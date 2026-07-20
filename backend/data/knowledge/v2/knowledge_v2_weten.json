@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2140,
+    "card_count": 2126,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T11:52:26.068266+00:00",
+    "last_updated": "2026-07-20T12:57:42.499298+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -281926,6 +281926,2048 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f7d99c43",
+      "begrip": "posities",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Posities zijn actieve situaties, plaatsen of rollen waarin iets of iemand zich bevindt",
+        "laag2": "In trading zijn posities open investeringen die nog niet zijn afgesloten. Een positie blijft actief totdat een exit plaatsvindt.",
+        "laag3": "Een positie ontstaat wanneer een trader een entry uitvoert en een koop- of verkooptransactie opent. Zolang de positie open staat, kan deze in winst of verlies bewegen. Een trader kan één of meerdere posities tegelijk hebben, afhankelijk van de strategie en het risicobeheer. Buiten de financiële wereld kan een positie ook een locatie, functie of standpunt betekenen.\n",
+        "laag4": "Een positie ontstaat wanneer een trader een entry uitvoert en een koop- of verkooptransactie opent. Zolang de positie open staat, kan deze in winst of verlies bewegen. Een trader kan één of meerdere posities tegelijk hebben, afhankelijk van de strategie en het risicobeheer. Buiten de financiële wereld kan een positie ook een locatie, functie of standpunt betekenen.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers en geautomatiseerde handelssystemen.",
+        "wat": "Actieve investeringen of situaties die nog niet zijn afgesloten.",
+        "wanneer": "Vanaf een entry tot aan een exit",
+        "waar": "Op financiële markten of, afhankelijk van de context, op een locatie of binnen een organisatie.",
+        "waarom": "Om deel te nemen aan een markt of een bepaalde situatie vast te houden.",
+        "hoe": "Door een positie te openen via een entry en deze te beheren totdat een exit plaatsvindt."
+      },
+      "tags": [
+        "posities",
+        "positie",
+        "trading",
+        "entry",
+        "exit",
+        "open positie",
+        "risicobeheer",
+        "spark trader",
+        "handel",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "exit",
+            "handel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd49820b",
+          "begrip": "trade",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "exit",
+            "handel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d809fc3b",
+          "begrip": "exitstrategie",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie",
+            "risicobeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca653c2c",
+          "begrip": "entry",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "handel",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b36978b",
+          "begrip": "entrystrategie",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "handel",
+            "neutraal",
+            "positie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:15:00.934481+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:56:28.143818+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-8642d3236cd6",
+        "extract_at": "2026-07-20T11:56:28.248380+00:00",
+        "extract_context_snippet": "(winst/verlies) laten zien.  2. **Open posities** – ik kan de huidige posities bekijken: welke assets je no",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'posities' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:14:59.333439+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:14:59.435428+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:14:59.443291+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:15:01.287908+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:15:01.295698+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-230b9851",
+      "begrip": "Gemiddelde",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een gemiddelde is een waarde die het midden of de typische waarde van een verzameling gegevens weergeeft.",
+        "laag2": "Het gemiddelde wordt gebruikt om meerdere waarden samen te vatten in één representatief getal. Het meest gebruikte gemiddelde is het rekenkundig gemiddelde.",
+        "laag3": "Een gemiddelde wordt berekend door alle waarden bij elkaar op te tellen en te delen door het aantal waarden. Hierdoor ontstaat een representatieve waarde voor de gehele groep. Naast het rekenkundig gemiddelde bestaan ook andere gemiddelden, zoals de mediaan en het gewogen gemiddelde, die in bepaalde situaties geschikter kunnen zijn.\n",
+        "laag4": "Een gemiddelde helpt om gegevens te analyseren en te vergelijken, maar vertelt niet altijd het hele verhaal. Uitschieters kunnen het gemiddelde sterk beïnvloeden. Daarom wordt het vaak gecombineerd met begrippen zoals mediaan, variantie en standaardafwijking om een completer beeld van een dataset te krijgen. Binnen de Spark Trader kunnen gemiddelden worden gebruikt voor bijvoorbeeld gemiddelde winst per trade, gemiddelde looptijd van posities en voortschrijdende gemiddelden in technische analyse.\n"
+      },
+      "ws5": {
+        "wie": "Onderzoekers, analisten, studenten, traders en AI-systemen",
+        "wat": "Een representatieve waarde van een verzameling gegevens.",
+        "wanneer": "Bij het analyseren, vergelijken of samenvatten van gegevens.",
+        "waar": "In statistiek, wetenschap, financiën, onderwijs en data-analyse.",
+        "waarom": "Om een overzichtelijke indruk van een groep waarden te krijgen.",
+        "hoe": "Door de waarden volgens een bepaalde methode samen te vatten, meestal door de som te delen door het aantal waarde"
+      },
+      "tags": [
+        "gemiddelde",
+        "statistiek",
+        "data",
+        "analyse",
+        "rekenkundig gemiddelde",
+        "mediaan",
+        "variantie",
+        "standaardafwijking",
+        "dataset",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "data",
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3208c15b",
+          "begrip": "verwerkt",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "data",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "standaardafwijking",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:22:55.490553+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.729720+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:22:48.665732+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:22:48.769395+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:22:48.777520+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:22:55.842034+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:22:55.850284+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-b236243e",
+      "begrip": "dierlijk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Dierlijk betekent dat iets afkomstig is van, behoort tot of kenmerken heeft van dieren.",
+        "laag2": "Het woord dierlijk wordt gebruikt om onderscheid te maken tussen producten, eigenschappen of processen die van dieren afkomstig zijn en die van planten, schimmels of andere bronnen.\n",
+        "laag3": "Dierlijk is een bijvoeglijk naamwoord dat verwijst naar alles wat met dieren te maken heeft. Zo zijn vlees, melk, eieren en wol dierlijke producten. Ook kan het woord worden gebruikt om eigenschappen of gedrag te beschrijven, zoals een dierlijk instinct. De betekenis wordt bepaald door de context.\n",
+        "laag4": "In biologie, voeding en geneeskunde wordt vaak onderscheid gemaakt tussen dierlijk en plantaardig. Dierlijke producten bevatten vaak eiwitten, vetten en voedingsstoffen die afkomstig zijn van dieren. Binnen de biologie verwijst dierlijk naar organismen uit het dierenrijk (Animalia). In andere contexten kan het woord ook figuurlijk worden gebruikt om instinctief of ongeremd gedrag te beschrijven.\n"
+      },
+      "ws5": {
+        "wie": "Dieren of producten en eigenschappen die met dieren verbonden zijn.",
+        "wat": "Afkomstig van, behorend tot of kenmerkend voor dieren.",
+        "wanneer": "Bij het beschrijven van producten, organismen, eigenschappen of gedrag",
+        "waar": "In biologie, voeding, geneeskunde en het dagelijks taalgebruik.",
+        "waarom": "Om onderscheid te maken tussen dierlijke en andere oorsprongen.",
+        "hoe": "Door de herkomst of relatie met dieren aan te geven."
+      },
+      "tags": [
+        "dierlijk",
+        "dieren",
+        "animalia",
+        "biologie",
+        "voeding",
+        "vlees",
+        "melk",
+        "eiwit",
+        "plantaardig",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a3a3d3ad",
+          "begrip": "Vleeseter",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "neutraal",
+            "vlees",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c12fb2d0",
+          "begrip": "Schapen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "melk",
+            "neutraal",
+            "vlees"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-32256404",
+          "begrip": "eiwit",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "eiwit",
+            "emotie",
+            "neutraal",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c229ca0c",
+          "begrip": "zoogdieren",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "melk",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-049b1495",
+          "begrip": "Geit",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "melk",
+            "neutraal",
+            "vlees"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:25:13.197860+00:00",
+        "vorige_versie_v1": "kb-skel-b236243e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.119230+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:25:10.940203+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:25:10.948357+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:25:13.551750+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:25:13.559752+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:25:10.837548+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c0bb9d3f",
+      "begrip": "plantaardig",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Plantaardig betekent dat iets afkomstig is van of behoort tot planten.",
+        "laag2": "Het woord plantaardig wordt gebruikt om producten, eigenschappen of stoffen aan te duiden die afkomstig zijn uit het plantenrijk.",
+        "laag3": "Plantaardig is een bijvoeglijk naamwoord dat verwijst naar alles wat van planten afkomstig is. Voorbeelden zijn groenten, fruit, granen, peulvruchten, noten, zaden en plantaardige oliën. Ook materialen zoals hout, katoen en papier zijn van plantaardige oorsprong. De betekenis hangt af van de context waarin het woord wordt gebruikt.\n",
+        "laag4": "In biologie, voeding en ecologie wordt vaak onderscheid gemaakt tussen plantaardig en dierlijk. Plantaardige producten vormen de basis van veel voedselketens, omdat planten via fotosynthese zonne-energie omzetten in voedingsstoffen. Binnen voeding verwijst plantaardig naar voedingsmiddelen die geheel of grotendeels uit planten bestaan. In andere vakgebieden kan het ook verwijzen naar materialen of grondstoffen die afkomstig zijn uit het plantenrijk.\n"
+      },
+      "ws5": {
+        "wie": "Planten of producten en eigenschappen die met planten verbonden zijn.",
+        "wat": "Afkomstig van of behorend tot planten.",
+        "wanneer": "Bij het beschrijven van producten, organismen, materialen of voeding.",
+        "waar": "In biologie, voeding, landbouw, ecologie en het dagelijks leven.",
+        "waarom": "Om onderscheid te maken tussen plantaardige en andere oorsprongen",
+        "hoe": "Door de herkomst of relatie met planten aan te geven."
+      },
+      "tags": [
+        "plantaardig",
+        "planten",
+        "plantenrijk",
+        "biologie",
+        "voeding",
+        "groenten",
+        "fruit",
+        "granen",
+        "dierlijk",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-b236243e",
+          "begrip": "dierlijk",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "biologie",
+            "context",
+            "dierlijk",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-03a6846b",
+          "begrip": "Planteneter",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "neutraal",
+            "planten",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30697706",
+          "begrip": "Iglo",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "groenten",
+            "neutraal",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-70ffabe5",
+          "begrip": "Kersen ",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "fruit",
+            "neutraal",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a3a3d3ad",
+          "begrip": "Vleeseter",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "neutraal",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:26:53.119149+00:00",
+        "vorige_versie_v1": "kb-skel-c0bb9d3f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:32.324443+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:26:48.932371+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:26:48.940430+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:26:53.474385+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:26:53.482411+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:26:48.829872+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-faa07def",
+      "begrip": "investering",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een investering is het inzetten van geld, tijd of middelen met de verwachting dat dit in de toekomst waarde oplevert.",
+        "laag2": "Bij een investering wordt iets opgeofferd in het heden om later rendement, groei, voordeel of een ander positief resultaat te behalen.",
+        "laag3": "Een investering kan financieel zijn, zoals het kopen van aandelen, obligaties of vastgoed, maar ook persoonlijk of zakelijk, zoals investeren in kennis, opleiding, gezondheid of technologie. Elke investering brengt een bepaalde mate van risico met zich mee. Het verwachte rendement staat vaak in verhouding tot het genomen risico.\n",
+        "laag4": "Binnen de financiële wereld is een investering het aankopen van een activum met als doel op lange of korte termijn rendement te behalen. Binnen de Spark Trader ontstaat een investering zodra een entry wordt uitgevoerd en een positie wordt geopend. De investering blijft actief totdat een exit plaatsvindt. Buiten financiën kan investeren ook betekenen dat tijd, energie of middelen worden ingezet om toekomstige ontwikkeling of succes mogelijk te maken.\n"
+      },
+      "ws5": {
+        "wie": "Particulieren, bedrijven, overheden en investeerders.",
+        "wat": "Het inzetten van geld, tijd of middelen om toekomstige waarde te creëren.",
+        "wanneer": "Wanneer iemand bewust kiest voor toekomstig rendement of voordeel.",
+        "waar": "In financiën, onderwijs, ondernemerschap, technologie en persoonlijke ontwikkeling.",
+        "waarom": "Om groei, winst, kennis of andere voordelen te realiseren.",
+        "hoe": "Door middelen beschikbaar te stellen in de verwachting van een positief toekomstig resultaat."
+      },
+      "tags": [
+        "investering",
+        "investeren",
+        "rendement",
+        "risico",
+        "kapitaal",
+        "activum",
+        "financiën",
+        "positie",
+        "trading",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2aa561c4",
+          "begrip": "Heb jij winst gemaakt vandaag met traden?",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "financiën",
+            "investering",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eaa509fe",
+          "begrip": "leverage",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "investering",
+            "kapitaal",
+            "positie",
+            "rendement"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "investering",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d3540f4e",
+          "begrip": "activum",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "activum",
+            "emotie",
+            "financiën",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75837706",
+          "begrip": "RPS",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "kapitaal",
+            "neutraal",
+            "positie",
+            "trading"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:28:42.107018+00:00",
+        "vorige_versie_v1": "kb-skel-faa07def",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.858600+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:28:39.594100+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:28:39.602067+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:28:42.466002+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:28:42.474268+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:28:39.489502+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-56ee7e76",
+      "begrip": "Mean",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Mean is het Engelse woord voor gemiddelde.",
+        "laag2": "In statistiek is de mean de gemiddelde waarde van een verzameling gegevens. De mean wordt berekend door alle waarden op te tellen en te delen door het aantal waarden.",
+        "laag3": "Mean is een veelgebruikte statistische maat die een representatieve waarde van een dataset weergeeft. Meestal wordt hiermee het rekenkundig gemiddelde (arithmetic mean) bedoeld. De mean wordt gebruikt in wetenschap, data-analyse, machine learning en financiën om gegevens samen te vatten en patronen te analyseren. De mean kan worden beïnvloed door uitschieters.\n",
+        "laag4": "Binnen de Spark Trader speelt de mean een belangrijke rol bij indicatoren zoals Moving Averages en Mean Reversion. Bij Mean Reversion wordt aangenomen dat prijzen na een sterke afwijking de neiging hebben terug te keren richting hun gemiddelde. De mean vormt daardoor een belangrijk referentiepunt voor statistische analyse en handelsstrategieën.\n"
+      },
+      "ws5": {
+        "wie": "Analisten, onderzoekers, traders en AI-systemen.",
+        "wat": "De Engelse benaming voor het gemiddelde van een dataset.",
+        "wanneer": "Bij statistische analyses en het samenvatten van gegevens.",
+        "waar": "In statistiek, data-analyse, machine learning, wetenschap en financiën.",
+        "waarom": "Om een representatieve waarde van een verzameling gegevens te bepalen.",
+        "hoe": "Door alle waarden op te tellen en te delen door het aantal waarden."
+      },
+      "tags": [
+        "mean",
+        "gemiddelde",
+        "arithmetic mean",
+        "statistiek",
+        "dataset",
+        "data-analyse",
+        "mean reversion",
+        "moving average",
+        "trading",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a1ae09da",
+          "begrip": "Reversion",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gemiddelde",
+            "mean reversion",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-230b9851",
+          "begrip": "Gemiddelde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "dataset",
+            "emotie",
+            "gemiddelde",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "data-analyse",
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "statistiek",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "trading"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:39:15.468436+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.448692+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:39:13.704939+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:39:13.806855+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:39:13.814985+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:39:15.825232+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:39:15.833596+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1e624bd4",
+      "begrip": "Technische analyse",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Technische analyse is het bestuderen van koersgegevens en grafieken om toekomstige prijsbewegingen te voorspellen.",
+        "laag2": "Technische analyse gaat ervan uit dat historische prijsbewegingen, handelsvolume en marktgedrag patronen vormen die kunnen helpen bij het nemen van handelsbeslissingen.",
+        "laag3": "Technische analyse is een analysemethode waarbij grafieken, indicatoren en statistische gegevens worden gebruikt om trends, patronen en mogelijke keerpunten in de markt te herkennen. Veelgebruikte hulpmiddelen zijn Bollinger Bands, Moving Averages, RSI, MACD, steun- en weerstandsniveaus en candlestickpatronen. De analyse richt zich op het gedrag van de markt en niet op de financiële waarde van een bedrijf of activum.\n",
+        "laag4": "Binnen de financiële markten is technische analyse één van de meest gebruikte analysemethoden. Traders combineren vaak meerdere indicatoren om de betrouwbaarheid van signalen te vergroten. Binnen de Spark Trader vormt technische analyse de basis voor strategieën zoals Gap Momentum 50 en Mean Reversion. Spark gebruikt technische analyse niet als voorspelling, maar als een verzameling statistische aanwijzingen die samen met risicobeheer, confidence-scores en andere signalen leiden tot een handelsbeslissing.\n"
+      },
+      "ws5": {
+        "wie": "Traders, analisten, beleggers en AI-handelssystemen.",
+        "wat": "Een methode om markten te analyseren aan de hand van koersgegevens en grafieken.",
+        "wanneer": "Voor en tijdens het nemen van handelsbeslissingen.",
+        "waar": "Op financiële markten zoals aandelen, crypto, forex en grondstoffen.",
+        "waarom": "Om trends, patronen en mogelijke koop- en verkoopsignalen te herkennen.",
+        "hoe": "Door historische koersgegevens, handelsvolume, indicatoren en grafiekpatronen te analyseren."
+      },
+      "tags": [
+        "technische analyse",
+        "trading",
+        "grafieken",
+        "indicatoren",
+        "bollinger bands",
+        "moving average",
+        "rsi",
+        "macd",
+        "candlestick",
+        "trend",
+        "patroon",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a1ae09da",
+          "begrip": "Reversion",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bollinger bands",
+            "context",
+            "emotie",
+            "neutraal",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "technische analyse",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-825f5b3e",
+          "begrip": "John Bollinger",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "technische analyse",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56ee7e76",
+          "begrip": "Mean",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "moving average",
+            "neutraal",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "patroon"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:41:05.164477+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.347332+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:41:03.013049+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:41:03.115043+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:41:03.123416+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:41:05.523344+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:41:05.531703+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1dcc5f21",
+      "begrip": "Volatiliteit",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Volatiliteit is de mate waarin de prijs van een activum schommelt.",
+        "laag2": "Een hoge volatiliteit betekent dat prijzen sterk en snel veranderen. Een lage volatiliteit betekent dat prijzen relatief stabiel blijven.",
+        "laag3": "Volatiliteit is een statistische maat voor de grootte van prijsbewegingen over een bepaalde periode. Hoe groter de schommelingen, hoe hoger de volatiliteit. Volatiliteit zegt niets over de richting van de prijs; zowel sterke stijgingen als sterke dalingen verhogen de volatiliteit. Binnen de financiële wereld wordt volatiliteit vaak gemeten met de standaardafwijking van rendementen.\n",
+        "laag4": "Volatiliteit is een belangrijk begrip binnen risicobeheer en technische analyse. Indicatoren zoals Bollinger Bands passen zich automatisch aan de volatiliteit van de markt aan: bij hoge volatiliteit worden de banden breder, bij lage volatiliteit smaller. Binnen de Spark Trader helpt volatiliteit bij het bepalen van geschikte entry- en exitmomenten, positiegrootte en risiconiveau. Een hogere volatiliteit betekent meestal meer kansen, maar ook meer risico.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers, analisten en AI-handelssystemen.",
+        "wat": "De mate waarin prijzen schommelen over een bepaalde periode.",
+        "wanneer": "Tijdens de analyse van financiële markten en risico's.",
+        "waar": "Op aandelen-, crypto-, forex- en grondstoffenmarkten.",
+        "waarom": "Om het risico en de beweeglijkheid van een markt of activum te beoordelen.",
+        "hoe": "Door de omvang van prijsveranderingen statistisch te meten, vaak met de standaardafwijking."
+      },
+      "tags": [
+        "volatiliteit",
+        "prijsbeweging",
+        "standaardafwijking",
+        "bollinger bands",
+        "statistiek",
+        "trading",
+        "risico",
+        "activum",
+        "technische analyse",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "standaardafwijking",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1ae09da",
+          "begrip": "Reversion",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "bollinger bands",
+            "context",
+            "emotie",
+            "neutraal",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "risico",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-825f5b3e",
+          "begrip": "John Bollinger",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "statistiek",
+            "technische analyse"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faa07def",
+          "begrip": "investering",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "activum",
+            "context",
+            "emotie",
+            "neutraal",
+            "risico"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:42:41.955945+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.245050+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:42:39.228294+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:42:39.333089+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:42:39.341317+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:42:42.319188+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:42:42.327528+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-acedf752",
+      "begrip": "Variantie",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Variantie is een maat voor hoe sterk waarden afwijken van hun gemiddelde.",
+        "laag2": "Variantie geeft aan hoe verspreid een verzameling gegevens is. Hoe groter de variantie, hoe groter de verschillen tussen de waarden.",
+        "laag3": "Variantie is een statistische maat die de gemiddelde gekwadrateerde afwijking van alle waarden ten opzichte van het gemiddelde berekent. Een lage variantie betekent dat de waarden dicht bij het gemiddelde liggen, terwijl een hoge variantie aangeeft dat de waarden sterk verspreid zijn. De standaardafwijking is de wortel van de variantie en wordt vaak gebruikt omdat deze dezelfde eenheid heeft als de oorspronkelijke gegevens.\n",
+        "laag4": "Variantie speelt een belangrijke rol in statistiek, data-analyse, machine learning en financiën. Binnen de financiële markten wordt variantie gebruikt om de beweeglijkheid van rendementen te meten en vormt zij de basis voor de berekening van de standaardafwijking en daarmee van volatiliteit. Binnen de Spark Trader helpt variantie bij het analyseren van marktgedrag, risico's en de betrouwbaarheid van handelsstrategieën.\n"
+      },
+      "ws5": {
+        "wie": "Analisten, onderzoekers, traders en AI-systemen.",
+        "wat": "Een statistische maat voor de spreiding van gegevens rond het gemiddelde.",
+        "wanneer": "Bij het analyseren van datasets, risico's en statistische patronen.",
+        "waar": "In statistiek, wetenschap, data-analyse, machine learning en financiën.",
+        "waarom": "Om inzicht te krijgen in de spreiding en voorspelbaarheid van gegevens.",
+        "hoe": "Door de gekwadrateerde afwijkingen ten opzichte van het gemiddelde te middelen."
+      },
+      "tags": [
+        "variantie",
+        "statistiek",
+        "spreiding",
+        "gemiddelde",
+        "standaardafwijking",
+        "volatiliteit",
+        "dataset",
+        "data-analyse",
+        "risico",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "data-analyse",
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-230b9851",
+          "begrip": "Gemiddelde",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "context",
+            "dataset",
+            "emotie",
+            "gemiddelde",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56ee7e76",
+          "begrip": "Mean",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "data-analyse",
+            "dataset",
+            "emotie",
+            "gemiddelde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1dcc5f21",
+          "begrip": "Volatiliteit",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "risico",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1ae09da",
+          "begrip": "Reversion",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "standaardafwijking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:44:11.270457+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.143484+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:44:09.050138+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:44:09.151882+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:44:09.160061+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:44:11.631777+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:44:11.639886+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1e54b8d0",
+      "begrip": "Som",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een som is een wiskundige berekening of de uitkomst van het optellen van twee of meer waarden.",
+        "laag2": "Een som wordt gebruikt om getallen of hoeveelheden met elkaar te combineren. In het dagelijks taalgebruik kan een som ook een rekenopgave of een geldbedrag betekenen.",
+        "laag3": "In de wiskunde is een som het resultaat van een optelling, bijvoorbeeld 3 + 5 = 8. Het woord wordt ook gebruikt voor de opgave zelf, zoals \"Maak de som.\" Buiten de wiskunde kan een som verwijzen naar een hoeveelheid geld, zoals \"een grote geldsom\". De betekenis wordt bepaald door de context.\n",
+        "laag4": "Sommen vormen de basis van rekenen en zijn onmisbaar in wetenschap, techniek, programmeren, statistiek en financiën. Binnen de Spark Trader worden voortdurend sommen uitgevoerd om bijvoorbeeld rendementen, gemiddelden, fees, winst en risico's te berekenen. Vrijwel iedere statistische berekening begint met één of meerdere sommen.\n"
+      },
+      "ws5": {
+        "wie": "Leerlingen, onderzoekers, programmeurs, analisten, traders en AI-systemen.",
+        "wat": "Een rekenbewerking, rekenopgave of de uitkomst van een optelling.",
+        "wanneer": "Bij rekenen, analyseren en berekenen van gegevens.",
+        "waar": "In wiskunde, wetenschap, financiën, programmeren en het dagelijks leven.",
+        "waarom": "Om waarden te combineren of een resultaat te berekenen.",
+        "hoe": "Door twee of meer waarden volgens een rekenregel met elkaar te combineren."
+      },
+      "tags": [
+        "som",
+        "optellen",
+        "berekening",
+        "rekenen",
+        "wiskunde",
+        "getallen",
+        "resultaat",
+        "statistiek",
+        "financiën",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-5a6ade75",
+          "begrip": "wiskunde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "berekening",
+            "emotie",
+            "getallen",
+            "neutraal",
+            "rekenen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-38cd0b20",
+          "begrip": "berekening",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "berekening",
+            "emotie",
+            "neutraal",
+            "rekenen",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4393e066",
+          "begrip": "rekenen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "berekening",
+            "emotie",
+            "getallen",
+            "neutraal",
+            "rekenen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-286cd065",
+          "begrip": "Verdubbelen ",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "berekening",
+            "emotie",
+            "neutraal",
+            "rekenen",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d612974",
+          "begrip": "plus",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "berekening",
+            "emotie",
+            "neutraal",
+            "optellen",
+            "rekenen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:47:10.892024+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.040020+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:47:08.574531+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:47:08.675929+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:47:08.684035+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:47:11.250504+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:47:11.258540+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fd669864",
+      "begrip": "Bollinger Bands",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bollinger Bands zijn een technische indicator die de volatiliteit en mogelijke prijsgrenzen van een markt laat zien.",
+        "laag2": "Bollinger Bands bestaan uit een voortschrijdend gemiddelde met een bovenste en onderste band. De afstand tussen de banden verandert mee met de volatiliteit van de markt.",
+        "laag3": "Bollinger Bands zijn ontwikkeld door John Bollinger en behoren tot de meest gebruikte indicatoren binnen de technische analyse. De indicator bestaat uit een Moving Average (meestal een 20-periode Simple Moving Average) en twee banden die doorgaans op twee standaardafwijkingen (2σ) boven en onder het gemiddelde liggen. Bij hoge volatiliteit worden de banden breder; bij lage volatiliteit smaller. De indicator geeft geen koop- of verkoopsignaal op zichzelf, maar biedt inzicht in prijsbewegingen en marktgedrag.\n",
+        "laag4": "Binnen de Spark Trader vormen Bollinger Bands een belangrijk onderdeel van strategieën zoals Gap Momentum 50 en Mean Reversion. Spark gebruikt de indicator niet als zelfstandig beslissingsmodel, maar combineert deze met onder andere candlestickpatronen, risicobeheer, confidence-scores, Honest PnL en andere signalen. Hierdoor worden handelsbeslissingen gebaseerd op meerdere statistische aanwijzingen in plaats van op één indicator.\n"
+      },
+      "ws5": {
+        "wie": "Traders, analisten en AI-handelssystemen.",
+        "wat": "Een technische indicator voor het meten van volatiliteit en mogelijke prijsgrenzen.",
+        "wanneer": "Tijdens de analyse van financiële markten en het nemen van handelsbeslissingen.",
+        "waar": "Op aandelen-, crypto-, forex- en grondstoffenmarkten.",
+        "waarom": "Om inzicht te krijgen in volatiliteit, mogelijke overgekochte of oververkochte situaties en prijsbewegingen.",
+        "hoe": "Door een voortschrijdend gemiddelde te combineren met een bovenste en onderste band op basis van de standaardafwijking."
+      },
+      "tags": [
+        "bollinger bands",
+        "bollinger",
+        "john bollinger",
+        "technische analyse",
+        "moving average",
+        "standaardafwijking",
+        "sigma",
+        "volatiliteit",
+        "mean reversion",
+        "trading",
+        "indicator",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "bollinger",
+            "bollinger bands",
+            "emotie",
+            "indicator",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-825f5b3e",
+          "begrip": "John Bollinger",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bollinger",
+            "bollinger bands",
+            "emotie",
+            "john bollinger",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1dcc5f21",
+          "begrip": "Volatiliteit",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bollinger bands",
+            "context",
+            "emotie",
+            "neutraal",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1ae09da",
+          "begrip": "Reversion",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "bollinger bands",
+            "context",
+            "emotie",
+            "mean reversion",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e624bd4",
+          "begrip": "Technische analyse",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bollinger bands",
+            "context",
+            "emotie",
+            "moving average",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:50:35.049400+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.832995+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:50:33.319665+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:50:33.427160+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:50:33.435140+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:50:35.406879+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:50:35.415250+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8a8c9d85",
+      "begrip": "Statistiek",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Statistiek is de wetenschap van het verzamelen, analyseren, interpreteren en presenteren van gegevens.",
+        "laag2": "Statistiek helpt om patronen, trends en verbanden in gegevens te ontdekken en ondersteunt het nemen van onderbouwde beslissingen.",
+        "laag3": "Statistiek is een vakgebied binnen de wiskunde dat methoden ontwikkelt om gegevens te beschrijven en conclusies te trekken uit data. Hierbij worden begrippen gebruikt zoals gemiddelde, mediaan, variantie, standaardafwijking, kansberekening en correlatie. Statistiek wordt toegepast in wetenschap, financiën, gezondheidszorg, techniek, kunstmatige intelligentie en vele andere disciplines.\n",
+        "laag4": "Binnen de Spark Trader vormt statistiek de basis voor vrijwel alle analyses. Indicatoren zoals Bollinger Bands, Moving Averages en volatiliteit zijn rechtstreeks gebaseerd op statistische principes. Spark gebruikt statistiek om marktgedrag te analyseren, risico's te beoordelen, strategieën te evalueren en de betrouwbaarheid van signalen te vergroten. Statistiek levert geen zekerheden, maar berekent waarschijnlijkheden en ondersteunt objectieve besluitvorming.\n"
+      },
+      "ws5": {
+        "wie": "Onderzoekers, analisten, traders, bedrijven en AI-systemen.",
+        "wat": "De wetenschap van het verzamelen, analyseren en interpreteren van gegevens.",
+        "wanneer": "Bij onderzoek, besluitvorming en het analyseren van data.",
+        "waar": "In wetenschap, financiën, gezondheidszorg, techniek, AI en het dagelijks leven.",
+        "waarom": "Om betrouwbare inzichten uit gegevens te verkrijgen en betere beslissingen te nemen.",
+        "hoe": "Door gegevens te verzamelen, te beschrijven en te analyseren met statistische methoden en modellen."
+      },
+      "tags": [
+        "statistiek",
+        "data",
+        "dataset",
+        "data-analyse",
+        "gemiddelde",
+        "variantie",
+        "standaardafwijking",
+        "kansberekening",
+        "correlatie",
+        "analyse",
+        "wiskunde",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-230b9851",
+          "begrip": "Gemiddelde",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "data",
+            "dataset",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-acedf752",
+          "begrip": "Variantie",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "context",
+            "data-analyse",
+            "dataset",
+            "emotie",
+            "gemiddelde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d3588c74",
+          "begrip": "Data-analyse",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "data",
+            "data-analyse",
+            "dataset"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56ee7e76",
+          "begrip": "Mean",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "data-analyse",
+            "dataset",
+            "emotie",
+            "gemiddelde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "data-analyse",
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "standaardafwijking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:52:08.212757+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.625707+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:52:05.886133+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:52:05.988864+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:52:05.997216+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:52:08.572684+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:52:08.581014+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c530a333",
+      "begrip": "Trading",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Trading is het kopen en verkopen van activa met als doel winst te behalen uit prijsveranderingen.",
+        "laag2": "Bij trading worden financiële activa, zoals aandelen, cryptovaluta of valuta, gekocht en verkocht op basis van een handelsstrategie.",
+        "laag3": "Trading is een vorm van handelen waarbij posities worden geopend en gesloten om te profiteren van koersbewegingen. Traders gebruiken verschillende analysemethoden, zoals technische analyse, fundamentele analyse of een combinatie daarvan, om beslissingen te nemen. Het succes van trading hangt af van factoren zoals strategie, risicobeheer, discipline en marktomstandigheden.\n",
+        "laag4": "Trading wordt toegepast op financiële markten zoals aandelen, cryptovaluta, forex, obligaties en grondstoffen. Binnen de Spark Trader is trading een volledig proces dat bestaat uit marktanalyse, entrystrategie, koop, positiebeheer, risicobeheer, exitstrategie en evaluatie. Spark combineert statistiek, technische analyse, confidence-scores en Honest PnL om handelsbeslissingen transparant en reproduceerbaar uit te voeren. Trading is daarmee niet één handeling, maar een complete besluitvormingscyclus.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers, financiële instellingen en AI-handelssystemen.",
+        "wat": "Het kopen en verkopen van financiële activa om rendement te behalen.",
+        "wanneer": "Tijdens de openingstijden van een financiële markt of een continu beschikbare markt, zoals crypto.",
+        "waar": "Op aandelen-, crypto-, forex-, obligatie- en grondstoffenmarkten.",
+        "waarom": "Om winst te behalen uit prijsveranderingen of risico's af te dekken.",
+        "hoe": "Door marktanalyses uit te voeren, een handelsstrategie toe te passen en posities te openen en sluiten."
+      },
+      "tags": [
+        "trading",
+        "handel",
+        "financiële markten",
+        "activum",
+        "trade",
+        "positie",
+        "investering",
+        "technische analyse",
+        "risicobeheer",
+        "tradingstrategie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-faa07def",
+          "begrip": "investering",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "activum",
+            "context",
+            "emotie",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "handel",
+            "neutraal",
+            "positie",
+            "risicobeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "investering",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7d99c43",
+          "begrip": "posities",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "handel",
+            "neutraal",
+            "positie",
+            "risicobeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1dcc5f21",
+          "begrip": "Volatiliteit",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "activum",
+            "context",
+            "emotie",
+            "neutraal",
+            "technische analyse"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:57:42.499280+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.310247+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:57:36.425498+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:57:36.527120+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:57:36.535382+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:57:42.854791+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:57:42.863173+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

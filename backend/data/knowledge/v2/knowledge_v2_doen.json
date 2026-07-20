@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1140,
+    "card_count": 1148,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T12:11:43.218835+00:00",
+    "last_updated": "2026-07-20T12:55:34.044179+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -149697,6 +149697,1251 @@
             "result": {
               "n_found": 5,
               "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8c7cd828",
+      "begrip": "concrete",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Concreet betekent dat iets duidelijk, specifiek en niet abstract is.",
+        "laag2": "Iets is concreet wanneer informatie, ideeën of plannen voldoende duidelijk zijn om direct te begrijpen of uit te voeren.",
+        "laag3": "Concreet is een eigenschap van communicatie, informatie of handelingen. Een concreet antwoord bevat feiten, voorbeelden of duidelijke stappen in plaats van vage of algemene uitspraken. Hierdoor wordt informatie begrijpelijker, controleerbaar en beter toepasbaar. Het tegenovergestelde van concreet is abstract.\n",
+        "laag4": "Concreet communiceren vermindert misverstanden en maakt samenwerking effectiever. Binnen onderwijs, wetenschap, projectmanagement en kunstmatige intelligentie helpt concreetheid om kennis nauwkeurig over te dragen en beslissingen uitlegbaar te maken. Binnen Spark betekent concreet dat antwoorden worden onderbouwd met feiten, data, voorbeelden of uitvoerbare acties. Concreet is daarmee een samenvattend kwaliteitsbegrip voor eigenschappen zoals duidelijkheid, specificiteit en praktische toepasbaarheid.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die communiceren, plannen maken of beslissingen nemen.",
+        "wat": "De eigenschap dat iets duidelijk, specifiek en praktisch toepasbaar is.",
+        "wanneer": "Bij uitleg, instructies, plannen, analyses en besluitvorming.",
+        "waar": " In communicatie, onderwijs, wetenschap, AI, projecten en het dagelijks leven.",
+        "waarom": "Om informatie begrijpelijk, controleerbaar en direct bruikbaar te maken.",
+        "hoe": "Door feiten, voorbeelden, meetbare gegevens en duidelijke stappen te gebruiken."
+      },
+      "tags": [
+        "concreet",
+        "duidelijk",
+        "specifiek",
+        "feitelijk",
+        "praktisch",
+        "toepasbaar",
+        "communicatie",
+        "informatie",
+        "abstract",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-9fa42aa9",
+          "begrip": "concreet",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "concreet",
+            "duidelijk",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59c44894",
+          "begrip": "ding",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "abstract",
+            "communicatie",
+            "concreet",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:21:11.913880+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:56:28.248671+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:21:09.683351+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:21:09.784952+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:21:09.793252+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:21:12.176272+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:21:12.184476+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-69d1f887",
+      "begrip": "Risicobeheer",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Risicobeheer is het herkennen, beoordelen en beheersen van risico's.",
+        "laag2": "Risicobeheer bestaat uit het nemen van maatregelen om de kans op schade of verlies te verkleinen en de gevolgen ervan te beperken.",
+        "laag3": "Risicobeheer is een proces waarbij risico's worden geïdentificeerd, geanalyseerd, geëvalueerd en beheerst. Dit gebeurt door risico's te vermijden, te verminderen, te accepteren of over te dragen. Risicobeheer wordt toegepast in onder andere financiën, ondernemerschap, techniek, gezondheidszorg en projectmanagement om ongewenste gevolgen zoveel mogelijk te beperken.\n",
+        "laag4": "Binnen de Spark Trader vormt risicobeheer één van de belangrijkste onderdelen van iedere tradingstrategie. Het bepaalt onder andere de Risk Per Trade (RPS), positiegrootte, stop-loss, loss-cut, event-pauzes en maximale blootstelling aan de markt. Goed risicobeheer zorgt ervoor dat één verkeerde beslissing nooit het volledige kapitaal kan vernietigen. Op lange termijn bepaalt risicobeheer vaak meer het succes van een strategie dan de kwaliteit van de entry.\n"
+      },
+      "ws5": {
+        "wie": "Traders, bedrijven, organisaties en systemen die risico's beheersen.",
+        "wat": "Het proces van het herkennen, beoordelen en beheersen van risico's.",
+        "wanneer": "Voor, tijdens en na activiteiten waarbij risico's aanwezig zijn.",
+        "waar": "In financiën, ondernemerschap, techniek, gezondheidszorg, projecten en het dagelijks leven.",
+        "waarom": "Om schade, verlies en ongewenste gevolgen zoveel mogelijk te beperken.",
+        "hoe": "Door risico's te identificeren, analyseren en passende beheersmaatregelen toe te passen."
+      },
+      "tags": [
+        "risicobeheer",
+        "risico",
+        "risk management",
+        "rps",
+        "stop-loss",
+        "loss-cut",
+        "positiegrootte",
+        "tradingstrategie",
+        "spark trader",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-75837706",
+          "begrip": "RPS",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positiegrootte",
+            "risicobeheer",
+            "rps"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d809fc3b",
+          "begrip": "exitstrategie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risicobeheer",
+            "spark trader",
+            "stop-loss"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risicobeheer",
+            "spark trader",
+            "tradingstrategie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7d99c43",
+          "begrip": "posities",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risicobeheer",
+            "spark trader"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faa07def",
+          "begrip": "investering",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "risico"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:30:28.609190+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.754686+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:30:26.634526+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:30:26.740535+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:30:26.748664+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:30:28.870511+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:30:28.878713+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-165e3aa9",
+      "begrip": "Koop",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Koop is het verkrijgen van een product, dienst of activum in ruil voor een betaling.",
+        "laag2": "Bij een koop betaalt een koper een afgesproken bedrag om eigenaar te worden van iets. In trading betekent een koop het openen of vergroten van een positie.",
+        "laag3": "Een koop is een transactie waarbij eigendom of bezit wordt overgedragen van een verkoper naar een koper. Dit kan betrekking hebben op goederen, diensten of financiële activa zoals aandelen en cryptovaluta. Binnen trading is een koop vaak de entry van een longpositie, waarna de investering actief blijft totdat een verkoop of exit plaatsvindt.\n",
+        "laag4": "Binnen de Spark Trader is een koop geen willekeurige handeling, maar het resultaat van een entrystrategie. Pas wanneer alle voorwaarden van de actieve strategie zijn vervuld, wordt automatisch een koop uitgevoerd. De koop legt onder andere de aankoopprijs, hoeveelheid, tijdstip, strategie en confidence-score vast. Deze gegevens vormen de basis voor het beheer van de positie en de uiteindelijke evaluatie van de trade.\n"
+      },
+      "ws5": {
+        "wie": "Kopers, traders, beleggers en geautomatiseerde handelssystemen.",
+        "wat": "Het aanschaffen van een product, dienst of activum tegen betaling.",
+        "wanneer": "Wanneer aan de voorwaarden voor een aankoop is voldaan.",
+        "waar": "In winkels, webshops, markten en financiële markten.",
+        "waarom": "Om eigenaar te worden van iets of om een investering te starten.",
+        "hoe": "Door een aankooporder uit te voeren en de afgesproken prijs te betalen."
+      },
+      "tags": [
+        "koop",
+        "kopen",
+        "aankoop",
+        "koper",
+        "investering",
+        "activum",
+        "transactie",
+        "entry",
+        "trading",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "entry",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faa07def",
+          "begrip": "investering",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "activum",
+            "context",
+            "emotie",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-36e8e899",
+          "begrip": "koper",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "aankoop",
+            "emotie",
+            "kopen",
+            "koper",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e56bcc4d",
+          "begrip": "uitgaven",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aankoop",
+            "emotie",
+            "investering",
+            "neutraal",
+            "transactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2c2aaee",
+          "begrip": "kopen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aankoop",
+            "emotie",
+            "kopen",
+            "neutraal",
+            "transactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:33:18.913043+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.651711+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:33:17.106044+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:33:17.209398+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:33:17.217343+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:33:19.174570+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:33:19.182926+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a1ae09da",
+      "begrip": "Reversion",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Reversion betekent het terugkeren naar een eerdere of normale toestand.",
+        "laag2": "Reversion beschrijft een proces waarbij iets na een afwijking weer teruggaat naar een oorspronkelijk, gemiddeld of verwacht niveau.",
+        "laag3": "Het begrip reversion wordt gebruikt in verschillende vakgebieden, zoals statistiek, financiën, biologie en natuurkunde. In trading verwijst reversion vaak naar mean reversion, het idee dat prijzen na een sterke afwijking de neiging hebben om terug te keren naar hun gemiddelde. Niet iedere afwijking leidt echter tot een reversion; het is een waarschijnlijkheid en geen zekerheid.\n",
+        "laag4": "Binnen de Spark Trader vormt reversion een belangrijk principe achter strategieën zoals Mean Reversion en onderdelen van Gap Momentum 50. De hypothese is dat markten na extreme prijsbewegingen vaak terugkeren richting hun statistisch gemiddelde, bijvoorbeeld gemeten met Bollinger Bands en standaardafwijking. Spark gebruikt reversion niet als garantie, maar als een statistisch patroon dat samen met andere signalen wordt beoordeeld.\n"
+      },
+      "ws5": {
+        "wie": "Analisten, traders, onderzoekers en AI-systemen.",
+        "wat": "Het terugkeren naar een eerdere, normale of gemiddelde toestand.",
+        "wanneer": "Na een afwijking van een normale of verwachte waarde.",
+        "waar": "In statistiek, financiën, natuurkunde, biologie en andere wetenschappelijke vakgebieden",
+        "waarom": "Omdat veel natuurlijke en statistische systemen de neiging hebben terug te keren naar een evenwichtstoestand.",
+        "hoe": "Door een geleidelijke of plotselinge beweging terug richting een referentiepunt of gemiddelde."
+      },
+      "tags": [
+        "reversion",
+        "mean reversion",
+        "gemiddelde",
+        "statistiek",
+        "trading",
+        "bollinger bands",
+        "standaardafwijking",
+        "volatiliteit",
+        "patroon",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "standaardafwijking",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-825f5b3e",
+          "begrip": "John Bollinger",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "statistiek",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-230b9851",
+          "begrip": "Gemiddelde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gemiddelde",
+            "neutraal",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "patroon"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:35:02.989958+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:17.549519+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:34:59.958725+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:35:00.070392+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:35:00.078655+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:35:03.259132+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:35:03.267412+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f3488028",
+      "begrip": "online verkoop",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Online verkoop is het verkopen van producten of diensten via internet.",
+        "laag2": "Bij online verkoop worden producten of diensten aangeboden, besteld en vaak ook betaald via een website, webshop of digitaal platform",
+        "laag3": "Online verkoop is een vorm van handel waarbij de koper en verkoper via internet met elkaar in contact komen. Het verkoopproces bestaat meestal uit het tonen van een aanbod, het plaatsen van een bestelling, het uitvoeren van een betaling en het leveren van het product of de dienst. Online verkoop kan plaatsvinden via een eigen webshop, marktplaats of ander digitaal verkoopkanaal.\n",
+        "laag4": "Online verkoop is een belangrijk onderdeel van e-commerce. Moderne webshops maken gebruik van betaalmethoden, voorraadbeheer, klantaccounts, verzenddiensten en analyses om het verkoopproces efficiënt te laten verlopen. Binnen het Spark-ecosysteem kan online verkoop worden gebruikt voor de verkoop van bijvoorbeeld merchandise, digitale producten, abonnementen, tokens of diensten. Daarbij kunnen bestellingen automatisch worden gekoppeld aan administratie, voorraad en betalingen.\n"
+      },
+      "ws5": {
+        "wie": "Webshops, bedrijven, ondernemers en consumenten.",
+        "wat": "Het verkopen van producten of diensten via internet.",
+        "wanneer": "Op ieder moment waarop een online bestelling kan worden geplaatst.",
+        "waar": "Via webshops, websites, marktplaatsen en andere online platforms.",
+        "waarom": "Om producten of diensten digitaal aan klanten aan te bieden en te verkopen.",
+        "hoe": "Door een online aanbod, bestelproces, betaling en levering via internet."
+      },
+      "tags": [
+        "online verkoop",
+        "webshop",
+        "e-commerce",
+        "internet",
+        "bestelling",
+        "betaling",
+        "klant",
+        "product",
+        "verkoop",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-32812f83",
+          "begrip": "webshop",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "bestelling",
+            "betaling",
+            "e-commerce",
+            "internet",
+            "klant"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6ae739c7",
+          "begrip": "shopify",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "e-commerce",
+            "emotie",
+            "internet",
+            "neutraal",
+            "verkoop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-32a481de",
+          "begrip": "shop",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bestelling",
+            "betaling",
+            "e-commerce",
+            "klant",
+            "verkoop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2c2aaee",
+          "begrip": "kopen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "betaling",
+            "emotie",
+            "neutraal",
+            "product",
+            "webshop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-36e8e899",
+          "begrip": "koper",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "betaling",
+            "emotie",
+            "klant",
+            "neutraal",
+            "product"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:37:12.618087+00:00",
+        "vorige_versie_v1": "kb-skel-f3488028",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:07.364720+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:37:09.803848+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:37:09.812306+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:37:12.877622+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:37:12.885789+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:37:09.701553+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d3588c74",
+      "begrip": "Data-analyse",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Data-analyse is het onderzoeken van gegevens om informatie, patronen en inzichten te verkrijgen.",
+        "laag2": "Bij data-analyse worden gegevens verzameld, verwerkt en geïnterpreteerd om vragen te beantwoorden, beslissingen te ondersteunen of voorspellingen te doen.",
+        "laag3": "Data-analyse is een proces waarbij datasets worden onderzocht met behulp van statistiek, wiskunde en analysetechnieken. Het doel is om patronen, trends, afwijkingen en verbanden te ontdekken die niet direct zichtbaar zijn. Data-analyse wordt toegepast in wetenschap, bedrijfsvoering, financiën, gezondheidszorg, kunstmatige intelligentie en vele andere vakgebieden.\n",
+        "laag4": "Binnen de Spark Trader vormt data-analyse de basis voor het evalueren van handelsstrategieën. Spark analyseert onder andere koersgegevens, trades, rendementen, volatiliteit, confidence-scores en Honest PnL om patronen te herkennen en strategieën te verbeteren. Data-analyse levert de inzichten waarop beslissingen worden gebaseerd, maar neemt de beslissingen niet zelf.\n"
+      },
+      "ws5": {
+        "wie": "Analisten, onderzoekers, bedrijven, traders en AI-systemen.",
+        "wat": "Het proces van het onderzoeken en interpreteren van gegevens.",
+        "wanneer": "Bij het beantwoorden van vragen, nemen van beslissingen of ontdekken van patronen.",
+        "waar": "In wetenschap, bedrijfsleven, financiën, AI, gezondheidszorg en technologie.",
+        "waarom": "Om betrouwbare informatie en inzichten uit gegevens te halen",
+        "hoe": "Door gegevens te verzamelen, verwerken, analyseren en interpreteren met verschillende analysetechnieken."
+      },
+      "tags": [
+        "data-analyse",
+        "analyse",
+        "data",
+        "dataset",
+        "statistiek",
+        "patroon",
+        "trend",
+        "inzicht",
+        "kunstmatige intelligentie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-230b9851",
+          "begrip": "Gemiddelde",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "data",
+            "dataset",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4f277524",
+          "begrip": "Curve",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "emotie",
+            "neutraal",
+            "patroon",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56ee7e76",
+          "begrip": "Mean",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "data-analyse",
+            "dataset",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-acedf752",
+          "begrip": "Variantie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "data-analyse",
+            "dataset",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "data",
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:48:42.598241+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.936541+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:48:40.920446+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:48:41.025233+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:48:41.033591+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:48:42.859827+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:48:42.868040+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-94ba12b4",
+      "begrip": "Take-profit",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een take-profit is een vooraf ingesteld prijsniveau waarop een positie automatisch met winst wordt gesloten.",
+        "laag2": "Met een take-profit wordt een investering automatisch verkocht zodra de vooraf bepaalde winst is bereikt.",
+        "laag3": "Een take-profit is een ordertype binnen trading waarmee een positie automatisch wordt gesloten wanneer een vooraf ingestelde koers wordt bereikt. Het doel is om winst veilig te stellen zonder voortdurend de markt te hoeven volgen. Een take-profit wordt vaak gecombineerd met een stop-loss als onderdeel van het risicobeheer.\n",
+        "laag4": "Binnen de Spark Trader is de take-profit onderdeel van de exitstrategie. De take-profit wordt bepaald op basis van de actieve handelsstrategie, marktomstandigheden, volatiliteit en het gewenste risico-rendementsprofiel. Wanneer de doelkoers wordt bereikt, voert Spark automatisch een verkoop uit, registreert de gerealiseerde winst en werkt de handelsstatistieken en Honest PnL bij. Hierdoor blijft de uitvoering objectief en emotieloos.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers en geautomatiseerde handelssystemen.",
+        "wat": "Een vooraf ingestelde verkooporder om winst automatisch veilig te stellen.",
+        "wanneer": "Zodra de vooraf bepaalde doelprijs wordt bereikt.",
+        "waar": "Op financiële markten zoals aandelen, crypto, forex en grondstoffen.",
+        "waarom": "Om winst automatisch te realiseren en emotionele beslissingen te voorkomen.",
+        "hoe": "Door vooraf een doelprijs in te stellen waarop de positie automatisch wordt gesloten."
+      },
+      "tags": [
+        "take-profit",
+        "winstdoel",
+        "verkoop",
+        "exit",
+        "exitstrategie",
+        "trading",
+        "positie",
+        "risicobeheer",
+        "stop-loss",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d809fc3b",
+          "begrip": "exitstrategie",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "exitstrategie",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75837706",
+          "begrip": "RPS",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "risicobeheer",
+            "stop-loss"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7d99c43",
+          "begrip": "posities",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie",
+            "risicobeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie",
+            "risicobeheer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:53:49.757088+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.523450+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:53:47.408951+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:53:47.510951+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:53:47.519251+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:53:50.020126+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:53:50.028248+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1b9e0727",
+      "begrip": "Stop-loss",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een stop-loss is een vooraf ingesteld prijsniveau waarop een positie automatisch wordt gesloten om verlies te beperken.",
+        "laag2": "Met een stop-loss wordt een investering automatisch verkocht zodra de prijs een vooraf bepaald verliesniveau bereikt.",
+        "laag3": "Een stop-loss is een ordertype binnen trading dat bedoeld is om het maximale verlies van een positie te beperken. Zodra de marktprijs het ingestelde niveau bereikt, wordt de positie automatisch gesloten. Hierdoor hoeft een trader niet voortdurend de markt te volgen en worden emotionele beslissingen verminderd. Een stop-loss wordt vaak gecombineerd met een take-profit als onderdeel van het risicobeheer.\n",
+        "laag4": "Binnen de Spark Trader is de stop-loss een essentieel onderdeel van de exitstrategie en het risicobeheer. De positie van de stop-loss wordt bepaald aan de hand van de handelsstrategie, volatiliteit, technische analyse en de maximale Risk Per Trade (RPS). Wanneer de stop-loss wordt geraakt, sluit Spark de positie automatisch, registreert het verlies in de Honest PnL en verwerkt de trade in de statistieken. Hierdoor blijft het maximale risico vooraf beheersbaar.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers en geautomatiseerde handelssystemen.",
+        "wat": "Een vooraf ingestelde verkooporder om verlies automatisch te beperken.",
+        "wanneer": "Zodra de vooraf ingestelde verliesgrens wordt bereikt.",
+        "waar": "Op financiële markten zoals aandelen, crypto, forex en grondstoffen.",
+        "waarom": "Om grote verliezen te voorkomen en risico's beheersbaar te houden.",
+        "hoe": "Door vooraf een prijsniveau in te stellen waarop de positie automatisch wordt gesloten."
+      },
+      "tags": [
+        "stop-loss",
+        "verliesbeperking",
+        "exit",
+        "exitstrategie",
+        "trading",
+        "positie",
+        "risicobeheer",
+        "rps",
+        "take-profit",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-94ba12b4",
+          "begrip": "Take-profit",
+          "lade": "doen",
+          "overlap": 10,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "exit",
+            "exitstrategie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d809fc3b",
+          "begrip": "exitstrategie",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "exitstrategie",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75837706",
+          "begrip": "RPS",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "risicobeheer",
+            "rps"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7d99c43",
+          "begrip": "posities",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie",
+            "risicobeheer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_gap_analysis",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:55:34.044160+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:58:16.420630+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:55:31.992316+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:55:32.095360+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:55:32.103467+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:55:34.309007+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:55:34.317286+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
             }
           }
         ]

@@ -129,8 +129,43 @@ class AchievementService:
         d = load_json(rps_file, default={"stats": {}})
         return d.get("stats", {}).get(user_id, {"wins": 0, "losses": 0, "ties": 0, "total": 0})
 
+    def _letter_status(self, letter: str) -> dict:
+        """v7_letter_completion_001 — Tel voor `letter` hoeveel inbox-skeletons + gevulde
+        lade-kaarten bestaan. Achievement unlock als empty==0 EN filled>=1.
+        Cards worden ook meegeteld als ze een variante letter hebben (accent).
+        """
+        all_status = self._letter_status_all()
+        return all_status.get((letter or "").upper()[:1], {"empty": 0, "filled": 0})
+
+    def _letter_status_all(self) -> dict:
+        """v7_letter_completion_001 — Bereken empty/filled per letter (A-Z) in één pass.
+        Cachet resultaat aan `self` per request-cyclus (recreeer bij nieuwe service call).
+        """
+        if getattr(self, "_ls_cache", None) is not None:
+            return self._ls_cache
+        import string as _string, unicodedata as _ud
+        out = {c: {"empty": 0, "filled": 0} for c in _string.ascii_uppercase}
+        for e in _load_kbv2_entries():
+            begrip = (e.get("begrip") or "").strip()
+            if not begrip:
+                continue
+            first = begrip[0].upper()
+            first_norm = _ud.normalize("NFKD", first).encode("ascii", "ignore").decode() or first
+            if first_norm not in out:
+                continue
+            lagen = e.get("lagen") or {}
+            has_content = bool((lagen.get("laag1") or "").strip())
+            if has_content:
+                out[first_norm]["filled"] += 1
+            else:
+                out[first_norm]["empty"] += 1
+        self._ls_cache = out
+        return out
+
     def get_user_progress(self, user_id):
         """Calculate user's achievement progress based on knowledge count + rps stats"""
+        # v7_letter_completion_001 — reset cache per call zodat KB-mutaties direct zichtbaar zijn
+        self._ls_cache = None
         user = self._get_user(user_id)
         if not user:
             return None
@@ -148,8 +183,13 @@ class AchievementService:
         # Check retroactive: auto-unlock any milestone die de progress al gepasseerd is.
         # v5_milestone_unlocks_001: skip trigger-based milestones (geen "milestone" int veld)
         # v6_achievements_rps_001: voor type='rps' gebruik stat_field tegen rps_stats
+        # v7_letter_completion_001: voor type='letter_completion' check inbox skeletons per letter
         newly_unlocked = []
         milestone_achs = [a for a in achievements if isinstance(a.get("milestone"), int)]
+        letter_achs = [a for a in achievements if a.get("type") == "letter_completion"]
+        letter_status_cache = {}  # cache _letter_status per letter (frontend polls dit ook)
+
+        # 1) Milestone-based (words + rps)
         for ach in sorted(milestone_achs, key=lambda a: a.get("milestone", 0)):
             if ach["id"] in unlocked_ids:
                 continue
@@ -174,6 +214,30 @@ class AchievementService:
             unlocked_ids.append(ach["id"])
             total_xp += ach.get("xp_reward", 0)
             newly_unlocked.append(unlock_entry)
+
+        # 2) Letter-completion (v7) — compute status voor ALLE letters (ook al unlocked)
+        import string as _string
+        for _l in _string.ascii_uppercase:
+            letter_status_cache[_l] = self._letter_status(_l)
+
+        for ach in letter_achs:
+            if ach["id"] in unlocked_ids:
+                continue
+            letter = (ach.get("letter", "") or "").upper()[:1]
+            status = letter_status_cache.get(letter, {"empty": 0, "filled": 0})
+            # Unlock als: 0 skeletons voor deze letter EN ≥1 gevulde kaart bestaat
+            if status["empty"] == 0 and status["filled"] >= 1:
+                unlock_entry = {
+                    "id": ach["id"], "name": ach["name"], "description": ach["description"],
+                    "milestone": None, "xp_reward": ach.get("xp_reward", 0),
+                    "icon": ach.get("icon", ""), "rarity": ach.get("rarity", "common"),
+                    "type": "letter_completion", "letter": letter,
+                    "unlocked_at": datetime.now(timezone.utc).isoformat(),
+                }
+                unlocked.append(unlock_entry)
+                unlocked_ids.append(ach["id"])
+                total_xp += ach.get("xp_reward", 0)
+                newly_unlocked.append(unlock_entry)
 
         # Save if new unlocks
         # ⚠ FIX 2026-05-19: voorheen overschreef "xp": total_xp de totale user.xp,
@@ -223,6 +287,7 @@ class AchievementService:
             "total_xp_earned": total_xp,
             "next_milestone": next_milestone,
             "newly_unlocked": newly_unlocked,
+            "letter_status": letter_status_cache,  # v7_letter_completion_001 — progress per letter (voor UI)
         }
 
 

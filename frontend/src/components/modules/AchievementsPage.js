@@ -63,6 +63,8 @@ export function AchievementsPage({ onNavigate }) {
   const wordCount = progress?.word_count || 0;
   const nextMilestone = progress?.next_milestone;
   const userName = progress?.user_naam || user?.naam || 'User';
+  // v7_letter_completion_001 — { A: {empty, filled}, B:{...}, ... }
+  const letterStatus = progress?.letter_status || {};
 
   return (
     <MainLayout activePage="achievements" onNavigate={onNavigate}>
@@ -142,7 +144,8 @@ export function AchievementsPage({ onNavigate }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {unlocked.map(ach => (
                 <AchievementCard key={ach.id} ach={ach} unlocked
-                  isAdmin={isAdmin} onAdminEdit={() => setEditingAch(ach)} />
+                  isAdmin={isAdmin} onAdminEdit={() => setEditingAch(ach)}
+                  letterStatus={letterStatus} />
               ))}
             </div>
           </div>
@@ -159,7 +162,8 @@ export function AchievementsPage({ onNavigate }) {
               const userAch = unlocked.find(u => u.id === ach.id);
               return (
                 <AchievementCard key={ach.id} ach={userAch || ach} unlocked={isUnlocked}
-                  isAdmin={isAdmin} onAdminEdit={() => setEditingAch(userAch || ach)} />
+                  isAdmin={isAdmin} onAdminEdit={() => setEditingAch(userAch || ach)}
+                  letterStatus={letterStatus} />
               );
             })}
           </div>
@@ -178,18 +182,21 @@ export function AchievementsPage({ onNavigate }) {
   );
 }
 
-function AchievementCard({ ach, unlocked, isAdmin, onAdminEdit }) {
+function AchievementCard({ ach, unlocked, isAdmin, onAdminEdit, letterStatus }) {
   const rarity = rarityConfig[ach.rarity] || rarityConfig.common;
   // v6_achievements_admin_edit_001 — icon kan emoji of URL zijn
   const isUrl = typeof ach.icon === 'string' && (ach.icon.startsWith('/') || ach.icon.startsWith('http'));
   const iconSrc = isUrl ? (ach.icon.startsWith('http') ? ach.icon : `${API}${ach.icon}`) : null;
   // Voor RPS-achievements toon "X potjes" i.p.v. "X woorden"
   const isRps = ach.type === 'rps';
+  // v7_letter_completion_001 — letter progress
+  const isLetter = ach.type === 'letter_completion';
+  const letterStat = isLetter && letterStatus ? letterStatus[ach.letter] : null;
   const milestoneLabel = ach.milestone != null
     ? (isRps
         ? (ach.stat_field === 'losses' ? `${ach.milestone} verloren` : `${ach.milestone} gewonnen`)
         : `${ach.milestone?.toLocaleString()} woorden`)
-    : null;
+    : (isLetter && letterStat ? `${letterStat.empty} skeletons open` : null);
   return (
     <div
       data-testid={`achievement-${ach.id}`}
@@ -224,6 +231,28 @@ function AchievementCard({ ach, unlocked, isAdmin, onAdminEdit }) {
       </div>
       <h4 className="text-sm font-bold text-white mb-0.5">{ach.name}</h4>
       <p className="text-[11px] text-slate-400 leading-relaxed">{ach.description}</p>
+      {/* v7_letter_completion_001 — inline progress-balk voor letter achievements */}
+      {isLetter && letterStat && !unlocked && (
+        <div className="mt-2">
+          <div className="flex justify-between text-[10px] text-slate-500 mb-1">
+            <span>{letterStat.filled} ingevuld / {letterStat.empty} nog leeg</span>
+            <span className="text-amber-400">
+              {letterStat.filled + letterStat.empty > 0
+                ? Math.round((letterStat.filled / (letterStat.filled + letterStat.empty)) * 100)
+                : 0}%
+            </span>
+          </div>
+          <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-full rounded-full transition-all"
+              style={{
+                width: `${letterStat.filled + letterStat.empty > 0
+                  ? (letterStat.filled / (letterStat.filled + letterStat.empty)) * 100
+                  : 0}%`,
+                background: rarity.ring,
+              }} />
+          </div>
+        </div>
+      )}
       <div className="mt-3 flex items-center justify-between">
         <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: `${rarity.ring}20`, color: rarity.ring }}>
           {rarity.label}

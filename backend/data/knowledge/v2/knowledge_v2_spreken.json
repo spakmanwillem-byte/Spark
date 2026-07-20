@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 553,
+    "card_count": 549,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T23:18:26.055730+00:00",
+    "last_updated": "2026-07-20T13:09:57.714673+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72097,6 +72097,478 @@
             "result": {
               "n_found": 5,
               "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f6335fea",
+      "begrip": "graag",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Graag is een beleefd woord waarmee iemand aangeeft iets te willen of ergens mee in te stemmen.",
+        "laag2": "Het woord graag wordt gebruikt om een wens, voorkeur, toestemming of positieve reactie vriendelijk uit te drukken",
+        "laag3": "Graag is een bijwoord dat in gesprekken wordt gebruikt om beleefdheid en bereidheid te tonen. Het kan betekenen dat iemand ergens behoefte aan heeft (\"Ik wil graag koffie.\"), ergens mee instemt (\"Ja, graag.\") of vriendelijk reageert op een bedankje (\"Graag gedaan.\"). De exacte betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen communicatie draagt het woord graag bij aan een vriendelijke en respectvolle toon. Hoewel het weinig inhoudelijke informatie bevat, geeft het wel inzicht in de intentie van de spreker. Binnen Spark kan \"graag\" worden herkend als een aanwijzing dat de gebruiker een verzoek doet, instemt met een voorstel of beleefd communiceert. Hierdoor kan Spark de toon en intentie van een gesprek beter interpreteren.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die beleefd communiceert.",
+        "wat": " Een woord dat een wens, voorkeur of instemming uitdrukt.",
+        "wanneer": "Bij verzoeken, antwoorden, aanbiedingen en bedankje",
+        "waar": "In gesprekken, e-mails, berichten en het dagelijks taalgebruik.",
+        "waarom": "Om beleefdheid, bereidheid of een positieve houding te tonen.",
+        "hoe": "Door het woord \"graag\" te gebruiken in combinatie met een verzoek, antwoord of reactie"
+      },
+      "tags": [
+        "graag",
+        "beleefdheid",
+        "communicatie",
+        "wens",
+        "voorkeur",
+        "instemming",
+        "taal",
+        "gesprek",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:00:25.865200+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:55:51.831867+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7db186ecec26",
+        "extract_at": "2026-07-20T11:55:51.934914+00:00",
+        "extract_context_snippet": "Graag gedaan, **De Willem**! Dank voor je waardering – het verste",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'graag' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:00:24.148456+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:00:24.250308+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:00:24.259086+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:00:26.071499+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:00:26.079943+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3e1c7f81",
+      "begrip": "hiermee",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hiermee betekent met dit of door middel van dit.",
+        "laag2": "Het woord hiermee verwijst naar een voorwerp, middel, document of handeling die al eerder is genoemd of zichtbaar is in de context.",
+        "laag3": "Hiermee is een aanwijzend voornaamwoord dat wordt gebruikt om aan te geven waarmee een handeling wordt uitgevoerd of waarop wordt verwezen. Het voorkomt dat dezelfde informatie steeds herhaald hoeft te worden. De betekenis is volledig afhankelijk van de context waarin het woord wordt gebruikt.\n",
+        "laag4": "Binnen communicatie helpt hiermee om zinnen korter en vloeiender te maken. Het verwijst altijd naar iets dat al bekend is voor de gesprekspartners, zoals een document, object, bestand of eerdere uitspraak. Binnen Spark is \"hiermee\" een contextafhankelijk verwijswoord. Spark moet daarom eerst bepalen waar \"hiermee\" naar verwijst voordat de betekenis van de zin volledig kan worden begrepen.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een verwijswoord dat betekent \"met dit\" of \"door middel van dit\".",
+        "wanneer": "Wanneer wordt verwezen naar iets dat al bekend of aanwezig is.",
+        "waar": "In gesprekken, teksten, e-mails, documenten en instructies.",
+        "waarom": "Om herhaling te voorkomen en communicatie vloeiender te maken.",
+        "hoe": "Door te verwijzen naar een eerder genoemd object, middel of handeling."
+      },
+      "tags": [
+        "hiermee",
+        "verwijzen",
+        "context",
+        "aanwijzend voornaamwoord",
+        "communicatie",
+        "taal",
+        "middel",
+        "gesprek",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T11:55:12.100195+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:07:59.143754+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "sorry voor mijn gebrabbel. Hiermee heb ik je dus ver 34 nieuwe kenniskaarten gegeven.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:07:57.414006+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:07:57.514469+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:07:57.522808+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:07:59.345946+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:07:59.354233+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-05a838fa",
+      "begrip": "gebrabbel",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gebrabbel is onsamenhangend, onduidelijk of moeilijk verstaanbaar spreken.",
+        "laag2": "Het woord gebrabbel wordt gebruikt wanneer gesproken woorden weinig structuur of duidelijke betekenis hebben voor de luisteraar.",
+        "laag3": "Gebrabbel verwijst naar spraak die onsamenhangend, onduidelijk of moeilijk te begrijpen is. Dit kan voorkomen bij jonge kinderen die leren praten, bij vermoeidheid, emotionele spanning, een taalbarrière of wanneer iemand zonder duidelijke structuur spreekt. Of iets als gebrabbel wordt ervaren, hangt af van de kennis en het begrip van de luisteraar.\n",
+        "laag4": "In communicatie heeft gebrabbel meestal een negatieve betekenis, omdat de boodschap niet goed wordt overgebracht. Bij jonge kinderen is gebrabbel echter een normale fase in de taalontwikkeling waarin klanken worden geoefend voordat echte woorden ontstaan. Binnen Spark kan gebrabbel worden herkend als spraak met een lage begrijpelijkheid of lage semantische samenhang. In zulke gevallen kan Spark verduidelijking vragen of proberen de bedoelde betekenis uit de context af te leiden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die spreken, zoals jonge kinderen of volwassenen.",
+        "wat": "Onsamenhangende of moeilijk verstaanbare spraak.",
+        "wanneer": "Bij vroege taalontwikkeling, vermoeidheid, emotie of onduidelijke communicatie.",
+        "waar": "In gesprekken en gesproken communicatie.",
+        "waarom": "Omdat de spreker nog geen duidelijke of begrijpelijke boodschap vormt, of omdat de luisteraar deze niet kan interpreteren.",
+        "hoe": "Door woorden, klanken of zinnen zonder duidelijke structuur of betekenis uit te spreken."
+      },
+      "tags": [
+        "gebrabbel",
+        "spreken",
+        "taal",
+        "communicatie",
+        "onduidelijk",
+        "onverstaanbaar",
+        "spraak",
+        "taalontwikkeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f02f431e",
+          "begrip": "spreektaal",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spraak",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9856595",
+          "begrip": "nee, jij herkent denk ik laten niet.",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T11:55:11.564388+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:09:57.714631+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "sorry voor mijn gebrabbel. Hiermee heb ik je dus ver 34 nieuwe kenniskaarten gegeven.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:09:55.853300+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:09:55.952868+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:09:56.205325+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:09:57.913848+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:09:57.921355+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

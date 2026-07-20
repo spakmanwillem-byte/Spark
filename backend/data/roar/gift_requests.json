@@ -98,6 +98,20 @@
       "expires_at": "2026-06-01T21:03:11.866163+00:00",
       "accepted_at": "2026-05-31T21:03:14.993836+00:00",
       "rejected_at": null
+    },
+    {
+      "id": "3c2e7385-02c1-4d91-852a-b7b04d3c0f18",
+      "sender_id": "user-001",
+      "sender_naam": "De Willem",
+      "recipient_id": "user-000",
+      "recipient_naam": "Spark",
+      "amount": 1,
+      "note": "Slip-mint doorgeschoven naar Spark - via papertrail",
+      "status": "accepted",
+      "created_at": "2026-07-20T17:01:40.547910+00:00",
+      "expires_at": "2026-07-21T17:01:40.547914+00:00",
+      "accepted_at": "2026-07-20T17:01:40.795893+00:00",
+      "rejected_at": null
     }
   ],
   "_arch_ref": "DSP-006 — gift lifecycle state. Financial transfer logged separately in roar_balances.transactions[] na accept. Privacy: bevat user-pairs."

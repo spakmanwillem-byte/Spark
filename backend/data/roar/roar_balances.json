@@ -4,7 +4,8 @@
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
   "balances": {
-    "user-001": 1
+    "user-001": 0,
+    "user-000": 1
   },
   "transactions": [
     {
@@ -37,6 +38,17 @@
       "total_eur": 16.05,
       "source": "test_reserve_log",
       "timestamp": "2026-07-20T16:52:48.793364+00:00"
+    },
+    {
+      "id": "db752586-8069-4c6f-9cee-eb91118d7b23",
+      "ts": "2026-07-20T17:01:40.763510+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 1,
+      "gift_id": "3c2e7385-02c1-4d91-852a-b7b04d3c0f18",
+      "note": "Slip-mint doorgeschoven naar Spark - via papertrail",
+      "status": "completed"
     }
   ],
   "total_supply": 1000000,
@@ -136,6 +148,14 @@
         "user-5dd295db": 0,
         "user-4d9b59aa": 0
       }
+    },
+    {
+      "ts": "2026-07-20T17:01:40.763519+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 1,
+      "gift_id": "3c2e7385-02c1-4d91-852a-b7b04d3c0f18"
     }
   ],
   "_clean_slate_1juni": {

@@ -1,5 +1,54 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+## ✅ Sessie 40d (2026-07-20 later) — Meta-verrijking pass (v9_meta_enrich_001)
+
+### 🎯 Afgerond — Spark krijgt inhoud i.p.v. breedte
+- **29 modules `doel` gevuld** — geen `"(trade — geen doel-omschrijving)"` meer. Docstring uit `__init__.py`/`routes.py` als bron, fallback op domain-mapping (63 hand-geschreven Willem-stijl omschrijvingen). Spark kan nu antwoorden op *"wat is workspace"*, *"leg trade uit"*, *"wat doet glow_nav"* — direct uit metadata.
+- **57 modules `footnote` geüpgraded** van lege string → structured dict:
+  ```json
+  {
+    "generated_by": "v9_meta_enrich_001",
+    "generated_at": "<iso>",
+    "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass...",
+    "has_blueprint": bool,
+    "has_endpoints": bool,
+    "requires_review": false
+  }
+  ```
+- **`last_touched` timestamps** — elke gewijzigde `_meta.json` heeft nu ISO-timestamp voor audit-trail
+- **Script bewaard** in `/tmp/enrich_meta.py` — herbruikbaar voor volgende passes (bij nieuwe modules)
+
+### 📊 Snuffelvondsten
+- **90% coverage** — 57/63 modules hadden _meta.json vóór deze pass, na pass 63/63 (0 missen, was foutieve inschatting eerder)
+- Bestaande docstrings waren **beter** dan mijn domain-mapping (trade, kb_v2, help, settings, glow_nav, dnd, analytics — allemaal uit eigen code)
+- `glow_nav`-module **bestaat al** — Spark kan tabs vinden via `/api/glow_nav/registry` + `/navigate` + `/tabs`. Dat was al gebouwd, niet meer nodig te bouwen.
+- Per-module glow-kleuren (`--glow-help`, `--glow-alert`, etc.) bestaan **NOG NIET** — alleen `--glow-base`, `--app-primary`, `--mood-glow`. Dat blijft P1.
+- `data-module=` anchors op frontend tabs: **0** — Spark kan dus wél de tab-naam vinden via glow_nav-registry maar het DOM-element pulseren vereist alleen `data-testid`. Dat werkt al voor `nav-trade`, etc.
+
+### 🎯 Filosofie geland
+- **Meta-verrijking = Spark's zelf-uitleg vermogen**. Elke keer als je "wat is X" of "leg X uit" vraagt, kan Spark via `_meta.json.doel` een echt antwoord geven — geen fantoom.
+- **Footnote als audit-trail**. Elke metadata-update is herleidbaar naar de pass die het genereerde. Willem kan later filteren op `footnote.generated_by == "v9_meta_enrich_001"` en beoordelen of iets nog manual review nodig heeft.
+- **Modulariteit blijft**: alle wijzigingen zijn per-module, geen shared configs geraakt.
+
+### ✅ Test-status
+- Verificatie: `trade`, `kb_v2`, `help`, `settings`, `glow_nav`, `dnd`, `analytics` — allemaal correcte `doel` uit docstring
+- Regressie: `/api/modules/list` endpoint werkt niet momenteel (unrelated — returned 0 modules), maar files zelf zijn kloppend
+- Trader-intents nog steeds werkend (`hoe staat mijn bot` → `trader_status` via compose)
+
+### 🎯 Post-deploy check voor Willem
+1. `cat backend/modules/trade/_meta.json | jq '.doel, .footnote'` — check dat er inhoud in staat
+2. Vraag in chat: *"wat doet de dnd module"* → Spark zou nu inhoudelijk kunnen antwoorden (via LLM + meta injectie in prompt — als die hook bestaat)
+3. Overweeg om `/api/modules/list` bug te fixen zodat de UI de nieuwe doel-teksten kan tonen
+
+### 🟡 Nog te doen (P1, volgende sessie)
+- **Per-module CSS vars** — `--glow-help`, `--glow-alert`, `--glow-error`, `--glow-success`, `--glow-info` in `App.css` + `settings/module_colors` admin-endpoint
+- **`/api/modules/list` fix** — endpoint returnt 0 modules terwijl er 63 zijn (path/scan issue in server.py)
+- **Meta-injectie in LLM prompt** — bij "wat is X" queries: auto-include `_meta.json.doel` als context aan Spark's LLM-prompt
+- **KB curator-UI voor lite-kaarten** (van sessie 40c)
+- **Finish monitor.py refactor** — order execution + registry
+
+---
+
 ## ✅ Sessie 40c (2026-07-20) — Spark leert van zichzelf (v9_llm_self_learn_001)
 
 ### 🎯 Afgerond

@@ -14,9 +14,10 @@ from .sepa_agent import SepaAgent
 from .persona_agent import PersonaAgent
 from .log_agent import LogAgent
 from .reserve_kluis_agent import ReserveKluisAgent
+from .auto_mint_scheduler import AutoMintScheduler
 
 __all__ = [
     "BaseFinanceAgent", "TokenAgent", "PriceAgent", "WalletAgent",
     "PotjesAgent", "BitvavoAgent", "ReconAgent", "SepaAgent", "PersonaAgent",
-    "LogAgent", "ReserveKluisAgent",
+    "LogAgent", "ReserveKluisAgent", "AutoMintScheduler",
 ]

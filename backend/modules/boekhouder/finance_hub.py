@@ -7,7 +7,7 @@ from typing import Any, Dict
 from .agents import (
     TokenAgent, PriceAgent, WalletAgent, PotjesAgent,
     BitvavoAgent, ReconAgent, SepaAgent, PersonaAgent,
-    LogAgent, ReserveKluisAgent,
+    LogAgent, ReserveKluisAgent, AutoMintScheduler,
 )
 
 
@@ -23,6 +23,7 @@ class FinanceHub:
         self.persona = PersonaAgent()
         self.log = LogAgent()
         self.reserve = ReserveKluisAgent()
+        self.auto_mint = AutoMintScheduler()
 
     def get_snapshot(self, user_id: str) -> Dict[str, Any]:
         """Volledig financieel beeld — ÉÉN CALL."""

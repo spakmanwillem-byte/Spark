@@ -150,10 +150,27 @@ async def get_user_wallet(user_id: str):
     wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}, "transactions": []})
     uw = user_wallets.get("user_wallets", {}).get(user_id, {})
     w = wallets.get("wallets", {}).get(user_id, {})
+
+    # v10_finance_hub_wallet_sync — hybride Willem-regel: 1 pot = 1 token.
+    # De ROAR-count in wallet = potjes-count (via finance_hub, fallback naar user-000).
+    # De stale user_wallets.spark_tokens is legacy en wordt genegeerd voor display.
+    spark_tokens_stored = uw.get("wallet", {}).get("spark_tokens", 0)
+    hybrid_token_count = spark_tokens_stored
+    try:
+        from modules.boekhouder.finance_hub import get_hub
+        potjes_snap = get_hub().get_potjes(user_id)
+        potjes_count = potjes_snap.get("potjes_count", 0) or 0
+        # Willem-regel: token-count = potjes-count. Volgt hybride direct.
+        hybrid_token_count = potjes_count
+    except Exception as ex:
+        print(f"[wallet] finance_hub overlay failed: {ex}")
+
     return {
         "user_id": user_id,
         "name": uw.get("name", "Onbekend"),
-        "spark_tokens": uw.get("wallet", {}).get("spark_tokens", 0),
+        "spark_tokens": hybrid_token_count,
+        "spark_tokens_stored": spark_tokens_stored,
+        "spark_tokens_from_potjes": hybrid_token_count,
         "credits": uw.get("wallet", {}).get("credits", 0),
         "balance_eur": w.get("balance", uw.get("wallet", {}).get("balance_eur", 0)),
         "earned_total": w.get("total_deposited", uw.get("wallet", {}).get("earned_total", 0)),

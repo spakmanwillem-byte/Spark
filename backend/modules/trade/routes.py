@@ -1058,6 +1058,12 @@ async def get_user_potjes(user_id: str):
         from modules.boekhouder.finance_hub import get_hub
         price_info = get_hub().get_price()
         dynamic_price = price_info.get("current_price_eur", 0)
+        # v10_finance_hub_ui_sync — summary strings updaten
+        summary["current_max_per_pot"] = dynamic_price
+        summary["next_pot_max"] = dynamic_price
+        summary["next_pot_cost"] = round(dynamic_price * 2, 2)  # heuristiek: 2× prijs = drempel
+        summary["total_capital_dynamic"] = round(len(potjes_list) * dynamic_price, 2)
+        summary["token_price_eur"] = dynamic_price
         for p in potjes_list:
             stored = float(p.get("capital", 0) or 0)
             p["capital_stored"] = stored
@@ -1247,6 +1253,11 @@ def _get_token_price_and_check_admin(viewer_id: str) -> Dict:
     if not viewer or viewer.get("gradatie", 99) > 1:
         return {"success": False, "error": "Alleen admins (gradatie ≤ 1) mogen herwaarderen"}
     try:
+        from modules.boekhouder.finance_hub import get_hub
+        price = float(get_hub().get_price().get("current_price_eur", 0))
+        if price > 0:
+            return {"success": True, "price": price}
+        # fallback
         from modules.shop.routes import get_dynamic_price
         return {"success": True, "price": float(get_dynamic_price())}
     except Exception as e:

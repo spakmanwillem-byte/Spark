@@ -150,3 +150,25 @@ async def check_auto_mint_endpoint(body: SyncBody):
     if not _is_admin(body.viewer_id):
         raise HTTPException(status_code=403, detail="Alleen admin")
     return finance_ops.check_auto_mint_hook("user-000")
+
+
+# ============================================================
+# v10_log_reserve_001 — Log Agent + Reserve Kluis endpoints
+# ============================================================
+@router.get("/logs")
+async def get_logs_overview():
+    """Overview van alle log-topics + event-counts."""
+    return {"success": True, **get_hub().log.snapshot("system")}
+
+
+@router.get("/logs/{topic}")
+async def get_logs_by_topic(topic: str, limit: int = 50, target_id: str = None):
+    """Lees events van 1 topic (mint/gift/deposit/etc.)."""
+    events = get_hub().log.lookup(topic=topic, target_id=target_id, limit=limit)
+    return {"success": True, "topic": topic, "count": len(events), "events": events}
+
+
+@router.get("/reserve-kluis")
+async def get_reserve_kluis():
+    """Huidige inhoud van reserve-kluis (dev/maint/buffer)."""
+    return {"success": True, **get_hub().reserve.snapshot("system")}

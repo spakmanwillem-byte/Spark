@@ -7,7 +7,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.0,
+          "capital": 80.26,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -31,7 +31,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.0,
+          "capital": 80.26,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -55,7 +55,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.0,
+          "capital": 80.26,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -79,7 +79,7 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.0,
+          "capital": 80.26,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -103,7 +103,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 10.0,
+          "capital": 80.26,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -130,7 +130,28 @@
       "created_at": "2026-07-09T22:02:52.798397+00:00"
     },
     "user-001": {
-      "potjes": []
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "nummer": 1,
+          "capital": 16.048,
+          "max_size": 80.24,
+          "pot_locked": false,
+          "market": "EUR",
+          "minted_at": "2026-07-20T16:52:48.805064+00:00",
+          "minted_from": "test_reserve_log",
+          "position": {
+            "is_open": false
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          }
+        }
+      ]
     },
     "user-a0ee2d7e": {
       "user_id": "user-a0ee2d7e",

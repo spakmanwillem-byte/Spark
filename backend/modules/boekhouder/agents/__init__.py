@@ -12,8 +12,11 @@ from .bitvavo_agent import BitvavoAgent
 from .recon_agent import ReconAgent
 from .sepa_agent import SepaAgent
 from .persona_agent import PersonaAgent
+from .log_agent import LogAgent
+from .reserve_kluis_agent import ReserveKluisAgent
 
 __all__ = [
     "BaseFinanceAgent", "TokenAgent", "PriceAgent", "WalletAgent",
     "PotjesAgent", "BitvavoAgent", "ReconAgent", "SepaAgent", "PersonaAgent",
+    "LogAgent", "ReserveKluisAgent",
 ]

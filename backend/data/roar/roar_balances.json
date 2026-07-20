@@ -3,7 +3,9 @@
   "cleaned_at": "2026-05-28T17:22:48.396843+00:00",
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
-  "balances": {},
+  "balances": {
+    "user-001": 1
+  },
   "transactions": [
     {
       "id": "0b66d989-d91c-4866-85a7-fedd2617fcae",
@@ -26,10 +28,19 @@
       "gift_id": "6bba5b27-48b4-46b2-a391-92f0abf2afea",
       "note": "",
       "status": "completed"
+    },
+    {
+      "type": "mint",
+      "user_id": "user-001",
+      "n_tokens": 1,
+      "price_per_token_eur": 16.048,
+      "total_eur": 16.05,
+      "source": "test_reserve_log",
+      "timestamp": "2026-07-20T16:52:48.793364+00:00"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999973,
+  "treasury_pool": 999972,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {

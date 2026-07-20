@@ -7,6 +7,7 @@ from typing import Any, Dict
 from .agents import (
     TokenAgent, PriceAgent, WalletAgent, PotjesAgent,
     BitvavoAgent, ReconAgent, SepaAgent, PersonaAgent,
+    LogAgent, ReserveKluisAgent,
 )
 
 
@@ -20,6 +21,8 @@ class FinanceHub:
         self.recon = ReconAgent()
         self.sepa = SepaAgent()
         self.persona = PersonaAgent()
+        self.log = LogAgent()
+        self.reserve = ReserveKluisAgent()
 
     def get_snapshot(self, user_id: str) -> Dict[str, Any]:
         """Volledig financieel beeld — ÉÉN CALL."""
@@ -33,6 +36,8 @@ class FinanceHub:
             "recon": self.recon.snapshot(user_id),
             "sepa": self.sepa.snapshot(user_id),
             "persona": self.persona.snapshot(user_id),
+            "log": self.log.snapshot(user_id),
+            "reserve_kluis": self.reserve.snapshot(user_id),
             "_generated_at": __import__("datetime").datetime.now(
                 __import__("datetime").timezone.utc).isoformat(),
         }

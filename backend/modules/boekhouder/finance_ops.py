@@ -161,6 +161,28 @@ def mint_tokens(user_id: str, n_tokens: int, source: str = "manual",
     user_pots["potjes"] = existing
     save_json(pot_fp, pots)
 
+    # v10_log_reserve_001 — Log-agent + Reserve-kluis
+    try:
+        from .agents.log_agent import LogAgent
+        from .agents.reserve_kluis_agent import ReserveKluisAgent
+        mint_total_eur = round(n_tokens * price, 4)
+        # Reserve-kluis: 5% split (2/2/1)
+        reserve_result = ReserveKluisAgent().reserve_from_mint(
+            mint_total_eur=mint_total_eur, mint_event_id="pending", source=source)
+        # Log event
+        log_result = LogAgent().record(
+            topic="mint", event_type="mint_tokens", actor=user_id,
+            data={
+                "n_tokens": n_tokens, "price_per_token_eur": price,
+                "total_eur": mint_total_eur, "source": source,
+                "minted_pot_ids": minted_ids,
+                "reserve": reserve_result["reserved"],
+            })
+        preview["log_event_id"] = log_result["event_id"]
+        preview["reserve"] = reserve_result["reserved"]
+    except Exception as e:
+        print(f"[mint] log/reserve failed (non-blocking): {e}")
+
     return {
         "success": True,
         "dry_run": False,

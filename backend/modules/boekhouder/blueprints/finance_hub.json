@@ -80,6 +80,23 @@
       "handles": ["weekly_report", "chat_reply", "close_cycle"],
       "chat_style": "warm, precies, cijfergericht in NL",
       "_note": "De 'Boekhouder' bot-persona. Weekverslagen + gesprekken over financiën. Data komt uit de andere sub-agents."
+    },
+    "log_agent": {
+      "topic": "paper_trail",
+      "handles": ["record", "lookup"],
+      "storage_pattern": "data/boekhouder/logs/{topic}/{YYYY-MM}.jsonl",
+      "topics_supported": ["mint", "gift", "deposit", "trade_close", "reserve", "drift_fix"],
+      "hash_chain": true,
+      "_note": "Paper trail = immutable event log per onderwerp. Hash-chain voor integriteit. Geagent per onderwerp zoals Willem-idee."
+    },
+    "reserve_kluis": {
+      "topic": "reserve_kluis",
+      "handles": ["reserve_from_mint", "snapshot"],
+      "reserve_percentages": {"dev": 2.0, "maint": 2.0, "buffer": 1.0},
+      "reserve_total_pct": 5.0,
+      "trigger_on": ["mint"],
+      "storage": "data/boekhouder/reserve_kluis.json",
+      "_note": "5% van elke mint gaat naar 3 fondsen (ontwikkeling/onderhoud/buffer). Boekhoudkundig — niet fysieke transfer. Later: uitbreiden naar deposit + trade_profit."
     }
   },
   "hooks": {

@@ -17,7 +17,7 @@
     "willem_regel": "Alles kunnen aanpassen behalve script zelf"
   },
   "split_from": null,
-  "children_max": 8,
+  "children_max": 10,
   "sub_agents": [
     {
       "class": "TokenAgent",
@@ -67,6 +67,18 @@
       "topic": "boekhouder_persona",
       "file": "agents/persona_agent.py",
       "blueprint_section": "persona_agent"
+    },
+    {
+      "class": "LogAgent",
+      "topic": "paper_trail",
+      "file": "agents/log_agent.py",
+      "blueprint_section": "log_agent"
+    },
+    {
+      "class": "ReserveKluisAgent",
+      "topic": "reserve_kluis",
+      "file": "agents/reserve_kluis_agent.py",
+      "blueprint_section": "reserve_kluis"
     }
   ],
   "endpoints": [
@@ -80,7 +92,10 @@
     "GET /boekhouder/snapshot/{user_id}",
     "GET /boekhouder/token/price",
     "POST /boekhouder/close-cycle/{user_id}",
-    "POST /boekhouder/run"
+    "POST /boekhouder/run",
+    "GET /boekhouder/logs",
+    "GET /boekhouder/logs/{topic}",
+    "GET /boekhouder/reserve-kluis"
   ],
   "tags": [
     "dispatcher",
@@ -106,6 +121,11 @@
         "date": "2026-07-20",
         "version": "v10_finance_hub_001",
         "changes": "Herbouwd tot dispatcher met 8 sub-agents. Hybride pot.capital = current_token_price hersteld. Ruis-formule (bitvavo - som(potjes)) toegevoegd. SEPA-stub voor toekomst. Persona geïsoleerd."
+      },
+      {
+        "date": "2026-07-20",
+        "version": "v10_log_reserve_001",
+        "changes": "LogAgent (paper trail, hash-chained, geagent per onderwerp) + ReserveKluisAgent (5% van mint → 2% dev / 2% maint / 1% buffer). Hooks aangesloten in mint_tokens."
       }
     ],
     "reality_vs_plan": {

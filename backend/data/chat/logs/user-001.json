@@ -52729,11 +52729,45 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2047
       }
+    },
+    {
+      "id": "conv-2bb7f9bb",
+      "timestamp": "2026-07-20T14:56:18.028485+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "hoeveel actieve potjes heeft spark trader",
+      "spark_response": "🏺 **Trader potjes voor user-000:** 5 totaal\n⚪ **pot-001** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-002** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-003** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-004** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-005** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n\n**In gebruik**: 0/5 potjes",
+      "channel": "spark-trader-intent",
+      "analysis": {
+        "intent": "trader_potjes",
+        "action": "trader_potjes"
+      },
+      "metadata": {
+        "session_id": "t1",
+        "gesprek_nummer": 2048
+      }
+    },
+    {
+      "id": "conv-c8a1a418",
+      "timestamp": "2026-07-20T14:56:18.672471+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "toon mijn potjes",
+      "spark_response": "🏺 **Trader potjes voor user-000:** 5 totaal\n⚪ **pot-001** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-002** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-003** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-004** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-005** · €10 cap / €50 max · BCH-EUR · 0 trades · laatste: geen trades\n\n**In gebruik**: 0/5 potjes",
+      "channel": "spark-trader-intent",
+      "analysis": {
+        "intent": "trader_potjes",
+        "action": "trader_potjes"
+      },
+      "metadata": {
+        "session_id": "t4",
+        "gesprek_nummer": 2049
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2047,
-    "last_updated": "2026-07-20T14:46:23.287357+00:00"
+    "total_conversations": 2049,
+    "last_updated": "2026-07-20T14:56:18.672471+00:00"
   }
 }

@@ -123,6 +123,16 @@ _EXPLAIN_PATTERNS = [
     r"\b(vertel|zeg)\s+(eens\s+)?(iets\s+)?over\s+(de\s+)?(trader|bot|handelsbot)\b",
 ]
 
+# POTJES — v9_trader_potjes_intent_001
+_POTJES_PATTERNS = [
+    r"\bhoeveel\s+(actieve?\s+)?potjes\b",
+    r"\bwelke\s+potjes\b",
+    r"\b(open|actieve?|gebruikte?)\s+potjes\b",
+    r"\bpotjes\s+(status|overzicht|status?)\b",
+    r"\btoon\s+(mijn\s+|de\s+)?potjes\b",
+    r"\bpot\s*(1|2|3|4|5|6|7|8|9|10|11|12)\b",
+]
+
 
 def _match(text: str, patterns: List[str]) -> bool:
     t = text.lower()
@@ -416,6 +426,79 @@ def _do_explain() -> Dict[str, Any]:
     return {"success": True, "message": msg, "data": {"endpoints": ["/api/trade/explained", "/api/trade/strategy/confidence"]}}
 
 
+def _do_potjes(user_id: str) -> Dict[str, Any]:
+    """v9_trader_potjes_intent_001 — Lees ECHTE potjes uit financial/user_potjes.json.
+
+    Trader-potjes zijn shared onder user-000 (Spark's admin account) — historische reden.
+    Voor user-001 (Willem, eigenaar) fallback naar user-000's potjes.
+    """
+    try:
+        FIN_DIR = DATA_ROOT / "financial"
+        data = load_json(FIN_DIR / "user_potjes.json", default={"users": {}})
+        users = data.get("users", {})
+        # Probeer eerst eigen user, anders user-000 (shared trader account)
+        user_data = users.get(user_id, {}) or {}
+        potjes = user_data.get("potjes", []) or []
+        source_user = user_id
+        if not potjes:
+            u0 = users.get("user-000", {}) or {}
+            potjes = u0.get("potjes", []) or []
+            source_user = "user-000"
+
+        # Lees trade history om te bepalen welke potjes IN GEBRUIK zijn
+        hist_file = DATA_ROOT / "wallet" / "trade_history" / f"{source_user}.json"
+        hist = load_json(hist_file, default=[])
+        if isinstance(hist, dict):
+            hist = hist.get("trades", [])
+
+        # Bereken per pot: open positie, laatste actie
+        pot_activity = {}
+        for tr in hist or []:
+            pid = tr.get("pot_id") or tr.get("pot")
+            if not pid:
+                continue
+            pot_activity.setdefault(pid, {"trades": 0, "last_action": None, "open_position": False})
+            pot_activity[pid]["trades"] += 1
+            action = tr.get("type") or tr.get("action")
+            ts = tr.get("timestamp", "")
+            if action:
+                pot_activity[pid]["last_action"] = f"{action} @ {ts[:19]}"
+            # Simpele open-position detectie (kopen zonder verkopen)
+            if action in ("buy", "koop", "BUY"):
+                pot_activity[pid]["open_position"] = True
+            elif action in ("sell", "verkoop", "SELL"):
+                pot_activity[pid]["open_position"] = False
+
+        lines = [f"🏺 **Trader potjes voor {source_user}:** {len(potjes)} totaal"]
+        if not potjes:
+            lines.append("_(geen potjes gevonden)_")
+        active_count = 0
+        for pot in potjes:
+            pid = pot.get("id") or f"pot-{pot.get('index','?')+1:03d}"
+            cap = pot.get("capital", 0) or 0
+            max_size = pot.get("max_size", 0) or 0
+            market = pot.get("market") or pot.get("last_market") or "?"
+            locked = pot.get("pot_locked", False)
+            act = pot_activity.get(pid, {})
+            open_pos = act.get("open_position", False)
+            last = act.get("last_action", "geen trades")
+            in_use = open_pos or act.get("trades", 0) > 0
+            if in_use:
+                active_count += 1
+            marker = "🟢" if open_pos else ("🟡" if in_use else "⚪")
+            lines.append(
+                f"{marker} **{pid}** · €{cap:.0f} cap / €{max_size:.0f} max · {market}"
+                + (f" · 🔒 locked" if locked else "")
+                + f" · {act.get('trades', 0)} trades · laatste: {last}"
+            )
+        lines.append(f"\n**In gebruik**: {active_count}/{len(potjes)} potjes")
+        return {"success": True, "message": "\n".join(lines),
+                "data": {"potjes_count": len(potjes), "active_count": active_count,
+                         "source_user": source_user, "potjes": potjes}}
+    except Exception as e:
+        return {"success": False, "message": f"Potjes lezen mislukt: {e}"}
+
+
 # ============================================================
 # Hoofd-entry — try_detect(text) → intent + reply
 # ============================================================
@@ -441,6 +524,8 @@ async def try_detect(text: str, user_id: str = "user-001") -> Optional[Dict[str,
         intent, result = "trader_events", _do_events()
     elif _match(t, _EXPLAIN_PATTERNS):
         intent, result = "trader_explain", _do_explain()
+    elif _match(t, _POTJES_PATTERNS):
+        intent, result = "trader_potjes", _do_potjes(user_id)
     elif _match(t, _PNL_PATTERNS):
         intent, result = "trader_pnl", _do_pnl(user_id)
     elif _match(t, _RECENT_PATTERNS):

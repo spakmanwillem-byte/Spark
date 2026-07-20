@@ -95,6 +95,28 @@ async def compose_response(
     except Exception:
         pass  # bij fout: door naar action_intents / LLM
 
+    # v9_self_profile_001 — Detecteer "waar woon ik / mijn adres / etc." → direct uit profile.json
+    # Skip verificatie: ingelogde user MAG eigen data zien.
+    try:
+        from modules.chat.self_profile_intent import try_detect as _self_profile_detect
+        sp_hit = _self_profile_detect(user_text, user_id=user_id)
+        if sp_hit:
+            if session_id:
+                _save_turn_pair(session_id, user_id, user_text, sp_hit.get("message", ""), "self_profile")
+            return {
+                "success": True,
+                "message": sp_hit.get("message", ""),
+                "action": sp_hit.get("action"),
+                "intent": sp_hit.get("intent"),
+                "data": sp_hit.get("data"),
+                "used_cards": [],
+                "used_model": "self_profile_intent",
+                "blueprint_version": "1.0",
+                "fast_path": True,
+            }
+    except Exception:
+        pass
+
     # v6_deep_side_effects_001 — Detecteer pure action-commands (TTS/STT/ambient toggle).
     # Bij match: skip de LLM (geen tokens, instant), return action + standaard-bevestiging.
     # Dit hergebruikt de bestaande action_intents_service zodat Diep dezelfde commands

@@ -280327,7 +280327,530 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-b2102a93",
+      "begrip": "historische",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Historische betekent dat iets betrekking heeft op de geschiedenis of op gebeurtenissen uit het verleden.",
+        "laag2": "Het woord historische wordt gebruikt om personen, plaatsen, gebeurtenissen, gebouwen of voorwerpen te beschrijven die van belang zijn voor de geschiedenis.",
+        "laag3": "Historische verwijst naar alles wat verband houdt met het verleden en de ontwikkeling van mensen, culturen of samenlevingen. Het wordt vaak gebruikt om aan te geven dat iets een bijzondere betekenis heeft gekregen door gebeurtenissen of ontwikkelingen die eerder hebben plaatsgevonden.",
+        "laag4": "Het begrip historische wordt gebruikt in onder andere geschiedenis, archeologie, cultuur, wetenschap en erfgoed. Een historische gebeurtenis of plaats helpt mensen het verleden te begrijpen en ervan te leren. Niet alles wat oud is, is automatisch historisch; iets is historisch wanneer het betekenis heeft binnen de geschiedenis."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en onderzoekers die zich met geschiedenis bezighouden.",
+        "wat": "Een aanduiding dat iets betrekking heeft op de geschiedenis.",
+        "wanneer": "Bij het beschrijven van gebeurtenissen, plaatsen of voorwerpen uit het verleden.",
+        "waar": "In geschiedenis, onderwijs, musea, erfgoed en cultuur.",
+        "waarom": "Om het belang of de relatie met het verleden aan te geven.",
+        "hoe": "Door iets te koppelen aan historische gebeurtenissen, perioden of ontwikkelingen."
+      },
+      "tags": [
+        "historische",
+        "geschiedenis",
+        "verleden",
+        "erfgoed",
+        "cultuur",
+        "archeologie",
+        "historisch",
+        "ontwikkeling",
+        "tijd",
+        "geschiedenis emotie neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e6d1eb8e",
+          "begrip": "archeologie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "archeologie",
+            "cultuur",
+            "erfgoed",
+            "geschiedenis",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37d17767",
+          "begrip": "oud",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "geschiedenis",
+            "ontwikkeling",
+            "tijd",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "ontwikkeling",
+            "tijd",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a95e0b4e",
+          "begrip": "geleden",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "geschiedenis",
+            "tijd",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e58d9767",
+          "begrip": "geweest",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "geschiedenis",
+            "tijd",
+            "verleden"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T08:04:26.464244+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T08:06:19.992192+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "heb jij de  historische gegevens niet in je systeem dan. bv als leer module. of je hebt toch ergens een geschiedenis. Dacht dat ik die info daar mss had geplaatst.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T08:06:11.272507+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:06:11.969576+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T08:06:12.053374+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:06:22.057527+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T08:06:22.067558+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-67ed1384",
+      "begrip": "unitykey",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een UnityKey is één API-sleutel waarmee meerdere AI- of LLM-providers kunnen worden gebruikt.",
+        "laag2": "UnityKey voorkomt dat gebruikers voor iedere AI-provider een aparte API-sleutel hoeven te beheren. De sleutel fungeert als één centrale toegang.",
+        "laag3": "UnityKey is een centrale authenticatiesleutel die toegang geeft tot meerdere ondersteunde taalmodellen via één interface. Hierdoor kunnen applicaties eenvoudiger wisselen tussen verschillende AI-providers zonder de software aan te passen. Beheer van credits, limieten en toegangsrechten verloopt via dezelfde sleutel.",
+        "laag4": "UnityKey vereenvoudigt het beheer van AI-integraties door meerdere LLM-providers achter één authenticatielaag te plaatsen. Ontwikkelaars hoeven daardoor minder verschillende API-sleutels op te slaan en kunnen eenvoudiger providers vervangen of combineren. De mogelijkheden hangen af van het platform dat de UnityKey aanbiedt."
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars en applicaties die meerdere AI-providers gebruiken.",
+        "wat": "Een universele API-sleutel voor meerdere LLM-providers.",
+        "wanneer": "Bij het ontwikkelen of gebruiken van AI-toepassingen met meerdere modellen.",
+        "waar": "Op AI-platformen die meerdere taalmodellen ondersteunen.",
+        "waarom": "Om beheer van API-sleutels eenvoudiger en centraler te maken.",
+        "hoe": "Door één authenticatiesleutel te gebruiken die toegang geeft tot verschillende ondersteunde AI-diensten."
+      },
+      "tags": [
+        "unitykey",
+        "api",
+        "authenticatie",
+        "llm",
+        "ai",
+        "provider",
+        "api-sleutel",
+        "integratie",
+        "toegang",
+        "software",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-aff6237c",
+          "begrip": "bot",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3208c15b",
+          "begrip": "verwerkt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "integratie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8a996a",
+          "begrip": "user",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6abcb839",
+          "begrip": "bots",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-21b5fcf8",
+          "begrip": "diep",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "llm",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:01:17.661998+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T08:15:48.278829+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "weet jij al zo veel, ook geen emergent unitykey",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T08:15:43.798870+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:15:44.361762+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T08:15:44.375222+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:15:50.481215+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T08:15:50.563384+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e1fcac11",
+      "begrip": "bacteriën",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "bacteriën"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T08:17:38.640389+00:00",
+        "vorige_versie_v1": "kb-skel-e1fcac11",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.014194+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:17:40.939639+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c8a9acfa",
+      "begrip": "beginner",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een beginner is iemand die net begint met het leren of uitvoeren van een nieuwe activiteit.",
+        "laag2": "Een beginner heeft meestal nog weinig ervaring of kennis en is bezig de basisvaardigheden te ontwikkelen.",
+        "laag3": "Een beginner bevindt zich aan het begin van een leerproces. Door oefening, begeleiding en ervaring ontwikkelt een beginner stap voor stap meer kennis en vaardigheden. Fouten maken en vragen stellen zijn een normaal onderdeel van deze fase.",
+        "laag4": "Iedere deskundige is ooit als beginner begonnen. De duur van de beginnersfase verschilt per persoon en per onderwerp. Een goede leeromgeving, duidelijke uitleg en regelmatige oefening helpen een beginner om zich verder te ontwikkelen naar een gevorderd niveau."
+      },
+      "ws5": {
+        "wie": "Mensen die een nieuwe vaardigheid, hobby, sport of beroep leren.",
+        "wat": "Iemand met weinig ervaring of kennis op een bepaald gebied.",
+        "wanneer": "Aan het begin van een leerproces of nieuwe activiteit.",
+        "waar": "Overal waar nieuwe kennis of vaardigheden worden geleerd.",
+        "waarom": "Omdat iedereen eerst de basis moet leren voordat ervaring wordt opgebouwd.",
+        "hoe": "Door te oefenen, fouten te maken, feedback te ontvangen en ervaring op te doen."
+      },
+      "tags": [
+        "beginner",
+        "leren",
+        "ervaring",
+        "kennis",
+        "vaardigheid",
+        "ontwikkeling",
+        "oefening",
+        "start",
+        "basis",
+        "leerling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-d069b938",
+          "begrip": "trainen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "kennis",
+            "leren",
+            "oefening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1a204b1b",
+          "begrip": "leer",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "kennis",
+            "leren",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b15201f2",
+          "begrip": "vooruitgang",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "kennis",
+            "leren",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-68fb65a6",
+          "begrip": "leraar",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "kennis",
+            "leerling",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-84f2ceda",
+          "begrip": "docent",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "kennis",
+            "leerling",
+            "leren"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T08:21:44.445194+00:00",
+        "vorige_versie_v1": "kb-skel-c8a9acfa",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:58.942542+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:21:39.841470+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T08:21:39.854930+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T08:21:46.664372+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T08:21:46.734642+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T08:21:39.226736+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
-  "updated_at": "2026-06-11T13:32:52.299095+00:00"
+  "updated_at": "2026-07-20T09:17:25.930091+00:00"
 }

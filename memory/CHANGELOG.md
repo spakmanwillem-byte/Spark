@@ -2,6 +2,31 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-20 (sessie 48) — KB merge uit productie-backup (P0)
+
+### 🎯 Productie KB-kaarten samengevoegd
+Uploaded ZIP: `spark_backup_changes_20260720_091442.zip`
+
+**Probleem**: In vorige sessie zijn alleen chat-logs gemergd, KB-kaarten die op productie met volledige laag1-4 content zijn afgemaakt bleven op preview als skeleton in de index staan (kaart-bestand ontbrak).
+
+**Gevonden diff** (7 kaarten in ZIP maar niet in preview lade-bestanden):
+- `kbv2-956d490e` [doen] – **lees** ✅ laag1-4 gemerged
+- `kbv2-67ed1384` [weten] – **unitykey** ✅ laag1-4 gemerged
+- `kbv2-30a83485` [doen] – **balanceer** ✅ laag1-4 gemerged
+- `kbv2-3f3135a9` [doen] – **gezet** ✅ laag1-4 gemerged
+- `kbv2-b2102a93` [weten] – **historische** ✅ laag1-4 gemerged
+- `kbv2-skel-c8a9acfa` [weten] – **beginner** ✅ laag1-4 gemerged
+- `kbv2-skel-e1fcac11` [weten] – **bacteriën** ⚠️ (was ook skeleton in ZIP, alleen index-entry bijgewerkt)
+
+**Uitvoering**:
+- Backup van originele preview-bestanden: `/app/backend/data/knowledge/v2/_backup_before_merge_20260720_091725/`
+- Kaarten toegevoegd aan `knowledge_v2_doen.json` (+3) en `knowledge_v2_weten.json` (+4)
+- `knowledge_index.json` bijgewerkt (rebuilt_by: `zip_merge_20260720`), 7 entries verrijkt met `lade` + `has_lagen`
+- Geen bestaande data overschreven (extra preview-kaarten `basis`, `bollinger`, `exit`, `fee-aware`, `sigma`, `trailing-stop` behouden)
+
+**Geverifieerd via `GET /api/kb/v2/find?begrip=X`**: 6/7 kaarten geven nu volledige laag1-4 output terug.
+
+
 ## 2026-07-08 (sessie 46) — Gap-breakout merge in trader decision-engine
 
 ### 🎯 v7_gap_breakout_001 + v7_gap_merge_001

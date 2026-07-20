@@ -102,3 +102,51 @@ async def finance_chat_snapshot(user_id: str):
         "chat_message": hub.persona.format_snapshot_for_chat(snap, user_naam),
         "raw_snapshot": snap,
     }
+
+
+# ============================================================
+# v10_finance_hub_ops_001 — Muterende endpoints (sync, mint)
+# ============================================================
+from pydantic import BaseModel
+from . import finance_ops
+
+
+class SyncBody(BaseModel):
+    dry_run: bool = True
+    viewer_id: str = "user-001"
+
+
+class MintBody(BaseModel):
+    user_id: str
+    n_tokens: int
+    source: str = "manual"
+    dry_run: bool = True
+    viewer_id: str = "user-001"
+
+
+@router.post("/admin/sync-wallet-mirror")
+async def sync_wallet_mirror_endpoint(body: SyncBody):
+    """Fix drift: sync user_wallets.spark_tokens ← roar_balances.balances."""
+    if not _is_admin(body.viewer_id):
+        raise HTTPException(status_code=403, detail="Alleen admin")
+    return finance_ops.sync_wallet_mirror(dry_run=body.dry_run)
+
+
+@router.post("/admin/mint")
+async def mint_endpoint(body: MintBody):
+    """Mint N tokens. 1 token = 1 pot (hybride Willem-regel).
+
+    Bij dry_run=true: alleen preview. Bij dry_run=false: schrijft naar roar_balances,
+    user_wallets en user_potjes files.
+    """
+    if not _is_admin(body.viewer_id):
+        raise HTTPException(status_code=403, detail="Alleen admin")
+    return finance_ops.mint_tokens(body.user_id, body.n_tokens, body.source, body.dry_run)
+
+
+@router.post("/admin/check-auto-mint")
+async def check_auto_mint_endpoint(body: SyncBody):
+    """Trigger auto-mint hook: als Spark's overflow_pool ≥ MINT_THRESHOLD → mint."""
+    if not _is_admin(body.viewer_id):
+        raise HTTPException(status_code=403, detail="Alleen admin")
+    return finance_ops.check_auto_mint_hook("user-000")

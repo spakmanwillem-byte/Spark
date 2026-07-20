@@ -1096,13 +1096,15 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             # v6_overflow_auto_mint_instant_001 — direct na trade-sluiting: check of
             # Spark's overflow_pool >= €10 staat, en mint dan onmiddellijk nieuwe
             # trade-potjes. Voorkomt 24h wachttijd van de scheduler. Spark-only.
+            # v10_finance_hub_ops_001 — Gebruik finance_hub check_auto_mint_hook zodat
+            # nieuwe potjes meteen hybride-revalue krijgen (capital = current token_price).
             auto_mint = None
             if user_id == "user-000":
                 try:
-                    from modules.trade.staking_growth import run_auto_mint_only
-                    auto_mint = run_auto_mint_only()
+                    from modules.boekhouder.finance_ops import check_auto_mint_hook
+                    auto_mint = check_auto_mint_hook("user-000")
                     if auto_mint.get("n_minted", 0) > 0:
-                        print(f"[close_pot] Auto-mint: {auto_mint['n_minted']} nieuwe potjes uit overflow")
+                        print(f"[close_pot] Auto-mint via finance_hub: {auto_mint['n_minted']} nieuwe potjes @ €{auto_mint.get('token_price_at_mint', '?')}")
                 except Exception as ex:
                     print(f"[close_pot] auto-mint failed (non-blocking): {ex}")
             # v6_dynamic_pot_split_001 — DISABLED (sessie 16): auto-rebalance op

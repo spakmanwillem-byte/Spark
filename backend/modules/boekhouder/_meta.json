@@ -1,6 +1,6 @@
 {
-  "_arch_ref": "v10_finance_hub_001",
-  "schema_version": "1.2",
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
   "naam": "boekhouder",
   "doel": "Finance Hub — dispatcher/sub-agent architectuur. Enige bron van waarheid voor tokens, potjes, wallet, prijs, bitvavo, drift, sepa. Boekhouder-persona (weekverslagen, close_cycle) draait óók op deze hub.",
   "container_type": "dir",
@@ -19,26 +19,76 @@
   "split_from": null,
   "children_max": 8,
   "sub_agents": [
-    {"class": "TokenAgent",   "topic": "roar_token",       "file": "agents/token_agent.py",   "blueprint_section": "token_agent"},
-    {"class": "PriceAgent",   "topic": "token_prijs",      "file": "agents/price_agent.py",   "blueprint_section": "price_agent"},
-    {"class": "WalletAgent",  "topic": "eur_wallet",       "file": "agents/wallet_agent.py",  "blueprint_section": "wallet_agent"},
-    {"class": "PotjesAgent",  "topic": "trader_potjes",    "file": "agents/potjes_agent.py",  "blueprint_section": "potjes_agent"},
-    {"class": "BitvavoAgent", "topic": "bitvavo_saldo",    "file": "agents/bitvavo_agent.py", "blueprint_section": "bitvavo_agent"},
-    {"class": "ReconAgent",   "topic": "reconciliation",   "file": "agents/recon_agent.py",   "blueprint_section": "recon_agent"},
-    {"class": "SepaAgent",    "topic": "sepa_bank",        "file": "agents/sepa_agent.py",    "blueprint_section": "sepa_agent", "status": "placeholder"},
-    {"class": "PersonaAgent", "topic": "boekhouder_persona","file": "agents/persona_agent.py","blueprint_section": "persona_agent"}
+    {
+      "class": "TokenAgent",
+      "topic": "roar_token",
+      "file": "agents/token_agent.py",
+      "blueprint_section": "token_agent"
+    },
+    {
+      "class": "PriceAgent",
+      "topic": "token_prijs",
+      "file": "agents/price_agent.py",
+      "blueprint_section": "price_agent"
+    },
+    {
+      "class": "WalletAgent",
+      "topic": "eur_wallet",
+      "file": "agents/wallet_agent.py",
+      "blueprint_section": "wallet_agent"
+    },
+    {
+      "class": "PotjesAgent",
+      "topic": "trader_potjes",
+      "file": "agents/potjes_agent.py",
+      "blueprint_section": "potjes_agent"
+    },
+    {
+      "class": "BitvavoAgent",
+      "topic": "bitvavo_saldo",
+      "file": "agents/bitvavo_agent.py",
+      "blueprint_section": "bitvavo_agent"
+    },
+    {
+      "class": "ReconAgent",
+      "topic": "reconciliation",
+      "file": "agents/recon_agent.py",
+      "blueprint_section": "recon_agent"
+    },
+    {
+      "class": "SepaAgent",
+      "topic": "sepa_bank",
+      "file": "agents/sepa_agent.py",
+      "blueprint_section": "sepa_agent",
+      "status": "placeholder"
+    },
+    {
+      "class": "PersonaAgent",
+      "topic": "boekhouder_persona",
+      "file": "agents/persona_agent.py",
+      "blueprint_section": "persona_agent"
+    }
   ],
   "endpoints": [
-    "GET /boekhouder/snapshot/{user_id}",
-    "GET /boekhouder/token/price",
-    "GET /boekhouder/potjes/{user_id}",
-    "GET /boekhouder/reconcile",
     "GET /boekhouder/blueprint",
     "GET /boekhouder/chat-snapshot/{user_id}",
     "GET /boekhouder/closings",
-    "POST /boekhouder/close-cycle/{user_id}"
+    "GET /boekhouder/history",
+    "GET /boekhouder/potjes/{user_id}",
+    "GET /boekhouder/preview",
+    "GET /boekhouder/reconcile",
+    "GET /boekhouder/snapshot/{user_id}",
+    "GET /boekhouder/token/price",
+    "POST /boekhouder/close-cycle/{user_id}",
+    "POST /boekhouder/run"
   ],
-  "tags": ["dispatcher", "finance", "agents", "single_source_of_truth", "hybride_token_potje"],
+  "tags": [
+    "dispatcher",
+    "finance",
+    "agents",
+    "single_source_of_truth",
+    "hybride_token_potje"
+  ],
   "encryption": {
     "enabled": false,
     "algorithm": null,
@@ -48,12 +98,15 @@
   "created_at": "2026-05-26T15:54:32.128125+00:00",
   "last_touched": "2026-07-20T15:00:00+00:00",
   "activity_count": 0,
-  "file_count": 4,
+  "file_count": 17,
   "subdir_count": 2,
   "extra": {
     "refactor_history": [
-      {"date": "2026-07-20", "version": "v10_finance_hub_001",
-       "changes": "Herbouwd tot dispatcher met 8 sub-agents. Hybride pot.capital = current_token_price hersteld. Ruis-formule (bitvavo - som(potjes)) toegevoegd. SEPA-stub voor toekomst. Persona geïsoleerd."}
+      {
+        "date": "2026-07-20",
+        "version": "v10_finance_hub_001",
+        "changes": "Herbouwd tot dispatcher met 8 sub-agents. Hybride pot.capital = current_token_price hersteld. Ruis-formule (bitvavo - som(potjes)) toegevoegd. SEPA-stub voor toekomst. Persona geïsoleerd."
+      }
     ],
     "reality_vs_plan": {
       "reality": "Preview trader draait, 5 potjes, roar_balances leeg maar wallet toont 15 tokens (drift), token-prijs €7.60 stale, €80+ op Bitvavo",

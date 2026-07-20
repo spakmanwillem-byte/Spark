@@ -9,7 +9,7 @@ import {
   Mic, Speech, Music, Upload, Play, Trash2, Edit3, Plus,
   Keyboard, MessageSquare, Brain, Trophy, ChevronDown, ChevronRight,
   Zap, Globe, Wifi, Database, Server, Bell, Eye, EyeOff,
-  ToggleLeft, ToggleRight, Archive, X
+  ToggleLeft, ToggleRight, Archive, X, Wallet, Pencil, Lock
 } from 'lucide-react';
 import { BarkModal } from '../shared/BarkModal';
 import { InputBark } from '../shared/InputBark';
@@ -324,6 +324,9 @@ export function InstellingenPage({ onNavigate }) {
 
                 {/* v7_achievement_agents_001 — Achievement Config Placeholder (admin only) */}
                 {user?.admin && <AchievementBlueprintPanel />}
+
+                {/* v10_finance_hub_001 — Boekhouder Finance Hub (admin only) */}
+                {user?.admin && <FinanceHubPanel />}
 
                 <SaveButton saving={saving} onClick={handleSave} />
               </>
@@ -1261,3 +1264,166 @@ function AchievementBlueprintPanel() {
     </div>
   );
 }
+
+
+// v10_finance_hub_001 — Boekhouder Finance Hub admin panel
+function FinanceHubPanel() {
+  const [snapshot, setSnapshot] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(null);
+  const [mintN, setMintN] = useState(3);
+  const [busy, setBusy] = useState(false);
+  const [lastAction, setLastAction] = useState(null);
+
+  const reload = () => {
+    setLoading(true);
+    fetch(`${API}/api/boekhouder/snapshot/user-001`)
+      .then(r => r.json())
+      .then(d => { setSnapshot(d); setLoading(false); })
+      .catch(() => setLoading(false));
+  };
+  useEffect(() => { reload(); }, []);
+
+  const doSync = async (dryRun) => {
+    setBusy(true);
+    const r = await fetch(`${API}/api/boekhouder/admin/sync-wallet-mirror`, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ dry_run: dryRun, viewer_id: 'user-001' })
+    }).then(r => r.json());
+    setLastAction({ type: 'sync', dryRun, ...r });
+    setBusy(false);
+    if (!dryRun) reload();
+  };
+
+  const doMint = async (dryRun) => {
+    setBusy(true);
+    const r = await fetch(`${API}/api/boekhouder/admin/mint`, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ user_id: 'user-001', n_tokens: mintN, source: 'admin_test', dry_run: dryRun, viewer_id: 'user-001' })
+    }).then(r => r.json());
+    setLastAction({ type: 'mint', dryRun, ...r });
+    setBusy(false);
+    if (!dryRun) reload();
+  };
+
+  if (loading) return <div className="text-xs text-slate-500 p-3">Finance Hub laden…</div>;
+  if (!snapshot) return null;
+
+  const t = snapshot.token || {};
+  const p = snapshot.price || {};
+  const w = snapshot.wallet || {};
+  const pj = snapshot.potjes || {};
+  const bv = snapshot.bitvavo || {};
+  const rc = snapshot.recon || {};
+
+  return (
+    <div data-testid="finance-hub-panel"
+      className="p-5 rounded-xl border border-emerald-500/20"
+      style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.05), rgba(6,95,70,0.04))' }}>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <Wallet className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-lg font-bold text-white">Boekhouder Finance Hub</h2>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">v10 dispatcher</span>
+        </div>
+        <button onClick={reload} data-testid="fh-reload"
+          className="px-2 py-1 text-xs rounded bg-slate-800 hover:bg-slate-700 text-slate-300">🔄 refresh</button>
+      </div>
+
+      {/* Live snapshot grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800">
+          <div className="text-[10px] text-slate-500 mb-1">EUR-saldo</div>
+          <div className="text-lg font-bold text-white">€{w.balance_eur?.toFixed(2)}</div>
+          <div className="text-[10px] text-slate-500">gestort: €{w.total_deposited_eur?.toFixed(2)}</div>
+        </div>
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800">
+          <div className="text-[10px] text-slate-500 mb-1">ROAR tokens</div>
+          <div className="text-lg font-bold text-white">{t.user_tokens_roar_authoritative}</div>
+          {t.drift_detected && <div className="text-[10px] text-amber-400">⚠️ mirror: {t.user_tokens_wallet_mirror}</div>}
+        </div>
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800">
+          <div className="text-[10px] text-slate-500 mb-1">Token-prijs</div>
+          <div className="text-lg font-bold text-white">€{p.current_price_eur?.toFixed(2)}</div>
+          <div className="text-[10px] text-slate-500">{p.at_floor ? '(floor)' : `${p.formula?.split(',')[0]?.replace('max(','')}...`}</div>
+        </div>
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800">
+          <div className="text-[10px] text-slate-500 mb-1">Potjes</div>
+          <div className="text-lg font-bold text-white">{pj.potjes_count} × €{p.current_price_eur?.toFixed(2)}</div>
+          <div className="text-[10px] text-slate-500">totaal: €{pj.total_capital_dynamic_eur}</div>
+        </div>
+      </div>
+
+      {/* Ruis + drift status */}
+      <div className="p-3 rounded-lg bg-slate-950/70 border border-slate-800 mb-3">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-xs font-semibold text-slate-300">🍖 Ruis (bitvavo - som potjes)</span>
+          <span className={`text-sm font-bold ${(rc.system_wide?.ruis_eur||0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+            €{rc.system_wide?.ruis_eur >= 0 ? '+' : ''}{rc.system_wide?.ruis_eur?.toFixed(2)}
+          </span>
+        </div>
+        <div className="text-[10px] text-slate-500">
+          Bitvavo: €{bv.bitvavo_free_eur?.toFixed(2)} • potjes-totaal: €{rc.system_wide?.total_potjes_capital_eur?.toFixed(2)}
+        </div>
+        {rc.warnings?.length > 0 && (
+          <div className="mt-2 text-[10px] text-amber-400">
+            {rc.warnings.map((wn, i) => <div key={i}>⚠️ {wn}</div>)}
+          </div>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="space-y-2 mb-3">
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800">
+          <div className="text-xs font-semibold text-slate-200 mb-2">🔧 Sync wallet mirror (fix drift)</div>
+          <div className="flex gap-2">
+            <button onClick={() => doSync(true)} disabled={busy} data-testid="fh-sync-dry"
+              className="px-3 py-1.5 text-xs rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Dry-run</button>
+            <button onClick={() => doSync(false)} disabled={busy} data-testid="fh-sync-real"
+              className="px-3 py-1.5 text-xs rounded bg-emerald-600 hover:bg-emerald-500 text-white">Uitvoeren</button>
+          </div>
+        </div>
+
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800">
+          <div className="text-xs font-semibold text-slate-200 mb-2">🪙 Test-mint tokens (1 token = 1 pot @ €{p.current_price_eur?.toFixed(2)})</div>
+          <div className="flex gap-2 items-center">
+            <input type="number" min="1" max="20" value={mintN} onChange={e => setMintN(Number(e.target.value))}
+              data-testid="fh-mint-n" className="w-16 px-2 py-1 text-xs rounded bg-slate-950 border border-slate-700 text-white" />
+            <span className="text-xs text-slate-400">tokens = €{(mintN * (p.current_price_eur||0)).toFixed(2)}</span>
+            <button onClick={() => doMint(true)} disabled={busy} data-testid="fh-mint-dry"
+              className="px-3 py-1.5 text-xs rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Preview</button>
+            <button onClick={() => doMint(false)} disabled={busy} data-testid="fh-mint-real"
+              className="px-3 py-1.5 text-xs rounded bg-amber-600 hover:bg-amber-500 text-white">Mint</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Last action result */}
+      {lastAction && (
+        <div className="p-3 rounded-lg bg-black/40 border border-emerald-500/20 mb-3">
+          <div className="text-[10px] text-emerald-400 mb-1">
+            Laatste actie: <b>{lastAction.type}</b> {lastAction.dryRun ? '(dry-run)' : '(uitgevoerd)'}
+          </div>
+          <pre className="text-[10px] text-slate-300 overflow-x-auto max-h-40">
+{JSON.stringify(lastAction, null, 2)}
+          </pre>
+        </div>
+      )}
+
+      {/* Sub-agents overview */}
+      <button onClick={() => setExpanded(expanded === 'agents' ? null : 'agents')} data-testid="fh-toggle-agents"
+        className="w-full px-3 py-2 text-xs rounded bg-slate-900/50 hover:bg-slate-800/50 text-slate-300 flex items-center justify-between">
+        <span>🤖 8 sub-agents (dispatcher-pattern)</span>
+        <ChevronRight className={`w-3 h-3 transition-transform ${expanded === 'agents' ? 'rotate-90' : ''}`} />
+      </button>
+      {expanded === 'agents' && (
+        <div className="mt-2 p-3 bg-black/30 rounded-lg border border-slate-800">
+          <pre className="text-[10px] text-slate-300 overflow-x-auto max-h-96 font-mono">
+{JSON.stringify(snapshot, null, 2)}
+          </pre>
+        </div>
+      )}
+    </div>
+  );
+}
+

@@ -1,0 +1,97 @@
+{
+  "_type": "finance_hub_blueprint",
+  "_module": "boekhouder",
+  "_agent_pattern": "topic_dispatcher_v1",
+  "_versie": "v10_finance_hub_001",
+  "_bijgewerkt_op": "2026-07-20T15:00:00+00:00",
+  "_doel": "Runtime-config voor de Boekhouder-hub. Elk sub-agent leest zijn eigen sectie hieruit. Admin-editable via /instellingen/boekhouder (placeholder).",
+  "_koppelingen": {
+    "code_ref": "backend/modules/boekhouder/",
+    "blueprint_doc": "/memory/blueprints/boekhouder.md",
+    "roadmap_ref": "/memory/ROADMAP.md#finance-hub-v10",
+    "help_ref": "backend/data/help/gradatie_*.json (finance-hoofdstukken)",
+    "privacy_ref": "backend/data/system/legal_privacy.json"
+  },
+  "sub_agents": {
+    "token_agent": {
+      "topic": "roar_token",
+      "handles": ["balance", "mint", "burn", "gift", "supply"],
+      "data_files_read": ["data/roar/roar_balances.json"],
+      "data_files_write": ["data/roar/roar_balances.json"],
+      "authoritative_for": ["balances", "transactions", "treasury_pool", "total_supply"]
+    },
+    "price_agent": {
+      "topic": "token_prijs",
+      "handles": ["dynamic_price", "recompute"],
+      "formula": "max_anchor_or_bitvavo_ratio",
+      "formula_params": {
+        "anchor_price_eur": 5.08,
+        "formula_definition": "max(anchor, bitvavo_free_eur / minted_supply)",
+        "recompute_on": ["deposit", "mint", "trade_close", "manual_refresh"]
+      }
+    },
+    "wallet_agent": {
+      "topic": "eur_wallet",
+      "handles": ["balance_eur", "deposits", "transacties", "tikkie"],
+      "data_files_read": ["data/wallet/wallets.json", "data/wallet/user_wallets.json"],
+      "authoritative_for": ["balance", "total_deposited", "transactions"]
+    },
+    "potjes_agent": {
+      "topic": "trader_potjes",
+      "handles": ["list", "value", "capital", "revalue"],
+      "data_files_read": ["data/financial/user_potjes.json"],
+      "capital_formula": "current_token_price",
+      "_note": "1 token = 1 pot. Elke pot's capital wordt live berekend uit token_price."
+    },
+    "bitvavo_agent": {
+      "topic": "bitvavo_saldo",
+      "handles": ["live_balance", "assets"],
+      "data_files_read": ["data/trade/market_stats.json"],
+      "cache_ttl_seconds": 60
+    },
+    "recon_agent": {
+      "topic": "reconciliation",
+      "handles": ["drift_check", "sync", "ruis_calc"],
+      "ruis_formula": "bitvavo_total_eur - sum(all_potjes_capital)",
+      "drift_thresholds": {
+        "wallet_vs_roar_tokens": 0,
+        "potjes_capital_drift_pct": 5.0,
+        "ruis_warning_eur": 100.0
+      }
+    },
+    "sepa_agent": {
+      "topic": "sepa_bank",
+      "status": "placeholder",
+      "handles": [],
+      "_note": "Stub voor toekomstige SEPA/bankrekening-koppeling. Geen actieve endpoints, alleen tab-frame."
+    },
+    "persona_agent": {
+      "topic": "boekhouder_persona",
+      "handles": ["weekly_report", "chat_reply", "close_cycle"],
+      "chat_style": "warm, precies, cijfergericht in NL",
+      "_note": "De 'Boekhouder' bot-persona. Weekverslagen + gesprekken over financiën. Data komt uit de andere sub-agents."
+    }
+  },
+  "hooks": {
+    "on_deposit": ["recon_agent.recheck_ruis", "price_agent.recompute", "potjes_agent.revalue_all"],
+    "on_trade_close": ["price_agent.recompute", "recon_agent.recheck_ruis", "token_agent.check_auto_mint"],
+    "on_mint": ["price_agent.recompute", "potjes_agent.add_pot_if_needed", "persona_agent.log_event"],
+    "on_gift": ["token_agent.transfer_balance", "persona_agent.log_event"]
+  },
+  "chat_intents": {
+    "wallet_query": ["wat is mijn saldo", "hoeveel geld heb ik", "mijn wallet"],
+    "token_query": ["hoeveel tokens", "mijn roar", "token balans"],
+    "price_query": ["token prijs", "wat is de prijs", "roar prijs"],
+    "potjes_query": ["mijn potjes", "hoeveel potjes", "pot waarde"],
+    "reconcile_query": ["klopt alles", "check drift", "ruis"],
+    "boekhouden_query": ["boekhouding", "financieel overzicht", "week rapport"]
+  },
+  "footnote": {
+    "generated_by": "e1_finance_hub_refactor_v1",
+    "generated_at": "2026-07-20T15:00:00+00:00",
+    "spark_note": "Deze blueprint stuurt de hele finance-hub. Wijzig formules/hooks/intents HIER — nooit in code.",
+    "editable_by_admin": true,
+    "future_admin_endpoint": "PATCH /boekhouder/admin/blueprint/finance_hub",
+    "willem_regel": "Alles kunnen aanpassen behalve script zelf"
+  }
+}

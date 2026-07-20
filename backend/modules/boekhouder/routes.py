@@ -40,3 +40,65 @@ async def close_cycle(user_id: str, payload: Optional[dict] = Body(None)):
 @router.get("/closings")
 async def list_closings(user_id: Optional[str] = None, limit: int = 20):
     return boekhouder.list_closings(user_id=user_id, limit=limit)
+
+
+
+# ============================================================
+# v10_finance_hub_001 — Finance Hub endpoints (single source of truth)
+# ============================================================
+from .finance_hub import get_hub
+
+
+@router.get("/snapshot/{user_id}")
+async def finance_snapshot(user_id: str):
+    """Volledig financieel beeld — ÉÉN CALL: token, wallet, potjes, prijs, bitvavo, drift, sepa.
+
+    Deze endpoint is de bron van waarheid voor alle UI's die financiële data tonen.
+    """
+    return {"success": True, **get_hub().get_snapshot(user_id)}
+
+
+@router.get("/token/price")
+async def finance_token_price():
+    """Dynamische token-prijs — fresh berekend uit blueprint-formule."""
+    return {"success": True, **get_hub().get_price()}
+
+
+@router.get("/potjes/{user_id}")
+async def finance_potjes(user_id: str):
+    """Potjes met dynamische capital (hybride: capital = current token_price)."""
+    return {"success": True, **get_hub().get_potjes(user_id)}
+
+
+@router.get("/reconcile")
+async def finance_reconcile(user_id: str = "user-001"):
+    """Drift-detectie + ruis-berekening (systeem-breed)."""
+    return {"success": True, **get_hub().reconcile(user_id)}
+
+
+@router.get("/blueprint")
+async def finance_blueprint():
+    """Lees de volledige finance-hub blueprint (formules, hooks, chat_intents)."""
+    return {"success": True, "blueprint": get_hub().token.full_blueprint()}
+
+
+@router.get("/chat-snapshot/{user_id}")
+async def finance_chat_snapshot(user_id: str):
+    """Formatteert snapshot als NL chat-antwoord voor Spark's persona."""
+    hub = get_hub()
+    snap = hub.get_snapshot(user_id)
+    # Lees user_naam
+    from pathlib import Path
+    from modules.core.storage import load_json
+    users = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json",
+                      default={"users": []})
+    user_naam = "user"
+    for u in users.get("users", []):
+        if u.get("id") == user_id:
+            user_naam = u.get("naam") or u.get("volledige_naam") or user_id
+            break
+    return {
+        "success": True,
+        "chat_message": hub.persona.format_snapshot_for_chat(snap, user_naam),
+        "raw_snapshot": snap,
+    }

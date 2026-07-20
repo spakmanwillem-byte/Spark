@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2113,
+    "card_count": 2140,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T09:21:50.492682+00:00",
+    "last_updated": "2026-07-20T11:52:26.068266+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -281075,6 +281075,4188 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-20T09:21:44.148213+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b8267111",
+      "begrip": "basis",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een basis is het fundament waarop iets wordt opgebouwd of verder ontwikkeld.",
+        "laag2": "De basis vormt het uitgangspunt van kennis, vaardigheden, systemen of constructies. Zonder een goede basis is verdere ontwikkeling moeilijker.",
+        "laag3": "Een basis bestaat uit de belangrijkste onderdelen die nodig zijn om iets goed te begrijpen, te bouwen of te gebruiken. De basis kan bestaan uit kennis, regels, vaardigheden, materialen of principes. Een sterke basis maakt het gemakkelijker om nieuwe informatie toe te voegen en complexe onderwerpen te begrijpen.",
+        "laag4": "Het begrip basis wordt gebruikt in vrijwel alle vakgebieden, zoals onderwijs, techniek, wetenschap, sport en softwareontwikkeling. Een stevig fundament vergroot stabiliteit, betrouwbaarheid en groei. Naarmate de basis sterker is, kunnen nieuwe lagen en verbindingen eenvoudiger worden toegevoegd zonder dat het geheel instabiel wordt."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen die iets leren, bouwen of ontwikkelen.",
+        "wat": "Het fundament of uitgangspunt waarop iets is gebaseerd.",
+        "wanneer": "Aan het begin van een leer-, bouw- of ontwikkelproces.",
+        "waar": "In onderwijs, techniek, wetenschap, software, sport en het dagelijks leven.",
+        "waarom": "Omdat een goede basis nodig is voor stabiliteit, begrip en verdere ontwikkeling.",
+        "hoe": "Door de belangrijkste kennis, regels, vaardigheden of onderdelen eerst op te bouwen."
+      },
+      "tags": [
+        "basis",
+        "fundament",
+        "uitgangspunt",
+        "kern",
+        "kennis",
+        "ontwikkeling",
+        "structuur",
+        "opbouw",
+        "stabiliteit",
+        "leren",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-5a80c066",
+          "begrip": "bouwstenen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "fundament",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a508eba",
+          "begrip": "Core",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "fundament",
+            "kern",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2c235f62",
+          "begrip": "kern",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "kern",
+            "neutraal",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c8a9acfa",
+          "begrip": "beginner",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "kennis",
+            "leren",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00205cb5",
+          "begrip": "studie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "kennis",
+            "leren",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:10:17.606279+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T08:41:39.041058+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:10:11.583464+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:09:34.215665+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:09:34.222629+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:10:11.684099+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:10:11.692290+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:10:17.955017+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:10:17.963017+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e4367141",
+      "begrip": "microscopisch",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Microscopisch betekent dat iets zo klein is dat het alleen met een microscoop goed zichtbaar is.",
+        "laag2": "Microscopische objecten zijn met het blote oog niet of nauwelijks te zien. Ze worden onderzocht met speciale vergrotingsapparatuur.",
+        "laag3": "Het begrip microscopisch wordt gebruikt voor zeer kleine organismen, cellen, bacteriën, virussen, deeltjes en structuren. Door een microscoop kunnen deze zichtbaar worden gemaakt en bestudeerd. De mate van vergroting hangt af van het type microscoop en het onderzochte object.",
+        "laag4": "Microscopisch onderzoek is belangrijk in biologie, geneeskunde, scheikunde, materiaalkunde en forensisch onderzoek. Het helpt wetenschappers om structuren en processen te begrijpen die met het blote oog verborgen blijven. Niet alles wat klein is, is microscopisch; een object is microscopisch wanneer het zonder vergroting niet goed waarneembaar is."
+      },
+      "ws5": {
+        "wie": "Wetenschappers, artsen, laboranten en onderzoekers.",
+        "wat": "Een aanduiding voor objecten die alleen met sterke vergroting zichtbaar zijn.",
+        "wanneer": "Bij het bestuderen van zeer kleine organismen, cellen of materialen.",
+        "waar": "In laboratoria, ziekenhuizen, onderzoeksinstellingen en het onderwijs.",
+        "waarom": "Om structuren en processen zichtbaar te maken die met het blote oog niet te zien zijn.",
+        "hoe": "Door gebruik te maken van een microscoop of andere vergrotingstechnieken."
+      },
+      "tags": [
+        "microscopisch",
+        "microscoop",
+        "vergroting",
+        "klein",
+        "cel",
+        "bacterie",
+        "virus",
+        "onderzoek",
+        "biologie",
+        "wetenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ac0761e3",
+          "begrip": "Muis",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "klein",
+            "neutraal",
+            "onderzoek",
+            "wetenschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e8bfb9a",
+          "begrip": "biologisch",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bacterie",
+            "biologie",
+            "cel",
+            "emotie",
+            "wetenschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7865b573",
+          "begrip": "Organismen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "cel",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b12f17bf",
+          "begrip": "cellen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "cel",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8ae05d74",
+          "begrip": "genetica",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "neutraal",
+            "wetenschap"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:12:17.662266+00:00",
+        "vorige_versie_v1": "kb-skel-e4367141",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:05.005531+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:12:12.693820+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:12:12.701451+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:12:18.012824+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:12:18.020732+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:12:12.593914+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9d999043",
+      "begrip": "bliksem",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bliksem is een krachtige elektrische ontlading die ontstaat tijdens onweer.",
+        "laag2": "Bliksem ontstaat wanneer elektrische ladingen in wolken of tussen een wolk en de aarde worden ontladen. De lichtflits is vrijwel direct zichtbaar, terwijl de donder later wordt gehoord.",
+        "laag3": "Bliksem ontstaat door een groot spanningsverschil tussen elektrisch geladen gebieden. Wanneer dit verschil groot genoeg wordt, springt een elektrische ontlading over. Deze ontlading verhit de lucht in een fractie van een seconde tot zeer hoge temperaturen, waardoor de lucht snel uitzet en donder ontstaat.",
+        "laag4": "Bliksem is een natuurlijk weersverschijnsel dat vooral voorkomt tijdens onweersbuien. Hoewel bliksem gevaarlijk kan zijn voor mensen, dieren en gebouwen, speelt het ook een rol in natuurlijke processen, zoals de vorming van stikstofverbindingen in de atmosfeer. Gebouwen worden vaak beschermd met bliksemafleiders om schade te beperken."
+      },
+      "ws5": {
+        "wie": "Iedereen kan met bliksem te maken krijgen; meteorologen en hulpdiensten bestuderen en monitoren het verschijnsel.",
+        "wat": "Een krachtige elektrische ontlading in de atmosfeer.",
+        "wanneer": "Meestal tijdens onweersbuien of andere zware weersomstandigheden.",
+        "waar": "In de atmosfeer, tussen wolken of tussen een wolk en de aarde.",
+        "waarom": "Door een groot verschil in elektrische lading dat wordt opgeheven.",
+        "hoe": "Via een plotselinge elektrische ontlading die licht, warmte en geluid veroorzaakt."
+      },
+      "tags": [
+        "bliksem",
+        "onweer",
+        "elektriciteit",
+        "ontlading",
+        "donder",
+        "atmosfeer",
+        "weer",
+        "spanning",
+        "natuur",
+        "meteorologie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-fa8e4e9f",
+          "begrip": "donder",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "atmosfeer",
+            "bliksem",
+            "donder",
+            "meteorologie",
+            "onweer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "atmosfeer",
+            "emotie",
+            "natuur",
+            "neutraal",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a483736d",
+          "begrip": "Onweer",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "atmosfeer",
+            "bliksem",
+            "donder",
+            "natuur",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5cd3dd05",
+          "begrip": "wolken",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "atmosfeer",
+            "emotie",
+            "natuur",
+            "onweer",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eedc6ea6",
+          "begrip": "mist",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "atmosfeer",
+            "emotie",
+            "natuur",
+            "neutraal",
+            "weer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:14:30.268850+00:00",
+        "vorige_versie_v1": "kb-skel-9d999043",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:06.774790+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:14:27.249303+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:14:27.257033+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:14:30.622123+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:14:30.630011+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:14:27.149541+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c472bb2f",
+      "begrip": "fundament",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een fundament is de stevige basis waarop iets wordt gebouwd of ontwikkeld.",
+        "laag2": "Een fundament zorgt voor stabiliteit, draagkracht en betrouwbaarheid. Zonder een goed fundament kan een gebouw, systeem of idee instabiel worden.",
+        "laag3": "Een fundament vormt de onderliggende structuur die nodig is om iets veilig en duurzaam te laten functioneren. Dit kan letterlijk een fundering van een gebouw zijn, maar ook figuurlijk de basis van kennis, waarden, overtuigingen, relaties of software. Een sterk fundament maakt verdere groei en ontwikkeling mogelijk.",
+        "laag4": "Het begrip fundament wordt gebruikt in bouwkunde, techniek, wetenschap, onderwijs, filosofie en softwareontwikkeling. Binnen systemen vormt het fundament de kern waarop alle andere onderdelen steunen. Wanneer het fundament verandert, heeft dit vaak invloed op het gehele systeem. Daarom is een goed fundament essentieel voor stabiliteit, betrouwbaarheid en toekomstige uitbreidingen."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen die iets bouwen, leren of ontwikkelen.",
+        "wat": "De dragende basis waarop iets rust of wordt opgebouwd.",
+        "wanneer": "Aan het begin van een bouw-, leer- of ontwikkelproces.",
+        "waar": "In gebouwen, organisaties, software, kennis, relaties en andere structuren.",
+        "waarom": "Om stabiliteit, betrouwbaarheid en verdere groei mogelijk te maken.",
+        "hoe": "Door eerst een sterke onderliggende structuur of basis te creëren voordat verdere lagen worden toegevoegd."
+      },
+      "tags": [
+        "fundament",
+        "basis",
+        "fundering",
+        "structuur",
+        "stabiliteit",
+        "ontwikkeling",
+        "kern",
+        "draagkracht",
+        "opbouw",
+        "betrouwbaarheid",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b8267111",
+          "begrip": "basis",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "fundament",
+            "kern",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5a80c066",
+          "begrip": "bouwstenen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "fundament",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a508eba",
+          "begrip": "Core",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "fundament",
+            "kern",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2c235f62",
+          "begrip": "kern",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "basis",
+            "emotie",
+            "kern",
+            "neutraal",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c90ef458",
+          "begrip": "voorspelbaar",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "emotie",
+            "neutraal",
+            "stabiliteit",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:16:13.746709+00:00",
+        "vorige_versie_v1": "kb-skel-c472bb2f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.374262+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:16:09.304886+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:16:09.312781+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:16:14.102933+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:16:14.110799+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:16:09.204550+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-76e259ac",
+      "begrip": "rund",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een rund is een groot hoefdier dat wordt gehouden voor melk, vlees of als trekdier.",
+        "laag2": "Runderen behoren tot de familie van de holhoornigen en worden wereldwijd gehouden in de veehouderij. Koeien, stieren en kalveren zijn verschillende levensfasen of geslachten van een rund.",
+        "laag3": "Een rund is een gedomesticeerd zoogdier dat al duizenden jaren door mensen wordt gehouden. Runderen spelen een belangrijke rol in de voedselvoorziening door de productie van melk en vlees. Daarnaast leveren ze mest en werden ze vroeger veel gebruikt als trekdieren in de landbouw.",
+        "laag4": "Runderen leven meestal in kuddes en zijn herkauwers. Ze hebben een maag met vier compartimenten waarmee ze gras en andere planten kunnen verteren. Wereldwijd bestaan veel verschillende runderrassen, elk met eigen eigenschappen voor melkproductie, vleeskwaliteit of aanpassing aan het klimaat."
+      },
+      "ws5": {
+        "wie": "Boeren, veehouders, dierenartsen en runderen zelf.",
+        "wat": "Een groot gedomesticeerd hoefdier en herkauwer.",
+        "wanneer": "Sinds duizenden jaren onderdeel van de landbouw en veeteelt.",
+        "waar": "Op boerderijen, weilanden en veehouderijen over de hele wereld.",
+        "waarom": "Op boerderijen, weilanden en veehouderijen over de hele wereld.",
+        "hoe": "Door verzorging, voeding en fokkerij binnen de veehouderij."
+      },
+      "tags": [
+        "rund",
+        "runderen",
+        "koe",
+        "stier",
+        "kalf",
+        "herkauwer",
+        "zoogdier",
+        "veehouderij",
+        "landbouw",
+        "dier",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-52172041",
+          "begrip": "koeien",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "herkauwer",
+            "koe",
+            "landbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5c843ec3",
+          "begrip": "Stier",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "dier",
+            "kalf",
+            "koe",
+            "landbouw",
+            "rund"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-049b1495",
+          "begrip": "Geit",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "landbouw",
+            "neutraal",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e269cba7",
+          "begrip": "Koe",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "koe",
+            "landbouw",
+            "rund",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7dee9d74",
+          "begrip": "Ooi",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "landbouw",
+            "neutraal",
+            "zoogdier"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:17:49.915810+00:00",
+        "vorige_versie_v1": "kb-skel-76e259ac",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.493725+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:17:46.783159+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:17:46.790897+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:17:50.265301+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:17:50.273095+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:17:46.679803+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-0da2a57c",
+      "begrip": "hoefdier",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een hoefdier is een zoogdier dat op één of meer hoeven loopt.",
+        "laag2": "Hoefdieren gebruiken hun hoeven om zich voort te bewegen. Veel hoefdieren zijn planteneters en leven in kuddes.",
+        "laag3": "Hoefdieren vormen een grote groep zoogdieren die zijn aangepast aan lopen, rennen en het dragen van hun lichaamsgewicht op hoeven. Tot de hoefdieren behoren onder andere paarden, runderen, schapen, geiten, herten, varkens en zebra's. Hun bouw maakt snelle en efficiënte voortbeweging mogelijk.",
+        "laag4": "Hoefdieren komen voor in uiteenlopende leefgebieden, zoals graslanden, bossen, bergen en woestijnen. Sommige soorten zijn gedomesticeerd en worden gehouden voor landbouw, vervoer of voedselproductie, terwijl andere in het wild leven. De vorm en het aantal hoeven verschillen per soort en zijn aangepast aan hun leefomgeving en levenswijze."
+      },
+      "ws5": {
+        "wie": "Wilde en gedomesticeerde zoogdieren met hoeven.",
+        "wat": "Een groep zoogdieren die zich voortbewegen op hoeven.",
+        "wanneer": "Altijd tijdens hun dagelijkse beweging en levenswijze.",
+        "waar": "In weilanden, bossen, savannes, bergen, boerderijen en andere leefgebieden.",
+        "waarom": "Hoeven bieden ondersteuning, bescherming en efficiënte voortbeweging.",
+        "hoe": "Door te lopen, rennen of springen op één of meer hoeven."
+      },
+      "tags": [
+        "hoefdier",
+        "hoef",
+        "zoogdier",
+        "dier",
+        "herkauwer",
+        "landbouw",
+        "natuur",
+        "kudde",
+        "planteneter",
+        "biologie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c12fb2d0",
+          "begrip": "Schapen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "hoefdier",
+            "kudde",
+            "landbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-049b1495",
+          "begrip": "Geit",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "hoefdier",
+            "kudde",
+            "landbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0eebf3f5",
+          "begrip": "knaagdier",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7dee9d74",
+          "begrip": "Ooi",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "kudde",
+            "landbouw",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-52172041",
+          "begrip": "koeien",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "herkauwer",
+            "landbouw",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:19:48.940188+00:00",
+        "vorige_versie_v1": "kb-skel-0da2a57c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:42.438787+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:19:44.104747+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:19:44.112621+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:19:49.292402+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:19:49.300361+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:19:44.004485+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-18d03c40",
+      "begrip": "Herkauwer",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een herkauwer is een zoogdier dat voedsel meerdere keren kauwt om het beter te verteren.",
+        "laag2": "Herkauwers slikken voedsel eerst grotendeels onverteerd door. Later brengen ze het terug naar de mond om het opnieuw te kauwen. Dit proces heet herkauwen.",
+        "laag3": "Herkauwers hebben een maag die uit vier compartimenten bestaat: de pens, netmaag, boekmaag en lebmaag. Dankzij dit bijzondere spijsverteringssysteem kunnen zij vezelrijke planten, zoals gras en bladeren, efficiënt verteren. Tot de herkauwers behoren onder andere runderen, schapen, geiten, herten en giraffen.",
+        "laag4": "Het herkauwen maakt het mogelijk om voedingsstoffen uit taaie plantaardige materialen op te nemen die voor veel andere dieren moeilijk verteerbaar zijn. Micro-organismen in de pens helpen bij de afbraak van cellulose. Hierdoor spelen herkauwers een belangrijke rol in ecosystemen en de landbouw."
+      },
+      "ws5": {
+        "wie": "Runderen, schapen, geiten, herten, giraffen en andere herkauwers.",
+        "wat": "Een zoogdier dat voedsel opnieuw kauwt voor een efficiënte vertering.",
+        "wanneer": "Tijdens het verteren van voedsel na het eerste eten.",
+        "waar": "In weilanden, bossen, savannes, boerderijen en andere leefgebieden.",
+        "waarom": "Om voedingsstoffen uit vezelrijke planten beter op te nemen.",
+        "hoe": "Door voedsel eerst door te slikken, later op te boeren en opnieuw te kauwen."
+      },
+      "tags": [
+        "herkauwer",
+        "herkauwen",
+        "zoogdier",
+        "spijsvertering",
+        "pens",
+        "maag",
+        "cellulose",
+        "rund",
+        "schaap",
+        "geit",
+        "biologie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-52172041",
+          "begrip": "koeien",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herkauwer",
+            "neutraal",
+            "rund",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-76e259ac",
+          "begrip": "rund",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herkauwer",
+            "neutraal",
+            "rund",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0da2a57c",
+          "begrip": "hoefdier",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "herkauwer",
+            "neutraal",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b964fb3",
+          "begrip": "begrazing",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "geit",
+            "neutraal",
+            "schaap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0eebf3f5",
+          "begrip": "knaagdier",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "neutraal",
+            "zoogdier"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:21:45.091747+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T10:21:41.359689+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:21:41.615031+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:21:41.715451+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:21:41.723112+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:21:45.441851+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:21:45.449625+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-03a6846b",
+      "begrip": "Planteneter",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een planteneter is een dier dat voornamelijk planten eet.",
+        "laag2": "Planteneters voeden zich met gras, bladeren, vruchten, zaden, bloemen of andere delen van planten. Ze worden ook wel herbivoren genoemd.",
+        "laag3": "Planteneters hebben een spijsverteringsstelsel dat is aangepast aan het verwerken van plantaardig voedsel. Veel soorten hebben sterke kiezen om planten fijn te malen en een darmstelsel of maag die helpt bij het afbreken van cellulose. Voorbeelden van planteneters zijn koeien, paarden, schapen, konijnen, olifanten en giraffen.",
+        "laag4": "Planteneters vormen een belangrijke schakel in ecosystemen. Ze zetten plantaardige energie om in dierlijke energie en dienen als voedsel voor vleeseters. Niet alle planteneters zijn herkauwers; paarden en konijnen zijn bijvoorbeeld planteneters, maar geen herkauwers. Sommige dieren zijn alleseters en eten zowel planten als vlees."
+      },
+      "ws5": {
+        "wie": "Dieren die zich voornamelijk met planten voeden.",
+        "wat": "Een dier dat hoofdzakelijk plantaardig voedsel eet.",
+        "wanneer": "Tijdens het zoeken naar en eten van voedsel.",
+        "waar": "In vrijwel alle ecosystemen waar planten groeien.",
+        "waarom": "Omdat hun voeding bestaat uit plantaardig materiaal.",
+        "hoe": "Door planten te eten en deze met een aangepast spijsverteringsstelsel te verteren."
+      },
+      "tags": [
+        "planteneter",
+        "herbivoor",
+        "dier",
+        "voeding",
+        "planten",
+        "gras",
+        "bladeren",
+        "spijsvertering",
+        "natuur",
+        "biologie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-0da2a57c",
+          "begrip": "hoefdier",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b964fb3",
+          "begrip": "begrazing",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herbivoor",
+            "natuur",
+            "neutraal",
+            "planten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f4313734",
+          "begrip": "voortplanting",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c229ca0c",
+          "begrip": "zoogdieren",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0eebf3f5",
+          "begrip": "knaagdier",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:23:27.312917+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T10:23:24.273057+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:23:24.533011+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:23:24.634323+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:23:24.641984+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:23:27.667742+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:23:27.675554+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a3a3d3ad",
+      "begrip": "Vleeseter",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een vleeseter is een dier dat voornamelijk andere dieren eet.",
+        "laag2": "Vleeseters voeden zich met vlees of andere dierlijke producten. Ze worden ook wel carnivoren genoemd.",
+        "laag3": "Vleeseters hebben een lichaam dat is aangepast aan het vangen, doden en verteren van prooien. Veel vleeseters beschikken over scherpe tanden, sterke kaken en goed ontwikkelde zintuigen. Voorbeelden zijn leeuwen, wolven, haaien, katten en roofvogels. Sommige vleeseters eten uitsluitend vlees, terwijl andere af en toe ook plantaardig voedsel eten.",
+        "laag4": "Vleeseters spelen een belangrijke rol in ecosystemen doordat zij populaties van prooidieren in balans houden. Hierdoor dragen zij bij aan een gezond ecosysteem. Niet alle vleeseters zijn uitsluitend carnivoren; sommige dieren zijn alleseters en eten zowel vlees als planten. De voedingswijze bepaalt de classificatie, niet de diersoort."
+      },
+      "ws5": {
+        "wie": "Dieren die zich voornamelijk met andere dieren voeden.",
+        "wat": "Een dier dat hoofdzakelijk dierlijk voedsel eet.",
+        "wanneer": "Tijdens het jagen, zoeken of eten van voedsel.",
+        "waar": "In vrijwel alle ecosystemen waar prooidieren voorkomen.",
+        "waarom": "Omdat hun voeding voornamelijk uit dierlijk materiaal bestaat.",
+        "hoe": "Door prooien te vangen, aas te eten of ander dierlijk voedsel te consumeren."
+      },
+      "tags": [
+        "vleeseter",
+        "carnivoor",
+        "dier",
+        "voeding",
+        "vlees",
+        "jagen",
+        "roofdier",
+        "ecosysteem",
+        "biologie",
+        "natuur",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ec6b4809",
+          "begrip": "roofdieren",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "biologie",
+            "carnivoor",
+            "dier",
+            "ecosysteem",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ccf4e05e",
+          "begrip": "Canis lupus",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c229ca0c",
+          "begrip": "zoogdieren",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b280447f",
+          "begrip": "watervogel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e57a33f4",
+          "begrip": "wolven",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:50:19.501043+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T10:50:16.339112+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:50:16.595586+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:50:16.702148+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:50:16.709570+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:50:19.848149+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:50:19.855390+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-890b852d",
+      "begrip": "Alleseter",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een alleseter is een dier dat zowel plantaardig als dierlijk voedsel eet.",
+        "laag2": "Alleseters kunnen zich voeden met planten, vruchten, zaden, insecten, vlees en andere voedselbronnen. Ze worden ook wel omnivoren genoemd.",
+        "laag3": "Alleseters hebben een spijsverteringsstelsel en gebit dat geschikt is voor verschillende soorten voedsel. Hierdoor kunnen zij zich aanpassen aan een wisselend voedselaanbod. Voorbeelden van alleseters zijn mensen, beren, varkens, ratten en kraaien.",
+        "laag4": "Alleseters zijn vaak flexibel in hun leefomgeving doordat zij niet afhankelijk zijn van één voedselbron. Deze voedingsstrategie vergroot hun overlevingskansen wanneer voedsel schaars wordt. Binnen ecosystemen vervullen alleseters verschillende rollen en kunnen zij zowel planten als dieren consumeren."
+      },
+      "ws5": {
+        "wie": "Dieren die zowel plantaardig als dierlijk voedsel eten.",
+        "wat": "Een dier met een gevarieerd voedingspatroon van planten en dieren.",
+        "wanneer": "Tijdens het zoeken naar en eten van voedsel.",
+        "waar": "In vrijwel alle ecosystemen waar verschillende voedselbronnen beschikbaar zijn.",
+        "waarom": "Om voldoende voedingsstoffen uit uiteenlopende voedselbronnen te halen.",
+        "hoe": "Door zowel plantaardig als dierlijk voedsel te verzamelen, jagen of eten."
+      },
+      "tags": [
+        "alleseter",
+        "omnivoor",
+        "dier",
+        "voeding",
+        "planteneter",
+        "vleeseter",
+        "voedsel",
+        "ecosysteem",
+        "biologie",
+        "natuur",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a3a3d3ad",
+          "begrip": "Vleeseter",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ec6b4809",
+          "begrip": "roofdieren",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-03a6846b",
+          "begrip": "Planteneter",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c229ca0c",
+          "begrip": "zoogdieren",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e8bfb9a",
+          "begrip": "biologisch",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:51:58.352046+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T10:51:55.505896+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:51:55.763588+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:51:55.863741+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:51:55.871184+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:51:58.697498+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:51:58.704895+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f1b5a3d5",
+      "begrip": "sigma",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Sigma (σ) is de achttiende letter van het Griekse alfabet en wordt veel gebruikt als symbool in wetenschap en wiskunde.",
+        "laag2": "Afhankelijk van de context kan sigma verschillende betekenissen hebben, zoals de standaardafwijking in statistiek, een optelsom of een aanduiding van een niveau of eigenschap.",
+        "laag3": "Sigma is een veelzijdig symbool dat in verschillende vakgebieden wordt gebruikt. De kleine letter σ staat in de statistiek meestal voor de standaardafwijking, een maat voor de spreiding van gegevens. De hoofdletter Σ wordt in de wiskunde gebruikt als somteken om meerdere waarden bij elkaar op te tellen. In andere wetenschappen krijgt sigma weer een andere betekenis, afhankelijk van het vakgebied.",
+        "laag4": "Omdat sigma meerdere betekenissen heeft, is de context belangrijk. Binnen de Spark Trader verwijst 2σ bijvoorbeeld naar twee standaardafwijkingen bij Bollinger Bands. Dat betekent dat de bovenste en onderste band op twee keer de standaardafwijking van de gemiddelde prijs liggen. Buiten de statistiek kan sigma ook verwijzen naar sommaties, materiaalkunde of andere wetenschappelijke notaties."
+      },
+      "ws5": {
+        "wie": "Wiskundigen, statistici, wetenschappers, programmeurs en analisten.",
+        "wat": "Een Griekse letter die als wetenschappelijk symbool wordt gebruikt.",
+        "wanneer": "Bij berekeningen, analyses en wetenschappelijke notatie.",
+        "waar": "In wiskunde, statistiek, natuurkunde, economie, software en data-analyse.",
+        "waarom": "Om berekeningen, spreiding of sommaties compact weer te geven.",
+        "hoe": "Door de Griekse letter σ of Σ als symbool in formules te gebruiken."
+      },
+      "tags": [
+        "sigma",
+        "σ",
+        "Σ",
+        "grieks alfabet",
+        "statistiek",
+        "standaardafwijking",
+        "wiskunde",
+        "bollinger bands",
+        "data-analyse",
+        "wetenschap"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4f277524",
+          "begrip": "Curve",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "statistiek",
+            "wiskunde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "statistiek",
+            "wetenschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-986aed59",
+          "begrip": "Percentage",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "statistiek",
+            "wiskunde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0fc61741",
+          "begrip": "Miljoen",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "statistiek",
+            "wiskunde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b3902839",
+          "begrip": "getal",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "statistiek",
+            "wiskunde"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:54:58.735718+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T08:41:38.936120+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:54:56.489890+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:54:56.589354+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:54:56.595559+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:54:59.083909+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:54:59.090316+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8146e5af",
+      "begrip": "bollinger",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bollinger Bands zijn een technische indicator die laat zien hoe sterk een prijs schommelt rond een gemiddelde.",
+        "laag2": "Bollinger Bands bestaan uit drie lijnen: een gemiddelde lijn, een bovenste band en een onderste band. De afstand tussen de banden verandert mee met de volatiliteit van de markt.",
+        "laag3": "Bollinger Bands zijn ontwikkeld door John Bollinger en worden gebruikt bij technische analyse van financiële markten. De middelste lijn is meestal een voortschrijdend gemiddelde. De bovenste en onderste band liggen vaak op 2 sigma (2 standaardafwijkingen) van dit gemiddelde. Hierdoor kan worden ingeschat of een prijs relatief hoog, laag of normaal is ten opzichte van recente prijsbewegingen.",
+        "laag4": "Handelaren gebruiken Bollinger Bands om volatiliteit, mogelijke trendomkeringen en overgekochte of oververkochte markten te herkennen. Een smalle band wijst vaak op lage volatiliteit, terwijl een brede band hoge volatiliteit aangeeft. Bollinger Bands voorspellen de toekomst niet, maar bieden statistische context voor prijsbewegingen. Daarom worden ze meestal gecombineerd met andere indicatoren of handelsregels."
+      },
+      "ws5": {
+        "wie": "Traders, beleggers, analisten en handelssystemen.",
+        "wat": "Een technische indicator die prijs en volatiliteit rond een gemiddelde weergeeft.",
+        "wanneer": "Bij het analyseren van financiële markten en handelsbeslissingen.",
+        "waar": "Op koersgrafieken van aandelen, crypto, valuta, grondstoffen en andere markten.",
+        "waarom": "Om prijsbewegingen en marktvolatiliteit beter te beoordelen.",
+        "hoe": "Door een gemiddelde te combineren met een bovenste en onderste band op basis van de standaardafwijking."
+      },
+      "tags": [
+        "bollinger bands",
+        "bollinger",
+        "technische analyse",
+        "indicator",
+        "volatiliteit",
+        "standaardafwijking",
+        "sigma",
+        "trading",
+        "koers",
+        "statistiek",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "koers",
+            "neutraal",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f1b5a3d5",
+          "begrip": "sigma",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bollinger bands",
+            "sigma",
+            "standaardafwijking",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4f277524",
+          "begrip": "Curve",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9780a2d9",
+          "begrip": "Hoeveel kenniskaarten heb jij",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T10:56:30.096605+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T08:41:38.819404+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T10:56:27.680025+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:56:27.783900+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:56:27.791129+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T10:56:30.451273+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T10:56:30.458652+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d3540f4e",
+      "begrip": "activum",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een activum is een bezit of middel dat economische waarde heeft.",
+        "laag2": "Een activum kan geld opleveren, waarde behouden of in de toekomst voordelen bieden. Bedrijven en personen kunnen verschillende soorten activa bezitten.",
+        "laag3": "Een activum is een bezitting die eigendom is van een persoon, organisatie of bedrijf en waarvan wordt verwacht dat deze toekomstige economische voordelen oplevert. Voorbeelden zijn geld, gebouwen, machines, voertuigen, aandelen, cryptovaluta, patenten en voorraden. Op een balans worden activa meestal tegenover passiva geplaatst.",
+        "laag4": "In de boekhouding vormen activa een belangrijk onderdeel van de financiële positie van een organisatie. Ze worden vaak ingedeeld in vaste activa (zoals gebouwen en machines) en vlottende activa (zoals voorraad, banktegoeden en debiteuren). De waarde van een activum kan stijgen of dalen door gebruik, marktontwikkelingen of afschrijving."
+      },
+      "ws5": {
+        "wie": "Personen, bedrijven, organisaties en overheden.",
+        "wat": "Een bezit of middel met economische waarde.",
+        "wanneer": "Zodra een bezitting toekomstige economische voordelen kan opleveren.",
+        "waar": "Op balansen, in administraties en binnen financiële systemen.",
+        "waarom": "Om waarde vast te leggen en toekomstige opbrengsten of voordelen te realiseren.",
+        "hoe": "Door eigendom, investering, aankoop of ontwikkeling van waardevolle bezittingen."
+      },
+      "tags": [
+        "activum",
+        "activa",
+        "bezit",
+        "bezitting",
+        "waarde",
+        "balans",
+        "boekhouding",
+        "financiën",
+        "investering",
+        "economie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f3b8b12e",
+          "begrip": "marktwaarde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bezit",
+            "economie",
+            "emotie",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-61a525b3",
+          "begrip": "financiën",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "economie",
+            "emotie",
+            "financiën",
+            "neutraal",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e56bcc4d",
+          "begrip": "uitgaven",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "economie",
+            "emotie",
+            "financiën",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-87b76b50",
+          "begrip": "bank",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "economie",
+            "emotie",
+            "financiën",
+            "investering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4f6d412a",
+          "begrip": "ruil",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bezit",
+            "economie",
+            "emotie",
+            "neutraal",
+            "waarde"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:02:47.104101+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T10:59:43.759857+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-97b929a04a38",
+        "extract_at": "2026-07-20T10:59:43.862636+00:00",
+        "extract_context_snippet": "at voor de mate waarin de prijs van een activum fluctueert. In de tradingwereld wordt volatiliteit vaak geb",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'activum' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:02:45.138140+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:02:45.238585+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:02:45.246069+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:02:47.457846+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:02:47.465245+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1fc0f90e",
+      "begrip": "vaak",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Vaak betekent dat iets regelmatig of veel voorkomt.",
+        "laag2": "Het woord vaak geeft aan dat een gebeurtenis, handeling of situatie zich herhaaldelijk voordoet, zonder een exact aantal keren te noemen.",
+        "laag3": "Vaak is een bijwoord dat aangeeft hoe regelmatig iets gebeurt. Het beschrijft een hoge frequentie, maar is minder precies dan een vaste tijdsaanduiding zoals \"drie keer per week\". De exacte betekenis hangt af van de context waarin het wordt gebruikt.",
+        "laag4": "In het dagelijks taalgebruik wordt vaak gebruikt om gewoonten, patronen of terugkerende gebeurtenissen te beschrijven. Omdat het geen exacte maat is, kan de interpretatie per persoon verschillen. In wetenschappelijke of technische contexten wordt \"vaak\" daarom soms vervangen door meetbare frequenties of percentages."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die herhalingen of patronen beschrijven.",
+        "wat": "Een aanduiding dat iets regelmatig voorkomt.",
+        "wanneer": "Als een gebeurtenis zich herhaaldelijk voordoet.",
+        "waar": "In gesprekken, teksten, analyses en observaties.",
+        "waarom": "Om de frequentie van een gebeurtenis aan te geven zonder exact aantal.",
+        "hoe": "Door een gebeurtenis of handeling als regelmatig terugkerend te beschrijven."
+      },
+      "tags": [
+        "vaak",
+        "frequentie",
+        "regelmatig",
+        "herhaling",
+        "patroon",
+        "tijd",
+        "taal",
+        "bijwoord",
+        "observatie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8ea44dc9",
+          "begrip": "meestal",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "herhaling",
+            "neutraal",
+            "observatie",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d915b9e4",
+          "begrip": "keer",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "frequentie",
+            "herhaling",
+            "neutraal",
+            "taal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5cf93abb",
+          "begrip": "patronen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herhaling",
+            "neutraal",
+            "observatie",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-88b8ebd7",
+          "begrip": "ritme",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herhaling",
+            "neutraal",
+            "patroon",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taal",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:04:25.182113+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T10:59:43.655851+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-97b929a04a38",
+        "extract_at": "2026-07-20T10:59:43.759559+00:00",
+        "extract_context_snippet": "n standaardafwijking zijn begrippen die vaak gebruikt worden in de statistiek en wiskunde. Sigma (σ) is",
+        "extract_count_in_spark": 3,
+        "extract_note": "Spark noemde 'vaak' 3× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:04:21.323657+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:04:21.423988+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:04:21.431421+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:04:25.536818+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:04:25.544430+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9508f446",
+      "begrip": "standaardafwijking",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een standaardafwijking is een maat die aangeeft hoeveel waarden gemiddeld afwijken van het gemiddelde.",
+        "laag2": "Met de standaardafwijking wordt gemeten hoe verspreid gegevens zijn. Een lage standaardafwijking betekent dat de waarden dicht bij het gemiddelde liggen, terwijl een hoge standaardafwijking wijst op grotere verschillen.",
+        "laag3": "Een standaardafwijking, aangeduid met het symbool σ (sigma) voor een populatie, is een statistische maat voor de spreiding van gegevens. Hoe groter de standaardafwijking, hoe groter de variatie tussen de meetwaarden. De standaardafwijking wordt veel gebruikt in statistiek, wetenschap, machine learning en financiële analyses om risico, onzekerheid en variatie te beschrijven.",
+        "laag4": "De standaardafwijking helpt om gegevens objectief te vergelijken en patronen te herkennen. In de financiële wereld wordt zij gebruikt om volatiliteit te meten. Bij Bollinger Bands worden de bovenste en onderste band meestal op 2 standaardafwijkingen (2σ) van het voortschrijdend gemiddelde geplaatst. Hierdoor ontstaat een statistisch bereik waarbinnen veel prijsbewegingen plaatsvinden. De standaardafwijking beschrijft de spreiding van gegevens, maar voorspelt toekomstige waarden niet."
+      },
+      "ws5": {
+        "wie": "Statistici, wetenschappers, analisten, programmeurs en handelssystemen.",
+        "wat": "Een statistische maat voor de spreiding van gegevens rond het gemiddelde.",
+        "wanneer": "Bij het analyseren van datasets, experimenten en financiële markten.",
+        "waar": "In statistiek, wetenschap, data-analyse, machine learning en trading.",
+        "waarom": "Om variatie, risico en onzekerheid te meten en te vergelijken.",
+        "hoe": "Door te berekenen hoe sterk individuele waarden gemiddeld afwijken van het gemiddelde."
+      },
+      "tags": [
+        "standaardafwijking",
+        "sigma",
+        "statistiek",
+        "spreiding",
+        "gemiddelde",
+        "variatie",
+        "volatiliteit",
+        "bollinger bands",
+        "data-analyse",
+        "risico",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "sigma",
+            "standaardafwijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f1b5a3d5",
+          "begrip": "sigma",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bollinger bands",
+            "data-analyse",
+            "sigma",
+            "standaardafwijking",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0847772f",
+          "begrip": "onzekerheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e08614e6",
+          "begrip": "dreiging",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-efe5810f",
+          "begrip": "alcohol",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risico"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T10:58:34.983380+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:07:30.472565+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Griekse alfabet, Standaardafwijking, Statistiek, Gemiddelde, Bollinger Bands, Data-analyse, Wiskunde, Som, Variantie.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:07:27.651771+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:07:27.753036+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:07:27.760634+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:07:30.824128+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:07:30.831591+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f2cf1517",
+      "begrip": "alfabet",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een alfabet is een geordende reeks letters waarmee een taal wordt geschreven.",
+        "laag2": "Elke letter in een alfabet vertegenwoordigt één of meer klanken. Door letters te combineren ontstaan woorden en zinnen.",
+        "laag3": "Een alfabet is een schriftsysteem waarin afzonderlijke letters worden gebruikt om gesproken taal weer te geven. Verschillende talen gebruiken verschillende alfabetten, zoals het Latijnse, Griekse, Cyrillische en Arabische alfabet. Het Nederlandse alfabet bestaat uit 26 letters.",
+        "laag4": "Het alfabet vormt de basis van lezen, schrijven en schriftelijke communicatie. Het gebruik van een alfabet maakt het mogelijk om kennis vast te leggen, informatie over te dragen en talen te leren. Sommige wetenschappelijke symbolen, zoals σ (sigma), zijn afkomstig uit het Griekse alfabet en worden in vakgebieden zoals wiskunde, natuurkunde en statistiek gebruikt."
+      },
+      "ws5": {
+        "wie": "Mensen die een taal lezen, schrijven of leren.",
+        "wat": "Een geordende verzameling letters waarmee woorden worden gevormd.",
+        "wanneer": "Bij lezen, schrijven en schriftelijke communicatie.",
+        "waar": "In boeken, documenten, computers, onderwijs en vrijwel alle geschreven talen.",
+        "waarom": "Om gesproken taal vast te leggen en informatie over te dragen.",
+        "hoe": "Door letters volgens vaste schrijf- en spellingsregels te combineren tot woorden en zinnen."
+      },
+      "tags": [
+        "alfabet",
+        "letters",
+        "taal",
+        "schrift",
+        "lezen",
+        "schrijven",
+        "communicatie",
+        "spelling",
+        "grieks alfabet",
+        "latijns alfabet",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "schrijven",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-31c6d4d6",
+          "begrip": "schrijf",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "schrijven",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b59f4bb",
+          "begrip": "grammatica",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "schrijven",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b3a39f3f",
+          "begrip": "schrijven",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "schrijven",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-956d490e",
+          "begrip": "lees",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "lezen",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T10:58:34.471080+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:09:13.913967+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Griekse alfabet, Standaardafwijking, Statistiek, Gemiddelde, Bollinger Bands, Data-analyse, Wiskunde, Som, Variantie.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:09:11.253626+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:09:11.354876+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:09:11.362277+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:09:14.265419+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:09:14.273123+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0c6dab4c",
+      "begrip": "griekse alfabet",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Het Griekse alfabet is een alfabet dat wordt gebruikt om de Griekse taal te schrijven.",
+        "laag2": "Het Griekse alfabet bestaat uit 24 letters en wordt naast de Griekse taal ook veel gebruikt in wetenschap, wiskunde en natuurkunde.",
+        "laag3": "Het Griekse alfabet ontstond rond de 8e eeuw voor Christus en is één van de oudste alfabetten die nog steeds in gebruik zijn. Veel wetenschappelijke symbolen zijn afkomstig uit dit alfabet, zoals α (alpha), β (beta), π (pi), θ (theta) en σ (sigma). Hierdoor speelt het een belangrijke rol in technische en wetenschappelijke notaties.",
+        "laag4": "Het Griekse alfabet heeft een grote invloed gehad op de ontwikkeling van andere alfabetten, waaronder het Latijnse en het Cyrillische alfabet. Buiten de Griekse taal worden de letters wereldwijd gebruikt om formules, constanten, variabelen en statistische begrippen aan te duiden. De betekenis van een Griekse letter hangt altijd af van de context waarin deze wordt gebruikt."
+      },
+      "ws5": {
+        "wie": "Griekstaligen, wetenschappers, wiskundigen, programmeurs en studenten.",
+        "wat": "Een alfabet van 24 letters voor de Griekse taal.",
+        "wanneer": "Sinds ongeveer de 8e eeuw voor Christus en nog steeds in gebruik.",
+        "waar": "In Griekenland en wereldwijd binnen wetenschap, techniek en wiskunde.",
+        "waarom": "Om de Griekse taal te schrijven en wetenschappelijke symbolen weer te geven.",
+        "hoe": "Door 24 Griekse letters te gebruiken voor taal en symbolische notatie."
+      },
+      "tags": [
+        "grieks alfabet",
+        "griekse letters",
+        "alfa",
+        "beta",
+        "gamma",
+        "sigma",
+        "pi",
+        "taal",
+        "alfabet",
+        "wetenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f2cf1517",
+          "begrip": "alfabet",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "alfabet",
+            "emotie",
+            "grieks alfabet",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b71890dd",
+          "begrip": "zit",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-04c5a529",
+          "begrip": "los",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-361c0e49",
+          "begrip": "geschreven",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-33902a4a",
+          "begrip": "goedeavond",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T10:58:33.960204+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:11:00.886982+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Griekse alfabet, Standaardafwijking, Statistiek, Gemiddelde, Bollinger Bands, Data-analyse, Wiskunde, Som, Variantie.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:10:58.508609+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:10:58.610561+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:10:58.617915+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:11:01.245838+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:11:01.253286+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ad638a8f",
+      "begrip": "griekse letters",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Griekse letters zijn de letters van het Griekse alfabet.",
+        "laag2": "Griekse letters worden gebruikt om de Griekse taal te schrijven en hebben daarnaast veel toepassingen in wetenschap, wiskunde, natuurkunde, statistiek en techniek.",
+        "laag3": "Het Griekse alfabet bestaat uit 24 letters, waaronder Alpha (Α, α), Beta (Β, β), Gamma (Γ, γ), Delta (Δ, δ), Theta (Θ, θ), Pi (Π, π), Sigma (Σ, σ) en Omega (Ω, ω). Elke letter heeft een eigen naam, hoofdletter en kleine letter. Buiten de Griekse taal worden deze letters vaak gebruikt als symbolen voor formules, constanten, variabelen en wetenschappelijke begrippen.",
+        "laag4": "Griekse letters zijn wereldwijd een standaardnotatie geworden binnen veel wetenschappelijke disciplines. Dezelfde letter kan afhankelijk van de context verschillende betekenissen hebben. Zo staat σ (sigma) vaak voor standaardafwijking, π (pi) voor de wiskundige constante, Δ (delta) voor een verandering en Ω (omega) voor elektrische weerstand of het einde van een reeks. De betekenis wordt altijd bepaald door het vakgebied waarin de letter wordt gebruikt."
+      },
+      "ws5": {
+        "wie": "Griekstaligen, wetenschappers, studenten, programmeurs en onderzoekers.",
+        "wat": "De 24 letters van het Griekse alfabet.",
+        "wanneer": "Bij het schrijven van Grieks en bij wetenschappelijke notatie.",
+        "waar": "In Griekenland en wereldwijd in wetenschap, techniek en onderwijs.",
+        "waarom": "Om taal te schrijven en symbolen voor wetenschappelijke begrippen weer te geven.",
+        "hoe": "Door Griekse letters als schrifttekens of als symbolen in formules en notaties te gebruiken."
+      },
+      "tags": [
+        "griekse letters",
+        "grieks alfabet",
+        "alpha",
+        "beta",
+        "gamma",
+        "delta",
+        "theta",
+        "sigma",
+        "pi",
+        "omega",
+        "symbolen",
+        "wetenschap emotie neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0c6dab4c",
+          "begrip": "griekse alfabet",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beta",
+            "gamma",
+            "grieks alfabet",
+            "griekse letters",
+            "pi"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f1b5a3d5",
+          "begrip": "sigma",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "grieks alfabet",
+            "sigma"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:13:11.211450+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:13:06.223202+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:13:06.480132+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:13:06.591158+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:13:06.597682+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:13:11.564556+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:13:11.570775+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ce612c0b",
+      "begrip": "Grieks",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Grieks is een taal die voornamelijk in Griekenland en Cyprus wordt gesproken.",
+        "laag2": "Het Grieks is één van de oudste nog levende talen ter wereld en heeft grote invloed gehad op wetenschap, filosofie, geneeskunde en wiskunde.",
+        "laag3": "Het Grieks behoort tot de Indo-Europese taalfamilie en wordt geschreven met het Griekse alfabet. De taal kent een geschiedenis van meer dan drieduizend jaar en heeft veel woorden en begrippen voortgebracht die nog steeds internationaal worden gebruikt. Veel wetenschappelijke termen en symbolen zijn afkomstig uit het Grieks.\n",
+        "laag4": "Het Grieks heeft een belangrijke rol gespeeld in de ontwikkeling van de westerse beschaving. Oude Griekse filosofen, wetenschappers en schrijvers legden de basis voor veel moderne vakgebieden. Tegenwoordig wordt Grieks nog steeds gesproken als officiële taal van Griekenland en Cyprus, terwijl Griekse woorden en letters wereldwijd worden gebruikt in wetenschap, techniek en geneeskunde.\n"
+      },
+      "ws5": {
+        "wie": "Inwoners van Griekenland, Cyprus en Griekstalige gemeenschappen.",
+        "wat": "Een Indo-Europese taal met een lange geschiedenis.",
+        "wanneer": "Al meer dan drieduizend jaar in gebruik.",
+        "waar": "Vooral in Griekenland en Cyprus, maar ook wereldwijd binnen wetenschap en onderwijs.",
+        "waarom": "Om te communiceren en als bron van veel wetenschappelijke en culturele begrippen.",
+        "hoe": "Door het Griekse alfabet en de grammatica van de Griekse taal te gebruiken."
+      },
+      "tags": [
+        "grieks",
+        "griekse taal",
+        "griekenland",
+        "taal",
+        "grieks alfabet",
+        "wetenschap",
+        "filosofie",
+        "geschiedenis",
+        "cultuur",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-659ac2e1",
+          "begrip": "etymologie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b15ef9cf",
+          "begrip": "martens",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b941ec1e",
+          "begrip": "Pelster",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6fe78ed",
+          "begrip": "Maas",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2bf9a877",
+          "begrip": "Martin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:15:09.199574+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:15:06.038176+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:15:06.306896+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:15:06.407483+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:15:06.414870+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:15:09.552837+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:15:09.560231+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a7efa9e3",
+      "begrip": "Griekenland",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Griekenland is een land in Zuidoost-Europa.",
+        "laag2": "Griekenland staat bekend om zijn rijke geschiedenis, oude beschaving, eilanden en invloed op filosofie, democratie, wetenschap en cultuur.",
+        "laag3": "Griekenland grenst aan Albanië, Noord-Macedonië, Bulgarije en Turkije en ligt aan de Middellandse Zee. De hoofdstad is Athene. Het land bestaat uit een vasteland en duizenden eilanden, waarvan ongeveer tweehonderd bewoond zijn. De officiële taal is Grieks en de munteenheid is de euro.\n",
+        "laag4": "Griekenland wordt beschouwd als de bakermat van de westerse beschaving. Hier ontstonden belangrijke ideeën op het gebied van democratie, filosofie, wiskunde, geneeskunde en wetenschap. Bekende denkers zoals Socrates, Plato en Aristoteles leefden er. Ook het Griekse alfabet, dat nog steeds in de wetenschap wordt gebruikt voor symbolen zoals α (alpha), π (pi) en σ (sigma), vindt hier zijn oorsprong. Tegenwoordig is Griekenland een democratische lidstaat van de Europese Unie en een populaire toeristische bestemming.\n"
+      },
+      "ws5": {
+        "wie": "Ongeveer 10 miljoen inwoners, de Grieken.",
+        "wat": "Een land in Zuidoost-Europa.",
+        "wanneer": "Sinds de oudheid een belangrijk centrum van cultuur en wetenschap; de moderne staat bestaat sinds 1830.",
+        "waar": "Op het Balkan-schiereiland, aan de Middellandse, Egeïsche en Ionische Zee.",
+        "waarom": "Bekend om zijn historische, culturele en wetenschappelijke invloed.",
+        "hoe": "Als onafhankelijke democratische republiek en lid van de Europese Unie."
+      },
+      "tags": [
+        "griekenland",
+        "europa",
+        "athene",
+        "grieks",
+        "griekse taal",
+        "geschiedenis",
+        "democratie",
+        "filosofie",
+        "wetenschap",
+        "mediterrane zee",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ce612c0b",
+          "begrip": "Grieks",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "filosofie",
+            "geschiedenis",
+            "griekenland",
+            "grieks"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9e1fa92",
+          "begrip": "de Maas",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "europa",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-87972be7",
+          "begrip": "nederland",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "democratie",
+            "europa",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ec657949",
+          "begrip": "Atlantis",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "filosofie",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2576e73a",
+          "begrip": "europa",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "europa",
+            "geschiedenis",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:17:01.600141+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:16:58.733456+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:16:58.988413+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:16:59.091294+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:16:59.098930+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:17:01.950839+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:17:01.958248+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-72197dd6",
+      "begrip": "positie",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een positie is de plaats, toestand of situatie waarin iets of iemand zich bevindt.",
+        "laag2": "Het begrip positie kan verwijzen naar een fysieke locatie, een rol, een standpunt of een open investering, afhankelijk van de context.",
+        "laag3": "Positie is een algemeen begrip dat in veel vakgebieden wordt gebruikt. In de ruimte beschrijft het waar iets zich bevindt. In organisaties kan het een functie of rol betekenen. In discussies verwijst het naar een standpunt. Binnen de financiële wereld en trading is een positie een actieve investering die nog niet is afgesloten. Een positie blijft open totdat een exit plaatsvindt.\n",
+        "laag4": "De betekenis van positie wordt volledig bepaald door de context. In de Spark Trader is een positie een geopende koop- of verkooptransactie die winst of verlies kan opleveren zolang deze actief is. De positie wordt geopend via een entry en afgesloten via een exit. In andere vakgebieden kan positie juist verwijzen naar locatie, rangorde of invloed. Het is daarom een contextafhankelijk kernbegrip.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, systemen en investeerders.",
+        "wat": "De plaats, toestand, rol of actieve situatie waarin iets of iemand zich bevindt.",
+        "wanneer": "Zodra een locatie, rol, standpunt of investering wordt ingenomen.",
+        "waar": "In de ruimte, organisaties, communicatie, financiën en andere vakgebieden.",
+        "waarom": "Om een huidige situatie, locatie of actieve status te beschrijven.",
+        "hoe": "Door een plaats, rol of investering in te nemen en deze vast te houden totdat deze verandert."
+      },
+      "tags": [
+        "positie",
+        "locatie",
+        "toestand",
+        "standpunt",
+        "investering",
+        "trading",
+        "entry",
+        "exit",
+        "status",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-558b2443",
+          "begrip": "kwijt",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10a73247",
+          "begrip": "staat",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "positie",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f5dbe5ba",
+          "begrip": "staan",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "locatie",
+            "neutraal",
+            "positie",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b71890dd",
+          "begrip": "zit",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "locatie",
+            "neutraal",
+            "positie",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "positie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T10:57:48.501590+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:18:48.513765+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Entry, Exitstrategie, Positie, Trading, Winst, Verlies, Stop-loss, Take-profit, Afsluiten, Besluit.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:18:46.358557+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:18:46.459116+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:18:46.466465+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:18:48.867729+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:18:48.875193+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8c7a9dbb",
+      "begrip": "onderwerpen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Onderwerpen zijn thema's of zaken waarover wordt gesproken, geschreven, geleerd of nagedacht.",
+        "laag2": "Een onderwerp geeft aan waar informatie, een gesprek, een tekst of een onderzoek over gaat. Het vormt het centrale thema van de inhoud.",
+        "laag3": "Onderwerpen helpen om kennis en informatie te ordenen. Eén onderwerp kan uit meerdere deelonderwerpen bestaan en kan verbonden zijn met andere onderwerpen. Door onderwerpen te groeperen ontstaat structuur, waardoor informatie gemakkelijker kan worden opgeslagen, teruggevonden en begrepen.\n",
+        "laag4": "Onderwerpen worden gebruikt in onderwijs, wetenschap, communicatie, administratie en kennisbanken. Binnen een kennisnetwerk, zoals Spark, vormen onderwerpen de basis voor het organiseren van kennis. Door relaties tussen onderwerpen te leggen ontstaat een netwerk waarin nieuwe kennis eenvoudig kan worden gekoppeld aan bestaande kennis. Hierdoor groeit niet alleen de hoeveelheid informatie, maar ook het begrip van de onderlinge verbanden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en kennis- of informatiesystemen.",
+        "wat": " Een centraal thema of onderwerp waar informatie over gaat.",
+        "wanneer": "Tijdens gesprekken, lessen, onderzoeken, documenten en kennisopbouw.",
+        "waar": "In boeken, artikelen, databases, kennisbanken, gesprekken en onderwijs.",
+        "waarom": "Om informatie te ordenen, structureren en gemakkelijker terug te vinden.",
+        "hoe": "Door kennis en informatie onder één centraal thema te groeperen en met andere onderwerpen te verbinden."
+      },
+      "tags": [
+        "onderwerpen",
+        "onderwerp",
+        "thema",
+        "kennis",
+        "informatie",
+        "structuur",
+        "classificatie",
+        "kennisbank",
+        "categorie",
+        "organisatie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-747e4a37",
+          "begrip": "categorieën",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "emotie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0087262b",
+          "begrip": "verzameling",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab5ea394",
+          "begrip": "ordening",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "informatie",
+            "kennis",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ff1be4f3",
+          "begrip": "laag",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "kennis",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ab49447e",
+          "begrip": "onderwerp",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "kennis",
+            "neutraal",
+            "onderwerp"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:34:07.911453+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:27:13.914999+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-cb90c7fb0452",
+        "extract_at": "2026-07-20T11:27:14.018750+00:00",
+        "extract_context_snippet": "rekken, hebben we al over verschillende onderwerpen gesproken, zoals Bollinger Bands en technische analyse. Ik",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'onderwerpen' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:34:05.931506+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:34:06.037383+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:34:06.045112+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:34:08.259759+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:34:08.267297+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bd776b96",
+      "begrip": "dataset",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een dataset is een verzameling van gestructureerde gegevens.",
+        "laag2": "Een dataset bevat informatie die is georganiseerd zodat deze kan worden opgeslagen, geanalyseerd of verwerkt door mensen of computers.",
+        "laag3": "Een dataset bestaat uit een verzameling gegevens over één of meerdere onderwerpen. De gegevens zijn meestal geordend in rijen en kolommen, zoals in een tabel of spreadsheet, maar kunnen ook in andere vormen voorkomen, zoals JSON, XML of databases. Datasets worden gebruikt voor onderzoek, statistiek, machine learning, rapportages en softwareontwikkeling.\n",
+        "laag4": "De kwaliteit van een dataset bepaalt vaak de kwaliteit van de analyse of het AI-model dat ermee werkt. Belangrijke eigenschappen zijn volledigheid, nauwkeurigheid, consistentie en actualiteit. Binnen kunstmatige intelligentie vormen datasets de basis voor het trainen, testen en evalueren van modellen. Ook binnen Spark kunnen kenniskaarten, logbestanden en gebruikersinteracties als datasets worden beschouwd wanneer zij systematisch worden verzameld en geanalyseerd.\n"
+      },
+      "ws5": {
+        "wie": "Onderzoekers, analisten, programmeurs, bedrijven en AI-systemen.",
+        "wat": "Een georganiseerde verzameling gegevens.",
+        "wanneer": "Wanneer gegevens worden opgeslagen, geanalyseerd of verwerkt.",
+        "waar": "In databases, spreadsheets, bestanden, API's en informatiesystemen.",
+        "waarom": "Om gegevens efficiënt te beheren, analyseren en gebruiken.",
+        "hoe": "Door informatie gestructureerd op te slaan volgens een vast formaat of schema."
+      },
+      "tags": [
+        "dataset",
+        "data",
+        "gegevens",
+        "database",
+        "analyse",
+        "machine learning",
+        "AI",
+        "statistiek",
+        "JSON",
+        "informatie"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-864023ff",
+          "begrip": "gegevens",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "ai",
+            "analyse",
+            "data",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "database",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f83c2190",
+          "begrip": "opslaan",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "data",
+            "database",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "data",
+            "informatie",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3208c15b",
+          "begrip": "verwerkt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "analyse",
+            "data",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:40:24.942257+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T10:58:36.210216+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b51654f4fff1",
+        "extract_at": "2026-07-20T10:58:36.319790+00:00",
+        "extract_context_snippet": "g is een maat voor de spreiding van een dataset, en statistiek is de studie van het verzamelen, analyseren",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'dataset' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:40:22.280888+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:40:22.383027+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:40:22.389532+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:40:25.302058+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:40:25.308578+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-da96daf3",
+      "begrip": "maat",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een maat is een eenheid, verhouding of persoon waarmee iets wordt gemeten, vergeleken of gedeeld.",
+        "laag2": "Het woord maat heeft meerdere betekenissen. Het kan verwijzen naar een meeteenheid, een afmeting, een verhouding, een ritmische indeling in muziek of een goede vriend.",
+        "laag3": "De betekenis van maat hangt af van de context. In de wiskunde en natuurkunde is een maat een meeteenheid, zoals meter of kilogram. Bij kleding geeft maat de afmetingen van een kledingstuk aan. In muziek verdeelt een maat een muziekstuk in gelijke delen. In het dagelijks taalgebruik betekent maat vaak een vriend of kameraad. Het begrip wordt ook gebruikt in woorden zoals maatregel, maatwerk en maatvoering.",
+        "laag4": "Maat is een algemeen begrip dat structuur en vergelijking mogelijk maakt. Door een maat te gebruiken kunnen objecten, hoeveelheden of situaties objectief worden vergeleken. Binnen wetenschap en techniek zijn maten gestandaardiseerd om wereldwijd dezelfde betekenis te hebben. In sociale context verwijst maat juist naar een persoonlijke relatie. Hierdoor is maat een sterk contextafhankelijk begrip."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen die meten, vergelijken of samenwerken.",
+        "wat": "Een eenheid, afmeting, verhouding of persoon, afhankelijk van de context.",
+        "wanneer": "Bij meten, vergelijken, ordenen of in sociale communicatie.",
+        "waar": "In wetenschap, techniek, handel, muziek, kleding en het dagelijks leven.",
+        "waarom": "Om eigenschappen te bepalen, vergelijkingen te maken of een relatie aan te duiden.",
+        "hoe": "Door een standaard, afmeting, ritme of sociale betekenis toe te passen."
+      },
+      "tags": [
+        "maat",
+        "meten",
+        "meeteenheid",
+        "afmeting",
+        "kledingmaat",
+        "muziekmaat",
+        "vriend",
+        "vergelijking",
+        "standaard",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-d2e2b153",
+          "begrip": "eenheden",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "maat",
+            "meeteenheid",
+            "meten",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0fcc5b1b",
+          "begrip": "grootte",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "afmeting",
+            "emotie",
+            "maat",
+            "meten",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e1df63b6",
+          "begrip": "perspectief",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d549fc6f",
+          "begrip": "hetzelfde",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "vergelijking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:46:13.206736+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T10:58:36.101724+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b51654f4fff1",
+        "extract_at": "2026-07-20T10:58:36.209927+00:00",
+        "extract_context_snippet": "an te duiden. Standaardafwijking is een maat voor de spreiding van een dataset, en statistiek is de stud",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'maat' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:46:09.252235+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:46:09.352974+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:46:09.360646+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:46:13.557552+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:46:13.565212+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-75837706",
+      "begrip": "RPS",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "RPS staat voor Risk Per Trade en geeft aan hoeveel risico je per transactie accepteert.",
+        "laag2": "RPS bepaalt welk deel van het beschikbare kapitaal je maximaal wilt verliezen als een trade mislukt. Het is een belangrijk onderdeel van risicobeheer.",
+        "laag3": "Risk Per Trade (RPS) is een methode om vooraf vast te leggen hoeveel geld of welk percentage van het handelskapitaal per positie op het spel mag staan. Veel traders gebruiken een vaste waarde, bijvoorbeeld 1% of 2% van het totale kapitaal. Hierdoor blijven verliezen beheersbaar en wordt voorkomen dat één slechte trade een groot deel van het vermogen wegneemt.\n",
+        "laag4": "RPS staat los van de kans op winst. Het bepaalt uitsluitend de maximale blootstelling aan risico per positie. Binnen professionele handel wordt RPS gecombineerd met positiegrootte, stop-loss, entry en exitstrategie. Ook binnen de Spark Trader kan RPS worden gebruikt om automatisch de juiste positiegrootte te berekenen op basis van het beschikbare kapitaal en de afstand tot de stop-loss.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers en geautomatiseerde handelssystemen.",
+        "wat": "De maximale hoeveelheid risico die per trade wordt geaccepteerd.",
+        "wanneer": "Voordat een positie wordt geopend.",
+        "waar": "In trading, beleggen en risicobeheer.",
+        "waarom": "Om grote verliezen te voorkomen en het kapitaal te beschermen.",
+        "hoe": "Door vooraf een vast bedrag of percentage van het kapitaal als maximaal risico per trade vast te leggen."
+      },
+      "tags": [
+        "rps",
+        "risk per trade",
+        "risicobeheer",
+        "trading",
+        "positie",
+        "stop-loss",
+        "positiegrootte",
+        "kapitaal",
+        "spark trader",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d809fc3b",
+          "begrip": "exitstrategie",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "risicobeheer",
+            "spark trader"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "risicobeheer",
+            "spark trader"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca653c2c",
+          "begrip": "entry",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "spark trader",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b36978b",
+          "begrip": "entrystrategie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "spark trader",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "spark trader",
+            "trading"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_suggestion_test",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:48:24.069722+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-09T23:05:27.550360+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:48:22.545536+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:48:22.646128+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:48:22.653445+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:48:24.425813+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:48:24.433308+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-825f5b3e",
+      "begrip": "John Bollinger",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "John Bollinger is een Amerikaanse financieel analist die de Bollinger Bands heeft ontwikkeld.",
+        "laag2": "John Bollinger ontwierp de Bollinger Bands in de jaren tachtig als hulpmiddel om volatiliteit en prijsbewegingen op financiële markten te analyseren.",
+        "laag3": "John Bollinger is een financieel analist, auteur en handelaar. Hij ontwikkelde de Bollinger Bands, een technische indicator die bestaat uit een voortschrijdend gemiddelde met een bovenste en onderste band op basis van de standaardafwijking (meestal 2σ). De indicator wordt wereldwijd gebruikt voor technische analyse van aandelen, valuta, grondstoffen en cryptovaluta.\n",
+        "laag4": "De Bollinger Bands behoren tot de bekendste indicatoren binnen de technische analyse. Hoewel John Bollinger de indicator ontwikkelde, benadrukt hij dat deze niet bedoeld is als zelfstandig koop- of verkoopsignaal. De bands geven vooral informatie over volatiliteit en moeten worden gecombineerd met andere analyses. Binnen de Spark Trader vormen Bollinger Bands één van de fundamenten van de Gap Momentum 50-strategie.\n"
+      },
+      "ws5": {
+        "wie": "John Bollinger, Amerikaans financieel analist en auteur.",
+        "wat": "Ontwikkelaar van de Bollinger Bands.",
+        "wanneer": "Ontwikkeld in de jaren 80 van de twintigste eeuw.",
+        "waar": "Binnen de financiële wereld en technische analyse.",
+        "waarom": "Om volatiliteit en prijsbewegingen statistisch inzichtelijk te maken.",
+        "hoe": "Door een voortschrijdend gemiddelde te combineren met banden gebaseerd op de standaardafwijking."
+      },
+      "tags": [
+        "john bollinger",
+        "bollinger",
+        "bollinger bands",
+        "technische analyse",
+        "trading",
+        "volatiliteit",
+        "sigma",
+        "statistiek",
+        "spark trader",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8146e5af",
+          "begrip": "bollinger",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bollinger",
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "sigma"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9508f446",
+          "begrip": "standaardafwijking",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "sigma",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "spark trader",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b36978b",
+          "begrip": "entrystrategie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "bollinger bands",
+            "emotie",
+            "neutraal",
+            "spark trader",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "spark trader",
+            "trading"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T10:59:42.657075+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:50:18.745478+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "John Bollinger, Sigma, Standaardafwijking, Volatiliteit, Gemiddelde, Trading, Koers, Technische analyse, Mean, Reversion, Spark Trader",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:50:17.369856+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:50:17.472469+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:50:17.479996+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:50:19.105322+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:50:19.112808+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4764ecd7",
+      "begrip": "John",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "John is een veelgebruikte voornaam voor mannen.",
+        "laag2": "John is de Engelse vorm van de naam Johannes en komt in veel Engelstalige landen voor.",
+        "laag3": "John is een mannelijke voornaam die is afgeleid van het Hebreeuwse Yochanan, wat betekent: \"God is genadig.\" Via het Griekse Ioannes en het Latijnse Johannes is de naam uitgegroeid tot één van de meest voorkomende voornamen ter wereld. Er bestaan veel varianten, zoals Johannes, Johan, Jan, Jean, Juan en Giovanni.\n",
+        "laag4": "Door de eeuwen heen is John door vele bekende personen gedragen, zoals wetenschappers, politici, muzikanten en ondernemers. De naam wordt wereldwijd gebruikt en behoort tot de meest herkenbare mannelijke voornamen. In kennisbanken is het belangrijk onderscheid te maken tussen de voornaam John en personen die deze naam dragen, zoals John Bollinger of John F. Kennedy.\n"
+      },
+      "ws5": {
+        "wie": "Mannen met de voornaam John.",
+        "wat": "Een mannelijke voornaam van Hebreeuwse oorsprong.",
+        "wanneer": "Al eeuwenlang wereldwijd in gebruik.",
+        "waar": "Vooral in Engelstalige landen, maar ook internationaal.",
+        "waarom": "Als persoonlijke voornaam.",
+        "hoe": "Als eigennaam die aan een persoon wordt gegeven."
+      },
+      "tags": [
+        "john",
+        "voornaam",
+        "naam",
+        "persoonsnaam",
+        "engels",
+        "johannes",
+        "yochanan",
+        "eigennaam",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-266152ea",
+          "begrip": "Joy",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "naam",
+            "neutraal",
+            "persoonsnaam",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-47da5ba3",
+          "begrip": "Wouter",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "naam",
+            "neutraal",
+            "persoonsnaam",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25b5908d",
+          "begrip": "Jan",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "naam",
+            "neutraal",
+            "persoonsnaam",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "naam",
+            "neutraal",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-465561f8",
+          "begrip": "klaas",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "naam",
+            "neutraal",
+            "voornaam"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T11:52:26.068248+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T11:52:23.857106+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T11:52:24.121042+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:52:24.222981+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:52:24.230321+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T11:52:26.421826+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T11:52:26.429245+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

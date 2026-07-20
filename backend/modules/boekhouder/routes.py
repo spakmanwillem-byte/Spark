@@ -172,3 +172,46 @@ async def get_logs_by_topic(topic: str, limit: int = 50, target_id: str = None):
 async def get_reserve_kluis():
     """Huidige inhoud van reserve-kluis (dev/maint/buffer)."""
     return {"success": True, **get_hub().reserve.snapshot("system")}
+
+
+# ============================================================
+# v10_auto_mint_scheduler_001 — Auto-Mint (24u ruis-stabiliteit)
+# ============================================================
+class AutoMintTickBody(BaseModel):
+    viewer_id: str = "user-001"
+    force: bool = False
+
+
+@router.get("/auto-mint/state")
+async def auto_mint_state():
+    """Huidige status van de auto-mint scheduler + live ruis-cijfers."""
+    return {"success": True, **get_hub().auto_mint.snapshot("system")}
+
+
+@router.post("/auto-mint/tick")
+async def auto_mint_tick(body: AutoMintTickBody):
+    """Handmatige check (admin). Met `force=true` overslaat de 24u grace (cooldown blijft)."""
+    if not _is_admin(body.viewer_id):
+        raise HTTPException(status_code=403, detail="Alleen admin")
+    return {"success": True, **get_hub().auto_mint.check_and_maybe_mint(
+        viewer_id=body.viewer_id, force=body.force)}
+
+
+class AutoMintResetBody(BaseModel):
+    viewer_id: str = "user-001"
+    field: str = "condition_met_since"  # of "last_auto_mint_at"
+
+
+@router.post("/auto-mint/reset")
+async def auto_mint_reset(body: AutoMintResetBody):
+    """Reset scheduler state (admin). Voor debugging/tests."""
+    if not _is_admin(body.viewer_id):
+        raise HTTPException(status_code=403, detail="Alleen admin")
+    ag = get_hub().auto_mint
+    s = ag._load()
+    if body.field not in ("condition_met_since", "last_auto_mint_at"):
+        raise HTTPException(status_code=400, detail="field moet condition_met_since of last_auto_mint_at zijn")
+    old = s.get(body.field)
+    s[body.field] = None
+    ag._save(s)
+    return {"success": True, "field": body.field, "was": old, "is_now": None}

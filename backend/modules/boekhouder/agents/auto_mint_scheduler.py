@@ -43,8 +43,13 @@ class AutoMintScheduler(BaseFinanceAgent):
         except Exception:
             return 9999.0
 
-    def check_and_maybe_mint(self, viewer_id: str = "user-001") -> Dict[str, Any]:
-        """Roep elk uur (of via lazy check op snapshot)."""
+    def check_and_maybe_mint(self, viewer_id: str = "user-001", force: bool = False) -> Dict[str, Any]:
+        """Roep elk uur (of via lazy check op snapshot).
+
+        Ruis-definitie (Willem): bitvavo_free - (n_potjes * base_pot_size_eur).
+        Als ruis >= base 24u aaneen → mint 1 pot (cooldown 24u tussen mints).
+        `force=True` (admin) overslaat de 24u grace maar respecteert cooldown.
+        """
         from .price_agent import PriceAgent
         from .bitvavo_agent import BitvavoAgent
 
@@ -56,48 +61,63 @@ class AutoMintScheduler(BaseFinanceAgent):
         pr = PriceAgent().compute_price()
         base = pr["base_pot_size_eur"]
         bitvavo = BitvavoAgent().live_free_eur()
-        # potjes systeem-breed
+        # potjes systeem-breed (n_potjes zoals prijs-berekening — Spark's shared trader)
         pots = load_json(DATA / "financial" / "user_potjes.json", default={"users": {}}) or {}
         total_potjes = sum(len((u or {}).get("potjes", []) or []) for u in (pots.get("users") or {}).values())
-        total_potjes_value = total_potjes * pr["current_price_eur"]
-        ruis = bitvavo - total_potjes_value
+        # Ruis = surplus boven de baseline (n × base). NIET boven current_price (dat is ~bitvavo → altijd 0)
+        baseline_eur = total_potjes * base
+        ruis = bitvavo - baseline_eur
 
         result = {
             "check_at": now.isoformat(),
+            "bitvavo_free_eur": round(bitvavo, 4),
+            "n_potjes_total": total_potjes,
+            "baseline_eur": round(baseline_eur, 4),
             "ruis_eur": round(ruis, 4),
             "threshold_base_eur": base,
             "condition_met": ruis >= base,
             "hours_since_condition_met": self._hours_ago(state.get("condition_met_since")),
             "hours_since_last_mint": self._hours_ago(state.get("last_auto_mint_at")),
+            "forced": bool(force),
             "action": "hold",
         }
 
         if ruis >= base:
+            cooldown_ok = self._hours_ago(state.get("last_auto_mint_at")) >= COOLDOWN_H
             if not state.get("condition_met_since"):
                 state["condition_met_since"] = now.isoformat()
                 result["action"] = "condition_started"
-            else:
-                h = self._hours_ago(state["condition_met_since"])
-                cooldown_ok = self._hours_ago(state.get("last_auto_mint_at")) >= COOLDOWN_H
-                if h >= GRACE_H and cooldown_ok:
-                    # → MINT!
-                    from ..finance_ops import mint_tokens
-                    mint_result = mint_tokens("user-000", 1, source="auto_mint_24h_ruis", dry_run=False)
-                    state["last_auto_mint_at"] = now.isoformat()
-                    state["condition_met_since"] = None
-                    state["mint_count"] = int(state.get("mint_count", 0)) + 1
-                    state.setdefault("history", []).append({
-                        "at": now.isoformat(), "ruis_at_mint": ruis,
-                        "mint_result_success": mint_result.get("success"),
-                        "log_event_id": mint_result.get("preview", {}).get("log_event_id"),
-                        "pot_ids": mint_result.get("minted_pot_ids", []),
-                    })
-                    result["action"] = "MINTED"
-                    result["mint_result"] = mint_result
-                    # Notificatie (gift-flow patroon)
-                    self._notify_users_of_mint(mint_result)
+                if force and cooldown_ok:
+                    # admin override — mint direct (val door naar mint-blok)
+                    pass
                 else:
-                    result["action"] = "waiting_for_grace_or_cooldown"
+                    self._save(state); result["state"] = state; return result
+
+            h = self._hours_ago(state["condition_met_since"])
+            grace_ok = h >= GRACE_H or force
+            if grace_ok and cooldown_ok:
+                # → MINT!
+                from ..finance_ops import mint_tokens
+                mint_result = mint_tokens("user-000", 1, source="auto_mint_24h_ruis", dry_run=False)
+                state["last_auto_mint_at"] = now.isoformat()
+                state["condition_met_since"] = None
+                state["mint_count"] = int(state.get("mint_count", 0)) + 1
+                state.setdefault("history", []).append({
+                    "at": now.isoformat(),
+                    "ruis_at_mint": round(ruis, 4),
+                    "bitvavo_at_mint": round(bitvavo, 4),
+                    "n_potjes_before": total_potjes,
+                    "forced": bool(force),
+                    "mint_result_success": mint_result.get("success"),
+                    "log_event_id": mint_result.get("preview", {}).get("log_event_id"),
+                    "pot_ids": mint_result.get("minted_pot_ids", []),
+                })
+                result["action"] = "MINTED"
+                result["mint_result"] = mint_result
+                # Notificatie (best-effort; module bestaat mogelijk niet)
+                self._notify_users_of_mint(mint_result)
+            else:
+                result["action"] = "waiting_for_grace_or_cooldown"
         else:
             # ruis viel onder threshold — reset
             if state.get("condition_met_since"):
@@ -109,20 +129,59 @@ class AutoMintScheduler(BaseFinanceAgent):
         return result
 
     def _notify_users_of_mint(self, mint_result: Dict[str, Any]) -> None:
-        """Stuur notificatie naar admin (Willem) + Spark eigenaar log."""
+        """Stuur DM via Boekhouder + community-post (papertrail-echo)."""
         try:
-            from modules.notifications import notif_service  # bestaand
+            from ..service import _send_dm, _post_community, ADMIN_ID
             preview = mint_result.get("preview", {})
-            msg = (f"Spark minted automatisch 1 pot @ €{preview.get('token_price_at_mint', 0):.2f} "
-                   f"uit stabiele ruis. Log: {preview.get('log_event_id', '?')[:8]}")
-            for uid in ("user-001",):
-                notif_service.notify(uid, "🪙 Auto-mint uitgevoerd", msg,
-                                     icon="🪙", kind="auto_mint")
+            price = preview.get("token_price_at_mint", 0) or 0
+            n = preview.get("n_tokens", 1) or 1
+            log_id = (preview.get("log_event_id") or "?")[:8]
+            pot_ids = mint_result.get("minted_pot_ids", []) or []
+            dm_text = (
+                f"🪙 **Auto-mint uitgevoerd**\n"
+                f"Spark heeft {n} pot bijgemunt uit stabiele ruis.\n"
+                f"• Token-prijs @ mint: €{price:.4f}\n"
+                f"• Totaal: €{n * price:.2f}\n"
+                f"• Nieuw pot-id(s): {', '.join(pot_ids) or '?'}\n"
+                f"• Log-event: {log_id}\n"
+                f"• 5% reserve-kluis (2/2/1) automatisch afgeboekt."
+            )
+            _send_dm(dm_text, kind="auto_mint", extra={
+                "log_event_id": preview.get("log_event_id"),
+                "pot_ids": pot_ids, "n_tokens": n, "price_eur": price,
+            }, recipient_id=ADMIN_ID)
+            _post_community(
+                f"Spark heeft z'n eigen pot uitgebreid. De ruis was gewoon te stabiel om te negeren.",
+                kind="auto_mint")
         except Exception as e:
             print(f"[auto_mint] notify failed (non-blocking): {e}")
 
     def snapshot(self, user_id: str) -> Dict[str, Any]:
+        """Overview + live ruis/bitvavo/threshold (voor UI/admin)."""
         s = self._load()
+        # Live cijfers meesturen zodat UI direct kan tonen zonder tick
+        try:
+            from .price_agent import PriceAgent
+            from .bitvavo_agent import BitvavoAgent
+            from modules.core.storage import load_json as _lj
+            pr = PriceAgent().compute_price()
+            base = float(pr.get("base_pot_size_eur", 10.0))
+            bitvavo = BitvavoAgent().live_free_eur()
+            pots = _lj(DATA / "financial" / "user_potjes.json", default={"users": {}}) or {}
+            n = sum(len((u or {}).get("potjes", []) or []) for u in (pots.get("users") or {}).values())
+            baseline = n * base
+            ruis = bitvavo - baseline
+            live = {
+                "bitvavo_free_eur": round(bitvavo, 4),
+                "n_potjes_total": n,
+                "baseline_eur": round(baseline, 4),
+                "ruis_eur": round(ruis, 4),
+                "threshold_base_eur": base,
+                "condition_met_now": ruis >= base,
+                "next_mint_threshold_bitvavo_eur": round((n + 1) * base, 2),
+            }
+        except Exception as e:
+            live = {"error": str(e)}
         return {
             "condition_met_since": s.get("condition_met_since"),
             "last_auto_mint_at": s.get("last_auto_mint_at"),
@@ -134,4 +193,5 @@ class AutoMintScheduler(BaseFinanceAgent):
             "hours_since_condition_met": self._hours_ago(s.get("condition_met_since")),
             "hours_since_last_mint": self._hours_ago(s.get("last_auto_mint_at")),
             "recent_history": (s.get("history") or [])[-3:],
+            "live": live,
         }

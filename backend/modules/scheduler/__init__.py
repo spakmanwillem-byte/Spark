@@ -349,6 +349,35 @@ async def _maybe_daily_brief():
         print(f"[scheduler] daily-brief loop failed: {ex}")
 
 
+async def _maybe_auto_mint():
+    """v10_auto_mint_scheduler_001 — elk uur check op ruis-stabiliteit.
+    De AutoMintScheduler heeft interne 24u grace + 24u cooldown, dus veilig om
+    ieder uur te ticken.
+    """
+    now = datetime.now(timezone.utc)
+    state = _load_state()
+    last_str = state.get("auto_mint_tick_last")
+    if last_str:
+        try:
+            last = datetime.fromisoformat(last_str.replace("Z", "+00:00"))
+            if (now - last).total_seconds() < 3600:  # < 1u geleden
+                return
+        except Exception:
+            pass
+    try:
+        from modules.boekhouder.finance_hub import get_hub
+        r = get_hub().auto_mint.check_and_maybe_mint(viewer_id="scheduler", force=False)
+        state["auto_mint_tick_last"] = now.isoformat()
+        state["auto_mint_last_action"] = r.get("action")
+        _save_state(state)
+        if r.get("action") == "MINTED":
+            print(f"[scheduler] AUTO-MINT geëxecuteerd: {r.get('mint_result', {}).get('minted_pot_ids')}")
+        else:
+            print(f"[scheduler] auto-mint tick: {r.get('action')} (ruis=€{r.get('ruis_eur')})")
+    except Exception as ex:
+        print(f"[scheduler] auto-mint tick failed: {ex}")
+
+
 async def scheduler_loop():
     """Hoofdloop — draait elke 5 minuten."""
     print("[scheduler] v6_scheduler_001 gestart (interval 5min)")
@@ -360,6 +389,7 @@ async def scheduler_loop():
             await _maybe_staking_growth()
             await _maybe_weekly_report()
             await _maybe_daily_brief()
+            await _maybe_auto_mint()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

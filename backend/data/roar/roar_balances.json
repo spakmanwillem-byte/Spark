@@ -5,7 +5,7 @@
   "previous_tx_count": 13,
   "balances": {
     "user-001": 0,
-    "user-000": 1
+    "user-000": 2
   },
   "transactions": [
     {
@@ -49,10 +49,19 @@
       "gift_id": "3c2e7385-02c1-4d91-852a-b7b04d3c0f18",
       "note": "Slip-mint doorgeschoven naar Spark - via papertrail",
       "status": "completed"
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 16.048,
+      "total_eur": 16.05,
+      "source": "auto_mint_24h_ruis",
+      "timestamp": "2026-07-20T17:20:05.434154+00:00"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999972,
+  "treasury_pool": 999971,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {

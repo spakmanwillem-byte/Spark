@@ -387,13 +387,30 @@ class DedupeInboxBody(BaseModel):
 async def rebuild_knowledge_index(body: DedupeInboxBody):
     """v6_kbv2_rebuild_index_001 — Bouw knowledge_index.json vers op uit huidige
     lade-bestanden + inbox-cards met gevulde laag1. Verwijdert stale entries die
-    naar verwijderde kaarten verwezen. Default dry_run=true."""
+    naar verwijderde kaarten verwezen. Default dry_run=true.
+
+    v7_ghost_cleanup_001 — ruimt ook auto ghost-duplicates op: inbox-skeletons
+    (0/4 lagen) waarvan een gevulde kaart met hetzelfde begrip elders bestaat.
+    """
     import shutil as _shutil
     from pathlib import Path as _P
     DATA = _P(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
     idx_p = DATA / "knowledge_index.json"
     old = load_json(idx_p, default={"entries": {}})
     old_count = len(old.get("entries", {}))
+
+    # v7_ghost_cleanup_001 — verzamel eerst alle begrippen die gevuld zijn in de lades
+    filled_begrippen = set()
+    for cat in ("weten", "doen", "voelen", "spreken"):
+        fp = DATA / f"knowledge_v2_{cat}.json"
+        if not fp.exists():
+            continue
+        d = load_json(fp, default={"kaarten": []})
+        for c in d.get("kaarten", []):
+            begrip = (c.get("begrip") or "").lower().strip()
+            lagen = c.get("lagen") or {}
+            if begrip and (lagen.get("laag1") or "").strip():
+                filled_begrippen.add(begrip)
 
     new_entries = {}
     for cat in ("weten", "doen", "voelen", "spreken"):
@@ -413,17 +430,25 @@ async def rebuild_knowledge_index(body: DedupeInboxBody):
                 "tags": (c.get("tags") or [])[:8],
                 "last_updated": fn.get("laatst_bewerkt_op") or fn.get("ingedeeld_op", ""),
             }
-    # Inbox-cards met laag1 ook indexeren
+    # Inbox-cards met laag1 ook indexeren + ghost-cleanup
     inbox_fp = DATA / "knowledge_inbox.json"
     inbox_added = 0
+    ghost_removed = []  # (id, begrip)
     if inbox_fp.exists():
         inb = load_json(inbox_fp, default={"kaarten": []})
+        kept_inbox = []
         for c in inb.get("kaarten", []):
             begrip = (c.get("begrip") or "").lower().strip()
+            lagen = c.get("lagen") or {}
+            has_content = (lagen.get("laag1") or "").strip()
+            # Ghost = leeg + zelfde begrip bestaat elders gevuld
+            if begrip and not has_content and begrip in filled_begrippen:
+                ghost_removed.append({"id": c.get("id"), "begrip": c.get("begrip")})
+                continue  # skip → uit inbox
+            kept_inbox.append(c)
             if not begrip or begrip in new_entries:
                 continue
-            lagen = c.get("lagen") or {}
-            if (lagen.get("laag1") or "").strip():
+            if has_content:
                 new_entries[begrip] = {
                     "kaart_id": c["id"], "lade": "inbox",
                     "has_lagen": [k for k, v in lagen.items() if (v or "").strip()],
@@ -438,6 +463,8 @@ async def rebuild_knowledge_index(body: DedupeInboxBody):
             "old_size": old_count, "new_size": len(new_entries),
             "delta": len(new_entries) - old_count,
             "inbox_added": inbox_added,
+            "ghost_removed_count": len(ghost_removed),
+            "ghost_removed_sample": ghost_removed[:20],
         }
 
     ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
@@ -449,11 +476,21 @@ async def rebuild_knowledge_index(body: DedupeInboxBody):
         "rebuilt_by": body.user_id,
         "total": len(new_entries),
     })
+    # Persist ghost cleanup — schrijf inbox alleen weg als er iets veranderde
+    if ghost_removed and inbox_fp.exists():
+        inbox_backup = inbox_fp.with_suffix(f".json.backup_ghost_{ts}")
+        _shutil.copy(str(inbox_fp), str(inbox_backup))
+        inb["kaarten"] = kept_inbox
+        inb["card_count"] = len(kept_inbox)
+        inb["updated_at"] = _dt.now(_tz.utc).isoformat()
+        save_json(inbox_fp, inb)
     return {
         "success": True, "dry_run": False,
         "old_size": old_count, "new_size": len(new_entries),
         "inbox_added": inbox_added,
         "backup_file": backup.name,
+        "ghost_removed_count": len(ghost_removed),
+        "ghost_removed": ghost_removed,
     }
 
 

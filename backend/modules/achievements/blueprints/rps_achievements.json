@@ -1,0 +1,49 @@
+{
+  "_type": "sub_agent_blueprint",
+  "_module": "achievements",
+  "_agent": "RPSAchievementAgent",
+  "_versie": "v1_rps_agent_001",
+  "_bijgewerkt_op": "2026-07-20T13:20:00+00:00",
+  "_doel": "Runtime-configuratie voor Rock-Paper-Scissors (Steen-Papier-Schaar) achievements.",
+  "_koppelingen": {
+    "code_ref": "backend/modules/achievements/agents/rps_agent.py",
+    "stats_source": "backend/data/games/rps/stats.json",
+    "meta_ref": "backend/modules/achievements/_meta.json"
+  },
+
+  "handles_types": ["rps"],
+
+  "stat_fields": {
+    "wins": {
+      "label": "gewonnen",
+      "banner_template": "🏆 {user_naam} won {milestone} SPS-rondes!",
+      "milestones": {
+        "1": {"xp": 25, "rarity": "common"},
+        "10": {"xp": 100, "rarity": "uncommon"},
+        "50": {"xp": 500, "rarity": "rare"},
+        "100": {"xp": 1500, "rarity": "epic"}
+      }
+    },
+    "losses": {
+      "label": "verloren",
+      "banner_template": "💀 {user_naam} — verlies is ook winst. {milestone} rondes gefaald!",
+      "milestones": {
+        "1": {"xp": 10, "rarity": "common"},
+        "10": {"xp": 50, "rarity": "common"}
+      }
+    },
+    "total": {
+      "label": "gespeeld",
+      "banner_template": "🎮 {user_naam} speelde {milestone} SPS-rondes",
+      "milestones": {}
+    }
+  },
+
+  "footnote": {
+    "generated_by": "e1_achievement_refactor_v1",
+    "generated_at": "2026-07-20T13:20:00+00:00",
+    "spark_note": "Blueprint voor RPS-achievements. Bewerk milestone-XP en teksten hier.",
+    "editable_by_admin": true,
+    "future_admin_endpoint": "PATCH /achievements/admin/blueprint/rps_achievements"
+  }
+}

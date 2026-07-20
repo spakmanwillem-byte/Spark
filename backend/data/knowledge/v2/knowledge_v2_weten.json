@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2126,
+    "card_count": 2130,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T12:57:42.499298+00:00",
+    "last_updated": "2026-07-20T13:27:45.571303+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -283971,6 +283971,637 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-bec58059",
+      "begrip": "appeltaart",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een appeltaart is een gebak dat voornamelijk bestaat uit deeg en appels.",
+        "laag2": "Appeltaart is een zoet bakproduct waarbij appels in of op een deegbodem worden gebakken. Het is een veelvoorkomend dessert en wordt vaak gegeten bij koffie of thee.",
+        "laag3": "Appeltaart kent wereldwijd verschillende varianten. De Nederlandse appeltaart wordt meestal gemaakt met een stevige boterdeegbodem, appels, kaneel en vaak rozijnen. De bovenkant bestaat vaak uit een deegrooster. Appeltaart kan warm of koud worden gegeten en wordt vaak geserveerd met slagroom of vanille-ijs.\n",
+        "laag4": "Appeltaart is een traditioneel gerecht dat in veel culturen voorkomt. Binnen een kennisbank kan het worden gekoppeld aan begrippen zoals appel, bakken, recept, ingrediënten, oven, dessert, voeding en deeg.\n\nPraktijkvoorbeeld – Basisrecept\n\nIngrediënten\n\n1 kg appels\n300 g bloem\n200 g boter\n150 g suiker\n1 ei\n2 theelepels kaneel\n1 zakje bakpoeder\nSnufje zout\nEventueel rozijnen\n\nBereiding\n\nVerwarm de oven voor op 175 °C.\nMeng bloem, boter, suiker, bakpoeder, zout en het ei tot een stevig deeg.\nBekleed een ingevette springvorm met ongeveer twee derde van het deeg.\nSchil de appels, snijd ze in blokjes en meng ze met kaneel (en eventueel rozijnen).\nVerdeel de appelvulling over de bodem.\nMaak van het resterende deeg een raster op de bovenkant.\nBak de taart ongeveer 60 minuten tot deze goudbruin is.\nLaat afkoelen en serveer eventueel met slagroom of vanille-ijs."
+      },
+      "ws5": {
+        "wie": "Bakkers, hobbykoks en iedereen die een appeltaart wil maken of eten.",
+        "wat": "Een gebak gemaakt van deeg en appels.",
+        "wanneer": "Als dessert, traktatie of bij koffie en thee.",
+        "waar": "Thuis, in bakkerijen, cafés en restaurants.",
+        "waarom": "Om een zoet gerecht te bereiden en te serveren.",
+        "hoe": "Door deeg te maken, appels te bereiden en alles in een oven te bakken volgens een recept."
+      },
+      "tags": [
+        "appeltaart",
+        "gebak",
+        "taart",
+        "appel",
+        "bakken",
+        "recept",
+        "deeg",
+        "ingrediënten",
+        "oven",
+        "dessert",
+        "voeding",
+        "koken",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bakken",
+            "emotie",
+            "ingrediënten",
+            "koken",
+            "recept"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e8a9ed",
+          "begrip": "recept",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bakken",
+            "emotie",
+            "ingrediënten",
+            "koken",
+            "recept"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e8cb3646",
+          "begrip": "beslag",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bakken",
+            "emotie",
+            "ingrediënten",
+            "recept",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-359dbc19",
+          "begrip": "Olie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bakken",
+            "emotie",
+            "koken",
+            "neutraal",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8b1053d",
+          "begrip": "koekjes",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "emotie",
+            "neutraal",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:14:12.961631+00:00",
+        "vorige_versie_v1": "kb-skel-bec58059",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:25.539000+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:14:08.663913+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:14:08.671489+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:14:13.313233+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:14:13.320731+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:14:08.562383+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c36ae4c1",
+      "begrip": "asfalt",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Asfalt is een verhardingsmateriaal dat wordt gebruikt voor wegen, fietspaden en andere verkeersoppervlakken.",
+        "laag2": "Asfalt bestaat uit een mengsel van steenslag, zand, vulstof en bitumen. Het vormt een sterke en duurzame verharding voor verkeer.",
+        "laag3": "Asfalt is een veelgebruikt bouwmateriaal in de wegenbouw. Het wordt geproduceerd door mineralen zoals steenslag en zand te mengen met bitumen, een kleverige stof die als bindmiddel dient. Afhankelijk van de toepassing bestaan verschillende soorten asfalt, zoals dicht asfaltbeton, zeer open asfaltbeton (ZOAB) en gekleurd asfalt. De eigenschappen worden afgestemd op belasting, klimaat en geluidsreductie.\n",
+        "laag4": "Asfalt speelt een belangrijke rol in de infrastructuur. Het zorgt voor een vlak, veilig en duurzaam wegdek waarop voertuigen efficiënt kunnen rijden. Moderne asfaltmengsels worden ontwikkeld om slijtage te verminderen, water sneller af te voeren, geluidsoverlast te beperken en materialen te recyclen. Binnen de wegenbouw wordt oud asfalt vaak hergebruikt als grondstof voor nieuw asfalt, waardoor de milieubelasting afneemt.\n\nPraktijkvoorbeeld – Asfalt aanleggen\n\nBenodigdheden\n\nOndergrond of fundering\nAsfaltmengsel\nAsfaltspreidmachine\nWals\nBitumen (als bindmiddel)\n\nWerkwijze\n\nBereid de ondergrond voor en zorg voor een stevige fundering.\nBreng het warme asfaltmengsel gelijkmatig aan.\nVerdeel het asfalt met een asfaltspreidmachine.\nVerdicht het asfalt met een wals totdat een egaal wegdek ontstaat.\nLaat het asfalt afkoelen voordat het volledig wordt belast."
+      },
+      "ws5": {
+        "wie": "Wegenbouwers, aannemers en overheden.",
+        "wat": "Een mengsel van steenslag, zand, vulstof en bitumen dat wordt gebruikt als wegverharding.",
+        "wanneer": "Bij de aanleg en het onderhoud van wegen, fietspaden en parkeerterreinen.",
+        "waar": "Op wegen, snelwegen, fietspaden, parkeerplaatsen, vliegvelden en industrieterreinen.",
+        "waarom": "Om een sterk, duurzaam, veilig en comfortabel wegdek te creëren.",
+        "hoe": "Door mineralen met bitumen te mengen, warm aan te brengen en vervolgens te verdichten."
+      },
+      "tags": [
+        "asfalt",
+        "bitumen",
+        "wegenbouw",
+        "wegdek",
+        "infrastructuur",
+        "verharding",
+        "steenslag",
+        "zand",
+        "zoab",
+        "bouwmateriaal",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "infrastructuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:21:52.884750+00:00",
+        "vorige_versie_v1": "kb-skel-c36ae4c1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:32.734899+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:21:53.232825+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:21:53.302000+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:21:48.495595+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-adc3dd4f",
+      "begrip": "astronomie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Astronomie is de wetenschap die hemellichamen en het heelal bestudeert.",
+        "laag2": "Astronomie onderzoekt objecten zoals sterren, planeten, manen, sterrenstelsels en zwarte gaten, en probeert te begrijpen hoe het heelal is ontstaan en zich ontwikkelt.",
+        "laag3": "Astronomie is een natuurwetenschap die zich bezighoudt met het observeren, meten en verklaren van verschijnselen buiten de atmosfeer van de aarde. Astronomen bestuderen onder andere planeten, sterren, kometen, asteroïden, nevels, sterrenstelsels en de kosmische achtergrondstraling. Hierbij worden telescopen, satellieten en wiskundige modellen gebruikt om de eigenschappen en bewegingen van hemellichamen te onderzoeken.\n",
+        "laag4": "Astronomie behoort tot de oudste wetenschappen en heeft een grote invloed gehad op navigatie, tijdmeting, natuurkunde en ruimtevaart. Moderne astronomie combineert waarnemingen met natuurkunde, scheikunde, wiskunde en informatica om het ontstaan, de evolutie en de toekomst van het heelal te begrijpen. Binnen een kennisbank vormt astronomie een centraal onderwerp dat verbonden is met begrippen zoals heelal, planeet, ster, zwaartekracht, licht, ruimtevaart en kosmologie.\n\nPraktijkvoorbeeld – De sterrenhemel observeren\n\nBenodigdheden\n\nBlote oog of verrekijker\nTelescoop (optioneel)\nSterrenkaart of sterren-app\nDonkere locatie met weinig lichtvervuiling\n\nWerkwijze\n\nZoek een donkere locatie.\nLaat je ogen ongeveer 20 minuten aan het donker wennen.\nGebruik een sterrenkaart om sterrenbeelden te herkennen.\nObserveer de Maan, planeten of heldere sterren.\nNoteer of fotografeer je waarnemingen."
+      },
+      "ws5": {
+        "wie": " Astronomen, onderzoekers, studenten en sterrenliefhebbers.",
+        "wat": "De wetenschap die hemellichamen en het heelal bestudeert.",
+        "wanneer": "Bij wetenschappelijk onderzoek en observaties van de ruimte.",
+        "waar": "In observatoria, onderzoekscentra, de ruimte en vanaf de aarde.",
+        "waarom": "Om te begrijpen hoe het heelal, sterren, planeten en andere hemellichamen ontstaan en functioneren.",
+        "hoe": "Door waarnemingen, metingen, telescopen, satellieten, natuurkundige modellen en data-analyse."
+      },
+      "tags": [
+        "astronomie",
+        "heelal",
+        "ruimte",
+        "sterren",
+        "planeten",
+        "maan",
+        "zon",
+        "sterrenstelsel",
+        "telescoop",
+        "observatie",
+        "kosmologie",
+        "wetenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f1cbf4e5",
+          "begrip": "planeten",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "astronomie",
+            "emotie",
+            "heelal",
+            "neutraal",
+            "planeten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-967acb6e",
+          "begrip": "sterren",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "astronomie",
+            "emotie",
+            "neutraal",
+            "planeten",
+            "ruimte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0becb266",
+          "begrip": "sterrenhemel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "astronomie",
+            "heelal",
+            "planeten",
+            "ruimte",
+            "sterren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "zon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "observatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:25:53.772152+00:00",
+        "vorige_versie_v1": "kb-skel-adc3dd4f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:34.523823+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:25:51.751169+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:25:51.758954+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:25:54.118747+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:25:54.127026+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:25:51.650752+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-72379f23",
+      "begrip": "atoom",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een atoom is het kleinste bouwblok van een chemisch element dat zijn eigenschappen behoudt.",
+        "laag2": "Atomen vormen de basis van alle gewone materie. Ze bestaan uit een kern met protonen en neutronen, waaromheen elektronen bewegen.",
+        "laag3": "Een atoom bestaat uit een atoomkern met positief geladen protonen en ongeladen neutronen. Rond de kern bevinden zich negatief geladen elektronen. Het aantal protonen bepaalt om welk chemisch element het gaat, zoals waterstof, zuurstof of koolstof. Atomen kunnen zich met elkaar verbinden tot moleculen, waaruit alle stoffen zijn opgebouwd.\n",
+        "laag4": "De atoomtheorie vormt de basis van de moderne natuurkunde, scheikunde en materiaalkunde. Hoewel atomen extreem klein zijn, bepalen zij de eigenschappen van alle vaste stoffen, vloeistoffen en gassen. Binnen wetenschap en technologie wordt kennis van atomen gebruikt in onder andere chemische reacties, kernenergie, elektronica, nanotechnologie en geneeskunde. Binnen een kennisbank is het atoom een fundamenteel begrip dat verbonden is met materie, moleculen en chemische elementen.\n\nPraktijkvoorbeeld – Watermolecuul begrijpen\n\nVoorbeeld\nEen watermolecuul (H₂O) bestaat uit:\n\n2 waterstofatomen (H)\n1 zuurstofatoom (O)\n\nWanneer deze drie atomen zich chemisch verbinden, ontstaat water. De eigenschappen van water verschillen volledig van die van losse waterstof- en zuurstofatomen."
+      },
+      "ws5": {
+        "wie": "Natuurkundigen, scheikundigen, onderzoekers en studenten.",
+        "wat": "Het kleinste bouwblok van een chemisch element.",
+        "wanneer": "Bij het bestuderen van materie, chemie en natuurkunde.",
+        "waar": "In alle gewone materie in het heelal.",
+        "waarom": "Omdat alle stoffen uit atomen of combinaties van atomen bestaan.",
+        "hoe": "Door protonen, neutronen en elektronen samen een stabiel atoom te laten vormen."
+      },
+      "tags": [
+        "atoom",
+        "materie",
+        "chemie",
+        "natuurkunde",
+        "proton",
+        "neutron",
+        "elektron",
+        "atoomkern",
+        "element",
+        "molecuul",
+        "wetenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2dcf12d5",
+          "begrip": "periodiek systeem",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "elektron",
+            "element",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-db754f6c",
+          "begrip": "deeltjes",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "atoom",
+            "elektron",
+            "emotie",
+            "materie",
+            "molecuul"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a02737ee",
+          "begrip": "periodiek systeem",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "element",
+            "emotie",
+            "natuurkunde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c2748ddb",
+          "begrip": "oxidatie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "molecuul",
+            "neutraal",
+            "wetenschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d7bc1088",
+          "begrip": "Energie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "chemie",
+            "emotie",
+            "natuurkunde",
+            "wetenschap"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:27:45.571284+00:00",
+        "vorige_versie_v1": "kb-skel-72379f23",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:04.791192+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:27:43.498071+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:27:43.505811+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:27:45.919731+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:27:45.927230+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:27:43.398644+00:00"
       },
       "media": {
         "voice_url": null,

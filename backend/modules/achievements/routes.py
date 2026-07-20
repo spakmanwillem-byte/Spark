@@ -16,6 +16,13 @@ async def get_all_achievements():
     return service.get_all()
 
 
+# v7_achievement_agents_001 — Blueprint uitlezen voor admin UI (later editable)
+@router.get("/admin/blueprints")
+async def get_blueprints():
+    """Return alle sub-agent blueprints (XP-waarden, texts, thresholds) voor admin UI."""
+    return {"success": True, "blueprints": service.get_blueprints()}
+
+
 @router.get("/progress/{user_id}")
 async def get_user_progress(user_id: str):
     """Get user's achievement progress (auto-unlocks retroactively)"""

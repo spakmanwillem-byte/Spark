@@ -1,14 +1,35 @@
 """
-Achievement Service - Word-based achievement system
-Berekent voortgang op basis van kennisbank entries
+Achievement Dispatcher Service (v7 refactor)
+============================================
+Dispatcher-patroon volgens Spark-modulestijl (zoals trade/monitor.py facade).
+
+De service zelf doet géén achievement-logic meer — die is verplaatst naar
+sub-agents in `agents/*.py`. Elke sub-agent handelt één (of meerdere) types af:
+
+    - KBAchievementAgent       → 'words', 'letter_completion'
+    - RPSAchievementAgent      → 'rps'
+    - MilestoneAchievementAgent→ 'milestones', 'contributions'
+
+Blueprint-koppeling per agent: `blueprints/{name}.json` — admin-editable.
+
+Meta: zie `_meta.json`
+Blueprint doc: `/memory/blueprints/achievements.md`
 """
 from pathlib import Path
 from modules.core.storage import load_json, save_json
 from datetime import datetime, timezone
+from typing import Dict, List, Any, Optional
+
+from .agents import (
+    BaseAchievementAgent,
+    KBAchievementAgent,
+    RPSAchievementAgent,
+    MilestoneAchievementAgent,
+)
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 ACHIEVEMENTS_FILE = DATA_DIR / "achievements.json"
-KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
 KBV2_DIR = DATA_DIR / "knowledge" / "v2"
 USERS_FILE = DATA_DIR / "system" / "users.json"
 
@@ -25,22 +46,182 @@ def _load_kbv2_entries():
 
 
 class AchievementService:
+    """
+    Dispatcher — delegeert unlock-checks naar de juiste sub-agent per achievement.type.
+    """
+
+    def __init__(self):
+        # Registry van sub-agents in vaste volgorde (bepaalt check-volgorde)
+        self._agents: List[BaseAchievementAgent] = [
+            KBAchievementAgent(),
+            RPSAchievementAgent(),
+            MilestoneAchievementAgent(),
+        ]
+
+    # =========== Public API ===========
+
+    def get_all(self):
+        """Return all achievements with system stats"""
+        achievements = self._get_achievements()
+        return {
+            "achievements": achievements,
+            "total": len(achievements),
+            "total_xp_available": sum(a.get("xp_reward", 0) for a in achievements),
+            "agents": [{"class": a.__class__.__name__,
+                        "handles_types": a.handles_types,
+                        "blueprint": a.blueprint_name} for a in self._agents],
+        }
+
+    def get_user_progress(self, user_id: str):
+        """Retroactive unlock + progress info voor alle achievements."""
+        user = self._get_user(user_id)
+        if not user:
+            return None
+
+        achievements = self._get_achievements()
+        context = self._build_context(user_id)
+
+        user_ach = user.get("achievements", {}) or {}
+        unlocked = list(user_ach.get("unlocked", []) or [])
+        unlocked_ids = [a.get("id") for a in unlocked]
+        total_xp = user_ach.get("total_xp_from_achievements", 0)
+
+        # Dispatch: elk achievement naar juiste agent
+        newly_unlocked: List[Dict[str, Any]] = []
+        for ach in achievements:
+            if ach["id"] in unlocked_ids:
+                continue
+            agent = self._route(ach)
+            if agent is None:
+                continue
+            entry = agent.check_unlock(user, ach, context)
+            if entry is not None:
+                unlocked.append(entry)
+                unlocked_ids.append(entry["id"])
+                total_xp += entry.get("xp_reward", 0)
+                newly_unlocked.append(entry)
+
+        # Save if new unlocks
+        if newly_unlocked:
+            self._save_user(user_id, {
+                "achievements": {"unlocked": unlocked, "total_xp_from_achievements": total_xp},
+            })
+            try:
+                from modules.chat import xp_service
+                for u in newly_unlocked:
+                    reward = u.get("xp_reward", 0)
+                    if reward > 0:
+                        xp_service.grant_xp(
+                            user_id=user_id, amount=reward,
+                            reason=f"Achievement: {u.get('name','?')}",
+                        )
+            except Exception as ex:
+                print(f"[achievements] grant_xp failed: {ex}")
+
+        # Volgende milestone (alleen word-based voor preview)
+        next_milestone = self._compute_next_milestone(achievements, unlocked_ids, context)
+
+        total_achievements = len(achievements)
+        total_unlocked = len(unlocked)
+        pct = round((total_unlocked / total_achievements * 100), 1) if total_achievements > 0 else 0
+
+        return {
+            "user_naam": user.get("naam", ""),
+            "user_gradatie": user.get("gradatie", 1),
+            "word_count": context["word_count"],
+            "unlocked": unlocked,
+            "total_unlocked": total_unlocked,
+            "total_achievements": total_achievements,
+            "progress_percentage": pct,
+            "total_xp_earned": total_xp,
+            "next_milestone": next_milestone,
+            "newly_unlocked": newly_unlocked,
+            "letter_status": context["letter_status"],  # v7 letter progress voor UI
+        }
+
+    def unlock_manual(self, user_id: str, achievement_id: str) -> dict:
+        """Manual unlock — voor trigger-based (avatar upload, first token, etc.)"""
+        user = self._get_user(user_id)
+        if not user:
+            return {"success": False, "error": "Gebruiker niet gevonden"}
+        achievements = self._get_achievements()
+        target = next((a for a in achievements if a.get("id") == achievement_id), None)
+        if not target:
+            return {"success": False, "error": f"Achievement {achievement_id} bestaat niet"}
+        user_ach = user.get("achievements", {}) or {}
+        unlocked = list(user_ach.get("unlocked", []))
+        if any(u.get("id") == achievement_id for u in unlocked):
+            return {"success": True, "already_unlocked": True, "achievement": target}
+
+        # Route naar agent voor consistente unlock_entry-opbouw (fallback: default)
+        agent = self._route(target)
+        entry = agent._build_unlock_entry(target) if agent else {
+            "id": target["id"], "name": target["name"], "description": target["description"],
+            "milestone": target.get("milestone", 0), "xp_reward": target.get("xp_reward", 0),
+            "icon": target.get("icon", ""), "rarity": target.get("rarity", "common"),
+            "unlocked_at": datetime.now(timezone.utc).isoformat(),
+        }
+        unlocked.append(entry)
+        total_xp = user_ach.get("total_xp_from_achievements", 0) + target.get("xp_reward", 0)
+        self._save_user(user_id, {
+            "achievements": {"unlocked": unlocked, "total_xp_from_achievements": total_xp},
+        })
+        try:
+            from modules.chat import xp_service
+            reward = target.get("xp_reward", 0)
+            if reward > 0:
+                xp_service.grant_xp(user_id=user_id, amount=reward,
+                                    reason=f"Achievement: {target.get('name','?')}")
+        except Exception as ex:
+            print(f"[achievements] grant_xp failed: {ex}")
+        return {"success": True, "already_unlocked": False, "achievement": entry,
+                "xp_granted": target.get("xp_reward", 0)}
+
+    def get_blueprints(self) -> Dict[str, Any]:
+        """v7_admin_placeholder — return alle sub-agent blueprints (voor admin UI)."""
+        out = {}
+        for agent in self._agents:
+            if agent.blueprint_name:
+                out[agent.blueprint_name] = {
+                    "agent_class": agent.__class__.__name__,
+                    "handles_types": agent.handles_types,
+                    "blueprint": agent.blueprint(),
+                }
+        return out
+
+    # =========== Private ===========
+
+    def _route(self, achievement: Dict[str, Any]) -> Optional[BaseAchievementAgent]:
+        """Find the agent that handles this achievement's type."""
+        for agent in self._agents:
+            if agent.can_handle(achievement):
+                return agent
+        return None
 
     def _get_achievements(self):
         data = load_json(ACHIEVEMENTS_FILE, default={"achievements": []})
         return data.get("achievements", [])
 
-    def _get_word_count(self, user_id: str = None):
-        """Count active knowledge entries.
+    def _get_user(self, user_id):
+        data = load_json(USERS_FILE, default={"users": []})
+        for u in data.get("users", []):
+            if u.get("id") == user_id:
+                return u
+        return None
 
-        v4_leaderboard_002: filter op user_id wanneer beschikbaar zodat elke user
-        zijn eigen bijdrage telt. KB-entries gebruiken `detected_by` met NAAM, dus we
-        matchen ook op user.naam / user.volledige_naam.
-        Fallback zonder user_id: globaal (legacy / admin context).
-        """
+    def _save_user(self, user_id, updates):
+        data = load_json(USERS_FILE, default={"users": []})
+        for i, u in enumerate(data["users"]):
+            if u.get("id") == user_id:
+                data["users"][i].update(updates)
+                save_json(USERS_FILE, data)
+                return True
+        return False
+
+    def _get_word_count(self, user_id: str = None):
+        """Count active knowledge entries (per-user of globaal)."""
         data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
         entries = data.get("knowledge_entries", [])
-        # v6_v2_first_001 — voeg V2 toe (bron-van-waarheid)
         entries = entries + _load_kbv2_entries()
         active = [e for e in entries if e.get("status", "active") in ("active", "draft")]
         if not user_id:
@@ -62,87 +243,13 @@ class AchievementService:
                 own += 1
         return own
 
-    def _get_user(self, user_id):
-        data = load_json(USERS_FILE, default={"users": []})
-        for u in data.get("users", []):
-            if u.get("id") == user_id:
-                return u
-        return None
-
-    def _save_user(self, user_id, updates):
-        data = load_json(USERS_FILE, default={"users": []})
-        for i, u in enumerate(data["users"]):
-            if u.get("id") == user_id:
-                data["users"][i].update(updates)
-                save_json(USERS_FILE, data)
-                return True
-        return False
-
-    def get_all(self):
-        """Return all achievements with system stats"""
-        achievements = self._get_achievements()
-        return {
-            "achievements": achievements,
-            "total": len(achievements),
-            "total_xp_available": sum(a.get("xp_reward", 0) for a in achievements),
-        }
-
-    # v5_milestone_unlocks_001 — handmatig unlock voor non-milestone achievements (avatar, tokens, etc.)
-    def unlock_manual(self, user_id: str, achievement_id: str) -> dict:
-        """Unlock een specifieke achievement voor een user (indien nog niet unlocked).
-        Returns: {success, already_unlocked, xp_granted, achievement|None}
-        """
-        user = self._get_user(user_id)
-        if not user:
-            return {"success": False, "error": "Gebruiker niet gevonden"}
-        achievements = self._get_achievements()
-        target = next((a for a in achievements if a.get("id") == achievement_id), None)
-        if not target:
-            return {"success": False, "error": f"Achievement {achievement_id} bestaat niet"}
-        user_ach = user.get("achievements", {}) or {}
-        unlocked = list(user_ach.get("unlocked", []))
-        if any(u.get("id") == achievement_id for u in unlocked):
-            return {"success": True, "already_unlocked": True, "achievement": target}
-        entry = {
-            "id": target["id"], "name": target["name"], "description": target["description"],
-            "milestone": target.get("milestone", 0), "xp_reward": target.get("xp_reward", 0),
-            "icon": target.get("icon", ""), "rarity": target.get("rarity", "common"),
-            "unlocked_at": datetime.now(timezone.utc).isoformat(),
-        }
-        unlocked.append(entry)
-        total_xp = user_ach.get("total_xp_from_achievements", 0) + target.get("xp_reward", 0)
-        self._save_user(user_id, {
-            "achievements": {"unlocked": unlocked, "total_xp_from_achievements": total_xp},
-        })
-        try:
-            from modules.chat import xp_service
-            reward = target.get("xp_reward", 0)
-            if reward > 0:
-                xp_service.grant_xp(user_id=user_id, amount=reward, reason=f"Achievement: {target.get('name','?')}")
-        except Exception as ex:
-            print(f"[achievements] grant_xp failed: {ex}")
-        return {"success": True, "already_unlocked": False, "achievement": entry, "xp_granted": target.get("xp_reward", 0)}
-
     def _get_rps_stats(self, user_id: str) -> dict:
-        """v6_achievements_rps_001 — Lees RPS lifetime stats voor user."""
         rps_file = DATA_DIR / "games" / "rps" / "stats.json"
         d = load_json(rps_file, default={"stats": {}})
         return d.get("stats", {}).get(user_id, {"wins": 0, "losses": 0, "ties": 0, "total": 0})
 
-    def _letter_status(self, letter: str) -> dict:
-        """v7_letter_completion_001 — Tel voor `letter` hoeveel inbox-skeletons + gevulde
-        lade-kaarten bestaan. Achievement unlock als empty==0 EN filled>=1.
-        Cards worden ook meegeteld als ze een variante letter hebben (accent).
-        """
-        all_status = self._letter_status_all()
-        return all_status.get((letter or "").upper()[:1], {"empty": 0, "filled": 0})
-
-    def _letter_status_all(self) -> dict:
-        """v7_letter_completion_001 — Bereken empty/filled per letter (A-Z) in één pass.
-        Cachet resultaat aan `self` per request-cyclus (recreeer bij nieuwe service call).
-        """
-        if getattr(self, "_ls_cache", None) is not None:
-            return self._ls_cache
+    def _compute_letter_status(self) -> Dict[str, Dict[str, int]]:
+        """Compute empty/filled per letter A-Z in één pass."""
         import string as _string, unicodedata as _ud
         out = {c: {"empty": 0, "filled": 0} for c in _string.ascii_uppercase}
         for e in _load_kbv2_entries():
@@ -159,143 +266,36 @@ class AchievementService:
                 out[first_norm]["filled"] += 1
             else:
                 out[first_norm]["empty"] += 1
-        self._ls_cache = out
         return out
 
-    def get_user_progress(self, user_id):
-        """Calculate user's achievement progress based on knowledge count + rps stats"""
-        # v7_letter_completion_001 — reset cache per call zodat KB-mutaties direct zichtbaar zijn
-        self._ls_cache = None
-        user = self._get_user(user_id)
-        if not user:
-            return None
-
-        achievements = self._get_achievements()
-        word_count = self._get_word_count(user_id)
-        rps_stats = self._get_rps_stats(user_id)
-
-        # Get unlocked from user data
-        user_ach = user.get("achievements", {})
-        unlocked = user_ach.get("unlocked", [])
-        unlocked_ids = [a.get("id") for a in unlocked]
-        total_xp = user_ach.get("total_xp_from_achievements", 0)
-
-        # Check retroactive: auto-unlock any milestone die de progress al gepasseerd is.
-        # v5_milestone_unlocks_001: skip trigger-based milestones (geen "milestone" int veld)
-        # v6_achievements_rps_001: voor type='rps' gebruik stat_field tegen rps_stats
-        # v7_letter_completion_001: voor type='letter_completion' check inbox skeletons per letter
-        newly_unlocked = []
-        milestone_achs = [a for a in achievements if isinstance(a.get("milestone"), int)]
-        letter_achs = [a for a in achievements if a.get("type") == "letter_completion"]
-        letter_status_cache = {}  # cache _letter_status per letter (frontend polls dit ook)
-
-        # 1) Milestone-based (words + rps)
-        for ach in sorted(milestone_achs, key=lambda a: a.get("milestone", 0)):
-            if ach["id"] in unlocked_ids:
-                continue
-            if ach.get("type") == "rps":
-                # RPS-achievement: vergelijk milestone tegen rps_stats[stat_field]
-                stat_field = ach.get("stat_field", "wins")
-                current = rps_stats.get(stat_field, 0)
-                if current < ach.get("milestone", 0):
-                    continue
-            else:
-                # Default: word-based
-                if word_count < ach.get("milestone", 0):
-                    continue
-            unlock_entry = {
-                "id": ach["id"], "name": ach["name"], "description": ach["description"],
-                "milestone": ach["milestone"], "xp_reward": ach.get("xp_reward", 0),
-                "icon": ach.get("icon", ""), "rarity": ach.get("rarity", "common"),
-                "type": ach.get("type", "words"),
-                "unlocked_at": datetime.now(timezone.utc).isoformat(),
-            }
-            unlocked.append(unlock_entry)
-            unlocked_ids.append(ach["id"])
-            total_xp += ach.get("xp_reward", 0)
-            newly_unlocked.append(unlock_entry)
-
-        # 2) Letter-completion (v7) — compute status voor ALLE letters (ook al unlocked)
-        import string as _string
-        for _l in _string.ascii_uppercase:
-            letter_status_cache[_l] = self._letter_status(_l)
-
-        for ach in letter_achs:
-            if ach["id"] in unlocked_ids:
-                continue
-            letter = (ach.get("letter", "") or "").upper()[:1]
-            status = letter_status_cache.get(letter, {"empty": 0, "filled": 0})
-            # Unlock als: 0 skeletons voor deze letter EN ≥1 gevulde kaart bestaat
-            if status["empty"] == 0 and status["filled"] >= 1:
-                unlock_entry = {
-                    "id": ach["id"], "name": ach["name"], "description": ach["description"],
-                    "milestone": None, "xp_reward": ach.get("xp_reward", 0),
-                    "icon": ach.get("icon", ""), "rarity": ach.get("rarity", "common"),
-                    "type": "letter_completion", "letter": letter,
-                    "unlocked_at": datetime.now(timezone.utc).isoformat(),
-                }
-                unlocked.append(unlock_entry)
-                unlocked_ids.append(ach["id"])
-                total_xp += ach.get("xp_reward", 0)
-                newly_unlocked.append(unlock_entry)
-
-        # Save if new unlocks
-        # ⚠ FIX 2026-05-19: voorheen overschreef "xp": total_xp de totale user.xp,
-        # waardoor bijdragen-XP (van xp_service.grant_xp) verloren ging. Nu: alleen
-        # achievement-list opslaan en per nieuwe unlock grant_xp aanroepen (optellend + audit log).
-        if newly_unlocked:
-            self._save_user(user_id, {
-                "achievements": {"unlocked": unlocked, "total_xp_from_achievements": total_xp},
-            })
-            try:
-                from modules.chat import xp_service
-                for u in newly_unlocked:
-                    reward = u.get("xp_reward", 0)
-                    if reward > 0:
-                        xp_service.grant_xp(
-                            user_id=user_id,
-                            amount=reward,
-                            reason=f"Achievement: {u.get('name','?')}",
-                        )
-            except Exception as ex:
-                print(f"[achievements] grant_xp failed: {ex}")
-
-        # Find next milestone (alleen word-based: skip rps voor "volgende mijlpaal" preview)
-        word_milestones = [a for a in milestone_achs if a.get("type") != "rps"]
-        next_milestone = None
-        for ach in sorted(word_milestones, key=lambda a: a.get("milestone", 0)):
-            if ach["id"] not in unlocked_ids:
-                next_milestone = {
-                    **ach,
-                    "current_progress": word_count,
-                    "remaining": max(0, ach.get("milestone", 0) - word_count),
-                }
-                break
-
-        total_achievements = len(achievements)
-        total_unlocked = len(unlocked)
-        pct = round((total_unlocked / total_achievements * 100), 1) if total_achievements > 0 else 0
-
+    def _build_context(self, user_id: str) -> Dict[str, Any]:
+        """Pre-compute alle data die sub-agents nodig hebben — één keer per request."""
         return {
-            "user_naam": user.get("naam", ""),
-            "user_gradatie": user.get("gradatie", 1),
-            "word_count": word_count,
-            "unlocked": unlocked,
-            "total_unlocked": total_unlocked,
-            "total_achievements": total_achievements,
-            "progress_percentage": pct,
-            "total_xp_earned": total_xp,
-            "next_milestone": next_milestone,
-            "newly_unlocked": newly_unlocked,
-            "letter_status": letter_status_cache,  # v7_letter_completion_001 — progress per letter (voor UI)
+            "word_count": self._get_word_count(user_id),
+            "rps_stats": self._get_rps_stats(user_id),
+            "letter_status": self._compute_letter_status(),
         }
 
+    def _compute_next_milestone(self, achievements, unlocked_ids, context) -> Optional[Dict[str, Any]]:
+        """Preview van volgende woord-milestone (skip letter_completion / rps in preview)."""
+        word_ms = [a for a in achievements
+                   if isinstance(a.get("milestone"), int)
+                   and a.get("type") not in ("rps", "letter_completion")]
+        wc = context.get("word_count", 0)
+        for ach in sorted(word_ms, key=lambda a: a.get("milestone", 0)):
+            if ach["id"] not in unlocked_ids:
+                return {
+                    **ach,
+                    "current_progress": wc,
+                    "remaining": max(0, ach.get("milestone", 0) - wc),
+                }
+        return None
 
-# Module-level convenience (v5_milestone_unlocks_001)
+
+# Module-level singleton
 _service_singleton = AchievementService()
 
 
 def unlock_milestone(user_id: str, achievement_id: str) -> dict:
-    """Cross-module hook: unlock een mijlpaal-achievement (avatar, first token, etc.)."""
+    """Cross-module hook — voor avatar-upload, first-token, etc."""
     return _service_singleton.unlock_manual(user_id, achievement_id)
-

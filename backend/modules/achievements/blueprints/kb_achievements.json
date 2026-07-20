@@ -1,0 +1,60 @@
+{
+  "_type": "sub_agent_blueprint",
+  "_module": "achievements",
+  "_agent": "KBAchievementAgent",
+  "_versie": "v1_kb_agent_001",
+  "_bijgewerkt_op": "2026-07-20T13:20:00+00:00",
+  "_doel": "Runtime-configuratie voor kennisbank-gebaseerde achievements. Bevat XP-waarden, banner-texts, thresholds. Admin kan dit later via /instellingen/achievements aanpassen.",
+  "_koppelingen": {
+    "code_ref": "backend/modules/achievements/agents/kb_agent.py",
+    "achievements_data": "backend/data/achievements.json",
+    "kb_data": "backend/data/knowledge/v2/",
+    "meta_ref": "backend/modules/achievements/_meta.json",
+    "blueprint_doc": "/memory/blueprints/achievements.md"
+  },
+
+  "handles_types": ["words", "letter_completion"],
+
+  "words": {
+    "beschrijving": "Milestone-achievements per aantal woorden dat de user aan Spark heeft geleerd.",
+    "xp_per_milestone": {
+      "10": 50, "25": 100, "50": 200, "100": 500, "250": 1000,
+      "500": 2000, "1000": 5000, "1500": 7500, "2000": 10000
+    },
+    "banner_text_template": "🎉 {user_naam} heeft Spark {milestone} woorden geleerd!",
+    "next_milestone_label": "woorden"
+  },
+
+  "letter_completion": {
+    "beschrijving": "26 achievements — één per letter A-Z. Unlock als inbox 0 skeletons voor die letter heeft.",
+    "min_filled_to_unlock": 1,
+    "_min_filled_note": "Minstens 1 gevulde kaart voor die letter moet bestaan; voorkomt unlocks voor letters zonder KB-content.",
+    "xp_by_rarity": {
+      "common": 100, "uncommon": 150, "rare": 250, "epic": 400,
+      "legendary": 600, "mythic": 1000
+    },
+    "rarity_by_letter_frequency": {
+      "very_common_letters": ["E","N","A","T","R","O","I","S","L","D"],
+      "very_common_rarity": "common",
+      "medium_letters": ["H","K","U","M","B","V","W","P","G","C"],
+      "medium_rarity": "uncommon",
+      "rare_letters": ["Z","J","F","Y","X","Q"],
+      "rare_rarity": "rare"
+    },
+    "banner_text_template": "🅰️ {user_naam} heeft Spark álle inbox-woorden met de letter {letter} laten leren!",
+    "description_template": "Was hier terwijl Spark alle inbox-woorden met de letter {letter} leerde.",
+    "icon_style": "unicode_circled",
+    "_icon_note": "Ⓐ Ⓑ ... Ⓩ (Unicode 0x24B6+). Alternatief 'squared_letter' voor 🅰️🅱️ (alleen A/B/M/O/P beschikbaar).",
+    "cooldown_reunlock": null,
+    "_cooldown_note": "null = eenmaal-per-user. Voor toekomstige seizoenen: zet aantal dagen."
+  },
+
+  "footnote": {
+    "generated_by": "e1_achievement_refactor_v1",
+    "generated_at": "2026-07-20T13:20:00+00:00",
+    "spark_note": "Deze blueprint stuurt het gedrag van KBAchievementAgent. Wijzig XP/tekst hier — niet in code.",
+    "editable_by_admin": true,
+    "future_admin_endpoint": "PATCH /achievements/admin/blueprint/kb_achievements",
+    "willem_regel": "Alles kunnen aanpassen behalve script zelf"
+  }
+}

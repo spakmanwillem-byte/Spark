@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1138,
+    "card_count": 1139,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T12:01:06.472088+00:00",
+    "last_updated": "2026-07-20T12:08:09.647828+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -149366,6 +149366,170 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-20T12:01:06.740020+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4f390719",
+      "begrip": "versterkt",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Versterkt betekent dat iets sterker, krachtiger of beter wordt gemaakt.",
+        "laag2": "Versterkt is de voltooid tegenwoordige tijd van versterken. Het geeft aan dat iets extra kracht, stabiliteit, invloed of ondersteuning heeft gekregen.",
+        "laag3": "Versterkt beschrijft het resultaat van een handeling waarbij iets is verbeterd of robuuster is gemaakt. Dit kan fysiek zijn, zoals een versterkte constructie, maar ook figuurlijk, zoals een versterkte samenwerking, een versterkt argument of een versterkt kennisnetwerk. De betekenis hangt af van de context.\n",
+        "laag4": "Het begrip versterkt wordt gebruikt in techniek, wetenschap, communicatie, psychologie, biologie en informatica. Binnen systemen betekent versterken vaak dat prestaties, betrouwbaarheid, veiligheid of samenhang zijn toegenomen. Binnen Spark worden bijvoorbeeld kennisverbindingen versterkt wanneer kaarten meer relaties krijgen. Hierdoor groeit niet alleen de hoeveelheid kennis, maar ook het vermogen om verbanden te leggen en betere conclusies te trekken.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen die iets verbeteren of ondersteunen.",
+        "wat": "Het resultaat van iets sterker, stabieler of effectiever maken.",
+        "wanneer": "Nadat een versterkende handeling is uitgevoerd.",
+        "waar": " In techniek, wetenschap, communicatie, AI, biologie en het dagelijks leven.",
+        "waarom": "Om prestaties, betrouwbaarheid, veiligheid of samenhang te vergroten.",
+        "hoe": "Door ondersteuning, verbetering of uitbreiding toe te passe"
+      },
+      "tags": [
+        "versterkt",
+        "versterken",
+        "verbetering",
+        "ondersteuning",
+        "kracht",
+        "stabiliteit",
+        "samenhang",
+        "verbinding",
+        "groei",
+        "doen",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e92b9dea",
+          "begrip": "versterking",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "groei",
+            "kracht",
+            "ondersteuning",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fd657b1f",
+          "begrip": "Versterken",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "groei",
+            "kracht",
+            "ondersteuning",
+            "stabiliteit",
+            "verbetering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f0f46c8",
+          "begrip": "sterke",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "kracht",
+            "neutraal",
+            "stabiliteit",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9980c280",
+          "begrip": "steun",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ondersteuning",
+            "stabiliteit",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5b2d2782",
+          "begrip": "ik wil jouw helpen je zelf te verbeteren",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "groei",
+            "neutraal",
+            "ondersteuning",
+            "verbetering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:08:09.647808+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:55:51.935211+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7db186ecec26",
+        "extract_at": "2026-07-20T11:55:52.039672+00:00",
+        "extract_context_snippet": "Willem**! Dank voor je waardering – het versterkt onze samenwerking. Laat me weten waarmee ik je nu verder ka",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'versterkt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:08:06.978607+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:08:07.081588+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:08:07.089236+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:08:09.906397+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:08:09.913977+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 6

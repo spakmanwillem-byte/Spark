@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1149,
+    "card_count": 1150,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T13:35:01.809207+00:00",
+    "last_updated": "2026-07-20T14:01:26.593938+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -151110,6 +151110,171 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-20T13:34:56.984775+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-5ca722b2",
+      "begrip": "baan",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een baan is betaald werk dat iemand uitvoert voor een werkgever of organisatie.",
+        "laag2": "Met een baan verricht iemand werkzaamheden in ruil voor een salaris of loon. Een baan bestaat uit taken, verantwoordelijkheden en afspraken die vaak zijn vastgelegd in een arbeidsovereenkomst.\n",
+        "laag3": "Een baan is een arbeidsrelatie waarbij een werknemer bepaalde werkzaamheden uitvoert volgens afgesproken voorwaarden, zoals werktijden, functie, salaris en arbeidsvoorwaarden. Een baan kan fulltime, parttime, tijdelijk of vast zijn en komt voor in vrijwel iedere sector. Naast inkomen kan een baan bijdragen aan persoonlijke ontwikkeling, sociale contacten en maatschappelijke deelname.\n",
+        "laag4": "Binnen Spark kan een baan worden gebruikt als onderdeel van een persoonlijk profiel, planning, administratie en loopbaanontwikkeling. Spark kan informatie koppelen aan functies, werkgevers, vaardigheden, werktijden, contracten, opleidingen en carrièredoelen. Hierdoor ontstaat een compleet overzicht van iemands werkgerelateerde informatie.\n"
+      },
+      "ws5": {
+        "wie": "Werknemers, werkgevers, zelfstandigen, organisaties en overheidsinstanties.",
+        "wat": "Betaald werk dat volgens afgesproken voorwaarden wordt uitgevoerd.",
+        "wanneer": "Wanneer iemand werkzaam is binnen een organisatie of onderneming.",
+        "waar": "Bij bedrijven, instellingen, overheden, verenigingen en andere organisaties.",
+        "waarom": "Om inkomen te verdienen, ervaring op te doen, jezelf te ontwikkelen en een bijdrage te leveren aan de samenleving.",
+        "hoe": "Door werkzaamheden uit te voeren op basis van een arbeidsovereenkomst, contract of andere werkafspraken."
+      },
+      "tags": [
+        "baan",
+        "werk",
+        "werknemer",
+        "werkgever",
+        "arbeid",
+        "functie",
+        "beroep",
+        "salaris",
+        "loon",
+        "contract",
+        "carrière",
+        "organisatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01810699",
+          "begrip": "medewerker",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "beroep",
+            "emotie",
+            "functie",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0c922de8",
+          "begrip": "werkgever",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "salaris",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5333b8b2",
+          "begrip": "personeel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "functie",
+            "neutraal",
+            "organisatie",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9e0ce62a",
+          "begrip": "collega",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "werk",
+            "werknemer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:01:26.593922+00:00",
+        "vorige_versie_v1": "kb-skel-5ca722b2",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:56.161098+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:01:24.900492+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:01:24.908423+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:01:26.852902+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:01:26.860793+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:01:24.800275+00:00"
       },
       "media": {
         "voice_url": null,

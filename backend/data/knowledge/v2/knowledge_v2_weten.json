@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2132,
+    "card_count": 2149,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T13:32:48.661229+00:00",
+    "last_updated": "2026-07-20T14:28:35.915378+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -284920,6 +284920,2732 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-20T13:32:43.229873+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d8aff72c",
+      "begrip": "weertypen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Weertypen zijn verschillende vormen van weersomstandigheden die beschrijven hoe de atmosfeer zich op een bepaald moment gedraagt, zoals zonnig, bewolkt, regenachtig of stormachtig.\n",
+        "laag2": "Weertypen geven aan wat voor weer mensen kunnen verwachten. Ze worden bepaald door factoren zoals temperatuur, bewolking, neerslag, wind en luchtdruk. Door weertypen te herkennen kunnen mensen activiteiten plannen en zich voorbereiden op veranderingen in het weer.\n",
+        "laag3": "Een weertype is een combinatie van meerdere meteorologische omstandigheden die samen een herkenbaar patroon vormen. Voorbeelden zijn zonnig weer met weinig bewolking, bewolkt weer waarbij de zon nauwelijks zichtbaar is, regenachtig weer met neerslag, mistig weer met verminderd zicht, sneeuwachtig weer bij lage temperaturen of stormachtig weer met sterke wind. Meteorologen gebruiken metingen en modellen om deze omstandigheden te voorspellen.\n",
+        "laag4": "Weertypen spelen een belangrijke rol in het dagelijks leven, landbouw, verkeer, energievoorziening en planning. Binnen Spark kunnen weertypen gebruikt worden om informatie begrijpelijk te maken, bijvoorbeeld in een weerapp, planning, wereldsimulatie of gameomgeving. Door eenvoudige categorieën te gebruiken blijft het systeem schaalbaar en kan Spark verschillende weersituaties herkennen en koppelen aan acties of adviezen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, meteorologen, weerstations, apps, AI-systemen en simulaties.",
+        "wat": "Een indeling van verschillende soorten weersomstandigheden.",
+        "wanneer": "Wanneer het weer wordt beschreven, voorspeld of geanalyseerd.",
+        "waar": "Overal op aarde waar de atmosfeer invloed heeft op de omgeving.",
+        "waarom": "Om het weer beter te begrijpen, voorspellen en om activiteiten veilig te plannen.",
+        "hoe": "Door temperatuur, neerslag, wind, bewolking, luchtdruk en andere meetgegevens te combineren."
+      },
+      "tags": [
+        "weertype",
+        "weer",
+        "klimaat",
+        "temperatuur",
+        "neerslag",
+        "zon",
+        "bewolking",
+        "wind",
+        "storm",
+        "voorspelling",
+        "meteorologie",
+        "natuur",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "context",
+            "klimaat",
+            "natuur",
+            "neutraal",
+            "temperatuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5310b4d",
+          "begrip": "meteorologisch",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bewolking",
+            "klimaat",
+            "meteorologie",
+            "natuur",
+            "neerslag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9e66608a",
+          "begrip": "hittegolf",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "klimaat",
+            "meteorologie",
+            "natuur",
+            "neutraal",
+            "temperatuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c2b5cf3b",
+          "begrip": "Weer (klimaat)",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "meteorologie",
+            "natuur",
+            "temperatuur",
+            "weer",
+            "wind"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d2a60706",
+          "begrip": "Seizoen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "klimaat",
+            "natuur",
+            "neutraal",
+            "temperatuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:51:33.398310+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T13:48:22.562507+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ffc90209f9d1",
+        "extract_at": "2026-07-20T13:48:22.667878+00:00",
+        "extract_context_snippet": "Ik zie dat we recentelijk verschillende weertypen hebben besproken, zoals zon, regen, sneeuw en wind. Voor zo",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'weertypen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:51:31.297017+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:51:31.400736+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:51:31.407611+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:51:33.753501+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:51:33.760740+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-efdd4008",
+      "begrip": "recentelijk",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Recentelijk betekent dat iets kort geleden heeft plaatsgevonden of nieuw is ten opzichte van het huidige moment.",
+        "laag2": "Het woord recentelijk wordt gebruikt om aan te geven dat een gebeurtenis, verandering of informatie nog niet lang geleden is gebeurd. De betekenis hangt af van de context; iets kan enkele minuten, dagen, maanden of soms jaren geleden zijn gebeurd.\n",
+        "laag3": "Recentelijk is een tijdsaanduiding die verwijst naar een periode die dicht bij het heden ligt. In communicatie wordt het gebruikt om onderscheid te maken tussen oude en nieuwe informatie. Wat als recent wordt gezien verschilt per situatie: bij nieuws kan een gebeurtenis van gisteren recent zijn, terwijl in wetenschap een onderzoek van enkele jaren geleden nog recent kan worden genoemd.\n",
+        "laag4": "Binnen Spark helpt het begrip recentelijk om tijdscontext te begrijpen en informatie te ordenen. Het kan gebruikt worden bij kennisbanken, nieuwsanalyses, herinneringen en besluitvorming om te bepalen welke informatie actueel of verouderd is. Door tijdslabels te koppelen aan kenniskaarten kan Spark beter prioriteiten stellen en verbanden leggen tussen gebeurtenissen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, AI-modellen en organisaties die informatie over tijd gebruiken.",
+        "wat": "Een aanduiding dat iets kort geleden gebeurd of vernieuwd is.",
+        "wanneer": "Wanneer iets dichtbij het huidige moment ligt.",
+        "waar": "In gesprekken, nieuws, onderzoeken, databases en analyses.",
+        "waarom": "Om verschil te maken tussen actuele en oudere informatie.",
+        "hoe": "Door gebeurtenissen of informatie te vergelijken met het huidige tijdstip."
+      },
+      "tags": [
+        "recentelijk",
+        "recent",
+        "tijd",
+        "datum",
+        "actualiteit",
+        "nieuw",
+        "gebeurtenis",
+        "informatie",
+        "context",
+        "geheugen",
+        "analyse",
+        "tijdlijn",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebeurtenis",
+            "geheugen",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3208c15b",
+          "begrip": "verwerkt",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "geheugen",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3334b2bb",
+          "begrip": "eerder",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebeurtenis",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8ce971",
+          "begrip": "laatste",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "recent",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2fa46333",
+          "begrip": "vanmorgen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "datum",
+            "emotie",
+            "gebeurtenis",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:53:02.997417+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T13:48:22.457679+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ffc90209f9d1",
+        "extract_at": "2026-07-20T13:48:22.562197+00:00",
+        "extract_context_snippet": "belangrijk thema te zijn. Ik zie dat we recentelijk verschillende weertypen hebben besproken, zoals zon, regen,",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'recentelijk' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:52:58.222822+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:52:58.328550+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:52:58.336649+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:53:03.349679+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:53:03.357715+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-735be6cb",
+      "begrip": "eerdere",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Eerdere betekent dat iets vóór een ander moment, gebeurtenis of situatie heeft plaatsgevonden.",
+        "laag2": "Het woord eerdere wordt gebruikt om te verwijzen naar iets dat al eerder is gebeurd of bestond. Het helpt om gebeurtenissen, besluiten of informatie in de juiste volgorde te plaatsen.",
+        "laag3": "Eerdere is een relatieve tijdsaanduiding die een vergelijking maakt met een later referentiepunt. Het wordt veel gebruikt in gesprekken, documenten, rapportages en tijdlijnen om onderscheid te maken tussen oude en nieuwe informatie. De exacte betekenis hangt af van de context waarin het wordt gebruikt.\n",
+        "laag4": "Binnen Spark wordt eerdere gebruikt om de volgorde van kennis, gebeurtenissen en acties vast te leggen. Hierdoor kan het systeem veranderingen volgen, eerdere versies vergelijken, historische informatie terugvinden en relaties leggen tussen verleden en heden. Dit ondersteunt contextbewust redeneren en een betrouwbare tijdlijn van informatie.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, AI-systemen en applicaties die met tijdsgebonden informatie werken.",
+        "wat": "Een aanduiding dat iets vóór een ander moment heeft plaatsgevonden.",
+        "wanneer": "Wanneer wordt verwezen naar een gebeurtenis, versie of situatie uit het verleden.",
+        "waar": "In gesprekken, rapporten, databases, documenten, tijdlijnen en kennisbanken",
+        "waarom": "Om gebeurtenissen chronologisch te ordenen en onderscheid te maken tussen oude en nieuwe informatie.",
+        "hoe": "Door een gebeurtenis of informatiepunt te vergelijken met een later referentiemoment."
+      },
+      "tags": [
+        "eerdere",
+        "eerder",
+        "verleden",
+        "geschiedenis",
+        "tijd",
+        "tijdlijn",
+        "chronologie",
+        "volgorde",
+        "context",
+        "informatie",
+        "versie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3334b2bb",
+          "begrip": "eerder",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "context",
+            "eerder",
+            "emotie",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e03e9294",
+          "begrip": "allereerste",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8ce971",
+          "begrip": "laatste",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2623a30c",
+          "begrip": "hadden",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:55:58.086050+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T13:48:22.351078+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ffc90209f9d1",
+        "extract_at": "2026-07-20T13:48:22.457355+00:00",
+        "extract_context_snippet": "**De Willem**, volgens onze eerdere gesprekken lijkt het weer een belangrijk thema te zijn. Ik",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'eerdere' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:55:56.029166+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:55:56.134027+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:55:56.141593+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:55:58.449305+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:55:58.457276+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-76ccb686",
+      "begrip": "zonnig",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Zonnig is een weertype waarbij de zon grotendeels zichtbaar is en er weinig tot geen bewolking aanwezig is.",
+        "laag2": "Bij zonnig weer schijnt de zon gedurende een groot deel van de dag. Er kunnen enkele wolken aanwezig zijn, maar deze bedekken de zon meestal niet langdurig. Zonnig weer gaat vaak samen met veel daglicht en aangename omstandigheden.\n",
+        "laag3": "Zonnig is een meteorologische beschrijving van een situatie waarin de hoeveelheid bewolking beperkt is, waardoor zonnestraling het aardoppervlak grotendeels bereikt. De ervaren temperatuur kan variëren afhankelijk van wind, luchtvochtigheid en seizoen. Zonnig weer komt voor in alle jaargetijden en betekent niet automatisch dat het warm is.\n",
+        "laag4": "Binnen Spark is zonnig een weertype dat gebruikt kan worden voor weersvoorspellingen, simulaties, games en planning. Het kan invloed hebben op activiteiten, energieopwekking met zonnepanelen, zichtbaarheid en de sfeer van een omgeving. Door zonnig als afzonderlijk weertype op te slaan kan Spark weersituaties eenvoudig herkennen, voorspellen en gebruiken binnen verschillende modules.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die met het weer te maken heeft, zoals mensen, meteorologen, weerapps en AI-systemen.",
+        "wat": "Een weertype waarbij de zon grotendeels zichtbaar is.",
+        "wanneer": "Wanneer er weinig bewolking is en de zon het grootste deel van de tijd schijnt.",
+        "waar": "Overal waar de weersomstandigheden zonnig zijn.",
+        "waarom": "Om een duidelijke beschrijving te geven van de actuele of verwachte weersituatie.",
+        "hoe": "Door de hoeveelheid bewolking en de zichtbaarheid van de zon te beoordelen."
+      },
+      "tags": [
+        "zonnig",
+        "zon",
+        "weer",
+        "weertype",
+        "bewolking",
+        "daglicht",
+        "meteorologie",
+        "temperatuur",
+        "klimaat",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d8aff72c",
+          "begrip": "weertypen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bewolking",
+            "context",
+            "klimaat",
+            "meteorologie",
+            "temperatuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "klimaat",
+            "temperatuur",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f5cae3a7",
+          "begrip": "De zon schijnt vandaag",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "daglicht",
+            "weer",
+            "zon",
+            "zonnig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cec3ea8c",
+          "begrip": "Zomer",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "daglicht",
+            "emotie",
+            "temperatuur",
+            "zon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5310b4d",
+          "begrip": "meteorologisch",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bewolking",
+            "klimaat",
+            "meteorologie",
+            "temperatuur",
+            "weer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T13:48:21.190296+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:57:22.382973+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "☀️ Zonnig, ☁️ Bewolkt, 🌧️ Regen, ⛈️ Onweer, ❄️ Sneeuw, 🌫️ Mist, 💨 Wind",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:57:20.723884+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:57:20.823237+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:57:20.830583+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:57:22.736427+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:57:22.743759+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-434a44c2",
+      "begrip": "chemisch",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Chemisch betekent dat iets betrekking heeft op stoffen, hun samenstelling, eigenschappen of de reacties tussen stoffen.",
+        "laag2": "Het woord chemisch wordt gebruikt voor processen, stoffen of verschijnselen waarbij atomen en moleculen veranderen of met elkaar reageren. Chemische processen komen voor in de natuur, het menselijk lichaam en de industrie.",
+        "laag3": "Chemisch verwijst naar alles wat te maken heeft met de scheikunde. Hierbij worden de structuur, samenstelling, eigenschappen en omzettingen van stoffen bestudeerd. Chemische reacties ontstaan wanneer stoffen met elkaar reageren en nieuwe stoffen vormen of bestaande stoffen veranderen. Voorbeelden zijn verbranding, roesten, fotosynthese en de spijsvertering.\n",
+        "laag4": "Binnen Spark kan chemisch worden gebruikt als kennisdomein voor wetenschap, onderwijs, gezondheidszorg, industrie en materiaalonderzoek. Spark kan chemische eigenschappen, reacties, veiligheidsinformatie en toepassingen koppelen aan stoffen, processen en experimenten, waardoor relaties tussen verschillende kennisgebieden inzichtelijk worden.\n"
+      },
+      "ws5": {
+        "wie": "Scheikundigen, onderzoekers, studenten, laboranten, industrieën en AI-systemen.",
+        "wat": "Alles wat betrekking heeft op stoffen en chemische reacties.",
+        "wanneer": "Wanneer stoffen worden onderzocht, gebruikt of met elkaar reageren",
+        "waar": "In laboratoria, de natuur, industrie, onderwijs en het dagelijks leven.",
+        "waarom": "Om stoffen en hun eigenschappen te begrijpen, nieuwe materialen te ontwikkelen en processen te verbeteren.",
+        "hoe": "Door de samenstelling, eigenschappen en reacties van stoffen te onderzoeken en toe te passen"
+      },
+      "tags": [
+        "chemisch",
+        "chemie",
+        "scheikunde",
+        "stof",
+        "molecuul",
+        "atoom",
+        "reactie",
+        "verbinding",
+        "element",
+        "laboratorium",
+        "wetenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2dcf12d5",
+          "begrip": "periodiek systeem",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "element",
+            "emotie",
+            "laboratorium"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-72379f23",
+          "begrip": "atoom",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "context",
+            "element",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a02737ee",
+          "begrip": "periodiek systeem",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "element",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c2748ddb",
+          "begrip": "oxidatie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "atoom",
+            "chemie",
+            "molecuul",
+            "neutraal",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "reactie",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:03:00.211978+00:00",
+        "vorige_versie_v1": "kb-skel-434a44c2",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:23.044514+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:02:58.097376+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:02:58.105471+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:03:00.568119+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:03:00.575843+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:02:57.995592+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9a7de632",
+      "begrip": "bewolkt",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bewolkt is een weertype waarbij een groot deel van de lucht bedekt is met wolken.",
+        "laag2": "Bij bewolkt weer is de zon geheel of grotendeels verborgen achter wolken. Er hoeft geen neerslag te vallen, maar de hoeveelheid zonlicht is meestal beperkt.",
+        "laag3": "Bewolkt is een meteorologische beschrijving van de lucht waarin de bewolkingsgraad hoog is. Wolken ontstaan door condensatie van waterdamp in de atmosfeer. De mate van bewolking wordt gebruikt om het weer te beschrijven en kan variëren van licht bewolkt tot geheel bewolkt. Bewolkt weer kan voorkomen zonder regen, maar gaat soms vooraf aan neerslag.\n",
+        "laag4": "Binnen Spark is bewolkt een weertype dat gebruikt kan worden voor weersvoorspellingen, simulaties, games en planning. Het beïnvloedt de hoeveelheid daglicht, zichtbaarheid en soms de temperatuur. Door bewolkt als afzonderlijk weertype op te slaan kan Spark weersituaties herkennen en gebruiken binnen verschillende toepassingen.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die met het weer te maken heeft, zoals mensen, meteorologen, weerapps en AI-systemen.",
+        "wat": "Een weertype waarbij een groot deel van de lucht bedekt is met wolken.",
+        "wanneer": "Wanneer de bewolkingsgraad hoog is.",
+        "waar": "Overal waar de atmosfeer een hoge hoeveelheid bewolking bevat.",
+        "waarom": "Om de toestand van de lucht en de weersomstandigheden te beschrijven.",
+        "hoe": "Door de hoeveelheid en bedekking van wolken in de lucht te beoordelen."
+      },
+      "tags": [
+        "bewolkt",
+        "wolken",
+        "weer",
+        "weertype",
+        "bewolking",
+        "atmosfeer",
+        "meteorologie",
+        "daglicht",
+        "temperatuur",
+        "klimaat",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-76ccb686",
+          "begrip": "zonnig",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bewolking",
+            "context",
+            "daglicht",
+            "emotie",
+            "klimaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "atmosfeer",
+            "bewolkt",
+            "context",
+            "emotie",
+            "klimaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d8aff72c",
+          "begrip": "weertypen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bewolking",
+            "context",
+            "klimaat",
+            "meteorologie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5310b4d",
+          "begrip": "meteorologisch",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "atmosfeer",
+            "bewolking",
+            "klimaat",
+            "meteorologie",
+            "temperatuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9e66608a",
+          "begrip": "hittegolf",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "klimaat",
+            "meteorologie",
+            "neutraal",
+            "temperatuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:04:52.186366+00:00",
+        "vorige_versie_v1": "kb-skel-9a7de632",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:33.590824+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:04:41.899617+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:04:41.907517+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:04:52.537984+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:04:52.545695+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:04:41.799871+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ac8c5136",
+      "begrip": "samenstelling",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Samenstelling is de manier waarop verschillende onderdelen of elementen samen een geheel vormen.",
+        "laag2": "Een samenstelling beschrijft uit welke onderdelen iets bestaat en hoe deze met elkaar zijn gecombineerd. Dit kan gaan om materialen, stoffen, objecten, teksten, teams of andere verzamelingen.\n",
+        "laag3": "Samenstelling verwijst naar de opbouw en structuur van een geheel. Afhankelijk van de context kan het betrekking hebben op de chemische samenstelling van een stof, de samenstelling van een team, de opbouw van een document of de onderdelen van een systeem. Door de samenstelling te kennen, wordt duidelijk hoe iets is opgebouwd en hoe de verschillende onderdelen elkaar beïnvloeden.\n",
+        "laag4": "Binnen Spark is samenstelling een fundamenteel begrip voor het analyseren en structureren van kennis. Het kan worden gebruikt om relaties tussen onderdelen zichtbaar te maken, zoals de opbouw van een kenniskaart, een dataset, een algoritme, een organisatie of een chemische stof. Hierdoor kan Spark complexe systemen beter begrijpen, vergelijken en analyseren.\n"
+      },
+      "ws5": {
+        "wie": "Onderzoekers, ontwerpers, wetenschappers, programmeurs, organisaties en AI-systemen.",
+        "wat": "De opbouw van een geheel uit verschillende onderdelen.",
+        "wanneer": "Wanneer wordt beschreven waaruit iets bestaat of hoe iets is opgebouwd.",
+        "waar": "In wetenschap, techniek, chemie, taal, organisaties, kunst en informatiesystemen.",
+        "waarom": "Om inzicht te krijgen in de structuur, eigenschappen en werking van een geheel.",
+        "hoe": "Door de onderdelen te identificeren en hun onderlinge relaties en opbouw te beschrijven."
+      },
+      "tags": [
+        "samenstelling",
+        "opbouw",
+        "structuur",
+        "onderdelen",
+        "geheel",
+        "componenten",
+        "analyse",
+        "systeem",
+        "chemie",
+        "organisatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-5a80c066",
+          "begrip": "bouwstenen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "opbouw",
+            "organisatie",
+            "samenstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-444c9aa9",
+          "begrip": "eenheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "geheel",
+            "neutraal",
+            "organisatie",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dc5f13f8",
+          "begrip": "Systemen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "onderdelen",
+            "organisatie",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4e97f471",
+          "begrip": "verzamelen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13bddec2",
+          "begrip": "onderdelen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "onderdelen",
+            "organisatie",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:07:54.227304+00:00",
+        "vorige_versie_v1": "kb-skel-ac8c5136",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.136029+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:07:52.473832+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:07:52.482217+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:07:54.581233+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:07:54.589117+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:07:52.373535+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-af88fe8d",
+      "begrip": "Samengesteld",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Samengesteld betekent dat iets is opgebouwd uit twee of meer onderdelen die samen één geheel vormen.",
+        "laag2": "Wanneer iets samengesteld is, bestaat het uit verschillende elementen die bewust of natuurlijk met elkaar zijn gecombineerd. Dit kan gaan om materialen, stoffen, personen, ideeën of systemen.\n",
+        "laag3": "Samengesteld is een eigenschap die aangeeft dat een object, stof, proces of systeem niet uit één enkel onderdeel bestaat, maar uit meerdere componenten die gezamenlijk een functie of betekenis vormen. De onderdelen kunnen gelijk of verschillend zijn en werken samen als één geheel. Het tegenovergestelde van samengesteld is eenvoudig of enkelvoudig, afhankelijk van de context.\n",
+        "laag4": "Binnen Spark wordt samengesteld gebruikt om aan te geven dat informatie, objecten of systemen uit meerdere bouwstenen bestaan. Een kenniskaart kan bijvoorbeeld zijn samengesteld uit definities, voorbeelden, relaties, tags en context. Ook datasets, algoritmen, documenten en AI-modellen kunnen als samengestelde systemen worden beschouwd, waarbij de samenhang tussen de onderdelen essentieel is voor het geheel.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, ontwerpers, onderzoekers, programmeurs, organisaties en AI-systemen.",
+        "wat": "Een eigenschap waarbij iets uit meerdere onderdelen bestaat.",
+        "wanneer": "Wanneer een geheel is opgebouwd uit verschillende componenten.",
+        "waar": "In wetenschap, techniek, taal, chemie, informatica, organisaties en het dagelijks leven.",
+        "waarom": "Om duidelijk te maken dat een geheel uit meerdere samenwerkende onderdelen bestaat.",
+        "hoe": "Door afzonderlijke onderdelen te combineren tot één functionerend geheel."
+      },
+      "tags": [
+        "samengesteld",
+        "samenstelling",
+        "opgebouwd",
+        "componenten",
+        "onderdelen",
+        "geheel",
+        "structuur",
+        "systeem",
+        "combinatie",
+        "analyse",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ac8c5136",
+          "begrip": "samenstelling",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "analyse",
+            "componenten",
+            "context",
+            "emotie",
+            "geheel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9b00ff83",
+          "begrip": "onderliggende",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "neutraal",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "neutraal",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-444c9aa9",
+          "begrip": "eenheid",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "geheel",
+            "neutraal",
+            "structuur",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "structuur",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:09:24.859821+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:09:22.582393+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:09:22.841168+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:09:22.942612+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:09:22.950475+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:09:25.214374+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:09:25.222141+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ecf36734",
+      "begrip": "kleur",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Kleur is de visuele eigenschap van licht die door het menselijk oog wordt waargenomen en door de hersenen wordt geïnterpreteerd.",
+        "laag2": "Kleuren ontstaan doordat voorwerpen bepaalde golflengten van licht weerkaatsen of uitstralen. Het menselijk oog neemt deze verschillen waar, waardoor kleuren zoals rood, blauw en groen zichtbaar worden.\n",
+        "laag3": "Kleur is het resultaat van de interactie tussen licht, een object en het waarnemingssysteem. Wit licht bestaat uit verschillende golflengten. Een object absorbeert een deel van deze golflengten en weerkaatst de rest. De weerkaatste golflengten bepalen welke kleur wordt waargenomen. Kleur speelt een belangrijke rol in communicatie, kunst, wetenschap, ontwerp en natuur.\n",
+        "laag4": "Binnen Spark kan kleur worden gebruikt als eigenschap van objecten, gebruikersinterfaces, categorieën en visualisaties. Kleuren kunnen informatie verduidelijken, emoties ondersteunen, waarschuwingen aangeven of objecten van elkaar onderscheiden. Daarnaast kan Spark kleuren herkennen, opslaan en koppelen aan contexten, thema's en classificaties.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, kunstenaars, ontwerpers, wetenschappers, programmeurs en AI-systemen.",
+        "wat": "Een visuele eigenschap die ontstaat door de waarneming van verschillende golflengten van licht.",
+        "wanneer": "Wanneer licht door een object wordt weerkaatst of uitgestraald en door een waarnemer wordt gezien.",
+        "waar": "Overal waar licht en zicht aanwezig zijn.",
+        "waarom": "Om objecten te onderscheiden, informatie over te brengen, schoonheid te creëren en betekenis toe te voegen.",
+        "hoe": "Door verschillen in lichtgolflengten waar te nemen en door de hersenen als kleuren te interpreteren."
+      },
+      "tags": [
+        "kleur",
+        "licht",
+        "spectrum",
+        "golflengte",
+        "waarneming",
+        "visueel",
+        "pigment",
+        "reflectie",
+        "natuur",
+        "ontwerp",
+        "wetenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "neutraal",
+            "visueel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2b71033a",
+          "begrip": "gele",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "kleur",
+            "licht",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "licht",
+            "natuur",
+            "neutraal",
+            "visueel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-13c2c6dc",
+          "begrip": "beeld",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "kleur",
+            "neutraal",
+            "visueel",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:10:55.802908+00:00",
+        "vorige_versie_v1": "kb-skel-ecf36734",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:56.618570+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:10:52.990682+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:10:52.998496+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:10:56.157708+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:10:56.165360+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:10:52.890229+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bed6a948",
+      "begrip": "primaire kleuren",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Primaire kleuren zijn basiskleuren die niet kunnen worden gemaakt door andere kleuren met elkaar te mengen.",
+        "laag2": "Primaire kleuren vormen de basis voor het maken van andere kleuren. Welke kleuren als primair worden beschouwd, hangt af van het gebruikte kleursysteem, zoals licht of verf.",
+        "laag3": "Er bestaan verschillende kleurmodellen met elk hun eigen primaire kleuren. Bij licht (RGB) zijn rood, groen en blauw de primaire kleuren. Door deze in verschillende sterktes te combineren ontstaan vrijwel alle kleuren op beeldschermen. Bij verf en drukwerk worden meestal cyaan, magenta en geel (CMY) gebruikt als primaire kleuren. In het traditionele kunstonderwijs worden vaak rood, geel en blauw (RYB) als primaire kleuren aangehouden.\n",
+        "laag4": "Binnen Spark kunnen primaire kleuren worden gebruikt als basis voor kleurherkenning, grafische vormgeving, visualisaties en gebruikersinterfaces. Afhankelijk van de toepassing kan Spark verschillende kleurmodellen gebruiken, bijvoorbeeld RGB voor digitale schermen en CMYK voor drukwerk. Hierdoor kan het systeem kleuren correct verwerken en omzetten tussen verschillende toepassingen.\n"
+      },
+      "ws5": {
+        "wie": "Kunstenaars, ontwerpers, drukkers, fotografen, programmeurs en AI-systemen.",
+        "wat": "Basiskleuren waaruit andere kleuren kunnen worden samengesteld.",
+        "wanneer": "Wanneer kleuren worden gemengd of toegepast in digitale of fysieke media.",
+        "waar": "In kunst, grafisch ontwerp, fotografie, beeldschermen, drukwerk en onderwijs.",
+        "waarom": "Om een breed scala aan kleuren te kunnen maken en reproduceren.",
+        "hoe": "Door primaire kleuren volgens een kleurmodel met elkaar te combineren."
+      },
+      "tags": [
+        "primaire kleuren",
+        "kleur",
+        "kleurmodel",
+        "RGB",
+        "CMY",
+        "CMYK",
+        "RYB",
+        "licht",
+        "verf",
+        "ontwerp",
+        "grafisch",
+        "spectrum",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ecf36734",
+          "begrip": "kleur",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "licht",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be38ac89",
+          "begrip": "versiering",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "kleur",
+            "neutraal",
+            "ontwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2b71033a",
+          "begrip": "gele",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "kleur",
+            "licht",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "licht",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:13:09.435089+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:13:07.188740+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:13:07.458494+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:13:07.559757+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:13:07.567434+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:13:09.792148+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:13:09.799912+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8495fe11",
+      "begrip": "Secundaire kleuren",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Secundaire kleuren zijn kleuren die ontstaan door twee primaire kleuren met elkaar te mengen.",
+        "laag2": "Door primaire kleuren te combineren ontstaan nieuwe kleuren. Welke secundaire kleuren ontstaan, hangt af van het gebruikte kleurmodel, zoals verf of licht.",
+        "laag3": "In het traditionele RYB-kleurmodel (rood, geel, blauw) ontstaan de secundaire kleuren oranje, groen en paars. In het RGB-kleurmodel voor licht ontstaan cyaan, magenta en geel door het mengen van twee primaire lichtkleuren. Secundaire kleuren vormen een belangrijke stap in het opbouwen van een volledig kleurenspectrum.\n",
+        "laag4": "Binnen Spark kunnen secundaire kleuren worden gebruikt voor kleurherkenning, beeldverwerking, grafische vormgeving en gebruikersinterfaces. Door inzicht te hebben in de relatie tussen primaire en secundaire kleuren kan Spark kleuren analyseren, combineren en omzetten tussen verschillende kleurmodellen.\n"
+      },
+      "ws5": {
+        "wie": "Kunstenaars, ontwerpers, fotografen, programmeurs, drukkers en AI-systemen.",
+        "wat": "Kleuren die ontstaan door het mengen van twee primaire kleuren",
+        "wanneer": "Wanneer primaire kleuren met elkaar worden gecombineerd.",
+        "waar": "In kunst, ontwerp, fotografie, beeldschermen, drukwerk en onderwijs.",
+        "waarom": "Om nieuwe kleuren te creëren en een groter kleurenspectrum te vormen.",
+        "hoe": "Door twee primaire kleuren volgens een kleurmodel met elkaar te mengen."
+      },
+      "tags": [
+        "secundaire kleuren",
+        "kleur",
+        "kleurmodel",
+        "mengen",
+        "primaire kleuren",
+        "RGB",
+        "RYB",
+        "CMY",
+        "oranje",
+        "groen",
+        "paars",
+        "spectrum",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bed6a948",
+          "begrip": "primaire kleuren",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "cmy",
+            "context",
+            "emotie",
+            "kleur",
+            "kleurmodel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ecf36734",
+          "begrip": "kleur",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "neutraal",
+            "spectrum"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:15:05.962629+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:15:03.712810+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:15:03.975149+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:15:04.075334+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:15:04.083397+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:15:06.318182+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:15:06.325882+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a7764a9d",
+      "begrip": "tertiaire kleuren",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Tertiaire kleuren zijn kleuren die ontstaan door een primaire kleur met een aangrenzende secundaire kleur te mengen.",
+        "laag2": "Tertiaire kleuren vormen de overgang tussen primaire en secundaire kleuren. Ze zorgen voor meer kleurnuances en een vloeiende overgang binnen de kleurencirkel.",
+        "laag3": "In het traditionele RYB-kleurmodel ontstaan tertiaire kleuren door een primaire kleur te mengen met een naastgelegen secundaire kleur. De zes tertiaire kleuren zijn: geeloranje, roodoranje, roodpaars, blauwpaars, blauwgroen en geelgroen. Deze kleuren maken het mogelijk om een uitgebreider en natuurlijker kleurenspectrum te creëren.\n",
+        "laag4": "Binnen Spark kunnen tertiaire kleuren worden gebruikt voor kleurherkenning, grafisch ontwerp, beeldanalyse en gebruikersinterfaces. Door kennis van tertiaire kleuren kan Spark kleuren nauwkeuriger classificeren, verlopen herkennen en kleurharmonieën toepassen in visualisaties en ontwerpen.\n"
+      },
+      "ws5": {
+        "wie": "Kunstenaars, ontwerpers, fotografen, programmeurs, drukkers en AI-systemen.",
+        "wat": "Kleuren die ontstaan door een primaire kleur met een aangrenzende secundaire kleur te mengen.",
+        "wanneer": "Wanneer een uitgebreidere reeks kleurnuances nodig is.",
+        "waar": "In kunst, grafisch ontwerp, fotografie, drukwerk, onderwijs en digitale toepassingen.",
+        "waarom": "Om meer kleurnuances en vloeiende overgangen tussen kleuren te creëren.",
+        "hoe": "Door een primaire kleur te mengen met een aangrenzende secundaire kleur volgens een kleurmodel."
+      },
+      "tags": [
+        "tertiaire kleuren",
+        "kleur",
+        "kleurmodel",
+        "kleurencirkel",
+        "primaire kleuren",
+        "secundaire kleuren",
+        "mengen",
+        "kleurnuance",
+        "kleurharmonie",
+        "spectrum",
+        "ontwerp",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8495fe11",
+          "begrip": "Secundaire kleuren",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "kleurmodel",
+            "mengen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bed6a948",
+          "begrip": "primaire kleuren",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "kleurmodel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ecf36734",
+          "begrip": "kleur",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "neutraal",
+            "ontwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kleur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be38ac89",
+          "begrip": "versiering",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "kleur",
+            "neutraal",
+            "ontwerp"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:16:38.831987+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:16:36.564953+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:16:36.828627+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:16:36.929072+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:16:36.936859+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:16:39.189120+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:16:39.197115+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a85c9587",
+      "begrip": "Tertiair",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Tertiair betekent derde in een reeks, volgorde of indeling.",
+        "laag2": "Het woord tertiair wordt gebruikt om aan te geven dat iets tot de derde categorie of fase behoort. De betekenis verschilt per vakgebied, maar verwijst altijd naar een derde niveau of stap.\n",
+        "laag3": "Tertiair is afkomstig van het Latijnse tertiarius, wat \"de derde\" betekent. Het begrip wordt gebruikt in uiteenlopende vakgebieden. In de kleurleer verwijst het naar kleuren die ontstaan door een primaire en een aangrenzende secundaire kleur te mengen. In de economie verwijst de tertiaire sector naar de dienstensector. In de geologie werd de term vroeger gebruikt voor een periode in de aardgeschiedenis. De exacte betekenis is dus afhankelijk van de context.\n",
+        "laag4": "Binnen Spark is tertiair een contextafhankelijk begrip dat een derde niveau, categorie of fase aanduidt. Door de context te koppelen kan Spark bepalen of tertiair betrekking heeft op kleuren, economie, geologie, onderwijs of een ander kennisgebied. Hierdoor blijft de kennisbank flexibel en herbruikbaar.\n"
+      },
+      "ws5": {
+        "wie": "Studenten, onderzoekers, docenten, ontwerpers, economen en AI-systemen.",
+        "wat": "Een aanduiding voor het derde niveau, de derde fase of de derde categorie",
+        "wanneer": "Wanneer een indeling uit drie of meer niveaus wordt gebruikt.",
+        "waar": "In kleurleer, economie, geologie, onderwijs, wetenschap en andere vakgebieden.",
+        "waarom": "Om onderscheid te maken tussen verschillende niveaus of categorieën.",
+        "hoe": "Door iets als derde stap of derde categorie binnen een bepaalde indeling aan te wijzen."
+      },
+      "tags": [
+        "tertiair",
+        "derde",
+        "niveau",
+        "categorie",
+        "fase",
+        "volgorde",
+        "kleurleer",
+        "economie",
+        "geologie",
+        "classificatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-deedc7b2",
+          "begrip": "label",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd6c17c9",
+          "begrip": "context-zin",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-32febab3",
+          "begrip": "Wat is dit voor bot?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca1d3767",
+          "begrip": "noem eens 5 dieren",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0a6aaa40",
+          "begrip": "Welke dieren kan jij op noemen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:21:09.037329+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:21:06.618634+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:21:06.881065+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:21:06.981667+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:21:06.989269+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:21:09.391031+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:21:09.399000+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-42d6d678",
+      "begrip": "Secundaire",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Secundair betekent tweede in een reeks, volgorde of indeling.",
+        "laag2": "Het woord secundair wordt gebruikt om aan te geven dat iets tot de tweede categorie, fase of stap behoort. De betekenis hangt af van de context waarin het wordt gebruikt.\n",
+        "laag3": "Secundair is afkomstig van het Latijnse secundarius, wat \"de tweede\" of \"volgend op de eerste\" betekent. Het begrip wordt gebruikt in verschillende vakgebieden. In de kleurleer verwijst het naar kleuren die ontstaan door twee primaire kleuren te mengen. In de economie verwijst de secundaire sector naar industrie en productie. In andere contexten kan secundair betekenen dat iets van ondergeschikt of afgeleid belang is ten opzichte van iets primairs.\n",
+        "laag4": "Binnen Spark is secundair een contextafhankelijk begrip dat een tweede niveau, fase of categorie aanduidt. Door de context te herkennen kan Spark bepalen of secundair betrekking heeft op kleurleer, economie, onderwijs, wetenschap of een ander kennisgebied. Dit maakt het begrip breed toepasbaar binnen de kennisbank.\n"
+      },
+      "ws5": {
+        "wie": "Studenten, onderzoekers, ontwerpers, economen, docenten en AI-systemen",
+        "wat": "Een aanduiding voor het tweede niveau, de tweede fase of de tweede categorie.",
+        "wanneer": "Wanneer een indeling uit twee of meer niveaus wordt gebruikt.",
+        "waar": "In kleurleer, economie, onderwijs, wetenschap en andere vakgebieden.",
+        "waarom": "Om onderscheid te maken tussen verschillende niveaus, fasen of categorieën.",
+        "hoe": "Door iets als tweede stap of tweede categorie binnen een bepaalde indeling aan te wijzen."
+      },
+      "tags": [
+        "secundair",
+        "tweede",
+        "niveau",
+        "categorie",
+        "fase",
+        "volgorde",
+        "classificatie",
+        "kleurleer",
+        "economie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a85c9587",
+          "begrip": "Tertiair",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "context",
+            "economie",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-deedc7b2",
+          "begrip": "label",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd6c17c9",
+          "begrip": "context-zin",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-32febab3",
+          "begrip": "Wat is dit voor bot?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca1d3767",
+          "begrip": "noem eens 5 dieren",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:22:38.735245+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:22:36.128764+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:22:58.998039+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:22:36.491772+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:22:36.498477+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:22:39.092474+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:22:39.099255+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:22:59.290173+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:22:59.297449+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c334e958",
+      "begrip": "Primaire",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Primair betekent eerste, oorspronkelijk of van het grootste belang binnen een reeks, indeling of proces.",
+        "laag2": "Het woord primair wordt gebruikt om aan te geven dat iets de basis vormt of als eerste komt. De betekenis is afhankelijk van de context, maar verwijst altijd naar een eerste niveau, fase of categorie.\n",
+        "laag3": "Primair is afkomstig van het Latijnse primarius, wat \"de eerste\" of \"voornaamste\" betekent. Het begrip wordt gebruikt in verschillende vakgebieden. In de kleurleer zijn primaire kleuren de basiskleuren waaruit andere kleuren ontstaan. In de economie verwijst de primaire sector naar landbouw, visserij en grondstoffenwinning. In de biologie kunnen primaire processen de eerste stappen van een proces aanduiden. Primair staat vaak tegenover secundair en tertiair.\n",
+        "laag4": "Binnen Spark is primair een contextafhankelijk begrip dat het eerste niveau, de basis of de belangrijkste categorie aanduidt. Spark kan aan de hand van de context bepalen of primair betrekking heeft op kleuren, economie, wetenschap, onderwijs of een ander kennisgebied. Hierdoor blijft de kennisbank logisch opgebouwd en eenvoudig uitbreidbaar.\n\n"
+      },
+      "ws5": {
+        "wie": "Studenten, onderzoekers, ontwerpers, economen, docenten en AI-systemen.",
+        "wat": "Een aanduiding voor het eerste niveau, de basis of de belangrijkste categorie.",
+        "wanneer": "Wanneer een indeling of proces begint met een eerste fase of basisniveau.",
+        "waar": "In kleurleer, economie, wetenschap, onderwijs en andere vakgebieden.",
+        "waarom": "Om het uitgangspunt of de basis van een indeling of proces aan te geven.",
+        "hoe": "Door iets als eerste stap, basis of belangrijkste categorie binnen een bepaalde context te definiëren."
+      },
+      "tags": [
+        "primair",
+        "eerste",
+        "basis",
+        "niveau",
+        "categorie",
+        "fase",
+        "volgorde",
+        "classificatie",
+        "kleurleer",
+        "economie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a85c9587",
+          "begrip": "Tertiair",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "context",
+            "economie",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-42d6d678",
+          "begrip": "Secundaire",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "context",
+            "economie",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-deedc7b2",
+          "begrip": "label",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e03e9294",
+          "begrip": "allereerste",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "eerste",
+            "emotie",
+            "neutraal",
+            "volgorde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd6c17c9",
+          "begrip": "context-zin",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "classificatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:24:36.152552+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:24:34.108862+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:24:34.397502+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:24:34.515877+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:24:34.523444+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:24:36.512979+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:24:36.520315+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2abf8a4c",
+      "begrip": "balspel",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een balspel is een spel of sport waarbij een bal het belangrijkste speelmiddel is.",
+        "laag2": "Bij een balspel gebruiken spelers een bal om punten te scoren, samen te werken of een doel te bereiken. Dit kan individueel of in teamverband plaatsvinden.",
+        "laag3": "Een balspel is een vorm van sport of recreatie waarbij een bal centraal staat in het spelverloop. Afhankelijk van de spelregels wordt de bal gegooid, geschopt, geslagen, gerold of gestuiterd. Balspellen kunnen competitief of recreatief zijn en dragen bij aan de ontwikkeling van motorische vaardigheden, samenwerking, reactievermogen en strategisch inzicht. Voorbeelden zijn voetbal, basketbal, volleybal, handbal en tennis.\n",
+        "laag4": "Binnen Spark kan een balspel worden geclassificeerd als een sportactiviteit of recreatieve bezigheid. Spark kan balspellen koppelen aan spelregels, benodigde materialen, vaardigheden, teams, competities en trainingsvormen. Hierdoor kunnen balspellen eenvoudig worden herkend, geordend en toegepast binnen sport-, onderwijs- en gamecontexten.\n"
+      },
+      "ws5": {
+        "wie": "Kinderen, volwassenen, sporters, scholen, verenigingen en recreanten.",
+        "wat": "Een spel of sport waarbij een bal centraal staat.",
+        "wanneer": "Tijdens sportlessen, trainingen, wedstrijden of recreatieve activiteiten.",
+        "waar": "Op sportvelden, in sporthallen, op speelplaatsen, in parken en op het strand.",
+        "waarom": "Voor beweging, ontspanning, competitie, samenwerking en plezier.",
+        "hoe": "Door volgens afgesproken spelregels een bal te gebruiken om een doel of score te behalen."
+      },
+      "tags": [
+        "balspel",
+        "sport",
+        "spel",
+        "bal",
+        "team",
+        "competitie",
+        "recreatie",
+        "beweging",
+        "training",
+        "spelregels",
+        "lichamelijke opvoeding",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5215ed79",
+          "begrip": "sport",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "competitie",
+            "emotie",
+            "neutraal",
+            "training"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-db1856ca",
+          "begrip": "competitie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "competitie",
+            "emotie",
+            "spel",
+            "sport",
+            "team"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e3f08dee",
+          "begrip": "teamsport",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "competitie",
+            "spel",
+            "sport",
+            "team",
+            "training"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3cd997a3",
+          "begrip": "punten",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "competitie",
+            "emotie",
+            "neutraal",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c7b2ad34",
+          "begrip": "kermis",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "recreatie",
+            "spel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:26:18.939925+00:00",
+        "vorige_versie_v1": "kb-skel-2abf8a4c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:20.212768+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:26:17.351372+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:26:17.358792+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:26:19.291031+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:26:19.298727+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:26:17.252174+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-724fd614",
+      "begrip": "bal",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bal is een meestal ronde of bolvormige speelvoorwerp dat wordt gebruikt bij spellen, sporten en recreatieve activiteiten.",
+        "laag2": "Ballen zijn verkrijgbaar in verschillende maten, materialen en gewichten, afhankelijk van het spel of de sport waarvoor ze zijn ontworpen. Ze kunnen worden gegooid, geschopt, gerold, gestuiterd of geslagen.\n",
+        "laag3": "Een bal is een object dat meestal een bolvorm heeft en is ontworpen om te bewegen door rollen, stuiteren, gooien of schoppen. Ballen worden gebruikt in uiteenlopende sporten, zoals voetbal, basketbal, tennis, volleybal en handbal. De eigenschappen van een bal, zoals grootte, gewicht, materiaal en luchtdruk, zijn afgestemd op de toepassing en de spelregels.\n",
+        "laag4": "Binnen Spark is een bal een fysiek object dat kan worden gekoppeld aan sporten, spelregels, materialen en activiteiten. Spark kan verschillende soorten ballen classificeren op basis van eigenschappen, gebruik en sportdiscipline. Hierdoor kunnen relaties worden gelegd tussen een bal, een balspel, de benodigde vaardigheden en de bijbehorende handelingen.\n"
+      },
+      "ws5": {
+        "wie": "Sporters, kinderen, recreanten, scholen, verenigingen en organisaties.",
+        "wat": "Een meestal bolvormig voorwerp dat wordt gebruikt bij spel en sport.",
+        "wanneer": "Tijdens sport-, spel- en recreatieve activiteiten.",
+        "waar": "Op sportvelden, in sporthallen, op speelplaatsen, in parken en andere speelomgevingen.",
+        "waarom": "Om te spelen, sporten, trainen of recreëren.",
+        "hoe": "Door de bal te gooien, rollen, schoppen, stuiteren, vangen of slaan volgens de regels van een spel of sport."
+      },
+      "tags": [
+        "bal",
+        "object",
+        "sport",
+        "spel",
+        "speelgoed",
+        "materiaal",
+        "bol",
+        "voetbal",
+        "basketbal",
+        "volleybal",
+        "tennis",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2abf8a4c",
+          "begrip": "balspel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bal",
+            "context",
+            "emotie",
+            "neutraal",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-18d0f873",
+          "begrip": "voorwerpen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "materiaal",
+            "neutraal",
+            "object"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "materiaal",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59c44894",
+          "begrip": "ding",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "object"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-080003a6",
+          "begrip": "Schovel",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "materiaal",
+            "neutraal",
+            "object"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:28:35.915363+00:00",
+        "vorige_versie_v1": "kb-skel-724fd614",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:58.817149+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:28:34.315964+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:28:34.323509+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:28:36.267652+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:28:36.275131+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:28:34.215596+00:00"
       },
       "media": {
         "voice_url": null,

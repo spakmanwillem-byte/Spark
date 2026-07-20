@@ -8,7 +8,7 @@
     "created_at": "2026-05-23T12:02:15.307240+00:00",
     "card_count": 453,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T23:48:18.648553+00:00",
+    "last_updated": "2026-07-20T14:29:58.949264+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -61510,6 +61510,314 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T23:48:13.637146+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8d9a0ab8",
+      "begrip": "Zo als het weer is, is het humeur. Zo als het klimaat is, is de aard.",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De uitspraak betekent dat tijdelijke omstandigheden invloed hebben op iemands stemming, terwijl langdurige omstandigheden invloed kunnen hebben op iemands karakter of aard.\n",
+        "laag2": "Het weer staat symbool voor het moment: hoe iemand zich vandaag voelt. Het klimaat staat symbool voor de langere termijn: de omgeving, ervaringen en omstandigheden die iemand over langere tijd vormen. De uitspraak maakt onderscheid tussen een tijdelijke emotie en een blijvende ontwikkeling.\n",
+        "laag3": "Deze metafoor laat zien dat gevoelens vaak veranderen door directe gebeurtenissen, terwijl persoonlijkheid en gedrag zich ontwikkelen door langdurige invloeden. Net zoals het weer dagelijks kan wisselen, kan een humeur snel veranderen. Het klimaat verandert veel langzamer en bepaalt op lange termijn welke omstandigheden overheersen. Op dezelfde manier kunnen opvoeding, leefomgeving en levenservaringen bijdragen aan iemands karakter.\n",
+        "laag4": "Binnen Spark kan deze uitspraak gebruikt worden als contextregel voor emotieherkenning. Een negatieve emotie hoeft niet te betekenen dat iemand een negatief karakter heeft. Spark maakt daarom onderscheid tussen de huidige emotionele toestand (weer) en de langdurige emotionele of gedragsmatige patronen (klimaat). Hierdoor kan het systeem beter begrijpen of een reactie tijdelijk is of onderdeel vormt van een terugkerend patroon.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die emoties, gedrag of persoonlijke ontwikkeling wil begrijpen.",
+        "wat": "Een metafoor die het verschil uitlegt tussen een tijdelijke stemming en een langdurige ontwikkeling.",
+        "wanneer": "Wanneer emoties, gedrag of karakter worden besproken.",
+        "waar": "In gesprekken, psychologie, coaching, filosofie en AI-contextmodellen.",
+        "waarom": "Om onderscheid te maken tussen hoe iemand zich nu voelt en wie iemand op de lange termijn is.",
+        "hoe": "Door het weer te gebruiken als symbool voor het humeur en het klimaat als symbool voor de aard of persoonlijkheid."
+      },
+      "tags": [
+        "metafoor",
+        "levenswijsheid",
+        "emotie",
+        "humeur",
+        "karakter",
+        "aard",
+        "klimaat",
+        "weer",
+        "psychologie",
+        "ontwikkeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "humeur",
+            "neutraal",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "klimaat",
+            "neutraal",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "humeur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-870f6b5d",
+          "begrip": "moed",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "karakter",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:00:03.497364+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-20T14:00:01.014440+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:00:01.273831+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:00:01.374286+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:00:01.382398+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:00:03.690570+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:00:03.698381+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-7cdff178",
+      "begrip": "bangerik",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bangerik is iemand die snel bang is of weinig durft in bepaalde situaties.",
+        "laag2": "Het woord bangerik wordt gebruikt om iemand te beschrijven die angstig reageert of risico's liever vermijdt. Afhankelijk van de context kan het een plagerige, beschrijvende of beledigende betekenis hebben.\n",
+        "laag3": "Bangerik is een informele aanduiding voor een persoon die regelmatig angst ervaart of terughoudend is bij spannende of onbekende situaties. Het is geen medische of psychologische term, maar een alledaags woord. De betekenis hangt sterk af van de toon en de context waarin het wordt gebruikt. Soms wordt het speels bedoeld, maar het kan ook kwetsend zijn.\n",
+        "laag4": "Binnen Spark wordt bangerik gezien als een beschrijvende term voor gedrag of een tijdelijke indruk, niet als een vaste eigenschap van een persoon. Spark maakt onderscheid tussen een moment van angst en iemands persoonlijkheid. Iemand kan zich in één situatie als een bangerik gedragen zonder dat hij of zij in het algemeen angstig is.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die angstig of terughoudend reageert in een bepaalde situatie.",
+        "wat": "Een informele benaming voor iemand die snel bang is of weinig durft.",
+        "wanneer": "Wanneer iemand angst toont of risico's vermijdt.",
+        "waar": "In alledaagse gesprekken, op school, thuis, tijdens spel of in sociale situaties.",
+        "waarom": "Om angstig of voorzichtig gedrag te beschrijven.",
+        "hoe": "Door iemand met het woord bangerik aan te duiden op basis van zijn of haar gedrag in een bepaalde situatie."
+      },
+      "tags": [
+        "bangerik",
+        "bang",
+        "angst",
+        "moed",
+        "onzekerheid",
+        "gedrag",
+        "emotie",
+        "bang",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-58fe509b",
+          "begrip": "Bang",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "angst",
+            "bang",
+            "emotie",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c82f3134",
+          "begrip": "beledigd",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "gedrag",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10363874",
+          "begrip": "vijandigheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "angst",
+            "bang",
+            "emotie",
+            "gedrag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d33d9371",
+          "begrip": "onbegrip",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "gedrag",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-84a2710c",
+          "begrip": "opstandig",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "angst",
+            "bang",
+            "emotie",
+            "gedrag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T14:29:58.949249+00:00",
+        "vorige_versie_v1": "kb-skel-7cdff178",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:15.612175+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:29:57.388031+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:29:57.394774+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T14:29:59.137607+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T14:29:59.144158+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T14:29:57.288620+00:00"
       },
       "media": {
         "voice_url": null,

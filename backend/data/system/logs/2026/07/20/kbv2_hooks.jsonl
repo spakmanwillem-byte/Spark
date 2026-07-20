@@ -162,3 +162,7 @@
 {"ts": "2026-07-20T11:52:24.230334+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "John", "found": "5"}}
 {"ts": "2026-07-20T11:52:26.421702+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "John", "lade": "weten", "active": "True", "is_new": "False"}}
 {"ts": "2026-07-20T11:52:26.429257+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "John", "found": "5"}}
+{"ts": "2026-07-20T12:01:04.835066+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "waarmee", "lade": "inbox", "active": "False", "is_new": "True"}}
+{"ts": "2026-07-20T12:01:04.842727+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "waarmee", "found": "5"}}
+{"ts": "2026-07-20T12:01:06.732360+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "waarmee", "lade": "doen", "active": "True", "is_new": "False"}}
+{"ts": "2026-07-20T12:01:06.740031+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "waarmee", "found": "5"}}

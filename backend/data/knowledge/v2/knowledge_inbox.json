@@ -1,7 +1,7 @@
 {
   "version": "v2",
   "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 1542,
+  "card_count": 1561,
   "metadata": {
     "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
     "redenen": {
@@ -66402,61 +66402,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-6ed26d69",
-      "begrip": "maat",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "maat"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-6ed26d69",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:25:31.814324+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-60e83144",
       "begrip": "presenteren",
       "lade": null,
@@ -84869,40 +84814,6 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-03c7d347",
-      "begrip": "waarmee",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-07-20T11:55:52.039978+00:00",
-        "llm_generated": true,
-        "llm_lite": true,
-        "extract_source": "spark_llm_output_scanner_v1",
-        "extract_turn_id": "learned-7db186ecec26",
-        "extract_at": "2026-07-20T11:55:52.144302+00:00",
-        "extract_context_snippet": "sterkt onze samenwerking. Laat me weten waarmee ik je nu verder kan ondersteunen.",
-        "extract_count_in_spark": 1,
-        "extract_note": "Spark noemde 'waarmee' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
-        "needs_review": true
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-cd49820b",
       "begrip": "trade",
       "lade": null,
@@ -85371,7 +85282,7 @@
       "_inbox_reason": "missing_laag1"
     }
   ],
-  "updated_at": "2026-07-20T09:34:00.700179+00:00",
+  "updated_at": "2026-07-20T12:02:40.711827+00:00",
   "last_dedupe": {
     "at": "2026-06-07T21:45:09.910282+00:00",
     "removed": 73,

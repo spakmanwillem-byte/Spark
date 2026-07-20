@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1137,
+    "card_count": 1138,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T11:44:02.437481+00:00",
+    "last_updated": "2026-07-20T12:01:06.472088+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -149208,6 +149208,167 @@
             "result": {
               "n_found": 5,
               "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-03c7d347",
+      "begrip": "waarmee",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Waarmee is een vragend of verwijzend woord dat vraagt of verwijst naar het middel waarmee iets gebeurt.",
+        "laag2": "Waarmee wordt gebruikt om te vragen of aan te geven met welk hulpmiddel, instrument, methode of middel een handeling wordt uitgevoerd.",
+        "laag3": "Waarmee is een samengesteld voornaamwoord van waar en mee. Het wordt gebruikt in vragen en verwijzingen om het middel of hulpmiddel van een handeling aan te geven. Bijvoorbeeld: \"Waarmee schrijf je?\" of \"Dit is het gereedschap waarmee ik werk.\" De betekenis wordt bepaald door de context.\n",
+        "laag4": "In communicatie helpt waarmee om duidelijk te maken welk middel, instrument of welke methode wordt gebruikt. Binnen wetenschap, techniek en AI speelt deze vraag een belangrijke rol bij het verklaren van processen en beslissingen. Voorbeelden zijn: \"Waarmee is deze analyse uitgevoerd?\", \"Waarmee is deze conclusie onderbouwd?\" of \"Waarmee is dit model getraind?\" Het antwoord verwijst naar de gebruikte middelen of bronnen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die vragen stellen of uitleg geven.",
+        "wat": "Een woord dat vraagt naar of verwijst naar het gebruikte middel of hulpmiddel.",
+        "wanneer": "Bij vragen over de manier waarop iets wordt gedaan.",
+        "waar": "In gesprekken, teksten, onderzoek en documentatie.",
+        "waarom": "Om duidelijk te maken welk middel, instrument of welke methode is gebruikt.",
+        "hoe": "Door te verwijzen naar het hulpmiddel of de methode waarmee een handeling wordt uitgevoerd."
+      },
+      "tags": [
+        "waarmee",
+        "vraagwoord",
+        "middel",
+        "hulpmiddel",
+        "methode",
+        "instrument",
+        "context",
+        "communicatie",
+        "verwijzing",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-31ca9c41",
+          "begrip": "waarop",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "verwijzing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68625774",
+          "begrip": "waarom",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "vraagwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59c44894",
+          "begrip": "ding",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "verwijzing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:01:06.472057+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:55:52.039978+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7db186ecec26",
+        "extract_at": "2026-07-20T11:55:52.144302+00:00",
+        "extract_context_snippet": "sterkt onze samenwerking. Laat me weten waarmee ik je nu verder kan ondersteunen.",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'waarmee' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:01:04.728889+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:01:04.835186+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:01:04.842715+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:01:06.732475+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:01:06.740020+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

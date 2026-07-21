@@ -52799,11 +52799,49 @@
         "session_id": "default",
         "gesprek_nummer": 2051
       }
+    },
+    {
+      "id": "conv-ae8f0f15",
+      "timestamp": "2026-07-21T13:42:22.096646+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "weet jij waar ik woon",
+      "spark_response": "Ik ken 'woon' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "weet"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "woon"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2052
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2051,
-    "last_updated": "2026-07-20T15:55:41.373182+00:00"
+    "total_conversations": 2052,
+    "last_updated": "2026-07-21T13:42:22.096646+00:00"
   }
 }

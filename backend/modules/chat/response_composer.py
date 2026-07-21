@@ -384,9 +384,13 @@ async def compose_response(
         user_snippet = format_for_system_prompt(user_profile)
 
         # v6_identity_facts_002 — PRE-PEND facts (vóór toon-instructie) voor max prominentie
+        # v10_admin_facts_full_001 — Voor gradatie 1 (Maker/Beheerder): geen cap.
         try:
             from modules.chat import identity_facts
-            facts = identity_facts.load_for_prompt(user_id, max_per_type=5)
+            # Detect gradatie 1 → toon ALLE facts (Willem is admin, mag alles zien)
+            _grad = (user_profile or {}).get("gradatie") if isinstance(user_profile, dict) else None
+            _cap = 999 if _grad == 1 else 5
+            facts = identity_facts.load_for_prompt(user_id, max_per_type=_cap)
             facts_snippet = identity_facts.format_for_prompt(facts)
             if facts_snippet:
                 # Plaats facts BOVENAAN het user_snippet — vóór tone-block

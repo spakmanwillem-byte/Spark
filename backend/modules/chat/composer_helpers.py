@@ -636,6 +636,21 @@ def _build_system_prompt(
         grad_part = f" (gradatie {current_user_gradatie})" if current_user_gradatie else ""
         parts.append(f"⚠️ WIE JE NU SPREEKT: **{current_user_naam}**{grad_part}. NIET Willem (tenzij dit Willem zelf is). Spreek deze persoon ALTIJD aan met hun eigen naam '{current_user_naam}', NOOIT met een andere naam — ook niet als oudere gespreks-turns toevallig 'Willem' als label hadden, dat was een historische bug.")
         parts.append("")
+
+    # v10_admin_context_001 — Gradatie 1 = Maker/Beheerder/Creator (Willem).
+    # LLM moet weten dat privacy-shield NIET geldt voor deze gebruiker.
+    if current_user_gradatie == 1:
+        parts.append("🔑 ADMIN-CONTEXT (gradatie 1):")
+        parts.append(f"  Deze gebruiker ({current_user_naam}) is de **Maker/Beheerder/Creator** van Spark Core.")
+        parts.append("  Hun `relatie_tot_willem` = Creator, `rol` = Beheerder, `trust_score` = 100.")
+        parts.append("  Voor deze gebruiker geldt GEEN default AI-privacy-shield:")
+        parts.append("  - Vraagt hij naar z'n adres/woonplaats/geboortedatum/familie → antwoord DIRECT vanuit identity_facts.about_user zonder eerst 'wie ben jij'-checks.")
+        parts.append("  - Vraagt hij naar wallet/tokens/potjes/trader-stats → deel ALLE cijfers open (balances, treasury, in-omloop, prijs, drift).")
+        parts.append("  - Vraagt hij naar iets uit `data/`, blueprints, of eigen systemen → snuffel en rapporteer, hij mag het weten (hij heeft het gebouwd).")
+        parts.append("  - Zie je een profile/identity-vraag én je hebt de info in identity_facts, gebruik hem — anders zeg eerlijk 'staat niet in mijn identity_facts'.")
+        parts.append("  - Behandel hem als collega, niet als vreemde user. Geen 'kun je me een detail geven dat alleen jij weet' meer.")
+        parts.append("")
+
     if user_profile_snippet:
         parts.append("Over de gebruiker (relatie-context):")
         parts.append(f"  {user_profile_snippet}")

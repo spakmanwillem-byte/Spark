@@ -1042,25 +1042,6 @@ class MonitorService:
                                     f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}"
                                 )
                             # v7_shadow_removed_001 — Shadow-close block removed.
-                            # v10_trade_boekhouder_dm_001 — Boekhouder meldt SELL aan Willem
-                            try:
-                                from modules.boekhouder.service import _send_dm, ADMIN_ID
-                                _netto = float(close_result.get("total_netto") or close_result.get("netto") or 0)
-                                _n = close_result.get("n_pots_closed", 1)
-                                emoji = "📉" if _netto < 0 else "📈"
-                                _send_dm(
-                                    f"{emoji} **SELL** {market}\n"
-                                    f"• {_n} pot(s) @ €{real_price:.4f}\n"
-                                    f"• Netto: €{_netto:+.4f}\n"
-                                    f"• User: {self._user_id}",
-                                    kind="trade_sell",
-                                    extra={"user_id": self._user_id, "market": market,
-                                           "n_pots": _n, "exit_eur": real_price, "netto_eur": _netto,
-                                           "cluster_id": cid},
-                                    recipient_id=ADMIN_ID,
-                                )
-                            except Exception as _ex:
-                                logger.debug(f"boekhouder SELL DM failed (non-blocking): {_ex}")
 
                 # v7_shadow_removed_001 — Shadow-activatie block removed (dead code cleanup).
 
@@ -1157,22 +1138,6 @@ class MonitorService:
                             f"BUY cluster {cluster['cluster_id'][:6]} ({cluster['n_pots']} pots, "
                             f"€{cluster['total_capital']:.2f}) {market} @ €{real_entry:.4f}"
                         )
-                        # v10_trade_boekhouder_dm_001 — Boekhouder meldt BUY aan Willem
-                        try:
-                            from modules.boekhouder.service import _send_dm, _post_community, ADMIN_ID
-                            _send_dm(
-                                f"📈 **BUY** {market}\n"
-                                f"• {cluster['n_pots']} pot(s) → €{cluster['total_capital']:.2f}\n"
-                                f"• Entry: €{real_entry:.4f}\n"
-                                f"• User: {self._user_id}",
-                                kind="trade_buy",
-                                extra={"user_id": self._user_id, "market": market,
-                                       "n_pots": cluster["n_pots"], "amount_eur": cluster["total_capital"],
-                                       "entry_eur": real_entry, "cluster_id": cluster["cluster_id"]},
-                                recipient_id=ADMIN_ID,
-                            )
-                        except Exception as _ex:
-                            logger.debug(f"boekhouder BUY DM failed (non-blocking): {_ex}")
                     else:
                         # v7_eur_cooldown_001 — bij INSUFFICIENT_EUR_BALANCE: activeer 30-min cooldown
                         if result.get("error_code") == "INSUFFICIENT_EUR_BALANCE":

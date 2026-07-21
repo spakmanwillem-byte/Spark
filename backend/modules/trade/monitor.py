@@ -618,6 +618,15 @@ class MonitorService:
                     self._trade_amount = float(st.get("trade_amount") or self._trade_amount)
                     self._use_mock = bool(st.get("use_mock", self._use_mock))
                     self._use_potjes = bool(st.get("use_potjes", self._use_potjes))
+                    # v10_buy_cooldown_persist_001 — laad per-markt buy-cooldown timestamps
+                    # zodat cooldown herstart-safe is. Voorheen was dit in-memory dict,
+                    # bij monitor-restart werd cooldown gereset → spam-buys mogelijk.
+                    _cd = st.get("last_buy_per_market") or {}
+                    for _m, _iso in _cd.items():
+                        try:
+                            self._last_buy_per_market[_m] = datetime.fromisoformat(_iso.replace("Z", "+00:00"))
+                        except Exception:
+                            pass
             except Exception as _ex:
                 logger.warning(f"Config init-load faalde voor {user_id}: {_ex}")
 
@@ -710,6 +719,10 @@ class MonitorService:
                 "trade_amount": self._trade_amount,
                 "use_mock": self._use_mock,
                 "use_potjes": self._use_potjes,
+                # v10_buy_cooldown_persist_001 — persist per-markt buy-timestamps
+                "last_buy_per_market": {
+                    m: ts.isoformat() for m, ts in self._last_buy_per_market.items()
+                },
                 "last_persisted": datetime.now(timezone.utc).isoformat(),
             }
             with open(MONITOR_STATE_FILE, "w") as f:
@@ -1038,8 +1051,19 @@ class MonitorService:
             #    Voorheen: trader kocht binnen 1 kwartier meerdere pots van dezelfde coin
             #    bij drop → volgende (grotere) dip werd niet benut. 15 min = 1 candle-cycle
             #    per markt per user (users kopen wel onafhankelijk op zelfde trigger).
-            BUY_COOLDOWN_SEC = 900  # 15 minuten (per markt per user)
-            # v7_eur_cooldown_001 — na INSUFFICIENT_EUR_BALANCE 30 min wachten (globaal per user)
+            #    v10_buy_cooldown_blueprint_001 — cooldown-waarde nu uit blueprint
+            #    zodat Willem het kan tweaken via de admin-UI zonder code-change.
+            _bp_cd = None
+            try:
+                from pathlib import Path as _P
+                import json as _j
+                _bp_fp = _P(__file__).parent / "blueprints" / "spark_trader.json"
+                if _bp_fp.exists():
+                    _bp = _j.load(open(_bp_fp))
+                    _bp_cd = _bp.get("buy_cooldown_sec_per_market")
+            except Exception:
+                pass
+            BUY_COOLDOWN_SEC = int(_bp_cd) if _bp_cd else 900  # default 15 min (per markt per user)
             EUR_COOLDOWN_SEC = 1800
             last_buy_ts = self._last_buy_per_market.get(market)
             now = datetime.now(timezone.utc)
@@ -1104,6 +1128,12 @@ class MonitorService:
                             market=market,
                         )
                         self._last_buy_per_market[market] = now
+                        # v10_buy_cooldown_persist_001 — direct persisteren na BUY
+                        # zodat cooldown herstart-safe is (was voorheen alleen in-memory).
+                        try:
+                            self._persist_state()
+                        except Exception:
+                            pass
                         actions_this_cycle.append(
                             f"BUY cluster {cluster['cluster_id'][:6]} ({cluster['n_pots']} pots, "
                             f"€{cluster['total_capital']:.2f}) {market} @ €{real_entry:.4f}"

@@ -14,6 +14,8 @@
     "willem_regel_1": "Help-data is single source of truth"
   },
   "actieve_strategie": "gap_momentum_50",
+  "buy_cooldown_sec_per_market": 900,
+  "buy_cooldown_note": "v10: minimum tijd tussen 2 BUYs op dezelfde markt (per user). Default 900s = 15 min = 1 candle-cycle. Voorkomt vol-lopen op één trigger. Aanpasbaar zonder code-change. Persisteert nu naar disk (herstart-safe).",
   "_strategie_naam_migratie": {
     "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
     "nieuwe_naam": "gap_momentum_50",

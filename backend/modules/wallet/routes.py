@@ -173,7 +173,10 @@ async def get_user_wallet(user_id: str):
         "spark_tokens_from_potjes": hybrid_token_count,
         "credits": uw.get("wallet", {}).get("credits", 0),
         "balance_eur": w.get("balance", uw.get("wallet", {}).get("balance_eur", 0)),
-        "earned_total": w.get("total_deposited", uw.get("wallet", {}).get("earned_total", 0)),
+        # v10_earned_fix_001 — "earned_total" moet echt earned zijn (trade P&L),
+        # NIET total_deposited. Legacy-bug hield deze twee bij elkaar geveegd.
+        "earned_total": float(uw.get("wallet", {}).get("earned_total", 0) or 0),
+        "total_deposited": float(w.get("total_deposited", 0) or 0),
         "activity_score": uw.get("wallet", {}).get("activity_score", 0),
         "total_withdrawn": w.get("total_withdrawn", 0),
         "total_donated": w.get("total_donated", 0),

@@ -55,6 +55,17 @@ Trader zag maar 2 potjes terwijl er 7 fysiek waren. Snuffel toonde:
 - Fix: `sum over all users` → n=7 → prijs €80.10/7 = €11.44 ✓ matcht Willem's regel "1 token = 1 pot"
 - EDIT `backend/modules/boekhouder/agents/price_agent.py` (v10_price_all_pots_001)
 
+### Hotfix 2: Wallet "Verdiend" toonde stortingen (€230)
+- Bug: `wallet/routes.py:176` stuurde `total_deposited` als `earned_total`
+- Fix: `earned_total` = echte earned (uit user_wallets.wallet.earned_total = 0), `total_deposited` = apart veld
+- EDIT `backend/modules/wallet/routes.py` (v10_earned_fix_001)
+
+### Hotfix 3: Trader baseline eikpunt-alignment
+- Bug: `capital_baseline.user-000.baseline_eur = 137.5` uit test manual 6 juli
+- Fix: gereset naar 60.0 (= 6 Spark pots × €10 base), `set_at=NOW` filtert oude test-trades weg
+- Live P&L: -€56.97 → **+€20.53** (= €80.53 bitvavo - €60 baseline)
+- Papertrail: `drift_fix.baseline_reset` event geregistreerd
+
 ---
 
 

@@ -1,6 +1,78 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## ✅ Sessie 46 (2026-07-21 avond) — Polish: gradatie-1 admin-context, KB dupes, buy-cooldown persist
+
+### 🎯 Kleine tweaks na Fase 1 — geen breed nieuw werk, veel glad strijken
+
+**1. LLM admin-context voor Willem (gradatie 1)**
+- **Probleem**: chat-log analyse toonde Willem vroeg "weet jij waar ik woon" → Spark antwoordde met privacy-riedel *"geef me een detail dat alleen jij weet"*, terwijl `identity_facts.about_user` letterlijk "ik woon in groningen" bevat.
+- **Root cause**: LLM prompt vermeldde `gradatie 1` als tussenzin maar zonder betekenis. Default AI-privacy override sloeg door.
+- **Fix v10_admin_context_001** in `composer_helpers._build_system_prompt`:
+  - Bij gradatie 1 → expliciet blok bovenaan: *"Deze gebruiker is Maker/Beheerder/Creator. GEEN privacy-shield. Vraagt hij naar adres/wallet/potjes → antwoord DIRECT vanuit identity_facts. Geen 'wie ben jij'-checks."*
+- **Fix v10_admin_facts_full_001** in `response_composer.py`:
+  - `identity_facts.load_for_prompt()` cap 5 → **999** voor gradatie 1
+  - Willem krijgt nu ALLE facts in de prompt, niet 5 random samples
+
+**2. Buy-cooldown persist naar disk (v10_buy_cooldown_persist_001)**
+- **Probleem** (Willem's observatie): "na elke korte cycle deed Spark een buy" — spam op zelfde markt
+- **Root cause**: `_last_buy_per_market` was in-memory dict; bij monitor-restart weg → cooldown-bypass mogelijk
+- **Fix in `modules/trade/monitor.py`**:
+  - `_persist_state()` schrijft nu `last_buy_per_market` naar `monitor_state.json`
+  - Bij startup wordt de dict geladen uit disk (isoformat → datetime)
+  - Direct-persist na elke BUY (regel 1106)
+- **Extra**: cooldown-waarde nu in blueprint (`spark_trader.json.buy_cooldown_sec_per_market`, default 900s) — admin-editable zonder code-change
+
+**3. KB skeleton-dupe cleanup (v10_kb_skel_cleanup_001)**
+- 8 kaarten verwijderd uit inbox: `kbv2-skel-*` naast bestaande gevulde tegenhangers
+- Begrippen: detail, kennisbank, manier, taalmodel, module, formuleren, recent, laten
+- Backup: `data/_backups/pre_dupe_cleanup_20260721_090022/`
+- Inbox: 1570 → 1562, KB totaal: 5881 → 5873
+- Enkelvoud/meervoud paren (potje/potjes) BEHOUDEN op Willem's expliciete regel: verschillende betekenis
+
+**4. Deposit-historie archief + papertrail-hook** (v10_deposit_papertrail_001)
+- 9 Tikkie-topups (€209.66) + 3 legacy deposits (€118.52) → `data/_archive/pre_eikpunt_20260721_084340/`
+- `wallets.user-001.total_deposited: 230.16 → 0.0` (verse start)
+- Log-hooks: `POST /api/trade/deposits/{uid}` + Tikkie-confirmations schrijven automatisch naar `boekhouder/logs/deposit/YYYY-MM.jsonl`
+
+**5. Prod-merge #2 (13:33 UTC)**
+- 17 files gemerged vanuit prod-backup (KB inbox +19 kaarten, learned_triggers +7, graph edges +12KB, price_snapshots +3.7KB, user-001 identity_facts +333b, shadow/events/2026-07-21.jsonl NEW)
+- Cherry-pick: `chat_sessions.user-001` (oude entry uit 8 juli) behouden uit preview
+- Backup: `data/_backups/pre_prod_merge2_20260721_133348/`
+
+### ✅ Test-status
+- Curl E2E: prijs €11.44 (bitvavo €80.10 / 7 pots), circulation OK, papertrail 7 events integer
+- Health-check via `/api/chat_hub/health`: HEALTHY, 5 backups gevonden
+- Identity regex-test bevestigd: "vertel over spark trader" botst niet meer met over_jezelf
+
+### Wijzigingen in bestanden
+- EDIT `backend/modules/chat/composer_helpers.py` — admin-context block bij gradatie 1
+- EDIT `backend/modules/chat/response_composer.py` — uncapped identity_facts voor gradatie 1
+- EDIT `backend/modules/trade/monitor.py` — cooldown persist naar/uit `monitor_state.json`
+- EDIT `backend/modules/trade/blueprints/spark_trader.json` — `buy_cooldown_sec_per_market` toegevoegd
+- EDIT `backend/modules/wallet/tikkie.py` — deposit papertrail log-hook
+- EDIT `backend/modules/trade/routes.py::add_deposit` — deposit papertrail log-hook
+- DATA `data/knowledge/v2/knowledge_inbox.json` — 8 skel-dupes verwijderd
+- DATA `data/wallet/tikkie_topups.json` + `data/trade/deposits.json` — leeg (gearchiveerd)
+- DATA `data/wallet/wallets.json` — user-001 totals gereset
+
+### 🟡 Nog te doen (na volgende Willem-observatie)
+- Delete-deposit endpoint papertrail-hook (kleine gap)
+- Sell/Dissolve token flow (P1)
+- Gift-token pot-eigendom transfer (P2)
+- Wallet/Shop UI naar `/boekhouder/snapshot`
+- Fase 2 ChatHub: bestaande chat/routes.py laten hub aanroepen als eerste-stap
+
+### 🎯 Filosofie ("polish over growth")
+- Willem's expliciete draai: minder brede nieuwe features, meer verdiepen + gladstrijken
+- Elke fix nu = minder onderhoud/uitleg later (rente op investering)
+- Meta + footnote + blueprint pattern wordt consequent toegepast bij elk klein onderdeel
+- Zelf-bewuste boekhouding blijft leidraad: elke drift-fix / mutatie in papertrail
+
+---
+
+
+
 ## ✅ Sessie 45 (2026-07-21 middag) — ChatHub Fase 1: Master/Leaf agents met typed contracts
 
 ### 🎯 Afgerond — nieuwe architectuur, nul regressie
@@ -1629,6 +1701,12 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
 - [ ] **Winkelstraat producten-CRUD per shop** — owner kan eigen merch/digital producten toevoegen binnen zijn shop. Nu zit alle producten-data global in `/data/shop/products.json`.
 - [ ] **WinkelPage.js refactor** — 684 lines splitsen in `MerchTab.js` / `DigitalTab.js` (storage+tokens) / `WinkelstraatTab.js` (al gedaan).
 - [ ] **Closed-shops filter** — 'closing' shops verbergen uit publieke lijst, of admin hard-delete endpoint.
+
+**Update sessies 42-46 (2026-07-20 t/m 2026-07-21) — voortgang op sommige P1-items:**
+- **Boekhouder-architectuur** heeft nu centrale bank rol (`/api/boekhouder/snapshot`) — biedt fundering voor "Winkelstraat eigen boekhouding per shop" (hoeft alleen shop-filter op snapshot). Zie sessie 42.
+- **Papertrail (hash-chained)** in `modules/boekhouder/agents/log_agent.py` — vervangt ReplayLogService-behoefte deels. Zie sessie 42.
+- **ChatHub Fase 1** (sessie 45) → biedt patroon voor `@traced`-achtige observability via typed contracts + `to_manifest()`.
+- **KB curation** kreeg cleanup-run (8 skel-dupes weg, sessie 46) maar UI-dashboard blijft open (#kb-curation-dash).
 
 ### P3 — Future / Experimenteel
 - [ ] **Dynamic theming** via `lore_index.json` (kleuren shiften met seizoen/lore)

@@ -66,6 +66,13 @@ Trader zag maar 2 potjes terwijl er 7 fysiek waren. Snuffel toonde:
 - Live P&L: -€56.97 → **+€20.53** (= €80.53 bitvavo - €60 baseline)
 - Papertrail: `drift_fix.baseline_reset` event geregistreerd
 
+### Hotfix 4: Historische deposit/tikkie data archiveren + papertrail-hook
+- 9 Tikkie-topups (€209.66) + 3 deposits (€118.52) verplaatst naar `data/_archive/pre_eikpunt_20260721_084340/`
+- `wallets.user-001.total_deposited: 230.16 → 0.0` (verse start)
+- Papertrail: `deposit.pre_eikpunt_archive` event geregistreerd
+- **Nieuwe log-hooks** in `modules/trade/routes.py::add_deposit()` en `modules/wallet/tikkie.py::confirm_topup` → alle nieuwe stortingen komen automatisch in `boekhouder/logs/deposit/YYYY-MM.jsonl` met hash-chain
+- E2E getest: nieuwe deposit via `/api/trade/deposits/user-001` → verschijnt direct in `/api/boekhouder/logs/deposit`
+
 ---
 
 

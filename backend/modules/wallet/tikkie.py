@@ -388,6 +388,27 @@ async def confirm_topup(topup_id: str, req: ConfirmTopup):
     except Exception as e:
         print(f"[tikkie] archiveer bevestigd gefaald: {e}")
 
+    # v10_tikkie_papertrail_001 — Bevestigde Tikkie → boekhouder log-agent
+    # (topic="deposit"). Hash-chained paper trail voor centrale bank guard.
+    try:
+        from modules.boekhouder.agents.log_agent import LogAgent
+        LogAgent().record(
+            topic="deposit",
+            event_type="tikkie_confirmed",
+            actor=topup.get("user_id"),
+            data={
+                "topup_id": topup["id"],
+                "amount_eur": float(topup.get("amount_eur") or 0),
+                "free_eur": free,
+                "potje_eur": potje,
+                "confirmed_by": req.viewer_id,
+                "source": "Tikkie",
+                "note": topup.get("note"),
+            }
+        )
+    except Exception as e:
+        print(f"[tikkie] papertrail log failed (non-blocking): {e}")
+
     # v6_accounting_hooks_001 — Tikkie storting → income personal_<user>
     try:
         from modules.accounting.hooks import on_deposit

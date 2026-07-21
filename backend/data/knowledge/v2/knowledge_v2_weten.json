@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2149,
+    "card_count": 2150,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T14:28:35.915378+00:00",
+    "last_updated": "2026-07-21T08:39:20.563532+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -287646,6 +287646,170 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-20T14:28:34.215596+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-54c1104b",
+      "begrip": "bepaalde",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bepaalde betekent dat iets specifiek, vaststaand of aangewezen is.",
+        "laag2": "Het woord bepaalde wordt gebruikt om aan te geven dat het gaat om een specifieke persoon, zaak, tijd, plaats of situatie en niet om iets algemeens.",
+        "laag3": "Bepaalde is een bijvoeglijk naamwoord dat verwijst naar een concreet of afgebakend onderwerp binnen een context. Het wordt gebruikt om iets nader te specificeren of te onderscheiden van andere mogelijkheden. De exacte betekenis hangt af van de zin, bijvoorbeeld in een bepaalde dag, een bepaalde persoon of onder bepaalde omstandigheden.",
+        "laag4": "Binnen Spark wordt bepaalde gebruikt als contextbegrip om informatie te verfijnen of af te bakenen. Het helpt om kennis, gebeurtenissen of objecten specifieker te beschrijven, waardoor relaties nauwkeuriger kunnen worden gelegd en zoekresultaten beter aansluiten op de bedoelde context."
+      },
+      "ws5": {
+        "wie": "Iedereen die informatie beschrijft of interpreteert.",
+        "wat": "Een aanduiding dat iets specifiek of afgebakend is.",
+        "wanneer": "Wanneer een persoon, object, tijd of situatie nader wordt gespecificeerd.",
+        "waar": "In gesprekken, documenten, wetenschap, onderwijs en informatiesystemen.",
+        "waarom": "Om onderscheid te maken tussen algemene en specifieke informatie.",
+        "hoe": "Door een persoon, object of situatie expliciet aan te wijzen of af te bakenen."
+      },
+      "tags": [
+        "bepaalde",
+        "specifiek",
+        "afgebakend",
+        "concreet",
+        "context",
+        "eigenschap",
+        "aanduiding",
+        "informatie",
+        "taal",
+        "precisie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8c7cd828",
+          "begrip": "concrete",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "concreet",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:39:20.563505+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:46:10.633464+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-d59e3bb3bcf1",
+        "extract_at": "2026-07-21T07:46:11.339504+00:00",
+        "extract_context_snippet": "nt** betekent “woont” dat iemand op een bepaalde plek leeft en verblijft. Met de kaart **[voelen] zusje** we",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'bepaalde' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:39:18.080472+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:39:18.185273+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:39:18.192755+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:39:20.919092+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:39:20.927298+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 453,
+    "card_count": 454,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T14:29:58.949264+00:00",
+    "last_updated": "2026-07-21T08:45:14.430558+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -61818,6 +61818,172 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-20T14:29:57.288620+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-711a74df",
+      "begrip": "liefdevolle",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Liefdevolle betekent dat iemand of iets liefde, warmte, zorg of genegenheid uitstraalt of toont.",
+        "laag2": "Het woord liefdevolle beschrijft een houding, handeling of eigenschap die wordt gekenmerkt door aandacht, zorg, respect en genegenheid voor anderen.",
+        "laag3": "Liefdevolle is de verbogen vorm van het bijvoeglijk naamwoord liefdevol. Het wordt gebruikt om personen, woorden, gebaren of handelingen te beschrijven die voortkomen uit liefde, empathie of oprechte betrokkenheid. Een liefdevolle benadering draagt vaak bij aan veiligheid, vertrouwen en verbondenheid.",
+        "laag4": "Binnen Spark is liefdevolle een emotionele eigenschap die kan worden gekoppeld aan communicatie, gedrag en relaties. Spark kan liefdevolle interacties herkennen aan kenmerken zoals vriendelijkheid, zorgzaamheid, empathie en respect. Hierdoor kan het systeem de emotionele context van een gesprek beter begrijpen."
+      },
+      "ws5": {
+        "wie": "Mensen, verzorgers, familieleden, partners, vrienden en AI-systemen die empathisch communiceren.",
+        "wat": "Een eigenschap die liefde, zorg en genegenheid uitdrukt.",
+        "wanneer": "Wanneer iemand met warmte, aandacht en respect handelt of communiceert.",
+        "waar": "In relaties, gezinnen, vriendschappen, zorg, onderwijs en communicatie.",
+        "waarom": "Om verbondenheid, vertrouwen, veiligheid en welzijn te bevorderen.",
+        "hoe": "Door liefde, zorg, empathie, aandacht en respect te tonen in woorden of daden."
+      },
+      "tags": [
+        "liefdevolle",
+        "liefdevol",
+        "liefde",
+        "zorg",
+        "genegenheid",
+        "empathie",
+        "warmte",
+        "vriendelijkheid",
+        "verbondenheid",
+        "relatie",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-941bc1b1",
+          "begrip": "liefde",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "genegenheid",
+            "liefde",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1ef01b9b",
+          "begrip": "vriendelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "empathie",
+            "positief",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e4b0eaa",
+          "begrip": "betrokken",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "relatie",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-028cb626",
+          "begrip": "warm",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "genegenheid",
+            "verbondenheid",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b365c569",
+          "begrip": "trouw",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "relatie",
+            "verbondenheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:45:14.430526+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:44:36.094954+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-44ebd4439b96",
+        "extract_at": "2026-07-21T07:44:36.714419+00:00",
+        "extract_context_snippet": "** is een partner iemand met wie je een liefdevolle, emotionele band hebt. Roline past daar niet in; ze is een",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'liefdevolle' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:45:12.058663+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:45:12.164878+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:45:12.403618+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:45:14.627216+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:45:14.634220+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

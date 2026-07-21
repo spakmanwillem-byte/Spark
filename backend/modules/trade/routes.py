@@ -265,6 +265,28 @@ async def add_deposit(user_id: str, req: DepositRequest):
     data[user_id] = deposits
     save_json(dep_file, data)
 
+    # v10_deposit_papertrail_001 — Log elke deposit/withdrawal/donation naar
+    # boekhouder log-agent (topic="deposit"). Hash-chained paper trail.
+    try:
+        from modules.boekhouder.agents.log_agent import LogAgent
+        log_ev = LogAgent().record(
+            topic="deposit",
+            event_type=f"{req.type}_registered",
+            actor=user_id,
+            data={
+                "deposit_id": entry["id"],
+                "type": req.type,
+                "amount_eur": req.amount_eur,
+                "source": req.source or "onbekend",
+                "description": req.description or "",
+            }
+        )
+        entry["log_event_id"] = log_ev["event_id"]
+        data[user_id] = deposits
+        save_json(dep_file, data)
+    except Exception as _ex:
+        print(f"[deposit] papertrail log failed (non-blocking): {_ex}")
+
     # Update baseline: +donation/deposit, -withdrawal
     baseline_file = DATA_DIR.parent / "trade" / "capital_baseline.json"
     baseline_data = load_json(baseline_file, default={})

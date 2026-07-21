@@ -1,0 +1,30 @@
+{
+  "naam": "module_meta",
+  "bevestigd_uit_py": "modules.chat_hub.agents.module_meta_agent.ModuleMetaAgent",
+  "klasse": "info_lookup",
+  "rol": "leaf",
+  "parent": "chat_hub_master",
+  "doel": "Leest _meta.json van elke module (doel, footnote, endpoints).",
+  "gradatie_min": 3,
+  "kost_ms_estimate": 15,
+  "data_sources": ["modules/{name}/_meta.json"],
+  "returns": {
+    "module": "str",
+    "doel": "str",
+    "footnote": "dict",
+    "endpoints": "list",
+    "last_touched": "iso timestamp",
+    "has_blueprint": "bool",
+    "sub_agents": "list[str]"
+  },
+  "example_queries": [
+    "wat doet module trade",
+    "meta van boekhouder",
+    "hoe werkt module kb_v2"
+  ],
+  "footnote": {
+    "generated_by": "v10_chat_hub_fase1",
+    "created": "2026-07-21",
+    "meta_pass_source": "v9_meta_enrich_001 (sessie 40d, 29 modules doel + 57 footnotes)"
+  }
+}

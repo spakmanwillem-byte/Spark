@@ -121,6 +121,10 @@ from modules.chat import chat_router, chat_extra_router
 app.include_router(chat_router, prefix="/api")
 app.include_router(chat_extra_router, prefix="/api")
 
+# v10_chat_hub_fase1 — Master/Leaf agent-tree met typed contracts (2026-07-21)
+from modules.chat_hub.routes import router as chat_hub_router
+app.include_router(chat_hub_router, prefix="/api")
+
 from modules.contributions.routes import router as contributions_router
 app.include_router(contributions_router)
 

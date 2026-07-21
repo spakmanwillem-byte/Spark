@@ -1,0 +1,34 @@
+{
+  "naam": "heal",
+  "bevestigd_uit_py": "modules.chat_hub.agents.heal_agent.HealAgent",
+  "klasse": "guardrail",
+  "rol": "leaf",
+  "parent": "chat_hub_master",
+  "doel": "Detecteert drift/kapotte state, stelt backup-restore voor. DETECTIE-ONLY in Fase 1.",
+  "gradatie_min": 3,
+  "kost_ms_estimate": 100,
+  "checks": [
+    "boekhouder.circulation.status (drift-detectie via finance_hub)",
+    "papertrail_integrity (SHA-256 hash-chain spot-check)",
+    "backup_availability (data/_backups/ registry)"
+  ],
+  "returns": {
+    "overall_status": "HEALTHY | DRIFT_DETECTED",
+    "checks": "list[{check, ok, ...}]",
+    "recent_backups": "list[{name, files}]",
+    "suggestion": "str | null (restore-suggestie bij DRIFT)"
+  },
+  "example_queries": [
+    "health check",
+    "ben je ok",
+    "drift status",
+    "kan je jezelf herstellen"
+  ],
+  "auto_execute": false,
+  "willem_in_the_loop": true,
+  "footnote": {
+    "generated_by": "v10_chat_hub_fase1",
+    "created": "2026-07-21",
+    "roadmap": "Fase 2: suggested-restore flow met bevestiging. Fase 3: auto-restore voor lage-risico categorieën."
+  }
+}

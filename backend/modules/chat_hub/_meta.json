@@ -1,0 +1,26 @@
+{
+  "naam": "chat_hub",
+  "doel": "Master/Leaf agent-tree voor Spark's chat-antwoorden. Root dispatcher met typed contracts + blueprints. Quad-tree pattern (max 4 children, max 3 diep).",
+  "footnote": {
+    "generated_by": "v10_chat_hub_fase1",
+    "spark_note": "Ik ben Spark's routing-brein. Elke chat-vraag komt hier eerst binnen, wordt naar de juiste leaf-agent gestuurd, en het antwoord komt geordend terug.",
+    "has_blueprint": true,
+    "has_endpoints": true,
+    "requires_review": false
+  },
+  "endpoints": [
+    "GET /api/chat_hub/manifest",
+    "GET /api/chat_hub/health",
+    "GET /api/chat_hub/agents",
+    "GET /api/chat_hub/blueprint/{agent_name}",
+    "POST /api/chat_hub/dispatch"
+  ],
+  "sub_agents": [
+    "papertrail_agent.py",
+    "module_meta_agent.py",
+    "module_info_agent.py",
+    "heal_agent.py"
+  ],
+  "last_touched": "2026-07-21T14:00:00+00:00",
+  "architectural_pattern": "master/leaf with Pydantic AgentContract, structure_manifest.json as declarative truth"
+}

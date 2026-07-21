@@ -1,6 +1,60 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## ✅ Sessie 45 (2026-07-21 middag) — ChatHub Fase 1: Master/Leaf agents met typed contracts
+
+### 🎯 Afgerond — nieuwe architectuur, nul regressie
+- **`modules/chat_hub/`** — nieuwe module, root van Spark's chat-agent-tree
+- **Master/Leaf pattern**: `chat_hub_master.py` (dispatcher, doet zelf geen werk) + 4 leaf-agents
+- **Typed contracts** (Pydantic): `AgentContract` (leaf) + `MasterContract` (master)
+- **Quad-tree regels**: max 4 children per master, max 3 diep, leaf max 400 regels — via `_split_check()`
+- **Structure manifest**: `structure_manifest.json` — blueprint = waarheid, code volgt
+- **Elke agent** heeft `{naam}_agent.py` + `{naam}_blauwdruk.json` paar (drift-check)
+
+### 4 Initial leaf-agents
+1. **`papertrail_agent`** (info_lookup) — leest boekhouder/logs/*.jsonl met hash-chain integrity
+2. **`module_meta_agent`** (info_lookup) — leest `modules/{name}/_meta.json`
+3. **`module_info_agent`** (info_lookup) — "vertel over spark trader" flow met alias-map
+4. **`heal_agent`** (guardrail) — health-check (drift + papertrail + backup-registry)
+
+### Bug-fix meegepakt
+- `identity_intent_service.over_jezelf` regex uitgebreid met negative lookahead → "vertel over spark trader" gaat NIET meer naar persona-antwoord
+
+### 5 nieuwe endpoints
+- `GET  /api/chat_hub/manifest` — tree + split-check
+- `GET  /api/chat_hub/health` — HealAgent output
+- `GET  /api/chat_hub/agents` — lijst
+- `GET  /api/chat_hub/blueprint/{naam}` — blueprint per agent
+- `POST /api/chat_hub/dispatch` — router (text + viewer_id → matched agents + results)
+
+### ✅ E2E getest (curl)
+- "vertel over spark trader" → module_info → leest trade/_meta.json → prose met doel + 14 endpoints
+- "wat is er gemint" → papertrail → 7 events, integrity_ok
+- "kan je jezelf checken" → heal → HEALTHY, 5 backups
+- Identity-fix bevestigd via regex-test
+
+### Wijzigingen
+- NEW `backend/modules/chat_hub/` (13 files)
+- EDIT `backend/server.py` — chat_hub_router include
+- EDIT `backend/modules/chat/identity_intent_service.py` — negative lookahead
+
+### 🟡 Fase 2 (na Willem's redeploy-observatie)
+- Bestaande `chat/routes.py::process_message` laten `chat_hub.dispatch()` aanroepen als eerste-stap
+- Migreer bestaande intents (identity, trader_intents, dank_service) naar chat_hub leaves
+- LLM function-calling: LLM ziet agents als tools (Anthropic MCP-style)
+- Auto-split detectie bij drempel → promotie leaf → sub-master
+
+### 🎯 Filosofie
+- Master doet geen werk, alleen routing/mergen
+- Quad-tree houdt overzicht: max 4 children, max 3 diep
+- Blueprint = waarheid; code volgt
+- Zelf-uitlegbaar via `to_manifest()`
+- Willem-in-the-loop bij heal (geen auto-restore in Fase 1)
+
+---
+
+
+
 ## ✅ Sessie 44 (2026-07-21) — Eikpunt + Centrale Bank Guard + Archief
 
 ### 🎯 Afgerond — data-reconciliatie + zelf-bewuste boekhouding

@@ -1,0 +1,41 @@
+{
+  "naam": "chat_hub_master",
+  "doel": "Root dispatcher voor Spark's chat-agents. Master doet geen werk, alleen routing + merging.",
+  "rol": "master",
+  "philosophy": "Quad-tree pattern: elke master max 4 children, max 3 levels diep. Bij overflow → promotie van leaf naar sub-master.",
+  "children_registry": [
+    {"naam": "papertrail",   "klasse": "info_lookup", "blueprint": "papertrail_blauwdruk.json"},
+    {"naam": "module_meta",  "klasse": "info_lookup", "blueprint": "module_meta_blauwdruk.json"},
+    {"naam": "module_info",  "klasse": "info_lookup", "blueprint": "module_info_blauwdruk.json"},
+    {"naam": "heal",         "klasse": "guardrail",   "blueprint": "heal_blauwdruk.json"}
+  ],
+  "class_taxonomy": {
+    "info_lookup": "Alleen-lezen, veilig, mag parallel",
+    "computation": "Berekening zonder mutatie",
+    "mutation":    "Schrijft data (check gradatie eerst)",
+    "decision":    "Kiest actie (met/zonder LLM)",
+    "notify":      "Stuurt DM/bark/community",
+    "guardrail":   "Blokkeert/waarschuwt, mag altijd draaien"
+  },
+  "split_rules": {
+    "leaf_max_lines": 400,
+    "master_max_children": 4,
+    "max_depth": 3
+  },
+  "gradatie_semantiek": {
+    "1": "Beheerder/Maker/Creator (Willem) — geen privacy-shield",
+    "2-3": "Vertrouwde user",
+    "4-6": "Standaard user",
+    "hint": "gradatie_min in agent = drempel. Als user_gradatie <= agent.gradatie_min → toegang."
+  },
+  "future_growth": {
+    "fase_2": "Migreer bestaande intents (identity, trader, dank, kb) naar chat_hub agents",
+    "fase_3": "Auto-split detectie bij bereikte drempel",
+    "fase_4": "LLM-integratie: LLM ziet agents als function-tools met contracts"
+  },
+  "footnote": {
+    "generated_by": "v10_chat_hub_fase1",
+    "created": "2026-07-21",
+    "designed_by": "willem + spark iteratie 44+"
+  }
+}

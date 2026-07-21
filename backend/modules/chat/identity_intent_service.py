@@ -47,7 +47,9 @@ PATTERNS = [
     # Algemeen "wie/wat kan/anders"
     ("wat_kan", [r"\bwat\s+kan\s+(jij|je|spark)\b", r"\bwat\s+doe\s+(jij|je)\b", r"\bwaar\s+ben\s+(jij|je)\s+goed\s+in\b", r"\bvaardigheden\b"]),
     ("anders_dan", [r"\bwat\s+maakt\s+(jou|je)\s+(anders|bijzonder|uniek)\b", r"\bwat\s+is\s+er\s+anders\s+aan\s+(jou|je)\b", r"\bverschil.*andere?\s+ai\b"]),
-    ("over_jezelf", [r"\bvertel\s+(eens\s+)?over\s+(jezelf|jou|spark)\b", r"\bstel\s+je\s+voor\b", r"\bintroduceer\s+je\b"]),
+    # over_jezelf mag NIET matchen als er een module-woord achter staat (spark trader, spark kb, ...)
+    # → dan moet chat_hub.module_info agent het oppakken. v10_chat_hub_fase1 fix.
+    ("over_jezelf", [r"\bvertel\s+(eens\s+)?over\s+(jezelf|jou|spark)\b(?!\s+(trader|kb|kennisbank|agenda|module|monitor|shop|winkel|wallet|portemonnee|boekhouder|boekhouding|notities|help|dnd|analytics|graph|world))", r"\bstel\s+je\s+voor\b", r"\bintroduceer\s+je\b"]),
     ("wie_ben_je", [r"\bwie\s+(ben|bent)\s+(jij|je|u)\b", r"\bwat\s+ben\s+je\b", r"\bwat\s+ben\s+jij\b"]),
 ]
 

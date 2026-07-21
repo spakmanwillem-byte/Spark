@@ -1,0 +1,59 @@
+{
+  "version": "1.0",
+  "generated_by": "willem + spark 2026-07-21",
+  "purpose": "Declaratieve manifest van chat_hub structuur. Blueprint = waarheid, code volgt.",
+  "root": "chat_hub_master",
+  "folders": {
+    "base/": {
+      "purpose": "Pydantic contracts (AgentContract, MasterContract)",
+      "required_files": ["agent_contract.py", "master_contract.py"]
+    },
+    "agents/": {
+      "purpose": "Concrete leaf/master agent implementations",
+      "pattern": "{naam}_agent.py"
+    },
+    "blueprints/": {
+      "purpose": "JSON confirmations van elke agent (naam + contract) — admin-editable",
+      "pattern": "{naam}_blauwdruk.json"
+    }
+  },
+  "current_tree": {
+    "chat_hub_master": {
+      "rol": "master",
+      "file": "chat_hub_master.py",
+      "children": ["papertrail", "module_meta", "module_info", "heal"]
+    },
+    "papertrail": {
+      "rol": "leaf", "klasse": "info_lookup",
+      "file": "agents/papertrail_agent.py",
+      "blueprint": "blueprints/papertrail_blauwdruk.json"
+    },
+    "module_meta": {
+      "rol": "leaf", "klasse": "info_lookup",
+      "file": "agents/module_meta_agent.py",
+      "blueprint": "blueprints/module_meta_blauwdruk.json"
+    },
+    "module_info": {
+      "rol": "leaf", "klasse": "info_lookup",
+      "file": "agents/module_info_agent.py",
+      "blueprint": "blueprints/module_info_blauwdruk.json"
+    },
+    "heal": {
+      "rol": "leaf", "klasse": "guardrail",
+      "file": "agents/heal_agent.py",
+      "blueprint": "blueprints/heal_blauwdruk.json"
+    }
+  },
+  "split_rules": {
+    "leaf_max_lines": 400,
+    "master_max_children": 4,
+    "max_depth": 3,
+    "on_overflow": "promoot leaf naar sub-master, verplaats verantwoordelijkheden naar nieuwe leaves"
+  },
+  "naming_convention": {
+    "leaf": "{naam}_agent.py",
+    "master": "{naam}_master.py (of chat_hub_master.py voor root)",
+    "child_separator": "__ (dubbele underscore in filename voor hierarchie: parent__child_agent.py)"
+  },
+  "next_promotion_candidates": []
+}

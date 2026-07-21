@@ -1,0 +1,41 @@
+{
+  "naam": "module_info",
+  "bevestigd_uit_py": "modules.chat_hub.agents.module_info_agent.ModuleInfoAgent",
+  "klasse": "info_lookup",
+  "rol": "leaf",
+  "parent": "chat_hub_master",
+  "doel": "Vangt 'vertel over X' waar X = module (trader/kb/boekhouder/agenda/...). Vervangt fantoom-antwoord uit identity-intent.",
+  "gradatie_min": 3,
+  "kost_ms_estimate": 20,
+  "aliases": {
+    "spark trader": "trade",
+    "trader": "trade",
+    "kennisbank": "kb_v2",
+    "boekhouder": "boekhouder",
+    "boekhouding": "boekhouder",
+    "shop": "shop",
+    "wallet": "wallet",
+    "portemonnee": "wallet",
+    "notities": "notes",
+    "help": "help",
+    "dnd": "dnd",
+    "spark world": "dnd",
+    "monitor": "trade"
+  },
+  "returns": {
+    "module": "str",
+    "prose": "str (gestructureerd tekstantwoord)",
+    "raw_meta": "dict"
+  },
+  "example_queries": [
+    "vertel over spark trader",
+    "leg de boekhouder uit",
+    "hoe werkt de wallet",
+    "wat is spark monitor"
+  ],
+  "footnote": {
+    "generated_by": "v10_chat_hub_fase1",
+    "created": "2026-07-21",
+    "fixes_bug": "identity_intent.over_jezelf ving 'vertel over spark trader' → gaf persona-antwoord ipv module-info"
+  }
+}

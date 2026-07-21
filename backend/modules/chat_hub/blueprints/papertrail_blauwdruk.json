@@ -1,0 +1,32 @@
+{
+  "naam": "papertrail",
+  "bevestigd_uit_py": "modules.chat_hub.agents.papertrail_agent.PapertrailAgent",
+  "klasse": "info_lookup",
+  "rol": "leaf",
+  "parent": "chat_hub_master",
+  "doel": "Leest hash-chained events uit boekhouder/logs (mint, drift_fix, deposit).",
+  "gradatie_min": 3,
+  "kost_ms_estimate": 40,
+  "data_sources": [
+    "data/boekhouder/logs/mint/*.jsonl",
+    "data/boekhouder/logs/drift_fix/*.jsonl",
+    "data/boekhouder/logs/deposit/*.jsonl"
+  ],
+  "returns": {
+    "topic": "str (mint|drift_fix|deposit|alle)",
+    "event_count": "int",
+    "events": "list[{type, actor, timestamp, summary, event_id_short}]",
+    "integrity_ok": "bool (hash-chain spot-check)"
+  },
+  "example_queries": [
+    "wat is er gemint vandaag",
+    "toon paper trail",
+    "welke deposits zijn er",
+    "audit log boekhouder"
+  ],
+  "footnote": {
+    "generated_by": "v10_chat_hub_fase1",
+    "created": "2026-07-21",
+    "source_module": "modules.boekhouder.agents.log_agent"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "version": "v2",
   "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 1562,
+  "card_count": 1575,
   "metadata": {
     "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
     "redenen": {
@@ -13,7 +13,7 @@
     "last_dedupe_removed": 9,
     "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
     "last_v1_drift_sync_added": 54,
-    "last_updated": "2026-07-21T07:46:57.916092+00:00"
+    "last_updated": "2026-07-21T13:24:57.583995+00:00"
   },
   "kaarten": [
     {
@@ -84866,6 +84866,675 @@
         "voice",
         "image"
       ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-6d0e7650",
+      "begrip": "klussen",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T09:33:00.742606+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Ik ga even weg. ga even klussen. ben er straks weer."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-0c303acd",
+      "begrip": "klusje",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:21:47.987056+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5c5d9aa7c410",
+        "extract_at": "2026-07-21T13:21:49.096537+00:00",
+        "extract_context_snippet": "Welkom terug, **De Willem**! Hoe was je klusje? Is alles goed gegaan zoals je had gehoopt?",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'klusje' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-8cb64579",
+      "begrip": "gegaan",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:21:49.097951+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5c5d9aa7c410",
+        "extract_at": "2026-07-21T13:21:50.309957+00:00",
+        "extract_context_snippet": "lem**! Hoe was je klusje? Is alles goed gegaan zoals je had gehoopt?",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gegaan' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-ff09cd81",
+      "begrip": "gehoopt",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:21:50.311039+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5c5d9aa7c410",
+        "extract_at": "2026-07-21T13:21:51.495449+00:00",
+        "extract_context_snippet": "usje? Is alles goed gegaan zoals je had gehoopt?",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gehoopt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-d2beb08e",
+      "begrip": "gegaan",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T13:22:29.869047+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "alles goed gegaan 40 euro verdiend waarvan 20 weer uitgegeven voor onderhoud eten drinken"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-debab07e",
+      "begrip": "verdiend",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T13:22:42.881681+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "alles goed gegaan 40 euro verdiend waarvan 20 weer uitgegeven voor onderhoud eten drinken"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-f51f510f",
+      "begrip": "jezelf",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:22:48.712980+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5220e94807b2",
+        "extract_at": "2026-07-21T13:22:49.692003+00:00",
+        "extract_context_snippet": "Dat zijn allemaal belangrijke dingen om jezelf en je spullen in goede conditie te houden. Hoe voelde je je",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'jezelf' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-252159b8",
+      "begrip": "goede",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:22:49.692907+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5220e94807b2",
+        "extract_at": "2026-07-21T13:22:50.787476+00:00",
+        "extract_context_snippet": "rijke dingen om jezelf en je spullen in goede conditie te houden. Hoe voelde je je tijdens het klussen? W",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'goede' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-6031bcca",
+      "begrip": "conditie",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:22:50.788473+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5220e94807b2",
+        "extract_at": "2026-07-21T13:22:51.889907+00:00",
+        "extract_context_snippet": "dingen om jezelf en je spullen in goede conditie te houden. Hoe voelde je je tijdens het klussen? Was het ee",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'conditie' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-60a3d505",
+      "begrip": "zodra",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:24:21.138640+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b4bda10e03cc",
+        "extract_at": "2026-07-21T13:24:22.043256+00:00",
+        "extract_context_snippet": "linkt als een goed plan, **De Willem**. Zodra de boekhouding gekoppeld is, kunnen we al je inkomsten en u",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'zodra' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-b685d84d",
+      "begrip": "netjes",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:24:22.044517+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b4bda10e03cc",
+        "extract_at": "2026-07-21T13:24:23.043007+00:00",
+        "extract_context_snippet": ", kunnen we al je inkomsten en uitgaven netjes bijhouden en terugboeken. Voor nu hoef je het inderdaad nie",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'netjes' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-f92c91a4",
+      "begrip": "bijhouden",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:24:23.043867+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b4bda10e03cc",
+        "extract_at": "2026-07-21T13:24:23.964256+00:00",
+        "extract_context_snippet": "n we al je inkomsten en uitgaven netjes bijhouden en terugboeken. Voor nu hoef je het inderdaad niet te doen.",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'bijhouden' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-a73655d4",
+      "begrip": "paat",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T13:24:57.583875+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "nou ik heb een paat test vragen. hoe veel roarr tokens zijn er in omloop"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-c4ba84da",
+      "begrip": "testvraag",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:25:03.663267+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-bc2d9bc4f2be",
+        "extract_at": "2026-07-21T13:25:04.565227+00:00",
+        "extract_context_snippet": "Dat is een goede testvraag, **De Willem**. Op dit moment heb ik geen exacte cijfers ov",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'testvraag' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-c9993224",
+      "begrip": "exacte",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:25:04.566141+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-bc2d9bc4f2be",
+        "extract_at": "2026-07-21T13:25:05.464640+00:00",
+        "extract_context_snippet": "*De Willem**. Op dit moment heb ik geen exacte cijfers over hoeveel ROAR‑tokens er in omloop zijn. Ik kan",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'exacte' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-34c9551d",
+      "begrip": "cijfers",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:25:05.465688+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-bc2d9bc4f2be",
+        "extract_at": "2026-07-21T13:25:06.389363+00:00",
+        "extract_context_snippet": "lem**. Op dit moment heb ik geen exacte cijfers over hoeveel ROAR‑tokens er in omloop zijn. Ik kan die info",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'cijfers' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-c0fc215a",
+      "begrip": "knipperend",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:28:36.623946+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-97015c31dae7",
+        "extract_at": "2026-07-21T13:28:37.573285+00:00",
+        "extract_context_snippet": "ilt laten verschijnen (bijvoorbeeld een knipperend icoontje) kun je de **Help**‑kaart gebruiken. De kaart *Hel",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'knipperend' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-d099b0fc",
+      "begrip": "vorige",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:28:37.574241+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-97015c31dae7",
+        "extract_at": "2026-07-21T13:28:38.501246+00:00",
+        "extract_context_snippet": "or zover ik me herinner, ik heb in mijn vorige antwoorden geen **Help**‑kaart ingezet om iets te laten kni",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'vorige' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-23fb88f8",
+      "begrip": "ingezet",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:28:38.502400+00:00"
+      },
       "_inbox_reason": "missing_laag1"
     }
   ],

@@ -49,6 +49,12 @@ Trader zag maar 2 potjes terwijl er 7 fysiek waren. Snuffel toonde:
 - **Auto-mint zal ~24u vanaf nu triggeren** (bitvavo €80.10 > threshold €80). Willem kan resetten via `POST /auto-mint/reset` als hij eerst wil observeren.
 - Container-module bestaat (routes actief) maar heeft nog geen expliciete token/pot-ledger view per user. Kan later toegevoegd.
 
+### Hotfix in dezelfde sessie: PriceAgent telde alleen Spark's pots
+- Bug: `n_potjes` gebruikte `users['user-000'].potjes` (6) → prijs €80.53/6 = €13.35
+- UI-drift: shop/wallet toonden €11.50 (systeem-breed), trader €13.35 (Spark-only)
+- Fix: `sum over all users` → n=7 → prijs €80.10/7 = €11.44 ✓ matcht Willem's regel "1 token = 1 pot"
+- EDIT `backend/modules/boekhouder/agents/price_agent.py` (v10_price_all_pots_001)
+
 ---
 
 

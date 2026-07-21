@@ -21,10 +21,12 @@ class PriceAgent(BaseFinanceAgent):
         bp = self.blueprint().get("formula_params", {}) or {}
         base = float(bp.get("base_pot_size_eur", 10.0))
         anchor = float(bp.get("anchor_price_eur", 5.08))
-        # Aantal potjes (systeem-breed, voor prijs-berekening — pak user-000 shared trader)
+        # Aantal potjes SYSTEEM-BREED (v10_price_all_pots_001 — Willem's regel:
+        # 1 token = 1 pot, dus prijs = bitvavo / totaal-aantal-potjes-in-omloop,
+        # NIET alleen Spark's pots. Shop/wallet gebruiken deze formule al.
         pots_data = _lj(DATA / "financial" / "user_potjes.json", default={"users": {}}) or {}
-        u0 = (pots_data.get("users") or {}).get("user-000", {}) or {}
-        n_potjes = len(u0.get("potjes", []) or []) or 1
+        all_users = pots_data.get("users") or {}
+        n_potjes = sum(len((u or {}).get("potjes", []) or []) for u in all_users.values()) or 1
         bitvavo_free = BitvavoAgent().live_free_eur()
         # Formule: pot-waarde = max(base_pot_size, bitvavo_free / n_potjes)
         per_pot_ratio = bitvavo_free / n_potjes if n_potjes > 0 else 0

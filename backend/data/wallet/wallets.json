@@ -1,9 +1,9 @@
 {
   "wallets": {
     "user-001": {
-      "balance": 0.0,
+      "balance": 5.0,
       "created_at": "2026-03-29T20:00:00+00:00",
-      "total_deposited": 0.0,
+      "total_deposited": 5.0,
       "total_withdrawn": 0.0,
       "total_donated": 0.0,
       "wallet_id": "user-001",
@@ -290,7 +290,7 @@
       "type": "deposit",
       "amount": 20.2,
       "status": "completed",
-      "message": "Tikkie tk-5a23c \u2014 naam: De Willem",
+      "message": "Tikkie tk-5a23c — naam: De Willem",
       "created_at": "2026-05-29T09:27:42.811557+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -318,7 +318,7 @@
       "type": "deposit",
       "amount": 1.33,
       "status": "completed",
-      "message": "Tikkie tk-22d0b \u2014 naam: De Willem",
+      "message": "Tikkie tk-22d0b — naam: De Willem",
       "created_at": "2026-05-29T10:36:10.860943+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -335,7 +335,7 @@
       "type": "deposit",
       "amount": 11.0,
       "status": "completed",
-      "message": "Tikkie tk-9aa27 \u2014 naam: De Willem",
+      "message": "Tikkie tk-9aa27 — naam: De Willem",
       "created_at": "2026-05-29T11:39:34.442710+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -363,7 +363,7 @@
       "type": "deposit",
       "amount": 100.0,
       "status": "completed",
-      "message": "Tikkie tk-5ccab \u2014 naam: De Willem",
+      "message": "Tikkie tk-5ccab — naam: De Willem",
       "created_at": "2026-05-29T12:01:45.264460+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -391,7 +391,7 @@
       "type": "deposit",
       "amount": 10.0,
       "status": "completed",
-      "message": "Tikkie tk-f2b2a \u2014 naam: De Willem",
+      "message": "Tikkie tk-f2b2a — naam: De Willem",
       "created_at": "2026-05-29T12:07:01.523012+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -419,7 +419,7 @@
       "type": "deposit",
       "amount": 33.0,
       "status": "completed",
-      "message": "Tikkie tk-ad126 \u2014 naam: De Willem",
+      "message": "Tikkie tk-ad126 — naam: De Willem",
       "created_at": "2026-05-29T12:29:38.244099+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -447,7 +447,7 @@
       "type": "deposit",
       "amount": 4.02,
       "status": "completed",
-      "message": "Tikkie tk-20b09 \u2014 naam: De Willem",
+      "message": "Tikkie tk-20b09 — naam: De Willem",
       "created_at": "2026-05-29T17:04:32.869929+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -464,7 +464,7 @@
       "type": "deposit",
       "amount": 0.11,
       "status": "completed",
-      "message": "Tikkie tk-e5b40 \u2014 naam: De Willem",
+      "message": "Tikkie tk-e5b40 — naam: De Willem",
       "created_at": "2026-05-29T17:07:46.207196+00:00",
       "payment_info": {
         "method": "tikkie",
@@ -496,6 +496,23 @@
       "description": "5 ROAR gekocht @ 0.0",
       "timestamp": "2026-07-09T22:02:46.369690+00:00",
       "status": "completed"
+    },
+    {
+      "id": "957c0965-c25d-428f-87e1-3c05f37a7ff0",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 5.0,
+      "status": "completed",
+      "message": "Tikkie tk-1ad37 — naam: De Willem",
+      "created_at": "2026-07-21T14:48:11.028627+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-1ad373edcb"
+      },
+      "split": {
+        "free": 5.0,
+        "potje": 0.0
+      }
     }
   ]
 }

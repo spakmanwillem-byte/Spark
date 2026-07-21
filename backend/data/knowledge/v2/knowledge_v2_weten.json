@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2150,
+    "card_count": 2151,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:39:20.563532+00:00",
+    "last_updated": "2026-07-21T08:46:38.437726+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -287807,6 +287807,163 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a0d4b06e",
+      "begrip": "nummer",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een nummer is een reeks cijfers, tekens of een aanduiding die wordt gebruikt om iets te tellen, identificeren, ordenen of onderscheiden.",
+        "laag2": "Nummers hebben verschillende functies. Ze kunnen een hoeveelheid aangeven, een volgorde bepalen of dienen als unieke identificatie, zoals een huisnummer, telefoonnummer of artikelnummer.",
+        "laag3": "Een nummer is een symbolische aanduiding die afhankelijk van de context verschillende betekenissen kan hebben. In de wiskunde vertegenwoordigt een nummer een getal. In administratie en informatica wordt een nummer vaak gebruikt als identificatie. Ook in muziek verwijst een nummer naar een lied of muziekstuk. De betekenis wordt bepaald door de toepassing.",
+        "laag4": "Binnen Spark is een nummer een algemeen gegevensobject dat kan worden gebruikt voor identificatie, ordening, metingen en berekeningen. Spark kan nummers koppelen aan personen, objecten, gebeurtenissen en datasets, waardoor informatie eenvoudig kan worden opgeslagen, teruggevonden en verwerkt."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers, administraties en AI-systemen.",
+        "wat": "Een reeks cijfers of tekens die een hoeveelheid, volgorde of identificatie aangeeft.",
+        "wanneer": "Wanneer iets moet worden geteld, geordend, gemeten of geïdentificeerd.",
+        "waar": "In wiskunde, administratie, informatica, communicatie, wetenschap en het dagelijks leven.",
+        "waarom": "Om informatie eenduidig vast te leggen, te herkennen en te verwerken.",
+        "hoe": "Door cijfers of tekens volgens een afgesproken systeem toe te kennen."
+      },
+      "tags": [
+        "nummer",
+        "getal",
+        "cijfers",
+        "identificatie",
+        "volgorde",
+        "code",
+        "administratie",
+        "gegevens",
+        "wiskunde",
+        "informatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-86b28776",
+          "begrip": "ingevuld",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "administratie",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-735be6cb",
+          "begrip": "eerdere",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "volgorde"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T07:45:34.726140+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:46:38.437707+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "mijn zusje woont op nummer 21",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:46:34.902219+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:46:35.011477+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:46:35.019405+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:46:38.802854+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:46:38.812116+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

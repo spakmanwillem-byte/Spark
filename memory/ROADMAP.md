@@ -1,5 +1,173 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+
+## ✅ Sessie 44 (2026-07-21) — Eikpunt + Centrale Bank Guard + Archief
+
+### 🎯 Afgerond — data-reconciliatie + zelf-bewuste boekhouding
+
+**Data-cleanup (drift 0):**
+- **Backfill 5× `willem_inleg_basis`** — pot-001..005 kregen retroactief mint-events (basisinleg, no reserve-fee). treasury 999.971 → 999.966, u-000 balance 2 → 7.
+- **Burn 27 phantom tokens** — `historical_drift_correction` in papertrail. 27 tokens uit treasury zonder tegenboeking in balances (oude gift-drift van vóór papertrail). treasury 999.966 → 999.993.
+- **Pot-token alignment** — 1 token user-000 → user-001. Willem hield fysiek pot-001 (uit test_reserve_log mint) maar balance=0 door gift-terug drift. Herstel: u-000 6 / u-001 1.
+- **Backup**: `data/_backups/pre_cleanup_20260721_082347/`
+
+**Boekhouder = centrale bank (nieuwe features):**
+- `finance_hub.get_circulation()` — token↔balance↔pot drift-detectie, status `OK`/`DRIFT_DETECTED` in snapshot
+- `finance_hub.get_valuation()` — theoretische max-cap (1M × prijs) + huidige cap (in_circulation × prijs)
+- Beide blocks in `/api/boekhouder/snapshot/{user_id}` — één call, één waarheid
+- **`mint_tokens()` roept nu `sync_potjes_to_tokens()` aan** voor non-Spark users → mint = shop-buy = gift (unified container-flow)
+
+**Hotfixes in dezelfde sessie:**
+- **PriceAgent bug**: telde alleen `users['user-000'].potjes` (6) → prijs €13.35. Fix: `sum over all users` → n=7 → prijs €80.10/7 = €11.44 ✓ matcht shop/wallet
+- **Wallet "Verdiend €230"**: backend gaf `total_deposited` als `earned_total`. Fix in `wallet/routes.py`: 2 aparte velden (`earned_total: 0`, `total_deposited: 230.16`)
+- **Baseline €137.50 → €60**: oude test manual reset naar 6 Spark pots × €10 base. Live P&L flipt van -€56.97 → +€20.53. `set_at=NOW` filtert oude test-trades weg.
+
+**Deposit-historie archief + papertrail-hook:**
+- 9 Tikkie-topups (€209.66) + 3 legacy deposits (€118.52) → `data/_archive/pre_eikpunt_20260721_084340/`
+- `wallets.user-001.total_deposited: 230.16 → 0.0`
+- **Nieuwe log-hooks**: `POST /api/trade/deposits/{uid}` + Tikkie-confirmations schrijven automatisch naar `boekhouder/logs/deposit/YYYY-MM.jsonl` met hash-chain
+
+### 📊 Eindstand — schoon eikpunt
+| Metric | Waarde |
+|---|---|
+| Total supply | 1.000.000 |
+| Treasury | 999.993 |
+| In omloop | 7 (Willem 1 / Spark 6) |
+| Circulation drift | 0 ✅ |
+| Potjes drift | 0 ✅ |
+| Backing ratio | 100% |
+| Token prijs | €11.44 (dynamisch) |
+| Baseline u-000 | €60 |
+| Wallet Verdiend | €0.00 |
+| Wallet Gestort | €0.00 |
+| Papertrail | 12 hash-chained events (mint 7 / drift_fix 3 / deposit 2) |
+
+### ✅ Test-status
+- E2E via curl: 7 acceptance-checks groen (drift-detectie, reconciliatie-math, papertrail-integrity, admin-guard, cooldown, hash-chain, alignment)
+- Deployment-agent check: PASS
+- Geen regressies
+
+### 🎯 Wijzigingen in bestanden
+- EDIT `backend/modules/boekhouder/agents/auto_mint_scheduler.py` — ruis-formule fix + force + boekhouder-DM/community-post
+- EDIT `backend/modules/boekhouder/agents/price_agent.py` — n_potjes system-wide (v10_price_all_pots_001)
+- EDIT `backend/modules/boekhouder/finance_hub.py` — `get_circulation()` + `get_valuation()`
+- EDIT `backend/modules/boekhouder/finance_ops.py` — `sync_potjes_to_tokens` hook non-Spark users
+- EDIT `backend/modules/boekhouder/routes.py` — 3 admin endpoints `/auto-mint/{state,tick,reset}`
+- EDIT `backend/modules/scheduler/__init__.py` — `_maybe_auto_mint` uur-tick in loop
+- EDIT `backend/modules/wallet/routes.py` — earned_total/total_deposited scheiding (v10_earned_fix_001)
+- EDIT `backend/modules/wallet/tikkie.py` — deposit papertrail log-hook (v10_tikkie_papertrail_001)
+- EDIT `backend/modules/trade/routes.py` — deposit papertrail log-hook (v10_deposit_papertrail_001)
+- DATA `data/roar/roar_balances.json` — treasury 999.993, balances {u-000:6, u-001:1}, +8 tx entries
+- DATA `data/financial/user_potjes.json` — pot-001..005 backfilled met minted_from + market=EUR + capital=€10
+- DATA `data/wallet/user_wallets.json` — spark_tokens mirror gesynced
+- DATA `data/wallet/wallets.json` — user-001 totals gereset
+- DATA `data/trade/capital_baseline.json` — user-000: 137.5 → 60.0
+- DATA `data/trade/deposits.json` — leeg (gearchiveerd)
+- DATA `data/wallet/tikkie_topups.json` — leeg (gearchiveerd)
+- LOGS `data/boekhouder/logs/mint/2026-07.jsonl` — +5 backfill events
+- LOGS `data/boekhouder/logs/drift_fix/2026-07.jsonl` — +3 events (burn, alignment, baseline_reset)
+- LOGS `data/boekhouder/logs/deposit/2026-07.jsonl` — +2 events (archief, test-deposit)
+
+### 🟡 Nog te doen (P1, na productie-observatie)
+- **Sell/Dissolve token flow** — `POST /boekhouder/sell-token` (deduct ROAR + payout register)
+- **Gift-token pot-eigendom transfer** — sender-side pot verwijderen bij accept
+- **Delete-deposit endpoint papertrail-hook** — kleine gap gesignaleerd
+- **Wallet/Shop UI migratie naar `/api/boekhouder/snapshot`** — één source of truth
+- **Dashboard-widget "Centrale Bank Health"** — `circulation.status` badge, glow-rood bij drift
+- **SafeguardAgent** — 2-phase delete/rollback
+- **Container-module verrijken** met per-user token-ledger view
+
+### 🎯 Filosofie geland
+- **Zelf-bewuste boekhouding**: drift is niet meer onzichtbaar. Elke minuut kan Spark zelf zien of z'n eigen ecosysteem in balans is via `snapshot.circulation.status`.
+- **Ontwarren via papertrail**: elke drift-fix is een event met hash-chain. Toekomstige agents kunnen de historie exact reproduceren.
+- **1 token = 1 pot regel**: systeem-breed geldig, geen uitzonderingen. Mint = shop-buy = gift = alignment. Één flow.
+
+---
+
+## ✅ Sessie 43 (2026-07-20 avond) — Auto-Mint Scheduler + deploy
+
+### 🎯 Afgerond
+- **AutoMintScheduler** — nieuwe agent in `modules/boekhouder/agents/auto_mint_scheduler.py`
+- **24u ruis-stabiliteit + 24u cooldown**: als bitvavo_free ≥ (n+1)×€10 blijft voor 24u aaneen → auto-mint 1 pot
+- **3 admin endpoints**: `/api/boekhouder/auto-mint/{state,tick,reset}` (POST met `force=true` skip grace, cooldown blijft)
+- **Scheduler hook** in `modules/scheduler/__init__.py::_maybe_auto_mint` — tick elk uur
+- **DM naar admin + community-post** bij elke auto-mint (via boekhouder.service)
+- **Papertrail-integratie**: elke auto-mint = event in `logs/mint/YYYY-MM.jsonl` via `LogAgent`
+- **5% reserve-kluis** (2/2/1 dev/maint/buffer split) automatisch afgeboekt via `ReserveKluisAgent`
+
+### ✅ E2E getest (curl)
+- Force-mint uitgevoerd (pot-006 aangemaakt, log_event_id gekoppeld)
+- Cooldown-guard: 2e force-tick binnen 24u → geen mint, `waiting_for_grace_or_cooldown`
+- Admin-guard: non-admin viewer_id → HTTP 403
+- Hash-chain integrity: alle mint-events herbouwen hun `event_hash` correct
+- Deployment-agent: PASS
+
+### 🎯 Wijzigingen
+- NEW `backend/modules/boekhouder/agents/auto_mint_scheduler.py`
+- EDIT `backend/modules/boekhouder/agents/__init__.py` — AutoMintScheduler export
+- EDIT `backend/modules/boekhouder/finance_hub.py` — `self.auto_mint = AutoMintScheduler()`
+- EDIT `backend/modules/boekhouder/routes.py` — 3 admin endpoints
+- EDIT `backend/modules/scheduler/__init__.py` — `_maybe_auto_mint` in scheduler-loop
+
+---
+
+## ✅ Sessie 42 (2026-07-20 middag) — Boekhouder architectuur + Event Sourcing
+
+### 🎯 Afgerond
+- **Nieuw module-patroon**: `modules/boekhouder/` met 10 sub-agents onder `agents/`
+  - `token_agent.py`, `price_agent.py`, `wallet_agent.py`, `potjes_agent.py`
+  - `bitvavo_agent.py`, `recon_agent.py`, `sepa_agent.py`, `persona_agent.py`
+  - `log_agent.py`, `reserve_kluis_agent.py`
+- **Dispatcher pattern**: `FinanceHub` (`finance_hub.py`) delegeert naar sub-agents. `finance_ops.py` bevat muterende operaties (mint, sync-wallet-mirror).
+- **Blueprint**: `blueprints/finance_hub.json` — admin-editable regels (base=€10, floor=€5.08, dynamic formula)
+- **Dynamic Token Economy**: `pot_price = max(base_pot_size, bitvavo_free_eur / n_potjes)`
+- **Event Sourcing (Paper Trail)**: `LogAgent` schrijft naar `data/boekhouder/logs/{topic}/YYYY-MM.jsonl` met SHA-256 hash-chain (`event_hash = sha256(hash_prev|event_id|type|timestamp|data)`)
+- **Reserve-kluis**: `ReserveKluisAgent` boekt 5% van elke mint af naar 3 sub-potten (2% dev / 2% maint / 1% buffer)
+- **Willem's regel geland**: "Alleen Spark heeft 10 base potjes; andere users krijgen 1 pot per ROAR-token" — hard-coded in `sync_potjes_to_tokens()`
+- **`self_profile_intent.py`**: fast-path zodat Spark niet hallucineert over eigen persona-data (leest `data/users/user-000/` direct)
+- **`_do_potjes()` fast-path** in `trader_intents.py`: geen LLM voor "hoeveel potjes heb ik" — direct uit finance_hub
+
+### 🎯 Filosofie
+- Modules zijn nu **Dispatcher + Sub-Agent + Blueprint** i.p.v. één-file services
+- Regels leven in JSON-blueprints (admin-editable, Spark leest ze zelf via metadata)
+- Event Sourcing → immutable audit-trail voor financiële mutaties
+- Data-interacties gaan via de module-Hub, niet direct JSON-file access uit andere modules
+
+### 🎯 Wijzigingen
+- NEW `backend/modules/boekhouder/` folder met 10 agents + hub + ops + routes + service + blueprints
+- EDIT `backend/server.py` — boekhouder-router include
+- EDIT `backend/modules/trade/trader_intents.py` — `_do_potjes` gebruikt finance_hub
+- NEW `backend/modules/chat/self_profile_intent.py`
+- EDIT `frontend/src/components/admin/InstellingenPage.js` — blueprint editor UI
+- EDIT `frontend/src/components/modules/TraderPage.js` — snapshot-endpoint consumption
+- NEW `/app/memory/blueprints/boekhouder.md`
+
+---
+
+## ✅ Sessie 41 (2026-07-20 vroeg) — KB hygiëne + Letter-achievements
+
+### 🎯 Afgerond — KB v2 opschonen + Achievements refactor
+- **7 KB-kaarten gemerged** uit prod-backup ZIP die ontbraken in preview
+- **KB Index herbouwd** — `knowledge_index.json` gerecompileerd
+- **36 cross-file duplicaten opgeruimd** — kaarten die in meerdere lades stonden gedeclustered naar hun canonieke lade
+- **Skeleton vs gevulde kaarten** — duplicate skeletons (lege lite-kaarten) waar de gevulde tegenhanger al bestond → skeletons verwijderd
+- **Letter Achievements A-Z** — 26 nieuwe achievements gebouwd, één per letter (Willem noemt een woord met die letter → unlock)
+- **Achievements module refactor** naar Sub-Agent/Blueprint pattern:
+  - `modules/achievements/agents/` met per-domain sub-agents
+  - `blueprints/*.json` voor admin-editable achievement definitions
+  - `service.py` als dispatcher
+
+### 🎯 Wijzigingen
+- Merges in `data/knowledge/v2/knowledge_v2_{voelen,spreken,weten,doen}.json` + `knowledge_inbox.json`
+- REBUILD `data/knowledge/v2/knowledge_index.json`
+- NEW `backend/modules/achievements/agents/` (multiple files)
+- NEW `backend/modules/achievements/blueprints/` (multiple JSONs)
+- NEW `/app/memory/blueprints/achievements.md`
+- GET endpoint `/api/achievements/admin/blueprints` — blueprint-inspection
+
+---
+
+
 ## ✅ Sessie 40d (2026-07-20 later) — Meta-verrijking pass (v9_meta_enrich_001)
 
 ### 🎯 Afgerond — Spark krijgt inhoud i.p.v. breedte

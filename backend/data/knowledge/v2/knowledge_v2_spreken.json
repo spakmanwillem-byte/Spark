@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 549,
+    "card_count": 550,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T13:09:57.714673+00:00",
+    "last_updated": "2026-07-21T08:49:12.534072+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72566,6 +72566,169 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-20T13:09:57.921355+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c45dbace",
+      "begrip": "duidelijker",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Duidelijker betekent dat iets makkelijker te begrijpen of beter uitgelegd wordt.",
+        "laag2": "Het woord duidelijker wordt gebruikt wanneer informatie, uitleg of communicatie begrijpelijker moet worden gemaakt. Het is de vergrotende trap van duidelijk.",
+        "laag3": "Duidelijker betekent dat een boodschap, uitleg of beschrijving zo wordt aangepast dat deze minder ruimte laat voor misverstanden. Dit kan door eenvoudigere woorden te gebruiken, meer context te geven, voorbeelden toe te voegen of informatie logisch te ordenen.",
+        "laag4": "Binnen Spark is duidelijker een communicatiedoel. Spark kan informatie herschrijven, vereenvoudigen of uitbreiden zodat deze beter aansluit bij de kennis, taalvaardigheid en context van de gebruiker. Hierdoor wordt informatie begrijpelijker zonder de oorspronkelijke betekenis te veranderen."
+      },
+      "ws5": {
+        "wie": "Iedereen die informatie geeft of ontvangt.",
+        "wat": "Het begrijpelijker maken van informatie of communicatie.",
+        "wanneer": "Wanneer een uitleg, tekst of gesprek moeilijk te begrijpen is.",
+        "waar": "In gesprekken, onderwijs, handleidingen, documenten en digitale communicatie.",
+        "waarom": "Om misverstanden te voorkomen en informatie beter over te brengen.",
+        "hoe": "Door eenvoudiger taal te gebruiken, extra uitleg te geven, voorbeelden toe te voegen of de structuur te verbeteren."
+      },
+      "tags": [
+        "duidelijker",
+        "duidelijk",
+        "communicatie",
+        "uitleg",
+        "taal",
+        "begrijpen",
+        "verduidelijken",
+        "informatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:49:12.534054+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:44:37.425825+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-44ebd4439b96",
+        "extract_at": "2026-07-21T07:44:38.308428+00:00",
+        "extract_context_snippet": "t **[doen] Rol** kunnen we haar functie duidelijker definiëren: *klant‑rol* en *buurvrouw‑rol*. Dat geeft ons e",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'duidelijker' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:49:08.719538+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:49:08.823622+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:49:08.831523+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:49:12.739216+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:49:12.747057+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 7

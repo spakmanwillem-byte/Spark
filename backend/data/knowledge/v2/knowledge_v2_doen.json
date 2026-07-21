@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1150,
+    "card_count": 1152,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T14:01:26.593938+00:00",
+    "last_updated": "2026-07-21T08:26:39.868929+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -151275,6 +151275,333 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-20T14:01:24.800275+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-aa6557b4",
+      "begrip": "verblijft",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verblijft betekent dat iemand zich tijdelijk of voor langere tijd op een bepaalde plaats bevindt of woont.",
+        "laag2": "Het werkwoord verblijven wordt gebruikt wanneer iemand ergens blijft voor een bepaalde periode. Dit kan gaan om wonen, logeren, reizen, opname of tijdelijk aanwezig zijn.",
+        "laag3": "Verblijft is de tegenwoordige tijd van het werkwoord verblijven. Het geeft aan dat een persoon of dier zich op een specifieke locatie bevindt gedurende een bepaalde tijd. De duur van het verblijf kan variëren van enkele uren tot vele jaren. Het woord wordt vaak gebruikt in formele situaties, zoals zorg, toerisme, justitie en administratie.",
+        "laag4": "Binnen Spark beschrijft verblijft een actuele locatie of verblijfssituatie van een persoon, dier of object. Spark kan deze informatie koppelen aan tijd, plaats en context, waardoor inzicht ontstaat in waar iemand zich bevindt of gedurende een bepaalde periode heeft bevonden."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren of andere levende wezens.",
+        "wat": "Het zich bevinden of wonen op een bepaalde plaats.",
+        "wanneer": "Wanneer iemand gedurende een bepaalde periode ergens aanwezig is.",
+        "waar": "Op iedere locatie, zoals een woning, hotel, zorginstelling, vakantieadres of andere verblijfplaats.",
+        "waarom": "Om aan te geven waar iemand tijdelijk of langdurig aanwezig is.",
+        "hoe": "Door zich gedurende een bepaalde tijd op een locatie te bevinden."
+      },
+      "tags": [
+        "verblijft",
+        "verblijven",
+        "locatie",
+        "aanwezigheid",
+        "verblijf",
+        "wonen",
+        "logeren",
+        "plaats",
+        "tijd",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aanwezigheid",
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b95648e2",
+          "begrip": "plaats",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "plaats"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2d5e62f2",
+          "begrip": "tegenover",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "plaats"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a6a4b2fd",
+          "begrip": "Woonplaats",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "locatie",
+            "neutraal",
+            "plaats",
+            "wonen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ffd11416",
+          "begrip": "onder",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "plaats"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:23:58.795445+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:46:12.046756+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-d59e3bb3bcf1",
+        "extract_at": "2026-07-21T07:46:12.732663+00:00",
+        "extract_context_snippet": "at iemand op een bepaalde plek leeft en verblijft. Met de kaart **[voelen] zusje** weten we dat een zusje een",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'verblijft' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:23:56.466561+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:23:56.570228+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:23:56.577639+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:23:59.052087+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:23:59.059552+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6cce22e9",
+      "begrip": "leeft",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Leeft betekent dat een levend wezen in leven is en levensprocessen uitvoert.\n",
+        "laag2": "Het werkwoord leven beschrijft het bestaan van mensen, dieren, planten en andere organismen. Iemand die leeft groeit, reageert op de omgeving en voert biologische processen uit.\n",
+        "laag3": "Leeft is de tegenwoordige tijd van het werkwoord leven. Het geeft aan dat een organisme in leven is en kenmerken vertoont zoals stofwisseling, groei, voortplanting en reactie op prikkels. Het woord kan ook figuurlijk worden gebruikt, bijvoorbeeld om aan te geven dat een idee, traditie of herinnering nog steeds voortbestaat.\n",
+        "laag4": "Binnen Spark beschrijft leeft de actuele toestand van een levend organisme of het voortbestaan van een concept. Spark kan deze informatie gebruiken om onderscheid te maken tussen levende en niet-levende objecten en om relaties te leggen met eigenschappen zoals leeftijd, gezondheid, leefomgeving en levenscyclus.\n"
+      },
+      "ws5": {
+        "wat": "Het in leven zijn en levensprocessen uitvoeren.",
+        "wie": "Mensen, dieren, planten en andere levende organismen.",
+        "waar": "Overal waar leven mogelijk is.",
+        "wanneer": "Gedurende de levensduur van een levend organisme.",
+        "waarom": "Omdat levende organismen biologische processen uitvoeren die nodig zijn om te bestaan.",
+        "hoe": "Door middel van levensprocessen zoals ademhaling, stofwisseling, groei, voortplanting en reactie op de omgeving"
+      },
+      "tags": [
+        "leeft",
+        "leven",
+        "levend",
+        "organisme",
+        "bestaan",
+        "levensproces",
+        "biologie",
+        "natuur",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4ecf020e",
+          "begrip": "leef",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "bestaan",
+            "emotie",
+            "leeft",
+            "leven",
+            "levend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e8bfb9a",
+          "begrip": "biologisch",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "leven",
+            "levend",
+            "levensproces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7865b573",
+          "begrip": "Organismen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "leven",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f4313734",
+          "begrip": "voortplanting",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "leven",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1c6d745f",
+          "begrip": "Leven",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "leven",
+            "natuur",
+            "organisme"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:26:39.868898+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:46:11.340391+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-d59e3bb3bcf1",
+        "extract_at": "2026-07-21T07:46:12.045731+00:00",
+        "extract_context_snippet": "“woont” dat iemand op een bepaalde plek leeft en verblijft. Met de kaart **[voelen] zusje** weten we dat",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'leeft' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:26:37.773204+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:26:37.876353+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:26:37.883798+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:26:40.144094+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:26:40.151500+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

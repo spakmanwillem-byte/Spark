@@ -161,6 +161,18 @@ def mint_tokens(user_id: str, n_tokens: int, source: str = "manual",
     user_pots["potjes"] = existing
     save_json(pot_fp, pots)
 
+    # v10_mint_container_sync_001 — Voor niet-Spark users: sync via de bestaande
+    # potjes-service zodat mint gedraagt zich identiek aan shop-buy/gift
+    # (container-koppeling, round-robin market-toewijzing uit bots_registry).
+    # user-000 (Spark) heeft eigen base-potjes-logic en wordt geskipt door de sync.
+    if user_id != "user-000":
+        try:
+            from modules.trade.potjes import sync_potjes_to_tokens
+            # We hebben net N potjes toegevoegd; sync verifieert count == new_balance
+            sync_potjes_to_tokens(user_id, new_roar_balance)
+        except Exception as _ex:
+            print(f"[mint] container sync (non-blocking): {_ex}")
+
     # v10_log_reserve_001 — Log-agent + Reserve-kluis
     try:
         from .agents.log_agent import LogAgent

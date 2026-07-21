@@ -4,8 +4,8 @@
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
   "balances": {
-    "user-001": 0,
-    "user-000": 2
+    "user-001": 1,
+    "user-000": 6
   },
   "transactions": [
     {
@@ -58,10 +58,87 @@
       "total_eur": 16.05,
       "source": "auto_mint_24h_ruis",
       "timestamp": "2026-07-20T17:20:05.434154+00:00"
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 10.0,
+      "total_eur": 10.0,
+      "source": "willem_inleg_basis",
+      "timestamp": "2026-07-21T08:23:47.025912+00:00",
+      "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
+      "retro_backfill": true,
+      "no_reserve_kluis": true
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 10.0,
+      "total_eur": 10.0,
+      "source": "willem_inleg_basis",
+      "timestamp": "2026-07-21T08:23:47.025912+00:00",
+      "log_event_id": "1788329d-8511-4d39-8da5-e3581f394353",
+      "retro_backfill": true,
+      "no_reserve_kluis": true
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 10.0,
+      "total_eur": 10.0,
+      "source": "willem_inleg_basis",
+      "timestamp": "2026-07-21T08:23:47.025912+00:00",
+      "log_event_id": "12b77d32-348a-4c55-8602-d7a9ef834d68",
+      "retro_backfill": true,
+      "no_reserve_kluis": true
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 10.0,
+      "total_eur": 10.0,
+      "source": "willem_inleg_basis",
+      "timestamp": "2026-07-21T08:23:47.025912+00:00",
+      "log_event_id": "00c6f3fa-7611-4524-9de5-f3be9de9fd64",
+      "retro_backfill": true,
+      "no_reserve_kluis": true
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 10.0,
+      "total_eur": 10.0,
+      "source": "willem_inleg_basis",
+      "timestamp": "2026-07-21T08:23:47.025912+00:00",
+      "log_event_id": "37b7bce0-0ab6-4a16-83eb-b704320d3a60",
+      "retro_backfill": true,
+      "no_reserve_kluis": true
+    },
+    {
+      "type": "burn",
+      "n_tokens": 27,
+      "source": "historical_drift_correction",
+      "timestamp": "2026-07-21T08:23:47.025912+00:00",
+      "log_event_id": "0a8e479b-70d4-4618-a473-709b2e619753",
+      "reason": "Cleanup: 27 phantom tokens (gift-drift zonder tegenboeking)"
+    },
+    {
+      "type": "alignment_transfer",
+      "from_user_id": "user-000",
+      "to_user_id": "user-001",
+      "n_tokens": 1,
+      "source": "pot_token_alignment",
+      "timestamp": "2026-07-21T08:24:30.537747+00:00",
+      "log_event_id": "5a6d6397-01c1-478f-bb1b-77667c338339"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999971,
+  "treasury_pool": 999993,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {
@@ -101,7 +178,7 @@
       "ts": "2026-06-03T12:04:57.407379+00:00",
       "action": "manual_balance_reset",
       "by": "user-001",
-      "reason": "Pre-redeploy schoonmaak — Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
+      "reason": "Pre-redeploy schoonmaak \u2014 Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
       "new_balances": {
         "user-000": 5,
         "user-001": 5,
@@ -177,10 +254,10 @@
       "ts": "2026-05-31T21:15:37.057791+00:00",
       "to_user_id": "user-000",
       "amount": 3,
-      "reason": "Surplus uit Bitvavo €29.74 → 3 tokens gemint naar Spark (nominaal €30, klein gemiddeld-correctie €0.26)",
+      "reason": "Surplus uit Bitvavo \u20ac29.74 \u2192 3 tokens gemint naar Spark (nominaal \u20ac30, klein gemiddeld-correctie \u20ac0.26)",
       "milestone": "echte_start_v1"
     }
   ],
   "_reset_at": "2026-07-09T22:03:12.853929+00:00",
-  "_reset_note": "v8_live_start: 5 tokens bij Willem (user-001) — Spark's trader-fonds. Treasury = TOTAL - 5."
+  "_reset_note": "v8_live_start: 5 tokens bij Willem (user-001) \u2014 Spark's trader-fonds. Treasury = TOTAL - 5."
 }

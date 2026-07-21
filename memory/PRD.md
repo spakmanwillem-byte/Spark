@@ -1,6 +1,58 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 44 (2026-07-21) — Data-reconciliatie + Centrale Bank Guard
+
+### Probleem (door Willem gesignaleerd)
+Trader zag maar 2 potjes terwijl er 7 fysiek waren. Snuffel toonde:
+- **Token/pot drift = 5**: 5 legacy Spark-pots (pot-001..005) zonder mint-event, `minted_from=?`, `market=BCH-EUR` → trader filterde ze weg.
+- **Treasury/balance drift = 27**: treasury -29 uit 1M, maar balances slechts 2. Historische gift-anomalie.
+- **Pot-token misalignment**: user-001 hield pot-001 (van test_reserve_log mint) maar balance=0 door gift-terug drift.
+
+### Cleanup uitgevoerd (met backup naar `data/_backups/pre_cleanup_20260721_082347`)
+1. **Backfill**: 5× mint `willem_inleg_basis` (source: eigen inleg, `no_reserve_kluis=true`) voor user-000, treasury -5, pot-001..005 krijgen `minted_from + market=EUR`
+2. **Burn**: 27 tokens via drift_fix event (`historical_drift_correction`) → treasury +27
+3. **Alignment**: 1 token user-000 → user-001 (`pot_token_alignment`) — herstel 1-token=1-pot voor Willem's pot-001
+
+### Eindstand — schoon eikpunt
+| Metric | Waarde |
+|---|---|
+| Total supply | 1.000.000 |
+| Treasury pool | 999.993 |
+| In omloop | 7 (Willem 1, Spark 6) |
+| Circulation drift | 0 |
+| Potjes drift | 0 |
+| Backing ratio | 100% |
+
+### Nieuwe features (Boekhouder = centrale bank)
+- **`finance_hub.get_circulation()`** — token↔balance↔pot drift-detectie, status `OK`/`DRIFT_DETECTED`
+- **`finance_hub.get_valuation()`** — theoretische max-cap (1M × price) + huidige cap (in_circulation × price)
+- **Beide blocks in `/api/boekhouder/snapshot/{user_id}`** — één call, één waarheid
+- **`mint_tokens()` roept nu `sync_potjes_to_tokens()` aan** voor non-Spark users → mint = shop-buy = gift (unified container-flow)
+
+### Verificatie (curl E2E)
+- ✅ `GET /snapshot/user-001` → `circulation.status: OK`, alle drifts 0
+- ✅ Papertrail: 7 mint-events + 1 burn + 1 alignment, hash-chain 100% integer
+- ✅ Auto-mint state: n_potjes=7, baseline=€70, ruis=€10.10, condition_met_now=true (klaar voor volgende natuurlijke mint)
+- ✅ Trader ziet nu 6 potjes voor user-000 (was 2)
+
+### Wijzigingen
+- EDIT `backend/modules/boekhouder/finance_hub.py` — `get_circulation()` + `get_valuation()` + snapshot uitbreiding
+- EDIT `backend/modules/boekhouder/finance_ops.py` — `sync_potjes_to_tokens` hook voor non-Spark users
+- DATA `data/roar/roar_balances.json` — treasury 999993, balances {u-000: 6, u-001: 1}, +7 transactions
+- DATA `data/financial/user_potjes.json` — pot-001..005 backfilled met minted_from + EUR + capital=€10 base
+- DATA `data/wallet/user_wallets.json` — spark_tokens mirror gesynced
+- LOGS `data/boekhouder/logs/mint/2026-07.jsonl` — +5 events
+- LOGS `data/boekhouder/logs/drift_fix/2026-07.jsonl` — +2 events (burn + alignment)
+
+### Open
+- **Auto-mint zal ~24u vanaf nu triggeren** (bitvavo €80.10 > threshold €80). Willem kan resetten via `POST /auto-mint/reset` als hij eerst wil observeren.
+- Container-module bestaat (routes actief) maar heeft nog geen expliciete token/pot-ledger view per user. Kan later toegevoegd.
+
+---
+
+
+
 ## Sessie 43 (2026-07-20) — Auto-Mint Scheduler afgerond + deployment-ready
 
 ### Wat gebouwd

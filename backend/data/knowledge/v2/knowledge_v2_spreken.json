@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 550,
+    "card_count": 551,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:49:12.534072+00:00",
+    "last_updated": "2026-07-21T08:54:52.228630+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72729,6 +72729,162 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-21T08:49:12.747057+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e6281129",
+      "begrip": "opmerking",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een opmerking is een mondelinge of schriftelijke uitspraak waarmee iemand informatie, een mening of een reactie geeft.",
+        "laag2": "Een opmerking wordt gebruikt om iets toe te voegen aan een gesprek, tekst of situatie. Een opmerking kan informatief, vragend, grappig, kritisch of ondersteunend zijn.",
+        "laag3": "Een opmerking is een vorm van communicatie waarin iemand een gedachte, observatie, mening of reactie uitdrukt. Opmerkingen kunnen neutraal of emotioneel zijn en hebben vaak invloed op het verloop van een gesprek. De betekenis wordt mede bepaald door de context, woordkeuze en toon.",
+        "laag4": "Binnen Spark is een opmerking een communicatie-uiting die kan worden geanalyseerd op inhoud, intentie, emotie en context. Spark kan opmerkingen herkennen als bijvoorbeeld een vraag, suggestie, feedback, compliment of kritiek, waardoor gesprekken beter kunnen worden geïnterpreteerd."
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een mondelinge of schriftelijke uitspraak die informatie, een mening of een reactie bevat.",
+        "wanneer": "Tijdens een gesprek, discussie, presentatie, tekst of andere vorm van communicatie.",
+        "waar": "In gesprekken, berichten, documenten, vergaderingen en online communicatie.",
+        "waarom": "Om informatie te delen, te reageren, feedback te geven of een gesprek voort te zetten.",
+        "hoe": "Door iets mondeling of schriftelijk uit te spreken of op te schrijven."
+      },
+      "tags": [
+        "opmerking",
+        "communicatie",
+        "uitspraak",
+        "reactie",
+        "mening",
+        "observatie",
+        "feedback",
+        "gesprek",
+        "taal",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-331910b3",
+          "begrip": "Nou, ik vond je reactietijd best snel.",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "feedback",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "mening",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T07:27:35.621148+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:54:52.228613+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "dus de slaapdronken opmerking komt uit je llm en niet uit je kb",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:54:50.305929+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:54:50.409232+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:54:50.417366+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:54:52.433523+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:54:52.441410+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 7

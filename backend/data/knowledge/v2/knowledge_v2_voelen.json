@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 454,
+    "card_count": 456,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:45:14.430558+00:00",
+    "last_updated": "2026-07-21T08:53:34.051329+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -61981,6 +61981,315 @@
             "result": {
               "n_found": 5,
               "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fdad6bce",
+      "begrip": "domme",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Domme beschrijft iets of iemand die als onverstandig, onhandig of weinig doordacht wordt gezien.",
+        "laag2": "Het woord domme is de verbogen vorm van dom. Het wordt gebruikt om een persoon, handeling, opmerking of beslissing te beschrijven die als onverstandig of onlogisch wordt ervaren. De betekenis is afhankelijk van de context.",
+        "laag3": "Domme is een subjectieve beoordeling en geen objectief vaststaand feit. Het kan verwijzen naar een gebrek aan kennis, een vergissing, onvoorzichtig gedrag of een oordeel van een ander. Omdat de term vaak een negatieve lading heeft, kan hij kwetsend of beledigend overkomen wanneer hij op een persoon wordt toegepast.",
+        "laag4": "Binnen Spark wordt domme gezien als een waarderende beschrijving en niet als een objectieve eigenschap. Spark maakt onderscheid tussen een domme handeling, een domme opmerking en het bestempelen van een persoon. Het systeem vermijdt om mensen als dom te classificeren en richt zich waar mogelijk op het gedrag of de situatie in plaats van op de persoon."
+      },
+      "ws5": {
+        "wie": "Mensen die een persoon, handeling of situatie beoordelen.",
+        "wat": "Een beschrijving van iets dat als onverstandig of weinig doordacht wordt gezien.",
+        "wanneer": "Wanneer een handeling, uitspraak of beslissing als onlogisch of onverstandig wordt ervaren.",
+        "waar": "In gesprekken, onderwijs, sociale situaties en geschreven communicatie.",
+        "waarom": "Om een negatieve beoordeling over gedrag, keuzes of uitspraken uit te drukken.",
+        "hoe": "Door een persoon, handeling of situatie als onverstandig of ondoordacht te omschrijven."
+      },
+      "tags": [
+        "domme",
+        "dom",
+        "onverstandig",
+        "beoordeling",
+        "gedrag",
+        "mening",
+        "communicatie",
+        "context",
+        "emotie",
+        "neutraal",
+        "boos",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "communicatie",
+            "context",
+            "emotie",
+            "mening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e7bf2f99",
+          "begrip": "verkeerd",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "boos",
+            "communicatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e2c7d584",
+          "begrip": "overdreven",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "boos",
+            "communicatie",
+            "context",
+            "emotie",
+            "mening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-fcaf76c8",
+          "begrip": "oordeel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "communicatie",
+            "emotie",
+            "mening",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "boos",
+            "communicatie",
+            "emotie",
+            "gedrag",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T07:31:58.529648+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:52:20.580510+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik plaag je met domme vragen, echter maakt je reactie mij blij,",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:52:16.467093+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:52:16.577810+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:52:16.586856+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:52:20.783204+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:52:20.790931+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-651af5e8",
+      "begrip": "slaapdronken",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Slaapdronken betekent dat iemand zich direct na het wakker worden nog slaperig, verward of niet volledig alert voelt.",
+        "laag2": "Iemand die slaapdronken is, heeft vaak moeite met helder denken, reageren of concentreren. Dit gevoel verdwijnt meestal vanzelf na korte tijd.",
+        "laag3": "Slaapdronken is een tijdelijke toestand die optreedt tijdens de overgang van slaap naar volledige waakzaamheid. Tijdens deze periode zijn de hersenen nog niet volledig actief, waardoor iemand traag kan reageren, zich verward voelt of moeite heeft met het nemen van beslissingen. De duur verschilt per persoon en situatie.",
+        "laag4": "Binnen Spark kan slaapdronken worden herkend als een tijdelijke toestand die invloed heeft op communicatie, concentratie en besluitvorming. Door deze context mee te nemen kan Spark rekening houden met verminderde alertheid en informatie eenvoudiger of stapsgewijs aanbieden."
+      },
+      "ws5": {
+        "wie": "Mensen die net wakker zijn geworden.",
+        "wat": "Een tijdelijke toestand van slaperigheid en verminderde alertheid na het ontwaken.",
+        "wanneer": "Direct na het wakker worden.",
+        "waar": "Overal waar iemand uit de slaap ontwaakt.",
+        "waarom": "Omdat de overgang van slaap naar volledige waakzaamheid tijd nodig heeft.",
+        "hoe": "Door de hersenen en het lichaam geleidelijk over te gaan van slaap naar een volledig alerte toestand."
+      },
+      "tags": [
+        "slaapdronken",
+        "slaap",
+        "ontwaken",
+        "slaperig",
+        "vermoeid",
+        "alertheid",
+        "concentratie",
+        "wakker",
+        "toestand",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b1ae70e0",
+          "begrip": "landen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "concentratie",
+            "emotie",
+            "neutraal",
+            "toestand",
+            "wakker"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0c1e200f",
+          "begrip": "cafeine",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "alertheid",
+            "concentratie",
+            "emotie",
+            "neutraal",
+            "slaap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-558b2443",
+          "begrip": "kwijt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T07:27:31.621221+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:53:34.051313+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "dus de slaapdronken opmerking komt uit je llm en niet uit je kb",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:53:30.910714+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:53:31.018406+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:53:31.027264+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:53:34.251347+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:53:34.258985+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

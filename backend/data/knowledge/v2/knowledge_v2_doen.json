@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1152,
+    "card_count": 1153,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:26:39.868929+00:00",
+    "last_updated": "2026-07-21T08:50:35.926518+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -151599,6 +151599,170 @@
             "result": {
               "n_found": 5,
               "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1680ebef",
+      "begrip": "past",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Past betekent dat iets geschikt is, overeenkomt of goed aansluit bij iets anders.",
+        "laag2": "Het woord past wordt gebruikt om aan te geven dat iets qua vorm, grootte, functie, stijl of situatie goed overeenkomt met een ander object of een bepaalde context. Het is de tegenwoordige tijd van het werkwoord passen.",
+        "laag3": "Past beschrijft een relatie tussen twee of meer zaken die met elkaar in overeenstemming zijn. Dit kan letterlijk zijn, zoals kleding die past, of figuurlijk, zoals een oplossing die bij een probleem past of een antwoord dat bij een vraag past. De beoordeling hangt af van de context en de eigenschappen van de betrokken onderdelen.",
+        "laag4": "Binnen Spark wordt past gebruikt om overeenkomsten en geschiktheid te beoordelen. Spark kan bepalen of een antwoord bij een vraag past, een object binnen een categorie past of een oplossing aansluit op de gegeven context. Hierdoor kan het systeem relevantere en nauwkeurigere keuzes maken."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen die beoordelen of iets geschikt is.",
+        "wat": "Het overeenkomen of geschikt zijn voor een bepaalde situatie of context.",
+        "wanneer": "Wanneer wordt beoordeeld of iets aansluit bij een ander object, persoon of situatie.",
+        "waar": "In het dagelijks leven, communicatie, onderwijs, werk en informatiesystemen.",
+        "waarom": "Om te bepalen of iets bruikbaar, passend of geschikt is.",
+        "hoe": "Door eigenschappen, kenmerken of context met elkaar te vergelijken."
+      },
+      "tags": [
+        "past",
+        "passen",
+        "geschikt",
+        "overeenkomst",
+        "aansluiten",
+        "passend",
+        "relatie",
+        "vergelijking",
+        "context",
+        "beoordeling",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-d549fc6f",
+          "begrip": "hetzelfde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "overeenkomst",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-57702291",
+          "begrip": "associatie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "overeenkomst",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1d373d6f",
+          "begrip": "overeenkomst",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overeenkomst",
+            "relatie",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2d5e62f2",
+          "begrip": "tegenover",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "vergelijking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-21T08:50:35.926501+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:44:36.715193+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-44ebd4439b96",
+        "extract_at": "2026-07-21T07:44:37.425000+00:00",
+        "extract_context_snippet": "efdevolle, emotionele band hebt. Roline past daar niet in; ze is een **klant** en **buurvrouw** van je z",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'past' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-21T08:50:32.939114+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:50:33.047164+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:50:33.054746+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T08:50:36.184528+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T08:50:36.192573+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

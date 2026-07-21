@@ -1,6 +1,42 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## 🔴 P1 BACKLOG — Gatekeeper-fase (ontdekt sessie 46, dubbels-audit)
+
+Willem's terechte feedback ("waarom vond je de bestaande buy/sell DM niet?") leidde tot een proactieve dubbels-scan. Bevindingen:
+
+### Risico 1 (kritiek) — 14 modules schrijven naar `roar_balances.json`
+Root cause van de 27-token drift die we in sessie 44 opruimden. Elke module kan de "centrale bank" muteren zonder gatekeeper:
+```
+trade/routes.py, shop/gift.py, boekhouder/finance_ops.py,
+wallet/routes.py, admin/pre_deploy_routes.py, achievements/*,
++ 8 anderen
+```
+**Fix**: enforce dat alle mutaties via `boekhouder/finance_ops.mint_tokens()` (of soortgelijk single-entry-point) gaan. Andere plekken roepen die aan; niemand editeert roar_balances direct. Voordeel: reserve-kluis-hook + papertrail + sync_potjes worden vanzelf meegepakt. ~1u werk.
+
+### Risico 2 (middel) — `wallets.json` vs `user_wallets.json` = twee wallet-systemen
+- `wallets.json`: 9 writers (legacy EUR-balance)
+- `user_wallets.json`: 4 writers (newer spark_tokens mirror)
+
+Was precies de reden dat "Verdiend €230" bug ontstond (verkeerde bron gepakt). **Fix**: migratie naar single source. Kies één, verplaats alle writers, laat andere alleen als read-only view. ~2u werk + testen.
+
+### Risico 3 (middel) — 4 writers naar `spark_trader.json` (blueprint)
+```
+trade/strategy_decision.py, trade/routes.py,
+trade/trader_intents.py, trade/monitor.py
+```
+Blueprint zou "read-only source of truth" moeten zijn. Als 4 plekken 'm kunnen wijzigen wordt hij niet-autoritair. **Fix**: alleen admin-UI mag blueprints editen; code leest ze alleen. Hetzelfde principe uitrollen naar alle andere `blueprints/*.json`. ~30 min werk.
+
+### Kleinere overlaps
+- Deposits-flow: Tikkie confirm ↔ deposit endpoint ↔ wallet.transactions — 3 plekken die soort-van-hetzelfde doen. Consolidatie wenselijk maar niet urgent.
+
+### Les voor toekomstige agents
+Bij architectuur-vragen minimaal **3 grep-passes**: op werkwoord (buy/sell/mint), op noun (trade/token/pot), en op module (boekhouder/finance_hub). Reverse-lookup bij hooks. En vraag Willem gewoon: "bestaat er al zoiets?" — hij weet de historie beter dan mijn grep.
+
+---
+
+
+
 ## ✅ Sessie 46 (2026-07-21 avond) — Polish: gradatie-1 admin-context, KB dupes, buy-cooldown persist
 
 ### 🎯 Kleine tweaks na Fase 1 — geen breed nieuw werk, veel glad strijken

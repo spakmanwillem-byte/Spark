@@ -266,5 +266,23 @@
       "total_donated": 0
     }
   },
-  "transactions": []
+  "transactions": [
+    {
+      "id": "957c0965-c25d-428f-87e1-3c05f37a7ff0",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 5.0,
+      "status": "completed",
+      "message": "Tikkie tk-1ad37 \u2014 naam: De Willem",
+      "created_at": "2026-07-21T14:48:11.028627+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-1ad373edcb"
+      },
+      "split": {
+        "free": 5.0,
+        "potje": 0.0
+      }
+    }
+  ]
 }

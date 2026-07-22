@@ -20,11 +20,14 @@ export default function SandboxPage({ onNavigate }) {
             <Beaker className="w-6 h-6 text-amber-400" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white">Sandbox</h1>
+            <h1 className="text-2xl font-bold text-white">Widget Kladblok</h1>
             <p className="text-sm text-slate-400 mt-1 max-w-xl">
               Tijdelijke parkeer-plek voor front-end kaders. Bouw je een widget en weet je nog niet
               waar hij hoort? Registreer &apos;m hier, verplaats later naar zijn definitieve module met
               &eacute;&eacute;n regel.
+            </p>
+            <p className="text-[10px] text-slate-600 mt-1.5">
+              💡 Niet te verwarren met <span className="text-slate-500">Module Sandbox</span> (Integraties → tab) — die is voor Sparks Python-modules.
             </p>
           </div>
         </header>

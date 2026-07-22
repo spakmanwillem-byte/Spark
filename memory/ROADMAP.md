@@ -25,6 +25,24 @@ Toont Groq/Cerebras/Emergent-key verbruik per dag met % van limit. Placeholder-d
 
 **Bonus voor Spark**: als hij ooit een widget wil suggereren, hoeft hij alleen een nieuw file + 1 regel in registry.js — geen module-code aanpassen.
 
+### 🔁 Naam-scheiding (Willems terechte vondst)
+Bestaande **"Module Sandbox"** (Integraties → tab, `/app/backend/sandbox/modules/`) is voor **Sparks Python-modules** — laten scripten + testen + integreren. Volledig backend + eigen frontend.
+
+Nieuwe **"Widget Kladblok"** (Beheer → tab, `/admin/sandbox` route) is voor **frontend-widget kaders parkeren** — puur UI.
+
+Om verwarring te voorkomen: nav-label omgezet van "Sandbox" → **"Widget Kladblok"**. Route + id blijven `sandbox` (backwards compat). Disclaimer bovenaan de page verwijst expliciet naar de andere.
+
+### 🟡 Nog te doen — Sandbox-agent (Willems idee sessie 47)
+> "mss een sandbox agent maken die onderscheid kan maken bijhouden zoudat je geen lijnen naast elkaar krijgt. ofzo en een taakverdeling hebt."
+
+Eén agent die:
+- Beide sandboxen (Module Sandbox + Widget Kladblok) kent
+- Bij een vraag "Spark, bouw een widget X" → beslist zelf welke sandbox (frontend-widget vs Python-module)
+- Voorkomt dubbele registraties / gescheiden metadata
+- Registreert taakverdeling (wie bouwt wat, welke naam-space)
+
+Niet nu bouwen — eerst gebruiken, dan patroon herkennen. Op roadmap voor als Willem er tegenaan loopt.
+
 
 ### 🔄 Prod → Preview merge (13:33 UTC)
 Willem deployde en vulde KB verder in in productie. Zip-backup (908 files sinds deploy-marker) ge-imported:

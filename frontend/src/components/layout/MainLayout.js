@@ -56,7 +56,7 @@ export const navigationConfig = {
       { id: 'profiel', label: 'Mijn Profiel', icon: User, path: '/profiel' },
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
-      { id: 'sandbox', label: 'Sandbox', icon: Beaker, path: '/admin/sandbox', adminOnly: true },
+      { id: 'sandbox', label: 'Widget Kladblok', icon: Beaker, path: '/admin/sandbox', adminOnly: true },
       { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },
     ]
   }

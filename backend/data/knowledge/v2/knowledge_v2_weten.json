@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2218,
+    "card_count": 2219,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T14:54:33.162993+00:00",
+    "last_updated": "2026-07-22T15:05:44.340583+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -298770,6 +298770,169 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-905fa1a9",
+      "begrip": "spelletje",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een spelletje is een klein of eenvoudig spel dat gespeeld wordt voor ontspanning, plezier of uitdaging.",
+        "laag2": "Spelletje is de verkleinvorm van spel. Het verwijst meestal naar een kort, eenvoudig of informeel spel, zoals een bordspel, kaartspel, computerspel of puzzel.",
+        "laag3": "Een spelletje is een activiteit met regels, doelen of uitdagingen waarbij één of meerdere spelers deelnemen. Het woord wordt vaak gebruikt voor kleinere of minder complexe spellen, maar kan ook een vriendelijke of informele benaming zijn voor een computerspel of bordspel. Spelletjes kunnen gespeeld worden voor ontspanning, competitie, samenwerking, leren of tijdverdrijf en bestaan in zowel fysieke als digitale vormen.",
+        "laag4": "Binnen Spark wordt spelletje herkend als een algemene benaming voor een spel. Spark gebruikt de context om te bepalen of het gaat om een computerspel, bordspel, kaartspel, puzzel, mobiel spel, videogame of een andere spelvorm. Indien mogelijk koppelt Spark het woord aan een specifiek spel of spelgenre.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zullen we een spelletje spelen?\"\n\n→ Er wordt voorgesteld om een spel te spelen.\n\nVoorbeeld 2\n\n\"Ik speel vanavond een spelletje op de computer.\"\n\n→ Er wordt een computerspel bedoeld."
+      },
+      "ws5": {
+        "wie": "Mensen van alle leeftijden.",
+        "wat": "Een klein, eenvoudig of informeel spel.",
+        "wanneer": "Tijdens ontspanning, vrije tijd, een activiteit of een spelmoment.",
+        "waar": "Thuis, op school, online, op een computer, spelcomputer, telefoon of aan tafel.",
+        "waarom": "Voor ontspanning, plezier, uitdaging, leren of sociale interactie.",
+        "hoe": "Door de regels van het spel te volgen en alleen of samen met anderen te spelen."
+      },
+      "tags": [
+        "spelletje",
+        "spel",
+        "game",
+        "videogame",
+        "computerspel",
+        "bordspel",
+        "kaartspel",
+        "puzzel",
+        "mobiel spel",
+        "ontspanning",
+        "amusement",
+        "uitdaging",
+        "vrije tijd",
+        "spelen",
+        "context",
+        "emotie",
+        "blij",
+        "positief",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-6284ddb1",
+          "begrip": "De Sims 4 (spel)",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8205b15f",
+          "begrip": "spelen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "game",
+            "neutraal",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-761b05aa",
+          "begrip": "entertainment",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "amusement",
+            "blij",
+            "emotie",
+            "ontspanning",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b24b74c0",
+          "begrip": "Amusement",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "amusement",
+            "ontspanning",
+            "positief",
+            "spel",
+            "vrije tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T13:03:19.465515+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:05:44.340564+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik ga even wat anders doen. ik ga een spelletje spelen. De Sims4",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:05:41.013372+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:05:41.114639+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:05:41.122749+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:05:44.694775+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:05:44.702880+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

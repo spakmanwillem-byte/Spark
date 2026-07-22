@@ -1559,6 +1559,26 @@
       "requested_amount": 12.19,
       "effective_amount": 12.19,
       "proxied_via_spark": false
+    },
+    {
+      "trade_id": "00000000-0000-047b-0100-0009577147ab",
+      "run_id": "manual",
+      "timestamp": "2026-07-22T07:27:42.138650+00:00",
+      "action": "SELL",
+      "market": "ETH-EUR",
+      "order_id": "00000000-0000-047b-0100-0009577147ab",
+      "amount": 0.00727667,
+      "price": 1678.0000000000002,
+      "filled": 0.00727667,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.04025226,
+      "fee_currency": "EUR",
+      "requested_amount": 12.22,
+      "effective_amount": 0.00727667,
+      "proxied_via_spark": false
     }
   ]
 }

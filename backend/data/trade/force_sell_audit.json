@@ -2410,6 +2410,193 @@
           "message": "LIVE SELL uitgevoerd @ €70.90 (fee €0.0223)"
         }
       }
+    },
+    {
+      "id": "fs-0035",
+      "ts": "2026-07-22T07:27:36.406125+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "ETH-EUR",
+      "exit_price": 1677.66,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "nummer": 1,
+          "capital": 11.9979,
+          "max_size": 80.24,
+          "pot_locked": false,
+          "market": "ETH-EUR",
+          "minted_at": "2026-07-20T16:52:48.805064+00:00",
+          "minted_from": "test_reserve_log",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "stats": {
+            "trades": 1,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1921
+          },
+          "alignment_log_event_id": "5a6d6397-01c1-478f-bb1b-77667c338339",
+          "alignment_at": "2026-07-21T08:24:30.537747+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-07-21T14:16:49.758044+00:00",
+              "action": "BUY",
+              "cluster_id": "c8ecf95df974",
+              "trade_id": "00000000-0000-047b-0100-000954930bdd",
+              "entry_price": 1696.0106757939493,
+              "amount_eur": 12.19
+            }
+          ],
+          "last_action": "SELL @ €1677.77 | netto €-0.192"
+        },
+        "netto": -0.1921,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-047b-0100-0009577134dc",
+            "run_id": "manual",
+            "timestamp": "2026-07-22T07:27:36.217513+00:00",
+            "action": "SELL",
+            "market": "ETH-EUR",
+            "order_id": "00000000-0000-047b-0100-0009577134dc",
+            "amount": 0.0072588,
+            "price": 1677.77,
+            "filled": 0.0072588,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.038596876,
+            "fee_currency": "EUR",
+            "requested_amount": 12.19,
+            "effective_amount": 0.0072588,
+            "proxied_via_spark": false
+          },
+          "message": "LIVE SELL uitgevoerd @ €1677.77 (fee €0.0386)"
+        }
+      }
+    },
+    {
+      "id": "fs-0036",
+      "ts": "2026-07-22T07:27:42.233366+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-001",
+      "market": "ETH-EUR",
+      "exit_price": 1677.66,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 12.0065,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ETH-EUR",
+          "stats": {
+            "trades": 1,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2135
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "last_action": "SELL @ €1678.00 | netto €-0.213",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
+          "trade_log": [
+            {
+              "ts": "2026-07-21T14:15:26.567222+00:00",
+              "action": "BUY",
+              "cluster_id": "3b30e7b75ea2",
+              "trade_id": "00000000-0000-047b-0100-000954918ca5",
+              "entry_price": 1699.1903037337545,
+              "amount_eur": 12.22
+            }
+          ]
+        },
+        "netto": -0.2135,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-047b-0100-0009577147ab",
+            "run_id": "manual",
+            "timestamp": "2026-07-22T07:27:42.138650+00:00",
+            "action": "SELL",
+            "market": "ETH-EUR",
+            "order_id": "00000000-0000-047b-0100-0009577147ab",
+            "amount": 0.00727667,
+            "price": 1678.0000000000002,
+            "filled": 0.00727667,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.04025226,
+            "fee_currency": "EUR",
+            "requested_amount": 12.22,
+            "effective_amount": 0.00727667,
+            "proxied_via_spark": false
+          },
+          "message": "LIVE SELL uitgevoerd @ €1678.00 (fee €0.0403)"
+        }
+      }
+    },
+    {
+      "id": "fs-0037",
+      "ts": "2026-07-22T07:28:15.372389+00:00",
+      "type": "force_sell_rejected",
+      "user_id": "user-000",
+      "pot_id": "pot-003",
+      "market": "ETH-EUR",
+      "exit_price": 1679.39,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "bitvavo_sell": {
+        "success": false,
+        "error": "Sell zou €0.012 opleveren, onder Bitvavo minimum €5.00 voor ETH-EUR. Balance (6.927405837913e-06 ETH) is te klein om te verkopen.",
+        "error_code": "BELOW_MIN_QUOTE",
+        "market": "ETH-EUR",
+        "expected_quote_eur": 0.0116,
+        "min_quote_eur": 5.0,
+        "actual_balance": 6.927405837913e-06,
+        "hint": "Deze coin is nu 'restwaarde' — verkoop is niet mogelijk. Gebruik sync-with-bitvavo om restwaarde-pot te sluiten zonder PnL."
+      },
+      "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
     }
   ]
 }

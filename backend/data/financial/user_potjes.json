@@ -7,29 +7,26 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 12.22,
+          "capital": 13.07,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 1699.1903037337545,
-            "highest_price": 1699.1903037337545,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-07-21T14:15:26.567222+00:00",
-            "amount_eur": 12.22,
-            "cluster_id": "3b30e7b75ea2",
-            "cluster_size": 1
+            "entry_time": null
           },
           "market": "ETH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
+            "losses": 1,
+            "total_pnl": -0.2135
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "BUY cluster 3b30e7 @ EUR1699.1903",
+          "last_action": "SELL @ €1678.00 | netto €-0.213",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
@@ -47,21 +44,18 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 12.2,
+          "capital": 10.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 1696.800219914239,
-            "highest_price": 1697.55,
-            "trailing_active": false,
-            "entry_time": "2026-07-21T14:16:20.529894+00:00",
-            "amount_eur": 12.2,
-            "cluster_id": "322cfee54d18",
-            "cluster_size": 1
+            "is_open": false,
+            "closed_at": "2026-07-22T07:57:39.529333+00:00",
+            "close_reason": "phantom_position_correction",
+            "close_note": "Bitvavo bevestigt geen ETH — positie was fantoom in JSON, geen tegenhanger op exchange. Sluit met 0-pnl.",
+            "realized_pnl_eur": 0.0
           },
-          "market": "ETH-EUR",
+          "market": "EUR",
           "stats": {
             "trades": 0,
             "wins": 0,
@@ -87,21 +81,18 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 12.19,
+          "capital": 10.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 1696.631174725083,
-            "highest_price": 1697.55,
-            "trailing_active": false,
-            "entry_time": "2026-07-21T14:16:36.021897+00:00",
-            "amount_eur": 12.19,
-            "cluster_id": "3583a424e5f8",
-            "cluster_size": 1
+            "is_open": false,
+            "closed_at": "2026-07-22T07:57:39.529333+00:00",
+            "close_reason": "phantom_position_correction",
+            "close_note": "Bitvavo bevestigt geen ETH — positie was fantoom in JSON, geen tegenhanger op exchange. Sluit met 0-pnl.",
+            "realized_pnl_eur": 0.0
           },
-          "market": "ETH-EUR",
+          "market": "EUR",
           "stats": {
             "trades": 0,
             "wins": 0,
@@ -127,7 +118,7 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 12.14,
+          "capital": 13.07,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -154,7 +145,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 12.14,
+          "capital": 13.07,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -182,7 +173,7 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 12.14,
+          "capital": 13.07,
           "max_size": 80.24,
           "pot_locked": false,
           "market": "EUR",
@@ -209,27 +200,24 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 12.19,
+          "capital": 13.07,
           "max_size": 80.24,
           "pot_locked": false,
           "market": "ETH-EUR",
           "minted_at": "2026-07-20T16:52:48.805064+00:00",
           "minted_from": "test_reserve_log",
           "position": {
-            "is_open": true,
-            "entry_price": 1696.0106757939493,
-            "highest_price": 1696.0106757939493,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-07-21T14:16:49.758044+00:00",
-            "amount_eur": 12.19,
-            "cluster_id": "c8ecf95df974",
-            "cluster_size": 1
+            "entry_time": null
           },
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
+            "losses": 1,
+            "total_pnl": -0.1921
           },
           "alignment_log_event_id": "5a6d6397-01c1-478f-bb1b-77667c338339",
           "alignment_at": "2026-07-21T08:24:30.537747+00:00",
@@ -243,9 +231,10 @@
               "amount_eur": 12.19
             }
           ],
-          "last_action": "BUY cluster c8ecf9 @ EUR1696.0107"
+          "last_action": "SELL @ €1677.77 | netto €-0.192"
         }
-      ]
+      ],
+      "overflow_pool": 0.0
     },
     "user-a0ee2d7e": {
       "user_id": "user-a0ee2d7e",
@@ -263,7 +252,7 @@
       "potjes": [],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-07-22T07:51:27.908333+00:00"
+      "created_at": "2026-07-22T07:58:31.743026+00:00"
     },
     "user-1996fa59": {
       "user_id": "user-1996fa59",
@@ -281,7 +270,7 @@
       "potjes": [],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-07-22T07:51:27.913385+00:00"
+      "created_at": "2026-07-22T07:58:31.747499+00:00"
     }
   },
   "_pre_deploy_reset_at": "2026-06-03T14:02:40.629249+00:00",

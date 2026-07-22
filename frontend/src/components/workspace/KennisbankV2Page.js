@@ -228,7 +228,16 @@ export function KennisbankV2Page({ onNavigate }) {
     if (!selectedCard) return;
     setSavingClassify(true);
     try {
-      const body = {
+      // v10_kbv2_move_from_lade_001 — Willems verzoek: lade-buttons ook zichtbaar
+      // wanneer kaart al in lade zit. Detect: als activeTab != 'inbox' → gebruik /move endpoint.
+      const isMove = activeTab !== 'inbox';
+      const url = isMove ? `${API}/api/kb/v2/move` : `${API}/api/kb/v2/classify`;
+      const body = isMove ? {
+        card_id: selectedCard.id,
+        from_lade: activeTab,
+        to_lade: lade,
+        user_id: 'user-001',
+      } : {
         card_id: selectedCard.id,
         lade,
         updates: editMode ? {
@@ -238,20 +247,28 @@ export function KennisbankV2Page({ onNavigate }) {
         } : null,
         user_id: 'user-001',
       };
-      const r = await fetch(`${API}/api/kb/v2/classify`, {
+      const r = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       }).then(x => x.json());
       if (r.success) {
+        toast.success(isMove
+          ? `Kaart verplaatst: ${activeTab} → ${lade}`
+          : `Kaart ingedeeld in ${lade}`, { duration: 3000 });
         setSelectedCard(null);
         setEditMode(false);
         await loadStats();
         await loadItems();
       } else {
-        alert(r.message || 'Classify mislukt');
+        // Tag-aware guard-warning: toon message + hint
+        const msg = r.message || (isMove ? 'Verplaatsen mislukt' : 'Classify mislukt');
+        toast.error(msg, { duration: 8000 });
+        if (r.hint) {
+          console.warn('KB dupe-guard hint:', r.hint, r);
+        }
       }
-    } catch (e) { alert('Fout: ' + e.message); }
+    } catch (e) { toast.error('Fout: ' + e.message); }
     setSavingClassify(false);
   };
 
@@ -1060,7 +1077,38 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
             ))}
           </div>
         </div>
-      ) : null}
+      ) : (
+        /* v10_kbv2_move_buttons_always_001 — Willems verzoek sessie 47:
+           lade-verplaats knoppen ALTIJD zichtbaar, ook in lade-mode.
+           Huidige lade is disabled (highlight). Klik op andere = verplaats via /api/kb/v2/move. */
+        <div className="space-y-2 border-t border-slate-800 pt-3">
+          <p className="text-[11px] text-slate-400 flex items-center gap-1.5">
+            <ArrowRightLeft className="w-3 h-3" /> Verplaats naar andere lade:
+          </p>
+          <div className="grid grid-cols-2 gap-1.5">
+            {LADES.map(l => {
+              const isCurrent = l.id === currentLade;
+              return (
+                <button key={l.id} data-testid={`kbv2-move-${l.id}`}
+                  onClick={() => !isCurrent && onClassify(l.id)}
+                  disabled={saving || isCurrent}
+                  title={isCurrent ? 'Huidige lade' : `Verplaats naar ${l.naam}`}
+                  className={`px-2 py-2 text-xs rounded-lg border transition-colors flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed ${
+                    isCurrent ? 'bg-slate-800/60 ring-1 ring-inset' : 'hover:bg-slate-800'
+                  }`}
+                  style={{ borderColor: l.color + '60', color: l.color }}>
+                  <span>{l.icon}</span>
+                  <span>{l.naam}{isCurrent ? ' ✓' : ''}</span>
+                  {!isCurrent && <ChevronRight className="w-3 h-3 ml-auto" />}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-[10px] text-slate-600 italic">
+            💡 Homoniemen (bv. banken = geld én meubel) kunnen ook in zelfde lade — geef beide kaarten unieke tags.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

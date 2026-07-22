@@ -470,23 +470,38 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
         card = inbox["kaarten"].pop(target_idx)
         card["lade"] = lade
 
-        # v10_kbv2_classify_dupe_guard_001 — voorkom dubbels bij classify.
-        # Als doel-lade al een kaart heeft met exact zelfde begrip (case-insensitive):
-        # zet kaart TERUG in inbox en return warning met de bestaande kaart-id.
+        # v10_kbv2_classify_dupe_guard_002 — Homoniem-aware dupe-check (Willems note sessie 47).
+        # Zelfde begrip in doel-lade is alleen echte dupe als tag-sets OVERLAPPEN.
+        # Bij lege intersect + beide kaarten ≥1 tag → homoniem (bv. `banken` = financieel én meubel),
+        # allebei toestaan. Bij tag-overlap of één zonder tags → weiger (echte dupe).
         _nb = (card.get("begrip") or "").lower().strip()
-        _existing_in_lade = next(
-            (k for k in (lade_data.get("kaarten") or [])
-             if (k.get("begrip") or "").lower().strip() == _nb),
-            None
-        )
+        _new_tags = {t.lower().strip() for t in (updates.get("tags") if updates else None) or card.get("tags") or [] if t}
+        _existing_in_lade = None
+        for _k in (lade_data.get("kaarten") or []):
+            if (_k.get("begrip") or "").lower().strip() != _nb:
+                continue
+            _ex_tags = {t.lower().strip() for t in (_k.get("tags") or []) if t}
+            _has_overlap = bool(_new_tags & _ex_tags)
+            _both_have_tags = bool(_new_tags) and bool(_ex_tags)
+            # ECHTE dupe: tag-overlap OF één van beide heeft geen tags
+            if _has_overlap or not _both_have_tags:
+                _existing_in_lade = _k
+                break
+            # Anders: disjunkte tags op beide → homoniem, sta toe (loop verder)
         if _existing_in_lade:
             inbox["kaarten"].insert(target_idx, card)  # rollback
             return {
                 "success": False,
-                "message": f"Begrip '{card.get('begrip')}' bestaat al in lade '{lade}' (id={_existing_in_lade.get('id')}). Merge handmatig of kies andere lade.",
+                "message": (
+                    f"Begrip '{card.get('begrip')}' bestaat al in lade '{lade}' (id={_existing_in_lade.get('id')}). "
+                    "Merge handmatig, kies andere lade, of geef beide kaarten unieke tags om als homoniem te scheiden."
+                ),
                 "duplicate_in_lade": lade,
                 "existing_card_id": _existing_in_lade.get("id"),
                 "existing_card_begrip": _existing_in_lade.get("begrip"),
+                "existing_card_tags": _existing_in_lade.get("tags") or [],
+                "new_card_tags": list(_new_tags),
+                "hint": "tag-based homoniem-guard: tags moeten NIET overlappen én beide moeten ≥1 tag hebben.",
             }
 
         # Verwijder migratie-meta
@@ -679,6 +694,32 @@ def move_card(card_id: str, from_lade: str, to_lade: str, user_id: str = "user-0
         idx = next((i for i, k in enumerate(kaarten) if k.get("id") == card_id), -1)
         if idx < 0:
             return {"success": False, "message": f"Kaart '{card_id}' niet in lade '{from_lade}'"}
+        card = kaarten[idx]
+
+        # v10_kbv2_move_dupe_guard_001 — Homoniem-aware guard bij verplaatsen.
+        # Zelfde begrip in doel-lade = echte dupe TENZIJ beide kaarten disjunkte tags hebben (≥1 elk).
+        _nb = (card.get("begrip") or "").lower().strip()
+        _new_tags = {t.lower().strip() for t in (card.get("tags") or []) if t}
+        for _dk in (dst_data.get("kaarten") or []):
+            if (_dk.get("begrip") or "").lower().strip() != _nb:
+                continue
+            _ex_tags = {t.lower().strip() for t in (_dk.get("tags") or []) if t}
+            _has_overlap = bool(_new_tags & _ex_tags)
+            _both_have_tags = bool(_new_tags) and bool(_ex_tags)
+            if _has_overlap or not _both_have_tags:
+                return {
+                    "success": False,
+                    "message": (
+                        f"Begrip '{card.get('begrip')}' bestaat al in '{to_lade}' (id={_dk.get('id')}). "
+                        "Geef beide kaarten unieke tags voor homoniem-scheiding."
+                    ),
+                    "duplicate_in_lade": to_lade,
+                    "existing_card_id": _dk.get("id"),
+                    "existing_card_tags": _dk.get("tags") or [],
+                    "new_card_tags": list(_new_tags),
+                }
+            # Anders: disjunkte tags op beide → homoniem, sta toe
+
         card = kaarten.pop(idx)
         card["lade"] = to_lade
         fn = card.get("footnote") or {}

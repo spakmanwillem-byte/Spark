@@ -1,6 +1,63 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+
+## 📌 SESSIE 47 RECAP (2026-07-22) — Redeploy-klaar
+
+**Alles wat vandaag gebouwd/gefixt is, op één plek. Deployen kan.**
+
+### ✅ Live en werkend
+- 🔧 **React-crash Synapslaag** gefixt (footnote dict-vorm safe rendered)
+- 💰 **KB dupe-guard** (classify + move) — **homoniem tag-aware**: overlap tags weiger, disjunkte tags toestaan
+- 🎯 **3 verkeerd-geplaatste kaarten** verplaatst (Spion, begrazing, aluminium) + bugs opgelost
+- 🔄 **Prod → Preview merge**: 10 kaarten gemergd, 0 conflicten
+- ⚓ **Anker Fase 2 LIVE** in `log_only` mode, 6 markten gebootstrapt met echte 30d Bitvavo candles
+- 📊 **Anker hook** in `monitor.py` — elke BUY-signaal ge-anker-checkt via LogAgent (`topic=anker_check`)
+- 🌙 **Nachtelijke reconciliatie** in scheduler (3 UTC)
+- 🛡️ **Deploy-safety endpoints** (`/prepare` `/release` `/status`) — prod/preview race-preventie
+- 🍌 **Bitvavo `get_candles()`** functional API toegevoegd
+- 🛟 **LLM emergency-fallback default ON** — Groq → Cerebras → Emergent (Claude) fallback-chain
+- 💾 **LLM response-cache** (5 min TTL, hash op sys+user+temp) — 0 tokens bij herhaalde vragen
+- 🧪 **Widget Kladblok** (Beheer → tab) — container-first registry-pattern voor front-end kaders
+- ⚡ **LLM Token Usage widget** (in Kladblok) — Groq %-vol + cache-savings
+- 📖 **Spark leest nu `/app/memory/ROADMAP.md` direct** — geen verouderde bullets meer
+- 📝 **`_meta.json`** toegevoegd voor 3 nieuwe dirs (sandbox, sandbox/widgets, chat_hub/agents)
+- 🐛 **2 bug reports** dichtgezet (Spion, begrazing, test #ec59e5bf)
+- 🎨 **Frontend KB-page**: lade-verplaatsknoppen ALTIJD zichtbaar (ook in lade-mode, met dupe-guard)
+
+### 🟡 Backlog (goede ideeën uit sessie 47)
+**Willems ideeën genoteerd voor later**:
+- **Sandbox-agent** — onderscheid maken tussen Module Sandbox (Sparks Python) en Widget Kladblok (frontend), taakverdeling
+- **Homoniem-scheiding chat** — Spark vraagt "bedoel je [tag1] of [tag2]?" bij homoniem-hit
+- **Anker → skip-mode** — na weekend log_only-data + drempel-tune, flag omzetten naar `"skip"`
+- **Threshold-slider** in AnkerPanel — nu read-only
+- **Backtest anker-integratie** — bestaande backtests hebben eigen strat-functies, apart werk
+- **Prod→Preview auto-sync widget** — knop: "download changes since deploy als zip"
+- **LLM Token Usage backend** — `/api/llm/usage/today` endpoint zodat provider-cijfers echt-tijds zijn
+- **Cache TTL tuning** — na dag gebruik: als hit-rate >30% → verleng TTL naar 15/30 min
+- **Bug-context link** — bij elke bug-report knop naar chat-context waarin gemeld
+
+**Ontdekt tijdens sessie 47**:
+- Synapse-scanner leest alleen top-level modules (subdirs met `_meta.json` invisible in UI)
+- Backtest-runners hebben eigen strat-functies, geen `_simple_decision` — anker-hook daar apart
+- 32 KB-dupes met verschillende inhoud (rapport in `DUPES_REPORT.md`, handmatig te doen)
+
+### 🎓 Lessen sessie 47
+1. **Bij event-logging** eerst `grep LogAgent` voordat je nieuwe log-locatie verzint
+2. **Bij nieuwe module** direct `_meta.json` erbij — anders Synapslaag ziet 'm niet
+3. **Bij statische fallbacks** in capability-handlers → altijd bron-file lezen, niet hardcoden
+4. **Bij feature-flag toevoegen** → skeleton + log_only eerst, dan pas gedragswijziging
+
+### 🚀 Deploy-flow
+```
+POST /api/trade/deploy/prepare   # vóór deploy
+deploy via Save-to-GitHub
+POST /api/trade/deploy/release   # na deploy
+```
+
+---
+
+
 ## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor + prod-merge + sandbox
 
 ### 🧪 Sandbox (v10_sandbox_page_001) — Willems container-idee

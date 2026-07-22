@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2227,
+    "card_count": 2228,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:42:45.189592+00:00",
+    "last_updated": "2026-07-22T15:44:15.610385+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -300349,6 +300349,166 @@
             "result": {
               "n_found": 5,
               "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5ddc80a8",
+      "begrip": "fantoom",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een fantoom is iets dat niet werkelijk aanwezig is, maar wel lijkt te bestaan of wordt waargenomen.",
+        "laag2": "Een fantoom kan verwijzen naar een denkbeeldige verschijning, een onjuiste waarneming of iets dat niet fysiek aanwezig is maar toch als echt wordt ervaren. De betekenis hangt af van de context.\n",
+        "laag3": "Het woord fantoom wordt in verschillende vakgebieden gebruikt. In de algemene taal verwijst het naar een spookachtige of denkbeeldige verschijning. In de geneeskunde spreekt men bijvoorbeeld van fantoompijn, waarbij iemand pijn ervaart in een geamputeerd lichaamsdeel dat niet meer aanwezig is. In de techniek en wetenschap worden fantomen gebruikt als testmodellen voor onderzoek of het kalibreren van apparatuur. In de informatica kan een fantoom verwijzen naar een onterechte detectie, een schijnbare fout of een verschijnsel dat lijkt te bestaan maar feitelijk niet aanwezig is.\n",
+        "laag4": "Binnen Spark wordt fantoom herkend als een begrip dat verwijst naar een schijnbare aanwezigheid of een onjuiste waarneming. Spark kan relaties leggen tussen:\n\nIllusie\nSchijn\nWaarneming\nVerbeelding\nMisvatting\nFoutdetectie\nValse detectie\nHallucinatie\nFantoompijn\nGeheugen\nCognitie\nGeneeskunde\nPsychologie\nInformatica\nSensor\nKalibratie\nTestmodel\nContext\n\nSpark gebruikt de context om te bepalen of het gaat om een medische, technische, psychologische of algemene betekenis.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Na de amputatie had hij nog fantoompijn.\"\n\n→ Er wordt pijn gevoeld in een lichaamsdeel dat niet meer aanwezig is.\n\nVoorbeeld 2\n\n\"Het systeem gaf een fantoommelding.\"\n\n→ Het systeem meldde iets dat in werkelijkheid niet aanwezig was."
+      },
+      "ws5": {
+        "wie": "Mensen, onderzoekers, zorgverleners, technici en AI-systemen.",
+        "wat": "Een schijnbare aanwezigheid of een verschijnsel dat niet werkelijk bestaat.",
+        "wanneer": "Wanneer iets ten onrechte wordt waargenomen of ervaren.",
+        "waar": "In de geneeskunde, psychologie, techniek, informatica en het dagelijks taalgebruik.",
+        "waarom": "Door de werking van het lichaam, de geest, sensoren of een systeem, afhankelijk van de context.",
+        "hoe": "Doordat een waarneming, interpretatie of detectie ontstaat zonder dat het daadwerkelijke object of verschijnsel aanwezig is."
+      },
+      "tags": [
+        "fantoom",
+        "schijn",
+        "illusie",
+        "waarneming",
+        "verbeelding",
+        "misvatting",
+        "fantoompijn",
+        "hallucinatie",
+        "foutdetectie",
+        "valse detectie",
+        "geneeskunde",
+        "psychologie",
+        "informatica",
+        "sensor",
+        "testmodel",
+        "cognitie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "cognitie",
+            "emotie",
+            "neutraal",
+            "psychologie",
+            "verbeelding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c86dca8c",
+          "begrip": "hersenen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "cognitie",
+            "emotie",
+            "neutraal",
+            "verbeelding",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d9a0ab8",
+          "begrip": "Zo als het weer is, is het humeur. Zo als het klimaat is, is de aard.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "psychologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-462f3439",
+          "begrip": "bewust",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T11:55:23.654411+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:44:15.610365+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee dit is fantoom data.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:44:12.657818+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:44:12.759223+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:44:12.767217+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:44:15.965515+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:44:15.973531+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 564,
+    "card_count": 565,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:31:09.251875+00:00",
+    "last_updated": "2026-07-22T15:46:41.509800+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -75091,6 +75091,179 @@
             "result": {
               "n_found": 5,
               "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cfcb233f",
+      "begrip": "verantwoording",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verantwoording is het uitleggen, onderbouwen of rechtvaardigen van een keuze, handeling of besluit.",
+        "laag2": "Verantwoording betekent dat iemand uitlegt waarom iets is gedaan of besloten. Dit kan vrijwillig zijn of omdat iemand daar verantwoordelijkheid voor draagt tegenover anderen.\n",
+        "laag3": "Verantwoording speelt een belangrijke rol binnen organisaties, overheden, wetenschap, financiën en het dagelijks leven. Iemand legt verantwoording af door keuzes, handelingen, uitgaven of resultaten toe te lichten en te onderbouwen. Verantwoording draagt bij aan transparantie, controle, vertrouwen en verantwoordelijkheid. De vorm kan mondeling, schriftelijk of administratief zijn, bijvoorbeeld in een rapport, gesprek, jaarverslag of evaluatie.\n",
+        "laag4": "Binnen Spark wordt verantwoording herkend als het proces van het toelichten en onderbouwen van beslissingen, acties of resultaten. Spark kan relaties leggen tussen:\n\nVerantwoordelijkheid\nUitleg\nOnderbouwing\nRechtvaardiging\nBesluit\nKeuze\nHandeling\nTransparantie\nControle\nEvaluatie\nRapport\nVerslag\nRekenschap\nToelichting\nBetrouwbaarheid\nBewijs\nArgumentatie\nCommunicatie\nOrganisatie\nVerplichting\n\nSpark kan daarnaast uitleg geven over verantwoordingsprocessen, besluitvorming en de relatie tussen verantwoordelijkheid, transparantie en vertrouwen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De projectleider legt verantwoording af over het budget.\"\n\n→ De projectleider licht de uitgaven en keuzes toe.\n\nVoorbeeld 2\n\n\"Na het onderzoek schreef de student een verantwoording.\"\n\n→ De student onderbouwt de gemaakte keuzes en werkwijze."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties, bedrijven, overheden en onderzoekers.",
+        "wat": "Het uitleggen, onderbouwen of rechtvaardigen van keuzes, handelingen of resultaten.",
+        "wanneer": "Wanneer iemand verantwoordelijkheid draagt voor een besluit, handeling of uitkomst.",
+        "waar": "Binnen organisaties, onderwijs, overheid, wetenschap, financiën en het dagelijks leven.",
+        "waarom": "Om transparantie, vertrouwen, controle en verantwoordelijkheid te bevorderen.",
+        "hoe": "Door keuzes, handelingen of resultaten toe te lichten met feiten, argumenten of bewijs."
+      },
+      "tags": [
+        "verantwoording",
+        "verantwoordelijkheid",
+        "rekenschap",
+        "uitleg",
+        "onderbouwing",
+        "rechtvaardiging",
+        "besluit",
+        "keuze",
+        "handeling",
+        "transparantie",
+        "controle",
+        "evaluatie",
+        "rapport",
+        "verslag",
+        "bewijs",
+        "argumentatie",
+        "communicatie",
+        "organisatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6e9d3b4a",
+          "begrip": "verklaring",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bewijs",
+            "communicatie",
+            "emotie",
+            "onderbouwing",
+            "rapport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-544a832a",
+          "begrip": "neemt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "besluit",
+            "context",
+            "emotie",
+            "handeling",
+            "keuze"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-303ce20a",
+          "begrip": "macht",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "controle",
+            "emotie",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-043ba9c4",
+          "begrip": "toezicht",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "controle",
+            "emotie",
+            "evaluatie",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "controle",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:46:41.509782+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:54:46.993518+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b51fd2229ca4",
+        "extract_at": "2026-07-22T11:54:47.094094+00:00",
+        "extract_context_snippet": "uus:  * een uiting van spijt, begrip of verantwoording voor een fout, probleem of ongewenste situatie.  * Het word",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'verantwoording' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:46:38.247825+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:46:38.348519+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:46:38.357033+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:46:41.708098+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:46:41.716326+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

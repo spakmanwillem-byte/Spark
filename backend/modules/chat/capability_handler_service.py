@@ -73,7 +73,39 @@ def _handle_tellen_bestanden(user_id: Optional[str]) -> Optional[Dict]:
 
 
 def _handle_taken_lijst(user_id: Optional[str]) -> Optional[Dict]:
-    # Pak open backlog uit ROADMAP-JSON als die bestaat, anders een statisch overzicht
+    """v10_roadmap_md_reader_001 — Spark leest nu direct /app/memory/ROADMAP.md
+    (waar wij dagelijks bijhouden). Fallback naar oude data/system/roadmap.json + statische lijst."""
+    from pathlib import Path as _P
+    md_fp = _P("/app/memory/ROADMAP.md")
+    if md_fp.exists():
+        try:
+            lines = md_fp.read_text(encoding="utf-8").splitlines()
+            # Pak de eerste "🟡 Nog te doen" of "P1"/"P2" bullets uit de recentste sessie
+            todo_lines = []
+            current_h2 = None
+            first_h2 = None  # onthoud eerste sessie waar bullets uit kwamen
+            for ln in lines[:400]:
+                if ln.startswith("## "):
+                    current_h2 = ln[3:].strip()
+                if ln.startswith("- **") or (ln.startswith("- ") and any(m in ln for m in ["P1", "P2", "P0", "Nog te doen", "Next"])):
+                    if len(ln.strip()) > 5 and len(todo_lines) < 12:
+                        clean = ln.strip().lstrip("- ").replace("**", "").replace("`", "")
+                        todo_lines.append(f"• {clean[:140]}")
+                        if first_h2 is None:
+                            first_h2 = current_h2
+                        if len(todo_lines) >= 12:
+                            break
+            if todo_lines:
+                header = f"📋 **Roadmap** _(uit `/app/memory/ROADMAP.md`, sessie: {first_h2 or 'onbekend'})_:"
+                return {
+                    "type": "capability_response",
+                    "capability_id": "taken_lijst",
+                    "message": header + "\n" + "\n".join(todo_lines) + "\n\n_Vraag 'wat zullen we doen?' voor concreter suggestie._",
+                }
+        except Exception:
+            pass
+
+    # Legacy fallback (roadmap.json)
     rm = load_json(DATA / "system" / "roadmap.json", default={})
     open_items = []
     for k, section in (rm or {}).items():
@@ -81,24 +113,16 @@ def _handle_taken_lijst(user_id: Optional[str]) -> Optional[Dict]:
             for item in (section.get("items") or []):
                 if item.get("status") in ("open", "pending", "in_progress"):
                     open_items.append(f"• {item.get('title', item.get('id', '?'))}")
-    if not open_items:
+    if open_items:
         return {
             "type": "capability_response",
             "capability_id": "taken_lijst",
-            "message": (
-                "📋 **Open taken** (uit `/app/memory/ROADMAP.md`):\n"
-                "• P0: Spark's hands — generic intent-router (deze laag nu live!)\n"
-                "• P1: D&D Perks & Unlocks enforcement\n"
-                "• P1: KB v2 hooks (Vocab/Graph/D&D/Voice-snippet)\n"
-                "• P2: Frontend-knop boekhouder closing\n"
-                "• P2: Closing-flow auto-trigger 21:00\n"
-                "_Vraag 'wat zullen we doen?' voor concreter suggestie._"
-            ),
+            "message": "📋 **Open taken:**\n" + "\n".join(open_items[:10]),
         }
     return {
         "type": "capability_response",
         "capability_id": "taken_lijst",
-        "message": "📋 **Open taken:**\n" + "\n".join(open_items[:10]),
+        "message": "📋 Roadmap niet leesbaar (`/app/memory/ROADMAP.md` ontbreekt of parse-fout).",
     }
 
 

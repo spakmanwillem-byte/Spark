@@ -1,0 +1,29 @@
+{
+  "_arch_ref": "v10_sandbox_registry_001",
+  "schema_version": "1.0",
+  "naam": "sandbox (Widget Kladblok)",
+  "doel": "Front-end parkeer-plek voor kaders zonder definitieve plek. Elke widget = zelfstandige container-component (registry-pattern) zodat verplaatsen naar definitieve module = 1 regel import elders + weghalen uit registry.",
+  "container_type": "dir",
+  "status": "active",
+  "owner": "spark-system",
+  "blueprint_ref": null,
+  "footnote": {
+    "generated_by": "e1 sessie 47 (2026-07-22)",
+    "generated_at": "2026-07-22T15:10:00+00:00",
+    "spark_note": "Widget Kladblok is voor front-end kaders. NIET verwarren met Module Sandbox (backend/sandbox/modules/) — die is voor Sparks Python-modules. Beide bestaan naast elkaar met verschillende doelen.",
+    "has_blueprint": false,
+    "has_endpoints": false,
+    "requires_review": false
+  },
+  "split_from": null,
+  "children_max": null,
+  "endpoints": [],
+  "tags": ["frontend", "sandbox", "widget", "kladblok", "registry-pattern"],
+  "encryption": { "at_rest": false, "in_transit": true },
+  "children": ["registry.js", "widgets/"],
+  "conventions": {
+    "widget_registration": "sandbox/registry.js SANDBOX_WIDGETS array; elk item: { id, naam, doel, waar_hoort_het, aangemaakt_op, Component }",
+    "widget_shape": "zelfstandige React component in sandbox/widgets/*.js, eigen state + fetch, geen dependency op SandboxPage",
+    "verplaatsen": "1) importeer XxxWidget in doel-page 2) render <XxxWidget /> 3) verwijder regel uit registry.js"
+  }
+}

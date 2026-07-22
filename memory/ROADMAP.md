@@ -43,6 +43,12 @@ Eén agent die:
 
 Niet nu bouwen — eerst gebruiken, dan patroon herkennen. Op roadmap voor als Willem er tegenaan loopt.
 
+### 🎯 Zelf-bewustzijn: `_meta.json` toegevoegd + Spark leest nu ROADMAP.md
+- **`_meta.json`** aangemaakt voor `frontend/src/components/admin/sandbox/` — vervolgt het meta-verrijking patroon (v9). Bevat `naam`, `doel`, `footnote` met spark_note, conventies (widget registration + verplaatsen protocol), tags. Zichtbaar in Synapslaag.
+- **Roadmap-reader bugfix** (v10_roadmap_md_reader_001): `_handle_taken_lijst` in `capability_handler_service.py` leest nu direct `/app/memory/ROADMAP.md` i.p.v. verouderde `data/system/roadmap.json` met statische fallback. Parseert eerste 12 bullets uit recentste `## Sessie` header. Fallback naar oude json blijft bestaan.
+
+Willem's terechte vraag: _"begrijpt spark zijn roadmap en leest hij die nog goed uit nu we llm gebruiken?"_ — antwoord: JA nu, hij ziet sessie 47 werk direct.
+
 
 ### 🔄 Prod → Preview merge (13:33 UTC)
 Willem deployde en vulde KB verder in in productie. Zip-backup (908 files sinds deploy-marker) ge-imported:

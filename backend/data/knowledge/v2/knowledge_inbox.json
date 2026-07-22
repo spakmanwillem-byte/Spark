@@ -10472,61 +10472,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-2a35d930",
-      "begrip": "geneeskunde",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "geneeskunde"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-2a35d930",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:56.882627+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-170eb04a",
       "begrip": "val",
       "lade": null,
@@ -82959,40 +82904,6 @@
         "voice",
         "image"
       ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-51d5d3fe",
-      "begrip": "sims",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-07-22T13:03:26.834185+00:00",
-        "llm_generated": true,
-        "llm_lite": true,
-        "extract_source": "spark_llm_output_scanner_v1",
-        "extract_turn_id": "learned-5a80d99f99af",
-        "extract_at": "2026-07-22T13:03:27.825063+00:00",
-        "extract_context_snippet": "ker dat je even een pauze neemt om **De Sims 4** te spelen! 🎮   Spelen betekent volgens onze kennisbank",
-        "extract_count_in_spark": 1,
-        "extract_note": "Spark noemde 'sims' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
-        "needs_review": true
-      },
       "_inbox_reason": "missing_laag1"
     },
     {

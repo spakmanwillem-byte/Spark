@@ -3,6 +3,21 @@
 
 ## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor
 
+### 🎯 KB v2 dupe-cleanup + prevention (v10_kbv2_classify_dupe_guard_001)
+
+**Snuffel-resultaat**: 5911 kaarten, 35 exacte dubbels (71 kaarten), 134 enkelvoud/meervoud paren (waarvan 53 cross-lade).
+
+**Oorzaak dupes**: `add_to_inbox` had al preventie (index check), maar **`classify_card` had geen dupe-guard**: kaart ging van inbox → lade zonder te checken of doel-lade al zo'n begrip had. Resultaat: 32 van de 35 dupes ontstonden via classify-pad.
+
+**Preventie geland**: `classify_card` (r.470-490 in `kb_v2/service.py`) checkt nu case-insensitive of doel-lade al kaart met zelfde begrip heeft. Zo ja → rollback naar inbox + return warning met `existing_card_id`. Getest: dummy classify van "Analoog" → correct geweigerd.
+
+**Cleanup uitgevoerd (safe only)**:
+- 3× auto-merge: `frank arjava petter` (voelen, identiek laag1), `conditie` + `gegaan` (inbox, allebei leeg)
+- Backup naar `_backup_dupes_cleanup_20260722_094053/`
+- Rapport voor manual review: `data/knowledge/v2/DUPES_REPORT.md` (742 regels, laag-inhoud naast elkaar)
+- 32 dupes met verschillende inhoud gelaten — homoniemen (balk, bank, drift...) beslist Willem zelf
+
+
 ### 🎯 Afgerond
 - **Anker-skeleton** (feature-flag OFF, `data/trade/anker/{market}.json` cache, blueprint-sectie `anker`)
 - **Anker-service** (`modules/trade/anker_service.py`): `check_gap_up`, `bootstrap_anker_from_bitvavo`, `log_anker_event`

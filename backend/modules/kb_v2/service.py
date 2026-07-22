@@ -469,6 +469,26 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
 
         card = inbox["kaarten"].pop(target_idx)
         card["lade"] = lade
+
+        # v10_kbv2_classify_dupe_guard_001 — voorkom dubbels bij classify.
+        # Als doel-lade al een kaart heeft met exact zelfde begrip (case-insensitive):
+        # zet kaart TERUG in inbox en return warning met de bestaande kaart-id.
+        _nb = (card.get("begrip") or "").lower().strip()
+        _existing_in_lade = next(
+            (k for k in (lade_data.get("kaarten") or [])
+             if (k.get("begrip") or "").lower().strip() == _nb),
+            None
+        )
+        if _existing_in_lade:
+            inbox["kaarten"].insert(target_idx, card)  # rollback
+            return {
+                "success": False,
+                "message": f"Begrip '{card.get('begrip')}' bestaat al in lade '{lade}' (id={_existing_in_lade.get('id')}). Merge handmatig of kies andere lade.",
+                "duplicate_in_lade": lade,
+                "existing_card_id": _existing_in_lade.get("id"),
+                "existing_card_begrip": _existing_in_lade.get("begrip"),
+            }
+
         # Verwijder migratie-meta
         card.pop("_inbox_reason", None)
         card.pop("_classifier_scores", None)

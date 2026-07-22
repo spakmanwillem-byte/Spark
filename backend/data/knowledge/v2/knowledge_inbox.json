@@ -13,7 +13,8 @@
     "last_dedupe_removed": 9,
     "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
     "last_v1_drift_sync_added": 54,
-    "last_updated": "2026-07-22T08:57:26.297458+00:00"
+    "last_updated": "2026-07-22T09:40:53.408906+00:00",
+    "card_count": 1552
   },
   "kaarten": [
     {
@@ -84325,82 +84326,6 @@
         "extract_context_snippet": "lem**! Hoe was je klusje? Is alles goed gegaan zoals je had gehoopt?",
         "extract_count_in_spark": 1,
         "extract_note": "Spark noemde 'gegaan' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
-        "needs_review": true
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-d2beb08e",
-      "begrip": "gegaan",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-07-21T13:22:29.869047+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "alles goed gegaan 40 euro verdiend waarvan 20 weer uitgegeven voor onderhoud eten drinken"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-6031bcca",
-      "begrip": "conditie",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-07-21T13:22:50.788473+00:00",
-        "llm_generated": true,
-        "llm_lite": true,
-        "extract_source": "spark_llm_output_scanner_v1",
-        "extract_turn_id": "learned-5220e94807b2",
-        "extract_at": "2026-07-21T13:22:51.889907+00:00",
-        "extract_context_snippet": "dingen om jezelf en je spullen in goede conditie te houden. Hoe voelde je je tijdens het klussen? Was het ee",
-        "extract_count_in_spark": 1,
-        "extract_note": "Spark noemde 'conditie' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
         "needs_review": true
       },
       "_inbox_reason": "missing_laag1"

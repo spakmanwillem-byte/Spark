@@ -191,3 +191,5 @@
 {"ts": "2026-07-22T09:34:09.738024+00:00", "module": "kbv2", "fn": "edit_card", "phase": "post", "intent": "bestaande kaart in lade bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 107.95}
 {"ts": "2026-07-22T09:34:11.372255+00:00", "module": "kbv2", "fn": "classify_card", "phase": "pre", "intent": "kaart uit inbox in lade plaatsen", "args": {"a0": "kbv2-3eb3b544", "a1": "doen", "updates": "None", "user_id": "user-001"}}
 {"ts": "2026-07-22T09:34:11.755690+00:00", "module": "kbv2", "fn": "classify_card", "phase": "post", "intent": "kaart uit inbox in lade plaatsen", "result": "dict(success=True, keys=success,kaart,lade)", "duration_ms": 383.37}
+{"ts": "2026-07-22T09:41:17.758459+00:00", "module": "kbv2", "fn": "classify_card", "phase": "pre", "intent": "kaart uit inbox in lade plaatsen", "args": {"a0": "kbv2-TEST-DUPE", "a1": "weten", "updates": "{}"}}
+{"ts": "2026-07-22T09:41:17.889470+00:00", "module": "kbv2", "fn": "classify_card", "phase": "post", "intent": "kaart uit inbox in lade plaatsen", "result": "dict(success=False, keys=success,message,duplicate_in_lade,existing_card_id,existing_card_begrip)", "duration_ms": 130.84}

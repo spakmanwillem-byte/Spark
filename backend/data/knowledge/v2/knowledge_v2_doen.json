@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1160,
+    "card_count": 1161,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:04:33.554487+00:00",
+    "last_updated": "2026-07-22T09:09:20.126824+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -152779,6 +152779,170 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fb15acdd",
+      "begrip": "bevat",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bevat betekent dat iets iets anders in zich heeft of omvat.",
+        "laag2": "Het woord bevat is de tegenwoordige tijd van het werkwoord bevatten. Het beschrijft dat een object, document, systeem of andere entiteit één of meer onderdelen, gegevens of eigenschappen in zich heeft.\n",
+        "laag3": "Bevat geeft aan dat iets onderdeel uitmaakt van een groter geheel. Dit kan gaan om fysieke inhoud, zoals een fles die water bevat, of om abstracte inhoud, zoals een document dat informatie bevat. De betekenis is afhankelijk van de context, maar verwijst altijd naar een relatie tussen een geheel en de onderdelen daarvan.\n",
+        "laag4": "Binnen Spark beschrijft bevat de relatie tussen een object en de inhoud ervan. Spark kan vastleggen welke gegevens, eigenschappen, kenniskaarten of andere elementen onderdeel zijn van een document, database, module of systeem.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De doos bevat tien boeken.\"\n\n→ De boeken bevinden zich in de doos.\n\nVoorbeeld 2\n\n\"De kenniskaart bevat vier lagen.\"\n\n→ De vier lagen maken onderdeel uit van de kenniskaart.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het in zich hebben of omvatten van iets.",
+        "wanneer": "Wanneer de inhoud of onderdelen van een geheel worden beschreven.",
+        "waar": "In documenten, systemen, voorwerpen, databases en het dagelijks leven.",
+        "waarom": "Om aan te geven welke onderdelen of inhoud ergens deel van uitmaken.",
+        "hoe": "Doordat één of meer elementen onderdeel zijn van een groter geheel."
+      },
+      "tags": [
+        "bevat",
+        "bevatten",
+        "inhoud",
+        "omvatten",
+        "onderdeel",
+        "gegevens",
+        "informatie",
+        "relatie",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bevatten",
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "inhoud"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ab49447e",
+          "begrip": "onderwerp",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "inhoud",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a0d4b06e",
+          "begrip": "nummer",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:09:20.126787+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:57:27.713137+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-d37d9960a64a",
+        "extract_at": "2026-07-22T08:57:27.817391+00:00",
+        "extract_context_snippet": "kaart heeft een specifiek onderwerp en bevat tags die helpen om verwante onderwerpen te vinden.  Ik kan",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'bevat' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:09:17.922356+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:09:18.022855+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:09:18.274981+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:09:20.380784+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:09:20.388310+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
             }
           }
         ]

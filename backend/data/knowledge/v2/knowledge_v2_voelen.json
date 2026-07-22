@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 461,
+    "card_count": 462,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:52:58.948200+00:00",
+    "last_updated": "2026-07-22T09:16:30.458990+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -62974,6 +62974,168 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-22T08:52:59.147508+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ff09cd81",
+      "begrip": "gehoopt",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gehoopt betekent dat iemand heeft gewenst of verwacht dat iets zou gebeuren.",
+        "laag2": "Het woord gehoopt is het voltooid deelwoord van hopen. Het geeft aan dat iemand een wens, verwachting of verlangen had over een gebeurtenis of uitkomst.",
+        "laag3": "Gehoopt beschrijft een situatie waarin iemand eerder hoop of verwachting heeft gehad over een bepaalde uitkomst. De gehoopte gebeurtenis kan zijn uitgekomen, gedeeltelijk zijn uitgekomen of niet zijn uitgekomen. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt gehoopt herkend als een aanduiding van een eerdere wens of verwachting van een gebruiker. Spark kan deze informatie gebruiken om de context van gesprekken beter te begrijpen, maar behandelt een gehoopte uitkomst niet als een feit.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik had gehoopt dat het droog zou blijven.\"\n\n→ De persoon wenste dat het niet zou regenen.\n\nVoorbeeld 2\n\n\"Ze hadden gehoopt op een betere uitslag.\"\n\n→ Er was een verwachting of wens voor een gunstiger resultaat."
+      },
+      "ws5": {
+        "wie": "Mensen die een wens of verwachting hebben.",
+        "wat": "Een eerdere wens of verwachting over een gebeurtenis of uitkomst.",
+        "wanneer": "Wanneer iemand terugkijkt op iets waarop hij of zij had gehoopt.",
+        "waar": "In gesprekken, verhalen, werk, onderwijs en het dagelijks leven.",
+        "waarom": "Om een eerdere hoop, wens of verwachting uit te drukken.",
+        "hoe": "Door het voltooid deelwoord van hopen te gebruiken om naar een eerdere verwachting te verwijzen."
+      },
+      "tags": [
+        "gehoopt",
+        "hopen",
+        "wens",
+        "verwachting",
+        "verlangen",
+        "uitkomst",
+        "verleden",
+        "context",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "verlangen",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-25112e01",
+          "begrip": "wens",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "verlangen",
+            "verwachting",
+            "wens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2f6ef6ac",
+          "begrip": "afkomst",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cb2ab1de",
+          "begrip": "anticipatie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75c4086a",
+          "begrip": "uitkomst",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "uitkomst"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:16:30.458972+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:21:50.311039+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5c5d9aa7c410",
+        "extract_at": "2026-07-21T13:21:51.495449+00:00",
+        "extract_context_snippet": "usje? Is alles goed gegaan zoals je had gehoopt?",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gehoopt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:16:28.822572+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:16:28.924713+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:16:28.932594+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:16:30.652339+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:16:30.660301+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 5

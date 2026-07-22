@@ -1486,6 +1486,9 @@ function TradeAnalyticsTab() {
       {/* v7_admin_trader_stats_001 — Trader stats verplaatst uit user-facing module */}
       <SparkTraderStatsPanel />
 
+      {/* v10_anker_panel_001 — Anker gap-up guard widget (shadow-log inzicht + flag) */}
+      <AnkerPanel />
+
       {/* v7_reconcile_own_panel_001 — Reconciliatie in eigen kader (uit bots-lijst gehaald) */}
       <ReconcileSparkPanel />
 
@@ -2292,3 +2295,183 @@ function ReconcileSparkPanel() {
   );
 }
 
+
+
+// ============================================================
+// v10_anker_panel_001 — Anker gap-up guard widget
+// Toont: feature-flag stand, anker per market, skip-count deze week, threshold
+// ============================================================
+function AnkerPanel() {
+  const [config, setConfig] = React.useState(null);
+  const [markets, setMarkets] = React.useState([]);
+  const [stats, setStats] = React.useState(null);
+  const [events, setEvents] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [busy, setBusy] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
+  const [days, setDays] = React.useState(7);
+  const API = process.env.REACT_APP_BACKEND_URL;
+
+  const WATCHLIST = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR', 'ATOM-EUR'];
+
+  const load = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const ev = await fetch(`${API}/api/trade/anker/shadow/events?days=${days}`).then(r => r.json()).catch(() => null);
+      setStats(ev?.stats || null);
+      setEvents(ev?.events || []);
+
+      const perMarket = [];
+      for (const m of WATCHLIST) {
+        const d = await fetch(`${API}/api/trade/anker/${m}`).then(r => r.json()).catch(() => null);
+        if (d?.success) {
+          perMarket.push({ market: m, anker: d.anker, config: d.config });
+          if (!config && d.config) setConfig(d.config);
+        }
+      }
+      setMarkets(perMarket);
+    } finally {
+      setLoading(false);
+    }
+  }, [API, days]);
+
+  React.useEffect(() => { load(); }, [load]);
+
+  const bootstrapMarket = async (market) => {
+    setBusy(true);
+    try {
+      await fetch(`${API}/api/trade/anker/bootstrap/${market}?user_id=user-001`, { method: 'POST' });
+      await load();
+    } finally { setBusy(false); }
+  };
+
+  const bootstrapAll = async () => {
+    setBusy(true);
+    try {
+      for (const m of WATCHLIST) {
+        await fetch(`${API}/api/trade/anker/bootstrap/${m}?user_id=user-001`, { method: 'POST' });
+      }
+      await load();
+    } finally { setBusy(false); }
+  };
+
+  if (loading && !config) {
+    return <div data-testid="anker-panel" className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 text-xs text-slate-500">⚓ Anker laden…</div>;
+  }
+
+  const enabled = !!config?.enabled;
+  const threshold = config?.above_anker_threshold_pct ?? 8.0;
+  const action = config?.action_on_above_anker || 'skip';
+
+  return (
+    <div data-testid="anker-panel" className="bg-slate-900/50 border border-cyan-500/30 rounded-2xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+            ⚓ Anker gap-up guard
+          </h3>
+          <span data-testid="anker-flag-badge"
+            className={`text-[10px] px-2 py-0.5 rounded-full border ${enabled
+              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+              : 'bg-slate-800 text-slate-400 border-slate-700'}`}>
+            {enabled ? `ON (${action})` : 'OFF'}
+          </span>
+          <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+            drempel: {threshold}%
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <select value={days} onChange={e => setDays(Number(e.target.value))}
+            data-testid="anker-days-filter"
+            className="text-[10px] px-2 py-1 rounded bg-slate-800 border border-slate-700 text-slate-300">
+            <option value={1}>1d</option>
+            <option value={7}>7d</option>
+            <option value={30}>30d</option>
+          </select>
+          <button onClick={load} data-testid="anker-reload"
+            className="text-[10px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">🔄</button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+        <div className="p-2 rounded-lg bg-slate-950/50 border border-slate-800" data-testid="anker-stat-total">
+          <div className="text-[10px] text-slate-500 mb-0.5">Checks ({days}d)</div>
+          <div className="text-lg font-bold text-white">{stats?.total ?? 0}</div>
+        </div>
+        <div className="p-2 rounded-lg bg-slate-950/50 border border-slate-800" data-testid="anker-stat-skip">
+          <div className="text-[10px] text-slate-500 mb-0.5">Would-skip</div>
+          <div className="text-lg font-bold text-amber-400">{stats?.would_skip_count ?? 0}</div>
+        </div>
+        <div className="p-2 rounded-lg bg-slate-950/50 border border-slate-800" data-testid="anker-stat-above">
+          <div className="text-[10px] text-slate-500 mb-0.5">Above threshold</div>
+          <div className="text-lg font-bold text-orange-400">{stats?.above_threshold_count ?? 0}</div>
+        </div>
+        <div className="p-2 rounded-lg bg-slate-950/50 border border-slate-800" data-testid="anker-stat-delta">
+          <div className="text-[10px] text-slate-500 mb-0.5">Avg Δ%</div>
+          <div className="text-lg font-bold text-cyan-400">{(stats?.avg_delta_pct ?? 0).toFixed(2)}%</div>
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[11px] text-slate-400">Anker per markt (30d gemiddelde)</span>
+          <button onClick={bootstrapAll} disabled={busy} data-testid="anker-bootstrap-all"
+            className="text-[10px] px-2 py-1 rounded bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-200 border border-cyan-500/40 disabled:opacity-50">
+            {busy ? '…' : '🔄 seed alle markten'}
+          </button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          {markets.map(({ market, anker }) => (
+            <div key={market} data-testid={`anker-market-${market}`}
+              className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 flex items-center justify-between">
+              <div>
+                <div className="text-[11px] font-medium text-white">{market}</div>
+                <div className="text-[10px] text-slate-500">
+                  {anker ? `€${anker.anker_price_eur?.toFixed(4)} (${anker.sample_count}d)` : 'geen cache'}
+                </div>
+              </div>
+              <button onClick={() => bootstrapMarket(market)} disabled={busy}
+                data-testid={`anker-bootstrap-${market}`}
+                className="text-[10px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 disabled:opacity-50">
+                seed
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button onClick={() => setExpanded(!expanded)}
+        data-testid="anker-toggle-events"
+        className="w-full text-left px-3 py-2 text-[11px] rounded bg-slate-900/50 hover:bg-slate-800/50 text-slate-300 flex items-center justify-between">
+        <span>📜 {events.length} recente anker-checks (LogAgent topic=anker_check)</span>
+        <span className={`transition-transform ${expanded ? 'rotate-90' : ''}`}>▶</span>
+      </button>
+      {expanded && (
+        <div className="mt-2 p-2 bg-black/30 rounded border border-slate-800 max-h-64 overflow-y-auto text-[10px]">
+          {events.length === 0 && <div className="text-slate-500 italic">Nog geen anker-checks (bot niet gedraaid met flag ON)</div>}
+          {events.slice().reverse().slice(0, 30).map((e, i) => {
+            const d = e.data || {};
+            const skipped = !d.allow;
+            return (
+              <div key={i} className="flex items-center gap-2 py-0.5 border-b border-slate-800/50 last:border-0">
+                <span className="text-slate-500 tabular-nums">{(e.timestamp || '').slice(11, 19)}</span>
+                <span className="font-medium text-white w-20">{d.market}</span>
+                <span className={skipped ? 'text-amber-400' : 'text-emerald-400'}>{skipped ? 'SKIP' : 'ALLOW'}</span>
+                <span className="text-slate-500">€{d.current?.toFixed(4)} vs anker €{d.anker?.toFixed(4)}</span>
+                <span className={d.above_threshold ? 'text-orange-400' : 'text-slate-500'}>
+                  {d.delta_pct >= 0 ? '+' : ''}{d.delta_pct?.toFixed(2)}%
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <p className="text-[10px] text-slate-500 italic mt-2 leading-snug">
+        💡 Feature-flag zit in blueprint <code className="text-slate-400">spark_trader.json → anker.enabled</code>.
+        Zet &apos;m eerst op <code className="text-slate-400">true</code> met <code className="text-slate-400">action_on_above_anker: &quot;log_only&quot;</code>,
+        laat &apos;t een weekend draaien, kijk bovenstaande stats, tune drempel, dan pas <code className="text-slate-400">&quot;skip&quot;</code>.
+      </p>
+    </div>
+  );
+}

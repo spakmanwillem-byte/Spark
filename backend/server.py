@@ -655,6 +655,28 @@ async def startup():
             print("   📚 Learning scheduler gestart (context + trade-history, elke 24u)")
         except Exception as _se:
             print(f"   ⚠️  learning scheduler start failed: {_se}")
+
+        # v10_anker_boot_bootstrap_001 — bij feature-flag ON: seed anker-cache
+        # voor alle actieve markets vanuit Bitvavo 30d daily candles. Alleen bij
+        # missing/stale cache. Fail-safe: crash mag boot niet blokkeren.
+        try:
+            from modules.trade.anker_service import _load_anker_config, get_anker, bootstrap_anker_from_bitvavo
+            _ank_cfg = _load_anker_config()
+            if _ank_cfg.get("enabled"):
+                from modules.trade.monitor import WATCHLIST_COINS
+                _seeded = 0
+                for _c in WATCHLIST_COINS:
+                    _m = f"{_c}-EUR"
+                    if not get_anker(_m):  # alleen als cache ontbreekt
+                        _r = bootstrap_anker_from_bitvavo(_m, user_id="user-001")
+                        if "error" not in _r:
+                            _seeded += 1
+                if _seeded:
+                    print(f"   ⚓ Anker gebootstrapt voor {_seeded} markt(en)")
+            else:
+                print("   ⚓ Anker-feature staat OFF — bootstrap geskipt")
+        except Exception as _ae:
+            print(f"   ⚠️  Anker-bootstrap faalde: {_ae}")
     try:
         import threading
         threading.Thread(target=_resume_in_background, daemon=True).start()

@@ -200,6 +200,7 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
             "_bollinger_action": "BUY",
         }
 
+
     band_pos = (price - lower) / (upper - lower) if (upper - lower) > 0 else 0.5
     return {
         **base,

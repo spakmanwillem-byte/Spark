@@ -18,13 +18,26 @@
 
 Reflex voor volgende keer: bij event-logging **eerst `grep -rn "LogAgent\|log_agent" backend/`** voor ik een nieuwe schrijf-locatie verzin.
 
-### 🟡 Nog te doen (P1, na Willem-review)
-- **Anker Fase 2**: hook in `strategy_decision._simple_decision` na BUY-signaal, voor execute (start met `action=log_only` een weekend, dan `skip` na drempel-tune)
-- **Boot-time bootstrap** — bij backend-start voor alle actieve markets 1x anker cachen
-- **Nachtelijke reconciliatie** — anker updaten uit Bitvavo daily candles (cron/scheduler)
-- **Admin-UI**: anker per market naast huidige prijs + threshold-slider (3/5/8/12/15%)
-- **Backtest-integratie**: bestaande backtest-runner (`data/trade/backtests/`) uitbreiden met `--enable-anker --threshold=X` om drempels historisch te vergelijken
-- **PapertrailAgent hint**: laten weten dat `anker_check` topic nu bestaat zodat "wat heeft de bot geskipt?" chat-vraag automatisch werkt via bestaande ChatHub-flow
+### 🟡 Nog te doen (P1)
+- **Backtest-integratie** — bestaande backtest-runners (`tests/backtest_v[2-5].py`) roepen **niet** `_simple_decision` aan maar hebben eigen `strat_*` functies. Anker-hook in backtest = apart werk (per-strat aanpassen of aparte backtest-variant). Later oppakken wanneer je drempels serieus wil vergelijken op historische data.
+- **Threshold-slider** in `AnkerPanel` (nu alleen read-only stat). Als je 't wil aanpassen: edit `spark_trader.json → anker.above_anker_threshold_pct` handmatig, of we bouwen slider die naar `POST /trade/anker/config` schrijft.
+
+### ✅ Sessie 47 fase 2 (2026-07-22) — Anker HOOK live (feature-flag OFF)
+
+Geland:
+- **Hook** in `monitor.py` na EUR-cooldown check, vóór execute (r.1108). Fail-open bij anker-crash. Bevat `buy_decision.anker_check` payload voor debugging.
+- **Boot-bootstrap** in `server.py` startup — alleen als flag ON, cachet 30d candles voor missing markets. Fail-safe.
+- **Nachtelijke reconciliatie** in `scheduler_loop()` — 1×/dag rond `reconciliation_hour_utc` (default 3 UTC) refresh anker-cache uit Bitvavo. Idempotent via `_load_state()`.
+- **Admin-UI widget** `AnkerPanel` in `AnalyticsPage.js` (Trade tab, onder `SparkTraderStatsPanel`). Toont: flag-status, per-market anker + seed-knop, week-stats (checks/would-skip/above-threshold/avg-Δ%), events preview (LogAgent topic=anker_check).
+
+End-to-end test:
+- ✅ Flag ON + gap-up (€220 vs anker €200) + log_only → `allow=True`, `above_threshold=True`, event geland via LogAgent
+- ✅ Backend lint groen (monitor.py, scheduler, server.py, anker_service)
+- ✅ UI-code compileert (kleine ESLint cosmetics same as rest of file)
+
+Backtest-integratie GESKIPT — motivatie in "Nog te doen" hierboven.
+
+---
 
 ### 🎯 Wijzigingen in bestanden
 - NEW `backend/modules/trade/anker_service.py`

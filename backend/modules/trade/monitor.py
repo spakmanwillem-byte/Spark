@@ -1105,6 +1105,28 @@ class MonitorService:
             if buy_decision["action"] == "BUY" and in_eur_cooldown:
                 buy_decision["reason"] += f" | Skipped: EUR-cooldown {eur_cooldown_left}s (eerder onvoldoende EUR)"
                 buy_decision["action"] = "HOLD"
+            # v10_anker_hook_001 — Gap-up guard. Log-only als flag off/log_only,
+            # skip als action=skip. Elke check gaat via LogAgent (topic=anker_check).
+            if buy_decision["action"] == "BUY":
+                try:
+                    from .anker_service import check_gap_up, log_anker_event
+                    anker_dec = check_gap_up(market, price)
+                    if anker_dec.get("enabled"):
+                        log_anker_event(market, anker_dec, user_id=self._user_id or "system")
+                    buy_decision["anker_check"] = {
+                        "enabled": anker_dec.get("enabled"),
+                        "anker": anker_dec.get("anker"),
+                        "delta_pct": anker_dec.get("delta_pct"),
+                        "action": anker_dec.get("action"),
+                        "above_threshold": anker_dec.get("above_threshold", False),
+                    }
+                    if not anker_dec.get("allow"):
+                        buy_decision["reason"] += f" | Skipped: anker-guard ({anker_dec.get('reason')})"
+                        buy_decision["action"] = "HOLD"
+                        buy_decision["anker_blocked"] = True
+                except Exception as _ae:
+                    # Anker mag NOOIT de trader blokkeren als hij zelf crasht (fail-open)
+                    logger.warning(f"anker check failed for {market}: {_ae}")
             if buy_decision["action"] == "BUY":
                 # v7_pot_cluster_001 — Cluster pots samen tot Bitvavo min-order gehaald
                 # is. Voorheen: 1 pot × €5,08 = Bitvavo weigert SOL/ADA orders (min €5-7).

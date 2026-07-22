@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2167,
+    "card_count": 2173,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:02:39.238668+00:00",
+    "last_updated": "2026-07-22T09:17:49.565180+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -290244,6 +290244,976 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-22T09:02:39.604462+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e942cb54",
+      "begrip": "eigen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Eigen betekent dat iets bij een bepaalde persoon, groep of organisatie hoort of kenmerkend is voor diegene.",
+        "laag2": "Het woord eigen geeft aan dat iets van iemand zelf is of specifiek bij die persoon, groep of situatie hoort. Het kan gaan om bezit, eigenschappen, ideeën of verantwoordelijkheden.\n",
+        "laag3": "Eigen is een bijvoeglijk naamwoord dat een relatie aangeeft tussen een persoon, groep of organisatie en iets dat daarbij hoort. Het wordt gebruikt om bezit, identiteit, kenmerken of verantwoordelijkheid te benadrukken, zoals in eigen huis, eigen mening of eigen verantwoordelijkheid. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt eigen gebruikt om aan te geven dat informatie, instellingen, gegevens of eigenschappen gekoppeld zijn aan een specifieke gebruiker, module of systeem. Hierdoor kan Spark onderscheid maken tussen algemene informatie en informatie die specifiek bij een bepaalde entiteit hoort.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Iedereen heeft een eigen mening.\"\n\n→ De mening behoort bij de persoon zelf.\n\nVoorbeeld 2\n\n\"Spark heeft zijn eigen kennisbank.\"\n\n→ De kennisbank behoort specifiek bij Spark."
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en AI-systemen.",
+        "wat": "Een eigenschap die aangeeft dat iets bij een bepaalde persoon, groep of entiteit hoort.",
+        "wanneer": "Wanneer bezit, kenmerken of verantwoordelijkheid worden beschreven.",
+        "waar": "In gesprekken, documenten, systemen en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets specifiek bij iemand of iets hoort.",
+        "hoe": "Door een eigenschap, voorwerp of verantwoordelijkheid aan een bepaalde persoon of entiteit te koppelen."
+      },
+      "tags": [
+        "eigen",
+        "bezit",
+        "eigenschap",
+        "identiteit",
+        "verantwoordelijkheid",
+        "persoonlijk",
+        "toebehoren",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1ee335bd",
+          "begrip": "bezit",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bezit",
+            "emotie",
+            "neutraal",
+            "persoonlijk",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-230d3cc9",
+          "begrip": "andermans",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bezit",
+            "emotie",
+            "neutraal",
+            "toebehoren",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2623a30c",
+          "begrip": "hadden",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "bezit",
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-80b7a108",
+          "begrip": "hebben",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bezit",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:07:43.323199+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:56:45.898621+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-606a7d814ab2",
+        "extract_at": "2026-07-22T08:56:46.003558+00:00",
+        "extract_context_snippet": "verschillende onderwerpen. Volgens mijn eigen kennis, zijn KB-kaarten gestructureerde kaarten waarin één",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'eigen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:07:41.245685+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:07:41.347257+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:07:41.354977+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:07:43.683166+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:07:43.690748+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0ca33ece",
+      "begrip": "ogen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ogen zijn de zintuigen waarmee mensen en veel dieren kunnen zien.",
+        "laag2": "Ogen nemen licht, kleuren, vormen en beweging waar en sturen deze informatie naar de hersenen, waar beelden worden verwerkt.",
+        "laag3": "Ogen zijn zintuiglijke organen die licht opvangen en omzetten in signalen voor de hersenen. Hierdoor kunnen mensen en veel dieren hun omgeving waarnemen, afstanden inschatten, beweging herkennen en objecten onderscheiden. De bouw en werking van ogen verschillen per diersoort, afhankelijk van hun leefomgeving en behoeften.\n",
+        "laag4": "Binnen Spark verwijzen ogen naar het biologische zintuig van mensen en dieren. Wanneer Spark gebruikmaakt van camera's of beeldherkenning, worden deze niet als ogen beschouwd, maar als sensoren die een vergelijkbare functie vervullen. Spark maakt daarom onderscheid tussen biologische ogen en technische beeldsensoren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Met je ogen kun je lezen.\"\n\n→ De ogen nemen de tekst waar.\n\nVoorbeeld 2\n\n\"De kat heeft grote ogen.\"\n\n→ De ogen helpen de kat om zijn omgeving te zien."
+      },
+      "ws5": {
+        "wie": "Mensen en veel diersoorten.",
+        "wat": "Zintuiglijke organen waarmee licht en beelden worden waargenomen.",
+        "wanneer": "Wanneer iemand of een dier kijkt of de omgeving waarneemt.",
+        "waar": "Aan het hoofd van mensen en veel dieren.",
+        "waarom": "Om de omgeving waar te nemen en visuele informatie te verwerken.",
+        "hoe": "Door licht op te vangen en om te zetten in signalen die door de hersenen worden verwerkt."
+      },
+      "tags": [
+        "ogen",
+        "oog",
+        "zien",
+        "zicht",
+        "waarnemen",
+        "zintuig",
+        "lichaam",
+        "biologisch",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-111e9236",
+          "begrip": "zicht",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ogen",
+            "zicht",
+            "zien"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5f608502",
+          "begrip": "zintuig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "lichaam",
+            "neutraal",
+            "zicht",
+            "zintuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3f9170b4",
+          "begrip": "waarnemen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "waarnemen",
+            "zien"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "lichaam",
+            "neutraal",
+            "waarnemen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b63cd623",
+          "begrip": "slaap",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "biologisch",
+            "emotie",
+            "lichaam",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:10:54.552982+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:55:12.204232+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6c4db2201ef4",
+        "extract_at": "2026-07-22T08:55:12.308757+00:00",
+        "extract_context_snippet": "n kletsen zonder een speciaal doel voor ogen, dat is ook belangrijk. Soms is het lekker om even niets bi",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'ogen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:10:52.649355+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:10:52.751168+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:10:52.987333+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:10:54.899745+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:10:54.907249+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-43ace69b",
+      "begrip": "gestructureerde",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gestructureerde betekent dat iets volgens een duidelijke en logische opbouw is georganiseerd.",
+        "laag2": "Het woord gestructureerde is de verbogen vorm van gestructureerd. Het beschrijft informatie, processen of objecten die overzichtelijk en volgens een vaste structuur zijn ingedeeld.\n",
+        "laag3": "Gestructureerde is een bijvoeglijk naamwoord dat aangeeft dat onderdelen op een geordende en samenhangende manier zijn georganiseerd. Een gestructureerde aanpak maakt informatie gemakkelijker te begrijpen, terug te vinden en te beheren. De structuur kan bestaan uit categorieën, stappen, lagen, regels of andere vormen van ordening.\n",
+        "laag4": "Binnen Spark wordt gestructureerde gebruikt om aan te geven dat kennis, gegevens, processen of communicatie volgens een vaste opbouw zijn georganiseerd. Hierdoor kan Spark informatie efficiënter opslaan, analyseren, doorzoeken en met elkaar verbinden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De informatie staat in een gestructureerde tabel.\"\n\n→ De gegevens zijn overzichtelijk geordend.\n\nVoorbeeld 2\n\n\"Spark gebruikt een gestructureerde kennisbank.\"\n\n→ De kennis is volgens een vaste structuur opgeslagen."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een eigenschap die aangeeft dat iets overzichtelijk en volgens een vaste structuur is georganiseerd.",
+        "wanneer": "Wanneer informatie, processen of objecten geordend zijn.",
+        "waar": "In documenten, databases, software, organisaties en het dagelijks leven.",
+        "waarom": "Om informatie overzichtelijk, begrijpelijk en gemakkelijk te beheren te maken.",
+        "hoe": "Door een vaste indeling, logische opbouw of duidelijke structuur toe te passen."
+      },
+      "tags": [
+        "gestructureerde",
+        "gestructureerd",
+        "structuur",
+        "geordend",
+        "georganiseerd",
+        "overzicht",
+        "indeling",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-d94d5e47",
+          "begrip": "Netjes betekent schoon, geordend of verzorgd.",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eigenschap",
+            "emotie",
+            "georganiseerd",
+            "neutraal",
+            "overzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-747e4a37",
+          "begrip": "categorieën",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eigenschap",
+            "emotie",
+            "indeling",
+            "neutraal",
+            "overzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "overzicht",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overzicht",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:12:16.423934+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:56:46.003871+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-606a7d814ab2",
+        "extract_at": "2026-07-22T08:56:46.109148+00:00",
+        "extract_context_snippet": "gens mijn eigen kennis, zijn KB-kaarten gestructureerde kaarten waarin één begrip, onderwerp of concept wordt besch",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gestructureerde' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:12:14.644745+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:12:14.744132+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:12:14.751744+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:12:16.773409+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:12:16.781093+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-30827b3c",
+      "begrip": "degene",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Degene verwijst naar een persoon die eerder is genoemd of bedoeld.",
+        "laag2": "Het woord degene is een aanwijzend voornaamwoord dat wordt gebruikt om naar een specifieke persoon te verwijzen zonder de naam te herhalen.",
+        "laag3": "Degene is een voornaamwoord dat verwijst naar één bepaalde persoon. Het wordt gebruikt om herhaling van een naam of omschrijving te voorkomen. De betekenis wordt bepaald door de context en verwijst altijd naar een persoon, in tegenstelling tot datgene, dat naar een zaak of begrip verwijst.\n",
+        "laag4": "Binnen Spark wordt degene herkend als een verwijzend voornaamwoord. Spark gebruikt de context om te bepalen naar welke persoon wordt verwezen, zodat gesprekken, opdrachten en teksten correct kunnen worden geïnterpreteerd.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Degene die het antwoord weet, mag zijn hand opsteken.\"\n\n→ Er wordt verwezen naar de persoon die het antwoord weet.\n\nVoorbeeld 2\n\n\"Ik zoek degene die de melding heeft verstuurd.\"\n\n→ Er wordt verwezen naar een specifieke persoon.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een voornaamwoord dat verwijst naar een specifieke persoon.",
+        "wanneer": "Wanneer naar een persoon wordt verwezen zonder diens naam te herhalen.",
+        "waar": "In gesprekken, teksten, documenten en het dagelijks taalgebruik.",
+        "waarom": "Om herhaling te voorkomen en een persoon duidelijk aan te duiden.",
+        "hoe": "Door degene te gebruiken als verwijzing naar een persoon die uit de context bekend is."
+      },
+      "tags": [
+        "degene",
+        "voornaamwoord",
+        "verwijzing",
+        "persoon",
+        "taal",
+        "grammatica",
+        "communicatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a1e57110",
+          "begrip": "jou",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69c7326b",
+          "begrip": "Arent",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:13:38.101528+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:42.180846+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-f0946d0c8a18",
+        "extract_at": "2026-07-20T14:44:42.284639+00:00",
+        "extract_context_snippet": "r – volgens de kaart **[doen] maker** – degene bent die dit systeem heeft opgezet en dat je dus bepaalde r",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'degene' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:13:36.050914+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:13:36.153806+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:13:36.401980+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:13:38.451676+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:13:38.459259+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-855dbbc0",
+      "begrip": "letter",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een letter is een schriftteken dat wordt gebruikt om woorden en zinnen te vormen.",
+        "laag2": "Letters vormen samen een alfabet. Door letters in een bepaalde volgorde te plaatsen ontstaan woorden, zinnen en teksten.",
+        "laag3": "Een letter is de kleinste geschreven eenheid van een alfabetisch schriftsysteem. Elke letter kan één of meerdere klanken vertegenwoordigen. De combinatie van letters vormt woorden, terwijl de betekenis van een woord wordt bepaald door de volgorde en samenstelling van de letters.\n",
+        "laag4": "Binnen Spark is een letter de kleinste tekstuele bouwsteen van geschreven taal. Spark gebruikt letters om woorden, zinnen en documenten te verwerken, op te slaan en te analyseren. Letters vormen de basis voor taalherkenning, spelling, zoekopdrachten en tekstanalyse.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het woord boom bestaat uit vier letters.\"\n\n→ De letters b, o, o en m vormen samen het woord.\n\nVoorbeeld 2\n\n\"De letter A is de eerste letter van het alfabet.\"\n\n→ A is één teken binnen het alfabet.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die leest, schrijft of tekst verwerkt.",
+        "wat": "Een schriftteken dat deel uitmaakt van een alfabet.",
+        "wanneer": "Wanneer woorden, zinnen of teksten worden geschreven of gelezen.",
+        "waar": "In boeken, documenten, computers, websites en andere vormen van geschreven taal.",
+        "waarom": "Om woorden, zinnen en informatie schriftelijk vast te leggen",
+        "hoe": "Door letters volgens de regels van een taal te combineren tot woorden en teksten."
+      },
+      "tags": [
+        "letter",
+        "alfabet",
+        "schrift",
+        "taal",
+        "tekst",
+        "woord",
+        "teken",
+        "spelling",
+        "communicatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f2cf1517",
+          "begrip": "alfabet",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "alfabet",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "schrift"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "taal",
+            "tekst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-31c6d4d6",
+          "begrip": "schrijf",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "taal",
+            "tekst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:15:09.950170+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:57.962158+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-9e9facec10d8",
+        "extract_at": "2026-07-20T14:44:58.065360+00:00",
+        "extract_context_snippet": "oor je uit.  **Sigma (σ)** is de 18 ste letter van het Griekse alfabet. In de wetenschap en wiskunde gebru",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'letter' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:15:07.759328+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:15:07.860827+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:15:07.868750+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:15:10.307493+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:15:10.315407+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c9993224",
+      "begrip": "exacte",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Exacte betekent dat iets volledig nauwkeurig, precies en zonder afwijking is.",
+        "laag2": "Het woord exacte is de verbogen vorm van exact. Het beschrijft informatie, metingen, aantallen of beschrijvingen die zo nauwkeurig mogelijk zijn.",
+        "laag3": "Exacte is een bijvoeglijk naamwoord dat aangeeft dat iets overeenkomt met de werkelijkheid of een vastgestelde waarde zonder of met minimale afwijking. Het wordt gebruikt bij metingen, berekeningen, locaties, tijdstippen, gegevens en andere situaties waarin precisie belangrijk is.\n",
+        "laag4": "Binnen Spark wordt exacte gebruikt om aan te geven dat gegevens, berekeningen of resultaten zo nauwkeurig mogelijk zijn vastgesteld. Spark maakt onderscheid tussen exacte informatie, geschatte informatie en onzekere informatie, zodat de betrouwbaarheid van gegevens duidelijk blijft.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Geef de exacte tijd.\"\n\n→ De precieze tijd wordt gevraagd.\n\nVoorbeeld 2\n\n\"Spark berekende de exacte uitkomst.\"\n\n→ De berekening is zonder afronding of schatting uitgevoerd.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, wetenschappers, computers en AI-systemen.",
+        "wat": "Een eigenschap die aangeeft dat iets volledig nauwkeurig en precies is.",
+        "wanneer": "Wanneer een hoge mate van precisie vereist is.",
+        "waar": "In wetenschap, techniek, wiskunde, administratie en het dagelijks leven.",
+        "waarom": "Om fouten, onduidelijkheid en afwijkingen te voorkomen.",
+        "hoe": "Door gegevens zorgvuldig vast te stellen, te meten of te berekenen."
+      },
+      "tags": [
+        "exacte",
+        "exact",
+        "nauwkeurig",
+        "precies",
+        "precisie",
+        "meting",
+        "berekening",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "nauwkeurig",
+            "neutraal",
+            "precies",
+            "precisie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9c9d01f9",
+          "begrip": "precies",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "exact",
+            "meting",
+            "nauwkeurig",
+            "neutraal",
+            "precies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9d9febf2",
+          "begrip": "precisie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "eigenschap",
+            "emotie",
+            "meting",
+            "neutraal",
+            "precisie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-54c1104b",
+          "begrip": "bepaalde",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal",
+            "precisie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f045385b",
+          "begrip": "nauwkeurig",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "exact",
+            "nauwkeurig",
+            "neutraal",
+            "precisie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:17:49.565158+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:25:04.566141+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-bc2d9bc4f2be",
+        "extract_at": "2026-07-21T13:25:05.464640+00:00",
+        "extract_context_snippet": "*De Willem**. Op dit moment heb ik geen exacte cijfers over hoeveel ROAR‑tokens er in omloop zijn. Ik kan",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'exacte' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:17:47.629717+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:17:47.731855+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:17:47.739418+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:17:49.922522+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:17:49.930029+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 5

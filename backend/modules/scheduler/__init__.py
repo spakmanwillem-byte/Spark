@@ -378,6 +378,44 @@ async def _maybe_auto_mint():
         print(f"[scheduler] auto-mint tick failed: {ex}")
 
 
+async def _maybe_anker_reconciliation():
+    """v10_anker_reconciliation_001 — 1×/dag rond `reconciliation_hour_utc` (blueprint,
+    default 3 UTC) anker-cache refreshen uit Bitvavo daily candles. Alleen als feature-flag AAN.
+    """
+    now = datetime.now(timezone.utc)
+    try:
+        from modules.trade.anker_service import _load_anker_config, bootstrap_anker_from_bitvavo
+        from modules.trade.monitor import WATCHLIST_COINS
+        cfg = _load_anker_config()
+    except Exception:
+        return
+    if not cfg.get("enabled"):
+        return
+    target_hour = int(cfg.get("reconciliation_hour_utc", 3))
+    if now.hour != target_hour:
+        return
+    state = _load_state()
+    today = now.strftime("%Y-%m-%d")
+    if state.get("anker_reconciled_date") == today:
+        return  # al gedraaid vandaag
+    refreshed = 0
+    errors = 0
+    for c in WATCHLIST_COINS:
+        m = f"{c}-EUR"
+        try:
+            r = bootstrap_anker_from_bitvavo(m, user_id="user-001")
+            if "error" in r:
+                errors += 1
+            else:
+                refreshed += 1
+        except Exception:
+            errors += 1
+    state["anker_reconciled_date"] = today
+    state["anker_last_result"] = {"refreshed": refreshed, "errors": errors}
+    _save_state(state)
+    print(f"[scheduler] anker reconciliation: refreshed={refreshed} errors={errors}")
+
+
 async def scheduler_loop():
     """Hoofdloop — draait elke 5 minuten."""
     print("[scheduler] v6_scheduler_001 gestart (interval 5min)")
@@ -390,6 +428,7 @@ async def scheduler_loop():
             await _maybe_weekly_report()
             await _maybe_daily_brief()
             await _maybe_auto_mint()
+            await _maybe_anker_reconciliation()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

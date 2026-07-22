@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2162,
+    "card_count": 2163,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:40:17.079431+00:00",
+    "last_updated": "2026-07-22T08:41:50.396392+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -289441,6 +289441,169 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f802f9fa",
+      "begrip": "bands",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bands is het meervoud van band.",
+        "laag2": "Het woord bands verwijst naar meerdere banden. De betekenis hangt af van de context, zoals meerdere relaties, autobanden, muziekbands of andere soorten banden.",
+        "laag3": "Bands is de meervoudsvorm van het zelfstandig naamwoord band. Afhankelijk van de context kan het verwijzen naar meerdere muziekgroepen, autobanden, verbindingen of andere objecten die met het woord band worden aangeduid. De exacte betekenis wordt bepaald door de situatie waarin het woord wordt gebruikt.",
+        "laag4": "Binnen Spark wordt bands automatisch gekoppeld aan het begrip band. Spark herkent dat het om de meervoudsvorm gaat en gebruikt de context om de juiste betekenis te bepalen, zoals muziekbands, autobanden of sociale banden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er treden vanavond drie bands op.\"\n\n→ Er worden drie muziekgroepen bedoeld.\n\nVoorbeeld 2\n\n\"De garage verkoopt winterbands.\"\n\n→ Er worden meerdere autobanden bedoeld."
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "De meervoudsvorm van het woord band.",
+        "wanneer": "Wanneer naar meerdere banden wordt verwezen.",
+        "waar": "In gesprekken, teksten, muziek, techniek en het dagelijks leven.",
+        "waarom": "Om meer dan één band aan te duiden.",
+        "hoe": "Door de meervoudsvorm bands te gebruiken."
+      },
+      "tags": [
+        "bands",
+        "band",
+        "meervoud",
+        "relatie",
+        "autoband",
+        "muziekgroep",
+        "verbinding",
+        "taal",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-edef827c",
+          "begrip": "band",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "autoband",
+            "band",
+            "context",
+            "emotie",
+            "muziekgroep"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:41:50.396370+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:57.858853+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-9e9facec10d8",
+        "extract_at": "2026-07-20T14:44:57.961858+00:00",
+        "extract_context_snippet": "ng** zie je sigma terug in de Bollinger Bands. Daar staat σ voor de standaardafwijking van de prijs ten o",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'bands' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:41:48.675521+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:41:48.786348+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:41:48.793797+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:41:50.786146+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:41:50.793796+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
             }
           }
         ]

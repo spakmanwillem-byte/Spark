@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2223,
+    "card_count": 2227,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:26:31.636434+00:00",
+    "last_updated": "2026-07-22T15:42:45.189592+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -299646,6 +299646,712 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-22T15:26:26.521430+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-603772ce",
+      "begrip": "bezigheid",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een bezigheid is een activiteit, taak of handeling waarmee iemand zijn of haar tijd doorbrengt.\n",
+        "laag2": "Een bezigheid is iets dat iemand doet, tijdelijk of regelmatig. Dit kan werk, een hobby, een huishoudelijke taak, studie, ontspanning of een andere activiteit zijn.\n",
+        "laag3": "Een bezigheid kan zowel verplicht als vrijwillig zijn en kan variëren van korte handelingen tot langdurige activiteiten. Voorbeelden zijn werken, lezen, sporten, koken, gamen, studeren, tuinieren of muziek maken. Het woord wordt gebruikt om aan te geven waar iemand mee bezig is of welke activiteit op een bepaald moment wordt uitgevoerd. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt bezigheid herkend als een algemene activiteit of taak. Spark kan relaties leggen tussen:\n\nActiviteit\nTaak\nWerk\nHobby\nVrije tijd\nOntspanning\nStudie\nLeren\nSport\nLezen\nSchrijven\nGamen\nKoken\nMuziek\nTuinieren\nHuishouden\nRoutine\nPlanning\nTijdsbesteding\nInteresse\n\nSpark kan daarnaast activiteiten classificeren, relaties leggen tussen bezigheden en interesses en onderscheid maken tussen werk, hobby's en dagelijkse taken.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Lezen is een rustige bezigheid.\"\n\n→ Lezen wordt genoemd als activiteit.\n\nVoorbeeld 2\n\n\"Zijn dagelijkse bezigheid is programmeren.\"\n\n→ Programmeren is de activiteit waarmee iemand veel tijd doorbrengt."
+      },
+      "ws5": {
+        "wie": "Mensen, groepen en organisaties.",
+        "wat": "Een activiteit, taak of handeling waarmee iemand bezig is.",
+        "wanneer": "Tijdens werk, studie, vrije tijd of andere dagelijkse momenten.",
+        "waar": "Thuis, op school, op het werk, buiten of op iedere andere locatie.",
+        "waarom": "Om een doel te bereiken, tijd te besteden, te leren, te werken of te ontspannen.",
+        "hoe": "Door een activiteit of taak uit te voeren."
+      },
+      "tags": [
+        "bezigheid",
+        "activiteit",
+        "taak",
+        "werk",
+        "hobby",
+        "vrije tijd",
+        "ontspanning",
+        "studie",
+        "leren",
+        "sport",
+        "lezen",
+        "schrijven",
+        "gamen",
+        "koken",
+        "muziek",
+        "tijdsbesteding",
+        "routine",
+        "planning",
+        "interesse",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-94165460",
+          "begrip": "zaterdag",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "hobby",
+            "ontspanning",
+            "planning",
+            "sport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5e1a0730",
+          "begrip": "interesses",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "hobby",
+            "interesse",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "planning",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "activiteit",
+            "emotie",
+            "neutraal",
+            "taak",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2596c17a",
+          "begrip": "zondag",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ontspanning",
+            "planning",
+            "vrije tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:32:58.848206+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T13:03:27.825816+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5a80d99f99af",
+        "extract_at": "2026-07-22T13:03:28.848629+00:00",
+        "extract_context_snippet": "ent volgens onze kennisbank een actieve bezigheid voor plezier, leren of ontspanning. Het geeft je ruimte om",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'bezigheid' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:32:55.513725+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:32:55.614453+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:32:55.742427+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:32:59.207105+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:32:59.215383+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b46efc74",
+      "begrip": "intent",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een intent is de bedoeling, het doel of de achterliggende intentie van een uitspraak of handeling.",
+        "laag2": "Binnen taal, AI en communicatie beschrijft een intent wat iemand werkelijk wil bereiken met een bericht of actie. De woorden die iemand gebruikt zijn daarbij minder belangrijk dan de bedoeling erachter.\n",
+        "laag3": "Het begrip intent wordt veel gebruikt binnen kunstmatige intelligentie, chatbots, spraakassistenten en natuurlijke taalverwerking (NLP). Een intent helpt een systeem te bepalen welke actie moet worden uitgevoerd. Zo kunnen verschillende zinnen dezelfde intent hebben, ook al zijn de woorden anders.\n\nVoorbeelden:\n\n\"Hoe laat is het?\" → Intent: tijd opvragen.\n\"Zet een wekker voor 7 uur.\" → Intent: wekker instellen.\n\"Vertel een grap.\" → Intent: amusement vragen.\n\"Speel muziek.\" → Intent: muziek afspelen.\n\nEen intent bestaat vaak uit:\n\nDe bedoeling van de gebruiker.\nEventuele parameters (slots), zoals een datum, tijd, naam of locatie.\nDe gewenste actie of reactie.",
+        "laag4": "Binnen Spark vormt een intent de schakel tussen taal en functionaliteit. Spark gebruikt intents om gebruikersinvoer te begrijpen en de juiste module of actie te kiezen. Spark kan relaties leggen tussen:\n\nGebruiker\nInvoer\nUitspraak\nTaal\nBetekenis\nNLP\nNatuurlijke taalverwerking\nChatbot\nAI\nSpraakherkenning\nCommando\nActie\nFunctionaliteit\nModule\nTrigger\nContext\nEntiteit\nSlot\nParameter\nClassificatie\nPrompt\nRespons\nAutomatisering\n\nSpark kan meerdere formuleringen koppelen aan dezelfde intent, zodat verschillende manieren van vragen toch tot dezelfde actie leiden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Hoe is het weer morgen?\"\n\n→ Intent: weerinformatie opvragen.\n\nVoorbeeld 2\n\n\"Open mijn agenda.\"\n\n→ Intent: agenda openen."
+      },
+      "ws5": {
+        "wie": "Gebruikers, AI-systemen, chatbots en spraakassistenten.",
+        "wat": "De bedoeling of het doel achter een uitspraak of handeling.",
+        "wanneer": "Wanneer een systeem probeert te begrijpen wat een gebruiker wil.",
+        "waar": "Binnen AI, chatbots, spraakassistenten, zoekmachines en andere systemen voor natuurlijke taalverwerking.",
+        "waarom": "Om de juiste betekenis te herkennen en de passende actie of reactie te kiezen.",
+        "hoe": "Door gebruikersinvoer te analyseren, de intent te classificeren en eventuele parameters te herkennen."
+      },
+      "tags": [
+        "intent",
+        "intentie",
+        "bedoeling",
+        "doel",
+        "nlp",
+        "natuurlijke taalverwerking",
+        "ai",
+        "chatbot",
+        "spraakherkenning",
+        "gebruiker",
+        "invoer",
+        "context",
+        "entiteit",
+        "slot",
+        "parameter",
+        "classificatie",
+        "commando",
+        "actie",
+        "functionaliteit",
+        "trigger",
+        "module",
+        "respons",
+        "automatisering",
+        "semantiek",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "bedoeling",
+            "context",
+            "doel",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-32febab3",
+          "begrip": "Wat is dit voor bot?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "chatbot",
+            "classificatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "intentie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea50eab8",
+          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "intentie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8a996a",
+          "begrip": "user",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gebruiker",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:39:25.183781+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:56:30.563907+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-08372b07c4d8",
+        "extract_at": "2026-07-22T11:56:30.669031+00:00",
+        "extract_context_snippet": "zit verweven in de **triggers** en de **intent‑registry**. Als je wilt, kan ik meteen een overzicht geven",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'intent' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:39:20.938811+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:39:21.038622+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:39:21.279034+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:39:25.531386+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:39:25.539445+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-88c4e659",
+      "begrip": "triggers",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Triggers zijn signalen of voorwaarden die een reactie, gebeurtenis of actie in gang zetten.",
+        "laag2": "Een trigger is een gebeurtenis, woord, situatie of prikkel die ervoor zorgt dat een systeem, persoon of proces reageert. De betekenis van een trigger hangt af van de context.\n",
+        "laag3": "Het begrip trigger wordt gebruikt in verschillende vakgebieden. Binnen software en AI is een trigger een voorwaarde die automatisch een functie of proces activeert, bijvoorbeeld een specifiek woord of een gebeurtenis. Binnen de psychologie is een trigger een prikkel die een emotionele of mentale reactie oproept. Ook in automatisering, databases en elektronica worden triggers gebruikt om acties automatisch uit te voeren zodra aan bepaalde voorwaarden wordt voldaan.\n",
+        "laag4": "Binnen Spark worden triggers gebruikt om te bepalen wanneer een intent, module of functie wordt geactiveerd. Een trigger kan bestaan uit een woord, woordgroep, patroon, gebeurtenis of combinatie van voorwaarden. Spark kan relaties leggen tussen:\n\nIntent\nIntentie\nGebruikersinvoer\nSleutelwoord\nZoekterm\nPatroon\nVoorwaarde\nRegel\nGebeurtenis\nActie\nModule\nFunctionaliteit\nAutomatisering\nNLP\nContext\nClassificatie\nWorkflow\nEvent\nRespons\nDetectie\n\nSpark kan meerdere triggers koppelen aan één intent en één trigger kan, afhankelijk van de context, naar verschillende intents verwijzen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Open mijn agenda.\"\n\n→ De woorden 'open' en 'agenda' kunnen samen de agenda-intent activeren.\n\nVoorbeeld 2\n\n\"Wat is mijn saldo?\"\n\n→ Het woord 'saldo' fungeert als trigger voor de bank- of portemonneemodule."
+      },
+      "ws5": {
+        "wie": "Gebruikers, AI-systemen, software, databases en automatiseringssystemen.",
+        "wat": "Een signaal of voorwaarde die een reactie of actie activeert.",
+        "wanneer": "Wanneer aan een vooraf bepaalde voorwaarde wordt voldaan.",
+        "waar": "Binnen AI, software, automatisering, databases, psychologie en communicatie.",
+        "waarom": "Om automatisch een reactie, functie of proces te starten.",
+        "hoe": "Door woorden, patronen, gebeurtenissen of andere signalen te herkennen en daarop een vooraf bepaalde actie uit te voeren."
+      },
+      "tags": [
+        "trigger",
+        "triggers",
+        "activatie",
+        "gebeurtenis",
+        "voorwaarde",
+        "signaal",
+        "intent",
+        "intentie",
+        "sleutelwoord",
+        "zoekterm",
+        "patroon",
+        "context",
+        "nlp",
+        "ai",
+        "automatisering",
+        "workflow",
+        "module",
+        "functionaliteit",
+        "actie",
+        "respons",
+        "detectie",
+        "event",
+        "classificatie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b46efc74",
+          "begrip": "intent",
+          "lade": "weten",
+          "overlap": 14,
+          "shared_tags": [
+            "actie",
+            "ai",
+            "automatisering",
+            "classificatie",
+            "context"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-311c5f83",
+          "begrip": "event",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "context",
+            "emotie",
+            "event",
+            "gebeurtenis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "automatisering",
+            "context",
+            "detectie",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-259ec4a1",
+          "begrip": "Trigger",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "activatie",
+            "detectie",
+            "emotie",
+            "event",
+            "gebeurtenis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-60a3d505",
+          "begrip": "zodra",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "automatisering",
+            "context",
+            "emotie",
+            "neutraal",
+            "trigger"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:41:04.589868+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:56:30.457001+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-08372b07c4d8",
+        "extract_at": "2026-07-22T11:56:30.563628+00:00",
+        "extract_context_snippet": "we *hooks* noemen, zit verweven in de **triggers** en de **intent‑registry**. Als je wilt, kan ik meteen een",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'triggers' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:41:01.388169+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:41:01.488430+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:41:01.496473+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 14
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:41:04.942829+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:41:04.951109+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 14
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c658151c",
+      "begrip": "query",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een query is een gerichte vraag of opdracht waarmee informatie wordt opgevraagd, gezocht of verwerkt.\n",
+        "laag2": "Een query wordt gebruikt om gegevens uit een systeem, database, zoekmachine of AI op te vragen. De query bepaalt welke informatie gezocht of welke bewerking uitgevoerd moet worden.\n",
+        "laag3": "Het begrip query komt veel voor in informatica, databases, zoekmachines en kunstmatige intelligentie. Een query kan bestaan uit een zoekterm, een natuurlijke taalvraag of een formele opdracht, zoals een SQL-query. Zoekmachines gebruiken queries om relevante resultaten te vinden, terwijl databases queries gebruiken om gegevens te selecteren, toe te voegen, te wijzigen of te verwijderen. Binnen AI vormt een query vaak de invoer die wordt geanalyseerd om de intent, context en gewenste actie te bepalen.\n\nVoorbeelden:\n\n\"Wat is het weer morgen?\" → natuurlijke taalquery.\n\"Zoek foto's van katten.\" → zoekquery.\nSELECT * FROM gebruikers; → SQL-query.\n\"Open mijn agenda.\" → opdrachtquery.",
+        "laag4": "Binnen Spark is een query de invoer waarmee een gebruiker informatie opvraagt of een actie start. Spark analyseert de query om de intent, context, entiteiten en eventuele parameters te herkennen. Daarna wordt bepaald welke module, kenniskaart of functionaliteit moet worden gebruikt. Spark kan relaties leggen tussen:\n\nGebruikersinvoer\nVraag\nOpdracht\nZoekopdracht\nZoekterm\nIntent\nTrigger\nContext\nNLP\nNatuurlijke taalverwerking\nAI\nChatbot\nDatabase\nSQL\nAPI\nEntiteit\nParameter\nPrompt\nRespons\nZoekresultaat\n\nSpark ondersteunt zowel natuurlijke taal als gestructureerde queries.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zoek alle kaarten over emoties.\"\n\n→ De query vraagt om informatie uit de kennisbank.\n\nVoorbeeld 2\n\n\"SELECT naam FROM gebruikers.\"\n\n→ De query vraagt gegevens op uit een database.\n"
+      },
+      "ws5": {
+        "wie": "Gebruikers, AI-systemen, zoekmachines, databases en software.",
+        "wat": "Een vraag of opdracht om informatie op te vragen of een actie uit te voeren.",
+        "wanneer": "Wanneer gegevens moeten worden gezocht, gefilterd of verwerkt.",
+        "waar": "Binnen databases, zoekmachines, AI-systemen, API's en andere informatiesystemen.",
+        "waarom": "Om informatie te vinden, gegevens te verwerken of een functie uit te voeren.",
+        "hoe": "Door een zoekterm, natuurlijke taal of een formele opdracht naar een systeem te sturen."
+      },
+      "tags": [
+        "query",
+        "zoekopdracht",
+        "zoekvraag",
+        "opdracht",
+        "vraag",
+        "gebruikersinvoer",
+        "zoekterm",
+        "database",
+        "sql",
+        "api",
+        "ai",
+        "nlp",
+        "intent",
+        "trigger",
+        "context",
+        "entiteit",
+        "parameter",
+        "prompt",
+        "respons",
+        "zoekresultaat",
+        "informatiesysteem",
+        "gegevens",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b46efc74",
+          "begrip": "intent",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "entiteit",
+            "intent"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-88c4e659",
+          "begrip": "triggers",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "intent",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "database",
+            "emotie",
+            "gegevens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c7b0851d",
+          "begrip": "invoer",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gegevens",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6db88117",
+          "begrip": "noem",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "opdracht",
+            "vraag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:42:45.189570+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:55:24.814994+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-c3c278a5e580",
+        "extract_at": "2026-07-22T11:55:24.919471+00:00",
+        "extract_context_snippet": "ht kan lijken. Het komt uit een directe query op de “knowledge‑v2”‑tab: ik telde alle kaarten met de stat",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'query' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:42:41.772403+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:42:41.873512+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:42:41.998482+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:42:45.546562+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:42:45.554773+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

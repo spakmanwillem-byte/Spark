@@ -73,6 +73,69 @@ def get_last_stats() -> Dict[str, Any]:
     return dict(_LAST_STATS)
 
 
+# ============================================================
+# v10_llm_response_cache_001 — Response cache (5 min TTL)
+# ============================================================
+import hashlib as _hashlib
+from collections import OrderedDict as _OD
+
+_CACHE: "_OD[str, Dict[str, Any]]" = _OD()
+_CACHE_MAX = 200
+_CACHE_TTL_SEC = 300  # 5 minuten
+_CACHE_STATS = {"hits": 0, "misses": 0, "stores": 0}
+
+
+def _cache_key(messages: List[Dict[str, str]], temperature: float) -> str:
+    """Hash op system+last_user+temperature — identieke context = identiek antwoord."""
+    sys_msg = next((m.get("content", "") for m in messages if m.get("role") == "system"), "")
+    last_user = next((m.get("content", "") for m in reversed(messages) if m.get("role") == "user"), "")
+    raw = f"{sys_msg}|{last_user}|{temperature:.2f}"
+    return _hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
+
+
+def _cache_lookup(messages: List[Dict[str, str]], temperature: float) -> Optional[Dict[str, Any]]:
+    key = _cache_key(messages, temperature)
+    entry = _CACHE.get(key)
+    if not entry:
+        return None
+    if time.time() - entry["stored_at"] > _CACHE_TTL_SEC:
+        _CACHE.pop(key, None)
+        return None
+    _CACHE.move_to_end(key)  # LRU touch
+    return dict(entry["result"])
+
+
+def _cache_store(messages: List[Dict[str, str]], temperature: float, result: Dict[str, Any]) -> None:
+    if not result.get("success") or not result.get("text"):
+        return
+    key = _cache_key(messages, temperature)
+    _CACHE[key] = {"stored_at": time.time(), "result": dict(result)}
+    _CACHE_STATS["stores"] += 1
+    _CACHE.move_to_end(key)
+    while len(_CACHE) > _CACHE_MAX:
+        _CACHE.popitem(last=False)
+
+
+def get_cache_stats() -> Dict[str, Any]:
+    """Voor Kladblok LLM Token widget — toont besparing."""
+    tot = _CACHE_STATS["hits"] + _CACHE_STATS["misses"]
+    return {
+        "hits": _CACHE_STATS["hits"],
+        "misses": _CACHE_STATS["misses"],
+        "stores": _CACHE_STATS["stores"],
+        "entries": len(_CACHE),
+        "max_entries": _CACHE_MAX,
+        "ttl_seconds": _CACHE_TTL_SEC,
+        "hit_rate_pct": round((_CACHE_STATS["hits"] / tot * 100), 1) if tot else 0.0,
+    }
+
+
+def clear_cache() -> Dict[str, Any]:
+    n = len(_CACHE)
+    _CACHE.clear()
+    return {"cleared": n}
+
+
 async def _call_openai_compat(
     provider: ProviderConfig,
     messages: List[Dict[str, str]],
@@ -173,14 +236,34 @@ async def chat_complete(
     temperature: float = 0.7,
     max_tokens: int = 1024,
     timeout: float = 30.0,
+    use_cache: bool = True,
 ) -> Dict[str, Any]:
     """Probeer providers in volgorde tot er één lukt.
 
-    Return: {success, text, provider, model, latency_s, usage, tried[]}
-    Bij volledige failure: {success: False, error, tried[]}
+    v10_llm_response_cache_001 — Zelfde-vraag-zelfde-antwoord cache (5 min TTL).
+    Willem's idee sessie 47: bespaart tokens bij herhaalde vragen (dev-cycli,
+    typo-retry, "wacht wat zei je ook alweer?").
+
+    Cache-key = sha256(system_msg + last_user_msg + temperature).
+    Cache-scope: globaal (niet per-user) omdat identieke system+user context per
+    definitie tot zelfde antwoord leidt. TTL: 5 min. Max 200 entries (LRU-ish).
+
+    Return: {success, text, provider, model, latency_s, usage, tried[], from_cache?}
     """
     global _LAST_STATS
     tried: List[Dict[str, Any]] = []
+
+    # === CACHE-CHECK ===
+    if use_cache:
+        cache_hit = _cache_lookup(messages, temperature)
+        if cache_hit:
+            _CACHE_STATS["hits"] += 1
+            cache_hit["from_cache"] = True
+            cache_hit["tried"] = [{"provider": "cache", "ok": True, "latency_s": 0.0}]
+            _LAST_STATS = cache_hit
+            return cache_hit
+        _CACHE_STATS["misses"] += 1
+
     chain = list_providers()
 
     if not chain:
@@ -202,6 +285,8 @@ async def chat_complete(
         if result["success"]:
             result["tried"] = tried
             _LAST_STATS = result
+            if use_cache:
+                _cache_store(messages, temperature, result)
             return result
         logger.warning("[llm_router] %s faalde: %s", provider.name, result.get("error"))
 
@@ -219,6 +304,8 @@ async def chat_complete(
     emergency["tried"] = tried
     _LAST_STATS = emergency
     if emergency["success"]:
+        if use_cache:
+            _cache_store(messages, temperature, emergency)
         return emergency
 
     return {

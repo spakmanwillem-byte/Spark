@@ -56,7 +56,46 @@ Bij het rondkijken naar missing `_meta.json` files bleek: Synapse-scanner (`back
 
 **Fix voor later**: scanner recursief maken (max diepte 3) om `**/subdir/_meta.json` op te pikken. In `synapse/service.py`. ~15 min werk.
 
-### ✅ Sessie 47 einde (2026-07-22 15:35 UTC) — Anker LIVE + LLM-fallback + candles
+### ✅ Sessie 47 einde (2026-07-22 15:45 UTC) — LLM response-cache + kladblok naam-fix
+
+**v10_llm_response_cache_001** — Zelfde-vraag-zelfde-antwoord cache (Willems idee):
+- In `llm_router.chat_complete()`: hash op sha256(system + last_user + temperature). TTL **5 min**, max 200 entries, LRU-eviction.
+- **Cache-hit** → skipt LLM helemaal (0ms latency, 0 tokens). Return met `from_cache=true`.
+- **Cache-miss** → normale LLM-chain. Bij success wordt result gecached (alleen als text non-empty).
+- **Endpoints**: `GET /api/chat/llm/cache/stats`, `POST /api/chat/llm/cache/clear`
+- **UI**: cache-blok in LlmTokenUsageWidget (Widget Kladblok): hits · misses · hit-rate · TTL · entries.
+
+**Verificatie** (4/4 groen):
+- ✅ Identieke context → HIT
+- ✅ Andere temperature → MISS (correct — creatieve output kan verschillen)
+- ✅ Andere user-message → MISS (correct)
+- ✅ TTL-expired (>5min) → MISS + auto-cleanup
+
+**Naam-refresh**: "sandbox" → "kladblok" waar zichtbaar (comments, data-testid `kladblok-page`, `kladblok-item-*`). Route + folder blijven `sandbox` voor backwards compat.
+
+Verwachte token-besparing: elke dev-cyclus (typo-retry, "wat zei je ook alweer?", pagina refresh) is nu 0 tokens. Bij ~10 dupe-vragen per dag → ~50k tokens bespaard, houdt Groq-quota langer overeind.
+
+
+### ✅ Sessie 47 middag (2026-07-22 15:35 UTC) — Anker LIVE + LLM-fallback + candles
+
+**v10_llm_response_cache_001** — Zelfde-vraag-zelfde-antwoord cache (Willems idee):
+- In `llm_router.chat_complete()`: hash op sha256(system + last_user + temperature). TTL **5 min**, max 200 entries, LRU-eviction.
+- **Cache-hit** → skipt LLM helemaal (0ms latency, 0 tokens). Return met `from_cache=true`.
+- **Cache-miss** → normale LLM-chain. Bij success wordt result gecached (alleen als text non-empty).
+- **Endpoints**: `GET /api/chat/llm/cache/stats`, `POST /api/chat/llm/cache/clear`
+- **UI**: cache-blok in LlmTokenUsageWidget (Widget Kladblok): hits · misses · hit-rate · TTL · entries.
+
+**Verificatie** (4/4 groen):
+- ✅ Identieke context → HIT
+- ✅ Andere temperature → MISS (correct)
+- ✅ Andere user-message → MISS (correct)
+- ✅ TTL-expired (>5min) → MISS + auto-cleanup
+
+**Naam-refresh**: "sandbox" → "kladblok" waar zichtbaar (comments, data-testid `kladblok-page`, `kladblok-item-*`). Route + folder blijven `sandbox` voor backwards compat.
+
+Verwachte token-besparing: elke dev-cyclus (typo-retry, "wat zei je ook alweer?", pagina refresh) is nu 0 tokens i.p.v. volle LLM-call. Bij ~10 dupe-vragen per dag → ~50k tokens bespaard, houdt Groq-quota langer overeind.
+
+
 
 **Anker Fase 2 flag ON (log_only)**:
 - `spark_trader.json → anker.enabled = true, action_on_above_anker = "log_only"`, drempel 8%

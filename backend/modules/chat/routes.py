@@ -50,6 +50,21 @@ class SnapRequest(BaseModel):
     is_sentence: bool = False
 
 
+# v10_llm_response_cache_001 — cache stats endpoint voor Kladblok LLM widget
+@router.get("/llm/cache/stats")
+async def get_llm_cache_stats():
+    from . import llm_router
+    return {"success": True, **llm_router.get_cache_stats()}
+
+
+@router.post("/llm/cache/clear")
+async def clear_llm_cache():
+    from . import llm_router
+    return {"success": True, **llm_router.clear_cache()}
+
+
+
+
 @router.post("/message")
 @traced(intent="Spark chat-bericht verwerken", module="chat", log_args=False)
 async def process_message(req: ChatMessage):

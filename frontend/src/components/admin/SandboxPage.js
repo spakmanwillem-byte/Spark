@@ -13,7 +13,7 @@ import { SANDBOX_WIDGETS } from './sandbox/registry';
 export default function SandboxPage({ onNavigate }) {
   return (
     <MainLayout activePage="sandbox" onNavigate={onNavigate}>
-      <div data-testid="sandbox-page" className="p-6 max-w-6xl mx-auto space-y-6">
+      <div data-testid="kladblok-page" className="p-6 max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <header className="flex items-start gap-3">
           <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30">
@@ -51,7 +51,7 @@ export default function SandboxPage({ onNavigate }) {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SANDBOX_WIDGETS.map(({ id, naam, doel, waar_hoort_het, aangemaakt_op, reden, Component }) => (
-              <div key={id} data-testid={`sandbox-item-${id}`}
+              <div key={id} data-testid={`kladblok-item-${id}`}
                 className="space-y-2">
                 {/* Meta-info bovenaan */}
                 <div className="px-3 py-2 rounded-xl bg-slate-900/30 border border-slate-800 text-[10px]">

@@ -12,6 +12,7 @@ import { Zap, AlertTriangle, ExternalLink } from 'lucide-react';
 
 export function LlmTokenUsageWidget() {
   const [usage, setUsage] = useState(null);
+  const [cache, setCache] = useState(null);
   const [loading, setLoading] = useState(true);
   const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -19,12 +20,13 @@ export function LlmTokenUsageWidget() {
     let cancelled = false;
     (async () => {
       try {
-        // Toekomst-endpoint (bestaat NOG NIET, geeft 404 — dat is oké voor sandbox)
         const r = await fetch(`${API}/api/llm/usage/today`).then(x => x.ok ? x.json() : null);
         if (!cancelled) setUsage(r);
-      } catch {
-        /* endpoint nog niet gebouwd — normale sandbox-state */
-      }
+      } catch { /* endpoint nog niet gebouwd */ }
+      try {
+        const c = await fetch(`${API}/api/chat/llm/cache/stats`).then(x => x.ok ? x.json() : null);
+        if (!cancelled) setCache(c);
+      } catch { /* ignore */ }
       if (!cancelled) setLoading(false);
     })();
     return () => { cancelled = true; };
@@ -98,6 +100,31 @@ export function LlmTokenUsageWidget() {
         💡 Backend endpoint <code className="text-slate-400">/api/llm/usage/today</code> nog te bouwen.
         Widget parseert Groq 429-errors automatisch zodra endpoint bestaat.
       </p>
+
+      {/* v10_llm_response_cache_001 — cache-savings blok */}
+      {cache && (
+        <div className="mt-3 p-2 rounded-lg bg-emerald-500/5 border border-emerald-500/20"
+             data-testid="widget-llm-cache-stats">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[11px] font-medium text-emerald-300">💾 Response-cache</span>
+            <span className="text-[10px] text-slate-500">TTL {cache.ttl_seconds}s · {cache.entries}/{cache.max_entries} entries</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div>
+              <div className="text-sm font-bold text-emerald-400">{cache.hits}</div>
+              <div className="text-[9px] text-slate-500">hits (bespaard)</div>
+            </div>
+            <div>
+              <div className="text-sm font-bold text-slate-300">{cache.misses}</div>
+              <div className="text-[9px] text-slate-500">misses (LLM call)</div>
+            </div>
+            <div>
+              <div className="text-sm font-bold text-cyan-400">{cache.hit_rate_pct}%</div>
+              <div className="text-[9px] text-slate-500">hit-rate</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

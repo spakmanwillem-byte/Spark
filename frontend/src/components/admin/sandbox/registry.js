@@ -1,5 +1,5 @@
 /**
- * v10_sandbox_registry_001 — Sandbox widget registry (Willems verzoek sessie 47).
+ * v10_kladblok_registry_001 — Kladblok widget registry (Willems verzoek sessie 47).
  *
  * DOEL: Tijdelijk parkeer-plek voor front-end kaders die nog geen definitieve plek hebben.
  * Als je een nieuwe widget bouwt en niet zeker weet waar hij hoort, registreer 'm hier.
@@ -7,7 +7,7 @@
  * importeer 'm daar.
  *
  * BEST PRACTICE: elk widget = een zelfstandige `.js` file in `./widgets/`.
- * Kader heeft eigen state, eigen fetch-logica, geen dependency op de sandbox zelf.
+ * Kader heeft eigen state, eigen fetch-logica, geen dependency op het kladblok zelf.
  * Zo kun je 'm 1-op-1 verplaatsen naar bv. AnalyticsPage door daar te importeren:
  *
  *   import { LlmTokenUsageWidget } from './sandbox/widgets/LlmTokenUsageWidget';
@@ -15,6 +15,10 @@
  *
  * Willem's woorden sessie 47:
  * > "kaders in containers doen. dan hoef je dat alleen te verplaatsen."
+ * > "je hoeft het geen sandbox meer te noemen hoor heet immers nu kladblok"
+ *
+ * Route + folder blijven `sandbox` (backwards compat, geen breaking change).
+ * Label + UI zeggen "Kladblok".
  */
 import { LlmTokenUsageWidget } from './widgets/LlmTokenUsageWidget';
 

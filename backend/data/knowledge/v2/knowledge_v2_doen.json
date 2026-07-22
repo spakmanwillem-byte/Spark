@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1165,
+    "card_count": 1178,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:34:11.372549+00:00",
+    "last_updated": "2026-07-22T11:49:09.760567+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -153582,6 +153582,2089 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8cb64579",
+      "begrip": "gegaan",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gegaan betekent dat iemand of iets zich heeft verplaatst of een plaats heeft verlaten.",
+        "laag2": "Het woord gegaan is het voltooid deelwoord van het werkwoord gaan. Het geeft aan dat de handeling van gaan al heeft plaatsgevonden.",
+        "laag3": "Gegaan beschrijft een afgeronde verplaatsing, verandering of overgang. Het kan verwijzen naar het verlaten van een plaats, het volgen van een route of het overgaan naar een andere situatie. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt gegaan herkend als een afgeronde handeling. Spark gebruikt deze informatie om te bepalen dat een verplaatsing, overgang of proces in het verleden heeft plaatsgevonden en kan deze gebeurtenis opnemen in de tijdlijn of context van een gesprek.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik ben naar huis gegaan.\"\n\n→ De persoon heeft zich naar huis verplaatst.\n\nVoorbeeld 2\n\n\"De vergadering is goed gegaan.\"\n\n→ De gebeurtenis heeft plaatsgevonden en is afgerond."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en, afhankelijk van de context, systemen of processen.",
+        "wat": "Een afgeronde handeling van gaan of een overgang.",
+        "wanneer": "Wanneer een verplaatsing of verandering al heeft plaatsgevonden.",
+        "waar": "Op elke locatie waar een verplaatsing of overgang mogelijk is.",
+        "waarom": "Om aan te geven dat iemand of iets een plaats heeft verlaten of een verandering heeft doorgemaakt.",
+        "hoe": "Door de handeling van gaan uit te voeren en af te ronden."
+      },
+      "tags": [
+        "gegaan",
+        "gaan",
+        "verplaatsen",
+        "vertrek",
+        "beweging",
+        "overgang",
+        "voltooid deelwoord",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f234fa5c",
+          "begrip": "heen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "gaan",
+            "neutraal",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-685d31dd",
+          "begrip": "gaan",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "context",
+            "gaan",
+            "overgang",
+            "vertrek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4cc3043d",
+          "begrip": "overgang",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "context",
+            "emotie",
+            "neutraal",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2978363e",
+          "begrip": "trekken",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "verplaatsen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "overgang"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:57:31.407829+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:21:49.097951+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5c5d9aa7c410",
+        "extract_at": "2026-07-21T13:21:50.309957+00:00",
+        "extract_context_snippet": "lem**! Hoe was je klusje? Is alles goed gegaan zoals je had gehoopt?",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gegaan' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:57:29.540597+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:57:29.640371+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:57:29.648093+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:57:31.665557+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:57:31.673337+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0c303acd",
+      "begrip": "klusje",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een klusje is een kleine taak of eenvoudige werkzaamheden die uitgevoerd moeten worden.",
+        "laag2": "Een klusje is meestal een kortdurende opdracht of activiteit die weinig tijd of inspanning kost. Het kan thuis, op het werk of ergens anders worden uitgevoerd.",
+        "laag3": "Een klusje is een kleine of eenvoudige taak die vaak deel uitmaakt van grotere werkzaamheden. Voorbeelden zijn opruimen, iets repareren, boodschappen doen of een klein onderhoud uitvoeren. Wat als een klusje wordt beschouwd, hangt af van de context en de omvang van de taak.\n",
+        "laag4": "Binnen Spark wordt een klusje herkend als een kleine uitvoerbare taak. Klusjes kunnen worden gepland, toegewezen, gevolgd en als afgerond gemarkeerd. Spark kan klusjes koppelen aan projecten, herinneringen, agenda's of takenlijsten.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik moet nog een klusje in de tuin doen.\"\n\n→ Er moet een kleine taak in de tuin worden uitgevoerd.\n\nVoorbeeld 2\n\n\"Spark zet het klusje op de takenlijst.\"\n\n→ De taak wordt geregistreerd om later uit te voeren.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een kleine taak of eenvoudige werkzaamheden.",
+        "wanneer": "Wanneer een korte of eenvoudige taak moet worden uitgevoerd.",
+        "waar": "Thuis, op het werk, in de tuin of op andere locaties.",
+        "waarom": "Om een kleine taak of onderhoudswerkzaamheden uit te voeren.",
+        "hoe": "Door de benodigde handelingen uit te voeren totdat de taak is afgerond."
+      },
+      "tags": [
+        "klusje",
+        "klus",
+        "taak",
+        "opdracht",
+        "werkzaamheden",
+        "onderhoud",
+        "uitvoeren",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2a7c59d4",
+          "begrip": "uitvoeren",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "handeling",
+            "neutraal",
+            "opdracht",
+            "uitvoeren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cefcf6b9",
+          "begrip": "instructies",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "handeling",
+            "neutraal",
+            "opdracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "handeling",
+            "neutraal",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01810699",
+          "begrip": "medewerker",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taak",
+            "werkzaamheden"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:58:44.123790+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:21:47.987056+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5c5d9aa7c410",
+        "extract_at": "2026-07-21T13:21:49.096537+00:00",
+        "extract_context_snippet": "Welkom terug, **De Willem**! Hoe was je klusje? Is alles goed gegaan zoals je had gehoopt?",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'klusje' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:58:42.475463+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:58:42.575975+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:58:42.583555+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:58:44.382538+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:58:44.390185+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6d0e7650",
+      "begrip": "klussen",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Klussen betekent werkzaamheden uitvoeren, meestal gericht op bouwen, repareren, onderhouden of verbeteren.",
+        "laag2": "Klussen is het verrichten van praktische werkzaamheden. Dit kan variëren van kleine reparaties en onderhoud tot grotere bouw- of verbouwingsprojecten.",
+        "laag3": "Klussen is een werkwoord dat verwijst naar het uitvoeren van praktische taken waarbij iets wordt gemaakt, gerepareerd, onderhouden of verbeterd. Het kan gaan om werkzaamheden in en om het huis, op het werk of als bijverdienste. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark beschrijft klussen het uitvoeren van praktische taken of projecten. Spark kan klussen registreren, plannen, koppelen aan takenlijsten, de voortgang bijhouden en markeren wanneer een klus is afgerond.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik ben het hele weekend aan het klussen.\"\n\n→ De persoon voert praktische werkzaamheden uit.\n\nVoorbeeld 2\n\n\"Spark houdt de geplande klussen bij.\"\n\n→ Spark beheert een overzicht van de uit te voeren werkzaamheden."
+      },
+      "ws5": {
+        "wie": "Mensen, vakmensen, hobbyisten en AI-systemen die taken beheren.",
+        "wat": "Het uitvoeren van praktische werkzaamheden.",
+        "wanneer": "Wanneer iets gebouwd, gerepareerd, onderhouden of verbeterd moet worden.",
+        "waar": "Thuis, op het werk, in een werkplaats, tuin of op een bouwlocatie.",
+        "waarom": "Om iets te maken, herstellen, onderhouden of verbeteren.",
+        "hoe": "Door de benodigde werkzaamheden stap voor stap uit te voeren."
+      },
+      "tags": [
+        "klussen",
+        "klus",
+        "klusje",
+        "werkzaamheden",
+        "repareren",
+        "bouwen",
+        "onderhoud",
+        "taak",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0c303acd",
+          "begrip": "klusje",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "klus",
+            "klusje"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "handeling",
+            "neutraal",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01810699",
+          "begrip": "medewerker",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "taak",
+            "werkzaamheden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a0e6deb0",
+          "begrip": "Werkbank",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bouwen",
+            "klussen",
+            "neutraal",
+            "repareren"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T09:33:00.742606+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:00:20.865037+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik ga even weg. ga even klussen. ben er straks weer.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:00:19.093475+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:00:19.194245+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:00:19.202122+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:00:21.127761+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:00:21.135498+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7ea0b7f5",
+      "begrip": "opgezet",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Opgezet betekent dat iets is gestart, ingericht of opgebouwd.",
+        "laag2": "Het woord opgezet is het voltooid deelwoord van opzetten. Het geeft aan dat een systeem, plan, project of object is voorbereid of tot stand is gebracht.",
+        "laag3": "Opgezet beschrijft een afgeronde handeling waarbij iets is ingericht, opgebouwd of georganiseerd. Dit kan betrekking hebben op een project, bedrijf, website, evenement, onderzoek, systeem of andere activiteit. De precieze betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt opgezet gebruikt om aan te geven dat een onderdeel, module, kennisbank, project of proces succesvol is aangemaakt en ingericht. Spark kan deze status gebruiken om onderscheid te maken tussen onderdelen die nog in ontwikkeling zijn en onderdelen die al operationeel zijn.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er is een nieuwe website opgezet.\"\n\n→ De website is aangemaakt en ingericht.\n\nVoorbeeld 2\n\n\"De kennisbank is opgezet.\"\n\n→ De basisstructuur van de kennisbank is aangemaakt en gereed voor gebruik."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een afgeronde handeling waarbij iets is ingericht, opgebouwd of gestart.",
+        "wanneer": "Wanneer een project, systeem, plan of object gereed is gemaakt.",
+        "waar": "In organisaties, software, projecten, bedrijven en het dagelijks leven.",
+        "waarom": "Om een nieuwe structuur, voorziening of activiteit te creëren en gereed te maken voor gebruik.",
+        "hoe": "Door iets stap voor stap te plannen, op te bouwen en in te richten."
+      },
+      "tags": [
+        "opgezet",
+        "opzetten",
+        "ingericht",
+        "opgebouwd",
+        "gestart",
+        "project",
+        "systeem",
+        "structuur",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraa"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-af88fe8d",
+          "begrip": "Samengesteld",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "opgebouwd",
+            "structuur",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "structuur",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "structuur",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8375ecff",
+          "begrip": "gebieden",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "structuur",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c1ee5231",
+          "begrip": "kenniskaart",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "structuur",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:01:39.482439+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:42.284922+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-f0946d0c8a18",
+        "extract_at": "2026-07-20T14:44:42.389882+00:00",
+        "extract_context_snippet": "r** – degene bent die dit systeem heeft opgezet en dat je dus bepaalde rechten verwacht. Mijn ontwerp respe",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'opgezet' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:01:37.857285+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:01:37.973790+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:01:37.981318+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:01:39.764901+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:01:39.772788+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b6be6105",
+      "begrip": "laten",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Laten betekent toestaan, veroorzaken of iemand vragen om iets te doen.",
+        "laag2": "Laten is een werkwoord dat aangeeft dat iemand iets toestaat, mogelijk maakt of door een ander laat uitvoeren.",
+        "laag3": "Laten heeft meerdere betekenissen. Het kan betekenen dat iemand toestemming geeft (\"Je mag gaan.\"), een handeling door een ander laat uitvoeren (\"Ik laat de auto repareren.\"), of ergens van afziet (\"Laat maar.\"). De juiste betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark beschrijft laten een handeling waarbij een gebruiker toestemming geeft, een opdracht delegeert of een actie niet uitvoert. Spark gebruikt de context om te bepalen of laten verwijst naar toestemming, delegatie of het afzien van een handeling.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik laat de hond uit.\"\n\n→ De persoon voert de handeling uit om de hond naar buiten te brengen.\n\nVoorbeeld 2\n\n\"Laat Spark de gegevens analyseren.\"\n\n→ De gebruiker geeft Spark de opdracht om de analyse uit te voeren."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een werkwoord dat toestemming, delegatie of het mogelijk maken van een handeling aangeeft.",
+        "wanneer": "Wanneer iemand iets toestaat, door een ander laat uitvoeren of ergens van afziet.",
+        "waar": "In gesprekken, opdrachten, instructies en het dagelijks leven.",
+        "waarom": "Om een handeling toe te staan, te laten uitvoeren of niet uit te voeren.",
+        "hoe": "Door toestemming te geven, een opdracht te verstrekken of bewust af te zien van een handeling."
+      },
+      "tags": [
+        "laten",
+        "toestaan",
+        "delegeren",
+        "opdracht",
+        "mogelijk maken",
+        "werkwoord",
+        "handeling",
+        "context",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "laten",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cefcf6b9",
+          "begrip": "instructies",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "opdracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "werkwoord"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:11:22.450755+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:32:03.002720+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-71f39f6483ed",
+        "extract_at": "2026-07-21T07:32:03.716080+00:00",
+        "extract_context_snippet": "jn dus juist een waardevolle actie – ze laten ons samenwerken en ontdekken.  De kaart **[doen] Reactie**",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'laten' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:11:19.742530+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:11:19.844911+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:11:19.852767+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:11:22.713804+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:11:22.721860+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4db940cc",
+      "begrip": "landing",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een landing is het neerkomen of aankomen op een vooraf bepaalde plaats.",
+        "laag2": "Een landing is de handeling waarbij een voertuig, persoon of object veilig op een oppervlak terechtkomt. Dit kan bijvoorbeeld een vliegtuig, helikopter, drone, ruimteschip of parachutist zijn.\n",
+        "laag3": "Een landing is een gecontroleerde handeling waarbij een beweging door de lucht of vanuit een hogere positie wordt beëindigd door veilig op een ondergrond aan te komen. De betekenis kan ook figuurlijk zijn, zoals het \"landen\" van een idee of het aankomen op een webpagina (landing page). De juiste betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark beschrijft landing een gebeurtenis waarbij een object, persoon of proces een eindpunt bereikt. Afhankelijk van de context kan dit een fysieke landing zijn, een digitale landingspagina of het succesvol afronden van een overgang of proces.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het vliegtuig maakte een veilige landing.\"\n\n→ Het vliegtuig kwam gecontroleerd op de landingsbaan terecht.\n\nVoorbeeld 2\n\n\"De drone voerde automatisch een landing uit.\"\n\n→ De drone kwam gecontroleerd op de grond terecht."
+      },
+      "ws5": {
+        "wie": "Mensen, piloten, voertuigen, drones, ruimteschepen en AI-systemen.",
+        "wat": "Een gecontroleerde aankomst of het neerkomen op een bestemming.",
+        "wanneer": "Aan het einde van een vlucht, sprong of verplaatsing",
+        "waar": "Op een landingsbaan, platform, terrein of andere geschikte locatie.",
+        "waarom": "Om een vlucht, beweging of overgang veilig af te ronden.",
+        "hoe": "Door gecontroleerd af te dalen en op de bestemming terecht te komen."
+      },
+      "tags": [
+        "landing",
+        "landen",
+        "aankomst",
+        "neerkomen",
+        "vliegtuig",
+        "drone",
+        "ruimteschip",
+        "landingsbaan",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-51fb1541",
+          "begrip": "zoekt",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a8e0a2b4",
+          "begrip": "krijgen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6c804020",
+          "begrip": "antwoorden",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f92c91a4",
+          "begrip": "bijhouden",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cb5383f9",
+          "begrip": "deelt",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:15:40.040644+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:31:08.373669+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-170b7af5630e",
+        "extract_at": "2026-07-21T07:31:09.702892+00:00",
+        "extract_context_snippet": "rder kunt.   Een typische manier om die landing te ondersteunen, is een kop koffie. Zoals de kaart **[sprek",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'landing' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:15:38.236638+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:15:38.338502+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:15:38.346245+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:15:40.300676+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:15:40.308700+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b5017a9d",
+      "begrip": "herinner",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Herinner is een vervoegde vorm van herinneren en betekent dat iemand iets opnieuw onder de aandacht brengt of in gedachten roept.",
+        "laag2": "Het woord herinner wordt gebruikt als opdracht of werkwoordsvorm, bijvoorbeeld in zinnen als \"Herinner mij eraan\" of \"Herinner jezelf aan de afspraak.\"",
+        "laag3": "Herinner is een vervoegde vorm van het werkwoord herinneren. Het beschrijft de handeling waarbij iemand zichzelf of een ander helpt om informatie, een gebeurtenis of een afspraak opnieuw in gedachten te brengen. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt herinner herkend als een opdracht of verzoek om een herinnering te activeren. Spark kan deze opdracht gebruiken om een melding, taak of afspraak op het juiste moment opnieuw onder de aandacht van de gebruiker te brengen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Herinner mij morgen aan de vergadering.\"\n\n→ Er wordt gevraagd om morgen een herinnering te geven.\n\nVoorbeeld 2\n\n\"Herinner jezelf eraan om voldoende water te drinken.\"\n\n→ De persoon roept een afspraak of doel opnieuw in gedachten.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen.",
+        "wat": "Een opdracht of vervoegde vorm van herinneren.",
+        "wanneer": "Wanneer iemand iets opnieuw onder de aandacht wil brengen.",
+        "waar": "In gesprekken, agenda's, herinneringssystemen en het dagelijks leven.",
+        "waarom": "Om te voorkomen dat belangrijke informatie, afspraken of taken worden vergeten.",
+        "hoe": "Door een herinnering te geven of iets opnieuw in gedachten te brengen."
+      },
+      "tags": [
+        "herinner",
+        "herinneren",
+        "herinnering",
+        "opdracht",
+        "agenda",
+        "melding",
+        "taak",
+        "geheugen",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "agenda",
+            "context",
+            "emotie",
+            "herinnering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0c303acd",
+          "begrip": "klusje",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "opdracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "agenda",
+            "context",
+            "emotie",
+            "geheugen",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aa9da354",
+          "begrip": "vergeet",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "geheugen",
+            "herinneren",
+            "herinnering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6d0e7650",
+          "begrip": "klussen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "taak"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:16:59.473408+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:29:34.527985+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b8750a9c9af2",
+        "extract_at": "2026-07-21T07:29:35.226926+00:00",
+        "extract_context_snippet": "erdaad anders vandaag. Voor zover ik me herinner, heb ik eerder wel over tijd en dag gesproken, maar de comb",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'herinner' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:16:55.603121+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:16:55.703801+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:16:55.711684+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:16:59.737047+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:16:59.744902+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-60e6f25a",
+      "begrip": "beatmatching",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Beatmatching is het gelijk laten lopen van het tempo en de maat van twee muziekstukken.",
+        "laag2": "Beatmatching is een dj-techniek waarbij de snelheid van twee nummers wordt aangepast zodat de beats gelijktijdig lopen en vloeiend in elkaar overgaan.",
+        "laag3": "Beatmatching is een techniek die door dj's wordt gebruikt om twee of meer muziekstukken synchroon af te spelen. Door het tempo (BPM) en de maat op elkaar af te stemmen ontstaat een naadloze overgang zonder dat het ritme onderbroken wordt. Beatmatching kan handmatig of automatisch met behulp van software worden uitgevoerd.\n",
+        "laag4": "Binnen Spark wordt beatmatching herkend als een techniek binnen het dj'en en muziekproductie. Spark kan het begrip koppelen aan onderwerpen zoals BPM, tempo, mixen, cuepunten en overgangen tussen nummers.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De dj gebruikte beatmatching om de nummers vloeiend te mixen.\"\n\n→ De beats van beide nummers lopen gelijk.\n\nVoorbeeld 2\n\n\"Met automatische beatmatching worden de BPM's op elkaar afgestemd.\"\n\n→ Software synchroniseert de muziek automatisch."
+      },
+      "ws5": {
+        "wie": "Dj's, muziekproducenten en muzieksoftware",
+        "wat": "Een techniek om het tempo en de maat van muziekstukken gelijk te laten lopen.",
+        "wanneer": "Tijdens het mixen van twee of meer nummers.",
+        "waar": "In clubs, festivals, studio's, radioprogramma's en thuis.",
+        "waarom": "Om vloeiende overgangen tussen muziekstukken te creëren.",
+        "hoe": "Door de BPM en de maat van de muziek op elkaar af te stemmen."
+      },
+      "tags": [
+        "beatmatching",
+        "dj",
+        "mixen",
+        "BPM",
+        "tempo",
+        "maat",
+        "muziek",
+        "overgang",
+        "synchronisatie",
+        "techniek",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3edc37d1",
+          "begrip": "Peren",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beatmatching",
+            "dj",
+            "mixen",
+            "muziek",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d2e2b153",
+          "begrip": "eenheden",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "maat",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-79afd67a",
+          "begrip": "panelen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "techniek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:26:59.117778+00:00",
+        "vorige_versie_v1": "kb-skel-60e6f25a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:08.467059+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:26:57.587280+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:26:57.595468+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:26:59.379524+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:26:59.387658+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:26:57.481673+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cfe7f173",
+      "begrip": "kwam",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kwam betekent dat iemand of iets op een bepaalde plaats aankwam of ergens terechtkwam.",
+        "laag2": "Het woord kwam is de verleden tijd van het werkwoord komen. Het geeft aan dat de handeling van aankomen of verschijnen al heeft plaatsgevonden.",
+        "laag3": "Kwam beschrijft een afgeronde gebeurtenis waarbij een persoon, dier, voorwerp of gebeurtenis op een bepaalde plaats of in een bepaalde situatie terechtkwam. Het kan zowel een fysieke aankomst als een figuurlijke verschijning of verandering aanduiden. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt kwam herkend als de verleden tijd van komen. Spark gebruikt deze informatie om gebeurtenissen in de tijd te plaatsen en te begrijpen dat een aankomst, verschijning of verandering al heeft plaatsgevonden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Hij kwam gisteren thuis.\"\n\n→ De persoon arriveerde thuis.\n\nVoorbeeld 2\n\n\"Er kwam een goed idee naar voren.\"\n\n→ Er ontstond of verscheen een idee."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, voorwerpen, gebeurtenissen en, afhankelijk van de context, systemen.",
+        "wat": "De verleden tijd van het werkwoord komen.",
+        "wanneer": "Wanneer een aankomst of verschijning al heeft plaatsgevonden.",
+        "waar": "Op iedere locatie of in iedere situatie waar iemand of iets kan aankomen of verschijnen.",
+        "waarom": "Om aan te geven dat een aankomst, verschijning of verandering in het verleden heeft plaatsgevonden.",
+        "hoe": "Door de handeling van komen uit te voeren en af te ronden."
+      },
+      "tags": [
+        "kwam",
+        "komen",
+        "aankomen",
+        "verschijnen",
+        "verleden tijd",
+        "werkwoord",
+        "beweging",
+        "gebeurtenis",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-58ab2e3c",
+          "begrip": "duikt",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "context",
+            "emotie",
+            "neutraal",
+            "verschijnen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "verleden tijd",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "verleden tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beweging",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "werkwoord"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:35:07.613318+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:27:40.631810+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6f726ee5d7ce",
+        "extract_at": "2026-07-21T07:27:41.335680+00:00",
+        "extract_context_snippet": "m**. De opmerking over slaapdronkenheid kwam uit mijn taalmodel (LLM) en niet direct uit mijn kennisbank",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'kwam' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:35:02.908745+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:35:03.010153+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:35:03.018008+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:35:07.879264+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:35:07.887096+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-457a3535",
+      "begrip": "trades",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Trades zijn koop- of verkooptransacties van financiële producten.\n",
+        "laag2": "Een trade is een uitgevoerde aankoop of verkoop van bijvoorbeeld aandelen, cryptovaluta, valuta of andere beleggingen. Trades is het meervoud hiervan.\n",
+        "laag3": "Trades zijn afzonderlijke transacties waarbij financiële activa worden gekocht of verkocht. Elke trade heeft kenmerken zoals tijdstip, prijs, hoeveelheid, handelspaar en resultaat. Trades vormen de basis voor het analyseren van handelsstrategieën, prestaties en risico's.\n",
+        "laag4": "Binnen Spark Trader zijn trades de geregistreerde koop- en verkoopacties die door de gebruiker of het systeem zijn uitgevoerd. Spark bewaart per trade onder andere het handelspaar, de hoeveelheid, de prijs, het tijdstip, de kosten, de winst of het verlies en de gebruikte strategie. Deze gegevens worden gebruikt voor analyses, statistieken en het verbeteren van handelsbeslissingen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Vandaag zijn er vijf trades uitgevoerd.\"\n\n→ Er zijn vijf koop- of verkooptransacties voltooid.\n\nVoorbeeld 2\n\n\"Spark analyseert alle trades van deze maand.\"\n\n→ Het systeem bekijkt de uitgevoerde transacties om prestaties te beoordelen.\n"
+      },
+      "ws5": {
+        "hoe": " Door een koop- of verkooporder uit te voeren tegen een bepaalde prijs.",
+        "waarom": "Om financiële activa te kopen, verkopen of winst te realiseren.",
+        "waar": "Op beurzen, handelsplatformen en binnen Spark Trader.",
+        "wanneer": "Tijdens het handelen op een financiële markt.",
+        "wat": "Meerdere koop- en verkooptransacties van financiële producten.",
+        "wie": "Traders, beleggers, handelsplatformen en AI-systemen."
+      },
+      "tags": [
+        "trades",
+        "trade",
+        "transactie",
+        "handelen",
+        "trading",
+        "crypto",
+        "aandelen",
+        "koop",
+        "verkoop",
+        "portefeuille",
+        "Spark Trader",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-88c184ef",
+          "begrip": "potjes",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "crypto",
+            "emotie",
+            "neutraal",
+            "spark trader"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd49820b",
+          "begrip": "trade",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "spark trader",
+            "trade",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-165e3aa9",
+          "begrip": "Koop",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "koop",
+            "neutraal",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2aa561c4",
+          "begrip": "Heb jij winst gemaakt vandaag met traden?",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "aandelen",
+            "context",
+            "crypto",
+            "emotie",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "crypto",
+            "emotie",
+            "neutraal",
+            "spark trader",
+            "trading"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:07:01.421903+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:07.619489+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-0f84cf3a01a3",
+        "extract_at": "2026-07-20T14:46:07.724987+00:00",
+        "extract_context_snippet": "akket dat op dit moment open staat voor trades. Als je meer details wilt (bijvoorbeeld de grootte van elk",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'trades' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:06:58.185962+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:06:58.292508+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:06:58.300174+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:07:01.683682+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:07:01.691388+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fe5620e6",
+      "begrip": "komen",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Komen betekent zich verplaatsen naar een bepaalde plaats of een gebeurtenis die plaatsvindt.",
+        "laag2": "Komen is een werkwoord dat aangeeft dat iemand of iets ergens naartoe beweegt of dat een gebeurtenis, toestand of moment ontstaat.",
+        "laag3": "Komen is een veelgebruikt werkwoord met meerdere betekenissen. Het kan verwijzen naar fysieke verplaatsing (\"Ik kom naar huis.\"), het plaatsvinden van een gebeurtenis (\"De zomer komt eraan.\"), het ontstaan van een situatie (\"Er kwam een oplossing.\") of de herkomst van iets (\"Hij komt uit Groningen.\"). De juiste betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt komen herkend als een contextafhankelijk werkwoord dat beweging, ontstaan, aankomst of herkomst kan beschrijven. Spark gebruikt de omliggende woorden om de juiste betekenis en relatie te bepalen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik kom morgen langs.\"\n\n→ De spreker verplaatst zich naar een bepaalde locatie.\n\nVoorbeeld 2\n\n\"Er komt een update.\"\n\n→ Er zal een gebeurtenis of verandering plaatsvinden."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, objecten, gebeurtenissen en AI-systemen.",
+        "wat": "Een werkwoord dat beweging, aankomst, ontstaan of herkomst beschrijft.",
+        "wanneer": "Wanneer iemand of iets zich verplaatst, ontstaat of plaatsvindt.",
+        "waar": "In gesprekken, verhalen, navigatie en het dagelijks taalgebruik.",
+        "waarom": "Om een beweging, gebeurtenis of oorsprong aan te geven.",
+        "hoe": "Door het werkwoord komen te gebruiken in de passende context."
+      },
+      "tags": [
+        "komen",
+        "werkwoord",
+        "beweging",
+        "aankomst",
+        "ontstaan",
+        "herkomst",
+        "gebeurtenis",
+        "context",
+        "taal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-cfe7f173",
+          "begrip": "kwam",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beweging",
+            "context",
+            "emotie",
+            "gebeurtenis",
+            "komen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebeurtenis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal",
+            "werkwoord"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T11:13:11.066197+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:41:48.875564+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "daar komen we achter door met elkaar te praten.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:41:45.622254+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:41:45.721580+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:41:45.729647+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:41:49.135915+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:41:49.143715+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e512dc84",
+      "begrip": "bediening",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bediening is het gebruiken, aansturen of verzorgen van een apparaat, systeem of dienst.",
+        "laag2": "Bediening kan verwijzen naar het besturen van een apparaat of machine, maar ook naar het helpen of serveren van mensen, bijvoorbeeld in een restaurant.",
+        "laag3": "Bediening is het uitvoeren van handelingen om iets te laten functioneren of om een dienst te verlenen. Afhankelijk van de context kan het gaan om de bediening van een machine, computer of voertuig, of om de bediening van klanten door personeel. De betekenis wordt bepaald door de situatie.\n",
+        "laag4": "Binnen Spark wordt bediening gebruikt voor alle handelingen waarmee een gebruiker of systeem een apparaat, interface, module of functie aanstuurt. Spark kan daarnaast herkennen of bediening verwijst naar technische besturing of naar dienstverlening.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De bediening van de machine is eenvoudig.\"\n\n→ Het apparaat is gemakkelijk te gebruiken.\n\nVoorbeeld 2\n\n\"De bediening in het restaurant was vriendelijk.\"\n\n→ Het personeel verleende goede service."
+      },
+      "ws5": {
+        "wie": "Gebruikers, medewerkers, operators en AI-systemen.",
+        "wat": "Het gebruiken, besturen of verzorgen van een apparaat, systeem of dienst.",
+        "wanneer": "Wanneer een apparaat wordt aangestuurd of een dienst wordt verleend.",
+        "waar": "Bij machines, voertuigen, software, restaurants, winkels en andere dienstverlenende omgevingen.",
+        "waarom": "Om een apparaat correct te laten functioneren of een klant van dienst te zijn.",
+        "hoe": "Door handelingen uit te voeren die een systeem besturen of een dienst verlenen."
+      },
+      "tags": [
+        "bediening",
+        "besturing",
+        "gebruiken",
+        "aansturen",
+        "bedieningselement",
+        "apparaat",
+        "machine",
+        "dienstverlening",
+        "service",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f2c036d2",
+          "begrip": "inschakelen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "apparaat",
+            "bediening",
+            "emotie",
+            "gebruiken",
+            "machine"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9d91800d",
+          "begrip": "apparaat",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "emotie",
+            "machine",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c488c6f5",
+          "begrip": "apparatuur",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "emotie",
+            "machine",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3357be2e",
+          "begrip": "besturing",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "besturing",
+            "emotie",
+            "machine",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-781813b4",
+          "begrip": "service",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "dienstverlening",
+            "emotie",
+            "neutraal",
+            "service"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:47:42.968600+00:00",
+        "vorige_versie_v1": "kb-skel-e512dc84",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:42.741477+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:47:37.990622+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:47:37.998618+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:47:43.229165+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:47:43.236939+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:47:37.890474+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-50489b54",
+      "begrip": "bedrijfsvoering",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bedrijfsvoering is het organiseren, aansturen en uitvoeren van alle activiteiten binnen een organisatie.",
+        "laag2": "Bedrijfsvoering omvat de dagelijkse processen, middelen en beslissingen die nodig zijn om een organisatie goed te laten functioneren en haar doelen te bereiken.",
+        "laag3": "Bedrijfsvoering is het geheel van werkzaamheden waarmee een organisatie wordt geleid en beheerd. Hieronder vallen onder andere financiën, personeelszaken, planning, administratie, productie, logistiek, communicatie en kwaliteitsbeheer. Goede bedrijfsvoering zorgt ervoor dat een organisatie efficiënt, effectief en duurzaam kan functioneren.\n",
+        "laag4": "Binnen Spark wordt bedrijfsvoering gebruikt om alle processen, modules en beslissingen te beschrijven die nodig zijn voor het beheren van een organisatie. Spark kan bedrijfsgegevens analyseren, processen ondersteunen, prestaties monitoren en helpen bij het optimaliseren van de dagelijkse bedrijfsvoering.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Een goede bedrijfsvoering voorkomt onnodige kosten.\"\n\n→ De organisatie wordt efficiënt geleid.\n\nVoorbeeld 2\n\n\"Spark ondersteunt de bedrijfsvoering met rapportages en analyses.\"\n\n→ Het systeem helpt bij het beheren en verbeteren van bedrijfsprocessen.\n"
+      },
+      "ws5": {
+        "wie": "Ondernemers, managers, medewerkers en AI-systemen.",
+        "wat": "Het organiseren, besturen en uitvoeren van alle bedrijfsactiviteiten.",
+        "wanneer": "Tijdens de dagelijkse werking en het beheer van een organisatie.",
+        "waar": "Binnen bedrijven, stichtingen, overheden en andere organisaties.",
+        "waarom": "Om de organisatie efficiënt, effectief en doelgericht te laten functioneren.",
+        "hoe": "Door processen te plannen, aan te sturen, te controleren en waar nodig te verbeteren."
+      },
+      "tags": [
+        "bedrijfsvoering",
+        "organisatie",
+        "bedrijfsbeheer",
+        "management",
+        "bedrijfsprocessen",
+        "planning",
+        "administratie",
+        "financiën",
+        "logistiek",
+        "efficiëntie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-976db1ee",
+          "begrip": "bedrijfsleider",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bedrijfsvoering",
+            "emotie",
+            "management",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59d9d164",
+          "begrip": "gepland",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-02750024",
+          "begrip": "spreiding",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "financiën",
+            "neutraal",
+            "planning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:49:09.760547+00:00",
+        "vorige_versie_v1": "kb-skel-50489b54",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:15.295885+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:49:06.379656+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:49:06.387344+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:49:10.020414+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:49:10.028111+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:49:06.278524+00:00"
       },
       "media": {
         "voice_url": null,

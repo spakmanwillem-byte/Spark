@@ -1,7 +1,17 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
-## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor
+## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor + prod-merge
+
+### 🔄 Prod → Preview merge (13:33 UTC)
+Willem deployde en vulde KB verder in in productie. Zip-backup (908 files sinds deploy-marker) ge-imported:
+- **10 nieuwe kaarten gemergd** (0 conflicten):
+  - `weten` (4): Cheatcode (De Sims 4), Manor Lords, Total War, De Sims 4 (spel)
+  - `inbox` (6): `spelletje`, `neemt`, `sims`, `bezigheid`, `*"samen`, `zijn"*` (die laatste 2 = LLM-auto-extract artifacts, geen echte begrippen)
+- **Index gesynct**: 10 nieuwe entries
+- **Backup vóór merge**: `data/knowledge/v2/_backup_prod_merge_20260722_133304/`
+- Nieuwe totalen: doen=1178, weten=2211, voelen=475, spreken=563, inbox=1517
+
 
 ### 🎯 KB v2 dupe-cleanup + prevention (v10_kbv2_classify_dupe_guard_001)
 
@@ -16,6 +26,23 @@
 - Backup naar `_backup_dupes_cleanup_20260722_094053/`
 - Rapport voor manual review: `data/knowledge/v2/DUPES_REPORT.md` (742 regels, laag-inhoud naast elkaar)
 - 32 dupes met verschillende inhoud gelaten — homoniemen (balk, bank, drift...) beslist Willem zelf
+
+### 🟡 Nog te doen — Homoniem-aware dupe-guard (Willems note sessie 47)
+
+Huidige `classify_card` guard blokkeert **elk** duplicate begrip in dezelfde lade. Echte homoniemen (`banken` = financieel én meubel) moeten allebei kunnen bestaan.
+
+**Willems voorstel**: onderscheiden via **tags**. Guard tag-aware maken:
+- Zelfde begrip + overlappende tags → weiger (echte dupe)
+- Zelfde begrip + disjunkte tags → toestaan (homoniem)
+
+Willems zorg: disambiguation-suffix in begrip (`banken (meubel)`) is lelijk als Spark in chat "banken (meubel)" zegt. Tag-oplossing houdt begrip schoon.
+
+**Implementatie-schets voor later**:
+1. `classify_card` dupe-check uitbreiden: naast begrip ook `set(new.tags) & set(existing.tags)` — bij lege intersect én beide kaarten ≥1 tag → homoniem toestaan
+2. `find_by_begrip()` retourneert **lijst** i.p.v. single kaart (voor homoniem-lookup)
+3. Chat: bij homoniem-hit vraagt Spark _"Bedoel je [tag1] of [tag2]?"_
+4. Rendering: nooit "(disambiguation)" in begrip zelf plakken
+
 
 
 ### 🎯 Afgerond

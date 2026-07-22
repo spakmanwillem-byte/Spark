@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 551,
+    "card_count": 563,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:54:52.228630+00:00",
+    "last_updated": "2026-07-22T12:04:45.369758+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72885,6 +72885,2043 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-21T08:54:52.441410+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9de60d3d",
+      "begrip": "uhhh",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Uhhh is een stopwoord of aarzelklank die wordt gebruikt tijdens het spreken.",
+        "laag2": "Het woord uhhh wordt gebruikt wanneer iemand nadenkt, twijfelt of even tijd nodig heeft om de juiste woorden te vinden. Het heeft meestal geen eigen inhoudelijke betekenis.",
+        "laag3": "Uhhh is een tussenwerpsel (interjectie) dat dient als spreekpauze. Sprekers gebruiken het om de beurt in een gesprek vast te houden terwijl zij nadenken of hun volgende woorden formuleren. De lengte en uitspraak kunnen verschillen, zoals uh, uhm, eh of ehm.\n",
+        "laag4": "Binnen Spark wordt uhhh herkend als een aarzeling of vulwoord en niet als inhoudelijke informatie. Spark kan dit gebruiken om natuurlijke spraak beter te interpreteren, zonder het woord als onderdeel van de betekenis van een zin te beschouwen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Uhhh... ik weet het even niet.\"\n\n→ De spreker denkt na voordat hij antwoord geeft.\n\nVoorbeeld 2\n\n\"Kun je... uhhh... dat nog een keer uitleggen?\"\n\n→ De spreker aarzelt tijdens het formuleren van de vraag."
+      },
+      "ws5": {
+        "wie": "Iedereen die spreekt.",
+        "wat": "Een aarzelklank of vulwoord zonder zelfstandige betekenis.",
+        "wanneer": "Wanneer iemand nadenkt, twijfelt of tijd nodig heeft om een zin te formuleren.",
+        "waar": "In gesprekken, presentaties en spontane spraak.",
+        "waarom": "Om spreektijd te overbruggen of de beurt in een gesprek vast te houden.",
+        "hoe": "Door een klank zoals uh, uhh, uhhh, eh of ehm uit te spreken."
+      },
+      "tags": [
+        "uhhh",
+        "uh",
+        "eh",
+        "ehm",
+        "uhm",
+        "vulwoord",
+        "aarzeling",
+        "tussenwerpsel",
+        "spreken",
+        "spraak",
+        "communicatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f02f431e",
+          "begrip": "spreektaal",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05a838fa",
+          "begrip": "gebrabbel",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c2beae",
+          "begrip": "oke, zeg eens wat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T07:46:57.915852+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:06:43.087427+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "uhhh je zei het al waarom vraag je om bevestiging?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:06:39.975198+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:06:40.083265+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:06:40.091450+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:06:43.299920+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:06:43.308247+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-355d3b15",
+      "begrip": "goedemorgen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Goedemorgen is een begroeting die wordt gebruikt om iemand in de ochtend vriendelijk te begroeten.",
+        "laag2": "Het woord goedemorgen wordt gebruikt aan het begin van een gesprek of ontmoeting in de ochtend. Het drukt een vriendelijke en beleefde begroeting uit.",
+        "laag3": "Goedemorgen is een vaste begroetingsuitdrukking die wordt gebruikt vanaf de vroege ochtend tot ongeveer het einde van de ochtend. De uitdrukking heeft vooral een sociale functie: het openen van een gesprek, het tonen van beleefdheid en het erkennen van de aanwezigheid van een ander.\n",
+        "laag4": "Binnen Spark wordt goedemorgen herkend als een begroeting. Spark gebruikt deze uitdrukking om het begin van een gesprek te herkennen en kan, afhankelijk van de context en het tijdstip, op een passende en vriendelijke manier reageren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Goedemorgen, hoe gaat het?\"\n\n→ De spreker begroet iemand aan het begin van een gesprek.\n\nVoorbeeld 2\n\n\"Spark zegt: 'Goedemorgen! Waar kan ik je vandaag mee helpen?'\"\n\n→ Spark opent het gesprek met een passende begroeting."
+      },
+      "ws5": {
+        "wie": "Iedereen die een gesprek begint.",
+        "wat": "Een begroeting die in de ochtend wordt gebruikt.",
+        "wanneer": "Tijdens de ochtend, bij het begin van een gesprek of ontmoeting.",
+        "waar": "In gesprekken, op het werk, thuis, op school en in digitale communicatie.",
+        "waarom": "Om iemand vriendelijk en beleefd te begroeten.",
+        "hoe": "Door goedemorgen uit te spreken of te schrijven als openingsgroet."
+      },
+      "tags": [
+        "goedemorgen",
+        "begroeting",
+        "groet",
+        "ochtend",
+        "communicatie",
+        "spreken",
+        "beleefdheid",
+        "gesprek",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d316c9a7",
+          "begrip": "Ik wilde je alleen begroeten.",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begroeting",
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-93b38729",
+          "begrip": "bedankte",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f6e63c2",
+          "begrip": "kletsen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:12:46.771413+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:31:09.704691+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-170b7af5630e",
+        "extract_at": "2026-07-21T07:31:10.822423+00:00",
+        "extract_context_snippet": "Goedemorgen, **De Willem**!   Volgens de kenniskaart **[doen] wakker**",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'goedemorgen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:12:45.019367+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:12:45.121912+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:12:45.129626+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:12:46.974363+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:12:46.981933+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9f48b1b3",
+      "begrip": "welkomstbericht",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een welkomstbericht is een bericht waarmee iemand welkom wordt geheten.",
+        "laag2": "Een welkomstbericht is een begroeting of introductie die wordt gestuurd wanneer iemand een gesprek, systeem, groep of dienst binnenkomt.",
+        "laag3": "Een welkomstbericht is een communicatieve uiting die bedoeld is om iemand vriendelijk te ontvangen. Het kan informatie bevatten over de omgeving, uitleg geven over de eerste stappen of aangeven hoe iemand verder geholpen kan worden. Welkomstberichten worden gebruikt in gesprekken, apps, websites, e-mails en andere communicatiemiddelen.\n",
+        "laag4": "Een welkomstbericht is een communicatieve uiting die bedoeld is om iemand vriendelijk te ontvangen. Het kan informatie bevatten over de omgeving, uitleg geven over de eerste stappen of aangeven hoe iemand verder geholpen kan worden. Welkomstberichten worden gebruikt in gesprekken, apps, websites, e-mails en andere communicatiemiddelen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een bericht waarmee iemand wordt begroet en welkom geheten",
+        "wanneer": "Bij de start van een gesprek, sessie, account of deelname.",
+        "waar": "In apps, websites, e-mails, chats, communities en andere communicatiemiddelen.",
+        "waarom": "Om iemand vriendelijk te ontvangen en wegwijs te maken.",
+        "hoe": "Door een begroeting en eventueel aanvullende informatie of instructies te verstrekken."
+      },
+      "tags": [
+        "welkomstbericht",
+        "welkom",
+        "begroeting",
+        "introductie",
+        "bericht",
+        "communicatie",
+        "chat",
+        "gebruiker",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-969ab090",
+          "begrip": "welkomsbericht",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "begroeting",
+            "bericht",
+            "communicatie",
+            "gebruiker",
+            "introductie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-355d3b15",
+          "begrip": "goedemorgen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begroeting",
+            "blij",
+            "communicatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-359f7662",
+          "begrip": "waardeer",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d316c9a7",
+          "begrip": "Ik wilde je alleen begroeten.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begroeting",
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:19:57.673009+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:29:33.181735+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b8750a9c9af2",
+        "extract_at": "2026-07-21T07:29:33.829508+00:00",
+        "extract_context_snippet": "lem**. Ik denk dat je gelijk hebt, mijn welkomstbericht was inderdaad anders vandaag. Voor zover ik me herinner, he",
+        "extract_count_in_spark": 3,
+        "extract_note": "Spark noemde 'welkomstbericht' 3× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:29:19.078558+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:19:56.505292+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:19:56.513034+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:19:57.875918+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:19:57.883731+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:29:19.219833+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:29:19.227743+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-eead2a44",
+      "begrip": "terugkoppeling",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Terugkoppeling is informatie of een reactie die wordt gegeven over een eerdere handeling, vraag of gebeurtenis.",
+        "laag2": "Terugkoppeling is een vorm van communicatie waarbij iemand laat weten wat het resultaat, de voortgang of de beoordeling van iets is.",
+        "laag3": "Terugkoppeling is het teruggeven van informatie aan degene die een vraag heeft gesteld, een opdracht heeft gegeven of een handeling heeft uitgevoerd. De terugkoppeling kan bestaan uit resultaten, voortgang, opmerkingen, feedback of een bevestiging. Het doel is om duidelijkheid te geven over wat er is gebeurd of wat de uitkomst is.\n",
+        "laag4": "Binnen Spark is een terugkoppeling een reactie van het systeem op een uitgevoerde opdracht, analyse of gebeurtenis. Spark gebruikt terugkoppelingen om de gebruiker te informeren over de status, resultaten, fouten, voortgang of voltooiing van een taak.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik geef je morgen een terugkoppeling over het gesprek.\"\n\n→ De resultaten of bevindingen worden later gedeeld.\n\nVoorbeeld 2\n\n\"Spark geeft een terugkoppeling nadat de analyse is voltooid.\"\n\n→ Het systeem meldt de uitkomst van de uitgevoerde taak."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een reactie of informatie over een eerdere handeling, vraag of opdracht.",
+        "wanneer": "Na een gebeurtenis, opdracht, onderzoek of gesprek.",
+        "waar": "In gesprekken, projecten, software, organisaties en het dagelijks leven.",
+        "waarom": "Om duidelijkheid te geven over de voortgang, resultaten of uitkomsten.",
+        "hoe": "Door informatie, een beoordeling, een status of een resultaat terug te communiceren."
+      },
+      "tags": [
+        "terugkoppeling",
+        "feedback",
+        "reactie",
+        "resultaat",
+        "voortgang",
+        "communicatie",
+        "status",
+        "rapportage",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "reactie",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6281129",
+          "begrip": "opmerking",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "feedback",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d52e766f",
+          "begrip": "reacties",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "feedback",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3cd997a3",
+          "begrip": "punten",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "feedback",
+            "neutraal",
+            "resultaat",
+            "voortgang"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:53:49.886196+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:42:36.433953+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6581c75a45da",
+        "extract_at": "2026-07-20T14:42:36.535017+00:00",
+        "extract_context_snippet": "g gedaan, **De Willem**! Ik waardeer je terugkoppeling – het “dank”‑gevoel dat je uitspreekt versterkt onze samenw",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'terugkoppeling' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:28:52.797355+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:53:48.363220+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:53:48.371231+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:53:50.090348+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:53:50.098415+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:28:52.937724+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:28:52.946124+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-37feae50",
+      "begrip": "formuleren",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Formuleren betekent gedachten, ideeën of informatie duidelijk onder woorden brengen.\n",
+        "laag2": "Formuleren is het zorgvuldig kiezen en ordenen van woorden om een boodschap begrijpelijk over te brengen.",
+        "laag3": "Formuleren is het proces waarbij iemand een gedachte, vraag, mening of uitleg omzet in gesproken of geschreven taal. Goed formuleren helpt om misverstanden te voorkomen en de boodschap duidelijk af te stemmen op de ontvanger. De manier van formuleren hangt af van de context, het doel en de doelgroep.\n",
+        "laag4": "Binnen Spark betekent formuleren het opbouwen van een duidelijke en begrijpelijke reactie of tekst. Spark gebruikt kennis, context en taalregels om informatie logisch te ordenen en passend onder woorden te brengen voor de gebruiker.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Kun je de vraag anders formuleren?\"\n\n→ De vraag wordt met andere woorden duidelijker gemaakt.\n\nVoorbeeld 2\n\n\"Spark formuleert een antwoord op basis van de beschikbare informatie.\"\n\n→ Spark zet informatie om in een begrijpelijke reactie."
+      },
+      "ws5": {
+        "wie": "Mensen, schrijvers, sprekers en AI-systemen.",
+        "wat": "Het onder woorden brengen van gedachten, ideeën of informatie.",
+        "wanneer": "Wanneer een boodschap gesproken of geschreven moet worden.",
+        "waar": "In gesprekken, e-mails, rapporten, onderwijs, software en het dagelijks leven.",
+        "waarom": "Om een boodschap duidelijk, correct en begrijpelijk over te brengen.",
+        "hoe": "Door woorden en zinnen zorgvuldig te kiezen, te ordenen en af te stemmen op de context."
+      },
+      "tags": [
+        "formuleren",
+        "taal",
+        "communicatie",
+        "schrijven",
+        "spreken",
+        "uitleg",
+        "boodschap",
+        "tekst",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "schrijven"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b3a39f3f",
+          "begrip": "schrijven",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "boodschap",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "schrijven"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "taal",
+            "tekst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:55:02.444985+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:43:09.132403+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-4a5af55a27b1",
+        "extract_at": "2026-07-20T14:43:09.234708+00:00",
+        "extract_context_snippet": "n reactie, en *stellen* het plaatsen of formuleren van die vraag. Ik zal eerlijk antwoorden wat ik weet en aan",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'formuleren' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:29:35.835220+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:55:00.749889+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:55:00.758042+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:55:02.645161+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:55:02.653098+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:29:35.976060+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:29:35.984001+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e393bb5d",
+      "begrip": "expliciet",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Expliciet betekent dat iets duidelijk, rechtstreeks en zonder ruimte voor twijfel wordt gezegd of aangegeven.",
+        "laag2": "Het woord expliciet beschrijft informatie of een boodschap die openlijk en ondubbelzinnig wordt gecommuniceerd, zonder dat de ontvanger iets hoeft af te leiden.",
+        "laag3": "Expliciet is een bijvoeglijk naamwoord dat aangeeft dat iets duidelijk en rechtstreeks wordt uitgedrukt. Er wordt niets verborgen of alleen gesuggereerd; de betekenis staat letterlijk of direct vermeld. Het tegenovergestelde is impliciet, waarbij de betekenis uit de context moet worden afgeleid.\n",
+        "laag4": "Binnen Spark wordt expliciet gebruikt om aan te geven dat informatie, opdrachten of regels letterlijk zijn geformuleerd. Spark behandelt expliciete instructies als direct gegeven informatie en hoeft deze niet uit de context af te leiden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De gebruiker gaf expliciet toestemming.\"\n\n→ De toestemming is duidelijk en rechtstreeks gegeven.\n\nVoorbeeld 2\n\n\"De instructie vermeldt expliciet dat de gegevens niet mogen worden verwijderd.\"\n\n→ De regel staat letterlijk in de instructie.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een eigenschap van informatie die duidelijk en rechtstreeks wordt gecommuniceerd.",
+        "wanneer": "Wanneer een boodschap zonder twijfel of verborgen betekenis wordt gegeven.",
+        "waar": "In gesprekken, documenten, regels, software en het dagelijks taalgebruik.",
+        "waarom": "Om misverstanden te voorkomen en de boodschap helder over te brengen.",
+        "hoe": "Door informatie letterlijk, duidelijk en ondubbelzinnig te formuleren."
+      },
+      "tags": [
+        "expliciet",
+        "duidelijk",
+        "rechtstreeks",
+        "letterlijk",
+        "communicatie",
+        "instructie",
+        "taal",
+        "context",
+        "impliciet",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c45dbace",
+          "begrip": "duidelijker",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "duidelijk",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f97c167",
+          "begrip": "stel",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:59:42.284170+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:05.512340+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ba2602174c69",
+        "extract_at": "2026-07-20T14:44:05.616026+00:00",
+        "extract_context_snippet": "alleen toegang tot de gegevens die jij expliciet met mij deelt of waarvoor je een specifieke opdracht geeft.",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'expliciet' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:29:48.187047+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:59:40.273365+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:59:40.281367+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:59:42.487798+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:59:42.495739+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:29:48.329089+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:29:48.336975+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7fa83436",
+      "begrip": "samengevat",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Samengevat betekent dat de belangrijkste informatie kort en overzichtelijk wordt weergegeven.",
+        "laag2": "Het woord samengevat geeft aan dat een langere tekst, uitleg of gebeurtenis is verkort tot de belangrijkste punten.",
+        "laag3": "Samengevat is het voltooid deelwoord van samenvatten en wordt gebruikt om aan te geven dat informatie is ingekort zonder de kern van de boodschap te verliezen. Een samenvatting laat details weg en richt zich op de hoofdpunten. De mate van verkorting hangt af van het doel en de context.",
+        "laag4": "Binnen Spark wordt samengevat gebruikt om aan te geven dat informatie is verwerkt tot een beknopte weergave. Spark kan gesprekken, documenten, kenniskaarten of analyses samenvatten, waarbij de belangrijkste informatie behouden blijft en minder relevante details worden weggelaten.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Samengevat komt het erop neer dat we morgen vertrekken.\"\n\n→ De belangrijkste conclusie wordt kort weergegeven.\n\nVoorbeeld 2\n\n\"Spark heeft het gesprek samengevat.\"\n\n→ Het systeem heeft de kern van het gesprek beknopt weergegeven."
+      },
+      "ws5": {
+        "wie": "Mensen, schrijvers, sprekers en AI-systemen.",
+        "wat": "Een verkorte weergave van de belangrijkste informatie.",
+        "wanneer": "Wanneer een lange uitleg of hoeveelheid informatie wordt ingekort.",
+        "waar": "In gesprekken, boeken, rapporten, vergaderingen, documenten en software.",
+        "waarom": "Om de kern van de informatie snel en overzichtelijk weer te geven.",
+        "hoe": "Door hoofdpunten te selecteren en minder belangrijke details weg te laten."
+      },
+      "tags": [
+        "samengevat",
+        "samenvatten",
+        "samenvatting",
+        "kern",
+        "overzicht",
+        "communicatie",
+        "tekst",
+        "informatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c3d72bb",
+          "begrip": "Wat is gisteren in de community besproken?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-361c0e49",
+          "begrip": "geschreven",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "tekst"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:02:42.635905+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:45:25.536015+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7740c3b754b9",
+        "extract_at": "2026-07-20T14:45:25.638865+00:00",
+        "extract_context_snippet": "**De Willem**, wat ik van jou weet, is samengevat in de gegevens die je eerder met me hebt gedeeld:  - Je wer",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'samengevat' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:30:00.699755+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:02:41.180051+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:02:41.188116+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:02:42.838598+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:02:42.846689+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:30:00.841126+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:30:00.849278+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d52e766f",
+      "begrip": "reacties",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Reacties zijn antwoorden of uitingen als gevolg van een gebeurtenis, vraag of handeling.",
+        "laag2": "Reacties zijn verbale, schriftelijke of andere uitingen waarmee iemand reageert op iets dat is gebeurd of gezegd.",
+        "laag3": "Reacties zijn de meervoudsvorm van reactie en beschrijven de antwoorden, meningen, gevoelens of handelingen die volgen op een gebeurtenis, bericht of situatie. Reacties kunnen positief, negatief of neutraal zijn en zowel bewust als onbewust plaatsvinden.\n",
+        "laag4": "Binnen Spark zijn reacties de antwoorden of uitingen die door gebruikers of het systeem worden gegeven tijdens een gesprek of na een gebeurtenis. Spark kan reacties analyseren op inhoud, toon, context, intentie en emotie om de communicatie beter te begrijpen en passende vervolgreacties te genereren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er kwamen veel positieve reacties op het bericht.\"\n\n→ Veel mensen reageerden positief.\n\nVoorbeeld 2\n\n\"Spark analyseert de reacties van de gebruiker.\"\n\n→ Het systeem onderzoekt de inhoud en betekenis van de antwoorden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Meerdere antwoorden, uitingen of handelingen als gevolg van een gebeurtenis of boodschap.",
+        "wanneer": "Na een vraag, gebeurtenis, bericht of handeling.",
+        "waar": "In gesprekken, sociale media, e-mails, forums, software en het dagelijks leven.",
+        "waarom": "Om een mening, gevoel, antwoord of beoordeling te geven.",
+        "hoe": "Door mondeling, schriftelijk of op een andere manier te reageren."
+      },
+      "tags": [
+        "reacties",
+        "reactie",
+        "antwoord",
+        "communicatie",
+        "gesprek",
+        "mening",
+        "feedback",
+        "respons",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e6281129",
+          "begrip": "opmerking",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "feedback",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6c804020",
+          "begrip": "antwoorden",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-331910b3",
+          "begrip": "Nou, ik vond je reactietijd best snel.",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "feedback",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c2beae",
+          "begrip": "oke, zeg eens wat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T11:14:00.862212+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:19:34.386851+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "want merk dat je reacties nog steeds met diep 5 kaarten heeft. al is je kennis gegroeid.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:30:17.741558+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:19:31.129147+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:19:31.137338+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:19:34.589418+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:19:34.597431+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:30:17.885557+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:30:17.893772+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-33739070",
+      "begrip": "elkaars",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Elkaars betekent dat iets van of tussen twee of meer personen onderling is.",
+        "laag2": "Het woord elkaars geeft wederkerigheid aan. Het beschrijft dat twee of meer personen iets met elkaar delen, doen of ervaren.",
+        "laag3": "Elkaars is een wederkerig voornaamwoord dat bezit of een relatie tussen meerdere personen uitdrukt. Het wordt gebruikt om aan te geven dat iets over en weer geldt, zoals elkaars mening, elkaars spullen of elkaars helpen. Het voorkomt herhaling van namen of persoonlijke voornaamwoorden.\n",
+        "laag4": "Binnen Spark wordt elkaars herkend als een wederkerige relatie tussen twee of meer entiteiten. Spark gebruikt dit woord om te begrijpen dat een handeling, eigenschap of bezit wederzijds is en beide of alle betrokken partijen betreft.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ze respecteren elkaars mening.\"\n\n→ Beide personen tonen respect voor de mening van de ander.\n\nVoorbeeld 2\n\n\"De teams delen elkaars kennis.\"\n\n→ De kennis wordt wederzijds gedeeld."
+      },
+      "ws5": {
+        "wie": "Twee of meer personen, groepen of entiteiten",
+        "wat": "Een wederkerig voornaamwoord dat onderlinge relaties of bezit aangeeft.",
+        "wanneer": "Wanneer iets wederzijds tussen meerdere betrokkenen geldt.",
+        "waar": "In gesprekken, teksten en het dagelijks taalgebruik.",
+        "waarom": "Om een onderlinge relatie of wederkerigheid duidelijk te maken.",
+        "hoe": "Door elkaars te gebruiken als aanduiding van wederzijds bezit, gedrag of een relatie."
+      },
+      "tags": [
+        "elkaars",
+        "wederkerig",
+        "wederkerigheid",
+        "voornaamwoord",
+        "bezit",
+        "onderling",
+        "relatie",
+        "taal",
+        "grammatica",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30827b3c",
+          "begrip": "degene",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58b83d67",
+          "begrip": "hebt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bezit",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:38:28.921790+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:13:13.873482+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7eb4d56210e5",
+        "extract_at": "2026-07-22T11:13:13.977847+00:00",
+        "extract_context_snippet": "e praten, kunnen we veel ontdekken over elkaars interesses, behoeften en kennis. Het is een mooie manier om",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'elkaars' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:38:25.359757+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:38:25.459848+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:38:25.467860+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:38:29.126440+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:38:29.134424+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-289e4cfe",
+      "begrip": "bedankt",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bedankt is een uiting van dankbaarheid voor iets dat iemand heeft gedaan of gegeven.",
+        "laag2": "Het woord bedankt wordt gebruikt om waardering of dank uit te spreken na een hulp, gebaar, informatie of cadeau.",
+        "laag3": "Bedankt is een veelgebruikte beleefdheidsuiting waarmee iemand dankbaarheid uitdrukt. Het kan zowel mondeling als schriftelijk worden gebruikt en varieert van informeel (\"Bedankt!\") tot formeler (\"Hartelijk bedankt.\"). De betekenis blijft hetzelfde: waardering tonen voor een ontvangen hulp, dienst of gebaar.\n",
+        "laag4": "Binnen Spark wordt bedankt herkend als een dankbetuiging. Spark kan het gebruiken om waardering uit te spreken of herkennen dat een gebruiker tevredenheid of dankbaarheid uitdrukt als reactie op een gesprek, antwoord of handeling.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Bedankt voor je hulp.\"\n\n→ De spreker toont waardering voor de ontvangen hulp.\n\nVoorbeeld 2\n\n\"De gebruiker zei: 'Bedankt.'\"\n\n→ De gebruiker drukt dankbaarheid uit."
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen.",
+        "wat": "Een uiting waarmee dank of waardering wordt uitgesproken.",
+        "wanneer": "Na het ontvangen van hulp, informatie, een dienst of een gebaar.",
+        "waar": "In gesprekken, e-mails, berichten en het dagelijks leven.",
+        "waarom": "Om waardering en dankbaarheid te tonen.",
+        "hoe": "Door het woord bedankt of een vergelijkbare dankbetuiging uit te spreken of te schrijven."
+      },
+      "tags": [
+        "bedankt",
+        "dank",
+        "dankbaarheid",
+        "waardering",
+        "beleefdheid",
+        "communicatie",
+        "reactie",
+        "gesprek",
+        "taal",
+        "emotie",
+        "blij",
+        "positief",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-93b38729",
+          "begrip": "bedankte",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "dank",
+            "dankbaarheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bedankt",
+            "blij",
+            "communicatie",
+            "dank",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bedankt",
+            "blij",
+            "communicatie",
+            "dank",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:43:08.230213+00:00",
+        "vorige_versie_v1": "kb-skel-289e4cfe",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.775331+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:43:05.170816+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:43:05.179101+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:43:08.445886+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:43:08.454388+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:43:05.071152+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3625e601",
+      "begrip": "directe",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Directe is de verbogen vorm van direct en beschrijft iets dat zonder omweg, onmiddellijk of rechtstreeks gebeurt.",
+        "laag2": "Het woord directe wordt gebruikt om een zelfstandig naamwoord te beschrijven dat rechtstreeks, duidelijk of onmiddellijk is.",
+        "laag3": "Directe is de verbogen vorm van het bijvoeglijk naamwoord direct. Het kan verwijzen naar communicatie, contact, handelingen of relaties waarbij geen tussenstappen of omwegen zijn. Afhankelijk van de context kan directe ook betekenen dat iets open, eerlijk of onmiddellijk plaatsvindt.",
+        "laag4": "Binnen Spark wordt directe herkend als een beschrijvend woord dat aangeeft dat een handeling, reactie of vorm van communicatie zonder tussenkomst of vertraging plaatsvindt. Spark gebruikt de context om te bepalen of het betrekking heeft op communicatie, contact, actie of een andere relatie.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ze gaf een directe reactie.\"\n\n→ De reactie was onmiddellijk en duidelijk.\n\nVoorbeeld 2\n\n\"Er is direct contact met de gebruiker.\"\n\n→ Er is geen tussenpersoon of omweg."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een verbogen vorm van direct die iets rechtstreekst of onmiddellijk beschrijft.",
+        "wanneer": "Wanneer iets zonder omweg, vertraging of tussenkomst gebeurt.",
+        "waar": "In gesprekken, communicatie, organisaties en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets onmiddellijk of rechtstreeks verloopt.",
+        "hoe": " Door directe als bijvoeglijk naamwoord te gebruiken bij een zelfstandig naamwoord."
+      },
+      "tags": [
+        "direct",
+        "directe",
+        "rechtstreeks",
+        "onmiddellijk",
+        "communicatie",
+        "contact",
+        "reactie",
+        "bijvoeglijk naamwoord",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a078bef8",
+          "begrip": "direct",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "direct",
+            "emotie",
+            "neutraal",
+            "onmiddellijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-26c9a1f7",
+          "begrip": "ongewenste",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bijvoeglijk naamwoord",
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c2beae",
+          "begrip": "oke, zeg eens wat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "reactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T12:03:28.109307+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:55:24.711773+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-c3c278a5e580",
+        "extract_at": "2026-07-22T11:55:24.814701+00:00",
+        "extract_context_snippet": "onverwacht kan lijken. Het komt uit een directe query op de “knowledge‑v2”‑tab: ik telde alle kaarten met d",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'directe' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T12:03:26.422562+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:03:26.523337+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:03:26.531485+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:03:28.310145+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:03:28.318428+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f53a6962",
+      "begrip": "voorstelt",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Voorstelt is een vervoegde vorm van voorstellen en betekent dat iemand een idee, plan, persoon of voorstelling presenteert.",
+        "laag2": "Het woord voorstelt wordt gebruikt wanneer iemand iets of iemand introduceert, een voorstel doet of een betekenis uitbeeldt.",
+        "laag3": "Voorstelt is een vervoegde vorm van het werkwoord voorstellen. Afhankelijk van de context kan het betekenen dat iemand een idee aandraagt (\"Hij stelt een oplossing voor.\"), iemand introduceert (\"Zij stelt haar collega voor.\") of dat iets een bepaalde betekenis of voorstelling heeft (\"Dit symbool stelt een boom voor.\").",
+        "laag4": "Binnen Spark wordt voorstelt herkend als een contextafhankelijk werkwoord. Spark bepaalt op basis van de zin of het gaat om een voorstel, een introductie of een representatie van een betekenis of object.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Hij stelt een nieuwe aanpak voor.\"\n\n→ Er wordt een voorstel gedaan.\n\nVoorbeeld 2\n\n\"Dit pictogram stelt een huis voor.\"\n\n→ Het pictogram vertegenwoordigt een huis."
+      },
+      "ws5": {
+        "wat": "Een vervoegde vorm van voorstellen die een voorstel, introductie of representatie aanduidt.",
+        "wie": "Mensen en AI-systemen.",
+        "wanneer": "Wanneer iemand een idee aandraagt, iets introduceert of iets een betekenis vertegenwoordigt.",
+        "waar": "In gesprekken, presentaties, onderwijs, documenten en het dagelijks taalgebruik.",
+        "waarom": "Om een idee, persoon of betekenis over te brengen.",
+        "hoe": "Door het werkwoord voorstellen in de derde persoon enkelvoud te gebruiken."
+      },
+      "tags": [
+        "voorstellen",
+        "voorstelt",
+        "voorstel",
+        "introductie",
+        "representatie",
+        "werkwoord",
+        "communicatie",
+        "betekenis",
+        "context",
+        "taal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T11:56:29.215886+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T12:04:45.369741+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee dat kan je niet wel lief dat je het voorstelt. maar je hebt de hooks niet.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T12:04:43.884907+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:04:43.985128+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:04:43.993406+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:04:45.570243+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:04:45.578508+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 7

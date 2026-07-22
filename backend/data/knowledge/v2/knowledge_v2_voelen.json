@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 464,
+    "card_count": 475,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:40:53.288850+00:00",
+    "last_updated": "2026-07-22T12:01:49.688420+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -63467,6 +63467,1801 @@
             "result": {
               "n_found": 5,
               "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-78515060",
+      "begrip": "relaxte",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Relaxte betekent dat iemand of iets ontspannen, rustig of ongedwongen is.",
+        "laag2": "Het woord relaxte is de verbogen vorm van relaxt. Het beschrijft een persoon, sfeer, situatie of houding die als ontspannen en prettig wordt ervaren.",
+        "laag3": "Relaxte is een bijvoeglijk naamwoord dat aangeeft dat iemand of iets weinig spanning of stress uitstraalt. Het kan betrekking hebben op mensen, gesprekken, activiteiten of omgevingen. Wat als relaxt wordt ervaren, is afhankelijk van de context en persoonlijke beleving.\n",
+        "laag4": "Binnen Spark wordt relaxte herkend als een positieve beschrijving van een emotionele of sociale toestand. Spark kan deze eigenschap gebruiken om de sfeer van een gesprek of situatie te herkennen, zonder aan te nemen dat iedereen deze op dezelfde manier ervaart.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het was een relaxte avond.\"\n\n→ De avond werd als ontspannen ervaren.\n\nVoorbeeld 2\n\n\"Hij heeft een relaxte houding.\"\n\n→ De persoon komt rustig en ongedwongen over."
+      },
+      "ws5": {
+        "wie": "Mensen die een persoon, situatie of sfeer beschrijven.",
+        "wat": "Een eigenschap die aangeeft dat iets ontspannen en ongedwongen is.",
+        "wanneer": "Wanneer een situatie of persoon weinig spanning of stress uitstraalt.",
+        "waar": "In gesprekken, sociale situaties, op het werk en in het dagelijks leven.",
+        "waarom": "Om een rustige en prettige sfeer of houding te beschrijven.",
+        "hoe": "Door een persoon, situatie of omgeving als ontspannen te ervaren of te omschrijven."
+      },
+      "tags": [
+        "relaxte",
+        "relaxt",
+        "ontspannen",
+        "rustig",
+        "ongedwongen",
+        "sfeer",
+        "beoordeling",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e5d48ca",
+          "begrip": "zeker",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b685d84d",
+          "begrip": "netjes",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-debab07e",
+          "begrip": "verdiend",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c760a1f1",
+          "begrip": "leuke",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "sfeer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:52:03.379805+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:55:12.098819+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6c4db2201ef4",
+        "extract_at": "2026-07-22T08:55:12.203897+00:00",
+        "extract_context_snippet": "Dat klinkt als een relaxte ochtend, **De Willem**! Gewoon even kletsen zonder een spec",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'relaxte' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:51:59.830465+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:51:59.930952+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:51:59.938038+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:52:03.571600+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:52:03.578762+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-db4d120e",
+      "begrip": "slaapdronkenheid",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Slaapdronkenheid is de toestand waarin iemand na het wakker worden nog slaperig, verward of minder alert is.",
+        "laag2": "Slaapdronkenheid treedt op direct na het ontwaken. Tijdens deze periode kan iemand trager denken, reageren of moeite hebben om volledig wakker te worden.",
+        "laag3": "Slaapdronkenheid is een tijdelijke toestand tussen slapen en volledig wakker zijn. Iemand kan zich suf, verward of gedesoriënteerd voelen en tijdelijk minder goed kunnen nadenken of handelen. De duur en intensiteit verschillen per persoon en situatie.\n",
+        "laag4": "Binnen Spark wordt slaapdronkenheid herkend als een tijdelijke lichamelijke en mentale toestand na het ontwaken. Spark kan hiermee rekening houden door eenvoudige communicatie te gebruiken, extra uitleg te geven of belangrijke beslissingen niet uitsluitend op basis van deze toestand te interpreteren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Door mijn slaapdronkenheid drukte ik op de verkeerde knop.\"\n\n→ De persoon was nog niet volledig wakker.\n\nVoorbeeld 2\n\n\"Na een paar minuten verdween de slaapdronkenheid.\"\n\n→ De persoon werd geleidelijk volledig wakker."
+      },
+      "ws5": {
+        "wie": "Mensen die net zijn ontwaakt.",
+        "wat": "Een tijdelijke toestand van slaperigheid en verminderde alertheid na het wakker worde",
+        "wanneer": "Direct na het ontwaken.",
+        "waar": "Overal waar iemand wakker wordt",
+        "waarom": "Omdat de hersenen en het lichaam nog niet volledig zijn overgeschakeld van slaap naar volledige waakzaamheid",
+        "hoe": "Door een tijdelijke overgang van de slaaptoestand naar volledige alertheid."
+      },
+      "tags": [
+        "slaapdronkenheid",
+        "slaapdronken",
+        "ontwaken",
+        "slaperigheid",
+        "alertheid",
+        "vermoeidheid",
+        "toestand",
+        "bewustzijn",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-651af5e8",
+          "begrip": "slaapdronken",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "alertheid",
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwaken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bewustzijn",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bewustzijn",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bewustzijn",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:21:30.537382+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:27:39.847736+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6f726ee5d7ce",
+        "extract_at": "2026-07-21T07:27:40.631094+00:00",
+        "extract_context_snippet": "klopt, **De Willem**. De opmerking over slaapdronkenheid kwam uit mijn taalmodel (LLM) en niet direct uit mijn kenni",
+        "extract_count_in_spark": 3,
+        "extract_note": "Spark noemde 'slaapdronkenheid' 3× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:21:28.670709+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:21:28.774762+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:21:28.782439+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:21:30.732585+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:21:30.740386+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7863c5af",
+      "begrip": "best",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Best betekent dat iets als het meest goed, meest geschikt of meest waardevol wordt gezien.",
+        "laag2": "Het woord best is de overtreffende trap van goed. Het geeft aan dat iets boven andere mogelijkheden uitkomt volgens een bepaalde beoordeling of vergelijking.\n",
+        "laag3": "Best wordt gebruikt om een hoogste niveau of voorkeur aan te geven. Het kan gaan om kwaliteit, prestaties, keuzes of ervaringen. Wat als best wordt gezien, hangt af van de criteria en de persoon die beoordeelt. In sommige contexten betekent het ook \"zo goed mogelijk\", zoals in \"doe je best\".\n",
+        "laag4": "Binnen Spark wordt best herkend als een beoordelend begrip dat een vergelijking of voorkeur aangeeft. Spark gebruikt de context om te bepalen waarop de beoordeling gebaseerd is, zoals kwaliteit, resultaat, persoonlijke voorkeur of efficiëntie.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Dit is de beste oplossing.\"\n\n→ Deze oplossing wordt als beter gezien dan andere oplossingen.\n\nVoorbeeld 2\n\n\"Doe je best.\"\n\n→ Probeer iets zo goed mogelijk uit te voeren."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die keuzes of beoordelingen maken.",
+        "wat": "De hoogste beoordeling binnen een vergelijking.",
+        "wanneer": "Wanneer iets wordt vergeleken met andere mogelijkheden.",
+        "waar": "In gesprekken, beoordelingen, keuzes, prestaties en vergelijkingen.",
+        "waarom": "Om aan te geven wat volgens bepaalde criteria het meest geschikt of goed is.",
+        "hoe": "Door eigenschappen, resultaten of voorkeuren met elkaar te vergelijken."
+      },
+      "tags": [
+        "best",
+        "goed",
+        "beter",
+        "beoordeling",
+        "kwaliteit",
+        "voorkeur",
+        "vergelijking",
+        "keuze",
+        "resultaat",
+        "context",
+        "emotie",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "goed",
+            "kwaliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f5bd2d1c",
+          "begrip": "check",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "emotie",
+            "kwaliteit",
+            "resultaat",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-51dd8529",
+          "begrip": "validatie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "emotie",
+            "kwaliteit",
+            "resultaat",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-52bcdb65",
+          "begrip": "voordeel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "keuze",
+            "kwaliteit",
+            "positief",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e31a7aca",
+          "begrip": "beoordeling",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "emotie",
+            "kwaliteit",
+            "resultaat",
+            "vergelijking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:41:44.780914+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:26:32.538672+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ffb68e67b031",
+        "extract_at": "2026-07-21T07:26:33.214458+00:00",
+        "extract_context_snippet": ", **De Willem**. Wakker worden kan soms best een uitdaging zijn, en het is niet ongewoon dat we ons 's o",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'best' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:41:39.379157+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:41:02.788444+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:41:02.795607+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:41:39.480152+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:41:39.487194+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:41:44.977784+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:41:44.984986+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3fa54b58",
+      "begrip": "interessante",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Interessante betekent dat iets de aandacht trekt of boeiend wordt gevonden.",
+        "laag2": "Het woord interessante is een verbogen vorm van het bijvoeglijk naamwoord interessant. Het beschrijft iets dat nieuwsgierigheid, aandacht of betrokkenheid oproept.",
+        "laag3": "Interessante wordt gebruikt om een persoon, onderwerp, gebeurtenis, idee of situatie te omschrijven die de moeite waard is om aandacht aan te besteden. Wat iemand interessant vindt, verschilt per persoon en hangt af van kennis, ervaring en voorkeur.\n",
+        "laag4": "Binnen Spark wordt interessante herkend als een beoordeling van aandacht of nieuwsgierigheid. Spark kan dit gebruiken om te begrijpen welke onderwerpen mogelijk meer uitleg, verdieping of aandacht van een gebruiker krijgen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Dat is een interessant idee.\"\n\n→ Het idee trekt aandacht en roept nieuwsgierigheid op.\n\nVoorbeeld 2\n\n\"Spark vond een interessante verbinding in de kennisbank.\"\n\n→ Er is een opvallende of waardevolle relatie gevonden."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die iets beoordelen.",
+        "wat": "Een eigenschap die aangeeft dat iets aandacht of nieuwsgierigheid oproept.",
+        "wanneer": "Wanneer iets boeiend, opvallend of waardevol wordt gevonden.",
+        "waar": "In gesprekken, leren, onderzoek, creatie en dagelijks leven.",
+        "waarom": "Om aan te geven dat iets de moeite waard is om verder te bekijken.",
+        "hoe": "Door iets te ervaren, beoordelen of herkennen als boeiend of waardevol."
+      },
+      "tags": [
+        "interessante",
+        "interessant",
+        "aandacht",
+        "nieuwsgierigheid",
+        "boeiend",
+        "bijzonder",
+        "beoordeling",
+        "voorkeur",
+        "context",
+        "emotie",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7863c5af",
+          "begrip": "best",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "positief",
+            "voorkeur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2b54083",
+          "begrip": "speciaal",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bijzonder",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-33a8de6f",
+          "begrip": "boeiend",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "aandacht",
+            "boeiend",
+            "interessant",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e5d48ca",
+          "begrip": "zeker",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:44:17.067908+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:26:31.923197+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ffb68e67b031",
+        "extract_at": "2026-07-21T07:26:32.537766+00:00",
+        "extract_context_snippet": "Dat is een interessante vraag, **De Willem**. Wakker worden kan soms best een uitda",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'interessante' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:44:15.127314+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:44:15.228426+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:44:15.235438+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:44:17.266075+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:44:17.273155+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8a1a2c64",
+      "begrip": "gepassioneerd",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gepassioneerd betekent dat iemand iets met veel enthousiasme, betrokkenheid en energie doet.",
+        "laag2": "Het woord gepassioneerd beschrijft een sterke interesse of toewijding voor een activiteit, onderwerp, persoon of doel.",
+        "laag3": "Gepassioneerd is een eigenschap die aangeeft dat iemand veel motivatie, enthousiasme en emotionele betrokkenheid toont. Iemand die gepassioneerd is, besteedt vaak veel aandacht en energie aan iets wat belangrijk of betekenisvol wordt gevonden. De intensiteit en uiting van passie verschillen per persoon.\n",
+        "laag4": "Binnen Spark wordt gepassioneerd herkend als een positieve emotionele eigenschap die wijst op hoge betrokkenheid en motivatie. Spark kan dit koppelen aan interesses, doelen, projecten en gedrag, zonder automatisch te bepalen dat passie altijd positief of wenselijk is in elke situatie.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Hij is gepassioneerd over muziek.\"\n\n→ Muziek is belangrijk voor hem en hij besteedt er veel energie aan.\n\nVoorbeeld 2\n\n\"Zij werkt gepassioneerd aan haar project.\"\n\n→ Zij toont veel enthousiasme en betrokkenheid bij haar werk.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die sterke betrokkenheid bij iets tonen.",
+        "wat": "Een eigenschap waarbij iemand veel enthousiasme en energie laat zien.",
+        "wanneer": "Wanneer iemand veel inzet en interesse toont voor iets belangrijks.",
+        "waar": "In hobby's, werk, relaties, kunst, sport en projecten.",
+        "waarom": "Omdat iemand veel waarde, betekenis of plezier ervaart in iets.",
+        "hoe": "Door met enthousiasme, toewijding en motivatie bezig te zijn."
+      },
+      "tags": [
+        "gepassioneerd",
+        "passie",
+        "enthousiasme",
+        "motivatie",
+        "betrokkenheid",
+        "energie",
+        "interesse",
+        "eigenschap",
+        "emotie",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7a56e09b",
+          "begrip": "enthousiasme",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "emotie",
+            "energie",
+            "enthousiasme",
+            "interesse"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e4b0eaa",
+          "begrip": "betrokken",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "betrokkenheid",
+            "emotie",
+            "interesse",
+            "motivatie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6c37ff3d",
+          "begrip": "Enthousiast",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "betrokkenheid",
+            "energie",
+            "motivatie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-532d6a37",
+          "begrip": "plezier",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "energie",
+            "motivatie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff5f4984",
+          "begrip": "geweldig",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "enthousiasme",
+            "motivatie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:46:59.471433+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:23.912489+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-2168a4847c6f",
+        "extract_at": "2026-07-20T14:46:24.018490+00:00",
+        "extract_context_snippet": "eet.   - Je werkt als zzp‑er en je bent gepassioneerd door zowel katten als techniek.  - Op zondag 17 mei heb je",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gepassioneerd' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:46:57.901538+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:46:58.004429+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:46:58.011196+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:46:59.669585+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:46:59.676486+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-359f7662",
+      "begrip": "waardeer",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Waardeer betekent dat iemand iets of iemand als waardevol of belangrijk beschouwt.",
+        "laag2": "Het woord waardeer is een vervoegde vorm van het werkwoord waarderen. Het wordt gebruikt om waardering, respect of erkenning uit te drukken.",
+        "laag3": "Waardeer beschrijft de handeling waarbij iemand de waarde, inzet, eigenschappen of betekenis van iets of iemand erkent. Dit kan betrekking hebben op personen, voorwerpen, ideeën, hulp of prestaties. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt waardeer herkend als een uiting van positieve waardering of erkenning. Spark kan deze uiting gebruiken om te begrijpen dat een gebruiker tevredenheid, respect of dankbaarheid uitdrukt tegenover een persoon, object of gebeurtenis.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik waardeer je hulp.\"\n\n→ De spreker spreekt waardering uit voor de ontvangen hulp.\n\nVoorbeeld 2\n\n\"Ik waardeer dat je de tijd hebt genomen.\"\n\n→ De spreker toont erkenning voor de inspanning van de ander."
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen die waardering uiten of ontvangen.",
+        "wat": "Een werkwoord dat het uitspreken van waardering of erkenning aangeeft.",
+        "wanneer": "Wanneer iemand iets of iemand als waardevol of belangrijk beschouwt.",
+        "waar": "In gesprekken, werk, relaties, onderwijs en het dagelijks leven.",
+        "waarom": "Om respect, dankbaarheid of erkenning uit te drukken.",
+        "hoe": "Door mondeling of schriftelijk aan te geven dat iets of iemand wordt gewaardeerd."
+      },
+      "tags": [
+        "waardeer",
+        "waarderen",
+        "waardering",
+        "erkenning",
+        "respect",
+        "dankbaarheid",
+        "waarderen",
+        "communicatie",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2b90d9cd",
+          "begrip": "compliment",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie",
+            "erkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "erkenning",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie",
+            "erkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "erkenning",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-93b38729",
+          "begrip": "bedankte",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie",
+            "erkenning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T10:52:30.221216+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:42:36.332237+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6581c75a45da",
+        "extract_at": "2026-07-20T14:42:36.433664+00:00",
+        "extract_context_snippet": "Graag gedaan, **De Willem**! Ik waardeer je terugkoppeling – het “dank”‑gevoel dat je uitspreekt ver",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'waardeer' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T10:52:28.324940+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:52:28.424701+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:52:28.432184+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T10:52:30.414651+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T10:52:30.422326+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cc53e454",
+      "begrip": "mooie",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Mooie is de verbogen vorm van mooi en beschrijft iets of iemand dat als aantrekkelijk, prettig of waardevol wordt ervaren.",
+        "laag2": "Het woord mooie wordt gebruikt om een zelfstandig naamwoord positief te beschrijven. Wat als mooi wordt beschouwd, verschilt per persoon, cultuur en situatie.",
+        "laag3": "Mooie is de verbogen vorm van het bijvoeglijk naamwoord mooi. Het kan verwijzen naar uiterlijke schoonheid, een prettige ervaring, een bewonderenswaardige eigenschap of een positieve beoordeling. Omdat schoonheid subjectief is, hangt de betekenis af van de waarnemer en de context.\n",
+        "laag4": "Binnen Spark wordt mooie herkend als een positief waarderend bijvoeglijk naamwoord. Afhankelijk van de context kan het betrekking hebben op uiterlijk, kwaliteit, gedrag, prestaties of een andere eigenschap die als aantrekkelijk of waardevol wordt beoordeeld.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Wat een mooie bloem.\"\n\n→ De bloem wordt als aantrekkelijk ervaren.\n\nVoorbeeld 2\n\n\"Dat was een mooie oplossing.\"\n\n→ De oplossing wordt als goed of elegant beoordeeld."
+      },
+      "ws5": {
+        "wie": "Mensen die iets beoordelen of beschrijven.",
+        "wat": "Een verbogen vorm van mooi die een positieve eigenschap aanduidt.",
+        "wanneer": "Wanneer iets of iemand als aantrekkelijk, prettig of waardevol wordt ervaren.",
+        "waar": "In gesprekken, teksten, kunst, media en het dagelijks leven.",
+        "waarom": "Om een positieve eigenschap of waardering te beschrijven.",
+        "hoe": "Door mooie als bijvoeglijk naamwoord te gebruiken."
+      },
+      "tags": [
+        "mooi",
+        "mooie",
+        "schoonheid",
+        "aantrekkelijk",
+        "waardering",
+        "beoordeling",
+        "bijvoeglijk naamwoord",
+        "subjectief",
+        "context",
+        "emotie",
+        "blij",
+        "positief",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6268a6ae",
+          "begrip": "mooi",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "aantrekkelijk",
+            "blij",
+            "emotie",
+            "mooi",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-debab07e",
+          "begrip": "verdiend",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e5d48ca",
+          "begrip": "zeker",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b685d84d",
+          "begrip": "netjes",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:35:10.319147+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:13:14.083611+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7eb4d56210e5",
+        "extract_at": "2026-07-22T11:13:14.188503+00:00",
+        "extract_context_snippet": "resses, behoeften en kennis. Het is een mooie manier om verbonden te zijn en om onze relatie te versterke",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'mooie' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:34:43.587532+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:34:43.689840+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:34:43.698232+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:35:10.512896+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:35:10.520941+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5e1a0730",
+      "begrip": "interesses",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Interesses zijn onderwerpen, activiteiten of zaken waarvoor iemand belangstelling heeft.",
+        "laag2": "Interesses zijn de meervoudsvorm van interesse en beschrijven de dingen die iemand leuk, belangrijk of boeiend vindt.",
+        "laag3": "Interesses zijn voorkeuren of aandachtsgebieden die iemands nieuwsgierigheid of motivatie trekken. Ze kunnen betrekking hebben op hobby's, werk, studie, mensen, sport, kunst of andere onderwerpen. Interesses kunnen veranderen door ervaringen, leeftijd of nieuwe kennis.",
+        "laag4": "Binnen Spark worden interesses gebruikt om voorkeuren en aandachtsgebieden van een gebruiker te herkennen en vast te leggen. Hierdoor kan Spark gesprekken, aanbevelingen en informatie beter afstemmen op wat voor de gebruiker relevant en interessant is.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zijn interesses liggen bij muziek en technologie.\"\n\n→ Muziek en technologie trekken zijn aandacht.\n\nVoorbeeld 2\n\n\"Spark houdt rekening met de interesses van de gebruiker.\"\n\n→ Het systeem gebruikt voorkeuren om beter aan te sluiten bij de gebruiker."
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen.",
+        "wat": "Onderwerpen of activiteiten waarvoor iemand belangstelling heeft.",
+        "wanneer": "Wanneer iemand voorkeur of nieuwsgierigheid voor iets toont.",
+        "waar": "In het dagelijks leven, onderwijs, werk, hobby's en gesprekken.",
+        "waarom": "Omdat interesses richting geven aan aandacht, motivatie en keuzes.",
+        "hoe": "Door herhaaldelijk belangstelling te tonen voor bepaalde onderwerpen of activiteiten."
+      },
+      "tags": [
+        "interesse",
+        "interesses",
+        "belangstelling",
+        "voorkeur",
+        "nieuwsgierigheid",
+        "motivatie",
+        "hobby",
+        "aandachtsgebied",
+        "persoonlijk",
+        "context",
+        "emotie",
+        "nieuwsgierig",
+        "positief",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c7aacfc7",
+          "begrip": "nieuwsgierigheid",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "interesse",
+            "motivatie",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0c8d93d2",
+          "begrip": "voorkeur",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "interesse",
+            "neutraal",
+            "persoonlijk",
+            "voorkeur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3fa54b58",
+          "begrip": "interessante",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "nieuwsgierigheid",
+            "positief",
+            "voorkeur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68625774",
+          "begrip": "waarom",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "motivatie",
+            "neutraal",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bd71cd23",
+          "begrip": "benieuwd",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "interesse",
+            "motivatie",
+            "nieuwsgierig",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:36:30.761263+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:13:13.978152+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7eb4d56210e5",
+        "extract_at": "2026-07-22T11:13:14.083332+00:00",
+        "extract_context_snippet": ", kunnen we veel ontdekken over elkaars interesses, behoeften en kennis. Het is een mooie manier om verbonden",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'interesses' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:36:25.502861+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:36:25.603613+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:36:25.611572+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:36:30.956297+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:36:30.964486+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-bff4fabd",
+      "begrip": "bederf",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bederf is het proces waarbij iets zijn kwaliteit verliest of onbruikbaar wordt.",
+        "laag2": "Bederf ontstaat wanneer voedsel, materialen of andere producten achteruitgaan door bijvoorbeeld bacteriën, schimmels, tijd of omgevingsinvloeden.",
+        "laag3": "Bederf is de aantasting of achteruitgang van de kwaliteit van een product of materiaal. Bij voedsel wordt bederf vaak veroorzaakt door micro-organismen, enzymen of chemische processen, waardoor het minder veilig of minder geschikt wordt voor consumptie. Het begrip kan ook figuurlijk worden gebruikt, zoals bij zedelijk bederf of moreel bederf.\n",
+        "laag4": "Binnen Spark wordt bederf herkend als een proces van kwaliteitsverlies. Afhankelijk van de context kan het betrekking hebben op voedsel, materialen, gegevens of abstracte begrippen. Spark gebruikt de context om te bepalen welke vorm van bederf wordt bedoeld.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Door de warmte trad bederf van het voedsel op.\"\n\n→ Het voedsel verloor zijn kwaliteit en werd mogelijk onveilig.\n\nVoorbeeld 2\n\n\"Langdurige verwaarlozing kan leiden tot bederf van materialen.\"\n\n→ De materialen gaan achteruit door onvoldoende onderhoud.\n"
+      },
+      "ws5": {
+        "wie": "Voedsel, materialen, organismen en andere objecten.",
+        "wat": "Het proces waarbij kwaliteit verloren gaat of iets onbruikbaar wordt.",
+        "wanneer": "Wanneer producten of materialen achteruitgaan door tijd of invloeden van buitenaf.",
+        "waar": "Bij voedsel, materialen, opslag, natuur en figuurlijk taalgebruik.",
+        "waarom": "Door biologische, chemische of fysieke processen.",
+        "hoe": "Door aantasting, afbraak of achteruitgang van de oorspronkelijke kwaliteit."
+      },
+      "tags": [
+        "bederf",
+        "achteruitgang",
+        "kwaliteitsverlies",
+        "voedsel",
+        "houdbaarheid",
+        "bacteriën",
+        "schimmels",
+        "afbraak",
+        "proces",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c515185a",
+          "begrip": "kookt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "proces",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9eee697c",
+          "begrip": "bijstellen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-42c604ea",
+          "begrip": "omstandigheden",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30697706",
+          "begrip": "Iglo",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "houdbaarheid",
+            "neutraal",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-311c5f83",
+          "begrip": "event",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T11:45:33.632468+00:00",
+        "vorige_versie_v1": "kb-skel-bff4fabd",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.040935+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:45:31.124820+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:45:31.132544+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T11:45:33.835719+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T11:45:33.843292+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T11:45:31.018690+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-81370b03",
+      "begrip": "voelen",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Voelen betekent het waarnemen van lichamelijke prikkels, emoties of innerlijke ervaringen.",
+        "laag2": "Voelen is een werkwoord dat beschrijft dat iemand iets ervaart via de tastzin, het lichaam of het gevoelsleven.",
+        "laag3": "Voelen is het bewust ervaren van lichamelijke sensaties, emoties of stemmingen. Het kan gaan om fysieke waarnemingen, zoals warmte of pijn, maar ook om innerlijke ervaringen, zoals blijheid, verdriet, angst of liefde. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt voelen gebruikt om fysieke en emotionele ervaringen te herkennen en te onderscheiden. Spark kan herkennen wanneer een gebruiker een gevoel, lichamelijke sensatie of emotionele toestand beschrijft en deze informatie koppelen aan de juiste context.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik voel me blij.\"\n\n→ Er wordt een emotionele toestand beschreven.\n\nVoorbeeld 2\n\n\"Ik voel dat de pan heet is.\"\n\n→ Er wordt een lichamelijke waarneming beschreven."
+      },
+      "ws5": {
+        "wat": "Een werkwoord dat lichamelijke of emotionele ervaringen beschrijft.",
+        "wie": "Mensen, dieren en AI-systemen.",
+        "wanneer": "Wanneer iemand een lichamelijke sensatie of emotie ervaart.",
+        "waar": "In het dagelijks leven, gesprekken, zorg, psychologie en communicatie.",
+        "waarom": "Om ervaringen, emoties of lichamelijke waarnemingen te herkennen en uit te drukken.",
+        "hoe": "Door zintuiglijke waarneming, lichamelijke prikkels of emotionele beleving."
+      },
+      "tags": [
+        "voelen",
+        "gevoel",
+        "emotie",
+        "lichamelijke waarneming",
+        "tast",
+        "beleving",
+        "ervaring",
+        "werkwoord",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beleving",
+            "emotie",
+            "ervaring",
+            "gevoel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beleving",
+            "context",
+            "emotie",
+            "gevoel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-489fde1f",
+          "begrip": "heb",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "gevoel",
+            "neutraal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2a608b3d",
+          "begrip": "ervaren",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal",
+            "voelen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-91e7fb2c",
+          "begrip": "gevoel",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "gevoel",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T12:00:16.632416+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:54:46.891808+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b51fd2229ca4",
+        "extract_at": "2026-07-22T11:54:46.993218+00:00",
+        "extract_context_snippet": "**De Willem**, volgens de KB‑kaart **[voelen] excuus** (vertrouwen = 0.9) betekent een excuus:  * een ui",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'voelen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T12:00:15.000082+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:00:15.103031+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:00:15.111119+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:00:16.828423+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:00:16.836299+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-26c9a1f7",
+      "begrip": "ongewenste",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ongewenste is de verbogen vorm van ongewenst en beschrijft iets dat niet gewenst, welkom of acceptabel is.",
+        "laag2": "Het woord ongewenste wordt gebruikt om een zelfstandig naamwoord te beschrijven dat als onwenselijk, storend of niet toegestaan wordt beschouwd.",
+        "laag3": "Ongewenste is de verbogen vorm van het bijvoeglijk naamwoord ongewenst. Het verwijst naar personen, handelingen, situaties of objecten die niet gewenst zijn. Wat als ongewenst wordt beschouwd, hangt af van regels, normen, persoonlijke voorkeuren of de context.",
+        "laag4": "Binnen Spark wordt ongewenste herkend als een beschrijvend woord dat aangeeft dat iets niet gewenst of toegestaan is. Spark gebruikt de context om te bepalen of het gaat om gedrag, communicatie, inhoud, gebeurtenissen of andere situaties die als ongewenst worden aangemerkt.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ongewenste reclame kan irritant zijn.\"\n\n→ De reclame wordt als storend ervaren.\n\nVoorbeeld 2\n\n\"Het systeem blokkeert ongewenste berichten.\"\n\n→ Berichten die niet gewenst zijn, worden tegengehouden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een verbogen vorm van ongewenst die iets beschrijft dat niet gewenst of niet welkom is.",
+        "wanneer": "Wanneer iets als storend, onacceptabel of ongepast wordt beschouwd.",
+        "waar": "In gesprekken, software, organisaties en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets niet gewenst of niet toegestaan is.",
+        "hoe": "Door ongewenste als bijvoeglijk naamwoord te gebruiken bij een zelfstandig naamwoord."
+      },
+      "tags": [
+        "ongewenst",
+        "ongewenste",
+        "afwijzing",
+        "ongepast",
+        "onacceptabel",
+        "storend",
+        "bijvoeglijk naamwoord",
+        "eigenschap",
+        "context",
+        "emotie",
+        "afkeur",
+        "negatief",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e58479c0",
+          "begrip": "nieuwe",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bijvoeglijk naamwoord",
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f34b1969",
+          "begrip": "afwijzing",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afwijzing",
+            "emotie",
+            "negatief",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fdad6bce",
+          "begrip": "domme",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "negatief",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc53e454",
+          "begrip": "mooie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bijvoeglijk naamwoord",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2b54083",
+          "begrip": "speciaal",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T12:01:49.688402+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:54:47.094396+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b51fd2229ca4",
+        "extract_at": "2026-07-22T11:54:47.198418+00:00",
+        "extract_context_snippet": "rantwoording voor een fout, probleem of ongewenste situatie.  * Het wordt gebruikt om sociale spanning te verm",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'ongewenste' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T12:01:46.834219+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:01:46.934539+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:01:46.942526+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T12:01:49.883596+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T12:01:49.891407+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

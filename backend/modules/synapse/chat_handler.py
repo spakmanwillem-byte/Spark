@@ -180,8 +180,9 @@ def _handle_status_of(query: str) -> Dict:
         f"🎯 Doel: {meta.get('doel') or '_geen omschrijving_'}",
     ]
     fn = meta.get("footnote")
-    if fn:
-        lines.append(f"📝 Footnote: {fn}")
+    fn_text = fn if isinstance(fn, str) else ((fn or {}).get("spark_note") or "")
+    if fn_text:
+        lines.append(f"📝 Footnote: {fn_text}")
     bp = meta.get("blueprint_ref")
     if bp:
         lines.append(f"📘 Blueprint: `{bp}`")
@@ -232,9 +233,10 @@ def _handle_what_does(query: str) -> Dict:
         f"🎯 **{naam}** — {doel}",
     ]
     fn = meta.get("footnote")
-    if fn:
+    fn_text = fn if isinstance(fn, str) else ((fn or {}).get("spark_note") or "")
+    if fn_text:
         lines.append("")
-        lines.append(f"📝 Notitie: {fn}")
+        lines.append(f"📝 Notitie: {fn_text}")
     lines.append("")
     lines.append(f"📂 `{path}` · status `{meta.get('status')}`")
     return {"type": "synapse_what", "message": "\n".join(lines)}

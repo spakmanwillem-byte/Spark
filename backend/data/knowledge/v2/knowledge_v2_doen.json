@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1153,
+    "card_count": 1155,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:50:35.926518+00:00",
+    "last_updated": "2026-07-22T08:23:47.214586+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -151819,6 +151819,170 @@
       },
       "media": [],
       "needs": []
+    },
+    {
+      "id": "kbv2-a8e0a2b4",
+      "begrip": "krijgen",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Krijgen betekent dat iemand iets ontvangt.",
+        "laag2": "Krijgen is een werkwoord dat beschrijft dat iemand een voorwerp, informatie, hulp, eigenschap of iets anders ontvangt van een persoon, systeem of gebeurtenis.",
+        "laag3": "Krijgen is een handeling waarbij iets wordt overgedragen aan een ontvanger. Wat wordt ontvangen kan tastbaar zijn, zoals een cadeau of een brief, of ontastbaar, zoals een compliment, een kans of informatie. De manier waarop iets wordt verkregen verschilt per situatie en wordt bepaald door de context.",
+        "laag4": "Binnen Spark beschrijft krijgen een gebeurtenis waarbij gegevens, opdrachten, meldingen of andere informatie door een gebruiker of systeem worden ontvangen. Spark kan vastleggen wie iets ontvangt, wat wordt ontvangen, van wie het afkomstig is en wanneer de overdracht plaatsvindt.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik krijg een bericht.\"\n\n→ Er wordt een bericht ontvangen.\n\nVoorbeeld 2\n\n\"Spark krijgt nieuwe gegevens.\"\n\n→ Spark ontvangt nieuwe informatie."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het ontvangen van iets.",
+        "wanneer": "Wanneer iets wordt overgedragen aan een ontvanger.",
+        "waar": "In het dagelijks leven, op het werk, op school en in digitale systemen.",
+        "waarom": "Om iets te ontvangen dat wordt gegeven, verzonden of toegekend.",
+        "hoe": "Doordat iets van een bron naar een ontvanger wordt overgedragen."
+      },
+      "tags": [
+        "krijgen",
+        "ontvangen",
+        "ontvangen",
+        "overdracht",
+        "ontvanger",
+        "geven",
+        "verkrijgen",
+        "handeling",
+        "informatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c3f1997f",
+          "begrip": "ontvangen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "krijgen",
+            "neutraal",
+            "ontvangen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4d9855e1",
+          "begrip": "krijgt",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "krijgen",
+            "neutraal",
+            "ontvangen",
+            "overdracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-61872f1f",
+          "begrip": "ontvanger",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "ontvangen",
+            "ontvanger"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8e190be7",
+          "begrip": "bericht",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "ontvanger",
+            "overdracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-097c2cb9",
+          "begrip": "brengen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "geven",
+            "informatie",
+            "neutraal",
+            "overdracht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:23:47.214566+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:32:04.418781+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-71f39f6483ed",
+        "extract_at": "2026-07-21T07:32:05.209724+00:00",
+        "extract_context_snippet": "om informatie, uitleg of een reactie te krijgen. Ze houden de communicatie levendig en stimuleren leren. Jo",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'krijgen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:23:42.525304+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:23:42.626354+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:23:42.634115+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:23:47.474377+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:23:47.481876+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
   "updated_at": "2026-07-22T08:01:54.033909+00:00",

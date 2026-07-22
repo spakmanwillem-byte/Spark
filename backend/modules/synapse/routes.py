@@ -91,10 +91,15 @@ async def search(q: str, group: Optional[str] = None):
         if group and grp != group:
             continue
         for path, meta in items.items():
+            # v10_footnote_shape_001 — footnote is soms dict (v9_meta_enrich_001)
+            fn_raw = meta.get("footnote")
+            fn_text = fn_raw if isinstance(fn_raw, str) else (
+                (fn_raw or {}).get("spark_note") or (fn_raw or {}).get("note") or ""
+            )
             haystack_parts = [
                 meta.get("naam", ""),
                 meta.get("doel", ""),
-                meta.get("footnote", ""),
+                fn_text,
                 meta.get("blueprint_ref", "") or "",
                 " ".join(meta.get("tags", []) or []),
                 " ".join(meta.get("endpoints", []) or []),
@@ -109,7 +114,7 @@ async def search(q: str, group: Optional[str] = None):
                     "status": meta.get("status"),
                     "container_type": meta.get("container_type"),
                     "endpoints_count": len(meta.get("endpoints") or []),
-                    "footnote": meta.get("footnote") or "",
+                    "footnote": fn_text,
                     "blueprint_ref": meta.get("blueprint_ref"),
                     "last_touched": meta.get("last_touched"),
                 })
@@ -146,7 +151,14 @@ async def tag_container(body: TagBody):
             raise HTTPException(400, f"Ongeldige status. Gebruik: {sorted(VALID_STATUSES)}")
         meta["status"] = body.status
     if body.footnote is not None:
-        meta["footnote"] = body.footnote
+        # v10_footnote_shape_001 — preserve dict-vorm (v9_meta_enrich_001):
+        # als bestaande footnote een dict is, update alleen spark_note. Anders string.
+        existing_fn = meta.get("footnote")
+        if isinstance(existing_fn, dict):
+            existing_fn["spark_note"] = body.footnote
+            meta["footnote"] = existing_fn
+        else:
+            meta["footnote"] = body.footnote
     if body.blueprint_ref is not None:
         meta["blueprint_ref"] = body.blueprint_ref or None
     if body.tags is not None:

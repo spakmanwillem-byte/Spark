@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2154,
+    "card_count": 2158,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:12:33.855747+00:00",
+    "last_updated": "2026-07-22T08:30:02.894508+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -288170,6 +288170,640 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f51f510f",
+      "begrip": "jezelf",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Jezelf verwijst naar dezelfde persoon die een handeling uitvoert.",
+        "laag2": "Jezelf is een wederkerend voornaamwoord dat wordt gebruikt wanneer de uitvoerder en de ontvanger van een handeling dezelfde persoon zijn.",
+        "laag3": "Jezelf verwijst altijd terug naar degene die de handeling uitvoert. Het woord komt voor bij wederkerende werkwoorden, zoals jezelf wassen, jezelf voorstellen en jezelf ontwikkelen. De betekenis is afhankelijk van de context, maar de verwijzing blijft altijd bij dezelfde persoon.",
+        "laag4": "Binnen Spark wordt jezelf herkend als een zelfverwijzing. Hierdoor kan Spark bepalen dat een opdracht, uitspraak of vraag betrekking heeft op dezelfde persoon die de handeling uitvoert. Dit voorkomt verwarring tussen de gebruiker, andere personen en Spark zelf.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zorg goed voor jezelf.\"\n\n→ De persoon richt de zorg op zichzelf.\n\nVoorbeeld 2\n\n\"Je moet jezelf voorstellen.\"\n\n→ De persoon vertelt informatie over zichzelf.\n\nVoorbeeld 3\n\n\"Je kent jezelf het beste.\"\n\n→ De uitspraak verwijst naar dezelfde persoon."
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een wederkerend voornaamwoord dat naar dezelfde persoon verwijst.",
+        "wanneer": "Wanneer een handeling of uitspraak betrekking heeft op degene die deze uitvoert.",
+        "waar": "In gesprekken, teksten en het dagelijks taalgebruik.",
+        "waarom": "Om duidelijk te maken dat een handeling op dezelfde persoon is gericht.",
+        "hoe": "Door jezelf te gebruiken als verwijzing naar de uitvoerder van de handeling."
+      },
+      "tags": [
+        "jezelf",
+        "zelf",
+        "wederkerend voornaamwoord",
+        "zelfverwijzing",
+        "grammatica",
+        "taal",
+        "communicatie",
+        "identiteit",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37f21d78",
+          "begrip": "onszelf",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:24:59.689842+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:22:48.712980+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5220e94807b2",
+        "extract_at": "2026-07-21T13:22:49.692003+00:00",
+        "extract_context_snippet": "Dat zijn allemaal belangrijke dingen om jezelf en je spullen in goede conditie te houden. Hoe voelde je je",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'jezelf' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:24:57.287660+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:24:57.389977+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:24:57.397800+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:25:00.041216+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:25:00.049014+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e598d1fc",
+      "begrip": "eerst",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Eerst betekent dat iets vóór iets anders gebeurt of komt.",
+        "laag2": "Het woord eerst geeft de volgorde van gebeurtenissen, handelingen of objecten aan. Het verwijst naar wat als eerste plaatsvindt binnen een reeks.",
+        "laag3": "Eerst is een bijwoord dat wordt gebruikt om prioriteit of volgorde aan te geven. Het kan betrekking hebben op tijd, handelingen of gebeurtenissen. Door eerst te gebruiken wordt duidelijk welke stap of gebeurtenis vóór andere plaatsvindt.",
+        "laag4": "Binnen Spark wordt eerst gebruikt als een volgorde-aanduiding. Hierdoor kan Spark bepalen welke taak, handeling of gebeurtenis als eerste moet worden uitgevoerd of verwerkt. Dit ondersteunt het plannen, organiseren en uitvoeren van processen in de juiste volgorde.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Eerst ontbijt ik, daarna ga ik werken.\"\n\n→ Ontbijten gebeurt vóór het werken.\n\nVoorbeeld 2\n\n\"Eerst de kenniskaart opslaan, daarna verdergaan.\"\n\n→ Het opslaan is de eerste stap."
+      },
+      "ws5": {
+        "wie": "Iedereen die een volgorde beschrijft of uitvoert.",
+        "wat": "Een aanduiding dat iets vóór iets anders gebeurt of komt.",
+        "wanneer": "Wanneer een volgorde of prioriteit wordt aangegeven.",
+        "waar": "In gesprekken, instructies, plannen, processen en het dagelijks leven.",
+        "waarom": "Om duidelijk te maken wat als eerste moet gebeuren.",
+        "hoe": "Door een gebeurtenis, handeling of stap vóór andere te plaatsen."
+      },
+      "tags": [
+        "eerst",
+        "volgorde",
+        "prioriteit",
+        "begin",
+        "planning",
+        "tijd",
+        "proces",
+        "instructie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-be67e868",
+          "begrip": "vroeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begin",
+            "context",
+            "planning",
+            "proces",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-72e8d59b",
+          "begrip": "fase",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "proces",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aa6c531c",
+          "begrip": "daarna",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "proces",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-613ed3b9",
+          "begrip": "Prioriteit",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "prioriteit",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d915b9e4",
+          "begrip": "keer",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "planning",
+            "tijd",
+            "volgorde"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:26:04.402710+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:43:26.651506+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-bd7ae5ff7223",
+        "extract_at": "2026-07-20T14:43:26.753362+00:00",
+        "extract_context_snippet": "catie veilig te kunnen opslaan, moet ik eerst zeker weten dat ik met jou spreek. Kun je me een detail gev",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'eerst' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:26:04.763008+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:26:04.770757+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-edef827c",
+      "begrip": "band",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een band is een verbinding of relatie tussen personen, objecten of onderdelen.",
+        "laag2": "Het woord band heeft meerdere betekenissen. Het kan verwijzen naar een relatie tussen mensen, een voorwerp zoals een autoband of elastische band, of een verbonden geheel. De juiste betekenis wordt bepaald door de context.",
+        "laag3": "Band is een algemeen begrip voor een vorm van verbinding. In sociale context verwijst het naar een relatie of verbondenheid tussen mensen of groepen. In technische context kan een band een onderdeel van een voertuig of machine zijn, zoals een autoband of transportband. Het woord wordt ook gebruikt voor een muziekgroep of een strook materiaal. De betekenis is daarom afhankelijk van de situatie.",
+        "laag4": "Binnen Spark is band een contextafhankelijk begrip dat een vorm van verbinding beschrijft. Spark gebruikt de context om te bepalen of het gaat om een sociale band, een technisch onderdeel, een muziekgroep of een ander type verbinding. Hierdoor kan het systeem de juiste betekenis aan het begrip koppelen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Wij hebben een sterke band.\"\n\n→ Er is een hechte relatie tussen personen.\n\nVoorbeeld 2\n\n\"De band van de auto is lek.\"\n\n→ Het gaat om de autoband.\n\nVoorbeeld 3\n\n\"De band treedt vanavond op.\"\n\n→ Het gaat om een muziekgroep."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, voertuigen, machines en muziekgroepen.",
+        "wat": "Een verbinding, relatie of object waarvan de betekenis afhangt van de context.",
+        "wanneer": "Wanneer sprake is van een relatie, verbinding of een specifiek voorwerp.",
+        "waar": "In sociale situaties, techniek, verkeer, muziek en het dagelijks leven.",
+        "waarom": "Om een verbinding, relatie of specifiek object aan te duiden.",
+        "hoe": "Door de betekenis af te leiden uit de context waarin het woord wordt gebruikt."
+      },
+      "tags": [
+        "band",
+        "verbinding",
+        "relatie",
+        "autoband",
+        "muziekgroep",
+        "verbondenheid",
+        "context",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f4d18917",
+          "begrip": "verbonden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:27:28.533866+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:57.116863+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-4c3b968256c0",
+        "extract_at": "2026-07-20T14:44:57.221400+00:00",
+        "extract_context_snippet": "ple moving average).  2. **Een bovenste band** = gemiddelde + 2 × standaarddeviatie.  3. **Een onderste",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'band' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:27:25.495560+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:27:25.595210+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:27:25.838355+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:27:28.881800+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:27:28.889962+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-59d9d164",
+      "begrip": "gepland",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gepland betekent dat iets vooraf is bedacht, georganiseerd of ingepland.",
+        "laag2": "Het woord gepland geeft aan dat een gebeurtenis, taak of activiteit van tevoren is voorbereid en een plaats heeft gekregen in een planning of schema.",
+        "laag3": "Gepland is het voltooid deelwoord van het werkwoord plannen. Het beschrijft een situatie waarin een activiteit, afspraak of proces vooraf is vastgesteld. Een geplande gebeurtenis hoeft nog niet te zijn uitgevoerd; het betekent alleen dat deze is opgenomen in een planning of dat er een voornemen voor bestaat.",
+        "laag4": "Binnen Spark is gepland een status die aangeeft dat een taak, afspraak of proces is ingepland voor een bepaald moment of onder bepaalde voorwaarden. Spark kan geplande activiteiten beheren, prioriteren, wijzigen en volgen totdat ze zijn uitgevoerd of geannuleerd.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De vergadering staat gepland voor maandag.\"\n\n→ De vergadering is vooraf ingepland.\n\nVoorbeeld 2\n\n\"Spark heeft een back-up gepland.\"\n\n→ De back-up zal op een vastgesteld moment worden uitgevoerd."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een status die aangeeft dat iets vooraf is ingepland.",
+        "wanneer": "Wanneer een activiteit of gebeurtenis vooraf wordt vastgelegd.",
+        "waar": "In agenda's, planningen, projecten, systemen en het dagelijks leven.",
+        "waarom": "Om werkzaamheden en gebeurtenissen georganiseerd en op het juiste moment uit te voeren.",
+        "hoe": "Door een taak, afspraak of gebeurtenis vooraf in een planning of schema op te nemen."
+      },
+      "tags": [
+        "gepland",
+        "planning",
+        "ingepland",
+        "afspraak",
+        "taak",
+        "schema",
+        "voorbereiding",
+        "organisatie",
+        "status",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "afspraak",
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-727fbd96",
+          "begrip": "kalender",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "afspraak",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-279e7e40",
+          "begrip": "maandag",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning",
+            "schema"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6780c263",
+          "begrip": "dinsdag",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning",
+            "schema"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:30:02.894488+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:45:25.639193+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7740c3b754b9",
+        "extract_at": "2026-07-20T14:45:25.741780+00:00",
+        "extract_context_snippet": "Op zondag 17 mei heb je een activiteit gepland.  - Je hebt recent een aantal kennis‑kaarten voor me ingevu",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gepland' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:29:59.414074+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:29:59.514494+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:29:59.521900+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:30:03.247442+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:30:03.254985+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

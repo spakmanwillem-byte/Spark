@@ -1,6 +1,39 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 47 (2026-07-22) — React-crash fix (SynapseTab footnote-shape)
+
+### Probleem
+Willem meldde React-crash: `Objects are not valid as a React child (found: object with keys {generated_by, generated_at, spark_note, has_blueprint, has_endpoints, requires_review})`. Optreedt bij openen van **Synapslaag** tab.
+
+### Root cause
+`_meta.json` footnote-veld werd tijdens v9_meta_enrich_001 pass upgegrade van **string** naar **object** (`{generated_by, generated_at, spark_note, has_blueprint, has_endpoints, requires_review}`). `SynapseTab.js` (r.294-296) renderde `{item.meta.footnote}` direct als React child → object → crash.
+- Backend `/api/synapse/search` had zelfde bug: `meta.get("footnote", "")` op dict, dan `.lower()` → TypeError.
+- Backend `/api/synapse/tag` overschreef bij edit de hele dict met een string → verlies van meta-enrich fields.
+
+### Fix (v10_footnote_shape_001)
+- `SynapseTab.js`: helper `footnoteText(fn)` — geeft string terug (spark_note bij dict, anders zelf). Gebruikt in search-haystack, editForm.footnote init, en render.
+- `synapse/routes.py`: `/search` extract altijd string. `/tag` behoudt dict-vorm bij bestaande dict, update alleen `spark_note` key.
+- `synapse/chat_handler.py`: `_handle_is_ready_ready` + `_handle_what_does` gebruiken spark_note bij dict-footnote.
+
+### Verificatie
+- ✅ Synapslaag laadt zonder React-crash (screenshot bevestigd)
+- ✅ 106 modules netjes zichtbaar met "Modulebeschrijving beheerd via meta-verrijking pass..." als footnote-tekst
+- ✅ Zero PAGEERROR in console
+
+### Wijzigingen
+- EDIT `frontend/src/components/admin/SynapseTab.js` — footnoteText helper + 3 gebruiksplekken
+- EDIT `backend/modules/synapse/routes.py` — search normalize + tag preserve dict
+- EDIT `backend/modules/synapse/chat_handler.py` — spark_note extract in chat-reply
+- EDIT `memory/ROADMAP.md` — P1 Trader Anker (hybride) toegevoegd
+
+### Anker-strategie (op roadmap)
+Willem koos richting **(c) hybride**: bij startup 30d Bitvavo candles fetchen, daarna zelf bijhouden. Doel: gap-up preventie. Blueprint + monitoring komen later (zie ROADMAP P1 sectie).
+
+---
+
+
+
 ## Sessie 44 (2026-07-21) — Data-reconciliatie + Centrale Bank Guard
 
 ### Probleem (door Willem gesignaleerd)

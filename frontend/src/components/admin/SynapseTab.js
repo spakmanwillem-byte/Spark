@@ -33,6 +33,16 @@ const GROUP_META = {
 
 const STATUS_OPTIONS = ['active', 'wip', 'skeleton', 'deprecated', 'tagged_for_deletion', 'deleted'];
 
+// v10_footnote_shape_001 — _meta.json footnote is soms string (legacy),
+// soms object {generated_by, generated_at, spark_note, has_blueprint, has_endpoints, requires_review}
+// (v9_meta_enrich_001). Deze helper geeft altijd een string terug om React-crash te voorkomen.
+function footnoteText(fn) {
+  if (!fn) return '';
+  if (typeof fn === 'string') return fn;
+  if (typeof fn === 'object') return fn.spark_note || fn.note || '';
+  return String(fn);
+}
+
 export function SynapseTab() {
   const [doc, setDoc] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -88,7 +98,7 @@ export function SynapseTab() {
         if (statusFilter !== 'all' && meta.status !== statusFilter) continue;
         if (search) {
           const hay = [
-            meta.naam, meta.doel, meta.footnote, meta.blueprint_ref,
+            meta.naam, meta.doel, footnoteText(meta.footnote), meta.blueprint_ref,
             (meta.tags || []).join(' '),
             (meta.endpoints || []).join(' '),
           ].filter(Boolean).join(' ').toLowerCase();
@@ -105,7 +115,7 @@ export function SynapseTab() {
     setEditing(item);
     setEditForm({
       doel: item.meta.doel || '',
-      footnote: item.meta.footnote || '',
+      footnote: footnoteText(item.meta.footnote),
       blueprint_ref: item.meta.blueprint_ref || '',
       status: item.meta.status || 'active',
       tags: (item.meta.tags || []).join(', '),
@@ -291,8 +301,8 @@ export function SynapseTab() {
                         <p className="text-[11px] text-slate-500 truncate">
                           {item.meta.doel || <em className="text-slate-700">— geen doel —</em>}
                         </p>
-                        {item.meta.footnote && (
-                          <p className="text-[10px] text-amber-400/70 truncate mt-0.5">📝 {item.meta.footnote}</p>
+                        {footnoteText(item.meta.footnote) && (
+                          <p className="text-[10px] text-amber-400/70 truncate mt-0.5">📝 {footnoteText(item.meta.footnote)}</p>
                         )}
                       </div>
                       <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5">

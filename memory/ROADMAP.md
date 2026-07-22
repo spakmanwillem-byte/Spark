@@ -1,6 +1,25 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## 🟠 P1 — Trader Anker (Hybride strategie) — sessie 47 (2026-07-22)
+
+**Doel**: Voorkomen dat de bot bovenaan een gap-up koopt. Introduceer een "anker-prijs" per markt (referentiepunt uit langere historie).
+
+**Gekozen richting (Willem)**: **(c) Hybride** — bij startup 1x Bitvavo history fetchen (bv. 30 dagen daily candles), daarna zelf bijhouden via ticker-samples. Robuust bij restart, geen dagelijkse API-hammering, niet gevoelig voor gap-ups.
+
+**Todo (nog te doen)**:
+- `modules/chat_hub/agents/coin_anker_agent.py` (of losse `trade/anker_service.py`) — leest 30d Bitvavo candles bij eerste boot, cachet in `data/trade/anker/{market}.json`.
+- Elke ticker-tick: rolling 30d moving average bijwerken via file-append; nachtelijke reconciliatie tegen Bitvavo (drift-alert).
+- Hook in `strategy_decision.py`: bij BUY-signaal → als `current_price > anker * (1 + threshold)` → skip / lower confidence.
+- Blueprint: `modules/trade/blueprints/anker.json` met `lookback_days`, `above_anker_threshold_pct`, `reconciliation_hour`, `enabled`.
+- Admin UI: toon anker per market naast huidige prijs in Trader-panel + slider voor threshold.
+- Monitor: log elke anker-skip in papertrail zodat we effect kunnen meten.
+
+**Test**: unit-test met synthetische gap-up (10% spike) → bot moet skippen; unit-test met normale +2% → bot mag doorgaan.
+
+---
+
+
 ## 🔴 P1 BACKLOG — Gatekeeper-fase (ontdekt sessie 46, dubbels-audit)
 
 Willem's terechte feedback ("waarom vond je de bestaande buy/sell DM niet?") leidde tot een proactieve dubbels-scan. Bevindingen:

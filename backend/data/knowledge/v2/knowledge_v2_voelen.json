@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 456,
+    "card_count": 459,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:53:34.051329+00:00",
+    "last_updated": "2026-07-22T08:28:48.466761+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -62345,6 +62345,331 @@
       },
       "media": [],
       "needs": []
+    },
+    {
+      "id": "kbv2-462f3439",
+      "begrip": "bewust",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bewust betekent dat iemand zich ergens van bewust is en dit met aandacht of opzet ervaart.",
+        "laag2": "Bewust beschrijft een toestand waarin iemand iets waarneemt, begrijpt of doelgericht doet. Het tegenovergestelde is onbewust.",
+        "laag3": "Bewust is een mentale toestand waarin iemand kennis heeft van zichzelf, de omgeving of een situatie. Iemand die bewust handelt, maakt een keuze met aandacht en intentie, in plaats van automatisch of zonder nadenken te reageren. De mate van bewustzijn kan verschillen per situatie.",
+        "laag4": "Binnen Spark wordt bewust gebruikt om aan te geven dat een keuze, handeling of waarneming met aandacht en intentie plaatsvindt. Bij gebruikers kan Spark herkennen wanneer iemand bewust een keuze maakt of ergens expliciet aandacht aan geeft. Bij Spark zelf verwijst bewust uitsluitend naar expliciete verwerking of doelgerichte logica en niet naar menselijk bewustzijn.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik ben mij bewust van mijn fouten.\"\n\n→ De persoon erkent en begrijpt zijn eigen fouten.\n\nVoorbeeld 2\n\n\"Ze maakte bewust een andere keuze.\"\n\n→ De keuze werd met opzet gemaakt."
+      },
+      "ws5": {
+        "wie": "Mensen en andere levende wezens.",
+        "wat": "Een toestand waarin iemand iets waarneemt, begrijpt of met opzet handelt.",
+        "wanneer": "Wanneer iemand ergens aandacht voor heeft of doelgericht een keuze maakt.",
+        "waar": "In het dagelijks leven, communicatie, psychologie, onderwijs en wetenschap.",
+        "waarom": "Om bewust keuzes te maken, situaties te begrijpen of ergens aandacht aan te geven.",
+        "hoe": "Door informatie waar te nemen, te verwerken en er doelgericht naar te handelen."
+      },
+      "tags": [
+        "bewust",
+        "bewustzijn",
+        "aandacht",
+        "intentie",
+        "waarneming",
+        "keuze",
+        "begrijpen",
+        "zelfbewustzijn",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "begrijpen",
+            "bewustzijn",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "aandacht",
+            "bewust",
+            "bewustzijn",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "begrijpen",
+            "bewustzijn",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6db9df8",
+          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bewustzijn",
+            "context",
+            "emotie",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "emotie",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:19:24.827411+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T07:31:07.325471+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-170b7af5630e",
+        "extract_at": "2026-07-21T07:31:08.372696+00:00",
+        "extract_context_snippet": "kker zijn dat je niet meer slaapt en je bewust bent van je omgeving. Het is de overgang van rust → bewustz",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'bewust' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:19:22.960135+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:19:23.064036+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:19:23.071661+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:19:25.022175+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:19:25.029857+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-252159b8",
+      "begrip": "goede",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Goede betekent dat iets of iemand als positief, juist, geschikt of van hoge kwaliteit wordt beoordeeld.",
+        "laag2": "Het woord goede is de verbogen vorm van goed. Het wordt gebruikt om een positieve beoordeling te geven over een persoon, voorwerp, handeling of situatie.",
+        "laag3": "Goede is een bijvoeglijk naamwoord dat aangeeft dat iets voldoet aan verwachtingen, normen of wensen. De beoordeling kan gebaseerd zijn op kwaliteit, prestaties, gedrag, bruikbaarheid of persoonlijke voorkeur. Wat als goed wordt gezien, kan verschillen per context.",
+        "laag4": "Binnen Spark wordt goede herkend als een positieve waardering. Spark koppelt deze beoordeling aan de juiste context, zoals kwaliteit, gedrag, prestaties of geschiktheid, zonder automatisch aan te nemen dat de beoordeling objectief waar is.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Dat was een goede beslissing.\"\n\n→ De beslissing wordt positief beoordeeld.\n\nVoorbeeld 2\n\n\"Ze hebben een goede band.\"\n\n→ De relatie wordt als positief ervaren.\n\nVoorbeeld 3\n\n\"Dit is een goede oplossing.\"\n\n→ De oplossing wordt als geschikt of effectief beoordeeld."
+      },
+      "ws5": {
+        "wie": "Iedereen die iets beoordeelt.",
+        "wat": "Een positieve beoordeling van een persoon, object, handeling of situatie.",
+        "wanneer": "Wanneer iets als juist, geschikt of van goede kwaliteit wordt ervaren.",
+        "waar": "In gesprekken, onderwijs, werk en het dagelijks leven.",
+        "waarom": "Om waardering, kwaliteit of geschiktheid uit te drukken.",
+        "hoe": "Door iets te beoordelen op basis van eigenschappen, prestaties, normen of persoonlijke voorkeur."
+      },
+      "tags": [
+        "goede",
+        "goed",
+        "positief",
+        "beoordeling",
+        "kwaliteit",
+        "waardering",
+        "geschiktheid",
+        "eigenschap",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2b90d9cd",
+          "begrip": "compliment",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "eigenschap",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2b54083",
+          "begrip": "speciaal",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "eigenschap",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9698941b",
+          "begrip": "succesvol",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "eigenschap",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b31f7f47",
+          "begrip": "Ik ben blij met je",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:28:48.466743+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:22:49.692907+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5220e94807b2",
+        "extract_at": "2026-07-21T13:22:50.787476+00:00",
+        "extract_context_snippet": "rijke dingen om jezelf en je spullen in goede conditie te houden. Hoe voelde je je tijdens het klussen? W",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'goede' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:28:44.221167+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:28:44.321708+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:28:44.329284+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:28:48.686478+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:28:48.693810+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
   "updated_at": "2026-07-22T08:01:54.033909+00:00",

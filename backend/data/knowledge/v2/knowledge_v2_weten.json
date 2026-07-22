@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2221,
+    "card_count": 2222,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:15:05.021645+00:00",
+    "last_updated": "2026-07-22T15:16:31.700655+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -299310,6 +299310,175 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-22T15:14:58.268830+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-4a8581bb",
+      "begrip": "praktijk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een praktijk is de uitvoering of toepassing van kennis, vaardigheden of werkzaamheden in de werkelijkheid.",
+        "laag2": "Praktijk verwijst naar het daadwerkelijk uitvoeren van handelingen of werkzaamheden. Het woord kan ook een plaats aanduiden waar een beroep wordt uitgeoefend, zoals een huisartsenpraktijk, tandartspraktijk of fysiotherapiepraktijk.",
+        "laag3": "Het begrip praktijk heeft meerdere betekenissen. Het kan verwijzen naar het toepassen van theorie in de dagelijkse werkelijkheid, naar ervaring die wordt opgedaan door te oefenen of werken, of naar een beroepslocatie waar diensten worden verleend. In het onderwijs wordt vaak onderscheid gemaakt tussen theorie en praktijk. In de gezondheidszorg is een praktijk de werkplek van een zorgverlener. De betekenis wordt bepaald door de context.",
+        "laag4": "Binnen Spark wordt praktijk herkend als een contextafhankelijk begrip. Spark kan onderscheid maken tussen de toepassing van kennis, praktische ervaring en een beroepslocatie. Relaties kunnen worden gelegd met onderwerpen zoals:\n\nTheorie\nToepassing\nErvaring\nOefenen\nVaardigheid\nWerk\nBeroep\nWerkplek\nHuisartsenpraktijk\nTandartspraktijk\nFysiotherapiepraktijk\nPsychologenpraktijk\nMedische praktijk\nStage\nOnderwijs\nTraining\nUitvoering\nProfessionele dienstverlening\n\nSpark gebruikt de context om de juiste betekenis van praktijk te bepalen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De theorie klinkt logisch, maar in de praktijk werkt het anders.\"\n\n→ Praktijk betekent hier de toepassing in de werkelijkheid.\n\nVoorbeeld 2\n\n\"De huisarts werkt in een groepspraktijk.\"\n\n→ Praktijk betekent hier de werk- of behandellocatie."
+      },
+      "ws5": {
+        "wie": "Studenten, professionals, zorgverleners, bedrijven en organisaties.",
+        "wat": "De toepassing van kennis of een plaats waar een beroep wordt uitgeoefend.",
+        "wanneer": "Tijdens het uitvoeren van werkzaamheden, het oefenen van vaardigheden of het verlenen van diensten.",
+        "waar": "Op de werkvloer, in een praktijkruimte, zorginstelling, school of andere professionele omgeving.",
+        "waarom": "Om kennis toe te passen, ervaring op te doen of beroepsmatige diensten te verlenen.",
+        "hoe": "Door theorie in de praktijk te brengen of werkzaamheden uit te voeren binnen een professionele omgeving."
+      },
+      "tags": [
+        "praktijk",
+        "theorie",
+        "toepassing",
+        "ervaring",
+        "uitvoeren",
+        "oefenen",
+        "werk",
+        "beroep",
+        "werkplek",
+        "praktijkruimte",
+        "huisartsenpraktijk",
+        "tandartspraktijk",
+        "fysiotherapie",
+        "zorg",
+        "onderwijs",
+        "stage",
+        "training",
+        "vaardigheden",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-be38b110",
+          "begrip": "toepassen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "praktijk",
+            "toepassing",
+            "uitvoeren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5ca722b2",
+          "begrip": "baan",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beroep",
+            "context",
+            "emotie",
+            "neutraal",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81370b03",
+          "begrip": "voelen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:16:31.700638+00:00",
+        "vorige_versie_v1": "kb-skel-4a8581bb",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.397151+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:16:28.382335+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:16:28.390631+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:16:32.047972+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:16:32.056038+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:16:28.281731+00:00"
       },
       "media": {
         "voice_url": null,

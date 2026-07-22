@@ -82,20 +82,26 @@
     }
   ],
   "endpoints": [
+    "GET /boekhouder/auto-mint/state",
     "GET /boekhouder/blueprint",
     "GET /boekhouder/chat-snapshot/{user_id}",
     "GET /boekhouder/closings",
     "GET /boekhouder/history",
+    "GET /boekhouder/logs",
+    "GET /boekhouder/logs/{topic}",
     "GET /boekhouder/potjes/{user_id}",
     "GET /boekhouder/preview",
     "GET /boekhouder/reconcile",
+    "GET /boekhouder/reserve-kluis",
     "GET /boekhouder/snapshot/{user_id}",
     "GET /boekhouder/token/price",
+    "POST /boekhouder/admin/check-auto-mint",
+    "POST /boekhouder/admin/mint",
+    "POST /boekhouder/admin/sync-wallet-mirror",
+    "POST /boekhouder/auto-mint/reset",
+    "POST /boekhouder/auto-mint/tick",
     "POST /boekhouder/close-cycle/{user_id}",
-    "POST /boekhouder/run",
-    "GET /boekhouder/logs",
-    "GET /boekhouder/logs/{topic}",
-    "GET /boekhouder/reserve-kluis"
+    "POST /boekhouder/run"
   ],
   "tags": [
     "dispatcher",
@@ -113,7 +119,7 @@
   "created_at": "2026-05-26T15:54:32.128125+00:00",
   "last_touched": "2026-07-20T15:00:00+00:00",
   "activity_count": 0,
-  "file_count": 17,
+  "file_count": 20,
   "subdir_count": 2,
   "extra": {
     "refactor_history": [

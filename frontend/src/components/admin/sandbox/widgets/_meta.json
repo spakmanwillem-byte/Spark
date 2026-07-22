@@ -1,0 +1,24 @@
+{
+  "_arch_ref": "v10_sandbox_widgets_meta_001",
+  "schema_version": "1.0",
+  "naam": "sandbox/widgets",
+  "doel": "Zelfstandige front-end widget-componenten die in Widget Kladblok geparkeerd staan. Elk widget = 1 file, eigen state + fetch, geen dependency op SandboxPage. Verplaatsen = 1 regel import elders + regel weghalen uit registry.js.",
+  "container_type": "dir",
+  "status": "active",
+  "owner": "spark-system",
+  "blueprint_ref": null,
+  "footnote": {
+    "generated_by": "e1 sessie 47 (2026-07-22)",
+    "generated_at": "2026-07-22T15:22:00+00:00",
+    "spark_note": "Widget-conventie: exporteer als named export (bv. LlmTokenUsageWidget). Container-first design: als je een widget verplaatst naar bv. AnalyticsPage, kopiëer je alleen de import-regel — geen inline JSX opknippen.",
+    "has_blueprint": false,
+    "has_endpoints": false,
+    "requires_review": false
+  },
+  "split_from": null,
+  "children_max": null,
+  "endpoints": [],
+  "tags": ["frontend", "widget", "sandbox", "kladblok", "react-component", "container-first"],
+  "encryption": { "at_rest": false, "in_transit": true },
+  "children": ["LlmTokenUsageWidget.js"]
+}

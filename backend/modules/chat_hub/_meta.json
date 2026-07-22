@@ -9,11 +9,11 @@
     "requires_review": false
   },
   "endpoints": [
-    "GET /api/chat_hub/manifest",
-    "GET /api/chat_hub/health",
-    "GET /api/chat_hub/agents",
-    "GET /api/chat_hub/blueprint/{agent_name}",
-    "POST /api/chat_hub/dispatch"
+    "GET /chat_hub/agents",
+    "GET /chat_hub/blueprint/{agent_name}",
+    "GET /chat_hub/health",
+    "GET /chat_hub/manifest",
+    "POST /chat_hub/dispatch"
   ],
   "sub_agents": [
     "papertrail_agent.py",
@@ -22,5 +22,20 @@
     "heal_agent.py"
   ],
   "last_touched": "2026-07-21T14:00:00+00:00",
-  "architectural_pattern": "master/leaf with Pydantic AgentContract, structure_manifest.json as declarative truth"
+  "architectural_pattern": "master/leaf with Pydantic AgentContract, structure_manifest.json as declarative truth",
+  "blueprint_ref": null,
+  "tags": [],
+  "owner": "spark-system",
+  "split_from": null,
+  "container_type": "dir",
+  "file_count": 17,
+  "subdir_count": 3,
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
+  "encryption": {
+    "enabled": false,
+    "algorithm": null,
+    "key_id": null,
+    "key_holder": null
+  }
 }

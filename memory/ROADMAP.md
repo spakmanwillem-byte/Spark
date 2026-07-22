@@ -49,6 +49,13 @@ Niet nu bouwen — eerst gebruiken, dan patroon herkennen. Op roadmap voor als W
 
 Willem's terechte vraag: _"begrijpt spark zijn roadmap en leest hij die nog goed uit nu we llm gebruiken?"_ — antwoord: JA nu, hij ziet sessie 47 werk direct.
 
+### 🟡 Nog te doen — Synapse subdir-scan (ontdekt sessie 47)
+Bij het rondkijken naar missing `_meta.json` files bleek: Synapse-scanner (`backend/modules/synapse/`) leest alleen **top-level modules** (`backend/modules/*`, `frontend/src/components/*`). Subdirs met eigen `_meta.json` (bv. `chat_hub/agents/`, `sandbox/widgets/`) verschijnen NIET in Synapslaag UI ook al zijn ze correct gedocumenteerd.
+
+**Impact**: geen bug, alleen inzicht-gap. Bestanden zijn zelf-documenterend voor wie ze opent, maar Willem ziet ze niet in de UI-lijst.
+
+**Fix voor later**: scanner recursief maken (max diepte 3) om `**/subdir/_meta.json` op te pikken. In `synapse/service.py`. ~15 min werk.
+
 
 ### 🔄 Prod → Preview merge (13:33 UTC)
 Willem deployde en vulde KB verder in in productie. Zip-backup (908 files sinds deploy-marker) ge-imported:

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2211,
+    "card_count": 2213,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T13:33:04.525747+00:00",
+    "last_updated": "2026-07-22T13:40:09.105046+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -297549,6 +297549,334 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d451d9cd",
+      "begrip": "Spion",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een spion is iemand die in het geheim informatie verzamelt.",
+        "laag2": "Een spion is iemand die in het geheim informatie verzamelt.",
+        "laag3": "Een spion verzamelt geheime informatie over vijanden, plannen of activiteiten. Dit gebeurt meestal zonder dat anderen weten dat de persoon informatie doorgeeft.",
+        "laag4": "Een spion is een persoon die bewust geheime informatie verzamelt, analyseert of doorgeeft namens een organisatie, overheid of groep. Spionage wordt gebruikt voor militaire, politieke, economische of strategische doeleinden."
+      },
+      "ws5": {
+        "wie": "Geheime agenten of informanten",
+        "wat": "Een persoon die in het geheim informatie verzamelt",
+        "wanneer": "Tijdens conflicten, oorlog of politieke spanningen",
+        "waar": "Bij vijanden, organisaties of andere landen",
+        "waarom": "Om belangrijke informatie te verkrijgen",
+        "hoe": "Door observatie, infiltratie en geheime communicatie 🕵️‍♂️"
+      },
+      "tags": [
+        "spion",
+        "spionage",
+        "geheim",
+        "informatie",
+        "inlichtingen",
+        "observatie",
+        "infiltratie",
+        "geheime dienst",
+        "agent",
+        "informant",
+        "onderzoek",
+        "surveillance",
+        "rol",
+        "persoon",
+        "veiligheid",
+        "weten",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "rol",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-28db863b",
+          "begrip": "Spionage",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "geheim",
+            "informatie",
+            "inlichtingen",
+            "observatie",
+            "spion"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-107749df",
+          "begrip": "bewijs",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "observatie",
+            "onderzoek",
+            "weten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-da0b170e",
+          "begrip": "zoeken",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "onderzoek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-12809d56",
+          "begrip": "waarneming",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T09:16:27.274016+00:00",
+        "vorige_versie_v1": "3f9c56b4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:30.761544+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T09:16:24.267208+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T09:16:24.287073+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T09:16:28.120759+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T09:16:28.165112+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T09:16:23.768509+00:00",
+        "moved_from": "voelen",
+        "moved_to": "weten",
+        "moved_at": "2026-07-22T13:40:08.344545+00:00",
+        "moved_reason": "bug-fix Willem: Spion — inlichtingen/informatie hoort bij weten"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-64304822",
+      "begrip": "aluminium",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aluminium is een licht, sterk en goed vervormbaar metaal dat veel wordt gebruikt in bouw, techniek en productie.",
+        "laag2": "Aluminium is een materiaal dat stevig is, weinig weegt en makkelijk te bewerken is.",
+        "laag3": "Door de combinatie van lichtheid, sterkte en bestendigheid is aluminium breed toepasbaar.\nHet wordt gebruikt waar duurzaamheid, vormbaarheid en bescherming belangrijk zijn.",
+        "laag4": "Binnen Spark staat aluminium voor een balans tussen kracht en flexibiliteit.\nHet laat zien hoe een structuur stevig kan zijn zonder zwaar of star te worden.\nAluminium vertegenwoordigt adaptieve stevigheid: draagkracht met beweeglijkheid."
+      },
+      "ws5": {
+        "wie": "mensen, industrie, techniek, systemen",
+        "wat": "een licht metaal",
+        "wanneer": "bij bouw, productie, verwerking",
+        "waar": "in constructie, techniek, gebruiksvoorwerpen",
+        "waarom": "voor sterkte en lichtheid",
+        "hoe": "door vorming en verwerking"
+      },
+      "tags": [
+        "aluminium",
+        "metaal",
+        "scheikunde",
+        "stof",
+        "licht",
+        "sterk",
+        "buigbaar",
+        "vorm",
+        "bescherming",
+        "bouw",
+        "techniek",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc9f9d35",
+          "begrip": "gebouw",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bescherming",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-785e26b2",
+          "begrip": "Glas",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bescherming",
+            "bouw",
+            "licht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7f9cf141",
+          "begrip": "bouw",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b03c8649",
+          "begrip": "Handwapens",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bescherming",
+            "neutraal",
+            "techniek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:52:24.123218+00:00",
+        "vorige_versie_v1": "kb-skel-64304822",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:04.152354+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:52:22.610637+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:52:22.688701+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:52:26.301544+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:52:26.309552+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:52:21.238066+00:00",
+        "moved_from": "doen",
+        "moved_to": "weten",
+        "moved_at": "2026-07-22T13:40:08.994087+00:00",
+        "moved_reason": "bug-fix Willem: Aluminium — stof/materiaal hoort bij weten"
       },
       "media": {
         "voice_url": null,

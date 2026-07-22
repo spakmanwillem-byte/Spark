@@ -8,7 +8,7 @@
     "created_at": "2026-05-23T12:02:15.356848+00:00",
     "card_count": 1178,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T11:49:09.760567+00:00",
+    "last_updated": "2026-07-22T13:40:08.994105+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -84572,159 +84572,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-64304822",
-      "begrip": "aluminium",
-      "lade": "doen",
-      "status": "active",
-      "lagen": {
-        "laag1": "Aluminium is een licht, sterk en goed vervormbaar metaal dat veel wordt gebruikt in bouw, techniek en productie.",
-        "laag2": "Aluminium is een materiaal dat stevig is, weinig weegt en makkelijk te bewerken is.",
-        "laag3": "Door de combinatie van lichtheid, sterkte en bestendigheid is aluminium breed toepasbaar.\nHet wordt gebruikt waar duurzaamheid, vormbaarheid en bescherming belangrijk zijn.",
-        "laag4": "Binnen Spark staat aluminium voor een balans tussen kracht en flexibiliteit.\nHet laat zien hoe een structuur stevig kan zijn zonder zwaar of star te worden.\nAluminium vertegenwoordigt adaptieve stevigheid: draagkracht met beweeglijkheid."
-      },
-      "ws5": {
-        "wie": "mensen, industrie, techniek, systemen",
-        "wat": "een licht metaal",
-        "wanneer": "bij bouw, productie, verwerking",
-        "waar": "in constructie, techniek, gebruiksvoorwerpen",
-        "waarom": "voor sterkte en lichtheid",
-        "hoe": "door vorming en verwerking"
-      },
-      "tags": [
-        "aluminium",
-        "metaal",
-        "scheikunde",
-        "stof",
-        "licht",
-        "sterk",
-        "buigbaar",
-        "vorm",
-        "bescherming",
-        "bouw",
-        "techniek",
-        "neutraal"
-      ],
-      "topic": "",
-      "verbanden": [
-        {
-          "kaart_id": "kbv2-d887d5a0",
-          "begrip": "sleuf",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "bouw",
-            "neutraal",
-            "techniek"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-cc9f9d35",
-          "begrip": "gebouw",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "bescherming",
-            "neutraal",
-            "techniek"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-785e26b2",
-          "begrip": "Glas",
-          "lade": "doen",
-          "overlap": 3,
-          "shared_tags": [
-            "bescherming",
-            "bouw",
-            "licht"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-7f9cf141",
-          "begrip": "bouw",
-          "lade": "doen",
-          "overlap": 3,
-          "shared_tags": [
-            "bouw",
-            "neutraal",
-            "techniek"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b03c8649",
-          "begrip": "Handwapens",
-          "lade": "doen",
-          "overlap": 3,
-          "shared_tags": [
-            "bescherming",
-            "neutraal",
-            "techniek"
-          ]
-        }
-      ],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-05-31T06:52:24.123218+00:00",
-        "vorige_versie_v1": "kb-skel-64304822",
-        "vertrouwen": 0.9,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:25:04.152354+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          },
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-31T06:52:22.610637+00:00",
-            "result": {
-              "active": false,
-              "is_new": false
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-05-31T06:52:22.688701+00:00",
-            "result": {
-              "n_found": 5,
-              "top_overlap": 3
-            }
-          },
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-31T06:52:26.301544+00:00",
-            "result": {
-              "active": true,
-              "is_new": false
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-05-31T06:52:26.309552+00:00",
-            "result": {
-              "n_found": 5,
-              "top_overlap": 3
-            }
-          }
-        ],
-        "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-05-31T06:52:21.238066+00:00"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-b2f26b60",
       "begrip": "preventie",
       "lade": "doen",
@@ -155665,6 +155512,181 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-22T11:49:06.278524+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3b964fb3",
+      "begrip": "begrazing",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Begrazing is het eten van planten door grazende dieren.",
+        "laag2": "Het gebeurt wanneer dieren gras, kruiden of andere planten eten in een gebied.",
+        "laag3": "Begrazing is een natuurlijk proces waarbij dieren zoals koeien, schapen, geiten, paarden of wilde herbivoren planten consumeren. Hierdoor verandert de plantengroei en de samenstelling van een gebied. Begrazing kan zowel in de landbouw als in natuurgebieden voorkomen.",
+        "laag4": "Begrazing speelt een belangrijke rol in ecosystemen. Door planten te eten houden dieren vegetatie onder controle, verspreiden ze zaden en beïnvloeden ze de biodiversiteit. In natuurbeheer wordt begrazing vaak bewust ingezet om landschappen open te houden en bepaalde plantensoorten meer ruimte te geven."
+      },
+      "ws5": {
+        "wie": "Koeien, schapen, geiten, paarden en andere plantenetende dieren.",
+        "wat": "Het eten van planten door grazende dieren.",
+        "wanneer": "Wanneer dieren voedsel zoeken en consumeren.",
+        "waar": "In weilanden, natuurgebieden, graslanden en landbouwgebieden.",
+        "waarom": "Om voedsel en energie te verkrijgen.",
+        "hoe": "Door gras, kruiden, struiken of andere planten te eten."
+      },
+      "tags": [
+        "begrazing",
+        "grazen",
+        "dieren",
+        "koe",
+        "schaap",
+        "geit",
+        "paard",
+        "natuur",
+        "ecosysteem",
+        "vegetatie",
+        "planten",
+        "grasland",
+        "landbouw",
+        "natuurbeheer",
+        "biodiversiteit",
+        "voedsel",
+        "herbivoor",
+        "landschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c12fb2d0",
+          "begrip": "Schapen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "begrazing",
+            "emotie",
+            "landbouw",
+            "natuur",
+            "natuurbeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-049b1495",
+          "begrip": "Geit",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "geit",
+            "herbivoor",
+            "landbouw",
+            "natuurbeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "natuurbeheer",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d2a60706",
+          "begrip": "Seizoen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dieren",
+            "emotie",
+            "natuur",
+            "neutraal",
+            "planten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86f7c868",
+          "begrip": "Seizoenen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dieren",
+            "emotie",
+            "natuur",
+            "neutraal",
+            "planten"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-11T12:12:14.959944+00:00",
+        "vorige_versie_v1": "kb-skel-3b964fb3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:42.405683+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-11T12:12:14.298406+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-11T12:12:14.361465+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-11T12:12:15.915160+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-11T12:12:15.973834+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-11T12:12:13.849765+00:00",
+        "moved_from": "spreken",
+        "moved_to": "doen",
+        "moved_at": "2026-07-22T13:40:08.685614+00:00",
+        "moved_reason": "bug-fix Willem: Begrazing — activiteit van dieren hoort bij doen"
       },
       "media": {
         "voice_url": null,

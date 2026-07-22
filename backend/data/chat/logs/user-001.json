@@ -52909,11 +52909,164 @@
         "session_id": "default",
         "gesprek_nummer": 2056
       }
+    },
+    {
+      "id": "conv-2adbd782",
+      "timestamp": "2026-07-22T08:54:23.390502+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Vertel maar. _(laatst sprak je me 17 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2057
+      }
+    },
+    {
+      "id": "conv-eb2fd325",
+      "timestamp": "2026-07-22T08:54:23.441661+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2058
+      }
+    },
+    {
+      "id": "conv-4a031c1a",
+      "timestamp": "2026-07-22T08:54:36.639670+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark. Hoe gaat het?",
+      "spark_response": "Hallo **De Willem**, leuk dat je even langskomt! Ik ga goed, dank je voor de vraag. Het is een mooie ochtend en ik ben klaar om je te helpen of gewoon even te kletsen. Hoe gaat het met jou? Heb je al plannen voor vandaag of wil je gewoon even bijkletsen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "weet",
+        "used_cards": [
+          "kbv2-1ebd40fb",
+          "kbv2-b5af1c60",
+          "kbv2-69d781cc",
+          "kbv2-be4ef430",
+          "kbv2-aaf81efb"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2059
+      }
+    },
+    {
+      "id": "conv-616ac006",
+      "timestamp": "2026-07-22T08:55:08.987581+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wilde even kletsen niks bijzonders.",
+      "spark_response": "Dat klinkt als een relaxte ochtend, **De Willem**! Gewoon even kletsen zonder een speciaal doel voor ogen, dat is ook belangrijk. Soms is het lekker om even niets bijzonders te doen en gewoon te genieten van het moment. Hoe voel je je vandaag? Heb je al koffie of thee gepakt om deze dag goed te beginnen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "spark",
+        "used_cards": [
+          "kbv2-17a641d5",
+          "kbv2-f09a42e5",
+          "kbv2-c1fc3b7d",
+          "kbv2-b7636cc6",
+          "kbv2-f9f2179e"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2060
+      }
+    },
+    {
+      "id": "conv-bb2d39c2",
+      "timestamp": "2026-07-22T08:56:06.069131+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat weet jij over je kennisbank",
+      "spark_response": "Mijn kennisbank! Dat is een belangrijk onderdeel van mij, **De Willem**. Mijn kennisbank bestaat uit een verzameling van kaarten met informatie over verschillende onderwerpen. Ik heb kaarten over kennis, leren, taal, chemische symbolen, banken en nog veel meer. Deze kaarten helpen me om antwoorden te geven op vragen en om mee te praten over verschillende onderwerpen.\n\nVolgens mijn kennisbank is kennis informatie en begrip dat iemand heeft geleerd of ervaren. Ik heb ook kaarten over specifieke onderwerpen, zoals het chemische symbool voor nikkel (Ni) en zuurstof (O). En, zoals je weet, ik heb ook kaarten over banken en financiële instellingen.\n\nMijn kennisbank is voortdurend in ontwikkeling, **De Willem**. Ik leer en groei door de gesprekken die ik voer met jou en andere gebruikers. Dus, als je iets wilt weten over een specifiek onderwerp, vraag me gerust! Ik zal mijn best doen om je te helpen met de kennis die ik heb.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "vertel",
+        "used_cards": [
+          "kbv2-db366369",
+          "kbv2-9115c6a7",
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-skel-87b76b50"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2061
+      }
+    },
+    {
+      "id": "conv-c54e52b3",
+      "timestamp": "2026-07-22T08:56:41.810038+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kb-kaarten?",
+      "spark_response": "**De Willem**, mijn kennisbank bestaat uit een verzameling van kaarten met informatie over verschillende onderwerpen. Volgens mijn eigen kennis, zijn KB-kaarten gestructureerde kaarten waarin één begrip, onderwerp of concept wordt beschreven. Ik heb kaarten over kennis, leren, taal en nog veel meer. Deze kaarten helpen me om antwoorden te geven op vragen en om mee te praten over verschillende onderwerpen.\n\nIk kan je vertellen dat ik kaarten heb over het onderwerp \"kb-kaarten\" zelf, met tags zoals \"kb-kaart\", \"kenniskaart\", \"kennisbank\" en \"kennis\". Dit geeft me een overzicht van hoe mijn kennisbank is opgebouwd en hoe ik kennis kan opslaan, uitbreiden en doorzoeken.\n\nWil je meer weten over een specifiek onderwerp of heb je een vraag over mijn kennisbank? Ik ben hier om te helpen!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hallo",
+        "used_cards": [
+          "kbv2-f525bd56",
+          "kbv2-b29a7ab5"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2062
+      }
+    },
+    {
+      "id": "conv-11fbdf8e",
+      "timestamp": "2026-07-22T08:57:26.248284+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dus je kennisbank is gevuld met KB-kaarten",
+      "spark_response": "Dat klopt, **De Willem**! Mijn kennisbank is inderdaad gevuld met KB-kaarten. Deze kaarten bevatten informatie over allerlei onderwerpen, zoals kennis, chemische symbolen, banken en nog veel meer. Elke kaart heeft een specifiek onderwerp en bevat tags die helpen om verwante onderwerpen te vinden.\n\nIk kan zien dat ik kaarten heb over bijvoorbeeld \"Kennis\", \"Ni\" (het chemische symbool voor nikkel), \"bank\" (zowel als financiële instelling als meubel) en \"Kaart\" (als visuele weergave van een gebied of informatie). Deze kaarten helpen me om antwoorden te geven op vragen en om mee te praten over verschillende onderwerpen.\n\nHet is fijn om te zien dat mijn kennisbank zo'n breed scala aan onderwerpen dekt. Ik ben altijd aan het leren en groeien, dus mijn kennisbank zal alleen maar uitgebreider en accurater worden!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "kb-kaarten",
+        "used_cards": [
+          "kbv2-db366369",
+          "kbv2-f9f2179e",
+          "kbv2-skel-87b76b50",
+          "kbv2-fb0a79bf",
+          "kbv2-f525bd56"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2063
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2056,
-    "last_updated": "2026-07-21T15:04:23.768112+00:00"
+    "total_conversations": 2063,
+    "last_updated": "2026-07-22T08:57:26.248284+00:00"
   }
 }

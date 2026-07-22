@@ -349,7 +349,7 @@
     "_action_options": ["skip", "lower_confidence", "log_only"],
     "_action_note": "log_only voor eerste week zodat we effect meten voordat we live gaan. Daarna: skip. lower_confidence is midden-optie (halveert confidence).",
     "_hook_locatie": "strategy_decision.py: na BUY-signaal, voor executie",
-    "_verantwoording_papertrail": "Elke anker-check logt naar data/trade/shadow_events/{yyyy-mm-dd}.jsonl (matcht bestaand shadow-patroon uit chat/shadow_observer)"
+    "_verantwoording_papertrail": "Elke anker-check gaat via LogAgent → data/boekhouder/logs/anker_check/{YYYY-MM}.jsonl (hash-chained). Lookup via LogAgent().lookup(topic='anker_check')."
   },
   "spark_awareness": {
     "spark_kan_uitleggen": [

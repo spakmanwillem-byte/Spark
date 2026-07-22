@@ -969,54 +969,50 @@ async def bootstrap_anker_endpoint(market: str, user_id: str = Query("user-001")
 
 
 @router.get("/anker/shadow/events")
-async def get_anker_shadow_events(days: int = Query(7, ge=1, le=90), market: Optional[str] = None):
+async def get_anker_shadow_events(days: int = Query(7, ge=1, le=90), market: Optional[str] = None,
+                                   limit: int = Query(500, ge=1, le=5000)):
     """
-    Read anker-shadow log (data/trade/shadow_events/*.jsonl).
+    Read anker-events via `LogAgent` (topic="anker_check").
+    Bestaande papertrail-conventie: `data/boekhouder/logs/anker_check/{YYYY-MM}.jsonl`,
+    hash-chained, doorzoekbaar via `LogAgent().lookup()`.
+
     Query params:
       - days: aantal dagen terugkijken (1-90, default 7)
       - market: filter op market (optioneel)
-    Retourneert events + aggregate stats (skips, above_threshold count, avg delta).
+      - limit: max events (default 500, max 5000)
+
+    Retourneert events + aggregate stats.
     """
-    from pathlib import Path as _P
     from datetime import datetime as _dt, timedelta as _td, timezone as _tz
-    log_dir = _P(__file__).parent.parent.parent / "data" / "trade" / "shadow_events"
-    if not log_dir.exists():
-        return {"success": True, "events": [], "stats": {"total": 0}, "note": "geen shadow_events dir (nog geen anker-log)"}
+    from modules.boekhouder.agents.log_agent import LogAgent
 
     cutoff = _dt.now(_tz.utc) - _td(days=days)
+    raw = LogAgent().lookup(topic="anker_check", limit=limit)
+
     events = []
-    for fp in sorted(log_dir.glob("*.jsonl")):
+    for ev in raw:
+        # Time filter
         try:
-            for line in fp.read_text().splitlines():
-                if not line.strip():
-                    continue
-                try:
-                    ev = json.loads(line)
-                except Exception:
-                    continue
-                if market and ev.get("market") != market:
-                    continue
-                ts = ev.get("ts") or ""
-                try:
-                    ev_dt = _dt.fromisoformat(ts.replace("Z", "+00:00"))
-                    if ev_dt < cutoff:
-                        continue
-                except Exception:
-                    pass
-                events.append(ev)
+            ev_dt = _dt.fromisoformat(ev.get("timestamp", "").replace("Z", "+00:00"))
+            if ev_dt < cutoff:
+                continue
         except Exception:
+            pass
+        # Market filter
+        if market and ev.get("data", {}).get("market") != market:
             continue
+        events.append(ev)
 
     # Aggregate
     stats = {
         "total": len(events),
-        "would_skip_count": sum(1 for e in events if not e.get("allow")),
-        "above_threshold_count": sum(1 for e in events if e.get("above_threshold")),
-        "allow_count": sum(1 for e in events if e.get("allow")),
-        "markets": sorted({e.get("market") for e in events if e.get("market")}),
-        "avg_delta_pct": (sum(float(e.get("delta_pct") or 0) for e in events) / len(events)) if events else 0.0,
+        "would_skip_count": sum(1 for e in events if not e.get("data", {}).get("allow")),
+        "above_threshold_count": sum(1 for e in events if e.get("data", {}).get("above_threshold")),
+        "allow_count": sum(1 for e in events if e.get("data", {}).get("allow")),
+        "markets": sorted({e.get("data", {}).get("market") for e in events if e.get("data", {}).get("market")}),
+        "avg_delta_pct": (sum(float(e.get("data", {}).get("delta_pct") or 0) for e in events) / len(events)) if events else 0.0,
     }
-    return {"success": True, "days": days, "market_filter": market, "stats": stats, "events": events[-500:]}
+    return {"success": True, "days": days, "market_filter": market, "stats": stats, "events": events}
 
 
 # v5_hot_market_swap_001 — markets hot-aanpassen tijdens running zonder bot te stoppen

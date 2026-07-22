@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2163,
+    "card_count": 2167,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:41:50.396392+00:00",
+    "last_updated": "2026-07-22T09:02:39.238668+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -289604,6 +289604,649 @@
             "result": {
               "n_found": 5,
               "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-56d7cde7",
+      "begrip": "banden",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Banden is het meervoud van band.",
+        "laag2": "Het woord banden verwijst naar meerdere banden. Afhankelijk van de context kan het gaan om relaties tussen mensen, autobanden of andere vormen van verbinding.",
+        "laag3": "Banden is de meervoudsvorm van het zelfstandig naamwoord band. Het kan verwijzen naar meerdere sociale relaties, voertuigbanden, transportbanden of andere objecten die met het woord band worden aangeduid. De juiste betekenis wordt bepaald door de context.",
+        "laag4": "Binnen Spark wordt banden automatisch gekoppeld aan het begrip band. Spark gebruikt de context om te bepalen of het gaat om sociale banden, voertuigbanden, technische onderdelen of andere vormen van verbinding.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De banden van de auto moeten worden vervangen.\"\n\n→ Er worden meerdere autobanden bedoeld.\n\nVoorbeeld 2\n\n\"Familiebanden zijn belangrijk.\"\n\n→ Er worden relaties tussen familieleden bedoeld."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, voertuigen en systemen.",
+        "wat": "De meervoudsvorm van band, waarmee meerdere banden of verbindingen worden aangeduid.",
+        "wanneer": "Wanneer naar meer dan één band wordt verwezen.",
+        "waar": "In gesprekken, techniek, verkeer, sociale relaties en het dagelijks leven.",
+        "waarom": "Om meerdere banden of verbindingen aan te duiden.",
+        "hoe": "Door de meervoudsvorm banden te gebruiken."
+      },
+      "tags": [
+        "banden",
+        "band",
+        "meervoud",
+        "verbinding",
+        "relatie",
+        "autoband",
+        "familieband",
+        "transportband",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f802f9fa",
+          "begrip": "bands",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "autoband",
+            "band",
+            "context",
+            "emotie",
+            "meervoud"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-edef827c",
+          "begrip": "band",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "autoband",
+            "band",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:48:21.267373+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:56.906371+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-4c3b968256c0",
+        "extract_at": "2026-07-20T14:44:57.011276+00:00",
+        "extract_context_snippet": "ktvolatiliteit: veel beweging → bredere banden, weinig beweging → smallere banden. Traders gebruiken ze on",
+        "extract_count_in_spark": 3,
+        "extract_note": "Spark noemde 'banden' 3× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:48:18.065595+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:48:18.164958+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:48:18.172771+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:48:21.619301+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:48:21.626909+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b29a7ab5",
+      "begrip": "kb-kaarten",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een KB-kaart (kennisbankkaart) is een gestructureerde kaart waarin één begrip, onderwerp of concept wordt beschreven.",
+        "laag2": "Een KB-kaart bevat informatie over één onderwerp, opgebouwd uit meerdere kennislagen. Hierdoor kan kennis overzichtelijk worden opgeslagen, uitgebreid en doorzocht.",
+        "laag3": "Een KB-kaart is een gestandaardiseerde eenheid van kennis waarin een begrip systematisch wordt vastgelegd. Elke kaart bevat een definitie, uitleg, context, voorbeelden, de 5W + H en tags. Door alle kennis op dezelfde manier te structureren ontstaat een consistente en onderling verbonden kennisbank die eenvoudig kan worden doorzocht en uitgebreid.",
+        "laag4": "Binnen Spark vormt de KB-kaart de kleinste zelfstandige kennis-eenheid. Iedere kaart beschrijft één begrip, eigenschap, handeling, emotie of context. KB-kaarten zijn onderling verbonden via relaties, categorieën en tags, waardoor Spark betekenis kan afleiden, verbanden kan leggen en kennis kan hergebruiken. Samen vormen alle KB-kaarten de centrale kennisbank van Spark.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Voor het begrip boom wordt een KB-kaart aangemaakt.\"\n\n→ Alle relevante kennis over boom wordt op één kaart vastgelegd.\n\nVoorbeeld 2\n\n\"Spark gebruikt KB-kaarten om vragen te beantwoorden.\"\n\n→ Spark zoekt de juiste kenniskaart en gebruikt de opgeslagen informatie als basis voor een antwoord."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders en Spark.",
+        "wat": "Een gestructureerde kenniskaart waarin één begrip of onderwerp wordt vastgelegd.",
+        "wanneer": "Wanneer nieuwe kennis wordt toegevoegd, aangepast of geraadpleegd.",
+        "waar": "Binnen de kennisbank van Spark.",
+        "waarom": "Om kennis overzichtelijk, herbruikbaar, uitbreidbaar en met elkaar verbonden op te slaan.",
+        "hoe": "Door informatie volgens een vaste structuur op te slaan, inclusief lagen, voorbeelden, 5W + H, tags en relaties."
+      },
+      "tags": [
+        "kb-kaart",
+        "kenniskaart",
+        "kennisbank",
+        "kennis",
+        "begrip",
+        "concept",
+        "spark",
+        "structuur",
+        "relaties",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0a96599b",
+          "begrip": "kenniskaarten",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kennisbank",
+            "kenniskaart",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b7cb703",
+          "begrip": "zo dat waren weer paar kenniskaarten",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kennis",
+            "kenniskaart",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c1ee5231",
+          "begrip": "kenniskaart",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "kennis",
+            "kenniskaart",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d06bd250",
+          "begrip": "concept",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "concept",
+            "context",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2474f9c1",
+          "begrip": "Wat houdt Spark in?",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "context",
+            "emotie",
+            "kennis",
+            "relaties"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:50:26.584628+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-22T08:50:23.274644+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:50:23.532081+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:50:23.633320+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:50:23.641182+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:50:26.934236+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:50:26.941916+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f89a64f9",
+      "begrip": "zowel",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Zowel betekent dat twee of meer personen, zaken of eigenschappen samen worden bedoeld.",
+        "laag2": "Het woord zowel wordt gebruikt om aan te geven dat meerdere onderdelen tegelijk van toepassing zijn. Meestal komt het voor in de combinatie zowel ... als ....",
+        "laag3": "Zowel is een voegwoord dat twee of meer gelijkwaardige elementen met elkaar verbindt. Het geeft aan dat alle genoemde onderdelen gelden of worden meegenomen. Het wordt vaak gebruikt om personen, voorwerpen, eigenschappen, handelingen of situaties gezamenlijk te benoemen.",
+        "laag4": "Binnen Spark wordt zowel herkend als een logische verbindingsoperator. Het geeft aan dat meerdere voorwaarden, eigenschappen of begrippen tegelijkertijd van toepassing zijn. Hierdoor kan Spark informatie combineren en relaties leggen tussen verschillende onderdelen van een vraag of uitspraak.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zowel kinderen als volwassenen kunnen deelnemen.\"\n\n→ Beide groepen kunnen deelnemen.\n\nVoorbeeld 2\n\n\"Spark ondersteunt zowel tekst als spraak.\"\n\n→ Beide invoervormen worden ondersteund."
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een voegwoord dat aangeeft dat meerdere onderdelen gezamenlijk van toepassing zijn.",
+        "wanneer": "Wanneer twee of meer gelijkwaardige elementen samen worden genoemd.",
+        "waar": "In gesprekken, teksten, instructies en het dagelijks taalgebruik.",
+        "waarom": "Om meerdere personen, zaken of eigenschappen tegelijk aan te duiden.",
+        "hoe": "Door zowel te combineren met als om de genoemde onderdelen met elkaar te verbinden."
+      },
+      "tags": [
+        "zowel",
+        "voegwoord",
+        "verbinding",
+        "combinatie",
+        "taal",
+        "grammatica",
+        "gelijkwaardigheid",
+        "logica",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1fe4e144",
+          "begrip": "verteld",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:51:55.578423+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:24.018799+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-2168a4847c6f",
+        "extract_at": "2026-07-20T14:46:24.123455+00:00",
+        "extract_context_snippet": "ls zzp‑er en je bent gepassioneerd door zowel katten als techniek.  - Op zondag 17 mei heb je een activit",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'zowel' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:51:52.659749+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:51:52.760673+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:51:52.768261+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:51:55.928743+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:51:55.936498+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-16448260",
+      "begrip": "waarin",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Waarin betekent in wat of in welke, en verwijst naar iets waarbinnen iets zich bevindt of gebeurt.",
+        "laag2": "Het woord waarin is een betrekkelijk of vragend voornaamwoord dat wordt gebruikt om te verwijzen naar een plaats, situatie, document, object of context waarin iets zich bevindt of plaatsvindt.\n",
+        "laag3": "Waarin is een samengesteld verwijswoord, gevormd uit waar en in. Het verbindt een zin met een eerder genoemd zelfstandig naamwoord of introduceert een vraag. Het wordt gebruikt om aan te geven binnen welk object, welke situatie of welke context iets gebeurt of aanwezig is.\n",
+        "laag4": "Binnen Spark wordt waarin herkend als een verwijswoord dat een relatie legt tussen een begrip en de context waarin het voorkomt. Hierdoor kan Spark bepalen op welk object, document, proces of situatie een uitspraak betrekking heeft en verbanden tussen kennis correct interpreteren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Dit is de map waarin de bestanden staan.\"\n\n→ Waarin verwijst naar de map.\n\nVoorbeeld 2\n\n\"Kun je uitleggen waarin het verschil zit?\"\n\n→ Er wordt gevraagd binnen welk aspect het verschil zich bevindt."
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een verwijswoord dat aangeeft binnen welk object, welke situatie of context iets gebeurt.",
+        "wanneer": "Wanneer wordt verwezen naar een plaats, situatie of context.",
+        "waar": "In gesprekken, teksten, documenten en het dagelijks taalgebruik.",
+        "waarom": "Om een relatie te leggen tussen een begrip en de context waarin iets zich bevindt of gebeurt.",
+        "hoe": "Door waarin te gebruiken als verwijzing naar iets dat eerder is genoemd of waarnaar wordt gevraagd."
+      },
+      "tags": [
+        "waarin",
+        "verwijswoord",
+        "betrekkelijk voornaamwoord",
+        "vragend voornaamwoord",
+        "taal",
+        "grammatica",
+        "verwijzing",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1fe4e144",
+          "begrip": "verteld",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:02:39.238650+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:56:46.109471+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-606a7d814ab2",
+        "extract_at": "2026-07-22T08:56:46.213403+00:00",
+        "extract_context_snippet": "zijn KB-kaarten gestructureerde kaarten waarin één begrip, onderwerp of concept wordt beschreven. Ik heb k",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'waarin' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:02:36.636639+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:02:36.738270+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:02:36.745697+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:02:39.596842+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:02:39.604462+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

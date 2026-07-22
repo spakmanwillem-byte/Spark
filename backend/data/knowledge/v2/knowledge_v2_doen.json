@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1158,
+    "card_count": 1160,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:47:15.004244+00:00",
+    "last_updated": "2026-07-22T09:04:33.554487+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -152453,6 +152453,329 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-22T08:47:15.268587+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f1b641f0",
+      "begrip": "uitspreekt",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Uitspreekt betekent dat iemand woorden, gedachten of gevoelens hardop zegt.",
+        "laag2": "Het woord uitspreekt is de tegenwoordige tijd van het werkwoord uitspreken. Het beschrijft de handeling waarbij iemand iets mondeling verwoordt of de uitspraak van woorden maakt.",
+        "laag3": "Uitspreekt verwijst naar het mondeling uiten van woorden, meningen, gevoelens, beloften, oordelen of andere informatie. Daarnaast kan het ook betekenen dat iemand de uitspraak van een woord of zin hardop weergeeft. De precieze betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark beschrijft uitspreekt een handeling waarbij tekst wordt omgezet in gesproken taal of waarbij een gebruiker mondeling informatie uit. Spark kan deze uitingen verwerken, analyseren of via spraaksynthese hardop weergeven.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zij spreekt haar mening uit.\"\n\n→ De persoon verwoordt haar mening.\n\nVoorbeeld 2\n\n\"Spark spreekt het antwoord uit.\"\n\n→ Spark zet tekst om in gesproken taal.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen.",
+        "wat": "Het mondeling uiten van woorden, gedachten of gevoelens.",
+        "wanneer": "Wanneer iemand iets hardop zegt of een woord uitspreekt.",
+        "waar": "In gesprekken, presentaties, lessen en spraakgestuurde systemen.",
+        "waarom": "Om informatie, gevoelens, meningen of boodschappen mondeling over te brengen.",
+        "hoe": "Door woorden of zinnen hardop uit te spreken."
+      },
+      "tags": [
+        "uitspreekt",
+        "uitspreken",
+        "spreken",
+        "mondeling",
+        "spraak",
+        "communicatie",
+        "taal",
+        "uitspraak",
+        "handeling",
+        "context",
+        "emotie",
+        "neutr"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "spraak",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "mondeling",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "spraak",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f02f431e",
+          "begrip": "spreektaal",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "spraak",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "spraak",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:00:31.508175+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:42:36.535314+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6581c75a45da",
+        "extract_at": "2026-07-20T14:42:36.637698+00:00",
+        "extract_context_snippet": "rugkoppeling – het “dank”‑gevoel dat je uitspreekt versterkt onze samenwerking. Als er iets is waar je nu meer",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'uitspreekt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:00:28.950833+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:00:29.055764+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:00:29.063223+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:00:31.779802+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:00:31.787245+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2a608b3d",
+      "begrip": "ervaren",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ervaren betekent iets meemaken, voelen of waarnemen.",
+        "laag2": "Het werkwoord ervaren beschrijft de handeling waarbij iemand een gebeurtenis, situatie, gevoel of waarneming persoonlijk meemaakt of ondervindt.",
+        "laag3": "Ervaren is het bewust meemaken of ondervinden van iets door middel van zintuigen, gevoelens, gedachten of gebeurtenissen. Het kan gaan om fysieke ervaringen, emoties, sociale situaties of het opdoen van kennis. De betekenis hangt af van de context en is vaak persoonlijk.\n",
+        "laag4": "Binnen Spark beschrijft ervaren het registreren of interpreteren van informatie die door een gebruiker wordt gedeeld of door sensoren wordt waargenomen. Spark kan herkennen dat een gebruiker een ervaring beschrijft, maar maakt onderscheid tussen een menselijke ervaring en de verwerking van gegevens door het systeem.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik ervaar veel stress.\"\n\n→ De persoon ondervindt stress.\n\nVoorbeeld 2\n\n\"Zij ervaart de film als ontroerend.\"\n\n→ De persoon beleeft de film op een persoonlijke manier.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en – afhankelijk van de context – AI-systemen die informatie verwerken.",
+        "wat": "Het persoonlijk meemaken, voelen of waarnemen van iets.",
+        "wanneer": "Wanneer iemand een gebeurtenis, gevoel of situatie ondervindt.",
+        "waar": "In het dagelijks leven, op het werk, thuis, op school en in sociale situaties.",
+        "waarom": "Om indrukken, gevoelens, gebeurtenissen of kennis op te doen.",
+        "hoe": "Door zintuigen, gedachten, gevoelens of gebeurtenissen bewust mee te maken."
+      },
+      "tags": [
+        "ervaren",
+        "ervaring",
+        "beleven",
+        "ondervinden",
+        "waarnemen",
+        "voelen",
+        "meemaken",
+        "bewust",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "ervaren",
+            "ervaring",
+            "neutraal",
+            "voelen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3f9170b4",
+          "begrip": "waarnemen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "voelen",
+            "waarnemen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-462f3439",
+          "begrip": "bewust",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bewust",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:04:33.554449+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:56:06.736442+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-2f59c887abc5",
+        "extract_at": "2026-07-22T08:56:06.840841+00:00",
+        "extract_context_snippet": "e en begrip dat iemand heeft geleerd of ervaren. Ik heb ook kaarten over specifieke onderwerpen, zoals het",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'ervaren' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:04:30.667933+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:04:30.770285+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:04:31.027353+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:04:33.810389+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:04:33.817926+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 6

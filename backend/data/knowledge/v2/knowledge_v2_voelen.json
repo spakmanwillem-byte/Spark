@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 460,
+    "card_count": 461,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:46:01.691222+00:00",
+    "last_updated": "2026-07-22T08:52:58.948200+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -62816,6 +62816,167 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b685d84d",
+      "begrip": "netjes",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Netjes betekent dat iets schoon, verzorgd, ordelijk of volgens de regels is.",
+        "laag2": "Het woord netjes beschrijft een positieve beoordeling van het uiterlijk, de organisatie, het gedrag of de manier waarop iets is uitgevoerd.",
+        "laag3": "Netjes is een bijwoord of bijvoeglijk gebruikt woord dat aangeeft dat iets verzorgd, geordend of beleefd is. Het kan betrekking hebben op een persoon, een ruimte, een voorwerp, gedrag of de uitvoering van een taak. Wat als netjes wordt beschouwd, kan verschillen per situatie en cultuur.",
+        "laag4": "Binnen Spark wordt netjes herkend als een positieve beoordeling van structuur, presentatie of gedrag. Spark kan deze eigenschap gebruiken om aan te geven dat informatie overzichtelijk is georganiseerd, een taak zorgvuldig is uitgevoerd of communicatie beleefd en verzorgd is.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Je kamer is netjes.\"\n\n→ De kamer is opgeruimd en verzorgd.\n\nVoorbeeld 2\n\n\"Spark heeft het rapport netjes opgemaakt.\"\n\n→ Het rapport is overzichtelijk en verzorgd opgesteld."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een eigenschap die aangeeft dat iets verzorgd, ordelijk of beleefd is.",
+        "wanneer": "Wanneer iets goed georganiseerd, schoon of zorgvuldig is.",
+        "waar": "In woningen, op het werk, op school, in documenten en in communicatie.",
+        "waarom": "Om een positieve beoordeling te geven over verzorging, orde of uitvoering.",
+        "hoe": "Door iets zorgvuldig, geordend of volgens de geldende normen uit te voeren of te presenteren."
+      },
+      "tags": [
+        "netjes",
+        "verzorgd",
+        "ordelijk",
+        "opgeruimd",
+        "beleefd",
+        "zorgvuldig",
+        "beoordeling",
+        "positief",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e5d48ca",
+          "begrip": "zeker",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-711a74df",
+          "begrip": "liefdevolle",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2b54083",
+          "begrip": "speciaal",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:52:58.948183+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:24:22.044517+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b4bda10e03cc",
+        "extract_at": "2026-07-21T13:24:23.043007+00:00",
+        "extract_context_snippet": ", kunnen we al je inkomsten en uitgaven netjes bijhouden en terugboeken. Voor nu hoef je het inderdaad nie",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'netjes' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:52:56.672349+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:52:56.772106+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:52:56.779278+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:52:59.140463+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:52:59.147508+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

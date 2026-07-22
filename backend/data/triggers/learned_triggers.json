@@ -2327,12 +2327,111 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6c4db2201ef4",
+      "text_hash": "6c4db2201ef4",
+      "original_text": "wilde even kletsen niks bijzonders.",
+      "topic": "kletsen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil informeel praten over niets in het bijzonder.",
+      "trigger_phrases": [
+        "even babbelen",
+        "niks bijzonders zeggen",
+        "kletsen over het weer",
+        "geen specifiek onderwerp"
+      ],
+      "keywords": [
+        "kletsen",
+        "praten",
+        "sociaal",
+        "informeel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:55:11.989636+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2f59c887abc5",
+      "text_hash": "2f59c887abc5",
+      "original_text": "wat weet jij over je kennisbank",
+      "topic": "kennisbank",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker wil weten wat de AI-assistent over zijn eigen kennisbank weet.",
+      "trigger_phrases": [
+        "wat weet je over je kennis",
+        "kennisbank informatie",
+        "wat is je kennisniveau",
+        "over je kennis"
+      ],
+      "keywords": [
+        "kennis",
+        "bank",
+        "informatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:56:06.520405+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-606a7d814ab2",
+      "text_hash": "606a7d814ab2",
+      "original_text": "kb-kaarten?",
+      "topic": "KB kaarten",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar informatie over KB-kaarten",
+      "trigger_phrases": [
+        "KB kaart",
+        "kaart van de bibliotheek",
+        "leeskaart",
+        "bibliotheekpas"
+      ],
+      "keywords": [
+        "kb",
+        "kaart",
+        "bibliotheek",
+        "lezen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:56:45.895858+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d37d9960a64a",
+      "text_hash": "d37d9960a64a",
+      "original_text": "dus je kennisbank is gevuld met KB-kaarten",
+      "topic": "KB-kaarten",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt naar de inhoud van de kennisbank van de AI-assistent",
+      "trigger_phrases": [
+        "wat zit in je kennisbank",
+        "hoe wordt je kennisbank gevuld",
+        "wat weet je allemaal",
+        "inhoud kennisbank"
+      ],
+      "keywords": [
+        "kennisbank",
+        "kb-kaarten",
+        "inhoud",
+        "gevuld"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:57:27.501918+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 92,
+    "totaal_voorgesteld": 96,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-21T13:28:36.617509+00:00"
+    "last_run": "2026-07-22T08:57:27.501918+00:00"
   }
 }

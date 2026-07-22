@@ -6,20 +6,25 @@
 ### 🎯 Afgerond
 - **Anker-skeleton** (feature-flag OFF, `data/trade/anker/{market}.json` cache, blueprint-sectie `anker`)
 - **Anker-service** (`modules/trade/anker_service.py`): `check_gap_up`, `bootstrap_anker_from_bitvavo`, `log_anker_event`
-- **Anker shadow-logging** naar `data/trade/shadow_events/{yyyy-mm-dd}.jsonl` — matcht bestaand shadow-patroon uit `chat/shadow_observer` (dag-jsonl, `ts + event_type` shape). Eigen sub-dir zodat chat-schema niet vervuilt.
+- **Anker events via LogAgent** (`topic="anker_check"`) — schrijft naar `data/boekhouder/logs/anker_check/{YYYY-MM}.jsonl` met UUID + hash-chain. Read via `LogAgent().lookup()`. Consistent met bestaande papertrail (mint/gift/deposit/drift_fix/reserve).
 - **Deploy-safety endpoints** (`POST /api/trade/deploy/prepare` / `/release`, `GET /deploy/status`) — voorkomt sessie-46 prod/preview race.
-- **Shadow-events read-endpoint**: `GET /api/trade/anker/shadow/events?days=7&market=BCH-EUR` met aggregate stats (`would_skip_count`, `above_threshold_count`, `avg_delta_pct`).
+- **Anker read-endpoint**: `GET /api/trade/anker/shadow/events?days=7&market=BCH-EUR` — aggregate stats (`would_skip_count`, `above_threshold_count`, `avg_delta_pct`) uit LogAgent.
 - **React-crash Synapslaag** gefixt (v10_footnote_shape_001) — footnote dict-vorm veilig gerenderd.
+
+### 🎓 2× "hadden we niet zo iets?" — les geleerd
+1. Eerste versie schreef naar eigen `boekhouder/logs/trader_events/` (3e locatie) → verkeerd
+2. Tweede versie verplaatste naar `data/trade/shadow_events/` (chat-shadow-conventie kopiëren) → nog steeds verkeerd
+3. **Juiste antwoord**: LogAgent gebruiken (bestaat al, hash-chain, `lookup()`, `snapshot()`). Nu geland.
+
+Reflex voor volgende keer: bij event-logging **eerst `grep -rn "LogAgent\|log_agent" backend/`** voor ik een nieuwe schrijf-locatie verzin.
 
 ### 🟡 Nog te doen (P1, na Willem-review)
 - **Anker Fase 2**: hook in `strategy_decision._simple_decision` na BUY-signaal, voor execute (start met `action=log_only` een weekend, dan `skip` na drempel-tune)
 - **Boot-time bootstrap** — bij backend-start voor alle actieve markets 1x anker cachen
 - **Nachtelijke reconciliatie** — anker updaten uit Bitvavo daily candles (cron/scheduler)
 - **Admin-UI**: anker per market naast huidige prijs + threshold-slider (3/5/8/12/15%)
-- **Backtest-integratie**: bestaande backtest-runner (`data/trade/backtests/`) uitbreiden met `--enable-anker --threshold=X` om drempels historisch te vergelijken → betere data dan alleen live shadow-log
-
-### 🎓 Les geleerd (Willem's terechte vraag)
-"Hadden we niet zoiets?" — ja. Bestaande shadow-patronen (chat/shadow_observer + emotion pipeline_shadow) had ik moeten reuse-en i.p.v. een 3e log-locatie te bouwen (`boekhouder/logs/trader_events/`). Nu opgelost: anker-events in bestaande shadow-conventie, andere dir omdat chat-consumers chat-schema verwachten.
+- **Backtest-integratie**: bestaande backtest-runner (`data/trade/backtests/`) uitbreiden met `--enable-anker --threshold=X` om drempels historisch te vergelijken
+- **PapertrailAgent hint**: laten weten dat `anker_check` topic nu bestaat zodat "wat heeft de bot geskipt?" chat-vraag automatisch werkt via bestaande ChatHub-flow
 
 ### 🎯 Wijzigingen in bestanden
 - NEW `backend/modules/trade/anker_service.py`

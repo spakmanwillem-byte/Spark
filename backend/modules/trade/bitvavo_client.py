@@ -89,6 +89,18 @@ def get_price(market: str) -> Optional[float]:
     return None
 
 
+def get_candles(market: str, interval: str = "1d", limit: int = 30) -> List[List]:
+    """v10_bitvavo_candles_001 — Public candles endpoint voor anker-service.
+
+    Returns list of candles: [[timestamp_ms, open, high, low, close, volume], ...]
+    Bij fout: [] (fail-safe).
+    """
+    res = _public_get(f"/{market}/candles?interval={interval}&limit={limit}")
+    if isinstance(res, list):
+        return res
+    return []
+
+
 def get_balance(user_id: str = "user-001") -> List[Dict]:
     """Returns list of {symbol, available, inOrder} dicts."""
     creds = _load_credentials(user_id)

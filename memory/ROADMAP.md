@@ -56,6 +56,25 @@ Bij het rondkijken naar missing `_meta.json` files bleek: Synapse-scanner (`back
 
 **Fix voor later**: scanner recursief maken (max diepte 3) om `**/subdir/_meta.json` op te pikken. In `synapse/service.py`. ~15 min werk.
 
+### ✅ Sessie 47 einde (2026-07-22 15:35 UTC) — Anker LIVE + LLM-fallback + candles
+
+**Anker Fase 2 flag ON (log_only)**:
+- `spark_trader.json → anker.enabled = true, action_on_above_anker = "log_only"`, drempel 8%
+- 6 markten (BCH/BTC/ETH/SOL/ADA/ATOM) gebootstrapt met echte 30d Bitvavo daily candles
+- Bot draait, elke BUY-signaal wordt nu ge-anker-checkt + gelogd via LogAgent (`topic=anker_check`)
+- Zero behavioral change (log_only) — meet effect eerst, dan pas switch naar "skip"
+
+**Bitvavo candles endpoint (v10_bitvavo_candles_001)**:
+Nieuwe functional `get_candles(market, interval, limit)` in `bitvavo_client.py`. Was nog niet aanwezig — daarom faalde eerste bootstrap-poging. Fix pusht anker naar echte data.
+
+**LLM emergency fallback default ON (v10_llm_emergency_default_on_001)**:
+`llm_router._try_emergent_emergency` — default veranderd van `false` naar `true`. Willems Groq zat op 95% dag-limit; nu valt Spark bij dubbel-fault (Groq 429 + Cerebras faal) automatisch terug op Emergent Universal Key (Claude Sonnet 4.6). Uit te zetten via env `LLM_EMERGENCY_USE_EMERGENT=false`.
+
+**Onderwerp-agent status** (Willems vraag):
+- ✅ **Live**: `chat/topic_tracker.py` — `detect_topic(session_id)` cross-turn, injected in system_prompt
+- ✅ **Live**: `spark_planner/threads_service.py` — open draden cross-day (add_or_bump_thread)
+- 🟡 **Nog te doen**: Laag B "Open Draden Stack" met decay (open→sluimerend na 7d, →afgesloten na 30d). Al beschreven op r.987 van deze roadmap.
+
 
 ### 🔄 Prod → Preview merge (13:33 UTC)
 Willem deployde en vulde KB verder in in productie. Zip-backup (908 files sinds deploy-marker) ge-imported:

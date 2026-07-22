@@ -194,14 +194,13 @@ def bootstrap_anker_from_bitvavo(market: str, user_id: str = "user-001") -> Dict
     lookback_days = cfg["lookback_days"]
 
     try:
-        from .bitvavo_client import BitvavoClient
+        from . import bitvavo_client
     except Exception as e:
         return {"error": f"bitvavo_client niet importeerbaar: {e}"}
 
     try:
-        client = BitvavoClient.for_user(user_id)
-        # Bitvavo API: /market/{market}/candles?interval=1d&limit={n}
-        candles = client.get_candles(market=market, interval="1d", limit=lookback_days)
+        # v10_bitvavo_candles_001 — functional API (module-level get_candles)
+        candles = bitvavo_client.get_candles(market=market, interval="1d", limit=lookback_days)
         if not candles or len(candles) < 3:
             return {"error": f"onvoldoende candles ({len(candles) if candles else 0}) voor {market}"}
         # candle = [timestamp_ms, open, high, low, close, volume]

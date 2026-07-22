@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 563,
+    "card_count": 564,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T14:50:27.069402+00:00",
+    "last_updated": "2026-07-22T15:31:09.251875+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -74921,6 +74921,176 @@
             "result": {
               "n_found": 5,
               "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8f10873b",
+      "begrip": "meteen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Meteen betekent direct, onmiddellijk of zonder vertraging.",
+        "laag2": "Het woord meteen geeft aan dat iets direct gebeurt nadat een gebeurtenis plaatsvindt of zodra iets mogelijk is. Er zit weinig tot geen tijd tussen de oorzaak en de handeling.",
+        "laag3": "Meteen is een bijwoord van tijd dat wordt gebruikt om snelheid of directheid uit te drukken. Het wordt vaak gebruikt in gesprekken, instructies en beschrijvingen van gebeurtenissen. Afhankelijk van de context kan het synoniem zijn aan direct, onmiddellijk, gelijk of terstond. Het tegenovergestelde is bijvoorbeeld later, straks of uiteindelijk.\n",
+        "laag4": "Binnen Spark wordt meteen herkend als een tijdsaanduiding die aangeeft dat een handeling zonder uitstel plaatsvindt. Spark kan relaties leggen tussen:\n\nDirect\nOnmiddellijk\nGelijk\nTerstond\nNu\nZo dadelijk\nTijd\nVolgorde\nReactie\nActie\nWachttijd\nUitstel\nLater\nPlanning\nSnelheid\n\nSpark gebruikt de context om te bepalen of meteen letterlijk directe uitvoering betekent of een informele aanduiding is voor \"binnen korte tijd\".\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik kom meteen.\"\n\n→ De persoon komt direct of zo snel mogelijk.\n\nVoorbeeld 2\n\n\"De computer start meteen op.\"\n\n→ De computer reageert zonder merkbare vertraging."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een bijwoord dat aangeeft dat iets direct gebeurt.",
+        "wanneer": "Wanneer een handeling zonder uitstel plaatsvindt.",
+        "waar": "In gesprekken, instructies, teksten en dagelijkse communicatie.",
+        "waarom": "Om aan te geven dat er geen of nauwelijks vertraging is.",
+        "hoe": "Door het woord meteen te gebruiken om de directheid van een handeling of gebeurtenis uit te drukken."
+      },
+      "tags": [
+        "meteen",
+        "direct",
+        "onmiddellijk",
+        "gelijk",
+        "terstond",
+        "nu",
+        "tijd",
+        "tijdsaanduiding",
+        "snelheid",
+        "reactie",
+        "actie",
+        "uitstel",
+        "later",
+        "planning",
+        "taal",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a078bef8",
+          "begrip": "direct",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "direct",
+            "emotie",
+            "neutraal",
+            "onmiddellijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "planning",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "planning",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b999a5d6",
+          "begrip": "straks",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "taal",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:31:09.251851+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:56:51.938725+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-de76f523c9a9",
+        "extract_at": "2026-07-22T11:56:52.041731+00:00",
+        "extract_context_snippet": "**De Willem**, ik stop meteen. Laat me weten of er iets anders is waar ik je mee kan help",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'meteen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:31:04.928875+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:31:05.031588+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:31:05.040185+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:31:09.447441+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:31:09.455536+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

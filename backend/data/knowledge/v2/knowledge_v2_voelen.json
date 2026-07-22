@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 474,
+    "card_count": 475,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T13:40:08.344564+00:00",
+    "last_updated": "2026-07-22T15:28:17.575122+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -65098,6 +65098,181 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-796b103d",
+      "begrip": "feest",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een feest is een bijeenkomst of gelegenheid waarbij mensen samenkomen om iets te vieren, te herdenken of gezellig tijd met elkaar door te brengen.\n",
+        "laag2": "Een feest is een sociale gebeurtenis met een bijzondere aanleiding of een informeel samenzijn. Feesten kunnen klein of groot zijn en gaan vaak gepaard met eten, drinken, muziek, versiering, activiteiten of tradities.\n",
+        "laag3": "Feesten bestaan in vrijwel alle culturen en kunnen een persoonlijke, religieuze, culturele of nationale betekenis hebben. Voorbeelden zijn verjaardagen, bruiloften, jubilea, diploma-uitreikingen, kerst, oud en nieuw, carnaval en buurtfeesten. Een feest kan bedoeld zijn om succes te vieren, verbondenheid te versterken, een traditie voort te zetten of een bijzondere gebeurtenis te markeren. De invulling verschilt per cultuur, leeftijd, persoonlijke voorkeur en gelegenheid.\n",
+        "laag4": "Binnen Spark wordt feest herkend als een sociale gebeurtenis waarbij mensen samenkomen rondom een gelegenheid. Spark kan relaties leggen tussen:\n\nViering\nVerjaardag\nBruiloft\nJubileum\nDiploma\nKerst\nPasen\nCarnaval\nOud en Nieuw\nSinterklaas\nMuziek\nDans\nEten\nDrinken\nCadeau\nFamilie\nVrienden\nGezelligheid\nTraditie\nEvenement\nUitnodiging\nDecoratie\nHerdenking\nSamenkomst\nOntspanning\n\nSpark kan daarnaast uitleg geven over verschillende soorten feesten, tradities, gebruiken en culturele verschillen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"We geven een feest voor mijn verjaardag.\"\n\n→ Er wordt een verjaardag gevierd.\n\nVoorbeeld 2\n\n\"Na het behalen van het diploma volgde een klein feest.\"\n\n→ Er wordt een bijzondere prestatie gevierd."
+      },
+      "ws5": {
+        "wie": "Familie, vrienden, collega's, verenigingen, organisaties en andere genodigden.",
+        "wat": "Een bijeenkomst om iets te vieren, te herdenken of samen plezier te hebben.",
+        "wanneer": "Bij een speciale gelegenheid, feestdag of belangrijke gebeurtenis.",
+        "waar": "Thuis, in een zaal, restaurant, tuin, school, bedrijf of openbare locatie.",
+        "waarom": "Om vreugde, verbondenheid, waardering of een bijzondere gebeurtenis met anderen te delen.",
+        "hoe": "Door mensen uit te nodigen en samen activiteiten te ondernemen, zoals eten, drinken, muziek luisteren, dansen of spelletjes spelen."
+      },
+      "tags": [
+        "feest",
+        "viering",
+        "verjaardag",
+        "bruiloft",
+        "jubileum",
+        "diploma",
+        "kerst",
+        "pasen",
+        "sinterklaas",
+        "carnaval",
+        "oud en nieuw",
+        "familie",
+        "vrienden",
+        "gezelligheid",
+        "muziek",
+        "dans",
+        "eten",
+        "drinken",
+        "cadeau",
+        "traditie",
+        "bijeenkomst",
+        "evenement",
+        "samenkomst",
+        "ontspanning",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-905fa1a9",
+          "begrip": "spelletje",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "ontspanning",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c760a1f1",
+          "begrip": "leuke",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gezelligheid",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0178f2bb",
+          "begrip": "Ambient",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "muziek",
+            "ontspanning",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:28:17.575096+00:00",
+        "vorige_versie_v1": "kb-skel-796b103d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:57.348072+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:28:13.352492+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:28:13.599990+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:28:17.761962+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:28:17.769562+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:28:13.252073+00:00"
       },
       "media": {
         "voice_url": null,

@@ -285464,6 +285464,19 @@
       "topic": "",
       "verbanden": [
         {
+          "kaart_id": "kbv2-skel-9a7de632",
+          "begrip": "bewolkt",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bewolking",
+            "context",
+            "daglicht",
+            "emotie",
+            "klimaat"
+          ]
+        },
+        {
           "kaart_id": "kbv2-d8aff72c",
           "begrip": "weertypen",
           "lade": "weten",
@@ -285514,19 +285527,6 @@
             "temperatuur",
             "zon"
           ]
-        },
-        {
-          "kaart_id": "kbv2-a5310b4d",
-          "begrip": "meteorologisch",
-          "lade": "weten",
-          "overlap": 5,
-          "shared_tags": [
-            "bewolking",
-            "klimaat",
-            "meteorologie",
-            "temperatuur",
-            "weer"
-          ]
         }
       ],
       "footnote": {
@@ -285538,7 +285538,7 @@
         "vertrouwen": 0.9,
         "snap_context": "☀️ Zonnig, ☁️ Bewolkt, 🌧️ Regen, ⛈️ Onweer, ❄️ Sneeuw, 🌫️ Mist, 💨 Wind",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-20T13:57:20.723884+00:00",
+        "laatst_bewerkt_op": "2026-07-21T15:14:32.502546+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -285571,17 +285571,50 @@
               "n_found": 5,
               "top_overlap": 8
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T15:14:25.387818+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T15:14:25.394927+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T15:14:32.798691+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T15:14:32.806038+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
           }
         ]
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/6284384a6f2f"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -285898,19 +285931,52 @@
               "n_found": 5,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T15:12:35.397845+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T15:12:35.406380+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-21T15:12:41.743861+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-21T15:12:41.751557+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-20T14:04:41.799871+00:00"
+        "laatst_bewerkt_op": "2026-07-21T15:12:41.449198+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/9f068d21d58a"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {

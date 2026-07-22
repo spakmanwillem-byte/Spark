@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2158,
+    "card_count": 2162,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:30:02.894508+00:00",
+    "last_updated": "2026-07-22T08:40:17.079431+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -288804,6 +288804,643 @@
             "result": {
               "n_found": 5,
               "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-23fb88f8",
+      "begrip": "ingezet",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ingezet betekent dat iets of iemand wordt gebruikt om een bepaald doel te bereiken.",
+        "laag2": "Het woord ingezet geeft aan dat een persoon, middel, hulpmiddel of systeem is toegewezen of gebruikt voor een specifieke taak of situatie.",
+        "laag3": "Ingezet is het voltooid deelwoord van het werkwoord inzetten. Het beschrijft de toestand waarin iemand of iets actief wordt gebruikt of beschikbaar is gesteld voor een bepaalde functie, opdracht of activiteit. Dit kan betrekking hebben op mensen, materialen, machines, software of andere middelen.",
+        "laag4": "Binnen Spark is ingezet een status die aangeeft dat een hulpmiddel, module, proces of AI-functie actief wordt gebruikt voor een specifieke taak. Spark kan vastleggen wat is ingezet, waarom het is ingezet en voor welk doel.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er zijn extra medewerkers ingezet.\"\n\n→ De medewerkers worden gebruikt om het werk uit te voeren.\n\nVoorbeeld 2\n\n\"Spark heeft een analysemodule ingezet.\"\n\n→ De module wordt gebruikt om een analyse uit te voeren."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Een status die aangeeft dat iemand of iets wordt gebruikt voor een bepaald doel.",
+        "wanneer": "Wanneer een persoon, middel of systeem actief wordt gebruikt.",
+        "waar": "Op het werk, in organisaties, projecten, systemen en het dagelijks leven.",
+        "waarom": "Om een taak uit te voeren of een doel te bereiken.",
+        "hoe": "Door een persoon, hulpmiddel of systeem beschikbaar te maken en actief te gebruiken."
+      },
+      "tags": [
+        "ingezet",
+        "inzetten",
+        "gebruikt",
+        "toegewezen",
+        "hulpmiddel",
+        "taak",
+        "functie",
+        "status",
+        "proces",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "proces",
+            "status",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da90c84a",
+          "begrip": "functies",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "functie",
+            "neutraal",
+            "proces",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59d9d164",
+          "begrip": "gepland",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "status",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96180cc8",
+          "begrip": "uitgevoerd",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "proces",
+            "status",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f2c036d2",
+          "begrip": "inschakelen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "functie",
+            "inzetten",
+            "neutraal",
+            "proces"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:32:17.231427+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:28:38.502400+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:32:15.563907+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:32:15.664176+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:32:15.671858+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:32:17.583911+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:32:17.591556+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d099b0fc",
+      "begrip": "vorige",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Vorige betekent dat iets direct vóór iets anders kwam in tijd, volgorde of reeks.",
+        "laag2": "Het woord vorige verwijst naar een gebeurtenis, persoon, object of situatie die voorafging aan de huidige. De betekenis wordt bepaald door de context.",
+        "laag3": "Vorige is een bijvoeglijk naamwoord dat wordt gebruikt om een eerdere positie in een tijdlijn, volgorde of reeks aan te geven. Het kan verwijzen naar een vorige dag, pagina, versie, afspraak of persoon. Het begrip beschrijft altijd een relatie met iets dat nu of later komt.",
+        "laag4": "Binnen Spark wordt vorige gebruikt als een verwijzing naar een eerder element binnen een reeks, tijdlijn of gegevensstructuur. Spark kan hierdoor relaties leggen tussen opeenvolgende gebeurtenissen, kenniskaarten, gesprekken, versies en andere chronologische of logische volgordes.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De vorige pagina bevat de uitleg.\"\n\n→ De pagina vóór de huidige wordt bedoeld.\n\nVoorbeeld 2\n\n\"Gebruik de vorige versie van het bestand.\"\n\n→ De eerder opgeslagen versie wordt bedoeld."
+      },
+      "ws5": {
+        "wie": "Iedereen die een volgorde of tijdlijn beschrijft.",
+        "wat": "Een aanduiding voor iets dat direct vóór het huidige komt.",
+        "wanneer": "Wanneer wordt verwezen naar een eerder moment, object of gebeurtenis.",
+        "waar": "In gesprekken, documenten, software, onderwijs en het dagelijks leven.",
+        "waarom": "Om onderscheid te maken tussen het huidige en een eerder onderdeel.",
+        "hoe": "Door te verwijzen naar het element dat direct voorafgaat in tijd, volgorde of reeks."
+      },
+      "tags": [
+        "vorige",
+        "eerder",
+        "voorafgaand",
+        "volgorde",
+        "tijdlijn",
+        "reeks",
+        "chronologie",
+        "verwijzing",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0f8ce971",
+          "begrip": "laatste",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "reeks"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-735be6cb",
+          "begrip": "eerdere",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "eerder",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3334b2bb",
+          "begrip": "eerder",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "eerder",
+            "emotie",
+            "neutraal",
+            "tijdlijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e03e9294",
+          "begrip": "allereerste",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "tijdlijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77d5122f",
+          "begrip": "Welk tijdstip is het?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:35:33.373351+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:28:37.574241+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-97015c31dae7",
+        "extract_at": "2026-07-21T13:28:38.501246+00:00",
+        "extract_context_snippet": "or zover ik me herinner, ik heb in mijn vorige antwoorden geen **Help**‑kaart ingezet om iets te laten kni",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'vorige' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:35:29.705044+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:35:29.806698+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:35:29.814713+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:35:33.727953+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:35:33.735487+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2f5af984",
+      "begrip": "actieve",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Actieve betekent dat iemand of iets op dat moment werkzaam, in gebruik of handelend is.",
+        "laag2": "Het woord actieve is de verbogen vorm van actief. Het beschrijft een persoon, object, proces of systeem dat bezig is, functioneert of deelneemt aan een activiteit.",
+        "laag3": "Actieve is een bijvoeglijk naamwoord dat aangeeft dat iets niet stil, uitgeschakeld of inactief is. De betekenis verschilt per context. Een actieve gebruiker gebruikt een systeem, een actieve vulkaan vertoont vulkanische activiteit en een actieve verbinding is op dat moment in gebruik.",
+        "laag4": "Binnen Spark wordt actieve gebruikt als eigenschap of status om aan te geven dat een gebruiker, module, proces of functie op dat moment actief is. Hierdoor kan Spark onderscheid maken tussen actieve en inactieve onderdelen en daar passend op reageren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er zijn twintig actieve gebruikers.\"\n\n→ Twintig gebruikers maken momenteel gebruik van het systeem.\n\nVoorbeeld 2\n\n\"De actieve module verwerkt gegevens.\"\n\n→ De module is op dit moment in werking."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, systemen, processen en AI-systemen.",
+        "wat": "Een eigenschap die aangeeft dat iets werkzaam, in gebruik of handelend is.",
+        "wanneer": "Wanneer iemand of iets actief deelneemt of functioneert.",
+        "waar": "In het dagelijks leven, software, techniek, wetenschap en organisaties.",
+        "waarom": "Om aan te geven dat een persoon, object of proces momenteel werkzaam is.",
+        "hoe": "Door deel te nemen aan een activiteit of door een functie uit te voeren."
+      },
+      "tags": [
+        "actieve",
+        "actief",
+        "werkzaam",
+        "in gebruik",
+        "status",
+        "proces",
+        "gebruiker",
+        "systeem",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "actief",
+            "emotie",
+            "neutraal",
+            "proces",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dbf7ad86",
+          "begrip": "toestand",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eigenschap",
+            "emotie",
+            "neutraal",
+            "proces",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7c669dc",
+          "begrip": "background",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebruiker",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c19ce25",
+          "begrip": "niet aanwezig",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebruiker",
+            "neutraal",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c7b0851d",
+          "begrip": "invoer",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebruiker",
+            "neutraal",
+            "proces"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T14:46:06.006386+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:36:49.703726+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "hoeveel actieve potjes heeft spark trader",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:36:47.932760+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:36:48.033820+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:36:48.041614+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:36:50.062330+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:36:50.070327+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9e19b279",
+      "begrip": "technische",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Technische betekent dat iets betrekking heeft op techniek, technologie of de werking van een systeem.",
+        "laag2": "Het woord technische is de verbogen vorm van technisch. Het beschrijft eigenschappen, kennis, problemen of werkzaamheden die te maken hebben met de bouw, werking of ontwikkeling van apparaten, machines, software of andere systemen.",
+        "laag3": "Technische is een bijvoeglijk naamwoord dat wordt gebruikt om aan te geven dat iets betrekking heeft op techniek of een technisch vakgebied. Het kan gaan om technische kennis, technische specificaties, technische problemen of technische ondersteuning. De betekenis is afhankelijk van de context, maar verwijst altijd naar de werking, constructie of implementatie van een systeem of product.",
+        "laag4": "Binnen Spark wordt technische gebruikt als eigenschap om informatie te classificeren die betrekking heeft op hardware, software, netwerken, systemen, programmeren of andere technische onderwerpen. Hierdoor kan Spark technische informatie onderscheiden van bijvoorbeeld administratieve, sociale of creatieve informatie.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er is een technisch probleem.\"\n\n→ Het probleem heeft betrekking op de werking van een systeem.\n\nVoorbeeld 2\n\n\"Spark geeft technische ondersteuning.\"\n\n→ Spark helpt bij vragen over techniek of systemen."
+      },
+      "ws5": {
+        "wie": "Technici, programmeurs, engineers, beheerders, gebruikers en AI-systemen.",
+        "wat": "Een eigenschap die aangeeft dat iets betrekking heeft op techniek of technologie.",
+        "wanneer": "Wanneer de werking, ontwikkeling of het onderhoud van een systeem wordt beschreven.",
+        "waar": "In techniek, softwareontwikkeling, industrie, wetenschap en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets betrekking heeft op de technische aspecten van een systeem of product.",
+        "hoe": "Door eigenschappen, kennis of werkzaamheden te koppelen aan techniek of technologie."
+      },
+      "tags": [
+        "technische",
+        "technisch",
+        "techniek",
+        "technologie",
+        "software",
+        "hardware",
+        "systeem",
+        "programmeren",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-81be535a",
+          "begrip": "computers",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "hardware",
+            "neutraal",
+            "software",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0b365c00",
+          "begrip": "besturingssysteem",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "hardware",
+            "neutraal",
+            "software",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e45a9347",
+          "begrip": "computersystemen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "hardware",
+            "neutraal",
+            "software",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d937d9eb",
+          "begrip": "hacker",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "programmeren",
+            "software",
+            "systeem",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-79afd67a",
+          "begrip": "panelen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "hardware",
+            "neutraal",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:40:17.079414+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:57.011573+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-4c3b968256c0",
+        "extract_at": "2026-07-20T14:44:57.116572+00:00",
+        "extract_context_snippet": "De Willem, Bollinger Bands zijn een technische indicator die je helpt de volatiliteit en mogelijke prijsgr",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'technische' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:40:13.789989+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:40:13.889283+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:40:13.897218+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:40:17.429174+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:40:17.436903+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

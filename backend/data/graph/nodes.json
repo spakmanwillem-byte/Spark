@@ -11046,6 +11046,78 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-215d63ee",
+      "label": "verkeerde",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Verkeerde betekent dat iets niet juist, niet passend of niet bedoeld is in een bepaalde situatie.",
+      "tags": [
+        "verkeerde",
+        "verkeerd",
+        "fout",
+        "onjuist",
+        "onjuistheid",
+        "vergissing",
+        "beoordeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "beoordeling",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-462f3439",
+      "label": "bewust",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Bewust betekent dat iemand zich ergens van bewust is en dit met aandacht of opzet ervaart.",
+      "tags": [
+        "bewust",
+        "bewustzijn",
+        "aandacht",
+        "intentie",
+        "waarneming",
+        "keuze",
+        "begrijpen",
+        "zelfbewustzijn",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-252159b8",
+      "label": "goede",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Goede betekent dat iets of iemand als positief, juist, geschikt of van hoge kwaliteit wordt beoordeeld.",
+      "tags": [
+        "goede",
+        "goed",
+        "positief",
+        "beoordeling",
+        "kwaliteit",
+        "waardering",
+        "geschiktheid",
+        "eigenschap",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-70b6d717",
       "label": "klank",
       "type": "knowledge_v2",
@@ -73873,6 +73945,250 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-52fc1016",
+      "label": "huidige",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Huidige betekent dat iets betrekking heeft op het heden of de situatie van dit moment.",
+      "tags": [],
+      "topic": "algemeen",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-922cf802",
+      "label": "momenteel",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Momenteel betekent dat iets op dit moment gebeurt of van toepassing is.",
+      "tags": [],
+      "topic": "algemeen",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-c0fc215a",
+      "label": "knipperend",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Knipperend betekent dat iets afwisselend zichtbaar en onzichtbaar is of herhaaldelijk aan en uit gaat.",
+      "tags": [
+        "knipperend",
+        "knipperen",
+        "licht",
+        "signaal",
+        "waarschuwing",
+        "zichtbaar",
+        "onzichtbaar",
+        "interface",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-f51f510f",
+      "label": "jezelf",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Jezelf verwijst naar dezelfde persoon die een handeling uitvoert.",
+      "tags": [
+        "jezelf",
+        "zelf",
+        "wederkerend voornaamwoord",
+        "zelfverwijzing",
+        "grammatica",
+        "taal",
+        "communicatie",
+        "identiteit",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-e598d1fc",
+      "label": "eerst",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Eerst betekent dat iets vóór iets anders gebeurt of komt.",
+      "tags": [
+        "eerst",
+        "volgorde",
+        "prioriteit",
+        "begin",
+        "planning",
+        "tijd",
+        "proces",
+        "instructie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-edef827c",
+      "label": "band",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een band is een verbinding of relatie tussen personen, objecten of onderdelen.",
+      "tags": [
+        "band",
+        "verbinding",
+        "relatie",
+        "autoband",
+        "muziekgroep",
+        "verbondenheid",
+        "context",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-59d9d164",
+      "label": "gepland",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gepland betekent dat iets vooraf is bedacht, georganiseerd of ingepland.",
+      "tags": [
+        "gepland",
+        "planning",
+        "ingepland",
+        "afspraak",
+        "taak",
+        "schema",
+        "voorbereiding",
+        "organisatie",
+        "status",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-23fb88f8",
+      "label": "ingezet",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Ingezet betekent dat iets of iemand wordt gebruikt om een bepaald doel te bereiken.",
+      "tags": [
+        "ingezet",
+        "inzetten",
+        "gebruikt",
+        "toegewezen",
+        "hulpmiddel",
+        "taak",
+        "functie",
+        "status",
+        "proces",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-d099b0fc",
+      "label": "vorige",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Vorige betekent dat iets direct vóór iets anders kwam in tijd, volgorde of reeks.",
+      "tags": [
+        "vorige",
+        "eerder",
+        "voorafgaand",
+        "volgorde",
+        "tijdlijn",
+        "reeks",
+        "chronologie",
+        "verwijzing",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-2f5af984",
+      "label": "actieve",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Actieve betekent dat iemand of iets op dat moment werkzaam, in gebruik of handelend is.",
+      "tags": [
+        "actieve",
+        "actief",
+        "werkzaam",
+        "in gebruik",
+        "status",
+        "proces",
+        "gebruiker",
+        "systeem",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-9e19b279",
+      "label": "technische",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Technische betekent dat iets betrekking heeft op techniek, technologie of de werking van een systeem.",
+      "tags": [
+        "technische",
+        "technisch",
+        "techniek",
+        "technologie",
+        "software",
+        "hardware",
+        "systeem",
+        "programmeren",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-18826611",
       "label": "wandeling",
       "type": "knowledge_v2",
@@ -99828,6 +100144,81 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-51fb1541",
+      "label": "zoekt",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Zoekt betekent dat iemand of iets probeert iets of iemand te vinden.",
+      "tags": [
+        "zoekt",
+        "zoeken",
+        "vinden",
+        "opzoeken",
+        "onderzoeken",
+        "informatie",
+        "database",
+        "kennis",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "handeling",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-a8e0a2b4",
+      "label": "krijgen",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Krijgen betekent dat iemand iets ontvangt.",
+      "tags": [
+        "krijgen",
+        "ontvangen",
+        "ontvangen",
+        "overdracht",
+        "ontvanger",
+        "geven",
+        "verkrijgen",
+        "handeling",
+        "informatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-6c804020",
+      "label": "antwoorden",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Antwoorden betekent reageren op een vraag, opmerking of bericht.",
+      "tags": [
+        "antwoorden",
+        "antwoord",
+        "reageren",
+        "reactie",
+        "communicatie",
+        "vraag",
+        "gesprek",
+        "informatie",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-skel-6a622ba0",
       "label": "roofdier",
       "type": "knowledge_v2",
@@ -121014,18 +121405,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-6c804020",
-      "label": "antwoorden",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-d7ccf243",
       "label": "woon",
       "type": "knowledge_v2",
@@ -121038,18 +121417,6 @@
         "from-diep",
         "gap-fill"
       ],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-e598d1fc",
-      "label": "eerst",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
       "topic": "",
       "belangrijkheid": 5,
       "vertrouwen": 0.3
@@ -121180,30 +121547,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-9e19b279",
-      "label": "technische",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-edef827c",
-      "label": "band",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-02750024",
       "label": "spreiding",
       "type": "knowledge_v2",
@@ -121252,18 +121595,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-59d9d164",
-      "label": "gepland",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-a2eb471e",
       "label": "recent",
       "type": "knowledge_v2",
@@ -121271,23 +121602,6 @@
       "lade_color": "#94a3b8",
       "description": "",
       "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-2f5af984",
-      "label": "actieve",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
       "topic": "",
       "belangrijkheid": 5,
       "vertrouwen": 0.3
@@ -121490,18 +121804,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-462f3439",
-      "label": "bewust",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-4db940cc",
       "label": "landing",
       "type": "knowledge_v2",
@@ -121540,18 +121842,6 @@
     {
       "id": "kbv2-886e41c3",
       "label": "manier",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-a8e0a2b4",
-      "label": "krijgen",
       "type": "knowledge_v2",
       "lade": null,
       "lade_color": "#94a3b8",
@@ -121632,7 +121922,9 @@
     {
       "id": "kbv2-6d0e7650",
       "label": "klussen",
-      "type": "knowledge",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
       "description": "",
       "tags": [
         "knowledge-snap",
@@ -121641,12 +121933,51 @@
         "gap-fill"
       ],
       "topic": "",
-      "belangrijkheid": 2
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0c303acd",
+      "label": "klusje",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8cb64579",
+      "label": "gegaan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ff09cd81",
+      "label": "gehoopt",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
     },
     {
       "id": "kbv2-d2beb08e",
       "label": "gegaan",
-      "type": "knowledge",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
       "description": "",
       "tags": [
         "knowledge-snap",
@@ -121655,12 +121986,15 @@
         "gap-fill"
       ],
       "topic": "",
-      "belangrijkheid": 2
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
     },
     {
       "id": "kbv2-debab07e",
       "label": "verdiend",
-      "type": "knowledge",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
       "description": "",
       "tags": [
         "knowledge-snap",
@@ -121669,21 +122003,92 @@
         "gap-fill"
       ],
       "topic": "",
-      "belangrijkheid": 2
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-a73655d4",
-      "label": "paat",
-      "type": "knowledge",
+      "id": "kbv2-6031bcca",
+      "label": "conditie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
       "description": "",
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
+      "tags": [],
       "topic": "",
-      "belangrijkheid": 2
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-60a3d505",
+      "label": "zodra",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b685d84d",
+      "label": "netjes",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f92c91a4",
+      "label": "bijhouden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c4ba84da",
+      "label": "testvraag",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c9993224",
+      "label": "exacte",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-34c9551d",
+      "label": "cijfers",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
     }
   ]
 }

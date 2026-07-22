@@ -333,6 +333,24 @@
     "min_bitvavo_order_eur": 5.0,
     "bitvavo_maker_taker_fee_pct": 0.25
   },
+  "anker": {
+    "_type": "hybride_gap_up_guard",
+    "_status": "SKELETON_FEATURE_FLAG_OFF",
+    "_bijgewerkt_op": "2026-07-22T09:00:00+00:00",
+    "_doel": "Voorkomt dat de bot bovenaan een gap-up koopt. Per markt houden we een 'anker'-prijs bij (30-daagse referentie). Als current_price > anker * (1 + above_anker_threshold_pct/100), skip de BUY.",
+    "_richting": "hybride: bij startup 1x 30d Bitvavo candles fetchen → cache in data/trade/anker/{market}.json → daarna zelf bijhouden via ticker-samples. Nachtelijke reconciliatie tegen Bitvavo.",
+    "enabled": false,
+    "lookback_days": 30,
+    "above_anker_threshold_pct": 8.0,
+    "_threshold_note": "8% is startwaarde uit Willem's feedback (sessie 47). Ondergrens: 3% (te strikt), Bovengrens: 15% (nooit skip). Backtest nog te doen.",
+    "reconciliation_hour_utc": 3,
+    "cache_dir": "data/trade/anker",
+    "action_on_above_anker": "skip",
+    "_action_options": ["skip", "lower_confidence", "log_only"],
+    "_action_note": "log_only voor eerste week zodat we effect meten voordat we live gaan. Daarna: skip. lower_confidence is midden-optie (halveert confidence).",
+    "_hook_locatie": "strategy_decision.py: na BUY-signaal, voor executie",
+    "_verantwoording_papertrail": "Elke anker-skip logt naar data/boekhouder/logs/trader_events/{month}.jsonl met event_type=anker_skip"
+  },
   "spark_awareness": {
     "spark_kan_uitleggen": [
       "welke strategie draait",

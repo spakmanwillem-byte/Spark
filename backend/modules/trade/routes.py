@@ -779,6 +779,195 @@ async def monitor_decisions(limit: int = Query(50)):
     return {"success": True, "decisions": get_monitor().get_decisions(limit)}
 
 
+# ============================================================
+# DEPLOY-SAFETY (v10_deploy_safety_001) — voorkom prod/preview race conditions
+# Willem's sessie 46-scenario: bot draaide in prod ÉN preview tijdens deploy,
+# resultaat: dubbele buy op ETH-EUR. Deze endpoints laten je de bot netjes
+# pauzeren VOOR een deploy en herstellen NA de deploy.
+# ============================================================
+
+@router.post("/deploy/prepare")
+async def deploy_prepare():
+    """
+    Pre-deploy: pauzeer ALLE actieve bots + snapshot huidige state naar disk.
+    Idempotent: veilig meerdere keren aanroepen.
+
+    Retourneert lijst van bots die gepauzeerd zijn en de pre-deploy state-snapshot.
+    """
+    from .monitor import _registry, _monitor
+    from datetime import datetime, timezone
+    from pathlib import Path
+    import json
+
+    paused = []
+    state_snapshot = {
+        "prepared_at": datetime.now(timezone.utc).isoformat(),
+        "reason": "pre_deploy_safety",
+        "bots": [],
+    }
+
+    # Legacy singleton (user-001)
+    try:
+        st = _monitor.get_status() or {}
+        was_running = bool(st.get("running")) and not bool(st.get("paused"))
+        if was_running and st.get("user_id") != "user-000":
+            _monitor.pause()
+            paused.append("user-001")
+        state_snapshot["bots"].append({
+            "user_id": st.get("user_id"),
+            "was_running": was_running,
+            "was_paused": bool(st.get("paused")),
+            "market": st.get("market"),
+            "markets": st.get("markets"),
+            "position_open": bool((st.get("position") or {}).get("is_open")),
+            "cycles": st.get("cycles"),
+        })
+    except Exception as e:
+        state_snapshot["bots"].append({"user_id": "legacy", "error": str(e)})
+
+    # Alle andere per-user bots
+    for uid, mon in list(_registry.items()):
+        try:
+            st = mon.get_status() or {}
+            was_running = bool(st.get("running")) and not bool(st.get("paused"))
+            if was_running and uid != "user-000":
+                mon.pause()
+                paused.append(uid)
+            state_snapshot["bots"].append({
+                "user_id": uid,
+                "was_running": was_running,
+                "was_paused": bool(st.get("paused")),
+                "market": st.get("market"),
+                "position_open": bool((st.get("position") or {}).get("is_open")),
+                "cycles": st.get("cycles"),
+            })
+        except Exception as e:
+            state_snapshot["bots"].append({"user_id": uid, "error": str(e)})
+
+    # Persist snapshot voor release-hydration
+    fp = Path(__file__).parent.parent.parent / "data" / "trade" / "deploy_snapshot.json"
+    fp.parent.mkdir(parents=True, exist_ok=True)
+    fp.write_text(json.dumps(state_snapshot, indent=2))
+
+    return {
+        "success": True,
+        "paused_now": paused,
+        "total_bots_in_registry": len(_registry) + 1,  # +1 for legacy
+        "snapshot": state_snapshot,
+        "snapshot_file": str(fp),
+        "hint": "Deploy nu safe. Na deploy: POST /api/trade/deploy/release om weer te resumen.",
+    }
+
+
+@router.post("/deploy/release")
+async def deploy_release():
+    """
+    Post-deploy: herstel bots die vóór de deploy draaiden.
+    Leest deploy_snapshot.json en resumet elke bot die 'was_running=True' had.
+    """
+    from .monitor import _registry, _monitor, get_user_monitor
+    from pathlib import Path
+    import json
+
+    fp = Path(__file__).parent.parent.parent / "data" / "trade" / "deploy_snapshot.json"
+    if not fp.exists():
+        return {
+            "success": False,
+            "error": "geen deploy_snapshot.json gevonden — was /deploy/prepare gedraaid?",
+        }
+    try:
+        snap = json.loads(fp.read_text())
+    except Exception as e:
+        return {"success": False, "error": f"kan snapshot niet parsen: {e}"}
+
+    resumed = []
+    skipped = []
+    errors = []
+
+    for bot_state in snap.get("bots", []):
+        uid = bot_state.get("user_id")
+        if not uid:
+            continue
+        if not bot_state.get("was_running"):
+            skipped.append({"user_id": uid, "reason": "was niet running voor deploy"})
+            continue
+        try:
+            mon = _monitor if uid == "user-001" else get_user_monitor(uid)
+            # resume_if_was_running is idempotent + no-op als niet in pause-mode
+            res = mon.resume_if_was_running()
+            resumed.append({"user_id": uid, "result": res})
+        except Exception as e:
+            errors.append({"user_id": uid, "error": str(e)})
+
+    return {
+        "success": True,
+        "resumed": resumed,
+        "skipped": skipped,
+        "errors": errors,
+        "snapshot_used": snap.get("prepared_at"),
+    }
+
+
+@router.get("/deploy/status")
+async def deploy_status():
+    """Toont laatste deploy-snapshot + huidige running-state, handig voor UI-check."""
+    from .monitor import _registry, _monitor
+    from pathlib import Path
+    import json
+
+    fp = Path(__file__).parent.parent.parent / "data" / "trade" / "deploy_snapshot.json"
+    snap = None
+    if fp.exists():
+        try:
+            snap = json.loads(fp.read_text())
+        except Exception:
+            snap = {"error": "snapshot niet parsebaar"}
+
+    current = []
+    try:
+        st = _monitor.get_status() or {}
+        current.append({"user_id": st.get("user_id"), "running": st.get("running"),
+                        "paused": st.get("paused")})
+    except Exception:
+        pass
+    for uid, mon in list(_registry.items()):
+        try:
+            st = mon.get_status() or {}
+            current.append({"user_id": uid, "running": st.get("running"),
+                            "paused": st.get("paused")})
+        except Exception:
+            current.append({"user_id": uid, "error": True})
+
+    return {"success": True, "last_snapshot": snap, "current_state": current}
+
+
+# ============================================================
+# ANKER (v10_anker_skeleton_001) — Read-only endpoints (feature flag off).
+# ============================================================
+
+@router.get("/anker/{market}")
+async def get_anker_endpoint(market: str):
+    """Lees anker-cache voor market. Retourneert null als cache leeg is."""
+    from .anker_service import get_anker, _load_anker_config
+    return {
+        "success": True,
+        "market": market,
+        "anker": get_anker(market),
+        "config": _load_anker_config(),
+    }
+
+
+@router.post("/anker/bootstrap/{market}")
+async def bootstrap_anker_endpoint(market: str, user_id: str = Query("user-001")):
+    """
+    Admin-only: seed anker uit Bitvavo 30d candles.
+    Werkt ONGEACHT feature-flag (voor zowel dry-run als warm-up).
+    """
+    from .anker_service import bootstrap_anker_from_bitvavo
+    result = bootstrap_anker_from_bitvavo(market, user_id=user_id)
+    return {"success": "error" not in result, "market": market, "result": result}
+
+
 # v5_hot_market_swap_001 — markets hot-aanpassen tijdens running zonder bot te stoppen
 class UpdateMarketsBody(BaseModel):
     markets: List[str]

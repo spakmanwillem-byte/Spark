@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1155,
+    "card_count": 1156,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:23:47.214586+00:00",
+    "last_updated": "2026-07-22T08:39:02.001444+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -151967,6 +151967,170 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-22T08:23:47.481876+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6c804020",
+      "begrip": "antwoorden",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Antwoorden betekent reageren op een vraag, opmerking of bericht.",
+        "laag2": "Het werkwoord antwoorden beschrijft de handeling waarbij iemand mondeling, schriftelijk of op een andere manier reageert op een vraag, verzoek, mededeling of situatie.",
+        "laag3": "Antwoorden is een vorm van communicatie waarbij een reactie wordt gegeven op eerder ontvangen informatie. Een antwoord kan informatie geven, een vraag verduidelijken, een keuze maken of een probleem oplossen. Antwoorden kunnen kort of uitgebreid zijn en worden beïnvloed door de context van de vraag of situatie.",
+        "laag4": "Binnen Spark beschrijft antwoorden het proces waarbij het systeem een passende reactie genereert op basis van een vraag, opdracht of andere invoer. Spark analyseert de context, beschikbare kennis en intentie van de gebruiker om een zo relevant mogelijk antwoord te geven.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De docent antwoordt op de vraag.\"\n\n→ De docent geeft een reactie op de vraag.\n\nVoorbeeld 2\n\n\"Spark antwoordt op de opdracht van de gebruiker.\"\n\n→ Spark genereert een passend antwoord."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het geven van een reactie op een vraag, opmerking of bericht.",
+        "wanneer": "Wanneer een reactie wordt gevraagd of verwacht.",
+        "waar": "In gesprekken, berichten, e-mails, onderwijs en digitale systemen.",
+        "waarom": "Om informatie te geven, duidelijkheid te bieden of een gesprek voort te zetten.",
+        "hoe": "Door mondeling, schriftelijk of digitaal een passende reactie te geven."
+      },
+      "tags": [
+        "antwoorden",
+        "antwoord",
+        "reageren",
+        "reactie",
+        "communicatie",
+        "vraag",
+        "gesprek",
+        "informatie",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e628516e",
+          "begrip": "antwoord",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d809154",
+          "begrip": "Dat vroeg ik niet",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "context",
+            "gesprek",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c2beae",
+          "begrip": "oke, zeg eens wat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:39:02.001404+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:43:09.234985+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-4a5af55a27b1",
+        "extract_at": "2026-07-20T14:43:09.337466+00:00",
+        "extract_context_snippet": "ormuleren van die vraag. Ik zal eerlijk antwoorden wat ik weet en aangeven waar ik onzeker ben.   Laat maar ko",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'antwoorden' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:38:59.092485+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:38:59.191749+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:38:59.429062+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:39:02.258673+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:39:02.267329+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 7

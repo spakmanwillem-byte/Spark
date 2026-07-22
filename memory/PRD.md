@@ -1,6 +1,62 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 47 (2026-07-22) — Deploy-safety + Anker skeleton (feature-flag off)
+
+### Snuffel eerst
+- Bot draaide alleen voor user-000 (Spark, onstopbaar-by-design), user-001 idle → veilig te deployen
+- Boekhouder circulation = OK, drift = 0
+- ChatHub health = HEALTHY (manifest werkt: 4 leaf agents)
+- Recente trade-history: 50 trades, laatste BUY+SELL ETH-EUR round-trip
+- Bitvavo API sporadische timeouts (netwerk, geen code-bug)
+
+### v10_deploy_safety_001 — Prod/Preview race preventie
+**Willem's sessie 46-scenario**: bot draaide in prod ÉN preview tijdens deploy → dubbele buy op ETH-EUR. Nu opgelost met 3 nieuwe endpoints:
+
+- `POST /api/trade/deploy/prepare` — pauzeert ALLE actieve user-bots (behalve user-000 Spark) + schrijft snapshot naar `data/trade/deploy_snapshot.json`
+- `POST /api/trade/deploy/release` — leest snapshot en resumet enkel bots die vóór deploy runnend waren
+- `GET /api/trade/deploy/status` — toont laatste snapshot + huidige running-state per bot
+
+Idempotent. Testable met curl. Snapshot bevat markt, cycles, position_open per bot.
+
+### v10_anker_skeleton_001 — Hybride gap-up guard (FEATURE-FLAG OFF)
+Infrastructuur voor het "trader-anker" strategie-onderdeel dat Willem in sessie 47 aanvroeg. Nu SKELETON: gedrag verandert niet tot flag aan gaat.
+
+**Componenten**:
+- Blueprint-sectie `anker` in `modules/trade/blueprints/spark_trader.json`: enabled=false, lookback_days=30, above_anker_threshold_pct=8.0, action_on_above_anker="skip", cache_dir="data/trade/anker"
+- `modules/trade/anker_service.py`:
+  - `get_anker(market)` — leest cache
+  - `check_gap_up(market, current_price)` — retourneert `{allow, reason, anker, current, delta_pct, action}`. Bij `enabled=false` altijd `allow=True`. Bij `action=log_only` altijd allow (maar loggen).
+  - `bootstrap_anker_from_bitvavo(market, user_id)` — fetch 30d daily candles, mean, cache
+  - `log_anker_event()` — papertrail hook naar `data/boekhouder/logs/trader_events/{yyyy-mm}.jsonl`
+- `GET /api/trade/anker/{market}` — read cache + config
+- `POST /api/trade/anker/bootstrap/{market}` — seed cache uit Bitvavo (werkt ongeacht flag, handig voor warm-up)
+
+**Nog te doen (P1)** — Willem review vereist voordat we aanzetten:
+- Hook in `strategy_decision._simple_decision` na BUY-signaal, voor execute
+- Boot-time bootstrap voor alle actieve markets
+- Ticker-tick rolling update + nachtelijke reconciliatie
+- Admin UI: anker per market naast huidige prijs + threshold-slider
+- Backtest met 3%/5%/8%/12%/15% drempels om optimaal punt te vinden
+- Effect meten via papertrail (aantal skips vs. bought-anyway PnL)
+
+### Unit-tests (Python)
+- ✅ 2.5% boven anker + drempel 8% → allow
+- ✅ 10% boven anker + drempel 8% + action=skip → disallow
+- ✅ 10% onder anker → allow (mean-reversion kans)
+- ✅ 10% boven anker + action=log_only → allow (maar logbaar)
+
+### Wijzigingen
+- NEW `backend/modules/trade/anker_service.py` (~210 regels)
+- EDIT `backend/modules/trade/blueprints/spark_trader.json` — +`anker` sectie
+- EDIT `backend/modules/trade/routes.py` — +5 endpoints (3 deploy, 2 anker)
+- EDIT `memory/ROADMAP.md` — Anker roadmap-item verfijnd
+- EDIT `memory/PRD.md` — deze sectie
+
+---
+
+
+
 ## Sessie 47 (2026-07-22) — React-crash fix (SynapseTab footnote-shape)
 
 ### Probleem

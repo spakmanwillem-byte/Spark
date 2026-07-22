@@ -84916,9 +84916,14 @@
     },
     "knipperend": {
       "kaart_id": "kbv2-c0fc215a",
-      "lade": null,
-      "has_lagen": [],
-      "last_updated": "2026-07-21T13:28:37.205446+00:00"
+      "lade": "weten",
+      "has_lagen": [
+        "laag1",
+        "laag2",
+        "laag3",
+        "laag4"
+      ],
+      "last_updated": "2026-07-22T08:12:34.132942+00:00"
     },
     "vorige": {
       "kaart_id": "kbv2-d099b0fc",
@@ -84941,10 +84946,20 @@
       "id": "kbv2-51fb1541",
       "lade": "doen",
       "status": "active"
+    },
+    "huidige": {
+      "id": "kbv2-huidige-recent",
+      "lade": "weten",
+      "status": "active"
+    },
+    "momenteel": {
+      "id": "kbv2-momenteel-recent",
+      "lade": "weten",
+      "status": "active"
     }
   },
-  "rebuilt_at": "2026-07-22T08:02:12.193290+00:00",
+  "rebuilt_at": "2026-07-22T08:05:54.368932+00:00",
   "rebuilt_by": "user-001",
-  "total": 4351,
+  "total": 4353,
   "entry_count": 4343
 }

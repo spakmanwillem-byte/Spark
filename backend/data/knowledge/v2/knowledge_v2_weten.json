@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2151,
+    "card_count": 2154,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-21T08:46:38.437726+00:00",
+    "last_updated": "2026-07-22T08:12:33.855747+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -287977,7 +287977,214 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-52fc1016",
+      "begrip": "huidige",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Huidige betekent dat iets betrekking heeft op het heden of de situatie van dit moment.",
+        "laag2": "Het woord huidige verwijst naar de toestand, periode, versie of situatie die op dit moment geldt.",
+        "laag3": "Huidige is een bijvoeglijk naamwoord dat aangeeft dat iets actueel is. Het wordt gebruikt om onderscheid te maken tussen het heden en het verleden of de toekomst. Het kan betrekking hebben op een persoon, functie, locatie, versie, status, tijd of situatie. De betekenis is altijd afhankelijk van het moment waarop het woord wordt gebruikt.",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "topic": "algemeen",
+      "verbanden": [],
+      "footnote": {
+        "source": "manual_import_12345txt",
+        "imported_at": "2026-07-22T08:05:54.368932+00:00",
+        "imported_reason": "Willem invulde via UI in prod, door lag niet opgeslagen (bug fix pending). Handmatig teruggeplaatst."
+      },
+      "media": [],
+      "needs": []
+    },
+    {
+      "id": "kbv2-922cf802",
+      "begrip": "momenteel",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Momenteel betekent dat iets op dit moment gebeurt of van toepassing is.",
+        "laag2": "Het woord momenteel verwijst naar de huidige situatie of de periode waarin iets nu plaatsvindt.",
+        "laag3": "Momenteel is een bijwoord van tijd dat aangeeft dat een gebeurtenis, toestand of situatie op het huidige moment geldt. Het wordt gebruikt om de actualiteit te benadrukken en onderscheid te maken tussen het heden, het verleden en de toekomst. De betekenis is vergelijkbaar met nu, op dit moment en thans, maar klinkt vaak formeler.",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "topic": "algemeen",
+      "verbanden": [],
+      "footnote": {
+        "source": "manual_import_12345txt",
+        "imported_at": "2026-07-22T08:05:54.368932+00:00",
+        "imported_reason": "Willem invulde via UI in prod, door lag niet opgeslagen (bug fix pending). Handmatig teruggeplaatst."
+      },
+      "media": [],
+      "needs": []
+    },
+    {
+      "id": "kbv2-c0fc215a",
+      "begrip": "knipperend",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Knipperend betekent dat iets afwisselend zichtbaar en onzichtbaar is of herhaaldelijk aan en uit gaat.",
+        "laag2": "Het woord knipperend beschrijft een toestand waarbij licht, een afbeelding, een signaal of een ander object met tussenpozen verschijnt en verdwijnt.",
+        "laag3": "Knipperend is de onvoltooid tegenwoordige deelwoordvorm van het werkwoord knipperen en wordt gebruikt als eigenschap van iets dat herhaaldelijk wisselt tussen zichtbaar en onzichtbaar of tussen aan en uit. Voorbeelden zijn een knipperend verkeerslicht, een knipperende cursor of een knipperend waarschuwingslampje. De snelheid en het patroon van het knipperen kunnen verschillen afhankelijk van de toepassing.",
+        "laag4": "Binnen Spark is knipperend een visuele eigenschap die kan worden gekoppeld aan objecten, meldingen, signalen en gebruikersinterfaces. Spark kan knipperende elementen herkennen of gebruiken om aandacht te vestigen op belangrijke informatie, waarschuwingen of actieve processen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het waarschuwingslampje knippert.\"\n\n→ Het lampje gaat herhaaldelijk aan en uit.\n\nVoorbeeld 2\n\n\"De cursor is knipperend.\"\n\n→ De cursor verschijnt en verdwijnt met regelmatige tussenpozen."
+      },
+      "ws5": {
+        "wie": "Mensen, computers, apparaten en AI-systemen.",
+        "wat": "Een eigenschap waarbij iets herhaaldelijk aan en uit gaat of zichtbaar en onzichtbaar wordt.",
+        "wanneer": "Wanneer een object of signaal periodiek van toestand wisselt.",
+        "waar": "Op beeldschermen, verkeerslichten, apparaten, voertuigen en signaleringssystemen.",
+        "waarom": "Om aandacht te trekken, informatie te geven of een status aan te duiden.",
+        "hoe": "Door afwisselend zichtbaar en onzichtbaar te zijn of tussen aan en uit te schakelen."
+      },
+      "tags": [
+        "knipperend",
+        "knipperen",
+        "licht",
+        "signaal",
+        "waarschuwing",
+        "zichtbaar",
+        "onzichtbaar",
+        "interface",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2b71033a",
+          "begrip": "gele",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "licht",
+            "neutraal",
+            "waarschuwing",
+            "zichtbaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "zichtbaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1aa95a23",
+          "begrip": "verborgen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "onzichtbaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8a996a",
+          "begrip": "user",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "interface",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a2b54083",
+          "begrip": "speciaal",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:12:33.855712+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:28:36.623946+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-97015c31dae7",
+        "extract_at": "2026-07-21T13:28:37.573285+00:00",
+        "extract_context_snippet": "ilt laten verschijnen (bijvoorbeeld een knipperend icoontje) kun je de **Help**‑kaart gebruiken. De kaart *Hel",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'knipperend' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:12:29.762970+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:12:29.866641+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:12:29.874365+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:12:34.215479+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:12:34.222980+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
-  "updated_at": "2026-07-20T12:13:38.729124+00:00"
+  "updated_at": "2026-07-22T08:05:54.368932+00:00",
+  "card_count": 2153
 }

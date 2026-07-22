@@ -8,6 +8,7 @@ import {
   Volume2, Sparkles
 } from 'lucide-react';
 import { KbV2TagCuration } from './KbV2TagCuration';
+import { robustFetch, getQueueSize, replayQueue } from '../../utils/robustFetch';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -256,10 +257,12 @@ export function KennisbankV2Page({ onNavigate }) {
 
   const saveEdit = async () => {
     if (!selectedCard || !editForm) return;
-    // v6_kbv2_edit_inbox_001 — inbox-kaarten kunnen nu ook bewerkt worden
+    // v10_kb_save_robust_001 — retry + timeout + queue voor lag/timeout resilience
     setSavingClassify(true);
+    // Optimistic UI: toon direct dat het probeert
+    toast.loading('Opslaan...', { id: 'save-edit' });
     try {
-      const r = await fetch(`${API}/api/kb/v2/edit`, {
+      const r = await robustFetch(`${API}/api/kb/v2/edit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -268,13 +271,24 @@ export function KennisbankV2Page({ onNavigate }) {
           updates: { lagen: editForm.lagen, ws5: editForm.ws5, tags: editForm.tags, begrip: editForm.begrip },
           user_id: 'user-001',
         }),
-      }).then(x => x.json());
+      }, { kind: 'kb_edit', description: `Edit kaart ${editForm.begrip}` });
       if (r.success) {
         setSelectedCard(r.kaart);
         setEditMode(false);
         await loadItems();
-      } else { alert(r.message || 'Opslaan mislukt'); }
-    } catch (e) { alert('Fout: ' + e.message); }
+        toast.success('Opgeslagen', { id: 'save-edit' });
+      } else {
+        toast.error(r.message || 'Opslaan mislukt', { id: 'save-edit' });
+      }
+    } catch (e) {
+      const qSize = getQueueSize();
+      toast.error(
+        qSize > 0
+          ? `Opslaan mislukt — in wachtrij (${qSize}). Klik "Sync" om opnieuw te proberen.`
+          : `Fout: ${e.message}`,
+        { id: 'save-edit', duration: 5000 }
+      );
+    }
     setSavingClassify(false);
   };
 
@@ -284,13 +298,17 @@ export function KennisbankV2Page({ onNavigate }) {
     if (!editForm) return;
     if (!(editForm.begrip || '').trim()) { alert('Vul een begrip in'); return; }
     setSavingClassify(true);
+    toast.loading('Kaart aanmaken...', { id: 'save-new' });
     try {
-      // Stap 1: kaart in inbox aanmaken
-      const r = await fetch(`${API}/api/kb/v2/inbox/add`, {
+      // Stap 1: kaart in inbox aanmaken (v10_kb_save_robust_001)
+      const r = await robustFetch(`${API}/api/kb/v2/inbox/add`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ begrip: editForm.begrip.trim(), source: 'manual', user_id: 'user-001' }),
-      }).then(x => x.json());
-      if (!r || !r.kaart) { alert('Aanmaken mislukt: ' + JSON.stringify(r)); setSavingClassify(false); return; }
+      }, { kind: 'kb_inbox_add', description: `Nieuwe kaart ${editForm.begrip}` });
+      if (!r || !r.kaart) {
+        toast.error('Aanmaken mislukt: ' + JSON.stringify(r), { id: 'save-new' });
+        setSavingClassify(false); return;
+      }
       let kaart = r.kaart;
       // Stap 2: lagen / ws5 / tags bewerken als ingevuld
       const hasContent =
@@ -298,16 +316,17 @@ export function KennisbankV2Page({ onNavigate }) {
         Object.values(editForm.ws5 || {}).some(v => (v || '').trim()) ||
         (editForm.tags || []).length > 0;
       if (hasContent) {
-        const ed = await fetch(`${API}/api/kb/v2/edit`, {
+        const ed = await robustFetch(`${API}/api/kb/v2/edit`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             card_id: kaart.id, lade: 'inbox',
             updates: { lagen: editForm.lagen, ws5: editForm.ws5, tags: editForm.tags },
             user_id: 'user-001',
           }),
-        }).then(x => x.json());
+        }, { kind: 'kb_edit', description: `Vullen ${kaart.begrip}` });
         if (ed.success && ed.kaart) kaart = ed.kaart;
       }
+      toast.success('Kaart opgeslagen', { id: 'save-new' });
       // Stap 3: refresh + selecteer nieuwe kaart (blijft in inbox/onbeantwoord)
       setActiveTab('inbox');
       setSearch('');
@@ -319,8 +338,32 @@ export function KennisbankV2Page({ onNavigate }) {
       setSelectedCard(kaart);
       setEditMode(false);
       setEditForm(null);
-    } catch (e) { alert('Fout: ' + e.message); }
+    } catch (e) {
+      const qSize = getQueueSize();
+      toast.error(
+        qSize > 0
+          ? `Opslaan mislukt — in wachtrij (${qSize}). Klik "Sync" om opnieuw te proberen.`
+          : `Fout: ${e.message}`,
+        { id: 'save-new', duration: 5000 }
+      );
+    }
     setSavingClassify(false);
+  };
+
+  // v10_kb_save_robust_001 — sync queue-items opnieuw
+  const syncQueue = async () => {
+    toast.loading('Wachtrij syncen...', { id: 'sync-queue' });
+    const { succeeded, failed } = await replayQueue();
+    if (succeeded > 0 && failed === 0) {
+      toast.success(`${succeeded} kaart(en) alsnog opgeslagen`, { id: 'sync-queue' });
+      await loadStats(); await loadItems();
+    } else if (succeeded > 0) {
+      toast.warning(`${succeeded} gelukt, ${failed} nog steeds falend`, { id: 'sync-queue' });
+    } else if (failed > 0) {
+      toast.error(`Sync mislukt — ${failed} in wachtrij`, { id: 'sync-queue' });
+    } else {
+      toast.info('Wachtrij is leeg', { id: 'sync-queue' });
+    }
   };
 
   const cancelNew = () => {

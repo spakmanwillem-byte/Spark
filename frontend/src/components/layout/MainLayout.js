@@ -5,7 +5,7 @@ import {
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
   BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart,
-  Activity, HelpCircle
+  Activity, HelpCircle, Beaker
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
@@ -56,6 +56,7 @@ export const navigationConfig = {
       { id: 'profiel', label: 'Mijn Profiel', icon: User, path: '/profiel' },
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
+      { id: 'sandbox', label: 'Sandbox', icon: Beaker, path: '/admin/sandbox', adminOnly: true },
       { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },
     ]
   }

@@ -8,6 +8,7 @@ import { TraderPage } from "./components/modules/TraderPage";
 import { UsersAdminPage } from "./components/admin/UsersAdminPage";
 import { UserProfilePage } from "./components/profile/UserProfilePage";
 import { AnalyticsPage } from "./components/admin/AnalyticsPage";
+import SandboxPage from "./components/admin/SandboxPage";
 import { EmotiesPage } from "./components/spark/EmotiesPage";
 import { VerbandenPage } from "./components/spark/VerbandenPage";
 import { TriggersPage } from "./components/spark/TriggersPage";
@@ -78,6 +79,7 @@ function AppContent() {
       '/profiel': 'profiel',
       '/admin/users': 'users',
       '/admin/analytics': 'analytics',
+      '/admin/sandbox': 'sandbox',
       '/admin/settings': 'settings',
     };
     return pathMap[path] || 'dashboard';
@@ -104,7 +106,7 @@ function AppContent() {
 
   // v4_route_guard_001 — admin routes alleen voor gradatie ≤ 2 (bug #5)
   // Als URL een admin-pad is maar user is geen admin → forceer redirect naar dashboard
-  const ADMIN_PAGES = ['users', 'analytics', 'settings'];
+  const ADMIN_PAGES = ['users', 'analytics', 'sandbox', 'settings'];
   useEffect(() => {
     if (!user) return;
     if (ADMIN_PAGES.includes(activePage) && (user.gradatie ?? 7) > 2) {
@@ -208,6 +210,8 @@ function AppContent() {
         return <UserProfilePage onNavigate={handleNavigate} />;
       case 'analytics':
         return <AnalyticsPage onNavigate={handleNavigate} />;
+      case 'sandbox':
+        return <SandboxPage onNavigate={handleNavigate} />;
       case 'emotions':
         return <EmotiesPage onNavigate={handleNavigate} />;
       case 'connections':

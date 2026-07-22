@@ -1,7 +1,30 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
-## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor + prod-merge
+## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor + prod-merge + sandbox
+
+### 🧪 Sandbox (v10_sandbox_page_001) — Willems container-idee
+Nieuw nav-item **BEHEER → Sandbox** (`/admin/sandbox`, admin-only, Beaker-icoon).
+
+**Filosofie**: parkeer-plek voor front-end kaders zonder definitieve plek. Elke widget is **zelfstandige container-component** in `sandbox/widgets/`. Registry-array in `sandbox/registry.js`. **Verplaatsen = 1 regel** import elders + verwijder uit registry.
+
+**Bestandsstructuur**:
+```
+components/admin/
+├── SandboxPage.js         — grid-renderer + meta-info per kader
+└── sandbox/
+    ├── registry.js        — SANDBOX_WIDGETS array (id, naam, doel, waar_hoort_het, Component)
+    └── widgets/
+        └── LlmTokenUsageWidget.js   — demo/eerste widget
+```
+
+**Eerste widget: LLM Token Usage**
+Toont Groq/Cerebras/Emergent-key verbruik per dag met % van limit. Placeholder-data (94.838/100.000 Groq bij 95%) tot backend endpoint `/api/llm/usage/today` bestaat. Uiteindelijke plek: Analytics → Systeem tab. Aanleiding: sessie 47 rate-limit-vondst.
+
+**Meta-kader boven elke widget** toont: naam, doel, uiteindelijke plek, aangemaakt-datum, reden. Zodat later duidelijk is waarom het kader er ooit stond.
+
+**Bonus voor Spark**: als hij ooit een widget wil suggereren, hoeft hij alleen een nieuw file + 1 regel in registry.js — geen module-code aanpassen.
+
 
 ### 🔄 Prod → Preview merge (13:33 UTC)
 Willem deployde en vulde KB verder in in productie. Zip-backup (908 files sinds deploy-marker) ge-imported:

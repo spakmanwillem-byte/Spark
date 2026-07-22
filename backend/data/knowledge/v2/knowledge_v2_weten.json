@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2217,
+    "card_count": 2218,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T13:59:06.340848+00:00",
+    "last_updated": "2026-07-22T14:54:33.162993+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -298605,6 +298605,171 @@
             "result": {
               "n_found": 5,
               "top_overlap": 18
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-068d0fbc",
+      "begrip": "versie",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een versie is een uitvoering of uitgave van iets die kan verschillen van andere uitvoeringen.",
+        "laag2": "Een versie is een bepaalde vorm van een product, document, programma, spel of ander object. Nieuwe versies bevatten vaak wijzigingen, verbeteringen, uitbreidingen of correcties ten opzichte van eerdere versies.",
+        "laag3": "Een versie wordt gebruikt om verschillende uitvoeringen van hetzelfde object van elkaar te onderscheiden. Software kent bijvoorbeeld versienummers zoals 1.0, 2.5 of 4.1, terwijl boeken, documenten en spellen ook meerdere versies kunnen hebben. Een nieuwe versie kan fouten oplossen, prestaties verbeteren, nieuwe functies toevoegen of bestaande onderdelen aanpassen. Versiebeheer helpt om veranderingen bij te houden en verschillende uitgaven van elkaar te onderscheiden.",
+        "laag4": "Binnen Spark wordt versie gebruikt om verschillende uitvoeringen van kennis, software, modules, documenten, bestanden of systemen te onderscheiden. Spark kan versies herkennen aan namen, nummers of labels en relaties leggen tussen eerdere, huidige en toekomstige versies. Hierdoor kan Spark veranderingen volgen, compatibiliteit beoordelen en de ontwikkelingsgeschiedenis begrijpen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Spark draait op versie 4.1.\"\n\n→ Er wordt aangegeven welke uitvoering van Spark wordt gebruikt.\n\nVoorbeeld 2\n\n\"De nieuwe versie bevat extra functies.\"\n\n→ Er is een bijgewerkte uitvoering met wijzigingen."
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars, gebruikers, organisaties en AI-systemen.",
+        "wat": "Een specifieke uitvoering of uitgave van een product, document, programma of systeem.",
+        "wanneer": "Wanneer verschillende uitvoeringen of updates van hetzelfde object bestaan.",
+        "waar": "Bij software, documenten, spellen, apparaten, bestanden en andere producten.",
+        "waarom": "Om wijzigingen, verbeteringen en verschillende uitvoeringen van elkaar te onderscheiden.",
+        "hoe": "Door een naam, nummer, datum of ander versiekenmerk toe te kennen."
+      },
+      "tags": [
+        "versie",
+        "versienummer",
+        "versiebeheer",
+        "update",
+        "upgrade",
+        "release",
+        "revisie",
+        "uitvoering",
+        "uitgave",
+        "software",
+        "document",
+        "bestand",
+        "product",
+        "ontwikkeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e03e9294",
+          "begrip": "allereerste",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwikkeling",
+            "versie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d9a0ab8",
+          "begrip": "Zo als het weer is, is het humeur. Zo als het klimaat is, is de aard.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-654d8676",
+          "begrip": "inzake",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "document",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T14:54:33.162974+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:55:05.700055+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-a3ac7d6df028",
+        "extract_at": "2026-07-22T11:55:05.801688+00:00",
+        "extract_context_snippet": "lledig ingevulde kenniskaarten in de KB‑versie 2.   Wil je meer weten over een specifieke kaart of de inho",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'versie' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T14:54:29.518868+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T14:54:29.621273+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T14:54:29.629665+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T14:54:33.521197+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T14:54:33.529554+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

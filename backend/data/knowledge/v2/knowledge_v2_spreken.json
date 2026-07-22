@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 562,
+    "card_count": 563,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T13:40:08.685631+00:00",
+    "last_updated": "2026-07-22T14:50:27.069402+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -74754,6 +74754,173 @@
             "result": {
               "n_found": 5,
               "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-544a832a",
+      "begrip": "neemt",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Neemt is de derde persoon enkelvoud van het werkwoord nemen en betekent dat iemand iets pakt, ontvangt, gebruikt of accepteert.",
+        "laag2": "Het woord neemt beschrijft een handeling waarbij iemand iets tot zich neemt, ergens bezit van neemt, een beslissing neemt of verantwoordelijkheid aanvaardt. De betekenis hangt af van de context.",
+        "laag3": "Neemt is een vervoegde vorm van het werkwoord nemen. Het kan verwijzen naar een fysieke handeling (\"Hij neemt het boek.\"), een keuze (\"Zij neemt een besluit.\"), een verantwoordelijkheid (\"Hij neemt de leiding.\"), een route (\"Ze neemt de trein.\") of een hoeveelheid (\"De taak neemt veel tijd.\"). De betekenis wordt bepaald door de woorden waarmee neemt wordt gecombineerd.",
+        "laag4": "Binnen Spark wordt neemt herkend als een contextafhankelijk werkwoord dat verschillende vormen van handelen of kiezen kan uitdrukken. Spark gebruikt de omliggende woorden om te bepalen of het gaat om het pakken, ontvangen, gebruiken, accepteren, kiezen, innemen of uitvoeren van iets.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Hij neemt een besluit.\"\n\n→ De persoon maakt een keuze.\n\nVoorbeeld 2\n\n\"Ze neemt haar jas mee.\"\n\n→ De persoon pakt of draagt een voorwerp met zich mee."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een vervoegde vorm van het werkwoord nemen.",
+        "wanneer": "Wanneer iemand iets pakt, kiest, ontvangt, gebruikt of accepteert.",
+        "waar": "In gesprekken, teksten en het dagelijks taalgebruik.",
+        "waarom": "Om een handeling, keuze of aanvaarding uit te drukken.",
+        "hoe": "Door het werkwoord nemen in de derde persoon enkelvoud te gebruiken."
+      },
+      "tags": [
+        "neemt",
+        "nemen",
+        "werkwoord",
+        "keuze",
+        "besluit",
+        "ontvangen",
+        "gebruiken",
+        "accepteren",
+        "pakken",
+        "meenemen",
+        "handeling",
+        "context",
+        "taal",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-63a5d91b",
+          "begrip": "nemen",
+          "lade": "doen",
+          "overlap": 10,
+          "shared_tags": [
+            "context",
+            "handeling",
+            "keuze",
+            "meenemen",
+            "nemen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3d2b8110",
+          "begrip": "pakken",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "gebruiken",
+            "handeling",
+            "meenemen",
+            "nemen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal",
+            "werkwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal",
+            "werkwoord"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T14:50:27.069376+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T13:03:25.765765+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-5a80d99f99af",
+        "extract_at": "2026-07-22T13:03:26.833121+00:00",
+        "extract_context_snippet": "Willem**, lekker dat je even een pauze neemt om **De Sims 4** te spelen! 🎮   Spelen betekent volgens onz",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'neemt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T14:50:19.450639+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T14:50:19.552483+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T14:50:19.560578+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T14:50:27.264796+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T14:50:27.272825+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
             }
           }
         ]

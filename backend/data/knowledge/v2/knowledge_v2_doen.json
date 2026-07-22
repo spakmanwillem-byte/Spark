@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1161,
+    "card_count": 1165,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:09:20.126824+00:00",
+    "last_updated": "2026-07-22T09:34:11.372549+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -152943,6 +152943,642 @@
             "result": {
               "n_found": 5,
               "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7b3aac58",
+      "begrip": "bevatten",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bevatten betekent dat iets één of meer onderdelen, eigenschappen of gegevens in zich heeft.",
+        "laag2": "Bevatten is een werkwoord dat beschrijft dat een object, document, systeem of ander geheel bepaalde inhoud of onderdelen omvat.",
+        "laag3": "Bevatten is het werkwoord dat aangeeft dat iets onderdeel uitmaakt van een groter geheel. Dit kan gaan om fysieke inhoud, zoals een doos die boeken bevat, of om abstracte inhoud, zoals een document dat informatie bevat. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark beschrijft bevatten de relatie tussen een geheel en de elementen waaruit het bestaat. Spark gebruikt deze relatie om vast te leggen welke gegevens, kenniskaarten, eigenschappen of onderdelen onderdeel zijn van een object, document, database of systeem.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De handleiding bevat belangrijke informatie.\"\n\n→ De informatie maakt deel uit van de handleiding.\n\nVoorbeeld 2\n\n\"Een KB-kaart kan meerdere tags bevatten.\"\n\n→ De tags zijn onderdeel van de kenniskaart."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het in zich hebben of omvatten van onderdelen, eigenschappen of informatie.",
+        "wanneer": "Wanneer de inhoud of samenstelling van een geheel wordt beschreven.",
+        "waar": "In documenten, systemen, databases, objecten en het dagelijks leven.",
+        "waarom": "Om aan te geven welke onderdelen of inhoud ergens deel van uitmaken.",
+        "hoe": "Doordat één of meer elementen onderdeel zijn van een groter geheel."
+      },
+      "tags": [
+        "bevatten",
+        "bevat",
+        "inhoud",
+        "omvatten",
+        "onderdeel",
+        "gegevens",
+        "informatie",
+        "relatie",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fb15acdd",
+          "begrip": "bevat",
+          "lade": "doen",
+          "overlap": 12,
+          "shared_tags": [
+            "bevat",
+            "bevatten",
+            "context",
+            "emotie",
+            "gegevens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bevatten",
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "inhoud"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ab49447e",
+          "begrip": "onderwerp",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "inhoud",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:21:51.386903+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:57:27.504594+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-d37d9960a64a",
+        "extract_at": "2026-07-22T08:57:27.608913+00:00",
+        "extract_context_snippet": "aad gevuld met KB-kaarten. Deze kaarten bevatten informatie over allerlei onderwerpen, zoals kennis, chemisc",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'bevatten' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:21:49.656255+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:21:49.757350+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:21:49.765244+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:21:51.649764+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:21:51.657493+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d7ccf243",
+      "begrip": "woon",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Woon betekent dat iemand op een bepaalde plaats leeft of verblijft.",
+        "laag2": "Het woord woon is een vervoegde vorm van het werkwoord wonen. Het geeft aan dat iemand zijn of haar vaste verblijfplaats op een bepaalde locatie heeft.",
+        "laag3": "Woon beschrijft de handeling of toestand waarbij iemand op een vaste plek leeft. Dit kan een huis, appartement, woonboot, zorginstelling of andere verblijfplaats zijn. De betekenis is afhankelijk van de context, maar verwijst altijd naar de plaats waar iemand woont.\n",
+        "laag4": "Binnen Spark wordt woon herkend als een vervoegde vorm van wonen. Spark gebruikt deze informatie om woonlocaties, adresgegevens of context over iemands verblijfplaats correct te interpreteren, zonder automatisch persoonlijke gegevens op te slaan of aan te nemen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik woon in Groningen.\"\n\n→ De persoon heeft zijn vaste verblijfplaats in Groningen.\n\nVoorbeeld 2\n\n\"Waar woon je?\"\n\n→ Er wordt gevraagd naar de vaste verblijfplaats van een persoon.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en, afhankelijk van de context, dieren.",
+        "wat": "Een vervoegde vorm van het werkwoord wonen.",
+        "wanneer": "Wanneer iemand aangeeft waar hij of zij leeft of verblijft.",
+        "waar": "In woningen, appartementen, woonvoorzieningen en andere verblijfplaatsen.",
+        "waarom": "Om de vaste verblijfplaats van iemand aan te geven.",
+        "hoe": "Door te wonen op een bepaalde locatie."
+      },
+      "tags": [
+        "woon",
+        "wonen",
+        "verblijfplaats",
+        "wonen",
+        "huis",
+        "locatie",
+        "werkwoord",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-1a32f423",
+          "begrip": "woont",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "huis",
+            "locatie",
+            "neutraal",
+            "verblijfplaats"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a6a4b2fd",
+          "begrip": "Woonplaats",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "locatie",
+            "neutraal",
+            "verblijfplaats",
+            "wonen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aa6557b4",
+          "begrip": "verblijft",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "wonen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "locatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "werkwoord"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T14:43:25.523323+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:27:24.420300+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "weet jij waar ik woon",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:27:22.772607+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:27:22.875002+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:27:22.882570+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:27:24.680852+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:27:24.688353+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9f6e63c2",
+      "begrip": "kletsen",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kletsen betekent op een informele manier met elkaar praten.",
+        "laag2": "Kletsen is een werkwoord dat beschrijft dat mensen ontspannen met elkaar praten, vaak zonder een specifiek doel of vaste structuur.",
+        "laag3": "Kletsen is een vorm van informele communicatie waarbij mensen gedachten, ervaringen, gevoelens of dagelijkse gebeurtenissen met elkaar delen. Het gesprek is meestal spontaan, vriendelijk en niet gericht op het oplossen van een probleem of het nemen van een beslissing.\n",
+        "laag4": "Binnen Spark beschrijft kletsen een informeel gesprek tussen een gebruiker en Spark of tussen meerdere personen. Tijdens het kletsen ligt de nadruk op sociale interactie en gezelligheid, terwijl Spark de context van het gesprek blijft volgen en relevante informatie kan herkennen.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"We zaten een uur te kletsen.\"\n\n→ De personen voerden een ontspannen gesprek.\n\nVoorbeeld 2\n\n\"Ik wil gewoon even met Spark kletsen.\"\n\n→ De gebruiker wil een informeel gesprek voeren.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen.",
+        "wat": "Het voeren van een informeel gesprek.",
+        "wanneer": "Wanneer mensen ontspannen met elkaar praten.",
+        "waar": "Thuis, op het werk, op school, online en in het dagelijks leven.",
+        "waarom": "Om contact te onderhouden, ervaringen te delen of gezellig met elkaar te praten.",
+        "hoe": "Door spontaan en informeel met elkaar te communiceren."
+      },
+      "tags": [
+        "kletsen",
+        "praten",
+        "gesprek",
+        "communicatie",
+        "sociaal",
+        "informeel",
+        "gezellig",
+        "handeling",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d316c9a7",
+          "begrip": "Ik wilde je alleen begroeten.",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c2beae",
+          "begrip": "oke, zeg eens wat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "informeel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-93b38729",
+          "begrip": "bedankte",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "sociaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T08:55:09.039546+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:32:44.978011+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "wilde even kletsen niks bijzonders.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:32:43.822653+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:32:43.922768+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:32:43.930565+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:32:45.239694+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:32:45.247293+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3eb3b544",
+      "begrip": "geven",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Geven betekent dat iemand iets overdraagt aan een ander.",
+        "laag2": "Geven is een werkwoord dat beschrijft dat een persoon, organisatie of systeem iets beschikbaar maakt of overdraagt aan een ontvanger.",
+        "laag3": "Geven is de handeling waarbij een voorwerp, informatie, hulp, toestemming of een andere vorm van waarde van een gever naar een ontvanger wordt overgedragen. Wat wordt gegeven kan zowel tastbaar als ontastbaar zijn. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark beschrijft geven het overdragen van informatie, opdrachten, resultaten, rechten of andere gegevens tussen gebruikers, systemen en modules. Spark kan vastleggen wie iets geeft, wat wordt gegeven, aan wie het wordt gegeven en onder welke voorwaarden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik geef een cadeau aan mijn vriend.\"\n\n→ Het cadeau wordt overgedragen aan een ander.\n\nVoorbeeld 2\n\n\"Spark geeft een antwoord op de vraag.\"\n\n→ Spark verstrekt informatie aan de gebruiker."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het overdragen of beschikbaar maken van iets aan een ander.",
+        "wanneer": "Wanneer iets wordt overgedragen, verstrekt of aangeboden.",
+        "waar": "In gesprekken, op het werk, op school, thuis en in digitale systemen.",
+        "waarom": "Om iets beschikbaar te maken, te delen of over te dragen.",
+        "hoe": "Door een voorwerp, informatie, hulp of een andere vorm van waarde aan een ontvanger te verstrekken."
+      },
+      "tags": [
+        "geven",
+        "overdragen",
+        "verstrekken",
+        "delen",
+        "ontvanger",
+        "gever",
+        "informatie",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d00a690b",
+          "begrip": "geeft",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "delen",
+            "emotie",
+            "geven",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a8e0a2b4",
+          "begrip": "krijgen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "geven",
+            "handeling",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4ef4f1ed",
+          "begrip": "deelde",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "delen",
+            "emotie",
+            "geven",
+            "informatie",
+            "overdragen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-417279b4",
+          "begrip": "verspreiden",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "delen",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "ontvanger"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51fb1541",
+          "begrip": "zoekt",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "handeling",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:34:11.372533+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:56:06.628636+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-2f59c887abc5",
+        "extract_at": "2026-07-22T08:56:06.736141+00:00",
+        "extract_context_snippet": "Deze kaarten helpen me om antwoorden te geven op vragen en om mee te praten over verschillende onderwerpe",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'geven' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:34:09.630313+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:34:09.729952+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:34:09.737687+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:34:11.633020+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:34:11.640919+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

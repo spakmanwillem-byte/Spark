@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 462,
+    "card_count": 465,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:16:30.458990+00:00",
+    "last_updated": "2026-07-22T09:26:05.174985+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -63139,6 +63139,466 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-debab07e",
+      "begrip": "verdiend",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verdiend betekent dat iemand volgens een bepaalde beoordeling recht heeft op iets.",
+        "laag2": "Het woord verdiend is het voltooid deelwoord van verdienen. Het geeft aan dat iemand iets heeft gekregen of behoort te krijgen als gevolg van inspanning, gedrag, prestaties of omstandigheden.\n",
+        "laag3": "Verdiend beschrijft een situatie waarin iemand volgens een norm, afspraak of persoonlijke beoordeling recht heeft op een beloning, waardering, kans of gevolg. Dit kan objectief zijn, zoals een verdiend salaris, of subjectief, zoals de uitspraak \"Dat heb je verdiend.\" De betekenis is daarom afhankelijk van de context.\n",
+        "laag4": "Binnen Spark wordt verdiend herkend als een beoordeling over de relatie tussen een handeling en de bijbehorende uitkomst of beloning. Spark maakt onderscheid tussen objectieve vormen van verdienen (zoals salaris, punten of beloningen volgens vaste regels) en subjectieve uitspraken die een persoonlijke mening of waardering uitdrukken.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Hij heeft zijn salaris verdiend.\"\n\n→ De persoon heeft volgens de gemaakte afspraken recht op het salaris.\n\nVoorbeeld 2\n\n\"Je hebt een compliment verdiend.\"\n\n→ Er wordt waardering uitgesproken voor iemands inzet of gedrag."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen die prestaties of beloningen beoordelen.",
+        "wat": "Een aanduiding dat iemand recht heeft op een beloning, waardering of gevolg.",
+        "wanneer": "Wanneer een prestatie, inspanning of gedrag wordt beoordeeld.",
+        "waar": "Op het werk, op school, in sport, relaties en het dagelijks leven.",
+        "waarom": "Om aan te geven dat een beloning, waardering of gevolg in verhouding staat tot een handeling of prestatie.",
+        "hoe": "Door een prestatie, inspanning of gedrag te beoordelen aan de hand van afspraken, regels of persoonlijke normen."
+      },
+      "tags": [
+        "verdiend",
+        "verdienen",
+        "beloning",
+        "waardering",
+        "recht",
+        "prestatie",
+        "beoordeling",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5243d9ac",
+          "begrip": "verdienen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beloning",
+            "blij",
+            "emotie",
+            "prestatie",
+            "verdienen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3cd997a3",
+          "begrip": "punten",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beloning",
+            "blij",
+            "emotie",
+            "prestatie",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81d57f08",
+          "begrip": "Krijg ik geen punten?",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beloning",
+            "blij",
+            "emotie",
+            "prestatie",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e5d48ca",
+          "begrip": "zeker",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-21T13:22:42.881681+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:23:12.680531+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "alles goed gegaan 40 euro verdiend waarvan 20 weer uitgegeven voor onderhoud eten drinken",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:23:10.813908+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:23:10.916218+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:23:10.923618+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:23:12.875246+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:23:12.882396+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c9728cb0",
+      "begrip": "bijzonders",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bijzonders betekent iets dat opvalt, afwijkt of speciaal is.",
+        "laag2": "Het woord bijzonders verwijst naar iets dat niet gewoon of alledaags is. Wat als bijzonder wordt gezien, hangt af van de situatie en de persoon.",
+        "laag3": "Bijzonders is de zelfstandige vorm van het bijvoeglijk naamwoord bijzonder. Het wordt gebruikt om te verwijzen naar iets opvallends, unieks of uitzonderlijks zonder dit specifiek te benoemen. De beoordeling is vaak subjectief en afhankelijk van de context.\n",
+        "laag4": "Binnen Spark wordt bijzonders herkend als een aanduiding dat een gebeurtenis, eigenschap of object afwijkt van het normale of verwachte. Spark behandelt dit als een subjectieve beoordeling en kan, indien nodig, vragen wat er precies als bijzonder wordt bedoeld.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Is er iets bijzonders gebeurd?\"\n\n→ Er wordt gevraagd of er iets opvallends of ongewoons is gebeurd.\n\nVoorbeeld 2\n\n\"Vandaag was er niets bijzonders.\"\n\n→ Er is niets gebeurd dat afweek van het normale."
+      },
+      "ws5": {
+        "wie": "Iedereen die een gebeurtenis of situatie beoordeelt.",
+        "wat": "Iets dat als opvallend, speciaal of ongewoon wordt beschouwd.",
+        "wanneer": "Wanneer iets afwijkt van het normale of de verwachting.",
+        "waar": "In gesprekken, verhalen, werk, onderwijs en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets speciaal, opvallend of uitzonderlijk is.",
+        "hoe": "Door een gebeurtenis, eigenschap of situatie te vergelijken met wat normaal of verwacht wordt."
+      },
+      "tags": [
+        "bijzonders",
+        "bijzonder",
+        "opvallend",
+        "speciaal",
+        "uitzonderlijk",
+        "beoordeling",
+        "context",
+        "emotie",
+        "neutraal",
+        "positie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a2b54083",
+          "begrip": "speciaal",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bijzonder",
+            "context",
+            "emotie",
+            "neutraal",
+            "opvallend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fdad6bce",
+          "begrip": "domme",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-215d63ee",
+          "begrip": "verkeerde",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T08:55:09.862051+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:24:47.129486+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "wilde even kletsen niks bijzonders.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:24:45.400267+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:24:45.505094+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:24:45.512518+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:24:47.325490+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:24:47.332892+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f5a844d3",
+      "begrip": "gewoon",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gewoon betekent dat iets normaal, alledaags of niet bijzonder is.",
+        "laag2": "Het woord gewoon wordt gebruikt om aan te geven dat iets als normaal, gebruikelijk of zonder opvallende kenmerken wordt beschouwd.",
+        "laag3": "Gewoon is een bijwoord of bijvoeglijk naamwoord dat aangeeft dat iets overeenkomt met wat als normaal of gebruikelijk wordt gezien. Het kan ook worden gebruikt om iets te benadrukken, zoals in \"Ik doe het gewoon.\" De betekenis hangt af van de context en is vaak gebaseerd op een persoonlijke of maatschappelijke beoordeling.\n",
+        "laag4": "Binnen Spark wordt gewoon herkend als een aanduiding van normaliteit of een neutrale beoordeling. Spark gebruikt de context om te bepalen of gewoon verwijst naar iets alledaags, een nadruk in een zin of een vergelijking met wat als normaal wordt beschouwd.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het was een gewone dag.\"\n\n→ Er gebeurde niets opvallends.\n\nVoorbeeld 2\n\n\"Doe het gewoon.\"\n\n→ Er wordt aangedrongen om de handeling uit te voeren zonder extra twijfel of ingewikkeldheid."
+      },
+      "ws5": {
+        "wie": "Iedereen die iets beoordeelt of beschrijft.",
+        "wat": "Een aanduiding dat iets normaal, gebruikelijk of niet bijzonder is.",
+        "wanneer": "Wanneer iets wordt vergeleken met wat als normaal wordt gezien.",
+        "waar": "In gesprekken, teksten, onderwijs en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets geen bijzondere of afwijkende kenmerken heeft",
+        "hoe": "Door een situatie, eigenschap of handeling als normaal of gebruikelijk te beschrijven."
+      },
+      "tags": [
+        "gewoon",
+        "normaal",
+        "alledaags",
+        "gebruikelijk",
+        "beoordeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fdad6bce",
+          "begrip": "domme",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-215d63ee",
+          "begrip": "verkeerde",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9728cb0",
+          "begrip": "bijzonders",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8ea44dc9",
+          "begrip": "meestal",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "gebruikelijk",
+            "neutraal",
+            "normaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:26:05.174968+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:55:11.993050+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6c4db2201ef4",
+        "extract_at": "2026-07-22T08:55:12.098502+00:00",
+        "extract_context_snippet": "als een relaxte ochtend, **De Willem**! Gewoon even kletsen zonder een speciaal doel voor ogen, dat is ook",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'gewoon' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:26:03.495524+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:26:03.598161+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:26:03.605454+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:26:05.370257+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:26:05.377443+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
             }
           }
         ]

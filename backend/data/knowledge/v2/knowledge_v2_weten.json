@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2173,
+    "card_count": 2176,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T09:17:49.565180+00:00",
+    "last_updated": "2026-07-22T09:30:06.978251+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -291217,6 +291217,480 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e7aae9da",
+      "begrip": "allerlei",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Allerlei betekent dat er veel verschillende soorten of varianten zijn.",
+        "laag2": "Het woord allerlei wordt gebruikt om aan te geven dat iets uit meerdere verschillende soorten, vormen of mogelijkheden bestaat, zonder deze allemaal afzonderlijk te noemen.",
+        "laag3": "Allerlei is een onbepaald voornaamwoord dat verwijst naar een verzameling van verschillende personen, voorwerpen, eigenschappen of situaties. Het benadrukt de verscheidenheid binnen een groep en laat de exacte samenstelling open. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt allerlei gebruikt als een aanduiding van diversiteit binnen een verzameling. Spark herkent dat het woord verwijst naar meerdere verschillende elementen en kan deze, indien beschikbaar, verder specificeren of categoriseren op basis van de context.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Er liggen allerlei boeken op tafel.\"\n\n→ Er liggen verschillende soorten boeken.\n\nVoorbeeld 2\n\n\"Spark kan allerlei vragen beantwoorden.\"\n\n→ Spark kan veel verschillende soorten vragen beantwoorden.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die communiceert.",
+        "wat": "Een woord dat aangeeft dat er veel verschillende soorten of varianten zijn.",
+        "wanneer": "Wanneer wordt verwezen naar een gevarieerde verzameling zonder alles op te sommen.",
+        "waar": "In gesprekken, teksten, onderwijs en het dagelijks taalgebruik.",
+        "waarom": "Om diversiteit of verscheidenheid aan te geven zonder alle onderdelen afzonderlijk te noemen.",
+        "hoe": "Door allerlei te gebruiken als aanduiding voor meerdere verschillende elementen."
+      },
+      "tags": [
+        "allerlei",
+        "verschillende",
+        "diversiteit",
+        "verzameling",
+        "variatie",
+        "onbepaald voornaamwoord",
+        "taal",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0c54d949",
+          "begrip": "allemaal",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "taal",
+            "verzameling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f97c167",
+          "begrip": "stel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:20:31.594208+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T08:57:27.609240+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-d37d9960a64a",
+        "extract_at": "2026-07-22T08:57:27.712839+00:00",
+        "extract_context_snippet": ". Deze kaarten bevatten informatie over allerlei onderwerpen, zoals kennis, chemische symbolen, banken en no",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'allerlei' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:20:29.669331+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:20:29.769952+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:20:29.777599+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:20:31.958382+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:20:31.965935+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-21464fd8",
+      "begrip": "poort",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een poort is een doorgang of toegang tot een afgesloten gebied, ruimte of systeem.",
+        "laag2": "Een poort vormt een gecontroleerde ingang of uitgang. Dit kan een fysieke toegang zijn, zoals een toegangspoort, of een digitale toegang, zoals een netwerkpoort.",
+        "laag3": "Een poort is een opening of toegangspunt dat de doorgang regelt tussen twee gebieden of systemen. In de fysieke wereld kan het een toegangspoort, stadspoort of hek zijn. In de informatietechnologie verwijst een poort naar een logisch communicatiepunt waarmee apparaten en programma's gegevens kunnen verzenden en ontvangen. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt poort gebruikt als een algemeen begrip voor een toegangspunt. Afhankelijk van de context kan dit een fysieke toegang zijn of een digitale poort binnen een netwerk, API of communicatiemodule. Spark gebruikt het begrip om verbindingen, toegangsrechten en gegevensstromen te beschrijven.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De poort sluit automatisch om 22:00 uur.\"\n\n→ De fysieke toegang wordt afgesloten.\n\nVoorbeeld 2\n\n\"De server luistert op poort 8080.\"\n\n→ Er wordt een netwerkpoort bedoeld.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Een toegangspunt of doorgang tussen twee gebieden of systemen.",
+        "wanneer": "Wanneer toegang of communicatie mogelijk moet zijn.",
+        "waar": "Bij gebouwen, terreinen, netwerken, computers en communicatiesystemen.",
+        "waarom": "Om toegang of gegevensuitwisseling gecontroleerd mogelijk te maken.",
+        "hoe": "Door een doorgang of communicatiepunt te openen, sluiten of beheren."
+      },
+      "tags": [
+        "poort",
+        "toegang",
+        "doorgang",
+        "ingang",
+        "netwerkpoort",
+        "communicatie",
+        "verbinding",
+        "systeem",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "systeem",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "systeem",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13fe3072",
+          "begrip": "wereldwijd",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "systeem",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "systeem",
+            "toegang",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "systeem",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:28:41.545914+00:00",
+        "vorige_versie_v1": "kb-skel-21464fd8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:56.810790+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:28:39.866411+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:28:39.874255+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:28:41.903370+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:28:41.911070+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:28:39.766285+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-268767eb",
+      "begrip": "gevuld",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gevuld betekent dat iets inhoud heeft of niet leeg is.",
+        "laag2": "Het woord gevuld is het voltooid deelwoord van vullen. Het beschrijft de toestand waarin een object, ruimte of gegevensveld inhoud bevat.",
+        "laag3": "Gevuld geeft aan dat iets geheel of gedeeltelijk van inhoud is voorzien. Dit kan betrekking hebben op fysieke voorwerpen, zoals een glas dat met water is gevuld, of op abstracte zaken, zoals een formulier dat is ingevuld. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is gevuld een status die aangeeft dat een object, gegevensveld, kenniskaart of ander onderdeel van inhoud is voorzien. Spark kan hiermee controleren of informatie compleet is of dat nog gegevens ontbreken.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het glas is gevuld met water.\"\n\n→ Het glas bevat water.\n\nVoorbeeld 2\n\n\"Alle velden zijn gevuld.\"\n\n→ Alle gegevens zijn ingevuld."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Een toestand waarin iets inhoud bevat of niet leeg is.",
+        "wanneer": "Wanneer een object, ruimte of gegevensveld van inhoud is voorzien.",
+        "waar": "In formulieren, databases, documenten, voorwerpen en het dagelijks leven.",
+        "waarom": "Om aan te geven dat iets compleet of van inhoud voorzien is.",
+        "hoe": "Door een object, ruimte of gegevensveld te vullen met inhoud."
+      },
+      "tags": [
+        "gevuld",
+        "vullen",
+        "inhoud",
+        "compleet",
+        "status",
+        "gegevens",
+        "formulier",
+        "eigenschap",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "formulier",
+            "gegevens",
+            "inhoud"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86b28776",
+          "begrip": "ingevuld",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "compleet",
+            "emotie",
+            "formulier",
+            "gegevens",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f6fe1d1",
+          "begrip": "vol",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "compleet",
+            "emotie",
+            "gevuld",
+            "inhoud",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "inhoud",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f5af984",
+          "begrip": "actieve",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal",
+            "status"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T08:57:26.297419+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T09:30:06.978231+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "dus je kennisbank is gevuld met KB-kaarten",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T09:30:06.042818+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:30:06.143727+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:30:06.151309+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T09:30:07.336295+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T09:30:07.343936+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

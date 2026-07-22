@@ -968,6 +968,57 @@ async def bootstrap_anker_endpoint(market: str, user_id: str = Query("user-001")
     return {"success": "error" not in result, "market": market, "result": result}
 
 
+@router.get("/anker/shadow/events")
+async def get_anker_shadow_events(days: int = Query(7, ge=1, le=90), market: Optional[str] = None):
+    """
+    Read anker-shadow log (data/trade/shadow_events/*.jsonl).
+    Query params:
+      - days: aantal dagen terugkijken (1-90, default 7)
+      - market: filter op market (optioneel)
+    Retourneert events + aggregate stats (skips, above_threshold count, avg delta).
+    """
+    from pathlib import Path as _P
+    from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+    log_dir = _P(__file__).parent.parent.parent / "data" / "trade" / "shadow_events"
+    if not log_dir.exists():
+        return {"success": True, "events": [], "stats": {"total": 0}, "note": "geen shadow_events dir (nog geen anker-log)"}
+
+    cutoff = _dt.now(_tz.utc) - _td(days=days)
+    events = []
+    for fp in sorted(log_dir.glob("*.jsonl")):
+        try:
+            for line in fp.read_text().splitlines():
+                if not line.strip():
+                    continue
+                try:
+                    ev = json.loads(line)
+                except Exception:
+                    continue
+                if market and ev.get("market") != market:
+                    continue
+                ts = ev.get("ts") or ""
+                try:
+                    ev_dt = _dt.fromisoformat(ts.replace("Z", "+00:00"))
+                    if ev_dt < cutoff:
+                        continue
+                except Exception:
+                    pass
+                events.append(ev)
+        except Exception:
+            continue
+
+    # Aggregate
+    stats = {
+        "total": len(events),
+        "would_skip_count": sum(1 for e in events if not e.get("allow")),
+        "above_threshold_count": sum(1 for e in events if e.get("above_threshold")),
+        "allow_count": sum(1 for e in events if e.get("allow")),
+        "markets": sorted({e.get("market") for e in events if e.get("market")}),
+        "avg_delta_pct": (sum(float(e.get("delta_pct") or 0) for e in events) / len(events)) if events else 0.0,
+    }
+    return {"success": True, "days": days, "market_filter": market, "stats": stats, "events": events[-500:]}
+
+
 # v5_hot_market_swap_001 — markets hot-aanpassen tijdens running zonder bot te stoppen
 class UpdateMarketsBody(BaseModel):
     markets: List[str]

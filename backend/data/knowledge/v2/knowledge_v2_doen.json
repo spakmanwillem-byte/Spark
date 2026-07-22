@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1156,
+    "card_count": 1158,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:39:02.001444+00:00",
+    "last_updated": "2026-07-22T08:47:15.004244+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -152134,6 +152134,328 @@
             "result": {
               "n_found": 5,
               "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f92c91a4",
+      "begrip": "bijhouden",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bijhouden betekent dat iemand informatie, werkzaamheden of ontwikkelingen regelmatig actualiseert en volgt.",
+        "laag2": "Bijhouden is het voortdurend aanvullen, controleren of onderhouden van iets zodat het actueel, volledig of in goede staat blijft. Dit kan betrekking hebben op gegevens, administratie, kennis, onderhoud of prestaties.",
+        "laag3": "Bijhouden is een doorlopende handeling waarbij veranderingen worden geregistreerd, gecontroleerd of verwerkt. Het doel is om informatie actueel te houden of de voortgang van een taak, project of systeem te volgen. Afhankelijk van de context kan bijhouden betrekking hebben op administratie, onderhoud, leren, planning of fysieke prestaties.",
+        "laag4": "Binnen Spark betekent bijhouden dat gegevens, kenniskaarten, logboeken, statistieken, gesprekken of andere informatie voortdurend worden bijgewerkt en gecontroleerd. Hierdoor beschikt Spark altijd over zo actueel en volledig mogelijke informatie voor analyses en besluitvorming.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik houd mijn agenda dagelijks bij.\"\n\n→ De agenda wordt regelmatig bijgewerkt.\n\nVoorbeeld 2\n\n\"Spark houdt de kennisbank automatisch bij.\"\n\n→ De kennisbank wordt voortdurend bijgewerkt en actueel gehouden."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het regelmatig actualiseren, controleren of onderhouden van informatie, werkzaamheden of systemen.",
+        "wanneer": "Wanneer gegevens, taken of ontwikkelingen actueel moeten blijven.",
+        "waar": "In administratie, projecten, software, onderwijs, werk en het dagelijks leven.",
+        "waarom": "Om informatie volledig, juist en actueel te houden.",
+        "hoe": "Door veranderingen regelmatig te registreren, controleren en verwerken."
+      },
+      "tags": [
+        "bijhouden",
+        "bijwerken",
+        "actualiseren",
+        "onderhouden",
+        "registreren",
+        "controleren",
+        "voortgang",
+        "administratie",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "administratie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "voortgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-654d8676",
+          "begrip": "inzake",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "administratie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "administratie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "handeling",
+            "neutraal",
+            "voortgang"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:43:50.314824+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-21T13:24:23.043867+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-b4bda10e03cc",
+        "extract_at": "2026-07-21T13:24:23.964256+00:00",
+        "extract_context_snippet": "n we al je inkomsten en uitgaven netjes bijhouden en terugboeken. Voor nu hoef je het inderdaad niet te doen.",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'bijhouden' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:43:46.964678+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:43:47.078517+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:43:47.086322+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:43:50.596291+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:43:50.603737+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cb5383f9",
+      "begrip": "deelt",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Deelt betekent dat iemand iets verdeelt of met anderen uitwisselt.",
+        "laag2": "Het woord deelt is de tegenwoordige tijd van het werkwoord delen. Het kan betekenen dat iets wordt opgesplitst, uitgedeeld of met anderen wordt gedeeld, zoals informatie, bezittingen of ervaringen.",
+        "laag3": "Deelt beschrijft een handeling waarbij iets geheel of gedeeltelijk aan anderen beschikbaar wordt gemaakt of wordt verdeeld. Dit kan gaan om fysieke voorwerpen, kennis, bestanden, gevoelens, tijd of digitale informatie. De betekenis hangt af van de context waarin het woord wordt gebruikt.",
+        "laag4": "Binnen Spark beschrijft deelt een actie waarbij informatie, kennis, bestanden of resultaten beschikbaar worden gemaakt voor een gebruiker, systeem of andere partij. Spark kan vastleggen wat wordt gedeeld, met wie, wanneer en onder welke voorwaarden.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zij deelt haar kennis met collega's.\"\n\n→ De kennis wordt beschikbaar gemaakt voor anderen.\n\nVoorbeeld 2\n\n\"Spark deelt de analyse met de gebruiker.\"\n\n→ De analyse wordt aan de gebruiker verstrekt."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, computers en AI-systemen.",
+        "wat": "Het verdelen of beschikbaar maken van iets.",
+        "wanneer": "Wanneer informatie, middelen of ervaringen worden uitgewisseld of verdeeld.",
+        "waar": "In gesprekken, sociale media, werk, onderwijs en digitale systemen.",
+        "waarom": "Om informatie, middelen of ervaringen met anderen beschikbaar te maken.",
+        "hoe": "Door iets te verdelen, door te geven of toegankelijk te maken."
+      },
+      "tags": [
+        "deelt",
+        "delen",
+        "verdelen",
+        "uitwisselen",
+        "delen van informatie",
+        "communicatie",
+        "kennis",
+        "handeling",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-417279b4",
+          "begrip": "verspreiden",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "delen",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5b31925",
+          "begrip": "uitwisseling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "delen",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1364c6a2",
+          "begrip": "voorbeeld",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:47:15.004207+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:44:05.616330+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-ba2602174c69",
+        "extract_at": "2026-07-20T14:44:05.719775+00:00",
+        "extract_context_snippet": "t de gegevens die jij expliciet met mij deelt of waarvoor je een specifieke opdracht geeft.   Volgens de",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'deelt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:47:10.216318+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:47:10.317430+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:47:10.554273+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:47:15.260293+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:47:15.268587+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

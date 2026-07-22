@@ -1,24 +1,37 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
-## 🟠 P1 — Trader Anker (Hybride strategie) — sessie 47 (2026-07-22)
+## ✅ Sessie 47 (2026-07-22) — Anker skeleton + deploy-safety + shadow-refactor
 
-**Doel**: Voorkomen dat de bot bovenaan een gap-up koopt. Introduceer een "anker-prijs" per markt (referentiepunt uit langere historie).
+### 🎯 Afgerond
+- **Anker-skeleton** (feature-flag OFF, `data/trade/anker/{market}.json` cache, blueprint-sectie `anker`)
+- **Anker-service** (`modules/trade/anker_service.py`): `check_gap_up`, `bootstrap_anker_from_bitvavo`, `log_anker_event`
+- **Anker shadow-logging** naar `data/trade/shadow_events/{yyyy-mm-dd}.jsonl` — matcht bestaand shadow-patroon uit `chat/shadow_observer` (dag-jsonl, `ts + event_type` shape). Eigen sub-dir zodat chat-schema niet vervuilt.
+- **Deploy-safety endpoints** (`POST /api/trade/deploy/prepare` / `/release`, `GET /deploy/status`) — voorkomt sessie-46 prod/preview race.
+- **Shadow-events read-endpoint**: `GET /api/trade/anker/shadow/events?days=7&market=BCH-EUR` met aggregate stats (`would_skip_count`, `above_threshold_count`, `avg_delta_pct`).
+- **React-crash Synapslaag** gefixt (v10_footnote_shape_001) — footnote dict-vorm veilig gerenderd.
 
-**Gekozen richting (Willem)**: **(c) Hybride** — bij startup 1x Bitvavo history fetchen (bv. 30 dagen daily candles), daarna zelf bijhouden via ticker-samples. Robuust bij restart, geen dagelijkse API-hammering, niet gevoelig voor gap-ups.
+### 🟡 Nog te doen (P1, na Willem-review)
+- **Anker Fase 2**: hook in `strategy_decision._simple_decision` na BUY-signaal, voor execute (start met `action=log_only` een weekend, dan `skip` na drempel-tune)
+- **Boot-time bootstrap** — bij backend-start voor alle actieve markets 1x anker cachen
+- **Nachtelijke reconciliatie** — anker updaten uit Bitvavo daily candles (cron/scheduler)
+- **Admin-UI**: anker per market naast huidige prijs + threshold-slider (3/5/8/12/15%)
+- **Backtest-integratie**: bestaande backtest-runner (`data/trade/backtests/`) uitbreiden met `--enable-anker --threshold=X` om drempels historisch te vergelijken → betere data dan alleen live shadow-log
 
-**Todo (nog te doen)**:
-- `modules/chat_hub/agents/coin_anker_agent.py` (of losse `trade/anker_service.py`) — leest 30d Bitvavo candles bij eerste boot, cachet in `data/trade/anker/{market}.json`.
-- Elke ticker-tick: rolling 30d moving average bijwerken via file-append; nachtelijke reconciliatie tegen Bitvavo (drift-alert).
-- Hook in `strategy_decision.py`: bij BUY-signaal → als `current_price > anker * (1 + threshold)` → skip / lower confidence.
-- Blueprint: `modules/trade/blueprints/anker.json` met `lookback_days`, `above_anker_threshold_pct`, `reconciliation_hour`, `enabled`.
-- Admin UI: toon anker per market naast huidige prijs in Trader-panel + slider voor threshold.
-- Monitor: log elke anker-skip in papertrail zodat we effect kunnen meten.
+### 🎓 Les geleerd (Willem's terechte vraag)
+"Hadden we niet zoiets?" — ja. Bestaande shadow-patronen (chat/shadow_observer + emotion pipeline_shadow) had ik moeten reuse-en i.p.v. een 3e log-locatie te bouwen (`boekhouder/logs/trader_events/`). Nu opgelost: anker-events in bestaande shadow-conventie, andere dir omdat chat-consumers chat-schema verwachten.
 
-**Test**: unit-test met synthetische gap-up (10% spike) → bot moet skippen; unit-test met normale +2% → bot mag doorgaan.
+### 🎯 Wijzigingen in bestanden
+- NEW `backend/modules/trade/anker_service.py`
+- EDIT `backend/modules/trade/blueprints/spark_trader.json` — +`anker` sectie
+- EDIT `backend/modules/trade/routes.py` — +6 endpoints (3 deploy, 3 anker incl. shadow-read)
+- EDIT `frontend/src/components/admin/SynapseTab.js` — footnote helper
+- EDIT `backend/modules/synapse/routes.py` + `chat_handler.py` — footnote dict-safe
+
+### 🎯 Filosofie geland
+"Skeleton first, hook later" — infra bouwen mét feature-flag OFF is deploy-safe. Trader gedraagt zich exact hetzelfde tot Willem de flag omzet. Elke skip logt naar shadow zodat je effect kunt meten vóór activatie.
 
 ---
-
 
 ## 🔴 P1 BACKLOG — Gatekeeper-fase (ontdekt sessie 46, dubbels-audit)
 

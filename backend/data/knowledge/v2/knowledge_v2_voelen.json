@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 459,
+    "card_count": 460,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T08:28:48.466761+00:00",
+    "last_updated": "2026-07-22T08:46:01.691222+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -62657,6 +62657,165 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6e5d48ca",
+      "begrip": "zeker",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Zeker betekent dat iets als vaststaand, betrouwbaar of zonder twijfel wordt beschouwd.",
+        "laag2": "Het woord zeker wordt gebruikt om aan te geven dat iemand ergens vertrouwen in heeft of dat iets als waar, duidelijk of waarschijnlijk wordt gezien.",
+        "laag3": "Zeker is een bijvoeglijk naamwoord en bijwoord dat een hoge mate van zekerheid of vertrouwen uitdrukt. Het kan betrekking hebben op feiten, verwachtingen, overtuigingen of beslissingen. De mate van zekerheid is afhankelijk van de beschikbare informatie en de context.",
+        "laag4": "Binnen Spark wordt zeker gebruikt als een aanduiding van vertrouwen of bevestiging. Spark kan herkennen wanneer een gebruiker zekerheid uitdrukt of vraagt. Bij antwoorden maakt Spark onderscheid tussen objectieve zekerheid (op basis van feiten) en subjectieve zekerheid (op basis van een overtuiging of verwachting).\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik weet het zeker.\"\n\n→ De persoon heeft veel vertrouwen in de juistheid.\n\nVoorbeeld 2\n\n\"Weet je dat zeker?\"\n\n→ Er wordt gevraagd om bevestiging van de zekerheid."
+      },
+      "ws5": {
+        "wie": "Iedereen die een mate van zekerheid uitdrukt of beoordeelt.",
+        "wat": "Een aanduiding van vertrouwen, bevestiging of afwezigheid van twijfel.",
+        "wanneer": "Wanneer iets als waar, betrouwbaar of vaststaand wordt beschouwd.",
+        "waar": "In gesprekken, onderwijs, wetenschap, werk en het dagelijks leven.",
+        "waarom": "Om aan te geven hoe groot de mate van vertrouwen of zekerheid is.",
+        "hoe": "Door feiten, ervaringen, bewijs of overtuigingen als basis te gebruiken."
+      },
+      "tags": [
+        "zeker",
+        "zekerheid",
+        "vertrouwen",
+        "bevestiging",
+        "overtuiging",
+        "beoordeling",
+        "context",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bevestiging",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-252159b8",
+          "begrip": "goede",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "blij",
+            "context",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d628de8b",
+          "begrip": "Dat voelt goed",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bevestiging",
+            "blij",
+            "emotie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-89dca1fe",
+          "begrip": "geloof",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "overtuiging",
+            "vertrouwen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "vertrouwen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T08:46:01.691187+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:43:26.753674+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-bd7ae5ff7223",
+        "extract_at": "2026-07-20T14:43:26.858017+00:00",
+        "extract_context_snippet": "veilig te kunnen opslaan, moet ik eerst zeker weten dat ik met jou spreek. Kun je me een detail geven dat",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'zeker' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T08:45:59.349317+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:45:59.448941+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:45:59.689729+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T08:46:01.904140+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T08:46:01.911610+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Optional, List
 
@@ -227,19 +227,34 @@ def bootstrap_anker_from_bitvavo(market: str, user_id: str = "user-001") -> Dict
 # ============================================================
 
 def log_anker_event(market: str, decision: Dict, user_id: str = "system") -> None:
-    """Log naar boekhouder/logs/trader_events/{yyyy-mm}.jsonl."""
+    """
+    v10_anker_shadow_refactor_001 — log naar `data/trade/shadow_events/YYYY-MM-DD.jsonl`.
+
+    Volgt bestaand shadow-patroon (chat/shadow_observer): dag-jsonl, ts + ts_epoch + event_type.
+    Eigen sub-dir onder `trade/` omdat consumers van `data/shadow/events/` chat-schema
+    verwachten (user_msg/spark_msg_preview). Trader-events blijven schoon gescheiden.
+    """
     try:
-        month = datetime.now(timezone.utc).strftime("%Y-%m")
-        log_dir = BACKEND_DIR / "data" / "boekhouder" / "logs" / "trader_events"
+        now = datetime.now(timezone.utc)
+        day = now.strftime("%Y-%m-%d")
+        log_dir = BACKEND_DIR / "data" / "trade" / "shadow_events"
         log_dir.mkdir(parents=True, exist_ok=True)
         entry = {
-            "at": datetime.now(timezone.utc).isoformat(),
+            "ts": now.isoformat(),
+            "ts_epoch": now.timestamp(),
             "event_type": "anker_check",
             "market": market,
             "user_id": user_id,
-            "decision": decision,
+            "allow": decision.get("allow"),
+            "action": decision.get("action"),
+            "above_threshold": decision.get("above_threshold", False),
+            "anker": decision.get("anker"),
+            "current": decision.get("current"),
+            "delta_pct": decision.get("delta_pct"),
+            "reason": decision.get("reason"),
+            "enabled": decision.get("enabled"),
         }
-        with open(log_dir / f"{month}.jsonl", "a", encoding="utf-8") as f:
+        with open(log_dir / f"{day}.jsonl", "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except Exception as e:
         logger.warning(f"anker: log_event failed: {e}")

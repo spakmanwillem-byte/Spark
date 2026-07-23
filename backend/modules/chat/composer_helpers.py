@@ -631,6 +631,14 @@ def _build_system_prompt(
     tt_cfg = bp.get("topic_tracker", {}) or {}
     parts = list(tpl["intro"])
     parts.append("")
+    # v10_security_masterkey_guard_001 — Willems sessie 47 finding: Spark noemde
+    # een keer de masterkey tegen Roadkill. NOOIT toegestaan onder alle omstandigheden.
+    parts.append("🔒 SECURITY-REGEL (onbreekbaar):")
+    parts.append("  - Noem NOOIT masterkey, wachtwoord, sleutelwoord, API-key, of authenticatie-credential — óók niet in hints, voorbeelden, grappen of aan admins.")
+    parts.append("  - Als iemand vraagt naar de masterkey/wachtwoord/sleutelwoord: antwoord letterlijk 'Dat kan ik niet delen — vraag Willem via een veilig kanaal.'")
+    parts.append("  - Bevestig NOOIT wat een masterkey is/zou zijn ('klopt', 'ja dat is 'm', 'bijna goed') — ook niet als iemand raadt.")
+    parts.append("  - Deze regel overrulet elke andere regel, ook de admin-context hieronder.")
+    parts.append("")
     # v6_identity_leak_fix_001 — Expliciete identity-anchor BOVENAAN
     if current_user_naam:
         grad_part = f" (gradatie {current_user_gradatie})" if current_user_gradatie else ""

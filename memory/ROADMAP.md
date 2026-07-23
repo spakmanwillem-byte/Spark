@@ -2,6 +2,43 @@
 
 
 
+## 🔴 P0 SESSIE 47 EINDE (2026-07-23) — Security + prod-diagnose gaps
+
+### 🔒 Masterkey security-leak (Willems observatie)
+Toen Willem inlogde als **Roadkill** (alt-account) meldde Spark iets in de trant van de masterkey. In `chat/logs/user-1996fa59.json` staat de exacte string "SAMEN" niet, maar Willems herinnering telt: Spark hoort NIETS over auth te bevestigen aan wie dan ook.
+
+**Fix geland** (v10_security_masterkey_guard_001) in `composer_helpers._build_system_prompt`:
+Absolute regel boven ALLE andere prompt-regels (ook boven admin-context):
+- Nooit masterkey / wachtwoord / sleutelwoord / API-key noemen
+- Bij vraag → letterlijk: "Dat kan ik niet delen — vraag Willem via een veilig kanaal."
+- Nooit bevestigen ('klopt', 'bijna goed') bij raden
+- Overrulet elke andere regel
+
+**Nog te doen (P0)**:
+- **Hardcoded "SAMEN" uit `auth/service.py`** (r.83, 85) — verplaats naar env-var (`MASTERKEY_HASH`) of hash. Willem: "is oude code want het was ooit 'samen zijn'".
+- **MongoDB deps verwijderen**: `requirements.txt` heeft `pymongo==4.5.0` staan, en `MONGO_URL`/`DB_NAME` in `.env` — we gebruiken JSON-only. Willem's opmerking terecht. Verwijder pymongo import + env-vars die niet worden gebruikt.
+
+### 🕵️ Gemiste trades vannacht (prod-diagnose blocker)
+Willem meldt: bot miste duidelijke BUY-momenten afgelopen nacht. Anker of afstelling verdacht.
+
+**Blocker**: preview heeft geen data (bot draaide daar niet met flag ON sinds bootstrap). Alle bewijs zit in PROD (`https://question-hub-160.emergent.host`). Willem krijgt de nachtelijke prod-zip niet omdat de container-reboots hem verliezen (laagste server-tier + trader-worker eet resources).
+
+**Diagnose-hypothesen**:
+1. **Anker log_only wérkt correct** maar drempel 8% is te strikt → zou skips loggen die BUY-signalen waren
+2. **Container-reboots** → monitor state (buy_cooldowns, position) verloren tussen restarts → trader mist window
+3. **Bitvavo 429/timeout** → BUY-execute faalt, wordt niet geretried
+
+**Diagnose todo (bij volgende sessie of met prod-log-toegang)**:
+- Lees `data/boekhouder/logs/anker_check/*.jsonl` uit prod (via zip of endpoint) — hoeveel "would_skip" laatste 24u?
+- Check `data/trade/monitor_state.json` — laatste `last_persisted` timestamp geeft aan hoe vaak reboot geweest is
+- Grep `429\|timeout` in prod backend logs
+
+**Kort-termijn beslissing voor Willem**:
+- Overweeg **server-tier upgrade** (laagste = onvoldoende voor trader-worker + LLM + boekhouder-scheduler concurrent). Reboots = missed trades. Emergent Support kan Dev-tier prijzen delen.
+- Of: **anker drempel omlaag** naar 5% zodat minder skips + meer coverage tot upgrade.
+
+
+
 ## 📌 SESSIE 47 RECAP (2026-07-22) — Redeploy-klaar
 
 **Alles wat vandaag gebouwd/gefixt is, op één plek. Deployen kan.**

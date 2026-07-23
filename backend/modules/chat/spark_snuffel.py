@@ -30,6 +30,18 @@ from modules.core.storage import load_json
 
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 
+# v6_snuffel_code_001 — sandboxed roots voor source-file search
+CODE_ROOTS = [
+    Path("/app/backend/modules"),
+    Path("/app/backend/config"),
+    Path("/app/backend/data/blueprints"),
+    Path("/app/backend/data/personality"),
+    Path("/app/memory"),
+]
+CODE_EXTENSIONS = {".py", ".md", ".json", ".txt", ".yaml", ".yml"}
+CODE_SKIP_DIRS = {"__pycache__", "node_modules", ".git", "build", "dist", "sandbox"}
+CODE_MAX_FILE_BYTES = 200_000  # skip enorme bestanden
+
 # ════════════════════════════════════════════════════════════
 # TRIGGER DETECTIE
 # ════════════════════════════════════════════════════════════
@@ -266,6 +278,60 @@ def _search_chat_logs(query: str, viewer_id: Optional[str], max_results: int = 3
 # HOOFD-FUNCTIE
 # ════════════════════════════════════════════════════════════
 
+def _search_code_files(query: str, max_results: int = 5) -> List[Dict]:
+    """v6_snuffel_code_001 — grep-achtige zoek door Spark's eigen source/config files."""
+    if not query or len(query) < 2:
+        return []
+    q_lower = query.lower()
+    hits: List[Tuple[int, Dict]] = []
+    for root in CODE_ROOTS:
+        if not root.exists():
+            continue
+        for path in root.rglob("*"):
+            if not path.is_file():
+                continue
+            if path.suffix.lower() not in CODE_EXTENSIONS:
+                continue
+            if any(p in CODE_SKIP_DIRS for p in path.parts):
+                continue
+            try:
+                if path.stat().st_size > CODE_MAX_FILE_BYTES:
+                    continue
+                text = path.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
+            t_lower = text.lower()
+            if q_lower not in t_lower:
+                continue
+            # Score = aantal matches (capped) + bonus voor filename-match
+            occur = t_lower.count(q_lower)
+            score = min(100, occur * 10)
+            if q_lower in path.name.lower():
+                score += 30
+            # Pak eerste match-regel als snippet
+            idx = t_lower.find(q_lower)
+            line_start = text.rfind("\n", 0, idx) + 1
+            line_end = text.find("\n", idx)
+            snippet = text[line_start:line_end if line_end != -1 else idx + 120].strip()
+            hits.append((score, {
+                "path": str(path),
+                "rel_path": str(path.relative_to(Path("/app"))),
+                "occurrences": occur,
+                "snippet": snippet[:200],
+            }))
+    hits.sort(key=lambda x: -x[0])
+    return [h[1] for h in hits[:max_results]]
+
+
+def _search_namen(query: str, max_results: int = 5) -> List[Dict]:
+    """v6_namen_001 — doorzoek namen-blueprint."""
+    try:
+        from modules.namen.service import search_names
+        return search_names(query, max_results=max_results)
+    except Exception:
+        return []
+
+
 def execute_snuffel(query: str, viewer_id: Optional[str] = None, scope: Optional[List[str]] = None) -> Dict:
     """Doorzoek alle bronnen voor query en geef gestructureerd resultaat.
 
@@ -274,7 +340,7 @@ def execute_snuffel(query: str, viewer_id: Optional[str] = None, scope: Optional
     if not query or len(query.strip()) < 2:
         return {"success": False, "error": "query te kort", "query": query}
 
-    scope = scope or ["kb", "notes", "personality", "chat"]
+    scope = scope or ["kb", "notes", "personality", "chat", "code", "namen"]
     started = datetime.now(timezone.utc)
     results: Dict[str, List[Dict]] = {}
     if "kb" in scope:
@@ -285,6 +351,10 @@ def execute_snuffel(query: str, viewer_id: Optional[str] = None, scope: Optional
         results["personality"] = _search_personality(query, max_results=3)
     if "chat" in scope:
         results["chat"] = _search_chat_logs(query, viewer_id, max_results=3)
+    if "code" in scope or "files" in scope or "bestanden" in scope:
+        results["code"] = _search_code_files(query, max_results=5)
+    if "namen" in scope or "names" in scope:
+        results["namen"] = _search_namen(query, max_results=5)
 
     total = sum(len(v) for v in results.values())
     elapsed_ms = int((datetime.now(timezone.utc) - started).total_seconds() * 1000)
@@ -341,5 +411,21 @@ def format_snuffel_result_for_chat(result: Dict) -> str:
         for h in chat_hits:
             ts = (h.get('ts') or '')[:10]
             lines.append(f"  • [{ts}] {h.get('role','?')}: \"{h['snippet'][:120]}\"")
+        lines.append("")
+
+    code_hits = result["results"].get("code", [])
+    if code_hits:
+        lines.append(f"**Bestanden/Code ({len(code_hits)}):**")
+        for h in code_hits:
+            lines.append(f"  • `{h['rel_path']}` ({h['occurrences']}× match)")
+            if h.get('snippet'):
+                lines.append(f"    {h['snippet'][:140]}")
+        lines.append("")
+
+    namen_hits = result["results"].get("namen", [])
+    if namen_hits:
+        lines.append(f"**Namen ({len(namen_hits)}):**")
+        for h in namen_hits:
+            lines.append(f"  • **{h['naam']}** — {h.get('categorie','?')}")
 
     return "\n".join(lines)

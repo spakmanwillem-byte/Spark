@@ -250,6 +250,15 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                     📥 <strong>{kbv2Stats.inbox_count || 0}</strong> kaarten in inbox wachten op indeling
                   </p>
                 </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); onNavigate('namen', '/spark/namen'); }}
+                  className="w-full bg-purple-500/10 border border-purple-500/30 rounded-lg p-2 mb-2 hover:bg-purple-500/20 transition text-left"
+                  data-testid="btn-open-namen"
+                >
+                  <p className="text-[10px] text-purple-300">
+                    🏷️ <strong>Namen-lade</strong> — voor- & achternamen, koosnamen (klik om te openen)
+                  </p>
+                </button>
                 {/* v6_kb_v1_v2_split_001 — Toon ook KB v1 totaal voor context */}
                 {knowledgeStats && (
                   <div className="bg-slate-800/30 rounded-lg p-2 text-[10px] text-slate-400">

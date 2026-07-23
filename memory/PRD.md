@@ -1,5 +1,61 @@
 # Spark Core 2.0 — PRD
 
+## Sessie 48 (2026-02-01) — P0 opruim + Namen-lade + File search uitgebreid
+
+### v10_masterkey_env_001 — Masterkey uit code naar env
+- `masterkey` was hardcoded ("SAMEN") in `modules/auth/service.py` regel 83/85.
+- Nu: `SPARK_MASTERKEY` in `/app/backend/.env`, geladen via `os.environ.get()` (helper `_get_masterkey()` in `auth/service.py`).
+- Login met verkeerde masterkey blijft afgewezen; login met correcte sleutelwoord ongewijzigd.
+- Gebruiker-record blijft `masterkey: "SAMEN"` als flag (nu vergeleken met env-waarde).
+
+### v10_pymongo_cleanup_001 — Ongebruikte MongoDB dependencies verwijderd
+- `pymongo` (4.5.0) en `motor` (3.3.1) uninstalled + verwijderd uit `backend/requirements.txt` via `pip freeze`.
+- **BELANGRIJK**: `MONGO_URL` en `DB_NAME` blijven in `/app/backend/.env` als dummy — Emergent supervisor crasht anders. App gebruikt ze niet.
+- Verified: geen `import motor` of `import pymongo` in de codebase.
+
+### v6_namen_001 — Namen-lade (blueprint, niet in KB v2)
+Willem's idee: Spark moet automatisch namen leren classificeren. Beslissing: **blueprint**, geen extra KB-lade — namen zijn data, geen gedrag.
+
+**Componenten**:
+- `/app/backend/data/blueprints/namen.json` — seed met 7 namen (Willem, Spakman, Lotus, Maaike, Heidi, Roadkill, Spark).
+- Categorieën: `voornaam_man`, `voornaam_vrouw`, `voornaam_unisex`, `achternaam`, `koosnaam`, `gamertag`, `onbekend`.
+- `modules/namen/service.py`: `list_names`, `get_name`, `add_name`, `delete_name`, `search_names`, `classify_via_llm`, `stats`.
+- `modules/namen/routes.py`: `GET /api/namen/list`, `GET /api/namen/search`, `GET /api/namen/stats`, `POST /api/namen/add`, `POST /api/namen/classify`, `DELETE /api/namen/{naam}`.
+- Frontend: `NamenPage.js` op route `/spark/namen`, dashboard-link "🏷️ Namen-lade" in KB v2 Lades kaart.
+- Integratie met snuffel: scope=`namen` doorzoekt de lade automatisch.
+
+**AI-classify**: `POST /api/namen/classify` roept LLM aan (Groq/Cerebras) om onbekende naam te categoriseren. Optioneel `auto_add:true` om direct op te slaan.
+
+### v6_snuffel_code_001 — File/code search binnen snuffel
+Willem's idee: Bestanden-tab als Spark's zoekmachine.
+
+`spark_snuffel.py` uitgebreid met `_search_code_files()` — sandboxed grep door:
+- `/app/backend/modules`, `/app/backend/config`, `/app/backend/data/blueprints`, `/app/backend/data/personality`, `/app/memory`.
+- Extensies: `.py, .md, .json, .txt, .yaml, .yml`. Skip: `__pycache__, node_modules, .git, build, dist, sandbox`.
+- Max 200 KB per file, top-5 hits met snippet + occurrences count.
+
+Scope `code`/`files`/`bestanden` toegevoegd aan `execute_snuffel()`. Default scope nu: `kb + notes + personality + chat + code + namen`.
+
+### Testing
+- Backend curl: masterkey login werkt, verkeerde key afgewezen, sleutelwoord-login onaangeroerd (regressie), Namen add/search/classify werken, snuffel geeft code+namen hits terug.
+- Frontend screenshot: `/spark/namen` rendert 8 namen met filters, add-form en AI-classify knop.
+- Lint: 0 issues in `modules/namen/`, `spark_snuffel.py`, `auth/service.py`.
+
+### Files changed
+- `/app/backend/.env` (+ SPARK_MASTERKEY)
+- `/app/backend/requirements.txt` (- pymongo, - motor)
+- `/app/backend/modules/auth/service.py` (masterkey uit env)
+- `/app/backend/modules/chat/spark_snuffel.py` (code + namen scope)
+- `/app/backend/data/blueprints/namen.json` (NEW)
+- `/app/backend/modules/namen/` (NEW: __init__.py, _meta.json, service.py, routes.py)
+- `/app/backend/server.py` (+ namen_router)
+- `/app/frontend/src/components/workspace/NamenPage.js` (NEW)
+- `/app/frontend/src/App.js` (+ namen route)
+- `/app/frontend/src/components/dashboard/DashboardPage.js` (+ namen-link)
+
+---
+
+
 
 ## Sessie 47 (2026-07-22) — Deploy-safety + Anker skeleton (feature-flag off)
 

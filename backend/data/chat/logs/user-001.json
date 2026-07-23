@@ -53410,11 +53410,79 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2078
       }
+    },
+    {
+      "id": "conv-db729fb8",
+      "timestamp": "2026-07-23T09:49:58.393906+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 17 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2079
+      }
+    },
+    {
+      "id": "conv-29f43ab8",
+      "timestamp": "2026-07-23T09:49:58.443809+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2080
+      }
+    },
+    {
+      "id": "conv-1a58c02c",
+      "timestamp": "2026-07-23T10:03:11.522611+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zoek in bestanden naar anker",
+      "spark_response": "**Bestand**: Een bestand is een verzameling gegevens die op een computer of opslagmedium wordt opgeslagen.\n\n**Anker**: Een anker is een zwaar object dat wordt gebruikt om een schip of boot op zijn plaats te houden.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **zoek** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Bestand"
+          },
+          {
+            "begrip": "Anker"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "zoek"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "test-namen",
+        "gesprek_nummer": 2081
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2078,
-    "last_updated": "2026-07-22T15:55:22.987816+00:00"
+    "total_conversations": 2081,
+    "last_updated": "2026-07-23T10:03:11.522611+00:00"
   }
 }

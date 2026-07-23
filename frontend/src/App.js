@@ -17,6 +17,7 @@ import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { ArchiefPage } from "./components/workspace/ArchiefPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { KennisbankV2Page } from "./components/workspace/KennisbankV2Page";
+import { NamenPage } from "./components/workspace/NamenPage";
 import { RoadmapPage } from "./components/workspace/RoadmapPage";
 import { DagboekPage } from "./components/workspace/DagboekPage";
 import { NotitiesPage } from "./components/workspace/NotitiesPage";
@@ -53,6 +54,7 @@ function AppContent() {
       '/knowledge': 'knowledge-v2',
       '/knowledge-legacy': 'knowledge',
       '/spark/kennisbank-v2': 'knowledge-v2',
+      '/spark/namen': 'namen',
       '/calendar': 'calendar',
       '/roadmap': 'roadmap',
       '/dagboek': 'dagboek',
@@ -228,6 +230,8 @@ function AppContent() {
         return <KennisbankPage onNavigate={handleNavigate} />;
       case 'knowledge-v2':
         return <KennisbankV2Page onNavigate={handleNavigate} />;
+      case 'namen':
+        return <NamenPage onNavigate={handleNavigate} />;
       case 'roadmap':
         return <RoadmapPage onNavigate={handleNavigate} />;
       case 'dagboek':

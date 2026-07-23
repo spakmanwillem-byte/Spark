@@ -1,0 +1,21 @@
+{
+  "module": "namen",
+  "titel": "Namen-lade",
+  "beschrijving": "Spark's naam-classificatie systeem. Slaat voornamen (m/v/unisex), achternamen, koosnamen en gamertags op. Auto-learn kan nieuwe namen classificeren via LLM.",
+  "auteur": "system",
+  "versie": "1.0",
+  "aangemaakt": "2026-02-01",
+  "endpoints": [
+    "GET /api/namen/list",
+    "GET /api/namen/search?q=...",
+    "POST /api/namen/add",
+    "POST /api/namen/classify",
+    "DELETE /api/namen/{naam}"
+  ],
+  "data_file": "/app/backend/data/blueprints/namen.json",
+  "voetnoten": [
+    "Namen leven in een blueprint (JSON), niet in KB v2 lades — omdat ze data zijn, geen gedrag.",
+    "Auto-classify gebruikt de bestaande LLM router (Groq/Cerebras) voor 1-shot classificatie.",
+    "spark_snuffel doorzoekt deze lade automatisch bij scope='namen'."
+  ]
+}

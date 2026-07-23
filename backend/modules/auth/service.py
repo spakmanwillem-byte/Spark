@@ -2,6 +2,7 @@
 Spark Auth Module - Service Layer
 All authentication logic in one place
 """
+import os
 from typing import Optional, Tuple, List, Dict
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -9,6 +10,11 @@ from pathlib import Path
 from modules.core.storage import load_json, save_json
 from config.settings import USERS_FILE, GRADATIES_FILE, SESSION_TIMEOUT_MINUTES
 from .models import User, UserCreate
+
+
+def _get_masterkey() -> str:
+    """Load masterkey from env at call-time (allows hot-swap in dev)."""
+    return (os.environ.get("SPARK_MASTERKEY") or "").strip().upper()
 
 
 class AuthService:
@@ -79,10 +85,12 @@ class AuthService:
         if not matching_users:
             return None, False
         
-        # Check masterkey first
-        if masterkey and masterkey.upper() == "SAMEN":
+        # Check masterkey first (loaded from env — SPARK_MASTERKEY)
+        env_mk = _get_masterkey()
+        if masterkey and env_mk and masterkey.strip().upper() == env_mk:
             for user in matching_users:
-                if user.get("masterkey") == "SAMEN":
+                user_mk = (user.get("masterkey") or "").strip().upper()
+                if user_mk and user_mk == env_mk:
                     print(f"[AUTH] Masterkey login: {user.get('naam')}")
                     return user, True
             return None, False

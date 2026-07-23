@@ -103,6 +103,9 @@ app.include_router(knowledge_router, prefix="/api")
 from modules.files import files_router
 app.include_router(files_router, prefix="/api")
 
+from modules.namen import namen_router
+app.include_router(namen_router, prefix="/api")
+
 from modules.user_archive import user_archive_router
 app.include_router(user_archive_router, prefix="/api")
 

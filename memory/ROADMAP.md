@@ -1,6 +1,68 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## 🟡 SESSIE 48 (2026-02-01) — Entity Engine (idea, gepland niet nu)
+
+### 🧬 Van "Namen-lade" naar Entity Engine
+
+**Trigger**: Sessie 48 bouwde een `namen`-module (blueprint + service + LLM-classify + UI + snuffel). Willem's inzicht: *"dezelfde structuur werkt straks ook voor recepten, boeken, plaatsen, bedrijven..."*. Chat-analyse bevestigde: dit is per ongeluk een **generieke entity-module** geworden.
+
+### Voorgestelde architectuur (WACHT tot 2e entiteit concreet nodig is)
+
+```
+/api/entities/{type}/*
+  ├── namen         → voornaam_m/v/unisex, achternaam, koosnaam, gamertag
+  ├── recepten      → voorgerecht, hoofdgerecht, dessert, drank, saus
+  ├── bedrijven     → klant, leverancier, KVK, branche
+  ├── plaatsen      → land, stad, adres, POI
+  ├── boeken        → fictie, non-fictie, referentie
+  ├── dieren        → soort, huisdier, wild
+  └── producten     → digitaal, fysiek, dienst
+```
+
+**Gedeelde infrastructuur per type**:
+- Blueprint JSON in `/data/blueprints/{type}.json` — schema + categorieën + seed data
+- `_meta.json` per module (footnotes / notities / auteur)
+- Generieke CRUD service (list / add / delete / search / classify_via_llm / stats)
+- Auto-registratie in `spark_snuffel` scope
+- Dynamische UI-page (rendert categorieën uit blueprint schema)
+
+**Combi: footnote + metadata + blueprint** (Willem's woorden)
+- Blueprint = **data-schema** (welke categorieën bestaan, seed content)
+- Meta = **module-eigenschap** (auteur, endpoints, versie, wanneer aangemaakt)
+- Footnote = **contextuele opmerkingen** waarom keuzes zo zijn (leesbaar voor Spark)
+- Alle drie zichtbaar/leesbaar voor Spark zelf → transparantie behouden
+
+### ⚠️ Agent-coördinatie nodig
+Zodra Entity Engine live gaat mogen **niet meerdere modules langs elkaar** aan dezelfde entiteit werken (bv. `namen` én `personalia_extraction_service` die beide personen extracten uit chat). Oplossing sluit aan bij bestaand **ChatHub Master/Leaf** patroon:
+
+```
+Entity Hub (Master)
+  ├── namen_agent       (owns: /entities/namen)
+  ├── recepten_agent    (owns: /entities/recepten)
+  ├── plaatsen_agent    (owns: /entities/plaatsen)
+  ...
+```
+
+- **1 agent per entiteits-type** = single writer, geen races
+- **Auto-learn hooks** (bv. capitalised token in chat → naam-agent classificeert) lopen via de hub, niet direct
+- **Cross-entity queries** (bv. "wie kookt welk recept?") gaan via Master
+
+### Beslissing (2026-02-01)
+- **Nu NIET refactoren**. `namen` blijft standalone (werkt goed).
+- **Wachten op 2e concreet voorbeeld** (waarschijnlijk `recepten`) → dan pas Entity Engine bouwen op basis van 2 real-world requirements i.p.v. hypothese.
+- **Roadmap-item aanmaken** (dit blok) zodat context niet verloren gaat.
+
+### Migratie-strategie (voor later)
+1. `modules/entities/` maken als generieke engine met type-registry
+2. `namen` intern doorsturen naar `entities/namen` (backward compat: `/api/namen/*` blijft werken)
+3. Nieuwe types = 1 blueprint JSON + 1 regel in registry
+4. Entity Hub agent-laag bouwen wanneer we ≥3 types hebben (anders overengineered)
+
+---
+
+
+
 
 ## 🔴 P0 SESSIE 47 EINDE (2026-07-23) — Security + prod-diagnose gaps
 

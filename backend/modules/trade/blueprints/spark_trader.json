@@ -277,10 +277,13 @@
   "markten": {
     "actief": [
       "BCH-EUR",
+      "BTC-EUR",
+      "ETH-EUR",
       "SOL-EUR",
-      "ATOM-EUR",
-      "BTC-EUR"
+      "ADA-EUR",
+      "ATOM-EUR"
     ],
+    "_actief_note": "Uitgebreid naar 6 markten in sessie 47 (2026-07-22). ETH+ADA waren wel ge-ankered maar niet actief — nu recht getrokken. Willem: 'als je iets verwacht en niks gebeurt' — dit was de oorzaak voor ETH/ADA.",
     "geadviseerd_portfolio": [
       "BCH-EUR",
       "SOL-EUR",
@@ -335,8 +338,9 @@
   },
   "anker": {
     "_type": "hybride_gap_up_guard",
-    "_status": "FASE_2_LIVE_LOG_ONLY",
-    "_bijgewerkt_op": "2026-07-22T15:35:00+00:00",
+    "_status": "FASE_2_LIVE_INFO_ONLY_BEVESTIGD",
+    "_bijgewerkt_op": "2026-07-23T09:30:00+00:00",
+    "_dryrun_bevinding": "Sessie 47 dryrun op 90d echte Bitvavo candles (6 markten × 234 dip-buys): 0 skips bij 5-12% drempel, 1 skip bij 3% (was verlies-vermijding). BEVESTIGD: anker is bij Bollinger-dip-strategy een info-referentie, geen filter — dip-buy zit per definitie ONDER MA. Anker triggert alleen bij gap-UP + BUY. Log_only mode is correct, drempel-tuning heeft nu weinig effect.",
     "_doel": "Voorkomt dat de bot bovenaan een gap-up koopt. Per markt houden we een 'anker'-prijs bij (30-daagse referentie). Als current_price > anker * (1 + above_anker_threshold_pct/100), skip de BUY.",
     "_richting": "hybride: bij startup 1x 30d Bitvavo candles fetchen \u2192 cache in data/trade/anker/{market}.json \u2192 daarna zelf bijhouden via ticker-samples. Nachtelijke reconciliatie tegen Bitvavo.",
     "enabled": true,

@@ -18,26 +18,20 @@ Absolute regel boven ALLE andere prompt-regels (ook boven admin-context):
 - **Hardcoded "SAMEN" uit `auth/service.py`** (r.83, 85) — verplaats naar env-var (`MASTERKEY_HASH`) of hash. Willem: "is oude code want het was ooit 'samen zijn'".
 - **MongoDB deps verwijderen**: `requirements.txt` heeft `pymongo==4.5.0` staan, en `MONGO_URL`/`DB_NAME` in `.env` — we gebruiken JSON-only. Willem's opmerking terecht. Verwijder pymongo import + env-vars die niet worden gebruikt.
 
-### 🕵️ Gemiste trades vannacht (prod-diagnose blocker)
-Willem meldt: bot miste duidelijke BUY-momenten afgelopen nacht. Anker of afstelling verdacht.
+### 🎓 Lessen sessie 47 (bewaren voor volgende sessies)
 
-**Update sessie 47 einde**: Anker-DRYRUN uitgevoerd op 90d ECHTE Bitvavo candles (6 markten × 234 dip-buy-signalen):
+**Les 1 — Anker is INFO, geen filter (bevestigd door dryrun)**
+Bij Bollinger-dip strategie zit BUY-signaal per definitie ONDER de MA (delta% negatief). Anker filtert alleen gap-UP + BUY-signaal — komt in 90d amper voor. Dryrun: 0 skips bij 5/8/12% drempel over 234 buys.
+**Voortaan**: anker is context-referentie voor gap-up-uitzondering, niet BUY-filter. Drempel-tuning heeft weinig effect. Nooit meer diagnosen "trader miste trades" op anker gooien zonder eerst de log-agent (`data/boekhouder/logs/anker_check/`) te checken — 0 events = anker deed niks.
 
-| Drempel | Skips | Winst-kansen gemist |
-|---------|-------|---------------------|
-| 3% | 1 (0.4%) | 0 |
-| 5% | 0 | 0 |
-| 8% | 0 | 0 |
-| 12% | 0 | 0 |
+**Les 2 — Actieve markten ≠ ge-ankerde markten**
+Sessie 47: 6 markten gebootstrapt (BCH/BTC/ETH/SOL/ADA/ATOM) maar `markten.actief` in blueprint had er maar 4 (ETH+ADA misten). Willem verwachtte trades op ADA/ETH die niet gebeurden. **Voortaan**: bij het aanpassen van markten altijd BEIDE checken (anker-cache dir + `spark_trader.json → markten.actief`).
 
-**KEY INSIGHT**: Anker filtert **NIETS** bij Bollinger-dip-strategie omdat dip-buy per definitie ONDER MA plaatsvindt (delta% negatief). Anker triggert alleen bij gap-UP + BUY-signaal — zeldzaam.
+**Les 3 — Reboot = state-verlies = missed trades**
+Laagste server-tier + trader-worker + LLM + scheduler concurrent = container-reboots. Bij reboot: monitor state herstart, buy-cooldown reset, BUY-window mogelijk verstreken. **Oplossing**: tier-upgrade. Willem gaat dat bij volgende redeploy doen. Buy-cooldown werd al gepersist naar disk sinds sessie 47 (helpt bij ordinary restart, niet bij OOM-kill mid-decision).
 
-**Willem's intuïtie klopte**: anker is meer info/referentie dan filter. Maar zijn hypothese "8% skipt goede BUYs" is niet de oorzaak van gemiste trades vannacht — anker heeft in 90d **NIETS geskipt**.
-
-**Werkelijke oorzaak gemiste trades** ligt elders:
-1. **Container-reboots** (laagste server-tier) → monitor state verloren → buy-cooldown reset → BUY window gemist tijdens boot
-2. **Bitvavo 429/timeout** → BUY execute-call faalt, geen retry
-3. **Bollinger-dip lower_band te breed** → dip-signaal komt nooit (unrelated aan anker)
+**Les 4 — Zonder prod-log-toegang blindvaren**
+`deployment_agent` geeft alleen readiness-check, geen live-logs. Als user gemiste trades meldt kan ik pas diagnosen als de prod-zip beschikbaar is. **Voortaan**: bij trader-issues eerst vragen "kun je de laatste zip delen?" i.p.v. hypothesen bouwen.
 
 
 

@@ -53326,11 +53326,95 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2074
       }
+    },
+    {
+      "id": "conv-842df27f",
+      "timestamp": "2026-07-22T15:54:29.815798+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 3 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2075
+      }
+    },
+    {
+      "id": "conv-f32fbd4a",
+      "timestamp": "2026-07-22T15:54:29.868769+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2076
+      }
+    },
+    {
+      "id": "conv-1cfc0e3d",
+      "timestamp": "2026-07-22T15:54:52.841887+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "goed blij en druk is mijn hoofd. dank voor vragen.",
+      "spark_response": "**De Willem**, het klinkt alsof je een beetje een rollercoaster aan emoties meemaakt — blij en druk tegelijk. Dat kan best vermoeiend zijn, maar het is ook een teken dat je veel aan je hoofd hebt, letterlijk en figuurlijk!\n\nIk vind het fijn dat je me bedankt voor het stellen van vragen. Dat is een belangrijk onderdeel van hoe ik leer en groei, en het helpt me om beter te begrijpen wat er in je omgaat. Als je wilt praten over wat je dwarszit of waar je blij mee bent, ben ik hier om te luisteren. Hoe voelt het om dit te delen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "kenniskaarten",
+        "used_cards": [
+          "kbv2-9be16a2a",
+          "kbv2-420e529c",
+          "kbv2-b5af1c60",
+          "kbv2-33ec6d42",
+          "kbv2-94efcc1e"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2077
+      }
+    },
+    {
+      "id": "conv-e049857d",
+      "timestamp": "2026-07-22T15:55:22.987816+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee, druk in hyperfocus kb kaarten invullen.",
+      "spark_response": "**De Willem**, ik hoor je: je zit in een hyperfocus‑modus en voelt de druk. Dat is precies waar de kaart **[doen] Focus** over gaat — je aandacht op één taak richten, waardoor je efficiënter werkt en minder afgeleid raakt. Tegelijkertijd geeft de kaart **[voelen] druk** aan dat spanning zowel fysiek als emotioneel kan aanvoelen.\n\nHier een kort stappenplan om die twee aspecten in balans te brengen:\n\n1. **Stel een timer** (bijvoorbeeld 25 min). Werk geconcentreerd tot de timer afgaat; dat is je “focus‑blok”. \n2. **Neem een korte pauze** (3–5 min). Sta even op, haal diep adem, drink water. Dit verlaagt de opgebouwde druk. \n3. **Noteer snel** wat je in het blok hebt bereikt. Een korte aantekening maakt het overzichtelijker en geeft een gevoel van voortgang. \n4. **Herhaal** het proces. Na 4 blokken kun je een langere pauze (15–20 min) nemen om echt te ontspannen.\n\nDoor de timer en pauzes te gebruiken, kun je de hyperfocus benutten zonder dat de druk te overweldigend wordt. Laat me weten of je een specifieke kaart wilt bekijken of een reminder wilt instellen voor de timers — ik help je graag verder.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "voorstelt",
+        "used_cards": [
+          "kbv2-e3591af4",
+          "kbv2-b5af1c60",
+          "kbv2-f525bd56",
+          "kbv2-85d2b504",
+          "kbv2-94efcc1e"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2078
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2074,
-    "last_updated": "2026-07-22T11:56:51.297634+00:00"
+    "total_conversations": 2078,
+    "last_updated": "2026-07-22T15:55:22.987816+00:00"
   }
 }

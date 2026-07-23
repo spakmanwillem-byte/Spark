@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 476,
+    "card_count": 482,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:36:38.276905+00:00",
+    "last_updated": "2026-07-22T16:14:01.880898+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -65439,6 +65439,1034 @@
             "result": {
               "n_found": 5,
               "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d19d89ad",
+      "begrip": "bezigheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bezigheid is iets waarmee iemand op een bepaald moment bezig is of regelmatig zijn tijd doorbrengt.",
+        "laag2": "Een bezigheid is een activiteit, taak of hobby die iemand uitvoert. Bezigheden kunnen ontspannend, leerzaam, creatief, sociaal of werkgerelateerd zijn.\n",
+        "laag3": "Een bezigheid geeft invulling aan tijd en kan vrijwillig of verplicht zijn. Voorbeelden zijn werken, studeren, sporten, lezen, gamen, koken, wandelen, tuinieren of muziek maken. De keuze voor een bezigheid wordt vaak beïnvloed door interesses, doelen, verantwoordelijkheden en de beschikbare tijd. Een prettige bezigheid kan bijdragen aan ontspanning, voldoening en welzijn.\n",
+        "laag4": "Binnen Spark wordt bezigheid herkend als een activiteit waarmee iemand tijd besteedt of een doel nastreeft. Spark kan relaties leggen tussen:\n\nActiviteit\nHobby\nWerk\nStudie\nVrije tijd\nOntspanning\nSport\nLezen\nSchrijven\nGamen\nKoken\nMuziek\nWandelen\nCreativiteit\nInteresse\nTijdsbesteding\nRoutine\nDagbesteding\nProductiviteit\nWelzijn\n\nSpark gebruikt de context om te bepalen of een bezigheid betrekking heeft op werk, leren, ontspanning of een andere vorm van tijdsbesteding.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Programmeren is zijn favoriete bezigheid.\"\n\n→ Programmeren is een hobby of activiteit die hij graag doet.\n\nVoorbeeld 2\n\n\"Na het werk zoekt ze een rustige bezigheid.\"\n\n→ Ze zoekt een ontspannende activiteit."
+      },
+      "ws5": {
+        "wie": "Mensen van alle leeftijden.",
+        "wat": "Een activiteit, taak of hobby waarmee iemand bezig is.",
+        "wanneer": "Tijdens werk, studie, vrije tijd of dagelijkse activiteiten.",
+        "waar": "Thuis, op school, op het werk, buiten of online.",
+        "waarom": "Om een doel te bereiken, te leren, te werken, te ontspannen of plezier te hebben.",
+        "hoe": "Door een activiteit of taak uit te voeren."
+      },
+      "tags": [
+        "bezigheid",
+        "activiteit",
+        "hobby",
+        "werk",
+        "studie",
+        "vrije tijd",
+        "ontspanning",
+        "tijdsbesteding",
+        "interesse",
+        "routine",
+        "dagbesteding",
+        "productiviteit",
+        "welzijn",
+        "context",
+        "emotie",
+        "neutraal",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-603772ce",
+          "begrip": "bezigheid",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "activiteit",
+            "bezigheid",
+            "context",
+            "emotie",
+            "hobby"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-905fa1a9",
+          "begrip": "spelletje",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9054e758",
+          "begrip": "comfort",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "ontspanning",
+            "welzijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-dbe5d5f3",
+          "begrip": "vermaak",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "activiteit",
+            "blij",
+            "emotie",
+            "hobby",
+            "ontspanning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:01:29.808434+00:00",
+        "vorige_versie_v1": "kb-skel-d19d89ad",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:23.406505+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:01:26.470532+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:01:26.479003+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:01:29.999157+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:01:30.007704+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:01:26.370147+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c9e1eb3a",
+      "begrip": "gezellig",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gezellig betekent dat iets of iemand een prettige, warme of aangename sfeer geeft of oproept.",
+        "laag2": "Gezellig beschrijft een gevoel van comfort, verbondenheid en plezier. Het kan betrekking hebben op mensen, plaatsen, activiteiten of momenten waarop men zich op zijn gemak voelt.\n",
+        "laag3": "Het woord gezellig is een typisch Nederlands begrip zonder één directe vertaling in veel andere talen. Het verwijst naar een positieve sociale of persoonlijke sfeer. Een gezellige avond kan ontstaan door goed gezelschap, een fijne omgeving, lekker eten, een gesprek of een gezamenlijke activiteit. Ook een ruimte, inrichting of evenement kan als gezellig worden ervaren. Wat als gezellig wordt gezien, verschilt per persoon en cultuur.",
+        "laag4": "Binnen Spark wordt gezellig herkend als een positieve beleving van sfeer en samenzijn. Spark kan relaties leggen tussen:\n\nSfeer\nSamenzijn\nGezelschap\nVrienden\nFamilie\nVerbinding\nOntspanning\nPlezier\nWarmte\nComfort\nGastvrijheid\nFeest\nGesprek\nEten\nDrinken\nThuis\nActiviteit\nWelzijn\nPositieve ervaring\nSociale interactie\n\nSpark gebruikt de context om te bepalen of gezellig betrekking heeft op een persoon, plaats, activiteit of gebeurtenis.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het was een gezellige avond met vrienden.\"\n\n→ De avond werd als prettig en aangenaam ervaren.\n\nVoorbeeld 2\n\n\"Dit café is erg gezellig.\"\n\n→ De sfeer van het café wordt als warm en uitnodigend ervaren."
+      },
+      "ws5": {
+        "wie": "Mensen, families, vrienden, collega's en gasten.",
+        "wat": "Een beschrijving van een prettige, warme of aangename sfeer.",
+        "wanneer": "Wanneer een situatie als fijn, ontspannen of sociaal wordt ervaren.",
+        "waar": "Thuis, op een feest, in een café, restaurant, op het werk of tijdens een activiteit.",
+        "waarom": "Omdat de sfeer, het gezelschap of de omgeving een positief gevoel oproept.",
+        "hoe": "Door een combinatie van een prettige omgeving, sociale interactie en een aangename beleving."
+      },
+      "tags": [
+        "gezellig",
+        "sfeer",
+        "samenzijn",
+        "gezelschap",
+        "vrienden",
+        "familie",
+        "verbinding",
+        "ontspanning",
+        "plezier",
+        "warmte",
+        "comfort",
+        "gastvrijheid",
+        "feest",
+        "gesprek",
+        "eten",
+        "drinken",
+        "welzijn",
+        "sociale interactie",
+        "positief",
+        "context",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-796b103d",
+          "begrip": "feest",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "blij",
+            "context",
+            "drinken",
+            "emotie",
+            "eten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-028cb626",
+          "begrip": "warm",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "comfort",
+            "emotie",
+            "gezellig",
+            "sfeer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-532d6a37",
+          "begrip": "plezier",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "plezier",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9054e758",
+          "begrip": "comfort",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "comfort",
+            "emotie",
+            "neutraal",
+            "ontspanning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:04:19.826026+00:00",
+        "vorige_versie_v1": "kb-skel-c9e1eb3a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.383154+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:04:13.517681+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:04:13.526064+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:04:20.021035+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:04:20.029734+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:04:13.415559+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-dd161113",
+      "begrip": "gezelligheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gezelligheid is het gevoel of de sfeer van warmte, verbondenheid en prettig samenzijn.",
+        "laag2": "Gezelligheid ontstaat wanneer mensen zich op hun gemak voelen en genieten van elkaars gezelschap of van een aangename omgeving. Het kan ook worden ervaren wanneer iemand alleen een ontspannen en fijne sfeer beleeft.\n",
+        "laag3": "Gezelligheid is een belangrijk cultureel begrip in Nederland en Vlaanderen. Het draait om een positieve sfeer waarin mensen zich welkom, ontspannen en verbonden voelen. Gezelligheid kan ontstaan tijdens een etentje, spelletjesavond, feest, familiebezoek, wandeling of een rustig moment thuis. Factoren zoals goed gezelschap, een warme inrichting, muziek, eten, drinken en aandacht voor elkaar kunnen bijdragen aan een gevoel van gezelligheid. De beleving is persoonlijk en afhankelijk van de situatie.\n",
+        "laag4": "Binnen Spark wordt gezelligheid herkend als een positieve sociale en emotionele beleving. Spark kan relaties leggen tussen:\n\nGezellig\nSfeer\nSamenzijn\nVerbinding\nGezelschap\nVrienden\nFamilie\nGastvrijheid\nWarmte\nComfort\nOntspanning\nPlezier\nGeluk\nWelzijn\nFeest\nEten\nDrinken\nGesprek\nSociale interactie\nThuis\nActiviteit\n\nSpark gebruikt de context om te bepalen waardoor de gezelligheid ontstaat en welke personen, plaatsen of activiteiten daarbij betrokken zijn.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"De gezelligheid maakte de avond onvergetelijk.\"\n\n→ De prettige sfeer zorgde voor een positieve ervaring.\n\nVoorbeeld 2\n\n\"Tijdens de feestdagen staat gezelligheid centraal.\"\n\n→ De nadruk ligt op samen zijn en een warme sfeer."
+      },
+      "ws5": {
+        "wie": "Mensen, families, vrienden, collega's en gasten.",
+        "wat": "Een gevoel of sfeer van warmte, verbondenheid en prettig samenzijn.",
+        "wanneer": "Tijdens sociale of ontspannen momenten.",
+        "waar": "Thuis, op een feest, in een restaurant, café, op het werk of tijdens gezamenlijke activiteiten.",
+        "waarom": "Omdat een prettige omgeving en positieve sociale interactie een goed gevoel geven.",
+        "hoe": "Door samen tijd door te brengen in een warme, ontspannen en uitnodigende sfeer."
+      },
+      "tags": [
+        "gezelligheid",
+        "gezellig",
+        "sfeer",
+        "samenzijn",
+        "verbinding",
+        "gezelschap",
+        "vrienden",
+        "familie",
+        "gastvrijheid",
+        "warmte",
+        "comfort",
+        "ontspanning",
+        "plezier",
+        "geluk",
+        "welzijn",
+        "feest",
+        "eten",
+        "drinken",
+        "gesprek",
+        "sociale interactie",
+        "thuis",
+        "positief",
+        "context",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c9e1eb3a",
+          "begrip": "gezellig",
+          "lade": "voelen",
+          "overlap": 22,
+          "shared_tags": [
+            "blij",
+            "comfort",
+            "context",
+            "drinken",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-796b103d",
+          "begrip": "feest",
+          "lade": "voelen",
+          "overlap": 11,
+          "shared_tags": [
+            "blij",
+            "context",
+            "drinken",
+            "emotie",
+            "eten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a07a1351",
+          "begrip": "fijn",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "comfort",
+            "emotie",
+            "geluk",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-614a038b",
+          "begrip": "lachen",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "gezelligheid",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-028cb626",
+          "begrip": "warm",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "comfort",
+            "emotie",
+            "gezellig",
+            "sfeer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:05:47.638119+00:00",
+        "vorige_versie_v1": "kb-skel-dd161113",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:03.529373+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:05:45.218804+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:05:45.226759+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 22
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:05:47.831947+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:05:47.839878+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 22
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:05:45.115765+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-382b0fe4",
+      "begrip": "hyperfocus",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hyperfocus is een toestand waarin iemand gedurende langere tijd uitzonderlijk sterk geconcentreerd is op één activiteit of onderwerp.",
+        "laag2": "Tijdens hyperfocus is de aandacht bijna volledig gericht op één taak, waardoor de omgeving, tijd of andere verplichtingen minder worden opgemerkt. Dit kan zowel voordelen als nadelen hebben.\n",
+        "laag3": "Hyperfocus komt voor bij sommige mensen, onder andere bij ADHD, maar kan ook zonder ADHD optreden. Tijdens een periode van hyperfocus kan iemand zeer productief, creatief en doelgericht zijn. Tegelijkertijd kan het moeilijk zijn om de aandacht te verplaatsen, pauzes te nemen of op andere belangrijke zaken te reageren. De duur en intensiteit verschillen per persoon en situatie. Hyperfocus wordt vaak uitgelokt door activiteiten die interessant, uitdagend of sterk motiverend zijn.\n",
+        "laag4": "Binnen Spark wordt hyperfocus herkend als een toestand van verhoogde concentratie en betrokkenheid. Spark kan relaties leggen tussen:\n\nConcentratie\nFocus\nAandacht\nADHD\nMotivatie\nInteresse\nBetrokkenheid\nProductiviteit\nCreativiteit\nFlow\nTijdsbesef\nTaak\nDoel\nAfleiding\nDoorzettingsvermogen\nMentale toestand\nCognitie\nWelzijn\nEmotieregulatie\nContext\n\nSpark gebruikt de context om te bepalen of hyperfocus als positief, neutraal of belastend wordt ervaren.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Tijdens het programmeren zat hij uren in hyperfocus.\"\n\n→ De persoon was volledig geconcentreerd op één taak.\n\nVoorbeeld 2\n\n\"Door haar hyperfocus vergat ze te eten.\"\n\n→ De sterke concentratie zorgde ervoor dat andere behoeften minder werden opgemerkt."
+      },
+      "ws5": {
+        "wie": "Iedereen kan hyperfocus ervaren, al wordt het vaak beschreven bij mensen met ADHD.",
+        "wat": "Een toestand van zeer sterke en langdurige concentratie op één activiteit.",
+        "wanneer": "Wanneer een taak veel interesse, motivatie of betrokkenheid oproept.",
+        "waar": "Tijdens werk, studie, hobby's, games, creatieve projecten of andere activiteiten.",
+        "waarom": "Doordat de aandacht zich sterk richt op één onderwerp of taak.",
+        "hoe": "Door langdurig en intensief met weinig afleiding op één activiteit geconcentreerd te blijven."
+      },
+      "tags": [
+        "hyperfocus",
+        "focus",
+        "concentratie",
+        "aandacht",
+        "adhd",
+        "motivatie",
+        "interesse",
+        "betrokkenheid",
+        "productiviteit",
+        "creativiteit",
+        "flow",
+        "tijdsbesef",
+        "taak",
+        "afleiding",
+        "doorzettingsvermogen",
+        "cognitieve processen",
+        "mentale toestand",
+        "welzijn",
+        "context",
+        "emotie",
+        "neutraal",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-df8ad401",
+          "begrip": "inspanning",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "blij",
+            "concentratie",
+            "doorzettingsvermogen",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b1ae70e0",
+          "begrip": "landen",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "aandacht",
+            "blij",
+            "concentratie",
+            "emotie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d19d89ad",
+          "begrip": "bezigheid",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "interesse",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "focus",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c7aacfc7",
+          "begrip": "nieuwsgierigheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "context",
+            "creativiteit",
+            "emotie",
+            "interesse"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T15:55:23.037031+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:10:56.879182+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee, druk in hyperfocus kb kaarten invullen.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:10:53.348129+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:10:53.449705+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:10:53.458393+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:10:57.075013+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:10:57.083530+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-462c5ccc",
+      "begrip": "meemaakt",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Meemaakt betekent dat iemand iets persoonlijk ervaart of beleeft.",
+        "laag2": "Meemaakt is de derde persoon enkelvoud van het werkwoord meemaken. Het geeft aan dat iemand een gebeurtenis, situatie of ervaring zelf ondergaat of erbij aanwezig is.\n",
+        "laag3": "Het woord meemaakt wordt gebruikt voor zowel positieve als negatieve ervaringen. Iemand kan bijvoorbeeld een feest, succes, verhuizing, verlies, ongeluk of bijzondere gebeurtenis meemaken. Het benadrukt dat de persoon de gebeurtenis zelf beleeft en niet alleen erover hoort of leest. De emotionele betekenis hangt af van de context.\n",
+        "laag4": "Binnen Spark wordt meemaakt herkend als het persoonlijk ervaren van een gebeurtenis of situatie. Spark kan relaties leggen tussen:\n\nMeemaken\nErvaring\nBeleving\nGebeurtenis\nSituatie\nHerinnering\nGevoel\nEmotie\nLevensgebeurtenis\nVerandering\nOntwikkeling\nPersoon\nWaarneming\nBetrokkenheid\nVerhaal\nContext\n\nSpark gebruikt de context om te bepalen welke gebeurtenis wordt meegemaakt en welke emotionele of praktische betekenis deze heeft.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zij maakt een moeilijke periode mee.\"\n\n→ Zij ervaart persoonlijk een moeilijke situatie.\n\nVoorbeeld 2\n\n\"Hij maakt voor het eerst sneeuw mee.\"\n\n→ Hij beleeft deze ervaring zelf."
+      },
+      "ws5": {
+        "wie": "Mensen of andere levende wezens.",
+        "wat": "Het persoonlijk beleven of ervaren van een gebeurtenis of situatie.",
+        "wanneer": "Tijdens of na een gebeurtenis die iemand zelf ondergaat.",
+        "waar": "Overal waar ervaringen of gebeurtenissen plaatsvinden.",
+        "waarom": "Omdat iemand direct betrokken is bij een situatie of gebeurtenis.",
+        "hoe": "Door de gebeurtenis zelf te beleven of te ervaren."
+      },
+      "tags": [
+        "meemaakt",
+        "meemaken",
+        "ervaren",
+        "beleven",
+        "ervaring",
+        "beleving",
+        "gebeurtenis",
+        "situatie",
+        "herinnering",
+        "gevoel",
+        "emotie",
+        "levensgebeurtenis",
+        "ontwikkeling",
+        "betrokkenheid",
+        "waarneming",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "beleving",
+            "emotie",
+            "ervaren",
+            "ervaring",
+            "gevoel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2a608b3d",
+          "begrip": "ervaren",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beleven",
+            "context",
+            "emotie",
+            "ervaren",
+            "ervaring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "herinnering",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-fd037658",
+          "begrip": "geraakt",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betrokkenheid",
+            "emotie",
+            "ervaring",
+            "gebeurtenis",
+            "gevoel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81370b03",
+          "begrip": "voelen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beleving",
+            "context",
+            "emotie",
+            "ervaring",
+            "gevoel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:12:27.610472+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T15:54:53.931694+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-cb1bdd740272",
+        "extract_at": "2026-07-22T15:54:54.027990+00:00",
+        "extract_context_snippet": "en beetje een rollercoaster aan emoties meemaakt — blij en druk tegelijk. Dat kan best vermoeiend zijn, maar",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'meemaakt' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:12:25.816110+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:12:25.917110+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:12:25.925591+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:12:27.801020+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:12:27.809567+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4860a73f",
+      "begrip": "rollercoaster",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een rollercoaster is een attractie in een pretpark waarin een trein over een baan rijdt met hoogteverschillen, bochten en snelle bewegingen.\n",
+        "laag2": "Een rollercoaster is ontworpen om spanning, snelheid en sensatie te bieden. Het woord wordt ook figuurlijk gebruikt om een periode met veel wisselende emoties of gebeurtenissen te beschrijven.\n",
+        "laag3": "Rollercoasters bestaan uit rails, een trein en een aandrijfsysteem. Ze maken gebruik van hoogte, zwaartekracht, snelheid en bochten om een rit met verschillende krachten en sensaties te creëren. Er bestaan houten, stalen, gelanceerde, hangende en draaiende achtbanen. In het dagelijks taalgebruik wordt rollercoaster vaak gebruikt als metafoor voor een periode vol onverwachte veranderingen, zoals een emotionele rollercoaster of een turbulente levensfase.\n",
+        "laag4": "Binnen Spark wordt rollercoaster herkend als zowel een fysieke attractie als een metafoor voor sterke wisselingen in ervaringen of emoties. Spark kan relaties leggen tussen:\n\nAchtbaan\nPretpark\nAttractie\nSnelheid\nHoogte\nBochten\nZwaartekracht\nSensatie\nSpanning\nAvontuur\nAngst\nOpwinding\nEmotie\nBeleving\nVerandering\nOnvoorspelbaarheid\nErvaring\nMetafoor\nContext\n\nSpark gebruikt de context om te bepalen of het woord letterlijk of figuurlijk wordt bedoeld.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"We gingen samen in de rollercoaster.\"\n\n→ Het gaat om een attractie in een pretpark.\n\nVoorbeeld 2\n\n\"De afgelopen maand was een emotionele rollercoaster.\"\n\n→ Het woord wordt figuurlijk gebruikt voor een periode met veel wisselende gevoelens."
+      },
+      "ws5": {
+        "wie": "Pretparkbezoekers en mensen die een ervaring beschrijven.",
+        "wat": "Een attractie of een metafoor voor sterke wisselingen in gebeurtenissen of emoties.",
+        "wanneer": "Tijdens een bezoek aan een pretpark of bij het beschrijven van een intensieve periode.",
+        "waar": "In pretparken of in gesprekken en teksten als beeldspraak.",
+        "waarom": "Om spanning en plezier te beleven of om een wisselende ervaring te omschrijven.",
+        "hoe": "Door een rit over een baan met hoogteverschillen en bochten of door het woord figuurlijk te gebruiken."
+      },
+      "tags": [
+        "rollercoaster",
+        "achtbaan",
+        "pretpark",
+        "attractie",
+        "sensatie",
+        "spanning",
+        "snelheid",
+        "hoogte",
+        "bochten",
+        "zwaartekracht",
+        "avontuur",
+        "opwinding",
+        "angst",
+        "beleving",
+        "ervaring",
+        "verandering",
+        "onvoorspelbaarheid",
+        "metafoor",
+        "context",
+        "emotie",
+        "blij",
+        "bang",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "blij",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "beleving",
+            "blij",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "beleving",
+            "blij",
+            "emotie",
+            "ervaring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b3ac2d71",
+          "begrip": "attracties",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "achtbaan",
+            "attractie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff0e6be0",
+          "begrip": "snel",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "blij",
+            "emotie",
+            "neutraal",
+            "snelheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:14:01.880879+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T15:54:53.835213+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-cb1bdd740272",
+        "extract_at": "2026-07-22T15:54:53.931417+00:00",
+        "extract_context_snippet": "m**, het klinkt alsof je een beetje een rollercoaster aan emoties meemaakt — blij en druk tegelijk. Dat kan best",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'rollercoaster' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:13:58.739003+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:13:58.839790+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:13:58.848410+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:14:02.072658+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:14:02.081139+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

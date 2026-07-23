@@ -5,7 +5,7 @@
   "previous_tx_count": 13,
   "balances": {
     "user-001": 1,
-    "user-000": 6
+    "user-000": 7
   },
   "transactions": [
     {
@@ -135,10 +135,19 @@
       "source": "pot_token_alignment",
       "timestamp": "2026-07-21T08:24:30.537747+00:00",
       "log_event_id": "5a6d6397-01c1-478f-bb1b-77667c338339"
+    },
+    {
+      "type": "mint",
+      "user_id": "user-000",
+      "n_tokens": 1,
+      "price_per_token_eur": 13.0029,
+      "total_eur": 13.0,
+      "source": "auto_mint_24h_ruis",
+      "timestamp": "2026-07-23T09:16:23.930206+00:00"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999993,
+  "treasury_pool": 999992,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {
@@ -178,7 +187,7 @@
       "ts": "2026-06-03T12:04:57.407379+00:00",
       "action": "manual_balance_reset",
       "by": "user-001",
-      "reason": "Pre-redeploy schoonmaak \u2014 Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
+      "reason": "Pre-redeploy schoonmaak — Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
       "new_balances": {
         "user-000": 5,
         "user-001": 5,
@@ -254,10 +263,10 @@
       "ts": "2026-05-31T21:15:37.057791+00:00",
       "to_user_id": "user-000",
       "amount": 3,
-      "reason": "Surplus uit Bitvavo \u20ac29.74 \u2192 3 tokens gemint naar Spark (nominaal \u20ac30, klein gemiddeld-correctie \u20ac0.26)",
+      "reason": "Surplus uit Bitvavo €29.74 → 3 tokens gemint naar Spark (nominaal €30, klein gemiddeld-correctie €0.26)",
       "milestone": "echte_start_v1"
     }
   ],
   "_reset_at": "2026-07-09T22:03:12.853929+00:00",
-  "_reset_note": "v8_live_start: 5 tokens bij Willem (user-001) \u2014 Spark's trader-fonds. Treasury = TOTAL - 5."
+  "_reset_note": "v8_live_start: 5 tokens bij Willem (user-001) — Spark's trader-fonds. Treasury = TOTAL - 5."
 }

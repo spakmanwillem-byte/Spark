@@ -2626,12 +2626,63 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-cb1bdd740272",
+      "text_hash": "cb1bdd740272",
+      "original_text": "goed blij en druk is mijn hoofd. dank voor vragen.",
+      "topic": "gevoelens",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker beschrijft zijn huidige emotionele staat als goed, blij en druk.",
+      "trigger_phrases": [
+        "ik voel me goed",
+        "mijn hoofd is druk",
+        "ik ben blij",
+        "goede dag gehad"
+      ],
+      "keywords": [
+        "gevoel",
+        "blij",
+        "druk",
+        "hoofd",
+        "dank"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T15:54:53.733843+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6f9298ad25e3",
+      "text_hash": "6f9298ad25e3",
+      "original_text": "nee, druk in hyperfocus kb kaarten invullen.",
+      "topic": "hyperfocus",
+      "categorie": "praktisch",
+      "intent": "Gebruiker wil informatie over het invullen van kaarten tijdens hyperfocus",
+      "trigger_phrases": [
+        "druk in hyperfocus",
+        "invullen kaarten",
+        "hyperfocus kaartjes",
+        "kaarten tijdens focus"
+      ],
+      "keywords": [
+        "hyperfocus",
+        "kaarten",
+        "invullen",
+        "druk"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T15:55:24.110722+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 104,
+    "totaal_voorgesteld": 106,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-22T11:56:51.936026+00:00"
+    "last_run": "2026-07-22T15:55:24.110722+00:00"
   }
 }

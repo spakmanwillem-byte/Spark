@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2228,
+    "card_count": 2232,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:44:15.610385+00:00",
+    "last_updated": "2026-07-22T16:17:03.113481+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46,
     "last_prod_merge": {
@@ -300512,6 +300512,699 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-25334995",
+      "begrip": "twee",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Twee is het natuurlijke getal dat volgt op één en voorafgaat aan drie.",
+        "laag2": "Twee geeft een hoeveelheid van 2 aan. Het wordt gebruikt om twee personen, voorwerpen, ideeën, gebeurtenissen of andere eenheden aan te duiden.\n",
+        "laag3": "Twee is een hoofdtelwoord en een van de meest gebruikte getallen in de wiskunde en het dagelijks leven. Het vertegenwoordigt een paar of een duo en wordt vaak gebruikt om aantallen, volgorde en vergelijkingen uit te drukken. In de wiskunde is twee het kleinste en enige even priemgetal. Het getal komt voor in talloze toepassingen, zoals tijd, meten, programmeren, wetenschap, economie en statistiek.",
+        "laag4": "Binnen Spark wordt twee herkend als een numeriek begrip dat een hoeveelheid of aantal aangeeft. Spark kan relaties leggen tussen:\n\nGetal\nNummer\nAantal\nHoeveelheid\nHoofdtelwoord\nEven getal\nPriemgetal\nPaar\nDuo\nDubbel\nEén\nDrie\nRekenen\nWiskunde\nTellen\nNumeriek\nWaarde\nContext\n\nSpark gebruikt de context om te bepalen of twee verwijst naar een hoeveelheid, volgorde, vergelijking of onderdeel van een uitdrukking.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik heb twee boeken.\"\n\n→ Er zijn twee exemplaren.\n\nVoorbeeld 2\n\n\"Er werken twee collega's aan het project.\"\n\n→ Het aantal collega's is twee."
+      },
+      "ws5": {
+        "wie": "Iedereen die telt, rekent of hoeveelheden beschrijft.",
+        "wat": "Het natuurlijke getal 2.",
+        "wanneer": "Wanneer een hoeveelheid van twee wordt aangeduid.",
+        "waar": "In de wiskunde, wetenschap, administratie en het dagelijks leven.",
+        "waarom": "Om een aantal, hoeveelheid of volgorde uit te drukken.",
+        "hoe": "Door het getal 2 of het woord twee te gebruiken."
+      },
+      "tags": [
+        "twee",
+        "2",
+        "getal",
+        "nummer",
+        "aantal",
+        "hoeveelheid",
+        "hoofdtelwoord",
+        "even getal",
+        "priemgetal",
+        "paar",
+        "duo",
+        "dubbel",
+        "rekenen",
+        "wiskunde",
+        "numeriek",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-286cd065",
+          "begrip": "Verdubbelen ",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "aantal",
+            "dubbel",
+            "emotie",
+            "getal",
+            "hoeveelheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34c9551d",
+          "begrip": "cijfers",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "getal",
+            "neutraal",
+            "numeriek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99886b31",
+          "begrip": "paar",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "aantal",
+            "context",
+            "hoeveelheid",
+            "numeriek",
+            "paar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b3902839",
+          "begrip": "getal",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "getal",
+            "hoeveelheid",
+            "neutraal",
+            "rekenen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a0d4b06e",
+          "begrip": "nummer",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "getal",
+            "neutraal",
+            "nummer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:50:13.218444+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:54:11.059724+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-747f4d0f5555",
+        "extract_at": "2026-07-22T11:54:11.161327+00:00",
+        "extract_context_snippet": "“weer” (herhaling)  * het woord “paar” (twee)  Dankzij deze kaarten kan ik nu specifieker reageren als j",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'twee' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:50:09.791841+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:50:09.892026+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:50:09.900076+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:50:13.573466+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:50:13.581868+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-90ee6676",
+      "begrip": "blok",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een blok is een stevig object of een afgebakend geheel met een vaste vorm, structuur of functie.",
+        "laag2": "Het woord blok heeft meerdere betekenissen. Het kan verwijzen naar een fysiek voorwerp, een onderdeel van een groter geheel, een tijdsperiode, een groep of een afgebakende eenheid. De betekenis hangt af van de context.",
+        "laag3": "Een blok wordt gebruikt in uiteenlopende situaties. Voorbeelden zijn een houten blok, een huizenblok, een notitieblok, een bouwblok, een lesblok, een woonblok, een codeblok of een geheugenblok in de informatica. Het woord beschrijft meestal iets dat duidelijk begrensd of als één geheel wordt beschouwd. In veel vakgebieden wordt een blok gebruikt om informatie, objecten of tijd logisch te organiseren.\n",
+        "laag4": "Binnen Spark wordt blok herkend als een algemene eenheid of afgebakend onderdeel. Spark kan relaties leggen tussen:\n\nBouwsteen\nEenheid\nObject\nStructuur\nModule\nComponent\nSegment\nGroep\nCluster\nGeheugenblok\nCodeblok\nNotitieblok\nBouwblok\nHuizenblok\nTijdsblok\nPlanning\nOrganisatie\nStructureren\nAfbakening\nContext\n\nSpark gebruikt de context om te bepalen of blok verwijst naar een fysiek object, een tijdseenheid, een softwareonderdeel of een andere afgebakende structuur.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Ik reserveer een blok van twee uur om te studeren.\"\n\n→ Blok verwijst naar een afgebakende tijdsperiode.\n\nVoorbeeld 2\n\n\"De programmeur plaatste de functie in een apart codeblok.\"\n\n→ Blok verwijst naar een logisch onderdeel van de broncode."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een afgebakend object, onderdeel of geheel.",
+        "wanneer": "Wanneer iets wordt georganiseerd, opgebouwd of onderverdeeld.",
+        "waar": "In de bouw, informatica, onderwijs, planning en het dagelijks leven.",
+        "waarom": "Om structuur, overzicht of een duidelijke indeling te creëren.",
+        "hoe": "Door objecten, informatie, tijd of onderdelen als afzonderlijke eenheden te groeperen."
+      },
+      "tags": [
+        "blok",
+        "bouwsteen",
+        "eenheid",
+        "object",
+        "structuur",
+        "module",
+        "component",
+        "segment",
+        "cluster",
+        "groep",
+        "geheugenblok",
+        "codeblok",
+        "notitieblok",
+        "bouwblok",
+        "huizenblok",
+        "tijdsblok",
+        "planning",
+        "organisatie",
+        "afbakening",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-444c9aa9",
+          "begrip": "eenheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "eenheid",
+            "emotie",
+            "groep",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c4d853df",
+          "begrip": "Troepen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eenheid",
+            "emotie",
+            "groep",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "planning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:07:37.588390+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T15:55:24.216547+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6f9298ad25e3",
+        "extract_at": "2026-07-22T15:55:24.319230+00:00",
+        "extract_context_snippet": "d tot de timer afgaat; dat is je “focus‑blok”.  2. **Neem een korte pauze** (3–5 min). Sta even op, haal",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'blok' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:07:34.358333+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:07:34.461142+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:07:34.469352+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:07:37.952886+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:07:37.961334+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d0132cfb",
+      "begrip": "timer",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een timer is een hulpmiddel dat een vooraf ingestelde tijd meet en een signaal geeft wanneer die tijd is verstreken.",
+        "laag2": "Een timer wordt gebruikt om activiteiten, processen of apparaten gedurende een bepaalde tijd te laten lopen of om een herinnering te geven wanneer een ingestelde tijd voorbij is.\n",
+        "laag3": "Timers komen voor in huishoudelijke apparaten, computers, smartphones, spelcomputers, industriële systemen en software. Ze kunnen aftellen vanaf een ingestelde tijd of automatisch acties uitvoeren na een bepaalde tijdsduur. In programmeren wordt een timer gebruikt om functies op een vast tijdstip of met een bepaald interval uit te voeren. Timers worden gebruikt voor koken, sporten, studeren, presentaties, automatisering, games en talloze andere toepassingen.\n",
+        "laag4": "Binnen Spark wordt timer herkend als een hulpmiddel voor tijdsbeheer en automatisering. Spark kan relaties leggen tussen:\n\nTijd\nTijdmeting\nAftellen\nStopwatch\nKlok\nAlarm\nHerinnering\nPlanning\nSchema\nInterval\nWachttijd\nAutomatisering\nGebeurtenis\nTrigger\nEvent\nProgrammeren\nTaak\nProces\nProductiviteit\nTijdbeheer\n\nSpark gebruikt de context om te bepalen of een timer bedoeld is voor een gebruiker, een apparaat of een softwareproces.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zet een timer van tien minuten.\"\n\n→ Er wordt een afteltijd ingesteld.\n\nVoorbeeld 2\n\n\"De game gebruikt een timer voor de volgende ronde.\"\n\n→ Een softwaretimer bepaalt wanneer een gebeurtenis plaatsvindt."
+      },
+      "ws5": {
+        "wie": "Mensen, apparaten, computers, AI-systemen en software.",
+        "wat": "Een hulpmiddel dat tijd meet en een actie of melding geeft wanneer een ingestelde tijd is verstreken.",
+        "wanneer": "Wanneer een tijdsduur moet worden bewaakt of een actie op een bepaald moment moet plaatsvinden.",
+        "waar": "Op telefoons, computers, huishoudelijke apparaten, industriële systemen, games en andere software.",
+        "waarom": "Om tijd te beheren, processen te automatiseren of herinneringen te geven.",
+        "hoe": "Door een tijdsduur in te stellen waarna een melding of automatische actie wordt uitgevoerd."
+      },
+      "tags": [
+        "timer",
+        "tijd",
+        "tijdmeting",
+        "aftellen",
+        "stopwatch",
+        "klok",
+        "alarm",
+        "herinnering",
+        "planning",
+        "schema",
+        "interval",
+        "wachttijd",
+        "automatisering",
+        "trigger",
+        "event",
+        "programmeren",
+        "taak",
+        "proces",
+        "productiviteit",
+        "tijdbeheer",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a25950ce",
+          "begrip": "wekker",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "alarm",
+            "automatisering",
+            "emotie",
+            "herinnering",
+            "klok"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "klok",
+            "neutraal",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77d5122f",
+          "begrip": "Welk tijdstip is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "klok",
+            "neutraal",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "herinnering",
+            "neutraal",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6a636d02",
+          "begrip": "Wanneer",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "herinnering",
+            "planning",
+            "proces",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:09:21.281686+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T15:55:24.113561+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6f9298ad25e3",
+        "extract_at": "2026-07-22T15:55:24.216249+00:00",
+        "extract_context_snippet": "en in balans te brengen:  1. **Stel een timer** (bijvoorbeeld 25 min). Werk geconcentreerd tot de timer a",
+        "extract_count_in_spark": 3,
+        "extract_note": "Spark noemde 'timer' 3× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:09:15.619050+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:09:15.720935+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:09:15.729404+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:09:21.640839+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:09:21.649213+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-136baae3",
+      "begrip": "beelddenken",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Beelddenken is een manier van denken waarbij informatie vooral wordt verwerkt in beelden, ruimtelijke voorstellingen en visuele verbanden.\n",
+        "laag2": "Mensen die in beelden denken vormen vaak eerst een mentaal beeld en zetten dit daarna om in woorden. Hierdoor kunnen zij verbanden, patronen en het geheel soms sneller herkennen dan losse details.\n",
+        "laag3": "Beelddenken is een cognitieve denkstijl die voorkomt bij veel mensen, maar vaak wordt genoemd bij creatieven, ontwerpers en sommige mensen met dyslexie, ADHD of autisme. Beelddenkers verwerken informatie vaak visueel en associatief in plaats van stap voor stap via taal. Dit kan voordelen bieden bij creativiteit, probleemoplossing en ruimtelijk inzicht. Tegelijkertijd kunnen zij meer moeite hebben om gedachten direct onder woorden te brengen of lineaire uitleg te volgen. Beelddenken is geen officiële diagnose, maar een beschrijving van een manier waarop informatie kan worden verwerkt.\n",
+        "laag4": "Binnen Spark wordt beelddenken herkend als een cognitieve denkstijl. Spark kan relaties leggen tussen:\n\nDenken\nCognitie\nVisueel denken\nVerbeelding\nMentale beelden\nAssociatie\nPatronen\nCreativiteit\nRuimtelijk inzicht\nProbleemoplossing\nLeren\nGeheugen\nDyslexie\nADHD\nAutisme\nTaal\nCommunicatie\nInformatieverwerking\nCognitieve stijl\nContext\n\nSpark gebruikt de context om onderscheid te maken tussen beelddenken als denkstijl en andere vormen van informatieverwerking.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Zij lost problemen op door eerst een beeld in haar hoofd te vormen.\"\n\n→ Zij gebruikt beelddenken.\n\nVoorbeeld 2\n\n\"Door zijn beelddenken vond hij snel een oplossing voor het ontwerp.\"\n\n→ De visuele denkstijl hielp bij het vinden van een oplossing."
+      },
+      "ws5": {
+        "wie": "Mensen die informatie voornamelijk visueel verwerken.",
+        "wat": "Een manier van denken waarbij beelden en ruimtelijke voorstellingen centraal staan.",
+        "wanneer": "Tijdens leren, onthouden, ontwerpen, analyseren of probleemoplossing.",
+        "waar": "In het dagelijks leven, onderwijs, creatieve beroepen en andere situaties waarin informatie wordt verwerkt.",
+        "waarom": "Omdat sommige mensen informatie van nature gemakkelijker visueel dan talig verwerken.",
+        "hoe": "Door mentale beelden, patronen en visuele verbanden te vormen en deze te gebruiken om informatie te begrijpen."
+      },
+      "tags": [
+        "beelddenken",
+        "visueel denken",
+        "denken",
+        "cognitie",
+        "cognitieve stijl",
+        "informatieverwerking",
+        "mentale beelden",
+        "verbeelding",
+        "associatie",
+        "patronen",
+        "creativiteit",
+        "ruimtelijk inzicht",
+        "probleemoplossing",
+        "leren",
+        "geheugen",
+        "dyslexie",
+        "adhd",
+        "autisme",
+        "taal",
+        "communicatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-662d0623",
+          "begrip": "beelddenkers",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "associatie",
+            "beelddenken",
+            "cognitie",
+            "communicatie",
+            "creativiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c86dca8c",
+          "begrip": "hersenen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "cognitie",
+            "denken",
+            "emotie",
+            "geheugen",
+            "informatieverwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f97c167",
+          "begrip": "stel",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "creativiteit",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca1d3767",
+          "begrip": "noem eens 5 dieren",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "associatie",
+            "communicatie",
+            "emotie",
+            "geheugen",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0a6aaa40",
+          "begrip": "Welke dieren kan jij op noemen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "associatie",
+            "communicatie",
+            "emotie",
+            "geheugen",
+            "leren"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:17:03.113460+00:00",
+        "vorige_versie_v1": "kb-skel-136baae3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:38.471023+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:16:59.023450+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:16:59.032157+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:17:03.475040+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:17:03.483718+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:16:58.920382+00:00"
       },
       "media": {
         "voice_url": null,

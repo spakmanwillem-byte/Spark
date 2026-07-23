@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 565,
+    "card_count": 569,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-22T15:46:41.509800+00:00",
+    "last_updated": "2026-07-22T16:15:32.473506+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -75264,6 +75264,680 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4aa369ae",
+      "begrip": "ingevulde",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ingevulde betekent dat iets is voltooid door de benodigde informatie, antwoorden of gegevens toe te voegen.",
+        "laag2": "Ingevulde is een vervoegde vorm van het werkwoord invullen. Het beschrijft iets waaraan informatie, tekst of gegevens zijn toegevoegd, waardoor het geheel of gedeeltelijk compleet is.\n",
+        "laag3": "Het woord ingevulde wordt gebruikt bij formulieren, documenten, enquêtes, toetsen, tabellen, profielen en andere gegevensdragers. Het kan ook figuurlijk worden gebruikt, bijvoorbeeld bij een ingevulde dag, waarmee wordt bedoeld dat de dag vol activiteiten of afspraken zit. De precieze betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark wordt ingevulde herkend als een toestand waarin gegevens, informatie of inhoud zijn toegevoegd aan een object of structuur. Spark kan relaties leggen tussen:\n\nInvullen\nInvoer\nGegevens\nInformatie\nFormulier\nDocument\nVeld\nAntwoord\nTekst\nEnquête\nRegistratie\nProfiel\nVoltooid\nCompleet\nOpslaan\nBewerken\nAdministratie\nContext\n\nSpark gebruikt de context om te bepalen of ingevulde verwijst naar een document, formulier, planning, profiel of een andere vorm van aangevulde informatie.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het ingevulde formulier is verzonden.\"\n\n→ Alle benodigde gegevens zijn toegevoegd aan het formulier.\n\nVoorbeeld 2\n\n\"Ze had een volledig ingevulde agenda.\"\n\n→ De agenda stond vol met afspraken."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een toestand waarin informatie of gegevens zijn toegevoegd.",
+        "wanneer": "Nadat een formulier, document of ander object is ingevuld.",
+        "waar": "Bij formulieren, documenten, administratie, digitale systemen en planningen.",
+        "waarom": "Om informatie vast te leggen, een taak af te ronden of gegevens compleet te maken.",
+        "hoe": "Door ontbrekende gegevens, antwoorden of tekst toe te voegen."
+      },
+      "tags": [
+        "ingevulde",
+        "invullen",
+        "ingevuld",
+        "invoer",
+        "gegevens",
+        "informatie",
+        "formulier",
+        "document",
+        "antwoord",
+        "tekst",
+        "veld",
+        "registratie",
+        "administratie",
+        "compleet",
+        "voltooid",
+        "opslaan",
+        "bewerken",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-86b28776",
+          "begrip": "ingevuld",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "administratie",
+            "antwoord",
+            "compleet",
+            "emotie",
+            "formulier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-bd2719dd",
+          "begrip": "vastleggen",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "administratie",
+            "document",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "formulier",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "document",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "invullen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-22T11:54:27.203668+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:48:48.277699+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "hoeveel ingevulde kenniskaarten heb jij?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:48:44.837247+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:48:44.936763+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:48:44.945017+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:48:48.472692+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:48:48.481046+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e101cc8b",
+      "begrip": "betekenen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Betekenen is een werkwoord dat aangeeft welke betekenis, waarde of functie iets heeft.",
+        "laag2": "Het woord betekenen wordt gebruikt om uit te leggen wat een woord, symbool, gebeurtenis, handeling of situatie inhoudt of vertegenwoordigt. Het kan ook aangeven dat iets belangrijk is voor iemand.",
+        "laag3": "Betekenen heeft meerdere toepassingen. Het kan verwijzen naar de definitie van een woord (\"Wat betekent dit woord?\"), de symbolische waarde van iets (\"De witte vlag betekent overgave.\") of het persoonlijke belang van iets (\"Jij betekent veel voor mij.\"). De juiste betekenis wordt bepaald door de context waarin het werkwoord wordt gebruikt.\n",
+        "laag4": "Binnen Spark wordt betekenen herkend als een werkwoord dat de relatie beschrijft tussen een begrip en zijn betekenis, functie, waarde of interpretatie. Spark kan relaties leggen tussen:\n\nBetekenis\nDefinitie\nUitleg\nInterpretatie\nSymbool\nWaarde\nFunctie\nBegrip\nWoord\nTaal\nCommunicatie\nContext\nSemantiek\nInhoud\nVerklaring\nRelatie\n\nSpark gebruikt de context om te bepalen of betekenen verwijst naar een taalkundige definitie, een symbolische betekenis of een persoonlijke waarde.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Wat betekent dit woord?\"\n\n→ Er wordt gevraagd naar de definitie.\n\nVoorbeeld 2\n\n\"Zijn hulp betekende veel voor mij.\"\n\n→ Er wordt verwezen naar de persoonlijke waarde of betekenis."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een werkwoord dat de betekenis, waarde, functie of interpretatie van iets aangeeft.",
+        "wanneer": "Wanneer iets wordt uitgelegd, geïnterpreteerd of gewaardeerd.",
+        "waar": "In gesprekken, teksten, onderwijs, wetenschap en dagelijkse communicatie.",
+        "waarom": "Om duidelijk te maken wat iets inhoudt of welke waarde het heeft.",
+        "hoe": "Door een begrip, symbool, gebeurtenis of situatie uit te leggen of te interpreteren."
+      },
+      "tags": [
+        "betekenen",
+        "betekenis",
+        "definitie",
+        "uitleg",
+        "interpretatie",
+        "symbool",
+        "waarde",
+        "functie",
+        "begrip",
+        "taal",
+        "communicatie",
+        "semantiek",
+        "verklaring",
+        "context",
+        "werkwoord",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 10,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea50eab8",
+          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "emotie",
+            "interpretatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:51:49.085900+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T11:54:10.956924+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-747f4d0f5555",
+        "extract_at": "2026-07-22T11:54:11.059445+00:00",
+        "extract_context_snippet": "kaart is en wat kaarten in het algemeen betekenen  * het woord “weer” (herhaling)  * het woord “paar” (twee)",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'betekenen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:51:45.424770+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:51:45.526866+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:51:45.535285+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:51:49.282747+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:51:49.291244+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-39c0803f",
+      "begrip": "korte",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Korte is een verbogen vorm van het bijvoeglijk naamwoord kort en betekent dat iets weinig lengte, duur of omvang heeft.",
+        "laag2": "Het woord korte beschrijft een zelfstandig naamwoord en geeft aan dat iets beperkt is in lengte, tijd, afstand, grootte of hoeveelheid. De precieze betekenis hangt af van de context.\n",
+        "laag3": "Korte wordt gebruikt in uiteenlopende situaties, zoals een korte tekst, een korte pauze, een korte broek, een korte afstand of een korte uitleg. Het is de verbogen vorm van kort die meestal vóór een zelfstandig naamwoord wordt geplaatst. Afhankelijk van de context kan het betrekking hebben op fysieke afmetingen, tijdsduur, inhoud of omvang.\n",
+        "laag4": "Binnen Spark wordt korte herkend als een bijvoeglijk naamwoord dat een eigenschap van een zelfstandig naamwoord beschrijft. Spark kan relaties leggen tussen:\n\nKort\nLengte\nDuur\nAfstand\nOmvang\nGrootte\nTijd\nTekst\nUitleg\nPauze\nBroek\nSamenvatting\nBeknopt\nBondig\nTegenstelling\nLang\nEigenschap\nContext\n\nSpark gebruikt de context om te bepalen waarop korte betrekking heeft, zoals tijd, afstand, lengte of inhoud.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Geef een korte uitleg.\"\n\n→ Er wordt gevraagd om een beknopte uitleg.\n\nVoorbeeld 2\n\n\"Hij droeg een korte broek.\"\n\n→ De broek heeft een beperkte lengte."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en AI-systemen.",
+        "wat": "Een verbogen vorm van het bijvoeglijk naamwoord kort.",
+        "wanneer": "Wanneer een eigenschap van beperkte lengte, duur of omvang wordt beschreven.",
+        "waar": "In gesprekken, teksten, onderwijs en dagelijkse communicatie.",
+        "waarom": "Om aan te geven dat iets weinig lengte, tijd, afstand of omvang heeft.",
+        "hoe": "Door korte als bijvoeglijk naamwoord vóór een zelfstandig naamwoord te gebruiken."
+      },
+      "tags": [
+        "korte",
+        "kort",
+        "bijvoeglijk naamwoord",
+        "eigenschap",
+        "lengte",
+        "duur",
+        "afstand",
+        "omvang",
+        "grootte",
+        "tijd",
+        "tekst",
+        "uitleg",
+        "beknopt",
+        "bondig",
+        "tegenstelling",
+        "lang",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e80e80fa",
+          "begrip": "kort",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "afstand",
+            "beknopt",
+            "duur",
+            "eigenschap",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c442c8c6",
+          "begrip": "diep",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "afstand",
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-26c9a1f7",
+          "begrip": "ongewenste",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bijvoeglijk naamwoord",
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37feae50",
+          "begrip": "formuleren",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "tekst",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3625e601",
+          "begrip": "directe",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bijvoeglijk naamwoord",
+            "context",
+            "eigenschap",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T15:59:35.749944+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T15:55:24.319509+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-6f9298ad25e3",
+        "extract_at": "2026-07-22T15:55:24.421008+00:00",
+        "extract_context_snippet": "dat is je “focus‑blok”.  2. **Neem een korte pauze** (3–5 min). Sta even op, haal diep adem, drink water",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'korte' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T15:59:33.950426+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:59:34.052585+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:59:34.060833+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T15:59:35.943811+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T15:59:35.951912+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-307e63ae",
+      "begrip": "alsof",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Alsof is een voegwoord dat een vergelijking, schijn of veronderstelling uitdrukt.",
+        "laag2": "Met alsof wordt aangegeven dat iets lijkt op, wordt voorgesteld als of wordt ervaren alsof het waar is. Het hoeft niet daadwerkelijk zo te zijn.",
+        "laag3": "Het woord alsof wordt gebruikt om vergelijkingen, beeldspraak, vermoedens of hypothetische situaties uit te drukken. Het kan een indruk beschrijven (\"Hij doet alsof hij alles weet.\"), een vergelijking maken (\"Het voelt alsof ik droom.\") of een niet-werkelijke situatie voorstellen. De betekenis hangt af van de context en hoeft geen feitelijke waarheid weer te geven.\n",
+        "laag4": "Binnen Spark wordt alsof herkend als een taalkundige constructie die een vergelijking, indruk of schijn aangeeft. Spark kan relaties leggen tussen:\n\nVergelijking\nSchijn\nIndruk\nVeronderstelling\nHypothese\nBeeldspraak\nFiguurlijk taalgebruik\nInterpretatie\nWaarneming\nGevoel\nErvaring\nTaal\nCommunicatie\nVoegwoord\nContext\n\nSpark gebruikt de context om te bepalen of alsof een vergelijking, emotionele beleving of hypothetische situatie beschrijft.\n\nPraktijkvoorbeeld\n\nVoorbeeld 1\n\n\"Het voelt alsof het gaat regenen.\"\n\n→ Er wordt een indruk of verwachting beschreven.\n\nVoorbeeld 2\n\n\"Hij doet alsof hij het antwoord weet.\"\n\n→ Hij wekt de indruk dat hij het weet, zonder dat dit per se waar is."
+      },
+      "ws5": {
+        "wie": "Mensen die spreken of schrijven.",
+        "wat": "Een voegwoord dat een vergelijking, schijn of veronderstelling uitdrukt.",
+        "wanneer": "Wanneer iets wordt vergeleken, voorgesteld of ervaren zonder dat het zeker waar is.",
+        "waar": "In gesprekken, teksten, verhalen en dagelijkse communicatie.",
+        "waarom": "Om een indruk, vergelijking of hypothetische situatie te beschrijven.",
+        "hoe": "Door alsof te gebruiken om twee situaties of belevingen met elkaar te verbinden."
+      },
+      "tags": [
+        "alsof",
+        "voegwoord",
+        "vergelijking",
+        "schijn",
+        "indruk",
+        "veronderstelling",
+        "hypothese",
+        "beeldspraak",
+        "figuurlijk taalgebruik",
+        "interpretatie",
+        "waarneming",
+        "gevoel",
+        "ervaring",
+        "taal",
+        "communicatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6fec0000",
+          "begrip": "indruk",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "ervaring",
+            "indruk",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "ervaring",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6db9df8",
+          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "ervaring",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e1df63b6",
+          "begrip": "perspectief",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-251af4c5",
+          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gevoel",
+            "interpretatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-22T16:15:32.473487+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-22T15:54:53.737361+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-cb1bdd740272",
+        "extract_at": "2026-07-22T15:54:53.834902+00:00",
+        "extract_context_snippet": "**De Willem**, het klinkt alsof je een beetje een rollercoaster aan emoties meemaakt — blij",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'alsof' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-22T16:15:29.201866+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:15:29.302434+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:15:29.311215+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-22T16:15:32.671595+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-22T16:15:32.680140+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
             }
           }
         ]

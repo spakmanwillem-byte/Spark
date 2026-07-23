@@ -21,21 +21,23 @@ Absolute regel boven ALLE andere prompt-regels (ook boven admin-context):
 ### 🕵️ Gemiste trades vannacht (prod-diagnose blocker)
 Willem meldt: bot miste duidelijke BUY-momenten afgelopen nacht. Anker of afstelling verdacht.
 
-**Blocker**: preview heeft geen data (bot draaide daar niet met flag ON sinds bootstrap). Alle bewijs zit in PROD (`https://question-hub-160.emergent.host`). Willem krijgt de nachtelijke prod-zip niet omdat de container-reboots hem verliezen (laagste server-tier + trader-worker eet resources).
+**Update sessie 47 einde**: Anker-DRYRUN uitgevoerd op 90d ECHTE Bitvavo candles (6 markten × 234 dip-buy-signalen):
 
-**Diagnose-hypothesen**:
-1. **Anker log_only wérkt correct** maar drempel 8% is te strikt → zou skips loggen die BUY-signalen waren
-2. **Container-reboots** → monitor state (buy_cooldowns, position) verloren tussen restarts → trader mist window
-3. **Bitvavo 429/timeout** → BUY-execute faalt, wordt niet geretried
+| Drempel | Skips | Winst-kansen gemist |
+|---------|-------|---------------------|
+| 3% | 1 (0.4%) | 0 |
+| 5% | 0 | 0 |
+| 8% | 0 | 0 |
+| 12% | 0 | 0 |
 
-**Diagnose todo (bij volgende sessie of met prod-log-toegang)**:
-- Lees `data/boekhouder/logs/anker_check/*.jsonl` uit prod (via zip of endpoint) — hoeveel "would_skip" laatste 24u?
-- Check `data/trade/monitor_state.json` — laatste `last_persisted` timestamp geeft aan hoe vaak reboot geweest is
-- Grep `429\|timeout` in prod backend logs
+**KEY INSIGHT**: Anker filtert **NIETS** bij Bollinger-dip-strategie omdat dip-buy per definitie ONDER MA plaatsvindt (delta% negatief). Anker triggert alleen bij gap-UP + BUY-signaal — zeldzaam.
 
-**Kort-termijn beslissing voor Willem**:
-- Overweeg **server-tier upgrade** (laagste = onvoldoende voor trader-worker + LLM + boekhouder-scheduler concurrent). Reboots = missed trades. Emergent Support kan Dev-tier prijzen delen.
-- Of: **anker drempel omlaag** naar 5% zodat minder skips + meer coverage tot upgrade.
+**Willem's intuïtie klopte**: anker is meer info/referentie dan filter. Maar zijn hypothese "8% skipt goede BUYs" is niet de oorzaak van gemiste trades vannacht — anker heeft in 90d **NIETS geskipt**.
+
+**Werkelijke oorzaak gemiste trades** ligt elders:
+1. **Container-reboots** (laagste server-tier) → monitor state verloren → buy-cooldown reset → BUY window gemist tijdens boot
+2. **Bitvavo 429/timeout** → BUY execute-call faalt, geen retry
+3. **Bollinger-dip lower_band te breed** → dip-signaal komt nooit (unrelated aan anker)
 
 
 

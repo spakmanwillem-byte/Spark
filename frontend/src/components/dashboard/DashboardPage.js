@@ -259,6 +259,15 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                     🏷️ <strong>Namen-lade</strong> — voor- & achternamen, koosnamen (klik om te openen)
                   </p>
                 </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); onNavigate('bijbel', '/spark/bijbel'); }}
+                  className="w-full bg-amber-500/10 border border-amber-500/30 rounded-lg p-2 mb-2 hover:bg-amber-500/20 transition text-left"
+                  data-testid="btn-open-bijbel"
+                >
+                  <p className="text-[10px] text-amber-300">
+                    💎 <strong>Bijbel</strong> — wijsheden, patronen, ankers (semantische laag)
+                  </p>
+                </button>
                 {/* v6_kb_v1_v2_split_001 — Toon ook KB v1 totaal voor context */}
                 {knowledgeStats && (
                   <div className="bg-slate-800/30 rounded-lg p-2 text-[10px] text-slate-400">

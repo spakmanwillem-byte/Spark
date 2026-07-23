@@ -1,0 +1,25 @@
+{
+  "module": "bijbel",
+  "titel": "Bijbel — semantische laag",
+  "beschrijving": "Wijsheden, patronen, mentale modellen en ankers. NIET een tweede kennisbank, maar de semantische laag DIE de kennisbank ordent. Entries linken many-to-many naar KB-begrippen.",
+  "auteur": "system + Willem",
+  "versie": "1.0",
+  "aangemaakt": "2026-02-01",
+  "types": ["wijsheid", "patroon", "mentaal_model", "anker"],
+  "endpoints": [
+    "GET /api/bijbel/list",
+    "GET /api/bijbel/search?q=...",
+    "GET /api/bijbel/by-begrip/{begrip}",
+    "GET /api/bijbel/stats",
+    "POST /api/bijbel/add",
+    "PATCH /api/bijbel/{id}",
+    "DELETE /api/bijbel/{id}"
+  ],
+  "data_file": "/app/backend/data/knowledge/learned_knowledge/unified_bijbel_entries.json",
+  "voetnoten": [
+    "Placeholder-schema bestond al sinds 2026-03-16 (leeg). Gevuld in sessie 48 na Willem+GPT+E1 discussie over enrichment-layer.",
+    "Wijsheden linken doorgaans aan meerdere begrippen (Belofte → Vertrouwen, Hoop, Teleurstelling, Verantwoordelijkheid).",
+    "Willem noemde de Bijbel ooit geen document maar 'ankers' — dit is nu een expliciet type.",
+    "Compositional service integratie (Spark citeert wijsheid na KB-definitie) is een aparte follow-up — niet in deze module."
+  ]
+}

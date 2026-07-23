@@ -1,5 +1,62 @@
 # Spark Core 2.0 — PRD
 
+## Sessie 48 vervolg (2026-02-01) — Bijbel: semantische laag
+
+### v10_bijbel_semantic_layer_001 — Wijsheden / Patronen / Mentale Modellen / Ankers
+
+**Genesis**: Willem + GPT + E1 discussie over "Knowledge Enrichment Layer". Conclusie: KB-cards zijn gecureerde feit-lagen (laag1/2/3), maar er is een aparte kennis-soort die nergens paste:
+- Wijsheden ("Belofte maakt schuld")
+- Patronen ("Zoals het weer is, is het humeur")
+- Mentale modellen ("Ego wordt ongezond wanneer het leegte maskeert")
+- Ankers ("Wat je zegt, ben je zelf")
+
+Willem noemde deze categorie ooit "ankers voor interpretatie". GPT's inzicht: wijsheden linken **many-to-many** naar KB-begrippen (Belofte → Vertrouwen, Hoop, Teleurstelling, Verantwoordelijkheid), niet 1-op-1.
+
+**Placeholder-file was er al**: `unified_bijbel_entries.json` bestond sinds 2026-03-16 met leeg schema — nu eindelijk gevuld en met echte semantiek.
+
+**Componenten**:
+- `modules/bijbel/` (service.py + routes.py + _meta.json): CRUD + search + link_to_begrip + stats
+- Endpoints: `GET/POST /api/bijbel/list`, `/api/bijbel/search`, `/api/bijbel/by-begrip/{b}`, `POST /add`, `PATCH /{id}`, `DELETE /{id}`
+- 4 types: `wijsheid`, `patroon`, `mentaal_model`, `anker`
+- Snuffel-scope `wijsheden` toegevoegd (default scope nu 7 bronnen: kb + notes + personality + chat + code + namen + wijsheden)
+- Frontend: `BijbelPage.js` op `/spark/bijbel`, dashboard-link "💎 Bijbel"
+- Seed: 4 entries (belofte, weer/humeur, ego, wat-je-zegt-ben-je-zelf) om patroon te demonstreren
+
+**Data model**:
+```json
+{
+  "id": "bijbel-xyz",
+  "type": "wijsheid|patroon|mentaal_model|anker",
+  "tekst": "...",
+  "gerelateerde_begrippen": ["Belofte", "Hoop", ...],
+  "bron": "Willem",
+  "tags": ["relatie", ...],
+  "notities": "...",
+  "aangemaakt": "2026-02-01T..."
+}
+```
+
+**Belangrijk**: Bijbel is GEEN tweede kennisbank. Het is een semantische laag DIE de KB ordent. KB zegt "wat is X", Bijbel zegt "hoe moet je X begrijpen".
+
+**Compositional integratie is FOLLOW-UP** (nog niet gedaan): op termijn kan `response_composer` na een KB-definitie automatisch citeren "Willem's kijk hierop:" + gekoppelde bijbel-entry. Nu is dat handmatig via snuffel/UI.
+
+### Testing
+- Alle 4 types via curl toegevoegd, stats klopt, by-begrip filter werkt
+- Snuffel: `execute_snuffel("Belofte")` → 1 wijsheid + 5 kb hits (KB niet verstoord)
+- Frontend: 4 entries + 15 begrip-chips + type-filters gerendered
+
+### Files added
+- `/app/backend/data/knowledge/learned_knowledge/unified_bijbel_entries.json` (schema upgraded v3, gevuld)
+- `/app/backend/modules/bijbel/` (NEW: __init__.py, _meta.json, service.py, routes.py)
+- `/app/backend/server.py` (+ bijbel_router)
+- `/app/backend/modules/chat/spark_snuffel.py` (+ _search_bijbel, scope 'wijsheden')
+- `/app/frontend/src/components/workspace/BijbelPage.js` (NEW)
+- `/app/frontend/src/App.js` (+ bijbel route)
+- `/app/frontend/src/components/dashboard/DashboardPage.js` (+ bijbel-link)
+
+---
+
+
 ## Sessie 48 (2026-02-01) — P0 opruim + Namen-lade + File search uitgebreid
 
 ### v10_masterkey_env_001 — Masterkey uit code naar env

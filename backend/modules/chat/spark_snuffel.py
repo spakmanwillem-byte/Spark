@@ -332,6 +332,15 @@ def _search_namen(query: str, max_results: int = 5) -> List[Dict]:
         return []
 
 
+def _search_bijbel(query: str, max_results: int = 5) -> List[Dict]:
+    """v10_bijbel_semantic_layer_001 — doorzoek wijsheden/patronen/mentale modellen/ankers."""
+    try:
+        from modules.bijbel.service import search_entries
+        return search_entries(query, max_results=max_results)
+    except Exception:
+        return []
+
+
 def execute_snuffel(query: str, viewer_id: Optional[str] = None, scope: Optional[List[str]] = None) -> Dict:
     """Doorzoek alle bronnen voor query en geef gestructureerd resultaat.
 
@@ -340,7 +349,7 @@ def execute_snuffel(query: str, viewer_id: Optional[str] = None, scope: Optional
     if not query or len(query.strip()) < 2:
         return {"success": False, "error": "query te kort", "query": query}
 
-    scope = scope or ["kb", "notes", "personality", "chat", "code", "namen"]
+    scope = scope or ["kb", "notes", "personality", "chat", "code", "namen", "wijsheden"]
     started = datetime.now(timezone.utc)
     results: Dict[str, List[Dict]] = {}
     if "kb" in scope:
@@ -355,6 +364,8 @@ def execute_snuffel(query: str, viewer_id: Optional[str] = None, scope: Optional
         results["code"] = _search_code_files(query, max_results=5)
     if "namen" in scope or "names" in scope:
         results["namen"] = _search_namen(query, max_results=5)
+    if "wijsheden" in scope or "bijbel" in scope:
+        results["wijsheden"] = _search_bijbel(query, max_results=5)
 
     total = sum(len(v) for v in results.values())
     elapsed_ms = int((datetime.now(timezone.utc) - started).total_seconds() * 1000)
@@ -427,5 +438,15 @@ def format_snuffel_result_for_chat(result: Dict) -> str:
         lines.append(f"**Namen ({len(namen_hits)}):**")
         for h in namen_hits:
             lines.append(f"  • **{h['naam']}** — {h.get('categorie','?')}")
+        lines.append("")
+
+    wijs_hits = result["results"].get("wijsheden", [])
+    if wijs_hits:
+        lines.append(f"**Wijsheden/Bijbel ({len(wijs_hits)}):**")
+        for h in wijs_hits:
+            type_label = h.get("type", "?")
+            begrippen = h.get("gerelateerde_begrippen", [])
+            b_str = f" → {', '.join(begrippen[:4])}" if begrippen else ""
+            lines.append(f"  • [{type_label}] \"{(h.get('tekst') or '')[:140]}\"{b_str}")
 
     return "\n".join(lines)

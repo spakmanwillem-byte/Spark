@@ -15,20 +15,20 @@
   },
   "actieve_strategie": "gap_momentum_50",
   "buy_cooldown_sec_per_market": 900,
-  "buy_cooldown_note": "v10: minimum tijd tussen 2 BUYs op dezelfde markt (per user). Default 900s = 15 min = 1 candle-cycle. Voorkomt vol-lopen op \u00e9\u00e9n trigger. Aanpasbaar zonder code-change. Persisteert nu naar disk (herstart-safe).",
+  "buy_cooldown_note": "v10: minimum tijd tussen 2 BUYs op dezelfde markt (per user). Default 900s = 15 min = 1 candle-cycle. Voorkomt vol-lopen op één trigger. Aanpasbaar zonder code-change. Persisteert nu naar disk (herstart-safe).",
   "gap_filter_dip_override_pct": 999.0,
-  "gap_filter_note": "v11: gap-breakout confirmation filter (v7_gap_merge_001) wordt overruled bij dips \u2265 dit percentage. Default 999 = filter altijd actief (oud v7 gedrag). Backtest 500d daily toonde dat verlagen naar 3.0% wel meer trades geeft op 15m maar netto niet winstgevend maakt. Verlaag ALLEEN samen met H1-rebound-strategie of vergelijkbare positieve hefboom.",
+  "gap_filter_note": "v11: gap-breakout confirmation filter (v7_gap_merge_001) wordt overruled bij dips ≥ dit percentage. Default 999 = filter altijd actief (oud v7 gedrag). Backtest 500d daily toonde dat verlagen naar 3.0% wel meer trades geeft op 15m maar netto niet winstgevend maakt. Verlaag ALLEEN samen met H1-rebound-strategie of vergelijkbare positieve hefboom.",
   "_strategie_naam_migratie": {
     "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
     "nieuwe_naam": "gap_momentum_50",
     "migratie_datum": "2026-07-09",
     "reden": "Betekenisvolle namen i.p.v. letters (Willems advies): begrijpelijk over jaren, eigenschap-gebaseerd, uitlegbaar door Spark"
   },
-  "strategie\u00ebn": {
+  "strategieën": {
     "mean_reversion_bollinger": {
       "display_name": "Mean Reversion Bollinger",
       "vorige_naam": "A_bollinger_only",
-      "beschrijving": "Bollinger 2\u03c3 mean-reversion zonder gap-filter \u2014 eenvoudige baseline",
+      "beschrijving": "Bollinger 2σ mean-reversion zonder gap-filter — eenvoudige baseline",
       "properties": [
         "bollinger_2sigma",
         "mean_reversion"
@@ -44,34 +44,34 @@
           "honesty_ratio": -11.32,
           "bear_market_pnl": 0.23,
           "random_seed_validatie": true,
-          "live_resultaten": "geen \u2014 niet actief"
+          "live_resultaten": "geen — niet actief"
         },
-        "toelichting": "Geeft gerealiseerd \u20ac+2.31 maar \u20ac-26 open drawdown (100% win-rate is misleidend). Confidence laag door verstopte verliezen zonder loss-cut."
+        "toelichting": "Geeft gerealiseerd €+2.31 maar €-26 open drawdown (100% win-rate is misleidend). Confidence laag door verstopte verliezen zonder loss-cut."
       },
       "hypothese_lineage": {
-        "hypothese": "Bollinger 2\u03c3 oversold-signaal is voldoende voor mean-reversion",
+        "hypothese": "Bollinger 2σ oversold-signaal is voldoende voor mean-reversion",
         "backtest_run": "20260709_205003 (v2), 20260709_205846_v3",
-        "resultaat": "\u20ac+2.31 gerealiseerd, maar \u20ac-28 open drawdown = ECHT netto \u20ac-26",
-        "conclusie": "Alleen niet voldoende \u2014 filter nodig tegen kopen-op-piek in bear-trend",
-        "volgende_hypothese": "Voeg gap-body confirmation toe \u2192 strategie gap_momentum_50"
+        "resultaat": "€+2.31 gerealiseerd, maar €-28 open drawdown = ECHT netto €-26",
+        "conclusie": "Alleen niet voldoende — filter nodig tegen kopen-op-piek in bear-trend",
+        "volgende_hypothese": "Voeg gap-body confirmation toe → strategie gap_momentum_50"
       },
       "spark_alignment": {
         "waarom": "Baseline om te vergelijken; niet aanbevolen als actieve strategie",
         "regels": [
-          "Koop bij prijs < Bollinger lower band 2\u03c3",
+          "Koop bij prijs < Bollinger lower band 2σ",
           "Verkoop bij trailing stop of winst-signaal"
         ],
         "data_bronnen": [
           "Bitvavo public candles 15m 360d"
         ],
-        "onderliggende_hypothese": "Prijs keert altijd terug naar mean \u2014 te simpel voor bear-markten",
-        "zekerheid": "45% \u2014 bewezen te simpel, houdt verlies verborgen"
+        "onderliggende_hypothese": "Prijs keert altijd terug naar mean — te simpel voor bear-markten",
+        "zekerheid": "45% — bewezen te simpel, houdt verlies verborgen"
       }
     },
     "gap_momentum_50": {
       "display_name": "Gap Momentum 50",
       "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
-      "beschrijving": "Bollinger 2\u03c3 + gap-body momentum-bevestiging (50%) + 48u loss-cut + event-pauze",
+      "beschrijving": "Bollinger 2σ + gap-body momentum-bevestiging (50%) + 48u loss-cut + event-pauze",
       "actief": true,
       "properties": [
         "bollinger_2sigma",
@@ -100,25 +100,25 @@
           "verschil_vs_random_stddev": "veel lager (systematisch)",
           "live_resultaten": "wachten op eerste maand data"
         },
-        "toelichting": "Bewezen winnaar in v2+v3 backtests. 6.2\u00d7 beter in bear-markten. Honesty ratio nog 0.30 door open posities \u2014 met loss-cut wordt dit richting 1.0."
+        "toelichting": "Bewezen winnaar in v2+v3 backtests. 6.2× beter in bear-markten. Honesty ratio nog 0.30 door open posities — met loss-cut wordt dit richting 1.0."
       },
       "hypothese_lineage": {
         "hypothese_h1": "Bollinger alleen koopt te vroeg in dalende trends",
-        "backtest_h1": "20260709_205003 (v2) \u2014 B_streng gap 95% blokkeerde 100% signalen, D_gap 50% wint",
-        "resultaat_h1": "D: \u20ac+2.63 vs A: \u20ac+2.31 gerealiseerd, in bear \u20ac1.42 vs \u20ac0.23 (6.2\u00d7)",
+        "backtest_h1": "20260709_205003 (v2) — B_streng gap 95% blokkeerde 100% signalen, D_gap 50% wint",
+        "resultaat_h1": "D: €+2.63 vs A: €+2.31 gerealiseerd, in bear €1.42 vs €0.23 (6.2×)",
         "hypothese_h2": "Verliezen zichtbaar realiseren > kapitaal bevriezen",
-        "backtest_h2": "20260709_213151 (v4) \u2014 P (D + 48u loss-cut -3%): ECHT netto \u20ac-9.53 vs D \u20ac-13.16",
+        "backtest_h2": "20260709_213151 (v4) — P (D + 48u loss-cut -3%): ECHT netto €-9.53 vs D €-13.16",
         "resultaat_h2": "Loss-cut werkt: kleinere echte drawdown, kapitaal vrij voor nieuwe kansen",
         "conclusie": "Gap-body + loss-cut samen = huidige actieve strategie",
-        "volgende_hypothese": "Regime-awareness (v9): dynamisch schakelen tussen strategie\u00ebn per markt-fase (bull/bear/range)"
+        "volgende_hypothese": "Regime-awareness (v9): dynamisch schakelen tussen strategieën per markt-fase (bull/bear/range)"
       },
       "spark_alignment": {
-        "waarom": "Enige strategie die zowel bear-markten wint (6.2\u00d7 baseline) als eerlijke PnL toont (loss-cut aan)",
+        "waarom": "Enige strategie die zowel bear-markten wint (6.2× baseline) als eerlijke PnL toont (loss-cut aan)",
         "regels": [
-          "BUY: prijs < Bollinger lower band 2\u03c3 EN laatste groene candle dekt \u226550% van vorige rode body",
+          "BUY: prijs < Bollinger lower band 2σ EN laatste groene candle dekt ≥50% van vorige rode body",
           "SELL trailing stop: activeert +0.5% winst, sluit bij -0.4% terugval vanaf top",
-          "SELL loss-cut: na 48u en \u2264-3% verlies \u2192 forceer SELL",
-          "PAUZE: markt drop >5% in 24u \u2192 24u stil + notificatie",
+          "SELL loss-cut: na 48u en ≤-3% verlies → forceer SELL",
+          "PAUZE: markt drop >5% in 24u → 24u stil + notificatie",
           "COOLDOWN: 15 min per markt na BUY; 30 min na INSUFFICIENT_EUR"
         ],
         "data_bronnen": [
@@ -128,13 +128,13 @@
           "live trade_history per user + market_stats.json"
         ],
         "onderliggende_hypothese": "Systematiek + transparantie > verstopping. Verlies zichtbaar > bevroren.",
-        "zekerheid": "82% \u2014 hoge score, live-datapunt nog te verzamelen om naar 90+ te gaan"
+        "zekerheid": "82% — hoge score, live-datapunt nog te verzamelen om naar 90+ te gaan"
       }
     },
     "extreme_oversold": {
       "display_name": "Extreme Oversold (Neef's variant)",
       "vorige_naam": "E_bollinger_plus_n_red_green",
-      "beschrijving": "Bollinger 2\u03c3 + N-red-then-green (N=3) \u2014 koopt alleen na 3 rode candles gevolgd door 1 groene",
+      "beschrijving": "Bollinger 2σ + N-red-then-green (N=3) — koopt alleen na 3 rode candles gevolgd door 1 groene",
       "properties": [
         "bollinger_2sigma",
         "n_red_green_pattern",
@@ -148,16 +148,16 @@
           "trades_180d": 21,
           "gerealiseerd_pnl_180d": 3.19,
           "loss_cut": "niet ingebouwd",
-          "live_resultaten": "geen \u2014 niet actief"
+          "live_resultaten": "geen — niet actief"
         },
         "toelichting": "Hoogste ruwe PnL maar smalle scope (alleen extreme dips). Zonder loss-cut niet aanbevolen als hoofdstrategie."
       },
       "hypothese_lineage": {
         "hypothese": "3-rode-dan-groen patroon geeft schoner omkeerpunt dan Bollinger alleen",
         "backtest_run": "20260709_205003 (v2)",
-        "resultaat": "\u20ac+3.19 op 21 trades \u2014 beter dan A en D op gerealiseerd, maar 180d only",
+        "resultaat": "€+3.19 op 21 trades — beter dan A en D op gerealiseerd, maar 180d only",
         "conclusie": "Kandidaat voor toekomstige regime-switch (bear-markten met extreme dips)",
-        "volgende_hypothese": "Combineer met loss-cut \u2192 nieuwe strategie extreme_oversold_protected"
+        "volgende_hypothese": "Combineer met loss-cut → nieuwe strategie extreme_oversold_protected"
       },
       "spark_alignment": {
         "waarom": "Backup-strategie voor toekomstige regime-awareness (v9)",
@@ -170,7 +170,7 @@
           "Bitvavo public candles 15m 180d"
         ],
         "onderliggende_hypothese": "Meer bevestiging = minder valse signalen",
-        "zekerheid": "55% \u2014 belovend maar onvolledig getest, geen loss-cut"
+        "zekerheid": "55% — belovend maar onvolledig getest, geen loss-cut"
       }
     },
     "gap_momentum_50__plus__extreme_oversold": {
@@ -194,12 +194,12 @@
       ],
       "confidence": {
         "score": 0,
-        "berekening": "geen backtest data \u2014 draft",
+        "berekening": "geen backtest data — draft",
         "gebaseerd_op": {
           "backtest_dagen": 0,
           "live_resultaten": "geen"
         },
-        "toelichting": "Nieuwe synthese \u2014 backtest nodig voor score"
+        "toelichting": "Nieuwe synthese — backtest nodig voor score"
       },
       "hypothese_lineage": {
         "hypothese": "De combinatie bollinger_2sigma + mean_reversion + gap_body_50 + n_red_green_pattern + loss_cut_48h_3pct + event_pause_5pct_24h + honest_pnl + trailing_stop + fee_aware_sell presteert beter dan de individuele componenten",
@@ -208,24 +208,24 @@
         "conclusie": "TODO"
       },
       "spark_alignment": {
-        "waarom": "Synthese door willem \u2014 combineert 9 bouwstenen uit property catalog",
+        "waarom": "Synthese door willem — combineert 9 bouwstenen uit property catalog",
         "regels": [
-          "BUY-signaal wanneer prijs onder Bollinger lower band 2\u03c3 zakt (mean-reversion)",
+          "BUY-signaal wanneer prijs onder Bollinger lower band 2σ zakt (mean-reversion)",
           "Onderneemt kopen bij afwijking van gemiddelde, verwacht terugkeer",
-          "Laatste groene candle moet \u226550% van vorige rode body dekken",
+          "Laatste groene candle moet ≥50% van vorige rode body dekken",
           "3 rode candles gevolgd door 1 groene (Neef's variant, extreme oversold)",
-          "Forceer SELL na 48u als positie \u2264-3% verlies staat (verlies zichtbaar realiseren)",
-          "Bij daily drop >5% \u2192 markt 24u pauze + notificatie",
+          "Forceer SELL na 48u als positie ≤-3% verlies staat (verlies zichtbaar realiseren)",
+          "Bij daily drop >5% → markt 24u pauze + notificatie",
           "Toont gerealiseerd + open drawdown + ECHT netto + honesty ratio",
           "Activeert bij +0.5% winst, sluit bij -0.4% terugval vanaf top",
-          "Weigert SELL als netto na 0.25% Bitvavo-fee < \u20ac0.01 winst"
+          "Weigert SELL als netto na 0.25% Bitvavo-fee < €0.01 winst"
         ],
         "data_bronnen": [
           "property_catalog v1",
           "voorgaande backtest-runs v2..v5"
         ],
         "onderliggende_hypothese": "Property-combinatie levert emergent gedrag: Signaal: bollinger_2sigma. Confirmatie: gap_body_50 + n_red_green_pattern. Bescherming: loss_cut_48h_3pct + event_pause_5pct_24h. Exit: trailing_stop + fee_aware_sell.",
-        "zekerheid": "0% \u2014 draft zonder backtest"
+        "zekerheid": "0% — draft zonder backtest"
       },
       "backtest_plan": {
         "test_periode_dagen": 360,
@@ -264,7 +264,7 @@
     "loss_cut_enabled": true,
     "loss_cut_hours": 48,
     "loss_cut_pct": -0.03,
-    "_loss_cut_rationale": "Willems H2 hypothese: verliezen zichtbaar realiseren > verlies bevriezen. Backtest v4 (20260709_213151): P=\u20ac-9.53 vs D=\u20ac-13.16 echt netto. Beter.",
+    "_loss_cut_rationale": "Willems H2 hypothese: verliezen zichtbaar realiseren > verlies bevriezen. Backtest v4 (20260709_213151): P=€-9.53 vs D=€-13.16 echt netto. Beter.",
     "rebound_enabled": false,
     "rebound_drop_threshold_pct": 5.0,
     "rebound_target_pct": 2.0,
@@ -274,7 +274,7 @@
     "trailing_stop_activatie_pct": 0.5,
     "trailing_stop_drop_pct": 0.4,
     "nooit_verkopen_met_verlies": true,
-    "willems_regel": "Netto na fees moet > \u20ac0.01 zijn, anders HOLD tot betere prijs"
+    "willems_regel": "Netto na fees moet > €0.01 zijn, anders HOLD tot betere prijs"
   },
   "markten": {
     "actief": [
@@ -295,7 +295,7 @@
       "ADA-EUR"
     ],
     "reden_pauze": {
-      "ADA-EUR": "0 trades in 180 dagen backtest \u2014 geen entry-signalen voor onze strategie"
+      "ADA-EUR": "0 trades in 180 dagen backtest — geen entry-signalen voor onze strategie"
     },
     "correlatie_clusters": {
       "eth_btc_sol_cluster": [
@@ -315,15 +315,15 @@
     "trigger_daily_drop_pct": 5.0,
     "actie": "pause_bot_and_notify_user",
     "pause_duration_hours": 24,
-    "notification_template": "\ud83d\udea8 Ik zag {drop_pct}% drop op {market}. Ik pauzeer je bot 24u om je kapitaal te beschermen. Detectie via 24h-window >{trigger_pct}% peak-to-trough.",
-    "backtest_evidence": "185 shock-events over 6 markten \u00d7 6 maanden. Bot moest 30\u00d7 per markt pauzeren."
+    "notification_template": "🚨 Ik zag {drop_pct}% drop op {market}. Ik pauzeer je bot 24u om je kapitaal te beschermen. Detectie via 24h-window >{trigger_pct}% peak-to-trough.",
+    "backtest_evidence": "185 shock-events over 6 markten × 6 maanden. Bot moest 30× per markt pauzeren."
   },
   "regime_awareness": {
     "actief_in_v9_geplant": true,
     "regimes": {
-      "bull": "24h prijs stijgt >2% \u2014 geen filter nodig, baseline strategie wint",
-      "bear": "24h prijs daalt >2% \u2014 gap-body-filter geeft 6.2\u00d7 betere winst",
-      "range": "tussen -2% en +2% \u2014 beide strategie\u00ebn gelijk"
+      "bull": "24h prijs stijgt >2% — geen filter nodig, baseline strategie wint",
+      "bear": "24h prijs daalt >2% — gap-body-filter geeft 6.2× betere winst",
+      "range": "tussen -2% en +2% — beide strategieën gelijk"
     }
   },
   "learning_scheduler": {
@@ -344,7 +344,7 @@
     "_bijgewerkt_op": "2026-07-23T09:30:00+00:00",
     "_dryrun_bevinding": "Sessie 47 dryrun op 90d echte Bitvavo candles (6 markten × 234 dip-buys): 0 skips bij 5-12% drempel, 1 skip bij 3% (was verlies-vermijding). BEVESTIGD: anker is bij Bollinger-dip-strategy een info-referentie, geen filter — dip-buy zit per definitie ONDER MA. Anker triggert alleen bij gap-UP + BUY. Log_only mode is correct, drempel-tuning heeft nu weinig effect.",
     "_doel": "Voorkomt dat de bot bovenaan een gap-up koopt. Per markt houden we een 'anker'-prijs bij (30-daagse referentie). Als current_price > anker * (1 + above_anker_threshold_pct/100), skip de BUY.",
-    "_richting": "hybride: bij startup 1x 30d Bitvavo candles fetchen \u2192 cache in data/trade/anker/{market}.json \u2192 daarna zelf bijhouden via ticker-samples. Nachtelijke reconciliatie tegen Bitvavo.",
+    "_richting": "hybride: bij startup 1x 30d Bitvavo candles fetchen → cache in data/trade/anker/{market}.json → daarna zelf bijhouden via ticker-samples. Nachtelijke reconciliatie tegen Bitvavo.",
     "enabled": true,
     "lookback_days": 30,
     "above_anker_threshold_pct": 8.0,
@@ -359,7 +359,9 @@
     ],
     "_action_note": "LOG_ONLY nu (sessie 47 einde) — zichtbaar in AnkerPanel widget hoeveel skips zouden gebeuren. Willem tuned drempel op basis van data, dan pas op 'skip'.",
     "_hook_locatie": "strategy_decision.py: na BUY-signaal, voor executie",
-    "_verantwoording_papertrail": "Elke anker-check gaat via LogAgent \u2192 data/boekhouder/logs/anker_check/{YYYY-MM}.jsonl (hash-chained). Lookup via LogAgent().lookup(topic='anker_check')."
+    "_verantwoording_papertrail": "Elke anker-check gaat via LogAgent → data/boekhouder/logs/anker_check/{YYYY-MM}.jsonl (hash-chained). Lookup via LogAgent().lookup(topic='anker_check').",
+    "action": "log_only",
+    "action_note": "log_only = anker check draait + logt, maar blokkeert nooit een trade. Zet op skip om echt te filteren."
   },
   "spark_awareness": {
     "spark_kan_uitleggen": [

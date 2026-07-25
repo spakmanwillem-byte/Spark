@@ -2,6 +2,56 @@
 
 
 
+## 🔴 P0 SESSIE 49 EIND (2026-02-01) — Gap-filter override GEREVERT + volgende hefbomen
+
+### ❌ 3% gap-override teruggedraaid (niet gedeployed)
+Blueprint `gap_filter_dip_override_pct` staat weer op **999** = oud v7-gedrag. Waarom:
+
+**Fout in mijn eerste presentatie**: mijn 10d 15m backtest telde alleen **realized PnL** en toonde cond_3 als "winnaar" (-€0.18). Willem's terechte tik: *"einde maand hadden we toch positief"*. Snuffel wees me naar `willem_ideas.md` waar hij eerder al concludeerde:
+
+> *"100% win-rate was ILLUSIE — verliezen zaten verstopt in open posities. D onze winnaar: gerealiseerd +€2.63, echte netto -€13.16 (met open DD)"*
+
+Ik heb opnieuw backtest gedraaid op **500d daily** MET unrealized DD:
+
+| Scenario | Realized | Open | Unreal DD | ECHT netto |
+|---|---|---|---|---|
+| off | -€5.38 | 1 | -€0.17 | **-€5.55** |
+| always (huidig) | €0.00 | 0 | €0.00 | €0.00 |
+| cond_2/3/5 | -€5.38 | 1 | -€0.17 | **-€5.55** |
+
+Op daily-frame maakt de filter geen verschil (78 trades bij elke override; daily body's zijn groot dus gap-check laat alles door). Op 15m maakt hij WEL uit, maar levert **geen extra winst**. Meer activiteit ≠ meer winst.
+
+### 🎯 Echte hefbomen die WEL bewezen zijn (uit willem_ideas.md v4-analyse)
+
+**H1 Rebound-strategie** (NIET geïmplementeerd, hoogste ROI potentie):
+- Post-event autopsy: **62.5% van 5%-drops is 24u later positief** (mediaan +1.96%)
+- **49.2% herstelt ≥2% binnen 24u**
+- Aanbeveling: nieuwe strategie **Q** = Bollinger + gap-body + rebound-BUY (koopt JUIST bij event, target 2% winst)
+- Drempel: verlaag rebound van 5% naar **3% drop** — dan wél triggeren
+- **P0 volgende sessie**
+
+**H2 48u loss-cut** (WEL geïmplementeerd, actief):
+- Bewezen betere netto (-€9.53 vs -€13.16 baseline)
+- Zit in `_simple_decision` regel 95-124
+- Blijft aan
+
+### 🎓 Les — verplicht voor elke toekomstige backtest
+**ELKE backtest moet unrealized DD meerekenen**, anders lieg je tegen jezelf. Concreet:
+```
+echt_netto = sum(realized_trades) + sum(open_positions_unrealized_at_end)
+```
+Als de "winnaar" scenario >1 open positie heeft aan het einde en de test-periode kort is → verlies verstopt. Gebruik ook langere periode (min 90d, liefst 500d) om market-regime bias te vermijden.
+
+### Status
+- Blueprint `gap_filter_dip_override_pct: 999` (oud gedrag, herstart-safe)
+- `monitor.py` code onaangetast (leest gewoon uit blueprint, backward-compatible)
+- Geen deploy nodig — preview draait al met 999
+- **Volgende sessie**: bouw H1 rebound-strategie (nieuwe strategie Q)
+
+---
+
+
+
 ## 🟢 SESSIE 49 UPDATE — Gap-filter override GEÏMPLEMENTEERD (2026-02-01 / 25-jul)
 
 Backtest 10 dagen 15m candles (14-25 juli), €10/trade, fee 0.25%/side, 6 markten:

@@ -1089,12 +1089,30 @@ class MonitorService:
             # laatste candle een structuur-omslag toont (groene candle volledig boven
             # vorige rode). Voorkomt 'kopen op piek' in dalende markt zoals Willem meldde.
             gap_check = _gap_breakout_check(context_candles)
-            if buy_decision.get("action") == "BUY" and gap_check["signal"] != "BUY":
+            # v11_gap_filter_conditional_001 — Filter alleen blokkerend bij ondiepe dips.
+            # Bij grote dips (>= threshold uit blueprint) mag Bollinger-BUY door zonder
+            # gap-bevestiging. Backtest 10d juli 2026: 3.0% gaf 6x meer trades met 75%
+            # win-rate. Overwrite via blueprint zonder code-change.
+            _gap_override_pct = 999.0
+            try:
+                from pathlib import Path as _P
+                import json as _j
+                _bp_fp = _P(__file__).parent / "blueprints" / "spark_trader.json"
+                if _bp_fp.exists():
+                    _bp = _j.load(open(_bp_fp))
+                    _gap_override_pct = float(_bp.get("gap_filter_dip_override_pct", 999.0))
+            except Exception:
+                pass
+            _dip_pct = buy_decision.get("drop_from_high_pct", 0)
+            if buy_decision.get("action") == "BUY" and gap_check["signal"] != "BUY" and _dip_pct < _gap_override_pct:
                 buy_decision["action"] = "HOLD"
-                buy_decision["reason"] += f" | Wacht op gap-bevestiging ({gap_check['reason']})"
+                buy_decision["reason"] += f" | Wacht op gap-bevestiging ({gap_check['reason']}, dip {_dip_pct:.1f}% < {_gap_override_pct:.1f}%)"
                 buy_decision["gap_filter_blocked"] = True
+            elif buy_decision.get("action") == "BUY" and gap_check["signal"] != "BUY" and _dip_pct >= _gap_override_pct:
+                buy_decision["reason"] += f" | Gap-filter overruled: dip {_dip_pct:.1f}% \u2265 {_gap_override_pct:.1f}% (echte dip)"
+                buy_decision["gap_filter_overruled"] = True
             elif buy_decision.get("action") == "BUY" and gap_check["signal"] == "BUY":
-                buy_decision["reason"] += f" | ✓ gap-bevestigd: {gap_check['reason']}"
+                buy_decision["reason"] += f" | \u2713 gap-bevestigd: {gap_check['reason']}"
                 buy_decision["gap_confirmed"] = True
             buy_decision["gap_check"] = gap_check
             if market_context:

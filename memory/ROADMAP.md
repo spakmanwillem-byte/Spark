@@ -1,6 +1,33 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+
+## 🟢 SESSIE 49 UPDATE — Gap-filter override GEÏMPLEMENTEERD (2026-02-01 / 25-jul)
+
+Backtest 10 dagen 15m candles (14-25 juli), €10/trade, fee 0.25%/side, 6 markten:
+
+| Scenario | Trades | Win% | Netto € |
+|---|---|---|---|
+| Geen filter | 31 | 71% | -€0.87 |
+| Huidig (always) | 2 | 50% | -€0.24 |
+| cond_2 (2%) | 24 | 67% | -€1.13 |
+| **cond_3 (3%)** ✅ | **12** | **75%** | **-€0.18** |
+| cond_5 (5%) | 3 | 67% | -€0.15 |
+
+**Winnaar: 3.0%** — 6× meer trades dan huidig, hoogste win-rate, minimaal verlies in bear-periode.
+
+**Belangrijk**: alle scenarios netto negatief in deze 10-daagse bear-periode. Mean-reversion strategieën verliezen inherent in aanhoudende bear-market — filter kan dat niet oplossen.
+
+**Geïmplementeerd**:
+- `spark_trader.json` → `gap_filter_dip_override_pct: 3.0` + toelichting
+- `monitor.py` regel ~1091 → threshold uit blueprint, backward compatible (999 = oud gedrag)
+- Beslissings-log heeft nu `gap_filter_overruled: true` flag
+
+**Live effect**: bij dips ≥3% → BUY door zonder gap-confirmation. Bij <3% → filter blijft actief (originele safety). Live tweak via blueprint zonder code-change.
+
+---
+
+
 ## 🟡 SESSIE 49 (2026-02-01 / 25-jul-prod) — Gap-filter blokkeert 100% in bear-market
 
 ### 📊 Bevindingen uit prod-zip 25 juli 07:23
@@ -56,10 +83,6 @@ Voordat dit deployed wordt: `tests/backtest_v5.py` draaien met en zonder deze ov
 ### Status
 - **NIET geïmplementeerd** — alleen genoteerd. Willem beslist zelf wanneer + samen met de backtest.
 - Anker (`log_only`, 8%) blijft ongewijzigd — heeft geen invloed op dit issue.
-
----
-
-
 
 ## 🟡 SESSIE 48 (2026-02-01) — Entity Engine (idea, gepland niet nu)
 

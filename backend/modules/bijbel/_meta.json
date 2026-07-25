@@ -5,15 +5,21 @@
   "auteur": "system + Willem",
   "versie": "1.0",
   "aangemaakt": "2026-02-01",
-  "types": ["wijsheid", "patroon", "mentaal_model", "anker"],
+  "types": [
+    "wijsheid",
+    "patroon",
+    "mentaal_model",
+    "anker"
+  ],
   "endpoints": [
-    "GET /api/bijbel/list",
-    "GET /api/bijbel/search?q=...",
-    "GET /api/bijbel/by-begrip/{begrip}",
-    "GET /api/bijbel/stats",
-    "POST /api/bijbel/add",
-    "PATCH /api/bijbel/{id}",
-    "DELETE /api/bijbel/{id}"
+    "DELETE /bijbel/{entry_id}",
+    "GET /bijbel/by-begrip/{begrip}",
+    "GET /bijbel/list",
+    "GET /bijbel/search",
+    "GET /bijbel/stats",
+    "GET /bijbel/{entry_id}",
+    "PATCH /bijbel/{entry_id}",
+    "POST /bijbel/add"
   ],
   "data_file": "/app/backend/data/knowledge/learned_knowledge/unified_bijbel_entries.json",
   "voetnoten": [
@@ -21,5 +27,22 @@
     "Wijsheden linken doorgaans aan meerdere begrippen (Belofte → Vertrouwen, Hoop, Teleurstelling, Verantwoordelijkheid).",
     "Willem noemde de Bijbel ooit geen document maar 'ankers' — dit is nu een expliciet type.",
     "Compositional service integratie (Spark citeert wijsheid na KB-definitie) is een aparte follow-up — niet in deze module."
-  ]
+  ],
+  "doel": "(bijbel — geen doel-omschrijving)",
+  "footnote": "",
+  "blueprint_ref": null,
+  "tags": [],
+  "owner": "spark-system",
+  "split_from": null,
+  "container_type": "dir",
+  "file_count": 3,
+  "subdir_count": 0,
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
+  "encryption": {
+    "enabled": false,
+    "algorithm": null,
+    "key_id": null,
+    "key_holder": null
+  }
 }

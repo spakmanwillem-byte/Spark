@@ -1,19 +1,19 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-07-22T16:21:28.708546+00:00",
+  "generated_at": "2026-07-23T14:32:51.322424+00:00",
   "summary": {
-    "total_containers": 108,
+    "total_containers": 111,
     "by_status": {
       "active": 96,
-      "unknown": 1,
-      "skeleton": 11
+      "unknown": 3,
+      "skeleton": 12
     },
     "by_container_type": {
-      "dir": 72,
-      "data": 36
+      "dir": 74,
+      "data": 37
     },
-    "total_endpoints_detected": 628
+    "total_endpoints_detected": 643
   },
   "tree": {
     "backend_modules": {
@@ -407,6 +407,54 @@
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
+      },
+      "backend/modules/bijbel": {
+        "module": "bijbel",
+        "titel": "Bijbel — semantische laag",
+        "beschrijving": "Wijsheden, patronen, mentale modellen en ankers. NIET een tweede kennisbank, maar de semantische laag DIE de kennisbank ordent. Entries linken many-to-many naar KB-begrippen.",
+        "auteur": "system + Willem",
+        "versie": "1.0",
+        "aangemaakt": "2026-02-01",
+        "types": [
+          "wijsheid",
+          "patroon",
+          "mentaal_model",
+          "anker"
+        ],
+        "endpoints": [
+          "DELETE /bijbel/{entry_id}",
+          "GET /bijbel/by-begrip/{begrip}",
+          "GET /bijbel/list",
+          "GET /bijbel/search",
+          "GET /bijbel/stats",
+          "GET /bijbel/{entry_id}",
+          "PATCH /bijbel/{entry_id}",
+          "POST /bijbel/add"
+        ],
+        "data_file": "/app/backend/data/knowledge/learned_knowledge/unified_bijbel_entries.json",
+        "voetnoten": [
+          "Placeholder-schema bestond al sinds 2026-03-16 (leeg). Gevuld in sessie 48 na Willem+GPT+E1 discussie over enrichment-layer.",
+          "Wijsheden linken doorgaans aan meerdere begrippen (Belofte → Vertrouwen, Hoop, Teleurstelling, Verantwoordelijkheid).",
+          "Willem noemde de Bijbel ooit geen document maar 'ankers' — dit is nu een expliciet type.",
+          "Compositional service integratie (Spark citeert wijsheid na KB-definitie) is een aparte follow-up — niet in deze module."
+        ],
+        "doel": "(bijbel — geen doel-omschrijving)",
+        "footnote": "",
+        "blueprint_ref": null,
+        "tags": [],
+        "owner": "spark-system",
+        "split_from": null,
+        "container_type": "dir",
+        "file_count": 3,
+        "subdir_count": 0,
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        }
       },
       "backend/modules/boekhouder": {
         "_arch_ref": "v6_synapse_001",
@@ -1766,6 +1814,46 @@
         "file_count": 3,
         "subdir_count": 0,
         "extra": {}
+      },
+      "backend/modules/namen": {
+        "module": "namen",
+        "titel": "Namen-lade",
+        "beschrijving": "Spark's naam-classificatie systeem. Slaat voornamen (m/v/unisex), achternamen, koosnamen en gamertags op. Auto-learn kan nieuwe namen classificeren via LLM.",
+        "auteur": "system",
+        "versie": "1.0",
+        "aangemaakt": "2026-02-01",
+        "endpoints": [
+          "DELETE /namen/{naam}",
+          "GET /namen/list",
+          "GET /namen/search",
+          "GET /namen/stats",
+          "GET /namen/{naam}",
+          "POST /namen/add",
+          "POST /namen/classify"
+        ],
+        "data_file": "/app/backend/data/blueprints/namen.json",
+        "voetnoten": [
+          "Namen leven in een blueprint (JSON), niet in KB v2 lades — omdat ze data zijn, geen gedrag.",
+          "Auto-classify gebruikt de bestaande LLM router (Groq/Cerebras) voor 1-shot classificatie.",
+          "spark_snuffel doorzoekt deze lade automatisch bij scope='namen'."
+        ],
+        "doel": "(namen — geen doel-omschrijving)",
+        "footnote": "",
+        "blueprint_ref": null,
+        "tags": [],
+        "owner": "spark-system",
+        "split_from": null,
+        "container_type": "dir",
+        "file_count": 3,
+        "subdir_count": 0,
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        }
       },
       "backend/modules/notes": {
         "_arch_ref": "v6_synapse_001",
@@ -3180,7 +3268,7 @@
         "created_at": "2026-05-26T15:54:32.302855+00:00",
         "last_touched": "2026-05-26T15:54:32.302855+00:00",
         "activity_count": 0,
-        "file_count": 13,
+        "file_count": 15,
         "subdir_count": 0,
         "extra": {}
       }
@@ -3294,6 +3382,33 @@
         "subdir_count": 0,
         "extra": {}
       },
+      "backend/data/blueprints": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "blueprints",
+        "doel": "Skelet — blueprints module nog leeg of placeholder",
+        "container_type": "data",
+        "status": "skeleton",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-07-23T14:32:50.505354+00:00",
+        "last_touched": "2026-07-23T14:32:50.505354+00:00",
+        "activity_count": 0,
+        "file_count": 1,
+        "subdir_count": 0,
+        "extra": {}
+      },
       "backend/data/boekhouder": {
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
@@ -3315,8 +3430,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-31T23:48:37.354567+00:00",
-        "last_touched": "2026-07-22T15:43:34.370051+00:00",
-        "activity_count": 24,
+        "last_touched": "2026-07-23T14:11:09.114558+00:00",
+        "activity_count": 29,
         "file_count": 7,
         "subdir_count": 1,
         "extra": {}
@@ -3423,8 +3538,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-07-22T15:55:23.034781+00:00",
-        "activity_count": 2047,
+        "last_touched": "2026-07-23T10:03:11.567187+00:00",
+        "activity_count": 2053,
         "file_count": 98,
         "subdir_count": 3,
         "extra": {}
@@ -3450,8 +3565,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-07-22T15:41:49.537161+00:00",
-        "activity_count": 167,
+        "last_touched": "2026-07-23T14:32:45.074070+00:00",
+        "activity_count": 170,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -3560,7 +3675,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-06-27T23:00:41.216091+00:00",
         "activity_count": 2,
-        "file_count": 42,
+        "file_count": 44,
         "subdir_count": 2,
         "extra": {}
       },
@@ -3585,8 +3700,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-07-22T08:26:49.966301+00:00",
-        "activity_count": 127271,
+        "last_touched": "2026-07-23T14:21:18.795442+00:00",
+        "activity_count": 127338,
         "file_count": 9,
         "subdir_count": 0,
         "extra": {}
@@ -3639,8 +3754,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-07-22T16:17:23.452998+00:00",
-        "activity_count": 932,
+        "last_touched": "2026-07-23T10:03:11.204194+00:00",
+        "activity_count": 936,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3693,8 +3808,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-07-22T16:17:03.699048+00:00",
-        "activity_count": 8423,
+        "last_touched": "2026-07-23T14:22:57.931498+00:00",
+        "activity_count": 8431,
         "file_count": 47,
         "subdir_count": 2,
         "extra": {}
@@ -3828,8 +3943,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-07-22T16:18:40.752987+00:00",
-        "activity_count": 3032,
+        "last_touched": "2026-07-23T14:31:40.063473+00:00",
+        "activity_count": 3063,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -3884,7 +3999,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 38,
+        "file_count": 39,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3990,9 +4105,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-07-22T16:21:28.366134+00:00",
-        "activity_count": 40470,
-        "file_count": 204,
+        "last_touched": "2026-07-23T14:32:50.633328+00:00",
+        "activity_count": 40739,
+        "file_count": 211,
         "subdir_count": 5,
         "extra": {}
       },
@@ -4044,9 +4159,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-07-22T15:38:37.298501+00:00",
-        "activity_count": 4303,
-        "file_count": 58,
+        "last_touched": "2026-07-23T14:21:40.208645+00:00",
+        "activity_count": 4460,
+        "file_count": 59,
         "subdir_count": 4,
         "extra": {}
       },
@@ -4152,8 +4267,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-07-21T14:48:11.036160+00:00",
-        "activity_count": 232,
+        "last_touched": "2026-07-23T09:16:23.937806+00:00",
+        "activity_count": 233,
         "file_count": 12,
         "subdir_count": 1,
         "extra": {}

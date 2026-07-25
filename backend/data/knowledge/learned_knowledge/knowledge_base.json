@@ -8739,23 +8739,34 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Dagelijks gebruik betekent dat iets iedere dag of vrijwel iedere dag wordt gebruikt.",
+        "laag2": "Het begrip beschrijft voorwerpen, hulpmiddelen, handelingen of toepassingen die een vast onderdeel vormen van het dagelijks leven.",
+        "laag3": "Dagelijks gebruik wordt toegepast om aan te geven dat iets regelmatig en routinematig wordt gebruikt. Dit kan gaan om huishoudelijke voorwerpen, digitale hulpmiddelen, medicijnen, voertuigen, software of vaardigheden. Het begrip zegt iets over de frequentie van gebruik, niet over de aard of kwaliteit van het object.",
+        "laag4": "Binnen Spark verwijst dagelijks gebruik naar een gebruiksfrequentie waarbij een object, hulpmiddel, systeem of handeling onderdeel is van de dagelijkse routine. Spark kan dagelijks gebruik koppelen aan frequentie, gewoonte, routine, gebruik, beschikbaarheid, gebruikerservaring, praktijk en contextanalyse. Hierdoor kunnen begrippen worden geclassificeerd op basis van hun gebruiksintensiteit."
       },
       "tags": [
-        "dagelijks gebruik"
+        "beschikbaarheid",
+        "classificatie",
+        "context",
+        "dagelijks",
+        "dagelijks gebruik",
+        "frequentie",
+        "gebruik",
+        "gebruikerservaring",
+        "gebruiksfrequentie",
+        "gewoonte",
+        "praktijk",
+        "routine"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Gebruikers, organisaties, AI-systemen en consumenten.",
+        "wat": "Een aanduiding dat iets iedere dag of vrijwel iedere dag wordt gebruikt.",
+        "wanneer": "Tijdens terugkerende dagelijkse activiteiten.",
+        "waar": "Thuis, op het werk, op school, onderweg en in digitale omgevingen.",
+        "waarom": "Om de gebruiksfrequentie en praktische relevantie van een object of handeling aan te geven.",
+        "hoe": "Door regelmatig gebruik als onderdeel van een dagelijkse routine."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -8764,7 +8775,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 6,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:37:23.352192+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-0c0f09aa",
@@ -64995,23 +65008,35 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Een dagdeel is een afgebakend gedeelte van een dag.",
+        "laag2": "Een dag wordt vaak verdeeld in meerdere delen, zoals ochtend, middag, avond en nacht.",
+        "laag3": "Dagdelen worden gebruikt om tijdstippen globaal aan te geven zonder een exact tijdstip te noemen. De precieze grenzen kunnen per cultuur, organisatie of toepassing verschillen. In planning, zorg, onderwijs en communicatie worden dagdelen gebruikt om activiteiten en afspraken te organiseren.",
+        "laag4": "Binnen Spark verwijst dagdeel naar een tijdsindeling die een periode binnen één kalenderdag aanduidt. Spark kan dagdeel koppelen aan tijd, planning, agenda, rooster, chronologie, gebeurtenissen, context, kalender en tijdsherkenning. Hierdoor kunnen tijdsgebonden gebeurtenissen en activiteiten systematisch worden geordend."
       },
       "tags": [
-        "dagdeel"
+        "agenda",
+        "avond",
+        "chronologie",
+        "context",
+        "dagdeel",
+        "kalender",
+        "middag",
+        "nacht",
+        "ochtend",
+        "planning",
+        "rooster",
+        "tijd",
+        "tijdsindeling"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Gebruikers, planners, organisaties, AI-systemen en agenda's.",
+        "wat": "Een afgebakend gedeelte van een dag.",
+        "wanneer": "Bij het plannen, beschrijven of ordenen van activiteiten.",
+        "waar": "In agenda's, roosters, planningen, zorg, onderwijs en communicatie.",
+        "waarom": "Om tijd globaal en overzichtelijk in te delen.",
+        "hoe": "Door een kalenderdag op te splitsen in perioden zoals ochtend, middag, avond en nacht."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -65020,7 +65045,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 1,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:36:45.068105+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-427529f6",
@@ -314708,6 +314735,48 @@
       "detected_by": "user-001",
       "created_by": "user-001",
       "created_at": "2026-07-25T07:33:48.589784+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-c5d00456",
+      "begrip": "Ging",
+      "status": "active",
+      "lagen": {
+        "laag1": "Ging betekent dat iemand of iets zich heeft verplaatst, begon, verliep of functioneerde.",
+        "laag2": "Ging is de verleden tijd van het werkwoord gaan en beschrijft een handeling, beweging of toestand die in het verleden heeft plaatsgevonden.",
+        "laag3": "Het woord ging wordt gebruikt in veel contexten. Het kan verwijzen naar fysieke verplaatsing (\"Hij ging naar huis.\"), het verloop van een proces (\"De vergadering ging goed.\"), het starten van een activiteit (\"De machine ging aan.\") of het functioneren van een systeem (\"Alles ging volgens plan.\"). De exacte betekenis wordt bepaald door de context.",
+        "laag4": "Binnen Spark verwijst ging naar een voltooide handeling, beweging of procesverloop in het verleden. Spark koppelt ging aan gaan, maar bewaart de oorspronkelijke woordvorm zodat grammaticale informatie behouden blijft. Hierdoor kunnen tijdsvormen, gebeurtenissen en procesverlopen nauwkeurig worden geanalyseerd."
+      },
+      "ws5": {
+        "wie": "Personen, systemen, processen, AI-systemen en organisaties.",
+        "wat": "Een voltooide handeling, beweging of proces in het verleden.",
+        "wanneer": "Wanneer een actie of verloop al heeft plaatsgevonden.",
+        "waar": "In dagelijkse taal, documenten, software, processen en communicatie.",
+        "waarom": "Om een gebeurtenis of ontwikkeling in het verleden te beschrijven.",
+        "hoe": "Door de verleden tijd van gaan te gebruiken."
+      },
+      "tags": [
+        "ging",
+        "gaan",
+        "verleden tijd",
+        "beweging",
+        "proces",
+        "verloop",
+        "handeling",
+        "voortgang",
+        "gebeurtenis",
+        "grammatica",
+        "context",
+        "taal"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-25T07:36:05.381597+00:00",
       "metadata": {
         "source": "text_importer"
       }

@@ -8469,23 +8469,37 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Een database is een georganiseerde verzameling van gegevens die digitaal wordt opgeslagen en beheerd.",
+        "laag2": "Een database maakt het mogelijk om gegevens efficiënt op te slaan, op te zoeken, te wijzigen en te verwijderen.",
+        "laag3": "Databases worden gebruikt in vrijwel alle moderne software, websites en informatiesystemen. Ze slaan gegevens op in een gestructureerde vorm, zodat informatie snel kan worden gevonden en verwerkt. Bekende databasesystemen zijn SQLite, MySQL, PostgreSQL, Microsoft SQL Server en MongoDB. Afhankelijk van het type database kunnen gegevens worden georganiseerd in tabellen, documenten, grafen of sleutel-waardeparen.",
+        "laag4": "Binnen Spark verwijst database naar het systeem waarin gestructureerde gegevens en relaties duurzaam worden opgeslagen en beheerd. Spark kan database koppelen aan gegevensopslag, SQL, NoSQL, tabellen, records, relaties, query's, indexering, JSON, kennisbanken, graph databases, serialisatie en gegevensbeheer. Hierdoor kunnen gegevens efficiënt worden opgeslagen, opgehaald en met elkaar worden verbonden."
       },
       "tags": [
-        "database"
+        "database",
+        "gegevensbeheer",
+        "gegevensopslag",
+        "graph database",
+        "json",
+        "kennisbank",
+        "mongodb",
+        "mysql",
+        "nosql",
+        "postgresql",
+        "query",
+        "records",
+        "sql",
+        "sqlite",
+        "tabellen"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Programmeurs, systeembeheerders, organisaties, AI-systemen en applicaties.",
+        "wat": "Een systeem voor het gestructureerd opslaan en beheren van gegevens.",
+        "wanneer": "Bij het bewaren, verwerken of opvragen van digitale informatie.",
+        "waar": "In software, websites, mobiele apps, cloudomgevingen en kennisbanken.",
+        "waarom": "Om gegevens betrouwbaar, snel en overzichtelijk beschikbaar te houden.",
+        "hoe": "Door gegevens op te slaan in een gestructureerd databasesysteem met zoek- en beheerfuncties."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -8494,7 +8508,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 6,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:43:00.013226+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-0b365c00",
@@ -8739,10 +8755,10 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "Dagelijks gebruik betekent dat iets iedere dag of vrijwel iedere dag wordt gebruikt.",
-        "laag2": "Het begrip beschrijft voorwerpen, hulpmiddelen, handelingen of toepassingen die een vast onderdeel vormen van het dagelijks leven.",
-        "laag3": "Dagelijks gebruik wordt toegepast om aan te geven dat iets regelmatig en routinematig wordt gebruikt. Dit kan gaan om huishoudelijke voorwerpen, digitale hulpmiddelen, medicijnen, voertuigen, software of vaardigheden. Het begrip zegt iets over de frequentie van gebruik, niet over de aard of kwaliteit van het object.",
-        "laag4": "Binnen Spark verwijst dagelijks gebruik naar een gebruiksfrequentie waarbij een object, hulpmiddel, systeem of handeling onderdeel is van de dagelijkse routine. Spark kan dagelijks gebruik koppelen aan frequentie, gewoonte, routine, gebruik, beschikbaarheid, gebruikerservaring, praktijk en contextanalyse. Hierdoor kunnen begrippen worden geclassificeerd op basis van hun gebruiksintensiteit."
+        "laag1": "Dagelijks gebruik betekent dat iets iedere dag of bijna iedere dag wordt gebruikt.",
+        "laag2": "Het begrip beschrijft hoe vaak een voorwerp, hulpmiddel, systeem of handeling in de praktijk wordt toegepast.",
+        "laag3": "Dagelijks gebruik wordt gebruikt om de praktische inzet van een object of handeling aan te geven. Voorbeelden zijn een tandenborstel, smartphone, bril, agenda of software die dagelijks wordt gebruikt. Het begrip zegt niets over de kwaliteit van het object, maar over de frequentie en gewoonte van het gebruik. Hierdoor wordt duidelijk hoe belangrijk of alledaags iets is binnen de praktijk.",
+        "laag4": "Binnen Spark verwijst dagelijks gebruik naar een gebruiksclassificatie die aangeeft dat een object, hulpmiddel, vaardigheid of systeem onderdeel is van de dagelijkse routine. Spark kan dagelijks gebruik koppelen aan frequentie, routine, gewoonte, praktijk, toegankelijkheid, gebruikerservaring, zelfredzaamheid en dagelijks leven. Hierdoor kunnen begrippen worden geclassificeerd op basis van hun praktische gebruiksintensiteit."
       },
       "tags": [
         "beschikbaarheid",
@@ -8750,23 +8766,25 @@
         "context",
         "dagelijks",
         "dagelijks gebruik",
+        "dagelijks leven",
         "frequentie",
         "gebruik",
         "gebruikerservaring",
         "gebruiksfrequentie",
         "gewoonte",
         "praktijk",
-        "routine"
+        "routine",
+        "zelfredzaamheid"
       ],
       "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "Gebruikers, organisaties, AI-systemen en consumenten.",
+        "wie": "Gebruikers, consumenten, organisaties, AI-systemen en professionals.",
         "wat": "Een aanduiding dat iets iedere dag of vrijwel iedere dag wordt gebruikt.",
         "wanneer": "Tijdens terugkerende dagelijkse activiteiten.",
         "waar": "Thuis, op het werk, op school, onderweg en in digitale omgevingen.",
-        "waarom": "Om de gebruiksfrequentie en praktische relevantie van een object of handeling aan te geven.",
-        "hoe": "Door regelmatig gebruik als onderdeel van een dagelijkse routine."
+        "waarom": "Om de praktische gebruiksfrequentie en toepasbaarheid van een object of handeling aan te geven.",
+        "hoe": "Door regelmatig en routinematig gebruik als onderdeel van het dagelijks leven."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -8776,7 +8794,7 @@
         "auto_seeded_from_tag_count": 6,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
       },
-      "updated_at": "2026-07-25T07:37:23.352192+00:00",
+      "updated_at": "2026-07-25T07:41:05.758865+00:00",
       "updated_by": "user-001"
     },
     {
@@ -14976,23 +14994,35 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Dampen zijn stoffen in gasvorm die vrijkomen uit een vloeistof of vaste stof.",
+        "laag2": "Dampen ontstaan wanneer een stof verdampt of door verhitting overgaat in een gasvormige toestand.",
+        "laag3": "Dampen kunnen afkomstig zijn van water, oplosmiddelen, brandstoffen, chemicaliën of andere stoffen. Sommige dampen zijn onschadelijk, zoals waterdamp, terwijl andere schadelijk, giftig, brandbaar of explosief kunnen zijn. In de industrie, laboratoria en huishoudens is goede ventilatie vaak belangrijk om blootstelling aan gevaarlijke dampen te beperken.",
+        "laag4": "Binnen Spark verwijst dampen naar gasvormige stoffen die ontstaan door verdamping of verhitting van materialen. Spark kan dampen koppelen aan verdamping, chemie, natuurkunde, luchtkwaliteit, ventilatie, veiligheid, gezondheid, brandgevaar, emissies en milieu. Hierdoor kunnen eigenschappen, risico's en toepassingen van dampen systematisch worden geanalyseerd."
       },
       "tags": [
-        "dampen"
+        "brandgevaar",
+        "chemie",
+        "context",
+        "damp",
+        "dampen",
+        "emissies",
+        "gas",
+        "gezondheid",
+        "luchtkwaliteit",
+        "natuurkunde",
+        "veiligheid",
+        "ventilatie",
+        "verdamping"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen, laboranten, werknemers, AI-systemen, industrie en huishoudens.",
+        "wat": "Gasvormige stoffen die ontstaan uit vloeistoffen of vaste stoffen.",
+        "wanneer": "Bij verdamping, verhitting of chemische processen.",
+        "waar": "In laboratoria, fabrieken, woningen, voertuigen en de natuur.",
+        "waarom": "Omdat stoffen door temperatuur of chemische reacties in gasvorm overgaan.",
+        "hoe": "Door verdamping, verhitting of andere fysische en chemische processen."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -15001,7 +15031,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 4,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:42:27.222211+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-4ad05678",
@@ -40520,23 +40552,35 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Een datacenter is een gebouw of ruimte waarin computers, servers en netwerkapparatuur zijn ondergebracht om digitale diensten te leveren.",
+        "laag2": "Datacenters zorgen voor de opslag, verwerking en uitwisseling van grote hoeveelheden digitale gegevens.",
+        "laag3": "Een datacenter bevat servers, opslagapparatuur, netwerken, stroomvoorzieningen, koeling en beveiligingssystemen. Bedrijven, overheden en cloudproviders gebruiken datacenters om websites, applicaties, databases, AI-systemen en andere digitale diensten continu beschikbaar te houden. Betrouwbaarheid, beveiliging, energievoorziening en redundantie zijn hierbij essentieel.",
+        "laag4": "Binnen Spark verwijst datacenter naar de fysieke infrastructuur waarin digitale systemen, servers en gegevens worden gehost en beheerd. Spark kan datacenter koppelen aan servers, cloud computing, databases, netwerken, opslag, virtualisatie, cybersecurity, energiebeheer, redundantie en infrastructuur. Hierdoor kunnen de technische en organisatorische aspecten van digitale dienstverlening systematisch worden geanalyseerd."
       },
       "tags": [
-        "datacenter"
+        "cloud computing",
+        "context",
+        "cybersecurity",
+        "database",
+        "datacenter",
+        "energiebeheer",
+        "hosting",
+        "infrastructuur",
+        "netwerk",
+        "opslag",
+        "redundantie",
+        "server",
+        "virtualisatie"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Cloudproviders, organisaties, systeembeheerders, IT-specialisten en AI-systemen.",
+        "wat": "Een locatie waar servers en digitale infrastructuur zijn ondergebracht.",
+        "wanneer": "Voor het continu beschikbaar stellen van digitale diensten en gegevens.",
+        "waar": "In speciaal gebouwde serverruimtes of grootschalige datacenters.",
+        "waarom": "Om gegevens veilig op te slaan, te verwerken en beschikbaar te maken.",
+        "hoe": "Met servers, opslag, netwerken, stroomvoorziening, koeling en beveiliging."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -40545,7 +40589,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 1,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:43:27.296058+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-6c41da2d",
@@ -47313,23 +47359,35 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Dakbedekking is de buitenste laag van een dak die een gebouw beschermt tegen weersinvloeden.",
+        "laag2": "Dakbedekking voorkomt dat regen, sneeuw, wind en zon schade veroorzaken aan de constructie van een gebouw.",
+        "laag3": "Er zijn verschillende soorten dakbedekking, afhankelijk van het type dak en de gewenste eigenschappen. Voorbeelden zijn dakpannen, bitumen, EPDM, PVC, leien, riet en metalen dakplaten. De keuze hangt af van duurzaamheid, waterdichtheid, isolatie, onderhoud, levensduur en kosten.",
+        "laag4": "Binnen Spark verwijst dakbedekking naar de beschermende afwerklaag van een dakconstructie. Spark kan dakbedekking koppelen aan bouwkunde, dak, woning, constructie, isolatie, waterdichtheid, onderhoud, weersbescherming, duurzaamheid en bouwmaterialen. Hierdoor kunnen bouwkundige onderdelen en hun functies systematisch worden geanalyseerd."
       },
       "tags": [
-        "dakbedekking"
+        "bitumen",
+        "bouwkunde",
+        "bouwmaterialen",
+        "context",
+        "dak",
+        "dakbedekking",
+        "dakpannen",
+        "duurzaamheid",
+        "epdm",
+        "isolatie",
+        "onderhoud",
+        "pvc",
+        "waterdichtheid"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Dakdekkers, aannemers, huiseigenaren, architecten, bouwbedrijven en AI-systemen.",
+        "wat": "De beschermende buitenlaag van een dak.",
+        "wanneer": "Bij nieuwbouw, renovatie, onderhoud of vervanging van een dak.",
+        "waar": "Op woningen, bedrijfsgebouwen, schuren en andere constructies.",
+        "waarom": "Om een gebouw te beschermen tegen weersinvloeden en vocht.",
+        "hoe": "Door geschikte dakmaterialen op de dakconstructie aan te brengen."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -47338,7 +47396,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 1,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:42:04.582078+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-7445b155",
@@ -65582,23 +65642,35 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Dagelijks leven is het geheel van gewone activiteiten en ervaringen die mensen iedere dag meemaken.",
+        "laag2": "Het dagelijks leven omvat routines, gewoonten, verantwoordelijkheden en sociale interacties die regelmatig terugkeren.",
+        "laag3": "Het begrip dagelijks leven verwijst naar de normale gang van zaken in het leven van mensen. Hieronder vallen onder andere wonen, werken, leren, eten, reizen, communiceren, ontspannen en zorgen voor zichzelf of anderen. In zorg, onderwijs en onderzoek wordt het begrip vaak gebruikt om aan te geven hoe mensen functioneren in hun gewone leefomgeving.",
+        "laag4": "Binnen Spark verwijst dagelijks leven naar de alledaagse context waarin mensen handelen, communiceren, leren en beslissingen nemen. Spark kan dagelijks leven koppelen aan routine, zelfredzaamheid, maatschappij, gezin, werk, onderwijs, gezondheid, communicatie, tijd en leefomgeving. Hierdoor kunnen begrippen worden geplaatst binnen hun praktische toepassing in het dagelijks functioneren."
       },
       "tags": [
-        "dagelijks leven"
+        "context",
+        "dagelijks",
+        "dagelijks leven",
+        "gewoonte",
+        "gezin",
+        "gezondheid",
+        "leefomgeving",
+        "leven",
+        "maatschappij",
+        "onderwijs",
+        "routine",
+        "werk",
+        "zelfredzaamheid"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen, gezinnen, organisaties, AI-systemen en de samenleving.",
+        "wat": "De gewone dagelijkse activiteiten, routines en ervaringen van mensen.",
+        "wanneer": "Iedere dag, tijdens normale bezigheden.",
+        "waar": "Thuis, op het werk, op school, onderweg en in de samenleving.",
+        "waarom": "Om te functioneren, te communiceren, te leren, te werken en te leven.",
+        "hoe": "Door dagelijkse routines, gewoonten, sociale contacten en praktische handelingen."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -65607,7 +65679,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 1,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:38:18.243765+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-ee320e12",
@@ -76713,23 +76787,34 @@
       "created_by": "system_repair",
       "created_at": "2026-05-21T10:58:15.548119+00:00",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Een dagplanning is een overzicht van activiteiten die op één dag zijn gepland.",
+        "laag2": "Een dagplanning helpt om tijd, taken en afspraken overzichtelijk te organiseren.",
+        "laag3": "Een dagplanning wordt gebruikt om structuur aan een dag te geven. Ze kan bestaan uit vaste afspraken, werk, studie, ontspanning, zorgtaken en vrije tijd. Een goede dagplanning helpt bij het stellen van prioriteiten, het efficiënt gebruiken van tijd en het voorkomen van stress. Dagplanningen kunnen op papier, digitaal of automatisch door software worden beheerd.",
+        "laag4": "Binnen Spark verwijst dagplanning naar het plannen, organiseren en bewaken van activiteiten binnen één kalenderdag. Spark kan dagplanning koppelen aan planning, agenda, tijdbeheer, dagdeel, taakbeheer, prioriteiten, routine, zelfredzaamheid en productiviteit. Hierdoor kunnen dagelijkse activiteiten overzichtelijk worden gestructureerd en gevolgd."
       },
       "tags": [
-        "dagplanning"
+        "agenda",
+        "context",
+        "dagdeel",
+        "dagplanning",
+        "planning",
+        "prioriteiten",
+        "productiviteit",
+        "routine",
+        "taakbeheer",
+        "tijdbeheer",
+        "tijdsplanning",
+        "zelfredzaamheid"
       ],
-      "belangrijkheid": 1,
+      "belangrijkheid": 3,
       "topic": "",
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Gebruikers, planners, studenten, werknemers, zorgverleners, AI-systemen en organisaties.",
+        "wat": "Een planning van activiteiten en afspraken voor één dag.",
+        "wanneer": "Aan het begin van de dag of voorafgaand aan dagelijkse werkzaamheden.",
+        "waar": "In agenda's, planners, apps, werkplekken, scholen en thuis.",
+        "waarom": "Om tijd efficiënt te gebruiken, overzicht te behouden en doelen te bereiken.",
+        "hoe": "Door activiteiten, tijdsblokken en prioriteiten voor één dag vast te leggen."
       },
       "needs_initial_fill": true,
       "review_pending": true,
@@ -76738,7 +76823,9 @@
         "updated_at": "2026-05-21T10:58:15.548119+00:00",
         "auto_seeded_from_tag_count": 1,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
-      }
+      },
+      "updated_at": "2026-07-25T07:41:40.293938+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-skel-eafe598a",
@@ -314777,6 +314864,48 @@
       "detected_by": "user-001",
       "created_by": "user-001",
       "created_at": "2026-07-25T07:36:05.381597+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-62a4d770",
+      "begrip": "Dagelijks taalgebruik",
+      "status": "active",
+      "lagen": {
+        "laag1": "Dagelijks taalgebruik is de gewone taal die mensen gebruiken in alledaagse gesprekken.",
+        "laag2": "Het bestaat uit begrijpelijke woorden en zinnen die aansluiten bij het dagelijkse leven en die door de meeste mensen gemakkelijk worden begrepen.",
+        "laag3": "Dagelijks taalgebruik wordt gebruikt in gesprekken met familie, vrienden, collega's en in veel vormen van communicatie. Het vermijdt onnodig moeilijke vaktermen, ingewikkelde zinsconstructies en formeel taalgebruik. Hierdoor is de boodschap toegankelijk voor een breed publiek. Afhankelijk van de situatie kan dagelijks taalgebruik informeel of neutraal zijn.",
+        "laag4": "Binnen Spark verwijst dagelijks taalgebruik naar een communicatiestijl waarbij informatie wordt overgebracht in eenvoudige, natuurlijke en algemeen begrijpelijke taal. Spark kan dagelijks taalgebruik koppelen aan communicatie, spreektaal, begrijpelijkheid, toegankelijkheid, inclusiviteit, gebruikerservaring, eenvoud en contextbewaking. Hierdoor kan Spark zijn taalgebruik afstemmen op een breed publiek zonder de inhoudelijke betekenis te verliezen."
+      },
+      "ws5": {
+        "wie": "Iedereen, schrijvers, docenten, zorgverleners, AI-systemen en gebruikers.",
+        "wat": "Een begrijpelijke en alledaagse manier van communiceren.",
+        "wanneer": "Bij gewone gesprekken, uitleg, instructies en publiekscommunicatie.",
+        "waar": "Thuis, op school, op het werk, online en in de samenleving.",
+        "waarom": "Om informatie voor zoveel mogelijk mensen begrijpelijk te maken.",
+        "hoe": "Door eenvoudige woorden, duidelijke zinnen en herkenbare voorbeelden te gebruiken."
+      },
+      "tags": [
+        "dagelijks taalgebruik",
+        "spreektaal",
+        "communicatie",
+        "begrijpelijkheid",
+        "toegankelijkheid",
+        "inclusiviteit",
+        "eenvoudige taal",
+        "gebruikerservaring",
+        "uitleg",
+        "context",
+        "taalstijl",
+        "helderheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-25T07:38:56.956214+00:00",
       "metadata": {
         "source": "text_importer"
       }

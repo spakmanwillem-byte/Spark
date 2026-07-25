@@ -104,9 +104,27 @@ def split_into_blocks(text: str) -> List[str]:
                 block_start = prev_end
             block_start += 1
         block_end = laag1_positions[i + 1] if i + 1 < len(laag1_positions) else len(text)
+        # v6_text_importer_003 — Voorkom overlap: als er een lege regel tussen dit blok
+        # en de volgende Laag 1 staat, laat het huidige blok daar eindigen (voorkomt dat
+        # de lade+begrip van de volgende kaart in dit blok blijft hangen).
+        if i + 1 < len(laag1_positions):
+            soft_end = text.rfind("\n\n", block_start, block_end)
+            if soft_end > block_start:
+                block_end = soft_end
         # Maar eindig bij volgende 'begrip-header'-marker als die nog dichter is
         blocks.append(text[block_start:block_end].strip())
     return blocks
+
+
+def _detect_lade_from_lines(lines: List[str]) -> Optional[str]:
+    """v6_text_importer_003 — detecteer 'losse' lade-regel boven begrip.
+    Bv. eerste regels bevatten '🎭 Doen' als sub-header voordat het begrip komt.
+    """
+    for ln in lines:
+        norm = _normalize_lade(ln)
+        if norm:
+            return norm
+    return None
 
 
 def _extract_begrip(pre_laag_text: str) -> Optional[str]:
@@ -117,8 +135,10 @@ def _extract_begrip(pre_laag_text: str) -> Optional[str]:
     # Bekende headers die GEEN begrip zijn
     skip = {"5w", "5w (wie/wat/wanneer/waar/waarom/hoe)", "tags", "lade", "emotie",
             "kernzin", "laag 1", "laag 2", "laag 3", "laag 4", "laag 1 — kort antwoord / definitie",
-            "wie", "wat", "wanneer", "waar", "waarom", "hoe"}
-    candidates = [ln for ln in lines if ln.lower() not in skip]
+            "wie", "wat", "wanneer", "waar", "waarom", "hoe",
+            "praktijkvoorbeelden", "voorbeelden", "vaardigheid", "concept", "onderwerp"}
+    # v6_text_importer_003 — filter ook lade-regels uit candidates
+    candidates = [ln for ln in lines if ln.lower() not in skip and not _normalize_lade(ln)]
     if not candidates:
         return None
     # Begrip is de laatste candidate vóór Laag 1; vaak is dat een Capitalized
@@ -138,8 +158,9 @@ def _extract_field(block: str, header_rx: re.Pattern, multi: bool = True) -> Opt
         return None
     rest = block[m.end():]
     # Stop bij volgende header (Laag X / 5W / Tags / Lade / Emotie / Wie / Wat etc.)
+    # v6_text_importer_003 — voeg 'Praktijkvoorbeelden' en 'Voorbeeld N' toe zodat laag 4 daar stopt
     next_header = re.search(
-        r"^\s*(Laag\s*[1-4]|5W|Tags|Lade|Emotie|Kernzin|Wie|Wat|Wanneer|Waar|Waarom|Hoe)\b",
+        r"^\s*(Laag\s*[1-4]|5W|Tags|Lade|Emotie|Kernzin|Wie|Wat|Wanneer|Waar|Waarom|Hoe|Praktijkvoorbeelden|Voorbeeld\s*\d+)\b",
         rest, re.IGNORECASE | re.MULTILINE
     )
     if next_header:
@@ -219,6 +240,11 @@ def parse_text_to_cards(text: str) -> List[Dict]:
         ws5 = _extract_5w(block)
         lade_raw = _extract_field(block, _LADE_HDR_RX)
         lade = _normalize_lade(lade_raw or "")
+        # v6_text_importer_003 — fallback: detecteer lade uit losse regel boven begrip
+        # (bv. '🎭 Doen' bovenaan het blok zonder 'Lade'-header)
+        if not lade:
+            pre_lines = [ln.strip() for ln in pre.strip().splitlines() if ln.strip()]
+            lade = _detect_lade_from_lines(pre_lines)
         emotie_raw = _extract_field(block, _EMOTIE_HDR_RX) or ""
         emotie = _norm_emotion(emotie_raw)
         # v6_text_importer_001 — fallback: detecteer emotie ook uit tags-lijst van origineel

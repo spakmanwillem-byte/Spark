@@ -314707,6 +314707,103 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-7cb9d018",
+      "begrip": "Batch import",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Batch import is het in één keer importeren van meerdere bestanden, records of gegevens.",
+        "laag2": "Bij een batch-import worden grote hoeveelheden gegevens automatisch verwerkt, zonder dat elk onderdeel afzonderlijk hoeft te worden geïmporteerd.",
+        "laag3": "Batch-import wordt gebruikt bij databases, softwareontwikkeling, gegevensmigratie en contentbeheer. In plaats van bestanden één voor één te verwerken, leest het systeem een volledige verzameling in en voert dezelfde verwerking uit op alle items. Vaak worden validatie, foutcontrole en logbestanden gebruikt om te controleren welke gegevens succesvol zijn verwerkt en welke niet.",
+        "laag4": "Binnen Spark verwijst batch-import naar het geautomatiseerd inlezen en verwerken van meerdere contextkaarten, kennisobjecten of databestanden in één bewerking. Spark kan batch-import koppelen aan import, JSON, CSV, gegevensmigratie, validatie, contextvalidatie, automatisering, serialisatie, databases en kennisopbouw. Hierdoor kunnen grote hoeveelheden kennis efficiënt en gecontroleerd worden toegevoegd.\n\nPraktijkvoorbeelden\n\nVoorbeeld 1\n\n\"Alle JSON-bestanden werden via een batch-import toegevoegd.\"\n\n→ Meerdere bestanden werden tegelijk verwerkt.\n\nVoorbeeld 2\n\n\"De batch-import sloeg beschadigde records over.\"\n\n→ De verwerking ging door ondanks fouten.\n\nVoorbeeld 3\n\n\"Spark gebruikt batch-import om honderden contextkaarten tegelijk in de kennisbank te laden.\"\n\n→ De kennisbank wordt automatisch uitgebreid."
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars, systeembeheerders, data-analisten, AI-systemen en gebruikers.",
+        "wat": "Het gelijktijdig importeren van meerdere gegevens of bestanden.",
+        "wanneer": "Bij grote datasets, migraties of periodieke synchronisaties.",
+        "waar": "In databases, software, kennisbanken, cloudsystemen en ETL-processen.",
+        "waarom": "Om grote hoeveelheden gegevens efficiënt, consistent en automatisch te verwerken.",
+        "hoe": "Door een verzameling bestanden of records in één geautomatiseerde importbewerking te verwerken."
+      },
+      "tags": [
+        "batch-import",
+        "import",
+        "gegevensmigratie",
+        "json",
+        "csv",
+        "etl",
+        "automatisering",
+        "validatie",
+        "contextvalidatie",
+        "serialisatie",
+        "database",
+        "kennisbank",
+        "spark",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-25T07:28:47.028811+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-542b44ef",
+      "begrip": "Regel",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een regel is een afspraak, richtlijn, voorschrift of afzonderlijke tekstregel, afhankelijk van de context.",
+        "laag2": "Het woord regel heeft meerdere betekenissen. Het kan verwijzen naar een gedragsregel, een programmeerregel, een tekstregel of een wetmatigheid.",
+        "laag3": "De betekenis van regel wordt bepaald door de context. In de samenleving is een regel een afspraak of voorschrift. In een document is een regel een horizontale tekstlijn. In programmeren is een regel een afzonderlijke instructie of codefragment. In wetenschap en wiskunde kan een regel een vaste wetmatigheid of formule beschrijven.",
+        "laag4": "Binnen Spark wordt regel opgesplitst in meerdere contextkaarten om dubbelzinnigheid te voorkomen:\n\nRegel (voorschrift) → afspraak, norm of richtlijn.\nRegel (tekst) → een afzonderlijke tekstregel in een document of bestand.\nRegel (programmeren) → een instructie of statement in broncode.\nRegel (wetmatigheid) → een algemeen geldend principe, formule of patroon.\n\nSpark gebruikt contextwoorden om automatisch de juiste betekenis te selecteren."
+      },
+      "ws5": {
+        "wie": "Gebruikers, programmeurs, schrijvers, onderzoekers, organisaties en AI-systemen.",
+        "wat": "Een afspraak, tekstregel, code-instructie of wetmatigheid.",
+        "wanneer": "Bij communicatie, programmeren, documenten, wetenschap en regelgeving.",
+        "waar": "In documenten, software, organisaties, onderwijs en wetenschappelijke contexten.",
+        "waarom": "Om structuur, duidelijkheid, gedrag of kennis vast te leggen.",
+        "hoe": "Door afspraken, tekst, code of principes vast te leggen en toe te passen."
+      },
+      "tags": [
+        "regel",
+        "voorschrift",
+        "richtlijn",
+        "tekstregel",
+        "coderegel",
+        "programmeerinstructie",
+        "wetmatigheid",
+        "patroon",
+        "document",
+        "programmeren",
+        "context",
+        "semantiek",
+        "classificatie"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-25T07:30:00.802677+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
     }
   ],
   "updated_at": "2026-07-22T08:05:54.368932+00:00",

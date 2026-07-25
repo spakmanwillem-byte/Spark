@@ -1,6 +1,66 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## 🟡 SESSIE 49 (2026-02-01 / 25-jul-prod) — Gap-filter blokkeert 100% in bear-market
+
+### 📊 Bevindingen uit prod-zip 25 juli 07:23
+
+**Willem's observatie**: 24 juli 07:08 tot 25 juli 07:23 (24u) = 0 trades, terwijl hij een BUY had verwacht. Reboot uitgesloten want bot draaide 48 events/uur constant.
+
+**Diagnose backtest** (via live Bitvavo 15m candles + `_simple_decision`):
+
+| Markt | Bollinger-BUY | Passed gap-filter | Zou trade |
+|---|---|---|---|
+| BTC-EUR | 5 | 0 | 0 |
+| ETH-EUR | 3 | 0 | 0 |
+| SOL-EUR | 7 | 0 | 0 |
+| ADA-EUR | 5 | 0 | 0 |
+| ATOM-EUR | 8 | 0 | 0 |
+| BCH-EUR | 1 | 0 | 0 |
+| **TOTAAL** | **29** | **0** | **0** |
+
+Alle 29 gedetecteerde Bollinger-dips werden geblokkeerd door **`v7_gap_merge_001`** (sessie 47) — de bevestigings-filter die eist dat na een Bollinger-BUY óók een `_gap_breakout_check` = BUY signaal moet komen (rood→groen candle-flip waarbij `curr.low > prev.high`).
+
+### ⚠️ Geen bug — bewuste feature, verkeerd geconfigureerd voor bear
+Uit CHANGELOG blijkt dat Willem `v7_gap_merge_001` zelf voorstelde om piek-koop in dalende markt te voorkomen. Werkt in trending-neutraal markten, maar in aanhoudende bear-daling (zoals 24 juli) treedt de rood→groen flip niet op → **100% van signalen wordt gedumpt, ook echte dip-kansen**.
+
+### ✅ Voorgestelde fix — Optie C (conditioneel filter)
+
+Maak de gap-filter afhankelijk van dip-diepte:
+
+```python
+# v11_gap_filter_conditional_001 — in modules/trade/monitor.py rond regel 1092
+if buy_decision.get("action") == "BUY" and gap_check["signal"] != "BUY":
+    # NIEUW: alleen filteren bij ondiepe dips (<3%). Bij ≥3% dip is
+    # de dip zelf al bewijs, geen momentum-confirmation nodig.
+    dip_pct = buy_decision.get("drop_from_high_pct", 0)  # zit al in decision
+    if dip_pct < 3.0:
+        buy_decision["action"] = "HOLD"
+        buy_decision["reason"] += f" | Wacht op gap-bevestiging ({gap_check['reason']}, dip {dip_pct:.1f}%)"
+        buy_decision["gap_filter_blocked"] = True
+    else:
+        buy_decision["reason"] += f" | Gap-filter overruled: dip {dip_pct:.1f}% ≥ 3.0% (echte dip)"
+        buy_decision["gap_filter_overruled"] = True
+```
+
+**Waarom 3%?** Uit prod-zip 24 juli: alle 29 signalen hadden `drop_from_high_pct` tussen 1.55% en 2.38% (dus dip-guard `MIN_DIP_PCT=1.5%` triggerde ze wel, gap-filter blokkeerde ze). Bij `drop >= 3.0%` heb je een substantiële dip die het risico op piek-koop klein maakt.
+
+**Alternatief nog te overwegen**: threshold uit blueprint halen (`gap_filter_override_dip_pct: 3.0`) i.p.v. hardcoded, zodat je live kunt tweaken.
+
+### 📝 Backtest vereist voordat live
+Voordat dit deployed wordt: `tests/backtest_v5.py` draaien met en zonder deze override op 90d data en PnL vergelijken. Vooral belangrijk om te controleren of we niet regressen naar het oude "koop op elke piek" gedrag in trending-neutraal.
+
+### 🎓 Les voor volgende sessies
+**Bij trader-diagnose eerst CHANGELOG + ROADMAP snuffelen** voordat ik code-analyse doe. Anders presenteer ik bekende features als "verdachten". `spark_snuffel` op scope `code` doet dit in 1 call — zou standaard eerste stap moeten zijn bij trader-issues.
+
+### Status
+- **NIET geïmplementeerd** — alleen genoteerd. Willem beslist zelf wanneer + samen met de backtest.
+- Anker (`log_only`, 8%) blijft ongewijzigd — heeft geen invloed op dit issue.
+
+---
+
+
+
 ## 🟡 SESSIE 48 (2026-02-01) — Entity Engine (idea, gepland niet nu)
 
 ### 🧬 Van "Namen-lade" naar Entity Engine

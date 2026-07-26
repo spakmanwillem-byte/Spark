@@ -268,7 +268,13 @@
     "rebound_enabled": false,
     "rebound_drop_threshold_pct": 3.0,
     "rebound_target_pct": 2.0,
-    "_rebound_note": "Backtest v4 (sessie 46, 9 juli): 62.5% van 5%-drops rebounds binnen 24u (mediaan +1.96%). Drempel verlaagd van 5% → 3% (sessie 49, 26 juli) op basis van Willems handmatige actie 25/7 14:46: kocht ATOM @ -2.7% drop → won. Code-implementatie in monitor.py PENDING — enabled blijft false tot code geschreven is."
+    "_rebound_note": "Backtest v4 (sessie 46, 9 juli): 62.5% van 5%-drops rebounds binnen 24u (mediaan +1.96%). Drempel verlaagd van 5% → 3% (sessie 49, 26 juli) op basis van Willems handmatige actie 25/7 14:46: kocht ATOM @ -2.7% drop → won. Code-implementatie in monitor.py PENDING — enabled blijft false tot code geschreven is.",
+    "extreme_oversold_enabled": false,
+    "extreme_oversold_n_red": 3,
+    "extreme_oversold_min_drop_pct": 0.0,
+    "extreme_oversold_body_ratio": 0.5,
+    "extreme_oversold_target_pct": 2.0,
+    "_extreme_oversold_note": "Neef's variant (sessie 46, backtest v3): koopt na N rode candles gevolgd door 1 groene die minimaal body_ratio × laatste rode body dekt. Optioneel minimum drop-diepte over de N rode candles (0 = uit). N=3 default (flexibel te tunen: 2, 4, 5). Historisch: N=3 gaf €+3.19 / 21 trades / 180d op 15m."
   },
   "sell_regels": {
     "trailing_stop_activatie_pct": 0.5,

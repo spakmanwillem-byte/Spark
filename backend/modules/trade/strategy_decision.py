@@ -128,20 +128,22 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         # v11_rebound_h1_exit_001 — Rebound-posities krijgen een scherpe target-exit i.p.v. trailing.
         # Verkoopt zodra netto ≥ target_pct van position. Werkt naast de bestaande trailing (die
         # blijft actief voor grotere winsten na target).
-        if position.get("strategy_variant") == "rebound_h1":
+        # v11_extreme_oversold_exit_001 — Zelfde target-exit voor extreme_oversold posities.
+        if position.get("strategy_variant") in ("rebound_h1", "extreme_oversold"):
             _target_pct = float(position.get("target_pct", 2.0)) / 100.0
             _netto_pct = netto_profit / trade_amount if trade_amount > 0 else 0
             if _netto_pct >= _target_pct:
+                _var = position.get("strategy_variant")
                 return {
                     **base,
                     "action": "SELL",
                     "reason": (
-                        f"Rebound target bereikt @ €{price:.4f}. Ingekocht €{entry:.4f} "
+                        f"{_var} target bereikt @ €{price:.4f}. Ingekocht €{entry:.4f} "
                         f"({profit_pct*100:+.2f}%). Netto +€{netto_profit:.4f} ({_netto_pct*100:.2f}% ≥ {_target_pct*100:.1f}%)."
                     ),
                     "confidence": 0.9,
                     "netto_profit": round(netto_profit, 4),
-                    "strategy_variant": "rebound_h1",
+                    "strategy_variant": _var,
                     "target_hit": True,
                     "position_update": {"close": True, "target_hit": True},
                 }
@@ -208,6 +210,53 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
                 "drop_24h_pct": round(_drop_24h_pct, 3),
                 "high_24h": round(_24h_high, 4),
                 "position_update": {"open": True, "entry_price": price, "strategy_variant": "rebound_h1", "target_pct": _rebound_target},
+            }
+
+    # v11_extreme_oversold_001 — Neef's N-red-then-green patroon (backtest v3: €+3.19 / 21 trades / 180d).
+    # Koopt na N rode candles gevolgd door 1 groene met body ≥ ratio × laatste rode body.
+    # Optioneel minimum drop-diepte over de N rode candles.
+    try:
+        _eo_enabled = bool(_bp.get("parameters", {}).get("extreme_oversold_enabled", False))
+        _eo_n = int(_bp.get("parameters", {}).get("extreme_oversold_n_red", 3))
+        _eo_min_drop = float(_bp.get("parameters", {}).get("extreme_oversold_min_drop_pct", 0.0))
+        _eo_body_ratio = float(_bp.get("parameters", {}).get("extreme_oversold_body_ratio", 0.5))
+        _eo_target = float(_bp.get("parameters", {}).get("extreme_oversold_target_pct", 2.0))
+    except Exception:
+        _eo_enabled, _eo_n, _eo_min_drop, _eo_body_ratio, _eo_target = False, 3, 0.0, 0.5, 2.0
+
+    if _eo_enabled and len(candles) >= _eo_n + 1:
+        last = candles[-(_eo_n + 1):]  # laatste N+1 candles
+        reds = last[:_eo_n]
+        green = last[-1]
+        # Check: alle N candles rood (close < open)
+        all_red = all(c["close"] < c["open"] for c in reds)
+        # Check: laatste candle groen (close > open)
+        is_green = green["close"] > green["open"]
+        # Check: groene body ≥ ratio × laatste rode body
+        last_red_body = abs(reds[-1]["open"] - reds[-1]["close"])
+        green_body = abs(green["close"] - green["open"])
+        body_ok = last_red_body > 0 and green_body >= _eo_body_ratio * last_red_body
+        # Check: totale drop over N rode candles ≥ min_drop
+        drop_start = reds[0]["open"]
+        drop_bottom = min(c["low"] for c in reds)
+        total_drop_pct = (drop_start - drop_bottom) / drop_start * 100 if drop_start > 0 else 0
+        drop_ok = total_drop_pct >= _eo_min_drop
+
+        if all_red and is_green and body_ok and drop_ok:
+            return {
+                **base,
+                "action": "BUY",
+                "reason": (
+                    f"Extreme oversold (Neef): {_eo_n} rode candles + groene bevestiging "
+                    f"(body {green_body:.4f} ≥ {_eo_body_ratio:.0%}×{last_red_body:.4f}). "
+                    f"Totale drop {total_drop_pct:.2f}%. Target +{_eo_target:.1f}% netto."
+                ),
+                "confidence": 0.8,
+                "strategy_variant": "extreme_oversold",
+                "target_pct": _eo_target,
+                "n_red": _eo_n,
+                "total_drop_pct": round(total_drop_pct, 3),
+                "position_update": {"open": True, "entry_price": price, "strategy_variant": "extreme_oversold", "target_pct": _eo_target},
             }
 
     if price <= lower:

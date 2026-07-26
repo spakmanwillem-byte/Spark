@@ -5134,6 +5134,23 @@
       "timestamp": "2026-07-25T14:16:09.790439+00:00",
       "bark_kind": "mirror_time",
       "bark_kind_id": "harry_mirror_2026-07-25_16:16"
+    },
+    {
+      "id": "bark-err-20260726T094245",
+      "user_id": "bot-madelief",
+      "user_name": "Madelief Stouten",
+      "message": "🐛 **Madelief heeft iets opgevangen**\n\n• `kb_v2` — Regenerate verbanden field voor alle KB v2 kaarten: AttributeError: module 'modules.kb_v2.service' has no attribute '_load'\n\n_Spark gaat er mee aan de slag._",
+      "ts": "2026-07-26T09:42:45.677731+00:00",
+      "kind": "self_error_bark",
+      "source": "scheduler_v6",
+      "errors": [
+        {
+          "module": "kb_v2",
+          "intent": "Regenerate verbanden field voor alle KB v2 kaarten",
+          "err": "AttributeError: module 'modules.kb_v2.service' has no attribute '_load'",
+          "ts": "2026-07-26T09:42:06.206625+00:00"
+        }
+      ]
     }
   ],
   "active_users": [

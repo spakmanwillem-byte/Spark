@@ -2,6 +2,44 @@
 
 
 
+## ✅ SESSIE 49 SLOT+2 — Verbanden-tab opgeschoond (26 juli, "rapen")
+
+### Wat is er gedaan (kleine patches, geen breukwerk)
+1. **`compute_verbanden` top_n 5 → 10** — elke kaart heeft nu max 10 verbanden i.p.v. 5
+2. **Cluster endpoint mega-tag blocklist** — `emotie`, `neutraal`, `context`, `communicatie`, `sociaal`, `informatie` uitgesloten (waren "rivieren" met 1000+ leden, geen echte clusters)
+3. **Cluster members cap 20 → 100** — zichtbaarheid per cluster verhoogd
+4. **Cluster JSON field fix** — `shared_tag` toegevoegd naast `tag` (frontend compat)
+5. **NEW endpoint** `POST /api/kb/v2/admin/verbanden/rebuild-all` — regenereert ALLE 5000+ kaarten in ~40s
+
+### Resultaat direct zichtbaar
+- **Verbanden-graph**: 51235 → **51264 edges** (na rebuild)
+- **Clusters**: 50 → **3106** échte clusters zichtbaar (was: rivier + rivier + rivier)
+- **Top 8 nu**: `leren(200) tijd(197) energie(193) relatie(189) actie(183) verandering(181) controle(167) analyse(160)`
+- **Vriend-kaart**: 5 → **10 verbanden** met overlap-scores 6/6/5/5/5/5/5/5/5/5
+
+### Wat NIET is gedaan (bewust, in ROADMAP voor later)
+- **Topic-Agent voor semantische verbanden** — nog steeds pure tag-overlap. Homonym-guards zitten in KB-CRUD, niet in graph
+- **Blueprint/meta/footnote integratie** — `_meta.json` en `footnote` fields worden nog niet meegenomen in verbands-score
+- **Master/Leaf agent pattern** voor semantische judge — schatting 40 credits, aparte sessie
+
+### Volgende iteratie
+```
+TopicAgent (Master, ~40 credits)
+├── judge_semantic_overlap(card_a, card_b) → score 0-100
+├── check_homonym_guard(shared_tags) → filter valse verbanden
+├── weight_by_footnote(card.footnote) → context-boost  
+└── read_blueprint(card.module) → module-specifieke regels
+```
+
+### Bestanden gewijzigd
+- `/app/backend/modules/graph/__init__.py` — cluster endpoint v2
+- `/app/backend/modules/kb_v2/hooks.py` — top_n 5→10
+- `/app/backend/modules/kb_v2/routes.py` — rebuild-all endpoint
+
+---
+
+
+
 ## ✅ SESSIE 49 SLOT+1 — Loss-cut getuned naar -1% (26 juli 2026)
 
 ### Wat is er gedaan

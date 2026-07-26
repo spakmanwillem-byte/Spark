@@ -326,10 +326,11 @@ def cmd_make_card(query: str, user_id: str = "user-000", card_type: str = "dnd")
 # HOOK 3: Auto-graph (verbanden tussen kaarten via shared tags)
 # ---------------------------------------------------------------------------
 
-def compute_verbanden(card: Dict, min_overlap: int = 2, top_n: int = 5) -> List[Dict]:
+def compute_verbanden(card: Dict, min_overlap: int = 2, top_n: int = 10) -> List[Dict]:
     """v6_kbv2_hooks_landing_001 — vind top-N kaarten met meeste shared tags.
     Schrijft NIET zelf naar disk; caller (classify/edit) doet save.
-    Returnt lijst van {kaart_id, begrip, lade, overlap}."""
+    Returnt lijst van {kaart_id, begrip, lade, overlap}.
+    v11 (sessie 49): top_n 5 → 10 voor rijkere verbindings-graaf."""
     own_tags = {(t or "").lower() for t in (card.get("tags") or []) if t}
     if len(own_tags) < min_overlap:
         return []

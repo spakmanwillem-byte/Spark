@@ -16083,7 +16083,7 @@
     },
     {
       "id": "kbv2-skel-022b54c3",
-      "begrip": "lange_afstand",
+      "begrip": "lange afstand",
       "lade": null,
       "status": "active",
       "lagen": {
@@ -16121,7 +16121,9 @@
               "is_new": true
             }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-26T09:42:28.382681+00:00"
       },
       "_inbox_reason": "missing_laag1",
       "media": {
@@ -20021,61 +20023,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:25:14.296113+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-bc4a51cc",
-      "begrip": "landwinning",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "landwinning"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-bc4a51cc",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:25:14.381441+00:00",
             "result": {
               "active": false,
               "is_new": true

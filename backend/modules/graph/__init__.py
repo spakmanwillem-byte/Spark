@@ -143,21 +143,30 @@ async def get_neighborhood(node_id: str, depth: int = Query(1, ge=1, le=2)):
 
 
 @router.get("/clusters")
-async def get_clusters(min_size: int = Query(3, ge=2, le=50)):
-    """Find clusters by shared tags"""
+async def get_clusters(min_size: int = Query(3, ge=2, le=50), max_cluster_size: int = Query(200, ge=10, le=2000)):
+    """Find clusters by shared tags.
+    
+    v11_cluster_v2_001: 
+    - shared_tag field (frontend compat)
+    - members cap verhoogd van 20 → configurable (default 100)
+    - filter mega-tags (context/emotie/neutraal) die geen cluster zijn maar rivier
+    """
     nodes = _load_nodes()
     tag_groups = {}
+    MEGA_TAG_BLOCKLIST = {"emotie", "neutraal", "context", "communicatie", "sociaal", "informatie"}
     for n in nodes:
         for t in (n.get("tags") or []):
+            if t.lower() in MEGA_TAG_BLOCKLIST:
+                continue  # skip mega-rivers
             if t not in tag_groups:
                 tag_groups[t] = []
             tag_groups[t].append({"id": n["id"], "label": n["label"]})
     clusters = [
-        {"tag": t, "size": len(members), "members": members[:20]}
+        {"tag": t, "shared_tag": t, "size": len(members), "members": members[:100]}
         for t, members in sorted(tag_groups.items(), key=lambda x: -len(x[1]))
-        if len(members) >= min_size
+        if min_size <= len(members) <= max_cluster_size
     ]
-    return {"clusters": clusters[:50], "total_clusters": len(clusters)}
+    return {"clusters": clusters[:50], "total_clusters": len(clusters), "excluded_mega_tags": sorted(MEGA_TAG_BLOCKLIST)}
 
 
 @router.get("/search")

@@ -627,6 +627,49 @@ async def backfill_v1_migration(body: BackfillMigrationBody):
     }
 
 
+# v11_verbanden_rebuild_001 — Regenerate verbanden voor alle bestaande kaarten
+@router.post("/admin/verbanden/rebuild-all")
+@traced(intent="Regenerate verbanden field voor alle KB v2 kaarten", module="kb_v2")
+async def rebuild_all_verbanden(viewer_id: str = "user-001"):
+    """v11_verbanden_rebuild_001 — Loopt ALLE kaarten door en herberekent hun
+    verbanden field via compute_verbanden. Gebruikt huidige top_n=10 default.
+    Admin-only. Duurt ~30-60s voor 5000+ kaarten."""
+    from modules.dnd.world import _is_admin as _check_admin
+    if not _check_admin(viewer_id):
+        return {"success": False, "error": "Alleen admin mag verbanden rebuilden."}
+
+    from modules.core.storage import save_json, load_json
+    from .hooks import compute_verbanden
+    import time
+    started = time.time()
+    updated_per_lade = {}
+    skipped = 0
+    for lade in service.LADES:
+        p = service._lade_path(lade)
+        d = load_json(p, default={"kaarten": []})
+        updated = 0
+        for k in d.get("kaarten", []):
+            new_verb = compute_verbanden(k, min_overlap=2, top_n=10)
+            if new_verb != k.get("verbanden", []):
+                k["verbanden"] = new_verb
+                updated += 1
+            elif not new_verb and not k.get("verbanden"):
+                skipped += 1
+        save_json(p, d)
+        updated_per_lade[lade] = updated
+    duration = round(time.time() - started, 2)
+    return {
+        "success": True,
+        "duration_sec": duration,
+        "updated_per_lade": updated_per_lade,
+        "total_updated": sum(updated_per_lade.values()),
+        "skipped_no_tags": skipped,
+        "hint": "Ververs graph via POST /api/graph/rebuild na deze call.",
+    }
+
+
+
+
 # v6_kbv2_autoresolve_001 — bulk auto-classify van inbox-kaarten via topic+tags
 class AutoResolveBody(BaseModel):
     reasons: Optional[List[str]] = None  # ['tag_tie', 'no_match'] — default beide

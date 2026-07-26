@@ -2,6 +2,43 @@
 
 
 
+## ✅ SESSIE 49 SLOT+1 — Loss-cut getuned naar -1% (26 juli 2026)
+
+### Wat is er gedaan
+Blueprint `parameters.loss_cut_pct: -0.03 → -0.01`. Reden: tuning-backtest 90d 4h 6 markten.
+
+### Bewijs
+| Config | Trades | Win% | ECHT netto | vs Geen |
+|---|---|---|---|---|
+| Geen loss-cut | 9 | 100% (illusie) | -€12.98 | – |
+| Oud (-3%) | 83 | 54% | -€9.40 | -28% |
+| **Nieuw (-1%)** ✅ | 115 | 41% | **-€7.87** | **-39%** |
+
+**Verbetering**: 16% minder verlies dan oud, 39% minder dan geen safety-net.
+
+### Belangrijk
+- Getest in **bear-heavy** 90d periode
+- Lagere win-rate (41% vs 54%) is expected — kleine verliezen worden vaker gerealiseerd i.p.v. verstopt in open posities
+- **Absolute PnL is beter** ondanks lagere win-rate = precies wat we willen
+- In bull-markt kan strakke loss-cut nadelig zijn — monitor eerste maand na deploy
+
+### Complete trader-configuratie NA deze wijziging
+- Strategie: `gap_momentum_50` (Bollinger 2σ + gap-body)
+- Loss-cut: **48u @ -1%** (was -3%)
+- Cooldown: 900s per markt
+- Anker: log_only, 8% drempel
+- Gap-filter override: 999 (oud v7 gedrag)
+- Rebound H1: gebouwd, disabled
+- Extreme oversold: gebouwd, disabled
+- 6 markten actief
+
+### Deploy
+Blueprint aangepast, backend herstart in preview. **Save-to-Github wanneer klaar** → prod redeploy.
+
+---
+
+
+
 ## 🟡 SESSIE 49 SLOT (2026-02-01 / 26 juli) — H1 Rebound geïmplementeerd + backtest = niet klaar voor enable
 
 ### ✅ Code geïmplementeerd (blijft staan, disabled)

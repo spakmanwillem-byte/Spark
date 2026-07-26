@@ -2,6 +2,124 @@
 
 
 
+## 🟡 SESSIE 49 SLOT (2026-02-01 / 26 juli) — H1 Rebound geïmplementeerd + backtest = niet klaar voor enable
+
+### ✅ Code geïmplementeerd (blijft staan, disabled)
+`strategy_decision.py`:
+- Rebound-BUY check vóór Bollinger (regel ~160): trigger BUY bij drop ≥ threshold in 24u
+- Rebound-exit check na loss-cut: scherpe SELL bij netto ≥ target_pct (default 2%)
+- Config via blueprint: `rebound_enabled`, `rebound_drop_threshold_pct`, `rebound_target_pct`
+- Backward compatible: default `enabled=false` → geen gedrag-verandering
+
+### 📊 Backtest 10d + dry-run 48u
+
+**Backtest 500d 15m, 6 markten:**
+| Config | Trades | Win% | ECHT netto |
+|---|---|---|---|
+| Baseline (rebound OFF) | 27 | 67% | -€1.44 |
+| Met rebound 3% | 33 | 61% | **-€2.97** ❌ |
+
+Rebound-trades winrate 52% (verwacht 62.5%). Verklaring: autopsy was op **daily drops**, niet 15m rolling. Op 15m frame is "3% drop in 24u" veel vaker en kwalitatief anders.
+
+**Dry-run laatste 48u:**
+| Threshold | Rebound signalen |
+|---|---|
+| 2% | 365 (overreactie) |
+| 3% | **147** (nog steeds te veel) |
+| 5% | 21 (redelijk) |
+
+**Werkelijkheid** (uit prod-zip 26 juli): 0 trader-trades, 4 Willem-manuele trades.
+
+### 🎯 Fundamentele inzicht — Willems mentale strategie ≠ pure drop-detection
+
+Willems 25/7 14:46 ATOM-BUY was op **-2.7% drop** (onder 3% threshold).  
+Willem wachtte niet op drop-maximum, hij wachtte op **stabilisatie**.
+
+- Mijn implementatie: `drop ≥ threshold → BUY` (koopt tijdens val)
+- Willems intuïtie: `drop + reversal waargenomen → BUY` (koopt na val)
+
+**De v7_gap_merge_001 gap-filter IS Willems reversal-detector**. Alleen: hij zit nu voor Bollinger-check, niet voor rebound-check. Rebound heeft eigen reversal-confirmation nodig, óf moet gap-check hergebruiken.
+
+### 📝 Volgende iteratie (~15-20 credits)
+1. Voeg `rebound_gap_confirmation_required: true` toe aan blueprint
+2. In rebound-check: als `_gap_breakout_check(candles).signal == 'BUY'` én drop ≥ threshold → BUY
+3. Anders: HOLD (wacht op reversal)
+4. Herbacktest — verwachting: minder signalen, hogere winrate
+5. Als 62.5% winrate + positief ECHT netto → enable
+
+### Status
+- `rebound_enabled: false` (blijft OFF)
+- `rebound_drop_threshold_pct: 3.0` (gedocumenteerd, gereed voor gebruik met gap-confirmation)
+- Code werkt, backtest reproduceerbaar
+- Willem blijft betrouwbaarder dan de bot in bear-market (jouw intuïtie > mijn threshold)
+
+---
+
+
+
+## 🔴 P0 SESSIE 49 SLOT (2026-02-01 / 26 juli) — H1 Rebound is 90% klaar, code ontbreekt
+
+### 📌 Willems terechte correctie
+Willem had gelijk toen hij zei "bekijk de logs van je eerdere berekeningen". Snuffel toonde aan:
+
+1. **Rebound is al ontworpen** — `spark_trader.json.parameters.rebound_*` bestaat sinds sessie 46 (9 juli)
+2. **Backtest is al gedaan** — 62.5% van 5%-drops geeft +1.96% mediaan binnen 24u (v4 autopsy)
+3. **Aanpassing bekend** — drempel 5% → 3% (documented "tuning naar 3% pending")
+4. **Willem bewees het live** — 25/7 14:46 kocht handmatig ATOM @ -2.7% drop, won +0.65% netto binnen 12u
+5. **Wat ontbreekt** — geen enkele regel code in `monitor.py` of `strategy_decision.py` leest deze rebound-config
+
+### ✅ Bijgewerkt in blueprint (0 credits, geen risico)
+- `rebound_drop_threshold_pct: 5.0 → 3.0` (op basis van Willems bewijs)
+- `rebound_enabled` blijft **`false`** (want code ontbreekt, anders NoOp)
+- Note uitgebreid met sessie-49 context
+
+### 🎯 Concrete implementatie-spec voor volgende sessie
+
+**Plek**: `modules/trade/monitor.py`, in `_simple_decision()` **VÓÓR** de Bollinger-check.
+
+**Pseudocode**:
+```python
+# Rebound-BUY: trigger bij drop ≥ threshold in laatste 24u
+if bp['parameters']['rebound_enabled']:
+    thresh = bp['parameters']['rebound_drop_threshold_pct']  # 3.0
+    high_24h = max(c['high'] for c in candles[-96:])  # 96 x 15m = 24u
+    drop_pct = (high_24h - current_price) / high_24h * 100
+    if drop_pct >= thresh and position is None:
+        return {
+            "action": "BUY",
+            "reason": f"Rebound-trigger: -{drop_pct:.1f}% drop in 24u (≥{thresh}% threshold)",
+            "strategy_variant": "rebound_h1",
+            "target_pct": bp['parameters']['rebound_target_pct']  # 2.0
+        }
+```
+
+**SELL-logica** (aparte target): rebound-positie verkoopt bij +2% (target) of via bestaande trailing/loss-cut.  
+Verschil met Bollinger-BUY: target is scherper (2% i.p.v. trailing 0.5→0.4).
+
+### 🧪 Backtest-vereiste vóór live
+1. Draai H1 rebound geïsoleerd op 500d 15m data
+2. Vergelijk met gap_momentum_50 op zelfde periode
+3. **ECHT netto** (realized + unrealized DD) moet positief of ≥ gap_momentum_50
+4. Als OK → `rebound_enabled: true` in blueprint, deploy
+
+### 💰 Credit-inschatting
+- Code implementatie: ~15 credits
+- Backtest + validatie: ~10 credits
+- Blueprint enable + deploy: ~5 credits
+- **Totaal: ~30 credits** — te weinig met Willems 23. Wachten op nieuwe sessie.
+
+### 🎓 Les voor mij
+**Bij trader-vragen altijd eerst blueprint snuffelen**. Ik heb 3× fout getframed voor ik dit vond:
+1. "gap-filter te strak" (gerevert)
+2. "trader werkt en verdient" (waren jouw manuele trades)
+3. "H1 moet nog gebouwd" (spec ligt al klaar sinds juli)
+
+Snuffel = eerste actie. Elke keer.
+
+---
+
+
+
 ## 🔴 P0 SESSIE 49 EIND (2026-02-01) — Gap-filter override GEREVERT + volgende hefbomen
 
 ### ❌ 3% gap-override teruggedraaid (niet gedeployed)

@@ -125,6 +125,27 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
                 except Exception as _e:
                     logger.warning(f"loss-cut parse error: {_e}")
 
+        # v11_rebound_h1_exit_001 — Rebound-posities krijgen een scherpe target-exit i.p.v. trailing.
+        # Verkoopt zodra netto ≥ target_pct van position. Werkt naast de bestaande trailing (die
+        # blijft actief voor grotere winsten na target).
+        if position.get("strategy_variant") == "rebound_h1":
+            _target_pct = float(position.get("target_pct", 2.0)) / 100.0
+            _netto_pct = netto_profit / trade_amount if trade_amount > 0 else 0
+            if _netto_pct >= _target_pct:
+                return {
+                    **base,
+                    "action": "SELL",
+                    "reason": (
+                        f"Rebound target bereikt @ €{price:.4f}. Ingekocht €{entry:.4f} "
+                        f"({profit_pct*100:+.2f}%). Netto +€{netto_profit:.4f} ({_netto_pct*100:.2f}% ≥ {_target_pct*100:.1f}%)."
+                    ),
+                    "confidence": 0.9,
+                    "netto_profit": round(netto_profit, 4),
+                    "strategy_variant": "rebound_h1",
+                    "target_hit": True,
+                    "position_update": {"close": True, "target_hit": True},
+                }
+
         if trailing_active and price < highest:
             if netto_rounded >= exit_min_netto:
                 return {
@@ -157,6 +178,38 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         }
 
     # ========== GEEN POSITIE: ZOEK BUY SIGNAAL ==========
+    # v11_rebound_h1_001 — Willems H1 rebound (backtest v4: 62.5% van 5%-drops
+    # rebounds binnen 24u, mediaan +1.96%). Trigger BUY bij grote drop in 24u
+    # ONAFHANKELIJK van Bollinger. Blueprint-controlled (enabled + threshold).
+    try:
+        _bp = _load_trader_blueprint()
+        _rebound_enabled = bool(_bp.get("parameters", {}).get("rebound_enabled", False))
+        _rebound_drop = float(_bp.get("parameters", {}).get("rebound_drop_threshold_pct", 3.0))
+        _rebound_target = float(_bp.get("parameters", {}).get("rebound_target_pct", 2.0))
+    except Exception:
+        _rebound_enabled = False
+        _rebound_drop, _rebound_target = 3.0, 2.0
+
+    if _rebound_enabled and len(candles) >= 96:  # 96 x 15m = 24u
+        _24h_highs = [c.get("high", c.get("close", price)) for c in candles[-96:]]
+        _24h_high = max(_24h_highs) if _24h_highs else price
+        _drop_24h_pct = (_24h_high - price) / _24h_high * 100 if _24h_high > 0 else 0
+        if _drop_24h_pct >= _rebound_drop:
+            return {
+                **base,
+                "action": "BUY",
+                "reason": (
+                    f"Rebound-trigger (H1): -{_drop_24h_pct:.2f}% drop in 24u (24h-high €{_24h_high:.4f} → nu €{price:.4f}). "
+                    f"Threshold ≥{_rebound_drop:.1f}%. Target +{_rebound_target:.1f}% netto."
+                ),
+                "confidence": 0.75,
+                "strategy_variant": "rebound_h1",
+                "target_pct": _rebound_target,
+                "drop_24h_pct": round(_drop_24h_pct, 3),
+                "high_24h": round(_24h_high, 4),
+                "position_update": {"open": True, "entry_price": price, "strategy_variant": "rebound_h1", "target_pct": _rebound_target},
+            }
+
     if price <= lower:
         distance_from_upper = (upper - price) / upper if upper > 0 else 1
         if distance_from_upper < 0.015:

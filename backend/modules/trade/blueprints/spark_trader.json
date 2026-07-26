@@ -266,9 +266,9 @@
     "loss_cut_pct": -0.03,
     "_loss_cut_rationale": "Willems H2 hypothese: verliezen zichtbaar realiseren > verlies bevriezen. Backtest v4 (20260709_213151): P=€-9.53 vs D=€-13.16 echt netto. Beter.",
     "rebound_enabled": false,
-    "rebound_drop_threshold_pct": 5.0,
+    "rebound_drop_threshold_pct": 3.0,
     "rebound_target_pct": 2.0,
-    "_rebound_note": "Backtest v4: 62.5% van 5%-drops rebounds binnen 24u (mediaan +1.96%). Nu uit tot we drempel tunen op 3%."
+    "_rebound_note": "Backtest v4 (sessie 46, 9 juli): 62.5% van 5%-drops rebounds binnen 24u (mediaan +1.96%). Drempel verlaagd van 5% → 3% (sessie 49, 26 juli) op basis van Willems handmatige actie 25/7 14:46: kocht ATOM @ -2.7% drop → won. Code-implementatie in monitor.py PENDING — enabled blijft false tot code geschreven is."
   },
   "sell_regels": {
     "trailing_stop_activatie_pct": 0.5,

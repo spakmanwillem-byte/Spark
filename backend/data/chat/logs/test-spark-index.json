@@ -1,0 +1,67 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "text": "hoeveel bestanden heb je",
+      "ts": "2026-07-29T20:11:26.993856+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik heb **1618 code-bestanden** verspreid over 461 mappen (backend + frontend + memory). Laatste index: 2026-07-29T20:11:26.",
+      "ts": "2026-07-29T20:11:26.993856+00:00",
+      "model": "spark_index"
+    },
+    {
+      "role": "user",
+      "text": "hoeveel mappen",
+      "ts": "2026-07-29T20:11:27.174725+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik heb **461 mappen** in totaal. Laatste index: 2026-07-29T20:11:26.",
+      "ts": "2026-07-29T20:11:27.174725+00:00",
+      "model": "spark_index"
+    },
+    {
+      "role": "user",
+      "text": "hoeveel modules heb je",
+      "ts": "2026-07-29T20:11:27.313684+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik heb **61 backend-modules**, waarvan **60 met een `_meta.json`-footnote** (die vertelt wat de module doet). Laatste index: 2026-07-29T20:11:26.",
+      "ts": "2026-07-29T20:11:27.313684+00:00",
+      "model": "spark_index"
+    },
+    {
+      "role": "user",
+      "text": "hoeveel python bestanden",
+      "ts": "2026-07-29T20:11:27.456313+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik heb **330 `py`-bestanden**. Laatste index: 2026-07-29T20:11:26.",
+      "ts": "2026-07-29T20:11:27.456313+00:00",
+      "model": "spark_index"
+    },
+    {
+      "role": "user",
+      "text": "welke modules heb je",
+      "ts": "2026-07-29T20:11:27.631172+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik heb **61 modules**: accounting, achievements, admin, agenda, analytics, audit, auth, backup, bijbel, boekhouder, bonnetjes, bots, bugs, cards, chat en nog 46 andere. Vraag `/api/spark-index` voor de volledige lijst.",
+      "ts": "2026-07-29T20:11:27.631172+00:00",
+      "model": "spark_index"
+    }
+  ],
+  "session_id": "test-spark-index",
+  "user_id": "user-001",
+  "updated_at": "2026-07-29T20:11:27.631172+00:00"
+}

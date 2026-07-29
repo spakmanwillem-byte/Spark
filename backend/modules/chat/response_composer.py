@@ -95,6 +95,29 @@ async def compose_response(
     except Exception:
         pass  # bij fout: door naar action_intents / LLM
 
+    # v11_spark_index_001 — Count-intent ('hoeveel bestanden/mappen/modules')
+    # Fast-path uit spark_index (geen live scan, geen LLM guess).
+    try:
+        from modules.chat.count_intent_service import detect_count_intent, answer_count
+        target = detect_count_intent(user_text)
+        if target:
+            ans = answer_count(target)
+            if ans:
+                if session_id:
+                    _save_turn_pair(session_id, user_id, user_text, ans["message"], "spark_index")
+                return {
+                    "success": True,
+                    "message": ans["message"],
+                    "intent": ans["intent"],
+                    "data": {"target": ans["target"], "totals": ans["totals"]},
+                    "used_cards": [],
+                    "used_model": "spark_index_fastpath",
+                    "blueprint_version": "1.0",
+                    "fast_path": True,
+                }
+    except Exception as _cx:
+        print(f"[count-intent] error: {_cx}")
+
     # v9_self_profile_001 — Detecteer "waar woon ik / mijn adres / etc." → direct uit profile.json
     # Skip verificatie: ingelogde user MAG eigen data zien.
     try:

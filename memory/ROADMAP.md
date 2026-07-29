@@ -1,6 +1,106 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## ✅ SESSIE 50 SLOT — Trader + Chat + Self-Awareness fundering (29 juli)
+
+### v11_pot_registration_safety_001 — Bug A (race condition)
+Bitvavo BUY-succes met `open_cluster` faal gaf silent coin-verlies. Nu try/except met fallback naar per-pot `open_pot`, event-notification bij faal, en `ui_refresh_trigger.json` voor directe frontend refresh.
+
+### v11_adopt_manual_positions_001 — Bug C (bot adopteert manual pots)
+Nieuwe `_adopt_orphan_positions()` + `_process_trailing_for_market()`. Open pots op markten buiten `self._markets` krijgen ook trailing-stop + -8% loss-cut check via batch-ticker fetch.
+
+### v11_glow_clear_on_nav_001 + no_self_glow_001 — UI Glow bug
+Nav-glow verdwijnt direct bij tab-klik; niet meer als user al op doel-tab staat. Path parsing werkt voor `/modules/trade` én `/`.
+
+### v11_bitvavo_reconcile_ui_001 + v11_rest_by_history_001 — Reconciliatie UI
+Nieuwe `BitvavoReconcilePanel` op Trader-pagina. Categorisatie op **historie** (matching pot of `net_paid ≥ €0.50`), niet op bedrag. Test-gokjes (NEAR/SHIB/TIA) → rest. ADA/BCH/ATOM/ETH/SOL/BTC → orphan-kandidaten.
+
+### v11_rest_bonus_001 — Rest meepakken bij trail-SELL
+Trail-trigger blijft berekend op cluster_capital ALLEEN. NA trigger → Bitvavo balance check, `rest_bonus = (actual - expected) × price`, meegenomen in SELL. Nieuwe `potjes.add_rest_bonus()` respecteert 2× original_max_size ceiling.
+
+### v11_trader_trades_open_001 — trader-intent "hoeveel trades lopen"
+4 nieuwe patronen (`hoeveel/welke posities`, `trades lopen/open/actief`). LLM hallucineert niet meer "2 lopende trades"; `_fmt_status` toont: *"3 open trade(s): 1× ADA-EUR, 1× ETH-EUR, 1× SOL-EUR"*.
+
+### v11_admin_family_001 + admin_cross_user_001 — Lotus + cross-user data
+Lotus (user-5dd295db) rol=Dochter. `family_relations` toegevoegd aan Willem + Lotus. Nieuwe helper `_load_family_relations_snippet` in admin-context prompt. Admin (gradatie 1) mag expliciet cross-user data delen.
+
+### v11_daily_event_rps_001 + v11_daily_rps_001 — SPS Daily-Event rijke UI
+`DailyEventCard` = dunne wrapper die `RpsBark` opent met `dailyMode=true`. Bark eerlijk bij loss ("je verloor deze ronde" ipv "je ontsnapte"). Behoudt 1×/dag gate + 10 goud uitkering.
+
+### v11_kb_fill_offer_001 — "Kan ik wat voor je doen"-flow
+Multi-turn: offer → question → paraphrase → save. 733 KBv2-kaarten met leeg ws5-veld beschikbaar als candidate. Escape-routes: nee/skip/retry.
+
+### v11_spark_index_001 — Self-Awareness fundering 🟢
+Nieuwe `modules/spark_index/` — periodieke scan van `/app/backend`, `/app/frontend/src`, `/app/memory`. Aggregeert 60 `_meta.json` footnotes per module. Endpoints:
+- `POST /api/spark-index/rebuild` — herbouw index
+- `GET /api/spark-index` — read-only totals + per-module details
+- `GET /api/spark-index/module/{name}` — module-specifieke footnote
+
+Chat-fastpath `count_intent_service.py` beantwoordt: *"hoeveel bestanden/mappen/modules/python-files/js-files"* + *"welke modules heb je"*. Live: **461 mappen, 1618 code-bestanden, 61 backend-modules (60 met meta), 330 .py-files**.
+
+Auto-rebuild op backend startup (~200ms). Fundering voor toekomstige 🟢 SparkSelfAwareness LLM-driven intent-hooks.
+
+---
+
+## 🟢 P0 — Volgende sessies (na Willems redeploy)
+
+### 1. SparkSelfAwareness LLM-driven hooks (~40-50 credits)
+Willems visie: harde strings (regex) blijven voor veiligheid + hoogste commando's. Conversationele intents (wedervraag, empathie, trader-info, humor) door LLM zelf laten kiezen ipv regex. Per user-turn: keuze-array `[wedervraag, empathie, trader-info, humor, niks]` → LLM decide.
+
+### 2. KB V3 — Normen, Waarden, Testament (~30 credits)
+Filosofische laag: definieer systeem-loyaliteit + `willem_mening` veld op KB kaarten. Voorkomt dat LLM Willem blokkeert met generieke guardrails.
+
+### 3. Merge-rest-into-existing-pot (~10 credits)
+Optionele flow: rest-restje (BTC €0.33) toevoegen aan bestaand potje-capital ipv nieuw potje heropenen.
+
+### 4. Missing 5W+H helper endpoint (~5 credits)
+`GET /api/kb/v2/admin/missing-5wh` — lijst kaarten met lege 5W-velden voor UI-bulk-fill.
+
+### 5. Rebound H1 tuning + activatie (~10 credits)
+Momenteel `enabled: false`. Nodig: gap-confirmation + reversal-signaal voordat activatie.
+
+### 6. Family uitbreiden (moeder + overleden vader) — ~5 credits
+User-formulier of chat-auto-detect ("mijn moeder heet X" → family_relation update).
+
+---
+
+## 🟡 P1 — Backlog
+
+### Bestand-search flow uitbreiden
+`spark_snuffel.py` bestaat, maar count-intent nieuw (`count_intent_service.py`). Uitbreiding: chat-vraag "wat staat er in `modules/trade/potjes.py`" → snuffel + samenvatting.
+
+### Cyclus-Agents (STARR/SMART) voor KB V3
+LeerAgent/MakenAgent die blueprints uitvoeren op basis van user-intent.
+
+### TopicAgent voor Graph
+Semantische validatie van edge connections in KB Verbanden.
+
+### Consolidatie wallets.json vs user_wallets.json
+Historische duplicatie, één source of truth kiezen.
+
+### 14 modules met directe roar_balances.json write
+Enforce mutations via `boekhouder.finance_ops.mint_tokens()`.
+
+### Sell/Dissolve token flow
+Nog niet gebouwd.
+
+### 32 KB v2 homoniem-dupes
+Rapport in `DUPES_REPORT.md`, handmatig user-review.
+
+### Proactieve 5W-vraag bij lang gesprek (~10 credits)
+Als user > N turns in gesprek → Spark stelt zelf 5W-vraag zonder trigger. Tussenstap naar 🟢 self-aware.
+
+### Dashboard-widget rest-bonus totaal
+"Totaal opgeruimd via rest-bonus deze maand: €X.XX" — leuke stats.
+
+---
+
+## Bestand-index live snapshot (v11_spark_index_001)
+- Totaal mappen: **461** · Totaal bestanden: **1618** · Backend modules: **61** (60 met meta)
+- Top file-types: **.py: 330** · **.js: 220** · **.json: 800+** · **.md: 100+**
+
+
+
 
 ## ✅ SESSIE 49 SLOT+4 — Bug B gefixt (29 juli)
 

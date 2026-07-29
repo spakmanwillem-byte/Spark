@@ -55815,11 +55815,159 @@
         "session_id": "default",
         "gesprek_nummer": 2187
       }
+    },
+    {
+      "id": "conv-1ff24fe8",
+      "timestamp": "2026-07-29T19:22:53.066490+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hoeveel trades heb je lopen",
+      "spark_response": "**hoeveel**: Hoeveel is een vraagwoord dat gebruikt wordt om naar een hoeveelheid, aantal of mate te vragen.\n\n**trades**: Trades zijn koop- of verkooptransacties van financiële producten.\n\n\n**Lopen**: Lopen is het verplaatsen door stappen te zetten met je benen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "heb",
+            "trades"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hoeveel"
+          },
+          {
+            "begrip": "trades"
+          },
+          {
+            "begrip": "Lopen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2188
+      }
+    },
+    {
+      "id": "conv-cd5d4894",
+      "timestamp": "2026-07-29T19:22:53.411063+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe staat spark bot",
+      "spark_response": "**staat**: Een staat is de huidige toestand, situatie of conditie waarin iets of iemand zich bevindt.\n\n**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n**bot**: Een bot is een geautomatiseerd systeem of programma dat taken uitvoert of reageert zonder directe menselijke besturing.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "bot",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "staat"
+          },
+          {
+            "begrip": "Spark"
+          },
+          {
+            "begrip": "bot"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2189
+      }
+    },
+    {
+      "id": "conv-53cb510b",
+      "timestamp": "2026-07-29T19:24:20.939158+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "Hoeveel trades heb je lopen",
+      "spark_response": "⏸️ Je trader staat stil · 0 open trades (1 potjes vrij). Zeg 'start mijn bot' om weer te beginnen.",
+      "channel": "spark-trader-intent",
+      "analysis": {
+        "intent": "trader_status",
+        "action": "trader_status"
+      },
+      "metadata": {
+        "session_id": "test-fix-002",
+        "gesprek_nummer": 2190
+      }
+    },
+    {
+      "id": "conv-f9a98703",
+      "timestamp": "2026-07-29T19:24:21.183498+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "hoe staat de trader",
+      "spark_response": "⏸️ Je trader staat stil · 0 open trades (1 potjes vrij). Zeg 'start mijn bot' om weer te beginnen.",
+      "channel": "spark-trader-intent",
+      "analysis": {
+        "intent": "trader_status",
+        "action": "trader_status"
+      },
+      "metadata": {
+        "session_id": "test-fix-003",
+        "gesprek_nummer": 2191
+      }
+    },
+    {
+      "id": "conv-6a6d8889",
+      "timestamp": "2026-07-29T19:24:33.195355+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie is Lotus voor mij",
+      "spark_response": "De Willem, voor zover ik me herinner, is Lotus jouw dochter. We hebben eerder over haar gesproken, en ik weet dat ze een speciale plek in jouw hart inneemt. De naam Lotus heeft ook een speciale betekenis, geïnspireerd door de symboliek van de lotusplant, die staat voor schoonheid en groei. Jouw dochter draagt dus een naam die niet alleen mooi klinkt, maar ook een diepe betekenis heeft.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-db2b0b19",
+          "kbv2-4942d366",
+          "kbv2-cbdc47d3",
+          "kbv2-230c76a2"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "test-family-1",
+        "gesprek_nummer": 2192
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2187,
-    "last_updated": "2026-07-29T18:43:04.903009+00:00"
+    "total_conversations": 2192,
+    "last_updated": "2026-07-29T19:24:33.195355+00:00"
   }
 }

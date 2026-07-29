@@ -1599,6 +1599,14 @@
       "admin_granted_by": "system-seed",
       "currency": {
         "goud": 20
+      },
+      "family_relations": {
+        "dochter": [
+          {
+            "id": "user-5dd295db",
+            "naam": "Lotus Martens"
+          }
+        ]
       }
     },
     {
@@ -5105,7 +5113,7 @@
       "volledige_naam": "Lotus Martens",
       "sleutelwoord": "Lotus11022009",
       "gradatie": 3,
-      "rol": "Onbekende",
+      "rol": "Dochter",
       "id": "user-5dd295db",
       "registered_date": "2026-05-23T20:55:42.942846",
       "last_active": "2026-05-31T11:33:50.249568+00:00",
@@ -5265,7 +5273,16 @@
       "welcome_version_seen": "v1",
       "welcome_sent_at": "2026-05-29T12:17:48.037221+00:00",
       "gradatie_titel": "Vriend",
-      "sleutelwoord_changed_op": "2026-05-29T12:19:15.644658"
+      "sleutelwoord_changed_op": "2026-05-29T12:19:15.644658",
+      "family_relation": "dochter van user-001 (Willem)",
+      "family_relations": {
+        "vader": [
+          {
+            "id": "user-001",
+            "naam": "De Willem"
+          }
+        ]
+      }
     },
     {
       "naam": "Maaike",

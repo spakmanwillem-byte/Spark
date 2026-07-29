@@ -62,6 +62,11 @@ _STATUS_PATTERNS = [
     r"\btrader\s+status\b",
     r"\bbot\s+status\b",
     r"\bwat\s+doet\s+(m'?n?|mijn|de)\s*(trader|bot)\b\??",
+    # v11_trader_trades_open_001 — "hoeveel trades heb je lopen" ea (was: LLM hallucineerde)
+    r"\bhoe\s*veel\s+(open\s+|lopende?\s+|actieve?\s+|dat\s+er\s+)?trades?\b",
+    r"\b(open|lopende?|actieve?)\s+trades?\b",
+    r"\btrades?\s+(open|lopen|actief|draaien)\b",
+    r"\b(hoeveel|welke)\s+posities\b",
 ]
 
 # PNL / WINST
@@ -153,9 +158,31 @@ def _fmt_status(status: Dict[str, Any]) -> str:
         markets_str = ", ".join(markets[:6]) if markets else "geen markten"
     else:
         markets_str = str(markets)
+    # v11_trader_trades_open_001 — tel open posities uit potjes, was: niet zichtbaar in status
+    user_id = status.get("user_id") or "user-001"
+    open_pots = 0
+    total_pots = 0
+    open_by_market: Dict[str, int] = {}
+    try:
+        from modules.trade import potjes as potjes_svc
+        data = potjes_svc.get_potjes(user_id)
+        for p in data.get("potjes", []):
+            total_pots += 1
+            if p.get("position", {}).get("is_open"):
+                open_pots += 1
+                mkt = p.get("market") or "?"
+                open_by_market[mkt] = open_by_market.get(mkt, 0) + 1
+    except Exception:
+        pass
+    open_str = ""
+    if open_pots > 0:
+        parts = [f"{n}× {m}" for m, n in sorted(open_by_market.items(), key=lambda x: -x[1])]
+        open_str = f" · **{open_pots} open trade(s)**: {', '.join(parts)}"
+    elif total_pots > 0:
+        open_str = f" · 0 open trades ({total_pots} potjes vrij)"
     if running:
-        return f"✅ Je trader draait — cycle elke {interval or '?'}s op {markets_str}."
-    return f"⏸️ Je trader staat stil. Zeg 'start mijn bot' om weer te beginnen."
+        return f"✅ Je trader draait — cycle elke {interval or '?'}s op {markets_str}{open_str}."
+    return f"⏸️ Je trader staat stil{open_str}. Zeg 'start mijn bot' om weer te beginnen."
 
 
 def _fmt_pnl(pnl: Dict[str, Any]) -> str:

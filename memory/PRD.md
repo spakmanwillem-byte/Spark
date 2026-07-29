@@ -1,5 +1,43 @@
 # Spark Core 2.0 — PRD
-## Sessie 50d (2026-02-01) — Rest-bonus meepakken bij trail-SELL
+## Sessie 50e (2026-02-01) — Chat-fix: trader-vragen + Lotus als familie
+
+### Willems observatie (uit gespreklog deep-user-001)
+1. **Trader-vraag hallucinatie**: Willem vroeg "Hoeveel trades heb je lopen" → Spark (gpt-oss-120b) verzon "2 lopende trades" ipv echte data lookup
+2. **Lotus niet als familie herkend**: Lotus bestaat als user-5dd295db met rol="Onbekende", terwijl Willem in chat expliciet zei "Lotus Martens, mijn dochter"
+
+### Fix 1: v11_trader_trades_open_001 — trader-status patterns uitgebreid
+- `_STATUS_PATTERNS` in `trader_intents.py` uitgebreid met 4 nieuwe patronen:
+  - `hoeveel (open|lopende|actieve|dat er) trades`
+  - `open/lopende/actieve trades`
+  - `trades open/lopen/actief/draaien`
+  - `hoeveel/welke posities`
+- `_fmt_status` toont nu open trades per markt: `"⏸️ Je trader staat stil · 3 open trade(s): 1× ADA-EUR, 1× ETH-EUR, 1× SOL-EUR"` ipv alleen bot-status
+- Fast-path bevestigd via `POST /api/spark/compose` → `intent=trader_status, used_model=trader_intents, fast_path=True`
+
+### Fix 2: v11_admin_family_001 — Lotus als familie + family-relations in prompt
+- **users.json update**:
+  - Lotus (user-5dd295db): `rol: "Onbekende" → "Dochter"`, `family_relation: "dochter van user-001 (Willem)"`
+  - Willem (user-001): `family_relations: {"dochter": [{"id": "user-5dd295db", "naam": "Lotus Martens"}]}`
+  - Lotus reverse pointer: `family_relations: {"vader": [{"id": "user-001", "naam": "De Willem"}]}`
+- **Nieuwe helper** `_load_family_relations_snippet(user_naam)` in `composer_helpers.py`: leest family_relations, flatten naar `"dochter = Lotus Martens (user-5dd295db); ..."`
+- **Admin-context prompt uitgebreid** (gradatie 1): toon family-relations regel in system_prompt
+- Effect: Spark antwoord op "wie is Lotus voor mij" nu: *"Lotus is jouw dochter"* met family-context uit users.json ipv alleen chat-memory
+
+### Fix 3: v11_admin_cross_user_001 — Cross-user data toestemming
+Admin-context (gradatie 1) uitgebreid met expliciete regel:
+> "Vraagt hij naar potjes/trader/wallet van ANDERE users → deel de cijfers. Users maken gebruik van onze dienst, hun trading/wallet-data is GEEN persoonsgegeven en Willem mag als beheerder alles zien. Geen 'ik mag dat niet delen'-antwoord."
+
+En hint waar de data te vinden is: `data/financial/user_potjes.json` / `data/roar/roar_balances.json`.
+
+### Files changed
+- `/app/backend/modules/trade/trader_intents.py` — 4 nieuwe status-patronen + verrijkte `_fmt_status`
+- `/app/backend/modules/chat/composer_helpers.py` — `_load_family_relations_snippet()` + admin-context uitgebreid
+- `/app/backend/data/system/users.json` — Lotus rol=Dochter, Willem+Lotus family_relations
+
+---
+
+
+
 
 ### v11_rest_bonus_001 — Rest gaat automatisch mee bij pot-SELL
 **Willems inzicht**: rest-restjes kunnen niet los verkocht worden (onder Bitvavo min-order), maar bij een pot-SELL op dezelfde coin kunnen ze wél meegaan → gratis extra winst.

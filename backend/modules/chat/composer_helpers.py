@@ -20,6 +20,46 @@ def _bp() -> Dict:
     return load_blueprint_cached("chat", "response_composer")
 
 
+# v11_admin_family_001 — Family-relations lookup voor Willem/admin
+def _load_family_relations_snippet(current_user_naam: str) -> Optional[str]:
+    """Bouw een korte zin met family-relations voor de admin-context prompt.
+
+    Leest data/system/users.json, zoekt de huidige user, en flatten
+    family_relations dict → 'dochter Lotus (user-5dd295db), zoon X, ...'.
+    Return None als geen family_relations bekend.
+    """
+    try:
+        users_fp = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+        d = load_json(users_fp, default={"users": []})
+        users = d.get("users", []) if isinstance(d, dict) else []
+        me = next((u for u in users
+                   if str(u.get("naam", "")).strip().lower() == current_user_naam.strip().lower()
+                   or str(u.get("volledige_naam", "")).strip().lower() == current_user_naam.strip().lower()),
+                  None)
+        if not me:
+            return None
+        fr = me.get("family_relations") or {}
+        if not fr:
+            return None
+        pieces = []
+        for rel, members in fr.items():
+            if not members:
+                continue
+            names = []
+            for m in members:
+                if isinstance(m, dict):
+                    n = m.get("naam") or m.get("volledige_naam") or m.get("id")
+                    uid = m.get("id", "")
+                    names.append(f"{n} ({uid})" if uid else n)
+                elif isinstance(m, str):
+                    names.append(m)
+            if names:
+                pieces.append(f"{rel} = {', '.join(names)}")
+        return "; ".join(pieces) if pieces else None
+    except Exception:
+        return None
+
+
 # ════════════════════════════════════════════════════════════
 # LOADERS — KB, bijbel, help-chain, mode, origin, awareness
 # ════════════════════════════════════════════════════════════
@@ -657,6 +697,16 @@ def _build_system_prompt(
         parts.append("  - Vraagt hij naar iets uit `data/`, blueprints, of eigen systemen → snuffel en rapporteer, hij mag het weten (hij heeft het gebouwd).")
         parts.append("  - Zie je een profile/identity-vraag én je hebt de info in identity_facts, gebruik hem — anders zeg eerlijk 'staat niet in mijn identity_facts'.")
         parts.append("  - Behandel hem als collega, niet als vreemde user. Geen 'kun je me een detail geven dat alleen jij weet' meer.")
+        # v11_admin_cross_user_001 — expliciete regel voor cross-user vragen
+        parts.append("  - Vraagt hij naar potjes/trader/wallet van ANDERE users (bv 'hoeveel potjes heeft Lotus', 'hoe staat Spark's bot', 'wat heeft user X verdiend') → deel de cijfers. Users maken gebruik van onze dienst, hun trading/wallet-data is GEEN persoonsgegeven en Willem mag als beheerder alles zien. Geen 'ik mag dat niet delen'-antwoord.")
+        parts.append("  - Als de vraag naar een specifieke user gaat: gebruik trader_intents met dat user_id, of read direct uit data/financial/user_potjes.json / data/roar/roar_balances.json.")
+        # v11_admin_family_001 — Family-relations context
+        try:
+            _fr = _load_family_relations_snippet(current_user_naam)
+            if _fr:
+                parts.append(f"  - Familie-relaties: {_fr}")
+        except Exception:
+            pass
         parts.append("")
 
     if user_profile_snippet:

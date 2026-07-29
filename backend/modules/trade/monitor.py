@@ -1037,17 +1037,66 @@ class MonitorService:
             if should_sell and self._auto_trade:
                 tag = "[adopted]" if adopted else "[trailing]"
                 logger.info(f"{tag} SELL trigger {market} pot={pot['id']} — {reason}")
+
+                # v11_rest_bonus_001 — NA trigger-berekening (nooit ervoor!),
+                # check of er rest van deze coin is die kan meegaan met de SELL.
+                # Rest die anders bleef staan (te klein voor eigen Bitvavo min-order)
+                # wordt hier "gratis" meegepakt en toegevoegd aan pot capital.
+                rest_bonus_eur = 0.0
+                try:
+                    base_asset = market.split("-")[0]
+                    bal = fetch_bitvavo_balance(self._user_id)
+                    for b in (bal or {}).get("balances", []):
+                        if str(b.get("symbol")) != base_asset:
+                            continue
+                        actual_coins = float(b.get("available", 0) or 0)
+                        # Verwachte coins in pot(s) op basis van entry-prijs
+                        expected_coins = cluster_capital / entry if entry > 0 else 0
+                        rest_coins = actual_coins - expected_coins
+                        # Alleen meepakken als rest zinvol groot is (dust-filter)
+                        if rest_coins > 0 and (rest_coins * price) > 0.02:
+                            rest_bonus_eur = rest_coins * price
+                            logger.info(
+                                f"[rest-bonus] {market}: {rest_coins:.8f} extra coins "
+                                f"(€{rest_bonus_eur:.4f}) meegaan met SELL"
+                            )
+                        break
+                except Exception as _re:
+                    logger.warning(f"[rest-bonus] check failed voor {market}: {_re}")
+
+                sell_amount_eur = cluster_capital + rest_bonus_eur
                 if self._use_mock:
-                    result = execute_mock_trade(self._user_id, market, "SELL", cluster_capital)
+                    result = execute_mock_trade(self._user_id, market, "SELL", sell_amount_eur)
                 else:
-                    result = execute_real_trade(self._user_id, market, "SELL", cluster_capital)
+                    result = execute_real_trade(self._user_id, market, "SELL", sell_amount_eur)
                 if result.get("success"):
                     real_price = result.get("trade", {}).get("price") or price
                     if cid:
-                        potjes_svc.close_cluster(self._user_id, cid, real_price)
+                        close_res = potjes_svc.close_cluster(self._user_id, cid, real_price)
                         processed_clusters.add(cid)
+                        # v11_rest_bonus_001 — bonus toevoegen aan eerste closed pot
+                        if rest_bonus_eur > 0.01 and close_res.get("closed_pot_ids"):
+                            try:
+                                br = potjes_svc.add_rest_bonus(
+                                    self._user_id,
+                                    close_res["closed_pot_ids"][0],
+                                    rest_bonus_eur,
+                                    market=market,
+                                )
+                                logger.info(f"[rest-bonus] applied: {br}")
+                            except Exception as _be:
+                                logger.warning(f"[rest-bonus] add_rest_bonus failed: {_be}")
                     else:
                         potjes_svc.close_pot(self._user_id, pot["id"], real_price)
+                        if rest_bonus_eur > 0.01:
+                            try:
+                                br = potjes_svc.add_rest_bonus(
+                                    self._user_id, pot["id"], rest_bonus_eur,
+                                    market=market,
+                                )
+                                logger.info(f"[rest-bonus] applied: {br}")
+                            except Exception as _be:
+                                logger.warning(f"[rest-bonus] add_rest_bonus failed: {_be}")
 
     def _run_market_cycle(self, market: str, context_per_market: Dict[str, List[Dict]], live_price: Optional[float] = None):
         """v4_multi_market_001: één cycle voor één market. Live prijs uit gedeelde ticker-call.
@@ -1149,23 +1198,67 @@ class MonitorService:
 
                 if trailing_active and price < highest and netto_r >= exit_min_netto:
                     if self._auto_trade:
+                        # v11_rest_bonus_001 — NA trail-trigger (nooit ervoor!),
+                        # check of er rest van deze coin is die kan meegaan met SELL.
+                        rest_bonus_eur = 0.0
+                        try:
+                            base_asset = market.split("-")[0]
+                            bal = fetch_bitvavo_balance(self._user_id)
+                            for b in (bal or {}).get("balances", []):
+                                if str(b.get("symbol")) != base_asset:
+                                    continue
+                                actual_coins = float(b.get("available", 0) or 0)
+                                expected_coins = cluster_capital / entry if entry > 0 else 0
+                                rest_coins = actual_coins - expected_coins
+                                if rest_coins > 0 and (rest_coins * price) > 0.02:
+                                    rest_bonus_eur = rest_coins * price
+                                    logger.info(
+                                        f"[rest-bonus] {market}: {rest_coins:.8f} extra "
+                                        f"coins (€{rest_bonus_eur:.4f}) meegaan met SELL"
+                                    )
+                                break
+                        except Exception as _re:
+                            logger.warning(f"[rest-bonus] check failed voor {market}: {_re}")
+
+                        sell_amount_eur = cluster_capital + rest_bonus_eur
                         if self._use_mock:
-                            result = execute_mock_trade(self._user_id, market, "SELL", cluster_capital)
+                            result = execute_mock_trade(self._user_id, market, "SELL", sell_amount_eur)
                         else:
-                            result = execute_real_trade(self._user_id, market, "SELL", cluster_capital)
+                            result = execute_real_trade(self._user_id, market, "SELL", sell_amount_eur)
                         if result.get("success"):
                             real_price = result.get("trade", {}).get("price") or price
                             if cid:
                                 close_result = potjes_svc.close_cluster(self._user_id, cid, real_price)
+                                bonus_str = ""
+                                if rest_bonus_eur > 0.01 and close_result.get("closed_pot_ids"):
+                                    try:
+                                        br = potjes_svc.add_rest_bonus(
+                                            self._user_id,
+                                            close_result["closed_pot_ids"][0],
+                                            rest_bonus_eur, market=market,
+                                        )
+                                        bonus_str = f" +€{br.get('bonus_applied_eur', 0):.2f} rest-bonus"
+                                    except Exception as _be:
+                                        logger.warning(f"[rest-bonus] add_rest_bonus failed: {_be}")
                                 actions_this_cycle.append(
                                     f"SELL cluster {cid[:6]} ({close_result.get('n_pots_closed',0)} pots, {market}) "
-                                    f"@ €{real_price:.4f} netto €{close_result.get('total_netto', 0):+.4f}"
+                                    f"@ €{real_price:.4f} netto €{close_result.get('total_netto', 0):+.4f}{bonus_str}"
                                 )
                                 processed_clusters.add(cid)
                             else:
                                 close_result = potjes_svc.close_pot(self._user_id, pot["id"], real_price)
+                                bonus_str = ""
+                                if rest_bonus_eur > 0.01:
+                                    try:
+                                        br = potjes_svc.add_rest_bonus(
+                                            self._user_id, pot["id"], rest_bonus_eur,
+                                            market=market,
+                                        )
+                                        bonus_str = f" +€{br.get('bonus_applied_eur', 0):.2f} rest-bonus"
+                                    except Exception as _be:
+                                        logger.warning(f"[rest-bonus] add_rest_bonus failed: {_be}")
                                 actions_this_cycle.append(
-                                    f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}"
+                                    f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}{bonus_str}"
                                 )
                             # v7_shadow_removed_001 — Shadow-close block removed.
 

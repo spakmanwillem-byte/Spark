@@ -1323,6 +1323,63 @@ def close_cluster(user_id: str, cluster_id: str, exit_price: float) -> Dict:
     }
 
 
+# v11_rest_bonus_001 — Bij trail-SELL kan bot ook de "rest" van dezelfde coin
+# meepakken (die anders bleef staan omdat te klein voor eigen Bitvavo min-order).
+# Deze bonus wordt NA de trigger toegevoegd (nooit bij trail-berekening zelf),
+# zodat de trail-drempel niet verstoord raakt door "gratis" rest.
+@with_lock
+def add_rest_bonus(user_id: str, pot_id: str, bonus_eur: float,
+                   market: Optional[str] = None) -> Dict:
+    """Voeg extra opbrengst uit "rest" toe aan een pot na een winstgevende SELL.
+
+    Willems logica: rest kan niet los verkocht worden (Bitvavo min-order),
+    maar bij een pot-SELL op dezelfde coin gaat de rest automatisch mee.
+    Die extra opbrengst is puur winst → optellen bij pot.capital (respecteert
+    2× original_max_size ceiling zoals bij normale SELL-groei, overflow gaat
+    naar user overflow_pool).
+    """
+    data = _load(user_id)
+    user = data["users"][user_id]
+    now = datetime.now(timezone.utc).isoformat()
+    for p in user["potjes"]:
+        if p["id"] != pot_id:
+            continue
+        old_cap = float(p.get("capital", 0) or 0)
+        new_cap = old_cap + float(bonus_eur)
+        # Zelfde ceiling als bij close_pot (v11_pot_growth_001)
+        original_max = float(p.get("original_max_size") or p.get("max_size", INITIAL_MAX))
+        ceiling = original_max * 2
+        overflow = 0.0
+        if new_cap > ceiling:
+            overflow = new_cap - ceiling
+            new_cap = ceiling
+        p["capital"] = round(new_cap, 4)
+        # Groei ook de max_size mee tot ceiling
+        if new_cap > float(p.get("max_size", INITIAL_MAX) or INITIAL_MAX):
+            p["max_size"] = new_cap
+        # Log
+        p.setdefault("rest_bonus_log", []).append({
+            "ts": now,
+            "bonus_eur": round(float(bonus_eur), 4),
+            "market": market,
+            "capital_before": round(old_cap, 4),
+            "capital_after": p["capital"],
+            "overflow": round(overflow, 4),
+        })
+        p["stats"]["total_pnl"] = round(p["stats"].get("total_pnl", 0) + float(bonus_eur), 4)
+        # Overflow → user overflow_pool (bestaande mechaniek in close_pot)
+        if overflow > 0:
+            user["overflow_pool"] = round(float(user.get("overflow_pool", 0) or 0) + overflow, 4)
+        _save(data)
+        return {
+            "success": True, "pot_id": pot_id,
+            "bonus_applied_eur": round(float(bonus_eur) - overflow, 4),
+            "overflow_eur": round(overflow, 4),
+            "capital_after": p["capital"],
+        }
+    return {"success": False, "error": f"pot {pot_id} not found"}
+
+
 
 def reset_last_buy_cycle(user_id: str):
     """Reset last_buy_cycle zodat volgende cycle weer mag kopen."""

@@ -1,5 +1,39 @@
 # Spark Core 2.0 — PRD
-## Sessie 50c (2026-02-01) — Bitvavo Reconciliatie categorisatie gecorrigeerd
+## Sessie 50d (2026-02-01) — Rest-bonus meepakken bij trail-SELL
+
+### v11_rest_bonus_001 — Rest gaat automatisch mee bij pot-SELL
+**Willems inzicht**: rest-restjes kunnen niet los verkocht worden (onder Bitvavo min-order), maar bij een pot-SELL op dezelfde coin kunnen ze wél meegaan → gratis extra winst.
+
+**Willems waarschuwing (correct opgevolgd)**: rest MAG NIET meegerekend worden in trail-berekening, anders verstoort het de drempel. Volgorde in code:
+1. Bereken `netto_r` uit **alleen `cluster_capital`** (pot-only)
+2. Bepaal trail-trigger uit `netto_r`
+3. **Pas ná trigger** → check Bitvavo balance, bereken `rest_bonus_eur = (actual_coins - expected_coins) * price`
+4. `sell_amount_eur = cluster_capital + rest_bonus_eur` → execute
+5. Bij success: `close_cluster` normaal + `add_rest_bonus(primary_pot_id, rest_bonus_eur)`
+
+**Nieuwe helper** in `potjes.py`:
+- `add_rest_bonus(user_id, pot_id, bonus_eur, market)` — voegt bonus toe aan pot.capital, respecteert 2× original_max_size ceiling (zoals v11_pot_growth_001), overflow → user.overflow_pool
+- Log per bonus in `pot.rest_bonus_log[]` met before/after/overflow
+- `stats.total_pnl` mee-omhoog
+
+**Toegepast op beide flows**:
+- `_run_market_cycle` (hoofd bot-flow, regel 1196-1254)
+- `_process_trailing_for_market` (mijn nieuwe adopted-flow uit Bug C, regel 1016-1094)
+
+**Micro-dust filter**: bonus alleen als `rest_coins * price > €0.02` (voorkom rounding-noise).
+
+### Testing
+- `add_rest_bonus` unit-test: €12.65 + €0.50 → €13.15, total_pnl −0.0019 → +0.4981, geen overflow (max_size €50) ✓
+- Trigger-volgorde bevestigd via grep: netto_r berekend op cluster_capital alleen; rest_bonus_eur pas gedeclareerd IN de `if should_sell` branch ✓
+
+### Files changed
+- `/app/backend/modules/trade/potjes.py` — `add_rest_bonus()` helper (+63 regels)
+- `/app/backend/modules/trade/monitor.py` — rest-bonus hook in beide SELL-flows
+
+---
+
+
+
 
 ### v11_rest_by_history_001 — Categorisatie op HISTORIE, niet op bedrag
 **Willem's correctie**: mijn 50b implementatie gebruikte €0.25 als harde drempel. Fout — €0.25 was slechts een voorbeeld. Willems echte logica:

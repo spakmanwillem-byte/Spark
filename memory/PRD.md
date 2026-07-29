@@ -1,5 +1,56 @@
 # Spark Core 2.0 — PRD
 
+## Sessie 50 (2026-02-01) — Trader Bug A + Bug C + UI Glow fixes
+
+### v11_pot_registration_safety_001 — Bug A: race condition in potjes creatie
+**Willem's melding**: bot koopt maar potje niet aangemaakt of frontend later.
+
+**Root cause**: `execute_real_trade` → `open_cluster` sequence had geen try/except. Als Bitvavo BUY succes maar `open_cluster` crashte silent, was coin gekocht zonder pot-registratie.
+
+**Fix** in `modules/trade/monitor.py`:
+- `open_cluster` gewrapt in try/except met logging
+- Fallback: bij faal → per pot `open_pot()` proberen zodat er tenminste registratie is
+- Event geschreven naar `data/trade/event_notifications.json` (severity CRITICAL/WARN)
+- Nieuwe `data/trade/ui_refresh_trigger.json` na elke BUY — frontend kan direct refreshen ipv wachten op poll cycle
+
+### v11_adopt_manual_positions_001 — Bug C: bot adopteert handmatige posities
+**Willem's melding**: bot doet 0 auto-trades, 78 open potjes worden genegeerd omdat bot alleen 4 markten monitorde.
+
+**Root cause**: `_run_market_cycle` filtert op `pot.market != market → skip`. Potjes op markten buiten `_markets` werden nooit gemonitord.
+
+**Fix** in `modules/trade/monitor.py`:
+- Nieuwe `_adopt_orphan_positions()` methode: detecteert open pots met market ∉ `_markets`
+- Nieuwe `_process_trailing_for_market()`: shared trailing-stop + loss-cut logic (leest `parameters.loss_cut_pct` uit blueprint, default -8%)
+- Aangeroepen na elke market-loop iteratie in `_loop()`
+- Fetch live tickers voor orphan markets in batch (rate-limit safe)
+
+### v11_glow_clear_on_nav_001 + v11_glow_no_self_glow_001 — UI Glow bug
+**Willem's melding**: Trade tab gloeit ook op chat/dashboard tab.
+
+**Root cause**: `spark:nav-glow` event triggerde 6s glow zonder self-check en zonder cleanup bij nav.
+
+**Fix** in `frontend/src/components/layout/MainLayout.js`:
+- `handleNavClick`: verwijdert ALLE `.spark-nav-glow` classes bij tab-klik
+- Glow-handler: skipt als user al op de doel-tab staat (via last path segment, werkt voor `/modules/trade` én `/`)
+
+### Testing
+- **Backend**: iter48 (10/10 PASS) — Bug A safety wrap, Bug C orphan adoption, en helper methods geverifieerd
+- **Frontend**: iter49 (4/4 PASS) — self-glow guard werkt op `/modules/trade` én root `/`, clear-on-nav werkt direct
+- Regressie: `GET /api/trade/monitor/status` en `/api/trade/potjes/*` groen
+
+### Files changed
+- `/app/backend/modules/trade/monitor.py` — Bug A safety wrap (regel ~1170-1250) + Bug C orphan adoption (regel ~918, methodes ~933-1050)
+- `/app/frontend/src/components/layout/MainLayout.js` — glow-clear-on-nav (regel ~423) + self-glow guard (regel ~163)
+- `/app/backend/tests/test_iter48_bug_a_c_glow.py` (nieuw, door testing agent)
+
+### NIET geraakt (bewust)
+- Bug B (winst-groei) — al gefixt sessie 49 (v11_pot_growth_001)
+- Rebound H1 tuning + KB V3 Normen/Waarden — voor volgende sessies (Willem's expliciete "trader helemaal goed maken" prioriteit)
+
+---
+
+
+
 ## Sessie 48 vervolg (2026-02-01) — Bijbel: semantische laag
 
 ### v10_bijbel_semantic_layer_001 — Wijsheden / Patronen / Mentale Modellen / Ankers

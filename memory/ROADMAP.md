@@ -2,6 +2,51 @@
 
 
 
+## ✅ SESSIE 49 SLOT+4 — Bug B gefixt (29 juli)
+
+### Wat Willem meldde
+*"Hij laat de winst staan en alleen potje zelf terug zet"*
+
+### Root cause — `potjes.py:close_pot()` regel 1000-1006
+```python
+new_capital = capital + netto        # €11.38 + winst = €11.50
+if new_capital > pot_max:             # pot_max = €11.38
+    overflow = new_capital - pot_max  # winst → overflow_pool
+    new_capital = pot_max              # capital gecapt op €11.38!
+p["capital"] = round(new_capital, 4) # potje weer op start-bedrag ❌
+```
+
+Winst was **niet weg** — ging naar `user["overflow_pool"]` (regel 1024). Maar in de pot-UI onzichtbaar → gebruiker denkt "winst is verdwenen".
+
+### Fix (v11_pot_growth_001)
+Potje **groeit mee met winst**:
+- Bij winst: `capital = capital + netto`, `max_size` schuift mee
+- Hard-ceiling op **2× oorspronkelijke max_size** (voorkomt onbeperkte groei)
+- Boven ceiling: overflow-mechaniek blijft als fallback
+- `original_max_size` opgeslagen bij eerste winst-close (backward compat)
+
+### Live effect
+- Nieuwe SELLs met winst laten `capital` groeien
+- UI toont nu écht potje-groei
+- Bestaande potjes onaangetast (geen data-migratie nodig)
+- Bij `netto < 0`: gedrag onveranderd (verlies afgetrokken van capital)
+
+### Bug A + C nog te doen
+- **Bug A** (potje niet aangemaakt bij bot-BUY) — race condition, ~10 credits
+- **Bug C** (adopt manual positions) — nieuw feature, ~15 credits
+- Beide op P0 voor volgende sessie
+
+### Trader-configuratie nu compleet volgens Willems ontwerp
+- Loss-cut: -8% (Willems noodstop, was -1% gisteren)
+- Trailing: fee-aware (activeert bij +6ct netto, verkoopt bij 1ct drop = 1ct netto winst)
+- Potje-groei: geactiveerd (bug B fix)
+- Extreme_oversold (3-red-then-green): ready, disabled
+- Rebound H1: ready, disabled
+
+---
+
+
+
 ## 🔴 P0 SESSIE 49 SLOT+3 — Trader bugs door Willem gemeld (29 juli)
 
 ### Bug A: Potjes niet aangemaakt bij bot-BUY

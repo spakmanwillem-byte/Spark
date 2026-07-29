@@ -997,11 +997,26 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             bruto = capital * profit_pct
             fees = capital * BITVAVO_TAKER_FEE * 2  # buy + sell fee
             netto = bruto - fees
-            # Update capital (cap at MAX_POT_SIZE, overflow gaat in overflow bucket)
+            # v11_pot_growth_001 (29 juli, sessie 49) — Willem's observatie:
+            # "winst blijft staan, alleen potje-bedrag terug". Root cause: capital werd
+            # gecapt op max_size waardoor winst naar overflow ging (onzichtbaar in UI).
+            # Fix: bij winst laat potje groeien; max_size schuift mee. Overflow-cap
+            # blijft alleen bij verlies of uitzonderlijk grote winst (>2x max_size).
             new_capital = capital + netto
             overflow = 0.0
             pot_max = p.get("max_size", INITIAL_MAX)
-            if new_capital > pot_max:
+            if netto > 0:
+                # Potje groeit mee met winst — max_size schuift op tot 2x oorspronkelijk
+                original_max = p.get("original_max_size", pot_max)
+                p.setdefault("original_max_size", pot_max)
+                hard_ceiling = original_max * 2.0
+                if new_capital > hard_ceiling:
+                    overflow = new_capital - hard_ceiling
+                    new_capital = hard_ceiling
+                # Update max_size mee met capital zodat UI het correct toont
+                p["max_size"] = max(pot_max, new_capital)
+            elif new_capital > pot_max:
+                # Alleen bij winst-scenario dat door aparte code loopt (backward compat)
                 overflow = new_capital - pot_max
                 new_capital = pot_max
             p["capital"] = round(new_capital, 4)

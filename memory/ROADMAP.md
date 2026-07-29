@@ -2,6 +2,37 @@
 
 
 
+## 🔴 P0 SESSIE 49 SLOT+3 — Trader bugs door Willem gemeld (29 juli)
+
+### Bug A: Potjes niet aangemaakt bij bot-BUY
+Willem: *"Sommig met potje kopen had hij namelijk niet meegenomen of front was later"*  
+**Vermoedelijke oorzaak**: race condition tussen `execute_real_trade` en `potjes.create()`. Bot koopt → registratie mislukt of frontend refresh te traag.  
+**Check volgende sessie**: `modules/trade/monitor.py:execute_real_trade` → `modules/trade/potjes.py:create()` sequentie. Add try/verify.
+
+### Bug B: Winst blijft staan bij SELL, alleen potje-bedrag terug
+Willem: *"Hij laat de winst staan en zet alleen potje zelf terug"*  
+**Vermoedelijke oorzaak**: SELL boekt `entry_amount` terug naar potje, netto-winst gaat naar `roar_balances` of boekhouder event maar niet zichtbaar in pot-UI.  
+**Check volgende sessie**: `close_pot` en `boekhouder/finance_ops` — verify dat `pot.value_eur += netto_profit` gebeurt.
+
+### Bug C: Bot doet 0 auto-trades sinds begin (87 trades = 100% manueel)
+- Bot ziet manuele posities niet in `bot_state` → geen trailing daarop
+- Bot koopt niet zelf omdat gap-filter blokkeert
+- **Voorstel volgende sessie**: `adopt_manual_positions` — bot leest wallet-history in, adopteert externe BUYs, past trailing toe
+
+### Willems werk-around nu
+Laat 10-25ct free balance per coin in Bitvavo staan zodat bot iets kan doen met bestaande potjes. Tijdelijke fix tot bugs A+B+C opgelost zijn.
+
+### Prioriteit voor volgende sessie
+1. Bug B (winst-verlies) — kritisch, financieel
+2. Bug A (potje-creatie) — kritisch, boekhouding
+3. Bug C (adopt manual) — verbetering, niet urgent
+
+**Schatting**: 15-25 credits totaal voor A+B, 15 extra voor C.
+
+---
+
+
+
 ## ✅ SESSIE 49 SLOT+2 — Verbanden-tab opgeschoond (26 juli, "rapen")
 
 ### Wat is er gedaan (kleine patches, geen breukwerk)

@@ -270,7 +270,9 @@ async def fix_spark_pot(req: FixPotReq):
 #   - PnL ≈ 0 (dust) → skip; te klein om zinvol te reconciliëren
 # =============================================================================
 BITVAVO_FEE_RATE = 0.0025          # Bitvavo taker fee 0.25%
-DUST_THRESHOLD_EUR = 0.10          # onder deze value: skip
+# v11_rest_threshold_001 — Willem's keuze: onder €0.25 = "rest" (trailing helper
+# voor Spark, laten liggen). Boven €0.25 = adoptie-kandidaat voor potje.
+DUST_THRESHOLD_EUR = 0.25          # onder deze value: rest (niet als orphan tonen)
 TRADE_HISTORY_DIR = DATA_ROOT / "wallet" / "trade_history"
 
 
@@ -342,30 +344,22 @@ async def scan_orphans(user_id: str):
             closed_pots_by_market.setdefault(m, []).append(p.get("id"))
 
     rows = []
+    rest_rows = []  # v11_rest_threshold_001 — aparte lijst voor coins < €0.25 (info-only)
     for coin, b in bv_balances.items():
         if coin == "EUR":
             continue
         avail = float(b.get("available", 0) or 0)
         cur_val = float(b.get("value_eur", 0) or 0)
         cur_price = float(b.get("price", 0) or 0)
-        if avail <= 0 or cur_val < DUST_THRESHOLD_EUR:
+        if avail <= 0:
             continue
         market = f"{coin}-EUR"
         paid = paid_per_market.get(market, {})
         net_paid = paid.get("net_paid_eur", 0.0)
         pnl = round(cur_val - net_paid, 4)
         pnl_after_fee = round(cur_val * (1 - BITVAVO_FEE_RATE) - net_paid, 4)
-
-        # Bepaal actie
-        if pnl_after_fee >= 0.01:
-            action = "SELL_PROFIT"
-        elif abs(pnl_after_fee) < 0.02:  # binnen 2 cent → dust
-            action = "SKIP_DUST"
-        else:
-            action = "REOPEN_POT"
-
         matching = closed_pots_by_market.get(market, [])
-        rows.append({
+        base_row = {
             "coin": coin,
             "market": market,
             "bv_amount": round(avail, 8),
@@ -376,23 +370,41 @@ async def scan_orphans(user_id: str):
             "net_paid_eur": round(net_paid, 2),
             "pnl_eur": pnl,
             "pnl_after_fee_eur": pnl_after_fee,
-            "proposed_action": action,
             "matching_closed_pot": matching[0] if matching else None,
             "closed_pots_available": len(matching),
-        })
+        }
+        # Onder de drempel = "rest" (Willem's woord: trailing helper voor Spark, laten liggen)
+        if cur_val < DUST_THRESHOLD_EUR:
+            base_row["category"] = "rest"
+            rest_rows.append(base_row)
+            continue
+        # Boven drempel = orphan → koppel-kandidaat
+        if pnl_after_fee >= 0.01:
+            action = "SELL_PROFIT"
+        elif abs(pnl_after_fee) < 0.02:
+            action = "SKIP_DUST"
+        else:
+            action = "REOPEN_POT"
+        base_row["proposed_action"] = action
+        base_row["category"] = "orphan"
+        rows.append(base_row)
 
     return {
         "success": True,
         "user_id": user_id,
+        "rest_threshold_eur": DUST_THRESHOLD_EUR,
         "rows": sorted(rows, key=lambda r: -r["pnl_after_fee_eur"]),
+        "rest": sorted(rest_rows, key=lambda r: -r["bv_value_eur"]),
         "totals": {
             "potential_profit_eur": round(sum(r["pnl_after_fee_eur"] for r in rows if r["proposed_action"] == "SELL_PROFIT"), 2),
             "underwater_positions_eur": round(sum(r["pnl_after_fee_eur"] for r in rows if r["proposed_action"] == "REOPEN_POT"), 2),
             "coins_to_sell": sum(1 for r in rows if r["proposed_action"] == "SELL_PROFIT"),
             "coins_to_reopen": sum(1 for r in rows if r["proposed_action"] == "REOPEN_POT"),
             "coins_skipped": sum(1 for r in rows if r["proposed_action"] == "SKIP_DUST"),
+            "rest_count": len(rest_rows),
+            "rest_total_eur": round(sum(r["bv_value_eur"] for r in rest_rows), 2),
         },
-        "note": "Dry-run — geen wijzigingen doorgevoerd. Gebruik POST om uit te voeren.",
+        "note": "Dry-run — geen wijzigingen doorgevoerd. Gebruik POST om uit te voeren. Rest (<€0.25) blijft altijd staan.",
         "ts": _now(),
     }
 

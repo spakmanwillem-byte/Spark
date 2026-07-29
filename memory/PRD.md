@@ -1,6 +1,40 @@
 # Spark Core 2.0 — PRD
+## Sessie 50b (2026-02-01) — Bitvavo Reconciliatie UI + rest/potje onderscheid
 
-## Sessie 50 (2026-02-01) — Trader Bug A + Bug C + UI Glow fixes
+### v11_bitvavo_reconcile_ui_001 — Bitvavo → Potjes reconciliatie zichtbaar
+**Willem's melding**: bot ziet 3 potjes maar Bitvavo heeft veel meer coin-posities (ADA/BCH/ATOM/ETH/SOL/BTC-rest/CSPR/Euler/etc). Er zit "rest" tussen (kleine bedragen achtergelaten uit oude trades) én adoptie-kandidaten (echte value zonder pot-registratie).
+
+**Snuffel-vondst**: `modules/trade/reconcile.py` bestond al met `GET /orphans/{user_id}` (scan) en `POST /orphans/{user_id}` (execute). Wat ontbrak was:
+1. UI-paneel (endpoint had geen frontend)
+2. Duidelijke splitsing "rest" vs "potje-kandidaat"
+3. DUST-drempel op €0.10 (te laag voor Willems keuze van €0.25)
+
+**Fix**:
+- `DUST_THRESHOLD_EUR: 0.10 → 0.25` (Willems keuze — onder deze grens = "rest", laten liggen als trailing helper voor Spark)
+- Response gesplitst in `rows` (orphans ≥ €0.25, koppel-kandidaten) + `rest` (< €0.25, info-only)
+- `totals.rest_count` + `totals.rest_total_eur` toegevoegd
+- Frontend: nieuw `BitvavoReconcilePanel` component in `TraderPage.js` na Potjes Panel
+  - 2 tabellen: Koppel-kandidaten (met adopt-knop per coin) + Rest (info)
+  - Per orphan: coin · €waarde · matching_pot · pnl na fee · Verkoop/Koppel knop (admin-only)
+  - Adopt roept `POST /reconcile/orphans/{user_id}` met `execute:true, coins:[coin]`
+
+### Live resultaat voor user-001
+- 8 orphans: BCH/BTC/EUL/CSPR (SELL_PROFIT, +€3.68) + ATOM/ETH/ADA/SOL (REOPEN_POT, -€680)
+- 14 rest coins (NEAR/SHIB/TIA/DIA/NIL/SUI/LPT/ONT/XTZ/LUNA/KSM/NEO/GRT/LUNA2, totaal €1.19)
+
+### Files changed
+- `/app/backend/modules/trade/reconcile.py` — DUST 0.10→0.25, rest-splitsing, totals uitgebreid
+- `/app/frontend/src/components/modules/TraderPage.js` — `BitvavoReconcilePanel` component
+
+### Voorwerk hergebruikt (geen dubbelwerk)
+- `GET /api/trade/reconcile/orphans/{user_id}` bestond
+- `POST /api/trade/reconcile/orphans/{user_id}` bestond (met `execute`/`only_profit`/`coins` params)
+- `_compute_net_paid_per_market` bestond (leest wallet trade_history)
+
+---
+
+
+
 
 ### v11_pot_registration_safety_001 — Bug A: race condition in potjes creatie
 **Willem's melding**: bot koopt maar potje niet aangemaakt of frontend later.

@@ -4,7 +4,8 @@ import {
   TrendingUp, TrendingDown, Activity, DollarSign,
   ArrowUpRight, ArrowDownRight, Clock, Play, Pause, Square,
   BarChart2, PieChart, RefreshCw, Eye, Timer,
-  Settings, Key, Link, GripVertical, Loader2, Zap, Radio, Brain
+  Settings, Key, Link, GripVertical, Loader2, Zap, Radio, Brain,
+  Scale
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -967,6 +968,9 @@ export function TraderPage({ onNavigate }) {
               </div>
             </div>
 
+            {/* v11_bitvavo_reconcile_ui_001 — Bitvavo Reconciliatie panel: orphans + rest */}
+            <BitvavoReconcilePanel userId={userId} isAdmin={isAdmin} />
+
             {/* Quick Trade Panel — vereenvoudigd v4_snelhandel_002 */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5">
               <h3 className="text-base font-semibold text-white mb-4 flex items-center gap-2">
@@ -1471,6 +1475,192 @@ function DonationsPanel({ userId }) {
         </div>
       ) : (
         <p className="text-[10px] text-slate-600 text-center py-2">Nog geen deposits/donaties</p>
+      )}
+    </div>
+  );
+}
+
+// v11_bitvavo_reconcile_ui_001 — Toont Bitvavo balances vergeleken met potjes.
+// Splitst in "orphans" (koppel-kandidaten >€0.25) en "rest" (<€0.25, laten liggen).
+function BitvavoReconcilePanel({ userId, isAdmin }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [adopting, setAdopting] = useState({});  // {coin: true}
+  const [error, setError] = useState(null);
+
+  const load = useCallback(async () => {
+    if (!userId) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const r = await fetch(`${API}/api/trade/reconcile/orphans/${userId}`);
+      const d = await r.json();
+      if (!d.success) throw new Error(d.detail || 'Onbekende fout');
+      setData(d);
+    } catch (e) {
+      setError(String(e.message || e));
+    } finally {
+      setLoading(false);
+    }
+  }, [userId]);
+
+  useEffect(() => { load(); }, [load]);
+
+  const adopt = async (coin, action) => {
+    if (!isAdmin) return;
+    if (!window.confirm(`${action === 'SELL_PROFIT' ? 'Verkoop' : 'Koppel als potje'}: ${coin}?`)) return;
+    setAdopting(prev => ({ ...prev, [coin]: true }));
+    try {
+      const r = await fetch(`${API}/api/trade/reconcile/orphans/${userId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          execute: true,
+          only_profit: action === 'SELL_PROFIT',
+          coins: [coin],
+        }),
+      });
+      const d = await r.json();
+      if (!d.success) throw new Error(d.detail || d.error || 'Onbekende fout');
+      await load();
+    } catch (e) {
+      alert(`Fout: ${e.message || e}`);
+    } finally {
+      setAdopting(prev => { const n = { ...prev }; delete n[coin]; return n; });
+    }
+  };
+
+  if (!data && !loading && !error) return null;
+
+  const orphans = data?.rows || [];
+  const rest = data?.rest || [];
+  const t = data?.totals || {};
+
+  return (
+    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden" data-testid="reconcile-panel">
+      <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+          <Scale className="w-4 h-4 text-cyan-400" /> Bitvavo Reconciliatie
+          {orphans.length > 0 && (
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">
+              {orphans.length} koppelbaar
+            </span>
+          )}
+          {rest.length > 0 && (
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-700/60 text-slate-300">
+              {rest.length} rest (€{(t.rest_total_eur || 0).toFixed(2)})
+            </span>
+          )}
+        </h3>
+        <button
+          onClick={load}
+          disabled={loading}
+          data-testid="reconcile-refresh"
+          className="text-slate-500 hover:text-white disabled:opacity-40"
+        >
+          <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
+        </button>
+      </div>
+
+      {error && (
+        <div className="p-3 text-xs text-red-300 bg-red-500/10 border-b border-red-500/20">
+          {error}
+        </div>
+      )}
+
+      {loading && !data && (
+        <div className="p-6 text-center text-xs text-slate-500">Bitvavo balances ophalen…</div>
+      )}
+
+      {data && (
+        <>
+          {/* Orphans / koppel-kandidaten */}
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="text-xs font-semibold text-cyan-300">Koppel-kandidaten (&gt; €{data.rest_threshold_eur})</h4>
+              {orphans.length > 0 && (
+                <span className="text-[10px] text-slate-400">
+                  Potentieel: <span className="text-green-400">€+{(t.potential_profit_eur || 0).toFixed(2)}</span>
+                </span>
+              )}
+            </div>
+            {orphans.length === 0 ? (
+              <p className="text-[10px] text-slate-600 text-center py-3">Geen orphans — alles is al gekoppeld of onder de rest-drempel</p>
+            ) : (
+              <div className="space-y-1.5" data-testid="reconcile-orphans-list">
+                {orphans.map(o => (
+                  <div key={o.coin}
+                    className="flex items-center justify-between text-[11px] bg-slate-800/40 rounded-lg px-3 py-2"
+                    data-testid={`reconcile-orphan-${o.coin}`}>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-medium">{o.coin}</span>
+                        <span className="text-slate-500">·</span>
+                        <span className="text-slate-400">€{o.bv_value_eur.toFixed(2)}</span>
+                        {o.matching_closed_pot && (
+                          <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/20 text-amber-300">
+                            → {o.matching_closed_pot}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-[9px] text-slate-500 mt-0.5">
+                        betaald €{o.net_paid_eur.toFixed(2)} · pnl na fee{' '}
+                        <span className={o.pnl_after_fee_eur >= 0 ? 'text-green-400' : 'text-red-400'}>
+                          €{o.pnl_after_fee_eur >= 0 ? '+' : ''}{o.pnl_after_fee_eur.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[9px] px-1.5 py-0.5 rounded ${
+                        o.proposed_action === 'SELL_PROFIT' ? 'bg-green-500/20 text-green-300'
+                        : o.proposed_action === 'REOPEN_POT' ? 'bg-amber-500/20 text-amber-300'
+                        : 'bg-slate-700/60 text-slate-400'
+                      }`}>
+                        {o.proposed_action === 'SELL_PROFIT' ? 'Verkoop met winst'
+                          : o.proposed_action === 'REOPEN_POT' ? 'Koppel als potje'
+                          : 'Skip (dust)'}
+                      </span>
+                      {isAdmin && o.proposed_action !== 'SKIP_DUST' && (
+                        <button
+                          onClick={() => adopt(o.coin, o.proposed_action)}
+                          disabled={adopting[o.coin]}
+                          data-testid={`reconcile-adopt-${o.coin}`}
+                          className="text-[10px] px-2 py-1 rounded bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-200 disabled:opacity-50"
+                        >
+                          {adopting[o.coin] ? '…' : (o.proposed_action === 'SELL_PROFIT' ? 'Verkoop' : 'Koppel')}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Rest — info only */}
+          {rest.length > 0 && (
+            <div className="border-t border-slate-800 p-4">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-xs font-semibold text-slate-400">
+                  Rest (&lt; €{data.rest_threshold_eur})
+                  <span className="ml-2 text-[10px] text-slate-500 font-normal">— laten liggen, trailing helper voor Spark</span>
+                </h4>
+                <span className="text-[10px] text-slate-500">Totaal €{(t.rest_total_eur || 0).toFixed(2)}</span>
+              </div>
+              <div className="space-y-1" data-testid="reconcile-rest-list">
+                {rest.map(r => (
+                  <div key={r.coin}
+                    className="flex items-center justify-between text-[10px] px-2 py-1"
+                    data-testid={`reconcile-rest-${r.coin}`}>
+                    <span className="text-slate-500">{r.coin}</span>
+                    <span className="text-slate-400">€{r.bv_value_eur.toFixed(2)}</span>
+                    <span className="text-slate-600 tabular-nums">{r.bv_amount.toFixed(6)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

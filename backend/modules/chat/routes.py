@@ -199,6 +199,100 @@ async def process_message(req: ChatMessage):
             session_state.set_state(req.user_id, pending_wedervraag=None, pending_card_session=None, pending_wv_consent=None)
         return response
 
+    # 0b2. KB-FILL FLOW (v11_kb_fill_offer_001) — "Kan ik wat voor je doen"-flow
+    # Multi-turn state machine: user biedt hulp → Spark kiest KBv2-kaart met leeg
+    # 5W-veld → user bevestigt → user antwoordt → Spark parafeert → user bevestigt → save.
+    try:
+        from . import wedervraag_service as _wv
+        kb_fill_state = state.get("kb_fill_pending") if req.user_id else None
+
+        # STAP 4: user bevestigt/annuleert parafrase → save of vraag herformulering
+        if kb_fill_state and kb_fill_state.get("phase") == "awaiting_confirm":
+            if _wv.is_affirmative(text):
+                ok = _wv.apply_answer(kb_fill_state["entry_id"],
+                                       kb_fill_state["field"],
+                                       kb_fill_state["answer"])
+                session_state.set_state(req.user_id, kb_fill_pending=None)
+                msg = (
+                    f"Genoteerd — '{kb_fill_state['field']}' op kaart '**{kb_fill_state['begrip']}**' "
+                    f"is bijgewerkt. Dank je wel. 🌱"
+                    if ok else
+                    "Hmm, kon 'm niet opslaan (kaart niet gevonden). Sorry."
+                )
+                response.update({"type": "kb_fill_saved", "message": msg})
+                _save_log(req, response, "kb_fill_saved")
+                return response
+            if _wv.is_negative(text):
+                # Terug naar awaiting_answer voor herformulering
+                session_state.set_state(req.user_id, kb_fill_pending={
+                    **kb_fill_state, "phase": "awaiting_answer", "answer": None,
+                })
+                response.update({
+                    "type": "kb_fill_retry",
+                    "message": f"OK, hoe zou jij het formuleren? {kb_fill_state.get('question','')}",
+                })
+                _save_log(req, response, "kb_fill_retry")
+                return response
+
+        # STAP 3: user gaf antwoord → parafeer + vraag bevestiging
+        if kb_fill_state and kb_fill_state.get("phase") == "awaiting_answer":
+            if _wv.is_skip(text):
+                session_state.set_state(req.user_id, kb_fill_pending=None)
+                response.update({"type": "kb_fill_skipped", "message": "OK, laten we het overslaan. 🌿"})
+                _save_log(req, response, "kb_fill_skipped")
+                return response
+            # Beschouw text als antwoord
+            answer = text.strip()
+            session_state.set_state(req.user_id, kb_fill_pending={
+                **kb_fill_state, "phase": "awaiting_confirm", "answer": answer,
+            })
+            response.update({
+                "type": "kb_fill_paraphrase",
+                "message": _wv.format_paraphrase(kb_fill_state["begrip"],
+                                                  kb_fill_state["field"], answer),
+            })
+            _save_log(req, response, "kb_fill_paraphrase")
+            return response
+
+        # STAP 2: user bevestigt initial offer → stel de echte vraag
+        if kb_fill_state and kb_fill_state.get("phase") == "offer":
+            if _wv.is_affirmative(text):
+                session_state.set_state(req.user_id, kb_fill_pending={
+                    **kb_fill_state, "phase": "awaiting_answer",
+                })
+                response.update({
+                    "type": "kb_fill_question",
+                    "message": kb_fill_state["question"],
+                })
+                _save_log(req, response, "kb_fill_question")
+                return response
+            if _wv.is_negative(text):
+                session_state.set_state(req.user_id, kb_fill_pending=None)
+                response.update({"type": "kb_fill_declined", "message": "OK, geen probleem. 🌿"})
+                _save_log(req, response, "kb_fill_declined")
+                return response
+
+        # STAP 1: NIEUW aanbod als user "kan ik wat voor je doen" zegt EN geen actieve state
+        if not kb_fill_state and _wv.wants_to_help(text):
+            offer = _wv.pick_random_kbv2_card_with_gap()
+            if offer:
+                session_state.set_state(req.user_id, kb_fill_pending={
+                    "phase": "offer",
+                    "entry_id": offer["entry_id"],
+                    "begrip": offer["begrip"],
+                    "field": offer["field"],
+                    "question": offer["question"],
+                })
+                response.update({
+                    "type": "kb_fill_offer",
+                    "message": _wv.format_offer(offer),
+                })
+                _save_log(req, response, "kb_fill_offer")
+                return response
+            # geen kandidaat — laat door naar normale flow (LLM antwoordt normaal)
+    except Exception as _kfex:
+        print(f"[kb-fill-flow] failed: {_kfex}")
+
     # 0b1. KB-Sound toggle — "sound aan" / "sound uit" (v6_kb_sound_001)
     # Naamgeving consistent met tts/stt. "geluid aan/uit" blijft voor ambient.
     try:

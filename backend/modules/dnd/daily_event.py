@@ -142,4 +142,5 @@ def _bark_text(result: str, ai: str, player: str) -> str:
         return f"De schaduw koos {ai}, jij koos {player} — je hebt de strijd gewonnen! +{WIN_GOUD} goud."
     if result == "draw":
         return f"De schaduw koos {ai}, jij koos {player} — een staaroorlog. Geen winst, geen verlies."
-    return f"De schaduw koos {ai}, jij koos {player} — je ontsnapte met de hakken over de sloot. Geen verlies, maar ook geen winst."
+    # v11_daily_event_honest_001 — was "je ontsnapte" (misleidend). Loss is echt loss.
+    return f"De schaduw koos {ai}, jij koos {player} — je verloor deze ronde. Kom morgen sterker terug."

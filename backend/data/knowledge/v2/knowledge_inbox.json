@@ -1,25 +1,4 @@
 {
-  "version": "v2",
-  "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 50,
-  "metadata": {
-    "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
-    "redenen": {
-      "tag_tie": 633,
-      "no_match": 160,
-      "missing_laag1": 2215
-    },
-    "last_dedupe_at": "2026-06-04T10:03:10.032631+00:00",
-    "last_dedupe_removed": 9,
-    "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
-    "last_v1_drift_sync_added": 54,
-    "last_updated": "2026-07-28T19:12:38.854455+00:00",
-    "card_count": 1517,
-    "last_prod_merge": {
-      "at": "2026-07-22T13:33:04.786336+00:00",
-      "n_added": 6
-    }
-  },
   "kaarten": [
     {
       "id": "kbv2-3a2cf096",
@@ -1624,71 +1603,46 @@
         "aangemaakt_op": "2026-07-29T19:24:34.039021+00:00"
       },
       "_inbox_reason": "missing_laag1"
-    }
-  ],
-  "updated_at": "2026-07-21T09:00:22.262706+00:00",
-  "last_dedupe": {
-    "at": "2026-06-07T21:45:09.910282+00:00",
-    "removed": 73,
-    "reason": "ids_also_in_lade"
-  },
-  "cleanup_history": [
+    },
     {
-      "at": "2026-07-21T09:00:22.262706+00:00",
-      "action": "skel_dupe_removal_v10",
-      "removed_count": 8,
-      "removed": [
-        {
-          "id": "kbv2-skel-9d575aaa",
-          "begrip": "detail",
-          "kept_id": "kbv2-7e4aceb9",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-3a9eed5c",
-          "begrip": "kennisbank",
-          "kept_id": "kbv2-3699c6a2",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-c1c60933",
-          "begrip": "manier",
-          "kept_id": "kbv2-886e41c3",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-781aef6b",
-          "begrip": "taalmodel",
-          "kept_id": "kbv2-bf81bf1d",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-bc90ea35",
-          "begrip": "module",
-          "kept_id": "kbv2-7166f914",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-4882d7c2",
-          "begrip": "formuleren",
-          "kept_id": "kbv2-37feae50",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-51afd9b4",
-          "begrip": "recent",
-          "kept_id": "kbv2-a2eb471e",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        },
-        {
-          "id": "kbv2-skel-e499a03f",
-          "begrip": "laten",
-          "kept_id": "kbv2-b6be6105",
-          "removed_at": "2026-07-21T09:00:22.262706+00:00"
-        }
+      "id": "kbv2-91c55b46",
+      "begrip": "skip",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated"
       ],
-      "before": 1570,
-      "after": 1562
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-07-29T19:56:24.650459+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "skip"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
     }
   ]
 }

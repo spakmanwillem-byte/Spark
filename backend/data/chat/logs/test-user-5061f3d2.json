@@ -1,0 +1,90 @@
+{
+  "user_id": "test-user-5061f3d2",
+  "conversations": [
+    {
+      "id": "conv-1ff4b690",
+      "timestamp": "2026-07-29T19:57:22.988339+00:00",
+      "user_id": "test-user-5061f3d2",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Plakjes**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-5061f3d2",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-c04383cd",
+      "timestamp": "2026-07-29T19:57:23.142401+00:00",
+      "user_id": "test-user-5061f3d2",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat houdt 'Plakjes' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-5061f3d2",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-757a79fb",
+      "timestamp": "2026-07-29T19:57:23.296693+00:00",
+      "user_id": "test-user-5061f3d2",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "OK, laten we het overslaan. 🌿 Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_skipped",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_skipped"
+      },
+      "metadata": {
+        "session_id": "test-flow-5061f3d2",
+        "gesprek_nummer": 3
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-user-5061f3d2",
+    "total_conversations": 3,
+    "last_updated": "2026-07-29T19:57:23.296693+00:00"
+  }
+}

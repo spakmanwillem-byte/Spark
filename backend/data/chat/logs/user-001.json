@@ -55963,11 +55963,599 @@
         "session_id": "test-family-1",
         "gesprek_nummer": 2192
       }
+    },
+    {
+      "id": "conv-d1cdf01a",
+      "timestamp": "2026-07-29T19:52:58.266680+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Geef**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-kb-fill-29184",
+        "gesprek_nummer": 2193
+      }
+    },
+    {
+      "id": "conv-6bc38285",
+      "timestamp": "2026-07-29T19:52:58.481474+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat houdt 'Geef' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-kb-fill-29184",
+        "gesprek_nummer": 2194
+      }
+    },
+    {
+      "id": "conv-c9fb70ad",
+      "timestamp": "2026-07-29T19:52:58.757051+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Willem is de creator",
+      "spark_response": "Dus voor '**Geef**' — Wat: _Willem is de creator_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-kb-fill-29184",
+        "gesprek_nummer": 2195
+      }
+    },
+    {
+      "id": "conv-e5d84800",
+      "timestamp": "2026-07-29T19:53:00.204481+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja klopt",
+      "spark_response": "Genoteerd — 'wat' op kaart '**Geef**' is bijgewerkt. Dank je wel. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_saved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_fill_saved"
+      },
+      "metadata": {
+        "session_id": "test-kb-fill-29184",
+        "gesprek_nummer": 2196
+      }
+    },
+    {
+      "id": "conv-79cf7e70",
+      "timestamp": "2026-07-29T19:56:19.547052+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Pinda**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-ec8a68",
+        "gesprek_nummer": 2197
+      }
+    },
+    {
+      "id": "conv-29500379",
+      "timestamp": "2026-07-29T19:56:19.730471+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat betekent 'Pinda' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-ec8a68",
+        "gesprek_nummer": 2198
+      }
+    },
+    {
+      "id": "conv-1708258b",
+      "timestamp": "2026-07-29T19:56:19.909656+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "mijn testantwoord tekst",
+      "spark_response": "Dus voor '**Pinda**' — Wat: _mijn testantwoord tekst_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "tekst"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-flow-ec8a68",
+        "gesprek_nummer": 2199
+      }
+    },
+    {
+      "id": "conv-18cf467d",
+      "timestamp": "2026-07-29T19:56:21.385933+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja klopt",
+      "spark_response": "Genoteerd — 'wat' op kaart '**Pinda**' is bijgewerkt. Dank je wel. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_saved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_fill_saved"
+      },
+      "metadata": {
+        "session_id": "test-flow-ec8a68",
+        "gesprek_nummer": 2200
+      }
+    },
+    {
+      "id": "conv-53b8b0be",
+      "timestamp": "2026-07-29T19:56:21.630142+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Reuk**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-b6b4e2",
+        "gesprek_nummer": 2201
+      }
+    },
+    {
+      "id": "conv-5839cc9d",
+      "timestamp": "2026-07-29T19:56:21.835099+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee",
+      "spark_response": "OK, geen probleem. 🌿 Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_declined",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_declined"
+      },
+      "metadata": {
+        "session_id": "test-flow-b6b4e2",
+        "gesprek_nummer": 2202
+      }
+    },
+    {
+      "id": "conv-266a2073",
+      "timestamp": "2026-07-29T19:56:22.070069+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Voorspelbaarheid**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-7fd582",
+        "gesprek_nummer": 2203
+      }
+    },
+    {
+      "id": "conv-6bacc435",
+      "timestamp": "2026-07-29T19:56:22.262986+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat betekent 'Voorspelbaarheid' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-7fd582",
+        "gesprek_nummer": 2204
+      }
+    },
+    {
+      "id": "conv-afc049c8",
+      "timestamp": "2026-07-29T19:56:22.474514+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "eerste poging antwoord",
+      "spark_response": "Dus voor '**Voorspelbaarheid**' — Wat: _eerste poging antwoord_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "antwoord"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-flow-7fd582",
+        "gesprek_nummer": 2205
+      }
+    },
+    {
+      "id": "conv-4e7e5e2a",
+      "timestamp": "2026-07-29T19:56:22.707491+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee",
+      "spark_response": "OK, hoe zou jij het formuleren? Wat betekent 'Voorspelbaarheid' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_retry",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_retry"
+      },
+      "metadata": {
+        "session_id": "test-flow-7fd582",
+        "gesprek_nummer": 2206
+      }
+    },
+    {
+      "id": "conv-441f8947",
+      "timestamp": "2026-07-29T19:56:22.918295+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Dus voor '**Voorspelbaarheid**' — Wat: _kan ik wat voor je doen_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-flow-f77e91",
+        "gesprek_nummer": 2207
+      }
+    },
+    {
+      "id": "conv-2913b273",
+      "timestamp": "2026-07-29T19:56:24.392563+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Genoteerd — 'wat' op kaart '**Voorspelbaarheid**' is bijgewerkt. Dank je wel. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_saved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_saved"
+      },
+      "metadata": {
+        "session_id": "test-flow-f77e91",
+        "gesprek_nummer": 2208
+      }
+    },
+    {
+      "id": "conv-f15ea465",
+      "timestamp": "2026-07-29T19:56:25.731845+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "Ik ken deze woorden nog niet: **skip**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'skip' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "skip"
+        ],
+        "snap_suggestions": [
+          "skip"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "test-flow-f77e91",
+        "gesprek_nummer": 2209
+      }
+    },
+    {
+      "id": "conv-11c3a57c",
+      "timestamp": "2026-07-29T19:56:47.540135+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Poreus**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-skip-1785355007",
+        "gesprek_nummer": 2210
+      }
+    },
+    {
+      "id": "conv-51090cc1",
+      "timestamp": "2026-07-29T19:56:47.747062+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Kan je in het kort uitleggen wat 'Poreus' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-skip-1785355007",
+        "gesprek_nummer": 2211
+      }
+    },
+    {
+      "id": "conv-c93ff1ee",
+      "timestamp": "2026-07-29T19:56:47.946788+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "OK, laten we het overslaan. 🌿 Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_skipped",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_skipped"
+      },
+      "metadata": {
+        "session_id": "test-skip-1785355007",
+        "gesprek_nummer": 2212
+      }
+    },
+    {
+      "id": "conv-a0cf9134",
+      "timestamp": "2026-07-29T19:58:23.233105+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2213
+      }
+    },
+    {
+      "id": "conv-91ce452b",
+      "timestamp": "2026-07-29T19:58:23.320651+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2214
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2192,
-    "last_updated": "2026-07-29T19:24:33.195355+00:00"
+    "total_conversations": 2214,
+    "last_updated": "2026-07-29T19:58:23.320651+00:00"
   }
 }

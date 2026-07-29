@@ -28,45 +28,92 @@ async function fetchUserById(uid) {
   } catch { return null; }
 }
 
-export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
+export function RpsBark({ userId, open, onClose, opponent = 'spark', dailyMode = false, onDailyPlayed = null }) {
   const [cards, setCards] = useState(null);
   const [session, setSession] = useState({ wins: 0, losses: 0, ties: 0, current_streak: 0 });
   const [lifetime, setLifetime] = useState({ wins: 0, losses: 0, longest_streak: 0 });
   const [lastRound, setLastRound] = useState(null);
   const [thinking, setThinking] = useState(false);
   const [playerPick, setPlayerPick] = useState(null);
+  const [dailyPlayed, setDailyPlayed] = useState(false);  // v11_daily_rps_001 — daily-mode: after play, disable
   // v6_rps_layout_002 — Avatars voor zijkant
   const [playerUser, setPlayerUser] = useState(null);
   const [opponentUser, setOpponentUser] = useState(null);
 
   // v6_rps_001b — Init: start nieuwe sessie met juiste opponent + load stats
+  // v11_daily_rps_001 — dailyMode: haal KB-cards op (voor thumbnails) MAAR gebruik daily-event endpoints
   useEffect(() => {
     if (!open) return;
-    fetch(`${API}/api/games/rps/start?user_id=${userId}&opponent=${opponent}`, { method: 'POST' })
-      .then(r => r.json())
-      .then(d => {
-        setCards(d.cards);
-        setSession(d.session || {});
-        // Update opponent als backend ander random bot koos
-        if (d.session?.opponent && d.session.opponent !== opponent) {
-          fetchUserById(d.session.opponent).then(u => setOpponentUser(u));
-        }
-      });
-    fetch(`${API}/api/games/rps/stats?user_id=${userId}`).then(r => r.json()).then(d => setLifetime(d.stats || {}));
-    // Avatars laden — speler altijd, opponent: spark of bot
-    fetchUserById(userId).then(u => setPlayerUser(u));
-    const oppId = opponent === 'spark' ? 'user-000' : opponent;
-    fetchUserById(oppId).then(u => setOpponentUser(u));
-  }, [open, userId, opponent]);
+    if (dailyMode) {
+      // Alleen cards ophalen (via games/rps/start) om KB-kaart plaatjes te tonen.
+      // Sessie-side-effect is prima — daily-play zelf gebruikt andere backend.
+      fetch(`${API}/api/games/rps/start?user_id=${userId}&opponent=spark`, { method: 'POST' })
+        .then(r => r.json())
+        .then(d => setCards(d.cards));
+      // Check of vandaag al gespeeld
+      fetch(`${API}/api/dnd/daily-event/${userId}`)
+        .then(r => r.json())
+        .then(d => {
+          if (d.played) {
+            setDailyPlayed(true);
+            setLastRound({
+              outcome: d.result === 'win' ? 'gewonnen' : (d.result === 'draw' ? 'gelijkspel' : 'verloren'),
+              player_choice: d.choice,
+              opponent_choice: d.ai_choice,
+              xp_delta: d.reward_goud || 0,
+              bark: `Je hebt vandaag al gespeeld: ${d.result}. Kom morgen terug.`,
+            });
+          }
+        });
+      fetchUserById(userId).then(u => setPlayerUser(u));
+      fetchUserById('user-000').then(u => setOpponentUser(u));
+    } else {
+      fetch(`${API}/api/games/rps/start?user_id=${userId}&opponent=${opponent}`, { method: 'POST' })
+        .then(r => r.json())
+        .then(d => {
+          setCards(d.cards);
+          setSession(d.session || {});
+          if (d.session?.opponent && d.session.opponent !== opponent) {
+            fetchUserById(d.session.opponent).then(u => setOpponentUser(u));
+          }
+        });
+      fetch(`${API}/api/games/rps/stats?user_id=${userId}`).then(r => r.json()).then(d => setLifetime(d.stats || {}));
+      fetchUserById(userId).then(u => setPlayerUser(u));
+      const oppId = opponent === 'spark' ? 'user-000' : opponent;
+      fetchUserById(oppId).then(u => setOpponentUser(u));
+    }
+  }, [open, userId, opponent, dailyMode]);
 
   const play = async (choice) => {
     if (thinking) return;
+    if (dailyMode && dailyPlayed) return;
     setPlayerPick(choice);
     setThinking(true);
     setLastRound(null);
     // Simulate "Spark denkt na..." for 800ms
     setTimeout(async () => {
       try {
+        if (dailyMode) {
+          // v11_daily_rps_001 — daily-event backend (1× per dag + goud-uitkering)
+          const r = await fetch(`${API}/api/dnd/daily-event/${userId}/play`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ choice }),
+          }).then(x => x.json());
+          if (r.detail) { toast.error(r.detail); return; }
+          setLastRound({
+            outcome: r.result === 'win' ? 'gewonnen' : (r.result === 'draw' ? 'gelijkspel' : 'verloren'),
+            player_choice: r.choice,
+            opponent_choice: r.ai_choice,
+            xp_delta: r.reward_goud || 0,
+            bark: r.bark,
+          });
+          setDailyPlayed(true);
+          if (r.result === 'win' && r.reward_goud > 0) {
+            toast.success(`🏆 +${r.reward_goud} goud`, { description: r.bark, duration: 4000 });
+          }
+          onDailyPlayed?.(r);
+          return;
+        }
         const r = await fetch(`${API}/api/games/rps/play`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId, choice }),
@@ -142,31 +189,42 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
         <div className="bg-gradient-to-r from-amber-500/20 via-rose-500/15 to-cyan-500/20 px-5 py-3 border-b border-amber-500/30 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-300" />
-            <h2 className="text-base font-bold text-amber-100">Steen — Papier — Schaar</h2>
+            <h2 className="text-base font-bold text-amber-100">
+              {dailyMode ? '⚔ Vecht voor je leven' : 'Steen — Papier — Schaar'}
+            </h2>
             <span data-testid="rps-opponent-label" className="text-[11px] text-amber-200/80">
               · vs <strong>{oppLabel}</strong>
             </span>
           </div>
-          <button data-testid="rps-close" onClick={stopGame} className="text-amber-200 hover:text-white p-1.5 rounded-full bg-slate-800/60">
+          <button data-testid="rps-close" onClick={dailyMode ? onClose : stopGame} className="text-amber-200 hover:text-white p-1.5 rounded-full bg-slate-800/60">
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Score-bar */}
-        <div className="px-5 py-3 bg-slate-950/50 border-b border-slate-800 flex items-center justify-between text-xs">
-          <div className="flex gap-4">
-            <span className="text-emerald-300" data-testid="rps-session-wins">✓ Win <strong>{session.wins || 0}</strong></span>
-            <span className="text-rose-300"   data-testid="rps-session-losses">✗ Loss <strong>{session.losses || 0}</strong></span>
-            <span className="text-slate-400"  data-testid="rps-session-ties">= Gelijk <strong>{session.ties || 0}</strong></span>
-            {session.current_streak > 1 && (
-              <span className="text-amber-300">🔥 Streak <strong>{session.current_streak}</strong></span>
-            )}
+        {/* Score-bar — verborgen in daily-mode (1 ronde, geen sessie-stats) */}
+        {!dailyMode && (
+          <div className="px-5 py-3 bg-slate-950/50 border-b border-slate-800 flex items-center justify-between text-xs">
+            <div className="flex gap-4">
+              <span className="text-emerald-300" data-testid="rps-session-wins">✓ Win <strong>{session.wins || 0}</strong></span>
+              <span className="text-rose-300"   data-testid="rps-session-losses">✗ Loss <strong>{session.losses || 0}</strong></span>
+              <span className="text-slate-400"  data-testid="rps-session-ties">= Gelijk <strong>{session.ties || 0}</strong></span>
+              {session.current_streak > 1 && (
+                <span className="text-amber-300">🔥 Streak <strong>{session.current_streak}</strong></span>
+              )}
+            </div>
+            <button data-testid="rps-reset" onClick={resetScore}
+              className="flex items-center gap-1 px-2 py-1 rounded text-[10px] bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">
+              <RotateCcw className="w-3 h-3" /> Reset
+            </button>
           </div>
-          <button data-testid="rps-reset" onClick={resetScore}
-            className="flex items-center gap-1 px-2 py-1 rounded text-[10px] bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">
-            <RotateCcw className="w-3 h-3" /> Reset
-          </button>
-        </div>
+        )}
+        {dailyMode && (
+          <div className="px-5 py-2 bg-rose-950/30 border-b border-rose-500/30 text-[11px] text-amber-100 italic text-center">
+            {dailyPlayed
+              ? 'Vandaag al gespeeld — kom morgen terug voor een nieuwe kans op 10 goud.'
+              : 'Eén ronde. Win: +10 goud. Verlies: geen straf. Kom morgen terug.'}
+          </div>
+        )}
 
         {/* Game area — v6_rps_layout_002 — 3-koloms layout */}
         <div className="p-5">
@@ -260,7 +318,7 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
                 key={c}
                 data-testid={`rps-pick-${c}`}
                 onClick={() => play(c)}
-                disabled={thinking}
+                disabled={thinking || (dailyMode && dailyPlayed)}
                 className={`flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all
                   ${playerPick === c ? 'border-amber-400 bg-amber-500/20 scale-95'
                     : 'border-slate-700 bg-slate-800/50 hover:border-amber-500/60 hover:bg-slate-800 hover:scale-105'}
@@ -279,6 +337,7 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
           </div>
 
           {/* Lifetime stats — v6_rps_battle_001 — toont nu ook battles + goud */}
+          {!dailyMode && (
           <div className="mt-4 border-t border-slate-800 pt-3 flex items-center justify-between flex-wrap gap-y-2 text-[11px] text-slate-400">
             <span className="flex items-center gap-3 flex-wrap">
               <span className="flex items-center gap-1">
@@ -307,6 +366,16 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
               {lastRound?.spark_is_learning ? `🧠 ${oppLabel} leert nog` : `⚡ ${oppLabel} heeft je door`}
             </span>
           </div>
+          )}
+          {/* Daily-mode: bark tonen na play */}
+          {dailyMode && dailyPlayed && lastRound?.bark && (
+            <div className="mt-4 p-3 rounded-lg bg-slate-900/60 border border-amber-500/30">
+              <p className="text-xs text-amber-100 italic text-center">{lastRound.bark}</p>
+              {lastRound.xp_delta > 0 && (
+                <p className="mt-1 text-center text-yellow-300 text-sm font-mono font-bold">+{lastRound.xp_delta} goud</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

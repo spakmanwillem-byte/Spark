@@ -1,8 +1,8 @@
 {
   "totals": {
-    "events": 1406,
+    "events": 1441,
     "corrections": 2,
-    "confirmations": 1,
+    "confirmations": 4,
     "fallbacks": 0,
     "knowledge_matches": 696
   },
@@ -16,7 +16,7 @@
     "suggest_action": 2,
     "clarify_question": 1,
     "topic_overview": 14,
-    "welcome": 256,
+    "welcome": 258,
     "recap": 1,
     "greeting": 35,
     "prive": 10,
@@ -106,11 +106,18 @@
     "homonym_disambig": 3,
     "compositional": 4,
     "kbv2_neighbor": 1,
-    "kbv2_direct": 1
+    "kbv2_direct": 1,
+    "kb_fill_offer": 9,
+    "kb_fill_question": 7,
+    "kb_fill_paraphrase": 6,
+    "kb_fill_saved": 4,
+    "kb_fill_declined": 2,
+    "kb_fill_retry": 2,
+    "kb_fill_skipped": 2
   },
   "response_types": {
     "knowledge": 342,
-    "unknown": 33,
+    "unknown": 34,
     "wedervraag_done": 28,
     "wedervraag": 44,
     "wedervraag_skip": 17,
@@ -120,7 +127,7 @@
     "suggest_action": 2,
     "clarify_question": 1,
     "topic_overview": 13,
-    "welcome": 256,
+    "welcome": 258,
     "recap": 1,
     "greeting": 35,
     "general": 43,
@@ -215,7 +222,14 @@
     "personalia_intrek": 2,
     "homonym_disambig": 3,
     "compositional": 4,
-    "kbv2_direct": 1
+    "kbv2_direct": 1,
+    "kb_fill_offer": 9,
+    "kb_fill_question": 7,
+    "kb_fill_paraphrase": 6,
+    "kb_fill_saved": 4,
+    "kb_fill_declined": 2,
+    "kb_fill_retry": 2,
+    "kb_fill_skipped": 2
   },
   "begrip_used": {
     "vroeg": 2,
@@ -582,6 +596,6 @@
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-07-29T19:22:53.465727+00:00",
+  "last_event_at": "2026-07-29T19:58:23.377493+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

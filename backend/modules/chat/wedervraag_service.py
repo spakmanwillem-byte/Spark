@@ -13,6 +13,7 @@ Skip-woorden ("laat maar", "skip", "weet niet") laten de flow stoppen.
 from pathlib import Path
 import secrets
 import re
+from typing import Optional
 from modules.core.storage import load_json, save_json
 
 KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
@@ -232,3 +233,129 @@ def continue_flow(pending: dict) -> dict:
         "asked_count": pending.get("asked_count", 0) + 1,
         "max_questions": pending.get("max_questions", 2),
     }
+
+
+# ═══════════════════════════════════════════════════════════════════
+# v11_kb_fill_offer_001 — "Kan ik wat voor je doen"-flow
+#
+# Willems idee: als user proactief vraagt "kan ik wat voor je doen",
+# Spark kiest zelf een random KBv2 kaart met een leeg ws5-veld en biedt
+# aan die te laten invullen. Multi-turn:
+#   1. User: "kan ik wat voor je doen"
+#      → Spark: "Ja graag — op de kaart 'X' mist het veld 'wie'. Wil je die invullen?"
+#      state: kb_fill_offer {entry_id, field}
+#   2. User: "ja" → Spark stelt de vraag: "Wie is er bij 'X' betrokken?"
+#      state: kb_fill_awaiting_answer {entry_id, field, begrip}
+#   3. User: <antwoord>
+#      → Spark: "Dus '{begrip}' — {field}: '{antwoord}'. Klopt dit?"
+#      state: kb_fill_awaiting_confirm {entry_id, field, begrip, answer}
+#   4. User: "ja" → apply_answer + save; "nee" → vraag om herformulering
+# ═══════════════════════════════════════════════════════════════════
+KAN_IK_HELPEN_PATTERNS = [
+    r"\bkan\s+ik\s+(iets|wat)\s+(voor\s+(je|jou)\s+)?doen\b",
+    r"\bwat\s+kan\s+ik\s+(voor\s+(je|jou)\s+)?doen\b",
+    r"\bwaarmee\s+kan\s+ik\s+(je|jou)\s+helpen\b",
+    r"\bhelp\s+je\s+een\s+handje\b",
+    r"\biets\s+voor\s+(je|jou)\s+doen\b",
+    r"\bwil\s+je\s+dat\s+ik\s+iets\s+(voor\s+(je|jou)\s+)?doe\b",
+]
+
+AFFIRMATIVE_PATTERNS = [
+    r"^\s*(ja|jazeker|jep|yes|yep|klopt|correct|goed\s+zo|prima|okee?|oké|zeker|natuurlijk)\b",
+    r"^\s*(doe\s+maar|graag|akkoord)\b",
+]
+
+NEGATIVE_PATTERNS = [
+    r"^\s*(nee|nope|nah|niet\s+juist|niet\s+goed|klopt\s+niet|onjuist)\b",
+    r"^\s*(laat\s+maar|later|skip|stop|geen\s+zin)\b",
+]
+
+
+def _match_any(text: str, patterns: list) -> bool:
+    t = (text or "").strip().lower()
+    for p in patterns:
+        if re.search(p, t):
+            return True
+    return False
+
+
+def wants_to_help(text: str) -> bool:
+    """Detecteer of user proactief helpen aanbiedt."""
+    return _match_any(text, KAN_IK_HELPEN_PATTERNS)
+
+
+def is_affirmative(text: str) -> bool:
+    return _match_any(text, AFFIRMATIVE_PATTERNS)
+
+
+def is_negative(text: str) -> bool:
+    return _match_any(text, NEGATIVE_PATTERNS)
+
+
+def pick_random_kbv2_card_with_gap(exclude_ids: Optional[list] = None) -> Optional[dict]:
+    """Zoek random KBv2-kaart met minstens 1 leeg ws5-veld.
+
+    Returns dict {entry_id, begrip, field, lade, question} of None als alles gevuld is.
+    Prefereert kaarten met MEER lege velden (grotere winst).
+    """
+    exclude_set = set(exclude_ids or [])
+    all_entries = _load_entries()
+    candidates = []
+    for e in all_entries:
+        eid = e.get("id") or ""
+        if not eid or eid in exclude_set or eid.startswith("snap-"):
+            continue
+        begrip = (e.get("begrip") or "").strip()
+        if not begrip:
+            continue
+        ws = e.get("ws5") or {}
+        if not isinstance(ws, dict):
+            continue
+        empty_fields = [f for f in FIELD_PRIORITY if not str(ws.get(f) or "").strip()]
+        if not empty_fields:
+            continue
+        candidates.append({
+            "entry_id": eid,
+            "begrip": begrip,
+            "empty_fields": empty_fields,
+            "lade": e.get("lade") or "",
+        })
+    if not candidates:
+        return None
+    # Bias: kaarten met meer lege velden hoger gewogen
+    candidates.sort(key=lambda c: -len(c["empty_fields"]))
+    # Neem top-30% en pick random
+    top_n = max(1, len(candidates) // 3)
+    pick = secrets.choice(candidates[:top_n])
+    field = pick["empty_fields"][0]  # kies eerste-prioriteit
+    return {
+        "entry_id": pick["entry_id"],
+        "begrip": pick["begrip"],
+        "field": field,
+        "lade": pick["lade"],
+        "question": build_question(field, pick["begrip"]),
+    }
+
+
+def format_offer(offer: dict) -> str:
+    """Bouw Spark's aanbod-tekst: 'Op de kaart X mist Y. Wil je die invullen?'"""
+    field_label = {
+        "wat": "Wat", "wanneer": "Wanneer", "waar": "Waar",
+        "wie": "Wie", "waarom": "Waarom", "hoe": "Hoe",
+    }.get(offer["field"], offer["field"])
+    return (
+        f"Ja graag — op de kaart '**{offer['begrip']}**' "
+        f"mist het veld '{field_label}'. Wil jij die aanvullen?"
+    )
+
+
+def format_paraphrase(begrip: str, field: str, answer: str) -> str:
+    """Bouw parafrase voor bevestiging."""
+    field_label = {
+        "wat": "Wat", "wanneer": "Wanneer", "waar": "Waar",
+        "wie": "Wie", "waarom": "Waarom", "hoe": "Hoe",
+    }.get(field, field)
+    return (
+        f"Dus voor '**{begrip}**' — {field_label}: _{answer.strip()[:280]}_.\n\n"
+        f"Klopt dit? (ja / nee)"
+    )

@@ -3887,6 +3887,104 @@
       ],
       "n_tokens": 1,
       "price_eur": 13.0029
+    },
+    {
+      "id": "bh-14d0b228",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • BTC @ €56008.0000\nPotje: pot-002\nInleg: €12.50\nEigenaar: Spark",
+      "ts": "2026-07-28T19:30:18.235114+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "BTC-EUR",
+      "pot_id": "pot-002",
+      "price": 56008.0,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-aae70ac7",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • ETH @ €1684.0000\nPotje: pot-003\nInleg: €12.50\nEigenaar: Spark",
+      "ts": "2026-07-28T19:30:22.746244+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "ETH-EUR",
+      "pot_id": "pot-003",
+      "price": 1684.0,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-b95c9639",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • SOL @ €65.0500\nPotje: pot-004\nInleg: €12.50\nEigenaar: Spark",
+      "ts": "2026-07-28T19:30:28.690099+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "SOL-EUR",
+      "pot_id": "pot-004",
+      "price": 65.05,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-d881b49b",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • ADA @ €0.1395\nPotje: pot-005\nInleg: €12.50\nEigenaar: Spark",
+      "ts": "2026-07-28T19:30:34.362158+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "ADA-EUR",
+      "pot_id": "pot-005",
+      "price": 0.13946,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-2a7ac455",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📤 SELL • BTC @ €56562.0000 ✅\nPotje: pot-002\nEigenaar: Spark\nNetto winst: €+0.0611\n",
+      "ts": "2026-07-29T09:47:50.957474+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BTC-EUR",
+      "pot_id": "pot-002",
+      "price": 56562.0,
+      "netto": 0.06114305099271532,
+      "spark_fee": 0.0,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-179a5fee",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📤 SELL • ADA @ €0.1440 ✅\nPotje: pot-005\nEigenaar: Spark\nNetto winst: €+0.3444\n",
+      "ts": "2026-07-29T10:01:08.549362+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "ADA-EUR",
+      "pot_id": "pot-005",
+      "price": 0.14400000000000002,
+      "netto": 0.3444267173383064,
+      "spark_fee": 0.0,
+      "user_id": "user-000"
     }
   ]
 }

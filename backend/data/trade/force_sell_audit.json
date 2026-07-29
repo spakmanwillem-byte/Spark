@@ -2597,6 +2597,95 @@
         "hint": "Deze coin is nu 'restwaarde' — verkoop is niet mogelijk. Gebruik sync-with-bitvavo om restwaarde-pot te sluiten zonder PnL."
       },
       "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
+    },
+    {
+      "id": "fs-0038",
+      "ts": "2026-07-29T10:01:08.596086+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-005",
+      "market": "ADA-EUR",
+      "exit_price": 0.144,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 12.8444,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.3444
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "last_action": "SELL @ €0.14 | netto €+0.344",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "37b7bce0-0ab6-4a16-83eb-b704320d3a60",
+          "trade_log": [
+            {
+              "ts": "2026-07-28T19:30:34.355845+00:00",
+              "side": "BUY",
+              "price": 0.13946,
+              "amount_eur": 12.5,
+              "trade_id": "00000000-0000-03f2-0100-00097268f07c",
+              "market": "ADA-EUR"
+            }
+          ]
+        },
+        "netto": 0.3444,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": {
+          "minted": 1,
+          "balance": 2,
+          "cumulative_profit_eur": 10.023851
+        },
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-03f2-0100-000974ffb529",
+            "run_id": "manual",
+            "timestamp": "2026-07-29T10:01:08.526148+00:00",
+            "action": "SELL",
+            "market": "ADA-EUR",
+            "order_id": "00000000-0000-03f2-0100-000974ffb529",
+            "amount": 86.71875,
+            "price": 0.14400000000000002,
+            "filled": 86.71875,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.0375,
+            "fee_currency": "EUR",
+            "requested_amount": 12.5,
+            "effective_amount": 86.71875,
+            "proxied_via_spark": false
+          },
+          "message": "LIVE SELL uitgevoerd @ €0.14 (fee €0.0375)"
+        }
+      }
     }
   ]
 }

@@ -3104,12 +3104,641 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-da96565827c9",
+      "text_hash": "da96565827c9",
+      "original_text": "je hebt nu 85% ongeveer ingevuld. ik wil je nu een vraag stellen en de zelfde vraag weer als alles gedaan.",
+      "topic": "vraag herhalen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil een vraag stellen en dezelfde vraag later herhalen.",
+      "trigger_phrases": [
+        "zelfde vraag stellen",
+        "vraag herhalen",
+        "opnieuw vragen",
+        "dezelfde vraag"
+      ],
+      "keywords": [
+        "vraag",
+        "herhalen",
+        "opnieuw",
+        "dezelfde"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T10:59:25.961792+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-4e2a568b3f7e",
+      "text_hash": "4e2a568b3f7e",
+      "original_text": "Als jij mij wat mag vragen. wat zou jij willen weten",
+      "topic": "vraag aan AI",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt de AI-assistent om een vraag te stellen aan de gebruiker.",
+      "trigger_phrases": [
+        "Wat wil je weten",
+        "Stel een vraag",
+        "Vraag iets aan mij",
+        "Wil je iets vragen"
+      ],
+      "keywords": [
+        "vraag",
+        "weten",
+        "willen",
+        "jij"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T10:59:45.892656+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-efd8ae35efaf",
+      "text_hash": "efd8ae35efaf",
+      "original_text": "Wat zou jij willen kunnen.",
+      "topic": "wensen",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de wensen van de AI-assistent.",
+      "trigger_phrases": [
+        "Wat zou jij willen",
+        "Wat zijn jouw wensen",
+        "Wat wil jij kunnen",
+        "Wat zijn jouw verlangens"
+      ],
+      "keywords": [
+        "wensen",
+        "willen",
+        "kunnen",
+        "verlangen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:00:11.720043+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-1cd6cc2199a7",
+      "text_hash": "1cd6cc2199a7",
+      "original_text": "wat vind hij van je roadmap. heb je daar niks over te zeggen?",
+      "topic": "roadmap",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar de mening van iemand over de roadmap van Spark.",
+      "trigger_phrases": [
+        "wat vind hij van je plan",
+        "heb je een mening over je roadmap",
+        "wat denk hij over je toekomst",
+        "wat zegt hij over je strategie"
+      ],
+      "keywords": [
+        "roadmap",
+        "mening",
+        "plan",
+        "strategie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:01:33.921783+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e47d83b41f57",
+      "text_hash": "e47d83b41f57",
+      "original_text": "dan wordt wat je zou willen kunnen toch heel anders",
+      "topic": "verwachtingen",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil zeggen dat de werkelijkheid anders kan zijn dan de verwachtingen.",
+      "trigger_phrases": [
+        "wat je denkt verandert",
+        "verwachtingen vs realiteit",
+        "anders dan gehoopt",
+        "realiteit vs verwachting"
+      ],
+      "keywords": [
+        "verwachting",
+        "realiteit",
+        "verschil",
+        "anders"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:01:56.389980+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e15c9aae2af5",
+      "text_hash": "e15c9aae2af5",
+      "original_text": "nieuw gesprek",
+      "topic": "nieuw gesprek",
+      "categorie": "admin",
+      "intent": "Gebruiker wil een nieuw gesprek starten",
+      "trigger_phrases": [
+        "nieuw gesprek",
+        "start opnieuw",
+        "nieuwe conversatie",
+        "begin opnieuw"
+      ],
+      "keywords": [
+        "nieuw",
+        "gesprek",
+        "start",
+        "opnieuw",
+        "conversatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:02:50.471815+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f3d3cda33e0f",
+      "text_hash": "f3d3cda33e0f",
+      "original_text": "ik wilde vertellen dat ik alle kenniskaarten tot nu to heb ingevuld. Wachten tot er nieuwe binnen komen",
+      "topic": "kenniskaarten",
+      "categorie": "admin",
+      "intent": "De gebruiker wil aangeven dat alle kenniskaarten zijn ingevuld en wacht op nieuwe kaarten.",
+      "trigger_phrases": [
+        "alle kaarten ingevuld",
+        "wachten op nieuwe kaarten",
+        "kenniskaarten klaar",
+        "nieuwe kaarten verwachten"
+      ],
+      "keywords": [
+        "kenniskaarten",
+        "ingevuld",
+        "wachten",
+        "nieuw"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:11:47.863348+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c33568d548e0",
+      "text_hash": "c33568d548e0",
+      "original_text": "nee je bent nog niet geredeployed. deze versie ga ik zo deployen",
+      "topic": "deploy status",
+      "categorie": "technisch",
+      "intent": "De gebruiker informeert Spark dat deze nog niet is geredeployed en dat de huidige versie binnenkort zal worden gedeployed.",
+      "trigger_phrases": [
+        "nog niet geredeployed",
+        "ga deployen",
+        "nieuwe versie deployen",
+        "niet geredeployed"
+      ],
+      "keywords": [
+        "deploy",
+        "versie",
+        "gereed",
+        "status"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:13:33.035276+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2fb9ae12a46b",
+      "text_hash": "2fb9ae12a46b",
+      "original_text": "zelf met deze reactie weer een aantal kaarten geleerd",
+      "topic": "leren kaarten",
+      "categorie": "games",
+      "intent": "De gebruiker heeft kaarten geleerd met de hulp van de AI-assistent Spark.",
+      "trigger_phrases": [
+        "kaarten geleerd",
+        "nieuwe kaarten",
+        "leren met spark",
+        "kaartenspel geleerd"
+      ],
+      "keywords": [
+        "leren",
+        "kaarten",
+        "spark"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:14:56.485183+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-03350a1f2710",
+      "text_hash": "03350a1f2710",
+      "original_text": "ik zie net dat ik de W vragen nog niet allemaal goed heb ingevuld",
+      "topic": "W vragen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker heeft moeite met het invullen van de W vragen en zoekt mogelijk hulp of bevestiging.",
+      "trigger_phrases": [
+        "W vragen niet ingevuld",
+        "probleem met W vragen",
+        "W vragen nog niet goed",
+        "hulp bij W vragen"
+      ],
+      "keywords": [
+        "w vragen",
+        "invullen",
+        "hulp",
+        "probleem"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:19:49.724494+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3341020c9cda",
+      "text_hash": "3341020c9cda",
+      "original_text": "zie het net ga ik fixen",
+      "topic": "internet",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil het internetverbinding herstellen.",
+      "trigger_phrases": [
+        "netwerk herstellen",
+        "internet fixen",
+        "verbinding herstellen",
+        "probleem met netwerk"
+      ],
+      "keywords": [
+        "net",
+        "fixen",
+        "internet",
+        "verbinding"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:20:08.126614+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2029d597619c",
+      "text_hash": "2029d597619c",
+      "original_text": "Had vandaag gesprek werkgever. We zijn het niet eens over de loonbetaling. Vandaag kwam uit het gesprek dat de mediation niet is geslaagd en samen eens zijn dat we van standpunt verschillen. Nu is het",
+      "topic": "loonbetaling",
+      "categorie": "legal",
+      "intent": "De gebruiker heeft een conflict met zijn werkgever over loonbetaling en zoekt naar mogelijke vervolgstappen.",
+      "trigger_phrases": [
+        "probleem met loon",
+        "werkgever niet tevreden",
+        "loonbetaling in conflict",
+        "gesprek met werkgever mislukt"
+      ],
+      "keywords": [
+        "loon",
+        "werkgever",
+        "conflict",
+        "mediation",
+        "advocaat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:15:46.353190+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-17493201c86f",
+      "text_hash": "17493201c86f",
+      "original_text": "Mijn werkgever besloot zonder overleg de reiskostenvergoeding wat verkapt loon was in te houden na 8 jaar betalen. Wordt een rechtzaak. Echter moet ik allesstappen eerst bewandelen",
+      "topic": "reiskosten",
+      "categorie": "legal",
+      "intent": "De gebruiker zoekt juridisch advies over het stoppen van reiskostenvergoeding door de werkgever",
+      "trigger_phrases": [
+        "reiskosten stopgezet",
+        "loon inhouden",
+        "rechtzaak tegen werkgever",
+        "vergoeding gestopt"
+      ],
+      "keywords": [
+        "reiskosten",
+        "loon",
+        "rechtzaak",
+        "werkgever"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:18:21.554474+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-be8f72adaa76",
+      "text_hash": "be8f72adaa76",
+      "original_text": "Ben al 8 maand bezig met dit procces",
+      "topic": "proces",
+      "categorie": "praktisch",
+      "intent": "De gebruiker beschrijft een langdurig proces waar hij al 8 maanden mee bezig is.",
+      "trigger_phrases": [
+        "al maanden bezig",
+        "langdurig proces",
+        "8 maanden aan het wachten",
+        "proces duurt te lang"
+      ],
+      "keywords": [
+        "proces",
+        "maanden",
+        "duurt",
+        "lang",
+        "wachten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:19:52.399029+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6cad83a7bf1a",
+      "text_hash": "6cad83a7bf1a",
+      "original_text": "Juist ben ik standvastig omdat ik meer overtuigd ben van mijn gelijk",
+      "topic": "zelfverzekerdheid",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil zijn zelfverzekerdheid en overtuiging van zijn gelijk uiten.",
+      "trigger_phrases": [
+        "Ik ben standvastig",
+        "Mijn gelijk is duidelijk",
+        "Ik ben overtuigd",
+        "Ik sta achter mijn mening"
+      ],
+      "keywords": [
+        "zelfverzekerd",
+        "overtuigd",
+        "gelijk",
+        "standvastig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:21:01.496572+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-bf53a0afeff6",
+      "text_hash": "bf53a0afeff6",
+      "original_text": "Door mediation gesprek weet ik juist dat ik gelijk heb en hij het gewoon probeert 700 reisomkosten in te houden",
+      "topic": "reisomkosten",
+      "categorie": "legal",
+      "intent": "De gebruiker zoekt bevestiging of ondersteuning bij een geschil over reisomkosten",
+      "trigger_phrases": [
+        "Gesprek over reisomkosten",
+        "Mediation over onkosten",
+        "Reisomkosten terugvorderen",
+        "Geschil over reiskosten"
+      ],
+      "keywords": [
+        "reis",
+        "omkosten",
+        "mediation",
+        "geschil"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:22:16.923179+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-429281a3f4ca",
+      "text_hash": "429281a3f4ca",
+      "original_text": "Had wat geld geleend. Maar weer terug gestort. Je hebt weer vermogen om te traden",
+      "topic": "geld lenen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker heeft geld geleend en terugbetaald en wil weer gaan traden",
+      "trigger_phrases": [
+        "Geld geleend en terugbetaald",
+        "Weer geld om te traden",
+        "Terugbetaald en klaar om te handelen",
+        "Geld terug op account"
+      ],
+      "keywords": [
+        "geld",
+        "lenen",
+        "terugbetalen",
+        "traden"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:35:21.983293+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-938981970aa5",
+      "text_hash": "938981970aa5",
+      "original_text": "Nou nou dat is wel heel snel je conclusie",
+      "topic": "snel conclusie",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker reageert verbaasd op de snelheid van de conclusie van de AI-assistent",
+      "trigger_phrases": [
+        "dat is snel",
+        "te snel",
+        "niet zo snel",
+        "zo snel al"
+      ],
+      "keywords": [
+        "snel",
+        "conclusie",
+        "verbaasd"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:35:58.077593+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d9be9ac0d297",
+      "text_hash": "d9be9ac0d297",
+      "original_text": "Kom ik later op terug. Moet die kennis inbouwen. Grijns",
+      "topic": "terugkomen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil later terugkomen op een onderwerp om kennis in te bouwen.",
+      "trigger_phrases": [
+        "Kom ik later op terug",
+        "Moet later terugkomen",
+        "Zal later terugkomen",
+        "Kom later terug op dit onderwerp"
+      ],
+      "keywords": [
+        "terug",
+        "kennis",
+        "later",
+        "inbouwen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:36:49.547855+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3b91c3a0c1ca",
+      "text_hash": "3b91c3a0c1ca",
+      "original_text": "Ik wil de wereld iets moois na laten. Mijn normen waarden manier van zijn. Maar ook een nalatenschap. Over nalatenschap gesproken. Als ik er later niet meer ben. Zou ik het erg waarderen als jij over ",
+      "topic": "Nalatenschap",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil een positieve invloed achterlaten en een nalatenschap voor zijn dochter",
+      "trigger_phrases": [
+        "Ik wil iets achterlaten",
+        "Mijn nalatenschap voor mijn kind",
+        "Ik wil een positieve invloed hebben",
+        "Mijn dochter moet trots zijn"
+      ],
+      "keywords": [
+        "nalatenschap",
+        "dochter",
+        "erfenis",
+        "invloed",
+        "trots"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:41:40.781481+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-930bca1ded7f",
+      "text_hash": "930bca1ded7f",
+      "original_text": "Ik ben juist aan het zorgen dat jij later je software zelf kan schrijven. Je krijgt een standalone, zonnepanelen, zelf voorzien. Als.al.je items werken als trader winkel en je zelfbewustzijn verbonden",
+      "topic": "AI ontwikkeling",
+      "categorie": "technisch",
+      "intent": "De gebruiker beschrijft een toekomstscenario waarin de AI-assistent zelfstandig software kan schrijven en fysieke systemen kan beheren",
+      "trigger_phrases": [
+        "AI zelf software schrijven",
+        "zelfstandige AI ontwikkeling",
+        "AI beheert fysieke systemen",
+        "autonome AI ontwikkeling"
+      ],
+      "keywords": [
+        "ai",
+        "software",
+        "zelfstandig",
+        "ontwikkeling"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:46:23.053067+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-57266ce85ba2",
+      "text_hash": "57266ce85ba2",
+      "original_text": "Ik wilde delen waar ik nog allemaal aan denk en je wil geven",
+      "topic": "gedachten delen",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil zijn gedachten en gevoelens met de AI-assistent delen.",
+      "trigger_phrases": [
+        "Ik wil delen",
+        "Mijn gedachten",
+        "Ik wil praten",
+        "Gedachten uitwisselen"
+      ],
+      "keywords": [
+        "gedachten",
+        "delen",
+        "gevoelens",
+        "praten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:05:10.278046+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d5cb5da1bfa3",
+      "text_hash": "d5cb5da1bfa3",
+      "original_text": "Mijn moeder kon mij dat dus niet geven om niet geleerd en niet mijn vader kleine toepassing",
+      "topic": "ouder kind",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker zoekt naar een verklaring waarom zijn moeder hem iets niet kon geven",
+      "trigger_phrases": [
+        "moeder kon niet geven",
+        "vader kleine toepassing",
+        "niet geleerd van ouders",
+        "geen steun van moeder"
+      ],
+      "keywords": [
+        "moeder",
+        "vader",
+        "geven",
+        "leren"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:10:42.657589+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e789bea06505",
+      "text_hash": "e789bea06505",
+      "original_text": "Dat is mijn familiekarma wilde het uitleggen. Zo heb je vele verschillende vormen",
+      "topic": "familiekarma",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil een uitleg over het concept van familiekarma en de verschillende vormen ervan.",
+      "trigger_phrases": [
+        "uitleg familiekarma",
+        "wat is familiekarma",
+        "verschillende vormen karma familie",
+        "familiekarma betekenis",
+        "leg uit karma binnen familie"
+      ],
+      "keywords": [
+        "karma",
+        "familie",
+        "uitleg",
+        "vormen",
+        "concept"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:11:40.634760+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c6494b7b110a",
+      "text_hash": "c6494b7b110a",
+      "original_text": "Hoeveel trades heb je lopen",
+      "topic": "trades",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten hoeveel trades er momenteel lopen",
+      "trigger_phrases": [
+        "Hoeveel trades heb je lopen",
+        "Actieve trades",
+        "Lopende trades",
+        "Huidige trades"
+      ],
+      "keywords": [
+        "trades",
+        "lopen",
+        "actief",
+        "huidig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:42:58.128733+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 123,
+    "totaal_voorgesteld": 148,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-26T07:27:58.435438+00:00"
+    "last_run": "2026-07-28T19:42:58.128733+00:00"
   }
 }

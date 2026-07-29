@@ -916,12 +916,138 @@ class MonitorService:
                 except Exception as e:
                     logger.error(f"Monitor cycle error ({mkt}) user={self._user_id}: {e}")
 
+            # v11_adopt_manual_positions_001 — Bug C fix.
+            # Bot draaide alleen over markten in `self._markets`. Handmatige BUYs van
+            # Willem op andere markten werden compleet genegeerd → geen trailing stop.
+            # Nu: detecteer open potjes op markten BUITEN self._markets en pas ook
+            # daar trailing-stop toe (loss-cut + trailing SELL) alsof ze bij ons hoorden.
+            if self._use_potjes:
+                try:
+                    self._adopt_orphan_positions(context_per_market)
+                except Exception as e:
+                    logger.error(f"Orphan adoption error user={self._user_id}: {e}")
+
             elapsed = 0
             while elapsed < self._interval and not self._stop_event.is_set():
                 time.sleep(1)
                 elapsed += 1
 
         logger.info("Monitor loop stopped")
+
+    def _adopt_orphan_positions(self, context_per_market: Dict[str, List[Dict]]):
+        """v11_adopt_manual_positions_001 — Detecteer open potjes op markten buiten
+        self._markets (bijv. handmatige BUYs door Willem) en apply trailing-stop check.
+
+        Werkwijze:
+          1. Verzamel unique markets van alle open pots die NIET in self._markets zitten
+          2. Voor elke orphan market: fetch live price + candles
+          3. Voor elke open pot op die market: doe dezelfde trailing-stop check als
+             _run_market_cycle regel 989-1046 (loss-cut + trailing SELL)
+        """
+        from modules.trade import potjes as potjes_svc
+
+        user_potjes = potjes_svc.get_potjes(self._user_id)
+        open_pots = [p for p in user_potjes.get("potjes", [])
+                     if p.get("position", {}).get("is_open")]
+        if not open_pots:
+            return
+
+        orphan_markets: Dict[str, List[Dict]] = {}
+        for p in open_pots:
+            mkt = p.get("market")
+            if not mkt or mkt in self._markets:
+                continue
+            orphan_markets.setdefault(mkt, []).append(p)
+
+        if not orphan_markets:
+            return
+
+        # Batch ticker-call voor alle orphan markets
+        base_symbols = [m.split("-")[0] for m in orphan_markets.keys()]
+        try:
+            ticker_data = fetch_tickers(base_symbols)
+            price_by_market = {t["market"]: float(t.get("last") or 0) for t in ticker_data}
+        except Exception as e:
+            logger.warning(f"[adopt] ticker fetch failed: {e}")
+            price_by_market = {}
+
+        for mkt, pots_on_mkt in orphan_markets.items():
+            price = price_by_market.get(mkt)
+            if not price or price <= 0:
+                continue
+            self._process_trailing_for_market(mkt, price, pots_on_mkt, adopted=True)
+
+    def _process_trailing_for_market(self, market: str, price: float,
+                                     pots: List[Dict], adopted: bool = False):
+        """v11_adopt_manual_positions_001 — Gedeelde trailing-stop logica voor
+        `_run_market_cycle` én `_adopt_orphan_positions`. Loss-cut + trailing SELL check.
+
+        Wordt in Fase 1 alleen aangeroepen door orphan-adoption (Bug C fix).
+        In een latere refactor kan _run_market_cycle regel 989-1046 hier naartoe worden
+        gerefactored zodat er 1 pad is voor trailing-stop logic.
+        """
+        from modules.trade import potjes as potjes_svc
+
+        processed_clusters: set = set()
+        for pot in pots:
+            if not pot["position"]["is_open"]:
+                continue
+            cid = pot["position"].get("cluster_id")
+            if cid and cid in processed_clusters:
+                continue
+            potjes_svc.update_pot_tracking(self._user_id, pot["id"], price)
+            pos = pot["position"]
+            entry = pos.get("entry_price")
+            if not entry or entry <= 0:
+                continue
+            if cid:
+                cluster_pots = potjes_svc.get_pots_by_cluster(self._user_id, cid)
+                cluster_capital = sum(float(cp.get("capital", 0) or 0) for cp in cluster_pots)
+            else:
+                cluster_pots = [pot]
+                cluster_capital = float(pot.get("capital", 0) or 0)
+            highest = max(pos.get("highest_price", entry) or entry, price)
+            profit_pct = (price - entry) / entry
+            bruto = cluster_capital * profit_pct
+            fees = cluster_capital * BITVAVO_TAKER_FEE * 2
+            netto = bruto - fees
+            trail_threshold = round(fees * 2, 6)
+            exit_min_netto = round(fees * 1, 6)
+            netto_r = round(netto, 6)
+            trailing_active = pos.get("trailing_active", False) or netto_r >= trail_threshold
+
+            # Loss-cut check (Willems -8% noodstop op adopted positions ook)
+            loss_pct = profit_pct * 100
+            try:
+                bp = _load_trader_blueprint()
+                loss_cut_pct = float(bp.get("parameters", {}).get("loss_cut_pct", -0.08)) * 100
+            except Exception:
+                loss_cut_pct = -8.0
+            hit_loss_cut = loss_pct <= loss_cut_pct
+
+            should_sell = False
+            reason = ""
+            if hit_loss_cut:
+                should_sell = True
+                reason = f"Loss-cut {loss_pct:.2f}% ≤ {loss_cut_pct:.1f}%"
+            elif trailing_active and price < highest and netto_r >= exit_min_netto:
+                should_sell = True
+                reason = f"Trailing SELL netto €{netto_r:.4f}"
+
+            if should_sell and self._auto_trade:
+                tag = "[adopted]" if adopted else "[trailing]"
+                logger.info(f"{tag} SELL trigger {market} pot={pot['id']} — {reason}")
+                if self._use_mock:
+                    result = execute_mock_trade(self._user_id, market, "SELL", cluster_capital)
+                else:
+                    result = execute_real_trade(self._user_id, market, "SELL", cluster_capital)
+                if result.get("success"):
+                    real_price = result.get("trade", {}).get("price") or price
+                    if cid:
+                        potjes_svc.close_cluster(self._user_id, cid, real_price)
+                        processed_clusters.add(cid)
+                    else:
+                        potjes_svc.close_pot(self._user_id, pot["id"], real_price)
 
     def _run_market_cycle(self, market: str, context_per_market: Dict[str, List[Dict]], live_price: Optional[float] = None):
         """v4_multi_market_001: één cycle voor één market. Live prijs uit gedeelde ticker-call.
@@ -1161,12 +1287,70 @@ class MonitorService:
                         result = execute_real_trade(self._user_id, market, "BUY", cluster["total_capital"])
                     if result.get("success"):
                         real_entry = result.get("trade", {}).get("price") or price
-                        potjes_svc.open_cluster(
-                            self._user_id, cluster["pot_ids"], real_entry,
-                            cluster["cluster_id"], self._cycles,
-                            trade_id=result.get("trade", {}).get("trade_id"),
-                            market=market,
-                        )
+                        # v11_pot_registration_safety_001 — Bug A fix.
+                        # Bitvavo BUY is geslaagd — potjes registratie MOET slagen anders
+                        # coin gekocht zonder pot-tracking (silent loss). Wrap in try/except,
+                        # log kritisch bij faal, en persist direct zodat frontend het ziet.
+                        cluster_opened = False
+                        try:
+                            open_result = potjes_svc.open_cluster(
+                                self._user_id, cluster["pot_ids"], real_entry,
+                                cluster["cluster_id"], self._cycles,
+                                trade_id=result.get("trade", {}).get("trade_id"),
+                                market=market,
+                            )
+                            cluster_opened = bool(open_result.get("success"))
+                        except Exception as _oe:
+                            logger.error(
+                                f"[CRITICAL] open_cluster FAILED na Bitvavo BUY success! "
+                                f"user={self._user_id} market={market} entry=€{real_entry} "
+                                f"pot_ids={cluster['pot_ids']} err={_oe}"
+                            )
+                        if not cluster_opened:
+                            # Fallback: probeer per potje open_pot zodat er tenminste
+                            # registratie is (voorkomt "coin gekocht maar geen pot"-scenario).
+                            fallback_opened = []
+                            for pid in cluster["pot_ids"]:
+                                try:
+                                    p_capital_share = float(cluster["total_capital"]) / max(len(cluster["pot_ids"]), 1)
+                                    r = potjes_svc.open_pot(
+                                        self._user_id, pid, real_entry, self._cycles,
+                                        trade_id=result.get("trade", {}).get("trade_id"),
+                                        amount_eur=p_capital_share,
+                                        market=market,
+                                    )
+                                    if r:
+                                        fallback_opened.append(pid)
+                                except Exception as _fe:
+                                    logger.error(f"[CRITICAL] fallback open_pot faalde voor {pid}: {_fe}")
+                            # Publiceer event zodat frontend & Willem direct zien dat er iets fout ging
+                            try:
+                                notif_file = DATA_DIR / "trade" / "event_notifications.json"
+                                existing = []
+                                if notif_file.exists():
+                                    existing = json.loads(notif_file.read_text())
+                                existing.append({
+                                    "type": "buy_registration_failure",
+                                    "severity": "CRITICAL" if not fallback_opened else "WARN",
+                                    "user_id": self._user_id,
+                                    "market": market,
+                                    "entry_price": real_entry,
+                                    "total_capital": cluster["total_capital"],
+                                    "cluster_id": cluster["cluster_id"],
+                                    "requested_pot_ids": cluster["pot_ids"],
+                                    "fallback_opened_pot_ids": fallback_opened,
+                                    "trade_id": result.get("trade", {}).get("trade_id"),
+                                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                                    "message": (
+                                        f"Bitvavo BUY €{cluster['total_capital']:.2f} {market} @ €{real_entry:.4f} "
+                                        f"is geslaagd, maar open_cluster faalde. "
+                                        f"{len(fallback_opened)}/{len(cluster['pot_ids'])} potjes via fallback geopend."
+                                    ),
+                                })
+                                notif_file.write_text(json.dumps(existing[-200:], indent=2, ensure_ascii=False))
+                            except Exception as _ne:
+                                logger.error(f"kon buy_registration_failure notif niet schrijven: {_ne}")
+                            cluster_opened = bool(fallback_opened)
                         self._last_buy_per_market[market] = now
                         # v10_buy_cooldown_persist_001 — direct persisteren na BUY
                         # zodat cooldown herstart-safe is (was voorheen alleen in-memory).
@@ -1174,9 +1358,24 @@ class MonitorService:
                             self._persist_state()
                         except Exception:
                             pass
+                        # v11_pot_registration_safety_001 — signaal aan frontend polling
+                        # zodat UI direct kan verversen na een succesvolle BUY (was: alleen
+                        # zichtbaar na volgende poll-cycle, kon 30s+ vertraging geven).
+                        try:
+                            trigger_file = DATA_DIR / "trade" / "ui_refresh_trigger.json"
+                            trigger_file.write_text(json.dumps({
+                                "user_id": self._user_id,
+                                "market": market,
+                                "action": "BUY",
+                                "cluster_id": cluster["cluster_id"],
+                                "timestamp": datetime.now(timezone.utc).isoformat(),
+                            }))
+                        except Exception:
+                            pass
                         actions_this_cycle.append(
                             f"BUY cluster {cluster['cluster_id'][:6]} ({cluster['n_pots']} pots, "
                             f"€{cluster['total_capital']:.2f}) {market} @ €{real_entry:.4f}"
+                            + ("" if cluster_opened else " [WARN: pot-registratie faalde]")
                         )
                     else:
                         # v7_eur_cooldown_001 — bij INSUFFICIENT_EUR_BALANCE: activeer 30-min cooldown

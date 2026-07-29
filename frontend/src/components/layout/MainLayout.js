@@ -158,6 +158,14 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
       const pulseDurationMs = 6000;
       if (!targetId) return;
 
+      // v11_glow_no_self_glow_001 — als user al op de doel-tab staat, geen glow
+      // (was: trader-intent op Trade-tab liet Trade-tab tóch pulseren)
+      try {
+        const currentPage = window.location.pathname.replace(/^\/+/, '').split('/')[0] || 'dashboard';
+        const wantedTab = String(targetId || '').replace(/^nav-/, '');
+        if (currentPage === wantedTab) return;
+      } catch {}
+
       const tryGlow = (attempt = 0) => {
         const el = document.querySelector(`[data-testid="${targetId}"]`);
         if (!el && attempt < 6) {
@@ -409,6 +417,11 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
         })
         .catch(() => {});
     }
+    // v11_glow_clear_on_nav_001 — verwijder ALLE spark-nav-glow classes bij nav-klik.
+    // Was: glow van trader-intent bleef 6s staan ook op de tab die je aanklikte.
+    try {
+      document.querySelectorAll('.spark-nav-glow').forEach(el => el.classList.remove('spark-nav-glow'));
+    } catch {}
     if (onNavigate) {
       onNavigate(item.id, item.path);
     }

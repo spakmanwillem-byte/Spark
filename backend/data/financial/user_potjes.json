@@ -66,15 +66,15 @@
             "trailing_active": false,
             "entry_time": null
           },
-          "market": "BTC-EUR",
+          "market": "EUR",
           "stats": {
-            "trades": 2,
+            "trades": 3,
             "wins": 1,
-            "losses": 0,
-            "total_pnl": 0.0611
+            "losses": 1,
+            "total_pnl": -0.0019
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "SELL @ €56562.00 | netto €+0.061",
+          "last_action": "SELL cluster test_c @ EUR100.0000 | share EUR-0.0630",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "1788329d-8511-4d39-8da5-e3581f394353",
@@ -94,6 +94,14 @@
               "amount_eur": 12.5,
               "trade_id": "00000000-0000-0431-0100-0009726888ac",
               "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-07-29T18:37:22.364790+00:00",
+              "action": "SELL",
+              "cluster_id": "test_cluster_xyz",
+              "exit_price": 100.0,
+              "netto": -0.06305,
+              "share_pct": 100.0
             }
           ]
         },

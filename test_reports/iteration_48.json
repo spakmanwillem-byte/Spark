@@ -1,0 +1,42 @@
+{
+  "summary": "Iteration 48 — Tested Bug A (buy-flow safety wrap), Bug C (orphan adoption), and UI glow fixes. All backend tests pass (10/10). Bug A + Bug C fully verified. UI glow: 'clear-on-nav-click' works correctly (glow removed immediately, not after 6s). However, the 'no-self-glow' guard has a REAL BUG: it does not recognize the Trade tab because Trade's route is /modules/trade, not /trade — so the guard's split('/')[0] extracts 'modules' instead of 'trade' and the glow IS still applied when user is already on Trade. This is the exact scenario the fix was supposed to prevent.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "MainLayout.js — spark:nav-glow handler (v11_glow_no_self_glow_001)",
+        "issue": "Self-glow guard fails for the Trade tab. Route path is '/modules/trade' but code does pathname.split('/')[0] which yields 'modules'. wantedTab='trade' -> mismatch -> guard does NOT return early -> Trade nav glows even though user is already on /modules/trade. Reproduced: navigate to /modules/trade (via clicking sidebar Trade item) and dispatch window.dispatchEvent(new CustomEvent('spark:nav-glow',{detail:{targetId:'nav-trade'}})) -> nav-trade gets spark-nav-glow class (expected: NOT get class).",
+        "selector": "[data-testid=nav-trade]",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter48_bug_a_c_glow.py",
+    "/app/test_reports/pytest/iter48_results.xml"
+  ],
+  "action_items": [
+    "Fix the self-glow guard in /app/frontend/src/components/layout/MainLayout.js (~line 164). Instead of `pathname.split('/')[0]`, match against the actual nav-item path or normalise by using the last path segment. Suggested fix: derive currentPage from the item registry, e.g. iterate navigationConfig items, find item.path that matches window.location.pathname startsWith, and compare item.id to wantedTab. Or simpler: `if (window.location.pathname.endsWith('/' + wantedTab)) return;` which correctly handles /modules/trade -> 'trade'. Retest all nav routes (dashboard, chat, trade, wallet, etc.) after fix."
+  ],
+  "critical_code_review_comments": [
+    "Route mismatch — sidebar item id 'nav-trade' but the actual path is '/modules/trade'. The self-glow guard assumes 1:1 mapping between the first path segment and nav item id, which is not the case for MODULES-section items (trade, wallet, winkel, boekhouding, etc.). Guard is silently broken for the entire MODULES section.",
+    "monitor.py is now 1715 lines — consider splitting the BUY-flow (lines ~1180-1400), adoption logic (~937-1050), and event-notification helpers into separate modules for maintainability.",
+    "Bug A fix writes event_notifications.json with slicing existing[-200:] which is good (bounded growth). Consider same bound on ui_refresh_trigger.json (it is overwritten each time, so fine).",
+    "Bug C orphan-adoption fetches tickers once per cycle for orphan markets — good. But there is no dedup with the main _run_market_cycle ticker call; if user adds an orphan market to _markets later, they get processed twice in the same cycle. Low priority."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter48_bug_a_c_glow.py (new test file)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "66% (2/3 glow sub-tests pass; self-glow guard fails)"},
+  "test_credentials": "naam=Willem, sleutelwoord=Appelsap (user-001, admin)",
+  "seed_data_creation": "None — used existing user-000 potjes (7 potjes, 3 open on ADA/ETH/SOL) as fixture.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend endpoints healthy. Bug A+C fully verified via /app/backend/tests/test_iter48_bug_a_c_glow.py (10/10 pass). The remaining fix needed is only the self-glow guard path parsing for /modules/* routes. After main agent patches MainLayout.js, retest by: 1) login Willem/Appelsap, 2) click Trade sidebar (goes to /modules/trade), 3) evaluate `window.dispatchEvent(new CustomEvent('spark:nav-glow',{detail:{targetId:'nav-trade'}}))`, 4) confirm nav-trade does NOT have class spark-nav-glow.",
+  "rca_of_the_issue": "Self-glow guard uses window.location.pathname.replace(/^\\/+/, '').split('/')[0] to get currentPage. On /modules/trade this returns 'modules', not 'trade'. The comparison `currentPage === wantedTab` ('modules' === 'trade') is false so the guard doesn't return early and glow is applied. Fix: compare against a normalised value (e.g. last segment: pathname.split('/').filter(Boolean).pop()) OR reverse-lookup the nav item whose path matches pathname and compare its id to targetId."
+}

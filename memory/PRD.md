@@ -1,5 +1,31 @@
 # Spark Core 2.0 — PRD
-## Sessie 50b (2026-02-01) — Bitvavo Reconciliatie UI + rest/potje onderscheid
+## Sessie 50c (2026-02-01) — Bitvavo Reconciliatie categorisatie gecorrigeerd
+
+### v11_rest_by_history_001 — Categorisatie op HISTORIE, niet op bedrag
+**Willem's correctie**: mijn 50b implementatie gebruikte €0.25 als harde drempel. Fout — €0.25 was slechts een voorbeeld. Willems echte logica:
+- **Orphan** = coin die ooit met intentie gekocht is (matching closed pot bestaat OF `net_paid_eur >= €0.50`)
+- **Rest** = coin zonder potje-historie (test-gokjes zoals NEAR/SHIB/TIA)
+
+Bedrag maakt niet meer uit voor categorisatie. Micro-dust <€0.05 wordt genegeerd (echt niks).
+
+**Nieuwe drempels**:
+- `DUST_THRESHOLD_EUR: 0.05` (micro-dust, negeren)
+- `INTENT_THRESHOLD_EUR: 0.50` (net_paid boven dit = "met intentie gekocht")
+
+**Live resultaat user-001**:
+- **Met potje-historie** (6): BCH €12.83, BTC €0.33 (historie €186), ATOM €12.79, ETH €12.64, ADA €13.56, SOL €12.64
+- **Test-gokjes** (8): EUL, CSPR, NEAR, SHIB, TIA, DIA, NIL, SUI (totaal €1.69)
+
+**Bot-gedrag bevestigd**: orphan-adoption (Bug C fix) triggert alleen op open potjes. Rest-coins hebben geen potje → bot laat ze met rust. Willems zorg "trader mee-traden van rest?" is niet aan de orde.
+
+### Files changed
+- `/app/backend/modules/trade/reconcile.py` — `has_history = bool(matching) or total_buy >= INTENT_THRESHOLD_EUR`
+- `/app/frontend/src/components/modules/TraderPage.js` — labels "Met potje-historie" en "Test-gokjes" ipv drempel-bedrag
+
+---
+
+
+
 
 ### v11_bitvavo_reconcile_ui_001 — Bitvavo → Potjes reconciliatie zichtbaar
 **Willem's melding**: bot ziet 3 potjes maar Bitvavo heeft veel meer coin-posities (ADA/BCH/ATOM/ETH/SOL/BTC-rest/CSPR/Euler/etc). Er zit "rest" tussen (kleine bedragen achtergelaten uit oude trades) én adoptie-kandidaten (echte value zonder pot-registratie).

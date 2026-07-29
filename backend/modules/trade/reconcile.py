@@ -270,9 +270,11 @@ async def fix_spark_pot(req: FixPotReq):
 #   - PnL ≈ 0 (dust) → skip; te klein om zinvol te reconciliëren
 # =============================================================================
 BITVAVO_FEE_RATE = 0.0025          # Bitvavo taker fee 0.25%
-# v11_rest_threshold_001 — Willem's keuze: onder €0.25 = "rest" (trailing helper
-# voor Spark, laten liggen). Boven €0.25 = adoptie-kandidaat voor potje.
-DUST_THRESHOLD_EUR = 0.25          # onder deze value: rest (niet als orphan tonen)
+# v11_rest_by_history_001 — Willem's echte logica: rest = coin ZONDER potje-historie
+# (NEAR/SHIB/TIA/etc = test-gokjes). Orphan = coin die ooit met intentie gekocht is
+# (matching pot bestaat OF net_paid_eur > drempel). €0.25 was voorbeeld, geen max.
+DUST_THRESHOLD_EUR = 0.05          # Onder dit bedrag = negeer volledig (echte micro-dust)
+INTENT_THRESHOLD_EUR = 0.50        # net_paid >= dit → coin telt als "met intentie gekocht"
 TRADE_HISTORY_DIR = DATA_ROOT / "wallet" / "trade_history"
 
 
@@ -344,18 +346,19 @@ async def scan_orphans(user_id: str):
             closed_pots_by_market.setdefault(m, []).append(p.get("id"))
 
     rows = []
-    rest_rows = []  # v11_rest_threshold_001 — aparte lijst voor coins < €0.25 (info-only)
+    rest_rows = []  # v11_rest_by_history_001 — coins zónder potje-historie (test-gokjes)
     for coin, b in bv_balances.items():
         if coin == "EUR":
             continue
         avail = float(b.get("available", 0) or 0)
         cur_val = float(b.get("value_eur", 0) or 0)
         cur_price = float(b.get("price", 0) or 0)
-        if avail <= 0:
-            continue
+        if avail <= 0 or cur_val < DUST_THRESHOLD_EUR:
+            continue  # micro-dust (<€0.05) → geheel negeren
         market = f"{coin}-EUR"
         paid = paid_per_market.get(market, {})
         net_paid = paid.get("net_paid_eur", 0.0)
+        total_buy = paid.get("total_buy_eur", 0.0)
         pnl = round(cur_val - net_paid, 4)
         pnl_after_fee = round(cur_val * (1 - BITVAVO_FEE_RATE) - net_paid, 4)
         matching = closed_pots_by_market.get(market, [])
@@ -365,7 +368,7 @@ async def scan_orphans(user_id: str):
             "bv_amount": round(avail, 8),
             "bv_value_eur": round(cur_val, 2),
             "cur_price_eur": round(cur_price, 6),
-            "total_buy_eur": round(paid.get("total_buy_eur", 0), 2),
+            "total_buy_eur": round(total_buy, 2),
             "total_sell_eur": round(paid.get("total_sell_eur", 0), 2),
             "net_paid_eur": round(net_paid, 2),
             "pnl_eur": pnl,
@@ -373,12 +376,16 @@ async def scan_orphans(user_id: str):
             "matching_closed_pot": matching[0] if matching else None,
             "closed_pots_available": len(matching),
         }
-        # Onder de drempel = "rest" (Willem's woord: trailing helper voor Spark, laten liggen)
-        if cur_val < DUST_THRESHOLD_EUR:
+        # v11_rest_by_history_001 — categorisatie op HISTORIE, niet op bedrag.
+        # Orphan = coin die ooit met intentie gekocht is (matching pot OF significant net_paid)
+        # Rest = geen enkele potje-historie (Willems test-gokjes)
+        has_history = bool(matching) or total_buy >= INTENT_THRESHOLD_EUR
+        if not has_history:
             base_row["category"] = "rest"
+            base_row["reason"] = "geen potje-historie (test-gok)"
             rest_rows.append(base_row)
             continue
-        # Boven drempel = orphan → koppel-kandidaat
+        # Orphan → bepaal actie
         if pnl_after_fee >= 0.01:
             action = "SELL_PROFIT"
         elif abs(pnl_after_fee) < 0.02:
@@ -392,7 +399,9 @@ async def scan_orphans(user_id: str):
     return {
         "success": True,
         "user_id": user_id,
-        "rest_threshold_eur": DUST_THRESHOLD_EUR,
+        "categorisation": "history_based_v11",
+        "intent_threshold_eur": INTENT_THRESHOLD_EUR,
+        "dust_threshold_eur": DUST_THRESHOLD_EUR,
         "rows": sorted(rows, key=lambda r: -r["pnl_after_fee_eur"]),
         "rest": sorted(rest_rows, key=lambda r: -r["bv_value_eur"]),
         "totals": {
@@ -404,7 +413,7 @@ async def scan_orphans(user_id: str):
             "rest_count": len(rest_rows),
             "rest_total_eur": round(sum(r["bv_value_eur"] for r in rest_rows), 2),
         },
-        "note": "Dry-run — geen wijzigingen doorgevoerd. Gebruik POST om uit te voeren. Rest (<€0.25) blijft altijd staan.",
+        "note": "Categorisatie op basis van potje-historie: coins met matching pot of eerdere BUY-orders zijn 'orphan' (kandidaat voor koppel/verkoop). Coins zonder historie zijn 'rest' (test-gokjes, blijven staan).",
         "ts": _now(),
     }
 

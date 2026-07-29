@@ -1543,12 +1543,12 @@ function BitvavoReconcilePanel({ userId, isAdmin }) {
           <Scale className="w-4 h-4 text-cyan-400" /> Bitvavo Reconciliatie
           {orphans.length > 0 && (
             <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">
-              {orphans.length} koppelbaar
+              {orphans.length} met potje-historie
             </span>
           )}
           {rest.length > 0 && (
             <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-700/60 text-slate-300">
-              {rest.length} rest (€{(t.rest_total_eur || 0).toFixed(2)})
+              {rest.length} test-gokjes (€{(t.rest_total_eur || 0).toFixed(2)})
             </span>
           )}
         </h3>
@@ -1577,7 +1577,10 @@ function BitvavoReconcilePanel({ userId, isAdmin }) {
           {/* Orphans / koppel-kandidaten */}
           <div className="p-4">
             <div className="flex items-center justify-between mb-2">
-              <h4 className="text-xs font-semibold text-cyan-300">Koppel-kandidaten (&gt; €{data.rest_threshold_eur})</h4>
+              <h4 className="text-xs font-semibold text-cyan-300">
+                Met potje-historie
+                <span className="ml-2 text-[10px] text-slate-500 font-normal">— ooit gekocht met intentie · koppelbaar aan potje</span>
+              </h4>
               {orphans.length > 0 && (
                 <span className="text-[10px] text-slate-400">
                   Potentieel: <span className="text-green-400">€+{(t.potential_profit_eur || 0).toFixed(2)}</span>
@@ -1585,7 +1588,7 @@ function BitvavoReconcilePanel({ userId, isAdmin }) {
               )}
             </div>
             {orphans.length === 0 ? (
-              <p className="text-[10px] text-slate-600 text-center py-3">Geen orphans — alles is al gekoppeld of onder de rest-drempel</p>
+              <p className="text-[10px] text-slate-600 text-center py-3">Geen coins met potje-historie zonder open positie</p>
             ) : (
               <div className="space-y-1.5" data-testid="reconcile-orphans-list">
                 {orphans.map(o => (
@@ -1637,13 +1640,13 @@ function BitvavoReconcilePanel({ userId, isAdmin }) {
             )}
           </div>
 
-          {/* Rest — info only */}
+          {/* Rest — coins zonder potje-historie */}
           {rest.length > 0 && (
             <div className="border-t border-slate-800 p-4">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-xs font-semibold text-slate-400">
-                  Rest (&lt; €{data.rest_threshold_eur})
-                  <span className="ml-2 text-[10px] text-slate-500 font-normal">— laten liggen, trailing helper voor Spark</span>
+                  Test-gokjes (geen potje-historie)
+                  <span className="ml-2 text-[10px] text-slate-500 font-normal">— laten liggen, bot doet er niks mee</span>
                 </h4>
                 <span className="text-[10px] text-slate-500">Totaal €{(t.rest_total_eur || 0).toFixed(2)}</span>
               </div>

@@ -160,8 +160,11 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
 
       // v11_glow_no_self_glow_001 — als user al op de doel-tab staat, geen glow
       // (was: trader-intent op Trade-tab liet Trade-tab tóch pulseren)
+      // Fix v11.1: routes zoals '/modules/trade' laten split('/')[0] = 'modules' geven.
+      // Gebruik nu het LAATSTE pad-segment zodat '/modules/trade' → 'trade' matcht.
       try {
-        const currentPage = window.location.pathname.replace(/^\/+/, '').split('/')[0] || 'dashboard';
+        const segs = window.location.pathname.split('/').filter(Boolean);
+        const currentPage = segs.length ? segs[segs.length - 1] : 'dashboard';
         const wantedTab = String(targetId || '').replace(/^nav-/, '');
         if (currentPage === wantedTab) return;
       } catch {}

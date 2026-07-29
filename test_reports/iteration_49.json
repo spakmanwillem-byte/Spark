@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend-only retest of UI glow self-guard fix v11.1 (path-parsing via last-segment). All 4 scenarios PASSED for Willem admin login.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "c_self_glow_on_trade_while_on_modules_trade": "PASS (no spark-nav-glow class added)",
+    "e_glow_on_trade_from_dashboard": "PASS (spark-nav-glow class added)",
+    "f_glow_cleared_immediately_on_chat_click": "PASS (0 .spark-nav-glow elements remaining)",
+    "extra_self_glow_on_dashboard_while_on_dashboard": "PASS (no glow, self-guard works for shallow paths)"
+  },
+  "urls_verified": {
+    "trade_route": "/modules/trade",
+    "dashboard_route": "/",
+    "chat_route": "/chat"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: dashboard root route is '/' (not '/dashboard'). segs.length===0 fallback to 'dashboard' correctly matches targetId 'nav-dashboard'. Fix works but relies on this convention — consider explicit route→id mapping if new routes are added."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested", "frontend": "100%"},
+  "test_credentials": "Willem / Appelsap (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "v11.1 glow self-guard fix (last path segment) verified working for /modules/trade route as well as root '/' dashboard. Handler in MainLayout.js:154-204. Clear-on-nav-click hook at line 423-426. Both work correctly.",
+  "rca of the issue": "N/A — fix verified"
+}

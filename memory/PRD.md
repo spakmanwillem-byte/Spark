@@ -1,5 +1,67 @@
 # Spark Core 2.0 — PRD
-## Sessie 50e (2026-02-01) — Chat-fix: trader-vragen + Lotus als familie
+## Sessie 50f (2026-02-01) — SPS Daily-Event rijke UI + KB-fill "kan ik wat voor je doen"
+
+### v11_daily_event_rps_001 + v11_daily_rps_001 — Daily-Event gebruikt nu RpsBark
+**Willems melding**: 2 SPS-modules bestonden (simpele DailyEventCard + rijke RpsBark). Simpele versie gaf verkeerde info bij loss ("je ontsnapte met de hakken over de sloot" ipv "je verloor").
+
+**Fix**:
+- `daily_event.py` bark-tekst eerlijk: bij loss "je verloor deze ronde. Kom morgen sterker terug." (was misleidend "je ontsnapte")
+- `RpsBark` component uitgebreid met `dailyMode` prop:
+  - In daily-mode: gebruikt `/api/dnd/daily-event/*` endpoints (1×/dag + goud-uitkering)
+  - Sessie-score-bar verborgen (irrelevant voor 1-ronde event)
+  - Lifetime-stats verborgen (dailyMode focus op deze ronde)
+  - Buttons disabled na play
+  - Header title: "⚔ Vecht voor je leven"
+  - Behoudt KB-kaart-thumbnails + avatars + "Spark denkt na" animatie
+- `DailyEventCard.js` herschreven als dunne wrapper (~65 regels ipv 128): laat trigger-button staan, opent RpsBark met `dailyMode=true`
+
+**Getest**: bark-tekst geverifieerd via curl (`result: loss` → bark "je verloor deze ronde"). Testing-agent: 13/13 backend groen, modal opent correct met 3 KB-thumbnails.
+
+### v11_kb_fill_offer_001 — "Kan ik wat voor je doen"-flow
+**Willems visie**: proactieve trigger — user biedt hulp, Spark kiest KB-kaart met leeg ws5-veld, parafeert, slaat op. Voorkomt dat elke kaart handmatig moet ge-reforge worden.
+
+**Implementatie** in `wedervraag_service.py`:
+- 6 nieuwe patronen (`KAN_IK_HELPEN_PATTERNS`): "kan ik wat voor je doen", "wat kan ik doen", "waarmee kan ik helpen", "help je een handje", "iets voor je doen", "wil je dat ik iets doe"
+- `pick_random_kbv2_card_with_gap()` — leest 4 KBv2-lades, filtert 733 kaarten met ≥1 leeg ws5-veld, prefereert kaarten met meer gaten (top-30% random)
+- `format_offer()` + `format_paraphrase()` — vriendelijke NL-teksten
+- `is_affirmative()` / `is_negative()` — ja/nee-detectie
+
+**Multi-turn state machine** in `chat/routes.py` (hook 0b2):
+1. **STAP 1**: user "kan ik wat voor je doen" → `type=kb_fill_offer` + state `phase=offer`
+2. **STAP 2**: user "ja" → `type=kb_fill_question` (echte 5W-vraag) + state `phase=awaiting_answer`
+3. **STAP 3**: user antwoordt → `type=kb_fill_paraphrase` ("Dus... Klopt dit?") + state `phase=awaiting_confirm`
+4. **STAP 4**: user "ja klopt" → save via `apply_answer()` + state cleaned + `type=kb_fill_saved`
+5. **Escape-routes**: "nee" bij offer → declined; "nee" bij parafrase → retry; "skip" bij antwoord → skipped
+
+**Getest end-to-end** met curl: alle 4 stappen groen, kaart "Geef" kreeg 'wat' veld, testkaart daarna teruggezet naar leeg. Testing-agent bevestigde 13/13 pytest.
+
+### v11 architectuur-notitie: harde strings vs self-aware triggers
+Willems visie voor toekomst: dagelijkse intents (zoals "kan ik wat voor je doen") door Spark LLM zelf laten kiezen ipv regex. Voor MVP behoudt v11 regex (snel + betrouwbaar). Fase 🟢 = `SparkSelfAwareness` module met LLM-driven intent-hooks (later apart project).
+
+### Wat wél als HARDE STRING blijft (afgesproken)
+- Veiligheidscommando's: `/stop`, `/rollback`, admin-auth
+- Trader safety: -8% noodstop, loss-cut, trailing-drempel
+- Systeemcommando's: `/api/admin/*` autorisatie
+
+### Wat naar LLM-decided gaat (later)
+- Conversationele intents (wedervraag, empathie, humor, trader-info)
+- Proactieve acties (5W-fill aanbod, herinneringen, aanbevelingen)
+
+### Files changed
+- `/app/backend/modules/dnd/daily_event.py` — bark-tekst honest bij loss
+- `/app/frontend/src/components/games/RpsBark.js` — `dailyMode` prop + endpoints/UI-hiding
+- `/app/frontend/src/components/profile/DailyEventCard.js` — herschreven als dunne wrapper
+- `/app/backend/modules/chat/wedervraag_service.py` — 6 patterns + 5 helpers + KBv2 gap-finder
+- `/app/backend/modules/chat/routes.py` — hook 0b2 met 4-fase state machine
+- `/app/backend/tests/test_iter50f_sps_kbfill.py` (nieuw, door testing-agent)
+
+### Voor de roadmap: wedervraag/5W-fill bestond al
+Verduidelijking voor toekomstige sessies: `wedervraag_service.py` en `spontaneous_w_service.py` waren er al (WEDERVRAAG_ENABLED=False sinds v6 uitgeschakeld). v11 heeft ze NIET vervangen, alleen aangevuld met de "kan ik wat voor je doen"-trigger. Zo blijft de bestaande stille achtergrondlaag intact terwijl de nieuwe proactieve modus door user zelf getriggerd wordt.
+
+---
+
+
+
 
 ### Willems observatie (uit gespreklog deep-user-001)
 1. **Trader-vraag hallucinatie**: Willem vroeg "Hoeveel trades heb je lopen" → Spark (gpt-oss-120b) verzon "2 lopende trades" ipv echte data lookup

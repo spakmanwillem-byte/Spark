@@ -2947,6 +2947,50 @@
           "message": "LIVE SELL uitgevoerd @ €186.37 (fee €0.0414)"
         }
       }
+    },
+    {
+      "id": "fs-0042",
+      "ts": "2026-07-31T10:22:44.915283+00:00",
+      "type": "force_sell_rejected",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 179.2,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "bitvavo_sell": {
+        "success": false,
+        "error": "Sell zou €0.211 opleveren, onder Bitvavo minimum €5.00 voor BCH-EUR. Balance (0.00117896 BCH) is te klein om te verkopen.",
+        "error_code": "BELOW_MIN_QUOTE",
+        "market": "BCH-EUR",
+        "expected_quote_eur": 0.2111,
+        "min_quote_eur": 5.0,
+        "actual_balance": 0.00117896,
+        "hint": "Deze coin is nu 'restwaarde' — verkoop is niet mogelijk. Gebruik sync-with-bitvavo om restwaarde-pot te sluiten zonder PnL."
+      },
+      "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
+    },
+    {
+      "id": "fs-0043",
+      "ts": "2026-07-31T10:22:45.125081+00:00",
+      "type": "force_sell_rejected",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 179.2,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "bitvavo_sell": {
+        "success": false,
+        "error": "Sell zou €0.211 opleveren, onder Bitvavo minimum €5.00 voor BCH-EUR. Balance (0.00117896 BCH) is te klein om te verkopen.",
+        "error_code": "BELOW_MIN_QUOTE",
+        "market": "BCH-EUR",
+        "expected_quote_eur": 0.2111,
+        "min_quote_eur": 5.0,
+        "actual_balance": 0.00117896,
+        "hint": "Deze coin is nu 'restwaarde' — verkoop is niet mogelijk. Gebruik sync-with-bitvavo om restwaarde-pot te sluiten zonder PnL."
+      },
+      "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
     }
   ]
 }

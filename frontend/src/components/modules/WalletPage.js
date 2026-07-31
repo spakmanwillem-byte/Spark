@@ -249,26 +249,27 @@ export function WalletPage({ onNavigate }) {
         {/* Top Row: Income / Expenses / Total Balance */}
         <div className="grid grid-cols-12 gap-4">
 
-          {/* Income + Expenses */}
+          {/* Income + Expenses — v11_week_boekhoud_link_001 — gekoppeld aan boekhoud-log
+              (was: statisch "+2.5%", niet gekoppeld aan echte transacties). */}
           <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-3">
             <StatCard
-              label="Inkomsten"
+              label="Inkomsten deze week"
               icon={ArrowDownLeft}
-              value={(wallet?.spark_tokens || 0).toLocaleString()}
-              unit="tokens"
-              change="+2.5%"
+              value={`€${(wallet?.week_in_eur || 0).toFixed(2)}`}
+              unit=""
+              change={`+${wallet?.week_in_count || 0} tx`}
               changePositive
-              sub="Spark Tokens verdiend"
+              sub="Storten + verkoop (boekhoud-log)"
               color="#22c55e"
             />
             <StatCard
-              label="Uitgaven"
+              label="Uitgaven deze week"
               icon={ArrowUpRight}
-              value={(wallet?.credits || 0).toLocaleString()}
-              unit="credits"
-              change={`-${wallet?.total_withdrawn?.toFixed(1) || '0.0'}`}
+              value={`€${(wallet?.week_out_eur || 0).toFixed(2)}`}
+              unit=""
+              change={`-${wallet?.week_out_count || 0} tx`}
               changePositive={false}
-              sub="Credits gebruikt"
+              sub="Opnemen + gift (boekhoud-log)"
               color="#f97316"
             />
           </div>
@@ -425,7 +426,8 @@ export function WalletPage({ onNavigate }) {
               </div>
             </div>
 
-            {/* Spark Card */}
+            {/* Spark Card — v11_spark_card_001 — dynamisch: wallet_id als kaartnr,
+                username, geldig-tot = created_at + 4 jaar OF "GEBLOKKEERD" */}
             <div className="rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a1333 0%, #f59e0b20 50%, #ea580c20 100%)' }}>
               <div className="p-5 border border-amber-500/20 rounded-xl">
                 <div className="flex items-center justify-between mb-6">
@@ -436,18 +438,33 @@ export function WalletPage({ onNavigate }) {
                   <span className="text-[10px] text-amber-400/60">SPARK CORE</span>
                 </div>
                 <div className="mb-6">
-                  <p className="text-lg font-mono text-slate-300 tracking-[0.2em]">
-                    4 217 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 0842
+                  <p data-testid="spark-card-number" className="text-lg font-mono text-slate-300 tracking-[0.2em]">
+                    {(() => {
+                      // Format wallet_id (bv. user-a0ee2d7e) als kaartnummer 4x4 groepen
+                      const wid = String(wallet?.wallet_id || user?.id || '').replace(/[^a-z0-9]/gi, '').padEnd(16, '0').slice(0, 16).toUpperCase();
+                      return `${wid.slice(0,4)} ${wid.slice(4,8)} ${wid.slice(8,12)} ${wid.slice(12,16)}`;
+                    })()}
                   </p>
                 </div>
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="text-[10px] text-slate-500 uppercase">Kaarthouder</p>
-                    <p className="text-sm text-white font-medium">{wallet?.name || user?.naam || 'De Willem'}</p>
+                    <p data-testid="spark-card-holder" className="text-sm text-white font-medium">
+                      {wallet?.name || user?.naam || user?.volledige_naam || 'Onbekend'}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] text-slate-500 uppercase">Geldig tot</p>
-                    <p className="text-sm text-white font-medium">12/28</p>
+                    <p data-testid="spark-card-valid" className={`text-sm font-medium ${user?.geblokkeerd ? 'text-red-400' : 'text-white'}`}>
+                      {user?.geblokkeerd ? 'GEBLOKKEERD' : (() => {
+                        const created = wallet?.created_at || user?.created_at;
+                        try {
+                          const d = created ? new Date(created) : new Date();
+                          const expires = new Date(d.getFullYear() + 4, d.getMonth(), d.getDate());
+                          return `${String(expires.getMonth()+1).padStart(2,'0')}/${String(expires.getFullYear()).slice(-2)}`;
+                        } catch { return '12/28'; }
+                      })()}
+                    </p>
                   </div>
                 </div>
               </div>

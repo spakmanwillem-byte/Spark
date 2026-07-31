@@ -21,6 +21,7 @@
  * Label + UI zeggen "Kladblok".
  */
 import { LlmTokenUsageWidget } from './widgets/LlmTokenUsageWidget';
+import { PapertrailWidget } from './widgets/PapertrailWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -32,6 +33,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 47',
     reden: "Willem's Groq rate limit hit vandaag (94k/100k tokens). Widget voorkomt verrassingen midden in gesprek.",
     Component: LlmTokenUsageWidget,
+  },
+  {
+    id: 'papertrail-supply',
+    naam: 'Token Papertrail',
+    doel: 'Toont treasury (999.990) + alle houders + laatste papertrail-transacties. Bewijs dat 1M pool klopt.',
+    waar_hoort_het: 'WalletPage → admin tab, of eigen Token-management module',
+    aangemaakt_op: '2026-07-31',
+    aangemaakt_door: 'e1 sessie 51',
+    reden: "Willem wil visueel bewijs dat mint/gift/buy allemaal via dezelfde treasury_pool gaan zonder losse eindjes. Fraude-preventie.",
+    Component: PapertrailWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

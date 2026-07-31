@@ -53,12 +53,13 @@ async def mint_from_wallet(payload: dict = Body(...)):
 
     try:
         from modules.boekhouder.agents.bitvavo_agent import BitvavoAgent
-        bitvavo_free = float(BitvavoAgent().live_free_eur() or 0)
+        # v11_reserve_lock_001 — mint mag NIET aan reserve-kluis (2/2/1) komen
+        bitvavo_free = float(BitvavoAgent().live_free_eur_after_reserve() or 0)
     except Exception as _be:
         raise HTTPException(500, f"Kon Bitvavo saldo niet ophalen: {_be}")
 
     if bitvavo_free < cost:
-        raise HTTPException(400, f"Onvoldoende Bitvavo saldo (€{bitvavo_free:.2f}, nodig €{cost:.2f})")
+        raise HTTPException(400, f"Onvoldoende Bitvavo saldo na reserve (€{bitvavo_free:.2f}, nodig €{cost:.2f})")
 
     roar = load_json(ROAR_FILE, default={})
     treasury = roar.get("treasury_pool", 0)

@@ -524,58 +524,10 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                 </div>
 
-                {/* v4_wallet_admin_001 — Wallet + Tokens Card (verborgen voor bots — die hebben geen wallet) */}
-                {(() => {
-                  const isBotUser = (selectedUser.id || '').startsWith('bot-') || selectedUser.type === 'bot';
-                  if (isBotUser) return null;
-                  const w = walletOverview[selectedUser.id] || {};
-                  const isAdmin = (selectedUser.gradatie ?? 7) <= 1;
-                  return (
-                    <div data-testid="wallet-tokens-card" className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 md:col-span-2">
-                      <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-amber-400" />
-                        Wallet & Tokens
-                      </h3>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                        <div className="bg-slate-800/40 rounded-xl p-3">
-                          <p className="text-[10px] text-slate-500 mb-1">Wallet ID (bank-koppeling)</p>
-                          <p className="text-xs text-white font-mono truncate" data-testid="wallet-id">{w.wallet_id || selectedUser.id}</p>
-                        </div>
-                        <div className="bg-slate-800/40 rounded-xl p-3">
-                          <p className="text-[10px] text-slate-500 mb-1">EUR saldo</p>
-                          <p className="text-base text-emerald-400 font-bold" data-testid="wallet-balance">€{(w.balance_eur ?? 0).toFixed(2)}</p>
-                        </div>
-                        <div className="bg-slate-800/40 rounded-xl p-3">
-                          <p className="text-[10px] text-slate-500 mb-1">ROAR Tokens</p>
-                          <p className="text-base text-amber-400 font-bold" data-testid="user-tokens">{w.tokens ?? 0}</p>
-                        </div>
-                        <div className="bg-slate-800/40 rounded-xl p-3">
-                          <p className="text-[10px] text-slate-500 mb-1">IBAN</p>
-                          <p className="text-xs text-slate-400 italic">{w.iban || 'nog niet gekoppeld'}</p>
-                        </div>
-                      </div>
-                      {isAdmin ? (
-                        <p className="text-[10px] text-slate-500 italic">Admin account: tokens beheren via Spark treasury (user-000) niet via UI.</p>
-                      ) : (
-                        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-800">
-                          <button data-testid="grant-token-1" onClick={() => grantToken(selectedUser.id, 1)} disabled={tokenBusy}
-                            className="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg text-xs font-medium transition-colors disabled:opacity-50">
-                            + 1 token
-                          </button>
-                          <button data-testid="grant-token-10" onClick={() => grantToken(selectedUser.id, 10)} disabled={tokenBusy}
-                            className="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg text-xs font-medium transition-colors disabled:opacity-50">
-                            + 10 tokens
-                          </button>
-                          <button data-testid="revoke-token-1" onClick={() => revokeToken(selectedUser.id, 1)} disabled={tokenBusy || (w.tokens ?? 0) < 1}
-                            className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-xs font-medium transition-colors disabled:opacity-50">
-                            − 1 token
-                          </button>
-                          <span className="text-[10px] text-slate-500 ml-auto">1 token = 1 potje-slot (zodra user trade-bot start)</span>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })()}
+                {/* v11_wallet_card_removed_001 — Willems verzoek sessie 51: verwijderd binnen gebruikers.
+                    Token-beheer gebeurt centraal via Wallet-module + Papertrail-widget (kladblok).
+                    Ingesloten wallet-actions (+1/+10/-1) gaven verwarring en dupliceerden logica.
+                    Als admin tokens wil grant/revoke: via WalletPage of PapertrailWidget. */}
               </div>
 
               {/* Middle Row */}

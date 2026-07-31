@@ -24,11 +24,15 @@ USERS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "users.js
 # Wallet-id = user-id (klaar voor latere bank-koppeling).
 # ============================================================
 def ensure_wallet(user_id: str) -> dict:
-    """Maak wallet aan voor user als die nog niet bestaat. Idempotent. Wallet-id = user-id."""
+    """Maak wallet aan voor user als die nog niet bestaat. Idempotent.
+    v11_unique_wallet_ids_001 — wallet_id = UUID (`wal-xxxxxxxx`), NIET user_id.
+    Anti-fraude: user_id kan gepubliceerd zijn, wallet_id blijft privé/bank-koppeling.
+    """
+    from uuid import uuid4
     wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}, "transactions": []})
     if user_id not in wallets.get("wallets", {}):
         wallets.setdefault("wallets", {})[user_id] = {
-            "wallet_id": user_id,
+            "wallet_id": f"wal-{uuid4().hex[:8]}",
             "balance": 0.0,
             "created_at": datetime.now(timezone.utc).isoformat(),
             "total_deposited": 0,
@@ -104,7 +108,9 @@ async def admin_grant_token(user_id: str, req: TokenAdminRequest):
     try:
         uw_fp = DATA_DIR / "user_wallets.json"
         uw = load_json(uw_fp, default={"user_wallets": {}})
-        uw.setdefault("user_wallets", {}).setdefault(user_id, {})["spark_tokens"] = roar["balances"][user_id]
+        entry = uw.setdefault("user_wallets", {}).setdefault(user_id, {})
+        entry["spark_tokens"] = roar["balances"][user_id]  # top-level master
+        entry.setdefault("wallet", {})["spark_tokens"] = roar["balances"][user_id]  # nested mirror
         save_json(uw_fp, uw)
     except Exception:
         pass
@@ -143,7 +149,9 @@ async def admin_revoke_token(user_id: str, req: TokenAdminRequest):
     try:
         uw_fp = DATA_DIR / "user_wallets.json"
         uw = load_json(uw_fp, default={"user_wallets": {}})
-        uw.setdefault("user_wallets", {}).setdefault(user_id, {})["spark_tokens"] = roar["balances"][user_id]
+        entry = uw.setdefault("user_wallets", {}).setdefault(user_id, {})
+        entry["spark_tokens"] = roar["balances"][user_id]  # top-level master
+        entry.setdefault("wallet", {})["spark_tokens"] = roar["balances"][user_id]  # nested mirror
         save_json(uw_fp, uw)
     except Exception:
         pass
@@ -315,12 +323,106 @@ async def get_overview(user_id: str = Query("user-001")):
     wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}, "transactions": []})
     uw = user_wallets.get("user_wallets", {}).get(user_id, {})
     w = wallets.get("wallets", {}).get(user_id, {})
+
+    # v11_week_boekhoud_link_001 — Bereken week-in/out uit boekhoud-log (audit_log.json).
+    # In = deposits + sell-opbrengsten; Out = withdrawals + gifts uitgaand.
+    week_in_eur = 0.0
+    week_out_eur = 0.0
+    week_in_count = 0
+    week_out_count = 0
+    try:
+        from datetime import datetime, timezone, timedelta
+        audit_fp = Path(__file__).parent.parent.parent / "data" / "system" / "audit_log.json"
+        audit = load_json(audit_fp, default={"entries": []})
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+        for e in audit.get("entries", []):
+            if e.get("user_id") != user_id:
+                continue
+            if e.get("ts", "") < cutoff:
+                continue
+            amt = e.get("amount_eur")
+            if amt is None:
+                continue
+            typ = e.get("type", "")
+            if typ in ("deposit", "trade_sell", "gift_received", "topup"):
+                week_in_eur += float(amt) if amt > 0 else 0
+                week_in_count += 1
+            elif typ in ("withdraw", "trade_buy", "gift_sent", "purchase"):
+                week_out_eur += abs(float(amt))
+                week_out_count += 1
+    except Exception:
+        pass
+
     return {
         "entities": entities,
         "user_wallet": {
-            "spark_tokens": uw.get("wallet", {}).get("spark_tokens", 0),
+            # v11_toplevel_master_001 — top-level spark_tokens is master
+            # (mint/grant/revoke muteren die), nested wallet.spark_tokens = mirror.
+            "spark_tokens": uw.get("spark_tokens", uw.get("wallet", {}).get("spark_tokens", 0)),
             "credits": uw.get("wallet", {}).get("credits", 0),
             "balance_eur": w.get("balance", 0),
+            "wallet_id": w.get("wallet_id"),
+            "created_at": w.get("created_at"),
+            "week_in_eur": round(week_in_eur, 2),
+            "week_out_eur": round(week_out_eur, 2),
+            "week_in_count": week_in_count,
+            "week_out_count": week_out_count,
         },
         "system_wallet": user_wallets.get("user_wallets", {}).get("spark_system", {}),
+    }
+
+
+
+@router.get("/papertrail-overview")
+async def papertrail_overview():
+    """v11_papertrail_widget_001 — Compleet overzicht: treasury + alle holders +
+    laatste 15 papertrail-transacties. Bewijs dat 1M pool klopt."""
+    roar = load_json(ROAR_FILE, default={})
+    users = load_json(USERS_FILE, default={"users": []}).get("users", [])
+    wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}}).get("wallets", {})
+
+    treasury = int(roar.get("treasury_pool", 0))
+    balances = roar.get("balances", {})
+    circulating = sum(int(v) for v in balances.values())
+    total_supply = int(roar.get("total_supply", 1000000))
+
+    # Current price (voor value-per-holder)
+    current_price = 0.0
+    try:
+        from modules.shop.routes import get_dynamic_price
+        current_price = get_dynamic_price() or 0.0
+    except Exception:
+        pass
+
+    # Bouw holders-lijst
+    holders = []
+    users_by_id = {u.get("id"): u for u in users}
+    for uid, amount in balances.items():
+        if int(amount) <= 0:
+            continue
+        u = users_by_id.get(uid) or {}
+        w = wallets.get(uid) or {}
+        holders.append({
+            "user_id": uid,
+            "naam": u.get("naam") or u.get("volledige_naam") or uid,
+            "wallet_id": w.get("wallet_id") or uid,
+            "tokens": int(amount),
+        })
+    holders.sort(key=lambda h: -h["tokens"])
+
+    # Recent transacties (laatste 15)
+    txs = roar.get("transactions", [])
+    if not isinstance(txs, list):
+        txs = []
+    recent = list(reversed(txs))[:15]
+
+    return {
+        "success": True,
+        "total_supply": total_supply,
+        "treasury_pool": treasury,
+        "circulating": circulating,
+        "current_price": round(current_price, 4),
+        "supply_check_ok": (treasury + circulating) == total_supply,
+        "holders": holders,
+        "transactions": recent,
     }

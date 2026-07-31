@@ -201,41 +201,7 @@ async def list_contacts(user_id: str) -> Dict:
     contacts: List[Dict] = []
     admin_grouped_added = False
 
-    # v11_self_contact_001 (31 jul) — "Persoonlijk (jij)" self-DM voor iedereen als
-    # eerste contact. Notities aan jezelf / kladblok. Werkt via _conv_file(uid, uid).
-    self_fp = _conv_file(user_id, user_id)
-    self_msgs = load_json(self_fp, default={"messages": []}).get("messages", []) if self_fp.exists() else []
-    self_last = self_msgs[-1] if self_msgs else None
-    self_last_time = ""
-    if self_last:
-        try:
-            t = _parse_iso(self_last.get("ts"))
-            if t:
-                delta = _now() - t
-                if delta < timedelta(minutes=1): self_last_time = "nu"
-                elif delta < timedelta(hours=1): self_last_time = f"{int(delta.total_seconds() / 60)}m"
-                elif delta < timedelta(days=1): self_last_time = t.astimezone().strftime("%H:%M")
-                else: self_last_time = t.astimezone().strftime("%d/%m")
-        except Exception:
-            pass
-    contacts.append({
-        "id": user_id,
-        "naam": "Persoonlijk (jij)",
-        "avatar": "📝",
-        "avatar_ref": "emoji:📝",
-        "color": "#06b6d4",
-        "online": True,
-        "is_bot": False,
-        "is_admin_contact": False,
-        "is_self": True,
-        "rol": "Notities aan jezelf",
-        "gradatie": viewer_grad,
-        "last_message": (self_last.get("text") or "")[:80] if self_last else "Kladblok — alleen jij ziet dit",
-        "last_time": self_last_time,
-        "unread": 0,
-    })
-
-    # v4_admin_collectief_001: virtueel "Admin Collectief" contact voor admins (grad ≤ 2)
+    # v4_admin_collectief_001: virtueel "Admin Collectief" contact bovenaan voor admins (grad ≤ 2)
     if viewer_grad <= ADMIN_COLLECTIEF_MAX:
         ac_data = load_json(ADMIN_COLLECTIEF_FILE, default={"messages": []})
         ac_msgs = ac_data.get("messages", [])
@@ -442,8 +408,7 @@ async def send_message(req: SendMessage) -> Dict:
         "to_user_id": req.to_user_id,
         "text": req.text.strip(),
         "ts": _now().isoformat(),
-        # v11_self_contact_001 — self-DM = kladblok, nooit als unread markeren.
-        "unread_by": [] if req.from_user_id == req.to_user_id else [req.to_user_id],
+        "unread_by": [req.to_user_id],  # recipient ziet 'm als unread tot hij opent
     }
     data["messages"] = data.get("messages", []) + [msg]
     save_json(fp, data)

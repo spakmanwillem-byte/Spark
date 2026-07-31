@@ -164,7 +164,9 @@ export function WalletPage({ onNavigate }) {
                   let bitvavoFree = null;
                   try {
                     const p = await fetch(`${API}/api/boekhouder/token/price`).then(x => x.json());
-                    mintCost = p?.next_mint_threshold_eur ?? p?.base_pot_size_eur ?? null;
+                    // v11_mint_cost_fix_001 — Willems correctie: kosten = current_price, NIET
+                    // next_mint_threshold (dat is de AUTO-mint drempel, niet de mint-kost).
+                    mintCost = p?.current_price_eur ?? null;
                     bitvavoFree = p?.bitvavo_free_eur ?? null;
                   } catch { /* fallback: null → UI toont '?' */ }
                   const costStr = mintCost !== null ? `€${mintCost.toFixed(2)}` : '?';

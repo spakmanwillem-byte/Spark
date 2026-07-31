@@ -4,8 +4,8 @@
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
   "balances": {
-    "user-001": 1,
-    "user-000": 8
+    "user-001": 3,
+    "user-000": 7
   },
   "transactions": [
     {
@@ -154,10 +154,25 @@
       "cost_eur": 13.93,
       "price_per_token": 13.93,
       "description": "Spark mint 1 ROAR — dekking: Bitvavo €108.66 @ €13.93"
+    },
+    {
+      "id": "bec893521218",
+      "ts": "2026-07-31T07:27:54.407789+00:00",
+      "type": "restore_state",
+      "description": "Herstel Willems 3 tokens die bij zip-merge verloren gingen (Spark=7, Willem=3)",
+      "before": {
+        "user-001": 1,
+        "user-000": 8
+      },
+      "after": {
+        "user-001": 3,
+        "user-000": 7
+      },
+      "source": "admin_restore_v11"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999991,
+  "treasury_pool": 999990,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {

@@ -14,7 +14,6 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const TABS = [
   { id: 'algemeen', label: 'Algemeen', accent: '#f59e0b' },
-  { id: 'achtergrond', label: 'Achtergrond', accent: '#10b981' },
   { id: 'gesprekken', label: 'Gesprekken', accent: '#3b82f6' },
   { id: 'avatar', label: 'Avatar', accent: '#ec4899' },
   { id: 'instellingen', label: 'Instellingen', accent: '#06b6d4' },
@@ -109,12 +108,6 @@ export function UserProfilePage({ onNavigate }) {
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
             )}
-            {activeTab === 'achtergrond' && (
-              <AchtergrondTab
-                profile={extProfile} updateField={updateField}
-                onSave={saveProfile} saving={saving} savedFlash={savedFlash}
-              />
-            )}
             {activeTab === 'gesprekken' && (
               <GesprekkenTab userId={userId} />
             )}
@@ -157,6 +150,9 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
 
   return (
     <div className="space-y-4">
+      {/* v11_profile_merge_001 — Algemeen + Achtergrond samengevoegd (Willem 31-jul-2026).
+          Overlappende velden weggehaald: 'leeftijd' (via geboortedatum), 'locatie' (via plaats/land).
+          Backend endpoint blijft alle velden accepteren (bestaande data blijft geldig). */}
       <Card title="Wie ben jij?" accent="#f59e0b">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {/* Avatar */}
@@ -175,14 +171,18 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
           <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <InputField label="Naam (login)" value={user?.naam || ''} disabled />
             <InputField label="Rol" value={user?.rol || ''} disabled />
-            <InputField label="Leeftijd" value={profile.leeftijd || ''}
-              placeholder="Bijv. 35" onChange={v => updateField('leeftijd', v)} />
-            <InputField label="Beroep" value={profile.beroep || ''}
-              placeholder="Bijv. Ondernemer" onChange={v => updateField('beroep', v)} />
-            <InputField label="Locatie (kort)" value={profile.locatie || ''}
-              placeholder="Bijv. Groningen, NL" onChange={v => updateField('locatie', v)} />
-            <InputField label="Opleiding" value={profile.opleiding || ''}
-              placeholder="Bijv. MBO Techniek" onChange={v => updateField('opleiding', v)} />
+            <InputField label="Volledige Naam" value={profile.volledige_naam || ''}
+              placeholder="Voor- en achternaam" onChange={v => updateField('volledige_naam', v)} />
+            <InputField label="Roepnaam" value={profile.roepnaam || ''}
+              placeholder="" onChange={v => updateField('roepnaam', v)} />
+            <InputField label="Geboortedatum" value={profile.geboortedatum || ''}
+              placeholder="DD-MM-JJJJ" onChange={v => updateField('geboortedatum', v)} />
+            <InputField label="Geboorteplaats" value={profile.geboorteplaats || ''}
+              placeholder="Stad" onChange={v => updateField('geboorteplaats', v)} />
+            <InputField label="Nationaliteit" value={profile.nationaliteit || ''}
+              placeholder="Nederlands" onChange={v => updateField('nationaliteit', v)} />
+            <InputField label="Burgerlijke Staat" value={profile.burgerlijke_staat || ''}
+              placeholder="Alleenstaand, gehuwd, ..." onChange={v => updateField('burgerlijke_staat', v)} />
           </div>
         </div>
 
@@ -209,44 +209,12 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
         </div>
       </Card>
 
-      <Card title="Sociale Media" accent="#3b82f6" subtitle="Wat je deelt, mag Spark gebruiken">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <InputField label="Instagram" value={profile.social_instagram || ''}
-            placeholder="@gebruikersnaam" onChange={v => updateField('social_instagram', v)} />
-          <InputField label="Facebook" value={profile.social_facebook || ''}
-            placeholder="naam of url" onChange={v => updateField('social_facebook', v)} />
-          <InputField label="LinkedIn" value={profile.social_linkedin || ''}
-            placeholder="profiel url" onChange={v => updateField('social_linkedin', v)} />
-          <InputField label="YouTube / TikTok" value={profile.social_youtube || ''}
-            placeholder="kanaal/handle" onChange={v => updateField('social_youtube', v)} />
-        </div>
-      </Card>
-
-      <SaveBar onSave={onSave} saving={saving} savedFlash={savedFlash} />
-    </div>
-  );
-}
-
-// ============================================================
-// TAB: ACHTERGROND — NAW + contact + bank
-// ============================================================
-function AchtergrondTab({ profile, updateField, onSave, saving, savedFlash }) {
-  return (
-    <div className="space-y-4">
-      <Card title="Identiteit" accent="#10b981" icon={User}>
+      <Card title="Werk & Opleiding" accent="#10b981" icon={User}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="Volledige Naam" value={profile.volledige_naam || ''}
-            placeholder="Voor- en achternaam" onChange={v => updateField('volledige_naam', v)} />
-          <InputField label="Roepnaam" value={profile.roepnaam || ''}
-            placeholder="" onChange={v => updateField('roepnaam', v)} />
-          <InputField label="Geboortedatum" value={profile.geboortedatum || ''}
-            placeholder="DD-MM-JJJJ" onChange={v => updateField('geboortedatum', v)} />
-          <InputField label="Geboorteplaats" value={profile.geboorteplaats || ''}
-            placeholder="Stad" onChange={v => updateField('geboorteplaats', v)} />
-          <InputField label="Nationaliteit" value={profile.nationaliteit || ''}
-            placeholder="Nederlands" onChange={v => updateField('nationaliteit', v)} />
-          <InputField label="Burgerlijke Staat" value={profile.burgerlijke_staat || ''}
-            placeholder="Alleenstaand, gehuwd, ..." onChange={v => updateField('burgerlijke_staat', v)} />
+          <InputField label="Beroep" value={profile.beroep || ''}
+            placeholder="Bijv. Ondernemer" onChange={v => updateField('beroep', v)} />
+          <InputField label="Opleiding" value={profile.opleiding || ''}
+            placeholder="Bijv. MBO Techniek" onChange={v => updateField('opleiding', v)} />
         </div>
       </Card>
 
@@ -287,6 +255,19 @@ function AchtergrondTab({ profile, updateField, onSave, saving, savedFlash }) {
             placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('iban', v)} />
           <InputField label="Bank" value={profile.bank_provider || ''}
             placeholder="ING, Rabobank, ABN..." onChange={v => updateField('bank_provider', v)} />
+        </div>
+      </Card>
+
+      <Card title="Sociale Media" accent="#3b82f6" subtitle="Wat je deelt, mag Spark gebruiken">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <InputField label="Instagram" value={profile.social_instagram || ''}
+            placeholder="@gebruikersnaam" onChange={v => updateField('social_instagram', v)} />
+          <InputField label="Facebook" value={profile.social_facebook || ''}
+            placeholder="naam of url" onChange={v => updateField('social_facebook', v)} />
+          <InputField label="LinkedIn" value={profile.social_linkedin || ''}
+            placeholder="profiel url" onChange={v => updateField('social_linkedin', v)} />
+          <InputField label="YouTube / TikTok" value={profile.social_youtube || ''}
+            placeholder="kanaal/handle" onChange={v => updateField('social_youtube', v)} />
         </div>
       </Card>
 

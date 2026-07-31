@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-07-31T08:44:24.037029+00:00",
+      "last_active": "2026-07-31T08:49:10.524667+00:00",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -8597,11 +8597,11 @@
       "rol": "Onbekende",
       "id": "user-166437fe",
       "registered_date": "2026-06-30T10:55:01.436488",
-      "last_active": "2026-07-31T06:40:36.652355+00:00",
+      "last_active": "2026-07-31T08:47:53.475152",
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 2340,
+      "xp": 2490,
       "welcome_version_seen": "v1",
       "welcome_sent_at": "2026-06-30T10:55:01.622278+00:00",
       "gradatie_titel": "Leert graag kennen",
@@ -8788,9 +8788,21 @@
             "type": "letter_completion",
             "unlocked_at": "2026-07-31T08:38:30.232667+00:00",
             "letter": "K"
+          },
+          {
+            "id": "letter_w",
+            "name": "De Letter W",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter W leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓦ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-07-31T08:45:25.449652+00:00",
+            "letter": "W"
           }
         ],
-        "total_xp_from_achievements": 2185
+        "total_xp_from_achievements": 2335
       },
       "xp_events": [
         {
@@ -9014,6 +9026,12 @@
           "reason": "Achievement: De Letter K",
           "granted_at": "2026-07-31T08:38:30.245325+00:00",
           "total_after": 2340
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter W",
+          "granted_at": "2026-07-31T08:45:25.461493+00:00",
+          "total_after": 2490
         }
       ],
       "avatar": "gallery:31c6dc04a2fd",

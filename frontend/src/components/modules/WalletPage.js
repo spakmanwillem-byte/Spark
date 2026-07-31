@@ -93,17 +93,30 @@ export function WalletPage({ onNavigate }) {
   const savingsGoal = 50;
   const savingsPct = wallet ? Math.min(100, Math.round((wallet.balance_eur / savingsGoal) * 100)) : 0;
 
-  // Build weekly overview from transactions
+  // v11_week_chart_real_001 — Willem verzocht: echte log-data ipv mock-fallback.
+  // Was: fake data `i % 3 === 0 ? 10 : 5` als er geen tx op die dag zijn → misleidend.
+  // Nu: gewoon 0 als er niks was. Berekent op basis van huidige week (ma..zo).
   const days = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
+  const now = new Date();
+  const dow = now.getDay(); // 0=zo, 1=ma..
+  const daysSinceMonday = dow === 0 ? 6 : dow - 1;
+  const mondayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysSinceMonday);
   const weeklyData = days.map((day, i) => {
+    const dayStart = new Date(mondayStart.getFullYear(), mondayStart.getMonth(), mondayStart.getDate() + i);
+    const dayEnd = new Date(dayStart.getFullYear(), dayStart.getMonth(), dayStart.getDate() + 1);
     const dayTxs = transactions.filter(tx => {
-      if (!tx.created_at) return false;
-      const d = new Date(tx.created_at);
-      return d.getDay() === (i === 6 ? 0 : i + 1);
+      const dtStr = tx.created_at || tx.ts || tx.timestamp;
+      if (!dtStr) return false;
+      const d = new Date(dtStr);
+      return d >= dayStart && d < dayEnd;
     });
-    const deposits = dayTxs.filter(t => t.type === 'deposit').reduce((s, t) => s + (t.amount || 0), 0);
-    const withdrawals = dayTxs.filter(t => t.type === 'withdrawal').reduce((s, t) => s + (t.amount || 0), 0);
-    return { day, deposits: deposits || (i % 3 === 0 ? 10 : 5), withdrawals: withdrawals || (i % 4 === 0 ? 3 : 1) };
+    const deposits = dayTxs
+      .filter(t => ['deposit', 'topup', 'gift_received', 'trade_sell'].includes(t.type))
+      .reduce((s, t) => s + Math.abs(t.amount || t.amount_eur || 0), 0);
+    const withdrawals = dayTxs
+      .filter(t => ['withdrawal', 'purchase', 'gift_sent', 'trade_buy'].includes(t.type))
+      .reduce((s, t) => s + Math.abs(t.amount || t.amount_eur || 0), 0);
+    return { day, deposits, withdrawals };
   });
   const maxBar = Math.max(...weeklyData.map(d => d.deposits + d.withdrawals), 1);
 
@@ -773,12 +786,8 @@ function TokenPriceChart() {
               </span>
             )}
           </h3>
-          <p className="text-[10px] text-slate-500">
-            <span className="text-emerald-300">━━ Incl-BTW (klant)</span>
-            {' · '}
-            <span className="text-amber-300">━━ Netto (Spark ontvangt)</span>
-            {updatedAt && <span> · ververst {updatedAt.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>}
-          </p>
+          {/* v11_price_kader_clean_001 — Willem verzocht: '━━ Incl-BTW · Netto · ververst tijd'
+              tekst weg (was zichtbaar in alle user-kaders, niet nuttig). */}
         </div>
         <div className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg">
           {['15m', '1h', '4h', '1d'].map(iv => (

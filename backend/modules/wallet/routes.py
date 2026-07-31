@@ -223,6 +223,10 @@ async def get_user_wallet(user_id: str):
 
     return {
         "user_id": user_id,
+        # v11_wallet_fields_001 — wallet_id + created_at nodig voor Spark Card UI
+        "wallet_id": w.get("wallet_id", user_id),
+        "created_at": w.get("created_at"),
+        "geblokkeerd": bool(uw.get("geblokkeerd", False)),
         "name": uw.get("name", "Onbekend"),
         "spark_tokens": hybrid_token_count,
         "spark_tokens_stored": spark_tokens_stored,

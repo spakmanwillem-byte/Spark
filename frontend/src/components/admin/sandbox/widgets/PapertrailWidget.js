@@ -78,20 +78,40 @@ export function PapertrailWidget() {
           <button onClick={load} data-testid="pt-refresh" className="text-[10px] text-slate-400 hover:text-white">↻</button>
         </div>
         <div className="divide-y divide-slate-800/60">
-          {(data.holders || []).map(h => (
-            <div key={h.user_id} data-testid={`pt-holder-${h.user_id}`} className="px-3 py-2 flex items-center justify-between text-[11px]">
-              <div className="flex-1 min-w-0">
-                <p className="text-white font-medium truncate">{h.naam || h.user_id}</p>
-                <p className="text-[9px] text-slate-500 font-mono truncate">
-                  user_id: {h.user_id} · wallet_id: {h.wallet_id || h.user_id}
-                </p>
+          {(data.holders || []).map(h => {
+            // v11_papertrail_potjes_001 — drift-badge: tokens vs potjes moet 1-op-1 kloppen.
+            const drift = h.drift ?? ((h.potjes || 0) - h.tokens);
+            const driftOk = drift === 0;
+            return (
+              <div key={h.user_id} data-testid={`pt-holder-${h.user_id}`} className="px-3 py-2 flex items-center justify-between text-[11px]">
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-medium truncate">{h.naam || h.user_id}</p>
+                  <p className="text-[9px] text-slate-500 font-mono truncate">
+                    user_id: {h.user_id} · wallet_id: {h.wallet_id || h.user_id}
+                  </p>
+                </div>
+                <div className="text-right flex items-center gap-2">
+                  <div>
+                    <p className="text-amber-300 font-mono">{h.tokens} ROAR</p>
+                    <p className="text-[9px] text-slate-500">€{(h.tokens * (data.current_price || 0)).toFixed(2)}</p>
+                  </div>
+                  <div className={`px-2 py-1 rounded text-[9px] font-mono border ${
+                    driftOk
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                      : 'bg-red-500/10 border-red-500/40 text-red-300'
+                  }`}
+                    title={driftOk
+                      ? '1 token = 1 potje ✓'
+                      : `Drift: ${drift > 0 ? `${drift} potje(s) te veel` : `${Math.abs(drift)} potje(s) te weinig`} — token en potje raakten uit sync (bv. gift verplaatst token maar niet potje).`}>
+                    <div>{h.potjes ?? 0} pot</div>
+                    <div className={driftOk ? 'text-emerald-400/70' : 'text-red-400'}>
+                      {driftOk ? '✓' : `${drift > 0 ? '+' : ''}${drift}`}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="text-right">
-                <p className="text-amber-300 font-mono">{h.tokens} ROAR</p>
-                <p className="text-[9px] text-slate-500">€{(h.tokens * (data.current_price || 0)).toFixed(2)}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

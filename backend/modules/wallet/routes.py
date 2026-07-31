@@ -399,6 +399,13 @@ async def papertrail_overview():
         pass
 
     # Bouw holders-lijst
+    # v11_papertrail_potjes_001 (31 jul) — koppel potjes-count aan tokens zodat drift zichtbaar wordt.
+    # Regel: 1 token = 1 potje. Bij gift/admin_grant verhuist wel token, niet potje.
+    potjes_file = DATA_DIR.parent / "financial" / "user_potjes.json"
+    try:
+        potjes_data = load_json(potjes_file, default={"users": {}}).get("users", {})
+    except Exception:
+        potjes_data = {}
     holders = []
     users_by_id = {u.get("id"): u for u in users}
     for uid, amount in balances.items():
@@ -406,11 +413,15 @@ async def papertrail_overview():
             continue
         u = users_by_id.get(uid) or {}
         w = wallets.get(uid) or {}
+        potjes_count = len((potjes_data.get(uid, {}) or {}).get("potjes", []) or [])
+        tokens_int = int(amount)
         holders.append({
             "user_id": uid,
             "naam": u.get("naam") or u.get("volledige_naam") or uid,
             "wallet_id": w.get("wallet_id") or uid,
-            "tokens": int(amount),
+            "tokens": tokens_int,
+            "potjes": potjes_count,
+            "drift": potjes_count - tokens_int,  # >0 = te veel potjes, <0 = te weinig
         })
     holders.sort(key=lambda h: -h["tokens"])
 

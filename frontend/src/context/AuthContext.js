@@ -110,6 +110,47 @@ export function AuthProvider({ children }) {
     return () => window.removeEventListener('avatar-changed', handler);
   }, [user?.id, refreshUser]);
 
+  // v11_admin_mode_001 — Admin losgekoppeld van gradatie. Standaard NIEMAND is admin,
+  // ook Willem (gradatie 1) niet. Enable via 'Admin aan' + admin_key. Bewaard in
+  // localStorage per user zodat het session-survivable is.
+  const [adminModeActive, setAdminModeActive] = useState(() => {
+    try {
+      const uid = JSON.parse(localStorage.getItem('spark_user') || 'null')?.id;
+      return uid ? localStorage.getItem(`spark_admin_mode_${uid}`) === '1' : false;
+    } catch { return false; }
+  });
+  const [adminCapable, setAdminCapable] = useState(false);
+
+  // Load admin_capable status wanneer user verandert
+  useEffect(() => {
+    if (!user?.id) { setAdminCapable(false); return; }
+    const API = process.env.REACT_APP_BACKEND_URL;
+    fetch(`${API}/api/auth/admin/status/${user.id}`)
+      .then(r => r.json())
+      .then(d => setAdminCapable(!!d.admin_capable))
+      .catch(() => setAdminCapable(false));
+  }, [user?.id]);
+
+  const enableAdmin = useCallback(async (adminKey) => {
+    const API = process.env.REACT_APP_BACKEND_URL;
+    const r = await fetch(`${API}/api/auth/admin/enable`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: user.id, admin_key: adminKey }),
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      throw new Error(err.detail || 'Ongeldige admin-key');
+    }
+    setAdminModeActive(true);
+    localStorage.setItem(`spark_admin_mode_${user.id}`, '1');
+    return true;
+  }, [user?.id]);
+
+  const disableAdmin = useCallback(() => {
+    setAdminModeActive(false);
+    if (user?.id) localStorage.removeItem(`spark_admin_mode_${user.id}`);
+  }, [user?.id]);
+
   const value = {
     user,
     loading,
@@ -118,7 +159,12 @@ export function AuthProvider({ children }) {
     logout,
     refreshUser,
     isLoggedIn: !!user,
-    isAdmin: user?.gradatie != null && user.gradatie <= 2  // v4_admin_grad_001: gradatie 1+2 zijn admin
+    // v11_admin_mode_001: isAdmin nu = admin_capable EN admin-mode actief (niet meer gradatie-gebaseerd)
+    isAdmin: adminCapable && adminModeActive,
+    adminCapable,
+    adminModeActive,
+    enableAdmin,
+    disableAdmin,
   };
 
   return (

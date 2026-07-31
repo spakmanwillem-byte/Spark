@@ -237,6 +237,30 @@ export function UsersAdminPage({ onNavigate }) {
     });
   };
 
+  // v11_admin_mode_001 — Reset admin-key van user (default 'admin')
+  const handleResetAdminKey = async (user) => {
+    if (!user) return;
+    setBark({
+      mode: 'confirm',
+      begrip: 'Admin-key',
+      title: `Admin-key resetten?`,
+      text: `Admin-key van "${user.naam}" wordt gereset naar 'admin'. Ze moeten hiermee opnieuw admin-mode activeren.`,
+      tone: 'warn',
+      onConfirm: async () => {
+        try {
+          const API = process.env.REACT_APP_BACKEND_URL;
+          const r = await fetch(`${API}/api/auth/admin/reset-key/${user.id}`, { method: 'POST' });
+          const d = await r.json();
+          if (!r.ok) throw new Error(d.detail || 'Reset mislukt');
+          setBark({ mode: 'info', begrip: 'Admin-key', title: 'Gereset', text: `Admin-key van ${user.naam} is nu: ${d.admin_key}`, tone: 'success' });
+        } catch (err) {
+          setBark({ mode: 'info', begrip: 'Toegang geweigerd', title: 'Reset mislukt', text: err.message || 'Kon admin-key niet resetten', tone: 'error' });
+        }
+      },
+    });
+  };
+
+
   const getGradatieInfo = (niveau) => {
     return gradaties.find(g => g.niveau === niveau) || { titel: 'Onbekend', niveau };
   };
@@ -624,6 +648,17 @@ export function UsersAdminPage({ onNavigate }) {
                     >
                       <KeyRound className="w-4 h-4" /> Reset WW
                     </button>
+                    {/* v11_admin_mode_001 — Reset admin-key knop (naast sleutelwoord-reset) */}
+                    {selectedUser?.admin_capable && (
+                      <button
+                        data-testid="action-reset-admin-key"
+                        onClick={() => handleResetAdminKey(selectedUser)}
+                        className="py-3 bg-amber-500/10 text-amber-400 rounded-xl font-medium hover:bg-amber-500/20 transition-colors flex items-center justify-center gap-2"
+                        title="Reset admin-key naar 'admin'"
+                      >
+                        <KeyRound className="w-4 h-4" /> Reset Admin-key
+                      </button>
+                    )}
                     <button
                       data-testid="action-historie"
                       onClick={() => setDetailTab('logs')}

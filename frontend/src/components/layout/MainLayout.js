@@ -97,7 +97,10 @@ export function getVisibilityForGradatie(grad) {
 }
 
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, adminCapable, adminModeActive, enableAdmin, disableAdmin } = useAuth();
+  const [adminKeyPrompt, setAdminKeyPrompt] = React.useState(false);
+  const [adminKeyInput, setAdminKeyInput] = React.useState('');
+  const [adminKeyError, setAdminKeyError] = React.useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showHelp, setShowHelp] = useState(false);  // v6_help_001
 
@@ -555,6 +558,67 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
               >
                 <LogOut className="w-4 h-4" />
               </button>
+            </div>
+          )}
+          {/* v11_admin_mode_001 — Admin-toggle. Alleen zichtbaar als admin_capable. */}
+          {adminCapable && !sidebarCollapsed && (
+            <div className="px-3 pb-2">
+              <button
+                data-testid="admin-toggle"
+                onClick={() => {
+                  if (adminModeActive) { disableAdmin(); }
+                  else { setAdminKeyPrompt(true); setAdminKeyError(''); setAdminKeyInput(''); }
+                }}
+                className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                  adminModeActive
+                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
+                    : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'
+                }`}
+              >
+                {adminModeActive ? '🔓 Admin aan' : '🔒 Admin uit'}
+              </button>
+            </div>
+          )}
+          {/* Admin-key modal */}
+          {adminKeyPrompt && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+                 onClick={() => setAdminKeyPrompt(false)}>
+              <div className="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 w-96 max-w-[90vw]"
+                   onClick={e => e.stopPropagation()}>
+                <h3 className="text-lg font-bold text-amber-300 mb-2">🔒 Admin-key</h3>
+                <p className="text-xs text-slate-400 mb-4">
+                  Voer je admin-key in om admin-features te activeren. Kan altijd weer uit via de knop.
+                </p>
+                <input
+                  data-testid="admin-key-input"
+                  type="password"
+                  autoFocus
+                  value={adminKeyInput}
+                  onChange={e => setAdminKeyInput(e.target.value)}
+                  onKeyDown={async (e) => {
+                    if (e.key === 'Enter') {
+                      try { await enableAdmin(adminKeyInput); setAdminKeyPrompt(false); }
+                      catch (err) { setAdminKeyError(err.message); }
+                    }
+                  }}
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:border-amber-500 focus:outline-none"
+                  placeholder="admin-key..."
+                />
+                {adminKeyError && <p className="text-red-400 text-xs mt-2">{adminKeyError}</p>}
+                <div className="flex gap-2 mt-4 justify-end">
+                  <button onClick={() => setAdminKeyPrompt(false)}
+                    className="px-3 py-1.5 text-xs text-slate-400 hover:text-white rounded-lg">Annuleer</button>
+                  <button
+                    data-testid="admin-key-submit"
+                    onClick={async () => {
+                      try { await enableAdmin(adminKeyInput); setAdminKeyPrompt(false); }
+                      catch (err) { setAdminKeyError(err.message); }
+                    }}
+                    className="px-4 py-1.5 text-xs bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded-lg border border-amber-500/40">
+                    Admin aan
+                  </button>
+                </div>
+              </div>
             </div>
           )}
 

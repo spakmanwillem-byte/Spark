@@ -323,6 +323,69 @@ async def change_password(user_id: str, req: ChangePasswordRequest):
     return {"success": True, "message": msg}
 
 
+# ═══════════════════════════════════════════════════════════════════
+# v11_admin_mode_001 — Admin loskoppelen van gradatie.
+# Willems visie: admin = tijdelijke toestand, moet actief aangezet worden.
+# Ook gradatie 1 (Willem) is standaard NIET admin — moet zelf "Admin aan" klikken.
+# Default admin_key = "admin", per user, resetbaar zoals sleutelwoord.
+# ═══════════════════════════════════════════════════════════════════
+class AdminEnableRequest(BaseModel):
+    user_id: str
+    admin_key: str
+
+
+@router.post("/admin/enable")
+async def admin_enable(req: AdminEnableRequest):
+    """Verifieer admin_key → sessie 'Admin aan'. Frontend bewaart deze state
+    lokaal (localStorage per user). Backend valideert alleen de key."""
+    ok = AuthService.verify_admin_key(req.user_id, req.admin_key)
+    if not ok:
+        raise HTTPException(status_code=401, detail="Onjuiste admin-key of user niet admin-capable")
+    return {"success": True, "user_id": req.user_id, "admin_active": True,
+            "message": "Admin-mode actief"}
+
+
+@router.post("/admin/disable")
+async def admin_disable(user_id: str):
+    """Frontend clear state. Backend endpoint puur voor audit-log."""
+    return {"success": True, "user_id": user_id, "admin_active": False,
+            "message": "Admin-mode uit"}
+
+
+@router.post("/admin/reset-key/{user_id}")
+async def admin_reset_key(user_id: str, new_key: Optional[str] = None):
+    """Reset admin_key van user naar default 'admin' (of custom via query-param).
+    Zoals wachtwoord-reset flow: alleen door beheerder aanroepbaar (frontend guard)."""
+    result = AuthService.reset_admin_key(user_id, new_key or "admin")
+    if not result:
+        raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
+    return {"success": True, "admin_key": result,
+            "message": f"Admin-key gereset naar '{result}'"}
+
+
+@router.post("/admin/set-capable/{user_id}")
+async def admin_set_capable(user_id: str, capable: bool = True):
+    """Zet of user überhaupt admin-mode kan aanzetten. Default 'admin' key
+    wordt geset als user nog geen key had."""
+    ok = AuthService.set_admin_capable(user_id, capable)
+    if not ok:
+        raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
+    return {"success": True, "user_id": user_id, "admin_capable": capable}
+
+
+@router.get("/admin/status/{user_id}")
+async def admin_status(user_id: str):
+    """Geeft aan of user admin-capable is (of hij dus überhaupt de toggle mag zien)."""
+    users = AuthService.get_all_users()
+    for u in users:
+        if u.get("id") == user_id:
+            return {"success": True, "user_id": user_id,
+                    "admin_capable": bool(u.get("admin_capable", False)),
+                    "has_admin_key": bool(u.get("admin_key"))}
+    raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
+
+
+
 @router.get("/users/{user_id}/time-awareness")
 async def get_time_awareness(user_id: str):
     """v4_025: Wat denkt Spark dat de tijd is voor deze user?

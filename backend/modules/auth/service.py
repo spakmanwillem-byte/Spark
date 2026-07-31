@@ -333,6 +333,47 @@ class AuthService:
                     return new_sleutelwoord
         return None
 
+    # v11_admin_mode_001 — Admin loskoppelen van gradatie. Willems visie:
+    # gradatie = permanente rol, admin = tijdelijke sessie-toestand.
+    # Standaard admin_key = "admin", user-gebonden, resetbaar zoals sleutelwoord.
+    @staticmethod
+    def verify_admin_key(user_id: str, key: str) -> bool:
+        """Verifieer admin-key voor 'Admin aan'-flow. Plain-text vergelijk (zelfde
+        patroon als sleutelwoord). Alleen users met admin_capable=True kunnen slagen."""
+        users = AuthService.get_all_users()
+        for user in users:
+            if user.get("id") != user_id:
+                continue
+            if not user.get("admin_capable"):
+                return False
+            stored = user.get("admin_key", "admin")  # default "admin" tot user reset
+            return str(stored).strip() == str(key).strip()
+        return False
+
+    @staticmethod
+    def reset_admin_key(user_id: str, new_key: str = "admin") -> Optional[str]:
+        """Reset admin_key (default 'admin'). Alleen aanroepbaar door andere admin."""
+        users = AuthService.get_all_users()
+        for user in users:
+            if user.get("id") == user_id:
+                user["admin_key"] = new_key
+                user["admin_key_reset_op"] = datetime.utcnow().isoformat()
+                if AuthService._save_users(users):
+                    return new_key
+        return None
+
+    @staticmethod
+    def set_admin_capable(user_id: str, capable: bool) -> bool:
+        """Zet of user überhaupt admin kan zijn (los van huidige key)."""
+        users = AuthService.get_all_users()
+        for user in users:
+            if user.get("id") == user_id:
+                user["admin_capable"] = bool(capable)
+                if capable and not user.get("admin_key"):
+                    user["admin_key"] = "admin"
+                return AuthService._save_users(users)
+        return False
+
     @staticmethod
     def change_password(user_id: str, current_sleutelwoord: str, new_sleutelwoord: str) -> Tuple[bool, str]:
         """

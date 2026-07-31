@@ -26,7 +26,7 @@
             "total_pnl": -0.2135
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €0.145010001605322",
+          "last_action": "ADMIN CLOSE (restwaarde \u2014 coin al weg) @ \u20ac0.145010001605322",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
@@ -132,7 +132,7 @@
             "total_pnl": -0.2683
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "SELL @ €1656.28 | netto €-0.268",
+          "last_action": "SELL @ \u20ac1656.28 | netto \u20ac-0.268",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "12b77d32-348a-4c55-8602-d7a9ef834d68",
@@ -177,7 +177,7 @@
             "total_pnl": -0.1726
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "SELL @ €64.48 | netto €-0.173",
+          "last_action": "SELL @ \u20ac64.48 | netto \u20ac-0.173",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "00c6f3fa-7611-4524-9de5-f3be9de9fd64",
@@ -214,7 +214,7 @@
             "total_pnl": 0.3444
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "SELL @ €0.14 | netto €+0.344",
+          "last_action": "SELL @ \u20ac0.14 | netto \u20ac+0.344",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "37b7bce0-0ab6-4a16-83eb-b704320d3a60",
@@ -262,7 +262,7 @@
               "amount_eur": 14.04
             }
           ],
-          "last_action": "SELL @ €186.37 | netto €-0.334"
+          "last_action": "SELL @ \u20ac186.37 | netto \u20ac-0.334"
         },
         {
           "id": "pot-007",
@@ -283,90 +283,6 @@
             "losses": 0,
             "total_pnl": 0.0
           }
-        },
-        {
-          "id": "pot-008",
-          "index": 7,
-          "capital": 10.94,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "EUR",
-          "assigned_market": null,
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-07-31T07:11:10.757076+00:00",
-          "last_action": null,
-          "source": "spark_mint_bonus",
-          "slot_type": "trade_slot_from_mint",
-          "origin_tx": "b64d3ca677ca"
-        },
-        {
-          "id": "pot-009",
-          "index": 8,
-          "capital": 10.94,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "EUR",
-          "assigned_market": null,
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-07-31T07:53:24.696012+00:00",
-          "last_action": null,
-          "source": "spark_mint_bonus",
-          "slot_type": "trade_slot_from_mint",
-          "origin_tx": "41b9a31d164e"
-        },
-        {
-          "id": "pot-010",
-          "index": 9,
-          "capital": 10.94,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "EUR",
-          "assigned_market": null,
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-07-31T07:53:24.696012+00:00",
-          "last_action": null,
-          "source": "spark_mint_bonus",
-          "slot_type": "trade_slot_from_mint",
-          "origin_tx": "41b9a31d164e"
         }
       ],
       "last_buy_cycle": 452,
@@ -422,6 +338,22 @@
             }
           ],
           "last_action": "BUY cluster e93b1c @ EUR189.9400"
+        },
+        {
+          "id": "pot-002",
+          "state": null,
+          "capital": 10.0,
+          "trades": [],
+          "created_at": "2026-07-31T10:17:33.271743+00:00",
+          "note": "v11_potjes_reconcile \u2014 auto-added to match token balance"
+        },
+        {
+          "id": "pot-003",
+          "state": null,
+          "capital": 10.0,
+          "trades": [],
+          "created_at": "2026-07-31T10:17:33.271743+00:00",
+          "note": "v11_potjes_reconcile \u2014 auto-added to match token balance"
         }
       ],
       "overflow_pool": 0.0,
@@ -517,7 +449,7 @@
   },
   "_pre_deploy_reset_at": "2026-06-03T14:02:40.629249+00:00",
   "_reset_at": "2026-07-09T21:58:48.209182+00:00",
-  "_reset_note": "v8_live_start_reset: burned 22 pots. New BASE_PRICE €10.00.",
+  "_reset_note": "v8_live_start_reset: burned 22 pots. New BASE_PRICE \u20ac10.00.",
   "_trim_at": "2026-07-09T22:03:38.887525+00:00",
   "_final_reset_at": "2026-07-09T22:04:13.835479+00:00"
 }

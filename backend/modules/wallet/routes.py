@@ -74,38 +74,86 @@ class TokenAdminRequest(BaseModel):
 
 @router.post("/admin/token/grant/{user_id}")
 async def admin_grant_token(user_id: str, req: TokenAdminRequest):
-    """Admin geeft N tokens aan user (uit Spark treasury user-000)."""
+    """Admin geeft N tokens aan user vanuit treasury_pool (NIET Spark's balance).
+
+    v11_treasury_pool_fix_001 — Was: haalde uit balances[user-000] (Spark's persoonlijke
+    tokens). Fout: verwarring tussen treasury en Spark-balance. Nu: correct uit
+    treasury_pool → 1M supply consistent (treasury + som(balances) = 1.000.000).
+    """
     n = max(1, int(req.amount))
-    roar = load_json(ROAR_FILE, default={"balances": {}})
-    treasury = int(roar.get("balances", {}).get("user-000", 0))
+    roar = load_json(ROAR_FILE, default={"balances": {}, "treasury_pool": 999973, "total_supply": 1000000})
+    treasury = int(roar.get("treasury_pool", 0))
     if treasury < n:
         return {"success": False, "error": f"Treasury heeft maar {treasury} tokens, je vroeg {n}"}
-    roar["balances"]["user-000"] = treasury - n
+    # 51%-garantie: treasury moet ≥510k blijven (governance)
+    if treasury - n < 510000:
+        return {"success": False, "error": "Mag niet onder 51% governance-garantie (510.000 tokens)"}
+    roar["treasury_pool"] = treasury - n
     roar["balances"][user_id] = int(roar.get("balances", {}).get(user_id, 0)) + n
+    now = datetime.now(timezone.utc).isoformat()
+    roar.setdefault("transactions", []).append({
+        "type": "admin_grant", "user_id": user_id, "n_tokens": n,
+        "source": "wallet_admin_grant_button", "reason": req.reason,
+        "timestamp": now,
+    })
     roar.setdefault("admin_log", []).append({
-        "ts": datetime.now(timezone.utc).isoformat(),
-        "action": "grant", "user_id": user_id, "amount": n, "reason": req.reason
+        "ts": now, "action": "grant", "user_id": user_id, "amount": n, "reason": req.reason,
     })
     save_json(ROAR_FILE, roar)
-    return {"success": True, "user_id": user_id, "new_balance": roar["balances"][user_id], "treasury_left": roar["balances"]["user-000"]}
+    # Sync user_wallets mirror
+    try:
+        uw_fp = DATA_DIR / "user_wallets.json"
+        uw = load_json(uw_fp, default={"user_wallets": {}})
+        uw.setdefault("user_wallets", {}).setdefault(user_id, {})["spark_tokens"] = roar["balances"][user_id]
+        save_json(uw_fp, uw)
+    except Exception:
+        pass
+    # Sync potjes-slot (1 token = 1 pot)
+    try:
+        from modules.trade.potjes import sync_potjes_to_tokens
+        sync_potjes_to_tokens(user_id, roar["balances"][user_id])
+    except Exception:
+        pass
+    return {"success": True, "user_id": user_id,
+            "new_balance": roar["balances"][user_id],
+            "treasury_left": roar["treasury_pool"]}
 
 
 @router.post("/admin/token/revoke/{user_id}")
 async def admin_revoke_token(user_id: str, req: TokenAdminRequest):
-    """Admin neemt N tokens terug van user → treasury."""
+    """Admin neemt N tokens terug van user → treasury_pool (v11_treasury_pool_fix_001)."""
     n = max(1, int(req.amount))
-    roar = load_json(ROAR_FILE, default={"balances": {}})
+    roar = load_json(ROAR_FILE, default={"balances": {}, "treasury_pool": 999973, "total_supply": 1000000})
     user_bal = int(roar.get("balances", {}).get(user_id, 0))
     if user_bal < n:
         return {"success": False, "error": f"User heeft maar {user_bal} tokens"}
     roar["balances"][user_id] = user_bal - n
-    roar["balances"]["user-000"] = int(roar.get("balances", {}).get("user-000", 0)) + n
+    roar["treasury_pool"] = int(roar.get("treasury_pool", 0)) + n
+    now = datetime.now(timezone.utc).isoformat()
+    roar.setdefault("transactions", []).append({
+        "type": "admin_revoke", "user_id": user_id, "n_tokens": n,
+        "source": "wallet_admin_revoke_button", "reason": req.reason,
+        "timestamp": now,
+    })
     roar.setdefault("admin_log", []).append({
-        "ts": datetime.now(timezone.utc).isoformat(),
-        "action": "revoke", "user_id": user_id, "amount": n, "reason": req.reason
+        "ts": now, "action": "revoke", "user_id": user_id, "amount": n, "reason": req.reason,
     })
     save_json(ROAR_FILE, roar)
-    return {"success": True, "user_id": user_id, "new_balance": roar["balances"][user_id]}
+    # Sync mirror + potjes
+    try:
+        uw_fp = DATA_DIR / "user_wallets.json"
+        uw = load_json(uw_fp, default={"user_wallets": {}})
+        uw.setdefault("user_wallets", {}).setdefault(user_id, {})["spark_tokens"] = roar["balances"][user_id]
+        save_json(uw_fp, uw)
+    except Exception:
+        pass
+    try:
+        from modules.trade.potjes import sync_potjes_to_tokens
+        sync_potjes_to_tokens(user_id, roar["balances"][user_id])
+    except Exception:
+        pass
+    return {"success": True, "user_id": user_id, "new_balance": roar["balances"][user_id],
+            "treasury_left": roar["treasury_pool"]}
 
 
 @router.get("/admin/overview")

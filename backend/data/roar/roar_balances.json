@@ -5,7 +5,8 @@
   "previous_tx_count": 13,
   "balances": {
     "user-001": 3,
-    "user-000": 7
+    "user-000": 7,
+    "user-a0ee2d7e": 0
   },
   "transactions": [
     {
@@ -169,6 +170,22 @@
         "user-000": 7
       },
       "source": "admin_restore_v11"
+    },
+    {
+      "type": "admin_grant",
+      "user_id": "user-a0ee2d7e",
+      "n_tokens": 1,
+      "source": "wallet_admin_grant_button",
+      "reason": "test v11_treasury_fix",
+      "timestamp": "2026-07-31T07:33:03.995571+00:00"
+    },
+    {
+      "type": "admin_revoke",
+      "user_id": "user-a0ee2d7e",
+      "n_tokens": 1,
+      "source": "wallet_admin_revoke_button",
+      "reason": "cleanup test v11_treasury_fix",
+      "timestamp": "2026-07-31T07:33:20.690442+00:00"
     }
   ],
   "total_supply": 1000000,
@@ -285,6 +302,20 @@
       "to_user_id": "user-000",
       "amount": 1,
       "gift_id": "3c2e7385-02c1-4d91-852a-b7b04d3c0f18"
+    },
+    {
+      "ts": "2026-07-31T07:33:03.995571+00:00",
+      "action": "grant",
+      "user_id": "user-a0ee2d7e",
+      "amount": 1,
+      "reason": "test v11_treasury_fix"
+    },
+    {
+      "ts": "2026-07-31T07:33:20.690442+00:00",
+      "action": "revoke",
+      "user_id": "user-a0ee2d7e",
+      "amount": 1,
+      "reason": "cleanup test v11_treasury_fix"
     }
   ],
   "_clean_slate_1juni": {

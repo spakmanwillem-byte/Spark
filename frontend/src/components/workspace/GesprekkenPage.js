@@ -464,9 +464,11 @@ export function GesprekkenPage({ onNavigate }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, userId, subTabGlow.spark]);
 
+  // v11_community_grad5_001 — Community-chat zichtbaar vanaf gradatie 5 (Community Member).
+  // Grad 6 (Bekend) en 7 (Leert graag kennen) zien alleen Spark + Privé.
   const tabs = [
     { id: 'spark', label: 'Spark AI', icon: Bot, accent: '#f59e0b' },
-    { id: 'community', label: 'Community', icon: Users, accent: '#a855f7' },
+    ...(userGradatie <= 5 ? [{ id: 'community', label: 'Community', icon: Users, accent: '#a855f7' }] : []),
     { id: 'prive', label: 'Privé', icon: Lock, accent: '#06b6d4' },
   ];
 

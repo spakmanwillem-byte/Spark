@@ -99,26 +99,50 @@ export function PapertrailWidget() {
       <div className="rounded-lg border border-slate-800 bg-slate-900/40 overflow-hidden">
         <div className="px-3 py-2 border-b border-slate-800">
           <h4 className="text-xs font-semibold text-white">Recente papertrail (laatste 15)</h4>
+          <p className="text-[9px] text-slate-500 mt-0.5">
+            → = tokens naar (gemint/gegift/toegekend) · ← = tokens uit (verkocht/burn/ingetrokken)
+          </p>
         </div>
         <div className="divide-y divide-slate-800/60 max-h-72 overflow-y-auto">
-          {(data.transactions || []).map((t, i) => (
-            <div key={i} data-testid={`pt-tx-${i}`} className="px-3 py-1.5 flex items-center justify-between text-[10px]">
-              <div className="flex-1 min-w-0">
-                <span className={`px-1.5 py-0.5 rounded text-[9px] mr-1 ${
-                  t.type === 'buy_tokens' ? 'bg-emerald-500/20 text-emerald-300'
-                  : t.type === 'spark_self_mint' ? 'bg-amber-500/20 text-amber-300'
-                  : t.type === 'admin_grant' ? 'bg-cyan-500/20 text-cyan-300'
-                  : t.type === 'admin_revoke' ? 'bg-red-500/20 text-red-300'
-                  : t.type === 'gift' ? 'bg-purple-500/20 text-purple-300'
-                  : 'bg-slate-700 text-slate-300'
-                }`}>{t.type}</span>
-                <span className="text-slate-400">{t.user_id?.slice(0,10)}</span>
-                {t.n_tokens && <span className="text-amber-300 ml-1">{t.n_tokens > 0 ? '+' : ''}{t.n_tokens}</span>}
-                {t.amount && <span className="text-amber-300 ml-1">{t.amount > 0 ? '+' : ''}{t.amount}</span>}
+          {(data.transactions || []).map((t, i) => {
+            // v11_papertrail_names_001 — richting + naam ipv kale user-id.
+            const TYPE_META = {
+              mint:               { label: 'mint',            color: 'bg-amber-500/20 text-amber-300',       dir: '→' },
+              spark_self_mint:    { label: 'spark self-mint', color: 'bg-amber-500/20 text-amber-300',       dir: '→' },
+              admin_grant:        { label: 'admin grant',     color: 'bg-cyan-500/20 text-cyan-300',         dir: '→' },
+              admin_revoke:       { label: 'admin revoke',    color: 'bg-red-500/20 text-red-300',           dir: '←' },
+              buy_tokens:         { label: 'koop',            color: 'bg-emerald-500/20 text-emerald-300',   dir: '→' },
+              sell_back:          { label: 'verkoop',         color: 'bg-orange-500/20 text-orange-300',     dir: '←' },
+              gift:               { label: 'gift',            color: 'bg-purple-500/20 text-purple-300',     dir: '→' },
+              burn:               { label: 'burn',            color: 'bg-red-500/20 text-red-300',           dir: '×' },
+              alignment_transfer: { label: 'alignment',       color: 'bg-slate-700 text-slate-300',          dir: '⇄' },
+              restore_state:      { label: 'restore',         color: 'bg-slate-700 text-slate-300',          dir: '⟲' },
+            };
+            const meta = TYPE_META[t.type] || { label: t.type, color: 'bg-slate-700 text-slate-300', dir: '·' };
+            const n = t.n_tokens ?? t.amount;
+            // Gift = van → naar (heeft from_naam + to_naam), anders: enkele holder.
+            const isGift = t.type === 'gift' && (t.from_naam || t.to_naam);
+            const displayName = isGift
+              ? `${t.from_naam || t.from_user || '?'} → ${t.to_naam || t.to_user || '?'}`
+              : (t.user_naam || t.user_id?.slice(0, 12) || '—');
+            return (
+              <div key={i} data-testid={`pt-tx-${i}`} className="px-3 py-1.5 flex items-center justify-between text-[10px] gap-2">
+                <div className="flex-1 min-w-0 flex items-center gap-1.5">
+                  <span className={`px-1.5 py-0.5 rounded text-[9px] flex-shrink-0 ${meta.color}`}>{meta.label}</span>
+                  {!isGift && <span className="text-slate-500 flex-shrink-0">{meta.dir}</span>}
+                  <span className="text-slate-200 truncate">{displayName}</span>
+                  {n != null && (
+                    <span className={`ml-1 font-mono flex-shrink-0 ${
+                      meta.dir === '←' || meta.dir === '×' ? 'text-red-300' : 'text-amber-300'
+                    }`}>
+                      {meta.dir === '←' || meta.dir === '×' ? '−' : '+'}{Math.abs(n)}
+                    </span>
+                  )}
+                </div>
+                <span className="text-slate-600 text-[9px] flex-shrink-0">{(t.ts || t.timestamp || '').slice(11, 19)}</span>
               </div>
-              <span className="text-slate-600 text-[9px]">{(t.ts || t.timestamp || '').slice(11, 19)}</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

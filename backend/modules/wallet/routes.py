@@ -414,11 +414,27 @@ async def papertrail_overview():
         })
     holders.sort(key=lambda h: -h["tokens"])
 
-    # Recent transacties (laatste 15)
+    # Recent transacties (laatste 15) — v11_papertrail_names_001 (31 jul):
+    # Verrijk elke tx met 'user_naam' zodat de widget "→ Spark" kan tonen ipv "user-000".
     txs = roar.get("transactions", [])
     if not isinstance(txs, list):
         txs = []
-    recent = list(reversed(txs))[:15]
+    recent = []
+    for t in list(reversed(txs))[:15]:
+        t2 = dict(t)
+        uid = t.get("user_id") or t.get("to_user") or t.get("actor")
+        from_uid = t.get("from_user")
+        to_uid = t.get("to_user")
+        if uid:
+            u = users_by_id.get(uid) or {}
+            t2["user_naam"] = u.get("naam") or u.get("volledige_naam") or uid
+        if from_uid:
+            u = users_by_id.get(from_uid) or {}
+            t2["from_naam"] = u.get("naam") or from_uid
+        if to_uid:
+            u = users_by_id.get(to_uid) or {}
+            t2["to_naam"] = u.get("naam") or to_uid
+        recent.append(t2)
 
     return {
         "success": True,

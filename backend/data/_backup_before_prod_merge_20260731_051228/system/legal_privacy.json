@@ -1,0 +1,80 @@
+{
+  "version": "0.2-draft",
+  "last_updated": "2026-06-27",
+  "scope": "Spark Core 2.0 — privacy beschrijving voor users",
+  "intro": "Spark draait standalone op een lokale server (FastAPI + lokale JSON-store). Geen cloud database, geen tracking, geen advertenties. Wat jij deelt blijft bij jou. Externe verbindingen worden alleen gebruikt voor specifieke integraties die JIJ aanzet.",
+  "secties": [
+    {
+      "titel": "Wat slaat Spark over jou op?",
+      "items": [
+        "Je profielgegevens (alleen wat je zelf invult): naam, leeftijd, interesses, voorkeuren.",
+        "Gesprekken met Spark (lokaal in `data/chat/logs/{user_id}/`, niet gedeeld met anderen).",
+        "Notities, agenda-items, dagboek-entries (uitsluitend voor jou — `data/notes/`, `data/agenda/`, `data/dagboek/`).",
+        "Shadow profile — wat Spark afleidt uit gesprekken (themes, emoties, interesses). Jij ziet wat Spark ziet via je profiel-tab.",
+        "Behavior tracker — patronen in hoe je Spark gebruikt (welke tabs vaak, welke vragen herhaaldelijk). Voor zelfinzicht, niet voor advertenties.",
+        "Relaties (familie/vrienden die je noemt) in `data/persons/user-{id}.json`. Privé per user — niemand anders ziet jouw relaties.",
+        "Trade-history als je de Trader gebruikt: elke buy/sell in `data/wallet/trade_history/{user_id}.json`."
+      ]
+    },
+    {
+      "titel": "Wat deelt Spark NIET?",
+      "items": [
+        "Niets met externe servers tenzij je een integratie expliciet aanzet (zie 'Externe verbindingen' hieronder).",
+        "Geen advertenties, geen analytics, geen tracking-pixels.",
+        "Privé-gesprekken tussen users zijn écht privé — alleen jij en de andere user zien ze.",
+        "Andere users zien JOUW privé-kaarten niet — KB v2 heeft `privacy: private` + `bron_user_id` filtering (v6_kb_privacy_filter_001).",
+        "Je shadow-profile wordt NOOIT gedeeld met andere users of bots, alleen jij en admin kunnen het zien."
+      ]
+    },
+    {
+      "titel": "Externe verbindingen (alleen als jij ze aanzet)",
+      "items": [
+        "**Diep-mode (Claude Sonnet 4.6)**: gebruikt Emergent LLM-key om je laatste paar gespreksturen + je profielsnippet naar Anthropic te sturen voor de respons. Je KB blijft lokaal. Uitzetten: schakel Diep-toggle uit (admin alleen, andere users altijd Diep aan).",
+        "**Voice TTS/STT (OpenAI)**: stuurt je gesproken bericht naar OpenAI Whisper voor transcriptie of laat Spark zijn antwoord voorlezen via OpenAI TTS. Uitzetten: zeg 'zet stem uit' of via Voice-tab.",
+        "**Bitvavo Trader**: alleen als je je eigen Bitvavo API-keys invoert (in `data/system/settings/{user_id}/settings.json`, lokaal). Trades gaan via Bitvavo's API. Keys staan NOOIT in code."
+      ]
+    },
+    {
+      "titel": "Wat ziet de admin (Willem)?",
+      "items": [
+        "Aggregaat-statistieken (aantal users, KB-gezondheid, error-logs) — geen persoonlijke inhoud.",
+        "Bij community-channels alle openbare berichten (zoals iedereen).",
+        "Bij bug-meldingen: wat jij in de bug-melding zet (vrijwillig).",
+        "GEEN toegang tot privé-chats tussen users.",
+        "GEEN toegang tot jouw dagboek/notities tenzij je dat expliciet deelt.",
+        "Wel: technische audit-logs (errors, performance) voor stabiliteit."
+      ]
+    },
+    {
+      "titel": "Bewaartermijnen",
+      "items": [
+        "Actieve data: zolang je account bestaat.",
+        "Verwijderde accounts: 30 dagen backup in `data/_deleted_users/`, daarna definitief gewist.",
+        "Chat-logs: maximaal 50 turns per sessie in `turns_dir` (oudere worden afgekapt). Volledige logs in `chat/logs/{user_id}/` blijven zolang je account leeft.",
+        "Trade-history: blijft voor fiscaliteit (gebruiker is zelf belastingplichtig).",
+        "Shadow-observations: rolling 200 events in `system/logs/shadow_observations.jsonl`."
+      ]
+    },
+    {
+      "titel": "Jouw rechten",
+      "items": [
+        "**Account verwijderen**: zeg 'verwijder mijn account' in chat. Backup 30 dagen bewaard, daarna definitief weg.",
+        "**Data exporteren**: via Beheer → Back-up als ZIP. Krijg ALLE data over jou in JSON.",
+        "**Spark vergeten**: zeg 'vergeet wat je over me weet' → shadow-profile wist op verzoek (KB-bijdragen blijven anoniem).",
+        "**Inzage**: alle data over jou ligt in `data/users/{id}/`, `data/persons/user-{id}.json`, `data/chat/logs/{user_id}/`. Vraag admin om een dump als je technisch wilt zien wat opgeslagen is.",
+        "**Correctie**: foute info? Zeg 'klopt niet' tegen Spark of edit via Beheer → Profiel."
+      ]
+    },
+    {
+      "titel": "Beveiliging",
+      "items": [
+        "Wachtwoorden worden gehasht (bcrypt) opgeslagen in `data/system/users.json`.",
+        "Sessies werken via tokens — uitloggen wist je token.",
+        "Lokale server — geen poorten open naar internet behalve de bewust geconfigureerde web-ingang.",
+        "Bij brute-force pogingen worden login_counters bijgehouden.",
+        "Bitvavo API-keys per user gescheiden in `data/system/settings/{user_id}/`."
+      ]
+    }
+  ],
+  "contact": "Voor privacy-vragen: vraag het Spark zelf (zeg 'hoe zit het met mijn privacy?') of contact met admin (Willem) via community-bericht."
+}

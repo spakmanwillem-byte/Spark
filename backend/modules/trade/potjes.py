@@ -1235,6 +1235,22 @@ def open_cluster(user_id: str, pot_ids: List[str], entry_price: float, cluster_i
             p["last_action"] = f"BUY cluster {cluster_id[:6]} @ EUR{entry_price:.4f}"
             opened.append(p["id"])
     _save(data)
+    # v11_audit_cluster_001 — announce_buy per pot in cluster zodat audit_log
+    # en Boekhouder-DM's óók worden getriggerd bij bot-cluster-trades.
+    # Was: alleen open_pot() triggerde announce_buy → cluster BUYs onzichtbaar in audit-log.
+    try:
+        from modules.boekhouder.service import announce_buy
+        per_pot_eur = None
+        for p in user["potjes"]:
+            if p["id"] not in opened:
+                continue
+            if per_pot_eur is None:
+                per_pot_eur = float(p.get("capital", 0) or 0)
+            announce_buy(user_id, p["id"], market or p.get("market") or "?-EUR",
+                         entry_price, float(p.get("capital", 0) or 0))
+    except Exception as _abe:
+        import logging
+        logging.getLogger(__name__).warning(f"announce_buy cluster failed: {_abe}")
     return {"success": True, "cluster_id": cluster_id, "opened_pot_ids": opened}
 
 
@@ -1313,6 +1329,16 @@ def close_cluster(user_id: str, cluster_id: str, exit_price: float) -> Dict:
         )
     except Exception:
         pass
+    # v11_audit_cluster_001 — announce_sell per pot in cluster zodat audit_log
+    # en Boekhouder-DM's óók worden getriggerd bij bot-cluster-SELLs.
+    try:
+        from modules.boekhouder.service import announce_sell
+        market_str = pots_in_cluster[0].get("market") or "?-EUR"
+        for pid, pnetto in per_pot_netto.items():
+            announce_sell(user_id, pid, market_str, exit_price, pnetto, spark_fee=0.0)
+    except Exception as _ase:
+        import logging
+        logging.getLogger(__name__).warning(f"announce_sell cluster failed: {_ase}")
     return {
         "success": True, "cluster_id": cluster_id,
         "closed_pot_ids": closed,

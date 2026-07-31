@@ -1,0 +1,56 @@
+{
+  "user_id": "bot-madelief",
+  "conversations": [
+    {
+      "id": "conv-ef52dfa0",
+      "timestamp": "2026-05-20T08:09:51.587847+00:00",
+      "user_id": "bot-madelief",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder mijn account",
+      "spark_response": "Even checken, Madelief Stouten: wil jij echt je **account verwijderen**? Ik vraag het straks nóg een keer om zeker te zijn. Een backup van je data blijft 30 dagen bewaard — daarna is het écht weg.\n\n_Antwoord met **ja** om door te gaan, of **nee** om te annuleren._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "account_delete_start",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "account_delete_confirm_1"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-f46bc3a7",
+      "timestamp": "2026-05-20T08:09:51.738063+00:00",
+      "user_id": "bot-madelief",
+      "user_naam": "Gebruiker",
+      "user_message": "nee toch maar niet",
+      "spark_response": "Goed, ik laat je account staan. Niks veranderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "account_delete_cancel",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "account_delete_cancelled"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "bot-madelief",
+    "total_conversations": 2,
+    "last_updated": "2026-05-20T08:09:51.738063+00:00"
+  }
+}

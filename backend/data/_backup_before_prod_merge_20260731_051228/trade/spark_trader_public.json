@@ -1,0 +1,247 @@
+{
+  "_type": "publieke_module_uitleg",
+  "_module": "trade",
+  "_doel": "Volledig transparante uitleg van Spark Trader — leesbaar voor iedereen die de privacyverklaring of algemene voorwaarden inhoudelijk wil doorlichten. Gekoppeld aan KB-kaart 'Spark Trader' (kbv2-2f55a485) en runtime-config spark_trader.json.",
+  "_versie": "v1.0",
+  "_bijgewerkt_op": "2026-07-09T22:30:00+00:00",
+  "_licentie": "openbaar_leesbaar",
+  "_bron_van_waarheid": {
+    "kb_kaart_id": "kbv2-2f55a485",
+    "runtime_config": "backend/modules/trade/blueprints/spark_trader.json",
+    "code_module": "backend/modules/trade/",
+    "backtests_data": "backend/data/trade/backtests/",
+    "regel": "Willem-regel: help-data is single source of truth"
+  },
+
+  "1_kernidee": {
+    "wat_is_het": "Spark Trader is een autonome crypto-handelsbot die via de Bitvavo API koopt en verkoopt namens een gebruiker (of namens Spark zelf).",
+    "waarom_zo_gebouwd": "Transparantie boven winst. Elke beslissing is achteraf te reconstrueren via trace-logs. Geen verborgen fees, geen ondoorzichtige leverage, geen zwarte doos.",
+    "wat_het_NIET_is": [
+      "GEEN margin/leverage-trading",
+      "GEEN high-frequency of scalping-bot (cycle = 15 minuten)",
+      "GEEN garantie op winst — historisch backtest = geen belofte over toekomst",
+      "GEEN handel met andermans geld zonder expliciete koppeling aan een user-account met eigen Bitvavo-keys of expliciete opt-in voor de Spark-proxy"
+    ]
+  },
+
+  "2_hoe_het_werkt": {
+    "cycle": "Elke 15 minuten scant de bot alle actieve markten (BCH-EUR, BTC-EUR, ETH-EUR, SOL-EUR, ADA-EUR, ATOM-EUR).",
+    "beslissing_per_markt": "BUY / HOLD / SELL wordt bepaald door 3 pijlers:",
+    "pijler_1_bollinger": "Bollinger Bands (20-periode, 2σ). Signaal 'oversold' als prijs onder de onderste band ligt.",
+    "pijler_2_gap_body_filter": "Bevestigingsfilter (sinds v7): laatste groene candle moet minimaal 50% van vorige rode candle-body afdekken. Voorkomt kopen-op-piek in dalende trends. Backtest v3: in bear-markten 6.2× winstgevender dan zonder filter.",
+    "pijler_3_context": "Learning-service leest per-markt win-rate, tijdstip-patronen (week/maand/weekend) en past drempel dynamisch aan.",
+    "potjes_systeem": {
+      "wat": "Elk 'potje' is een kleine, geïsoleerde kapitaal-eenheid (€10 base). 1 potje = 1 aankoop = 1 verkoop.",
+      "waarom": "Boekhoudkundig transparant per euro-eenheid. Geen mengpot waarin winst en verlies onzichtbaar tegen elkaar wegvallen.",
+      "clustering": "Meerdere potjes van dezelfde user worden geclusterd als samen ≥ Bitvavo min-order (€5) om orderkosten te sparen."
+    },
+    "multi_user_proxy": "Users zonder eigen Bitvavo-API kunnen (na expliciete opt-in) via Spark's account proxy-traden. Elke trade is per-user gelabeld en boekhoudkundig gescheiden."
+  },
+
+  "3_risico_beschermingen": {
+    "48u_loss_cut": {
+      "regel": "Als een positie na 48 uur ≥3% in verlies staat → SELL uitvoeren (verlies zichtbaar realiseren).",
+      "filosofie": "Breekt bewust met de oude 'nooit met verlies verkopen'-regel. Reden: verlies bevriezen op de balans lijkt winstgevender (100% win-rate) maar verstopt echte drawdown en bevriest kapitaal maandenlang.",
+      "backtest_bewijs": "v4 (180d): strategie D (zonder loss-cut) toonde 100% win-rate + €+2.63 gerealiseerd, MAAR €-15.79 open drawdown = ECHT netto €-13.16. Strategie P (D + loss-cut) heeft ECHT netto €-9.53 — beter.",
+      "config": "loss_cut_hours=48, loss_cut_pct=-0.03, aanpasbaar in spark_trader.json"
+    },
+    "event_auto_pauze": {
+      "regel": "Bij daily drop >5% op een markt → bot pauzeert die markt automatisch 24 uur en stuurt notificatie.",
+      "filosofie": "Shock-events (flash crashes, macro-nieuws) breken statistische aannames. Beter een dag stil dan blindelings in een vrije val kopen.",
+      "backtest_bewijs": "v3: 185 shock-events over 6 markten × 180 dagen. Zonder pauze zou de bot 30× per markt in een crash gestapt zijn.",
+      "config": "trigger_daily_drop_pct=5.0, pause_duration_hours=24"
+    },
+    "cooldowns": {
+      "per_markt_buy_cooldown": "15 min na een BUY op dezelfde markt (voorkomt doom-buying tijdens 1 grote drop).",
+      "eur_balance_cooldown": "30 min na een INSUFFICIENT_EUR_BALANCE-error (was voorheen 57 mislukte pogingen per uur, nu maximaal 2 pogingen).",
+      "night_pause_optioneel": "Configureerbaar per user."
+    },
+    "sell_regels": {
+      "trailing_stop": "Activeert bij +0.5% winst, sluit bij -0.4% terugval vanaf top.",
+      "fee_aware_guard": "SELL wordt geweigerd als netto na Bitvavo-fee (0.25% maker/taker) < €0.01 winst — dan HOLD tot betere prijs.",
+      "atomair": "Als Bitvavo de SELL rejected (min-order, precision, rate-limit) → potje wordt teruggerold, geen ghost-close."
+    }
+  },
+
+  "4_actieve_strategie": {
+    "naam": "Gap Momentum 50",
+    "code_id": "gap_momentum_50",
+    "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
+    "eigenschappen": [
+      "bollinger_2sigma",
+      "mean_reversion",
+      "gap_body_50",
+      "loss_cut_48h_3pct",
+      "event_pause_5pct_24h",
+      "honest_pnl",
+      "trailing_stop",
+      "fee_aware_sell"
+    ],
+    "confidence_score": 82,
+    "waarom_gekozen": "Enige strategie die zowel bear-markten wint (6.2× baseline) als eerlijke PnL toont met loss-cut aan. Winnaar backtest v2 én v3, gevalideerd op 360 dagen.",
+    "alternatieven": [
+      {"naam": "Mean Reversion Bollinger", "code_id": "mean_reversion_bollinger", "confidence": 45, "waarom_niet_actief": "Verstopt verlies zonder loss-cut — honesty ratio -11.32"},
+      {"naam": "Extreme Oversold (Neef's variant)", "code_id": "extreme_oversold", "confidence": 55, "waarom_niet_actief": "Smalle scope, geen loss-cut, alleen 180d getest"}
+    ],
+    "spark_alignment": {
+      "waarom": "Backtest-bewezen beter dan random en baseline in bear-markten",
+      "regels": [
+        "BUY: prijs < Bollinger lower band 2σ EN laatste groene candle dekt ≥50% vorige rode body",
+        "SELL trailing stop: +0.5% activatie, -0.4% terugval sluit",
+        "SELL loss-cut: 48u + ≤-3% verlies → forceer SELL",
+        "PAUZE: >5% daily drop → 24u stil",
+        "COOLDOWN: 15 min per markt na BUY"
+      ],
+      "data_bronnen": ["Bitvavo public candles 15m 360d", "5 backtest-runs", "random-seed check 10 seeds", "live trade_history"],
+      "onderliggende_hypothese": "Systematiek + transparantie > verstopping",
+      "zekerheid_pct": 82
+    }
+  },
+
+  "5_backtest_resultaten": {
+    "methodologie": "Historische Bitvavo public candles (15-min interval), 6 markten × 180-360 dagen, €10 trade-bedrag, 0.25% Bitvavo-fee, ECHTE fill-prijzen via avg_price. Alle runs opgeslagen met _meta.json + aggregate.json + per_market.json (single source of truth).",
+
+    "run_v2_20260709_205003": {
+      "periode": "180 dagen",
+      "doel": "Vergelijk 8 BUY-strategieën voor beste live-config",
+      "belangrijkste_bevinding": "Gap-body filter 50% wint met €+2.63 (18% beter dan baseline). Streng gap-filter (95%) blokkeerde 100% van signalen — te streng.",
+      "top_3": {
+        "D_bollinger_plus_gap_body": {"trades": 22, "win_rate_pct": 100, "pnl_eur": 2.63},
+        "A_bollinger_baseline": {"trades": 19, "win_rate_pct": 100, "pnl_eur": 2.78},
+        "B_bollinger_streng": {"trades": 0, "win_rate_pct": null, "pnl_eur": 0, "opmerking": "Te streng — 0 signalen"}
+      }
+    },
+
+    "run_v3_20260709_205846_stress_contrarian": {
+      "periode": "180 dagen",
+      "doel": "Stress-test aannames + regime + event-analyse",
+      "belangrijkste_bevindingen": [
+        "185 shock-events gedetecteerd (>5% daily drop) → onderbouwt event-auto-pauze",
+        "In BEAR-markten is strategie D 6.2× winstgevender dan A (€1.42 vs €0.23)",
+        "In IN-EVENT windows: D presteert beter (€2.18) dan A (€0.77) — filter werkt tijdens crashes",
+        "Correlatie ETH/BTC/SOL = 0.90-0.96 (cluster). BCH/ATOM meer onafhankelijk → advies max 1 uit ETH/BTC/SOL + BCH + ATOM",
+        "ADA-EUR: 0 trade-signalen in 180 dagen voor onze strategie → gepauzeerd"
+      ],
+      "regime_split_strategie_D_pnl_eur": {"bull": 0.00, "bear": 1.42, "range": 1.21}
+    },
+
+    "run_v4_20260709_213151_hypotheses": {
+      "periode": "180 dagen",
+      "doel": "Test Willems H1 rebound + H2 48u loss-cut + post-event autopsy",
+      "belangrijkste_bevindingen": [
+        "H1 REBOUND (Q, R): 62.5% van 5%-drops rebounds binnen 24u met mediaan +1.96%. Maar strategie Q genereerde 0 trades in 180d — drempel op 5% is te streng. Uitgezet, drempel op 3% is toekomstig te tunen.",
+        "H2 LOSS-CUT BEWEZEN: strategie P (D + 48u -3% cut) heeft ECHT netto €-9.53 vs D €-13.16. Beter kapitaal-vrijmaken dan bevriezen.",
+        "S baseline + loss-cut: -€44.95 op 576 trades — baseline zonder gap-filter is véél slechter met loss-cut. Bevestigt dat gap-filter essentieel is."
+      ],
+      "resultaten_per_strategie_180d": {
+        "A_baseline": {"trades": 23, "gerealiseerd": 2.31, "open_drawdown": -28.46, "echt_netto": -26.15},
+        "D_gap_body": {"trades": 22, "gerealiseerd": 2.63, "open_drawdown": -15.79, "echt_netto": -13.16},
+        "P_D_plus_losscut": {"trades": 65, "wins": 43, "gerealiseerd": -9.35, "open_drawdown": -0.18, "echt_netto": -9.53},
+        "Q_rebound": {"trades": 0, "opmerking": "drempel 5% te streng"},
+        "R_combined": {"trades": 65, "echt_netto": -9.53, "opmerking": "gelijk aan P"},
+        "S_baseline_plus_losscut": {"trades": 576, "gerealiseerd": -44.95, "echt_netto": -44.94, "opmerking": "bevestigt: gap-filter essentieel"}
+      }
+    },
+
+    "run_v5_20260709_220726_360d": {
+      "periode": "360 dagen (jaar-check)",
+      "doel": "Verifieer of 180-dagen conclusies stand houden over vol jaar",
+      "conclusie": "Ja, dezelfde ordening. D genereert €+8.84 gerealiseerd op 62 trades, open drawdown €-22.30, echt netto €-13.46. P blijft rond -€9 echt netto. Loss-cut werkt.",
+      "resultaten_360d": {
+        "A_baseline": {"trades": 77, "gerealiseerd": 9.80, "echt_netto": -29.26},
+        "D_gap_body": {"trades": 62, "gerealiseerd": 8.84, "echt_netto": -13.46},
+        "P_D_plus_losscut": {"trades": 138, "gerealiseerd": -9.04, "echt_netto": -9.24, "loss_cuts_uitgevoerd": 37}
+      }
+    },
+
+    "random_seed_check": {
+      "doel": "Bewijs dat systematische strategie D > random buy over 10 verschillende random-seeds",
+      "random_buy_pnl_180d": {"min": 0.90, "median": 1.61, "mean": 2.43, "max": 6.49, "stddev": 1.64},
+      "strategie_D_pnl_180d": 2.63,
+      "conclusie": "D presteert bovengemiddeld en met veel lagere variantie dan random. Systematiek > chaos."
+    }
+  },
+
+  "6_eerlijke_pnl_metriek": {
+    "endpoint": "GET /api/trade/honest-pnl/{user_id}",
+    "wat_toont_het": "Gerealiseerd + open drawdown + ECHT netto + honesty_ratio",
+    "honesty_ratio_uitleg": {
+      "1_0": "Geen verstopte verliezen — winst is écht winst",
+      "0_5": "Helft van 'winst' is illusie (verstopt in open verlies)",
+      "negatief": "ECHT netto is verlies terwijl gerealiseerd winst toont — misleidende 100% win-rate"
+    },
+    "waarom_dit_er_is": "De oude 'nooit met verlies verkopen'-regel gaf 100% win-rate, maar verstopte drawdown in open posities. Deze metric maakt dat live zichtbaar en corrigeert Willems 100%-hypothese naar iets testbaars."
+  },
+
+  "7_events_endpoint": {
+    "endpoint": "GET /api/trade/events/notifications",
+    "wat_toont_het": "Live shock-events per markt (peak, trough, drop%, pauze-status)",
+    "waarom_dit_er_is": "Transparantie: elke keer dat de bot pauzeert door een event, is dat achteraf zichtbaar en verklaarbaar. Geen zwarte doos."
+  },
+
+  "8_backtests_endpoint": {
+    "endpoint": "GET /api/trade/backtests",
+    "wat_toont_het": "Alle historische backtest-runs met _meta + resultaten",
+    "waarom_dit_er_is": "Ieder kan de exacte data die deze strategie legitimeert nalezen. Geen 'wij hebben getest, geloof ons maar'."
+  },
+
+  "9_bekende_beperkingen_en_risicos": [
+    "Historische backtest is geen garantie voor toekomst. Bitvavo-markten kunnen structureel veranderen.",
+    "Bitvavo API-uitval, rate-limiting of downtime kan trades vertragen of laten mislukken.",
+    "48u loss-cut betekent dat een positie die net herstelt na 49u toch verkocht kan worden. Bewuste keuze.",
+    "Event-pauze kan een 'gemiste kans' zijn tijdens sterke rebound. Backtest v4 toont dat dit acceptabel is.",
+    "Random-seed check toont mean €2.43 voor random buy — soms wint dom geluk toevallig van systematiek. Maar met lagere variantie.",
+    "Bot handelt alleen op 6 gedefinieerde EUR-markten. Andere coins niet ondersteund.",
+    "Multi-user proxy verhoogt de complexiteit; per-user accounting is boekhoudkundig gescheiden maar praktisch afhankelijk van Spark's Bitvavo-toegang."
+  ],
+
+  "10_privacy_en_dataverwerking": {
+    "opslag": "Alle trade-data staat lokaal in JSON-bestanden (backend/data/trade/*.json). Geen cloud-database, geen externe analytics.",
+    "wat_wordt_opgeslagen_per_trade": [
+      "Timestamp (UTC)",
+      "Markt (bv. BCH-EUR)",
+      "Actie (BUY/SELL/HOLD)",
+      "Prijs, hoeveelheid, EUR-waarde",
+      "Bitvavo order-id (voor herleidbaarheid)",
+      "User-id (welke gebruiker heeft dit potje)",
+      "Trace-log met besliscontext (Bollinger-status, gap-check, cooldown-status)"
+    ],
+    "wat_wordt_NIET_opgeslagen": [
+      "Persoonlijke chat-tekst van user",
+      "Externe identificerende data buiten user-id",
+      "Cross-user vergelijkingen zonder expliciete admin-view"
+    ],
+    "toegang": "User ziet eigen data. Admin (Willem) ziet aggregaties + individuele bots voor debug. Geen derde partij.",
+    "recht_op_verwijdering": "Op verzoek van de user worden alle trade-logs, potjes en stats permanent verwijderd uit de JSON-bestanden binnen 7 werkdagen."
+  },
+
+  "11_toekomstige_uitbreidingen": [
+    "Regime-awareness (v9 gepland): actieve strategie switchen tussen bull/bear/range",
+    "Rebound-drempel tunen op 3% (nu 5% te streng)",
+    "Refactor trade/monitor.py in core + alerts + reporter voor Odroid-migratie"
+  ],
+
+  "12_bereikbaarheid_voor_bezoeker": {
+    "publieke_endpoints": [
+      "GET /api/trade/explained — deze uitleg-JSON",
+      "GET /api/trade/backtests — alle historische testruns",
+      "GET /api/trade/events/notifications — actieve shock-event pauzes"
+    ],
+    "kb_kaart": "In Spark's kennisbank: kaart 'Spark Trader' (id kbv2-2f55a485), lade 'weten', 4 lagen diep",
+    "code_repo_pad": "backend/modules/trade/ (open leesbaar voor auditors)",
+    "chat_intents": {
+      "beschrijving": "Spark begrijpt de trader in natuurlijke taal via 8 fast-path intents (geen LLM-call, instant respons)",
+      "code_ref": "backend/modules/trade/trader_intents.py",
+      "intents": {
+        "trader_start": ["start mijn bot", "zet de trader aan", "activeer bot"],
+        "trader_stop": ["stop mijn bot", "pauzeer trader", "trader uit"],
+        "trader_status": ["hoe staat mijn bot", "draait mijn trader?", "trader status"],
+        "trader_pnl": ["wat heb ik verdiend", "eerlijke winst", "mijn PnL"],
+        "trader_recent": ["laatste trades", "wat heb je gekocht", "handelsgeschiedenis"],
+        "trader_baseline_reset": ["reset baseline", "nieuwe baseline"],
+        "trader_events": ["actieve events", "shock events", "welke markten gepauzeerd"],
+        "trader_explain": ["leg de trader uit", "hoe werkt de trader", "vertel over de bot"]
+      }
+    }
+  }
+}

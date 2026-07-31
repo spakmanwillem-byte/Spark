@@ -1,4 +1,34 @@
 # Spark Core 2.0 — PRD
+
+## Sessie 51 (2026-07-31) — Prod-merge + trade-log fix
+
+### Merge productie-backup
+Willem's zip (`spark_backup_changes_20260731_050848.zip`, 3.2 MB, 66 files) uit productie geladen. Backup gemaakt in `data/_backup_before_prod_merge_20260731_051228/` (213MB). 57 JSON files overschreven, 9 JSONL-logs append-merged (dedup op line). Family_relations van sessie 50e bleven behouden (waren óók in prod-zip). 
+
+### v11_audit_cluster_001 — Trade-log werkt niet goed → FIX
+**Willems melding**: trade-log werkt niet goed.
+
+**Root cause gevonden**:
+1. `open_cluster()` en `close_cluster()` in `potjes.py` riepen NIET `announce_buy`/`announce_sell` aan → sinds bot naar cluster-mode ging (~29 juli) werden bot-trades **niet meer in audit_log.json geregistreerd**. Alleen handmatige trades via `open_pot`/`close_pot` werden gelogd.
+2. `announce_sell` audit-entry miste `amount_eur` → UI toonde altijd `-` bij sell entries.
+
+**Fixes**:
+- `open_cluster()`: per pot in cluster → `announce_buy()` call (audit + Boekhouder-DM)
+- `close_cluster()`: per pot → `announce_sell(user_id, pid, market, exit_price, pnetto)` call
+- `announce_sell` audit-entry: `amount_eur=netto` toegevoegd (was ontbrekend)
+
+### v11_audit_backfill_001 — Historische trades ingehaald
+Script backgevuld: uit `data/trade/logs/trace_*.jsonl` alle open_cluster/close_cluster events geëxtraheerd → 16 audit-entries toegevoegd inclusief 2× BCH-EUR BUY op 30 juli 19:08. Trade-log nu chronologisch compleet tot 30 juli.
+
+### Files changed
+- `/app/backend/modules/trade/potjes.py` — announce_buy/sell in open_cluster + close_cluster
+- `/app/backend/modules/boekhouder/service.py` — announce_sell amount_eur toegevoegd
+- `/app/backend/data/` — 57 JSON files uit prod-zip
+- `/app/backend/data/system/audit_log.json` — +16 backfill entries (266 totaal)
+
+---
+
+
 ## Sessie 50f (2026-02-01) — SPS Daily-Event rijke UI + KB-fill "kan ik wat voor je doen"
 
 ### v11_daily_event_rps_001 + v11_daily_rps_001 — Daily-Event gebruikt nu RpsBark

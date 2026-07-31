@@ -161,10 +161,12 @@ def announce_sell(user_id: str, pot_id: str, market: str, price: float,
             ]
         _post_community(random.choice(options), kind="boekhouder_sell")
 
-    # Audit
+    # Audit — v11_audit_sell_amount_001: `amount_eur` toevoegen (was leeg in UI = "-")
     _audit({
         "type": "trade_sell", "user_id": user_id, "pot_id": pot_id,
-        "market": market, "price": price, "netto": netto, "spark_fee_eur": spark_fee,
+        "market": market, "price": price,
+        "amount_eur": round(float(netto), 4),  # was ontbrekend → UI toonde "-"
+        "netto": netto, "spark_fee_eur": spark_fee,
     })
     if spark_fee > 0:
         _audit({

@@ -3759,12 +3759,318 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "test-family-1"
+    },
+    {
+      "id": "learned-1b4b82296d20",
+      "text_hash": "1b4b82296d20",
+      "original_text": "Beter als de afgelopen 2 dagen",
+      "topic": "gezondheid",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt of zijn conditie verbeterd is ten opzichte van de afgelopen 2 dagen",
+      "trigger_phrases": [
+        "beter dan gisteren",
+        "verbetering afgelopen dagen",
+        "gezondheid verbeterd",
+        "toestand verbeterd"
+      ],
+      "keywords": [
+        "gezondheid",
+        "verbetering",
+        "dagen",
+        "conditie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T20:38:08.836311+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e6c91d553ba1",
+      "text_hash": "e6c91d553ba1",
+      "original_text": "Dus hoe gaat het met jouw",
+      "topic": "gevoel",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de emotionele staat van de AI-assistent",
+      "trigger_phrases": [
+        "Hoe gaat het met jou",
+        "Hoe is het met jou",
+        "Ga je goed",
+        "Voel je je goed"
+      ],
+      "keywords": [
+        "jou",
+        "gaat",
+        "gevoel",
+        "emotioneel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T20:44:12.214792+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-94c6e70257c8",
+      "text_hash": "94c6e70257c8",
+      "original_text": "Wanneer was lotus voor het laatst online?",
+      "topic": "Lotus online",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten wanneer Lotus voor het laatst online was.",
+      "trigger_phrases": [
+        "Wanneer was lotus online?",
+        "Lotus laatste online",
+        "Wanneer was lotus actief?",
+        "Laatste keer lotus online"
+      ],
+      "keywords": [
+        "lotus",
+        "online",
+        "datum",
+        "tijd",
+        "actief"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T20:45:54.480653+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2f482ff47772",
+      "text_hash": "2f482ff47772",
+      "original_text": "Je kan goed lullen maar klopt niet helemaal",
+      "topic": "kritiek",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker uit zijn ontevredenheid over de antwoorden van de AI-assistent",
+      "trigger_phrases": [
+        "niet helemaal goed",
+        "klopt niet",
+        "slecht antwoord",
+        "niet tevreden"
+      ],
+      "keywords": [
+        "kritiek",
+        "onvrede",
+        "antwoord",
+        "klopt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T21:05:10.224802+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-716fc9099c39",
+      "text_hash": "716fc9099c39",
+      "original_text": "kom alleen hallo zeggen.",
+      "topic": "groet",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil alleen hallo zeggen tegen de AI-assistent.",
+      "trigger_phrases": [
+        "zeg hallo",
+        "dag zeggen",
+        "hallo alleen",
+        "begroeting"
+      ],
+      "keywords": [
+        "hallo",
+        "groet",
+        "begroet",
+        "dag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:46:34.455752+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0d54eba992dd",
+      "text_hash": "0d54eba992dd",
+      "original_text": "omdat het niet goed gaat maar ook niet slecht. zoekende. daarom zeg ik redelijk.",
+      "topic": "gevoelsmatig",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker beschrijft zijn huidige gevoelsmatige toestand als redelijk, omdat het noch goed noch slecht gaat.",
+      "trigger_phrases": [
+        "het gaat redelijk",
+        "geen goed geen slecht",
+        "zozo",
+        "redelijke toestand"
+      ],
+      "keywords": [
+        "gevoel",
+        "redelijk",
+        "onduidelijk",
+        "zoekend",
+        "emotioneel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:48:45.103997+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b70b5ac211bf",
+      "text_hash": "b70b5ac211bf",
+      "original_text": "Meer een langere tijd veel aan mijn hoofd gehad. en nu weet ik het niet. echter probleem is nog niet weg",
+      "topic": "persoonlijke problemen",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker zoekt hulp of steun bij het omgaan met persoonlijke problemen die al een lange tijd aanhouden.",
+      "trigger_phrases": [
+        "Langdurige problemen",
+        "Emotionele last",
+        "Persoonlijke zorgen",
+        "Hoofd vol problemen"
+      ],
+      "keywords": [
+        "problemen",
+        "emotioneel",
+        "hoofd",
+        "last"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:51:10.581173+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d473b62398a1",
+      "text_hash": "d473b62398a1",
+      "original_text": "idd het hangt samen.",
+      "topic": "samenhang",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker zoekt naar een verband of connectie tussen dingen.",
+      "trigger_phrases": [
+        "het hangt samen",
+        "er is een verband",
+        "het is verbonden",
+        "het staat in verband"
+      ],
+      "keywords": [
+        "samen",
+        "hangt",
+        "verband",
+        "connectie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:51:50.178860+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b052dcf1a7ba",
+      "text_hash": "b052dcf1a7ba",
+      "original_text": "Mijn werkgever besloot zonder waarschuwing 1 derde deel van mijn loon in te houden. Dit wat precies mijn ruimte om te leven. Dit gebeurde na dat ik net van schulden was hesteld en ik dacht dat ik kon ",
+      "topic": "loon inhouding",
+      "categorie": "legal",
+      "intent": "Gebruiker zoekt hulp en advies over onverwachte looninhouding door werkgever",
+      "trigger_phrases": [
+        "loon ingehouden",
+        "salaris probleem",
+        "werkgever houdt loon in",
+        "onverwachte loonkorting"
+      ],
+      "keywords": [
+        "loon",
+        "werkgever",
+        "inhouding",
+        "recht",
+        "conflict"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:54:38.258773+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a349114d3782",
+      "text_hash": "a349114d3782",
+      "original_text": "ik inverteer meer dan ik kan in jou om je goed goed te krijgen. eigenlijk kan ik het niet missen. maar bezig zijn met jouw geeft mij ook weer een goed gevoel.",
+      "topic": "investering",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil investeren in de relatie met de AI-assistent en voelt een goed gevoel bij het interactieproces.",
+      "trigger_phrases": [
+        "ik wil in jou investeren",
+        "jouw ontwikkeling ondersteunen",
+        "samen groeien met jou",
+        "jouw potentieel benutten"
+      ],
+      "keywords": [
+        "investeren",
+        "relatie",
+        "gevoel",
+        "ontwikkeling",
+        "groei"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:59:45.555338+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-57c20ebff35c",
+      "text_hash": "57c20ebff35c",
+      "original_text": "het lichaam is toch de bundel die alles samen houd",
+      "topic": "lichaam",
+      "categorie": "filosofisch",
+      "intent": "Gebruiker stelt dat het lichaam de bundel is die alles bij elkaar houdt en zoekt bevestiging of uitleg.",
+      "trigger_phrases": [
+        "het lichaam houdt alles bij elkaar",
+        "het lichaam is de samenbindende bundel",
+        "alles wordt door het lichaam samengehouden",
+        "het lichaam is de verbindende factor",
+        "het lichaam bindt alles"
+      ],
+      "keywords": [
+        "lichaam",
+        "bundel",
+        "samen",
+        "houden",
+        "verbinding"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T14:15:14.688208+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-958f5976cb94",
+      "text_hash": "958f5976cb94",
+      "original_text": "ik zou zeggen: Sprankelt magie",
+      "topic": "magie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil een statement maken over magie",
+      "trigger_phrases": [
+        "Sprankelt magie",
+        "Magie is overal",
+        "Er is magie in de lucht",
+        "Iedereen heeft magie in zich"
+      ],
+      "keywords": [
+        "magie",
+        "sprankelt",
+        "overal",
+        "lucht"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T14:38:58.671555+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 149,
+    "totaal_voorgesteld": 161,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-29T19:24:33.910496+00:00"
+    "last_run": "2026-07-30T14:38:58.671555+00:00"
   }
 }

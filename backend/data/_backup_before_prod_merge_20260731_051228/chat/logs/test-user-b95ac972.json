@@ -1,0 +1,124 @@
+{
+  "user_id": "test-user-b95ac972",
+  "conversations": [
+    {
+      "id": "conv-fd88584b",
+      "timestamp": "2026-07-29T19:57:20.564470+00:00",
+      "user_id": "test-user-b95ac972",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**Oscillatie**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-b95ac972",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-b1ba09f0",
+      "timestamp": "2026-07-29T19:57:20.711966+00:00",
+      "user_id": "test-user-b95ac972",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat houdt 'Oscillatie' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-b95ac972",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-abce3322",
+      "timestamp": "2026-07-29T19:57:20.861699+00:00",
+      "user_id": "test-user-b95ac972",
+      "user_naam": "Willem",
+      "user_message": "mijn testantwoord tekst",
+      "spark_response": "Dus voor '**Oscillatie**' — Wat: _mijn testantwoord tekst_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "tekst"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-flow-b95ac972",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-0c458197",
+      "timestamp": "2026-07-29T19:57:21.829664+00:00",
+      "user_id": "test-user-b95ac972",
+      "user_naam": "Willem",
+      "user_message": "ja klopt",
+      "spark_response": "Genoteerd — 'wat' op kaart '**Oscillatie**' is bijgewerkt. Dank je wel. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_saved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_fill_saved"
+      },
+      "metadata": {
+        "session_id": "test-flow-b95ac972",
+        "gesprek_nummer": 4
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-user-b95ac972",
+    "total_conversations": 4,
+    "last_updated": "2026-07-29T19:57:21.829664+00:00"
+  }
+}

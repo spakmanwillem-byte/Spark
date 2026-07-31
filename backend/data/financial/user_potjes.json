@@ -7,29 +7,26 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 12.82,
+          "capital": 13.93,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.145010001605322,
-            "highest_price": 0.14674,
-            "trailing_active": true,
-            "entry_time": "2026-07-29T03:14:43.685258+00:00",
-            "amount_eur": 12.82,
-            "cluster_id": "013cf2fffc94",
-            "cluster_size": 1
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
           },
           "market": "ADA-EUR",
           "stats": {
-            "trades": 1,
+            "trades": 2,
             "wins": 0,
             "losses": 1,
             "total_pnl": -0.2135
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "BUY cluster 013cf2 @ EUR0.1450",
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €0.145010001605322",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
@@ -50,12 +47,20 @@
               "entry_price": 0.145010001605322,
               "amount_eur": 12.82
             }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-07-30T14:30:44.903041+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 88.407695 ADA maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 0.145010001605322
+            }
           ]
         },
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 12.48,
+          "capital": 13.93,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -66,7 +71,7 @@
             "trailing_active": false,
             "entry_time": null
           },
-          "market": "EUR",
+          "market": "BTC-EUR",
           "stats": {
             "trades": 3,
             "wins": 1,
@@ -192,7 +197,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 12.48,
+          "capital": 13.93,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -230,30 +235,48 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 12.48,
+          "capital": 14.04,
           "max_size": 80.24,
           "pot_locked": false,
-          "market": "ATOM-EUR",
+          "market": "BCH-EUR",
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": false
+            "is_open": true,
+            "entry_price": 189.9400169426495,
+            "highest_price": 189.99,
+            "trailing_active": false,
+            "entry_time": "2026-07-30T19:08:25.578345+00:00",
+            "amount_eur": 14.04,
+            "cluster_id": "61e23f95806a",
+            "cluster_size": 1
           },
           "stats": {
             "trades": 0,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
-          }
+          },
+          "trade_log": [
+            {
+              "ts": "2026-07-30T19:08:25.578345+00:00",
+              "action": "BUY",
+              "cluster_id": "61e23f95806a",
+              "trade_id": "00000000-0000-041f-0100-00097bee1592",
+              "entry_price": 189.9400169426495,
+              "amount_eur": 14.04
+            }
+          ],
+          "last_action": "BUY cluster 61e23f @ EUR189.9400"
         },
         {
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 12.48,
+          "capital": 13.93,
           "max_size": 65.0145,
           "pot_locked": false,
-          "market": "BCH-EUR",
+          "market": "BTC-EUR",
           "minted_at": "2026-07-23T09:16:23.939810+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
@@ -277,18 +300,21 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 12.59,
+          "capital": 14.04,
           "max_size": 80.24,
           "pot_locked": false,
-          "market": "ETH-EUR",
+          "market": "BCH-EUR",
           "minted_at": "2026-07-20T16:52:48.805064+00:00",
           "minted_from": "test_reserve_log",
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 189.9400169426495,
+            "highest_price": 189.98,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-07-30T19:08:24.097035+00:00",
+            "amount_eur": 14.04,
+            "cluster_id": "e93b1cec3495",
+            "cluster_size": 1
           },
           "stats": {
             "trades": 1,
@@ -306,12 +332,21 @@
               "trade_id": "00000000-0000-047b-0100-000954930bdd",
               "entry_price": 1696.0106757939493,
               "amount_eur": 12.19
+            },
+            {
+              "ts": "2026-07-30T19:08:24.097035+00:00",
+              "action": "BUY",
+              "cluster_id": "e93b1cec3495",
+              "trade_id": "00000000-0000-041f-0100-00097bee119d",
+              "entry_price": 189.9400169426495,
+              "amount_eur": 14.04
             }
           ],
-          "last_action": "SELL @ €1677.77 | netto €-0.192"
+          "last_action": "BUY cluster e93b1c @ EUR189.9400"
         }
       ],
-      "overflow_pool": 0.0
+      "overflow_pool": 0.0,
+      "market": "BCH-EUR"
     },
     "user-a0ee2d7e": {
       "user_id": "user-a0ee2d7e",
@@ -329,7 +364,7 @@
       "potjes": [],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-07-27T05:03:46.903569+00:00"
+      "created_at": "2026-07-29T20:33:54.750239+00:00"
     },
     "user-1996fa59": {
       "user_id": "user-1996fa59",

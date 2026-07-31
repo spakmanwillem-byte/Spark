@@ -2842,6 +2842,42 @@
       "amount_eur": null,
       "trade_id": "00000000-0000-041f-0100-00097bee1592",
       "source": "backfill_v11_cluster"
+    },
+    {
+      "ts": "2026-07-31T05:21:44.763063+00:00",
+      "id": "dcc28cef8a62",
+      "type": "trade_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-003",
+      "market": "ETH-EUR",
+      "price": 1656.28,
+      "amount_eur": -0.2683,
+      "netto": -0.26826009501187664,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-07-31T05:21:48.142141+00:00",
+      "id": "6fbe11dab60c",
+      "type": "trade_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-004",
+      "market": "SOL-EUR",
+      "price": 64.477,
+      "amount_eur": -0.1726,
+      "netto": -0.1726076095311286,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-07-31T05:22:29.304226+00:00",
+      "id": "9aa24fc8a940",
+      "type": "trade_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-006",
+      "market": "BCH-EUR",
+      "price": 186.37,
+      "amount_eur": -0.3341,
+      "netto": -0.3340887722639983,
+      "spark_fee_eur": 0.0
     }
   ]
 }

@@ -158,7 +158,37 @@ export function WalletPage({ onNavigate }) {
               <button
                 data-testid="spark-mint-token-btn"
                 onClick={async () => {
-                  const ok = window.confirm('Spark gebruikt zijn EUR-wallet om 1 token uit treasury te minten.\n\nCirculating +1, prijs stijgt voor alle holders.\n\nDoorgaan?');
+                  // v11_mint_ux_001 — Eerst prijs+balance ophalen zodat user weet wat 't kost
+                  let mintCost = null;
+                  let sparkEur = null;
+                  try {
+                    const p = await fetch(`${API}/api/boekhouder/token/price`).then(x => x.json());
+                    mintCost = p?.next_mint_threshold_eur ?? p?.base_pot_size_eur ?? null;
+                  } catch { /* fallback: cost=null → UI toont '?' */ }
+                  try {
+                    const w = await fetch(`${API}/api/wallet/user-000`).then(x => x.json());
+                    sparkEur = w?.wallet?.balance ?? w?.balance ?? 0;
+                  } catch { /* fallback: balance=null → UI toont '?' */ }
+                  const costStr = mintCost !== null ? `€${mintCost.toFixed(2)}` : '?';
+                  const balStr = sparkEur !== null ? `€${sparkEur.toFixed(2)}` : '?';
+                  if (mintCost !== null && sparkEur !== null && sparkEur < mintCost) {
+                    alert(
+                      `🪙 Mint nog niet mogelijk\n\n` +
+                      `Kosten volgende mint: ${costStr}\n` +
+                      `Spark's EUR-wallet: ${balStr}\n` +
+                      `Tekort: €${(mintCost - sparkEur).toFixed(2)}\n\n` +
+                      `Spark verdient EUR via SELL-fees (5%) en donaties. ` +
+                      `Zodra hij genoeg heeft, kun je hier weer minten.`
+                    );
+                    return;
+                  }
+                  const ok = window.confirm(
+                    `Spark mint 1 ROAR uit treasury.\n\n` +
+                    `Kosten: ${costStr}\n` +
+                    `Spark EUR-wallet: ${balStr}\n` +
+                    `Effect: Circulating +1 · prijs stijgt voor holders\n\n` +
+                    `Doorgaan?`
+                  );
                   if (!ok) return;
                   try {
                     const r = await fetch(`${API}/api/spark/mint/from-wallet`, {
@@ -169,7 +199,7 @@ export function WalletPage({ onNavigate }) {
                       alert(`🪙 Spark heeft 1 ROAR gemaakt!\n\nKosten: €${r.cost_eur}\nTreasury: ${r.new_treasury.toLocaleString()}\nSpark balance: ${r.new_spark_balance}\nSpark EUR-wallet: €${r.new_spark_eur_wallet}`);
                       window.location.reload();
                     } else {
-                      alert('Kon niet minten: ' + (r.detail || JSON.stringify(r)));
+                      alert('🪙 Mint mislukt:\n\n' + (r.detail || 'Onbekende fout — check backend logs'));
                     }
                   } catch (e) { alert('Fout: ' + e.message); }
                 }}

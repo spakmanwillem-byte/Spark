@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-07-31T07:49:25.952859",
+      "last_active": "2026-07-31T07:53:55.934039",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -4871,7 +4871,7 @@
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 950,
+      "xp": 1000,
       "sleutelwoord_changed_op": "2026-05-22T20:20:30.483797",
       "achievements": {
         "unlocked": [
@@ -4956,9 +4956,20 @@
             "type": "letter_completion",
             "unlocked_at": "2026-07-25T17:32:43.482712+00:00",
             "letter": "G"
+          },
+          {
+            "id": "milestone_first_roar_token",
+            "name": "I got a ROAR Token",
+            "description": "Eerste ROAR token op je wallet — welkom in de Spark-economie.",
+            "milestone": null,
+            "xp_reward": 50,
+            "icon": "🪙",
+            "rarity": "uncommon",
+            "type": "milestones",
+            "unlocked_at": "2026-07-31T07:53:42.409619+00:00"
           }
         ],
-        "total_xp_from_achievements": 900
+        "total_xp_from_achievements": 950
       },
       "xp_events": [
         {
@@ -5008,6 +5019,12 @@
           "reason": "Achievement: De Letter G",
           "granted_at": "2026-07-25T17:32:43.562226+00:00",
           "total_after": 950
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: I got a ROAR Token",
+          "granted_at": "2026-07-31T07:53:42.420362+00:00",
+          "total_after": 1000
         }
       ],
       "avatar": "gallery:9a9f50f2e1bc",

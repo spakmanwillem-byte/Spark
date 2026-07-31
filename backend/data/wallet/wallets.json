@@ -100,7 +100,7 @@
           "reason": "Saldo naar 0: vermogen zit in 10 potjes (Bitvavo allocatie), saldo is alleen vrij liggend cash"
         }
       ],
-      "tokens": 8,
+      "tokens": 9,
       "eur_balance": 0,
       "balance_eur": 0.0,
       "spark_tokens": 10,
@@ -301,6 +301,15 @@
       "amount_eur": -5.0,
       "tokens_delta": 2,
       "note": "Restore: 3 tokens gekocht die zip-merge miste; wallet-saldo → €0"
+    },
+    {
+      "id": "41b9a31d164e",
+      "ts": "2026-07-31T07:53:24.696012+00:00",
+      "type": "spark_self_mint",
+      "user_id": "user-000",
+      "amount_eur": 0,
+      "tokens": 2,
+      "note": "papertrail: dekking uit Bitvavo, geen EUR-transfer"
     }
   ]
 }

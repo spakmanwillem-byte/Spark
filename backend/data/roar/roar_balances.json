@@ -6,7 +6,7 @@
   "balances": {
     "user-001": 3,
     "user-000": 7,
-    "user-a0ee2d7e": 0
+    "user-a0ee2d7e": 2
   },
   "transactions": [
     {
@@ -186,10 +186,31 @@
       "source": "wallet_admin_revoke_button",
       "reason": "cleanup test v11_treasury_fix",
       "timestamp": "2026-07-31T07:33:20.690442+00:00"
+    },
+    {
+      "id": "41b9a31d164e",
+      "ts": "2026-07-31T07:53:24.696012+00:00",
+      "type": "spark_self_mint",
+      "user_id": "user-000",
+      "amount": 2,
+      "cost_eur": 26.28,
+      "price_per_token": 13.14,
+      "description": "Spark mint 2 ROAR — dekking: Bitvavo €126.40 @ €13.14"
+    },
+    {
+      "id": "9e6248eb-0444-422f-94d4-070a391cc0d1",
+      "ts": "2026-07-31T07:53:42.387900+00:00",
+      "type": "gift",
+      "from_user_id": "user-000",
+      "to_user_id": "user-a0ee2d7e",
+      "amount": 2,
+      "gift_id": "33b5a700-fc3e-47cb-a815-cb71fb815741",
+      "note": "Bijkoop-gift van Spark (via Willem)",
+      "status": "completed"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999990,
+  "treasury_pool": 999988,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {
@@ -316,6 +337,14 @@
       "user_id": "user-a0ee2d7e",
       "amount": 1,
       "reason": "cleanup test v11_treasury_fix"
+    },
+    {
+      "ts": "2026-07-31T07:53:42.387911+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-000",
+      "to_user_id": "user-a0ee2d7e",
+      "amount": 2,
+      "gift_id": "33b5a700-fc3e-47cb-a815-cb71fb815741"
     }
   ],
   "_clean_slate_1juni": {

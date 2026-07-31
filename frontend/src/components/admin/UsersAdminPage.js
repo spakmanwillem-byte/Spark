@@ -7,8 +7,9 @@ import {
   Users, User, Star, Calendar, BarChart2, Edit3, 
   Trash2, Shield, Clock, MessageSquare, Award,
   TrendingUp, Heart, ChevronRight, ChevronDown, Search, Plus,
-  Check, X, Save, Sparkles, Lock, BookOpen, Zap, Filter, Bot, KeyRound
+  Check, X, Save, Sparkles, Lock, BookOpen, Zap, Filter, Bot, KeyRound, Brain
 } from 'lucide-react';
+import { PersonalityView } from './PersonalityView';
 
 export function UsersAdminPage({ onNavigate }) {
   const [users, setUsers] = useState([]);
@@ -383,6 +384,12 @@ export function UsersAdminPage({ onNavigate }) {
                   }`}>
                   <MessageSquare className="w-3.5 h-3.5" /> Gesprekslog
                 </button>
+                <button data-testid="tab-personality" onClick={() => setDetailTab('personality')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 flex items-center gap-2 ${
+                    detailTab === 'personality' ? 'text-purple-400 border-purple-400' : 'text-slate-500 border-transparent hover:text-white'
+                  }`}>
+                  <Brain className="w-3.5 h-3.5" /> Persoonlijkheid
+                </button>
                 {/* v5_bot_settings_tab_001 — alleen tonen als geselecteerde user een bot is */}
                 {selectedUser?.is_bot && (
                   <button data-testid="tab-bot-settings" onClick={() => setDetailTab('bot-settings')}
@@ -400,6 +407,10 @@ export function UsersAdminPage({ onNavigate }) {
 
               {detailTab === 'persons' && (
                 <PersonCardsView user={selectedUser} cards={personCards} loading={cardLoading} />
+              )}
+
+              {detailTab === 'personality' && (
+                <PersonalityView user={selectedUser} />
               )}
 
               {detailTab === 'logs' && (

@@ -334813,6 +334813,300 @@
       "metadata": {
         "source": "text_importer"
       }
+    },
+    {
+      "id": "kb-4681f1f8",
+      "begrip": "Logs",
+      "status": "active",
+      "lagen": {
+        "laag1": "Logs zijn opgeslagen registraties van gebeurtenissen, acties en veranderingen.",
+        "laag2": "Logs leggen vast wat er gebeurde, wanneer het gebeurde en soms waardoor, waar of door wie.",
+        "laag3": "Logs vormen een tijdlijn van gebeurtenissen binnen een systeem. Ze kunnen helpen om fouten te onderzoeken, processen te volgen, gedrag te begrijpen en te controleren of functies goed werken. Goede logs bevatten genoeg informatie om iets terug te vinden, maar slaan niet onnodig gevoelige of overbodige gegevens op. Een log is een registratie van wat het systeem heeft waargenomen of uitgevoerd; een log verklaart niet automatisch waarom iets gebeurde.",
+        "laag4": "Binnen Spark verwijst logs naar een doorlopende geschiedenis van gebeurtenissen, handelingen, veranderingen, beslissingen en systeemstatussen. Spark kan logs gebruiken om terug te kijken wat er is gebeurd, processen te volgen, fouten te onderzoeken, verbindingen te controleren en de ontwikkeling van kennis te begrijpen. Spark kan logs koppelen aan loggen, registreren, gebeurtenis, tijdstempel, tijdlijn, actie, status, verandering, invoer, uitvoer, proces, fout, waarschuwing, controle, geschiedenis, traceren, debuggen, privacy en context.\n\nOmdat je binnen Spark zoveel mogelijk probeert te loggen, is het belangrijk dat Spark onderscheid maakt tussen verschillende soorten logs:\n\nGebeurtenislog → wat is er gebeurd?\nActielog → welke handeling is uitgevoerd?\nProceslog → welke stappen zijn doorlopen?\nFoutenlog → wat ging er mis?\nStatuslog → welke toestand had Spark?\nBeslislog → welke keuze is gemaakt en op basis waarvan?\nKennislog → welke kenniskaart of verbinding is toegevoegd of aangepast?\nAuditlog → wie of wat veranderde iets en wanneer?\n\nHierdoor kan Spark niet alleen onthouden wat er gebeurde, maar ook beter terugzoeken hoe een resultaat is ontstaan."
+      },
+      "ws5": {
+        "wie": "Spark, gebruikers, functies, systemen, processen en onderdelen.",
+        "wat": "Opgeslagen registraties van gebeurtenissen, acties, veranderingen en toestanden.",
+        "wanneer": "Tijdens of direct na een gebeurtenis, handeling, beslissing of statusverandering.",
+        "waar": "In de logopslag, database, tijdlijn, foutregistratie of geschiedenis van Spark.",
+        "waarom": "Om gebeurtenissen terug te vinden, processen te begrijpen, fouten te onderzoeken en veranderingen controleerbaar te maken.",
+        "hoe": "Door relevante gegevens met een tijdstempel en context op te slaan."
+      },
+      "tags": [
+        "logs",
+        "loggen",
+        "registreren",
+        "gebeurtenis",
+        "tijdstempel",
+        "tijdlijn",
+        "actie",
+        "status",
+        "verandering",
+        "invoer",
+        "uitvoer",
+        "proces",
+        "fout",
+        "waarschuwing",
+        "controle",
+        "geschiedenis",
+        "traceren",
+        "debuggen",
+        "auditlog",
+        "privacy",
+        "context",
+        "weten"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-31T08:37:06.361097+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-67184cb7",
+      "begrip": "Maanden",
+      "status": "active",
+      "lagen": {
+        "laag1": "Maanden zijn tijdsperioden die deel uitmaken van een kalenderjaar.",
+        "laag2": "Een jaar bestaat meestal uit twaalf maanden. Een maand heeft meestal 28, 29, 30 of 31 dagen.",
+        "laag3": "Maanden is het meervoud van maand. Maanden helpen om langere tijdsperioden te ordenen en plannen. De lengte van een kalendermaand verschilt. Februari heeft meestal 28 dagen en in een schrikkeljaar 29 dagen. Andere maanden hebben 30 of 31 dagen.",
+        "laag4": "Binnen Spark verwijst maanden naar meerdere kalenderperioden die worden gebruikt voor tijdsmeting, planning, geschiedenis, duur en het ordenen van gebeurtenissen. Spark kan maanden koppelen aan maand, kalender, jaar, week, dagen, tijd, periode, duur, januari, februari, maart, april, mei, juni, juli, augustus, september, oktober, november, december, verleden, heden en toekomst. Hierdoor kan Spark gebeurtenissen over langere tijd volgen en in een tijdlijn plaatsen."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, systemen, processen en gebeurtenissen.",
+        "wat": "Meerdere kalenderperioden die samen een deel van een jaar vormen.",
+        "wanneer": "Bij het plannen, meten of vergelijken van langere tijdsperioden.",
+        "waar": "In kalenders, planningen, tijdlijnen, geschiedenis en systemen.",
+        "waarom": "Om tijd over langere perioden overzichtelijk te meten en te ordenen.",
+        "hoe": "Door opeenvolgende kalendermaanden te tellen en aan gebeurtenissen te koppelen."
+      },
+      "tags": [
+        "maanden",
+        "maand",
+        "kalender",
+        "jaar",
+        "week",
+        "dagen",
+        "tijd",
+        "periode",
+        "duur",
+        "januari",
+        "februari",
+        "maart",
+        "april",
+        "mei",
+        "juni",
+        "juli",
+        "augustus",
+        "september",
+        "oktober",
+        "november",
+        "december",
+        "verleden",
+        "heden",
+        "toekomst",
+        "weten"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-31T08:42:34.441398+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-05954d5f",
+      "begrip": "Tijden",
+      "status": "active",
+      "lagen": {
+        "laag1": "Tijden is het meervoud van tijd en kan verschillende momenten, perioden of tijdsvormen betekenen.",
+        "laag2": "Tijden helpen om gebeurtenissen te plaatsen, te vergelijken en te begrijpen wanneer iets gebeurt, gebeurde of zal gebeuren.",
+        "laag3": "Tijden heeft meerdere betekenissen. Het kan gaan over verschillende momenten of perioden, zoals: “In vroegere tijden.” Het kan ook verwijzen naar werkwoordstijden, zoals verleden tijd, tegenwoordige tijd en toekomstige tijd. De juiste betekenis hangt af van de context.",
+        "laag4": "Binnen Spark verwijst tijden naar meerdere momenten, perioden of tijdsvormen die gebeurtenissen ordenen en betekenis geven. Spark kan tijden koppelen aan tijd, moment, periode, duur, verleden, heden, toekomst, volgorde, tijdlijn, datum, tijdstip, werkwoordstijd, verleden tijd, tegenwoordige tijd, toekomende tijd, verandering en context. Hierdoor kan Spark begrijpen wanneer iets plaatsvindt en hoe gebeurtenissen zich in de tijd tot elkaar verhouden."
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, gebeurtenissen, processen, talen en systemen.",
+        "wat": "Meerdere momenten, perioden of vormen waarmee tijd wordt uitgedrukt.",
+        "wanneer": "Bij het beschrijven, vergelijken of ordenen van gebeurtenissen.",
+        "waar": "In gesprekken, verhalen, kalenders, tijdlijnen, grammatica en logs.",
+        "waarom": "Om duidelijk te maken wanneer iets gebeurt en hoe gebeurtenissen in de tijd samenhangen.",
+        "hoe": "Door tijdstippen, perioden, datums, volgordes of werkwoordsvormen te gebruiken."
+      },
+      "tags": [
+        "tijden",
+        "tijd",
+        "moment",
+        "periode",
+        "duur",
+        "verleden",
+        "heden",
+        "toekomst",
+        "volgorde",
+        "tijdlijn",
+        "datum",
+        "tijdstip",
+        "werkwoordstijd",
+        "verleden tijd",
+        "tegenwoordige tijd",
+        "toekomende tijd",
+        "verandering",
+        "context",
+        "weten"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-31T08:43:04.542912+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-f586d653",
+      "begrip": "Besloot",
+      "status": "active",
+      "lagen": {
+        "laag1": "Besloot betekent dat iemand na nadenken of afwegen een keuze maakte.",
+        "laag2": "",
+        "laag3": "Besloot is de verleden tijd van besluiten. Een besluit kan snel of na lang overleg worden genomen. Vaak worden eerst mogelijkheden, informatie, gevolgen of meningen afgewogen. Een besluit kan persoonlijk zijn, maar ook door een groep, organisatie of systeem worden genomen.",
+        "laag4": "Binnen Spark verwijst besloot naar een beslissing die in het verleden is genomen op basis van beschikbare informatie, regels, doelen of afwegingen. Spark kan besloot koppelen aan besluiten, beslissing, keuze, afwegen, mogelijkheden, informatie, reden, doel, gevolg, actie, uitkomst, beslislog, tijdstempel en context. Hierdoor kan Spark vastleggen welke keuze is gemaakt en later terugzoeken waarop die keuze was gebaseerd."
+      },
+      "ws5": {
+        "wie": "Mensen, gebruikers, groepen, teams, organisaties en systemen.",
+        "wat": "Een keuze of beslissing die in het verleden is genomen.",
+        "wanneer": "Nadat informatie, mogelijkheden of gevolgen zijn overwogen.",
+        "waar": "In gesprekken, projecten, organisaties, processen en digitale systemen.",
+        "waarom": "Om richting te kiezen, een probleem aan te pakken of een doel te bereiken.",
+        "hoe": "Door informatie en mogelijkheden af te wegen en vervolgens een keuze te maken."
+      },
+      "tags": [
+        "besloot",
+        "besluiten",
+        "beslissing",
+        "keuze",
+        "afwegen",
+        "mogelijkheden",
+        "informatie",
+        "reden",
+        "doel",
+        "gevolg",
+        "actie",
+        "uitkomst",
+        "beslislog",
+        "tijdstempel",
+        "context",
+        "doen"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-31T08:43:30.740053+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-111e6c01",
+      "begrip": "Immers",
+      "status": "active",
+      "lagen": {
+        "laag1": "Immers betekent: zoals al bekend is, want of omdat dat logisch is.",
+        "laag2": "Het woord immers geeft een reden of uitleg die de spreker als bekend, duidelijk of vanzelfsprekend beschouwt.",
+        "laag3": "Immers wordt vaak gebruikt om een eerdere uitspraak te ondersteunen. Bijvoorbeeld: “Spark slaat de gebeurtenis op, want alles wordt immers gelogd.” Het woord laat zien dat de reden volgens de spreker al bekend is of logisch volgt uit wat eerder is gezegd. Immers kan in gewone gesprekken wat formeel klinken.",
+        "laag4": "Binnen Spark verwijst immers naar een taalverbinding die een uitspraak ondersteunt met een reden, uitleg of eerder bekende informatie. Spark kan immers koppelen aan want, omdat, reden, uitleg, onderbouwing, argument, bekend, vanzelfsprekend, logisch, conclusie, verband, context, voorgaande informatie en betekenis. Hierdoor kan Spark herkennen dat een zin voortbouwt op informatie die al bekend of eerder genoemd is."
+      },
+      "ws5": {
+        "wie": "Sprekers, schrijvers, gebruikers en systemen die informatie uitleggen.",
+        "wat": "Een woord dat een reden, uitleg of bekende onderbouwing toevoegt.",
+        "wanneer": "Wanneer een uitspraak wordt ondersteund met iets dat al bekend of logisch lijkt.",
+        "waar": "In gesprekken, uitleg, teksten, argumenten en redeneringen.",
+        "waarom": "Om een verband duidelijk te maken en een uitspraak te onderbouwen.",
+        "hoe": "Door een reden of bekende informatie aan een eerdere uitspraak te verbinden."
+      },
+      "tags": [
+        "immers",
+        "want",
+        "omdat",
+        "reden",
+        "uitleg",
+        "onderbouwing",
+        "argument",
+        "bekend",
+        "vanzelfsprekend",
+        "logisch",
+        "conclusie",
+        "verband",
+        "context",
+        "voorgaande informatie",
+        "betekenis",
+        "spreken"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-31T08:43:54.680478+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-7911829c",
+      "begrip": "Wist",
+      "status": "active",
+      "lagen": {
+        "laag1": "Wist betekent dat iemand in het verleden kennis had van iets.",
+        "laag2": "",
+        "laag3": "Wist is de verleden tijd van weten. Het geeft aan dat kennis op een eerder moment aanwezig was. Bijvoorbeeld: “Ik wist het antwoord.” Het kan ook betekenen dat iemand ergens van op de hoogte was: “Zij wist dat de afspraak was veranderd.” Dat iemand iets wist, betekent niet automatisch dat de kennis volledig, juist of nog actueel was.",
+        "laag4": "Binnen Spark verwijst wist naar kennis, informatie of bewustzijn dat op een eerder moment beschikbaar was. Spark kan wist koppelen aan weten, kennis, informatie, bekend, begrijpen, herinneren, bewust, verleden, tijd, tijdstempel, bron, zekerheid, juistheid, geheugen en context. Hierdoor kan Spark onderscheid maken tussen wat eerder bekend was, wat nu bekend is en wat later is geleerd."
+      },
+      "ws5": {
+        "wie": "Mensen, gebruikers, groepen en systemen.",
+        "wat": "Kennis of bewustzijn dat op een eerder moment aanwezig was.",
+        "wanneer": "In het verleden, vóór het huidige moment.",
+        "waar": "In herinneringen, gesprekken, kennisbanken, logs en systemen.",
+        "waarom": "Door leren, ervaren, waarnemen, uitleg of ontvangen informatie.",
+        "hoe": "Door informatie op te slaan, te begrijpen, te onthouden of terug te halen."
+      },
+      "tags": [
+        "wist",
+        "weten",
+        "kennis",
+        "informatie",
+        "bekend",
+        "begrijpen",
+        "herinneren",
+        "bewust",
+        "verleden",
+        "tijd",
+        "tijdstempel",
+        "bron",
+        "zekerheid",
+        "juistheid",
+        "geheugen",
+        "context"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-07-31T08:44:22.982046+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
     }
   ],
   "last_backfill": "2026-06-07T21:30:59.330073+00:00"

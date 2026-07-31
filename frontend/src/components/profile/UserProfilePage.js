@@ -15,7 +15,6 @@ const API = process.env.REACT_APP_BACKEND_URL;
 const TABS = [
   { id: 'algemeen', label: 'Algemeen', accent: '#f59e0b' },
   { id: 'achtergrond', label: 'Achtergrond', accent: '#10b981' },
-  { id: 'persoonlijkheid', label: 'Persoonlijkheid', accent: '#a855f7' },
   { id: 'gesprekken', label: 'Gesprekken', accent: '#3b82f6' },
   { id: 'avatar', label: 'Avatar', accent: '#ec4899' },
   { id: 'instellingen', label: 'Instellingen', accent: '#06b6d4' },
@@ -113,12 +112,6 @@ export function UserProfilePage({ onNavigate }) {
             {activeTab === 'achtergrond' && (
               <AchtergrondTab
                 profile={extProfile} updateField={updateField}
-                onSave={saveProfile} saving={saving} savedFlash={savedFlash}
-              />
-            )}
-            {activeTab === 'persoonlijkheid' && (
-              <PersoonlijkheidTab
-                persona={persona} setPersona={setPersona}
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
             )}

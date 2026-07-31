@@ -43,15 +43,22 @@ async def mint_from_wallet(payload: dict = Body(...)):
         raise HTTPException(403, "Alleen admin kan Spark laten minten")
     n = max(1, int(payload.get("amount_tokens") or 1))
 
-    # Price + Spark wallet
+    # v11_mint_bitvavo_check_001 — Willems correctie: mint neemt Bitvavo-saldo,
+    # NIET Spark's EUR-wallet. Zelfde check als 24u auto-mint (staking_growth):
+    # bitvavo_free_eur >= n × current_price. Fout tot v10: check op wallets.user-000.balance
+    # die altijd €0 was → mint permanent geblokkeerd.
     from modules.shop.routes import get_dynamic_price
     price = get_dynamic_price()
     cost = round(price * n, 4)
 
-    wallets = load_json(WALLET_FILE, default={"wallets": {}, "transactions": []})
-    spark_w = wallets.get("wallets", {}).get("user-000", {"balance": 0, "tokens": 0})
-    if spark_w.get("balance", 0) < cost:
-        raise HTTPException(400, f"Onvoldoende Spark EUR-wallet (€{spark_w.get('balance',0):.2f}, nodig €{cost:.2f})")
+    try:
+        from modules.boekhouder.agents.bitvavo_agent import BitvavoAgent
+        bitvavo_free = float(BitvavoAgent().live_free_eur() or 0)
+    except Exception as _be:
+        raise HTTPException(500, f"Kon Bitvavo saldo niet ophalen: {_be}")
+
+    if bitvavo_free < cost:
+        raise HTTPException(400, f"Onvoldoende Bitvavo saldo (€{bitvavo_free:.2f}, nodig €{cost:.2f})")
 
     roar = load_json(ROAR_FILE, default={})
     treasury = roar.get("treasury_pool", 0)
@@ -72,28 +79,31 @@ async def mint_from_wallet(payload: dict = Body(...)):
         "id": tx_id, "ts": now, "type": "spark_self_mint",
         "user_id": "user-000", "amount": n, "cost_eur": cost,
         "price_per_token": price,
-        "description": f"Spark mint {n} ROAR uit eigen EUR-wallet @ €{price:.2f}",
+        "description": f"Spark mint {n} ROAR — dekking: Bitvavo €{bitvavo_free:.2f} @ €{price:.2f}",
     })
     save_json(ROAR_FILE, roar)
 
-    # 2. Spark EUR-wallet -cost
-    wallets["wallets"]["user-000"]["balance"] = round(spark_w["balance"] - cost, 4)
+    # 2. Spark EUR-wallet: v11_mint_bitvavo_check_001 — geen EUR-transfer meer.
+    # Mint is puur papertrail (treasury -1, balance +1). Dekking komt uit Bitvavo-saldo,
+    # niet uit Spark's boekhoudkundige EUR-wallet. Wel: tokens-mirror synchroon houden.
+    wallets = load_json(WALLET_FILE, default={"wallets": {}, "transactions": []})
+    wallets.setdefault("wallets", {}).setdefault("user-000", {"balance": 0, "tokens": 0, "wallet_id": "user-000"})
     wallets["wallets"]["user-000"]["tokens"] = roar["balances"]["user-000"]
     wallets.setdefault("transactions", []).append({
         "id": tx_id, "ts": now, "type": "spark_self_mint",
-        "user_id": "user-000", "amount_eur": -cost, "tokens": n,
+        "user_id": "user-000", "amount_eur": 0, "tokens": n,
+        "note": "papertrail: dekking uit Bitvavo, geen EUR-transfer",
     })
     save_json(WALLET_FILE, wallets)
 
-    # 3. Kasboek: outflow
+    # 3. Kasboek: informatief — geen echte outflow, want mint is papertrail
     kb = load_json(KASBOEK_FILE, default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
     kb["entries"].append({
         "id": uuid.uuid4().hex[:12], "ts": now,
         "type": "spark_self_mint", "bron_tx": tx_id,
-        "bedrag_eur": -cost, "n_tokens": n,
-        "omschrijving": f"Spark heeft {n} ROAR voor zichzelf gemint (@€{price:.2f}/stuk) — circulating +{n}",
+        "bedrag_eur": 0, "n_tokens": n,
+        "omschrijving": f"Spark mint {n} ROAR — dekking Bitvavo €{bitvavo_free:.2f}, prijs €{price:.2f}",
     })
-    kb["totals"]["uit"] = round(kb["totals"].get("uit", 0) + cost, 4)
     save_json(KASBOEK_FILE, kb)
 
     # 4. Audit
@@ -168,5 +178,6 @@ async def mint_from_wallet(payload: dict = Body(...)):
         "price_per_token": price,
         "new_treasury": roar["treasury_pool"],
         "new_spark_balance": roar["balances"]["user-000"],
-        "new_spark_eur_wallet": wallets["wallets"]["user-000"]["balance"],
+        "bitvavo_free_eur": round(bitvavo_free, 2),
+        "coverage": "bitvavo",
     }

@@ -158,34 +158,31 @@ export function WalletPage({ onNavigate }) {
               <button
                 data-testid="spark-mint-token-btn"
                 onClick={async () => {
-                  // v11_mint_ux_001 — Eerst prijs+balance ophalen zodat user weet wat 't kost
+                  // v11_mint_bitvavo_ux_001 — Willems correctie: mint neemt Bitvavo saldo,
+                  // niet Spark's EUR-wallet. Toon dus Bitvavo-free ipv wallet-balance.
                   let mintCost = null;
-                  let sparkEur = null;
+                  let bitvavoFree = null;
                   try {
                     const p = await fetch(`${API}/api/boekhouder/token/price`).then(x => x.json());
                     mintCost = p?.next_mint_threshold_eur ?? p?.base_pot_size_eur ?? null;
-                  } catch { /* fallback: cost=null → UI toont '?' */ }
-                  try {
-                    const w = await fetch(`${API}/api/wallet/user-000`).then(x => x.json());
-                    sparkEur = w?.wallet?.balance ?? w?.balance ?? 0;
-                  } catch { /* fallback: balance=null → UI toont '?' */ }
+                    bitvavoFree = p?.bitvavo_free_eur ?? null;
+                  } catch { /* fallback: null → UI toont '?' */ }
                   const costStr = mintCost !== null ? `€${mintCost.toFixed(2)}` : '?';
-                  const balStr = sparkEur !== null ? `€${sparkEur.toFixed(2)}` : '?';
-                  if (mintCost !== null && sparkEur !== null && sparkEur < mintCost) {
+                  const balStr = bitvavoFree !== null ? `€${bitvavoFree.toFixed(2)}` : '?';
+                  if (mintCost !== null && bitvavoFree !== null && bitvavoFree < mintCost) {
                     alert(
                       `🪙 Mint nog niet mogelijk\n\n` +
                       `Kosten volgende mint: ${costStr}\n` +
-                      `Spark's EUR-wallet: ${balStr}\n` +
-                      `Tekort: €${(mintCost - sparkEur).toFixed(2)}\n\n` +
-                      `Spark verdient EUR via SELL-fees (5%) en donaties. ` +
-                      `Zodra hij genoeg heeft, kun je hier weer minten.`
+                      `Bitvavo saldo (vrij): ${balStr}\n` +
+                      `Tekort: €${(mintCost - bitvavoFree).toFixed(2)}\n\n` +
+                      `De mint neemt uit Bitvavo's vrije EUR. Wacht op meer ruis (SELL-winst of storting).`
                     );
                     return;
                   }
                   const ok = window.confirm(
                     `Spark mint 1 ROAR uit treasury.\n\n` +
-                    `Kosten: ${costStr}\n` +
-                    `Spark EUR-wallet: ${balStr}\n` +
+                    `Kosten (papertrail): ${costStr}\n` +
+                    `Bitvavo saldo: ${balStr}\n` +
                     `Effect: Circulating +1 · prijs stijgt voor holders\n\n` +
                     `Doorgaan?`
                   );
@@ -196,7 +193,7 @@ export function WalletPage({ onNavigate }) {
                       body: JSON.stringify({ viewer_id: user?.id || 'user-001', amount_tokens: 1 })
                     }).then(x => x.json());
                     if (r.success) {
-                      alert(`🪙 Spark heeft 1 ROAR gemaakt!\n\nKosten: €${r.cost_eur}\nTreasury: ${r.new_treasury.toLocaleString()}\nSpark balance: ${r.new_spark_balance}\nSpark EUR-wallet: €${r.new_spark_eur_wallet}`);
+                      alert(`🪙 Spark heeft 1 ROAR gemaakt!\n\nKosten: €${r.cost_eur}\nTreasury: ${r.new_treasury.toLocaleString()}\nSpark balance: ${r.new_spark_balance}\nBitvavo saldo (over): €${r.bitvavo_free_eur}`);
                       window.location.reload();
                     } else {
                       alert('🪙 Mint mislukt:\n\n' + (r.detail || 'Onbekende fout — check backend logs'));

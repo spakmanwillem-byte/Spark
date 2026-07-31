@@ -64,7 +64,9 @@ export function WinkelPage({ onNavigate }) {
   const deleteProduct = async (product) => {
     if (!window.confirm(`Product "${product.name}" definitief verwijderen?`)) return;
     try {
-      const r = await fetch(`${API}/api/shop/admin/products/${product.id}?viewer_id=${encodeURIComponent(userId)}`, {
+      // v11_shop_scope_001 — geef shop_id mee zodat verwijderen in de juiste container gebeurt.
+      const shopId = selectedShopId || product.shop_id || 'shop-roadkill';
+      const r = await fetch(`${API}/api/shop/admin/products/${product.id}?viewer_id=${encodeURIComponent(userId)}&shop_id=${encodeURIComponent(shopId)}`, {
         method: 'DELETE',
       });
       const d = await r.json();
@@ -79,8 +81,10 @@ export function WinkelPage({ onNavigate }) {
   };
 
   const loadData = useCallback(() => {
+    // v11_shop_scope_001 — Producten filteren op geselecteerde shop, niet global.
+    const shopId = selectedShopId || 'shop-roadkill';
     Promise.all([
-      fetch(`${API}/api/shop/products`).then(r => r.json()).catch(() => ({ products: [] })),
+      fetch(`${API}/api/shop/products?shop_id=${encodeURIComponent(shopId)}`).then(r => r.json()).catch(() => ({ products: [] })),
       fetch(`${API}/api/shop/token/price`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/shop/token/balance/${userId}`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/wallet/user/${userId}`).then(r => r.json()).catch(() => null),
@@ -92,7 +96,7 @@ export function WinkelPage({ onNavigate }) {
       setStorageStats(storage);
       setLoading(false);
     });
-  }, [userId]);
+  }, [userId, selectedShopId]);
 
   useEffect(() => { loadData(); }, [loadData]);
 
@@ -571,6 +575,8 @@ export function WinkelPage({ onNavigate }) {
           onClose={() => { setEditingProduct(null); setNewProductTab(null); }}
           product={editingProduct}
           userId={user?.id}
+          shopId={selectedShopId || 'shop-roadkill'}
+          shopName={selectedShop?.naam || 'Roadkill Shop'}
           defaultCategory={newProductTab || editingProduct?.category || 'merch'}
           onSaved={(p) => { loadData(); if (p && p.id) setEditingProduct(p); }}
         />

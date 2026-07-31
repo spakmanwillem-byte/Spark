@@ -4,7 +4,7 @@ import { X, Upload, Trash2, Loader2, Plus } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
-export function ProductEditModal({ open, onClose, product, userId, onSaved, defaultCategory = 'merch' }) {
+export function ProductEditModal({ open, onClose, product, userId, shopId = 'shop-roadkill', shopName = 'Roadkill Shop', onSaved, defaultCategory = 'merch' }) {
   const isNew = !product;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -19,6 +19,10 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
   const [error, setError] = useState(null);
   const fileRef = useRef(null);
 
+  // v11_shop_scope_001 — entity_id (kasboek) volgt automatisch de shop-context.
+  // shop-roadkill → 'roadkill_merch' (bestaand), andere shops → 'shop_<id>'.
+  const derivedEntityId = shopId === 'shop-roadkill' ? 'roadkill_merch' : `shop_${shopId}`;
+
   useEffect(() => {
     if (!open) return;
     setError(null);
@@ -27,16 +31,16 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
       setDescription(product.description || '');
       setPrice(String(product.price ?? ''));
       setCategory(product.category || 'merch');
-      setEntityId(product.entity_id || 'roadkill_merch');
+      setEntityId(product.entity_id || derivedEntityId);
       setInStock(product.in_stock !== false);
       setImageIcon(product.image_icon || 'package');
       setImages(product.images || (product.image_url ? [product.image_url] : []));
     } else {
       setName(''); setDescription(''); setPrice(''); setCategory(defaultCategory);
-      setEntityId(defaultCategory === 'merch' ? 'roadkill_merch' : 'spark_your_life');
+      setEntityId(derivedEntityId);
       setInStock(true); setImageIcon('package'); setImages([]);
     }
-  }, [open, product, defaultCategory]);
+  }, [open, product, defaultCategory, derivedEntityId]);
 
   if (!open) return null;
 
@@ -53,7 +57,7 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
       }
       const created = await fetch(`${API}/api/shop/admin/products`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon }),
+        body: JSON.stringify({ viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, shop_id: shopId }),
       }).then(r => r.json());
       if (!created.success) { setError(created.detail || 'Aanmaken mislukt'); return; }
       pid = created.product.id;
@@ -80,7 +84,7 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
       return;
     }
     if (!window.confirm('Foto verwijderen?')) return;
-    const qs = new URLSearchParams({ image_url: url, viewer_id: userId });
+    const qs = new URLSearchParams({ image_url: url, viewer_id: userId, shop_id: shopId });
     const r = await fetch(`${API}/api/shop/admin/products/${product.id}/images?${qs}`, { method: 'DELETE' }).then(x => x.json());
     if (r.success) setImages(r.images);
   };
@@ -92,7 +96,7 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
     if (!Number.isFinite(pr) || pr < 0) { setError('Prijs ongeldig'); return; }
     setSaving(true);
     try {
-      const body = { viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, images };
+      const body = { viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, images, shop_id: shopId };
       const url = isNew ? `${API}/api/shop/admin/products` : `${API}/api/shop/admin/products/${product.id}`;
       const method = isNew ? 'POST' : 'PUT';
       const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.json());
@@ -105,7 +109,7 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
   const deleteProduct = async () => {
     if (!product?.id) return;
     if (!window.confirm(`Product "${product.name}" definitief verwijderen?`)) return;
-    await fetch(`${API}/api/shop/admin/products/${product.id}?viewer_id=${userId}`, { method: 'DELETE' });
+    await fetch(`${API}/api/shop/admin/products/${product.id}?viewer_id=${userId}&shop_id=${encodeURIComponent(shopId)}`, { method: 'DELETE' });
     onSaved && onSaved(null);
     onClose && onClose();
   };
@@ -167,7 +171,7 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
               className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 resize-none" />
           </div>
 
-          {/* Categorie + entity */}
+          {/* Categorie + kasboek (read-only, gekoppeld aan shop) */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-[10px] text-slate-400 uppercase tracking-wider">Categorie</label>
@@ -180,12 +184,15 @@ export function ProductEditModal({ open, onClose, product, userId, onSaved, defa
             </div>
             <div>
               <label className="text-[10px] text-slate-400 uppercase tracking-wider">Kasboek</label>
-              <select data-testid="product-entity" value={entityId} onChange={e => setEntityId(e.target.value)}
-                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white">
-                <option value="roadkill_merch">Roadkill Shop</option>
-                <option value="spark_your_life">Spark Your Life</option>
-                <option value="spark_core">Spark AI</option>
-              </select>
+              {/* v11_shop_scope_001 — Kasboek is vast per shop; niet meer los kiesbaar.
+                  Voorkomt dat producten in andermans kasboek belanden. */}
+              <div data-testid="product-entity-locked"
+                className="mt-1 w-full px-3 py-2 bg-slate-800/50 border border-slate-700 rounded-lg text-sm text-slate-300 flex items-center gap-2">
+                <span className="text-amber-400">🔒</span>
+                <span className="truncate">{shopName}</span>
+                <span className="text-[9px] text-slate-500 ml-auto">auto</span>
+              </div>
+              <p className="text-[9px] text-slate-500 mt-1">Kasboek volgt de huidige winkel</p>
             </div>
           </div>
 

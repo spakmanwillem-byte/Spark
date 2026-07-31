@@ -25,18 +25,18 @@ SHOPS_FILE = DATA_DIR / "shop" / "shops.json"  # v6_shop_admin_delete_001 — mo
 def _shop_products_path(shop_id: str = "shop-roadkill"):
     """v6_shop_per_user_001 (28 mei) — products per shop in shop-owner's container.
     Founder shop-roadkill = user-001's container. Andere shops = hun owner.
+    v11_shop_scope_001 (31 jul) — voor nieuwe shops (nog geen products.json) toch de
+    per-shop path retourneren; save_json maakt hem aan. Voorkomt dat nieuwe shops
+    per ongeluk in Willem's Roadkillshop-file schrijven.
     """
     from pathlib import Path as _P
     SHOPS = _P(__file__).parent.parent.parent / "data" / "shop" / "shops.json"
     sdata = load_json(SHOPS, default={"shops": []})
     shop = next((s for s in sdata.get("shops", []) if s.get("id") == shop_id), None)
     if not shop:
-        return PRODUCTS_FILE  # fallback
+        return PRODUCTS_FILE  # fallback voor onbekende shop_id
     owner = shop.get("owner_user_id", "user-001")
-    user_path = _P(__file__).parent.parent.parent / "data" / "users" / owner / "shops" / shop_id / "products.json"
-    if user_path.exists():
-        return user_path
-    return PRODUCTS_FILE
+    return _P(__file__).parent.parent.parent / "data" / "users" / owner / "shops" / shop_id / "products.json"
 ACCOUNTING_FILE = DATA_DIR / "accounting" / "transactions.json"
 
 TOTAL_SUPPLY = 1_000_000
@@ -724,6 +724,8 @@ class ProductUpsert(BaseModel):
     in_stock: Optional[bool] = True
     image_icon: Optional[str] = "package"
     images: Optional[List[str]] = []  # full URLs (sa /api/system-archive/file/...)
+    # v11_shop_scope_001 — Product-CRUD moet per shop schrijven, niet in de global PRODUCTS_FILE.
+    shop_id: Optional[str] = "shop-roadkill"
 
 
 def _require_admin(viewer_id: str) -> None:
@@ -764,7 +766,9 @@ async def admin_create_product(req: ProductUpsert):
     _require_admin(req.viewer_id)
     if req.price < 0:
         raise HTTPException(400, "Prijs mag niet negatief zijn")
-    data = load_json(PRODUCTS_FILE, default={"products": []})
+    # v11_shop_scope_001 — schrijf naar de container van de opgegeven shop, niet global.
+    pfile = _shop_products_path(req.shop_id or "shop-roadkill")
+    data = load_json(pfile, default={"products": []})
     pid = req.name.lower().replace(" ", "-").replace("/", "-")[:50] + "-" + uuid.uuid4().hex[:6]
     new_prod = {
         "id": pid, "name": req.name, "description": req.description or "",
@@ -772,18 +776,20 @@ async def admin_create_product(req: ProductUpsert):
         "category": req.category, "entity_id": req.entity_id,
         "in_stock": req.in_stock, "image_icon": req.image_icon,
         "images": req.images or [], "image_url": (req.images or [None])[0],
+        "shop_id": req.shop_id or "shop-roadkill",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "btw_percentage": 0,  # Verkoopprijs is incl. BTW (per user: zonder BTW = wat ze betalen)
     }
     data.setdefault("products", []).append(new_prod)
-    save_json(PRODUCTS_FILE, data)
+    save_json(pfile, data)
     return {"success": True, "product": new_prod}
 
 
 @router.put("/admin/products/{product_id}")
 async def admin_update_product(product_id: str, req: ProductUpsert):
     _require_admin(req.viewer_id)
-    data = load_json(PRODUCTS_FILE, default={"products": []})
+    pfile = _shop_products_path(req.shop_id or "shop-roadkill")
+    data = load_json(pfile, default={"products": []})
     for p in data.get("products", []):
         if p["id"] == product_id:
             p["name"] = req.name
@@ -799,34 +805,36 @@ async def admin_update_product(product_id: str, req: ProductUpsert):
                 if req.images:
                     p["image_url"] = req.images[0]
             p["updated_at"] = datetime.now(timezone.utc).isoformat()
-            save_json(PRODUCTS_FILE, data)
+            save_json(pfile, data)
             return {"success": True, "product": p}
     raise HTTPException(404, "Product niet gevonden")
 
 
 @router.delete("/admin/products/{product_id}")
-async def admin_delete_product(product_id: str, viewer_id: str):
+async def admin_delete_product(product_id: str, viewer_id: str, shop_id: str = "shop-roadkill"):
     _require_admin(viewer_id)
-    data = load_json(PRODUCTS_FILE, default={"products": []})
+    pfile = _shop_products_path(shop_id)
+    data = load_json(pfile, default={"products": []})
     before = len(data.get("products", []))
     data["products"] = [p for p in data.get("products", []) if p["id"] != product_id]
     if len(data["products"]) == before:
         raise HTTPException(404, "Product niet gevonden")
-    save_json(PRODUCTS_FILE, data)
+    save_json(pfile, data)
     return {"success": True}
 
 
 @router.delete("/admin/products/{product_id}/images")
-async def admin_remove_product_image(product_id: str, image_url: str, viewer_id: str):
+async def admin_remove_product_image(product_id: str, image_url: str, viewer_id: str, shop_id: str = "shop-roadkill"):
     """Verwijder één image-URL uit product.images[]."""
     _require_admin(viewer_id)
-    data = load_json(PRODUCTS_FILE, default={"products": []})
+    pfile = _shop_products_path(shop_id)
+    data = load_json(pfile, default={"products": []})
     for p in data.get("products", []):
         if p["id"] == product_id:
             p["images"] = [u for u in (p.get("images") or []) if u != image_url]
             if p.get("image_url") == image_url:
                 p["image_url"] = (p["images"][0] if p["images"] else None)
-            save_json(PRODUCTS_FILE, data)
+            save_json(pfile, data)
             return {"success": True, "images": p["images"]}
     raise HTTPException(404, "Product niet gevonden")
 

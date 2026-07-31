@@ -968,8 +968,10 @@ export function TraderPage({ onNavigate }) {
               </div>
             </div>
 
-            {/* v11_bitvavo_reconcile_ui_001 — Bitvavo Reconciliatie panel: orphans + rest */}
-            <BitvavoReconcilePanel userId={userId} isAdmin={isAdmin} />
+            {/* v11_bitvavo_reconcile_ui_001 — Bitvavo Reconciliatie panel: orphans + rest.
+                v11_reconcile_admin_only_001 — Alleen zichtbaar voor admins; gewone users
+                hoeven test-gokjes/orphan-info niet te zien. */}
+            {isAdmin && <BitvavoReconcilePanel userId={userId} isAdmin={isAdmin} />}
 
             {/* Quick Trade Panel — vereenvoudigd v4_snelhandel_002 */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5">

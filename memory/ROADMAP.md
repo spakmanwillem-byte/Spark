@@ -1,6 +1,80 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## ✅ SESSIE 51 SLOT — Wallet/Token/Mint gerepareerd + verbonden (31 juli)
+
+### Kritieke bug-fixes (single-source-of-truth)
+- **v11_treasury_pool_fix_001** — `admin_grant_token` en `admin_revoke_token` haalden tokens uit **Spark's balance** ipv `treasury_pool`. Elke +1/-1 token knop verstoorde de 1M-pool. Nu correct + auto-sync `user_wallets.json` + `sync_potjes_to_tokens`.
+- **v11_mint_bitvavo_check_001** — mint checkte fout op `wallets.user-000.balance` (altijd €0). Nu op **Bitvavo-saldo** (net als 24u auto-mint). Geen EUR-transfer meer uit Spark's wallet — pure papertrail.
+- **v11_audit_cluster_001** — `open_cluster` en `close_cluster` in potjes.py riepen NIET `announce_buy`/`announce_sell` aan. Sinds bot naar cluster-mode ging (~29 juli) verdwenen alle bot-trades uit audit-log. Nu gefixed + `amount_eur` in sell-entries + 16 historische entries backgefilled uit trace-jsonl.
+- **v11_mint_cost_fix_001** — frontend gebruikte `next_mint_threshold_eur` (€90 = auto-mint drempel) als mint-kosten. Nu `current_price_eur` (€13.14 per token).
+
+### Data-integriteit (Willems eis: alles verbonden)
+- **v11_reserve_lock_001** — 2/2/1 reserve-kluis nu apart. Nieuwe `BitvavoAgent.live_free_eur_after_reserve()` — mint en potjes gebruiken deze. Reserve €2.26 mag NIET aangeraakt worden.
+- **v11_unique_wallet_ids_001** — user-000 → `wal-da01a7d6`, user-001 → `wal-571e222b` (anti-fraude). Andere users blijven vooralsnog `user_id` als wallet_id.
+- **v11_toplevel_master_001** — dubbele `spark_tokens` in `user_wallets.json` (top-level + nested) nu synchroon gehouden bij elke mutatie.
+- **Papertrail-integriteit**: elke `/api/wallet/admin/token/grant`, `spark/mint/from-wallet`, `shop/token/buy` en `shop/gift/accept` muteert nu identiek: `roar_balances.json` (master) → `user_wallets.json` (mirror) → `user_potjes.json` (slots).
+
+### UI-features (nieuw + verbouwd)
+- **v11_papertrail_widget_001** — nieuw kladblok-widget: supply check + houders-lijst + laatste 15 tx. Bewijs dat 1M pool klopt.
+- **v11_spark_card_001** — Spark Card dynamisch: kaartnr = wallet_id (16 chars), kaarthouder = username, geldig-tot = `created_at + 4 jaar` OF **"GEBLOKKEERD"** bij block.
+- **v11_week_boekhoud_link_001** — Weekoverzicht (Inkomsten/Uitgaven) nu gekoppeld aan `audit_log.json` (was: statisch "+2.5%"). Categoriseert deposit/sell/gift_received → in; withdraw/buy/gift_sent → out.
+- **v11_wallet_card_removed_001** — wallettoken-kader binnen UsersAdminPage verwijderd. Token-beheer via WalletPage + Papertrail-widget (single-source-of-truth).
+
+### Nieuwe endpoints
+- `GET /api/wallet/papertrail-overview` — supply + holders + recent tx (voor widget)
+- `GET /api/wallet/overview` — uitgebreid met `week_in_eur/count`, `week_out_eur/count`, `wallet_id`, `created_at`
+
+### Live verificatie
+- **Willems 3 tokens hersteld** (verlies bij zip-merge). Willem 3 · Spark 7 · treasury 999.990 · som 1.000.000 ✓
+- **2 tokens gemint + gift aan Geiser** doorgevoerd. Nu: Spark 7 · Willem 3 · Geiser 2 · treasury 999.988 · som 1.000.000 ✓
+- **In Omloop klopt**: was 9, nu 12 (na Geiser-gift) — winkel-widget rendert correct.
+
+### Prod-merges (2× deze sessie)
+1. `spark_backup_changes_20260731_050848.zip` (66 files, 3.2MB) — audit-log recover + gebruikersdata
+2. `spark_backup_changes_20260731_065728.zip` (1530 files, backups geskipt) — 788 JSON + 227 JSONL
+
+Backup in `data/_backup_before_prod_merge_20260731_051228/` (213MB) voor rollback-safety.
+
+---
+
+## 🔴 P0 — Volgende sessie (na Willems redeploy + zip terug)
+
+### 1. Andere users unieke wallet-IDs migreren (~5 credits)
+Nu alleen user-000/001 hebben `wal-*` IDs. Geiser en anderen hebben nog `user_id` als wallet_id. Simpele migratie: iterate over alle wallets, als `wallet_id == user_id` → genereer nieuwe `wal-{uuid8}`.
+
+### 2. 🟢 SparkSelfAwareness LLM-driven hooks (~40-50 credits)
+Willems visie: harde strings blijven voor veiligheid + hoogste commando's. Conversationele intents (wedervraag, empathie, trader-info, humor) door LLM zelf laten kiezen ipv regex. Fundering (`spark_index`) klaar sessie 50g.
+
+### 3. KB V3 — Normen, Waarden, Testament (~30 credits)
+Filosofische laag voor systeem-loyaliteit + `willem_mening` veld. Voorkomt guardrail-blokkade.
+
+---
+
+## 🟡 P1 — Backlog
+
+- **Consolidatie `wallets.json` vs `user_wallets.json`** — nu 2 bronnen synchroon gehouden, eigenlijk moet 1 weg (kandidaat: `user_wallets.json` opheffen, alles in `wallets.json` + `roar_balances.json`).
+- **Sell/Dissolve token flow** — user kan token terugverkopen aan treasury.
+- **Merge-rest-into-existing-pot flow** — rest-restje toevoegen aan bestaand pot-capital.
+- **Missing 5W+H helper endpoint** `GET /api/kb/v2/admin/missing-5wh`.
+- **Rebound H1 tuning** + gap-confirmation + activation.
+- **Family uitbreiden** — moeder, overleden vader (nu alleen Lotus als dochter gekoppeld).
+- **Proactieve 5W-vraag bij lang gesprek** — tussenstap naar 🟢.
+- **Rest-bonus dashboard-widget** — "totaal opgeruimd deze maand".
+- **Cyclus-Agents STARR/SMART** voor KB V3 execution.
+- **32 KB v2 homoniem-dupes** — handmatige user-review (rapport in `DUPES_REPORT.md`).
+
+---
+
+## Bestand-index snapshot (v11_spark_index_001)
+- Live via `GET /api/spark-index`
+- 461 mappen · 1618 code-bestanden · 61 backend-modules · 60 met `_meta.json` footnote
+- Auto-rebuild bij backend startup
+
+---
+
+
+
 ## ✅ SESSIE 50 SLOT — Trader + Chat + Self-Awareness fundering (29 juli)
 
 ### v11_pot_registration_safety_001 — Bug A (race condition)
@@ -42,56 +116,9 @@ Auto-rebuild op backend startup (~200ms). Fundering voor toekomstige 🟢 SparkS
 
 ---
 
-## 🟢 P0 — Volgende sessies (na Willems redeploy)
-
-### 1. SparkSelfAwareness LLM-driven hooks (~40-50 credits)
-Willems visie: harde strings (regex) blijven voor veiligheid + hoogste commando's. Conversationele intents (wedervraag, empathie, trader-info, humor) door LLM zelf laten kiezen ipv regex. Per user-turn: keuze-array `[wedervraag, empathie, trader-info, humor, niks]` → LLM decide.
-
-### 2. KB V3 — Normen, Waarden, Testament (~30 credits)
-Filosofische laag: definieer systeem-loyaliteit + `willem_mening` veld op KB kaarten. Voorkomt dat LLM Willem blokkeert met generieke guardrails.
-
-### 3. Merge-rest-into-existing-pot (~10 credits)
-Optionele flow: rest-restje (BTC €0.33) toevoegen aan bestaand potje-capital ipv nieuw potje heropenen.
-
-### 4. Missing 5W+H helper endpoint (~5 credits)
-`GET /api/kb/v2/admin/missing-5wh` — lijst kaarten met lege 5W-velden voor UI-bulk-fill.
-
-### 5. Rebound H1 tuning + activatie (~10 credits)
-Momenteel `enabled: false`. Nodig: gap-confirmation + reversal-signaal voordat activatie.
-
-### 6. Family uitbreiden (moeder + overleden vader) — ~5 credits
-User-formulier of chat-auto-detect ("mijn moeder heet X" → family_relation update).
-
----
-
-## 🟡 P1 — Backlog
-
-### Bestand-search flow uitbreiden
-`spark_snuffel.py` bestaat, maar count-intent nieuw (`count_intent_service.py`). Uitbreiding: chat-vraag "wat staat er in `modules/trade/potjes.py`" → snuffel + samenvatting.
-
-### Cyclus-Agents (STARR/SMART) voor KB V3
-LeerAgent/MakenAgent die blueprints uitvoeren op basis van user-intent.
-
-### TopicAgent voor Graph
-Semantische validatie van edge connections in KB Verbanden.
-
-### Consolidatie wallets.json vs user_wallets.json
-Historische duplicatie, één source of truth kiezen.
-
-### 14 modules met directe roar_balances.json write
-Enforce mutations via `boekhouder.finance_ops.mint_tokens()`.
-
-### Sell/Dissolve token flow
-Nog niet gebouwd.
-
-### 32 KB v2 homoniem-dupes
-Rapport in `DUPES_REPORT.md`, handmatig user-review.
-
-### Proactieve 5W-vraag bij lang gesprek (~10 credits)
-Als user > N turns in gesprek → Spark stelt zelf 5W-vraag zonder trigger. Tussenstap naar 🟢 self-aware.
-
-### Dashboard-widget rest-bonus totaal
-"Totaal opgeruimd via rest-bonus deze maand: €X.XX" — leuke stats.
+## 🟢 P0 — Sessie 50 (SAMENGEVOEGD MET SESSIE 51 P0 HIERBOVEN)
+_Historische verwijzing — actuele P0 staat helemaal bovenaan (sessie 51 blok).
+Deze punten zijn nu gemerged in de P0/P1 secties bovenaan om dubbelwerk te voorkomen._
 
 ---
 

@@ -80,7 +80,9 @@ export const getPageInfo = (pageId) => {
 // Grad 4 (collega's): zelfde als 3 + geen voice
 // Grad 5: + geen Trade + geen Boekhouding
 // Grad 6: + geen Dagboek
-// Grad 7: + geen Agenda (krijgt Agenda terug bij upgrade naar 6) + geen Archief + geen Boekhouding (heeft Wallet)
+// Grad 7: + geen Agenda (krijgt Agenda terug bij upgrade naar 6) + geen Boekhouding (heeft Wallet).
+// v11_grad7_archief_001 — Archief WEL zichtbaar; daar staat gespreksgeschiedenis, die
+// heeft ook grad 7 nodig om zichzelf terug te kunnen lezen.
 const SPARK_ONLY_ITEMS = ['triggers', 'emotions', 'emotion-routing', 'connections'];
 const VISIBILITY_RULES = {
   1: { hideSection: [], hide: [] },
@@ -89,7 +91,7 @@ const VISIBILITY_RULES = {
   4: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', ...SPARK_ONLY_ITEMS] },
   5: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', ...SPARK_ONLY_ITEMS] },
   6: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', ...SPARK_ONLY_ITEMS] },
-  7: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', 'archief', 'calendar', ...SPARK_ONLY_ITEMS] },
+  7: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', 'calendar', ...SPARK_ONLY_ITEMS] },
 };
 
 export function getVisibilityForGradatie(grad) {

@@ -1057,7 +1057,6 @@ const GLOW_PRESETS = [
 function InstellingenTab({ userId }) {
   const [prefs, setPrefs] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [bvStatus, setBvStatus] = useState(null);
   const [savedFlash, setSavedFlash] = useState(false);
 
   useEffect(() => {
@@ -1065,10 +1064,6 @@ function InstellingenTab({ userId }) {
       .then(r => r.json())
       .then(d => setPrefs(d.preferences || null))
       .catch(() => setPrefs({ glow_base_color: '#f59e0b', sound_enabled: true, auto_bark_enabled: false }));
-    fetch(`${API}/api/trade/bitvavo/status/${userId}`)
-      .then(r => r.json())
-      .then(d => setBvStatus(d))
-      .catch(() => setBvStatus({ connected: false }));
   }, [userId]);
 
   const updatePref = (key, val) => {
@@ -1138,8 +1133,8 @@ function InstellingenTab({ userId }) {
 
       {/* === ACCOUNT === */}
       <AccountSection userId={userId} />
-      <AdminPasswordSection userId={userId} />
-      <AdminGrantSection userId={userId} />
+      {/* v11_instellingen_split_001 — AdminPasswordSection + AdminGrantSection verplaatst naar
+          Beheer → Gebruikers → per-user "Admin" tab. Zijn admin-taken, horen niet in Mijn Profiel. */}
 
       {/* === AVATAR (terug, was vroeger Avatar-tab; nu D&D dus hier ondergebracht) === */}
       <AvatarPickerPanel userId={userId} />
@@ -1277,39 +1272,8 @@ function InstellingenTab({ userId }) {
         </div>
       </Panel>
 
-      {/* === CONNECTIES === */}
-      <Panel>
-        <div className="flex items-center gap-2 mb-3">
-          <Link2 className="w-4 h-4 text-emerald-400" />
-          <h3 className="text-sm font-semibold text-white">Connecties</h3>
-        </div>
-
-        <div className="space-y-2">
-          <div data-testid="conn-bitvavo" className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xs font-bold">BV</div>
-              <div>
-                <p className="text-xs font-medium text-white">Bitvavo trading</p>
-                <p className="text-[10px] text-slate-500">
-                  {bvStatus?.connected
-                    ? `Verbonden ${bvStatus.connected_at ? '· ' + new Date(bvStatus.connected_at).toLocaleDateString('nl-NL') : ''}`
-                    : bvStatus?.placeholder ? 'Test-key ingesteld' : 'Niet verbonden'}
-                </p>
-              </div>
-            </div>
-            <span
-              className={`text-[10px] font-medium px-2 py-1 rounded-full ${bvStatus?.connected ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-400'}`}
-              data-testid="conn-bitvavo-status"
-            >
-              {bvStatus?.connected ? 'Actief' : 'Inactief'}
-            </span>
-          </div>
-
-          <p className="text-[10px] text-slate-500 italic px-1">
-            Meer connecties (Google Agenda, Moneybird, Telegram) volgen later.
-          </p>
-        </div>
-      </Panel>
+      {/* v11_instellingen_split_001 — Connecties/Bitvavo verplaatst naar
+          Beheer → Instellingen → Integraties (Spark-brede admin-config, geen user-instelling). */}
     </div>
   );
 }
@@ -1317,9 +1281,8 @@ function InstellingenTab({ userId }) {
 
 // ============================================================
 // AdminGrantSection (v6_admin_role_001) — admins toekennen + intrekken
-// Alleen zichtbaar voor admins. Toont lijst huidige admins + grant-knop.
-// ============================================================
-function AdminGrantSection({ userId }) {
+// v11_instellingen_split_001 — export omdat UsersAdminPage hem ook rendert (per-user Admin tab)
+export function AdminGrantSection({ userId }) {
   const [isAdmin, setIsAdmin] = useState(null);
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
@@ -1629,8 +1592,9 @@ function AccountSection({ userId }) {
 // ============================================================
 // AdminPasswordSection (v6_admin_role_001) — admin-wachtwoord wijzigen
 // Alleen zichtbaar voor admins (user.admin === true).
+// v11_instellingen_split_001 — export voor gebruik in UsersAdminPage.
 // ============================================================
-function AdminPasswordSection({ userId }) {
+export function AdminPasswordSection({ userId }) {
   const [isAdmin, setIsAdmin] = useState(null);
   const [oldPw, setOldPw] = useState('');
   const [newPw, setNewPw] = useState('');

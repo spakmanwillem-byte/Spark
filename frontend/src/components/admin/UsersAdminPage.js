@@ -10,6 +10,7 @@ import {
   Check, X, Save, Sparkles, Lock, BookOpen, Zap, Filter, Bot, KeyRound, Brain
 } from 'lucide-react';
 import { PersonalityView } from './PersonalityView';
+import { AdminPasswordSection, AdminGrantSection } from '../profile/UserProfilePage';
 
 export function UsersAdminPage({ onNavigate }) {
   const [users, setUsers] = useState([]);
@@ -390,6 +391,12 @@ export function UsersAdminPage({ onNavigate }) {
                   }`}>
                   <Brain className="w-3.5 h-3.5" /> Persoonlijkheid
                 </button>
+                <button data-testid="tab-admin" onClick={() => setDetailTab('admin')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 flex items-center gap-2 ${
+                    detailTab === 'admin' ? 'text-red-400 border-red-400' : 'text-slate-500 border-transparent hover:text-white'
+                  }`}>
+                  <Shield className="w-3.5 h-3.5" /> Admin
+                </button>
                 {/* v5_bot_settings_tab_001 — alleen tonen als geselecteerde user een bot is */}
                 {selectedUser?.is_bot && (
                   <button data-testid="tab-bot-settings" onClick={() => setDetailTab('bot-settings')}
@@ -411,6 +418,21 @@ export function UsersAdminPage({ onNavigate }) {
 
               {detailTab === 'personality' && (
                 <PersonalityView user={selectedUser} />
+              )}
+
+              {detailTab === 'admin' && (
+                <div data-testid="admin-user-view" className="space-y-4">
+                  <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-3">
+                    <p className="text-[11px] text-red-200/80 leading-relaxed">
+                      <Shield className="w-3 h-3 text-red-400 inline mr-1" />
+                      Admin-beheer voor <span className="text-amber-300 font-semibold">{selectedUser.naam}</span>:
+                      admin-wachtwoord wijzigen + admin-rol toekennen/intrekken.
+                      Alleen zichtbaar voor huidige admins.
+                    </p>
+                  </div>
+                  <AdminPasswordSection userId={selectedUser.id} />
+                  <AdminGrantSection userId={selectedUser.id} />
+                </div>
               )}
 
               {detailTab === 'logs' && (

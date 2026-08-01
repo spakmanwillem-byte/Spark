@@ -14,7 +14,6 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const TABS = [
   { id: 'algemeen', label: 'Algemeen', accent: '#f59e0b' },
-  { id: 'gesprekken', label: 'Gesprekken', accent: '#3b82f6' },
   { id: 'avatar', label: 'Avatar', accent: '#ec4899' },
   { id: 'instellingen', label: 'Instellingen', accent: '#06b6d4' },
 ];
@@ -107,9 +106,6 @@ export function UserProfilePage({ onNavigate }) {
                 isAdmin={(user?.gradatie ?? 99) <= 2}
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
-            )}
-            {activeTab === 'gesprekken' && (
-              <GesprekkenTab userId={userId} />
             )}
             {activeTab === 'avatar' && (
               <AvatarTab userId={userId} isAdmin={(user?.gradatie ?? 99) <= 2} />

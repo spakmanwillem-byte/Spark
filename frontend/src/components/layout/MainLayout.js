@@ -29,14 +29,15 @@ export const navigationConfig = {
   spark: {
     label: 'SPARK AI',
     items: [
-      { id: 'spark-overzicht', label: 'Brein-overzicht', icon: Brain, path: '/spark/overzicht' },
-      { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain' },
+      // v11_spark_admin_only_001 — Hele Spark AI sectie alleen zichtbaar in admin-mode.
+      { id: 'spark-overzicht', label: 'Brein-overzicht', icon: Brain, path: '/spark/overzicht', adminOnly: true },
+      { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain', adminOnly: true },
       { id: 'synapse', label: 'Synapslaag', icon: Brain, path: '/spark/synapse', adminOnly: true },
-      { id: 'knowledge-v2', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
-      { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers' },
-      { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions' },
-      { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections' },
-      { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
+      { id: 'knowledge-v2', label: 'Kennisbank', icon: BookOpen, path: '/knowledge', adminOnly: true },
+      { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers', adminOnly: true },
+      { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions', adminOnly: true },
+      { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections', adminOnly: true },
+      { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations', adminOnly: true },
     ]
   },
   modules: {

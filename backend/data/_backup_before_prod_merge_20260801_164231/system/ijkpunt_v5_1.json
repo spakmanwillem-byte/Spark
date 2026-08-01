@@ -1,0 +1,41 @@
+{
+  "ijkpunt_version": "v5.1",
+  "ts": "2026-05-23T13:29:53.565774+00:00",
+  "anchor": {
+    "deposit_eur_total": 96.52,
+    "tokens_issued": 20,
+    "token_price_initial_eur": 5.08,
+    "spark_user-000": {
+      "tokens": 10,
+      "potjes": 10,
+      "capital_per_pot": 5.08,
+      "totaal_eur": 50.8
+    },
+    "willem_user-001": {
+      "tokens": 10,
+      "potjes": 10,
+      "capital_per_pot": 5.08,
+      "totaal_eur": 50.8
+    },
+    "bron": "Bitvavo SEPA deposit dep-0001 + 10/10 mint"
+  },
+  "schaduw_users_potjes_verwijderd": [
+    "user-a0ee2d7e",
+    "user-574ac78e",
+    "user-4d81e2a4",
+    "user-1b492f19",
+    "user-bc76725e"
+  ],
+  "changes": [
+    "roar_balances: gefilterd naar {'user-000': 10, 'user-001': 10}",
+    "wallets.json: token-velden gesynchroniseerd met roar_balances",
+    "user_wallets.json: spark_tokens + balance_eur gesynchroniseerd",
+    "potjes verwijderd voor: ['user-1b492f19', 'user-bc76725e', 'user-574ac78e', 'user-a0ee2d7e', 'user-4d81e2a4']",
+    "bots_registry: 1 → 1 (schaduw verwijderd)",
+    "chat/logs/: 18 test-bestanden verwijderd",
+    "community/messages.json: 358 → 351 berichten",
+    "gift_requests: 2 → 2",
+    "trade-feed: 0 → 0"
+  ],
+  "backup_dir": "/app/backend/data/_backups/ijkpunt_v5_1_20260523_132953"
+}

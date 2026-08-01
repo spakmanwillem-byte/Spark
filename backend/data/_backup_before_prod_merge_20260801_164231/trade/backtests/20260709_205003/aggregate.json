@@ -1,0 +1,138 @@
+{
+  "A": {
+    "strategy": "Bollinger 2σ (baseline huidig)",
+    "params": {
+      "sigma": 2.0,
+      "gap": null,
+      "break_even": false
+    },
+    "trades": 19,
+    "wins": 19,
+    "win_rate": 100.0,
+    "total_pnl_eur": 2.78,
+    "avg_pnl_eur": 0.146,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 0,
+    "gap_allowed": 25,
+    "blocked_pct": 0.0
+  },
+  "B": {
+    "strategy": "Bollinger 2σ + gap-streng (v7 huidig)",
+    "params": {
+      "sigma": 2.0,
+      "gap": "streng",
+      "break_even": false
+    },
+    "trades": 0,
+    "wins": 0,
+    "win_rate": 0,
+    "total_pnl_eur": 0,
+    "avg_pnl_eur": 0,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 3958,
+    "gap_allowed": 0,
+    "blocked_pct": 100.0
+  },
+  "C": {
+    "strategy": "Bollinger 2σ + gap-los",
+    "params": {
+      "sigma": 2.0,
+      "gap": "los",
+      "break_even": false
+    },
+    "trades": 3,
+    "wins": 3,
+    "win_rate": 100.0,
+    "total_pnl_eur": 0.31,
+    "avg_pnl_eur": 0.103,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 3698,
+    "gap_allowed": 4,
+    "blocked_pct": 99.9
+  },
+  "D": {
+    "strategy": "Bollinger 2σ + gap-body (50%)",
+    "params": {
+      "sigma": 2.0,
+      "gap": "body",
+      "break_even": false
+    },
+    "trades": 22,
+    "wins": 22,
+    "win_rate": 100.0,
+    "total_pnl_eur": 3.29,
+    "avg_pnl_eur": 0.15,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 1580,
+    "gap_allowed": 28,
+    "blocked_pct": 98.3
+  },
+  "E": {
+    "strategy": "Bollinger 2σ + 3-red-green (Neef)",
+    "params": {
+      "sigma": 2.0,
+      "gap": "n_red3",
+      "break_even": false
+    },
+    "trades": 21,
+    "wins": 21,
+    "win_rate": 100.0,
+    "total_pnl_eur": 3.19,
+    "avg_pnl_eur": 0.152,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 757,
+    "gap_allowed": 26,
+    "blocked_pct": 96.7
+  },
+  "F": {
+    "strategy": "Bollinger 1.5σ (losser BUY)",
+    "params": {
+      "sigma": 1.5,
+      "gap": null,
+      "break_even": false
+    },
+    "trades": 20,
+    "wins": 20,
+    "win_rate": 100.0,
+    "total_pnl_eur": 3.03,
+    "avg_pnl_eur": 0.152,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 0,
+    "gap_allowed": 26,
+    "blocked_pct": 0.0
+  },
+  "G": {
+    "strategy": "Bollinger 1.5σ + gap-body",
+    "params": {
+      "sigma": 1.5,
+      "gap": "body",
+      "break_even": false
+    },
+    "trades": 11,
+    "wins": 11,
+    "win_rate": 100.0,
+    "total_pnl_eur": 1.66,
+    "avg_pnl_eur": 0.151,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 250,
+    "gap_allowed": 17,
+    "blocked_pct": 93.6
+  },
+  "H": {
+    "strategy": "Bollinger 1.5σ + gap-body + break-even sell",
+    "params": {
+      "sigma": 1.5,
+      "gap": "body",
+      "break_even": true
+    },
+    "trades": 11,
+    "wins": 11,
+    "win_rate": 100.0,
+    "total_pnl_eur": 1.66,
+    "avg_pnl_eur": 0.151,
+    "max_drawdown_eur": 0,
+    "gap_blocked": 250,
+    "gap_allowed": 17,
+    "blocked_pct": 93.6
+  }
+}

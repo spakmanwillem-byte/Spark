@@ -16,7 +16,9 @@ const INTERVAL_MS = { '15m': 15*60*1000, '1h': 60*60*1000, '4h': 4*60*60*1000, '
 const INTERVAL_LABELS = { '15m': '15 min', '1h': '1 uur', '4h': '4 uur', '1d': '1 dag' };
 
 export function TraderPage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, isAdmin: isAdminMode } = useAuth();
+  // v12_admin_toggle_001 — legacy gradatie-check behouden voor page-content (wallet-switch, stats),
+  // maar Bitvavo Reconciliatie panel gated via echte Admin-toggle (isAdminMode).
   const isAdmin = (user?.gradatie ?? 7) <= 1;
   const isFamilie = (user?.gradatie ?? 7) === 2;  // v4_trader_g2_hide_001
   // v4_trader_admin_switch_001 — admin kan switchen tussen eigen wallet en Spark wallet
@@ -969,9 +971,10 @@ export function TraderPage({ onNavigate }) {
             </div>
 
             {/* v11_bitvavo_reconcile_ui_001 — Bitvavo Reconciliatie panel: orphans + rest.
-                v11_reconcile_admin_only_001 — Alleen zichtbaar voor admins; gewone users
-                hoeven test-gokjes/orphan-info niet te zien. */}
-            {isAdmin && <BitvavoReconcilePanel userId={userId} isAdmin={isAdmin} />}
+                v12_admin_toggle_001 — Alleen zichtbaar wanneer 'Admin aan' toggle actief is
+                (isAdminMode = admin_capable && adminModeActive). Legacy gradatie-check
+                niet meer voldoende. */}
+            {isAdminMode && <BitvavoReconcilePanel userId={userId} isAdmin={isAdminMode} />}
 
             {/* Quick Trade Panel — vereenvoudigd v4_snelhandel_002 */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5">

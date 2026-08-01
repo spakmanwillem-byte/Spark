@@ -1,6 +1,46 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## ✅ SESSIE 52 SLOT — Admin/UX-split + prod-merge + shop-scope (1 aug)
+
+### Prod-merge #3
+- `spark_backup_changes_20260801_163713.zip` — 1540 files (1070 backups geskipt). 435 identiek, 36 gemerged (log-tails, cache, timestamps, users.json `last_active`).
+- Backup: `data/_backup_before_prod_merge_20260801_164231/` (211MB) voor rollback.
+
+### Bug: Winkel-scope + shop-delete permissie
+- **v11_shop_scope_001** — GET `/api/shop/products` returnde altijd Roadkill-producten voor NIEUWE shops. Frontend WinkelPage geeft nu `shop_id` mee, `_shop_products_path()` retourneert per-shop path (ook voor lege). Product POST/PUT/DELETE + image-DELETE geven `shop_id` mee → correcte container.
+- **v11_shop_delete_admin_only_001** — Legacy grad-2 fallback in `_require_admin` weggehaald. Alleen strict `admin===true` mag shops/produkten deleten. Familie (Heidi/Lotus/Maaike/Joy/Gerben) geblokkeerd. Frontend `WinkelstraatTab` gebruikt nu `isAdmin` uit AuthContext (v11 toggle) i.p.v. legacy `user.admin`.
+- Maaike's shop-0aff7155cd hersteld in shops.json (bestond op disk, ontbrak in registry).
+
+### UI-verplaatsingen (Willem's structuur)
+- **v11_shop_tab_in_archief_001** — Per-user "Winkel: [naam]"-tab in Workspace → Archief. Reuseert `ShopTabView` component.
+- **v11_spark_shop_admin_001** — Spark Shop beheer in Beheer → Instellingen → Archief → Spark Shop tab. Zelfde component. ROAR Token (was in Willem's shop) verhuisd naar shop-spark.
+- **v11_instellingen_split_001** — Mijn Profiel → Instellingen opgeschoond. `AdminPasswordSection` + `AdminGrantSection` → verhuisd naar Beheer → Gebruikers → nieuwe "Admin" tab per user. Bitvavo-connectie kader weg (staat al in Beheer → Instellingen → Integraties).
+- **v11_dashboard_admin_toggle_001** — Dashboard admin-widgets gaten nu op toggle-gebaseerde `isAdmin` uit AuthContext, niet meer op `gradatie ≤ 2`. Familie zonder toggle ziet clean dashboard.
+
+### UX-fixes
+- **v11_papertrail_names_001** — Papertrail widget toont nu `→ Spark +1` i.p.v. `mintuser-000+1`. Backend `/papertrail-overview` verrijkt tx met `user_naam/from_naam/to_naam`. Direction-arrows: → in, ← uit, × burn.
+- **v11_potjes_reconcile (eenmalig)** — Willem 1 pot → 3, Spark 10 pot → 7. Aligned met token-balances. `capital_baseline.json` bijgewerkt (Willem €30, Spark €70). Root-cause (gift/admin_grant verplaatst token maar niet pot) staat nog open.
+- **v11_reconcile_admin_only_001** — Bitvavo Reconciliatie-panel op Trader-pagina alleen zichtbaar voor grad-1.
+- **v11_grad7_archief_001** — Grad 7 ziet nu Archief-tab (gespreksgeschiedenis).
+- **v11_community_only_items_001** — Achievements + Leaderboard verborgen voor grad 6/7 (pas vanaf grad 5).
+- **v11_spark_admin_only_001** — Hele Spark AI sidebar-sectie (Brein/Synapslaag/KB/Triggers/Emoties/Verbanden) admin-only.
+- **v11_roar_token_readonly_001** — ROAR Token in Spark Shop = read-only weergave (prijs bepaald door potjes-mechanisme).
+- **v11_bitvavo_reconcile_ui_001** — Community-chat tab in Gesprekken vanaf grad 5.
+- **v11_profile_merge_001** — Mijn Profiel: Algemeen + Achtergrond samengevoegd tot 1 tab. Persoonlijkheid verplaatst naar Beheer → Gebruikers → per-user tab. Gesprekken-tab weg (staat in Archief).
+- **NotitiesPage** — Bijdragen-tab (KB v1 dead code) weg.
+- **Dead code cleanup** UserProfilePage.js — 232 regels weggehaald (PersoonlijkheidTab + GesprekkenTab + Slider/ListInputs helpers + ongebruikte imports).
+
+### Trader (leesonderzoek, geen wijziging)
+- ADA-EUR cyclus 1 aug: BUY 73.64 @ €0.14828 + BUY 73.50 @ €0.14843, SELL 146.26 @ €0.14999 → netto ~−€0.01 (fees eten winst). Bitvavo API rechtstreeks bevraagd via Spark's keys. ~0.89 ADA dust bleef staan.
+- Papertrail-alle-mints-naar-Spark bevestigd als by-design (Spark → treasury source, gift verdeelt daarna).
+
+### Nog open na deze sessie
+- **Root-cause gift/admin_grant → pot verhuist niet met token** (drift-bron ligt in `boekhouder/finance_ops` — pot moet mee-verhuizen).
+- **P0 sessie 51**: andere users unieke wallet-IDs migreren, SparkSelfAwareness LLM-hooks, KB V3.
+
+---
+
 ## ✅ SESSIE 51 SLOT — Wallet/Token/Mint gerepareerd + verbonden (31 juli)
 
 ### Kritieke bug-fixes (single-source-of-truth)

@@ -11,8 +11,10 @@ import { TikkieTopupModal } from './TikkieTopupModal';
 const API = process.env.REACT_APP_BACKEND_URL;
 
 export function WalletPage({ onNavigate }) {
-  const { user } = useAuth();
-  const isAdmin = (user?.gradatie ?? 7) <= 1;
+  const { user, isAdmin } = useAuth();
+  // v12_admin_toggle_001 — isAdmin nu via AuthContext (admin_capable && adminModeActive),
+  // niet meer op basis van gradatie. Wallet-switch, Mint-knop en Spark-view zijn dus
+  // pas zichtbaar wanneer 'Admin aan' toggle actief is.
   // v4_wallet_admin_switch_001 — admin kan tussen eigen wallet en Spark wallet switchen
   const [walletView, setWalletView] = useState(() =>
     sessionStorage.getItem('wallet_view') || 'me'

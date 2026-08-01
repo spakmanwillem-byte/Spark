@@ -19,7 +19,7 @@ const TABS = [
 ];
 
 export function UserProfilePage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, isAdmin: isAdminUser } = useAuth();
   const userId = user?.id || 'user-001';
   const [activeTab, setActiveTab] = useState('algemeen');
   const [saving, setSaving] = useState(false);
@@ -103,12 +103,12 @@ export function UserProfilePage({ onNavigate }) {
                 user={user} userId={userId}
                 profile={extProfile} updateField={updateField}
                 persona={persona} setPersona={setPersona}
-                isAdmin={(user?.gradatie ?? 99) <= 2}
+                isAdmin={isAdminUser}
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
             )}
             {activeTab === 'avatar' && (
-              <AvatarTab userId={userId} isAdmin={(user?.gradatie ?? 99) <= 2} />
+              <AvatarTab userId={userId} isAdmin={isAdminUser} />
             )}
             {activeTab === 'instellingen' && (
               <InstellingenTab userId={userId} />

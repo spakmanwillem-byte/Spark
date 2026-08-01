@@ -55,8 +55,10 @@ export function WinkelPage({ onNavigate }) {
   const [buyingToken, setBuyingToken] = useState(false);
   const [tokenResult, setTokenResult] = useState(null);
 
-  // v6_shop_admin_product_crud_001 — Admin product edit state (BEFORE early returns!)
-  const isAdminViewer = (user?.gradatie ?? 7) <= 2;
+  // v12_admin_toggle_001 — admin-CRUD-knoppen (product edit/delete, ProductEditModal, ProductImageArea) 
+  // gated via AuthContext isAdmin (admin_capable && adminModeActive), niet meer gradatie-gebaseerd.
+  const { isAdmin } = useAuth();
+  const isAdminViewer = isAdmin;
   const [editingProduct, setEditingProduct] = useState(null);
   const [newProductTab, setNewProductTab] = useState(null);
 

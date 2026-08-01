@@ -12,7 +12,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 const entityColors = { spark_core: '#f59e0b', spark_your_life: '#a855f7', roadkill_merch: '#22c55e', personal_willem: '#64748b' };
 
 export function BoekhoudPage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const userId = user?.id || 'user-001';
   const [activeTab, setActiveTab] = useState('overzicht');
   const [kasboeken, setKasboeken] = useState([]);
@@ -25,7 +25,7 @@ export function BoekhoudPage({ onNavigate }) {
   const [showNew, setShowNew] = useState(false);
   const [newTx, setNewTx] = useState({ type: 'income', category: 'Donations', amount: '', description: '', entity_id: 'spark_core', btw_percentage: 21 });
 
-  const isAdmin = (user?.gradatie ?? 7) <= 2;
+  // v12_admin_toggle_001 — isAdmin komt nu van AuthContext (admin_capable && adminModeActive).
 
   // v5_tikkie_topup_001 — Tikkie admin inbox in Boekhouden (verhuisd van Wallet)
   const [showAdminTikkie, setShowAdminTikkie] = useState(false);

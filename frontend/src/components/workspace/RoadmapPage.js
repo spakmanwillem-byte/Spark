@@ -507,13 +507,13 @@ const phases = [
 ];
 
 export function RoadmapPage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [expandedPhase, setExpandedPhase] = useState(
     phases.find(p => p.status === 'active')?.id || phases[0].id
   );
   // v4_roadmap_user_ideas_001 — toon bug-tickets / ideeën van user op roadmap
+  // v12_admin_toggle_001 — isAdmin via AuthContext (admin-toggle), niet gradatie
   const [myBugs, setMyBugs] = useState([]);
-  const isAdmin = (user?.gradatie ?? 7) <= 2;
   useEffect(() => {
     if (!user?.id) return;
     // Alleen admins krijgen /bugs/list (403 anders) — voor non-admin probeer mijn-bugs endpoint

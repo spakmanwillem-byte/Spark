@@ -19,12 +19,12 @@ const rarityConfig = {
 };
 
 export function AchievementsPage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [allAch, setAllAch] = useState([]);
   const [progress, setProgress] = useState(null);
   const [loading, setLoading] = useState(true);
-  // v6_achievements_admin_edit_001
-  const isAdmin = !!user?.admin;
+  // v12_admin_toggle_001 — admin edit-knop nu via AuthContext-toggle
+  // (was: legacy user.admin flag, niet gekoppeld aan 'Admin aan' UI-toggle).
   const [editingAch, setEditingAch] = useState(null);
 
   const refreshAll = () => {

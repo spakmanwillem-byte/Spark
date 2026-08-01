@@ -17,7 +17,7 @@ import { InputBark } from '../shared/InputBark';
 const API = process.env.REACT_APP_BACKEND_URL;
 
 export function InstellingenPage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const userId = user?.id;
   const userGrad = user?.gradatie ?? 7;
   const [activeTab, setActiveTab] = useState('algemeen');
@@ -260,7 +260,7 @@ export function InstellingenPage({ onNavigate }) {
 
             {/* ====== ARCHIEF (Systeem) ====== */}
             {activeTab === 'archief' && (
-              <SystemArchive currentUserId={user?.id} isAdmin={userGrad <= 2} />
+              <SystemArchive currentUserId={user?.id} isAdmin={isAdmin} />
             )}
 
             {/* ====== SYNAPSLAAG (v6_synapse_001 F6) ====== */}
@@ -323,10 +323,11 @@ export function InstellingenPage({ onNavigate }) {
                 </SettingsCard>
 
                 {/* v7_achievement_agents_001 — Achievement Config Placeholder (admin only) */}
-                {user?.admin && <AchievementBlueprintPanel />}
+                {/* v12_admin_toggle_001 — was legacy user.admin flag, nu AuthContext-toggle */}
+                {isAdmin && <AchievementBlueprintPanel />}
 
                 {/* v10_finance_hub_001 — Boekhouder Finance Hub (admin only) */}
-                {user?.admin && <FinanceHubPanel />}
+                {isAdmin && <FinanceHubPanel />}
 
                 <SaveButton saving={saving} onClick={handleSave} />
               </>

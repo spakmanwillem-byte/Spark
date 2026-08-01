@@ -19,8 +19,10 @@ const BUG_STATUSES = {
 };
 
 export function NotitiesPage({ onNavigate }) {
-  const { user } = useAuth();
-  const isAdminViewer = (user?.gradatie || 7) <= 2;
+  const { user, isAdmin } = useAuth();
+  // v12_admin_toggle_001 — admin tabs/features (deploy-tab, alle-bugs-lijst, bug status/delete)
+  // gated via AuthContext isAdmin, niet meer gradatie-gebaseerd.
+  const isAdminViewer = isAdmin;
   const [notes, setNotes] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);

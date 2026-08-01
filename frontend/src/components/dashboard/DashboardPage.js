@@ -74,8 +74,10 @@ function buildRecentChats(sparkLog, community, contacts) {
 
 export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const { user, isAdmin } = useAuth();
-  const userGrad = user?.gradatie ?? 7;
-  const isAdminUser = userGrad <= 2; // v4_dashboard_grad_001: 1-2 zien admin widgets
+  // v11_dashboard_admin_toggle_001 — Admin-widgets alleen bij actieve admin-toggle,
+  // niet meer op basis van gradatie (Heidi/Lotus/Maaike grad-2 zonder admin-toggle
+  // zien nu geen KB-overview, Triggers, Emoties, Verbanden, Gebruikers, Systeem-status).
+  const isAdminUser = isAdmin;
   const [knowledgeStats, setKnowledgeStats] = useState(null);
   const [fileStats, setFileStats] = useState(null);
   const [userStats, setUserStats] = useState(null);

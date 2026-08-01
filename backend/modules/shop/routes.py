@@ -729,17 +729,15 @@ class ProductUpsert(BaseModel):
 
 
 def _require_admin(viewer_id: str) -> None:
-    """v6_shop_admin_legacy — laat bestaande gradatie-2-admins doorgaan voor backwards-compat.
-    Voor STRIKTE admin-only-acties → gebruik admin_service.is_admin() direct.
+    """v11_shop_delete_admin_only_001 — Strict admin check (drop legacy grad-2 fallback).
+    Reden: Familie op grad-2 zoals Heidi/Lotus/Maaike had toegang tot shop-delete
+    e.d. via de legacy check. Nu alleen `admin === true` in users.json = admin.
     """
     users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
     viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
     if not viewer:
         raise HTTPException(403, "Gebruiker niet gevonden")
-    # v6_admin_role_001 — accept either user.admin == True OR legacy gradatie ≤ 2
-    is_strict_admin = viewer.get("admin") is True
-    is_legacy_admin = (viewer.get("gradatie") or 7) <= 2
-    if not (is_strict_admin or is_legacy_admin):
+    if viewer.get("admin") is not True:
         raise HTTPException(403, "Alleen admins")
 
 

@@ -7,13 +7,16 @@
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import { Store, Plus, Edit3, X, Loader2, Check, AlertCircle, Crown, Lock } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
 export function WinkelstraatTab({ user, onNavigateToShop }) {
   const userId = user?.id;
   const gradatie = user?.gradatie ?? 7;
-  const isAdmin = !!user?.admin;  // v6_shop_admin_delete_001
+  // v11_shop_delete_admin_only_001 — Admin-check via AuthContext (toggle-based),
+  // niet meer via legacy `user.admin` (die was gradatie-gebonden en dus onjuist).
+  const { isAdmin } = useAuth();
   const [shops, setShops] = useState([]);
   const [minGradatie, setMinGradatie] = useState(4);
   const [commissieDefault, setCommissieDefault] = useState(2.0);

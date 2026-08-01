@@ -2,11 +2,12 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Search, Upload, Trash2, X, File as FileIcon,
   Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag,
-  MessageSquare, Server, FileText, Users, Code2
+  MessageSquare, Server, FileText, Users, Code2, Store
 } from 'lucide-react';
 import { AvatarGallerySection } from './AvatarGallerySection';
 import { DnDGallerySection } from './DnDGallerySection';
 import { LogsBrowser } from './LogsBrowser';
+import { ShopTabView } from '../workspace/ShopTabView';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -16,8 +17,9 @@ const CATEGORIES = [
   { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7' },
   { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899' },
   { id: 'dialogen', label: 'Dialogen', icon: MessageSquare, color: '#06b6d4' },
-  // v5_logs_to_analytics_001 — Logs-tab verhuisd naar Beheer → Analytics → LOGS
-  // (LogsBrowser nog steeds beschikbaar als legacy fallback, maar UI-entry hier weggehaald)
+  // v11_spark_shop_admin_001 — Spark's shop (systeem-shop) beheer via admin-archief.
+  // Zelfde ShopTabView-component als users gebruiken in Workspace → Archief.
+  { id: 'spark-shop', label: 'Spark Shop', icon: Store, color: '#f59e0b', systemOnly: true },
 ];
 
 function formatBytes(n) {
@@ -49,6 +51,12 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
   const load = useCallback(async () => {
     // Logs-tab gebruikt eigen browser, niet system-archive API
     if (activeTab === 'logs') {
+      setLoading(false);
+      setFiles([]);
+      return;
+    }
+    // v11_spark_shop_admin_001 — Spark Shop tab heeft eigen ShopTabView, niks laden.
+    if (activeTab === 'spark-shop') {
       setLoading(false);
       setFiles([]);
       return;
@@ -227,6 +235,20 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       {/* v5_spark_logger_001 — Logs tab rendert eigen browser */}
       {activeTab === 'logs' && <LogsBrowser />}
 
+      {/* v11_spark_shop_admin_001 — Spark Shop beheer via zelfde ShopTabView als users */}
+      {activeTab === 'spark-shop' && (
+        <ShopTabView
+          shop={{
+            id: 'shop-spark',
+            naam: 'Spark Shop',
+            tagline: 'Digitale producten & ondersteuning voor Spark',
+            color_accent: '#f59e0b',
+            logo_url: '/api/winkelstraat/shops/shop-spark/logo.webp',
+          }}
+          userId={currentUserId || 'user-001'}
+        />
+      )}
+
       {/* v5_foto_subtabs_001 — Foto sub-tabs (Algemene foto's / Avatar Galerij / D&D Galerij) */}
       {activeTab === 'foto' && (
         <div className="flex items-center gap-1 p-1 bg-slate-800/40 rounded-xl w-fit">
@@ -315,8 +337,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
-      {/* Search + tag filter (verberg in avatars-mode + logs-mode + D&D) */}
-      {activeTab !== 'logs' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
+      {/* Search + tag filter (verberg in avatars-mode + logs-mode + D&D + spark-shop) */}
+      {activeTab !== 'logs' && activeTab !== 'spark-shop' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
         <div className="flex flex-wrap gap-2">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
@@ -341,8 +363,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
-      {/* Content (verberg in avatars-mode + logs-mode) */}
-      {activeTab !== 'logs' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
+      {/* Content (verberg in avatars-mode + logs-mode + spark-shop) */}
+      {activeTab !== 'logs' && activeTab !== 'spark-shop' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
         loading ? (
           <div className="text-center py-12 text-xs text-slate-500">Laden...</div>
         ) : files.length === 0 ? (

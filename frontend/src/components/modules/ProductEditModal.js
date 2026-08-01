@@ -22,6 +22,9 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
   // v11_shop_scope_001 — entity_id (kasboek) volgt automatisch de shop-context.
   // shop-roadkill → 'roadkill_merch' (bestaand), andere shops → 'shop_<id>'.
   const derivedEntityId = shopId === 'shop-roadkill' ? 'roadkill_merch' : `shop_${shopId}`;
+  // v11_roar_token_readonly_001 — ROAR Token in Spark Shop is display-only;
+  // prijs wordt bepaald door potjes-mechaniek, niet handmatig.
+  const isRoarToken = product?.id === 'roar-token' || product?.category === 'token';
 
   useEffect(() => {
     if (!open) return;
@@ -118,10 +121,19 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
     <div data-testid="product-edit-modal" className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="w-full max-w-2xl max-h-[92vh] bg-slate-900 border border-amber-500/40 rounded-2xl flex flex-col" onClick={e => e.stopPropagation()}>
         <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between">
-          <h3 className="text-base font-bold text-white">{isNew ? 'Nieuw product' : `Bewerk: ${product.name}`}</h3>
+          <h3 className="text-base font-bold text-white">
+            {isRoarToken ? `ROAR Token — weergave` : (isNew ? 'Nieuw product' : `Bewerk: ${product.name}`)}
+          </h3>
           <button onClick={onClose} className="p-1.5 hover:bg-slate-800 rounded-lg"><X className="w-4 h-4 text-slate-400" /></button>
         </div>
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        {isRoarToken && (
+          <div className="mx-5 mt-3 rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-2 text-[11px] text-amber-200 leading-relaxed">
+            <strong>Read-only.</strong> ROAR-tokenprijs wordt automatisch bepaald door het potjes-systeem
+            (revalue op basis van live Bitvavo BCH/ETH-koers). Aanpassen aan naam of prijs zou een
+            valse waarde tonen — daarom hier alleen zichtbaar.
+          </div>
+        )}
+        <div className={`flex-1 overflow-y-auto p-5 space-y-4 ${isRoarToken ? 'pointer-events-none opacity-70' : ''}`}>
           {/* Afbeeldingen */}
           <div>
             <label className="text-[10px] text-slate-400 uppercase tracking-wider">Afbeeldingen (voor, achter, detail…)</label>
@@ -206,7 +218,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
           {error && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded p-2">{error}</p>}
         </div>
         <div className="px-5 py-3 border-t border-slate-800 flex items-center justify-between gap-2">
-          {!isNew && (
+          {!isNew && !isRoarToken && (
             <button onClick={deleteProduct} data-testid="product-delete"
               className="px-3 py-2 text-xs font-medium rounded-lg text-red-300 hover:bg-red-500/10 border border-red-500/30">
               Verwijder product
@@ -214,13 +226,15 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
           )}
           <div className="ml-auto flex gap-2">
             <button onClick={onClose} className="px-4 py-2 text-sm font-medium rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">
-              Annuleren
+              {isRoarToken ? 'Sluiten' : 'Annuleren'}
             </button>
-            <button onClick={save} disabled={saving} data-testid="product-save"
-              className="px-4 py-2 text-sm font-bold rounded-lg text-slate-900 disabled:opacity-60"
-              style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-              {saving ? 'Opslaan…' : (isNew ? 'Product aanmaken' : 'Opslaan')}
-            </button>
+            {!isRoarToken && (
+              <button onClick={save} disabled={saving} data-testid="product-save"
+                className="px-4 py-2 text-sm font-bold rounded-lg text-slate-900 disabled:opacity-60"
+                style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+                {saving ? 'Opslaan…' : (isNew ? 'Product aanmaken' : 'Opslaan')}
+              </button>
+            )}
           </div>
         </div>
       </div>

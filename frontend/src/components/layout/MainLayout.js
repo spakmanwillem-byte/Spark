@@ -58,7 +58,7 @@ export const navigationConfig = {
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
       { id: 'sandbox', label: 'Widget Kladblok', icon: Beaker, path: '/admin/sandbox', adminOnly: true },
-      { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },
+      { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings', adminOnly: true },
     ]
   }
 };
@@ -80,19 +80,21 @@ export const getPageInfo = (pageId) => {
 // Grad 3 (vrienden): geen voice, geen Spark AI sectie, geen Integraties
 // Grad 4 (collega's): zelfde als 3 + geen voice
 // Grad 5: + geen Trade + geen Boekhouding
-// Grad 6: + geen Dagboek
+// Grad 6: + geen Dagboek + geen Achievements/Leaderboard (die zijn voor Community-members)
 // Grad 7: + geen Agenda (krijgt Agenda terug bij upgrade naar 6) + geen Boekhouding (heeft Wallet).
 // v11_grad7_archief_001 — Archief WEL zichtbaar; daar staat gespreksgeschiedenis, die
 // heeft ook grad 7 nodig om zichzelf terug te kunnen lezen.
+// v11_community_only_items_001 — Achievements + Leaderboard vanaf grad 5 (Community Member).
 const SPARK_ONLY_ITEMS = ['triggers', 'emotions', 'emotion-routing', 'connections'];
+const COMMUNITY_ONLY_ITEMS = ['achievements', 'leaderboard'];
 const VISIBILITY_RULES = {
   1: { hideSection: [], hide: [] },
   2: { hideSection: [], hide: ['voice'] },
   3: { hideSection: ['spark'], hide: ['voice', 'integrations', 'analytics', 'settings', ...SPARK_ONLY_ITEMS] },
   4: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', ...SPARK_ONLY_ITEMS] },
   5: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', ...SPARK_ONLY_ITEMS] },
-  6: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', ...SPARK_ONLY_ITEMS] },
-  7: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', 'calendar', ...SPARK_ONLY_ITEMS] },
+  6: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', ...SPARK_ONLY_ITEMS, ...COMMUNITY_ONLY_ITEMS] },
+  7: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', 'calendar', ...SPARK_ONLY_ITEMS, ...COMMUNITY_ONLY_ITEMS] },
 };
 
 export function getVisibilityForGradatie(grad) {

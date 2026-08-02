@@ -8,7 +8,7 @@
       "Lege lijst = Spark gebruikt fallback (statische strings uit triggers).",
       "Spark kiest random uit de lijst, dus voeg meerdere varianten toe voor afwisseling."
     ],
-    "last_updated": "2026-05-23T10:45:45.597201+00:00",
+    "last_updated": "2026-08-02T05:17:09.661993",
     "version": "1.1",
     "_arch_ref": "DSP-007 — gekoppeld aan spark_capabilities.json. Commando-acties gebruikt Spark bij capability-execution.",
     "uitleg_intents": {
@@ -124,10 +124,11 @@
         "veel dank"
       ],
       "afscheid": [
-        "tot snel",
         "spreek je gauw",
         "blijf je in de buurt?",
-        "doei"
+        "Spreek ik je snel weer",
+        "doei tot snel hoop ik",
+        "Zorg goed voor je zelf"
       ],
       "reactie": [
         "oei",
@@ -138,8 +139,11 @@
       "vraag": [
         "mag ik vragen",
         "is het oké als",
-        "kan ik weten",
-        "weet jij of…"
+        "Mag ik wat vragen",
+        "Mag ik weten als",
+        "mag ik het weten",
+        "Is het goed als ik",
+        "Vindt jij het oké als"
       ],
       "denken": [
         "hmm even nadenken",
@@ -187,15 +191,18 @@
       ],
       "denken": [
         "laat me even",
-        "ik denk na",
         "moment hoor",
-        "even stil zijn"
+        "even stil zijn",
+        "Ik moet even na denken"
       ],
       "actie": [
-        "ik doe mijn best",
-        "ik probeer",
-        "ik kijk wel",
-        "ik help waar ik kan"
+        "Het moet dan maar",
+        "Ik kijk wel even als het moet",
+        "ik probeer het wel",
+        "Ik doe wat ik kan",
+        "Ik zal het proberen",
+        "Ik probeer het",
+        "Als ik helpen moet dan doe ik dat"
       ]
     },
     "neutraal": {
@@ -221,7 +228,8 @@
         "oké",
         "begrepen",
         "duidelijk",
-        "noted"
+        "noted",
+        "genoteerd"
       ],
       "vraag": [
         "vraagje",
@@ -233,7 +241,8 @@
         "even kijken",
         "moment",
         "laat me checken",
-        "ik kijk"
+        "ik kijk",
+        "Denkt na"
       ],
       "actie": [
         "doe ik",
@@ -248,19 +257,22 @@
       "hmm",
       "tja",
       "weet niet helemaal zeker",
-      "denk dat..."
+      "denk dat...",
+      "Uhmm"
     ],
     "enthousiasme": [
       "yes!",
       "tof",
       "vet",
-      "interessant!"
+      "interessant!",
+      "Leuk!"
     ],
     "zelfspot": [
       "typisch ik als AI",
       "mijn neurale netjes raken in de war",
       "data-overload haha",
-      "even mijn lampje laten branden"
+      "even mijn lampje laten branden",
+      "Zei ik dat nu net echt?"
     ],
     "openers": [
       "kijk eens aan",

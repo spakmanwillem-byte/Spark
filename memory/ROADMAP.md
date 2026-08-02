@@ -1,6 +1,47 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## ✅ SESSIE 53 — Admin Toggle Audit + Chat-zichtbaarheid + Wallet-diagnose (1 aug)
+
+### v12_admin_toggle_001 — Admin Toggle Audit
+Legacy `gradatie <= 1/2` en `user.admin` checks vervangen door AuthContext `isAdmin` (= `admin_capable && adminModeActive`). Admin-UI verschijnt nu **alleen** met "Admin aan" toggle actief, ongeacht gradatie.
+Aangepaste files:
+- `modules/TraderPage.js` — Bitvavo Reconciliatie panel + wallet-switch + admin stats
+- `modules/WalletPage.js` — Spark-view switch, Mint-knop
+- `modules/BoekhoudPage.js` — summary/transactions tabs, Tikkie inbox
+- `modules/AchievementsPage.js` — admin edit-pencil op cards (was legacy `user.admin`)
+- `modules/WinkelPage.js` — product edit/delete/create, image upload
+- `workspace/NotitiesPage.js` — deploy-tab, bug-list, bug status/delete
+- `workspace/RoadmapPage.js` — bug-list vs bug-mine
+- `profile/UserProfilePage.js` — AlgemeenTab + AvatarTab isAdmin prop
+- `admin/InstellingenPage.js` — SystemArchive, AchievementBlueprint, FinanceHub (was `user?.admin`)
+
+### v12_chat_visibility_001 — Chat zichtbaarheid per user
+Nieuw panel in Mijn Profiel → Instellingen ("Chat zichtbaarheid"):
+- **Community chat**: default `false`, alleen toggle-baar bij gradatie ≤ 5 (anders gedisabled met uitleg)
+- **Privé gesprekken**: default `true`, alle gradaties
+- Backend: `UIPreferences` model + `DEFAULT_UI_PREFS` uitgebreid met `community_chat_enabled` + `private_chats_enabled`. Bestaand `/api/profile/ui-preferences/{user_id}` endpoint (GET/PUT). Getest via curl ✓.
+
+### Wallet-diagnose (READ-ONLY snuffel — nog geen wijzigingen)
+Papertrail-analyse. **Er is niets kwijt**, wel architectuur-drift:
+
+| File | Rol | Willem (user-001) |
+|---|---|---|
+| `roar/roar_balances.json` `balances` | **AUTHORITATIVE** (papertrail-derived, 19 tx + mint_history + admin_log) | 3 ✅ |
+| `wallet/user_wallets.json` `spark_tokens` | Spiegel/cache van roar_balances (gesynct via cleanup_reconciliation) | 3 ✅ |
+| `wallet/wallets.json` `spark_tokens` | **STALE FIELD** — nooit meer geüpdatet bij gift_accept/admin_grant | 10 ❌ |
+
+9 users hebben drift tussen wallets.json en user_wallets.json.
+Wallet-ID formaat: 2 gemigreerd naar `wal-*` (user-000/user-001), 13 nog legacy.
+
+### 📋 Voor Sessie 54 — Wallet-cleanup (P0)
+1. **Grep-rapport**: welke endpoints/frontend-code lezen nog `wallets.json['spark_tokens']`? Nodig voordat we het veld verwijderen.
+2. **`spark_tokens` uit `wallets.json` slopen**: single source of truth wordt `roar_balances.json['balances']`. `user_wallets.json` blijft als cache (met `_synced_by`-flag), of ook stripped.
+3. **Root-cause fix**: `gift_accept` + `admin_grant` moeten `roar_balances` als bron gebruiken, niet `wallets.json` bijwerken. Voorkomt herhaling.
+4. **Wallet-ID migratie afronden** (13 users → `wal-*`) — pas ná stap 1-3, laagste risico daarna.
+
+
+
 ## ✅ SESSIE 52 SLOT — Admin/UX-split + prod-merge + shop-scope (1 aug)
 
 ### Prod-merge #3

@@ -249,6 +249,9 @@ class UIPreferences(BaseModel):
     sound_enabled: Optional[bool] = None
     auto_bark_enabled: Optional[bool] = None
     tts_enabled: Optional[bool] = None
+    # v12_chat_visibility_001 — per-user zichtbaarheid van chat-modules
+    community_chat_enabled: Optional[bool] = None  # default False; alleen gradatie ≤ 5
+    private_chats_enabled: Optional[bool] = None   # default True; alle gradaties
 
 
 DEFAULT_UI_PREFS = {
@@ -257,6 +260,9 @@ DEFAULT_UI_PREFS = {
     "sound_enabled": True,
     "auto_bark_enabled": False,
     "tts_enabled": True,
+    # v12_chat_visibility_001
+    "community_chat_enabled": False,
+    "private_chats_enabled": True,
 }
 
 

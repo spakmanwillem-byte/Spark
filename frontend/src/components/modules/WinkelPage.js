@@ -55,10 +55,12 @@ export function WinkelPage({ onNavigate }) {
   const [buyingToken, setBuyingToken] = useState(false);
   const [tokenResult, setTokenResult] = useState(null);
 
-  // v12_admin_toggle_001 — admin-CRUD-knoppen (product edit/delete, ProductEditModal, ProductImageArea) 
-  // gated via AuthContext isAdmin (admin_capable && adminModeActive), niet meer gradatie-gebaseerd.
+  // v6_shop_admin_product_crud_001 — Admin product edit state (BEFORE early returns!)
+  // v12_shop_owner_perms_001 — admin OF shop-owner mag CRUD op deze shop.
+  //   Voorheen: admin-toggle vereist → Maaike kon haar eigen kristallen-shop niet beheren.
   const { isAdmin } = useAuth();
-  const isAdminViewer = isAdmin;
+  const isShopOwner = !!(selectedShop && user?.id && selectedShop.owner_user_id === user.id);
+  const isAdminViewer = isAdmin || isShopOwner;
   const [editingProduct, setEditingProduct] = useState(null);
   const [newProductTab, setNewProductTab] = useState(null);
 
@@ -286,6 +288,10 @@ export function WinkelPage({ onNavigate }) {
         {/* MERCH TAB — alleen tonen als shop geselecteerd */}
         {selectedShop && activeTab === 'merch' && (
           <div className="space-y-4">
+            {/* v12_shop_owner_perms_001 — Shop-owner beheer-bar bovenaan (naam + kleur-picker) */}
+            {isAdminViewer && (
+              <ShopOwnerBar shop={selectedShop} viewerId={user?.id} onSaved={openShop} />
+            )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {merchProducts.map(product => (
                 <div key={product.id} data-testid={`product-${product.id}`}
@@ -305,7 +311,7 @@ export function WinkelPage({ onNavigate }) {
                       </button>
                     </div>
                   )}
-                  <ProductImageArea product={product} isAdmin={isAdminViewer} userId={user?.id} onUpdated={loadData} />
+                  <ProductImageArea product={product} isAdmin={isAdminViewer} userId={user?.id} shopId={selectedShopId} onUpdated={loadData} />
                   {/* Product info */}
                   <div className="p-4 space-y-3">
                     <div>
@@ -594,7 +600,7 @@ const PRODUCT_ICONS = {
   hat: '🧢', shirt: '🔥', package: '📦', coin: '💎',
 };
 
-function ProductImageArea({ product, isAdmin, userId, onUpdated }) {
+function ProductImageArea({ product, isAdmin, userId, shopId, onUpdated }) {
   const [uploading, setUploading] = useState(false);
   const [err, setErr] = useState('');
   const inputRef = React.useRef(null);
@@ -608,6 +614,8 @@ function ProductImageArea({ product, isAdmin, userId, onUpdated }) {
       const fd = new FormData();
       fd.append('image', file);
       fd.append('viewer_id', userId || '');
+      // v12_shop_owner_perms_001 — geef shop_id mee zodat backend upload naar juiste shop-container schrijft
+      fd.append('shop_id', shopId || product.shop_id || 'shop-roadkill');
       const r = await fetch(`${API}/api/shop/products/${product.id}/image`, { method: 'POST', body: fd }).then(x => x.json());
       if (!r.success) { setErr(r.detail || 'Upload mislukt'); }
       else { onUpdated && onUpdated(); }
@@ -648,6 +656,70 @@ function ProductImageArea({ product, isAdmin, userId, onUpdated }) {
       {err && (
         <p className="absolute bottom-1 left-1 right-1 text-[10px] text-red-300 bg-red-900/60 rounded px-1.5 py-0.5">{err}</p>
       )}
+    </div>
+  );
+}
+
+// ============================================================
+// v12_shop_owner_perms_001 — Shop owner beheer-bar (naam + kleur)
+// Bovenaan Merch-tab wanneer je admin of shop-owner bent.
+// ============================================================
+const SHOP_COLOR_PRESETS = [
+  '#f59e0b', '#ef4444', '#ec4899', '#a855f7',
+  '#3b82f6', '#06b6d4', '#10b981', '#eab308',
+];
+
+function ShopOwnerBar({ shop, viewerId, onSaved }) {
+  const [color, setColor] = useState(shop.color_accent || '#f59e0b');
+  const [saving, setSaving] = useState(false);
+  const [flash, setFlash] = useState(false);
+
+  const saveColor = async (hex) => {
+    setColor(hex);
+    setSaving(true);
+    try {
+      const r = await fetch(`${API}/api/winkelstraat/shops/${shop.id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ actor_user_id: viewerId, patch: { color_accent: hex } }),
+      }).then(x => x.json());
+      if (r.success) {
+        setFlash(true);
+        setTimeout(() => setFlash(false), 1500);
+        onSaved && onSaved(shop.id);
+      }
+    } finally { setSaving(false); }
+  };
+
+  return (
+    <div data-testid="shop-owner-bar"
+      className="bg-slate-900/50 border rounded-xl p-4 flex flex-col md:flex-row md:items-center gap-3"
+      style={{ borderColor: `${color}55` }}>
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ background: `linear-gradient(135deg, ${color}, ${color}88)` }}>
+          <ShoppingBag className="w-5 h-5 text-white" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] uppercase tracking-wider text-slate-500">Jouw winkel</p>
+          <h2 className="text-base font-bold text-white truncate">{shop.naam}</h2>
+          {shop.tagline && <p className="text-[11px] text-slate-400 truncate">{shop.tagline}</p>}
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-[11px] text-slate-400">Kleur:</span>
+        {SHOP_COLOR_PRESETS.map(hex => (
+          <button key={hex} onClick={() => saveColor(hex)}
+            data-testid={`shop-color-preset-${hex.slice(1)}`}
+            title={hex}
+            className={`w-6 h-6 rounded-full border-2 transition-transform hover:scale-110 ${color === hex ? 'ring-2 ring-white/60' : ''}`}
+            style={{ background: hex, borderColor: color === hex ? '#fff' : 'transparent' }} />
+        ))}
+        <input type="color" value={color} onChange={e => saveColor(e.target.value)}
+          data-testid="shop-color-picker"
+          className="w-8 h-8 rounded cursor-pointer bg-slate-800 border border-slate-700" />
+        {saving && <span className="text-[10px] text-slate-500">…</span>}
+        {flash && <span className="text-[10px] text-emerald-400">✓</span>}
+      </div>
     </div>
   );
 }

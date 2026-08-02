@@ -653,16 +653,16 @@ async def upload_product_image(
     product_id: str,
     image: UploadFile = File(...),
     viewer_id: str = Form(...),
+    shop_id: str = Form("shop-roadkill"),
 ):
     """Upload nieuwe afbeelding voor een merch-product (vervangt of voegt toe).
     Opslag: /data/system_archive/foto/ met tag 'roadkill_merch' + linked_product_id.
     Product `image_url` wordt bijgewerkt naar de system-archive URL.
+    v12_shop_owner_perms_001 — Shop-owner mag eigen product-afbeelding uploaden.
     """
-    # Admin-check
+    _require_admin_or_shop_owner(viewer_id, shop_id)
     users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
     viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
-    if not viewer or (viewer.get("gradatie") or 7) > 2:
-        raise HTTPException(403, "Alleen admins mogen product-afbeeldingen wijzigen")
 
     ext = Path(image.filename or "img.png").suffix.lower()
     if ext not in {".png", ".jpg", ".jpeg", ".webp"}:
@@ -681,7 +681,9 @@ async def upload_product_image(
 
     sa_index = sa_dir / "_index.json"
     idx = load_json(sa_index, default={"files": []})
-    pdata = load_json(PRODUCTS_FILE, default={"products": []})
+    # v12_shop_owner_perms_001 — lees/schrijf product in de shop-specifieke container.
+    pfile = _shop_products_path(shop_id)
+    pdata = load_json(pfile, default={"products": []})
     prod = next((p for p in pdata.get("products", []) if p["id"] == product_id), None)
     pname = prod["name"] if prod else product_id
     entry = {
@@ -708,7 +710,7 @@ async def upload_product_image(
         if not prod.get("image_url"):
             prod["image_url"] = image_url
         prod["image_archive_id"] = file_id
-        save_json(PRODUCTS_FILE, pdata)
+        save_json(pfile, pdata)
 
     return {"success": True, "image_url": image_url, "archive_id": file_id, "product_id": product_id, "images": prod.get("images") if prod else [image_url]}
 
@@ -741,6 +743,24 @@ def _require_admin(viewer_id: str) -> None:
         raise HTTPException(403, "Alleen admins")
 
 
+def _require_admin_or_shop_owner(viewer_id: str, shop_id: str) -> None:
+    """v12_shop_owner_perms_001 — Product-CRUD is toegestaan voor:
+    - admins (admin===true in users.json), of
+    - de eigenaar van de betreffende shop (owner_user_id).
+    Voorkomt dat Maaike (niet-admin) haar eigen shop niet kan beheren."""
+    users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
+    viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
+    if not viewer:
+        raise HTTPException(403, "Gebruiker niet gevonden")
+    if viewer.get("admin") is True:
+        return
+    shops = load_json(SHOPS_FILE, default={"shops": []})
+    shop = next((s for s in shops.get("shops", []) if s.get("id") == shop_id), None)
+    if shop and shop.get("owner_user_id") == viewer_id:
+        return
+    raise HTTPException(403, "Alleen admins of de eigenaar van deze shop")
+
+
 # v6_shop_delete_001 — delete shop (test/legacy cleanup)
 @router.delete("/admin/shops/{shop_id}")
 async def admin_delete_shop(shop_id: str, viewer_id: str):
@@ -761,7 +781,8 @@ async def admin_delete_shop(shop_id: str, viewer_id: str):
 
 @router.post("/admin/products")
 async def admin_create_product(req: ProductUpsert):
-    _require_admin(req.viewer_id)
+    # v12_shop_owner_perms_001 — Shop-owner mag zelf producten aanmaken in eigen shop
+    _require_admin_or_shop_owner(req.viewer_id, req.shop_id or "shop-roadkill")
     if req.price < 0:
         raise HTTPException(400, "Prijs mag niet negatief zijn")
     # v11_shop_scope_001 — schrijf naar de container van de opgegeven shop, niet global.
@@ -785,7 +806,8 @@ async def admin_create_product(req: ProductUpsert):
 
 @router.put("/admin/products/{product_id}")
 async def admin_update_product(product_id: str, req: ProductUpsert):
-    _require_admin(req.viewer_id)
+    # v12_shop_owner_perms_001 — Shop-owner mag zelf producten bewerken in eigen shop
+    _require_admin_or_shop_owner(req.viewer_id, req.shop_id or "shop-roadkill")
     pfile = _shop_products_path(req.shop_id or "shop-roadkill")
     data = load_json(pfile, default={"products": []})
     for p in data.get("products", []):
@@ -810,7 +832,8 @@ async def admin_update_product(product_id: str, req: ProductUpsert):
 
 @router.delete("/admin/products/{product_id}")
 async def admin_delete_product(product_id: str, viewer_id: str, shop_id: str = "shop-roadkill"):
-    _require_admin(viewer_id)
+    # v12_shop_owner_perms_001 — Shop-owner mag zelf producten verwijderen in eigen shop
+    _require_admin_or_shop_owner(viewer_id, shop_id)
     pfile = _shop_products_path(shop_id)
     data = load_json(pfile, default={"products": []})
     before = len(data.get("products", []))
@@ -824,7 +847,8 @@ async def admin_delete_product(product_id: str, viewer_id: str, shop_id: str = "
 @router.delete("/admin/products/{product_id}/images")
 async def admin_remove_product_image(product_id: str, image_url: str, viewer_id: str, shop_id: str = "shop-roadkill"):
     """Verwijder één image-URL uit product.images[]."""
-    _require_admin(viewer_id)
+    # v12_shop_owner_perms_001 — Shop-owner mag zelf image losmaken van eigen product
+    _require_admin_or_shop_owner(viewer_id, shop_id)
     pfile = _shop_products_path(shop_id)
     data = load_json(pfile, default={"products": []})
     for p in data.get("products", []):

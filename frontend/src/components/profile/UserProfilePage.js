@@ -111,7 +111,7 @@ export function UserProfilePage({ onNavigate }) {
               <AvatarTab userId={userId} isAdmin={isAdminUser} />
             )}
             {activeTab === 'instellingen' && (
-              <InstellingenTab userId={userId} />
+              <InstellingenTab userId={userId} user={user} />
             )}
           </div>
         </div>
@@ -1054,10 +1054,13 @@ const GLOW_PRESETS = [
   { hex: '#3b82f6', label: 'Blauw',   note: 'Helder' },
 ];
 
-function InstellingenTab({ userId }) {
+function InstellingenTab({ userId, user }) {
   const [prefs, setPrefs] = useState(null);
   const [saving, setSaving] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
+  // v12_chat_visibility_001 — Community chat is beperkt tot gradatie ≤ 5
+  const userGrad = user?.gradatie ?? 7;
+  const communityUnlocked = userGrad <= 5;
 
   useEffect(() => {
     fetch(`${API}/api/profile/ui-preferences/${userId}`)
@@ -1267,6 +1270,56 @@ function InstellingenTab({ userId }) {
               checked={!!prefs.auto_bark_enabled}
               onChange={e => { updatePref('auto_bark_enabled', e.target.checked); savePrefs({ auto_bark_enabled: e.target.checked }); }}
               className="w-4 h-4 accent-violet-500"
+            />
+          </label>
+        </div>
+      </Panel>
+
+      {/* v12_chat_visibility_001 — Chat-modules aan/uit per user */}
+      <Panel>
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center">
+            <MessageSquare className="w-4 h-4 text-pink-400" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-white">Chat zichtbaarheid</h3>
+            <p className="text-[10px] text-slate-500">Kies welke gesprekstypen je in Workspace → Gesprekken ziet</p>
+          </div>
+        </div>
+        <div className="space-y-2">
+          {/* Community chat — default UIT, alleen gradatie ≤ 5 */}
+          <label className={`flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800 ${communityUnlocked ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}>
+            <div>
+              <p className="text-xs font-medium text-white">Community chat</p>
+              <p className="text-[10px] text-slate-500">
+                Groepskanaal met alle leden.{' '}
+                {communityUnlocked
+                  ? 'Standaard uit — vink aan om zichtbaar te maken.'
+                  : `Vergrendeld — beschikbaar vanaf gradatie 5 (jij bent gradatie ${userGrad}).`}
+              </p>
+            </div>
+            <input
+              type="checkbox"
+              data-testid="toggle-community-chat"
+              disabled={!communityUnlocked}
+              checked={!!prefs.community_chat_enabled}
+              onChange={e => { updatePref('community_chat_enabled', e.target.checked); savePrefs({ community_chat_enabled: e.target.checked }); }}
+              className="w-4 h-4 accent-pink-500"
+            />
+          </label>
+
+          {/* Privé gesprekken — default AAN, alle gradaties */}
+          <label className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800 cursor-pointer">
+            <div>
+              <p className="text-xs font-medium text-white">Privé gesprekken</p>
+              <p className="text-[10px] text-slate-500">1-op-1 chats met andere leden en bots. Standaard aan.</p>
+            </div>
+            <input
+              type="checkbox"
+              data-testid="toggle-private-chats"
+              checked={prefs.private_chats_enabled !== false}
+              onChange={e => { updatePref('private_chats_enabled', e.target.checked); savePrefs({ private_chats_enabled: e.target.checked }); }}
+              className="w-4 h-4 accent-pink-500"
             />
           </label>
         </div>

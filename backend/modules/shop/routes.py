@@ -655,14 +655,15 @@ async def upload_product_image(
     viewer_id: str = Form(...),
     shop_id: str = Form("shop-roadkill"),
 ):
-    """Upload nieuwe afbeelding voor een merch-product (vervangt of voegt toe).
-    Opslag: /data/system_archive/foto/ met tag 'roadkill_merch' + linked_product_id.
-    Product `image_url` wordt bijgewerkt naar de system-archive URL.
-    v12_shop_owner_perms_001 — Shop-owner mag eigen product-afbeelding uploaden.
+    """Upload nieuwe afbeelding voor een product.
+    v12_shop_image_owner_container_001 — Opslag verplaatst van globale
+    /data/system_archive/foto/ naar de user-eigen container:
+    /data/users/{owner}/archive/foto/{file_id}.{ext}, geregistreerd in de
+    user's _index.json. URL = /api/archive/{owner}/file/{file_id}.
+    Voordeel: bij shop/user-verwijdering gaan alle bijbehorende foto's
+    automatisch mee — geen wees-bestanden meer in system_archive.
     """
     _require_admin_or_shop_owner(viewer_id, shop_id)
-    users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
-    viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
 
     ext = Path(image.filename or "img.png").suffix.lower()
     if ext not in {".png", ".jpg", ".jpeg", ".webp"}:
@@ -671,39 +672,48 @@ async def upload_product_image(
     if len(data_bytes) > 8 * 1024 * 1024:
         raise HTTPException(413, "Image te groot (>8MB)")
 
-    sa_dir = DATA_DIR / "system_archive"
-    foto_dir = sa_dir / "foto"
-    foto_dir.mkdir(parents=True, exist_ok=True)
+    # Bepaal shop-owner (waar de foto naartoe geschreven wordt)
+    shops = load_json(SHOPS_FILE, default={"shops": []})
+    shop = next((s for s in shops.get("shops", []) if s.get("id") == shop_id), None)
+    if not shop:
+        raise HTTPException(404, "Shop niet gevonden")
+    owner = shop.get("owner_user_id") or viewer_id
+
+    # Schrijf naar user-container: /data/users/{owner}/archive/foto/
+    user_foto_dir = DATA_DIR / "users" / owner / "archive" / "foto"
+    user_foto_dir.mkdir(parents=True, exist_ok=True)
     file_id = uuid.uuid4().hex[:12]
-    safe_name = f"merch_{product_id}_{file_id}{ext}"
-    dest = foto_dir / safe_name
+    safe_name = f"{file_id}{ext}"
+    dest = user_foto_dir / safe_name
     dest.write_bytes(data_bytes)
 
-    sa_index = sa_dir / "_index.json"
-    idx = load_json(sa_index, default={"files": []})
-    # v12_shop_owner_perms_001 — lees/schrijf product in de shop-specifieke container.
+    # Lees product-info voor betere index-entry
     pfile = _shop_products_path(shop_id)
     pdata = load_json(pfile, default={"products": []})
     prod = next((p for p in pdata.get("products", []) if p["id"] == product_id), None)
     pname = prod["name"] if prod else product_id
-    entry = {
-        "id": file_id, "filename": safe_name, "original_name": image.filename or safe_name,
-        "category": "foto", "extension": ext, "mime_type": image.content_type or "image/png",
+
+    # Registreer in user's _index.json (zodat quota/list endpoints het meetellen)
+    user_index_file = DATA_DIR / "users" / owner / "archive" / "_index.json"
+    uidx = load_json(user_index_file, default={"files": []})
+    uidx.setdefault("files", []).append({
+        "id": file_id, "filename": safe_name,
+        "original_name": image.filename or safe_name,
+        "category": "foto", "extension": ext,
+        "mime_type": image.content_type or "image/png",
         "size_bytes": len(data_bytes),
-        "description": f"Roadkill Merch product: {pname}",
-        "tags": ["roadkill_merch", f"product_{product_id}"],
+        "description": f"Winkel-foto: {pname} ({shop.get('naam','')})",
+        "tags": ["shop_product", f"shop_{shop_id}", f"product_{product_id}"],
         "uploaded_at": datetime.now(timezone.utc).isoformat(),
         "uploaded_by": viewer_id, "path": str(dest),
-        "linked_product_id": product_id, "source": "shop_product_image",
-        "scan_status": None, "scan_results": None,
-    }
-    idx.setdefault("files", []).append(entry)
-    idx["updated_at"] = datetime.now(timezone.utc).isoformat()
-    save_json(sa_index, idx)
+        "linked_product_id": product_id, "linked_shop_id": shop_id,
+        "source": "shop_product_image",
+    })
+    save_json(user_index_file, uidx)
 
-    image_url = f"/api/system-archive/file/{file_id}"
+    # Hyperlink naar user-archive endpoint (bestaand): /api/archive/{owner}/file/{file_id}
+    image_url = f"/api/archive/{owner}/file/{file_id}"
     if prod:
-        # Multi-image: voeg toe aan images[] array, en zet primary image_url als die nog leeg is
         imgs = prod.get("images") or ([prod["image_url"]] if prod.get("image_url") else [])
         imgs.append(image_url)
         prod["images"] = imgs

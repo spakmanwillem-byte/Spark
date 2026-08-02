@@ -2,8 +2,8 @@
 // Toont producten van user's eigen shop met bewerk-modal.
 // v12_shop_owner_perms_001 — Header met kleur-picker: shop-owner beheert hier zijn winkel
 // (naam + accent-kleur). Winkelstraat (front) blijft admin-only voor CRUD.
-import React, { useState, useEffect, useCallback } from 'react';
-import { Package, Plus, Edit3, Trash2, Image as ImageIcon, ShoppingBag } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Package, Plus, Edit3, Trash2, Image as ImageIcon, ShoppingBag, Camera } from 'lucide-react';
 import { ProductEditModal } from '../modules/ProductEditModal';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -25,6 +25,34 @@ export function ShopTabView({ shop, userId }) {
   const [colorFlash, setColorFlash] = useState(false);
 
   useEffect(() => { setColor(shop.color_accent || '#f59e0b'); }, [shop.color_accent]);
+
+  // v12_shop_owner_perms_001 — logo-upload (POST /api/winkelstraat/shops/{id}/logo)
+  const [logoUrl, setLogoUrl] = useState(shop.logo_url || '');
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [logoErr, setLogoErr] = useState('');
+  const logoInputRef = useRef(null);
+  useEffect(() => { setLogoUrl(shop.logo_url || ''); }, [shop.logo_url]);
+
+  const uploadLogo = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingLogo(true);
+    setLogoErr('');
+    try {
+      const fd = new FormData();
+      fd.append('logo', file);
+      fd.append('actor_user_id', userId);
+      const r = await fetch(`${API}/api/winkelstraat/shops/${shop.id}/logo`, { method: 'POST', body: fd }).then(x => x.json());
+      if (r.success && r.logo_url) {
+        // Cache-buster zodat browser nieuwe logo direct laadt
+        setLogoUrl(`${r.logo_url}?t=${Date.now()}`);
+      } else {
+        setLogoErr(r.detail || 'Upload mislukt');
+      }
+    } catch (ex) { setLogoErr(ex.message); }
+    setUploadingLogo(false);
+    if (logoInputRef.current) logoInputRef.current.value = '';
+  };
 
   const saveColor = async (hex) => {
     setColor(hex);
@@ -66,17 +94,31 @@ export function ShopTabView({ shop, userId }) {
         style={{ borderColor: `${color}55` }}>
         <div className="flex flex-col md:flex-row md:items-center gap-3">
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            {shop.logo_url ? (
-              <img src={`${API}${shop.logo_url}`} alt="" className="w-11 h-11 rounded-xl object-cover flex-shrink-0"
-                onError={e => { e.target.style.display = 'none'; }} />
-            ) : (
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `linear-gradient(135deg, ${color}, ${color}88)` }}>
-                <ShoppingBag className="w-5 h-5 text-white" />
+            {/* v12_shop_owner_perms_001 — Logo met klik-to-upload overlay */}
+            <div className="relative w-11 h-11 rounded-xl overflow-hidden flex-shrink-0 group cursor-pointer"
+              onClick={() => logoInputRef.current?.click()}
+              data-testid={`shop-logo-edit-${shop.id}`}
+              title="Klik om logo te wijzigen">
+              {logoUrl ? (
+                <img src={logoUrl.startsWith('http') ? logoUrl : `${API}${logoUrl}`} alt="" className="w-full h-full object-cover"
+                  onError={e => { e.target.style.display = 'none'; }} />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center"
+                  style={{ background: `linear-gradient(135deg, ${color}, ${color}88)` }}>
+                  <ShoppingBag className="w-5 h-5 text-white" />
+                </div>
+              )}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <Camera className="w-4 h-4 text-white" />
               </div>
-            )}
+              <input ref={logoInputRef} type="file" accept="image/*" className="hidden"
+                onChange={uploadLogo} data-testid={`shop-logo-input-${shop.id}`} />
+            </div>
             <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500">Jouw winkel</p>
+              <p className="text-[10px] uppercase tracking-wider text-slate-500">
+                Jouw winkel {uploadingLogo && <span className="text-amber-400">· logo uploaden…</span>}
+                {logoErr && <span className="text-red-400"> · {logoErr}</span>}
+              </p>
               <h2 className="text-lg font-bold text-white truncate">{shop.naam}</h2>
               {shop.tagline && <p className="text-[11px] text-slate-400 truncate">{shop.tagline}</p>}
             </div>

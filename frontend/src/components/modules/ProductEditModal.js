@@ -71,6 +71,8 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
       const fd = new FormData();
       fd.append('image', files[i]);
       fd.append('viewer_id', userId);
+      // v12_shop_owner_perms_001 — shop_id nodig zodat backend de owner-check kan doen
+      fd.append('shop_id', shopId || 'shop-roadkill');
       const r = await fetch(`${API}/api/shop/products/${pid}/image`, { method: 'POST', body: fd }).then(x => x.json());
       if (r.success && r.image_url) newImgs.push(r.image_url);
     }

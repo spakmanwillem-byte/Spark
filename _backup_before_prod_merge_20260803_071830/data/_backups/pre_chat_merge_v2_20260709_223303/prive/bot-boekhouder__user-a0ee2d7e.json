@@ -1,0 +1,486 @@
+{
+  "messages": [
+    {
+      "id": "bh-2460e408",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📥 BUY • ATOM @ €1.7398\nPotje: pot-001\nInleg: €10.00\nEigenaar: user-a0ee2d7e",
+      "ts": "2026-05-29T19:09:48.230034+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "ATOM-EUR",
+      "pot_id": "pot-001",
+      "price": 1.7398002248652529,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-501913ff",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • ATOM @ €1.7379 ⚠️\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €-0.0611\n",
+      "ts": "2026-05-29T19:09:50.693720+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "ATOM-EUR",
+      "pot_id": "pot-001",
+      "price": 1.737872702852853,
+      "netto": -0.061078984729693725,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-7077ccbd",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "🌱 **Boekhouder weekrapport** (7 dagen)\n\n⚓ **Anchors**: 6 stuks, totaal capital €62.54\n   → Geen rente deze week (interval 30 dagen)\n\n💼 **Trade-potjes**: 4 stuks\n\n💰 **Trade resultaat**: €+0.00\n\n🌊 **Overflow pool**: €0.00\n\n📈 _Nog geen tempo te meten — wacht op eerste winstronde._",
+      "ts": "2026-05-31T20:34:59.062535+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_weekly_report",
+      "report": {
+        "period": {
+          "from": "2026-05-24T20:34:59.053334+00:00",
+          "to": "2026-05-31T20:34:59.053334+00:00",
+          "days": 7
+        },
+        "anchors": {
+          "count": 6,
+          "total_capital": 62.54,
+          "weekly_growth": 0.0,
+          "changes": []
+        },
+        "trade_pots": {
+          "count": 4,
+          "minted_this_week": []
+        },
+        "overflow_pool": {
+          "now": 0.0
+        },
+        "trade_results": {
+          "winst_total": 0,
+          "verlies_total": 0,
+          "netto": 0
+        },
+        "roar_activity": {
+          "tokens_bought": 0,
+          "tokens_sold_back": 0,
+          "eur_in": 0,
+          "eur_out": 0
+        },
+        "projection": "Nog geen tempo te meten — wacht op eerste winstronde.",
+        "generated_at": "2026-05-31T20:34:59.053334+00:00"
+      },
+      "as_holder": true
+    },
+    {
+      "id": "bh-5db353b4",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €101.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0342\n",
+      "ts": "2026-07-07T15:42:46.248896+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 101.0,
+      "netto": 0.0342,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-1bcdc576",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €102.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0337\n",
+      "ts": "2026-07-07T15:42:46.283403+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 102.0,
+      "netto": 0.03369038613861386,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-74441848",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €103.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0332\n",
+      "ts": "2026-07-07T15:42:46.314436+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 103.0,
+      "netto": 0.03318500980392157,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-7804dc02",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €104.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0327\n",
+      "ts": "2026-07-07T15:42:46.343875+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 104.0,
+      "netto": 0.03268382038834951,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-4b896e23",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €105.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0322\n",
+      "ts": "2026-07-07T15:42:46.373644+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 105.0,
+      "netto": 0.03218676923076924,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-7331f156",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €106.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0317\n",
+      "ts": "2026-07-07T15:42:46.403761+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 106.0,
+      "netto": 0.031693809523809534,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-22071863",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €107.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0312\n",
+      "ts": "2026-07-07T15:42:46.440463+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 107.0,
+      "netto": 0.031204896226415084,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-70463a3e",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €108.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0307\n",
+      "ts": "2026-07-07T15:42:46.472040+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 108.0,
+      "netto": 0.0307199859813084,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-cf7ecb83",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €109.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0302\n",
+      "ts": "2026-07-07T15:42:46.506875+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 109.0,
+      "netto": 0.030239037037037023,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-530e9e03",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €110.0000 ✅\nPotje: pot-002\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0298\n",
+      "ts": "2026-07-07T15:42:46.537520+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 110.0,
+      "netto": 0.029762009174311932,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-e88ac249",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €101.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0342\n",
+      "ts": "2026-07-07T15:42:47.535922+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 101.0,
+      "netto": 0.0342,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-a874c867",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €102.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0337\n",
+      "ts": "2026-07-07T15:42:47.567474+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 102.0,
+      "netto": 0.03369038613861386,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-ed629ad0",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €103.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0332\n",
+      "ts": "2026-07-07T15:42:47.601536+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 103.0,
+      "netto": 0.03318500980392157,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-d62c94c6",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €104.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0327\n",
+      "ts": "2026-07-07T15:42:47.636951+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 104.0,
+      "netto": 0.03268382038834951,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-929b6778",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €105.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0322\n",
+      "ts": "2026-07-07T15:42:47.669280+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 105.0,
+      "netto": 0.03218676923076924,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-9c53cd0d",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €106.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0317\n",
+      "ts": "2026-07-07T15:42:47.900016+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 106.0,
+      "netto": 0.031693809523809534,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-84c422b2",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €107.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0312\n",
+      "ts": "2026-07-07T15:42:47.932226+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 107.0,
+      "netto": 0.031204896226415084,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-86c18f10",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €108.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0307\n",
+      "ts": "2026-07-07T15:42:47.963895+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 108.0,
+      "netto": 0.0307199859813084,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-893b0285",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €109.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0302\n",
+      "ts": "2026-07-07T15:42:48.182962+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 109.0,
+      "netto": 0.030239037037037023,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-449f4b7e",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • BCH @ €110.0000 ✅\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €+0.0298\n",
+      "ts": "2026-07-07T15:42:48.217922+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 110.0,
+      "netto": 0.029762009174311932,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-49809ccd",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • SOL @ €70.8960 ⚠️\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €-0.1466\n",
+      "ts": "2026-07-07T19:11:35.415925+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "SOL-EUR",
+      "pot_id": "pot-001",
+      "price": 70.896,
+      "netto": -0.14658290809370506,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    }
+  ]
+}

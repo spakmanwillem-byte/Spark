@@ -1,0 +1,17 @@
+{
+  "gradatie": 5,
+  "label": "Lid",
+  "intro": "Op gradatie 5 krijg je het Dagboek erbij — een veilige plek voor je gedachten.",
+  "inherits_from": "gradatie_6",
+  "extra_topics": [
+    {
+      "id": "dagboek",
+      "label": "Dagboek",
+      "korte_uitleg": "Schrijf een dagelijkse entry. Spark leest mee en kan terugkijken naar patronen (alleen als jij dat wil).",
+      "deep_uitleg": "Het dagboek is privé. Spark gebruikt entries niet voor andere features tenzij jij ze deelt. Per entry kan je een stemming/emotie tag geven, dan helpt Spark patronen herkennen.",
+      "nav_path": "/dagboek",
+      "nav_testid": "nav-dagboek",
+      "synonyms": ["dagboek", "journal", "diary", "schrijven", "gedachten", "dagelijks"]
+    }
+  ]
+}

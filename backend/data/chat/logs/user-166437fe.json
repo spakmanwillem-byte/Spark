@@ -282,11 +282,35 @@
         "session_id": "deep-user-166437fe",
         "gesprek_nummer": 13
       }
+    },
+    {
+      "id": "conv-9daed9ca",
+      "timestamp": "2026-08-02T08:19:14.755039+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "Welke gradatie ben ik",
+      "spark_response": "Gert van zeven, jij hebt gradatie 4. Dat betekent dat je toegang hebt tot de Trade‑bot, je boekhouding, agenda, notities, dagboek en de meeste andere persoonlijke tabs. Met deze gradatie kun je zelf je data beheren, transacties bekijken en je eigen planning bijhouden, terwijl Spark je ondersteunt en de controle bij jou houdt. \n\nWil je iets specifieks doen met je gradatie 4‑rechten? Bijvoorbeeld je trade‑logs bekijken, een notitie maken, of een afspraak in je agenda zetten? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "triggert",
+        "used_cards": [
+          "kbv2-34be5d8c",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d",
+          "kbv2-skel-59c4c4f6",
+          "kbv2-skel-4bd2830e"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 14
+      }
     }
   ],
   "metadata": {
     "user_id": "user-166437fe",
-    "total_conversations": 13,
-    "last_updated": "2026-07-24T19:19:06.261480+00:00"
+    "total_conversations": 14,
+    "last_updated": "2026-08-02T08:19:14.755039+00:00"
   }
 }

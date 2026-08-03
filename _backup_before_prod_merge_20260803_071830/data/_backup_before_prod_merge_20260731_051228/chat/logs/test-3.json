@@ -1,0 +1,19 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "text": "wat is standaardafwijking?",
+      "ts": "2026-07-20T14:44:58.185738+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Hoi De Willem,\n\n**Standaardafwijking** is een statistische maat die aangeeft hoe ver individuele waarden van het gemiddelde afwijken. \n\n- **Hoe het werkt:** Je berekent eerst het gemiddelde (de “mean”) van je dataset. Vervolgens meet je voor elk datapunt het verschil met dat gemiddelde, kwadrateert die verschillen, neemt het gemiddelde van die kwadraten (de variantie) en trekt daar de vierkantswortel van. Dat resultaat is de standaardafwijking (σ). \n- **Wat het vertelt:** Een *lage* standaardafwijking betekent dat de waarden dicht bij elkaar en bij het gemiddelde liggen; een *hoge* standaardafwijking wijst op grotere spreiding en meer volatiliteit. \n- **Waarom het nuttig is:** In trading, bijvoorbeeld bij Bollinger‑bands, gebruiken we σ om banden rond de prijs te tekenen. Als de prijs buiten de banden treedt, signaleert dat een mogelijke afwijking van de norm – een kans voor reversion (terugkeer) naar het gemiddelde.\n\nKort gezegd: de standaardafwijking kwantificeert de “normale” variatie in je data, zodat je kunt zien of iets uitzonderlijk is of gewoon binnen de verwachte spreiding valt.\n\nAls je wilt, kan ik een voorbeeldberekening voor je maken of de sigma‑waarde van je huidige trading‑data opvragen. Laat maar weten wat je nodig hebt!",
+      "ts": "2026-07-20T14:44:58.185738+00:00",
+      "model": "fallback/gpt-oss-120b"
+    }
+  ],
+  "session_id": "test-3",
+  "user_id": "user-001",
+  "updated_at": "2026-07-20T14:44:58.185738+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "gradatie": 6,
+  "label": "Beginnend Lid",
+  "intro": "Welkom terug! Op gradatie 6 heb je alles van een gast plus de Agenda. Goed voor het bijhouden van je dagen.",
+  "inherits_from": "gradatie_7",
+  "extra_topics": [
+    {
+      "id": "calendar",
+      "label": "Agenda",
+      "korte_uitleg": "Je persoonlijke agenda met afspraken en herinneringen. Spark kan je vragen 'wat staat er morgen?' en doet de rest.",
+      "deep_uitleg": "Agenda kan ook gekoppeld worden aan Google Calendar (gradatie 2+). Op gradatie 6 is dit nog lokaal.",
+      "nav_path": "/calendar",
+      "nav_testid": "nav-calendar",
+      "synonyms": ["agenda", "kalender", "calendar", "afspraak", "afspraken", "wat staat er"]
+    }
+  ]
+}

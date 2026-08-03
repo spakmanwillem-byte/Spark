@@ -119,6 +119,46 @@
       "requested_amount": 6.8,
       "effective_amount": 6.8,
       "proxied_via_spark": true
+    },
+    {
+      "trade_id": "00000000-0000-0560-0100-000986feb259",
+      "run_id": "manual",
+      "timestamp": "2026-08-02T13:27:32.947230+00:00",
+      "action": "BUY",
+      "market": "SOL-EUR",
+      "order_id": "00000000-0000-0560-0100-000986feb259",
+      "amount": 10.02,
+      "price": 63.26000391934236,
+      "filled": 0.15839392,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0300006208,
+      "fee_currency": "EUR",
+      "requested_amount": 10.05,
+      "effective_amount": 10.05,
+      "proxied_via_spark": true
+    },
+    {
+      "trade_id": "00000000-0000-03f2-0100-000987595fff",
+      "run_id": "manual",
+      "timestamp": "2026-08-02T15:57:54.269798+00:00",
+      "action": "BUY",
+      "market": "ADA-EUR",
+      "order_id": "00000000-0000-03f2-0100-000987595fff",
+      "amount": 10.01,
+      "price": 0.16468000232493285,
+      "filled": 60.784551,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.03000014132,
+      "fee_currency": "EUR",
+      "requested_amount": 10.04,
+      "effective_amount": 10.04,
+      "proxied_via_spark": true
     }
   ]
 }

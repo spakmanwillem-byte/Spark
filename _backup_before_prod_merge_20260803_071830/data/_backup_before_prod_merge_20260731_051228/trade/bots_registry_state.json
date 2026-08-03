@@ -1,0 +1,65 @@
+{
+  "bots": [
+    {
+      "user_id": "user-000",
+      "running": true,
+      "interval": 300,
+      "market": "BCH-EUR",
+      "markets": [
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
+      ],
+      "candle_interval": "15m",
+      "auto_trade": true,
+      "trade_amount": 13.93,
+      "use_mock": false,
+      "use_potjes": true,
+      "pot_count": 7
+    },
+    {
+      "user_id": "user-a0ee2d7e",
+      "running": false,
+      "interval": 300,
+      "market": "BCH-EUR",
+      "markets": [
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
+      ],
+      "candle_interval": "15m",
+      "auto_trade": true,
+      "trade_amount": 13.93,
+      "use_mock": false,
+      "use_potjes": true,
+      "pot_count": 0
+    },
+    {
+      "user_id": "user-1996fa59",
+      "running": false,
+      "interval": 300,
+      "market": "BCH-EUR",
+      "markets": [
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
+      ],
+      "candle_interval": "15m",
+      "auto_trade": true,
+      "trade_amount": 13.93,
+      "use_mock": false,
+      "use_potjes": true,
+      "pot_count": 0
+    }
+  ],
+  "saved_at": "2026-07-31T05:11:32.765697+00:00"
+}

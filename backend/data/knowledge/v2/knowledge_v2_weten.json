@@ -432045,22 +432045,189 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Huidige betekent dat iets betrekking heeft op het heden of de situatie van dit moment.",
-        "laag2": "Het woord huidige verwijst naar de toestand, periode, versie of situatie die op dit moment geldt.",
-        "laag3": "Huidige is een bijvoeglijk naamwoord dat aangeeft dat iets actueel is. Het wordt gebruikt om onderscheid te maken tussen het heden en het verleden of de toekomst. Het kan betrekking hebben op een persoon, functie, locatie, versie, status, tijd of situatie. De betekenis is altijd afhankelijk van het moment waarop het woord wordt gebruikt.",
-        "laag4": ""
+        "laag1": "Huidige betekent dat iets op dit moment bestaat, geldt of van toepassing is.",
+        "laag2": "Het woord huidige verwijst naar de actuele persoon, situatie, toestand, periode, versie of informatie die nu geldig is.",
+        "laag3": "Huidige is de verbogen vorm van het woord huidig. Het wordt gebruikt om iets te beschrijven dat op dit moment actief, geldig of aanwezig is. Het kan bijvoorbeeld gaan over de huidige situatie, huidige gebruiker, huidige versie, huidige status of huidige tijd. Wat momenteel huidig is, kan later veranderen. De betekenis is daarom altijd afhankelijk van tijd en context.",
+        "laag4": "Binnen Spark verwijst huidige naar de informatie of toestand die op het moment van verwerking actief en relevant is. Dit kan bijvoorbeeld de huidige gebruiker, huidige context, huidige kennisbankstatus, huidige versie of huidige taak zijn. Spark gebruikt deze actuele informatie om onderscheid te maken tussen wat nu geldt, wat eerder is gebeurd en wat voor de toekomst is gepland.\n\nPraktijkvoorbeelden\n\nVoorbeeld 1\n\n“Wat is de huidige status van Spark?”\n\n→ Er wordt gevraagd naar de status die op dit moment geldt.\n\nVoorbeeld 2\n\n“De huidige versie van Spark bevat nieuwe functies.”\n\n→ De versie die nu actief of beschikbaar is, wordt bedoeld.\n\nVoorbeeld 3\n\n“Spark gebruikt de huidige context om een respons te vormen.”\n\n→ Spark gebruikt de informatie die op dat moment relevant is."
       },
-      "ws5": {},
-      "tags": [],
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "Een woord dat verwijst naar iets dat op dit moment actief, geldig of van toepassing is.",
+        "wanneer": "Wanneer informatie betrekking heeft op het heden of de actuele situatie.",
+        "waar": "In gesprekken, documenten, software, systemen en dagelijkse situaties.",
+        "waarom": "Om actuele informatie te onderscheiden van informatie uit het verleden of de toekomst.",
+        "hoe": "Door een persoon, toestand, versie, waarde of situatie te koppelen aan het huidige moment."
+      },
+      "tags": [
+        "huidige",
+        "huidig",
+        "actueel",
+        "actualiteit",
+        "heden",
+        "nu",
+        "momenteel",
+        "status",
+        "toestand",
+        "versie",
+        "tijd",
+        "context",
+        "neutraal"
+      ],
       "topic": "algemeen",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "heden",
+            "neutraal",
+            "status",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9395a04",
+          "begrip": "vandaag",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "actualiteit",
+            "context",
+            "heden",
+            "nu",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8f10873b",
+          "begrip": "meteen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "nu",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-558b2443",
+          "begrip": "kwijt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efdd4008",
+          "begrip": "recentelijk",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "actualiteit",
+            "context",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-735be6cb",
+          "begrip": "eerdere",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "tijd",
+            "versie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a2eb471e",
+          "begrip": "recent",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "actueel",
+            "context",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10a73247",
+          "begrip": "staat",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2623a30c",
+          "begrip": "hadden",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "tijd",
+            "toestand"
+          ]
+        }
+      ],
       "footnote": {
         "source": "manual_import_12345txt",
         "imported_at": "2026-07-22T08:05:54.368932+00:00",
-        "imported_reason": "Willem invulde via UI in prod, door lag niet opgeslagen (bug fix pending). Handmatig teruggeplaatst."
+        "imported_reason": "Willem invulde via UI in prod, door lag niet opgeslagen (bug fix pending). Handmatig teruggeplaatst.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T08:39:14.580202+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T08:39:15.642512+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T08:39:15.664663+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ]
       },
       "media": [],
-      "needs": []
+      "needs": [
+        "voice",
+        "image"
+      ]
     },
     {
       "id": "kbv2-922cf802",
@@ -586628,10 +586795,3177 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-ada9692d",
+      "begrip": "huidig",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Huidig betekent dat iets op dit moment bestaat, geldt of van toepassing is.",
+        "laag2": "Het woord huidig verwijst naar de actuele toestand, situatie, periode, versie of informatie die nu geldig is. De betekenis is afhankelijk van het moment waarop het woord wordt gebruikt.",
+        "laag3": "Huidig is een bijvoeglijk naamwoord dat wordt gebruikt om onderscheid te maken tussen het heden, het verleden en de toekomst. Het kan betrekking hebben op een situatie, status, gebruiker, versie, functie, periode of hoeveelheid. Wat nu huidig is, kan later veranderen. Daarom is huidig altijd tijds- en contextafhankelijk.",
+        "laag4": "Binnen Spark verwijst huidig naar de informatie of toestand die op het moment van verwerking actief of geldig is. Dit kan bijvoorbeeld de huidige gebruiker, huidige context, huidige kennisbankstatus, huidige versie of huidige taak zijn. Spark gebruikt de actuele context om informatie correct te interpreteren en onderscheid te maken tussen huidige, historische en geplande gegevens.\n\nPraktijkvoorbeelden\n\nVoorbeeld 1\n\n“Wat is de huidige status van Spark?”\n\n→ Er wordt gevraagd naar de status die op dit moment geldt.\n\nVoorbeeld 2\n\n“De huidige versie van Spark is geïnstalleerd.”\n\n→ De versie die nu actief of beschikbaar is, wordt bedoeld.\n\nVoorbeeld 3\n\n“Spark gebruikt de huidige context om een respons te vormen.”\n\n→ Spark gebruikt de informatie die op dat moment relevant en actief is."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "Een aanduiding voor iets dat op dit moment geldt of actief is.",
+        "wanneer": "Wanneer informatie betrekking heeft op het heden of de actuele situatie.",
+        "waar": "In gesprekken, documenten, software, systemen en dagelijkse situaties.",
+        "waarom": "Om actuele informatie te onderscheiden van informatie uit het verleden of de toekomst.",
+        "hoe": "Door een toestand, waarde, versie of situatie te koppelen aan het huidige moment."
+      },
+      "tags": [
+        "huidig",
+        "huidige",
+        "actueel",
+        "actualiteit",
+        "heden",
+        "nu",
+        "momenteel",
+        "status",
+        "toestand",
+        "versie",
+        "tijd",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-52fc1016",
+          "begrip": "huidige",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "actualiteit",
+            "actueel",
+            "context",
+            "heden",
+            "huidig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "heden",
+            "neutraal",
+            "status",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9395a04",
+          "begrip": "vandaag",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "actualiteit",
+            "context",
+            "heden",
+            "nu",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8f10873b",
+          "begrip": "meteen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "nu",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-558b2443",
+          "begrip": "kwijt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efdd4008",
+          "begrip": "recentelijk",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "actualiteit",
+            "context",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-735be6cb",
+          "begrip": "eerdere",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "tijd",
+            "versie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a2eb471e",
+          "begrip": "recent",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "actueel",
+            "context",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10a73247",
+          "begrip": "staat",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T08:39:37.796891+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T08:25:32.445033+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T08:37:12.381254+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T08:39:38.941069+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T08:39:38.964121+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 13
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4b05e1fd",
+      "begrip": "toegangsrechten",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Toegangsrechten bepalen welke informatie, onderdelen of functies iemand mag bekijken, gebruiken of aanpassen.",
+        "laag2": "Toegangsrechten geven gebruikers verschillende niveaus van toegang binnen een systeem. Een gebruiker kan bijvoorbeeld alleen informatie bekijken, gegevens wijzigen of volledige beheerdersrechten hebben.",
+        "laag3": "Toegangsrechten worden gebruikt om informatie, gegevens en functies te beschermen. Een systeem controleert welke gebruiker toegang vraagt en welke rechten aan die gebruiker zijn gekoppeld. Op basis daarvan wordt bepaald welke handelingen zijn toegestaan. Veelvoorkomende rechten zijn bekijken, toevoegen, wijzigen, verwijderen en beheren. Toegangsrechten kunnen worden gekoppeld aan individuele gebruikers, rollen, groepen of gradaties.",
+        "laag4": "Binnen Spark bepalen toegangsrechten welke onderdelen van het systeem een gebruiker mag zien en gebruiken. De rechten kunnen gekoppeld zijn aan een gebruikersrol, relatie, gradatie of specifieke toestemming. Hierdoor kan Spark onderscheid maken tussen bijvoorbeeld een eigenaar, familielid, vriend, communitylid of bezoeker. Een hogere toegangsgradatie kan toegang geven tot meer persoonlijke informatie of extra functies. Toegangsrechten helpen Spark om gegevens overzichtelijk, persoonlijk en beschermd te houden.\n\nPraktijkvoorbeelden\n\nVoorbeeld 1\n\nEen bezoeker mag openbare informatie bekijken, maar kan geen persoonlijke gegevens openen.\n\n→ De bezoeker heeft beperkte toegangsrechten.\n\nVoorbeeld 2\n\nEen familielid mag bepaalde gedeelde herinneringen bekijken, maar geen systeeminstellingen wijzigen.\n\n→ De toegangsrechten zijn afgestemd op de relatie en toestemming.\n\nVoorbeeld 3\n\nDe eigenaar van Spark kan gebruikers beheren en alle instellingen aanpassen.\n\n→ De eigenaar heeft uitgebreide beheerdersrechten."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders, groepen en systemen.",
+        "wat": "Regels die bepalen welke informatie en functies iemand mag bekijken, gebruiken of aanpassen.",
+        "wanneer": "Wanneer een gebruiker toegang vraagt tot een onderdeel, functie of gegeven.",
+        "waar": "In apps, websites, databases, bestanden en informatiesystemen.",
+        "waarom": "Om informatie te beschermen, privacy te ondersteunen en ongewenste wijzigingen te voorkomen.",
+        "hoe": "Door gebruikers te herkennen en hun rechten te controleren op basis van rollen, gradaties, relaties of afzonderlijke toestemmingen."
+      },
+      "tags": [
+        "toegangsrechten",
+        "toegang",
+        "toestemming",
+        "autorisatie",
+        "gebruikersrechten",
+        "beveiliging",
+        "privacy",
+        "gebruiker",
+        "rol",
+        "gradatie",
+        "beheer",
+        "systeem",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96b52c55",
+          "begrip": "Toegang verleend",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "autorisatie",
+            "beveiliging",
+            "gebruiker",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f31fbce7",
+          "begrip": "Admin geactiveerd",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "autorisatie",
+            "beheer",
+            "beveiliging",
+            "gebruiker",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-71796d8f",
+          "begrip": "Admin gedeactiveerd",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "autorisatie",
+            "beheer",
+            "beveiliging",
+            "gebruiker",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-957ec267",
+          "begrip": "uitlog",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beveiliging",
+            "gebruiker",
+            "neutraal",
+            "privacy",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dc466fa0",
+          "begrip": "Trusted Hosts",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "autorisatie",
+            "beveiliging",
+            "neutraal",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aa59078f",
+          "begrip": "Gradatiesysteem",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gebruiker",
+            "gradatie",
+            "privacy",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a374c38c",
+          "begrip": "Toegang geweigerd",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beveiliging",
+            "gebruiker",
+            "neutraal",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-37b3a401",
+          "begrip": "login",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beveiliging",
+            "gebruiker",
+            "neutraal",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beveiliging",
+            "neutraal",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-32febab3",
+          "begrip": "Wat is dit voor bot?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "gebruiker",
+            "neutraal",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T08:42:04.882541+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T08:33:17.107502+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T08:41:58.144888+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T08:42:05.996572+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T08:42:06.020808+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9dc21f2f",
+      "begrip": "gebruikers",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gebruikers zijn personen die een systeem, dienst, programma of product gebruiken.",
+        "laag2": "Een gebruiker is iemand die toegang heeft tot een systeem en daarvan functies of informatie kan gebruiken.",
+        "laag3": "Gebruikers kunnen binnen een systeem een eigen account, profiel, instellingen en toegangsrechten hebben. Afhankelijk van hun rol of toestemming kunnen gebruikers verschillende functies gebruiken, informatie bekijken of gegevens aanpassen.",
+        "laag4": "Binnen Spark is een gebruiker een persoon met een eigen identiteit, profiel, voorkeuren, gradatie en toegangsrechten. Spark gebruikt deze gegevens om functies en informatie persoonlijk en passend aan te bieden"
+      },
+      "ws5": {
+        "wie": "Mensen die Spark gebruiken, beheren of toegang hebben tot onderdelen van het systeem.",
+        "wat": "Een afzonderlijke persoon met een eigen identiteit, profiel en toegangsrechten binnen Spark.",
+        "wanneer": "Wanneer iemand een account gebruikt, inlogt of toegang krijgt tot Spark.",
+        "waar": "Binnen de Spark-app, modules, kennisbank, community en andere onderdelen van het Spark-ecosysteem.",
+        "waarom": "Om Spark persoonlijk, overzichtelijk en veilig te kunnen gebruiken.",
+        "hoe": "Door een gebruikersidentiteit te koppelen aan een profiel, voorkeuren, instellingen, gradatie en toegangsrechten."
+      },
+      "tags": [
+        "gebruikers",
+        "gebruiker",
+        "user",
+        "users",
+        "account",
+        "gebruikersaccount",
+        "identiteit",
+        "profiel",
+        "toegangsrechten",
+        "gradatie",
+        "toestemming",
+        "rol",
+        "spark",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0f8a996a",
+          "begrip": "user",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "account",
+            "context",
+            "emotie",
+            "gebruiker",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b05e1fd",
+          "begrip": "toegangsrechten",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "gebruiker",
+            "gradatie",
+            "neutraal",
+            "rol"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1890e59",
+          "begrip": "profiel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "account",
+            "context",
+            "emotie",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-32febab3",
+          "begrip": "Wat is dit voor bot?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebruiker",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25b237ba",
+          "begrip": "Ik dacht dat jij binnen de gesprekken van de user jij de onderliggende relaties van de user bij hield.",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebruiker",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d00f04e0",
+          "begrip": "Spark Identiteit",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "rol",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-601ce23a",
+          "begrip": "Catan Universe",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "account",
+            "context",
+            "emotie",
+            "neutraal",
+            "profiel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-37b3a401",
+          "begrip": "login",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "account",
+            "emotie",
+            "gebruiker",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "rol"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T08:47:26.896865+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T08:33:16.927772+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T08:47:02.735162+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T08:47:28.021235+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T08:47:28.046918+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9e143633",
+      "begrip": "meeste",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Meeste betekent het grootste aantal of de grootste hoeveelheid.",
+        "laag2": "Het woord meeste wordt gebruikt om aan te geven dat iets groter is dan alle andere aantallen, hoeveelheden of delen binnen een bepaalde groep.",
+        "laag3": "Meeste is een vorm van het woord veel en wordt gebruikt om een vergelijking te maken. Het kan verwijzen naar het grootste aantal personen, voorwerpen of gebeurtenissen, maar ook naar de grootste hoeveelheid van iets. De precieze betekenis wordt bepaald door de groep of situatie waarmee wordt vergeleken. Het woord komt vaak voor in uitdrukkingen zoals de meeste mensen, het meeste werk en de meeste tijd.",
+        "laag4": "Binnen Spark helpt meeste bij het herkennen van vergelijkingen en hoeveelheden. Wanneer een gebruiker bijvoorbeeld zegt “Welke kenniskaart heeft de meeste verbindingen?”, begrijpt Spark dat alle relevante aantallen moeten worden vergeleken om de hoogste waarde te vinden. Het woord kan ook aangeven dat een groot deel van een groep wordt bedoeld, zoals in “De meeste gebruikers hebben toegang tot deze functie.”\n\nPraktijkvoorbeelden\n\nVoorbeeld 1\n\n“De meeste mensen gebruiken dagelijks een telefoon.”\n\n→ Het grootste deel van de groep mensen wordt bedoeld.\n\nVoorbeeld 2\n\n“Deze kenniskaart heeft de meeste verbindingen.”\n\n→ Deze kenniskaart heeft meer verbindingen dan de andere kaarten waarmee wordt vergeleken.\n\nVoorbeeld 3\n\n“Ik heb het meeste werk al gedaan.”\n\n→ Het grootste deel van het werk is voltooid."
+      },
+      "ws5": {
+        "wie": "Iedereen die aantallen, hoeveelheden of groepen vergelijkt.",
+        "wat": "Een aanduiding voor het grootste aantal, de grootste hoeveelheid of het grootste deel.",
+        "wanneer": "Wanneer meerdere aantallen, hoeveelheden of delen met elkaar worden vergeleken.",
+        "waar": "In gesprekken, teksten, statistiek, gegevensanalyse en dagelijkse situaties.",
+        "waarom": "Om aan te geven welk aantal, welke hoeveelheid of welk deel het grootst is.",
+        "hoe": "Door waarden of delen met elkaar te vergelijken en de hoogste of grootste uitkomst aan te wijzen."
+      },
+      "tags": [
+        "meeste",
+        "veel",
+        "hoeveelheid",
+        "aantal",
+        "grootste",
+        "vergelijking",
+        "deel",
+        "groep",
+        "statistiek",
+        "data",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "aantal",
+            "data",
+            "emotie",
+            "hoeveelheid",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6648c990",
+          "begrip": "aantal",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aantal",
+            "data",
+            "emotie",
+            "hoeveelheid",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-230b9851",
+          "begrip": "Gemiddelde",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "data",
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a8c9d85",
+          "begrip": "Statistiek",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "data",
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25334995",
+          "begrip": "twee",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aantal",
+            "context",
+            "emotie",
+            "hoeveelheid",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-18836a8a",
+          "begrip": "Hoeveelheidsaanduiding",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aantal",
+            "context",
+            "data",
+            "hoeveelheid",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8c0af9bc",
+          "begrip": "Kwantiteit",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aantal",
+            "data",
+            "hoeveelheid",
+            "statistiek",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a50d668a",
+          "begrip": "Zoveel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aantal",
+            "context",
+            "hoeveelheid",
+            "veel",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-286cd065",
+          "begrip": "Verdubbelen ",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aantal",
+            "emotie",
+            "hoeveelheid",
+            "neutraal",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d3588c74",
+          "begrip": "Data-analyse",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "data",
+            "emotie",
+            "neutraal",
+            "statistiek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T08:51:38.606294+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T08:19:15.486057+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T08:51:20.626209+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T08:51:39.739344+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T08:51:39.764916+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5aa2f151",
+      "begrip": "saldi",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Saldi zijn de bedragen of waarden die op een bepaald moment beschikbaar of overblijven.",
+        "laag2": "Een saldo geeft aan wat er op een rekening, account of binnen een overzicht aanwezig is nadat inkomsten, uitgaven, stortingen en opnames zijn verwerkt. Saldi is het meervoud van saldo.",
+        "laag3": "Saldi worden gebruikt om de financiële of administratieve toestand van meerdere rekeningen, accounts of onderdelen weer te geven. Een saldo kan positief, nul of negatief zijn. Een positief saldo betekent meestal dat er geld of waarde beschikbaar is. Een negatief saldo kan betekenen dat er een tekort, schuld of openstaand bedrag is. De betekenis van een saldo hangt af van de context en het soort rekening of systeem.",
+        "laag4": "Binnen Spark kunnen saldi worden gebruikt om de actuele waarden van meerdere financiële onderdelen te tonen, zoals bankrekeningen, wallets, handelsaccounts, spaargeld of andere bezittingen. Spark kan deze saldi verzamelen, afzonderlijk weergeven en samenvoegen tot een totaaloverzicht. Daarbij is het belangrijk om het bedrag, de valuta, de bron en het tijdstip van de laatste update te bewaren, zodat duidelijk blijft hoe actueel en betrouwbaar de gegevens zijn.\n\nPraktijkvoorbeelden\n\nVoorbeeld 1\n\n“Mijn saldi zijn € 1.200 op de bank en € 300 in mijn wallet.”\n\n→ Er zijn meerdere afzonderlijke bedragen beschikbaar.\n\nVoorbeeld 2\n\n“Spark toont de saldi van alle gekoppelde rekeningen.”\n\n→ De bedragen van meerdere rekeningen worden afzonderlijk weergegeven.\n\nVoorbeeld 3\n\n“Het totale saldo is de som van alle beschikbare saldi.”\n\n→ Meerdere bedragen worden samengevoegd tot één totaal."
+      },
+      "ws5": {
+        "wie": "Rekeninghouders, gebruikers, bedrijven en financiële systemen.",
+        "wat": "De actuele of berekende bedragen en waarden van meerdere rekeningen, accounts of onderdelen.",
+        "wanneer": "Wanneer de financiële toestand van meerdere onderdelen wordt bekeken of bijgewerkt.",
+        "waar": "Bij banken, wallets, handelsplatformen, boekhoudsystemen en financiële dashboards.",
+        "waarom": "Om inzicht te krijgen in beschikbare bedragen, bezittingen, tekorten of openstaande waarden.",
+        "hoe": "Door inkomsten, uitgaven, stortingen, opnames en andere mutaties per rekening of onderdeel te verwerken."
+      },
+      "tags": [
+        "saldi",
+        "saldo",
+        "balans",
+        "rekening",
+        "spark wallet",
+        "account",
+        "bedrag",
+        "waarde",
+        "financiën",
+        "wallet",
+        "bankrekening",
+        "totaal",
+        "overzicht",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a3967613",
+          "begrip": "rekening",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bankrekening",
+            "emotie",
+            "financiën",
+            "neutraal",
+            "rekening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-58842b5a",
+          "begrip": "kasboek",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "financiën",
+            "neutraal",
+            "overzicht",
+            "rekening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ed5375ef",
+          "begrip": "wallet",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "account",
+            "financiën",
+            "saldo",
+            "waarde",
+            "wallet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d3540f4e",
+          "begrip": "activum",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "financiën",
+            "neutraal",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-88c184ef",
+          "begrip": "potjes",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "financiën",
+            "neutraal",
+            "saldo"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-02750024",
+          "begrip": "spreiding",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "context",
+            "emotie",
+            "financiën",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69959d52",
+          "begrip": "Saldo",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "overzicht",
+            "rekening",
+            "saldo",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f8ea840",
+          "begrip": "saldo is gewijzigd",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "account",
+            "balans",
+            "saldo",
+            "waarde",
+            "wallet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "overzicht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "de Geiser",
+        "aangemaakt_op": "2026-08-02T08:25:30.680625+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T08:54:38.355430+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Wat is mijn wallet saldi?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T08:54:33.980141+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T08:54:39.463375+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T08:54:39.488943+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8d56d9db",
+      "begrip": "Handvatten",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Handvatten zijn hulpmiddelen die iemand helpen om iets beter te begrijpen, aan te pakken of uit te voeren.",
+        "laag2": "Het woord handvatten wordt vaak figuurlijk gebruikt. Handvatten geven iemand praktische ideeën, richtlijnen of mogelijkheden om met een situatie, probleem of taak om te gaan.",
+        "laag3": "Handvatten kunnen bestaan uit uitleg, tips, voorbeelden, stappen, methoden of hulpmiddelen. Ze geven richting zonder dat ze altijd precies voorschrijven wat iemand moet doen. Handvatten helpen iemand om zelf keuzes te maken en een situatie beter te begrijpen of aan te pakken. De betekenis hangt af van de context. Letterlijk zijn handvatten onderdelen waaraan iets kan worden vastgepakt, zoals de handvatten van een fiets of tas.",
+        "laag4": "Binnen Spark kunnen handvatten worden gebruikt om een gebruiker praktische ondersteuning te geven. Wanneer een gebruiker vraagt om handvatten voor een probleem of situatie, kan Spark uitleg, voorbeelden, mogelijke stappen en aandachtspunten aanbieden. Spark geeft daarbij ondersteuning en richting, maar laat ruimte voor de gebruiker om zelf te bepalen welke aanpak passend is."
+      },
+      "ws5": {
+        "wie": "Mensen die ondersteuning, richting of praktische mogelijkheden nodig hebben.",
+        "wat": "Hulpmiddelen, ideeën, richtlijnen of praktische aanwijzingen die helpen om iets te begrijpen of aan te pakken.",
+        "wanneer": "",
+        "waar": "In gesprekken, onderwijs, begeleiding, werk, hulpverlening en dagelijkse situaties.",
+        "waarom": "Om iemand meer inzicht, richting en mogelijkheden te geven bij het omgaan met een situatie.",
+        "hoe": "Door uitleg, tips, voorbeelden, stappen, methoden of andere hulpmiddelen aan te bieden."
+      },
+      "tags": [
+        "handvatten",
+        "handvat",
+        "hulpmiddel",
+        "ondersteuning",
+        "begeleiding",
+        "richting",
+        "advies",
+        "tips",
+        "uitleg",
+        "voorbeelden",
+        "stappen",
+        "aanpak",
+        "mogelijkheden",
+        "inzicht",
+        "praktisch",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T12:47:07.404811+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-bc973f97",
+      "begrip": "Dagboek",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een dagboek is een plek waarin iemand persoonlijke gedachten, gevoelens, ervaringen en gebeurtenissen kan opschrijven.",
+        "laag2": "In een dagboek kan iemand bijhouden wat er is gebeurd, hoe iemand zich voelt of wat iemand belangrijk vindt. Een dagboek kan helpen om ervaringen te onthouden, gedachten te ordenen en later terug te kijken.",
+        "laag3": "Een dagboek bestaat uit persoonlijke berichten die op verschillende momenten worden geschreven. Iemand kan gebeurtenissen, gevoelens, ideeën, herinneringen, plannen of ervaringen vastleggen. Door eerdere berichten terug te lezen kunnen veranderingen, terugkerende onderwerpen en persoonlijke ontwikkelingen zichtbaar worden. Een dagboek is meestal persoonlijk en wordt alleen gedeeld wanneer de schrijver daarvoor kiest.",
+        "laag4": "Binnen Spark is het Dagboek een persoonlijke functie waarin gebruikers gedachten, gevoelens, ervaringen en gebeurtenissen kunnen vastleggen. De Dagboek-tab is niet direct voor iedere gebruiker beschikbaar. De functie wordt ontgrendeld wanneer een gebruiker voldoende vertrouwensscore heeft bereikt en aan de voorwaarden voor toegang voldoet.\n\nDe Dagboek-tab kan beschikbaar worden vanaf Community Plus, gradatie 4. Gebruikers met een hogere gradatie binnen Spark behouden deze toegang. Binnen de gradaties van Spark betekent een lager gradatienummer een hogere positie en meer rechten.\n\nDe inhoud van het Dagboek is persoonlijk. De gebruiker kan berichten bewaren en later terugkijken op eerdere gedachten, gevoelens, ervaringen en gebeurtenissen."
+      },
+      "ws5": {
+        "wie": "Gebruikers die persoonlijke gedachten, gevoelens, ervaringen of gebeurtenissen willen vastleggen.",
+        "wat": "Een persoonlijke verzameling van geschreven berichten over gedachten, gevoelens, herinneringen en gebeurtenissen.",
+        "wanneer": "",
+        "waar": "In een persoonlijk dagboek of binnen de ontgrendelde Dagboek-tab van Spark.",
+        "waarom": "Om ervaringen te bewaren, gedachten te ordenen, gevoelens te uiten en persoonlijke ontwikkelingen terug te kunnen zien.",
+        "hoe": "Door op verschillende momenten persoonlijke berichten te schrijven en deze in het Dagboek te bewaren."
+      },
+      "tags": [
+        "dagboek",
+        "schrijven",
+        "gedachten",
+        "gevoelens",
+        "ervaringen",
+        "gebeurtenissen",
+        "herinneringen",
+        "persoonlijk",
+        "privé",
+        "reflectie",
+        "ontwikkeling",
+        "vertrouwen",
+        "vertrouwensscore",
+        "voorwaarden",
+        "toegang",
+        "ontgrendelen",
+        "community-plus",
+        "gradatie",
+        "rechten",
+        "spark",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T12:53:15.139619+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-e94a4cac",
+      "begrip": "Tokens",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Tokens zijn digitale eenheden die binnen een systeem een bepaalde waarde, functie of betekenis kunnen hebben.",
+        "laag2": "Tokens kunnen worden gebruikt om waarde vast te leggen, toegang te geven, een beloning te vertegenwoordigen of iets binnen een digitaal systeem te gebruiken.",
+        "laag3": "Een token is een digitale eenheid die volgens bepaalde regels binnen een systeem bestaat. Tokens kunnen verschillende functies hebben. Ze kunnen een waarde vertegenwoordigen, worden gebruikt als betaalmiddel, toegang geven tot onderdelen of gebruikers belonen. De waarde en mogelijkheden van een token hangen af van het systeem waaraan de token is verbonden. Een token kan in waarde stijgen of dalen en heeft niet altijd een vaste waarde.",
+        "laag4": "Binnen Spark zijn tokens digitale eenheden die onderdeel kunnen zijn van het Spark-ecosysteem. Tokens kunnen worden gebruikt om de community te ondersteunen, waarde binnen het ecosysteem weer te geven of toekomstige functies mogelijk te maken. De ROAR Token is een voorbeeld van een token binnen Spark. ROAR is verbonden met de ontwikkeling van het Spark-ecosysteem en heeft een waarde die kan veranderen.\n\nTokens kunnen binnen Spark worden bewaard en bekeken via de Spark Wallet. De Wallet toont het aantal tokens dat een gebruiker bezit en de actuele waarde. De werking, waarde en mogelijkheden van een token worden bepaald door de regels van het betreffende token en het Spark-ecosysteem."
+      },
+      "ws5": {
+        "wie": "Gebruikers, communities, organisaties en digitale systemen die tokens maken, bezitten of gebruiken.",
+        "wat": "Digitale eenheden die waarde, toegang, een functie, eigendom of een beloning kunnen vertegenwoordigen.",
+        "wanneer": "",
+        "waar": "In digitale systemen, online platforms, wallets, communities en het Spark-ecosysteem.",
+        "waarom": "Om digitale waarde, functies, toegang, beloningen of deelname binnen een systeem mogelijk te maken.",
+        "hoe": "Door tokens volgens vastgestelde regels aan te maken, te bewaren, over te dragen of binnen een systeem te gebruiken."
+      },
+      "tags": [
+        "tokens",
+        "token",
+        "digitale-eenheid",
+        "digitale-waarde",
+        "waarde",
+        "functie",
+        "toegang",
+        "beloning",
+        "wallet",
+        "spark-wallet",
+        "roar",
+        "roar-token",
+        "ecosysteem",
+        "community",
+        "bezit",
+        "digitaal",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T12:54:23.816418+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-18f406f5",
+      "begrip": "wetenschap",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Wetenschap is het onderzoeken en verzamelen van kennis door vragen te stellen, onderzoek te doen en bewijzen te gebruiken.",
+        "laag2": "Wetenschap probeert de wereld beter te begrijpen door informatie systematisch te onderzoeken. Wetenschappers verzamelen gegevens, testen ideeën en vergelijken resultaten om betrouwbare kennis te ontwikkelen.",
+        "laag3": "Wetenschap is een manier om kennis te verkrijgen en te controleren. Onderzoekers stellen vragen, doen waarnemingen, vormen hypotheses en voeren onderzoeken of experimenten uit. De resultaten worden onderzocht en kunnen door andere onderzoekers worden gecontroleerd of opnieuw worden getest. Wetenschappelijke kennis kan veranderen wanneer nieuw bewijs of betere verklaringen beschikbaar komen. Wetenschap omvat veel gebieden, zoals biologie, natuurkunde, scheikunde, astronomie, psychologie en sociale wetenschappen.",
+        "laag4": "Binnen Spark helpt wetenschap om informatie te begrijpen, te onderzoeken en te beoordelen op basis van bewijs, controle en betrouwbare bronnen. Wetenschappelijke kennis kan worden gebruikt om onderwerpen uit te leggen en verbanden te leggen. Spark moet onderscheid maken tussen bewezen kennis, onderzoek, theorieën, aannames en persoonlijke meningen. Wanneer nieuwe informatie beschikbaar komt, kan bestaande kennis worden aangevuld of aangepast."
+      },
+      "ws5": {
+        "hoe": "Door vragen te stellen, waarnemingen te doen, hypotheses te vormen, gegevens te verzamelen, onderzoek uit te voeren en resultaten te controleren.",
+        "waarom": "Om de wereld beter te begrijpen, vragen te beantwoorden, problemen op te lossen en betrouwbare kennis te ontwikkelen.",
+        "waar": "In universiteiten, scholen, laboratoria, onderzoeksinstellingen, de natuur en andere onderzoeksomgevingen.",
+        "wanneer": "Wanneer vragen worden onderzocht en kennis wordt ontwikkeld, gecontroleerd of verbeterd.",
+        "wat": "Een systematische manier om kennis te verzamelen, onderzoeken, testen en controleren.",
+        "wie": "Wetenschappers, onderzoekers, studenten, organisaties en andere mensen die kennis onderzoeken en ontwikkelen."
+      },
+      "tags": [
+        "wetenschap",
+        "wetenschappelijk",
+        "onderzoek",
+        "onderzoeken",
+        "onderzoeker",
+        "wetenschapper",
+        "kennis",
+        "bewijs",
+        "gegevens",
+        "waarneming",
+        "hypothese",
+        "experiment",
+        "theorie",
+        "resultaten",
+        "controle",
+        "betrouwbaarheid",
+        "biologie",
+        "natuurkunde",
+        "scheikunde",
+        "astronomie",
+        "psychologie",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-70efee15",
+          "begrip": "feit",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bewijs",
+            "kennis",
+            "neutraal",
+            "onderzoek",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2dcf12d5",
+          "begrip": "periodiek systeem",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "kennis",
+            "natuurkunde",
+            "neutraal",
+            "onderzoek",
+            "scheikunde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-107749df",
+          "begrip": "bewijs",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bewijs",
+            "controle",
+            "gegevens",
+            "neutraal",
+            "onderzoek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bee108b6",
+          "begrip": "Testpersoon",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "experiment",
+            "gegevens",
+            "neutraal",
+            "onderzoek",
+            "onderzoeker"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8be5ee47",
+          "begrip": "Hypothese",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bewijs",
+            "context",
+            "experiment",
+            "hypothese",
+            "onderzoek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b2beb9a",
+          "begrip": "ontdekken",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "kennis",
+            "neutraal",
+            "onderzoek",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-22a641b0",
+          "begrip": "informatiebron",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "gegevens",
+            "kennis",
+            "neutraal",
+            "onderzoek",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1c554dc6",
+          "begrip": "Smoking Gun",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "bewijs",
+            "context",
+            "neutraal",
+            "onderzoek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-081e4988",
+          "begrip": "Objectief",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bewijs",
+            "context",
+            "onderzoek",
+            "waarneming",
+            "wetenschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f045385b",
+          "begrip": "nauwkeurig",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "controle",
+            "neutraal",
+            "waarneming",
+            "wetenschap"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T12:58:14.942509+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T07:22:05.109428+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T12:58:11.532543+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T12:58:16.026055+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T12:58:16.050499+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9e77df87",
+      "begrip": "Bril",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bril is een hulpmiddel met glazen dat voor de ogen wordt gedragen om beter te kunnen zien of de ogen te beschermen.",
+        "laag2": "Een bril bestaat meestal uit een montuur en twee glazen. De glazen kunnen het zicht verbeteren, beschermen tegen licht of worden gebruikt als onderdeel van een bepaalde stijl.",
+        "laag3": "Een bril wordt op de neus en achter de oren gedragen. De glazen kunnen een sterkte hebben die helpt om scherp te zien. Er zijn verschillende soorten brillen, zoals een gewone bril, leesbril, zonnebril, veiligheidsbril en sportbril. Een bril kan worden gebruikt om het zicht te ondersteunen, de ogen te beschermen of fel licht te verminderen. De vorm, het materiaal en de functie kunnen verschillen.",
+        "laag4": "Binnen Spark kan een bril worden herkend als een voorwerp dat wordt gebruikt om beter te zien, de ogen te beschermen of licht te verminderen. Wanneer een gebruiker zegt “Ik heb mijn bril nodig”, kan Spark begrijpen dat de gebruiker een bril gebruikt om goed te kunnen zien. De context bepaalt of het gaat om een gewone bril, leesbril, zonnebril, veiligheidsbril of een andere soort bril."
+      },
+      "ws5": {
+        "wie": "Mensen die een bril gebruiken om beter te zien, hun ogen te beschermen of licht te verminderen.",
+        "wat": "Een hulpmiddel met glazen en een montuur dat voor de ogen wordt gedragen.",
+        "wanneer": "",
+        "waar": "Op de neus en voor de ogen, bij mensen thuis, op school, op het werk, buiten en tijdens verschillende activiteiten.",
+        "waarom": "Om beter of scherper te kunnen zien, de ogen te beschermen of licht te verminderen.",
+        "hoe": "Door de bril op de neus te plaatsen, waarbij het montuur de glazen voor de ogen houdt."
+      },
+      "tags": [
+        "bril",
+        "brillen",
+        "glas",
+        "glazen",
+        "montuur",
+        "ogen",
+        "zien",
+        "zicht",
+        "scherp-zien",
+        "leesbril",
+        "zonnebril",
+        "veiligheidsbril",
+        "sportbril",
+        "bescherming",
+        "licht",
+        "hulpmiddel",
+        "voorwerp",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T12:59:22.423070+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-eedd2c4d",
+      "begrip": "bureau",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bureau is een meubel waarop iemand kan werken, schrijven, leren of een computer kan gebruiken.",
+        "laag2": "Een bureau heeft meestal een plat werkblad en kan lades of andere opbergruimte hebben. Een bureau wordt vaak gebruikt om spullen overzichtelijk neer te zetten en werkzaamheden uit te voeren.",
+        "laag3": "Een bureau is een werkmeubel dat wordt gebruikt voor activiteiten zoals schrijven, tekenen, studeren, administratief werk en computergebruik. Op een bureau kunnen bijvoorbeeld een computer, beeldscherm, toetsenbord, boeken, papieren of andere hulpmiddelen staan. Bureaus verschillen in grootte, vorm, materiaal en functie. Sommige bureaus zijn in hoogte verstelbaar of hebben ingebouwde opbergruimte.\n\nHet woord bureau kan ook een organisatie, afdeling of kantoor aanduiden. Bijvoorbeeld een reisbureau, uitzendbureau of onderzoeksbureau. De betekenis wordt bepaald door de context.",
+        "laag4": "Binnen Spark kan bureau verwijzen naar een fysiek werkmeubel of naar een organisatie of afdeling. Wanneer een gebruiker zegt “Mijn computer staat op het bureau”, begrijpt Spark dat het om een meubel gaat. Bij “Ik heb contact opgenomen met het uitzendbureau” begrijpt Spark dat bureau een organisatie of dienst betekent. Spark gebruikt de zin en de eerdere context om de juiste betekenis te bepalen."
+      },
+      "ws5": {
+        "wie": "Mensen die werken, leren, schrijven, studeren of een computer gebruiken.",
+        "wat": "Een meubel met een werkblad waarop mensen kunnen werken of spullen kunnen plaatsen. Bureau kan ook een organisatie, afdeling of kantoor betekenen.",
+        "wanneer": "",
+        "waar": "Thuis, op school, op kantoor, in een werkruimte of binnen een organisatie.",
+        "waarom": "Om een overzichtelijke en geschikte plek te bieden voor werk, studie, administratie of computergebruik.",
+        "hoe": "Door een bureau als werkoppervlak te gebruiken en benodigde materialen of apparatuur erop te plaatsen."
+      },
+      "tags": [
+        "bureau",
+        "bureaus",
+        "meubel",
+        "werkplek",
+        "werkblad",
+        "tafel",
+        "kantoor",
+        "thuiswerken",
+        "studeren",
+        "schrijven",
+        "computer",
+        "beeldscherm",
+        "toetsenbord",
+        "lades",
+        "opbergruimte",
+        "organisatie",
+        "afdeling",
+        "dienst",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T13:05:15.242993+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-9f8f9d0c",
+      "begrip": "dorp",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een dorp is een kleine woonplaats waar mensen wonen, werken en samenleven.",
+        "laag2": "Een dorp bestaat uit woningen, wegen en voorzieningen. Een dorp is meestal kleiner dan een stad en heeft vaak een overzichtelijke gemeenschap.",
+        "laag3": "In een dorp wonen mensen dicht bij elkaar en kennen inwoners elkaar vaak. Dorpen kunnen verschillen in grootte, aantal inwoners en beschikbare voorzieningen. Sommige dorpen hebben winkels, scholen, sportverenigingen, een kerk of andere ontmoetingsplaatsen. Andere dorpen hebben minder voorzieningen en zijn voor bepaalde diensten afhankelijk van een nabijgelegen stad of groter dorp. Een dorp kan een eigen geschiedenis, cultuur en identiteit hebben.",
+        "laag4": "Binnen Spark helpt het onderwerp dorp om informatie over een woonplaats, gemeenschap en lokale omgeving te begrijpen. Wanneer een gebruiker over een dorp spreekt, kan Spark herkennen dat het gaat om een plaats waar mensen wonen en samenleven. Spark kan de context gebruiken om informatie te verbinden met inwoners, voorzieningen, locaties, gebeurtenissen en de identiteit van het dorp."
+      },
+      "ws5": {
+        "wie": "De inwoners van het dorp en mensen die er werken, wonen of op bezoek komen.",
+        "wat": "Een kleine woonplaats met woningen, inwoners en verschillende voorzieningen.",
+        "wanneer": "",
+        "waar": "In een landelijke, dorpsachtige of stedelijke omgeving, vaak buiten grote steden.",
+        "waarom": "Om mensen een plek te bieden om te wonen, samen te leven, te werken en deel uit te maken van een gemeenschap.",
+        "hoe": "Door woningen, wegen, voorzieningen, organisaties en ontmoetingsplaatsen te ontwikkelen en te onderhouden."
+      },
+      "tags": [
+        "dorp",
+        "dorpen",
+        "woonplaats",
+        "inwoners",
+        "gemeenschap",
+        "wonen",
+        "samenleven",
+        "woningen",
+        "voorzieningen",
+        "wegen",
+        "winkels",
+        "school",
+        "vereniging",
+        "ontmoeting",
+        "geschiedenis",
+        "cultuur",
+        "identiteit",
+        "plaats",
+        "omgeving"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T13:11:19.421130+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-a50166b7",
+      "begrip": "beheermogelijkheden",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Beheermogelijkheden zijn de functies en handelingen waarmee iemand onderdelen kan beheren.",
+        "laag2": "Beheermogelijkheden geven een gebruiker de mogelijkheid om informatie, instellingen, gebruikers of andere onderdelen te bekijken, aanpassen, organiseren of controleren.",
+        "laag3": "Beheermogelijkheden verschillen per systeem, rol en toegangsrecht. Een beheerder kan bijvoorbeeld gebruikers beheren, gegevens aanpassen, instellingen wijzigen, inhoud organiseren of bepaalde functies controleren. Niet iedere gebruiker heeft dezelfde beheermogelijkheden. Welke mogelijkheden beschikbaar zijn, hangt af van de toegewezen rol, rechten en voorwaarden.",
+        "laag4": "Binnen Spark bepalen beheermogelijkheden welke onderdelen een gebruiker mag bekijken, aanpassen of beheren. De beschikbare mogelijkheden zijn gekoppeld aan de gradatie, rol en toegangsrechten van de gebruiker. Een beheerder kan meer beheermogelijkheden hebben dan een gewone gebruiker, maar niet iedere beheerder hoeft toegang te hebben tot alle onderdelen of gegevens.\n\nBeheermogelijkheden kunnen betrekking hebben op gebruikers, gradaties, toegangsrechten, instellingen, kenniskaarten, modules, inhoud en andere onderdelen van Spark. Spark controleert welke mogelijkheden beschikbaar zijn voordat een gebruiker een beheerhandeling uitvoert."
+      },
+      "ws5": {
+        "wie": "Beheerders, gebruikers en systemen met toegewezen beheertaken of toegangsrechten.",
+        "wat": "Functies en mogelijkheden waarmee onderdelen kunnen worden bekeken, aangepast, georganiseerd of gecontroleerd.",
+        "wanneer": "",
+        "waar": "In systemen, organisaties, websites, applicaties en digitale omgevingen.",
+        "waarom": "Om onderdelen overzichtelijk, georganiseerd, veilig en goed werkend te houden.",
+        "hoe": "Door beheermogelijkheden toe te wijzen op basis van rollen, gradaties, toegangsrechten en voorwaarden."
+      },
+      "tags": [
+        "beheermogelijkheden",
+        "beheer",
+        "beheren",
+        "beheerder",
+        "beheertaken",
+        "beheerfuncties",
+        "gebruikersbeheer",
+        "toegangsrechten",
+        "rechten",
+        "bevoegdheden",
+        "rol",
+        "gradatie",
+        "instellingen",
+        "gebruikers",
+        "gegevens",
+        "modules",
+        "kenniskaarten",
+        "spark",
+        "systeem",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T13:15:59.131861+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-361005df",
+      "begrip": "kennisbankkaarten",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kennisbankkaarten zijn kaarten waarin informatie over een onderwerp overzichtelijk wordt opgeslagen.",
+        "laag2": "Een kennisbankkaart bevat informatie die stap voor stap wordt uitgelegd. De kaarten helpen om kennis te bewaren, terug te vinden, te begrijpen en met andere onderwerpen te verbinden.",
+        "laag3": "Kennisbankkaarten verdelen kennis over meerdere lagen. Laag 1 geeft een korte en eenvoudige uitleg. Laag 2 geeft meer informatie en verduidelijking. Laag 3 legt het onderwerp uitgebreider uit en beschrijft belangrijke kenmerken, betekenissen of verbanden. Laag 4 legt uit wat het onderwerp specifiek betekent of doet binnen Spark.\n\nKennisbankkaarten kunnen gaan over woorden, personen, voorwerpen, handelingen, gevoelens, systemen, functies, gebeurtenissen en andere onderwerpen. Door tags toe te voegen kunnen kaarten worden gevonden en met vergelijkbare onderwerpen worden verbonden.",
+        "laag4": "Binnen Spark vormen kennisbankkaarten een belangrijk onderdeel van de kennisbank. Spark gebruikt de kaarten om informatie te begrijpen, onderwerpen te herkennen en verbanden tussen kennis op te bouwen.\n\nEen kennisbankkaart wordt ingevuld met een onderwerp, een lade, vier kennislagen, een 5W+H uitleg en tags. De lagen bouwen de uitleg stap voor stap op. De eerste lagen geven algemene kennis en de vierde laag beschrijft de betekenis, functie of toepassing binnen Spark.\n\nKennisbankkaarten kunnen worden aangemaakt, ingevuld, aangepast, uitgebreid, gecontroleerd en met andere kaarten verbonden. Door kennisbankkaarten te gebruiken kan Spark informatie gestructureerd bewaren en later opnieuw gebruiken."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders en Spark gebruiken kennisbankkaarten om kennis op te slaan, te ontwikkelen en te gebruiken.",
+        "wat": "Kaarten waarin kennis over een onderwerp overzichtelijk en in meerdere lagen wordt opgeslagen.",
+        "wanneer": "Wanneer informatie moet worden toegevoegd, uitgelegd, bewaard, aangepast of met andere kennis verbonden.",
+        "waar": "In de kennisbank van Spark.",
+        "waarom": "Om kennis overzichtelijk te bewaren, beter te begrijpen, gemakkelijk terug te vinden en met andere onderwerpen te verbinden.",
+        "hoe": "Door een onderwerp te kiezen en de kaart in te vullen met vier lagen, een 5W+H uitleg en relevante tags."
+      },
+      "tags": [
+        "kennisbankkaarten",
+        "kennisbankkaart",
+        "kenniskaart",
+        "kenniskaarten",
+        "kb kaart",
+        "kb kaarten",
+        "kennisbank",
+        "Spark",
+        "informatie",
+        "kennis",
+        "onderwerp",
+        "lagen",
+        "laag 1",
+        "laag 2",
+        "laag 3",
+        "laag 4",
+        "5W+H",
+        "tags",
+        "verbinden",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0a96599b",
+          "begrip": "kenniskaarten",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "kennisbank",
+            "kenniskaart",
+            "kenniskaarten",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3699c6a2",
+          "begrip": "kennisbank",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis",
+            "kennisbank",
+            "kenniskaart"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c1ee5231",
+          "begrip": "kenniskaart",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis",
+            "kenniskaart",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "kennisbank",
+            "kenniskaart",
+            "neutraal",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b29a7ab5",
+          "begrip": "kb-kaarten",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "kennis",
+            "kennisbank",
+            "kenniskaart",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b7cb703",
+          "begrip": "zo dat waren weer paar kenniskaarten",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis",
+            "kenniskaart",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9780a2d9",
+          "begrip": "Hoeveel kenniskaarten heb jij",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennisbank",
+            "kenniskaart",
+            "neutraal",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ab49447e",
+          "begrip": "onderwerp",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis",
+            "neutraal",
+            "onderwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis",
+            "neutraal",
+            "onderwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8c7a9dbb",
+          "begrip": "onderwerpen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "kennisbank",
+            "neutraal",
+            "onderwerp"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T13:35:11.650247+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T13:28:10.484458+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T13:35:07.421175+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T13:35:12.768154+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T13:35:12.792317+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f2567b9c",
+      "begrip": "updatemechanismen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Updatemechanismen zijn manieren waarop informatie, gegevens of systemen worden bijgewerkt.",
+        "laag2": "Updatemechanismen bepalen hoe een update wordt uitgevoerd. Ze zorgen ervoor dat nieuwe informatie, wijzigingen, verbeteringen of functies op de juiste manier worden toegevoegd of verwerkt.",
+        "laag3": "Een updatemechanisme bestaat uit regels en processen die bepalen wanneer, hoe en welke onderdelen worden bijgewerkt. Een update kan automatisch of handmatig worden uitgevoerd. Sommige updates veranderen alleen een klein onderdeel, terwijl andere meerdere onderdelen of een volledig systeem vernieuwen.\n\nUpdatemechanismen kunnen controleren of nieuwe informatie beschikbaar is, welke versie momenteel wordt gebruikt en of een wijziging veilig kan worden toegepast. Ze kunnen gegevens aanpassen, nieuwe functies toevoegen, fouten herstellen of verouderde informatie vervangen. Een goed updatemechanisme voorkomt dat belangrijke informatie onbedoeld verloren gaat.",
+        "laag4": "Binnen Spark zorgen updatemechanismen ervoor dat kennis, kennisbankkaarten, gegevens, instellingen, functies en andere onderdelen gecontroleerd en bijgewerkt kunnen worden. Spark kan een update uitvoeren op verzoek van een gebruiker of wanneer een systeemproces een wijziging verwerkt.\n\nEen updatemechanisme moet herkennen wat de huidige informatie is, welke wijziging wordt gevraagd en welke onderdelen behouden moeten blijven. Bij het updaten van een kennisbankkaart kunnen bijvoorbeeld alleen bepaalde lagen, tags of gegevens worden aangepast, terwijl de rest van de kaart behouden blijft.\n\nUpdatemechanismen helpen Spark om wijzigingen gecontroleerd uit te voeren, bestaande informatie te behouden en de actuele toestand van onderdelen te beheren."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders, ontwikkelaars en systemen die informatie, gegevens of onderdelen bijwerken.",
+        "wat": "Manieren en processen waarmee informatie, gegevens, functies of systemen worden gecontroleerd en bijgewerkt.",
+        "wanneer": "Wanneer nieuwe informatie beschikbaar is, iets verandert, een fout moet worden hersteld of een onderdeel moet worden vernieuwd.",
+        "waar": "In systemen, applicaties, databases, kennisbanken, kennisbankkaarten en onderdelen van Spark.",
+        "waarom": "Om informatie actueel te houden, fouten te herstellen, verbeteringen toe te voegen en systemen goed te laten werken.",
+        "hoe": "Door de huidige toestand te controleren, wijzigingen te verwerken en alleen de benodigde onderdelen aan te passen, toe te voegen, te verwijderen of te vervangen."
+      },
+      "tags": [
+        "updatemechanismen",
+        "updatemechanisme",
+        "update",
+        "updaten",
+        "bijwerken",
+        "bijgewerkt",
+        "vernieuwen",
+        "vernieuwd",
+        "actualiseren",
+        "wijziging",
+        "wijzigen",
+        "aanpassen",
+        "aanpassing",
+        "gegevens",
+        "informatie",
+        "systeem",
+        "functies",
+        "kennisbank",
+        "kennisbankkaarten",
+        "Spark",
+        "context",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5536cbaf",
+          "begrip": "updaten",
+          "lade": "doen",
+          "overlap": 15,
+          "shared_tags": [
+            "aanpassen",
+            "actualiseren",
+            "bijgewerkt",
+            "bijwerken",
+            "context"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0346ff68",
+          "begrip": "bijgewerkt",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "aanpassen",
+            "actualiseren",
+            "bijgewerkt",
+            "bijwerken",
+            "gegevens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d0ca25db",
+          "begrip": "wijziging",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "aanpassen",
+            "aanpassing",
+            "context",
+            "gegevens",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-361005df",
+          "begrip": "kennisbankkaarten",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennisbank",
+            "kennisbankkaarten",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2fb39df9",
+          "begrip": "gewijzigd",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "aanpassen",
+            "aanpassing",
+            "neutraal",
+            "update",
+            "wijzigen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gegevens",
+            "informatie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gegevens",
+            "informatie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9780a2d9",
+          "begrip": "Hoeveel kenniskaarten heb jij",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennisbank",
+            "neutraal",
+            "spark",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9eee697c",
+          "begrip": "bijstellen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassen",
+            "aanpassing",
+            "context",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-85d2b504",
+          "begrip": "kaarten",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gegevens",
+            "informatie",
+            "neutraal",
+            "spark"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T13:36:37.465808+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T13:28:10.579497+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T13:36:30.028626+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T13:36:38.572085+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T13:36:38.598865+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 15
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e9ee669e",
+      "begrip": "hoofdstuk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een hoofdstuk is een onderdeel van een boek, verhaal, document of andere tekst.",
+        "laag2": "Een hoofdstuk verdeelt een grotere tekst in overzichtelijke delen. Elk hoofdstuk heeft vaak een eigen onderwerp, gebeurtenis, fase of onderdeel van het geheel.",
+        "laag3": "Hoofdstukken helpen om informatie, verhalen en onderwerpen logisch te ordenen. Een boek kan uit meerdere hoofdstukken bestaan die elkaar opvolgen. Een hoofdstuk kan een nieuw onderwerp beginnen, een gebeurtenis verder vertellen of extra uitleg geven.\n\nHoofdstukken kunnen kort of lang zijn. Ze hebben vaak een nummer of titel, zodat lezers gemakkelijk kunnen zien waar een onderdeel begint en eindigt. De inhoud van verschillende hoofdstukken kan met elkaar verbonden zijn, maar ieder hoofdstuk kan ook een eigen onderwerp of doel hebben.",
+        "laag4": "Binnen Spark kan een hoofdstuk worden gebruikt om grotere informatie, documenten, verhalen, projecten of kennis overzichtelijk in delen te verdelen. Wanneer een gebruiker zegt “Ga naar het volgende hoofdstuk”, begrijpt Spark dat er wordt verwezen naar een volgend onderdeel binnen een grotere structuur.\n\nSpark kan hoofdstukken gebruiken om informatie stap voor stap te organiseren en de samenhang tussen verschillende onderdelen te behouden. De context bepaalt of hoofdstuk verwijst naar een boek, verhaal, document, kennisbank of een onderdeel binnen Spark."
+      },
+      "ws5": {
+        "wie": "Schrijvers, lezers, leerlingen, gebruikers en systemen die informatie of verhalen indelen.",
+        "wat": "Een afzonderlijk onderdeel van een groter boek, verhaal, document of andere tekst.",
+        "wanneer": "",
+        "waar": "In boeken, verhalen, documenten, handleidingen, verslagen, lesmateriaal en digitale systemen.",
+        "waarom": "Om informatie en gebeurtenissen overzichtelijk, logisch en stap voor stap te ordenen.",
+        "hoe": "Door een grotere tekst of hoeveelheid informatie op te delen in afzonderlijke delen met een eigen nummer, titel, onderwerp of inhoud."
+      },
+      "tags": [
+        "hoofdstuk",
+        "hoofdstukken",
+        "boek",
+        "verhaal",
+        "tekst",
+        "document",
+        "onderdeel",
+        "indeling",
+        "structuur",
+        "onderwerp",
+        "titel",
+        "nummer",
+        "informatie",
+        "uitleg",
+        "gebeurtenis",
+        "fase",
+        "volgorde",
+        "samenhang",
+        "kennisbank",
+        "spark",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T14:19:39.381685+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-af21dab2",
+      "begrip": "passage",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een passage is een gedeelte van een tekst, boek, verhaal of gesprek.",
+        "laag2": "Een passage is een afgebakend stuk informatie dat onderdeel is van een groter geheel. Een passage kan uit één zin, meerdere zinnen of een alinea bestaan.",
+        "laag3": "Een passage komt vaak voor in boeken, verhalen, artikelen, documenten en andere teksten. Een passage kan belangrijke informatie, een gebeurtenis, uitleg, beschrijving of gedachte bevatten. De betekenis van een passage wordt vaak duidelijker door te kijken naar de tekst ervoor en erna.\n\nHet woord passage kan ook een doorgang of route betekenen. In “De passage door de bergen was moeilijk” verwijst passage naar een doorgang. De betekenis wordt bepaald door de zin en de context.",
+        "laag4": "Binnen Spark kan een passage verwijzen naar een specifiek gedeelte van een gesprek, document, kennisbankkaart of andere tekst. Wanneer een gebruiker zegt “Lees deze passage”, begrijpt Spark dat een bepaald tekstgedeelte moet worden bekeken of uitgelegd.\n\nSpark kan een passage gebruiken om informatie gericht te herkennen, te analyseren of met andere informatie te verbinden. Daarbij is de omliggende context belangrijk, omdat de betekenis van een passage kan afhangen van wat ervoor en erna staat."
+      },
+      "ws5": {
+        "wie": "Schrijvers, lezers, gebruikers en systemen die een gedeelte van een tekst, gesprek of document gebruiken.",
+        "wat": "Een afgebakend gedeelte van een tekst, verhaal, gesprek of document. Passage kan ook een doorgang of route betekenen.",
+        "wanneer": "Wanneer naar een specifiek deel van een groter geheel wordt verwezen of wanneer iemand een doorgang beschrijft.",
+        "waar": "In boeken, verhalen, artikelen, documenten, gesprekken, kennisbankkaarten en routes.",
+        "waarom": "Om een specifiek deel van informatie te benoemen, te bespreken of te gebruiken.",
+        "hoe": "Door een gedeelte uit een groter geheel te selecteren, te lezen, te bespreken of te analyseren."
+      },
+      "tags": [
+        "passage",
+        "passages",
+        "tekstgedeelte",
+        "tekst",
+        "alinea",
+        "zin",
+        "boek",
+        "verhaal",
+        "artikel",
+        "document",
+        "gesprek",
+        "informatie",
+        "uitleg",
+        "beschrijving",
+        "context",
+        "doorgang",
+        "route",
+        "onderdeel",
+        "kennisbank",
+        "Spark",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e9ee669e",
+          "begrip": "hoofdstuk",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "boek",
+            "context",
+            "document",
+            "informatie",
+            "kennisbank"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-013e17e0",
+          "begrip": "inhoud",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "beschrijving",
+            "context",
+            "document",
+            "gesprek",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gesprek",
+            "informatie",
+            "tekst",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "neutraal",
+            "tekst",
+            "zin"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gesprek",
+            "informatie",
+            "neutraal",
+            "zin"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beschrijving",
+            "context",
+            "informatie",
+            "neutraal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5113a6b4",
+          "begrip": "vertelde",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "gesprek",
+            "informatie",
+            "neutraal",
+            "uitleg",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4aa369ae",
+          "begrip": "ingevulde",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "document",
+            "informatie",
+            "neutraal",
+            "tekst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0a96599b",
+          "begrip": "kenniskaarten",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "document",
+            "kennisbank",
+            "neutraal",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7e4aceb9",
+          "begrip": "detail",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "neutraal",
+            "onderdeel",
+            "spark"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T14:23:56.640570+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T13:49:51.429997+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T14:23:49.368891+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T14:23:57.747032+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T14:23:57.771867+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5e77d289",
+      "begrip": "wonderland",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Wonderland betekent wonderland of wonderlijke wereld en is een fantasiewereld waarin bijzondere en ongewone dingen gebeuren.",
+        "laag2": "Wonderland is vooral bekend als de fantasiewereld uit het verhaal Alice in Wonderland. Het is een vreemde en magische wereld waarin de gewone regels niet altijd gelden.",
+        "laag3": "Wonderland is een Engelse naam die letterlijk kan worden vertaald als wonderland of wonderlijke wereld. Het woord wordt gebruikt voor een fantasierijke plaats vol bijzondere, onverwachte of magische gebeurtenissen.\n\nIn Alice in Wonderland komt Alice terecht in een vreemde wereld met bijzondere personages, zoals de Mad Hatter, de Cheshire Cat en de Queen of Hearts. In Wonderland kunnen tijd, logica, taal en regels anders werken dan in de gewone wereld. Daardoor staat Wonderland vaak symbool voor nieuwsgierigheid, verbeelding, avontuur en het ontdekken van onbekende mogelijkheden.\n\nWonderland wordt ook gebruikt als naam voor creatieve werelden, spellen, verhalen, evenementen en fantasierijke omgevingen.",
+        "laag4": "Binnen Spark kan Wonderland worden herkend als een fantasiewereld, een verwijzing naar Alice in Wonderland of een creatieve omgeving. Wanneer een gebruiker Wonderland noemt, gebruikt Spark de context om te bepalen of het gaat over het verhaal, een personage, een spel, een plaats of een zelfbedachte wereld.\n\nIn een creatieve context kan Wonderland binnen Spark symbool staan voor een plek waar nieuwsgierigheid, verbeelding en ontdekking centraal staan. Het kan een omgeving zijn waarin gebruikers nieuwe ideeën onderzoeken, onverwachte verbanden ontdekken en op een andere manier naar bekende onderwerpen kijken."
+      },
+      "ws5": {
+        "wie": "Alice, de bijzondere personages uit Wonderland en mensen die verhalen, spellen of fantasiewerelden maken of beleven.",
+        "wat": "Een fantasiewereld waarin bijzondere, onverwachte en soms magische gebeurtenissen plaatsvinden.",
+        "wanneer": "Wanneer wordt gesproken over Alice in Wonderland, fantasie, verbeelding, avontuur of een wonderlijke wereld.",
+        "waar": "In het verhaal Alice in Wonderland en in boeken, films, spellen, kunst en creatieve werelden.",
+        "waarom": "Om een wereld te creëren waarin fantasie, nieuwsgierigheid en onverwachte mogelijkheden kunnen worden onderzocht.",
+        "hoe": "Door bekende regels en verwachtingen te veranderen en een wereld te vullen met bijzondere plaatsen, personages, gebeurtenissen en mogelijkheden."
+      },
+      "tags": [
+        "wonderland",
+        "wonderlijke wereld",
+        "fantasiewereld",
+        "Alice",
+        "Alice in Wonderland",
+        "mad hatter",
+        "cheshire cat",
+        "queen of hearts",
+        "fantasie",
+        "verbeelding",
+        "nieuwsgierigheid",
+        "avontuur",
+        "magie",
+        "bijzonder",
+        "onverwacht",
+        "creativiteit",
+        "ontdekken",
+        "verhaal",
+        "boek",
+        "film",
+        "game",
+        "context",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-aab8e7c9",
+          "begrip": "hatter",
+          "lade": "spreken",
+          "overlap": 11,
+          "shared_tags": [
+            "alice",
+            "bijzonder",
+            "boek",
+            "context",
+            "creativiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d9743a9",
+          "begrip": "Alice",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "alice",
+            "avontuur",
+            "context",
+            "nieuwsgierigheid",
+            "verbeelding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-87326e60",
+          "begrip": "fictie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "fantasie",
+            "neutraal",
+            "verbeelding",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-44dea6c8",
+          "begrip": "speels",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "creativiteit",
+            "fantasie",
+            "nieuwsgierigheid",
+            "verbeelding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c7aacfc7",
+          "begrip": "nieuwsgierigheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "creativiteit",
+            "nieuwsgierigheid",
+            "ontdekken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f1d5db2f",
+          "begrip": "Hé Spark, stel je eens voor?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "creativiteit",
+            "neutraal",
+            "verbeelding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f97c167",
+          "begrip": "stel",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "creativiteit",
+            "neutraal",
+            "verbeelding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b2beb9a",
+          "begrip": "ontdekken",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "nieuwsgierigheid",
+            "ontdekken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-61ed6e32",
+          "begrip": "dragon",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "avontuur",
+            "fantasie",
+            "magie",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d14fa2d8",
+          "begrip": "mythisch",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "fantasie",
+            "magie",
+            "neutraal",
+            "verhaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-08-02T13:49:49.536925+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T14:29:55.697242+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "we zijn goed. dus je zag wel alice in wonderland txt",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T14:29:48.900254+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T14:29:56.993122+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T14:29:57.026318+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-87c89e99",
+      "begrip": "extra",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Extra betekent: iets dat meer is dan normaal, verwacht of al aanwezig.",
+        "laag2": "Iets is extra wanneer het wordt toegevoegd boven op wat er al is. Extra kan gaan over een hoeveelheid, hulp, tijd, geld, informatie, aandacht of een aanvullende mogelijkheid.",
+        "laag3": "Het woord extra geeft aan dat iets aanvullend of bijkomend is. Het kan betekenen dat iemand meer krijgt, doet of nodig heeft dan gebruikelijk. Bijvoorbeeld: “Ik heb extra hulp nodig” betekent dat de gewone hulp niet voldoende is. “Spark krijgt een extra functie” betekent dat er een aanvullende functie wordt toegevoegd naast de functies die al bestaan.",
+        "laag4": "Extra beschrijft een toevoeging die boven op een bestaande basis komt. De betekenis hangt af van de context. Extra kan verwijzen naar een grotere hoeveelheid, een aanvullende voorziening, meer inspanning of een bijkomend onderdeel. Iets extra’s kan vrijwillig worden toegevoegd, nodig zijn om een doel te bereiken of worden gegeven als voordeel. Extra betekent niet automatisch beter of noodzakelijk; het geeft vooral aan dat iets boven de normale, verwachte of bestaande hoeveelheid komt."
+      },
+      "ws5": {
+        "wie": "een persoon, groep, organisatie of systeem dat iets toevoegt, geeft, ontvangt of nodig heeft.",
+        "wat": "een aanvullende hoeveelheid, hulp, informatie, functie, tijd of mogelijkheid.",
+        "wanneer": "wanneer de bestaande hoeveelheid niet voldoende is of wanneer iets wordt toegevoegd.",
+        "waar": "bij een bestaande situatie, taak, voorziening, systeem of hoeveelheid.",
+        "waarom": "om meer ondersteuning, mogelijkheden, informatie of capaciteit te bieden.",
+        "hoe": "door iets toe te voegen boven op wat al aanwezig of gebruikelijk is."
+      },
+      "tags": [
+        "extra",
+        "aanvullend",
+        "toevoeging",
+        "bijkomend",
+        "meer",
+        "aanvulling",
+        "additioneel",
+        "bijkomstig",
+        "extra hulp",
+        "extra tijd",
+        "extra informatie",
+        "extra functie",
+        "hoeveelheid",
+        "uitbreiding",
+        "toevoeging"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d612974",
+          "begrip": "plus",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "extra",
+            "hoeveelheid",
+            "meer",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ffb71673",
+          "begrip": "aanvullend",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aanvullend",
+            "extra",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2c948a03",
+          "begrip": "toevoeging",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aanvulling",
+            "extra",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b8cd194f",
+          "begrip": "aanvulling",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5ce723b6",
+          "begrip": "Toegevoegd",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e6d0c00d",
+          "begrip": "accessoire",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc394916",
+          "begrip": "Bovendien",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-764bc487",
+          "begrip": "Ook",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a50d668a",
+          "begrip": "Zoveel",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "hoeveelheid",
+            "meer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9f591af2",
+          "begrip": "aanvullen",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "aanvulling",
+            "uitbreiding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T06:46:55.020545+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T19:25:41.931808+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-03T06:46:44.940974+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-03T06:46:56.346278+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-03T06:46:56.368148+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4a459e10",
+      "begrip": "beschreven",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Beschreven betekent: iets is met woorden uitgelegd of weergegeven.",
+        "laag2": "Iets is beschreven wanneer informatie over een persoon, situatie, gebeurtenis, voorwerp of onderwerp met woorden is verteld of vastgelegd.",
+        "laag3": "Beschreven is de voltooide vorm van het werkwoord beschrijven. Bij een beschrijving worden kenmerken, eigenschappen, gebeurtenissen of omstandigheden met woorden duidelijk gemaakt. Een beschrijving kan mondeling worden verteld of schriftelijk worden vastgelegd. Bijvoorbeeld: “De werking van Spark is beschreven” betekent dat is uitgelegd hoe Spark werkt.",
+        "laag4": "Beschreven betekent dat informatie met taal is weergegeven, zodat anderen een persoon, voorwerp, situatie, gebeurtenis, proces of idee kunnen begrijpen. Een beschrijving kan kort of uitgebreid zijn en kan feiten, kenmerken, eigenschappen, ervaringen of waarnemingen bevatten. De kwaliteit van een beschrijving hangt af van hoe duidelijk, volledig en passend de informatie is. Binnen een document of systeem kan iets worden beschreven om kennis vast te leggen, een werking uit te leggen, een situatie te verduidelijken of informatie later terug te kunnen vinden. Een beschrijving is niet altijd volledig of objectief, omdat de inhoud afhankelijk kan zijn van wat de schrijver of verteller heeft waargenomen en gekozen om te vermelden."
+      },
+      "ws5": {
+        "wie": "een persoon, schrijver, verteller, gebruiker of systeem.",
+        "wat": "informatie, kenmerken, gebeurtenissen, situaties of processen met woorden weergeven.",
+        "wanneer": "wanneer iets wordt uitgelegd, vastgelegd of duidelijk gemaakt.",
+        "waar": "in een gesprek, verslag, document, boek, kenniskaart of digitaal systeem.",
+        "waarom": "om informatie begrijpelijk, duidelijk en terugvindbaar te maken.",
+        "hoe": "door woorden te gebruiken om kenmerken, eigenschappen, ervaringen of gebeurtenissen uit te leggen."
+      },
+      "tags": [
+        "beschreven",
+        "beschrijven",
+        "beschrijving",
+        "uitleg",
+        "weergegeven",
+        "vastgelegd",
+        "woorden",
+        "informatie",
+        "kenmerken",
+        "eigenschappen",
+        "situatie",
+        "gebeurtenis",
+        "proces",
+        "document",
+        "verslag",
+        "uitleggen",
+        "duidelijk maken"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijving",
+            "eigenschappen",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6e9d3b4a",
+          "begrip": "verklaring",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijving",
+            "document",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-43ce2ecd",
+          "begrip": "kenmerken",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijving",
+            "eigenschappen",
+            "informatie",
+            "kenmerken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e9ee669e",
+          "begrip": "hoofdstuk",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "document",
+            "gebeurtenis",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-af21dab2",
+          "begrip": "passage",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijving",
+            "document",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0b1bc109",
+          "begrip": "zeggen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "uitleggen",
+            "woorden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "uitleggen",
+            "woorden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-beddcba2",
+          "begrip": "Beschrijft",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "beschrijven",
+            "informatie",
+            "uitleggen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f740c66",
+          "begrip": "Uitleggen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "uitleg",
+            "uitleggen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1364c6a2",
+          "begrip": "voorbeeld",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "situatie",
+            "uitleg"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T06:50:23.007701+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-02T15:22:27.654033+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-03T06:50:20.003781+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-03T06:50:24.355857+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-03T06:50:24.379862+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0245a92a",
+      "begrip": "start",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Start betekent: het begin van iets.",
+        "laag2": "Een start is het moment waarop een activiteit, proces, gebeurtenis, taak of ontwikkeling begint. Het kan ook betekenen dat iemand of een systeem iets in werking zet.",
+        "laag3": "Het woord start kan een zelfstandig naamwoord of een werkwoord zijn. Als zelfstandig naamwoord verwijst het naar het beginpunt, zoals: “De start van het project.” Als werkwoord betekent het dat iemand of iets begint of wordt ingeschakeld, zoals: “Spark start het programma.” Een start kan gepland, onverwacht, handmatig of automatisch plaatsvinden.",
+        "laag4": "Een start markeert de overgang van een situatie waarin iets nog niet actief is naar een situatie waarin een activiteit, proces of ontwikkeling begint. Een start kan betrekking hebben op een gesprek, reis, project, taak, programma, machine, gebeurtenis of nieuwe fase. Vaak gaat aan een start een voorbereiding, beslissing of opdracht vooraf. Na de start volgen meestal verdere stappen, handelingen of ontwikkelingen. Binnen een digitaal systeem kan een start betekenen dat een programma, dienst, proces of functie wordt geactiveerd en begint te werken."
+      },
+      "ws5": {
+        "wie": "een persoon, groep, organisatie, systeem, programma of apparaat.",
+        "wat": "het begin van een activiteit, proces, taak, gebeurtenis of ontwikkeling.",
+        "wanneer": "op het moment dat iets begint of wordt geactiveerd.",
+        "waar": "op de plaats, binnen het systeem of in de situatie waar iets begint.",
+        "waarom": "om een doel, taak, activiteit of proces in gang te zetten.",
+        "hoe": "door een beslissing, handeling, opdracht, planning of automatische activatie."
+      },
+      "tags": [
+        "start",
+        "beginnen",
+        "begin",
+        "aanvang",
+        "opstarten",
+        "starten",
+        "activatie",
+        "activeren",
+        "eerste stap",
+        "beginpunt",
+        "proces",
+        "activiteit",
+        "taak",
+        "project",
+        "programma",
+        "systeem",
+        "in werking zetten"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T06:51:30.395935+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-99535199",
+      "begrip": "uitgebreider",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Uitgebreider betekent: met meer informatie, details of uitleg.",
+        "laag2": "Iets wordt uitgebreider wanneer het groter, vollediger of gedetailleerder wordt gemaakt. Een uitleg kan uitgebreider worden door meer informatie toe te voegen.",
+        "laag3": "Uitgebreider is de vergrotende vorm van uitgebreid. Het wordt gebruikt om aan te geven dat iets meer inhoud, onderdelen, informatie of details bevat dan eerder of dan iets anders. Bijvoorbeeld: “De beschrijving is uitgebreider gemaakt” betekent dat er meer uitleg en informatie aan de beschrijving is toegevoegd. Uitgebreider kan gaan over teksten, gesprekken, plannen, onderzoeken, systemen, functies of activiteiten.",
+        "laag4": "Uitgebreider beschrijft een toename in omvang, inhoud, diepgang of detail. Iets uitgebreider maken betekent dat bestaande informatie wordt aangevuld, verduidelijkt of verder uitgewerkt. Dit kan helpen om een onderwerp beter te begrijpen, maar meer informatie is niet altijd automatisch beter. Een uitgebreide uitleg kan minder overzichtelijk worden wanneer er onnodige of herhaalde informatie wordt toegevoegd. Daarom moet de hoeveelheid informatie passen bij het doel, de situatie en de persoon die de informatie ontvangt. Binnen Spark kan een antwoord uitgebreider worden gemaakt door meer context, voorbeelden, verbanden of uitleg toe te voegen."
+      },
+      "ws5": {
+        "wie": "een persoon, schrijver, verteller, onderzoeker of systeem.",
+        "wat": "informatie, uitleg, een beschrijving, plan, onderwerp of systeem verder uitbreiden.",
+        "wanneer": "wanneer meer uitleg, details, context of volledigheid nodig is.",
+        "waar": "in een gesprek, tekst, verslag, document, kenniskaart, plan of digitaal systeem.",
+        "waarom": "om informatie duidelijker, vollediger of beter begrijpelijk te maken.",
+        "hoe": "door relevante informatie, details, voorbeelden, context of onderdelen toe te voegen."
+      },
+      "tags": [
+        "uitgebreider",
+        "uitgebreid",
+        "uitbreiden",
+        "uitbreiding",
+        "aanvullen",
+        "toevoeging",
+        "meer informatie",
+        "details",
+        "uitleg",
+        "verdieping",
+        "vollediger",
+        "uitgebreidere uitleg",
+        "beschrijving",
+        "context",
+        "voorbeelden",
+        "uitwerken",
+        "vergroten",
+        "inhoud"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T06:53:17.465502+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-6793d0a2",
+      "begrip": "beveiligingswerk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Beveiligingswerk is werk waarbij mensen, gebouwen, terreinen, spullen of informatie worden beschermd tegen risico’s, schade of ongewenste situaties.",
+        "laag2": "Bij beveiligingswerk houdt iemand toezicht, controleert de omgeving en probeert problemen, gevaar of ongewenst gedrag te voorkomen. Een beveiligingsmedewerker kan bijvoorbeeld toezicht houden, bezoekers controleren, alarmen opvolgen of hulp inschakelen.",
+        "laag3": "Beveiligingswerk bestaat uit verschillende taken die gericht zijn op veiligheid en bescherming. Het kan plaatsvinden bij bedrijven, winkels, evenementen, gebouwen, zorginstellingen, stations of andere locaties. Een beveiligingsmedewerker observeert wat er gebeurt, herkent mogelijke risico’s en handelt volgens afspraken en procedures. Het werk kan bestaan uit toegangscontrole, surveilleren, toezicht houden, controleren, rapporteren en reageren op incidenten. Beveiligingswerk vraagt om alertheid, verantwoordelijkheidsgevoel, goede communicatie en zorgvuldig handelen.",
+        "laag4": "Beveiligingswerk is professioneel werk waarbij veiligheid wordt ondersteund door toezicht, preventie, controle en het zorgvuldig reageren op afwijkende of risicovolle situaties. Het doel is niet alleen om problemen op te lossen, maar vooral om risico’s vroeg te herkennen en incidenten te voorkomen of te beperken. De werkzaamheden kunnen verschillen per locatie en opdracht. Een beveiliger werkt vaak volgens vaste regels, veiligheidsprocedures en bevoegdheden. Daarbij is het belangrijk om rustig te blijven, situaties goed te beoordelen, respectvol te communiceren en gebeurtenissen correct te rapporteren. Beveiligingswerk kan gericht zijn op de bescherming van mensen, eigendommen, gebouwen, terreinen, informatie of de openbare orde. De beveiligingsmedewerker heeft niet automatisch dezelfde bevoegdheden als de politie en moet binnen de eigen taak, bevoegdheden en geldende regels handelen."
+      },
+      "ws5": {
+        "wie": "beveiligingsmedewerkers, beveiligers, organisaties, bezoekers en andere aanwezigen.",
+        "wat": "toezicht houden, controleren, beschermen, risico’s herkennen en reageren op incidenten.",
+        "wanneer": "tijdens werkzaamheden, openingstijden, evenementen, controles of bij een melding of incident.",
+        "waar": "bij bedrijven, winkels, evenementen, gebouwen, terreinen, zorginstellingen, stations en andere locaties.",
+        "waarom": "om mensen, eigendommen, informatie en locaties te beschermen en risico’s of incidenten te voorkomen.",
+        "hoe": "door observatie, toezicht, toegangscontrole, surveillance, communicatie, rapportage en het volgen van procedures."
+      },
+      "tags": [
+        "beveiligingswerk",
+        "beveiliging",
+        "beveiliger",
+        "beveiligingsmedewerker",
+        "veiligheid",
+        "beschermen",
+        "toezicht",
+        "controle",
+        "surveilleren",
+        "toegangscontrole",
+        "observatie",
+        "risico",
+        "preventie",
+        "incident",
+        "alarm",
+        "rapportage",
+        "procedures",
+        "communicatie",
+        "verantwoordelijkheid",
+        "gebouwen",
+        "terreinen",
+        "eigendommen"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T06:55:22.511912+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-060fda2a",
+      "begrip": "instellen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Instellen betekent: iets aanpassen of bepalen zodat het op de gewenste manier werkt.",
+        "laag2": "Bij instellen kiest of verandert iemand bepaalde waarden, opties of voorwaarden. Hierdoor werkt een apparaat, programma, systeem of andere voorziening volgens de gekozen instellingen.",
+        "laag3": "Instellen is het aanpassen van een systeem, apparaat, programma of proces aan een gewenste situatie. Iemand kan bijvoorbeeld een tijd, temperatuur, taal, volume, voorkeur of beveiligingsoptie instellen. De gekozen instelling bepaalt hoe iets reageert of functioneert. Instellingen kunnen handmatig worden gekozen, automatisch worden aangepast of later weer worden veranderd.",
+        "laag4": "Instellen is een proces waarbij eigenschappen, waarden, regels of voorkeuren worden bepaald zodat een apparaat, programma, systeem of omgeving op een gewenste manier werkt. Een instelling kan invloed hebben op gedrag, functies, uiterlijk, prestaties, toegang of veiligheid. Binnen Spark kunnen instellingen bijvoorbeeld bepalen welke functies actief zijn, hoe Spark reageert, welke gebruiker is ingelogd of welke voorkeuren worden toegepast. Goede instellingen zijn duidelijk, controleerbaar en kunnen meestal worden aangepast of teruggezet. Sommige belangrijke instellingen kunnen beschermd zijn om ongewenste veranderingen te voorkomen."
+      },
+      "ws5": {
+        "wie": "een gebruiker, beheerder, persoon, programma of systeem.",
+        "wat": "waarden, opties, voorkeuren, regels of eigenschappen aanpassen of bepalen.",
+        "wanneer": "wanneer iets voor het eerst wordt gebruikt of wanneer de werking moet veranderen.",
+        "waar": "in een apparaat, programma, systeem, menu, profiel of instellingenpagina.",
+        "waarom": "om iets passend, persoonlijk, veilig of goed werkend te maken.",
+        "hoe": "door een optie te kiezen, een waarde in te voeren, een schakelaar te veranderen of een regel toe te passen."
+      },
+      "tags": [
+        "instellen",
+        "instelling",
+        "instellingen",
+        "aanpassen",
+        "configureren",
+        "configuratie",
+        "voorkeur",
+        "optie",
+        "waarde",
+        "keuze",
+        "regel",
+        "eigenschappen",
+        "aanpassen",
+        "activeren",
+        "wijzigen",
+        "systeem",
+        "programma",
+        "apparaat",
+        "gebruiker",
+        "beheerder"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T07:03:57.893030+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-dcb4a1a5",
+      "begrip": "spannende",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Spannende betekent: iets dat spanning, nieuwsgierigheid, opwinding of onzekerheid veroorzaakt.",
+        "laag2": "Iets is spannend wanneer iemand benieuwd, opgewonden, onzeker of een beetje zenuwachtig is over wat er gaat gebeuren. Spannend kan leuk, prettig, eng of ongemakkelijk zijn.",
+        "laag3": "Spannende is een vorm van het bijvoeglijk naamwoord spannend. Het wordt gebruikt bij een zelfstandig naamwoord, zoals een spannende film, spannende gebeurtenis, spannende wedstrijd of spannende dag. De ervaring verschilt per persoon. Wat voor de één spannend en leuk is, kan voor een ander spannend en eng zijn. Spanning ontstaat vaak wanneer de uitkomst nog onbekend is of wanneer er iets belangrijks kan gebeuren.",
+        "laag4": "Spannende beschrijft een situatie, gebeurtenis of ervaring die aandacht en verwachting oproept doordat de afloop nog niet bekend is, er iets belangrijks gebeurt of er een mogelijke verandering aankomt. Spanning kan samengaan met verschillende emoties, zoals blijheid, nieuwsgierigheid, angst, hoop of zenuwachtigheid. Dezelfde gebeurtenis kan tegelijk leuk en spannend zijn. Binnen een gesprek is het belangrijk om uit de context te begrijpen welke soort spanning wordt bedoeld. “Een spannende film” verwijst meestal naar een verhaal met onzekerheid of gevaar, terwijl “een spannende afspraak” kan betekenen dat iemand nieuwsgierig, hoopvol of zenuwachtig is."
+      },
+      "ws5": {
+        "wie": "een persoon of groep die spanning, verwachting of onzekerheid ervaart.",
+        "wat": "een gebeurtenis, situatie, verhaal, activiteit of ervaring die spanning oproept.",
+        "wanneer": "wanneer de afloop onbekend is, iets belangrijk is of er iets onverwachts kan gebeuren.",
+        "waar": "tijdens een gesprek, film, wedstrijd, afspraak, activiteit of nieuwe situatie.",
+        "waarom": "omdat nieuwsgierigheid, onzekerheid, verwachting, risico of verandering aanwezig is.",
+        "hoe": "doordat iemand vooruitdenkt, afwacht wat er gebeurt of reageert op een onzekere situatie."
+      },
+      "tags": [
+        "spannende",
+        "spannend",
+        "spanning",
+        "nieuwsgierig",
+        "nieuwsgierigheid",
+        "verwachting",
+        "onzekerheid",
+        "zenuwachtig",
+        "opgewonden",
+        "opwinding",
+        "avontuur",
+        "verrassing",
+        "onbekend",
+        "afwachten",
+        "leuk",
+        "eng",
+        "angst",
+        "hoop",
+        "gebeurtenis"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-03T07:05:05.463810+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
     }
   ],
   "metadata": {
-    "card_count": 3589,
-    "last_updated": "2026-07-31T05:45:43.787131+00:00"
+    "card_count": 3664,
+    "last_updated": "2026-08-03T06:50:23.007744+00:00"
   }
 }

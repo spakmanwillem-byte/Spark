@@ -3,7 +3,7 @@
   "users": [
     {
       "id": "user-001",
-      "naam": "De Willem",
+      "naam": "Willem",
       "volledige_naam": "Willem Spakman",
       "sleutelwoord": "Welkom01",
       "masterkey": "SAMEN",
@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-08-02T05:18:08.960602",
+      "last_active": "2026-08-03T07:20:44.874680",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -5229,8 +5229,8 @@
       "naam": "Roadkill",
       "volledige_naam": "Roadkill",
       "sleutelwoord": "Willem2204",
-      "gradatie": 4,
-      "rol": "",
+      "gradatie": 5,
+      "rol": "onbekend",
       "id": "user-1996fa59",
       "registered_date": "2026-05-18T14:19:46.972593",
       "last_active": "2026-07-31T06:40:59.859821+00:00",
@@ -8485,8 +8485,8 @@
       "user_id": "bot-boekhouder",
       "naam": "De Boekhouder",
       "voornaam": "De Boekhouder",
-      "volledige_naam": "De Boekhouder 🎩",
-      "gradatie": 3,
+      "volledige_naam": "De Boekhouder",
+      "gradatie": 4,
       "gradatie_titel": "Acteur Bot",
       "is_bot": true,
       "is_acteur": true,
@@ -8947,9 +8947,9 @@
     {
       "id": "bot-dood",
       "user_id": "bot-dood",
-      "naam": "De Dood",
+      "naam": "Magere Hein",
       "voornaam": "De Dood",
-      "volledige_naam": "De Dood ⚰️",
+      "volledige_naam": "Magere Hein junior ",
       "gradatie": 4,
       "gradatie_titel": "Acteur Bot",
       "is_bot": true,
@@ -9419,7 +9419,7 @@
       "rol": "Onbekende",
       "id": "user-a0ee2d7e",
       "registered_date": "2026-05-22T20:14:40.642745",
-      "last_active": "2026-06-03T14:10:29.875563",
+      "last_active": "2026-08-02T20:04:31.784658",
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
@@ -10896,7 +10896,7 @@
       "rol": "Onbekende",
       "id": "user-fc2f683b",
       "registered_date": "2026-05-23T20:56:02.359210",
-      "last_active": "2026-08-02T06:26:47.186151",
+      "last_active": "2026-08-02T08:01:19.685068+00:00",
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
@@ -11370,7 +11370,7 @@
       "rol": "Onbekende",
       "id": "user-c4507f59",
       "registered_date": "2026-05-23T20:56:23.567957",
-      "last_active": null,
+      "last_active": "2026-08-02T08:01:05.455660+00:00",
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
@@ -11927,7 +11927,10 @@
           "total_after": 4450
         }
       ],
-      "admin_capable": false
+      "admin_capable": false,
+      "welcome_version_seen": "v1",
+      "welcome_sent_at": "2026-08-02T08:01:05.211389+00:00",
+      "gradatie_titel": "Familie"
     },
     {
       "naam": "Thomas",
@@ -12456,7 +12459,7 @@
       "naam": "Jayden",
       "volledige_naam": "Jayden",
       "sleutelwoord": "jaydenvdoorn",
-      "gradatie": 4,
+      "gradatie": 5,
       "rol": "Onbekende",
       "id": "user-ff6da683",
       "registered_date": "2026-05-24T12:05:46.246025",
@@ -13962,7 +13965,7 @@
       "rol": "Onbekende",
       "id": "user-166437fe",
       "registered_date": "2026-06-30T10:55:01.436488",
-      "last_active": "2026-07-31T10:47:36.219463+00:00",
+      "last_active": "2026-08-02T08:19:06.152578+00:00",
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
@@ -14617,6 +14620,444 @@
       ],
       "avatar": "gallery:31c6dc04a2fd",
       "admin_capable": false
+    },
+    {
+      "naam": "Marleen van Steen",
+      "volledige_naam": "Marleen van Steen",
+      "sleutelwoord": "Onhandig2287",
+      "gradatie": 7,
+      "rol": "Onbekende",
+      "id": "user-7b532909",
+      "registered_date": "2026-08-02T08:19:25.622092",
+      "last_active": "2026-08-02T08:21:07.840795+00:00",
+      "gesprekken_count": 0,
+      "trust_score": 0,
+      "masterkey": null,
+      "xp": 3600,
+      "welcome_version_seen": "v1",
+      "welcome_sent_at": "2026-08-02T08:19:26.688562+00:00",
+      "gradatie_titel": "Leert graag kennen",
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "letter_c",
+            "name": "De Letter C",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter C leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓒ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275123+00:00",
+            "letter": "C"
+          },
+          {
+            "id": "letter_f",
+            "name": "De Letter F",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter F leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓕ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275167+00:00",
+            "letter": "F"
+          },
+          {
+            "id": "letter_i",
+            "name": "De Letter I",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter I leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓘ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275183+00:00",
+            "letter": "I"
+          },
+          {
+            "id": "letter_k",
+            "name": "De Letter K",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter K leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓚ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275196+00:00",
+            "letter": "K"
+          },
+          {
+            "id": "letter_l",
+            "name": "De Letter L",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter L leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓛ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275205+00:00",
+            "letter": "L"
+          },
+          {
+            "id": "letter_n",
+            "name": "De Letter N",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter N leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓝ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275220+00:00",
+            "letter": "N"
+          },
+          {
+            "id": "letter_p",
+            "name": "De Letter P",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter P leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓟ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275232+00:00",
+            "letter": "P"
+          },
+          {
+            "id": "letter_q",
+            "name": "De Letter Q",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter Q leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓠ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275244+00:00",
+            "letter": "Q"
+          },
+          {
+            "id": "letter_u",
+            "name": "De Letter U",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter U leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓤ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275264+00:00",
+            "letter": "U"
+          },
+          {
+            "id": "letter_v",
+            "name": "De Letter V",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter V leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓥ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275275+00:00",
+            "letter": "V"
+          },
+          {
+            "id": "letter_x",
+            "name": "De Letter X",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter X leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓧ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275289+00:00",
+            "letter": "X"
+          },
+          {
+            "id": "letter_y",
+            "name": "De Letter Y",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter Y leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓨ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275299+00:00",
+            "letter": "Y"
+          },
+          {
+            "id": "letter_z",
+            "name": "De Letter Z",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter Z leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓩ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T08:32:49.275309+00:00",
+            "letter": "Z"
+          },
+          {
+            "id": "letter_a",
+            "name": "De Letter A",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter A leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓐ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875118+00:00",
+            "letter": "A"
+          },
+          {
+            "id": "letter_d",
+            "name": "De Letter D",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter D leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓓ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875181+00:00",
+            "letter": "D"
+          },
+          {
+            "id": "letter_e",
+            "name": "De Letter E",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter E leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓔ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875194+00:00",
+            "letter": "E"
+          },
+          {
+            "id": "letter_g",
+            "name": "De Letter G",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter G leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓖ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875202+00:00",
+            "letter": "G"
+          },
+          {
+            "id": "letter_j",
+            "name": "De Letter J",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter J leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓙ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875211+00:00",
+            "letter": "J"
+          },
+          {
+            "id": "letter_m",
+            "name": "De Letter M",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter M leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓜ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875219+00:00",
+            "letter": "M"
+          },
+          {
+            "id": "letter_o",
+            "name": "De Letter O",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter O leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓞ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875226+00:00",
+            "letter": "O"
+          },
+          {
+            "id": "letter_r",
+            "name": "De Letter R",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter R leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓡ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875233+00:00",
+            "letter": "R"
+          },
+          {
+            "id": "letter_s",
+            "name": "De Letter S",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter S leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓢ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875240+00:00",
+            "letter": "S"
+          },
+          {
+            "id": "letter_w",
+            "name": "De Letter W",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter W leerde.",
+            "milestone": null,
+            "xp_reward": 150,
+            "icon": "Ⓦ",
+            "rarity": "uncommon",
+            "type": "letter_completion",
+            "unlocked_at": "2026-08-02T16:23:22.875250+00:00",
+            "letter": "W"
+          }
+        ],
+        "total_xp_from_achievements": 3600
+      },
+      "xp_events": [
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter C",
+          "granted_at": "2026-08-02T08:32:49.314600+00:00",
+          "total_after": 150
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter F",
+          "granted_at": "2026-08-02T08:32:49.356733+00:00",
+          "total_after": 400
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter I",
+          "granted_at": "2026-08-02T08:32:49.397119+00:00",
+          "total_after": 500
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter K",
+          "granted_at": "2026-08-02T08:32:49.436272+00:00",
+          "total_after": 650
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter L",
+          "granted_at": "2026-08-02T08:32:49.480379+00:00",
+          "total_after": 750
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter N",
+          "granted_at": "2026-08-02T08:32:49.522152+00:00",
+          "total_after": 850
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter P",
+          "granted_at": "2026-08-02T08:32:49.558134+00:00",
+          "total_after": 1000
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter Q",
+          "granted_at": "2026-08-02T08:32:49.597071+00:00",
+          "total_after": 1250
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter U",
+          "granted_at": "2026-08-02T08:32:49.643466+00:00",
+          "total_after": 1400
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter V",
+          "granted_at": "2026-08-02T08:32:49.683429+00:00",
+          "total_after": 1550
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter X",
+          "granted_at": "2026-08-02T08:32:49.722882+00:00",
+          "total_after": 1800
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter Y",
+          "granted_at": "2026-08-02T08:32:49.762754+00:00",
+          "total_after": 2050
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter Z",
+          "granted_at": "2026-08-02T08:32:49.800419+00:00",
+          "total_after": 2300
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter A",
+          "granted_at": "2026-08-02T16:23:22.923758+00:00",
+          "total_after": 2400
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter D",
+          "granted_at": "2026-08-02T16:23:22.959954+00:00",
+          "total_after": 2500
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter E",
+          "granted_at": "2026-08-02T16:23:22.993859+00:00",
+          "total_after": 2600
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter G",
+          "granted_at": "2026-08-02T16:23:23.027289+00:00",
+          "total_after": 2750
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter J",
+          "granted_at": "2026-08-02T16:23:23.060250+00:00",
+          "total_after": 3000
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter M",
+          "granted_at": "2026-08-02T16:23:23.095403+00:00",
+          "total_after": 3150
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter O",
+          "granted_at": "2026-08-02T16:23:23.128320+00:00",
+          "total_after": 3250
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter R",
+          "granted_at": "2026-08-02T16:23:23.161879+00:00",
+          "total_after": 3350
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter S",
+          "granted_at": "2026-08-02T16:23:23.202687+00:00",
+          "total_after": 3450
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: De Letter W",
+          "granted_at": "2026-08-02T16:23:23.242220+00:00",
+          "total_after": 3600
+        }
+      ]
     }
   ],
   "metadata": {

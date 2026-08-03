@@ -4060,6 +4060,84 @@
       "tx_id": "41b9a31d164e",
       "n": 2,
       "cost": 26.28
+    },
+    {
+      "id": "bh-521cca7c",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • SOL @ €63.2710\nPotje: pot-004\nInleg: €10.04\nEigenaar: Spark",
+      "ts": "2026-08-02T13:28:59.286748+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "SOL-EUR",
+      "pot_id": "pot-004",
+      "price": 63.271000757608604,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-86bf726f",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • ADA @ €0.1650\nPotje: pot-001\nInleg: €10.04\nEigenaar: Spark",
+      "ts": "2026-08-02T16:00:14.422918+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "ADA-EUR",
+      "pot_id": "pot-001",
+      "price": 0.1650300010033692,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-3633a55b",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "🌱 **Boekhouder weekrapport** (7 dagen)\n\n⚓ **Anchors**: 0 stuks, totaal capital €0.00\n   → Geen rente deze week (interval 30 dagen)\n\n💼 **Trade-potjes**: 7 stuks\n\n💰 **Trade resultaat**: €-0.43\n   → Winst €0.40 · Verlies €0.83\n\n🌊 **Overflow pool**: €0.00\n\n📈 _Nog geen tempo te meten — wacht op eerste winstronde._",
+      "ts": "2026-08-02T20:03:22.758606+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_weekly_report",
+      "report": {
+        "period": {
+          "from": "2026-07-26T20:03:22.756621+00:00",
+          "to": "2026-08-02T20:03:22.756621+00:00",
+          "days": 7
+        },
+        "anchors": {
+          "count": 0,
+          "total_capital": 0,
+          "weekly_growth": 0.0,
+          "changes": []
+        },
+        "trade_pots": {
+          "count": 7,
+          "minted_this_week": []
+        },
+        "overflow_pool": {
+          "now": 0.0
+        },
+        "trade_results": {
+          "winst_total": 0.4,
+          "verlies_total": 0.83,
+          "netto": -0.43
+        },
+        "roar_activity": {
+          "tokens_bought": 0,
+          "tokens_sold_back": 0,
+          "eur_in": 0,
+          "eur_out": 0
+        },
+        "projection": "Nog geen tempo te meten — wacht op eerste winstronde.",
+        "generated_at": "2026-08-02T20:03:22.756621+00:00",
+        "recipients": [
+          "user-001",
+          "user-a0ee2d7e"
+        ]
+      }
     }
   ]
 }

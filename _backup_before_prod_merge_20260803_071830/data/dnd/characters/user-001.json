@@ -1,0 +1,143 @@
+{
+  "user_id": "user-001",
+  "titel": "De Willem",
+  "ondertitel": "Zoeker",
+  "rang_titel": "Generaal",
+  "rang_progress_pct": 0,
+  "klasse": "voet",
+  "beroep": "smid",
+  "fractie": "neutraal",
+  "locatie_naam": "Oerrak",
+  "dorp": "Oerrak",
+  "dorp_level": 1,
+  "fog_of_war_pct": 0,
+  "bio": "",
+  "currency": {
+    "goud": 1000,
+    "gems": 0,
+    "ziel": 0
+  },
+  "equipment": {
+    "hoofd": null,
+    "nek": null,
+    "schouders": null,
+    "armen": null,
+    "trinket": null,
+    "torso": null,
+    "broek": null,
+    "voeten": null,
+    "sjaal": null,
+    "riem": null,
+    "handen": null,
+    "ring_l": null,
+    "ring_r": null,
+    "linkerhand": null,
+    "rechterhand": null,
+    "offhand": null,
+    "pijl_boog": null,
+    "rugzak": null
+  },
+  "event_feed": [
+    {
+      "ts": "2026-05-29T20:02:29.646562+00:00",
+      "kind": "WERELD",
+      "text": "De markt van Stormhaven is geopend."
+    },
+    {
+      "ts": "2026-05-29T19:57:20.158830+00:00",
+      "kind": "SYSTEEM",
+      "text": "Welkom in Spark Emergent, De Willem!"
+    }
+  ],
+  "updated_at": "2026-06-30T00:11:32.262288+00:00",
+  "events_feed": [
+    {
+      "id": "evt-8b232482",
+      "kind": "WERELD",
+      "text": "✨ Dobbel (basis): 18 + 0 = 18 → Groot Succes · actie: verken Stormhaven",
+      "flavor": "Het loopt soepel — alsof iets je een zachte duw geeft.",
+      "ts": "2026-05-31T23:32:30.767806+00:00",
+      "source": "dice_roll"
+    },
+    {
+      "id": "evt-f7415102",
+      "kind": "WERELD",
+      "text": "❌ Dobbel (super): 7 + 0 = 7 → Faal · actie: open mysterieuze kist",
+      "flavor": "Je voelt dat het ergens vastloopt. Een ademteug — en je probeert het later opnieuw.",
+      "ts": "2026-05-31T23:32:30.940491+00:00",
+      "source": "dice_roll"
+    },
+    {
+      "id": "evt-28ffb172",
+      "kind": "WERELD",
+      "text": "❌ Dobbel (basis): 5 + 0 = 5 → Faal",
+      "flavor": "Niet vandaag. Het lukt niet, maar de fout is klein en je leert ervan.",
+      "ts": "2026-05-31T23:34:32.332553+00:00",
+      "source": "dice_roll"
+    },
+    {
+      "id": "evt-2275dabc",
+      "kind": "WERELD",
+      "text": "❌ Dobbel (super): 7 + 0 = 7 → Faal",
+      "flavor": "Niet vandaag. Het lukt niet, maar de fout is klein en je leert ervan.",
+      "ts": "2026-05-31T23:34:33.848161+00:00",
+      "source": "dice_roll"
+    }
+  ],
+  "fractie_naam": "Spartanen",
+  "klasse_gekozen_op": "2026-06-29T22:23:01.190073+00:00",
+  "beroep_gekozen_op": "2026-06-29T22:23:01.190085+00:00",
+  "xp_per_beroep": {
+    "smid": 0,
+    "vissen": 0,
+    "survival": 0,
+    "koken": 0
+  },
+  "sub_beroepen": [
+    {
+      "id": "vissen",
+      "geleerd_op": "2026-06-29T22:23:01.190088+00:00",
+      "leer_kosten_betaald": 2,
+      "tier": 1,
+      "xp": 0
+    },
+    {
+      "id": "survival",
+      "geleerd_op": "2026-06-29T22:23:01.190090+00:00",
+      "leer_kosten_betaald": 2,
+      "tier": 1,
+      "xp": 0
+    },
+    {
+      "id": "koken",
+      "geleerd_op": "2026-06-29T22:26:38.630631+00:00",
+      "leer_kosten_betaald": 2,
+      "tier": 1,
+      "xp": 0
+    }
+  ],
+  "stats_start": {
+    "kracht": 12,
+    "behendigheid": 9,
+    "intelligentie": 7,
+    "conditie": 13,
+    "wilskracht": 10,
+    "geluk": 8
+  },
+  "daily_time_budget": {
+    "totaal_uren": 24,
+    "slaap_uren_default": 6,
+    "slaap_uren_healing": 8,
+    "werk_uren_primary": 6,
+    "vrije_tijd_uren": "rest"
+  },
+  "stat_points_spent": {
+    "Kracht": 22,
+    "Behendigheid": 22,
+    "Intelligentie": 19,
+    "Conditie": 24,
+    "Wilskracht": 20,
+    "Geluk": 15,
+    "Gezondheid": 31
+  }
+}

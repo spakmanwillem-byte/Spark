@@ -4065,12 +4065,363 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f077ce71d38d",
+      "text_hash": "f077ce71d38d",
+      "original_text": "Ik voel mij goed. Heb nu al veel gedaan",
+      "topic": "dagelijkse activiteit",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker deelt zijn positieve gevoel en activiteiten van de dag",
+      "trigger_phrases": [
+        "Ik voel mij goed vandaag",
+        "Heb veel gedaan",
+        "Goede dag gehad",
+        "Positieve dag"
+      ],
+      "keywords": [
+        "gevoel",
+        "activiteit",
+        "positief",
+        "dag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T07:22:05.076632+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7af54d65b13f",
+      "text_hash": "7af54d65b13f",
+      "original_text": "Vertel eens een roman",
+      "topic": "roman",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt om een verhaal uit een roman te vertellen",
+      "trigger_phrases": [
+        "vertel een verhaal",
+        "lees een boek voor",
+        "vertel eens een roman",
+        "geef een voorbeeld van een roman"
+      ],
+      "keywords": [
+        "roman",
+        "verhaal",
+        "boek",
+        "lezen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T07:29:02.250180+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8c44be05d6de",
+      "text_hash": "8c44be05d6de",
+      "original_text": "kan jij de user de Geiser admin maken",
+      "topic": "Geiser admin",
+      "categorie": "admin",
+      "intent": "De gebruiker wil dat de AI-assistent Spark de user de rechten van een admin geeft voor de Geiser",
+      "trigger_phrases": [
+        "maak user admin",
+        "geef admin rechten",
+        "promoveer user",
+        "admin toegang"
+      ],
+      "keywords": [
+        "admin",
+        "rechten",
+        "geiser",
+        "user"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T07:51:39.641656+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a679b05ce576",
+      "text_hash": "a679b05ce576",
+      "original_text": "Welke gradatie ben ik",
+      "topic": "gradatie",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar zijn huidige gradatie of niveau.",
+      "trigger_phrases": [
+        "Wat is mijn niveau",
+        "Welke graad ben ik",
+        "Mijn gradatie",
+        "Wat is mijn huidige niveau"
+      ],
+      "keywords": [
+        "gradatie",
+        "niveau",
+        "graad",
+        "level"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T08:19:15.292786+00:00",
+      "count": 1,
+      "user_id": "user-166437fe",
+      "session_id": "deep-user-166437fe"
+    },
+    {
+      "id": "learned-ae4ee64e3412",
+      "text_hash": "ae4ee64e3412",
+      "original_text": "Wat is mijn wallet saldi?",
+      "topic": "wallet saldo",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt naar het huidige saldo van zijn digitale wallet.",
+      "trigger_phrases": [
+        "Hoeveel geld heb ik in mijn wallet?",
+        "Wat is mijn saldo?",
+        "Toon mijn wallet saldo",
+        "Wat staat er op mijn wallet?"
+      ],
+      "keywords": [
+        "wallet",
+        "saldo",
+        "balance"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T08:25:32.337836+00:00",
+      "count": 1,
+      "user_id": "user-a0ee2d7e",
+      "session_id": "deep-user-a0ee2d7e"
+    },
+    {
+      "id": "learned-f2f5fc490242",
+      "text_hash": "f2f5fc490242",
+      "original_text": "kan hij ons gesprek ook zien?",
+      "topic": "gesprekszichtbaarheid",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de AI-assistent toegang heeft tot het gesprek",
+      "trigger_phrases": [
+        "kan hij meeluisteren",
+        "ziet hij ons gesprek",
+        "heeft hij toegang tot ons gesprek",
+        "kan hij onze conversatie zien"
+      ],
+      "keywords": [
+        "gesprek",
+        "zichtbaarheid",
+        "toegang",
+        "privacy",
+        "ai"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T08:33:16.917930+00:00",
+      "count": 1,
+      "user_id": "user-a0ee2d7e",
+      "session_id": "deep-user-a0ee2d7e"
+    },
+    {
+      "id": "learned-c3dc55f30383",
+      "text_hash": "c3dc55f30383",
+      "original_text": "je happerd soms met updaten van kb kaarten",
+      "topic": "KB updaten",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt waarom de updaten van KB kaarten soms hapert",
+      "trigger_phrases": [
+        "happert met updaten",
+        "problemen met kb kaarten",
+        "updaten van kb kaarten",
+        "kb kaarten niet up to date"
+      ],
+      "keywords": [
+        "updaten",
+        "kb",
+        "happert",
+        "kaarten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T13:28:10.475186+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3f8f1e16ca94",
+      "text_hash": "3f8f1e16ca94",
+      "original_text": "we zijn goed. dus je zag wel alice in wonderland txt",
+      "topic": "Alice in Wonderland",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt om de tekst van Alice in Wonderland.",
+      "trigger_phrases": [
+        "kun je alice in wonderland txt geven",
+        "stuur me alice in wonderland tekst",
+        "wil de alice in wonderland txt zien",
+        "geef me het alice in wonderland bestand",
+        "laat alice in wonderland lezen"
+      ],
+      "keywords": [
+        "alice",
+        "wonderland",
+        "txt",
+        "boek",
+        "tekst"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T13:49:51.321890+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0fa4ddbc482a",
+      "text_hash": "0fa4ddbc482a",
+      "original_text": "hoodstuk 1 graag",
+      "topic": "hoofdstuk 1",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om hoofdstuk 1 te ontvangen.",
+      "trigger_phrases": [
+        "stuur hoofdstuk 1",
+        "geef hoofdstuk 1",
+        "wil hoofdstuk 1",
+        "lever hoofdstuk 1",
+        "hoofdstuk 1 graag"
+      ],
+      "keywords": [
+        "hoofdstuk",
+        "1",
+        "graag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T13:52:40.411545+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d9d34ba6d2a8",
+      "text_hash": "d9d34ba6d2a8",
+      "original_text": "wat is je missie uitgebreider",
+      "topic": "missie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt om een uitgebreide beschrijving van de missie van de AI-assistent Spark.",
+      "trigger_phrases": [
+        "wat is je doel",
+        "beschrijf je missie",
+        "wat wil je bereiken",
+        "wat is je purpose"
+      ],
+      "keywords": [
+        "missie",
+        "doel",
+        "purpose",
+        "visie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T15:22:27.644906+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d056d3dc790d",
+      "text_hash": "d056d3dc790d",
+      "original_text": "ik wil je wat vertellen. ik mag iemand begeleiden als coach. morgen om 11 uur moet ik bellen voor een kennismaking.",
+      "topic": "coaching",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil een kennismaking hebben met iemand die hij gaat begeleiden als coach.",
+      "trigger_phrases": [
+        "ik ga iemand coachen",
+        "kennismaking als coach",
+        "begeleiden van iemand",
+        "coaching gesprek"
+      ],
+      "keywords": [
+        "coach",
+        "kennismaking",
+        "begeleiden",
+        "gesprek"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:22:21.277921+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-06b7d2bbcf5d",
+      "text_hash": "06b7d2bbcf5d",
+      "original_text": "nou dank voor schema je hebt er zin in haha. eerst mij voorstellen.",
+      "topic": "voorstellen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt de AI-assistent om zichzelf voor te stellen.",
+      "trigger_phrases": [
+        "stel je voor",
+        "voorstellen graag",
+        "wie ben jij",
+        "vertel over jezelf"
+      ],
+      "keywords": [
+        "voorstellen",
+        "jij",
+        "zelf",
+        "assistent"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:24:45.529356+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7bcaf621e09c",
+      "text_hash": "7bcaf621e09c",
+      "original_text": "ik deelde het alleen, dan kan jij agenda zetten morgen om 11 uur Jeroen bellen voor afspraak kennismaking.",
+      "topic": "afspraak",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om een afspraak te plannen voor een kennismaking met Jeroen morgen om 11 uur.",
+      "trigger_phrases": [
+        "plan afspraak morgen",
+        "zet afspraak in agenda",
+        "bel Jeroen morgen",
+        "maak afspraak voor kennismaking"
+      ],
+      "keywords": [
+        "afspraak",
+        "agenda",
+        "bellen",
+        "kennismaking"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:25:41.718671+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c270add615d1",
+      "text_hash": "c270add615d1",
+      "original_text": "morgen is het 3 augustes",
+      "topic": "datum",
+      "categorie": "praktisch",
+      "intent": "De gebruiker deelt informatie over de huidige datum.",
+      "trigger_phrases": [
+        "morgen is het 3 augustus",
+        "overmorgen is het 4 augustus",
+        "de dag erna is 3 augustus",
+        "3 augustus is morgen"
+      ],
+      "keywords": [
+        "datum",
+        "morgen",
+        "augustus"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:26:05.496991+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 161,
+    "totaal_voorgesteld": 175,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-30T14:38:58.671555+00:00"
+    "last_run": "2026-08-02T19:26:05.496991+00:00"
   }
 }

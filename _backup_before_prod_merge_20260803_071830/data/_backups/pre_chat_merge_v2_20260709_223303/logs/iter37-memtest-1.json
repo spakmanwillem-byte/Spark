@@ -1,0 +1,31 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "text": "help",
+      "ts": "2026-06-27T21:41:33.883092+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "🔮 Help-overzicht geopend.",
+      "ts": "2026-06-27T21:41:33.883092+00:00",
+      "model": "smart_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "wat zei je vorige bericht?",
+      "ts": "2026-06-27T21:41:36.883395+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Je zei één woord: **\"help\"**\n\nEn ik opende het help-overzicht daarvoor. Dat was mijn vorige bericht.\n\nWil je alsnog hulp ergens mee?",
+      "ts": "2026-06-27T21:41:36.883395+00:00",
+      "model": "anthropic/claude-sonnet-4-6"
+    }
+  ],
+  "session_id": "iter37-memtest-1",
+  "user_id": "user-001",
+  "updated_at": "2026-06-27T21:41:36.883395+00:00"
+}

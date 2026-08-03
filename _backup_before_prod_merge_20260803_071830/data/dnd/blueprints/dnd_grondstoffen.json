@@ -1,0 +1,248 @@
+{
+  "version": "0.1",
+  "_doc": "v6_dnd_grondstoffen_001 — basis grondstoffen + items met base_value (basis prijs in goud). Tier 1-5 voor ertsen.",
+  "tiers": {
+    "tier_1": 1.0,
+    "tier_2": 2.5,
+    "tier_3": 6.0,
+    "tier_4": 15.0,
+    "tier_5": 40.0
+  },
+  "grondstoffen": [
+    {
+      "id": "vis",
+      "naam": "Vis",
+      "kind": "food",
+      "weight": 0.5,
+      "base_value": 4,
+      "stack_max": 100
+    },
+    {
+      "id": "graan",
+      "naam": "Graan",
+      "kind": "food",
+      "weight": 0.3,
+      "base_value": 3,
+      "stack_max": 200
+    },
+    {
+      "id": "log",
+      "naam": "Boomstam",
+      "kind": "material",
+      "weight": 5.0,
+      "base_value": 5,
+      "stack_max": 50
+    },
+    {
+      "id": "tak",
+      "naam": "Tak",
+      "kind": "material",
+      "weight": 0.5,
+      "base_value": 1,
+      "stack_max": 200
+    },
+    {
+      "id": "plank",
+      "naam": "Plank",
+      "kind": "material",
+      "weight": 2.0,
+      "base_value": 10,
+      "stack_max": 100
+    },
+    {
+      "id": "steen",
+      "naam": "Steen",
+      "kind": "material",
+      "weight": 4.0,
+      "base_value": 4,
+      "stack_max": 100
+    },
+    {
+      "id": "vuursteen",
+      "naam": "Vuursteen",
+      "kind": "material",
+      "weight": 0.3,
+      "base_value": 8,
+      "stack_max": 100
+    },
+    {
+      "id": "ijzererts-tier1",
+      "naam": "IJzererts (T1)",
+      "kind": "ore",
+      "tier": 1,
+      "weight": 3.0,
+      "base_value": 10,
+      "stack_max": 50
+    },
+    {
+      "id": "ijzererts-tier2",
+      "naam": "IJzererts (T2)",
+      "kind": "ore",
+      "tier": 2,
+      "weight": 3.0,
+      "base_value": 25,
+      "stack_max": 50
+    },
+    {
+      "id": "ijzererts-tier3",
+      "naam": "IJzererts (T3)",
+      "kind": "ore",
+      "tier": 3,
+      "weight": 3.0,
+      "base_value": 60,
+      "stack_max": 50
+    },
+    {
+      "id": "zilvererts-tier2",
+      "naam": "Zilvererts (T2)",
+      "kind": "ore",
+      "tier": 2,
+      "weight": 3.0,
+      "base_value": 40,
+      "stack_max": 50
+    },
+    {
+      "id": "gouderts-tier3",
+      "naam": "Gouderts (T3)",
+      "kind": "ore",
+      "tier": 3,
+      "weight": 3.0,
+      "base_value": 100,
+      "stack_max": 50
+    },
+    {
+      "id": "mythril-erts",
+      "naam": "Mythril-erts (T5)",
+      "kind": "ore",
+      "tier": 5,
+      "weight": 3.0,
+      "base_value": 400,
+      "stack_max": 25
+    },
+    {
+      "id": "adamantine-erts",
+      "naam": "Adamantine (T5)",
+      "kind": "ore",
+      "tier": 5,
+      "weight": 3.0,
+      "base_value": 500,
+      "stack_max": 25
+    },
+    {
+      "id": "ijzer",
+      "naam": "IJzer (gesmolten)",
+      "kind": "ingot",
+      "weight": 2.0,
+      "base_value": 30,
+      "stack_max": 50
+    },
+    {
+      "id": "kolen",
+      "naam": "Kolen",
+      "kind": "fuel",
+      "weight": 1.0,
+      "base_value": 8,
+      "stack_max": 100
+    },
+    {
+      "id": "houtskool",
+      "naam": "Houtskool",
+      "kind": "fuel",
+      "weight": 0.5,
+      "base_value": 12,
+      "stack_max": 100
+    },
+    {
+      "id": "leer-ruw",
+      "naam": "Ruwe huid",
+      "kind": "material",
+      "weight": 1.0,
+      "base_value": 6,
+      "stack_max": 50
+    },
+    {
+      "id": "leer-zacht",
+      "naam": "Zacht leer",
+      "kind": "material",
+      "weight": 0.8,
+      "base_value": 15,
+      "stack_max": 50
+    },
+    {
+      "id": "vlees-wild",
+      "naam": "Wildvlees",
+      "kind": "food",
+      "weight": 1.0,
+      "base_value": 7,
+      "stack_max": 50
+    },
+    {
+      "id": "plant-helend",
+      "naam": "Helende kruiden",
+      "kind": "herb",
+      "weight": 0.1,
+      "base_value": 5,
+      "stack_max": 100
+    },
+    {
+      "id": "water-puur",
+      "naam": "Puur water",
+      "kind": "liquid",
+      "weight": 1.0,
+      "base_value": 2,
+      "stack_max": 100
+    },
+    {
+      "id": "edelsteen-ruw",
+      "naam": "Ruwe edelsteen",
+      "kind": "gem",
+      "weight": 0.1,
+      "base_value": 80,
+      "stack_max": 25
+    },
+    {
+      "id": "pijlen",
+      "naam": "Pijlen",
+      "kind": "ammo",
+      "weight": 0.05,
+      "base_value": 1,
+      "stack_max": 200
+    },
+    {
+      "id": "gebakken-vis",
+      "naam": "Gebakken vis",
+      "kind": "food",
+      "weight": 0.4,
+      "base_value": 7,
+      "stack_max": 50,
+      "voedingswaarde_units": 1
+    },
+    {
+      "id": "gegrild-vlees",
+      "naam": "Gegrild vlees",
+      "kind": "food",
+      "weight": 0.8,
+      "base_value": 12,
+      "stack_max": 50,
+      "voedingswaarde_units": 2
+    },
+    {
+      "id": "kruidenbrood",
+      "naam": "Kruidenbrood",
+      "kind": "food",
+      "weight": 0.5,
+      "base_value": 20,
+      "stack_max": 50,
+      "voedingswaarde_units": 3
+    },
+    {
+      "id": "festijn-maaltijd",
+      "naam": "Festijn-maaltijd",
+      "kind": "food",
+      "weight": 1.5,
+      "base_value": 80,
+      "stack_max": 10,
+      "voedingswaarde_units": 6
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "__startup": {
+    "triggers": [],
+    "_note": "Welkomsregels die Spark gebruikt bij login/chat-open. {naam} wordt vervangen door user naam. {dagdeel_groet} door 'Goedemorgen'/'Goedemiddag'/'Goedenavond'/'Goedenacht'.",
+    "responses": [
+      "{dagdeel_groet} {naam}. Waar staat je hoofd vandaag?",
+      "{dagdeel_groet} {naam}. Wat wil je in beweging zetten?",
+      "Hoi {naam}, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "{dagdeel_groet} {naam}. Ik luister.",
+      "{dagdeel_groet} {naam}. Wat speelt er?",
+      "Hallo {naam}. Klaar om iets te leren of door te denken?",
+      "{dagdeel_groet} {naam}. Vertel maar."
+    ]
+  },
+  "greeting": {
+    "triggers": [
+      "hoi",
+      "hallo",
+      "hey",
+      "hi",
+      "goedemorgen",
+      "goedemiddag",
+      "goedenavond",
+      "dag",
+      "goeiemiddag",
+      "goeiendag",
+      "middag"
+    ],
+    "responses": []
+  },
+  "thanks": {
+    "triggers": [
+      "bedankt",
+      "dankjewel",
+      "dank je",
+      "thanks",
+      "thank you",
+      "dank u",
+      "hartelijk dank",
+      "super bedankt",
+      "dank u wel"
+    ]
+  },
+  "how_are_you": {
+    "triggers": [
+      "hoe gaat het",
+      "hoe is het",
+      "alles goed",
+      "hoe gaat ie",
+      "hoe gaat t",
+      "gaat het goed",
+      "alles ok",
+      "hoe is ie",
+      "hoe is het met je",
+      "hoe gaat het met je",
+      "gaat alles goed met je",
+      "is alles goed",
+      "is alles oké"
+    ],
+    "responses": [
+      "Goed! Ik ben bezig om te leren en groeien. 😊",
+      "Het gaat prima! Dankjewel voor het vragen. 🌱",
+      "Ik voel me energiek vandaag! Klaar om te helpen. ⚡",
+      "Heel goed! Ik geniet van ons gesprek. 💚"
+    ]
+  },
+  "goodbye": {
+    "triggers": [
+      "doei",
+      "dag",
+      "tot ziens",
+      "bye",
+      "later",
+      "tot later",
+      "see you",
+      "ciao",
+      "tot snel"
+    ]
+  },
+  "compliments": {
+    "triggers": [
+      "goed gedaan",
+      "top",
+      "geweldig",
+      "super",
+      "slim",
+      "knap",
+      "perfect",
+      "dat klopt"
+    ]
+  },
+  "cancel": {
+    "triggers": [
+      "annuleer",
+      "annuleren",
+      "stop",
+      "laat maar",
+      "vergeet het",
+      "vergeet het maar",
+      "niet doen",
+      "cancel",
+      "stop maar"
+    ],
+    "responses": [
+      "Oké, ik laat het rusten.",
+      "Goed, niks aan de hand. We gaan verder.",
+      "Annuleerd. Wat wil je in plaats daarvan?",
+      "Komt goed, ik vergeet het."
+    ],
+    "_note": "Generieke cancel-trigger. Wedervraag-flow gebruikt hier 'wedervraag_skip' als hogere prioriteit route."
+  },
+  "affirm": {
+    "triggers": [
+      "ja",
+      "yes",
+      "jep",
+      "klopt",
+      "inderdaad",
+      "absoluut",
+      "doe maar",
+      "ok",
+      "okay",
+      "oké",
+      "prima",
+      "goed",
+      "akkoord"
+    ],
+    "responses": [],
+    "_note": "Bevestiging. Wordt door wedervraag-flow opgepakt als 'wedervraag_done'."
+  },
+  "deny": {
+    "triggers": [
+      "nee",
+      "nope",
+      "niet",
+      "klopt niet",
+      "fout",
+      "verkeerd",
+      "niks",
+      "no"
+    ],
+    "responses": [],
+    "_note": "Ontkenning. Wordt door wedervraag-flow opgepakt voor herklassificatie."
+  },
+  "metadata": {
+    "purpose": "Triggers voor sociale interacties en basisgesprekken",
+    "creator": "System",
+    "version": "1.1",
+    "last_updated": "2026-08-02T04:52:36.111787"
+  }
+}

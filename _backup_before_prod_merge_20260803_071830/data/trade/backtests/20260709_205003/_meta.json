@@ -1,0 +1,98 @@
+{
+  "run_id": "20260709_205003",
+  "created_at": "2026-07-09T20:50:36.195162+00:00",
+  "doel": "Vergelijk BUY-strategieën over historische Bitvavo-data om beste live-configuratie te kiezen",
+  "bron": "Bitvavo public API /candles (17.000+ candles per markt via paginated end-param)",
+  "markten": [
+    "BCH-EUR",
+    "BTC-EUR",
+    "ETH-EUR",
+    "SOL-EUR",
+    "ADA-EUR",
+    "ATOM-EUR"
+  ],
+  "periode_dagen": 180,
+  "candle_interval": "15m",
+  "trade_bedrag_eur": 10.0,
+  "fee_pct": 0.0025,
+  "strategieën": [
+    {
+      "id": "A",
+      "name": "Bollinger 2σ (baseline huidig)",
+      "params": {
+        "sigma": 2.0,
+        "gap": null,
+        "break_even": false
+      }
+    },
+    {
+      "id": "B",
+      "name": "Bollinger 2σ + gap-streng (v7 huidig)",
+      "params": {
+        "sigma": 2.0,
+        "gap": "streng",
+        "break_even": false
+      }
+    },
+    {
+      "id": "C",
+      "name": "Bollinger 2σ + gap-los",
+      "params": {
+        "sigma": 2.0,
+        "gap": "los",
+        "break_even": false
+      }
+    },
+    {
+      "id": "D",
+      "name": "Bollinger 2σ + gap-body (50%)",
+      "params": {
+        "sigma": 2.0,
+        "gap": "body",
+        "break_even": false
+      }
+    },
+    {
+      "id": "E",
+      "name": "Bollinger 2σ + 3-red-green (Neef)",
+      "params": {
+        "sigma": 2.0,
+        "gap": "n_red3",
+        "break_even": false
+      }
+    },
+    {
+      "id": "F",
+      "name": "Bollinger 1.5σ (losser BUY)",
+      "params": {
+        "sigma": 1.5,
+        "gap": null,
+        "break_even": false
+      }
+    },
+    {
+      "id": "G",
+      "name": "Bollinger 1.5σ + gap-body",
+      "params": {
+        "sigma": 1.5,
+        "gap": "body",
+        "break_even": false
+      }
+    },
+    {
+      "id": "H",
+      "name": "Bollinger 1.5σ + gap-body + break-even sell",
+      "params": {
+        "sigma": 1.5,
+        "gap": "body",
+        "break_even": true
+      }
+    }
+  ],
+  "footnote": {
+    "kb_kaart_ref": "kbv2-2f55a485",
+    "code_ref": "backend/tests/backtest_v2.py",
+    "sibling_data": "market_stats.json (echte trade-stats voor cross-validatie)",
+    "insight_dashboard_ref": "/beheer → Trader → Backtests (nog te bouwen UI)"
+  }
+}

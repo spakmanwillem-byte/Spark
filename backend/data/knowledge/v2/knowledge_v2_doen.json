@@ -245570,10 +245570,269 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-cc3c7efc",
+      "begrip": "Nagaan",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Nagaan betekent dat iemand iets controleert, onderzoekt of probeert te achterhalen.",
+        "laag2": "Het woord nagaan wordt gebruikt wanneer iemand wil controleren of iets klopt, wil weten hoe iets is gegaan of meer informatie over iets wil vinden.",
+        "laag3": "Nagaan is een handeling waarbij iemand informatie controleert, onderzoekt of stap voor stap bekijkt. Iemand kan bijvoorbeeld nagaan of een afspraak klopt, waar iets vandaan komt of wat er is gebeurd. Bij het nagaan worden gegevens, gebeurtenissen of informatie vergeleken om duidelijkheid te krijgen.",
+        "laag4": "Binnen Spark helpt het woord nagaan om te herkennen dat een gebruiker wil dat informatie wordt gecontroleerd, onderzocht of teruggekeken. Wanneer een gebruiker zegt “Ga na of dit klopt”, begrijpt Spark dat de beschikbare informatie moet worden bekeken en vergeleken. Nagaan kan betrekking hebben op gegevens, afspraken, gesprekken, gebeurtenissen, berekeningen of eerdere informatie."
+      },
+      "ws5": {
+        "wie": "Mensen of systemen die informatie controleren, onderzoeken of proberen te achterhalen.",
+        "wat": "Het controleren, onderzoeken of achterhalen van informatie, gegevens of gebeurtenissen.",
+        "wanneer": "",
+        "waar": "In gesprekken, onderzoeken, administratie, gegevens, systemen en dagelijkse situaties.",
+        "waarom": "Om duidelijkheid te krijgen, fouten te vinden of te controleren of informatie juist is.",
+        "hoe": "Door informatie te bekijken, te vergelijken, te onderzoeken of stap voor stap te controleren."
+      },
+      "tags": [
+        "nagaan",
+        "controleren",
+        "onderzoeken",
+        "achterhalen",
+        "bekijken",
+        "vergelijken",
+        "controleren",
+        "informatie",
+        "gegevens",
+        "gebeurtenis",
+        "juistheid",
+        "duidelijkheid",
+        "handeling",
+        "context"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T12:40:58.420170+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-5536cbaf",
+      "begrip": "updaten",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Updaten betekent iets bijwerken of vernieuwen met nieuwe informatie, gegevens of functies.",
+        "laag2": "Updaten gebeurt wanneer een bestaand onderdeel wordt aangepast zodat het weer actueel is, beter werkt of nieuwe inhoud bevat.",
+        "laag3": "Updaten is het aanpassen of vernieuwen van iets dat al bestaat. Dit kan gaan om een programma, systeem, apparaat, bestand, kenniskaart, gegevens of informatie. Een update kan fouten oplossen, beveiliging verbeteren, nieuwe functies toevoegen of bestaande informatie vervangen. Een update kan klein zijn, zoals het aanpassen van één gegeven, of groot, zoals het vernieuwen van een volledig systeem.",
+        "laag4": "Binnen Spark betekent updaten dat bestaande informatie, kennis, instellingen, functies of onderdelen worden bijgewerkt. Wanneer een gebruiker zegt “Update deze kenniskaart”, begrijpt Spark dat de bestaande kaart moet worden aangepast met nieuwe of verbeterde informatie. Bij “Update Spark” kan het gaan om het vernieuwen van functies, systemen of onderdelen van Spark.\n\nSpark moet bij een update herkennen wat de huidige situatie is, welke wijziging wordt gevraagd en wat na de update behouden moet blijven. Een update hoeft niet altijd alles te vervangen. Alleen de onderdelen die moeten veranderen worden aangepast, terwijl de overige informatie behouden blijft."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders, ontwikkelaars en systemen die informatie, gegevens, programma’s of onderdelen bijwerken.",
+        "wat": "Het bijwerken, aanpassen of vernieuwen van iets dat al bestaat.",
+        "wanneer": "Wanneer informatie verouderd is, gegevens veranderen, fouten moeten worden opgelost of nieuwe functies beschikbaar komen.",
+        "waar": "In systemen, programma’s, applicaties, databases, bestanden, kenniskaarten en digitale omgevingen.",
+        "waarom": "Om informatie actueel te houden, fouten te herstellen, beveiliging te verbeteren of functies toe te voegen.",
+        "hoe": "Door bestaande informatie, gegevens, instellingen of functies te controleren en de benodigde onderdelen aan te passen, toe te voegen, te verwijderen of te vervangen."
+      },
+      "tags": [
+        "updaten",
+        "update",
+        "bijgewerkt",
+        "bijwerken",
+        "vernieuwen",
+        "vernieuwd",
+        "actualiseren",
+        "aanpassen",
+        "wijziging",
+        "veranderen",
+        "verbetering",
+        "nieuwe informatie",
+        "gegevens",
+        "functies",
+        "systeem",
+        "programma",
+        "applicatie",
+        "kenniskaart",
+        "Spark",
+        "context",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0346ff68",
+          "begrip": "bijgewerkt",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "aanpassen",
+            "actualiseren",
+            "bijgewerkt",
+            "bijwerken",
+            "gegevens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d0ca25db",
+          "begrip": "wijziging",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "aanpassen",
+            "context",
+            "gegevens",
+            "systeem",
+            "veranderen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fix-93584f94ad",
+          "begrip": "Even kijken naar je nieuwe features.",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "functies",
+            "neutraal",
+            "systeem",
+            "update",
+            "verbetering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-85d2b504",
+          "begrip": "kaarten",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "gegevens",
+            "kenniskaart",
+            "neutraal",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4e8ca249",
+          "begrip": "aangepast",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassen",
+            "neutraal",
+            "veranderen",
+            "verbetering",
+            "wijziging"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d8a5e139",
+          "begrip": "synchroniseer",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "bijwerken",
+            "gegevens",
+            "neutraal",
+            "systeem",
+            "update"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86b28776",
+          "begrip": "ingevuld",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "gegevens",
+            "kenniskaart",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0211e5df",
+          "begrip": "wat heb jij te bieden spark?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "functies",
+            "spark",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "gegevens",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "spark",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-08-02T13:28:08.437075+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-02T13:33:05.599017+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "je happerd soms met updaten van kb kaarten",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-02T13:32:59.061765+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-02T13:33:06.176841+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-02T13:33:06.206350+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
   "metadata": {
-    "card_count": 1252,
-    "last_updated": "2026-07-30T14:35:32.112022+00:00"
+    "card_count": 1279,
+    "last_updated": "2026-08-02T13:33:05.599051+00:00"
   }
 }

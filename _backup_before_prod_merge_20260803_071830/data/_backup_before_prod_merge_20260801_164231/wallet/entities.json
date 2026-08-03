@@ -1,0 +1,119 @@
+{
+  "entities": {
+    "spark_core": {
+      "id": "spark_core",
+      "name": "Spark AI",
+      "type": "system",
+      "description": "Spark Core trading & ontwikkeling. Saldo = Bitvavo wallet.",
+      "wallets": {
+        "crypto": {
+          "provider": "bitvavo",
+          "balance_eur": 50.8,
+          "enabled": true
+        }
+      },
+      "purpose": "Trading & Infrastructure",
+      "owner": "system",
+      "color": "amber",
+      "created_at": 1711372800,
+      "btw_plichtig": false,
+      "btw_nummer": null,
+      "kvk_nummer": null,
+      "bank": {
+        "naam": "Bitvavo (Spark AI bank)",
+        "iban": null,
+        "provider": "bitvavo"
+      },
+      "updated_at": "2026-05-21T12:38:45.566199+00:00"
+    },
+    "spark_your_life": {
+      "id": "spark_your_life",
+      "name": "Spark Zorgboerderij",
+      "type": "project",
+      "description": "Impact project & zorgboerderij",
+      "wallets": {
+        "bank": {
+          "iban": "NL43 INGB 0006 6836 13",
+          "balance_eur": 0,
+          "provider": "ING"
+        }
+      },
+      "purpose": "Social Impact & Zorg",
+      "owner": "spark_core",
+      "color": "purple",
+      "created_at": 1711372800,
+      "btw_plichtig": true,
+      "btw_nummer": null,
+      "kvk_nummer": null,
+      "bank": {
+        "naam": "ING Zakelijk",
+        "iban": null,
+        "provider": ""
+      },
+      "updated_at": "2026-05-21T12:40:33.927162+00:00"
+    },
+    "roadkill_merch": {
+      "id": "roadkill_merch",
+      "name": "Roadkill Shop",
+      "type": "business",
+      "description": "Merchandise verkoop (caps, hoodies, sets)",
+      "wallets": {
+        "bank": {
+          "iban": "NL43 INGB 0006 6836 13",
+          "balance_eur": 0,
+          "provider": "ING"
+        }
+      },
+      "purpose": "Revenue Generation",
+      "owner": "spark_core",
+      "color": "green",
+      "created_at": 1711372800,
+      "btw_plichtig": true,
+      "btw_nummer": null,
+      "kvk_nummer": null,
+      "bank": {
+        "naam": "Zakelijke bank Roadkill Shop",
+        "iban": null,
+        "provider": ""
+      },
+      "updated_at": "2026-05-21T12:38:45.566199+00:00"
+    },
+    "personal_willem": {
+      "id": "personal_willem",
+      "name": "Mijn Prive",
+      "type": "personal",
+      "description": "Willem's persoonlijke financien",
+      "wallets": {
+        "fiat": {
+          "iban": "NL80 INGB 0675 4994 02",
+          "balance_eur": 0,
+          "provider": "ING"
+        }
+      },
+      "purpose": "Persoonlijk Vermogen",
+      "owner": "willem",
+      "color": "gray",
+      "created_at": 1711372800,
+      "btw_plichtig": false,
+      "btw_nummer": null,
+      "bank": {
+        "naam": "Privé bank Willem",
+        "iban": null,
+        "provider": ""
+      },
+      "updated_at": "2026-05-21T12:38:45.566199+00:00"
+    }
+  },
+  "btw_tarieven": {
+    "hoog": 21,
+    "laag": 9,
+    "nul": 0
+  },
+  "dagboeken": {
+    "verkoop": "Verkoopboek",
+    "inkoop": "Inkoopboek",
+    "bank": "Bankboek",
+    "kas": "Kasboek",
+    "memoriaal": "Memoriaalboek"
+  }
+}

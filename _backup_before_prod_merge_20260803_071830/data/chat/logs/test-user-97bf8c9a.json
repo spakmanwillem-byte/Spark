@@ -1,0 +1,67 @@
+{
+  "user_id": "test-user-97bf8c9a",
+  "conversations": [
+    {
+      "id": "conv-80f4f525",
+      "timestamp": "2026-07-29T19:57:22.004869+00:00",
+      "user_id": "test-user-97bf8c9a",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**huidige**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-97bf8c9a",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-6b33c360",
+      "timestamp": "2026-07-29T19:57:22.168424+00:00",
+      "user_id": "test-user-97bf8c9a",
+      "user_naam": "Willem",
+      "user_message": "nee",
+      "spark_response": "OK, geen probleem. 🌿 Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_declined",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_declined"
+      },
+      "metadata": {
+        "session_id": "test-flow-97bf8c9a",
+        "gesprek_nummer": 2
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-user-97bf8c9a",
+    "total_conversations": 2,
+    "last_updated": "2026-07-29T19:57:22.168424+00:00"
+  }
+}

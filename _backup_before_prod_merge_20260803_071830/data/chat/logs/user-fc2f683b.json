@@ -1,0 +1,105 @@
+{
+  "user_id": "user-fc2f683b",
+  "conversations": [
+    {
+      "id": "conv-204ec359",
+      "timestamp": "2026-08-01T06:45:02.619706+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "welke gradatie ben ik",
+      "spark_response": "Maaike, jij zit op **gradatie 2**. Dat betekent dat je al toegang hebt tot de basis‑functies — kennisbank, agenda, notities, dagboek en een paar extra tools. Naarmate je meer leert en groeit, kun je hoger opschalen en meer mogelijkheden ontgrendelen. Laat me weten als je wilt ontdekken wat er nog meer voor je klaarstaat!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-34be5d8c",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d",
+          "kbv2-skel-59c4c4f6",
+          "kbv2-skel-4bd2830e"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-4c57a08e",
+      "timestamp": "2026-08-01T06:46:11.043233+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "heb ik een winkel",
+      "spark_response": "Ja, je hebt een **Winkel** in je dashboard. Daar kun je, mocht je dat willen, goederen of diensten aanbieden aan andere gebruikers. Op dit moment zie ik geen specifieke producten in je assortiment, dus de winkel is er wel, maar er staan nog geen items in. Als je wilt kun je beginnen met het toevoegen van producten — denk aan de **assortimentsbreedte**, **assortimentslengte** en **assortimentsdiepte** om je aanbod vorm te geven. Laat me weten wat je wilt verkopen, dan help ik je met de eerste stappen!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "gradatie",
+        "used_cards": [
+          "kbv2-7c04f767",
+          "kbv2-489fde1f",
+          "kbv2-0dc511c5",
+          "kbv2-7643293c",
+          "kbv2-600eab6c"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-81f9a360",
+      "timestamp": "2026-08-01T06:46:26.794608+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Hoe heet mijn Winkel",
+      "spark_response": "Maaike, ik zie geen specifieke naam voor jouw Winkel in de gegevens die ik heb. Kun je me laten weten hoe je jouw winkel wilt noemen? Dan kan ik die naam voor je opslaan en gebruiken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "gradatie",
+        "used_cards": [
+          "kbv2-7c04f767",
+          "kbv2-b5af1c60",
+          "kbv2-81d826ac",
+          "kbv2-0dc511c5",
+          "kbv2-7643293c"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-36123ceb",
+      "timestamp": "2026-08-01T06:46:38.359309+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Dank",
+      "spark_response": "Graag gedaan, Maaike! Ik waardeer je dankbaarheid enorm. Het is fijn om te weten dat ik je kan helpen. Laat me weten als er nog iets is waar je meer over wilt weten of als je een volgende stap in je winkel wilt zetten. 😊",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "winkel",
+        "used_cards": [
+          "kbv2-369f8921",
+          "kbv2-1e02ff1c",
+          "kbv2-93b38729",
+          "kbv2-skel-289e4cfe"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 4
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-fc2f683b",
+    "total_conversations": 4,
+    "last_updated": "2026-08-01T06:46:38.359309+00:00"
+  }
+}

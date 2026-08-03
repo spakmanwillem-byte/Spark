@@ -1,0 +1,136 @@
+{
+  "test": "random_seed_robustness",
+  "n_seeds": 10,
+  "random_stats": {
+    "min": 0.9,
+    "median": 1.61,
+    "mean": 2.43,
+    "max": 6.49,
+    "stddev": 1.64
+  },
+  "random_per_seed": [
+    {
+      "seed": 0,
+      "total_pnl": 3.09,
+      "per_market": {
+        "BCH-EUR": 0.69,
+        "BTC-EUR": 0,
+        "ETH-EUR": 0.27,
+        "SOL-EUR": 0.22,
+        "ADA-EUR": 0.24,
+        "ATOM-EUR": 1.67
+      }
+    },
+    {
+      "seed": 1,
+      "total_pnl": 1.04,
+      "per_market": {
+        "BCH-EUR": 0.19,
+        "BTC-EUR": 0.06,
+        "ETH-EUR": 0.12,
+        "SOL-EUR": 0,
+        "ADA-EUR": 0,
+        "ATOM-EUR": 0.67
+      }
+    },
+    {
+      "seed": 2,
+      "total_pnl": 6.49,
+      "per_market": {
+        "BCH-EUR": 0.37,
+        "BTC-EUR": 0.25,
+        "ETH-EUR": 0.26,
+        "SOL-EUR": 0.37,
+        "ADA-EUR": 2.47,
+        "ATOM-EUR": 2.77
+      }
+    },
+    {
+      "seed": 3,
+      "total_pnl": 0.9,
+      "per_market": {
+        "BCH-EUR": 0.15,
+        "BTC-EUR": 0,
+        "ETH-EUR": 0.12,
+        "SOL-EUR": 0.15,
+        "ADA-EUR": 0.18,
+        "ATOM-EUR": 0.3
+      }
+    },
+    {
+      "seed": 4,
+      "total_pnl": 3.22,
+      "per_market": {
+        "BCH-EUR": 0.13,
+        "BTC-EUR": 0.24,
+        "ETH-EUR": 0.61,
+        "SOL-EUR": 0.33,
+        "ADA-EUR": 0,
+        "ATOM-EUR": 1.91
+      }
+    },
+    {
+      "seed": 5,
+      "total_pnl": 1.49,
+      "per_market": {
+        "BCH-EUR": 0.41,
+        "BTC-EUR": 0.13,
+        "ETH-EUR": 0.19,
+        "SOL-EUR": 0.22,
+        "ADA-EUR": 0.12,
+        "ATOM-EUR": 0.42
+      }
+    },
+    {
+      "seed": 6,
+      "total_pnl": 1.56,
+      "per_market": {
+        "BCH-EUR": 0.46,
+        "BTC-EUR": 0,
+        "ETH-EUR": 0.23,
+        "SOL-EUR": 0.35,
+        "ADA-EUR": 0.11,
+        "ATOM-EUR": 0.41
+      }
+    },
+    {
+      "seed": 7,
+      "total_pnl": 3.63,
+      "per_market": {
+        "BCH-EUR": 0.24,
+        "BTC-EUR": 0.16,
+        "ETH-EUR": 0,
+        "SOL-EUR": 0.23,
+        "ADA-EUR": 1.71,
+        "ATOM-EUR": 1.29
+      }
+    },
+    {
+      "seed": 8,
+      "total_pnl": 1.61,
+      "per_market": {
+        "BCH-EUR": 0.54,
+        "BTC-EUR": 0,
+        "ETH-EUR": 0.24,
+        "SOL-EUR": 0.3,
+        "ADA-EUR": 0.21,
+        "ATOM-EUR": 0.32
+      }
+    },
+    {
+      "seed": 9,
+      "total_pnl": 1.24,
+      "per_market": {
+        "BCH-EUR": 0.21,
+        "BTC-EUR": 0,
+        "ETH-EUR": 0.19,
+        "SOL-EUR": 0.19,
+        "ADA-EUR": 0.06,
+        "ATOM-EUR": 0.59
+      }
+    }
+  ],
+  "d_deterministic_pnl": 2.63,
+  "random_beats_d_count": 4,
+  "conclusion": "D wint als mean_random < D_pnl OF stddev_random > 30% van mean"
+}

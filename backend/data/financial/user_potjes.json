@@ -7,16 +7,19 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.98,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 0.1650300010033692,
+            "highest_price": 0.16545,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-02T16:00:14.416515+00:00",
+            "amount_eur": 10.04,
+            "cluster_id": "7c38eda035ca",
+            "cluster_size": 1
           },
           "market": "ADA-EUR",
           "stats": {
@@ -26,7 +29,7 @@
             "total_pnl": -0.2135
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €0.145010001605322",
+          "last_action": "BUY cluster 7c38ed @ EUR0.1650",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
@@ -46,6 +49,14 @@
               "trade_id": "00000000-0000-03f2-0100-000973c14ce7",
               "entry_price": 0.145010001605322,
               "amount_eur": 12.82
+            },
+            {
+              "ts": "2026-08-02T16:00:14.416515+00:00",
+              "action": "BUY",
+              "cluster_id": "7c38eda035ca",
+              "trade_id": "00000000-0000-03f2-0100-0009875acd8a",
+              "entry_price": 0.1650300010033692,
+              "amount_eur": 10.04
             }
           ],
           "reconcile_audit": [
@@ -60,7 +71,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.98,
+          "capital": 4.93,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -113,7 +124,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.98,
+          "capital": 4.93,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -158,16 +169,19 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.98,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 63.271000757608604,
+            "highest_price": 64.161,
+            "trailing_active": true,
+            "entry_time": "2026-08-02T13:28:59.279922+00:00",
+            "amount_eur": 10.04,
+            "cluster_id": "7a1907a87b84",
+            "cluster_size": 1
           },
           "market": "SOL-EUR",
           "stats": {
@@ -177,7 +191,7 @@
             "total_pnl": -0.1726
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
-          "last_action": "SELL @ €64.48 | netto €-0.173",
+          "last_action": "BUY cluster 7a1907 @ EUR63.2710",
           "minted_from": "willem_inleg_basis",
           "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
           "log_event_id": "00c6f3fa-7611-4524-9de5-f3be9de9fd64",
@@ -189,13 +203,21 @@
               "amount_eur": 12.5,
               "trade_id": "00000000-0000-0560-0100-00097268dc18",
               "market": "SOL-EUR"
+            },
+            {
+              "ts": "2026-08-02T13:28:59.279922+00:00",
+              "action": "BUY",
+              "cluster_id": "7a1907a87b84",
+              "trade_id": "00000000-0000-0560-0100-000986ff72c7",
+              "entry_price": 63.271000757608604,
+              "amount_eur": 10.04
             }
           ]
         },
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 10.98,
+          "capital": 4.93,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -233,7 +255,7 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 10.98,
+          "capital": 4.93,
           "max_size": 80.24,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -268,7 +290,7 @@
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.98,
+          "capital": 4.93,
           "max_size": 65.0145,
           "pot_locked": false,
           "market": "BTC-EUR",
@@ -295,18 +317,19 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.94,
+          "capital": 10.97,
           "max_size": 80.24,
           "pot_locked": false,
           "market": "BCH-EUR",
           "minted_at": "2026-07-20T16:52:48.805064+00:00",
           "minted_from": "test_reserve_log",
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 506.821507,
+            "size": 0.1200028,
+            "highest_price": 506.821507,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-02T07:15:06.531861+00:00"
           },
           "stats": {
             "trades": 2,
@@ -341,6 +364,14 @@
               "action": "restwaarde_close",
               "reason": "Pot claimt 0.073918 BCH maar Bitvavo heeft 0.001179. Coin al verkocht buiten pot-state om.",
               "entry_price": 189.9400169426495
+            },
+            {
+              "ts": "2026-08-02T07:15:06.531874+00:00",
+              "action": "reopen_orphan",
+              "reason": "Orphaned BCH balance reconciled — trader neemt over",
+              "avg_entry_price": 506.821507,
+              "size": 0.1200028,
+              "net_paid_eur": 60.82
             }
           ]
         },
@@ -348,18 +379,19 @@
           "id": "pot-002",
           "index": 1,
           "nummer": 2,
-          "capital": 10.94,
+          "capital": 10.03,
           "max_size": 60.0,
           "pot_locked": false,
           "market": "BCH-EUR",
           "minted_at": "2026-07-31T10:20:50.733070+00:00",
           "minted_from": "v11_potjes_reconcile",
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 1041.336362,
+            "size": 0.05840572,
+            "highest_price": 1041.336362,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-02T20:06:18.209359+00:00"
           },
           "stats": {
             "trades": 0,
@@ -369,13 +401,23 @@
           },
           "trade_log": [],
           "last_action": null,
-          "note": "v11_potjes_reconcile — auto-added to match token balance"
+          "note": "v11_potjes_reconcile — auto-added to match token balance",
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-02T20:06:18.209369+00:00",
+              "action": "reopen_orphan",
+              "reason": "Orphaned BCH balance reconciled — trader neemt over",
+              "avg_entry_price": 1041.336362,
+              "size": 0.05840572,
+              "net_paid_eur": 60.82
+            }
+          ]
         },
         {
           "id": "pot-003",
           "index": 2,
           "nummer": 3,
-          "capital": 10.94,
+          "capital": 9.95,
           "max_size": 60.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -409,18 +451,21 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.98,
+          "capital": 10.05,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 63.26000391934236,
+            "highest_price": 64.129,
+            "trailing_active": true,
+            "entry_time": "2026-08-02T13:27:32.958390+00:00",
+            "amount_eur": 10.05,
+            "cluster_id": "a014835531ab",
+            "cluster_size": 1
           },
-          "market": "BCH-EUR",
+          "market": "SOL-EUR",
           "stats": {
             "trades": 0,
             "wins": 0,
@@ -428,24 +473,37 @@
             "total_pnl": 0.0
           },
           "created_at": "2026-07-31T07:33:04.005890+00:00",
-          "last_action": null,
-          "source": "token_buy_expansion"
+          "last_action": "BUY cluster a01483 @ EUR63.2600",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-08-02T13:27:32.958390+00:00",
+              "action": "BUY",
+              "cluster_id": "a014835531ab",
+              "trade_id": "00000000-0000-0560-0100-000986feb259",
+              "entry_price": 63.26000391934236,
+              "amount_eur": 10.05
+            }
+          ]
         },
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.98,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 0.16468000232493285,
+            "highest_price": 0.16532,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-02T15:57:54.282017+00:00",
+            "amount_eur": 10.04,
+            "cluster_id": "005e36e47005",
+            "cluster_size": 1
           },
-          "market": "BCH-EUR",
+          "market": "ADA-EUR",
           "stats": {
             "trades": 0,
             "wins": 0,
@@ -453,8 +511,18 @@
             "total_pnl": 0.0
           },
           "created_at": "2026-07-31T07:53:42.395026+00:00",
-          "last_action": null,
-          "source": "token_buy_expansion"
+          "last_action": "BUY cluster 005e36 @ EUR0.1647",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-08-02T15:57:54.282017+00:00",
+              "action": "BUY",
+              "cluster_id": "005e36e47005",
+              "trade_id": "00000000-0000-03f2-0100-000987595fff",
+              "entry_price": 0.16468000232493285,
+              "amount_eur": 10.04
+            }
+          ]
         }
       ],
       "last_buy_cycle": null,

@@ -1,0 +1,162 @@
+{
+  "A": {
+    "strategy": "Bollinger 2σ (baseline huidig)",
+    "trades": 1,
+    "wins": 1,
+    "losses": 0,
+    "win_rate": 100.0,
+    "total_pnl_eur": 0.11,
+    "avg_pnl_eur": 0.114,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 9.8,
+    "blocked": 0,
+    "allowed": 2,
+    "open_at_end": true,
+    "trade_details": [
+      {
+        "entry_price": 77434.0,
+        "exit_price": 78700.0,
+        "entry_ts": 1768206600000,
+        "exit_ts": 1768241700000,
+        "net_pnl": 0.1135,
+        "hold_bars": 39,
+        "win": true
+      }
+    ]
+  },
+  "B": {
+    "strategy": "Bollinger 2σ + gap-streng (v7 huidig)",
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0,
+    "total_pnl_eur": 0,
+    "avg_pnl_eur": 0,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 0,
+    "blocked": 472,
+    "allowed": 0,
+    "open_at_end": false,
+    "trade_details": []
+  },
+  "C": {
+    "strategy": "Bollinger 2σ + gap-los",
+    "trades": 1,
+    "wins": 1,
+    "losses": 0,
+    "win_rate": 100.0,
+    "total_pnl_eur": 0.1,
+    "avg_pnl_eur": 0.103,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 42.8,
+    "blocked": 471,
+    "allowed": 1,
+    "open_at_end": false,
+    "trade_details": [
+      {
+        "entry_price": 61303.0,
+        "exit_price": 62244.0,
+        "entry_ts": 1775959200000,
+        "exit_ts": 1776113100000,
+        "net_pnl": 0.1035,
+        "hold_bars": 171,
+        "win": true
+      }
+    ]
+  },
+  "D": {
+    "strategy": "Bollinger 2σ + gap-body (50%)",
+    "trades": 1,
+    "wins": 1,
+    "losses": 0,
+    "win_rate": 100.0,
+    "total_pnl_eur": 0.13,
+    "avg_pnl_eur": 0.132,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 2270.0,
+    "blocked": 77,
+    "allowed": 2,
+    "open_at_end": true,
+    "trade_details": [
+      {
+        "entry_price": 68679.0,
+        "exit_price": 69930.0,
+        "entry_ts": 1769870700000,
+        "exit_ts": 1778068800000,
+        "net_pnl": 0.1322,
+        "hold_bars": 9080,
+        "win": true
+      }
+    ]
+  },
+  "E": {
+    "strategy": "Bollinger 2σ + 3-red-green (Neef)",
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0,
+    "total_pnl_eur": 0,
+    "avg_pnl_eur": 0,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 0,
+    "blocked": 11,
+    "allowed": 1,
+    "open_at_end": true,
+    "trade_details": []
+  },
+  "F": {
+    "strategy": "Bollinger 1.5σ (losser BUY)",
+    "trades": 1,
+    "wins": 1,
+    "losses": 0,
+    "win_rate": 100.0,
+    "total_pnl_eur": 0.11,
+    "avg_pnl_eur": 0.114,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 9.8,
+    "blocked": 0,
+    "allowed": 2,
+    "open_at_end": true,
+    "trade_details": [
+      {
+        "entry_price": 77434.0,
+        "exit_price": 78700.0,
+        "entry_ts": 1768206600000,
+        "exit_ts": 1768241700000,
+        "net_pnl": 0.1135,
+        "hold_bars": 39,
+        "win": true
+      }
+    ]
+  },
+  "G": {
+    "strategy": "Bollinger 1.5σ + gap-body",
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0,
+    "total_pnl_eur": 0,
+    "avg_pnl_eur": 0,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 0,
+    "blocked": 12,
+    "allowed": 1,
+    "open_at_end": true,
+    "trade_details": []
+  },
+  "H": {
+    "strategy": "Bollinger 1.5σ + gap-body + break-even sell",
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0,
+    "total_pnl_eur": 0,
+    "avg_pnl_eur": 0,
+    "max_drawdown_eur": 0,
+    "avg_hold_hours": 0,
+    "blocked": 12,
+    "allowed": 1,
+    "open_at_end": true,
+    "trade_details": []
+  }
+}

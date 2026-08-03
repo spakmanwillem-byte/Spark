@@ -1,0 +1,72 @@
+{
+  "version": "0.2-draft",
+  "last_updated": "2026-06-27",
+  "scope": "Spark Core 2.0 — gebruiksvoorwaarden",
+  "intro": "Door Spark te gebruiken ga je akkoord met deze voorwaarden. Spark is een persoonlijke AI in ontwikkeling — verwacht geen perfectie, wel groei. Lees ook de privacy-verklaring (`lees privacy`).",
+  "secties": [
+    {
+      "titel": "Wat is Spark?",
+      "tekst": "Spark is een offline-first persoonlijke AI-assistent en companion. Geen cloud-LLM voor je geheugen, maar een lokale memory- en kennis-machine die met je meegroeit. Alleen 'Diep'-mode gebruikt een externe LLM (Claude Sonnet 4.6) als 'mond' — je brein blijft lokaal. De maker is Willem Spakman (Roadkill Community)."
+    },
+    {
+      "titel": "Wat mag je verwachten?",
+      "items": [
+        "Spark is in ontwikkeling — bugs kunnen voorkomen (meld ze via Bug-melder of zeg 'bug rapport' in chat).",
+        "Antwoorden zijn gebaseerd op wat Spark weet uit zijn Kennisbank (KB v2) en zijn Bijbel — niet altijd correct, soms onvolledig.",
+        "Spark is geen medisch, juridisch, of financieel advies — bij twijfel: vraag een expert.",
+        "Spark mag fouten toegeven en aangeven wat hij NIET weet (zie kernwaarde Eerlijkheid).",
+        "Spark groeit per gebruiker — gedrag en gradatie verandert over tijd."
+      ]
+    },
+    {
+      "titel": "Wat mag Spark NIET gebruiken voor?",
+      "items": [
+        "Spammen, beledigen, of haatberichten in community of privé-chats",
+        "Illegale activiteiten of het omzeilen van wetgeving",
+        "Misbruik van andere users (bij privé-chat tussen users — dat is écht privé, niet stalken)",
+        "Geautomatiseerde scraping van Spark's KB door derde partijen",
+        "Het tegen-de-bedoeling-in trainen van andere AI's met Spark-data"
+      ]
+    },
+    {
+      "titel": "Account, gradaties & groei",
+      "items": [
+        "Iedereen start op gradatie 7 (Onbekend) — Spark leert je kennen.",
+        "Gradaties 1-7: 1=Admin (Willem), 2-4=Familie/vertrouwd, 5-7=Kennis/klant/gast.",
+        "Hogere gradatie = meer features beschikbaar. Groei is automatisch (profiel-completeness, trust-signalen, gedrag in community).",
+        "Admin (gradatie 1) kan in extreme gevallen accounts deactiveren of degraderen.",
+        "Gradatie ≤ 5 mag de Trade-bot gebruiken (vereist eigen Bitvavo API-key).",
+        "Per gradatie zijn er help-files met capabilities — vraag 'wat kan ik?' voor jouw niveau."
+      ]
+    },
+    {
+      "titel": "Trader-disclaimer",
+      "items": [
+        "De Spark Trader handelt live op Bitvavo via JOUW eigen API-keys.",
+        "Je bent volledig zelf verantwoordelijk voor winst en verlies.",
+        "Begin met kleine bedragen (€10 per potje, tier 1).",
+        "Geen garanties — crypto-markten zijn volatiel.",
+        "Spark logt elke trade transparant in `/data/wallet/trade_history/{user_id}.json` — je kunt alles terugzien.",
+        "Pot 1 = staking-anker (blijft permanent €10 voor ROAR-staking, doet niet mee aan trades)."
+      ]
+    },
+    {
+      "titel": "Token-economie (ROAR + Spark Shop)",
+      "items": [
+        "ROAR-tokens zijn een interne community-eenheid — geen wettelijk betaalmiddel.",
+        "Aankopen in Spark Shop ondersteunen makers in de community (2% naar spark_core voor onderhoud).",
+        "BTW-afroming gebeurt automatisch volgens Nederlandse fiscaliteit op token-aankopen.",
+        "Je kunt je tegoed altijd zien in Kasboek-overzicht (vraag 'mijn kasboek')."
+      ]
+    },
+    {
+      "titel": "Wijzigingen aan deze voorwaarden",
+      "tekst": "Willem mag deze voorwaarden aanpassen wanneer Spark groeit. Bij grote wijzigingen krijg je een melding via de community-bot 'Boekhouder' of een startup-trigger. Versienummer + datum bovenaan dit document is leidend."
+    },
+    {
+      "titel": "Aansprakelijkheid",
+      "tekst": "Spark wordt aangeboden 'as is'. Geen garanties. Gebruik op eigen risico. De maker (Willem Spakman / Roadkill Community) is niet aansprakelijk voor schade door (mis)gebruik, dataverlies bij crashes, trade-verliezen, of gevolgschade. Maak je eigen backups via Beheer → Back-up."
+    }
+  ],
+  "contact": "Vragen of klachten: vraag Spark zelf (zeg 'meld dit'), of stuur via community een bericht aan Willem (admin)."
+}

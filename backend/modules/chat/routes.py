@@ -874,7 +874,37 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "make_note")
             return response
 
-        # Agenda
+        # v12_agenda_intent_split_001 — Route-splitter voor agenda-intents.
+        # Voorheen: `smart_intents.detect_agenda_intent` (simpel — matcht op woord
+        # "agenda") ving alles af → altijd overzicht. Nieuw event aanmaken werd
+        # nooit bereikt, Spark hallucineerde "aangemaakt" via LLM-fallback.
+        # Nu: eerst CREATE-detector (slim, met datetime + wat/waar). Alleen als er
+        # géén CREATE-intent is → val terug op overzicht.
+        if req.user_id:
+            try:
+                from modules.auth.service import AuthService as _Auth
+                _user_a = _Auth.get_user_by_id(req.user_id)
+            except Exception:
+                _user_a = None
+            create_intent = agenda_intent_service.detect_agenda_intent(text, user=_user_a)
+            if create_intent.get("has_intent"):
+                has_conflict = agenda_intent_service.has_agenda_conflict(req.user_id, create_intent["datetime_iso"])
+                pending = {
+                    "datetime_iso": create_intent["datetime_iso"],
+                    "raw_time": create_intent.get("raw_time"),
+                    "wat": create_intent.get("wat"),
+                    "waar": create_intent.get("waar"),
+                    "raw_text": text,
+                    "has_conflict": has_conflict,
+                }
+                session_state.set_state(req.user_id, pending_agenda=pending)
+                response["type"] = "agenda_proposal"
+                response["message"] = agenda_intent_service.build_proposal_message(create_intent, has_conflict)
+                response["agenda_intent"] = pending
+                _save_log(req, response, "agenda_proposal")
+                return response
+
+        # Agenda-overzicht (READ) — fallback als geen CREATE-intent
         if si.detect_agenda_intent(text) and req.user_id:
             out = si.handle_agenda(req.user_id, _load_user(), text)
             response.update(out)

@@ -47,6 +47,10 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
   const [uploadError, setUploadError] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
+  // v12_dialog_upload_tags_001 — pre-upload tag-selectie voor dialogen.
+  // Voorheen: dialoog-uploads kwamen binnen zonder tags → later handmatig editen.
+  // Nu: user klikt tags aan vóór upload, worden meegestuurd in FormData.
+  const [pendingUploadTags, setPendingUploadTags] = useState(new Set());
 
   const load = useCallback(async () => {
     // Logs-tab gebruikt eigen browser, niet system-archive API
@@ -101,6 +105,10 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         else if (fotoSubTab === 'dnd') fd.append('tags', 'dnd');
         else fd.append('tags', 'algemeen');
       }
+      // v12_dialog_upload_tags_001 — pre-selected tags meesturen voor dialogen
+      if (activeTab === 'dialogen' && pendingUploadTags.size > 0) {
+        fd.append('tags', Array.from(pendingUploadTags).join(','));
+      }
       if (currentUserId) fd.append('uploaded_by', currentUserId);
       const res = await fetch(`${API}/api/system-archive/upload`, { method: 'POST', body: fd });
       if (!res.ok) {
@@ -113,6 +121,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
     }
     setUploading(false);
     if (fileInputRef.current) fileInputRef.current.value = '';
+    // v12_dialog_upload_tags_001 — reset gekozen tags na upload
+    setPendingUploadTags(new Set());
   };
 
   const deleteFile = async (fileId) => {
@@ -229,6 +239,33 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
               <p>Upload teksten van gesprekken, dialogen, scripts of oefen-gesprekken (.txt, .md, .json, .srt). Tag ze met types (rauw, afscheid, vreugde, delen, etc.) zodat Spark later via een leer-module kan herkennen hoe gesprekken contextueel verlopen en hoe te reageren.</p>
             </div>
           </div>
+          {/* v12_dialog_upload_tags_001 — pre-upload tag-selectie */}
+          {availableTags.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-cyan-500/20">
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-2">
+                Tags voor volgende upload {pendingUploadTags.size > 0 && <span className="text-cyan-400">· {pendingUploadTags.size} gekozen</span>}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {availableTags.map(t => {
+                  const on = pendingUploadTags.has(t);
+                  return (
+                    <button key={t} type="button"
+                      data-testid={`upload-tag-${t}`}
+                      onClick={() => setPendingUploadTags(s => {
+                        const c = new Set(s);
+                        if (c.has(t)) c.delete(t); else c.add(t);
+                        return c;
+                      })}
+                      className={`text-[10px] px-2 py-1 rounded-full border transition-colors ${on
+                        ? 'bg-cyan-500/20 border-cyan-400/50 text-cyan-300'
+                        : 'bg-slate-800/40 border-slate-700/50 text-slate-400 hover:bg-slate-800/70'}`}>
+                      {on ? '✓ ' : '+ '}{t}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

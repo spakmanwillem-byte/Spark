@@ -58349,11 +58349,80 @@
         "session_id": "default",
         "gesprek_nummer": 2296
       }
+    },
+    {
+      "id": "conv-fcf9f6b1",
+      "timestamp": "2026-08-03T08:32:16.902355+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "morgen om 11 uur Jeroen bellen voor afspraak kennismaking",
+      "spark_response": "Ik hoorde dat je morgen om 11 uur gaat bellen. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "bellen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2297
+      }
+    },
+    {
+      "id": "conv-6fc3218d",
+      "timestamp": "2026-08-03T08:32:17.068958+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat staat er in mijn agenda",
+      "spark_response": "Je agenda is helemaal leeg voor de komende week. Vrij speelveld dus 🙂",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2298
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2296,
-    "last_updated": "2026-08-03T08:05:31.595809+00:00"
+    "total_conversations": 2298,
+    "last_updated": "2026-08-03T08:32:17.068958+00:00"
   }
 }

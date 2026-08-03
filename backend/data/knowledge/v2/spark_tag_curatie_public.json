@@ -94,8 +94,9 @@
   },
 
   "6_hoe_spark_dit_kan_uitleggen": {
-    "instructie": "Als iemand vraagt 'hoe worden tags opgeruimd' of 'wat is de risk-badge' — lees dit bestand en formuleer een antwoord op basis van 1_kernidee en 4_wat_te_doen.",
-    "voorbeeld_antwoord": "Ik heb een tag-curatie systeem dat dubbele varianten van hetzelfde woord opspoort (bv. 'emotie' en 'emoties' zijn hetzelfde). Willem kiest welke variant blijft en klikt Merge. Bij twijfelgevallen zoals 'wet' en 'weten' krijgt hij een rode waarschuwing want die zijn semantisch verschillend ondanks dezelfde stam."
+    "instructie": "Als iemand vraagt 'hoe worden tags opgeruimd' of 'wat is de risk-badge' — lees dit bestand en formuleer een antwoord op basis van 1_kernidee en 4_wat_te_doen. Als iemand vraagt 'waar hoort deze kaart' of 'in welke lade' — gebruik sectie 8_lade_toewijzing_regels.",
+    "voorbeeld_antwoord_tag_curatie": "Ik heb een tag-curatie systeem dat dubbele varianten van hetzelfde woord opspoort (bv. 'emotie' en 'emoties' zijn hetzelfde). Willem kiest welke variant blijft en klikt Merge. Bij twijfelgevallen zoals 'wet' en 'weten' krijgt hij een rode waarschuwing want die zijn semantisch verschillend ondanks dezelfde stam.",
+    "voorbeeld_antwoord_lade": "Kaarten worden verdeeld over 4 lades: voelen (emoties/zintuigen), spreken (taal/communicatie), weten (feiten/concepten), doen (acties/praktijk). Werkwoorden in hun meervoudsvorm — de infinitief zoals 'lopen', 'werken', 'voelen' — horen in de doen-lade omdat een werkwoord per definitie een handeling is. Sommige enkelvoudige zelfstandige naamwoorden horen óók in doen als ze een proces beschrijven (onderhoud, procedure, keuze) — niet iets dat je weet, maar iets dat je doet."
   },
 
   "7_status_en_roadmap": {
@@ -116,5 +117,38 @@
       "min_stem_chars": "3 (tag_normalizer.py:_strip_suffix)",
       "false_positive_pairs": "~25 pairs (tag_normalizer.py:_KNOWN_FALSE_POSITIVE_PAIRS)"
     }
+  },
+
+  "8_lade_toewijzing_regels": {
+    "context": "Willem's taxonomie-principes voor kaart-plaatsing in KB v2. Deze regels zijn taxonomie, geen morfologie — de tag-stemmer bemoeit zich hier niet mee. Bedoeld als richtlijn voor snap-flow (tag→kaart), wees-recover, en handmatige kaart-aanmaak.",
+    "de_vier_lades": {
+      "voelen": "Emoties, gevoelens, zintuigen, lichaamssensaties. Voorbeelden: blij, verdrietig, prikkel, angst, warmte, rust, spanning.",
+      "spreken": "Taal, communicatie, uitingen, gesprek-elementen. Voorbeelden: woord, boodschap, gesprek, vraag, antwoord, dialoog, stem.",
+      "weten": "Kennis, feiten, concepten, theorieën, systemen als kennis-object. Voorbeelden: geschiedenis, wet, natuurwet, logica, definitie, filosofie, biologie.",
+      "doen": "Handelingen, acties, procedures, praktijk. Voorbeelden: lopen, onderhouden, kiezen, repareren, procedure, actie, handeling."
+    },
+    "regel_1_werkwoorden_meervoud_naar_doen": {
+      "wat": "Werkwoorden in hun meervoudsvorm (de infinitief in NL, eindigend op -en) horen in de doen-lade.",
+      "waarom": "Een werkwoord is per definitie een handeling. De infinitief is de canonieke woordenboek-vorm — 'lopen' is de handeling zelf, niet een gedachte over lopen. Dat maakt het inherent een doen-kaart, niet een weten-kaart.",
+      "voorbeelden_correct": ["lopen", "werken", "voelen", "helpen", "zoeken", "denken", "spreken", "eten", "schrijven", "leren"],
+      "waarom_niet_stam_vorm": "De enkelvoudige stam ('loop', 'werk', 'voel') is dubbelzinnig — het kan een zn zijn (een loop, het werk, een gevoel). Meervoud/infinitief geeft het duidelijke werkwoords-signaal.",
+      "uitzondering_zn_op_en": "Sommige zn eindigen ook op -en (leven, wapen, teken) — die volgen regel 2, niet regel 1. Semantiek beslist, niet spelling."
+    },
+    "regel_2_kernwoord_enkelvoud_naar_doen": {
+      "wat": "Bepaalde enkelvoudige zelfstandige naamwoorden horen óók in doen — ondanks dat ze niet werkwoord zijn.",
+      "criterium": "Het zn beschrijft een handeling, proces of praktische activiteit — geen mentale kennis of gevoel. Vraag: 'doe je het, of denk je erover?'",
+      "voorbeelden_correct": ["onderhoud", "procedure", "keuze", "actie", "handeling", "reparatie", "operatie", "instructie", "beweging", "training", "installatie"],
+      "voorbeelden_uitzondering_wel_weten": ["filosofie", "wet", "theorie", "definitie", "logica", "geschiedenis", "biologie", "wiskunde"],
+      "vuistregel": "Als je bij het woord een verborgen 'doen' hoort (onderhoud = onderhouden, keuze = kiezen, procedure = procedurele stappen), dan hoort het in doen. Als je een verborgen 'weten' hoort (wet = kennis over regels, theorie = een gedachtemodel), dan hoort het in weten."
+    },
+    "checklist_bij_twijfel": [
+      "1. Is het een werkwoord in meervoud (-en)? → doen (regel 1)",
+      "2. Is het een gevoel/emotie/zintuig? → voelen",
+      "3. Gaat het over taal/uiting? → spreken",
+      "4. Is het een proces of actie ondanks enkelvoud? → doen (regel 2)",
+      "5. Is het feitelijke kennis of een concept? → weten",
+      "6. Twijfel je nog? → weten is default voor abstract, doen voor concreet"
+    ],
+    "dyslectische_precisie": "Deze regels zijn Willems eigen taxonomie — niet standaard NL grammatica. De 'meervoud is doen' regel is een pragmatisch onderscheid om taalkundige dubbelzinnigheid te vermijden. Consistent volgen levert een KB op waarin Spark altijd weet waar hij moet zoeken."
   }
 }

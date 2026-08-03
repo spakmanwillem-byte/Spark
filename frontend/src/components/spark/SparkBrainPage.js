@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { useAuth } from '../../context/AuthContext';
+import { KbCurationSuite } from './KbCurationSuite';
 import { toast } from 'sonner';
 import {
   Brain, Heart, BookOpen, Star,
@@ -985,7 +987,8 @@ export default SparkBrainPage;
 
 /* === GROEIEN section === */
 function GroeienSection() {
-  const [tab, setTab] = useState('vocab'); // 'vocab' | 'tags' | 'orphans'
+  const { user } = useAuth();
+  const [tab, setTab] = useState('vocab'); // 'vocab' | 'tags' | 'orphans' | 'curation'
   const [vocabData, setVocabData] = useState(null);
   const [tagsData, setTagsData] = useState(null);
   const [orphansData, setOrphansData] = useState(null);
@@ -1054,6 +1057,7 @@ function GroeienSection() {
     { id: 'vocab', label: 'Vocab kandidaten', sub: 'Woorden uit jouw kennisbank' },
     { id: 'tags', label: 'Tags zonder kaart', sub: 'Veelgebruikte tags die nog géén kaart hebben' },
     { id: 'orphans', label: 'Weeskaarten', sub: 'In graph, niet in KB (recover)' },
+    { id: 'curation', label: 'KB-Curatie Suite', sub: '5W-Filler · Duplicaten · Lade-check (Sessie 55)' },
   ];
 
   return (
@@ -1151,6 +1155,13 @@ function GroeienSection() {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* v12_kb_curation_suite_001 — 5W-Filler + Duplicaten + Lade-check */}
+      {tab === 'curation' && !loading && (
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+          <KbCurationSuite userId={user?.id || 'user-001'} />
         </div>
       )}
     </>

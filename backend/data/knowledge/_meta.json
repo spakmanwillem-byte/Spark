@@ -7,11 +7,16 @@
   "status": "active",
   "owner": "spark-system",
   "blueprint_ref": "/memory/blueprints/knowledge.md",
-  "footnote": "",
+  "footnote": "v2/spark_tag_curatie_public.json (v1.1, 2026-08-03) — Publieke uitleg-blauwdruk voor Tag-Curatie mechanisme in KB v2. Beschrijft stemming-regels, risk-detectie (bekende false-positive-paren zoals wet/weten, kaars/kaart), veiligheden en Sessie-55 wensen. UI: Kennisbank v2 → tab Tag-curatie. Endpoints: /api/kb/v2/tags/scan + /tags/merge.",
   "split_from": null,
   "children_max": 4,
-  "endpoints": [],
-  "tags": [],
+  "endpoints": [
+    "GET /api/kb/v2/tags/scan",
+    "POST /api/kb/v2/tags/merge",
+    "GET /api/kb/v2/tags/normalize",
+    "GET /api/kb/v2/tags/similarity"
+  ],
+  "tags": ["kennisbank", "tag-curatie", "stemming", "risk-detectie", "canoniek"],
   "encryption": {
     "enabled": false,
     "algorithm": null,
@@ -19,8 +24,8 @@
     "key_holder": null
   },
   "created_at": "2026-05-26T15:54:32.323687+00:00",
-  "last_touched": "2026-08-03T07:33:02.453546+00:00",
-  "activity_count": 17036,
+  "last_touched": "2026-08-03T10:57:28.677767+00:00",
+  "activity_count": 17968,
   "file_count": 47,
   "subdir_count": 2,
   "extra": {}

@@ -131,3 +131,75 @@ def overlap_score(tags_a: List[str], tags_b: List[str]) -> float:
     if not a or not b:
         return 0.0
     return len(a & b) / len(a | b)
+
+
+# v12_tag_merge_safety_001 — Bekende semantisch-verschillende paren die het
+# regel-gebaseerde stemmer ten onrechte samenvoegt. Deze pairs worden in
+# tag_scan endpoint gemarkeerd als `is_risky: true` zodat de UI een
+# waarschuwing kan tonen. Admin moet expliciet bevestigen bij merge.
+_KNOWN_FALSE_POSITIVE_PAIRS = {
+    # (variant_a, variant_b) — semantisch verschillend ondanks zelfde stem
+    ("wet", "weten"),           # law vs to know
+    ("kaars", "kaart"),         # candle vs card/map
+    ("kaar", "kaart"),          # -- (kaar is truncation)
+    ("kaar", "kaars"),          # --
+    ("botten", "bots"),         # bones vs plural(bot)
+    ("botten", "bot"),          # bones vs bot (chatbot/bytecode)
+    ("waarderen", "waarden"),   # to appreciate vs values
+    ("waarderen", "waard"),     # --
+    ("leveren", "leven"),       # to deliver vs life
+    ("leveren", "lev"),         # --
+    ("logeren", "log"),         # to lodge vs log entry
+    ("logeren", "logs"),        # --
+    ("logeren", "loggen"),      # --
+    ("rechts", "rechten"),      # right(direction) vs rights/laws
+    ("vasten", "vast"),         # fasting vs fixed
+    ("regelen", "regel"),       # to arrange vs rule (soms OK, admin-review)
+    ("regelen", "regels"),      # --
+    ("blokkeren", "blok"),      # to block vs building-block
+    ("blokkeren", "blokken"),   # --
+    ("organiseren", "organist"),  # to organize vs organist(muziek)
+    ("openen", "opent"),        # infinitief vs 3e-persoon — OK maar samen twijfel
+    ("banden", "bands"),        # tires vs music-bands
+    ("banden", "band"),         # tires/relations vs single band — context-afh.
+    ("bronzen", "bronnen"),     # bronze vs sources
+    ("brons", "bronnen"),       # --
+    ("merken", "merkt"),        # brands vs to notice
+    ("wachten", "wacht"),       # to wait vs guard
+    ("spelen", "spel"),         # OK ww↔zn, maar admin-check
+    ("ziens", "zien"),          # goodbye vs to see
+    ("bereiken", "bereikt"),    # to reach vs reached (samen twijfel)
+}
+# Normalize pairs to canonical form (sorted tuple) voor snelle lookup
+_KNOWN_FALSE_POSITIVE_SET = {tuple(sorted(p)) for p in _KNOWN_FALSE_POSITIVE_PAIRS}
+
+
+def is_risky_merge(variants: List[str]) -> bool:
+    """True als de variants-lijst één of meer bekende false-positive-paren bevat.
+
+    Voorbeeld:
+      is_risky_merge(['wet', 'weten']) → True
+      is_risky_merge(['emotie', 'emoties']) → False
+    """
+    if not variants or len(variants) < 2:
+        return False
+    lowered = [v.lower().strip() for v in variants]
+    for i in range(len(lowered)):
+        for j in range(i + 1, len(lowered)):
+            pair = tuple(sorted([lowered[i], lowered[j]]))
+            if pair in _KNOWN_FALSE_POSITIVE_SET:
+                return True
+    return False
+
+
+def risk_reason(variants: List[str]) -> str:
+    """Geef de eerste bekende risky-pair uit variants terug, of lege string."""
+    if not variants or len(variants) < 2:
+        return ""
+    lowered = [v.lower().strip() for v in variants]
+    for i in range(len(lowered)):
+        for j in range(i + 1, len(lowered)):
+            pair = tuple(sorted([lowered[i], lowered[j]]))
+            if pair in _KNOWN_FALSE_POSITIVE_SET:
+                return f"'{pair[0]}' en '{pair[1]}' zijn bekende semantisch verschillende woorden"
+    return ""

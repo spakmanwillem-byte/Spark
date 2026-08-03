@@ -1204,6 +1204,7 @@ async def tag_scan(limit: int = 50):
     """
     from collections import defaultdict
     from modules.core.storage import load_json
+    from .tag_normalizer import is_risky_merge, risk_reason
     lades = ["voelen", "spreken", "weten", "doen"]
     stem_to_variants: dict = defaultdict(set)
     stem_to_count: dict = defaultdict(int)
@@ -1224,22 +1225,29 @@ async def tag_scan(limit: int = 50):
                 stem_to_count[stem] += 1
                 total_tags += 1
     # Filter: alleen stammen met ≥2 verschillende varianten (dedupe-kansen)
-    duplicates = [
-        {
+    # v12_tag_merge_safety_001 — markeer bekende false-positives als risky
+    duplicates = []
+    for stem, variants in stem_to_variants.items():
+        if len(variants) < 2:
+            continue
+        vlist = sorted(variants)
+        risky = is_risky_merge(vlist)
+        duplicates.append({
             "stem": stem,
-            "variants": sorted(variants),
+            "variants": vlist,
             "variant_count": len(variants),
             "total_occurrences": stem_to_count[stem],
-        }
-        for stem, variants in stem_to_variants.items()
-        if len(variants) >= 2
-    ]
+            "is_risky": risky,
+            "risk_reason": risk_reason(vlist) if risky else "",
+        })
     duplicates.sort(key=lambda x: (-x["total_occurrences"], -x["variant_count"]))
+    risky_count = sum(1 for d in duplicates if d["is_risky"])
     return {
         "success": True,
         "total_tags_scanned": total_tags,
         "unique_stems": len(stem_to_variants),
         "stems_with_duplicates": len(duplicates),
+        "risky_duplicates": risky_count,
         "top_duplicates": duplicates[:limit],
     }
 

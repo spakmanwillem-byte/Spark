@@ -75,10 +75,11 @@ export function KbV2TagCuration({ viewerId = 'user-001' }) {
   return (
     <div data-testid="kb-tag-curation" className="space-y-3">
       {/* Stats header */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
         <StatTile label="Tags gescand" value={scanData?.total_tags_scanned ?? '—'} color="#94a3b8" />
         <StatTile label="Unieke stammen" value={scanData?.unique_stems ?? '—'} color="#06b6d4" />
         <StatTile label="Dedupe-kansen" value={scanData?.stems_with_duplicates ?? '—'} color="#f59e0b" />
+        <StatTile label="⚠ Risico" value={scanData?.risky_duplicates ?? '—'} color="#ef4444" />
         <StatTile label="Sessie-merges" value={mergeHistory.length} color="#22c55e" />
       </div>
 
@@ -164,16 +165,40 @@ function StatTile({ label, value, color }) {
 
 function DuplicateRow({ d, chosen, onChooseVariant, merging, onMerge }) {
   const [expanded, setExpanded] = useState(false);
+  // v12_tag_merge_safety_001 — risky pairs krijgen rode rand + waarschuwing + confirm
+  const isRisky = !!d.is_risky;
+  const handleMergeClick = () => {
+    if (isRisky) {
+      const ok = window.confirm(
+        `⚠️  Waarschuwing — mogelijk semantisch verschillend\n\n` +
+        `${d.risk_reason || 'Deze varianten hebben dezelfde stem maar kunnen andere betekenis hebben.'}\n\n` +
+        `Merge stem "${d.stem}"?\n` +
+        `Varianten: ${d.variants.join(', ')}\n\n` +
+        `Klik OK om toch te mergen, of Annuleren om te overslaan.`
+      );
+      if (!ok) return;
+    }
+    onMerge();
+  };
+  const borderClass = isRisky
+    ? 'border-red-500/40 hover:border-red-500/60'
+    : 'border-slate-800 hover:border-amber-500/30';
   return (
     <div data-testid={`kb-curation-row-${d.stem}`}
-      className="bg-slate-900/60 border border-slate-800 hover:border-amber-500/30 rounded-lg p-3 transition-colors">
+      className={`bg-slate-900/60 border ${borderClass} rounded-lg p-3 transition-colors`}>
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <TagIcon className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
-          <code className="text-sm text-amber-300 font-mono">{d.stem}</code>
+          <TagIcon className={`w-3.5 h-3.5 flex-shrink-0 ${isRisky ? 'text-red-400' : 'text-amber-400'}`} />
+          <code className={`text-sm font-mono ${isRisky ? 'text-red-300' : 'text-amber-300'}`}>{d.stem}</code>
           <span className="text-[10px] text-slate-500">
             {d.variant_count} varianten · {d.total_occurrences}× gebruikt
           </span>
+          {isRisky && (
+            <span data-testid={`kb-curation-risky-${d.stem}`}
+              className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40 uppercase tracking-wider">
+              ⚠ risico
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-1.5">
           <select data-testid={`kb-curation-keep-${d.stem}`}
@@ -185,8 +210,10 @@ function DuplicateRow({ d, chosen, onChooseVariant, merging, onMerge }) {
             ))}
           </select>
           <button data-testid={`kb-curation-merge-${d.stem}`}
-            onClick={onMerge} disabled={merging}
-            className="px-3 py-1 rounded text-[11px] font-medium bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-50 flex items-center gap-1">
+            onClick={handleMergeClick} disabled={merging}
+            className={`px-3 py-1 rounded text-[11px] font-medium text-white disabled:opacity-50 flex items-center gap-1 ${
+              isRisky ? 'bg-red-500 hover:bg-red-600' : 'bg-amber-500 hover:bg-amber-600'
+            }`}>
             <Merge className="w-3 h-3" />
             {merging ? 'Mergen...' : 'Merge'}
           </button>
@@ -197,6 +224,11 @@ function DuplicateRow({ d, chosen, onChooseVariant, merging, onMerge }) {
           </button>
         </div>
       </div>
+      {isRisky && d.risk_reason && (
+        <p className="mt-1.5 text-[10px] text-red-300/80 italic pl-5">
+          {d.risk_reason} — controleer of merge klopt vóór je bevestigt.
+        </p>
+      )}
       {expanded && (
         <div className="mt-2 pt-2 border-t border-slate-800/60 flex flex-wrap gap-1">
           {d.variants.map(v => (

@@ -466,11 +466,34 @@ export function GesprekkenPage({ onNavigate }) {
 
   // v11_community_grad5_001 — Community-chat zichtbaar vanaf gradatie 5 (Community Member).
   // Grad 6 (Bekend) en 7 (Leert graag kennen) zien alleen Spark + Privé.
+  // v12_chat_visibility_toggles_001 — user-prefs kunnen community/privé extra verbergen
+  // (Profiel → Instellingen → Chat zichtbaarheid). Community default off, privé default on.
+  const [chatPrefs, setChatPrefs] = useState({ community_chat_enabled: false, private_chats_enabled: true });
+  useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/profile/ui-preferences/${userId}`)
+      .then(r => r.json())
+      .then(d => { if (d?.preferences) setChatPrefs({
+        community_chat_enabled: d.preferences.community_chat_enabled === true,
+        private_chats_enabled: d.preferences.private_chats_enabled !== false,
+      }); })
+      .catch(() => {});
+  }, [userId]);
+
+  const communityAllowed = userGradatie <= 5 && chatPrefs.community_chat_enabled;
+  const priveAllowed = chatPrefs.private_chats_enabled;
+
   const tabs = [
     { id: 'spark', label: 'Spark AI', icon: Bot, accent: '#f59e0b' },
-    ...(userGradatie <= 5 ? [{ id: 'community', label: 'Community', icon: Users, accent: '#a855f7' }] : []),
-    { id: 'prive', label: 'Privé', icon: Lock, accent: '#06b6d4' },
+    ...(communityAllowed ? [{ id: 'community', label: 'Community', icon: Users, accent: '#a855f7' }] : []),
+    ...(priveAllowed ? [{ id: 'prive', label: 'Privé', icon: Lock, accent: '#06b6d4' }] : []),
   ];
+
+  // Als user op verborgen tab staat, terug naar spark
+  useEffect(() => {
+    if (activeTab === 'community' && !communityAllowed) setActiveTab('spark');
+    if (activeTab === 'prive' && !priveAllowed) setActiveTab('spark');
+  }, [activeTab, communityAllowed, priveAllowed]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

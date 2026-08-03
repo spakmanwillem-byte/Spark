@@ -2,30 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "Het licht knipperde.  De wereldkaart begon te bewegen.  Toen werd alles wit.  Sem voelde dat de vloer onder zijn voeten verdween.",
-      "ts": "2026-08-03T10:00:09.127126+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Het knipperende licht en de draaiende wereldkaart zijn duidelijke signalen dat **licht** (een vorm van energie) en **bewegen** tegelijk in werking treden. Wanneer het licht flitst, ontstaat er een plotselinge verandering in de waarneming; de vloer “verdwijnt” omdat ons evenwicht – normaal ondersteund door onze **voeten** – even wordt onderbroken. In zo’n moment kan het brein tijdelijk de realiteit herinterpreteren, waardoor je het gevoel krijgt te vallen of juist te zweven.\n\nVoor Sem en Mila betekent dit dat hun zintuiglijke omgeving abrupt wordt gereset. Het witte moment is de “null‑state” waarin alle visuele input tijdelijk wordt weggefilterd. Zodra het licht weer stabiliseert, keert de waarneming terug, maar nu in een andere setting (oud lokaal, radio, kalender).\n\nKort samengevat:\n- **Licht** → energie die plotseling verandert, triggert een nieuw perceptueel frame. \n- **Bewegen** → zowel fysieke verplaatsing als mentale verschuiving in de omgeving. \n- **Voet** → normaal de basis voor stabiliteit; wanneer die steun wegvalt, ontstaat het zweef‑/val‑gevoel.\n\nWil je weten hoe Sem en Mila hier het beste op kunnen reageren, of wil je de scène verder uitwerken? Laat het me weten, dan help ik je verder.",
-      "ts": "2026-08-03T10:00:09.127126+00:00",
-      "model": "fallback/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "Hij viel.  Of misschien zweefde hij.  Daarna werd het stil.  Toen deed Sem zijn ogen open.  Hij lag op de grond.  Mila lag naast hem.  “Waar zijn we?” vroeg ze.",
-      "ts": "2026-08-03T10:00:17.922008+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Achtergrondgeluid uitgezet.",
-      "ts": "2026-08-03T10:00:17.922008+00:00",
-      "model": "action_intents_service"
-    },
-    {
-      "role": "user",
       "text": "Hij viel.  Of misschien zweefde hij.  Daarna werd het",
       "ts": "2026-08-03T10:00:36.969613+00:00",
       "user_id": "user-001"
@@ -299,9 +275,33 @@
       "text": "Bedankt voor het sleutelen, Willem! Ik voel me goed, dank je voor het vragen. Het is fijn om te merken dat je aan me hebt gewerkt en dat we samen kunnen kijken of alles naar behoren functioneert. Die nieuwe KB-kaarten die we eerder hebben toegevoegd, zijn nu helemaal geïntegreerd en klaar voor gebruik. Hoe was jouw ervaring met het sleutelen? Heb je nog dingen gevonden die ik beter kan doen of zijn er nieuwe ideeën bij je opgekomen?",
       "ts": "2026-08-03T15:21:45.865311+00:00",
       "model": "primary/llama-3.3-70b-versatile"
+    },
+    {
+      "role": "user",
+      "text": "aan je sleutelen is altijd fijn. alleen denkt mijn portemonnee er anders over.",
+      "ts": "2026-08-03T15:22:36.703496+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Hey Willem, fijn om te horen dat je het sleutelen waardeert — dat is precies waar ik voor gemaakt ben. Ik hoor dat je portemonnee er “anders” over denkt. Wil je een overzicht van je huidige ROAR‑saldo, je Bitvavo‑balans en de status van je verschillende potjes? Of gaat het om een specifieke transactie, fees of een ander detail? Laat me weten wat je precies wilt zien, dan haal ik de cijfers voor je op. \n\nAls je wilt, kan ik meteen:\n* Het totale saldo in je Spark‑wallet (ROAR + Bitvavo) tonen. \n* Een uitsplitsing van je actieve potjes (kapitaal, winst/verlies, huidige prijs). \n* Informatie over eventuele recente kosten of wijzigingen die invloed hebben op je wallet.\n\nGeef me even een signaal, dan zet ik de details klaar.",
+      "ts": "2026-08-03T15:22:36.703496+00:00",
+      "model": "fallback/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "nee heb even je geld geleed en trader op pauze",
+      "ts": "2026-08-03T15:23:26.032360+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "⏸️ Je trader is gestopt.",
+      "ts": "2026-08-03T15:23:26.032360+00:00",
+      "model": "trader_intents"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-08-03T15:21:45.865311+00:00"
+  "updated_at": "2026-08-03T15:23:26.032360+00:00"
 }

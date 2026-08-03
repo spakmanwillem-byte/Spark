@@ -172,6 +172,61 @@ async def get_inbox(limit: int = Query(50, ge=1, le=500),
     return {"success": True, **service.list_inbox(limit=limit, offset=offset, reason=reason, search=search)}
 
 
+@router.get("/inbox/incomplete")
+async def get_inbox_incomplete(limit: int = Query(50, ge=1, le=500),
+                                offset: int = Query(0, ge=0),
+                                search: str = ""):
+    """v12_inbox_incomplete_001 — Kaarten uit de 4 lades die incompleet zijn.
+    Anker: knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium.
+
+    Toont onder Kennisbank v2 → Inbox → subtab 'Onvolledig'.
+    """
+    from modules.core.storage import load_json as _lj
+    REQUIRED_5W = {"wie", "wat", "wanneer", "waar", "waarom", "hoe"}
+    LADES = ["voelen", "spreken", "weten", "doen"]
+    PLACEHOLDER = {"", "?", "nog te vullen", "onbekend", "n.v.t.", "n/a"}
+    out = []
+    for lade in LADES:
+        d = _lj(service._lade_path(lade), default={"kaarten": []})
+        for c in d.get("kaarten", []):
+            ws = c.get("ws5", {}) or {}
+            filled_5w = sum(1 for k in REQUIRED_5W
+                            if isinstance(ws.get(k), str)
+                            and ws[k].strip().lower() not in PLACEHOLDER)
+            lagen = c.get("lagen", {}) or {}
+            filled_lagen = sum(1 for i in (1, 2, 3, 4)
+                                if isinstance(lagen.get(f"laag{i}"), str)
+                                and len(lagen[f"laag{i}"].strip()) >= 20)
+            incomplete = filled_5w < 6 or filled_lagen < 4
+            if not incomplete:
+                continue
+            if search and search.lower().strip() not in (c.get("begrip") or "").lower():
+                continue
+            out.append({
+                "id": c.get("id"),
+                "begrip": c.get("begrip"),
+                "lade": lade,
+                "status": c.get("status"),
+                "filled_5w": filled_5w,
+                "filled_lagen": filled_lagen,
+                "missing_5w": sorted(REQUIRED_5W - {k for k, v in ws.items()
+                                                    if isinstance(v, str) and v.strip().lower() not in PLACEHOLDER}),
+                "laag1": (lagen.get("laag1") or "")[:120],
+                "tags_sample": (c.get("tags") or [])[:5],
+                "_inbox_reason": "onvolledig",
+            })
+    # Sorteer: minst ingevuld eerst zodat urgent werk bovenaan komt
+    out.sort(key=lambda x: (x["filled_5w"] + x["filled_lagen"], x["begrip"] or ""))
+    return {
+        "success": True,
+        "total": len(out),
+        "offset": offset,
+        "limit": limit,
+        "kaarten": out[offset:offset + limit],
+        "anker": "knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium",
+    }
+
+
 @router.get("/priority/missing-laag1")
 async def get_priority_missing_laag1(limit: int = Query(50, ge=1, le=200)):
     """

@@ -60178,11 +60178,88 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2377
       }
+    },
+    {
+      "id": "conv-4733cc10",
+      "timestamp": "2026-08-03T15:22:36.709407+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "aan je sleutelen is altijd fijn. alleen denkt mijn portemonnee er anders over.",
+      "spark_response": "Hey Willem, fijn om te horen dat je het sleutelen waardeert — dat is precies waar ik voor gemaakt ben. Ik hoor dat je portemonnee er “anders” over denkt. Wil je een overzicht van je huidige ROAR‑saldo, je Bitvavo‑balans en de status van je verschillende potjes? Of gaat het om een specifieke transactie, fees of een ander detail? Laat me weten wat je precies wilt zien, dan haal ik de cijfers voor je op. \n\nAls je wilt, kan ik meteen:\n* Het totale saldo in je Spark‑wallet (ROAR + Bitvavo) tonen. \n* Een uitsplitsing van je actieve potjes (kapitaal, winst/verlies, huidige prijs). \n* Informatie over eventuele recente kosten of wijzigingen die invloed hebben op je wallet.\n\nGeef me even een signaal, dan zet ik de details klaar.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "helpen",
+        "used_cards": [
+          "kbv2-8bc5c519",
+          "kbv2-042cdf0e",
+          "kbv2-674e09dd",
+          "kbv2-skel-f9efce92",
+          "kbv2-b5af1c60"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2378
+      }
+    },
+    {
+      "id": "conv-7c9d9a67",
+      "timestamp": "2026-08-03T15:23:25.974251+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "nee heb even je geld geleed en trader op pauze",
+      "spark_response": "⏸️ Je trader is gestopt.",
+      "channel": "spark-trader-intent",
+      "analysis": {
+        "intent": "trader_stop",
+        "action": "trader_stop"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2379
+      }
+    },
+    {
+      "id": "conv-d0625c6c",
+      "timestamp": "2026-08-03T15:27:49.035443+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2380
+      }
+    },
+    {
+      "id": "conv-6490c42b",
+      "timestamp": "2026-08-03T15:27:49.090855+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2381
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2377,
-    "last_updated": "2026-08-03T15:21:45.871507+00:00"
+    "total_conversations": 2381,
+    "last_updated": "2026-08-03T15:27:49.090855+00:00"
   }
 }

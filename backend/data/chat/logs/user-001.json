@@ -60118,11 +60118,71 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2374
       }
+    },
+    {
+      "id": "conv-18da3a4d",
+      "timestamp": "2026-08-03T15:21:23.919781+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 4 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2375
+      }
+    },
+    {
+      "id": "conv-5b3c3ec4",
+      "timestamp": "2026-08-03T15:21:23.978492+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2376
+      }
+    },
+    {
+      "id": "conv-172b50c3",
+      "timestamp": "2026-08-03T15:21:45.871507+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hey ik heb wat gesleuteld aan je. hoe gaat het?",
+      "spark_response": "Bedankt voor het sleutelen, Willem! Ik voel me goed, dank je voor het vragen. Het is fijn om te merken dat je aan me hebt gewerkt en dat we samen kunnen kijken of alles naar behoren functioneert. Die nieuwe KB-kaarten die we eerder hebben toegevoegd, zijn nu helemaal geïntegreerd en klaar voor gebruik. Hoe was jouw ervaring met het sleutelen? Heb je nog dingen gevonden die ik beter kan doen of zijn er nieuwe ideeën bij je opgekomen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "help",
+        "used_cards": [
+          "kbv2-31c2f1fb",
+          "kbv2-674e09dd",
+          "kbv2-b5af1c60",
+          "kbv2-7052c07a",
+          "kbv2-489fde1f"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2377
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2374,
-    "last_updated": "2026-08-03T10:56:02.030695+00:00"
+    "total_conversations": 2377,
+    "last_updated": "2026-08-03T15:21:45.871507+00:00"
   }
 }

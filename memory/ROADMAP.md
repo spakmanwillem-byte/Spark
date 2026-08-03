@@ -7,6 +7,7 @@
 - KB-Curatie Suite (backend + UI live in preview, wacht op redeploy)
 - Blauwdruk `spark_tag_curatie_public.json` v1.1 met sectie 8 lade-regels
 - Blauwdruk `spark_groeien_public.json` v1.0 met zelfreflectie-flow
+- **KB veld-semantiek** `knowledge/_meta.json` schema v1.1 — elk kaart-veld (laag1-4, ws5, andere_velden) heeft eigen doel/toon/verboden. Werkt door in LLM-prompts van 5W-Filler
 - Vier Werelden Bijbel-kaarten (Wonderland/Neverland/Mirrorland/Crossroads) — door Willem net toegevoegd
 
 ### 🎯 Autonomie-scheiding (leidend principe)
@@ -124,14 +125,63 @@ Deze scheiding staat in de blauwdrukken en wordt gerespecteerd door alle nieuwe 
 
 ---
 
-### 📊 Sessie 55 SLA
-- **Verwacht kredietverbruik**: ~90-110 credits (KB-Curatie executie + Werelden-module + vocab-bulk)
-- **Minimaal resultaat**: 680 lege 5W ingevuld + 32 dupes weg + ~200 lade-fouten gecorrigeerd + Werelden werken in chat
-- **Ideaal resultaat**: bovenstaand + Graph gevuld + top-100 vocab live
+### MODULE 7 — Inbox subtab "Onvolledig" (klein maar bruikbaar)
+**Doel**: 680 lege-5W kaarten zichtbaar maken in bestaande Inbox-tab i.p.v. nieuwe top-tab.  
+**Anker**: `knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium.toon_in_ui`
+
+**Executie-stappen**:
+1. Backend: `/api/kb/v2/inbox` endpoint krijgt optionele `?filter=incomplete` param
+2. Filter-logica hergebruikt `incompleet_criterium.checks` uit meta (7 regels)
+3. Frontend `KennisbankV2Page.js`: 2 sub-buttons onder Inbox-tab — `Inbox (2112)` en `Onvolledig (680)`
+4. Klik op subtab → herlaadt met andere query-param
+
+**Zones**:
+- 🤖 **Spark autonoom**: incompleet-detectie via meta-regels
+- 👤 **Willem beslist**: aanpak per kaart (invullen via 5W-Filler of manueel bewerken)
+
+**Effort**: ~15 credits.
+
+---
+
+### MODULE 8 — Refine-endpoint per veld (chirurgische verbetering)
+**Doel**: Willem kan Spark chirurgisch vragen "verbeter alleen laag3" i.p.v. hele kaart opnieuw.  
+**Anker**: `knowledge/_meta.json § kaart_veldsemantiek.lagen.laag3` (of ws5.wat/waarom/etc.)
+
+**Nieuw endpoint**: `POST /api/kb/v2/card/{id}/refine?field=laag3`  
+**Flow**:
+1. Lees kaart + veld-definitie uit meta (doel/toon/verboden)
+2. Bouw LLM-prompt: "Verbeter alleen `field` volgens deze regels: `{doel}`, toon `{toon}`, vermijd `{verboden}`. Behoud alle andere velden."
+3. Return voorstel voor review (draft, geen mutatie)
+4. Willem accepteert → veld wordt bijgewerkt, curation_history logged
+
+**UI-integratie**: 
+- KennisbankV2Page → kaart-detail-view → klein potlood-icoontje per veld
+- Klik → LLM voorstel modal → Accept/Cancel
+
+**Zones**:
+- 🤖 **Spark autonoom**: LLM-voorstel op basis van meta-regels
+- 👤 **Willem beslist**: accept per veld, geen bulk
+
+**Effort**: ~25 credits. Bouwt exact op de veld-semantiek die vandaag is vastgelegd — zonder die meta zou dit niet werken.
+
+---
+
+### 📊 Sessie 55 SLA (bijgewerkt)
+- **Verwacht kredietverbruik**: ~130-160 credits (KB-Curatie executie + Werelden-module + vocab-bulk + inbox-subtab + refine-endpoint)
+- **Minimaal resultaat**: 680 lege 5W ingevuld met scherpe LLM-voorstellen (dankzij nieuwe meta-regels) + 32 dupes weg + ~200 lade-fouten gecorrigeerd + Werelden werken in chat
+- **Ideaal resultaat**: bovenstaand + Graph gevuld + top-100 vocab live + refine-per-veld werkend + inbox-subtab zichtbaar
 - **Reserve-post**: Sessie 56 voor Graph-vulling als Sessie 55 vol raakt
 
 ### 🚦 Redeploy-checkpoint (nu)
-Alles wat hierboven staat DRAAIT AL in preview. Willem hoeft alleen te deployen om overmorgen fresh te starten met live tools. Backup gemaakt: `/app/_backup_before_prod_merge_20260803_071830/`
+Alles wat hierboven staat DRAAIT AL in preview:
+- ✅ KB-Curatie Suite (backend + UI)
+- ✅ `knowledge/_meta.json` schema v1.1 met veld-semantiek (130 regels definitie)
+- ✅ 5W-Filler LLM-prompt leest de nieuwe veld-regels
+- ✅ Blauwdrukken groeien + tag-curatie
+- ✅ Vier Werelden Bijbel-kaarten
+- ✅ Agenda intent-splitter, admin-toggle audit, chat-visibility toggles, shop-owner permissies + user-container foto's
+
+Backup gemaakt: `/app/_backup_before_prod_merge_20260803_071830/`
 
 ---
 

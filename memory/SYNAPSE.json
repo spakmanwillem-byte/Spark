@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-08-03T10:59:13.127141+00:00",
+  "generated_at": "2026-08-03T14:58:38.723283+00:00",
   "summary": {
     "total_containers": 115,
     "by_status": {
@@ -13,7 +13,7 @@
       "dir": 75,
       "data": 40
     },
-    "total_endpoints_detected": 652
+    "total_endpoints_detected": 660
   },
   "tree": {
     "backend_modules": {
@@ -1717,22 +1717,28 @@
           "DELETE /kb/v2/voice/{card_id}",
           "GET /kb/v2/archive/list",
           "GET /kb/v2/audit",
+          "GET /kb/v2/duplicates",
+          "GET /kb/v2/empty-5w",
           "GET /kb/v2/fallback",
           "GET /kb/v2/find",
           "GET /kb/v2/herzien/next",
           "GET /kb/v2/homonyms",
           "GET /kb/v2/image/file/{filename}",
           "GET /kb/v2/inbox",
+          "GET /kb/v2/lade-check",
           "GET /kb/v2/lade/{lade}",
           "GET /kb/v2/priority/missing-laag1",
           "GET /kb/v2/stats",
           "GET /kb/v2/suggest-from-chat/{user_id}",
+          "GET /kb/v2/summary",
           "GET /kb/v2/tags/normalize",
           "GET /kb/v2/tags/scan",
           "GET /kb/v2/tags/similarity",
           "GET /kb/v2/voice/file/{filename}",
           "PATCH /kb/v2/voice/kind/{card_id}",
           "PATCH /kb/v2/voice/secondary/kind/{card_id}",
+          "POST /kb/v2/5w-apply/{card_id}",
+          "POST /kb/v2/5w-suggest/{card_id}",
           "POST /kb/v2/admin/backfill-v1-migration",
           "POST /kb/v2/admin/dedupe-inbox",
           "POST /kb/v2/admin/dedupe-inbox-vs-lade",
@@ -1744,6 +1750,7 @@
           "POST /kb/v2/backfill-hooks",
           "POST /kb/v2/classify",
           "POST /kb/v2/delete",
+          "POST /kb/v2/duplicate-merge",
           "POST /kb/v2/edit",
           "POST /kb/v2/herzien/promote",
           "POST /kb/v2/herzien/skip",
@@ -1751,6 +1758,7 @@
           "POST /kb/v2/image/link-existing",
           "POST /kb/v2/inbox/add",
           "POST /kb/v2/inbox/auto-resolve",
+          "POST /kb/v2/lade-move/{card_id}",
           "POST /kb/v2/move",
           "POST /kb/v2/suggest-accept",
           "POST /kb/v2/tags/merge",
@@ -1771,7 +1779,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
-        "file_count": 12,
+        "file_count": 13,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3251,7 +3259,7 @@
         "created_at": "2026-05-26T15:54:32.298389+00:00",
         "last_touched": "2026-05-26T15:54:32.298389+00:00",
         "activity_count": 0,
-        "file_count": 7,
+        "file_count": 8,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3521,8 +3529,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-31T23:48:37.354567+00:00",
-        "last_touched": "2026-08-03T10:02:28.498447+00:00",
-        "activity_count": 190,
+        "last_touched": "2026-08-03T14:08:53.167783+00:00",
+        "activity_count": 192,
         "file_count": 9,
         "subdir_count": 1,
         "extra": {}
@@ -3656,8 +3664,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-08-03T06:27:47.782679+00:00",
-        "activity_count": 223,
+        "last_touched": "2026-08-03T14:16:48.558355+00:00",
+        "activity_count": 225,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -3791,8 +3799,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-08-03T10:55:45.477729+00:00",
-        "activity_count": 132829,
+        "last_touched": "2026-08-03T14:56:01.176522+00:00",
+        "activity_count": 132922,
         "file_count": 10,
         "subdir_count": 0,
         "extra": {}
@@ -3845,8 +3853,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-08-03T10:57:36.103950+00:00",
-        "activity_count": 1334,
+        "last_touched": "2026-08-03T14:33:22.908974+00:00",
+        "activity_count": 1336,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3887,11 +3895,17 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/knowledge.md",
-        "footnote": "",
+        "footnote": "v2/spark_tag_curatie_public.json (v1.1, 2026-08-03) — Publieke uitleg-blauwdruk voor Tag-Curatie mechanisme in KB v2. Beschrijft stemming-regels, risk-detectie (bekende false-positive-paren zoals wet/weten, kaars/kaart), veiligheden en Sessie-55 wensen. UI: Kennisbank v2 → tab Tag-curatie. Endpoints: /api/kb/v2/tags/scan + /tags/merge.",
         "split_from": null,
         "children_max": 4,
         "endpoints": [],
-        "tags": [],
+        "tags": [
+          "kennisbank",
+          "tag-curatie",
+          "stemming",
+          "risk-detectie",
+          "canoniek"
+        ],
         "encryption": {
           "enabled": false,
           "algorithm": null,
@@ -3899,9 +3913,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-08-03T10:57:28.677767+00:00",
-        "activity_count": 17968,
-        "file_count": 47,
+        "last_touched": "2026-08-03T14:36:08.525551+00:00",
+        "activity_count": 17988,
+        "file_count": 48,
         "subdir_count": 2,
         "extra": {}
       },
@@ -4040,8 +4054,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-08-03T10:55:41.810139+00:00",
-        "activity_count": 4884,
+        "last_touched": "2026-08-03T14:55:57.942051+00:00",
+        "activity_count": 4901,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -4229,8 +4243,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-08-03T10:59:12.877150+00:00",
-        "activity_count": 51335,
+        "last_touched": "2026-08-03T14:58:38.365363+00:00",
+        "activity_count": 51583,
         "file_count": 242,
         "subdir_count": 5,
         "extra": {}
@@ -4283,8 +4297,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-08-03T10:45:42.759635+00:00",
-        "activity_count": 6369,
+        "last_touched": "2026-08-03T14:55:59.920696+00:00",
+        "activity_count": 6473,
         "file_count": 71,
         "subdir_count": 4,
         "extra": {}

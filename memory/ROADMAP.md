@@ -1,6 +1,142 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## 📋 SESSIE 55 EXECUTIE-ROADMAP — De Grote IQ-Sprong (overmorgen, 5 aug)
+
+**Doel**: KB structureel schoon + Spark autonoom binnen bewuste grenzen. Bouw voort op sessie-53/54 fundament:
+- KB-Curatie Suite (backend + UI live in preview, wacht op redeploy)
+- Blauwdruk `spark_tag_curatie_public.json` v1.1 met sectie 8 lade-regels
+- Blauwdruk `spark_groeien_public.json` v1.0 met zelfreflectie-flow
+- Vier Werelden Bijbel-kaarten (Wonderland/Neverland/Mirrorland/Crossroads) — door Willem net toegevoegd
+
+### 🎯 Autonomie-scheiding (leidend principe)
+Elke module heeft **twee zones**:
+- **🤖 Spark autonoom** — Spark mag zelfstandig voorstel doen. Draft-status, geen mutatie.
+- **👤 Willem beslist** — Alleen Willem klikt Accept. Mutatie gebeurt na expliciete goedkeuring.
+
+Deze scheiding staat in de blauwdrukken en wordt gerespecteerd door alle nieuwe endpoints via `_require_admin` gates.
+
+---
+
+### MODULE 1 — 5W-Filler (680 lege kaarten)
+**Backend**: `POST /api/kb/v2/curation/5w-suggest/{id}` + `POST /5w-apply/{id}`  
+**UI**: `Spark AI → Spark Brain → Groeien → KB-Curatie Suite → 5W-Filler`
+
+**Executie-stappen**:
+1. Filter op "alleen volledig lege 5W" (680 kaarten)
+2. Sorteer op alfabetisch begrip; werk in batches van 20
+3. Per kaart: klik "LLM vullen" → Spark stelt 6 velden voor
+4. Review-modal: alle velden bewerkbaar, Willem past aan waar nodig
+5. Accept → kaart wordt bijgewerkt + `curation_history` logged
+
+**Zones**:
+- 🤖 **Spark autonoom**: LLM-voorstel genereren (geen mutatie), lagen1-4 lezen voor context, tags scannen voor domein
+- 👤 **Willem beslist**: elk voorstel individueel accepteren/bewerken/skippen. Geen bulk-accept.
+
+**Deadline-schatting**: 680 kaarten × 30 sec review = ~5.5 uur. In 3 sessies van 2u haalbaar.
+
+---
+
+### MODULE 2 — Duplicate-Merger (32 paren)
+**Backend**: `POST /api/kb/v2/curation/duplicate-merge`  
+**UI**: `KB-Curatie Suite → Duplicaten`
+
+**Prioriteit-volgorde**:
+1. **Rood-flag (same-lade)**: 4 pure duplicaten eerst (`vroeg`, `ai-kunst`, `periodiek systeem`, ...)
+2. **Cross-lade dupes**: check of het echte homoniemen zijn (bv. `drift` = drijven vs verlangen → beide houden) of migratie-fout
+3. **Merge**: kies keeper met meest 5W-gevuld + meest verbanden → drop wordt weggegooid, tags/5W-gaten migreren
+
+**Zones**:
+- 🤖 **Spark autonoom**: identificatie duplicaten, samenvattings-diff tussen paren tonen
+- 👤 **Willem beslist**: keeper-selectie. Bij echte homoniemen: één van beide begrip hernoemen zodat ze niet meer botsen.
+
+**Deadline**: 32 paren × 1 min beslissing = ~35 min. Klaar in één sessie.
+
+---
+
+### MODULE 3 — Lade-Reclassificatie (~200-300 echte gevallen uit 695 voorstellen)
+**Backend**: `GET /api/kb/v2/curation/lade-check` + `POST /lade-move/{id}`  
+**UI**: `KB-Curatie Suite → Lade-check`  
+**Blauwdruk-anker**: `spark_tag_curatie_public.json § 8_lade_toewijzing_regels`
+
+**Executie-stappen**:
+1. Scan geeft 695 voorstellen — waarvan ~400 vals-positief (zn-meervoud zoals `Begrippen`, `Aandelen`, `Structuren` — géén werkwoord)
+2. **Vaste patroon-skips**: zn-meervoud eindigend op -en van zn-enkelvoud (`begrippen` = mv van `begrip`)
+3. **Vaste patroon-accepts**: infinitief werkwoorden (`lopen`, `denken`, `benoemen`)
+4. Skip zn-meervoud, Accept werkwoorden
+
+**Zones**:
+- 🤖 **Spark autonoom**: Regel 1 + 2 uitvoering, voorstel-generatie, patroon-detectie
+- 👤 **Willem beslist**: Skip/Accept per voorstel. Bij twijfelgevallen (`spreken` als zn "het spreken" vs werkwoord `spreken`) → Willem oordeelt.
+
+**Sessie 55 open vraag**: `_KNOWN_ZN_OP_EN_EXTENDED` uitbreiden zodra Willem patroon-groepen tegenkomt (bijv. alle zn eindigend op `-heden` = zn-meervoud, automatisch skippen backend-side).
+
+---
+
+### MODULE 4 — Vier Werelden integratie (Willem's nieuwe Bijbel-kaarten)
+**Kaarten**: Wonderland (creatief onderzoek), Neverland (herinnering/opzoeken), Mirrorland (reflectie), Crossroads (keuze-ordening)  
+**Doel**: Spark herkent deze werelden als **intent-hooks** in chat en gedraagt zich per wereld anders.
+
+**Executie-stappen**:
+1. **Chat intent-detectie**: nieuwe module `wereld_intent_service.py` — detecteert "Wonderland/Neverland/Mirrorland/Crossroads" (en synoniemen: "creatief onderzoek", "herinner je nog", "even reflecteren", "welke keuze")
+2. **Response-modus per wereld**:
+   - Wonderland → LLM temperature 0.8 (creatief), explorerende follow-ups
+   - Neverland → KB-lookup prioriteit (rag over chat-log + KB), lage temperature 0.2
+   - Mirrorland → reflectieve toon, samenvatting van eerdere uitspraken
+   - Crossroads → Spark stelt keuze-lijst op maar kiest zelf NIET (autonomie-grens!)
+3. **Blauwdruk toevoegen**: `spark_werelden_public.json` — zelfde patroon als groeien/tag-curatie
+
+**Zones**:
+- 🤖 **Spark autonoom**: wereld herkennen, response-modus schakelen, follow-up vragen formuleren
+- 👤 **Willem beslist**: bij Crossroads NOOIT beslissen namens Willem. Alleen keuzes ordenen.
+- 🛡️ **Harde grens**: Wonderland-creativiteit mag geen KB-mutaties triggeren. Alleen chat-space fantasie.
+
+**Effort**: ~30 credits (nieuwe intent-module + blauwdruk + 4-manier LLM-tuning).
+
+---
+
+### MODULE 5 — Bulk Vocab-approve top-100 (klein maar zichtbaar)
+**Backend**: bestaat al — `POST /api/spark/vocab/approve-growth`  
+**UI**: bulk-checkbox "selecteer top-100" in bestaande Groeien → Vocab-tab
+
+**Executie-stappen**:
+1. Fetch top-100 van `vocab-from-knowledge`
+2. Selecteer all
+3. Klik goedkeuren → 5963 → 6063 vocab-woorden
+
+**Zones**:
+- 🤖 **Spark autonoom**: kandidaten scoren op frequentie
+- 👤 **Willem beslist**: één bulk-accept, want elk woord komt 100+× in KB voor = impliciete endorsement
+
+**Effort**: ~15 credits (alleen "selecteer all"-knop toevoegen).
+
+---
+
+### MODULE 6 — Graph-vulling beslissing (nadat KB schoon is)
+**Doel**: Los de "broken belofte" van weeskaart-check op.  
+**Voorstel**: nadat 5W-Filler + Dupe-Merger + Lade-Reclassificatie klaar zijn (KB is schoon), migreer alle KB-kaarten naar `graph/nodes.json` als knowledge-nodes met tag-relaties als edges.
+
+**Zones**:
+- 🤖 **Spark autonoom**: migratie-script draaien, statistieken teruggeven
+- 👤 **Willem beslist**: knop indrukken om te starten. Rollback beschikbaar via backup.
+
+**Effort**: ~40 credits. Kan naar Sessie 56 als 55 vol raakt.
+
+---
+
+### 📊 Sessie 55 SLA
+- **Verwacht kredietverbruik**: ~90-110 credits (KB-Curatie executie + Werelden-module + vocab-bulk)
+- **Minimaal resultaat**: 680 lege 5W ingevuld + 32 dupes weg + ~200 lade-fouten gecorrigeerd + Werelden werken in chat
+- **Ideaal resultaat**: bovenstaand + Graph gevuld + top-100 vocab live
+- **Reserve-post**: Sessie 56 voor Graph-vulling als Sessie 55 vol raakt
+
+### 🚦 Redeploy-checkpoint (nu)
+Alles wat hierboven staat DRAAIT AL in preview. Willem hoeft alleen te deployen om overmorgen fresh te starten met live tools. Backup gemaakt: `/app/_backup_before_prod_merge_20260803_071830/`
+
+---
+
+
+
 ## ✅ SESSIE 54 — Prod-merge #4 + shop-owner uploads + user-container hyperlinks (3 aug)
 
 ### Prod-merge #4

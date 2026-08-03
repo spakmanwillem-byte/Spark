@@ -131,7 +131,14 @@ async def suggest_5w(card_id: str, body: Suggest5WBody):
     sys_prompt = (
         "Je bent een Nederlandstalige KB-editor voor Spark. Vul de 6 W's + Hoe in voor het "
         "gegeven begrip op basis van bestaande context. Wees concreet, feitelijk, geen 'persoon' "
-        "of vage abstracties. Geen markdown, geen uitleg — alleen JSON."
+        "of vage abstracties. Geen markdown, geen uitleg — alleen JSON.\n\n"
+        "REGELS (uit knowledge/_meta.json § kaart_veldsemantiek.ws5):\n"
+        "- wie: SUBJECT (actor/entiteit/groep). Geen 'iedereen'.\n"
+        "- wat: DISCRIMINEREND (wat maakt dit anders dan naburige begrippen). Géén herhaling van lagen.\n"
+        "- wanneer: CONCRETE TIJD/SITUATIE. Géén 'altijd/nooit'.\n"
+        "- waar: CONCRETE PLAATS/DOMEIN. Géén 'overal'.\n"
+        "- waarom: DOEL/MOTIVATIE/FUNCTIE (waarom bestaat dit). Géén 'omdat het zo is'.\n"
+        "- hoe: CONCRETE WERKING/METHODE (stappen/mechanismen). Géén 'gewoon doen'."
     )
     user_prompt = (
         f"Begrip: '{begrip}'\n"

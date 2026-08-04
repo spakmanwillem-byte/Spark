@@ -2,6 +2,39 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-08-04 (sessie 56c) — Grote Schoonmaak: tag-cleaner + Infinitief-Regel
+
+### 🧹 v12_tag_cleaner_001 — Tag-bloat opgeruimd (11.049 tags weg)
+**Probleem**: GPT-import genereerde 100-175 tags per kaart met veel ruis (tijdliterals `08:00`, enkelvoud+meervoud dubbel, werkwoord-vervoegingen). Import-flow gebruikte `set()`-merge zonder trim → tags stapelen elke re-import op.
+
+**Fix in 3 lagen** (`/app/backend/modules/kb_v2/tag_cleaner.py`):
+1. **Junk-filter**: tijden (`HH:MM`), datums, pure cijfers, single-letters, tags <2/>40 chars → weg
+2. **Lemma-dedupe** (Nederlandse iteratieve stemmer): `audits`/`auditen` → stem `audi` → merge onder kortste variant `audit`. Undoet consonant-verdubbeling (`stoppen` → `stopp` → `stop`).
+3. **Cap 15**: max 15 tags/kaart, kortste en meest atomaire vormen winnen
+
+**Toegepast op**:
+- `text_importer.py apply_cards_to_kb()` — bij elke bulk-import (nieuwe + bestaande kaarten)
+- `POST /api/kb/v2/tags/cleanup` — bulk cleanup met `dry_run` param
+
+**Live-run resultaat (op 6156 kaarten)**:
+- 1442 kaarten aangepakt (~23%)
+- **71.462 → 60.413 tags** (–11.049, –15.5%)
+- 36 junk, 1229 lemma-merges, 9513 cap-trims
+- Voorbeeld: `informatie` 175→15, `Audit` 170→15, `tijdstip` 139→15 (alle `08:00`-literals weg)
+- Backup: `/app/_backups/pre_tagcleanup_20260804_134316.tgz`
+
+### 📐 v12_infinitief_regel_001 — Blueprint in `_meta.json` v1.2
+Toegevoegd aan `kaart_veldsemantiek.infinitief_regel`:
+- **Regel 1 (Anker)**: Elk werkwoord = 1 hoofdkaart op infinitief-vorm in Doen-lade
+- **Regel 2 (Vervoegings-tags)**: `loop`/`loopt`/`liep`/`gelopen` als metadata-tags op anker `lopen`, GEEN losse kaarten
+- **Regel 3 (Homoniem-uitzondering)**: split alleen bij totaal andere betekenis (`bank`=meubel/Weten vs `banken`=actie/Doen; `wet`/Weten vs `weten`/Doen)
+- Toepassings-blok bindt regel aan: lade-reclassificatie, text_importer, refine-endpoint
+
+Dit is de "wet" waaraan Spark de 695 lade-voorstellen toetst tijdens de Grote Reclassificatie (overmorgen).
+
+### 🔒 v12_admin_gated_genereer_001 — Genereer-knop verstopt voor niet-admin
+LLM-genereer knop in Kennisbank v2 CardDetail is nu `adminModeActive ? generateWithLLM : null`. Verdwijnt volledig uit UI voor Lotus / familie / non-admin gradaties. Cloud-afhankelijke feature blijft technisch werken voor Willem's testen, maar staat niet meer in de weg voor eindgebruikers.
+
 ## 2026-08-04 (sessie 56b) — Admin-gated trader triggers
 
 ### 🟡 v12_admin_gated_triggers_001 — Trader-commando's nu admin-only

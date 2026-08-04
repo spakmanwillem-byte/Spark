@@ -136,10 +136,26 @@
       "regel_3_homoniem_uitzondering": {
         "wat": "SPLITSEN in 2 aparte kaarten alleen als een stam een totaal andere betekenis heeft dan de actie-vorm.",
         "voorbeelden": [
-          {"stam": "bank (meubel)", "lade": "weten", "reden": "concreet object"},
-          {"stam": "banken (financieel handelen)", "lade": "doen", "reden": "actie op de markt"},
-          {"stam": "wet (regel)", "lade": "weten", "reden": "juridisch concept"},
-          {"stam": "weten (kennen)", "lade": "doen", "reden": "cognitieve actie"}
+          {
+            "stam": "bank (meubel)",
+            "lade": "weten",
+            "reden": "concreet object"
+          },
+          {
+            "stam": "banken (financieel handelen)",
+            "lade": "doen",
+            "reden": "actie op de markt"
+          },
+          {
+            "stam": "wet (regel)",
+            "lade": "weten",
+            "reden": "juridisch concept"
+          },
+          {
+            "stam": "weten (kennen)",
+            "lade": "doen",
+            "reden": "cognitieve actie"
+          }
         ],
         "detectie": "Zie spark_tag_curatie_public.json § risk-detectie voor bekende false-positive-paren. Deze paren MOGEN nooit door tag_cleaner._stem worden gemerged.",
         "toon_in_ui": "Reclassificatie-voorstel toont 'homoniem-flag' zodat Willem per geval bevestigt of split gewenst is."
@@ -168,8 +184,8 @@
     "key_holder": null
   },
   "created_at": "2026-05-26T15:54:32.323687+00:00",
-  "last_touched": "2026-08-04T07:45:51.331362+00:00",
-  "activity_count": 19092,
+  "last_touched": "2026-08-04T13:43:19.603325+00:00",
+  "activity_count": 19096,
   "file_count": 48,
   "subdir_count": 2,
   "extra": {}

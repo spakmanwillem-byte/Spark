@@ -21,3 +21,4 @@
 {"ts": "2026-08-04T07:45:07.769214+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 98.66}
 {"ts": "2026-08-04T07:45:51.334932+00:00", "module": "kbv2", "fn": "delete_card", "phase": "event", "intent": "card-verwijderd", "detail": {"card_id": "kbv2-69d781cc", "lade": "weten", "begrip": "Spark", "user_id": "user-001", "reason": "(geen reden opgegeven)", "before_count": "3789", "after_count": "3788", "ts": "2026-08-04T07:45:51.334914+00:00"}}
 {"ts": "2026-08-04T13:40:04.323257+00:00", "module": "kbv2", "fn": "tags_cleanup", "phase": "event", "intent": "tags_cleanup", "detail": {"dry_run": "True", "changed": "1442"}}
+{"ts": "2026-08-04T13:43:19.605985+00:00", "module": "kbv2", "fn": "tags_cleanup", "phase": "event", "intent": "tags_cleanup", "detail": {"dry_run": "False", "changed": "1442"}}

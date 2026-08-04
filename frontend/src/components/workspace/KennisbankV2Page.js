@@ -591,7 +591,7 @@ export function KennisbankV2Page({ onNavigate }) {
   const totalPages = Math.ceil(total / PAGE);
 
   return (
-    <MainLayout onNavigate={onNavigate}>
+    <MainLayout activePage="knowledge-v2" onNavigate={onNavigate}>
       <div data-testid="kennisbank-v2-page" className="p-4 md:p-6 space-y-4 max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-3">

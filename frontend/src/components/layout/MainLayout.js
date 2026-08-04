@@ -106,7 +106,16 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const [adminKeyPrompt, setAdminKeyPrompt] = React.useState(false);
   const [adminKeyInput, setAdminKeyInput] = React.useState('');
   const [adminKeyError, setAdminKeyError] = React.useState('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // v12_sidebar_collapse_persist_001 — Sidebar-collapse state overleeft page-nav
+  // (MainLayout wordt per pagina opnieuw gemount, dus useState resette elke keer).
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    try { return localStorage.getItem('sidebarCollapsed') === '1'; }
+    catch { return false; }
+  });
+  useEffect(() => {
+    try { localStorage.setItem('sidebarCollapsed', sidebarCollapsed ? '1' : '0'); }
+    catch {}
+  }, [sidebarCollapsed]);
   const [showHelp, setShowHelp] = useState(false);  // v6_help_001
 
   // v6_help_001 — Luister naar 'spark:open-help' event vanuit chat ("help" trigger)
@@ -707,10 +716,17 @@ function NavItem({ item, isActive, isCollapsed, glow, glowCount, onClick, dragga
       <button
         onClick={onClick}
         data-glow={glow || undefined}
+        style={isActive ? {
+          backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 12%, transparent)',
+          color: 'var(--glow-base, #f59e0b)',
+          borderColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 25%, transparent)',
+          borderWidth: 1,
+          borderStyle: 'solid',
+        } : undefined}
         className={`
           w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer
           ${isActive
-            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+            ? ''
             : `text-slate-400 hover:text-white hover:bg-slate-800/50 ${glowStyle}`
           }
           ${isCollapsed ? 'justify-center' : ''}
@@ -718,7 +734,8 @@ function NavItem({ item, isActive, isCollapsed, glow, glowCount, onClick, dragga
         title={isCollapsed ? item.label : (draggable ? `${item.label} (sleep om te verplaatsen)` : item.label)}
         data-testid={`nav-${item.id}`}
       >
-        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-amber-400' : glowIconColor}`} />
+        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? '' : glowIconColor}`}
+              style={isActive ? { color: 'var(--glow-base, #f59e0b)' } : undefined} />
         {!isCollapsed && (
           <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
         )}

@@ -2,6 +2,20 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-08-04 (sessie 56d) — Sidebar-collapse + active-tab + persoonlijke glow
+
+### 🔧 v12_sidebar_collapse_persist_001 — Sidebar blijft ingeklapt na navigatie
+**Probleem**: Klap je sidebar in en klik je op een ander tab-icoon, dan klapte 'ie meteen weer open. Oorzaak: `MainLayout` wordt per pagina opnieuw gemount (elke workspace-pagina wrapt zichzelf in een `<MainLayout>`), dus `useState(false)` resette bij élke route-change.
+**Fix**: `sidebarCollapsed` gepersist naar `localStorage` (zelfde patroon als bestaande `sidebarWidth`). Blijft nu netjes smal tot je 'm zelf openklapt.
+
+### 🔧 v12_active_tab_correct_001 — Kennisbank glowde Dashboard
+**Probleem**: `KennisbankV2Page.js` passeerde geen `activePage` prop aan MainLayout, dus viel terug op de default `'dashboard'`. Dashboard-tab glowde ondanks dat je op Kennisbank stond.
+**Fix**: `<MainLayout activePage="knowledge-v2" onNavigate={onNavigate}>` — id matcht nu het nav-item.
+
+### 🎨 v12_active_glow_userpersonal_001 — Actieve tab respecteert `--glow-base`
+**Probleem**: Actieve nav-item was hard-coded `amber-500/10 text-amber-400`. `--glow-base` bestond wél maar werd niet geconsumeerd door de sidebar-active-highlight.
+**Fix**: `NavItem` gebruikt nu `style` met `color-mix(in srgb, var(--glow-base, #f59e0b) 12%, transparent)` voor background, en pure `var(--glow-base)` voor tekst en border. Amber-fallback via CSS var default. Jouw kleurpicker in Mijn Profiel → Instellingen kleurt nu ook de actieve tab, niet alleen de andere glow-effecten.
+
 ## 2026-08-04 (sessie 56c) — Grote Schoonmaak: tag-cleaner + Infinitief-Regel
 
 ### 🧹 v12_tag_cleaner_001 — Tag-bloat opgeruimd (11.049 tags weg)

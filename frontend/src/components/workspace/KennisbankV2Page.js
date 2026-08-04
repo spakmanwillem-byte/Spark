@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { toast } from 'sonner';
+import { useAuth } from '../../context/AuthContext';
 import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
@@ -34,6 +35,8 @@ const REASON_LABEL = {
  *   • #DeWillem-principe in audit-panel zichtbaar
  */
 export function KennisbankV2Page({ onNavigate }) {
+  // v12_admin_gated_triggers_001 — Genereer-knop en LLM-bump verstopt achter Admin-toggle
+  const { adminModeActive } = useAuth();
   const [activeTab, setActiveTab] = useState('inbox');     // 'inbox' | lade-id
   const [stats, setStats] = useState(null);
   const [items, setItems] = useState([]);
@@ -755,7 +758,7 @@ export function KennisbankV2Page({ onNavigate }) {
                 onClassify={classifyTo} onSaveEdit={saveEdit}
                 saving={savingClassify} inInbox={activeTab === 'inbox'} currentLade={activeTab}
                 onMediaUpdated={loadItems}
-                onGenerateLLM={generateWithLLM} llmGenerating={llmGenerating}
+                onGenerateLLM={adminModeActive ? generateWithLLM : null} llmGenerating={llmGenerating}
                 onDeleteCard={() => setConfirmDelete(selectedCard)} />
             )}
           </div>

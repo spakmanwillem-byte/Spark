@@ -314,6 +314,12 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
             summary["details"].append({"begrip": b, "reason": "geen laag1"})
             continue
 
+        # v12_tag_cleaner_001 — Clean tags op input (voordat een NEW-card wordt gemaakt).
+        # Voor bestaande kaarten gebeurt dit in de merge-branches hierboven.
+        from .tag_cleaner import clean_tags_simple
+        cleaned_input_tags = clean_tags_simple(list(c.get("tags") or []))
+        c["tags"] = cleaned_input_tags
+
         # --- KB V1 update ---
         v1_existing = kb1_by_begrip.get(b_lc)
         if v1_existing:
@@ -321,11 +327,10 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
             if not cur_l1 or overwrite_existing:
                 v1_existing["lagen"] = c["lagen"]
                 v1_existing["ws5"] = c["ws5"]
-                # Merge tags
-                existing_tags = set(v1_existing.get("tags") or [])
-                for t in c["tags"]:
-                    existing_tags.add(t)
-                v1_existing["tags"] = sorted(existing_tags)
+                # v12_tag_cleaner_001 — Merge + trim (junk-filter, lemma-dedupe, cap 15)
+                from .tag_cleaner import clean_tags_simple
+                merged = list((v1_existing.get("tags") or [])) + list(c.get("tags") or [])
+                v1_existing["tags"] = clean_tags_simple(merged)
                 v1_existing["status"] = "active"
                 v1_existing["updated_at"] = _now()
                 v1_existing["updated_by"] = user_id
@@ -385,10 +390,10 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
             if not cur_l1 or overwrite_existing:
                 v2_found["lagen"] = c["lagen"]
                 v2_found["ws5"] = c["ws5"]
-                existing_tags = set(v2_found.get("tags") or [])
-                for t in c["tags"]:
-                    existing_tags.add(t)
-                v2_found["tags"] = sorted(existing_tags)
+                # v12_tag_cleaner_001 — Merge + trim (junk-filter, lemma-dedupe, cap 15)
+                from .tag_cleaner import clean_tags_simple
+                merged = list((v2_found.get("tags") or [])) + list(c.get("tags") or [])
+                v2_found["tags"] = clean_tags_simple(merged)
                 v2_found["status"] = "active"
                 v2_found["lade"] = lade
                 if c.get("emotie"):

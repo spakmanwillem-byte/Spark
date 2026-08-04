@@ -1,6 +1,6 @@
 {
   "_arch_ref": "v6_synapse_001",
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "naam": "knowledge",
   "doel": "Data-store voor knowledge: bevat 2 JSON-bestanden (kb_repair_report, kb_repair_audit).",
   "container_type": "data",
@@ -119,6 +119,36 @@
       ],
       "detectie_endpoint": "GET /api/kb/v2/curation/summary → empty_5w + partial_5w counters",
       "toon_in_ui": "Kennisbank v2 → Inbox tab → subtab 'Onvolledig' (hergebruik inbox-filter i.p.v. nieuwe top-tab)"
+    },
+    "infinitief_regel": {
+      "_arch_ref": "v12_infinitief_regel_001",
+      "_doel": "Absolute wet waaraan Spark de 695 lade-voorstellen toetst tijdens de Grote Lade-Reclassificatie. Voorkomt dat 'lopen', 'liep', 'loopt' als 3 losse kaarten in het systeem terechtkomen.",
+      "regel_1_infinitief_anker": {
+        "wat": "Elk werkwoord heeft precies 1 hoofdkaart op de INFINITIEF-vorm (bv. 'lopen', 'helpen', 'groeien'), altijd in de Doen-lade.",
+        "waarom": "De infinitief is het actieve centrum — alle vervoegingen wijzen daar naartoe. Dit voorkomt versnippering."
+      },
+      "regel_2_vervoegings_tags": {
+        "wat": "Varianten van het werkwoord (stam, stam+t, verleden tijd, voltooid deelwoord) worden NIET als losse kaarten opgeslagen, maar als metadata-tags gekoppeld aan de anker-kaart.",
+        "voorbeeld": "kaart 'lopen' [Doen] heeft tags: ['loop', 'loopt', 'liep', 'liepen', 'gelopen']",
+        "gevolg_voor_zoek": "Zoekopdracht op 'liep' → tag_normalizer resolvet naar stem 'loop' → anker-kaart 'lopen' wordt teruggegeven",
+        "gevolg_voor_tag_cleaner": "tag_cleaner.py past dezelfde stemming toe zodat vervoegingen niet als aparte tags mergen in de tags-lijst van een niet-werkwoord kaart"
+      },
+      "regel_3_homoniem_uitzondering": {
+        "wat": "SPLITSEN in 2 aparte kaarten alleen als een stam een totaal andere betekenis heeft dan de actie-vorm.",
+        "voorbeelden": [
+          {"stam": "bank (meubel)", "lade": "weten", "reden": "concreet object"},
+          {"stam": "banken (financieel handelen)", "lade": "doen", "reden": "actie op de markt"},
+          {"stam": "wet (regel)", "lade": "weten", "reden": "juridisch concept"},
+          {"stam": "weten (kennen)", "lade": "doen", "reden": "cognitieve actie"}
+        ],
+        "detectie": "Zie spark_tag_curatie_public.json § risk-detectie voor bekende false-positive-paren. Deze paren MOGEN nooit door tag_cleaner._stem worden gemerged.",
+        "toon_in_ui": "Reclassificatie-voorstel toont 'homoniem-flag' zodat Willem per geval bevestigt of split gewenst is."
+      },
+      "toepassing": {
+        "lade_reclassificatie": "Bij de 695 lade-voorstellen: elk werkwoord in enkelvoud/vervoeging → voorstel = move naar infinitief-anker in Doen (of maak anker aan als nog niet bestaat). Niet-werkwoorden blijven in Weten tenzij homoniem-uitzondering geldt.",
+        "text_importer": "Bij bulk-import: als kaart-begrip een werkwoord-vervoeging is, redirect naar de infinitief-anker (met begrip-vervanging + tag-append) i.p.v. nieuwe kaart aanmaken.",
+        "refine_endpoint": "Toekomstige POST /api/kb/v2/card/{id}/refine?field=laag3 respecteert deze regels: werkt niet op vervoegingen (die verwijzen enkel naar de anker)."
+      }
     }
   },
   "split_from": null,

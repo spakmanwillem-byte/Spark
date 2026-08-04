@@ -1401,3 +1401,94 @@ async def tag_merge(body: TagMergeBody):
         "by": body.viewer_id,
     }
 
+
+
+# v12_tag_cleaner_001 — Bulk tag-schoonmaak (junk-filter, lemma-dedupe, cap 15)
+# Doel: GPT-import bloat (100+ tags per kaart met tijdliterals, cijfers, enkelvoud+meervoud
+# dubbel) opruimen. Dry-run laat impact zien; commit=true schrijft door.
+@router.post("/tags/cleanup")
+async def tags_cleanup(dry_run: bool = True, min_tags_threshold: int = 0,
+                       max_cards: int = 0):
+    """Ruim tag-lijst op elke kaart op via tag_cleaner (junk/lemma/cap=15).
+
+    Query params:
+    - dry_run=true (default): rapporteer wat er zou gebeuren, schrijf niets.
+    - min_tags_threshold=0: alleen kaarten met > N tags meenemen (0 = allemaal).
+    - max_cards=0: cap op aantal verwerkte kaarten voor snel testen (0 = geen cap).
+    """
+    from .tag_cleaner import clean_tags
+    from pathlib import Path as _P
+
+    KB_V2 = _P("/app/backend/data/knowledge/v2")
+    lades = ["voelen", "spreken", "weten", "doen"]
+
+    global_report = {
+        "dry_run": dry_run,
+        "cards_scanned": 0,
+        "cards_changed": 0,
+        "tags_before_total": 0,
+        "tags_after_total": 0,
+        "junk_removed_total": 0,
+        "lemma_merges_total": 0,
+        "cap_trimmed_total": 0,
+        "per_lade": {},
+        "top_examples": [],  # meest bloat-gevallen (voor UI review)
+    }
+
+    for lade in lades:
+        path = KB_V2 / f"knowledge_v2_{lade}.json"
+        if not path.exists():
+            continue
+        d = load_json(path, default={"kaarten": []})
+        lade_stats = {"scanned": 0, "changed": 0, "tags_before": 0, "tags_after": 0}
+        for k in d.get("kaarten", []):
+            if max_cards and global_report["cards_scanned"] >= max_cards:
+                break
+            tags = k.get("tags") or []
+            if len(tags) < min_tags_threshold:
+                continue
+            lade_stats["scanned"] += 1
+            global_report["cards_scanned"] += 1
+            cleaned, rep = clean_tags(tags)
+            lade_stats["tags_before"] += rep["before"]
+            lade_stats["tags_after"] += rep["after"]
+            global_report["tags_before_total"] += rep["before"]
+            global_report["tags_after_total"] += rep["after"]
+            global_report["junk_removed_total"] += len(rep["removed_junk"])
+            global_report["lemma_merges_total"] += len(rep["merged_lemmas"])
+            global_report["cap_trimmed_total"] += len(rep["trimmed_by_cap"])
+            if rep["before"] != rep["after"]:
+                lade_stats["changed"] += 1
+                global_report["cards_changed"] += 1
+                # Top examples: kaarten met grootste diff
+                diff = rep["before"] - rep["after"]
+                if diff >= 5:
+                    global_report["top_examples"].append({
+                        "card_id": k.get("id"),
+                        "begrip": k.get("begrip"),
+                        "lade": lade,
+                        "before": rep["before"],
+                        "after": rep["after"],
+                        "removed_junk": rep["removed_junk"][:8],
+                        "merged_lemmas": rep["merged_lemmas"][:8],
+                        "trimmed_by_cap": rep["trimmed_by_cap"][:8],
+                    })
+                if not dry_run:
+                    k["tags"] = cleaned
+        global_report["per_lade"][lade] = lade_stats
+        if not dry_run and lade_stats["changed"] > 0:
+            save_json(path, d)
+
+    # Top-25 grootste opruimers sorteren
+    global_report["top_examples"] = sorted(
+        global_report["top_examples"], key=lambda x: -(x["before"] - x["after"])
+    )[:25]
+
+    try:
+        from modules.core.spark_logger import log_event
+        log_event("kbv2", "tags_cleanup",
+                  detail={"dry_run": dry_run, "changed": global_report["cards_changed"]})
+    except Exception:
+        pass
+
+    return {"success": True, **global_report}

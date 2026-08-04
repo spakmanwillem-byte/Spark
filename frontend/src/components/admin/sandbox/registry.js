@@ -22,6 +22,7 @@
  */
 import { LlmTokenUsageWidget } from './widgets/LlmTokenUsageWidget';
 import { PapertrailWidget } from './widgets/PapertrailWidget';
+import { AchievementSnuffelWidget } from './widgets/AchievementSnuffelWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -46,4 +47,14 @@ export const SANDBOX_WIDGETS = [
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }
+  {
+    id: 'achievement-snuffel',
+    naam: 'Achievement / XP / Rang — inventaris',
+    doel: 'Overzicht van wat er ECHT bestaat rondom achievements, XP en rang, zodat we geen dubbele modules bouwen.',
+    waar_hoort_het: 'Tijdelijk kladblok — verwijder als Willem gaps heeft besproken en/of opgepakt.',
+    aangemaakt_op: '2026-08-04',
+    aangemaakt_door: 'e1 sessie 56d',
+    reden: "Willem: 'als je info niet kwijt kan en graag kwijt wil geen plek weet, plaats gerust in beheer widget kladblok.' Snuffel-findings over 7 bestaande dingen + 5 open vragen + 1 nu gefixt.",
+    Component: AchievementSnuffelWidget,
+  },
 ];

@@ -154,15 +154,27 @@ async def create_user(user_data: UserCreate, admin_id: Optional[str] = None):
     Create new user.
 
     - Self-registration (admin_id=None): collisie-check + minstens 4 tekens.
-    - Admin override (?admin_id=<gradatie 1/2 user>): collisie-check + lengte-eis
+    - Admin override (?admin_id=<admin_capable user>): collisie-check + lengte-eis
       overgeslagen. Hiermee kan admin meerdere accounts maken met gedeeld
       default-sleutelwoord (bv. 'Welkom01').
+
+    v12_admin_capable_unlock_001 — Losgekoppeld van gradatie: iedereen met
+    admin_capable=True (of gradatie 1/2 als legacy fallback) mag override.
+    Zo kunnen community-admins (bv. gradatie 3 Vriend + admin_capable) ook
+    nieuwe users aanmaken.
     """
     admin_override = False
     if admin_id:
         admin_user = AuthService.get_user_by_id(admin_id)
-        if not admin_user or admin_user.get("gradatie", 99) > 2:
-            raise HTTPException(status_code=403, detail="Alleen admin (gradatie 1 of 2) mag override gebruiken.")
+        if not admin_user:
+            raise HTTPException(status_code=403, detail="Admin-user niet gevonden.")
+        _cap = bool(admin_user.get("admin_capable"))
+        _grad = admin_user.get("gradatie", 99)
+        if not _cap and _grad > 2:
+            raise HTTPException(
+                status_code=403,
+                detail="Alleen users met admin_capable=True (of gradatie 1/2) mogen override gebruiken."
+            )
         admin_override = True
 
     user, error = AuthService.create_user(user_data, admin_override=admin_override)

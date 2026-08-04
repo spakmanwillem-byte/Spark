@@ -1,6 +1,53 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
 
+## 📋 SESSIE 57 EXECUTIE-ROADMAP — Leger & XP-Motor Herkalibratie
+
+**Context**: Willem wil admins ook vanaf de community kunnen aanstellen (bv. gradatie 3 "Vriend" als community-onderhoud) én overweegt een parallelle rang-schaal (legerrang-idee: Sergeant/Luitenant of neutraal Rookie→Legend). Snuffel-rapport sessie 56d wees uit: **veel bestaat al** — niet dubbel bouwen.
+
+### ✅ Wat er al leeft (bestaande infrastructure)
+
+| Wat | Waar | Endpoint |
+|---|---|---|
+| `AchievementBlueprintPanel` (admin-only) | `InstellingenPage.js` r1195 achter `isAdmin` | `GET /api/achievements/admin/blueprints` |
+| Admin edit-modal per achievement | `AchievementsPage.js` r212 (`data-testid: achievement-admin-edit-{id}`) — titel + icon | `PATCH /api/achievements/admin/{id}?by_user=...` |
+| XP-motor (centraal) | `/app/backend/modules/chat/xp_service.py` → `grant_xp(user_id, amount, reason)` — 6 bronnen: chat, RPS, contributions, achievements-unlock, badges, tag-curatie | (interne functie) |
+| 50 achievements met XP-rewards | `/app/backend/data/achievements.json` — schaal 50 XP (words_10) tot 15.000 XP (words_2500) | `GET /api/achievements/list` |
+| Rang op karakter-kaart | `DnDCharacterSheet.js` r521-524 én r2005 — `char.rang_titel` + Community Level + militaire streepjes (100 levels = 1 streepje) | (client-side, `char.derived.level`) |
+| Leaderboard op XP | `AchievementsPage.js` + backend | `GET /api/achievements/leaderboard?period=alltime&limit=25` |
+| RPS-leaderboard (aparte spelrang) | Los van XP-motor | `GET /api/rps/leaderboard?limit=50` |
+| **Admin-capable loskoppeling** ✅ | `AuthService.set_admin_capable()` + endpoint | `POST /api/auth/admin/set-capable/{user_id}?capable=true` |
+
+### 🔓 In sessie 56d gefixt
+- **`v12_admin_capable_unlock_001`** — `/api/auth/users?admin_id=...` (register-with-override) accepteert nu iedereen met `admin_capable=True` of gradatie 1/2, i.p.v. alleen gradatie 1/2. Getest met 3 curl-scenarios, allemaal groen. Marieke (gradatie 3) getest en teruggezet — Willem kiest zelf wie sub-admin wordt.
+
+### ❓ Open vragen / gaps voor sessie 57
+
+1. **XP-veld ontbreekt in edit-modal**
+   `AchievementsPage.js` edit-modal past nu alleen titel + icon aan. `xp_reward` en `threshold`/`trigger`-waarden zijn nog blueprint-JSON-alleen (niet via GUI editable). *Vraag*: wil Willem die velden editable in de modal, of blijft dat blueprint-only werk voor Willem alleen?
+
+2. **Rang-drempel-mapping**
+   Karakter-kaart toont `char.rang_titel`. Waar wordt die string bepaald? Bestaat er een mapping-tabel `level → rang_titel` (bv. `0-9=Burger, 10-24=Rookie, ...`)? *Actie*: zoek de mapping (mogelijk `dnd_service.py` of `character_defaults`). Als hij niet bestaat: bouwen als losse config-JSON, niet als hardcoded Python.
+
+3. **`text_importer` geeft geen XP**
+   `/app/backend/modules/kb_v2/text_importer.py apply_cards_to_kb()` roept nergens `grant_xp()` aan. *Vraag*: bewust (import is admin-taak, geen zelf-XP) of onbedoeld (nieuwe kennis = groei = XP)? Vraag Willem.
+
+4. **`admin_capable` UI-toggle ontbreekt in `UsersAdminPage`**
+   Backend endpoint werkt (`POST /api/auth/admin/set-capable/{user_id}`), maar geen frontend switch. *Blocker*: gradatie-3 community-admin kan nu alleen via curl worden geactiveerd. Kleine toggle bouwen in de users-tabel (data-testid: `admin-capable-toggle-{user_id}`).
+
+5. **Legerrang-schaal parallel aan gradatie**
+   Emmy stelt Sergeant/Luitenant voor. Agent-advies: **neutrale labels eerst** (Rookie/Bronze/Silver/Gold/Master/Legend) tot er 15-20 users zijn en de XP-verdeling zichtbaar wordt. Dan pas kalibreren + hernoemen. Willem's keuze staat nog open.
+
+### 🎯 Actie voor sessie 57 (voorstel-volgorde)
+1. **Bouw `admin-capable-toggle`** in `UsersAdminPage` (gap 4) — kleinste blocker, direct nut
+2. **Zoek + documenteer rang-drempel-mapping** (gap 2) — leren wat er is voor bouwen
+3. **Beslis over `text_importer` XP-hook** (gap 3) — 1 regel code, product-keuze
+4. **XP-veld in edit-modal** (gap 1) — als Willem het wil
+5. **Neutrale rang-labels wirings** (gap 5) — nog niet bouwen, alleen ontwerp-schets
+6. **`ROADMAP.md` sectie 57 afsluiten** na oplevering, verplaats naar CHANGELOG
+
+---
+
 ## 📋 SESSIE 55 EXECUTIE-ROADMAP — De Grote IQ-Sprong (overmorgen, 5 aug)
 
 **Doel**: KB structureel schoon + Spark autonoom binnen bewuste grenzen. Bouw voort op sessie-53/54 fundament:

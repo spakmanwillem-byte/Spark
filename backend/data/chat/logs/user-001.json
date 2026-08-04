@@ -60471,57 +60471,214 @@
       }
     },
     {
-      "id": "conv-e807711f",
-      "timestamp": "2026-08-03T18:06:06.727059+00:00",
+      "id": "conv-eb943863",
+      "timestamp": "2026-08-03T18:59:21.474091+00:00",
       "user_id": "user-001",
       "user_naam": "Willem",
-      "user_message": "welke jongens namen ken jij",
-      "spark_response": "Natuurlijk, ik ken heel wat jongensnamen. Hier zijn er een aantal, zowel klassiek als wat moderner:\n\n- **Joris**\n- **Lucas**\n- **Daan**\n- **Finn**\n- **Milan**\n- **Sam**\n- **Thijs**\n- **Luuk**\n- **Sven**\n- **Noud**\n- **Bram**\n- **Ties**\n- **Jelte**\n- **Matteo**\n- **Noah**\n- **Sem**\n- **Rens**\n- **Levi**\n- **Stijn**\n- **Koen**\n\nDit zijn namen die vaak voorkomen in Nederland en die ik in mijn kennisbank herken als typische jongensnamen. Als je een specifieke stijl of periode zoekt, laat het me weten — dan kan ik de lijst verder aanpassen.",
-      "channel": "spark-deep",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er? _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
       "analysis": {
-        "topic": "staat",
-        "used_cards": [
-          "kbv2-b5af1c60",
-          "kbv2-04b0d8bf",
-          "kbv2-skel-f8e15fb6",
-          "kbv2-56f183f0",
-          "kbv2-4db90563"
-        ],
-        "model": "fallback/gpt-oss-120b"
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
       },
       "metadata": {
-        "session_id": "deep-user-001",
+        "session_id": "default",
         "gesprek_nummer": 2391
       }
     },
     {
-      "id": "conv-a93dfc70",
-      "timestamp": "2026-08-03T18:06:08.646740+00:00",
+      "id": "conv-5804cec0",
+      "timestamp": "2026-08-03T19:06:18.521746+00:00",
       "user_id": "user-001",
       "user_naam": "Willem",
-      "user_message": "welke meisjes namen ken jij",
-      "spark_response": "Natuurlijk, ik kan je een aantal meisjesnamen geven die ik ken. Het zijn veelvoorkomende Nederlandse (en internationaal bekende) namen, en ik baseer me op de algemene kennis over namen:\n\n- Anna \n- Emma \n- Sophie \n- Julia \n- Sara \n- Noor \n- Lotte \n- Mila \n- Eva \n- Tess \n- Lisa \n- Roos \n- Fleur \n- Elise \n- Maya \n- Iris \n- Anouk \n- Charlotte \n- Yara \n- Zoë \n\nDit is geen volledige lijst, maar een selectie van namen die vaak worden gebruikt. Als je specifieke voorkeuren hebt (bijvoorbeeld een bepaalde oorsprong of betekenis), laat het me weten — dan kan ik gerichter zoeken of meer details geven.",
-      "channel": "spark-deep",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
       "analysis": {
-        "topic": "staat",
-        "used_cards": [
-          "kbv2-0ffe598a",
-          "kbv2-04b0d8bf",
-          "kbv2-18ef0f3b",
-          "kbv2-56f183f0",
-          "kbv2-4db90563"
-        ],
-        "model": "fallback/gpt-oss-120b"
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
       },
       "metadata": {
-        "session_id": "deep-user-001",
+        "session_id": "default",
         "gesprek_nummer": 2392
+      }
+    },
+    {
+      "id": "conv-e8a28939",
+      "timestamp": "2026-08-04T07:45:27.775298+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Ik luister. _(laatst sprak je me 12 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2393
+      }
+    },
+    {
+      "id": "conv-90aea4c9",
+      "timestamp": "2026-08-04T12:55:12.217647+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe staat mijn bot",
+      "spark_response": "**staat**: Een staat is de huidige toestand, situatie of conditie waarin iets of iemand zich bevindt.\n\n**bot**: Een bot is een geautomatiseerd systeem of programma dat taken uitvoert of reageert zonder directe menselijke besturing.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "bot",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "staat"
+          },
+          {
+            "begrip": "bot"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "test-trader-001",
+        "gesprek_nummer": 2394
+      }
+    },
+    {
+      "id": "conv-56674a0e",
+      "timestamp": "2026-08-04T12:56:23.879458+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "hoe staat mijn bot",
+      "spark_response": "⏸️ Je trader staat stil · **2 open trade(s)**: 2× BCH-EUR. Zeg 'start mijn bot' om weer te beginnen.",
+      "channel": "spark-trader-intent",
+      "analysis": {
+        "intent": "trader_status",
+        "action": "trader_status"
+      },
+      "metadata": {
+        "session_id": "test-1",
+        "gesprek_nummer": 2395
+      }
+    },
+    {
+      "id": "conv-55adcaae",
+      "timestamp": "2026-08-04T12:57:53.556285+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe staat mijn bot",
+      "spark_response": "⏸️ Je trader staat stil · **2 open trade(s)**: 2× BCH-EUR. Zeg 'start mijn bot' om weer te beginnen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "trader_intent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "trader_intent"
+      },
+      "metadata": {
+        "session_id": "test-t1",
+        "gesprek_nummer": 2396
+      }
+    },
+    {
+      "id": "conv-343b6d71",
+      "timestamp": "2026-08-04T12:57:53.765299+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb ik verdiend",
+      "spark_response": "💰 **Eerlijke PnL** (0 trades):\n  • Gerealiseerd: €+0.00\n  • Open drawdown (0 posities): €+0.00\n  • **ECHT netto: €+0.00**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "trader_intent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "trader_intent"
+      },
+      "metadata": {
+        "session_id": "test-t2",
+        "gesprek_nummer": 2397
+      }
+    },
+    {
+      "id": "conv-990e3e43",
+      "timestamp": "2026-08-04T12:57:53.948795+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel potjes heb ik",
+      "spark_response": "🏺 **Trader potjes voor user-001:** 3 totaal\n⚪ **pot-001** · €11 cap / €80 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-002** · €10 cap / €60 max · BCH-EUR · 0 trades · laatste: geen trades\n⚪ **pot-003** · €10 cap / €60 max · BCH-EUR · 0 trades · laatste: geen trades\n\n**In gebruik**: 0/3 potjes",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "trader_intent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "trader_intent"
+      },
+      "metadata": {
+        "session_id": "test-t3",
+        "gesprek_nummer": 2398
+      }
+    },
+    {
+      "id": "conv-05147777",
+      "timestamp": "2026-08-04T12:57:54.613767+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hallo",
+      "spark_response": "Hallo Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "test-t4",
+        "gesprek_nummer": 2399
       }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2392,
-    "last_updated": "2026-08-03T18:06:08.646740+00:00"
+    "total_conversations": 2399,
+    "last_updated": "2026-08-04T12:57:54.613767+00:00"
   }
 }

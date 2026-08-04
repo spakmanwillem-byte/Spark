@@ -1,0 +1,312 @@
+{
+  "type": "changes_since_deploy",
+  "created_at": "2026-08-04T12:38:01.878625+00:00",
+  "marker": {
+    "marked_at": "2026-08-03T19:04:03.419679+00:00",
+    "marked_at_epoch": 1785783843.419679,
+    "note": "Markeert moment van laatste deploy. Bestanden gewijzigd na deze tijd zitten in een 'wijzigingen-backup'.",
+    "written_to": [
+      "persistent (/app/memory/)",
+      "legacy (backend/data/system/)"
+    ]
+  },
+  "marker_missing": false,
+  "fallback_used_hours": null,
+  "file_count": 58,
+  "sources": [
+    "/app/backend/data",
+    "/app/memory"
+  ],
+  "files": [
+    {
+      "path": "backend/data/boekhouder/_meta.json",
+      "size": 645,
+      "mtime": "2026-08-04T12:24:27.272423+00:00"
+    },
+    {
+      "path": "backend/data/boekhouder/auto_mint_state.json",
+      "size": 836,
+      "mtime": "2026-08-04T12:24:27.268422+00:00"
+    },
+    {
+      "path": "backend/data/boekhouder/logs/anker_check/2026-08.jsonl",
+      "size": 4946,
+      "mtime": "2026-08-04T04:32:18.443451+00:00"
+    },
+    {
+      "path": "backend/data/chat/_meta.json",
+      "size": 678,
+      "mtime": "2026-08-04T07:45:27.935016+00:00"
+    },
+    {
+      "path": "backend/data/chat/logs/deep-user-166437fe.json",
+      "size": 11944,
+      "mtime": "2026-08-04T07:45:06.952020+00:00"
+    },
+    {
+      "path": "backend/data/chat/logs/deep-user-1996fa59.json",
+      "size": 23369,
+      "mtime": "2026-08-03T19:06:10.812141+00:00"
+    },
+    {
+      "path": "backend/data/chat/logs/user-001.json",
+      "size": 2372258,
+      "mtime": "2026-08-04T07:45:27.925015+00:00"
+    },
+    {
+      "path": "backend/data/chat/logs/user-166437fe.json",
+      "size": 16868,
+      "mtime": "2026-08-04T07:45:06.962021+00:00"
+    },
+    {
+      "path": "backend/data/chat/logs/user-1996fa59.json",
+      "size": 43165,
+      "mtime": "2026-08-03T19:06:10.887148+00:00"
+    },
+    {
+      "path": "backend/data/community/_meta.json",
+      "size": 684,
+      "mtime": "2026-08-04T12:37:19.567892+00:00"
+    },
+    {
+      "path": "backend/data/community/messages.json",
+      "size": 194545,
+      "mtime": "2026-08-04T12:37:19.560891+00:00"
+    },
+    {
+      "path": "backend/data/financial/_meta.json",
+      "size": 703,
+      "mtime": "2026-08-04T12:36:37.935931+00:00"
+    },
+    {
+      "path": "backend/data/financial/user_potjes.json",
+      "size": 18326,
+      "mtime": "2026-08-04T12:36:37.931931+00:00"
+    },
+    {
+      "path": "backend/data/graph/_meta.json",
+      "size": 675,
+      "mtime": "2026-08-03T20:01:06.726680+00:00"
+    },
+    {
+      "path": "backend/data/graph/edges.json",
+      "size": 14924013,
+      "mtime": "2026-08-03T20:01:06.679675+00:00"
+    },
+    {
+      "path": "backend/data/graph/nodes.json",
+      "size": 3723135,
+      "mtime": "2026-08-03T20:01:05.451559+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/_meta.json",
+      "size": 6270,
+      "mtime": "2026-08-04T07:45:51.331242+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/learned_knowledge/knowledge_base.json",
+      "size": 14198252,
+      "mtime": "2026-08-03T20:02:57.448212+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/v2/knowledge_inbox.json",
+      "size": 1330,
+      "mtime": "2026-08-04T07:45:07.671088+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/v2/knowledge_index.json",
+      "size": 1485846,
+      "mtime": "2026-08-04T07:45:51.323241+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/v2/knowledge_v2_doen.json",
+      "size": 6868907,
+      "mtime": "2026-08-03T20:02:59.576415+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/v2/knowledge_v2_spreken.json",
+      "size": 3401028,
+      "mtime": "2026-08-04T07:34:38.578240+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/v2/knowledge_v2_voelen.json",
+      "size": 3146982,
+      "mtime": "2026-08-03T20:02:57.656232+00:00"
+    },
+    {
+      "path": "backend/data/knowledge/v2/knowledge_v2_weten.json",
+      "size": 18117666,
+      "mtime": "2026-08-04T07:45:51.181227+00:00"
+    },
+    {
+      "path": "backend/data/personality/_meta.json",
+      "size": 1225,
+      "mtime": "2026-08-03T19:41:05.924449+00:00"
+    },
+    {
+      "path": "backend/data/personality/spark_vocab.json",
+      "size": 1652789,
+      "mtime": "2026-08-03T19:41:05.815439+00:00"
+    },
+    {
+      "path": "backend/data/roar/_meta.json",
+      "size": 688,
+      "mtime": "2026-08-04T12:34:29.465710+00:00"
+    },
+    {
+      "path": "backend/data/roar/price_snapshots.json",
+      "size": 426599,
+      "mtime": "2026-08-04T12:34:29.457709+00:00"
+    },
+    {
+      "path": "backend/data/shadow/stats.json",
+      "size": 12671,
+      "mtime": "2026-08-04T07:45:27.942017+00:00"
+    },
+    {
+      "path": "backend/data/shadow/events/2026-08-03.jsonl",
+      "size": 4880,
+      "mtime": "2026-08-03T19:06:18.718893+00:00"
+    },
+    {
+      "path": "backend/data/shadow/events/2026-08-04.jsonl",
+      "size": 437,
+      "mtime": "2026-08-04T07:45:27.939016+00:00"
+    },
+    {
+      "path": "backend/data/spark_planner/_meta.json",
+      "size": 638,
+      "mtime": "2026-08-04T02:02:31.349514+00:00"
+    },
+    {
+      "path": "backend/data/spark_planner/open_threads.json",
+      "size": 18347,
+      "mtime": "2026-08-04T02:02:31.346513+00:00"
+    },
+    {
+      "path": "backend/data/spark_planner/daily_briefs/user-001/2026-08-03.json",
+      "size": 1312,
+      "mtime": "2026-08-04T02:02:31.259505+00:00"
+    },
+    {
+      "path": "backend/data/system/_meta.json",
+      "size": 714,
+      "mtime": "2026-08-04T12:37:19.855919+00:00"
+    },
+    {
+      "path": "backend/data/system/backup_anchors.json",
+      "size": 3145,
+      "mtime": "2026-08-04T12:38:01.162849+00:00"
+    },
+    {
+      "path": "backend/data/system/login_counters.json",
+      "size": 305,
+      "mtime": "2026-08-04T12:37:19.571892+00:00"
+    },
+    {
+      "path": "backend/data/system/scheduler_state.json",
+      "size": 641,
+      "mtime": "2026-08-04T12:34:29.469710+00:00"
+    },
+    {
+      "path": "backend/data/system/users.json",
+      "size": 509304,
+      "mtime": "2026-08-04T12:37:19.848918+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/03/auth.jsonl",
+      "size": 2434,
+      "mtime": "2026-08-03T19:06:13.893434+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/03/kb_v2.jsonl",
+      "size": 92812,
+      "mtime": "2026-08-03T19:41:06.461500+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/03/kbv2.jsonl",
+      "size": 107425,
+      "mtime": "2026-08-03T19:41:06.460500+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/03/kbv2_hooks.jsonl",
+      "size": 3325,
+      "mtime": "2026-08-03T19:41:06.048461+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/04/auth.jsonl",
+      "size": 1606,
+      "mtime": "2026-08-04T12:37:19.589894+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/04/kbv2.jsonl",
+      "size": 7404,
+      "mtime": "2026-08-04T07:45:51.334242+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/04/kb_v2.jsonl",
+      "size": 23291,
+      "mtime": "2026-08-04T07:45:51.334242+00:00"
+    },
+    {
+      "path": "backend/data/system/logs/2026/08/04/barks.jsonl",
+      "size": 187,
+      "mtime": "2026-08-04T12:37:19.570892+00:00"
+    },
+    {
+      "path": "backend/data/trade/anker/ADA-EUR.json",
+      "size": 267,
+      "mtime": "2026-08-04T03:02:41.840972+00:00"
+    },
+    {
+      "path": "backend/data/trade/anker/ATOM-EUR.json",
+      "size": 271,
+      "mtime": "2026-08-04T03:02:41.925980+00:00"
+    },
+    {
+      "path": "backend/data/trade/anker/BCH-EUR.json",
+      "size": 267,
+      "mtime": "2026-08-04T03:02:41.502940+00:00"
+    },
+    {
+      "path": "backend/data/trade/anker/BTC-EUR.json",
+      "size": 274,
+      "mtime": "2026-08-04T03:02:41.581948+00:00"
+    },
+    {
+      "path": "backend/data/trade/anker/ETH-EUR.json",
+      "size": 268,
+      "mtime": "2026-08-04T03:02:41.673956+00:00"
+    },
+    {
+      "path": "backend/data/trade/anker/SOL-EUR.json",
+      "size": 267,
+      "mtime": "2026-08-04T03:02:41.755964+00:00"
+    },
+    {
+      "path": "backend/data/trade/logs/trace_2026-08-03.jsonl",
+      "size": 501815,
+      "mtime": "2026-08-03T23:59:16.064006+00:00"
+    },
+    {
+      "path": "backend/data/trade/logs/trace_2026-08-04.jsonl",
+      "size": 398364,
+      "mtime": "2026-08-04T12:36:38.339970+00:00"
+    },
+    {
+      "path": "backend/data/triggers/learned_triggers.json",
+      "size": 155962,
+      "mtime": "2026-08-04T07:45:07.516073+00:00"
+    },
+    {
+      "path": "backend/data/users/user-166437fe/recent_topics.json",
+      "size": 1966,
+      "mtime": "2026-08-04T07:44:56.280005+00:00"
+    },
+    {
+      "path": "backend/data/users/user-1996fa59/recent_topics.json",
+      "size": 2448,
+      "mtime": "2026-08-03T19:06:05.393626+00:00"
+    }
+  ]
+}

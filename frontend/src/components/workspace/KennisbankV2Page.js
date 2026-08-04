@@ -280,9 +280,21 @@ export function KennisbankV2Page({ onNavigate }) {
   const saveEdit = async () => {
     if (!selectedCard || !editForm) return;
     // v10_kb_save_robust_001 — retry + timeout + queue voor lag/timeout resilience
+    // v12_kbv2_snappy_001 — optimistische UI: pas eerst lokaal aan, dan pas backend
     setSavingClassify(true);
-    // Optimistic UI: toon direct dat het probeert
     toast.loading('Opslaan...', { id: 'save-edit' });
+    // Optimistische snapshot voor rollback bij fout
+    const prevItems = items;
+    const prevSelected = selectedCard;
+    const optimistic = {
+      ...selectedCard,
+      begrip: editForm.begrip,
+      lagen: editForm.lagen,
+      ws5: editForm.ws5,
+      tags: editForm.tags,
+    };
+    setSelectedCard(optimistic);
+    setItems(items.map(c => c.id === selectedCard.id ? { ...c, ...optimistic } : c));
     try {
       const r = await robustFetch(`${API}/api/kb/v2/edit`, {
         method: 'POST',
@@ -295,14 +307,23 @@ export function KennisbankV2Page({ onNavigate }) {
         }),
       }, { kind: 'kb_edit', description: `Edit kaart ${editForm.begrip}` });
       if (r.success) {
-        setSelectedCard(r.kaart);
+        // Server-truth toepassen (bv. genormaliseerde tags/hooks-updates)
+        if (r.kaart) {
+          setSelectedCard(r.kaart);
+          setItems(curr => curr.map(c => c.id === r.kaart.id ? { ...c, ...r.kaart } : c));
+        }
         setEditMode(false);
-        await loadItems();
         toast.success('Opgeslagen', { id: 'save-edit' });
       } else {
+        // Rollback bij server-fout
+        setItems(prevItems);
+        setSelectedCard(prevSelected);
         toast.error(r.message || 'Opslaan mislukt', { id: 'save-edit' });
       }
     } catch (e) {
+      // Rollback bij netwerk-fout
+      setItems(prevItems);
+      setSelectedCard(prevSelected);
       const qSize = getQueueSize();
       toast.error(
         qSize > 0
@@ -399,15 +420,30 @@ export function KennisbankV2Page({ onNavigate }) {
   // v6_kbv2_delete_001 — permanent verwijderen via /api/kb/v2/delete
   // v12_inbox_incomplete_delete_fix — in Onvolledig-modus zit de kaart in een lade,
   // niet in inbox. Gebruik de kaart-eigen `lade` field i.p.v. activeTab.
+  // v12_kbv2_snappy_001 — optimistische UI: verwijder direct uit lijst zonder refetch
   const doDelete = async () => {
     if (!confirmDelete) return;
     const targetLade = (incompleteMode && confirmDelete.lade) ? confirmDelete.lade : activeTab;
+    // Snapshot voor rollback
+    const prevItems = items;
+    const prevSelected = selectedCard;
+    const prevTotal = total;
+    // Optimistisch: haal kaart direct uit lijst
+    setItems(items.filter(c => c.id !== confirmDelete.id));
+    setTotal(t => Math.max(0, t - 1));
+    setSelectedCard(null);
+    setEditMode(false);
+    setEditForm(null);
+    const cardId = confirmDelete.id;
+    const cardBegrip = confirmDelete.begrip || '(leeg)';
+    setConfirmDelete(null);
+    setDeleteReason('');
     try {
       const r = await fetch(`${API}/api/kb/v2/delete`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          card_id: confirmDelete.id,
+          card_id: cardId,
           lade: targetLade,
           user_id: 'user-001',
           reason: deleteReason,
@@ -415,19 +451,22 @@ export function KennisbankV2Page({ onNavigate }) {
       });
       const j = await r.json();
       if (j.success) {
-        toast.success(`Kaart "${j.begrip}" verwijderd`);
-        setSelectedCard(null);
-        setEditMode(false);
-        setEditForm(null);
-        await loadItems();
+        toast.success(`Kaart "${j.begrip || cardBegrip}" verwijderd`);
+        // Stats refresh op achtergrond zodat tab-tellers kloppen
+        loadStats();
       } else {
+        // Rollback bij server-fout
+        setItems(prevItems);
+        setSelectedCard(prevSelected);
+        setTotal(prevTotal);
         toast.error(j.message || 'Verwijderen mislukt');
       }
     } catch (e) {
+      // Rollback bij netwerk-fout
+      setItems(prevItems);
+      setSelectedCard(prevSelected);
+      setTotal(prevTotal);
       toast.error(`Netwerkfout: ${e.message}`);
-    } finally {
-      setConfirmDelete(null);
-      setDeleteReason('');
     }
   };
 
@@ -653,11 +692,13 @@ export function KennisbankV2Page({ onNavigate }) {
           )}
         </div>
 
-        {/* List + Detail */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-3">
+        {/* List + Detail — v12_kbv2_stable_layout_001: min-w-0 voorkomt overflow,
+             beide panelen krijgen dezelfde vaste hoogte + interne scroll zodat
+             lange kaarten het overzicht niet meer laten "verspringen". */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-3 items-start">
           {/* List */}
-          <div className="bg-slate-900/40 border border-slate-800 rounded-xl">
-            <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between sticky top-0 bg-slate-900/90 z-10">
+          <div className="bg-slate-900/40 border border-slate-800 rounded-xl min-w-0 h-[75vh] flex flex-col overflow-hidden">
+            <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between bg-slate-900/90 z-10 shrink-0">
               <p className="text-[11px] text-slate-400 font-medium">
                 {activeTab === 'inbox' ? 'Onbeantwoord' : LADES.find(l => l.id === activeTab)?.naam}
                 <span className="text-slate-500"> · {total} kaarten</span>
@@ -674,7 +715,7 @@ export function KennisbankV2Page({ onNavigate }) {
                 </div>
               )}
             </div>
-            <div className="max-h-[70vh] overflow-y-auto">
+            <div className="flex-1 overflow-y-auto">
               {loading ? (
                 <p className="text-xs text-slate-500 p-4 text-center">Laden...</p>
               ) : items.length === 0 ? (
@@ -688,8 +729,8 @@ export function KennisbankV2Page({ onNavigate }) {
             </div>
           </div>
 
-          {/* Detail / Edit */}
-          <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-3">
+          {/* Detail / Edit — vaste hoogte + eigen scroll, min-w-0 tegen overflow */}
+          <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-3 min-w-0 h-[75vh] overflow-y-auto">
             {creatingNew ? (
               <NewCardInline editForm={editForm} setEditForm={setEditForm}
                 saving={savingClassify}
@@ -951,20 +992,21 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
 
   return (
     <div className="space-y-3">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex-1">
+      {/* Header — v12_kbv2_stable_layout_001: flex-wrap + min-w-0 zodat lange
+          begrippen de knoppen niet meer uit beeld duwen. */}
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
           {editMode ? (
             <input data-testid="kbv2-edit-begrip" value={editForm.begrip}
               onChange={(e) => upd('begrip', e.target.value)}
               className="w-full text-lg font-bold text-white bg-slate-800/60 border border-slate-700 rounded px-2 py-1" />
           ) : (
-            <h2 className="text-lg font-bold text-white">{card.begrip || '(leeg)'}</h2>
+            <h2 className="text-lg font-bold text-white break-words">{card.begrip || '(leeg)'}</h2>
           )}
-          <p className="text-[10px] text-slate-500 mt-0.5">{card.id}</p>
+          <p className="text-[10px] text-slate-500 mt-0.5 truncate">{card.id}</p>
         </div>
         {/* v6_kbv2_unify_001 — Compleetheid-badge */}
-        <div data-testid="kbv2-completeness-badge" className={`px-2 py-1 rounded-lg text-[10px] font-semibold border ${
+        <div data-testid="kbv2-completeness-badge" className={`shrink-0 px-2 py-1 rounded-lg text-[10px] font-semibold border ${
           isComplete
             ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
             : pct >= 50
@@ -974,7 +1016,7 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
           {isComplete ? '✓ 100% gekuurd' : `${pct}% (${filledCount}/${totalFields})`}
         </div>
         {!editMode ? (
-          <>
+          <div className="flex items-center gap-1.5 shrink-0 flex-wrap">
             <button data-testid="kbv2-edit-btn" onClick={onStartEdit}
               className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-300 hover:bg-slate-800 flex items-center gap-1">
               <Edit3 className="w-3 h-3" /> Bewerken
@@ -996,10 +1038,10 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
               className="px-2 py-1 text-xs border border-red-500/40 rounded text-red-400 hover:bg-red-500/15 flex items-center gap-1">
               <Trash2 className="w-3 h-3" />
             </button>
-          </>
+          </div>
         ) : (
           <button data-testid="kbv2-cancel-edit" onClick={onCancelEdit}
-            className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-400 hover:bg-slate-800">
+            className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-400 hover:bg-slate-800 shrink-0">
             <X className="w-3 h-3" />
           </button>
         )}

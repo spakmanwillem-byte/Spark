@@ -2,6 +2,36 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-08-04 (sessie 56) — Layout-stabiliteit, snappy CRUD, trader-fastpath, ZIP-merge
+
+### 🟢 P0 — Backup ZIP delta-merge
+- Merged `spark_backup_changes_20260804_123804.zip` (8.5 MB, 59 bestanden).
+- Backup vóór merge: `/app/_backups/pre_merge_20260804_125140.tgz`.
+- Nieuwe totalen: Voelen 539 · Spreken 601 · Weten 3788 · Doen 1228 · Inbox 2 (was: 553/611/3855/1240/0).
+
+### 🟡 v12_kbv2_stable_layout_001 — Kennisbank layout locked
+**Probleem**: Bij openen van een lange kaart verspringen de kaders — het detail-paneel groeide oneindig, waardoor de lijst-kolom visueel niet meer paste en knoppen aan de rand uit beeld raakten.
+**Fix**:
+- Beide grid-panelen (`lijst` + `detail`) krijgen nu **vaste h-[75vh]** met eigen `overflow-y-auto`.
+- `min-w-0` op beide grid-children voorkomt overflow bij lange tags/tekst.
+- Detail-header: `flex-wrap items-start` + `min-w-0` op titel + `shrink-0` op actie-knoppen → knoppen (Bewerken/Genereer/🗑) blijven altijd zichtbaar, ook bij lange begrippen.
+
+### 🟡 v12_kbv2_snappy_001 — Direct verwijderen/bewerken (geen refetch-lag)
+**Probleem**: Delete + edit voelden traag omdat de backend na elke actie de volledige lade opnieuw uit 18 MB weten-JSON las én de frontend daarna alsnog `loadItems()` deed.
+**Fix (optimistische UI)**:
+- `doDelete` verwijdert de kaart direct uit lokale `items` state, roept dan pas de backend aan; bij fout rollback.
+- `saveEdit` past de kaart direct in-place aan (`setItems(map)`) en refresht daarna alleen op basis van server-truth i.p.v. volledige refetch.
+- Stats worden op achtergrond ge-refreshed (tab-tellers blijven kloppen).
+
+### 🟡 v12_trader_intents_fastpath_001 — Trader-data in normale chat
+**Probleem**: In Diep-modus (`/api/spark/compose`) werkten trader-commando's ("hoe staat mijn bot", "wat heb ik verdiend", "hoeveel potjes") wel, maar in normale chat (`/api/chat/message`) viel Spark terug op KB-card definities van "staat" en "bot" → geen trader data.
+**Fix**: `trader_intents.try_detect` toegevoegd als fast-path in `/api/chat/message`, direct na safeword-check en behavior-tracking. Werkt nu voor: `trader_start/stop/status/pnl/recent/potjes/events/explain/config`. Verified: 3/3 test-prompts geven nu correcte trader-data terug; onschuldige "hallo" gaat gewoon door greeting-flow.
+
+### 📊 Geraakte bestanden
+- `/app/backend/modules/chat/routes.py` (trader-fastpath)
+- `/app/frontend/src/components/workspace/KennisbankV2Page.js` (layout + optimistic UI)
+- `/app/backend/data/**` (ZIP-merge)
+
 ## 2026-07-20 (sessie 48) — KB merge uit productie-backup (P0)
 
 ### 🎯 Productie KB-kaarten samengevoegd

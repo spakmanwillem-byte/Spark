@@ -123,6 +123,39 @@ async def process_message(req: ChatMessage):
     except Exception:
         pass
 
+    # v12_trader_intents_fastpath_001 — Trader-commando's ('start bot', 'hoe staat mijn bot',
+    # 'wat verdiend?', etc.) direct via trader_intents afhandelen zodat gewone chat
+    # niet meer terugvalt op KB-card definities van 'staat'/'bot'. Diep-modus deed dit
+    # al via /api/spark/compose; nu ook /api/chat/message.
+    try:
+        from modules.trade.trader_intents import try_detect as _trader_detect
+        _trader_hit = await _trader_detect(text, user_id=req.user_id or "user-001")
+        if _trader_hit:
+            _msg = _trader_hit.get("message", "")
+            _resp = {
+                "type": "trader_intent",
+                "message": _msg,
+                "spark_response": _msg,
+                "success": _trader_hit.get("success", True),
+                "intent": _trader_hit.get("intent"),
+                "action": _trader_hit.get("action"),
+                "data": _trader_hit.get("data"),
+                "used_model": "trader_intents",
+                "fast_path": True,
+                "knowledge_matches": [],
+                "sentiment": snap.detect_sentiment(text),
+                "emotion": None,
+                "unknown_words": [],
+                "snap_suggestions": [],
+            }
+            try:
+                _save_log(req, _resp, "trader_intent")
+            except Exception:
+                pass
+            return _resp
+    except Exception as _ex:
+        print(f"[trader_intents fastpath] failed: {_ex}")
+
     response = {
         "type": "response",
         "message": "",

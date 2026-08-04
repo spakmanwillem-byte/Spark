@@ -868,12 +868,35 @@
         "session_id": "deep-user-1996fa59",
         "gesprek_nummer": 36
       }
+    },
+    {
+      "id": "conv-3e0d101d",
+      "timestamp": "2026-08-03T19:06:10.883757+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "ha;;o Spark",
+      "spark_response": "Hoi Roadkill! \nIk ben er weer. Hoe kan ik je vandaag helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "anders",
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-69d781cc",
+          "kbv2-aaf81efb",
+          "kbv2-0a5d1838",
+          "kbv2-9bc67e82"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-1996fa59",
+        "gesprek_nummer": 37
+      }
     }
   ],
   "metadata": {
     "user_id": "user-1996fa59",
-    "total_conversations": 36,
-    "last_updated": "2026-07-07T18:20:14.284106+00:00",
-    "last_merged_at": "2026-07-09T22:33:03.952412+00:00"
+    "total_conversations": 37,
+    "last_updated": "2026-08-03T19:06:10.883757+00:00"
   }
 }

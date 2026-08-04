@@ -397,15 +397,18 @@ export function KennisbankV2Page({ onNavigate }) {
   };
 
   // v6_kbv2_delete_001 — permanent verwijderen via /api/kb/v2/delete
+  // v12_inbox_incomplete_delete_fix — in Onvolledig-modus zit de kaart in een lade,
+  // niet in inbox. Gebruik de kaart-eigen `lade` field i.p.v. activeTab.
   const doDelete = async () => {
     if (!confirmDelete) return;
+    const targetLade = (incompleteMode && confirmDelete.lade) ? confirmDelete.lade : activeTab;
     try {
       const r = await fetch(`${API}/api/kb/v2/delete`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           card_id: confirmDelete.id,
-          lade: activeTab,
+          lade: targetLade,
           user_id: 'user-001',
           reason: deleteReason,
         }),

@@ -202,7 +202,7 @@ const saveDeepMode = (userId, value) => {
 };
 
 export function GesprekkenPage({ onNavigate }) {
-  const { user } = useAuth();
+  const { user, adminModeActive } = useAuth();
   const userId = user?.id || 'user-001';
   const userName = user?.naam || 'Gebruiker';
   const userGradatie = user?.gradatie ?? 2;
@@ -840,7 +840,7 @@ export function GesprekkenPage({ onNavigate }) {
         const res = await fetch(`${API}/api/chat/message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, user_naam: userName, user_id: userId, channel: 'spark' }),
+          body: JSON.stringify({ message: text, user_naam: userName, user_id: userId, channel: 'spark', admin_mode: !!adminModeActive }),
         });
         const data = await res.json();
 

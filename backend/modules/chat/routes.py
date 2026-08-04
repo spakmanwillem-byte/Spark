@@ -41,6 +41,10 @@ class ChatMessage(BaseModel):
     user_id: Optional[str] = None
     channel: Optional[str] = "spark"
     session_id: Optional[str] = None
+    # v12_admin_gated_triggers_001 — Wanneer False (default) triggeren admin-taken
+    # zoals trader-commando's niet meer op random woorden tijdens bv. verhaal-paste
+    # voor snap-input. Frontend stuurt True mee zodra 'Admin aan' toggle actief is.
+    admin_mode: Optional[bool] = False
 
 
 class SnapRequest(BaseModel):
@@ -127,34 +131,38 @@ async def process_message(req: ChatMessage):
     # 'wat verdiend?', etc.) direct via trader_intents afhandelen zodat gewone chat
     # niet meer terugvalt op KB-card definities van 'staat'/'bot'. Diep-modus deed dit
     # al via /api/spark/compose; nu ook /api/chat/message.
-    try:
-        from modules.trade.trader_intents import try_detect as _trader_detect
-        _trader_hit = await _trader_detect(text, user_id=req.user_id or "user-001")
-        if _trader_hit:
-            _msg = _trader_hit.get("message", "")
-            _resp = {
-                "type": "trader_intent",
-                "message": _msg,
-                "spark_response": _msg,
-                "success": _trader_hit.get("success", True),
-                "intent": _trader_hit.get("intent"),
-                "action": _trader_hit.get("action"),
-                "data": _trader_hit.get("data"),
-                "used_model": "trader_intents",
-                "fast_path": True,
-                "knowledge_matches": [],
-                "sentiment": snap.detect_sentiment(text),
-                "emotion": None,
-                "unknown_words": [],
-                "snap_suggestions": [],
-            }
-            try:
-                _save_log(req, _resp, "trader_intent")
-            except Exception:
-                pass
-            return _resp
-    except Exception as _ex:
-        print(f"[trader_intents fastpath] failed: {_ex}")
+    # v12_admin_gated_triggers_001 — ALLEEN uitvoeren wanneer 'Admin aan' actief is.
+    # Zo triggert een verhaal-paste met "stop", "pauzeer" of "bot" niet meer per ongeluk
+    # trader-acties. Non-admin gesprek loopt door de gewone NLP-pipeline.
+    if req.admin_mode:
+        try:
+            from modules.trade.trader_intents import try_detect as _trader_detect
+            _trader_hit = await _trader_detect(text, user_id=req.user_id or "user-001")
+            if _trader_hit:
+                _msg = _trader_hit.get("message", "")
+                _resp = {
+                    "type": "trader_intent",
+                    "message": _msg,
+                    "spark_response": _msg,
+                    "success": _trader_hit.get("success", True),
+                    "intent": _trader_hit.get("intent"),
+                    "action": _trader_hit.get("action"),
+                    "data": _trader_hit.get("data"),
+                    "used_model": "trader_intents",
+                    "fast_path": True,
+                    "knowledge_matches": [],
+                    "sentiment": snap.detect_sentiment(text),
+                    "emotion": None,
+                    "unknown_words": [],
+                    "snap_suggestions": [],
+                }
+                try:
+                    _save_log(req, _resp, "trader_intent")
+                except Exception:
+                    pass
+                return _resp
+        except Exception as _ex:
+            print(f"[trader_intents fastpath] failed: {_ex}")
 
     response = {
         "type": "response",

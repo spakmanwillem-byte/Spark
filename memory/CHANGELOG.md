@@ -2,6 +2,24 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-08-04 (sessie 56b) — Admin-gated trader triggers
+
+### 🟡 v12_admin_gated_triggers_001 — Trader-commando's nu admin-only
+**Probleem**: Toen ik in 56a een `trader_intents.try_detect` fastpath toevoegde aan `/api/chat/message`, kon een verhaal-paste (voor snap-input) per ongeluk trader-woorden ("stop", "pauzeer", "bot") oppikken en Spark liet zeggen "*ik stop of pauzeer*". Willem's oorspronkelijke design: hard-triggers zijn legacy vase, admin-taken horen achter `Admin aan`.
+**Fix**:
+- `ChatMessage` payload uitgebreid met `admin_mode: bool = False` (default veilig).
+- Fastpath `trader_intents.try_detect` in `/api/chat/message` wordt nu alléén uitgevoerd als `admin_mode == True`.
+- Frontend (`GesprekkenPage`) stuurt `adminModeActive` uit `AuthContext` mee bij elke chat-call.
+- Deep-mode (`/api/spark/compose`) blijft ongewijzigd — dat is een expliciete keuze van de gebruiker.
+
+**Getest**:
+- Non-admin "hoe staat mijn bot" → `type: knowledge` (geen trader) ✓
+- Non-admin "stop de bus, pauzeer even" → `type: agenda_declined` (geen trader-stop) ✓
+- Admin ON "hoe staat mijn bot" → `type: trader_intent`, `intent: trader_status` ✓
+
+### 📝 Notitie voor later
+Willem heeft aangegeven dat álle hard-coded triggers ("stop"-safeword, `card_session_service` STOP_WORDS, `zaag`-sound op "zien", etc.) sporen zijn van een oudere fase. De toekomst is zelf-leren + zelfspraak (Bumblebee-idee). Voorlopig alleen de admin-taken gegate.
+
 ## 2026-08-04 (sessie 56) — Layout-stabiliteit, snappy CRUD, trader-fastpath, ZIP-merge
 
 ### 🟢 P0 — Backup ZIP delta-merge

@@ -60674,11 +60674,110 @@
         "session_id": "test-t4",
         "gesprek_nummer": 2399
       }
+    },
+    {
+      "id": "conv-76d69b7a",
+      "timestamp": "2026-08-04T13:11:30.294072+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe staat mijn bot",
+      "spark_response": "**staat**: Een staat is de huidige toestand, situatie of conditie waarin iets of iemand zich bevindt.\n\n**bot**: Een bot is een geautomatiseerd systeem of programma dat taken uitvoert of reageert zonder directe menselijke besturing.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "bot",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "staat"
+          },
+          {
+            "begrip": "bot"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "g1",
+        "gesprek_nummer": 2400
+      }
+    },
+    {
+      "id": "conv-f47b6f71",
+      "timestamp": "2026-08-04T13:11:30.582357+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "stop de bus, pauzeer even, we moeten praten",
+      "spark_response": "Oké, ik laat het zo. Niks in je agenda gezet.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "stop"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_declined",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "agenda_declined"
+      },
+      "metadata": {
+        "session_id": "g2",
+        "gesprek_nummer": 2401
+      }
+    },
+    {
+      "id": "conv-cea774d2",
+      "timestamp": "2026-08-04T13:11:30.798127+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe staat mijn bot",
+      "spark_response": "⏸️ Je trader staat stil · **2 open trade(s)**: 2× BCH-EUR. Zeg 'start mijn bot' om weer te beginnen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "trader_intent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "trader_intent"
+      },
+      "metadata": {
+        "session_id": "g3",
+        "gesprek_nummer": 2402
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2399,
-    "last_updated": "2026-08-04T12:57:54.613767+00:00"
+    "total_conversations": 2402,
+    "last_updated": "2026-08-04T13:11:30.798127+00:00"
   }
 }

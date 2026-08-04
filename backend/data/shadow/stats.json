@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 1478,
+    "events": 1481,
     "corrections": 2,
     "confirmations": 4,
     "fallbacks": 0,
-    "knowledge_matches": 698
+    "knowledge_matches": 700
   },
   "triggers_used": {
     "wedervraag_done": 28,
@@ -114,10 +114,11 @@
     "kb_fill_declined": 2,
     "kb_fill_retry": 2,
     "kb_fill_skipped": 2,
-    "trader_intent": 3
+    "trader_intent": 4,
+    "agenda_declined": 1
   },
   "response_types": {
-    "knowledge": 343,
+    "knowledge": 344,
     "unknown": 34,
     "wedervraag_done": 28,
     "wedervraag": 44,
@@ -231,12 +232,13 @@
     "kb_fill_declined": 2,
     "kb_fill_retry": 2,
     "kb_fill_skipped": 2,
-    "trader_intent": 3
+    "trader_intent": 4,
+    "agenda_declined": 1
   },
   "begrip_used": {
     "vroeg": 2,
     "Computer": 1,
-    "staat": 7,
+    "staat": 8,
     "Morgen": 7,
     "Planning": 1,
     "voorstel": 2,
@@ -592,12 +594,12 @@
     "Anker": 1,
     "trades": 1,
     "Lopen": 1,
-    "bot": 2
+    "bot": 3
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-08-04T12:57:54.666811+00:00",
+  "last_event_at": "2026-08-04T13:11:30.853586+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

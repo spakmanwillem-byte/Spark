@@ -20,6 +20,7 @@
 
 ### 🔓 In sessie 56d gefixt
 - **`v12_admin_capable_unlock_001`** — `/api/auth/users?admin_id=...` (register-with-override) accepteert nu iedereen met `admin_capable=True` of gradatie 1/2, i.p.v. alleen gradatie 1/2. Getest met 3 curl-scenarios, allemaal groen. Marieke (gradatie 3) getest en teruggezet — Willem kiest zelf wie sub-admin wordt.
+- **`v12_admin_type_001`** — RBAC light: `admin_type` veld op user + `admin_types.json` config met 3 vaste types (full / community / user_admin, elk met kleur en scope-array). `POST /api/admin/grant` accepteert nu `admin_type` param. `GET /api/admin/types` publiek endpoint. In `AdminSettingsPanel` bark: dropdown "Admin-type" tussen user-select en wachtwoord. In admins-lijst: gekleurde type-badge naast naam. **Nog niet gates**: elke tab/endpoint zonder scope-check draait als vanouds. Scope-enforcement is sessie 57.
 
 ### ❓ Open vragen / gaps voor sessie 57
 

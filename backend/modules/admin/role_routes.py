@@ -12,17 +12,27 @@ class GrantRequest(BaseModel):
     target_user_id: str
     granted_by: str
     password: str
+    admin_type: Optional[str] = "full"  # v12_admin_type_001
 
 
 @router.post("/grant")
 async def grant_admin(req: GrantRequest):
     """Verleen admin-rol aan een user. Alleen door bestaande admin met geldig
-    ADMIN_PASSWORD wachtwoord (env-var)."""
-    result = svc.grant_admin(req.target_user_id, req.granted_by, req.password)
+    ADMIN_PASSWORD wachtwoord (env-var). admin_type default 'full'."""
+    result = svc.grant_admin(req.target_user_id, req.granted_by, req.password, req.admin_type or "full")
     # Verrijk met bark-image
     if result.get("bark_kaart"):
         result["bark_image_url"] = svc.get_bark_image_for_concept(result["bark_kaart"])
     return result
+
+
+# v12_admin_type_001 — Vaste admin-type-config voor RBAC light.
+@router.get("/types")
+async def get_admin_types():
+    """Return de vaste admin-types (full / community / user_admin). Bevat naam,
+    beschrijving, kleur en scope-array. Frontend gebruikt dit voor de dropdown
+    in 'Maak admin' bark en voor toekomstige scope-gates."""
+    return {"types": svc.list_admin_types()}
 
 
 class RevokeRequest(BaseModel):

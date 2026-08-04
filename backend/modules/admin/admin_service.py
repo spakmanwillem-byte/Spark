@@ -97,26 +97,34 @@ def verify_admin_password(password: str) -> bool:
     return password.strip() == expected
 
 
-def grant_admin(target_user_id: str, granted_by: str, password: str) -> Dict:
+def grant_admin(target_user_id: str, granted_by: str, password: str, admin_type: str = "full") -> Dict:
     """Geef admin-rol aan een user.
 
     Vereisten:
       - granted_by MOET zelf admin zijn
       - password moet matchen met ADMIN_PASSWORD env-var
+      - admin_type moet bestaan in /data/system/admin_types.json (default 'full')
     """
     if not is_admin(granted_by):
         return {"success": False, "error": "Alleen bestaande admin mag admin-rechten verlenen."}
     if not verify_admin_password(password):
         return {"success": False, "error": "Admin-wachtwoord onjuist.", "bark_kaart": "Toegang geweigerd"}
 
+    # v12_admin_type_001 — Valideer type
+    valid_ids = {t["id"] for t in list_admin_types()}
+    if admin_type not in valid_ids:
+        return {"success": False, "error": f"Onbekend admin-type '{admin_type}'. Kies uit: {sorted(valid_ids)}"}
+
     data = _load_users()
     target = next((u for u in data.get("users", []) if u.get("id") == target_user_id), None)
     if not target:
         return {"success": False, "error": f"Gebruiker {target_user_id} niet gevonden."}
-    if target.get("admin") is True:
-        return {"success": True, "already": True, "user_id": target_user_id, "bark_kaart": "Admin geactiveerd"}
+    if target.get("admin") is True and target.get("admin_type") == admin_type:
+        return {"success": True, "already": True, "user_id": target_user_id, "admin_type": admin_type,
+                "bark_kaart": "Admin geactiveerd"}
 
     target["admin"] = True
+    target["admin_type"] = admin_type
     target["admin_granted_at"] = _now_iso()
     target["admin_granted_by"] = granted_by
     _save_users(data)
@@ -124,10 +132,25 @@ def grant_admin(target_user_id: str, granted_by: str, password: str) -> Dict:
         "success": True,
         "user_id": target_user_id,
         "naam": target.get("naam"),
+        "admin_type": admin_type,
         "granted_by": granted_by,
         "bark_kaart": "Admin geactiveerd",
-        "message": f"{target.get('naam', target_user_id)} is nu admin.",
+        "message": f"{target.get('naam', target_user_id)} is nu {admin_type}-admin.",
     }
+
+
+# v12_admin_type_001 — Config-loader voor admin-types.
+def list_admin_types() -> list:
+    """Return alle vaste admin-types uit /data/system/admin_types.json."""
+    import json as _json
+    from pathlib import Path as _P
+    p = _P(__file__).parent.parent.parent / "data" / "system" / "admin_types.json"
+    if not p.exists():
+        return [{"id": "full", "naam": "Beheerder", "scopes": ["*"], "is_default": True}]
+    try:
+        return _json.loads(p.read_text()).get("types", [])
+    except Exception:
+        return [{"id": "full", "naam": "Beheerder", "scopes": ["*"], "is_default": True}]
 
 
 def revoke_admin(target_user_id: str, revoked_by: str) -> Dict:
@@ -190,6 +213,7 @@ def list_admins() -> Dict:
     data = _load_users()
     admins = [
         {"id": u.get("id"), "naam": u.get("naam"), "gradatie": u.get("gradatie"),
+         "admin_type": u.get("admin_type") or "full",
          "admin_granted_at": u.get("admin_granted_at"), "admin_granted_by": u.get("admin_granted_by")}
         for u in data.get("users", []) if u.get("admin") is True
     ]

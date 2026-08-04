@@ -849,10 +849,14 @@ function AdminSettingsPanel({ userId }) {
   const [showBark, setShowBark] = useState(null);
   const [showGrantBark, setShowGrantBark] = useState(false); // v6_admin_grant_frame_001
   const [busy, setBusy] = useState(false);
+  // v12_admin_type_001 — Types voor RBAC-light dropdown
+  const [adminTypes, setAdminTypes] = useState([]);
 
   useEffect(() => {
     if (!userId) return;
     fetch(`${API}/api/admin/is-admin/${userId}`).then(r => r.json()).then(d => setIsAdmin(d.is_admin === true));
+    // Types laden (public — voor de dropdown)
+    fetch(`${API}/api/admin/types`).then(r => r.json()).then(d => setAdminTypes(d.types || [])).catch(() => {});
   }, [userId]);
 
   const refresh = useCallback(() => {
@@ -874,7 +878,7 @@ function AdminSettingsPanel({ userId }) {
     );
   }
 
-  const grant = async ({ targetId, grantPw }) => {
+  const grant = async ({ targetId, grantPw, adminType }) => {
     if (!targetId || !grantPw) {
       setShowBark({ begrip: 'Toegang geweigerd', title: 'Vul beide velden in', text: 'Kies een user en typ het admin-wachtwoord.', tone: 'warn' });
       return;
@@ -882,12 +886,18 @@ function AdminSettingsPanel({ userId }) {
     setBusy(true);
     const res = await fetch(`${API}/api/admin/grant`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ target_user_id: targetId, granted_by: userId, password: grantPw }),
+      body: JSON.stringify({
+        target_user_id: targetId,
+        granted_by: userId,
+        password: grantPw,
+        admin_type: adminType || 'full',  // v12_admin_type_001
+      }),
     }).then(r => r.json());
     setBusy(false);
     if (res.success) {
       setShowGrantBark(false);
-      setShowBark({ begrip: 'Admin geactiveerd', title: `${res.naam || targetId} is nu admin`, text: res.message, tone: 'success' });
+      const typeLabel = adminTypes.find(t => t.id === (res.admin_type || 'full'))?.naam || res.admin_type || 'admin';
+      setShowBark({ begrip: 'Admin geactiveerd', title: `${res.naam || targetId} is nu ${typeLabel}`, text: res.message, tone: 'success' });
       refresh();
     } else {
       setShowBark({ begrip: 'Toegang geweigerd', title: 'Admin-grant mislukt', text: res.error, tone: 'error' });
@@ -955,6 +965,20 @@ function AdminSettingsPanel({ userId }) {
                 <ShieldCheck className="w-3.5 h-3.5 text-purple-300" />
                 <span className="text-xs text-white">{a.naam || a.id}</span>
                 <span className="text-[10px] text-slate-500">g{a.gradatie}</span>
+                {/* v12_admin_type_001 — Type badge (full / community / user_admin) */}
+                {(() => {
+                  const t = adminTypes.find(x => x.id === (a.admin_type || 'full'));
+                  return (
+                    <span
+                      data-testid={`admin-type-badge-${a.id}`}
+                      style={{ color: t?.kleur || '#f59e0b', borderColor: t?.kleur || '#f59e0b' }}
+                      className="text-[9px] font-semibold px-1.5 py-0.5 rounded border bg-slate-900/40"
+                      title={t?.beschrijving || ''}
+                    >
+                      {t?.naam || (a.admin_type || 'full')}
+                    </span>
+                  );
+                })()}
                 {a.admin_granted_by === 'system-seed' && (
                   <span className="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">seed</span>
                 )}
@@ -1042,6 +1066,18 @@ function AdminSettingsPanel({ userId }) {
             options: grantableUsers.map(u => ({
               value: u.id,
               label: `${u.naam || u.id} (g${u.gradatie || '?'})`,
+            })),
+          },
+          {
+            // v12_admin_type_001 — Kies type (full / community / user_admin)
+            name: 'adminType',
+            type: 'select',
+            label: 'Admin-type',
+            placeholder: '— kies type —',
+            initial: 'full',
+            options: adminTypes.map(t => ({
+              value: t.id,
+              label: t.naam,
             })),
           },
           {

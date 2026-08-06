@@ -176,11 +176,16 @@ async def get_inbox(limit: int = Query(50, ge=1, le=500),
 @router.get("/inbox/incomplete")
 async def get_inbox_incomplete(limit: int = Query(50, ge=1, le=500),
                                 offset: int = Query(0, ge=0),
-                                search: str = ""):
+                                search: str = "",
+                                sort: str = Query("recent", regex="^(recent|oud|alfa|alfa_desc|hits_desc|hits_asc)$")):
     """v12_inbox_incomplete_001 — Kaarten uit de 4 lades die incompleet zijn.
     Anker: knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium.
 
-    Toont onder Kennisbank v2 → Inbox → subtab 'Onvolledig'.
+    v12_kbv2_inbox_sort_001 — sort-param voor gelijkheid met /inbox endpoint.
+      - 'recent' (default): minst ingevuld eerst (urgent bovenaan)
+      - 'oud'/'recent' op timestamp (footnote.laatst_bewerkt_op)
+      - 'alfa'/'alfa_desc': op begrip
+      - 'hits_desc'/'hits_asc': op laag1_refs (cross-referenties)
     """
     from modules.core.storage import load_json as _lj
     REQUIRED_5W = {"wie", "wat", "wanneer", "waar", "waarom", "hoe"}
@@ -215,14 +220,33 @@ async def get_inbox_incomplete(limit: int = Query(50, ge=1, le=500),
                 "laag1": (lagen.get("laag1") or "")[:120],
                 "tags_sample": (c.get("tags") or [])[:5],
                 "_inbox_reason": "onvolledig",
+                "_footnote_ts": (c.get("footnote") or {}).get("laatst_bewerkt_op")
+                                or (c.get("footnote") or {}).get("aangemaakt_op") or "",
             })
-    # Sorteer: minst ingevuld eerst zodat urgent werk bovenaan komt
-    out.sort(key=lambda x: (x["filled_5w"] + x["filled_lagen"], x["begrip"] or ""))
+
+    # v12_kbv2_inbox_sort_001 — Sort volgens dropdown-keuze
+    if sort == "alfa":
+        out.sort(key=lambda x: (x["begrip"] or "").lower())
+    elif sort == "alfa_desc":
+        out.sort(key=lambda x: (x["begrip"] or "").lower(), reverse=True)
+    elif sort == "oud":
+        out.sort(key=lambda x: x["_footnote_ts"])
+    elif sort in ("hits_desc", "hits_asc"):
+        signals = service._build_priority_signals()
+        laag1_refs = signals.get("laag1_refs", {})
+        out.sort(
+            key=lambda x: laag1_refs.get((x["begrip"] or "").lower(), 0),
+            reverse=(sort == "hits_desc"),
+        )
+    else:  # 'recent' — default: minst ingevuld eerst zodat urgent werk bovenaan komt
+        out.sort(key=lambda x: (x["filled_5w"] + x["filled_lagen"], x["begrip"] or ""))
+
     return {
         "success": True,
         "total": len(out),
         "offset": offset,
         "limit": limit,
+        "sort": sort,
         "kaarten": out[offset:offset + limit],
         "anker": "knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium",
     }

@@ -96,6 +96,8 @@ export function KennisbankV2Page({ onNavigate }) {
       let url;
       if (activeTab === 'inbox' && incompleteMode) {
         // v12_inbox_incomplete_001 — Kaarten uit lades met leeg 5W of onvolledige lagen
+        // v12_kbv2_inbox_sort_001 — sort-param meesturen zodat dropdown ook hier werkt
+        if (sortMode && sortMode !== 'recent') qs.append('sort', sortMode);
         url = `${API}/api/kb/v2/inbox/incomplete?${qs}`;
       } else if (activeTab === 'inbox' && (sortMode === 'hits_desc' || sortMode === 'hits_asc')) {
         // v12_kbv2_inbox_sort_001 — 'meeste/minste hits' gebruikt cross-lade priority-endpoint
@@ -692,24 +694,22 @@ export function KennisbankV2Page({ onNavigate }) {
                 }`}>
                 ⚠ Onvolledig
               </button>
-              {/* v12_kbv2_inbox_sort_001 — sort-dropdown vervangt losse 'Top 50 prio' toggle.
-                  Beschikbaar bij inbox 'alle' en 'tag_tie' modus (niet in Onvolledig). */}
-              {!incompleteMode && (
-                <select
-                  data-testid="kbv2-sort-select"
-                  value={sortMode}
-                  onChange={(e) => { setSortMode(e.target.value); setPage(0); }}
-                  className="ml-2 px-2 py-1 rounded text-[10px] font-medium border border-slate-700 bg-slate-900/60 text-slate-300 focus:outline-none focus:border-amber-500/50"
-                  title="Sorteervolgorde voor deze lijst"
-                >
-                  <option value="recent">🕒 Nieuwste eerst</option>
-                  <option value="oud">🕐 Oudste eerst</option>
-                  <option value="alfa">🔤 A → Z</option>
-                  <option value="alfa_desc">🔡 Z → A</option>
-                  <option value="hits_desc">⭐ Meeste hits (Top prio)</option>
-                  <option value="hits_asc">🌱 Minste hits eerst</option>
-                </select>
-              )}
+              {/* v12_kbv2_inbox_sort_001 — sort-dropdown werkt op alle 3 filters
+                  (alle / Tag-tie / Onvolledig) zodat het geen off-grid tab meer voelt. */}
+              <select
+                data-testid="kbv2-sort-select"
+                value={sortMode}
+                onChange={(e) => { setSortMode(e.target.value); setPage(0); }}
+                className="ml-2 px-2 py-1 rounded text-[10px] font-medium border border-slate-700 bg-slate-900/60 text-slate-300 focus:outline-none focus:border-amber-500/50"
+                title="Sorteervolgorde voor deze lijst"
+              >
+                <option value="recent">🕒 Nieuwste eerst</option>
+                <option value="oud">🕐 Oudste eerst</option>
+                <option value="alfa">🔤 A → Z</option>
+                <option value="alfa_desc">🔡 Z → A</option>
+                <option value="hits_desc">⭐ Meeste hits (Top prio)</option>
+                <option value="hits_asc">🌱 Minste hits eerst</option>
+              </select>
             </div>
           )}
         </div>

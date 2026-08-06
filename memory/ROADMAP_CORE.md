@@ -1,0 +1,408 @@
+# Spark Core 2.0 — Roadmap Core
+
+> **Lees dit als eerste bij elke nieuwe sessie.**
+> Voor afgeronde sessies: `ROADMAP_HISTORY.md`.
+> Voor open items en ideeën: `ROADMAP_BACKLOG.md`.
+> Voor bewezen inzichten en fout-patterns: `LEARNINGS.md`.
+> Voor overzicht: `ROADMAP_INDEX.md`.
+
+---
+
+## 🌷 Moreel Kompas — Kernvisie (blijft altijd bovenaan)
+
+Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft aan zijn dochter Lotus. Dat betekent:
+
+1. **Rust boven snelheid** — snappy UX telt, maar nooit ten koste van voorspelbaarheid of dataveiligheid.
+2. **Privacy-by-design** — geen chat-tekst loggen, geen user-namen in `/app/memory/*.md` voor anderen dan Willem, alleen patroon-tellers. Per-user opt-out beschikbaar.
+3. **Autonomie-scheiding** — elke module heeft twee zones:
+   - 🤖 **Spark autonoom**: voorstel doen, geen mutatie (draft-status).
+   - 👤 **Willem beslist**: expliciete Accept vóór mutatie plaatsvindt.
+4. **Zwart-wit boven grijs** — strakke regels die 90% dekken + expliciete uitzonderingen zijn beter dan flexibele regels die 100% dekken maar niet meer te ontwarren zijn.
+5. **Container-isolatie is default** — elke user/shop/bot heeft eigen container met `_meta.json`. Nooit globale bestanden voor user-data. Delete = delete-directory.
+6. **Gastheer-toon** — bij twijfel/onzekerheid: warm ontvangen, niet docerend. Erkenning voor prestatie. "We doen het samen."
+7. **NO MONGODB** — alle data via `load_json`/`save_json` uit `modules.core.storage`. Backups zijn zip-exports.
+
+Zie ook: `PRD.md` voor product-visie, `LEARNINGS.md` voor concrete fouten om te vermijden.
+
+---
+
+## 📋 SESSIE 57 EXECUTIE-ROADMAP — Leger & XP-Motor Herkalibratie
+
+**Context**: Willem wil admins ook vanaf de community kunnen aanstellen (bv. gradatie 3 "Vriend" als community-onderhoud) én overweegt een parallelle rang-schaal (legerrang-idee: Sergeant/Luitenant of neutraal Rookie→Legend). Snuffel-rapport sessie 56d wees uit: **veel bestaat al** — niet dubbel bouwen.
+
+### ✅ Wat er al leeft (bestaande infrastructure)
+
+| Wat | Waar | Endpoint |
+|---|---|---|
+| `AchievementBlueprintPanel` (admin-only) | `InstellingenPage.js` r1195 achter `isAdmin` | `GET /api/achievements/admin/blueprints` |
+| Admin edit-modal per achievement | `AchievementsPage.js` r212 (`data-testid: achievement-admin-edit-{id}`) — titel + icon | `PATCH /api/achievements/admin/{id}?by_user=...` |
+| XP-motor (centraal) | `/app/backend/modules/chat/xp_service.py` → `grant_xp(user_id, amount, reason)` — 6 bronnen: chat, RPS, contributions, achievements-unlock, badges, tag-curatie | (interne functie) |
+| 50 achievements met XP-rewards | `/app/backend/data/achievements.json` — schaal 50 XP (words_10) tot 15.000 XP (words_2500) | `GET /api/achievements/list` |
+| Rang op karakter-kaart | `DnDCharacterSheet.js` r521-524 én r2005 — `char.rang_titel` + Community Level + militaire streepjes (100 levels = 1 streepje) | (client-side, `char.derived.level`) |
+| Leaderboard op XP | `AchievementsPage.js` + backend | `GET /api/achievements/leaderboard?period=alltime&limit=25` |
+| RPS-leaderboard (aparte spelrang) | Los van XP-motor | `GET /api/rps/leaderboard?limit=50` |
+| **Admin-capable loskoppeling** ✅ | `AuthService.set_admin_capable()` + endpoint | `POST /api/auth/admin/set-capable/{user_id}?capable=true` |
+
+### 🔓 In sessie 56d gefixt
+- **`v12_admin_capable_unlock_001`** — `/api/auth/users?admin_id=...` (register-with-override) accepteert nu iedereen met `admin_capable=True` of gradatie 1/2, i.p.v. alleen gradatie 1/2. Getest met 3 curl-scenarios, allemaal groen. Marieke (gradatie 3) getest en teruggezet — Willem kiest zelf wie sub-admin wordt.
+- **`v12_admin_type_001`** — RBAC light: `admin_type` veld op user + `admin_types.json` config met 3 vaste types (full / community / user_admin, elk met kleur en scope-array). `POST /api/admin/grant` accepteert nu `admin_type` param. `GET /api/admin/types` publiek endpoint. In `AdminSettingsPanel` bark: dropdown "Admin-type" tussen user-select en wachtwoord. In admins-lijst: gekleurde type-badge naast naam. **Nog niet gates**: elke tab/endpoint zonder scope-check draait als vanouds. Scope-enforcement is sessie 57.
+
+### ❓ Open vragen / gaps voor sessie 57
+
+1. **XP-veld ontbreekt in edit-modal**
+   `AchievementsPage.js` edit-modal past nu alleen titel + icon aan. `xp_reward` en `threshold`/`trigger`-waarden zijn nog blueprint-JSON-alleen (niet via GUI editable). *Vraag*: wil Willem die velden editable in de modal, of blijft dat blueprint-only werk voor Willem alleen?
+
+2. **Rang-drempel-mapping**
+   Karakter-kaart toont `char.rang_titel`. Waar wordt die string bepaald? Bestaat er een mapping-tabel `level → rang_titel` (bv. `0-9=Burger, 10-24=Rookie, ...`)? *Actie*: zoek de mapping (mogelijk `dnd_service.py` of `character_defaults`). Als hij niet bestaat: bouwen als losse config-JSON, niet als hardcoded Python.
+
+3. **`text_importer` geeft geen XP**
+   `/app/backend/modules/kb_v2/text_importer.py apply_cards_to_kb()` roept nergens `grant_xp()` aan. *Vraag*: bewust (import is admin-taak, geen zelf-XP) of onbedoeld (nieuwe kennis = groei = XP)? Vraag Willem.
+
+4. **`admin_capable` UI-toggle ontbreekt in `UsersAdminPage`**
+   Backend endpoint werkt (`POST /api/auth/admin/set-capable/{user_id}`), maar geen frontend switch. *Blocker*: gradatie-3 community-admin kan nu alleen via curl worden geactiveerd. Kleine toggle bouwen in de users-tabel (data-testid: `admin-capable-toggle-{user_id}`).
+
+5. **Legerrang-schaal parallel aan gradatie**
+   Emmy stelt Sergeant/Luitenant voor. Agent-advies: **neutrale labels eerst** (Rookie/Bronze/Silver/Gold/Master/Legend) tot er 15-20 users zijn en de XP-verdeling zichtbaar wordt. Dan pas kalibreren + hernoemen. Willem's keuze staat nog open.
+
+### 🎯 Actie voor sessie 57 (voorstel-volgorde)
+1. **Bouw `admin-capable-toggle`** in `UsersAdminPage` (gap 4) — kleinste blocker, direct nut
+2. **Zoek + documenteer rang-drempel-mapping** (gap 2) — leren wat er is voor bouwen
+3. **Beslis over `text_importer` XP-hook** (gap 3) — 1 regel code, product-keuze
+4. **XP-veld in edit-modal** (gap 1) — als Willem het wil
+5. **Neutrale rang-labels wirings** (gap 5) — nog niet bouwen, alleen ontwerp-schets
+6. **`ROADMAP.md` sectie 57 afsluiten** na oplevering, verplaats naar CHANGELOG
+
+---
+
+## 📋 SESSIE 55 — De Grote IQ-Sprong (nog te plannen)
+
+> **Status 4 aug 2026**: was gepland voor 5 aug maar overwoekerd door sessie 56 (tag-cleaner + admin-type). Herbevestigen met Willem of dit blijft staan.
+
+**Doel**: KB structureel schoon + Spark autonoom binnen bewuste grenzen. Bouw voort op sessie-53/54 fundament:
+- KB-Curatie Suite (backend + UI live in preview, wacht op redeploy)
+- Blauwdruk `spark_tag_curatie_public.json` v1.1 met sectie 8 lade-regels
+- Blauwdruk `spark_groeien_public.json` v1.0 met zelfreflectie-flow
+- **KB veld-semantiek** `knowledge/_meta.json` schema v1.1 — elk kaart-veld (laag1-4, ws5, andere_velden) heeft eigen doel/toon/verboden. Werkt door in LLM-prompts van 5W-Filler
+- Vier Werelden Bijbel-kaarten (Wonderland/Neverland/Mirrorland/Crossroads) — door Willem net toegevoegd
+
+### 🎯 Autonomie-scheiding (leidend principe)
+Elke module heeft **twee zones**:
+- **🤖 Spark autonoom** — Spark mag zelfstandig voorstel doen. Draft-status, geen mutatie.
+- **👤 Willem beslist** — Alleen Willem klikt Accept. Mutatie gebeurt na expliciete goedkeuring.
+
+Deze scheiding staat in de blauwdrukken en wordt gerespecteerd door alle nieuwe endpoints via `_require_admin` gates.
+
+---
+
+### MODULE 1 — 5W-Filler (680 lege kaarten)
+**Backend**: `POST /api/kb/v2/curation/5w-suggest/{id}` + `POST /5w-apply/{id}`  
+**UI**: `Spark AI → Spark Brain → Groeien → KB-Curatie Suite → 5W-Filler`
+
+**Executie-stappen**:
+1. Filter op "alleen volledig lege 5W" (680 kaarten)
+2. Sorteer op alfabetisch begrip; werk in batches van 20
+3. Per kaart: klik "LLM vullen" → Spark stelt 6 velden voor
+4. Review-modal: alle velden bewerkbaar, Willem past aan waar nodig
+5. Accept → kaart wordt bijgewerkt + `curation_history` logged
+
+**Zones**:
+- 🤖 **Spark autonoom**: LLM-voorstel genereren (geen mutatie), lagen1-4 lezen voor context, tags scannen voor domein
+- 👤 **Willem beslist**: elk voorstel individueel accepteren/bewerken/skippen. Geen bulk-accept.
+
+**Deadline-schatting**: 680 kaarten × 30 sec review = ~5.5 uur. In 3 sessies van 2u haalbaar.
+
+---
+
+### MODULE 2 — Duplicate-Merger (32 paren)
+**Backend**: `POST /api/kb/v2/curation/duplicate-merge`  
+**UI**: `KB-Curatie Suite → Duplicaten`
+
+**Prioriteit-volgorde**:
+1. **Rood-flag (same-lade)**: 4 pure duplicaten eerst (`vroeg`, `ai-kunst`, `periodiek systeem`, ...)
+2. **Cross-lade dupes**: check of het echte homoniemen zijn (bv. `drift` = drijven vs verlangen → beide houden) of migratie-fout
+3. **Merge**: kies keeper met meest 5W-gevuld + meest verbanden → drop wordt weggegooid, tags/5W-gaten migreren
+
+**Zones**:
+- 🤖 **Spark autonoom**: identificatie duplicaten, samenvattings-diff tussen paren tonen
+- 👤 **Willem beslist**: keeper-selectie. Bij echte homoniemen: één van beide begrip hernoemen zodat ze niet meer botsen.
+
+**Deadline**: 32 paren × 1 min beslissing = ~35 min. Klaar in één sessie.
+
+---
+
+### MODULE 3 — Lade-Reclassificatie (~200-300 echte gevallen uit 695 voorstellen)
+**Backend**: `GET /api/kb/v2/curation/lade-check` + `POST /lade-move/{id}`  
+**UI**: `KB-Curatie Suite → Lade-check`  
+**Blauwdruk-anker**: `spark_tag_curatie_public.json § 8_lade_toewijzing_regels`
+
+**Executie-stappen**:
+1. Scan geeft 695 voorstellen — waarvan ~400 vals-positief (zn-meervoud zoals `Begrippen`, `Aandelen`, `Structuren` — géén werkwoord)
+2. **Vaste patroon-skips**: zn-meervoud eindigend op -en van zn-enkelvoud (`begrippen` = mv van `begrip`)
+3. **Vaste patroon-accepts**: infinitief werkwoorden (`lopen`, `denken`, `benoemen`)
+4. Skip zn-meervoud, Accept werkwoorden
+
+**Zones**:
+- 🤖 **Spark autonoom**: Regel 1 + 2 uitvoering, voorstel-generatie, patroon-detectie
+- 👤 **Willem beslist**: Skip/Accept per voorstel. Bij twijfelgevallen (`spreken` als zn "het spreken" vs werkwoord `spreken`) → Willem oordeelt.
+
+**Sessie 55 open vraag**: `_KNOWN_ZN_OP_EN_EXTENDED` uitbreiden zodra Willem patroon-groepen tegenkomt (bijv. alle zn eindigend op `-heden` = zn-meervoud, automatisch skippen backend-side).
+
+---
+
+### MODULE 4 — Vier Werelden integratie (Willem's nieuwe Bijbel-kaarten)
+**Kaarten**: Wonderland (creatief onderzoek), Neverland (herinnering/opzoeken), Mirrorland (reflectie), Crossroads (keuze-ordening)  
+**Doel**: Spark herkent deze werelden als **intent-hooks** in chat en gedraagt zich per wereld anders.
+
+**Executie-stappen**:
+1. **Chat intent-detectie**: nieuwe module `wereld_intent_service.py` — detecteert "Wonderland/Neverland/Mirrorland/Crossroads" (en synoniemen: "creatief onderzoek", "herinner je nog", "even reflecteren", "welke keuze")
+2. **Response-modus per wereld**:
+   - Wonderland → LLM temperature 0.8 (creatief), explorerende follow-ups
+   - Neverland → KB-lookup prioriteit (rag over chat-log + KB), lage temperature 0.2
+   - Mirrorland → reflectieve toon, samenvatting van eerdere uitspraken
+   - Crossroads → Spark stelt keuze-lijst op maar kiest zelf NIET (autonomie-grens!)
+3. **Blauwdruk toevoegen**: `spark_werelden_public.json` — zelfde patroon als groeien/tag-curatie
+
+**Zones**:
+- 🤖 **Spark autonoom**: wereld herkennen, response-modus schakelen, follow-up vragen formuleren
+- 👤 **Willem beslist**: bij Crossroads NOOIT beslissen namens Willem. Alleen keuzes ordenen.
+- 🛡️ **Harde grens**: Wonderland-creativiteit mag geen KB-mutaties triggeren. Alleen chat-space fantasie.
+
+**Effort**: ~30 credits (nieuwe intent-module + blauwdruk + 4-manier LLM-tuning).
+
+---
+
+### MODULE 5 — Bulk Vocab-approve top-100 (klein maar zichtbaar)
+**Backend**: bestaat al — `POST /api/spark/vocab/approve-growth`  
+**UI**: bulk-checkbox "selecteer top-100" in bestaande Groeien → Vocab-tab
+
+**Executie-stappen**:
+1. Fetch top-100 van `vocab-from-knowledge`
+2. Selecteer all
+3. Klik goedkeuren → 5963 → 6063 vocab-woorden
+
+**Zones**:
+- 🤖 **Spark autonoom**: kandidaten scoren op frequentie
+- 👤 **Willem beslist**: één bulk-accept, want elk woord komt 100+× in KB voor = impliciete endorsement
+
+**Effort**: ~15 credits (alleen "selecteer all"-knop toevoegen).
+
+---
+
+### MODULE 6 — Graph-vulling beslissing (nadat KB schoon is)
+**Doel**: Los de "broken belofte" van weeskaart-check op.  
+**Voorstel**: nadat 5W-Filler + Dupe-Merger + Lade-Reclassificatie klaar zijn (KB is schoon), migreer alle KB-kaarten naar `graph/nodes.json` als knowledge-nodes met tag-relaties als edges.
+
+**Zones**:
+- 🤖 **Spark autonoom**: migratie-script draaien, statistieken teruggeven
+- 👤 **Willem beslist**: knop indrukken om te starten. Rollback beschikbaar via backup.
+
+**Effort**: ~40 credits. Kan naar Sessie 56 als 55 vol raakt.
+
+---
+
+### MODULE 7 — Inbox subtab "Onvolledig" (klein maar bruikbaar)
+**Doel**: 680 lege-5W kaarten zichtbaar maken in bestaande Inbox-tab i.p.v. nieuwe top-tab.  
+**Anker**: `knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium.toon_in_ui`
+
+**Executie-stappen**:
+1. Backend: `/api/kb/v2/inbox` endpoint krijgt optionele `?filter=incomplete` param
+2. Filter-logica hergebruikt `incompleet_criterium.checks` uit meta (7 regels)
+3. Frontend `KennisbankV2Page.js`: 2 sub-buttons onder Inbox-tab — `Inbox (2112)` en `Onvolledig (680)`
+4. Klik op subtab → herlaadt met andere query-param
+
+**Zones**:
+- 🤖 **Spark autonoom**: incompleet-detectie via meta-regels
+- 👤 **Willem beslist**: aanpak per kaart (invullen via 5W-Filler of manueel bewerken)
+
+**Effort**: ~15 credits.
+
+---
+
+### MODULE 8 — Refine-endpoint per veld (chirurgische verbetering)
+**Doel**: Willem kan Spark chirurgisch vragen "verbeter alleen laag3" i.p.v. hele kaart opnieuw.  
+**Anker**: `knowledge/_meta.json § kaart_veldsemantiek.lagen.laag3` (of ws5.wat/waarom/etc.)
+
+**Nieuw endpoint**: `POST /api/kb/v2/card/{id}/refine?field=laag3`  
+**Flow**:
+1. Lees kaart + veld-definitie uit meta (doel/toon/verboden)
+2. Bouw LLM-prompt: "Verbeter alleen `field` volgens deze regels: `{doel}`, toon `{toon}`, vermijd `{verboden}`. Behoud alle andere velden."
+3. Return voorstel voor review (draft, geen mutatie)
+4. Willem accepteert → veld wordt bijgewerkt, curation_history logged
+
+**UI-integratie**: 
+- KennisbankV2Page → kaart-detail-view → klein potlood-icoontje per veld
+- Klik → LLM voorstel modal → Accept/Cancel
+
+**Zones**:
+- 🤖 **Spark autonoom**: LLM-voorstel op basis van meta-regels
+- 👤 **Willem beslist**: accept per veld, geen bulk
+
+**Effort**: ~25 credits. Bouwt exact op de veld-semantiek die vandaag is vastgelegd — zonder die meta zou dit niet werken.
+
+---
+
+### 📊 Sessie 55 SLA (bijgewerkt)
+- **Verwacht kredietverbruik**: ~130-160 credits (KB-Curatie executie + Werelden-module + vocab-bulk + inbox-subtab + refine-endpoint)
+- **Minimaal resultaat**: 680 lege 5W ingevuld met scherpe LLM-voorstellen (dankzij nieuwe meta-regels) + 32 dupes weg + ~200 lade-fouten gecorrigeerd + Werelden werken in chat
+- **Ideaal resultaat**: bovenstaand + Graph gevuld + top-100 vocab live + refine-per-veld werkend + inbox-subtab zichtbaar
+- **Reserve-post**: Sessie 56 voor Graph-vulling als Sessie 55 vol raakt
+
+### 🚦 Redeploy-checkpoint (nu)
+Alles wat hierboven staat DRAAIT AL in preview:
+- ✅ KB-Curatie Suite (backend + UI)
+- ✅ `knowledge/_meta.json` schema v1.1 met veld-semantiek (130 regels definitie)
+- ✅ 5W-Filler LLM-prompt leest de nieuwe veld-regels
+- ✅ Blauwdrukken groeien + tag-curatie
+- ✅ Vier Werelden Bijbel-kaarten
+- ✅ Agenda intent-splitter, admin-toggle audit, chat-visibility toggles, shop-owner permissies + user-container foto's
+
+Backup gemaakt: `/app/_backup_before_prod_merge_20260803_071830/`
+
+---
+
+## 🧠 Spark's brein — wat er AL is (v5-status, 2026-05-23)
+
+> Deze sectie bestaat omdat de backlog hieronder anders de indruk wekt dat Spark
+> nog hersenloos is. Hij is dat niet. Hij denkt al laagsgewijs mee — onderstaande
+> modules zijn live en in productie:
+
+### 🎯 5-laags AI-pipeline (in volgorde bij elk chat-bericht)
+1. **Safe-word laag** (`chat/routes.py`) — universeel `stop`/`pauze`/`klaar` wist alle pending state, vóór elke andere verwerking.
+2. **Identity & Action intents** (`identity_intent_service.py`, `action_intents_service.py`) — "wie ben je?", "wat kan je?", "verwijder mijn account" e.d. eerst.
+3. **Smart intents heuristic** (`smart_intents_service.py`) — help / suggest / community-recap / dnd-help / legal / time / credits + Boekhouder/Madelief/Mr Smith barks.
+4. **Snap & NLP service** (`snap_service.py`) — meerlaags KB-lookup met homoniem-disambiguatie, compositional reasoning (`compositional_service.py`), stem-fallback en auto-zin-snap.
+5. **Fallback service** (`fallback_service.py` + `#DeWillem` graceful) — als er geen directe hit is, kiest Spark een buurkaart uit de KB v2 lade en stelt voor het concept apart te leren in plaats van "weet ik niet" te zeggen.
+
+### 🔭 Observability & shadow-leren
+- **`@traced` decorator** (`modules/core/spark_logger.py`) — pre/post/error logs met `duration_ms` per gedecoreerde route, JSON Lines per module, 28-dagen retentie.
+- **Shadow observer** (`chat/shadow_observer.py`) — registreert elk chat-event + correction-examples voor toekomstige zelf-tuning.
+- **Behavior tracker** (`modules/behavior_tracker.py`) — telt gedragingen (`help_msg`, `kb_create`, `lie_detected`, `used_safeword`, etc.) — voedt het D&D aura-systeem.
+
+### 🧩 Specialized services (allemaal live, in chat-flow hooked)
+- **`emotion_service.py`** — emotie-detectie per bericht (input voor Madelief barks).
+- **`time_intent_service.py`** + `user_time_service.py` — "hoe laat is het?" met tijdzone-resolutie per user.
+- **`agenda_intent_service.py`** — natuurlijke afspraken parsen ("vrijdag 14:00 lunch met Tineke").
+- **`wedervraag_service.py`** — als info ontbreekt, vraagt Spark gericht door (5W+H flow).
+- **`scan_service.py`** + `spontaneous_w_service.py` — woorden in lopende zin worden stilletjes geanalyseerd voor 5W-aanvulling.
+- **`session_state.py`** — 2-min ephemeral state (laatste vraag, pending card) per user-session.
+- **`card_session_service.py`** — actieve KB-kaart-edit-flow door chat.
+- **`relation_extraction_service.py`** — patterns als "Ron is mijn vriend" → relatie-graph auto-update.
+- **`bijbel_lookup_service.py`** — externe lookup voor Bijbel-citaten.
+- **`spark_self_service.py`** — Spark's eigen scratch.json: "onthoud voor jezelf", "wat heb je vandaag geleerd?".
+- **`dank_service.py`** + `legal_service.py` + `personal_docs_service.py` — credits/privacy/voorwaarden/testament/survivalgids intents.
+- **`intent_matcher_service.py`** — capability-matcher die Spark's *handen* moet gaan koppelen aan acties (P0 backlog: live-routering nog te maken).
+
+### 🗂️ Kennis-architectuur (4 lagen)
+- **v1 Knowledge Base** (`/data/knowledge/learned_knowledge/knowledge_base.json`) — 5288 entries, full graph-coverage.
+- **KB v2 — 4 lades** (`/data/knowledge/v2/`) — 🌸 Voelen 250 · 💬 Spreken 329 · 🧠 Weten 1071 · 🎭 Doen 632 + 📥 Inbox 3007 (te classificeren).
+- **Knowledge graph** (`modules/graph/sync_service.py`) — 10577 nodes + 65981 edges (v1+v2 gemengd, lade-kleuren).
+- **Voice/Image media** — centraal in `system_archive` met `linked_card_id` backreference.
+
+### 🎭 D&D / Levende Wereld laag
+- **Lore index** (7 avatars-as-functions, 6 behavior-categorieën).
+- **Aura-engine** (`/api/dnd/aura/{user_id}`) — live top-3 gedragingen → kleur-gradient op Persoonskaart.
+- **Card Factory** (`modules/cards/`) — DnD/Event/Bark kaarten met hook-chain bij draft→active.
+- **Base Line intro** (community chat `[start verhaal]`) — keuze-driven story-flow.
+
+### 🎙️ Stem-laag
+
+---
+
+## 🔭 Observability — Verplicht voor nieuwe modules (v5_spark_logger_001)
+
+Vanaf 2026-05-23 geldt: **elke nieuwe of gewijzigde Python-functie die user-acties of system-events afhandelt MOET gedecoreerd zijn met `@traced`**.
+
+```python
+from modules.core.spark_logger import traced, log_event
+
+@traced(intent="kort, in het Nederlands wat deze functie probeert te doen")
+async def my_handler(...):
+    ...
+
+# Voor handmatige events (geen functie-grens):
+log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
+```
+
+**Waarom**: pre + post logs (met duration_ms + result-summary) maken bugs als de B3 community-crash direct zichtbaar — je ziet de "post" niet en weet meteen waar het kapot ging.
+
+**Wat krijg je gratis**:
+- `/data/system/logs/YYYY/MM/DD/{module}.jsonl` (JSON Lines, 1 record per regel)
+- Browser in **Beheer → Instellingen → Archief → Logs**
+- 28-dagen retentie (auto-purge bij startup)
+- Filter per phase: `pre` / `post` / `error` / `event`
+
+**Reeds gedecoreerde routes** (referentie):
+- `bots/routes.py::send_community_message` (community/send)
+- `chat/routes.py::process_message` (Spark chat)
+
+**Te decoreren** (volgende sessies, P1):
+- `auth/routes.py::login` + `logout`
+- `trade/routes.py::bot_start`, `bot_stop`, `quick_buy_potje`
+- `shop/gift.py::*` (ROAR gift escrow lifecycle)
+- `dnd/routes.py::observe` (achievement triggers)
+- Knowledge Base mutations
+
+---
+
+## 🧠 Architectuur principes (don't forget)
+
+1. **NO MONGODB**: alle data via `load_json`/`save_json` uit `modules.core.storage`
+2. **DSP-tags**: 2-JSON sync issues moeten gedocumenteerd in `ARCHITECTURE.md` (DSP-001 t/m DSP-006 actief)
+3. **Nederlands**: alle UI-tekst en log-intents in het Nederlands
+4. **data-testid**: elk interactief element heeft een uniek testid (kebab-case)
+5. **Piramide-lagen** (zie MISSION.md): Core/Skelet/Geheugen/Logs — wijs nieuw werk de juiste laag toe
+6. **Hooks-laag voor placeholders**: `modules/kb_v2/hooks.py` toont pattern. Bij toekomstige verbindings-noden: maak hooks-bestand met TODO-blocks i.p.v. losse `# TODO` in productiecode
+7. **Identity-3-lagen wet**: ALTIJD `user_id`, NOOIT op naam matchen (CR-001/002/003)
+
+## 🔗 Hook-bestanden (PLACEHOLDERS) — entry-points voor toekomstige features
+
+| Hook-file | Status | Doel |
+|---|---|---|
+| `modules/kb_v2/hooks.py` | ✅ Created sessie 5 + uitgebreid sessie 8 | KB v2 → Vocab/Commands/Graph/D&D/Dialogen + card-factory commands |
+| `modules/cards/service.py::_fire_card_hooks` | ✅ Created sessie 8 | DnD/Event/Bark hook-chain bij draft→active overgang |
+
+Nieuwe hooks volgens dit pattern toevoegen voor:
+- `modules/trade/hooks.py` — closing-flow + replay + auto-snapshot triggers
+- `modules/dnd/hooks.py` — lore-card sync, perk-trigger, aura-gates (kan deels via cards/service.py)
+- `modules/spark/hooks.py` — Spark's hands (intent_matcher generic router)
+
+## 🃏 Card Factory pattern (v5_card_factory_001)
+
+3 generieke kaart-types naast KB v2 kennis-kaarten:
+
+| Type | Doel | Hook bij active | Extra schema |
+|---|---|---|---|
+| `dnd` | Game-kaarten (lore/quest/item) | `dnd_lore_registered` | `dnd: {verteller, scene, rewards}` |
+| `event` | Community-events | Community-bark via Boekhouder | `event: {datum, locatie, deelnemers}` |
+| `bark` | Bot-trigger templates | `bark_template_registered` | `bark: {bot, trigger_text, schedule}` |
+
+**Common schema**: id, type, titel, vraag, antwoord, media (image+audio), tags, status, footnote.
+**Storage**: `/data/cards/{type}/<id>.json` + index per type. Media via system_archive met
+`tag=card_<type>` + `linked_card_id`. Cascade-delete bij card-verwijdering.
+
+**Chat commands**: "maak een d&d kaart [titel]" / "maak een event kaart [titel]" / "maak een bark kaart [titel]".
+
+## 📦 Media-storage strategie (v5_kbv2_media_002)
+
+**Centrale store**: alle voice/image uploads van kennis-kaarten gaan door
+`/api/system-archive` heen, met:
+- `category`: `foto` / `geluiden` / `filmpjes`
+- `tags`: `['kbv2', 'kbv2_card_<id>']`
+- `linked_card_id`: backreference naar kaart-id
+- `source`: `kbv2_media_upload`
+
+UI in **Beheer → Instellingen → Archief → Foto/Geluiden** heeft drie bron-filters:
+- **Alles** — geen filter
+- **🧠 Kennis-kaart** — alleen kbv2-gelinkte items
+- **📎 Los** — alleen items zonder kbv2-tag
+
+Voordelen:
+- 1 centrale media-tabel, geen duplicate-storage
+- Sub-tab pattern uitbreidbaar (later bv. "Dagboek-foto's", "Trade-screenshots")
+- Verwijderen van een kaart kan zo ook gekoppelde media opruimen via `linked_card_id`-scan
+
+## 📊 Dashboard-widgets per gradatie
+
+- **Gradatie 1** (super-admin): alle widgets incl. Triggers, KB Lades, Shadow Learning, Storage Cache
+- **Gradatie 2** (admin): KB Lades + Triggers + Users + Health
+- **Gradatie 3-7**: Kennisbank-overzicht + persoonlijke widgets (Mijn Opslag, Agenda, Spark-status)

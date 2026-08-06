@@ -22,8 +22,10 @@ const LADES = [
 
 const REASON_LABEL = {
   tag_tie:        { label: 'Tag-tie',       color: '#f59e0b' },
-  no_match:       { label: 'Geen match',     color: '#94a3b8' },
-  missing_laag1:  { label: 'Geen laag 1',    color: '#ef4444' },
+  // v12_kbv2_inbox_tabs_cleanup_001 — 'no_match' en 'missing_laag1' zijn
+  // in de praktijk hetzelfde als de default inbox-lijst (alle onbeantwoord)
+  // en zijn daarom weg als aparte filter-tabs. Ze blijven wel bestaan als
+  // interne _inbox_reason waarden voor bookkeeping.
 };
 
 /**
@@ -45,10 +47,13 @@ export function KennisbankV2Page({ onNavigate }) {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [reasonFilter, setReasonFilter] = useState('');
-  // v6_kbv2_priority_001 — Top 50 prio modus
+  // v6_kbv2_priority_001 — Top 50 prio modus (blijft bestaan, maar niet meer als button;
+  // wordt gedreven door sortMode==='hits_desc' via de dropdown hieronder)
   const [priorityMode, setPriorityMode] = useState(false);
   // v12_inbox_incomplete_001 — subtab voor kaarten met leeg 5W of onvolledige lagen
   const [incompleteMode, setIncompleteMode] = useState(false);
+  // v12_kbv2_inbox_sort_001 — sort-dropdown voor inbox-lijst
+  const [sortMode, setSortMode] = useState('recent');
   // v6_kbv2_text_importer_001 — bulk-import modal state
   const [showImporter, setShowImporter] = useState(false);
   const [priorityMeta, setPriorityMeta] = useState(null);
@@ -89,33 +94,36 @@ export function KennisbankV2Page({ onNavigate }) {
       const qs = new URLSearchParams({ limit: String(PAGE), offset: String(page * PAGE) });
       if (search) qs.append('search', search);
       let url;
-      if (activeTab === 'inbox' && priorityMode) {
-        // v6_kbv2_priority_001 — Top 50 belangrijkste kaarten zonder laag1
-        url = `${API}/api/kb/v2/priority/missing-laag1?limit=50`;
-      } else if (activeTab === 'inbox' && incompleteMode) {
+      if (activeTab === 'inbox' && incompleteMode) {
         // v12_inbox_incomplete_001 — Kaarten uit lades met leeg 5W of onvolledige lagen
         url = `${API}/api/kb/v2/inbox/incomplete?${qs}`;
+      } else if (activeTab === 'inbox' && (sortMode === 'hits_desc' || sortMode === 'hits_asc')) {
+        // v12_kbv2_inbox_sort_001 — 'meeste/minste hits' gebruikt cross-lade priority-endpoint
+        // (kaarten uit alle 4 lades zonder laag1, gescoord op hits). Was voorheen aparte
+        // 'Top 50 prio' toggle; nu een sort-optie in de dropdown.
+        url = `${API}/api/kb/v2/priority/missing-laag1?limit=50${sortMode === 'hits_asc' ? '&reverse=true' : ''}`;
       } else if (activeTab === 'inbox') {
         if (reasonFilter) qs.append('reason', reasonFilter);
+        if (sortMode && sortMode !== 'recent') qs.append('sort', sortMode);
         url = `${API}/api/kb/v2/inbox?${qs}`;
       } else {
         url = `${API}/api/kb/v2/lade/${activeTab}?${qs}`;
       }
       const r = await fetch(url).then(x => x.json());
       setItems(r.kaarten || []);
-      if (priorityMode) {
-        setTotal(r.total_missing_laag1 || 0);
+      if (sortMode === 'hits_desc' || sortMode === 'hits_asc') {
+        setTotal(r.total_missing_laag1 || r.total || 0);
         setPriorityMeta({ total: r.total_missing_laag1, shown: r.kaarten?.length || 0 });
       } else {
         setTotal(r.total || 0);
         setPriorityMeta(null);
       }
-      if (activeTab === 'inbox' && !priorityMode) setReasons(r.redenen || {});
+      if (activeTab === 'inbox' && !(sortMode === 'hits_desc' || sortMode === 'hits_asc')) setReasons(r.redenen || {});
     } catch {
       setItems([]); setTotal(0);
     }
     setLoading(false);
-  }, [activeTab, page, search, reasonFilter, priorityMode, incompleteMode]);
+  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode]);
 
   useEffect(() => { loadStats(); }, [loadStats]);
   useEffect(() => { loadItems(); }, [loadItems]);
@@ -657,40 +665,52 @@ export function KennisbankV2Page({ onNavigate }) {
               className="w-full pl-8 pr-3 py-1.5 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-amber-500/50" />
           </div>
           {activeTab === 'inbox' && (
-            <div className="flex items-center gap-1 flex-wrap">
-              <button data-testid="kbv2-reason-all" onClick={() => { setReasonFilter(''); setPriorityMode(false); setIncompleteMode(false); setPage(0); }}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {/* Alle onbeantwoord (default) */}
+              <button data-testid="kbv2-reason-all"
+                onClick={() => { setReasonFilter(''); setIncompleteMode(false); setPage(0); }}
                 className={`px-2 py-1 rounded text-[10px] font-medium border ${
-                  reasonFilter === '' && !priorityMode && !incompleteMode ? 'bg-amber-500/20 border-amber-500/40 text-amber-300' : 'border-slate-700 text-slate-400'
+                  reasonFilter === '' && !incompleteMode ? 'bg-amber-500/20 border-amber-500/40 text-amber-300' : 'border-slate-700 text-slate-400'
                 }`}>alle</button>
+              {/* Tag-tie blijft — semantisch anders (ambiguïteit tussen 2 lades) */}
               {Object.entries(REASON_LABEL).map(([k, v]) => (
                 <button key={k} data-testid={`kbv2-reason-${k}`}
-                  onClick={() => { setReasonFilter(k); setPriorityMode(false); setIncompleteMode(false); setPage(0); }}
+                  onClick={() => { setReasonFilter(k); setIncompleteMode(false); setPage(0); }}
                   className={`px-2 py-1 rounded text-[10px] font-medium border ${
-                    reasonFilter === k && !priorityMode && !incompleteMode ? 'border-current' : 'border-slate-700 text-slate-400'
+                    reasonFilter === k && !incompleteMode ? 'border-current' : 'border-slate-700 text-slate-400'
                   }`}
-                  style={reasonFilter === k && !priorityMode && !incompleteMode ? { color: v.color, borderColor: v.color, backgroundColor: v.color + '15' } : {}}>
+                  style={reasonFilter === k && !incompleteMode ? { color: v.color, borderColor: v.color, backgroundColor: v.color + '15' } : {}}>
                   {v.label} {reasons[k] ? `(${reasons[k]})` : ''}
                 </button>
               ))}
-              <button
-                data-testid="kbv2-priority-laag1"
-                onClick={() => { setPriorityMode(!priorityMode); setReasonFilter(''); setIncompleteMode(false); setPage(0); }}
-                title="Top 50 kaarten zonder laag1, gesorteerd op belangrijkheid (verbanden + tags + topic)"
-                className={`px-2 py-1 rounded text-[10px] font-medium border ml-1 ${
-                  priorityMode ? 'bg-purple-500/20 border-purple-500/40 text-purple-300' : 'border-purple-700/40 text-purple-400 hover:bg-purple-500/10'
-                }`}>
-                ⭐ Top 50 prio (laag1)
-              </button>
-              {/* v12_inbox_incomplete_001 — subtab voor incomplete kaarten uit alle 4 lades */}
+              {/* Onvolledig — kaarten uit lades met lege lagen (semantisch anders dan inbox) */}
               <button
                 data-testid="kbv2-incomplete"
-                onClick={() => { setIncompleteMode(!incompleteMode); setPriorityMode(false); setReasonFilter(''); setPage(0); }}
+                onClick={() => { setIncompleteMode(!incompleteMode); setReasonFilter(''); setPage(0); }}
                 title="Kaarten uit de 4 lades met leeg 5W of onvolledige lagen (volgens knowledge/_meta.json § incompleet_criterium)"
                 className={`px-2 py-1 rounded text-[10px] font-medium border ml-1 ${
                   incompleteMode ? 'bg-orange-500/20 border-orange-500/40 text-orange-300' : 'border-orange-700/40 text-orange-400 hover:bg-orange-500/10'
                 }`}>
                 ⚠ Onvolledig
               </button>
+              {/* v12_kbv2_inbox_sort_001 — sort-dropdown vervangt losse 'Top 50 prio' toggle.
+                  Beschikbaar bij inbox 'alle' en 'tag_tie' modus (niet in Onvolledig). */}
+              {!incompleteMode && (
+                <select
+                  data-testid="kbv2-sort-select"
+                  value={sortMode}
+                  onChange={(e) => { setSortMode(e.target.value); setPage(0); }}
+                  className="ml-2 px-2 py-1 rounded text-[10px] font-medium border border-slate-700 bg-slate-900/60 text-slate-300 focus:outline-none focus:border-amber-500/50"
+                  title="Sorteervolgorde voor deze lijst"
+                >
+                  <option value="recent">🕒 Nieuwste eerst</option>
+                  <option value="oud">🕐 Oudste eerst</option>
+                  <option value="alfa">🔤 A → Z</option>
+                  <option value="alfa_desc">🔡 Z → A</option>
+                  <option value="hits_desc">⭐ Meeste hits (Top prio)</option>
+                  <option value="hits_asc">🌱 Minste hits eerst</option>
+                </select>
+              )}
             </div>
           )}
         </div>

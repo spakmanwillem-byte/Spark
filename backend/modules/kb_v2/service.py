@@ -116,8 +116,18 @@ def list_lade(lade: str, limit: int = 50, offset: int = 0, search: str = "") -> 
     }
 
 
-def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str = "") -> Dict:
-    """Lijst onbeantwoorde kaarten met optionele filter op _inbox_reason."""
+def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str = "",
+               sort: str = "recent") -> Dict:
+    """Lijst onbeantwoorde kaarten met optionele filter op _inbox_reason.
+
+    v12_kbv2_inbox_sort_001 — sort opties:
+      - 'recent' (default): nieuwste bewerkt/toegevoegd eerst
+      - 'oud': oudste eerst
+      - 'alfa': alfabetisch A-Z
+      - 'alfa_desc': alfabetisch Z-A
+      - 'hits_desc': meeste 'hits' eerst (laag1_refs uit andere kaarten — Top 50 prio-modus)
+      - 'hits_asc': minste hits eerst
+    """
     data = load_json(_inbox_path(), default={"kaarten": []})
     kaarten = data.get("kaarten", [])
     if reason:
@@ -126,21 +136,37 @@ def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str =
         s = search.lower().strip()
         kaarten = [k for k in kaarten if s in (k.get("begrip", "") or "").lower()]
     total = len(kaarten)
-    # v6_kbv2_sort_recent — recent aangemaakt/bewerkt eerst, dan oude inbox-prio
-    # Manueel toegevoegde kaarten (footnote.aangemaakt_op) komen bovenaan zodat
-    # gebruikers hun nieuw aangemaakte kaart direct terugzien.
-    priority = {"tag_tie": 1, "no_match": 2, "missing_laag1": 3}
-    # Eerst alfabetisch (stable), dan op ts desc, dan op reden-prio.
-    kaarten = sorted(kaarten, key=lambda k: (k.get("begrip") or "").lower())
-    kaarten = sorted(kaarten, key=lambda k: priority.get(k.get("_inbox_reason", ""), 9))
+
     def _ts(k):
         fn = k.get("footnote") or {}
         return fn.get("aangemaakt_op") or fn.get("laatst_bewerkt_op") or ""
-    kaarten = sorted(kaarten, key=_ts, reverse=True)
+
+    if sort == "alfa":
+        kaarten = sorted(kaarten, key=lambda k: (k.get("begrip") or "").lower())
+    elif sort == "alfa_desc":
+        kaarten = sorted(kaarten, key=lambda k: (k.get("begrip") or "").lower(), reverse=True)
+    elif sort == "oud":
+        kaarten = sorted(kaarten, key=_ts)  # oude eerst
+    elif sort in ("hits_desc", "hits_asc"):
+        # Gebruik laag1_refs (hoeveel andere kaarten dit woord in laag1 noemen)
+        signals = _build_priority_signals()
+        laag1_refs = signals.get("laag1_refs", {})
+        kaarten = sorted(
+            kaarten,
+            key=lambda k: laag1_refs.get((k.get("begrip") or "").lower(), 0),
+            reverse=(sort == "hits_desc"),
+        )
+    else:  # 'recent' (default) — huidige gedrag: alfabetisch → reden-prio → ts desc
+        priority = {"tag_tie": 1, "no_match": 2, "missing_laag1": 3}
+        kaarten = sorted(kaarten, key=lambda k: (k.get("begrip") or "").lower())
+        kaarten = sorted(kaarten, key=lambda k: priority.get(k.get("_inbox_reason", ""), 9))
+        kaarten = sorted(kaarten, key=_ts, reverse=True)
+
     return {
         "total": total,
         "offset": offset,
         "limit": limit,
+        "sort": sort,
         "kaarten": kaarten[offset:offset + limit],
         "redenen": _count_reasons(data.get("kaarten", [])),
     }
@@ -237,7 +263,7 @@ def _build_priority_signals() -> Dict:
     }
 
 
-def list_priority_missing_laag1(limit: int = 50) -> Dict:
+def list_priority_missing_laag1(limit: int = 50, reverse: bool = False) -> Dict:
     """
     v6_kbv2_priority_002 — Top N kaarten zonder laag1, gesorteerd op echte signalen
     i.p.v. alleen interne tags/verbanden.
@@ -341,7 +367,8 @@ def list_priority_missing_laag1(limit: int = 50) -> Dict:
             "breakdown": breakdown,
         })
 
-    scored.sort(key=lambda x: x["score"], reverse=True)
+    # v12_kbv2_inbox_sort_001 — reverse=True → 'minste hits eerst' (score oplopend)
+    scored.sort(key=lambda x: x["score"], reverse=not reverse)
     return {
         "total_missing_laag1": len(no_laag1),
         "limit": limit,

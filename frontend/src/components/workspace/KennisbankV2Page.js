@@ -620,10 +620,9 @@ export function KennisbankV2Page({ onNavigate }) {
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" /> Nieuwe kaart
             </button>
-            <button data-testid="kbv2-refresh-btn" onClick={() => { loadStats(); loadItems(); }}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
-              <RefreshCw className="w-3.5 h-3.5" /> Verversen
-            </button>
+            {/* v12_kbv2_ui_rust_001 — Verversen-knop verwijderd. Optimistic UI + auto
+                stats-refresh na acties maken 'm overbodig. F5 blijft beschikbaar als
+                nood-refresh. Past bij kernwaarde 'rust boven snelheid'. */}
             {/* v6_kbv2_text_importer_001 — Bulk import knop */}
             <button
               data-testid="kbv2-import-text-btn"

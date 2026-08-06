@@ -60809,11 +60809,47 @@
         "session_id": "default",
         "gesprek_nummer": 2404
       }
+    },
+    {
+      "id": "conv-f40a2906",
+      "timestamp": "2026-08-06T08:09:07.390127+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen? _(het is 1 dagen geleden dat we praatten)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2405
+      }
+    },
+    {
+      "id": "conv-8eb8c060",
+      "timestamp": "2026-08-06T08:09:07.449201+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2406
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2404,
-    "last_updated": "2026-08-04T17:04:38.208854+00:00"
+    "total_conversations": 2406,
+    "last_updated": "2026-08-06T08:09:07.449201+00:00"
   }
 }

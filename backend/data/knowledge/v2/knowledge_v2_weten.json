@@ -544897,50 +544897,6 @@
       "emotie": "neutraal"
     },
     {
-      "id": "kbv2-b1b29052",
-      "begrip": "Rijden",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Rijden betekent jezelf of een voertuig verplaatsen door een bepaalde route te volgen.",
-        "laag2": "Rijden kan verwijzen naar auto's, fietsen, motoren, dieren of andere vervoermiddelen.",
-        "laag3": "Rijden vraagt vaardigheden zoals aandacht, controle en verkeersinzicht.",
-        "laag4": "Binnen Spark verwijst rijden naar beweging en mobiliteit. Spark kan rijden koppelen aan vervoer, techniek, veiligheid, gedrag en omgeving."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "rijden",
-        "vervoer",
-        "mobiliteit",
-        "voertuig",
-        "techniek",
-        "veiligheid",
-        "gedrag",
-        "omgeving",
-        "neutraal\n\n💬 spreken\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T10:54:31.375398+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
       "id": "kbv2-155e84ea",
       "begrip": "Zender",
       "lade": "weten",
@@ -545462,27 +545418,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Relevant betekent dat iets belangrijk of passend is voor een bepaalde situatie.",
-        "laag2": "Relevante informatie helpt bij het nemen van beslissingen.",
-        "laag3": "Relevantie hangt af van context en doel.",
-        "laag4": "Binnen Spark verwijst relevant naar selectie en betekenis."
+        "laag1": "Relevant betekent dat iets belangrijk, passend of bruikbaar is voor een bepaald onderwerp, doel, vraag of situatie.",
+        "laag2": "Iets is relevant wanneer het duidelijk verband houdt met waar het op dat moment over gaat.\n\nVoorbeeld:\n\nBij een vraag over de werking van Spark is informatie over Spark relevant. Informatie over het weer is waarschijnlijk niet relevant.",
+        "laag3": "Relevantie kan worden beoordeeld aan de hand van verschillende vragen.\n\nPast het bij het onderwerp?\n\nDe informatie moet verband houden met het onderwerp.\n\nVoorbeeld:\n\nBij een gesprek over programmering is informatie over code relevant.\n\nHelpt het bij de vraag?\n\nDe informatie moet helpen om een vraag te beantwoorden.\n\nVoorbeeld:\n\nBij de vraag “Hoe werkt relationeel geheugen?” is uitleg over relaties tussen gegevens relevant.\n\nDraagt het bij aan het doel?\n\nDe informatie moet bruikbaar zijn voor wat iemand wil bereiken.\n\nVoorbeeld:\n\nBij het maken van een planning zijn beschikbare tijd en deadlines relevante gegevens.\n\nIs de informatie actueel?\n\nBij onderwerpen die kunnen veranderen, kan recente informatie belangrijk zijn.\n\nVoorbeeld:\n\nBij actuele nieuwsberichten is nieuwe informatie meestal relevanter dan oude informatie.\n\nIs de informatie betrouwbaar?\n\nInformatie kan goed bij een onderwerp passen, maar toch onjuist of onbetrouwbaar zijn.\n\nDaarom zijn relevantie en betrouwbaarheid niet hetzelfde.",
+        "laag4": "Relevantie is afhankelijk van:\n\nhet onderwerp;\nde vraag;\nhet doel;\nde situatie;\nde gebruiker;\nhet moment;\nde beschikbare informatie.\n\nEen systeem kan informatie beoordelen door te kijken naar:\n\novereenkomst tussen woorden;\nbetekenis;\ncontext;\nrelaties tussen begrippen;\neerdere informatie;\nhet doel van de gebruiker.\nVoorbeeld\n\nVraag:\n\n“Hoeveel kenniskaarten heeft Spark?”\n\nRelevant:\n\nHet actuele aantal kenniskaarten.\n\nMinder relevant:\n\nDe kleur van de gebruikersomgeving.\n\nNiet relevant:\n\nDe temperatuur buiten.\n\nDe grens tussen relevant en niet relevant is niet altijd scherp.\n\nSommige informatie is:\n\ndirect relevant → nodig om de vraag te beantwoorden;\nindirect relevant → geeft extra context;\nmogelijk relevant → kan later nuttig zijn;\nniet relevant → draagt niet bij aan het onderwerp of doel.\n\nTe veel irrelevante informatie kan een antwoord:\n\nlanger maken;\nonduidelijk maken;\nmoeilijker leesbaar maken;\nafleiden van de hoofdvraag.\n\nTe weinig relevante informatie kan ervoor zorgen dat een antwoord:\n\nonvolledig is;\nbelangrijke context mist;\nniet bruikbaar genoeg is.\n\nEen goede selectie gebruikt de informatie die nodig is om de vraag duidelijk en passend te beantwoorden.\n\nRelevantie in Spark\n\nVoor Spark kan relevantie helpen bepalen:\n\nwelke kenniskaart wordt gebruikt;\nwelke herinnering bij een gesprek past;\nwelke informatie wordt opgehaald;\nwelke informatie wordt weggelaten;\nwelke context behouden blijft;\nwelke reactie het beste aansluit bij de gebruiker.\n\nVoorbeeld:\n\nGebruiker: “Hoe werkt mijn kennisbank?”\n\nSpark zoekt dan vooral naar informatie over:\n\nkenniskaarten;\nlagen;"
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen, gebruikers, onderzoekers, medewerkers, zoekmachines, AI-systemen en digitale assistenten.",
+        "wat": "De mate waarin informatie, een onderwerp of een antwoord past bij een vraag, doel, situatie of context.",
+        "wanneer": "Wanneer informatie wordt gezocht, geselecteerd, beoordeeld of gebruikt.",
+        "waar": "In gesprekken, zoekmachines, kennisbanken, onderwijs, onderzoek, werk en digitale systemen.",
+        "waarom": "Om bruikbare informatie te vinden, afleiding te beperken en een passend antwoord of besluit te maken.",
+        "hoe": "Door informatie te vergelijken met het onderwerp, de vraag, het doel, de context en de benodigde actualiteit."
       },
       "tags": [
-        "relevant",
-        "informaties",
-        "context",
-        "selectie",
-        "betekenis",
+        "ai",
         "analyse",
-        "neutraal\n\n💬 spreken\nbegrip"
+        "belangrijk",
+        "betekenis",
+        "bruikbaar",
+        "context",
+        "doel",
+        "informatie",
+        "onderwerp",
+        "passend",
+        "relevant",
+        "selectie",
+        "ter zake",
+        "vraag",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -545492,7 +545456,8 @@
         "ingedeeld_op": "2026-07-26T11:08:37.595631+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:51:51.935041+00:00"
       },
       "media": [],
       "needs": [],
@@ -549977,73 +549942,40 @@
       "emotie": "neutraal"
     },
     {
-      "id": "kbv2-fe713f3d",
-      "begrip": "Redding",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Redding betekent iemand of iets uit een gevaarlijke situatie helpen.",
-        "laag2": "Redding kan worden uitgevoerd door mensen, diensten of systemen.",
-        "laag3": "Reddingsacties vragen vaak samenwerking en snelle reactie.",
-        "laag4": "Binnen Spark verwijst redding naar hulp, veiligheid en samenwerking."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "redding",
-        "hulp",
-        "veiligheid",
-        "samenwerking",
-        "risico",
-        "blij\n\n🧠 weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:40:42.167499+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
       "id": "kbv2-f843b932",
       "begrip": "Redenering",
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Redenering is het proces waarbij iemand logisch nadenkt om tot een conclusie te komen.",
-        "laag2": "Redeneringen gebruiken informatie, regels en verbanden.",
-        "laag3": "Redeneren is belangrijk bij leren, wetenschap en besluitvorming.",
-        "laag4": "Binnen Spark verwijst redenering naar logica, analyse en intelligentie."
+        "laag1": "Een redenering is een reeks gedachten of argumenten waarmee iemand vanuit informatie tot een conclusie komt.",
+        "laag2": "Bij een redenering worden feiten, ervaringen, aannames of aanwijzingen met elkaar verbonden.\n\nEen redenering kan bijvoorbeeld zo verlopen:\n\nHet regent.\nIk moet naar buiten.\nDaarom neem ik een paraplu mee.\n\nDe conclusie is:\n\n“Ik neem een paraplu mee.”",
+        "laag3": "Een redenering bestaat vaak uit verschillende onderdelen.\n\nUitgangspunt\n\nEen uitgangspunt is informatie waarmee de redenering begint.\n\nVoorbeeld:\n\n“De winkel sluit om 18.00 uur.”\n\nAanwijzing of argument\n\nEen argument geeft een reden waarom een conclusie logisch of aannemelijk is.\n\nVoorbeeld:\n\n“Het is nu 17.45 uur en ik moet nog tien minuten fietsen.”\n\nConclusie\n\nDe conclusie is wat iemand op basis van de beschikbare informatie afleidt.\n\nVoorbeeld:\n\n“Ik kan de winkel waarschijnlijk nog op tijd bereiken.”\n\nEen redenering kan worden opgebouwd met woorden zoals:\n\nomdat;\ndaarom;\ndus;\ndaardoor;\nals;\ndan;\naangezien;\nhieruit volgt.",
+        "laag4": "Er bestaan verschillende manieren van redeneren.\n\nDeductieve redenering\n\nBij deductie wordt vanuit een algemene regel een conclusie over een specifieke situatie getrokken.\n\nVoorbeeld:\n\nAlle mensen hebben zuurstof nodig.\nSam is een mens.\nDus Sam heeft zuurstof nodig."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen, onderzoekers, leerlingen, professionals, besluitvormers en systemen die informatie verwerken.",
+        "wat": "Een reeks gedachten of argumenten waarmee informatie wordt verbonden om tot een conclusie, verklaring of beslissing te komen.",
+        "wanneer": "Bij het oplossen van problemen, beantwoorden van vragen, beoordelen van informatie of nemen van beslissingen.",
+        "waar": "In gesprekken, onderwijs, wetenschap, werk, rechtspraak, dagelijkse situaties en digitale systemen.",
+        "waarom": "Om informatie te begrijpen, verbanden te leggen, verklaringen te vinden en onderbouwde conclusies te trekken.",
+        "hoe": "Door uitgangspunten, feiten, aanwijzingen en argumenten logisch met elkaar te verbinden en daaruit een passende conclusie af te leiden."
       },
       "tags": [
-        "redenering",
-        "logica",
-        "denken",
+        "aanname",
+        "aanwijzing",
+        "afleiding",
         "analyse",
+        "argument",
+        "conclusie",
+        "deductie",
+        "denken",
+        "inductie",
         "kennis",
-        "intelligentie",
-        "neutraal\n\n🌱 weten\nbegrip"
+        "logica",
+        "redenatie",
+        "redeneren",
+        "verband",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550053,7 +549985,8 @@
         "ingedeeld_op": "2026-07-26T11:40:42.189947+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:40:10.828874+00:00"
       },
       "media": [],
       "needs": [],
@@ -550065,27 +549998,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een regenworm is een bodemdiertje dat leeft in de grond.",
-        "laag2": "Regenwormen helpen bij het verbeteren van de bodemstructuur.",
-        "laag3": "Ze spelen een rol in ecosystemen en kringlopen.",
-        "laag4": "Binnen Spark verwijst regenworm naar natuur, bodem en ecologie."
+        "laag1": "Een regenworm is een lang, zacht ongewerveld dier dat in de grond leeft.",
+        "laag2": "Regenwormen graven gangen door de bodem en eten vooral organisch materiaal, zoals dode plantenresten.\n\nDoor hun beweging en voedselopname helpen regenwormen de bodem losser en beter gemengd te maken.",
+        "laag3": "Een regenworm heeft geen poten en beweegt door spieren in zijn lichaam samen te trekken.\n\nHet lichaam bestaat uit veel ringvormige delen. Kleine borstels, ook wel setae genoemd, helpen de regenworm zich aan de grond vast te houden en vooruit te bewegen.\n\nRegenwormen hebben:\n\neen lang en buigzaam lichaam;\nveel lichaamssegmenten;\nkleine borstels;\nspieren;\neen vochtige huid.\n\nRegenwormen ademen via hun huid. Daarom moet hun huid vochtig blijven.",
+        "laag4": "Regenwormen spelen een belangrijke rol in de bodem.\n\nGangen maken\n\nRegenwormen graven gangen door de grond.\n\nDeze gangen kunnen helpen bij:\n\nhet binnendringen van lucht;\nhet opnemen en afvoeren van water;\nde groei van plantenwortels;\nhet losser maken van de bodem.\nOrganisch materiaal verwerken\n\nRegenwormen eten onder andere:\n\ndode bladeren;\nplantenresten;\nkleine resten van organisch materiaal;\nmicro-organismen die op dit materiaal leven.\n\nHet materiaal wordt in het lichaam verwerkt en komt weer als uitwerpselen in de bodem terecht.\n\nDeze uitwerpselen bevatten voedingsstoffen en kunnen bijdragen aan een vruchtbare bodem.\n\nBodem mengen\n\nDoor te graven en materiaal te verwerken, verplaatsen regenwormen grond en organisch materiaal.\n\nHierdoor worden verschillende lagen van de bodem gedeeltelijk gemengd.\n\nVoedsel voor andere dieren\n\nRegenwormen zijn voedsel voor verschillende dieren, zoals:\n\nvogels;\negels;\nmollen;\nkikkers;\nsommige insecten.\n\nRegenwormen komen vaak naar het bodemoppervlak wanneer de grond erg nat is.\n\nDe naam regenworm komt waarschijnlijk doordat ze na regen vaker zichtbaar zijn. Regenwormen kunnen echter ook bij vochtig weer of ’s nachts naar boven komen.\n\nEr bestaat een bekende misvatting dat een regenworm die in tweeën wordt gedeeld altijd twee nieuwe regenwormen vormt.\n\nDat klopt niet.\n\nEen regenworm kan onder bepaalde omstandigheden een beschadigd deel van zijn lichaam herstellen. Of een worm kan overleven, hangt onder andere af van:\n\nde soort;\nde plaats van de beschadiging;\nwelke lichaamsdelen intact blijven.\n\nEen afgescheiden achterste deel groeit meestal niet uit tot een volledige nieuwe regenworm.\n\nRegenwormen zijn belangrijk voor gezonde bodems, maar niet iedere bodem heeft dezelfde soorten of aantallen regenwormen."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Regenwormen en andere bodemdieren die in de grond leven.",
+        "wat": "Een lang, zacht en ongewerveld dier dat organisch materiaal verwerkt en gangen in de bodem maakt.",
+        "wanneer": "Vooral wanneer de bodem voldoende vochtig is. Veel regenwormen zijn actief in vochtige omstandigheden en komen vaak ’s nachts naar het oppervlak.",
+        "waar": "In grond, tuinen, weilanden, bossen, compost en andere bodems met voldoende vocht en organisch materiaal.",
+        "waarom": "Regenwormen zoeken voedsel, maken gangen, verwerken organisch materiaal en dragen bij aan de bodemstructuur.",
+        "hoe": "Door zich met spieren en kleine borstels door de grond te bewegen, organisch materiaal op te nemen en gangen in de bodem te maken."
       },
       "tags": [
-        "regenworm",
-        "natuur",
+        "aarde",
+        "bladeren",
         "bodem",
-        "ecosysteem",
+        "bodemdier",
+        "borstels",
+        "compost",
         "dier",
+        "gangen",
+        "grond",
+        "humus",
         "kringloop",
-        "neutraal\n\n🏛️ weten\nbegrip"
+        "natuur",
+        "setae",
+        "weten",
+        "worm"
       ],
       "topic": "",
       "verbanden": [],
@@ -550095,7 +550036,8 @@
         "ingedeeld_op": "2026-07-26T11:40:42.212593+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:40:41.643430+00:00"
       },
       "media": [],
       "needs": [],
@@ -550107,27 +550049,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een regering is het bestuur van een land.",
-        "laag2": "Een regering maakt beleid en voert wetten uit.",
-        "laag3": "Regeringen beïnvloeden samenleving, economie en veiligheid.",
-        "laag4": "Binnen Spark verwijst regering naar bestuur en maatschappelijke systemen."
+        "laag1": "Een regering is het deel van het bestuur van een land dat beleid voorbereidt, het land bestuurt en wetten uitvoert.",
+        "laag2": "Een regering neemt beslissingen over onderwerpen die belangrijk zijn voor een land.\n\nVoorbeelden zijn:\n\nonderwijs;\nzorg;\nveiligheid;\neconomie;\nbelastingen;\nwonen;\nverkeer;\nnatuur;\ndefensie.\n\nDe regering werkt samen met het parlement bij het maken van wetten en het vaststellen van de begroting.",
+        "laag3": "De betekenis van regering kan per land verschillen.\n\nIn Nederland bestaat de regering officieel uit:\n\nde Koning;\nalle ministers.\n\nDe ministers zijn politiek verantwoordelijk voor het beleid en het bestuur. De Koning is onschendbaar; de ministers leggen verantwoording af over het regeringsbeleid.\n\nRegering en kabinet\n\nDe woorden regering en kabinet worden in gewone gesprekken vaak door elkaar gebruikt, maar officieel betekenen ze niet precies hetzelfde.\n\nBegrip\tBetekenis in Nederland\nRegering\tDe Koning en de ministers\nKabinet\tDe ministers en staatssecretarissen\nMinisterraad\tAlle ministers samen\n\nDe minister-president is voorzitter van de ministerraad.\n\nMinisters\n\nMinisters hebben ieder een eigen beleidsterrein.\n\nVoorbeelden zijn:\n\nonderwijs;\nfinanciën;\njustitie;\nzorg;\ndefensie.\n\nEen minister geeft politieke leiding aan een ministerie en is verantwoordelijk voor het beleid binnen het eigen werkgebied.\n\nStaatssecretarissen\n\nEen staatssecretaris ondersteunt een minister en krijgt een deel van het beleid of de taken toegewezen.\n\nStaatssecretarissen maken deel uit van het kabinet, maar niet van de regering.",
+        "laag4": "Nederland is een constitutionele monarchie en een parlementaire democratie.\n\nEen constitutionele monarchie betekent dat Nederland een Koning als staatshoofd heeft en dat de positie en bevoegdheden van de Koning in de Grondwet zijn vastgelegd.\n\nDe bevoegdheden van de Koning zijn beperkt. Ministers dragen de politieke verantwoordelijkheid.\n\nDe regering werkt niet zelfstandig zonder controle.\n\nHet parlement bestaat uit:\n\nde Tweede Kamer;\nde Eerste Kamer.\n\nHet parlement:\n\ncontroleert de regering;\nbespreekt beleid;\nbehandelt wetsvoorstellen;\ncontroleert de uitgaven van de overheid;\nkan ministers om uitleg vragen.\n\nDe regering en het parlement werken samen aan wetten. Een wetsvoorstel moet door de Tweede Kamer en de Eerste Kamer worden aangenomen voordat het een wet kan worden.\n\nMinisters hebben het vertrouwen van het parlement nodig."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "De Koning en de ministers. Het kabinet bestaat daarnaast ook uit staatssecretarissen.",
+        "wat": "Het landelijke bestuursorgaan dat beleid voorbereidt, het land bestuurt en samen met het parlement werkt aan wetten en begrotingen.",
+        "wanneer": "Doorlopend tijdens een kabinetsperiode en bij het voorbereiden, uitvoeren en beoordelen van beleid.",
+        "waar": "Op landelijk niveau in Nederland, onder andere bij ministeries, de ministerraad en het parlement.",
+        "waarom": "Om het land te besturen, publieke taken uit te voeren, beleid te ontwikkelen en maatschappelijke vraagstukken aan te pakken.",
+        "hoe": "Door beleid te maken, voorstellen voor wetten en begrotingen voor te bereiden, besluiten te nemen en samen te werken met het parlement en overheidsorganisaties."
       },
       "tags": [
-        "regering",
-        "overheid",
+        "begroting",
+        "beleid",
         "bestuur",
-        "maatschappij",
+        "democratie",
+        "kabinet",
+        "koning",
+        "minister",
+        "overheid",
+        "parlement",
         "politiek",
+        "premier",
+        "regeren",
         "systeem",
-        "neutraal\n\n💻 weten\nbegrip"
+        "weten",
+        "wetgeving"
       ],
       "topic": "",
       "verbanden": [],
@@ -550137,7 +550087,8 @@
         "ingedeeld_op": "2026-07-26T11:40:42.241131+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:42:55.832460+00:00"
       },
       "media": [],
       "needs": [],
@@ -550149,28 +550100,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Regex is een manier om patronen in tekst te zoeken of te herkennen.",
-        "laag2": "Regex wordt gebruikt in programmering, data-analyse en zoekfuncties.",
-        "laag3": "Met regex kunnen complexe tekstcontroles worden uitgevoerd.",
-        "laag4": "Binnen Spark verwijst regex naar taalverwerking, data en automatisering."
+        "laag1": "Regex is een afkorting van regular expression. Een regex is een patroon waarmee tekst kan worden zoeken, herkennen, controleren of vervangen.",
+        "laag2": "Met een regex kan een computer zoeken naar tekst die aan bepaalde regels voldoet.\n\nVoorbeelden:\n\nalle cijfers vinden;\neen e-mailadres herkennen;\ncontroleren of een postcode goed is geschreven;\nwoorden met een bepaald begin zoeken;\ndelen van tekst vervangen.\n\nVoorbeeld:\n\n\\d+\n\nDit patroon zoekt naar één of meer cijfers.\n\nIn de tekst:\n\n“Spark heeft 6104 kaarten.”\n\nvindt de regex:\n\n6104",
+        "laag3": "Een regex bestaat uit gewone tekens en speciale tekens.\n\nGewone tekst\n\nEen gewone letter of woord zoekt naar precies die tekst.\n\nSpark\n\nDit zoekt naar:\n\nSpark\n\nPunt\n\nEen punt . staat meestal voor één willekeurig teken.\n\nh.t\n\nDit kan bijvoorbeeld overeenkomen met:\n\nhat;\nhit;\nhot.\nCijfers\n\\d\n\nBetekent:\n\néén cijfer van 0 tot en met 9.\n\n\\d\\d\n\nZoekt naar twee cijfers.\n\n\\d+\n\nZoekt naar één of meer cijfers.\n\nWoordtekens\n\\w\n\nZoekt meestal naar een letter, cijfer of laag streepje:\n\n_\nWitruimte\n\\s\n\nZoekt naar witruimte, zoals:\n\neen spatie;\neen tab;\neen nieuwe regel.\nBegin en einde\n^\n\nBetekent meestal:\n\nbegin van de tekst of regel.\n\n$\n\nBetekent meestal:\n\neinde van de tekst of regel.\n\nVoorbeeld:\n\n^Spark$\n\nDit komt overeen met:\n\nSpark\n\nMaar niet met:\n\nSpark Core",
+        "laag4": "Regex gebruikt patroontekens, ook wel metatekens genoemd.\n\nRegex\tBetekenis\n.\téén willekeurig teken\n\\d\téén cijfer\n\\D\téén teken dat geen cijfer is\n\\w\téén woordteken\n\\W\téén teken dat geen woordteken is\n\\s\téén witruimteteken\n\\S\téén teken dat geen witruimte is\n^\tbegin van tekst of regel\n$\teinde van tekst of regel\n+\téén of meer keer\n*\tnul of meer keer\n?\tnul of één keer\n{3}\tprecies drie keer\n{2,5}\tminimaal twee en maximaal vijf keer\n[abc]\téén teken: a, b of c\n[a-z]\téén kleine letter van a tot z\n`\t`\n()\teen groep\nVoorbeeld: een jaartal zoeken\n\\d{4}\n\nDit zoekt naar vier cijfers achter elkaar.\n\nVoorbeelden:\n\n2026;\n1999;\n1234.\nVoorbeeld: een woord met “Spark”\nSpark\\w*\n\nDit kan bijvoorbeeld vinden:\n\nSpark;\nSparkCore;\nSparkWorld.\nVoorbeeld: meerdere mogelijkheden\nSpark|ROAR\n\nDit zoekt naar:\n\nSpark;\nROAR.\nVoorbeeld: een postcodepatroon\n\nEen eenvoudige Nederlandse postcode kan worden beschreven als:\n\n\\d{4}\\s?[A-Za-z]{2}\n\nDit kan bijvoorbeeld overeenkomen met:\n\n9711 AB;\n9711AB.\n\nEen regex controleert vooral of tekst de vorm van een patroon heeft. Dat betekent niet automatisch dat de informatie echt of geldig is.\n\nVoorbeeld:\n\nEen regex kan herkennen dat:\n\nnaam@voorbeeld.nl\n\nde vorm van een e-mailadres heeft.\n\nDe regex controleert daarmee nog niet:\n\nof het e-mailadres bestaat;\nof de mailbox actief is;\nof de persoon achter het adres bestaat.\n\nRegex wordt gebruikt in:\n\nprogrammering;\nzoekfuncties;\ntekstverwerking;\nformulieren;\ngegevenscontrole;\nchatbots;\nlogbestanden;\nkennisbanken;\nautomatische herkenning.\n\nEen regex kan krachtig zijn, maar ingewikkelde patronen kunnen moeilijk leesbaar en lastig te onderhouden worden. Daarom is het belangrijk om een patroon duidelijk te testen en zo eenvoudig mogelijk te houden."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Programmeurs, ontwikkelaars, data-analisten, systeembeheerders en digitale systemen.",
+        "wat": "Een patroon voor het zoeken, herkennen, controleren of vervangen van tekst.",
+        "wanneer": "Wanneer tekst automatisch moet worden onderzocht of gecontroleerd op een bepaalde vorm of structuur.",
+        "waar": "In programmeertalen, teksteditors, zoekfuncties, formulieren, databases, chatbots en digitale systemen.",
+        "waarom": "Om tekst sneller en automatisch te doorzoeken, gegevens te controleren en patronen te herkennen.",
+        "hoe": "Door gewone tekens en speciale patroontekens te combineren tot een regular expression."
       },
       "tags": [
-        "regex",
-        "programmering",
-        "patroon",
-        "tekst",
-        "data",
-        "automatisering",
+        "\\d",
+        "\\s",
+        "\\w",
         "ai",
-        "neutraal\n\n📚 doen\nbegrip"
+        "data",
+        "metatekens",
+        "patroon",
+        "regex",
+        "regextekens",
+        "tekst",
+        "tekst zoeken",
+        "tekstpatroon",
+        "validatie",
+        "weten",
+        "zoekfunctie"
       ],
       "topic": "",
       "verbanden": [],
@@ -550180,7 +550138,8 @@
         "ingedeeld_op": "2026-07-26T11:40:42.264345+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:43:40.708599+00:00"
       },
       "media": [],
       "needs": [],
@@ -550192,26 +550151,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een register is een georganiseerde lijst of verzameling gegevens.",
-        "laag2": "Registers worden gebruikt om informatie te bewaren en terug te vinden.",
-        "laag3": "Voorbeelden zijn administratieve en technische registers.",
-        "laag4": "Binnen Spark verwijst register naar opslag, structuur en informatiebeheer."
+        "laag1": "Een register is een geordende verzameling van gegevens, informatie of onderdelen die volgens een bepaald systeem wordt bijgehouden.",
+        "laag2": "Een register wordt gebruikt om informatie overzichtelijk te bewaren, terug te vinden en te beheren.\n\nVoorbeelden:\n\neen inwonersregister;\neen ledenregister;\neen adressenregister;\neen register van bedrijven;\neen register met gebeurtenissen;\neen digitaal gegevensregister.\n\nEen register kan op papier staan of digitaal worden opgeslagen.",
+        "laag3": "Het woord register heeft meerdere betekenissen.\n\nGegevensregister\n\nEen gegevensregister bevat informatie over personen, organisaties, voorwerpen of gebeurtenissen.\n\nVoorbeeld:\n\nEen ledenregister bevat gegevens over de leden van een vereniging.\n\nEen register kan gegevens bevatten zoals:\n\nnaam;\nnummer;\ndatum;\nstatus;\ncategorie;\nlocatie;\nbeschrijving.\nOpenbaar register\n\nEen openbaar register is een register waarvan bepaalde informatie door anderen kan worden geraadpleegd.\n\nVoorbeelden kunnen zijn:\n\nregisters met bepaalde bedrijfsgegevens;\nregisters met eigendomsinformatie;\nofficiële publicaties.\n\nNiet alle gegevens in een openbaar register zijn vrij toegankelijk. Toegang kan afhangen van wetten, privacyregels of andere voorwaarden.\n\nTechnisch register\n\nIn techniek en informatica kan een register een kleine, snelle opslagplaats zijn waarin gegevens tijdelijk worden bewaard.\n\nEen processor gebruikt registers bijvoorbeeld tijdens berekeningen en het uitvoeren van opdrachten.\n\nTaalregister\n\nEen taalregister is een manier van spreken of schrijven die past bij een situatie, doelgroep of doel.\n\nVoorbeelden:\n\nformeel taalgebruik;\ninformeel taalgebruik;\nzakelijk taalgebruik;\nvaktaal;\nspreektaal.\n\nVoorbeeld:\n\nEen brief aan een rechtbank gebruikt meestal een formeler taalregister dan een gesprek met een vriend.\n\nMuziekregister\n\nBij muziek kan een register verwijzen naar een bereik van tonen.\n\nVoorbeelden:\n\nhoog register;\nmiddenregister;\nlaag register.",
+        "laag4": "Een goed register heeft meestal een duidelijke structuur.\n\nDaarbij kunnen onderdelen worden gebruikt zoals:\n\neen unieke identificatie;\ncategorieën;\nvaste gegevensvelden;\ndatums;\neen status;\nzoekmogelijkheden;\ntoegangsrechten;\neen wijzigingsgeschiedenis.\n\nEen register kan worden bijgewerkt wanneer gegevens veranderen.\n\nVoorbeelden:\n\nEen nieuw lid wordt toegevoegd aan een ledenregister.\n\nEen oud adres wordt aangepast.\n\nEen gebeurtenis wordt geregistreerd.\n\nDe betrouwbaarheid van een register hangt onder andere af van:\n\nde juistheid van de gegevens;"
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Overheden, organisaties, bedrijven, verenigingen, medewerkers, beheerders en digitale systemen.",
+        "wat": "Een geordende verzameling gegevens of informatie die systematisch wordt bijgehouden.",
+        "wanneer": "Wanneer informatie moet worden vastgelegd, beheerd, gecontroleerd of teruggevonden.",
+        "waar": "In overheidsorganisaties, bedrijven, verenigingen, administraties, computers, databases en andere informatievoorzieningen.",
+        "waarom": "Om gegevens overzichtelijk te bewaren, informatie terug te vinden, veranderingen bij te houden en processen te ondersteunen.",
+        "hoe": "Door gegevens volgens vaste regels, categorieën of velden vast te leggen, te ordenen, te beheren en waar nodig bij te werken."
       },
       "tags": [
-        "register",
+        "bijhouden",
+        "categorie",
+        "database",
         "gegevens",
-        "administratie",
+        "informaties",
         "opslag",
+        "ordenen",
+        "register",
+        "registratie",
+        "registreren",
+        "status",
         "structuur",
-        "informaties"
+        "taalregister",
+        "vastleggen",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550221,7 +550189,8 @@
         "ingedeeld_op": "2026-07-26T11:40:42.286162+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:44:43.246289+00:00"
       },
       "media": [],
       "needs": [],
@@ -550233,27 +550202,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Registratie betekent het vastleggen van informatie in een systeem of lijst.",
-        "laag2": "Registratie wordt gebruikt voor gegevens, gebeurtenissen, personen of activiteiten.",
-        "laag3": "Een goede registratie helpt bij overzicht, controle en terugvinden van informatie.",
-        "laag4": "Binnen Spark verwijst registratie naar geheugen, administratie en informatiebeheer."
+        "laag1": "Registratie is het vastleggen van gegevens, informatie, een gebeurtenis of een handeling in een systeem, overzicht of register.",
+        "laag2": "Door iets te registreren wordt informatie bewaard zodat deze later kan worden teruggevonden, gecontroleerd of gebruikt.\n\nVoorbeelden:\n\neen bezoek wordt geregistreerd;\neen nieuwe gebruiker wordt geregistreerd;\neen gebeurtenis wordt geregistreerd;\ngewerkte uren worden geregistreerd;\neen betaling wordt geregistreerd;\neen product wordt geregistreerd in een voorraadbeheer.\n\nRegistratie kan op papier of digitaal plaatsvinden.",
+        "laag3": "Een registratie bevat vaak meerdere gegevens.\n\nVoorbeelden:\n\nnaam;\ndatum;\ntijd;\nidentificatienummer;\nsoort gebeurtenis;\nstatus;\nlocatie;\nbeschrijving;\nverantwoordelijke persoon.\n\nVoorbeeld:\n\nEen medewerker registreert dat een cliënt om 09.00 uur is aangekomen.\n\nDe registratie kan dan bevatten:",
+        "laag4": "Registratie kan verschillende doelen hebben.\n\nOverzicht\n\nRegistraties maken zichtbaar wat er is gebeurd.\n\nVoorbeeld:\n\nEen overzicht toont hoeveel bezoekers er op een dag waren.\n\nControle\n\nGegevens kunnen worden gecontroleerd.\n\nVoorbeeld:\n\nEen organisatie controleert geregistreerde uren.\n\nVerantwoording\n\nEen registratie kan laten zien welke handeling is uitgevoerd en door wie.\n\nVoorbeeld:\n\nEen medewerker registreert dat een taak is afgerond.\n\nAnalyse\n\nMeerdere registraties kunnen worden onderzocht om patronen of veranderingen te herkennen.\n\nVoorbeeld:\n\nEen systeem analyseert wanneer de meeste gebruikers inloggen.\n\nHerinnering\n\nEen registratie kan helpen om informatie later terug te vinden.\n\nVoorbeeld:\n\nEen afspraak wordt geregistreerd in een agenda.\n\nEen goede registratie is meestal:\n\nduidelijk;\nvolledig;\ncorrect;\nrelevant;\ncontroleerbaar;\nvoorzien van een datum of tijd wanneer dat nodig is.\n\nBij het registreren van persoonsgegevens zijn privacy en beveiliging belangrijk.\n\nDaarbij kan worden gekeken naar:\n\nwelke gegevens echt nodig zijn;"
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "de cliënt;",
+        "wat": "aangekomen;",
+        "wanneer": "09.00 uur;",
+        "waar": "de locatie;",
+        "waarom": "Om overzicht te houden, informatie terug te vinden, processen te ondersteunen, verantwoording mogelijk te maken en gegevens te analyseren.",
+        "hoe": "Door relevante gegevens handmatig of automatisch volgens vaste regels vast te leggen en op een veilige en georganiseerde manier te bewaren."
       },
       "tags": [
-        "registratie",
+        "aanmelding",
+        "analyse",
+        "beveiliging",
+        "controle",
+        "database",
         "gegevens",
-        "administratie",
         "geheugen",
         "informaties",
+        "inloggen",
+        "overzicht",
+        "privacy",
+        "register",
+        "registratie",
         "systeem",
-        "neutraal\n\n🧹 doen\nbegrip"
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550263,49 +550240,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.111991+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-bb4d21af",
-      "begrip": "Reiniging",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Reiniging betekent het schoonmaken of verwijderen van vuil en ongewenste stoffen.",
-        "laag2": "Reiniging wordt gebruikt bij mensen, materialen, ruimtes en systemen.",
-        "laag3": "Goede reiniging helpt gezondheid, kwaliteit en veiligheid behouden.",
-        "laag4": "Binnen Spark verwijst reiniging naar onderhoud, hygiëne en zorg."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "reiniging",
-        "schoonmaak",
-        "hygiëne",
-        "onderhoud",
-        "gezondheid",
-        "veiligheid",
-        "neutraal\n\n🖥️ weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:41:09.134131+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:45:15.264657+00:00"
       },
       "media": [],
       "needs": [],
@@ -550317,27 +550253,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Rekenkracht is het vermogen van een computer om berekeningen uit te voeren.",
-        "laag2": "Meer rekenkracht maakt complexere taken en snellere verwerking mogelijk.",
-        "laag3": "Rekenkracht is belangrijk voor games, AI, simulaties en wetenschap.",
-        "laag4": "Binnen Spark verwijst rekenkracht naar technologie, verwerking en intelligentie."
+        "laag1": "Rekenkracht is het vermogen van een computer of digitaal systeem om berekeningen en opdrachten uit te voeren.",
+        "laag2": "",
+        "laag3": "Rekenkracht wordt geleverd door verschillende onderdelen.\n\nProcessor\n\nDe processor, ook wel CPU genoemd, voert algemene opdrachten en berekeningen uit.\n\nDe processor verwerkt bijvoorbeeld:\n\nprogramma-instructies;\nlogische bewerkingen;\nberekeningen;\ngegevens;\ntaken van het besturingssysteem.\nGrafische processor\n\nEen grafische processor, ook wel GPU genoemd, is ontworpen om veel vergelijkbare berekeningen tegelijk uit te voeren.\n\nEen GPU wordt onder andere gebruikt voor:\n\n3D-graphics;\ngames;\nbeeldverwerking;\nvideobewerking;\nAI-berekeningen;\nwetenschappelijke berekeningen.\nWerkgeheugen\n\nHet werkgeheugen, ook wel RAM genoemd, bewaart gegevens die programma’s op dat moment nodig hebben.\n\nMeer werkgeheugen betekent niet automatisch meer rekenkracht, maar kan voorkomen dat een systeem trager wordt doordat gegevens steeds opnieuw moeten worden geladen.\n\nOpslag\n\nEen SSD of andere opslag bewaart gegevens langdurig.\n\nOpslag is niet hetzelfde als rekenkracht. Een snelle opslag kan wel invloed hebben op hoe snel programma’s en gegevens worden geladen.",
+        "laag4": "Rekenkracht hangt niet alleen af van één onderdeel.\n\nDe prestaties van een systeem worden beïnvloed door:\n\nde snelheid van de processor;\nhet aantal processorkernen;\nde architectuur van de processor;\nde prestaties van de GPU;\nde hoeveelheid en snelheid van het werkgeheugen;\nde snelheid van de opslag;\nde software;\nde manier waarop een programma is geschreven;\nde koeling;\nhet energieverbruik;\nde verdeling van taken.\n\nEen computer met een snelle processor kan toch traag aanvoelen wanneer er te weinig werkgeheugen beschikbaar is of wanneer een programma slecht is geoptimaliseerd.\n\nParallel rekenen\n\nBij parallel rekenen worden meerdere berekeningen tegelijk uitgevoerd.\n\nVoorbeeld:\n\nEen GPU kan veel vergelijkbare berekeningen tegelijkertijd verwerken.\n\nDit kan vooral nuttig zijn bij:\n\n3D-beeldvorming;\nAI-modellen;\nsimulaties;\ngrote gegevensverzamelingen.\nRekenprestatie meten\n\nRekenkracht kan op verschillende manieren worden gemeten.\n\nVoorbeelden zijn:\n\nbewerkingen per seconde;\nFLOPS: floating-point operations per second;\nverwerkingstijd;\nprestaties bij een bepaalde taak;\nbenchmarks.\n\nEen hogere score betekent niet altijd dat een computer bij iedere taak beter presteert. Verschillende programma’s gebruiken hardware op verschillende manieren.\n\nRekenbelasting"
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Computers, servers, processors, grafische processors en andere digitale systemen.",
+        "wat": "Het vermogen om berekeningen, gegevensverwerking en digitale opdrachten uit te voeren.",
+        "wanneer": "Wanneer een programma gegevens verwerkt, berekeningen uitvoert of digitale taken afhandelt.",
+        "waar": "In computers, smartphones, servers, gameconsoles, datacenters, robots en andere digitale apparaten.",
+        "waarom": "Om programma’s uit te voeren, gegevens te verwerken, problemen te berekenen en digitale systemen te laten functioneren.",
+        "hoe": "Door processors, grafische processors en andere hardware samen te laten werken bij het uitvoeren van berekeningen en opdrachten."
       },
       "tags": [
-        "rekenkracht",
-        "computer",
         "ai",
-        "technologie",
-        "verwerking",
+        "benchmark",
+        "computer",
+        "cpu",
+        "flops",
+        "gpu",
+        "lokale ai",
+        "opslag",
+        "processor",
+        "ram",
+        "server",
         "snelheid",
-        "neutraal\n\n💻 weten\nbegrip"
+        "spark",
+        "ssd",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550347,49 +550291,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.156081+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-a5790b5d",
-      "begrip": "Rekenprogramma",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Een rekenprogramma is software die berekeningen uitvoert.",
-        "laag2": "Rekenprogramma's worden gebruikt voor wiskunde, analyse en automatisering.",
-        "laag3": "Ze kunnen eenvoudige of complexe berekeningen verwerken.",
-        "laag4": "Binnen Spark verwijst rekenprogramma naar software, logica en ondersteuning."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "rekenprogramma",
-        "software",
-        "rekenen",
-        "computer",
-        "analyse",
-        "automatisering",
-        "neutraal\n\n🧠 weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:41:09.177864+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:46:21.125829+00:00"
       },
       "media": [],
       "needs": [],
@@ -550401,28 +550304,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Relationeel geheugen is geheugen waarbij informatie wordt opgeslagen via verbanden tussen concepten.",
-        "laag2": "In plaats van losse feiten worden relaties en betekenissen onthouden.",
-        "laag3": "Relationeel geheugen helpt bij begrip, herkenning en leren.",
-        "laag4": "Binnen Spark verwijst relationeel geheugen naar kennisnetwerken en semantische verbindingen."
+        "laag1": "Relationeel geheugen is het vermogen van een systeem om informatie te onthouden door relaties en verbanden tussen gegevens, gebeurtenissen, personen of begrippen vast te leggen.",
+        "laag2": "Bij relationeel geheugen wordt informatie niet alleen als losse gegevens opgeslagen. Het systeem onthoudt ook hoe informatie met elkaar verbonden is.\n\nVoorbeeld:\n\nWillem werkt aan Spark.\n\nEen relationeel geheugen kan niet alleen de woorden opslaan, maar ook de relatie:\n\nWillem → werkt aan → Spark\n\nDaardoor kan het systeem later begrijpen dat Willem en Spark met elkaar verbonden zijn.",
+        "laag3": "Relationeel geheugen kan informatie opslaan als:\n\nentiteiten;\neigenschappen;\nrelaties;\ngebeurtenissen;\ncontext.\nEntiteiten\n\nEen entiteit is iets waar informatie over wordt opgeslagen.\n\nVoorbeelden:\n\neen persoon;\neen project;\neen plaats;\neen voorwerp;\neen organisatie;\neen begrip.\n\nVoorbeeld:\n\nWillem\nSpark\nUnity\nEigenschappen\n\nEigenschappen beschrijven een entiteit.\n\nVoorbeeld:\n\nSpark → type → persoonlijke AI\nRelaties\n\nRelaties beschrijven hoe twee of meer entiteiten met elkaar verbonden zijn.\n\nVoorbeeld:\n\nWillem → ontwikkelt → Spark\nSpark → gebruikt → kenniskaarten\nSpark → wordt ontwikkeld in → Unity\nGebeurtenissen\n\nEen gebeurtenis kan meerdere entiteiten met elkaar verbinden.\n\nVoorbeeld:\n\nWillem → voegt toe → nieuwe kenniskaart\n\nHet systeem kan daarbij ook opslaan:",
+        "laag4": "Relationeel geheugen kan worden weergegeven als een netwerk of graaf.\n\nIn zo’n netwerk zijn:\n\nnodes de opgeslagen entiteiten of begrippen;\nedges de verbindingen of relaties tussen de nodes.\n\nVoorbeeld:\n\nWillem\n   │\nontwikkelt\n   │\nSpark\n   │\ngebruikt\n   │\nKenniskaarten\n\nEen relationeel geheugen kan hierdoor verbanden vinden die niet letterlijk in één opgeslagen zin staan.\n\nVoorbeeld:\n\nWillem → ontwikkelt → Spark\nSpark → gebruikt → Kenniskaarten\n\nHet systeem kan daaruit afleiden:\n\nWillem werkt aan een systeem dat kenniskaarten gebruikt.\n\nDit is een afleiding op basis van opgeslagen relaties. De afleiding moet wel duidelijk worden onderscheiden van een rechtstreeks opgeslagen feit.\n\nRelationeel geheugen kan helpen bij:\n\ninformatie terugvinden;\nverbanden herkennen;\ncontext behouden;\nvervolgvragen begrijpen;\ninformatie aan elkaar koppelen;\naanbevelingen doen;\nkennisnetwerken bouwen.\n\nVoorbeeld:\n\n“Waar werken we Spark mee?”\n\nHet systeem kan via opgeslagen relaties zoeken naar:\n\nSpark → wordt ontwikkeld in → Unity\n\nen vervolgens antwoorden:\n\n“Spark wordt ontwikkeld in Unity.”\n\nRelationeel geheugen verschilt van een gewone lijst of tabel.\n\nGewone opslag\tRelationeel geheugen\nBewaart losse gegevens\tBewaart gegevens én verbanden\nZoekt vaak op woorden of velden\tKan relaties volgen\nContext staat vaak apart\tContext kan aan relaties worden gekoppeld\nMinder geschikt voor complexe verbindingen\tGeschikt voor kennisnetwerken\n\nRelationeel geheugen is ook niet hetzelfde als een menselijk geheugen. Een digitaal systeem bewaart informatie volgens gegevensstructuren en regels. Het heeft niet automatisch menselijke ervaringen, gevoelens of bewustzijn.\n\nVoor Spark kan relationeel geheugen worden gebruikt om kenniskaarten, gesprekken, gebruikers, projecten en gebeurtenissen met elkaar te verbinden.\n\nVoorbeelden:\n\nSpark → heeft kenniskaart → Relationeel geheugen\n\nRelationeel geheugen → ondersteunt → Context\n\nKenniskaart → heeft tag → geheugen\n\nGebruiker → bespreekt → Spark\n\nHierdoor kan Spark informatie mogelijk beter terugvinden en verbanden tussen onderwerpen herkennen.\n\nEen relationeel geheugen moet zorgvuldig omgaan met:\n\njuiste relaties;\ndubbele gegevens;\ntegenstrijdige informatie;\nverouderde informatie;\nprivacy;\ntoegangsrechten;\nde bron van informatie.\n\nEen foutieve relatie kan leiden tot een fout verband of een onjuiste conclusie. Daarom is het belangrijk dat relaties controleerbaar en waar mogelijk herleidbaar zijn."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen, gebruikers, digitale assistenten, AI-systemen, databases en kennisbeheersystemen.",
+        "wat": "Een manier van informatie opslaan waarbij gegevens samen met hun onderlinge relaties en context worden bewaard.",
+        "wanneer": "Wanneer een systeem verbanden moet onthouden, informatie aan elkaar moet koppelen of vervolgvragen moet begrijpen.",
+        "waar": "In kennisgrafen, relationele databases, AI-systemen, digitale assistenten, kennisbanken en andere informatiesystemen.",
+        "waarom": "Om context te behouden, informatie beter terug te vinden en verbanden tussen gegevens te herkennen.",
+        "hoe": "Door entiteiten, eigenschappen, relaties, gebeurtenissen en context vast te leggen en verbindingen tussen deze informatie te volgen."
       },
       "tags": [
-        "relationeel geheugen",
-        "geheugen",
-        "verbinding",
-        "kennis",
         "ai",
+        "context",
+        "edge",
+        "entiteit",
+        "geheugen",
+        "graaf",
+        "kennis",
         "leren",
+        "netwerk",
+        "node",
+        "relatie",
         "semantiek",
-        "neutraal\n\n🧘 voelen\nbegrip"
+        "spark",
+        "verband",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550432,7 +550342,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.199591+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:48:33.648372+00:00"
       },
       "media": [],
       "needs": [],
@@ -550444,27 +550355,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Relativering betekent iets in een breder perspectief bekijken.",
-        "laag2": "Het helpt om situaties minder zwaar of absoluut te zien.",
-        "laag3": "Relativering kan helpen bij omgaan met problemen en emoties.",
-        "laag4": "Binnen Spark verwijst relativering naar balans, perspectief en emotionele verwerking."
+        "laag1": "Relativering is het bekijken van een situatie vanuit een breder perspectief, zodat iets minder absoluut, zwaar of belangrijk wordt gemaakt.",
+        "laag2": "Door te relativeren wordt een gebeurtenis of probleem in verhouding geplaatst tot andere informatie, ervaringen of omstandigheden.\n\nRelativeren betekent niet dat een probleem wordt ontkend. Het betekent dat er wordt gekeken naar het gehele plaatje.\n\nVoorbeeld:\n\n“Deze fout is vervelend, maar één fout betekent niet dat het hele project is mislukt.”",
+        "laag3": "Relativering kan op verschillende manieren gebeuren.\n\nEen situatie in perspectief plaatsen\n\nIemand kijkt niet alleen naar het probleem, maar ook naar de bredere situatie.\n\nVoorbeeld:\n\n“Vandaag ging het gesprek niet goed, maar eerdere gesprekken gingen wel goed.”\n\nTijd meenemen\n\nEen gebeurtenis kan anders voelen wanneer deze over een langere periode wordt bekeken.\n\nVoorbeeld:\n\n“Dit probleem is nu belangrijk, maar over een maand kan het minder grote gevolgen hebben.”\n\nVergelijken\n\nEen situatie wordt vergeleken met andere situaties.\n\nVoorbeeld:\n\n“De vertraging is vervelend, maar er is geen schade ontstaan en de afspraak kan worden verplaatst.”\n\nAndere verklaringen bekijken\n\nIemand onderzoekt of er meer mogelijke verklaringen zijn.\n\nVoorbeeld:\n\n“Die persoon reageerde kort. Misschien is diegene druk of moe, en is de reactie niet persoonlijk bedoeld.”\n\nHumor gebruiken\n\nHumor kan helpen om spanning te verminderen en een situatie minder zwaar te maken.\n\nVoorbeeld:\n\n“De computer liep vast, maar gelukkig was alleen het programma boos en niet de hele computer.”\n\nHumor is niet altijd passend. Bij ernstige of pijnlijke situaties kan relativering te vroeg of te sterk overkomen als het bagatelliseren van een probleem.",
+        "laag4": "Relativering kan helpen om:\n\nafstand te nemen van een eerste reactie;\neen situatie breder te bekijken;\ngedachten te controleren;\nspanning te verminderen;\nmeerdere mogelijkheden te zien;\neen probleem in verhouding te plaatsen;\nbeter te bepalen wat belangrijk is.\n\nRelativering is niet hetzelfde als bagatelliseren.\n\nRelativeren\n\nEen probleem wordt erkend, maar in een bredere context geplaatst.\n\nVoorbeeld:\n\n“Dit is een vervelende fout. We kunnen onderzoeken wat er misging en het herstellen.”\n\nBagatelliseren\n\nEen probleem of gevoel wordt kleiner gemaakt zonder voldoende aandacht voor de gevolgen.\n\nVoorbeeld:\n\n“Stel je niet aan, het is helemaal niets.”\n\nRelativering is ook niet hetzelfde als ontkennen.\n\nOntkennen\n\nIemand weigert of vermijdt het erkennen van een probleem.\n\nVoorbeeld:\n\n“Er is geen probleem.”\n\nRelativeren\n\nIemand erkent het probleem, maar bekijkt het vanuit meerdere kanten.\n\nVoorbeeld:\n\n“Er is een probleem, maar we hebben ook mogelijkheden om het op te lossen.”\n\nEen helpende relativering kan bestaan uit deze stappen:\n\nErken wat er is gebeurd.\nBenoem waarom het belangrijk of vervelend is.\nBekijk de volledige context.\nOnderzoek andere verklaringen.\nBepaal wat wel en niet beïnvloedbaar is.\nKijk welke volgende stap mogelijk is.\n\nRelativering kan minder passend zijn wanneer een situatie direct gevaarlijk, ernstig of onveilig is. Dan kan eerst handelen of hulp inschakelen belangrijker zijn dan het probleem in perspectief plaatsen."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen die een gebeurtenis, probleem, gedachte of gevoel vanuit een breder perspectief bekijken.",
+        "wat": "Het in verhouding plaatsen van een situatie door de volledige context, tijd, andere mogelijkheden en verschillende perspectieven mee te nemen.",
+        "wanneer": "Wanneer een gebeurtenis heel groot, zwaar, absoluut of bepalend voelt en een breder beeld kan helpen.",
+        "waar": "In gesprekken, werk, onderwijs, relaties, hulpverlening, persoonlijke ontwikkeling en dagelijkse situaties.",
+        "waarom": "Om een situatie beter te begrijpen, spanning te verminderen, gedachten te controleren en een passende volgende stap te bepalen.",
+        "hoe": "Door het probleem te erkennen, de context te onderzoeken, andere verklaringen te bekijken en de situatie in verhouding te plaatsen."
       },
       "tags": [
-        "relativering",
-        "perspectief",
+        "afstand nemen",
+        "bagatelliseren",
         "balans",
-        "emotie",
+        "context",
         "denken",
+        "emotie",
         "gedrag",
-        "neutraal\n\n🎯 weten\nbegrip"
+        "geheel",
+        "gerelativeerd",
+        "humor",
+        "nuance",
+        "ontkennen",
+        "perspectief",
+        "relativeren",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550474,7 +550393,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.220953+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:50:15.339246+00:00"
       },
       "media": [],
       "needs": [],
@@ -550537,27 +550457,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Remote access betekent op afstand toegang krijgen tot een computer of systeem.",
-        "laag2": "Dit gebeurt via een netwerkverbinding.",
-        "laag3": "Remote access wordt gebruikt voor beheer, ondersteuning en werken op afstand.",
-        "laag4": "Binnen Spark verwijst remote access naar verbinding, beheer en technologie."
+        "laag1": "Remote access betekent dat iemand of een systeem vanaf een andere locatie toegang krijgt tot een computer, apparaat, netwerk of digitaal systeem.",
+        "laag2": "Met remote access kan een gebruiker een apparaat op afstand bekijken, bedienen of beheren zonder er fysiek naast te zitten.\n\nVoorbeelden:\n\nvanaf huis werken op een computer op kantoor;\neen server op afstand beheren;\ntechnische hulp geven via schermovername;\nbestanden op een ander apparaat gebruiken;\neen computer op afstand bedienen.\n\nRemote access wordt ook wel toegang op afstand of externe toegang genoemd.",
+        "laag3": "Remote access kan op verschillende manieren werken.\n\nExtern bureaublad\n\nEen gebruiker ziet het scherm van een andere computer en kan deze soms bedienen met muis en toetsenbord.\n\nVoorbeeld:\n\nEen medewerker logt vanaf huis in op een werkcomputer.\n\nSchermdeling\n\nEen gebruiker deelt het scherm met iemand anders.\n\nDe andere persoon kan soms alleen meekijken en soms ook toestemming krijgen om de computer te bedienen.\n\nVoorbeeld:\n\nEen helpdeskmedewerker kijkt mee om een technisch probleem te onderzoeken.\n\nToegang tot bestanden\n\nEen gebruiker krijgt op afstand toegang tot bestanden of opslag.\n\nVoorbeelden:\n\neen bedrijfsserver;\nnetwerkopslag;\neen gedeelde map;\neen persoonlijke opslagomgeving.\nToegang tot een server\n\nEen beheerder kan een server op afstand beheren.\n\nVoorbeelden:\n\ninstellingen aanpassen;\nprogramma’s starten;\nlogbestanden bekijken;\nupdates uitvoeren;\nproblemen onderzoeken.\nToegang tot een digitaal systeem\n\nEen programma of gebruiker kan via een beveiligde verbinding toegang krijgen tot een dienst of functie.\n\nVoorbeeld:\n\nSpark gebruikt een beveiligde verbinding om een externe functie te bereiken.",
+        "laag4": "Remote access bestaat meestal uit meerdere onderdelen.\n\nHet apparaat op afstand\n\nDit is het apparaat of systeem dat toegankelijk wordt gemaakt.\n\nVoorbeelden:\n\neen computer;\neen server;\neen telefoon;\neen netwerk;\neen digitaal systeem.\nDe gebruiker of beheerder\n\nDit is de persoon of het systeem dat toegang vraagt.\n\nDe verbinding\n\nDe verbinding maakt communicatie tussen de locaties mogelijk.\n\nVoorbeelden:\n\ninternet;\neen bedrijfsnetwerk;\neen beveiligde netwerkverbinding.\nAanmelding\n\nDe gebruiker moet zich vaak identificeren.\n\nVoorbeelden:\n\ngebruikersnaam;\nwachtwoord;\nbeveiligingscode;\nbeveiligingssleutel;\nbiometrische controle.\nToestemming\n\nHet systeem bepaalt welke handelingen zijn toegestaan.\n\nVoorbeelden:\n\nalleen bekijken;\nbestanden lezen;\nbestanden wijzigen;\nprogramma’s uitvoeren;\nvolledige bediening.\n\nRemote access kan handig zijn voor:\n\nthuiswerken;\ntechnische ondersteuning;\nsysteembeheer;\nsamenwerken;\nonderhoud;\ntoegang tot bestanden;\nbeheer van apparaten.\n\nRemote access brengt ook beveiligingsrisico’s met zich mee."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Gebruikers, medewerkers, beheerders, technische ondersteuners, organisaties en digitale systemen.",
+        "wat": "Toegang tot of bediening van een computer, apparaat, netwerk, server of digitaal systeem vanaf een andere locatie.",
+        "wanneer": "Wanneer iemand een systeem op afstand wil gebruiken, beheren, onderhouden of ondersteunen.",
+        "waar": "Via internet, een bedrijfsnetwerk, een beveiligde verbinding of een andere netwerkverbinding.",
+        "waarom": "Om op afstand te werken, technische hulp te bieden, systemen te beheren, bestanden te gebruiken of onderhoud uit te voeren.",
+        "hoe": "Door een verbinding op te zetten, de gebruiker te identificeren, toegangsrechten te controleren en toestemming te geven voor bepaalde handelingen."
       },
       "tags": [
-        "remote access",
-        "netwerk",
-        "computer",
-        "toegang",
-        "technologie",
+        "aanmelding",
+        "authenticatie",
         "beheer",
-        "neutraal\n\n🌐 doen\nbegrip"
+        "computer",
+        "helpdesk",
+        "netwerk",
+        "remote access",
+        "schermdeling",
+        "spark",
+        "technologie",
+        "thuiswerken",
+        "toegang",
+        "toestemming",
+        "verificatie",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550567,7 +550495,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.263711+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:52:31.108258+00:00"
       },
       "media": [],
       "needs": [],
@@ -550579,27 +550508,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Remote toegang betekent toegang tot een systeem zonder fysiek aanwezig te zijn.",
-        "laag2": "Het maakt gebruik van internet of andere verbindingen.",
-        "laag3": "Remote toegang wordt gebruikt voor samenwerking en beheer.",
-        "laag4": "Binnen Spark verwijst remote toegang naar digitale verbinding en infrastructuur."
+        "laag1": "Remote toegang betekent dat iemand vanaf een andere locatie toegang krijgt tot een computer, apparaat, netwerk of digitaal systeem.",
+        "laag2": "Met remote toegang kan een gebruiker een apparaat of systeem op afstand bekijken, gebruiken of beheren zonder er fysiek aanwezig te zijn.\n\nVoorbeelden:\n\nvanaf huis werken op een computer op kantoor;\neen server op afstand beheren;\ntechnische hulp krijgen via schermovername;\nbestanden op een ander apparaat gebruiken;\nSpark vanaf een ander apparaat openen.\n\nRemote toegang wordt ook toegang op afstand of externe toegang genoemd.",
+        "laag3": "Remote toegang kan verschillende vormen hebben.\n\nExtern bureaublad\n\nEen gebruiker ziet het scherm van een andere computer en kan deze op afstand bedienen.\n\nVoorbeeld:\n\nEen medewerker logt thuis in op de computer op kantoor.\n\nSchermdeling\n\nEen gebruiker deelt het scherm met een andere persoon.\n\nDe andere persoon kan:\n\nalleen meekijken;\naanwijzingen geven;\nna toestemming de computer bedienen.\nToegang tot bestanden\n\nEen gebruiker kan bestanden openen die op een ander apparaat of netwerk staan.\n\nVoorbeelden:\n\neen gedeelde map;\neen bedrijfsserver;\nnetwerkopslag;\neen persoonlijke opslagomgeving.\nServertoegang\n\nEen beheerder kan een server op afstand beheren.\n\nVoorbeelden:\n\ninstellingen aanpassen;\nprogramma’s starten;\nlogbestanden bekijken;\nupdates uitvoeren;\nproblemen onderzoeken.\nToegang tot een digitaal systeem\n\nEen gebruiker of programma krijgt toegang tot een functie of dienst via een netwerkverbinding.\n\nVoorbeeld:\n\nEen gebruiker opent Spark vanaf een ander apparaat.",
+        "laag4": "Remote toegang bestaat meestal uit meerdere onderdelen.\n\nHet externe systeem\n\nDit is de computer, server, het apparaat of systeem dat op afstand toegankelijk is.\n\nDe gebruiker\n\nDit is de persoon of het systeem dat toegang vraagt.\n\nDe verbinding\n\nDe verbinding maakt communicatie tussen de gebruiker en het externe systeem mogelijk.\n\nVoorbeelden:\n\ninternet;\neen lokaal netwerk;\neen bedrijfsnetwerk;\neen beveiligde verbinding.\nAanmelding\n\nDe gebruiker moet vaak bewijzen wie diegene is.\n\nVoorbeelden:\n\ngebruikersnaam;\nwachtwoord;\nbeveiligingscode;\nbeveiligingssleutel;\nbiometrische controle.\nToegangsrechten\n\nHet systeem bepaalt welke handelingen de gebruiker mag uitvoeren.\n\nVoorbeelden:\n\nalleen bekijken;\nbestanden lezen;\nbestanden wijzigen;\ninstellingen aanpassen;\nvolledige bediening.\n\nRemote toegang kan worden gebruikt voor:\n\nthuiswerken;\ntechnische ondersteuning;\nsysteembeheer;\nsamenwerken;\nonderhoud;\ntoegang tot bestanden;\nbeheer van apparaten.\n\nRemote toegang brengt ook beveiligingsrisico’s met zich mee."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Gebruikers, medewerkers, beheerders, technische ondersteuners, organisaties en digitale systemen.",
+        "wat": "Toegang tot een computer, apparaat, netwerk, server of digitaal systeem vanaf een andere locatie.",
+        "wanneer": "Wanneer iemand een systeem op afstand wil gebruiken, beheren, onderhouden of ondersteunen.",
+        "waar": "Via internet, een lokaal netwerk, een bedrijfsnetwerk of een andere beveiligde netwerkverbinding.",
+        "waarom": "Om op afstand te werken, technische hulp te bieden, systemen te beheren, bestanden te gebruiken of onderhoud uit te voeren.",
+        "hoe": "Door een verbinding op te zetten, de gebruiker te identificeren, toegangsrechten te controleren en toestemming te geven voor bepaalde handelingen."
       },
       "tags": [
-        "remote toegang",
-        "netwerk",
+        "aanmelding",
+        "authenticatie",
+        "helpdesk",
         "internet",
-        "verbinding",
+        "netwerk",
+        "remote access",
+        "schermdeling",
+        "spark",
         "systeem",
         "technologie",
-        "neutraal\n\n💰 weten\nbegrip"
+        "thuiswerken",
+        "toestemming",
+        "verbinding",
+        "verificatie",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550609,7 +550546,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.284564+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:53:09.445055+00:00"
       },
       "media": [],
       "needs": [],
@@ -550621,27 +550559,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Rendement is de opbrengst van een investering of inspanning.",
-        "laag2": "Het wordt vaak uitgedrukt als verhouding tussen opbrengst en kosten.",
-        "laag3": "Rendement wordt gebruikt in economie, energie en prestaties.",
-        "laag4": "Binnen Spark verwijst rendement naar efficiëntie, waarde en optimalisatie."
+        "laag1": "Rendement is de opbrengst of het resultaat dat wordt behaald in verhouding tot wat ergens voor is ingezet.",
+        "laag2": "Rendement laat zien hoeveel iets oplevert ten opzichte van bijvoorbeeld:\n\ngeld;\ntijd;\nenergie;\ngrondstoffen;\narbeid;\neen investering.\n\nEen hoog rendement betekent meestal dat de opbrengst groot is in verhouding tot de inzet.\n\nVoorbeeld:\n\nIemand investeert €100 en ontvangt later €110 terug. De opbrengst is €10. Het rendement is 10%.",
+        "laag3": "Het woord rendement wordt in verschillende situaties gebruikt.\n\nFinancieel rendement\n\nFinancieel rendement laat zien hoeveel een investering heeft opgeleverd of verloren.\n\nVoorbeeld:\n\nEen investering van €1.000 stijgt naar €1.100.\n\nDe winst is:\n\n€100\n\nHet rendement is:\n\n10%\n\nFinancieel rendement kan positief of negatief zijn.\n\nPositief rendement: de waarde of opbrengst is hoger.\nNegatief rendement: de waarde of opbrengst is lager.\nRendement van een bedrijf\n\nEen bedrijf kan kijken hoeveel winst wordt gemaakt in verhouding tot de omzet, kosten of investering.\n\nVoorbeeld:\n\nEen bedrijf behaalt €20.000 winst bij €200.000 omzet.\n\nDe winstmarge is:\n\n10%\n\nEnergierendement\n\nBij energie geeft rendement aan welk deel van de ingevoerde energie wordt omgezet in bruikbare energie.\n\nVoorbeeld:\n\nEen apparaat ontvangt 100 joule energie en levert 80 joule bruikbare energie.\n\nHet energierendement is:\n\n80%.\n\nEen deel van de energie kan bijvoorbeeld verloren gaan als:\n\nwarmte;\ngeluid;\nbeweging die niet wordt gebruikt.\nRendement van een proces\n\nRendement kan ook aangeven hoe efficiënt een proces werkt.\n\nVoorbeeld:\n\nEen machine gebruikt minder materiaal om dezelfde hoeveelheid producten te maken.",
+        "laag4": "Rendement wordt vaak als percentage weergegeven.\n\nBij financieel rendement wordt meestal gekeken naar de winst of het verlies in verhouding tot de oorspronkelijke investering.\n\nVoorbeeld:\n\nEen investering is €500.\n\nDe waarde stijgt naar €550.\n\nDe winst is:\n\n€550 − €500 = €50\n\nHet rendement is:\n\n€50 ÷ €500 × 100 = 10%\n\nBij energierendement wordt gekeken naar de bruikbare energie in verhouding tot de toegevoerde energie.\n\nEen rendement van 100% betekent dat alle ingevoerde energie bruikbaar wordt gebruikt. In echte processen gaat vaak een deel verloren of wordt een deel omgezet in ongewenste vormen, zoals warmte.\n\nRendement is niet hetzelfde als opbrengst.\n\nOpbrengst is wat iets oplevert.\nRendement vergelijkt de opbrengst met wat ervoor is ingezet.\n\nVoorbeeld:\n\nInvestering A levert €100 winst op.\nInvestering B levert €50 winst op.\n\nDat betekent niet automatisch dat investering A het hoogste rendement heeft."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Beleggers, bedrijven, ondernemers, onderzoekers, technici en personen die resultaten of investeringen beoordelen.",
+        "wat": "De opbrengst, winst of bruikbare uitkomst in verhouding tot de ingezette middelen.",
+        "wanneer": "Wanneer het resultaat van een investering, proces, apparaat of activiteit wordt gemeten of vergeleken.",
+        "waar": "In financiën, beleggen, bedrijfsvoering, techniek, energie, productie en projectontwikkeling.",
+        "waarom": "Om te beoordelen hoeveel resultaat een investering of inzet oplevert en om verschillende mogelijkheden te vergelijken.",
+        "hoe": "Door de opbrengst of bruikbare uitkomst te vergelijken met de oorspronkelijke inzet en dit vaak als percentage weer te geven."
       },
       "tags": [
-        "rendement",
-        "opbrengst",
+        "beleggen",
         "economie",
         "efficiëntie",
         "investering",
+        "opbrengst",
+        "rendement",
+        "risico",
+        "roi",
+        "spark",
+        "trader",
+        "verlies",
         "waarde",
-        "neutraal\n\n🏠 doen\nbegrip"
+        "weten",
+        "winst",
+        "winstmarge"
       ],
       "topic": "",
       "verbanden": [],
@@ -550651,91 +550597,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.305081+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-2fa75a26",
-      "begrip": "Renovatie",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Renovatie betekent het vernieuwen of verbeteren van een gebouw of onderdeel.",
-        "laag2": "Renovatie kan gericht zijn op onderhoud, comfort of duurzaamheid.",
-        "laag3": "Het verlengt vaak de levensduur van een object.",
-        "laag4": "Binnen Spark verwijst renovatie naar onderhoud, verbetering en ontwikkeling."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "renovatie",
-        "onderhoud",
-        "gebouw",
-        "verbetering",
-        "duurzaamheid",
-        "techniek",
-        "neutraal\n\n🔧 doen\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:41:09.326176+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-31fc2268",
-      "begrip": "Reparatie",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Reparatie betekent het herstellen van iets dat beschadigd of defect is.",
-        "laag2": "Reparaties kunnen uitgevoerd worden aan apparaten, gebouwen of systemen.",
-        "laag3": "Reparatie voorkomt verspilling en verlengt gebruik.",
-        "laag4": "Binnen Spark verwijst reparatie naar herstel, onderhoud en probleemoplossing."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "reparatie",
-        "herstel",
-        "onderhoud",
-        "techniek",
-        "oplossing",
-        "systeem",
-        "neutraal\n\n🎭 weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:41:09.346580+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T18:53:52.252370+00:00"
       },
       "media": [],
       "needs": [],
@@ -550747,27 +550610,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Representatie betekent een voorstelling of afbeelding van iets anders.",
-        "laag2": "Een representatie kan bestaan uit woorden, beelden, data of modellen.",
-        "laag3": "Representaties helpen mensen informatie te begrijpen.",
-        "laag4": "Binnen Spark verwijst representatie naar kennisweergave en betekenis."
+        "laag1": "Een representatie is een manier waarop iets wordt weergegeven, voorgesteld of beschreven.",
+        "laag2": "Een representatie maakt informatie, een idee, een voorwerp of een situatie zichtbaar, begrijpelijk of bruikbaar.\n\nDezelfde informatie kan op verschillende manieren worden weergegeven.\n\nVoorbeeld:\n\nHet getal vijf kan worden weergegeven als:\n\n5;\nvijf stippen: ●●●●●;\nhet woord vijf;\nvijf voorwerpen;\neen plaats op een getallenlijn.\n\nDeze representaties verwijzen naar hetzelfde aantal, maar gebruiken een andere vorm.",
+        "laag3": "Representaties kunnen verschillende vormen hebben.\n\nTekstuele representatie\n\nInformatie wordt weergegeven met woorden, letters of zinnen.\n\nVoorbeeld:\n\n“Een fiets heeft twee wielen.”\n\nVisuele representatie\n\nInformatie wordt weergegeven met beelden.\n\nVoorbeelden:\n\neen foto;\neen tekening;\neen pictogram;\neen kaart;\neen diagram.\nNumerieke representatie\n\nInformatie wordt weergegeven met getallen.\n\nVoorbeeld:\n\n25 °C\n\nGrafische representatie\n\nGegevens worden zichtbaar gemaakt met een grafiek of schema.\n\nVoorbeelden:\n\neen staafdiagram;\neen lijngrafiek;\neen cirkeldiagram;\neen stroomdiagram.\nSymbolische representatie\n\nEen symbool vertegenwoordigt een bepaalde betekenis.\n\nVoorbeelden:\n\n+ betekent optellen;\n€ vertegenwoordigt de euro;\n❤️ kan liefde of waardering voorstellen.\nDigitale representatie\n\nInformatie wordt opgeslagen of verwerkt in een digitale vorm.\n\nVoorbeelden:\n\ntekst;\nafbeeldingen;\ngeluid;\nvideo;\nprogrammacode;\ngegevens.",
+        "laag4": "Een representatie is niet hetzelfde als het oorspronkelijke onderwerp.\n\nVoorbeeld:\n\nEen kaart van Nederland is een representatie van Nederland. De kaart is niet het land zelf.\n\nEen foto van een persoon is een representatie van die persoon. De foto is niet de persoon.\n\nEen representatie laat meestal bepaalde eigenschappen zien en laat andere eigenschappen weg. Een representatie is daarom vaak een selectie, vereenvoudiging of weergave van de werkelijkheid.\n\nEen representatie kan informatie:\n\nvereenvoudigen;\nsamenvatten;\nordenen;\nverduidelijken;\nzichtbaar maken;\noverdraagbaar maken;\nvergelijkbaar maken.\n\nDaarbij kan informatie verloren gaan of minder zichtbaar worden.\n\nVoorbeeld:\n\nEen eenvoudige kaart laat wegen en plaatsen zien, maar meestal niet alle gebouwen, geluiden, geuren en gebeurtenissen.\n\nDe keuze voor een representatie hangt af van het doel.\n\nVoorbeelden:\n\nEen route wordt vaak weergegeven op een kaart.\nEen ontwikkeling door de tijd wordt vaak weergegeven in een lijngrafiek.\nEen proces wordt vaak weergegeven met een stappenplan.\nEen locatie kan worden weergegeven met coördinaten.\nEen geluid kan worden weergegeven als een audiobestand.\nEen ingewikkeld systeem kan worden weergegeven met een model of schema.\n\nEen representatie kan nauwkeurig of vereenvoudigd zijn.\n\nEen nauwkeurige representatie bevat vaak meer details, maar kan ingewikkelder zijn om te begrijpen of te gebruiken.\n\nEen vereenvoudigde representatie is vaak overzichtelijker, maar laat mogelijk belangrijke details weg.\n\nRepresentatie in computers\n\nComputers verwerken informatie in digitale vormen.\n\nTekst, afbeeldingen, geluid en video worden opgeslagen als gegevens die een computer kan verwerken.\n\nVoorbeelden:\n\ntekst wordt opgeslagen met tekencodes;\neen afbeelding wordt opgebouwd uit pixels;\ngeluid wordt opgeslagen als digitale meetwaarden;\neen video bestaat uit beeldgegevens en geluid.\n\nDe digitale representatie beïnvloedt onder andere:\n\nhoeveel opslagruimte nodig is;"
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen, ontwerpers, onderzoekers, programmeurs, computers, AI-systemen en andere systemen die informatie weergeven of verwerken.",
+        "wat": "Een vorm waarin een voorwerp, idee, gegeven, situatie of andere informatie wordt weergegeven, voorgesteld of beschreven.",
+        "wanneer": "Wanneer informatie zichtbaar, begrijpelijk, overdraagbaar, opgeslagen of verwerkt moet worden.",
+        "waar": "In taal, afbeeldingen, kaarten, grafieken, symbolen, modellen, databases, computers en digitale systemen.",
+        "waarom": "Om informatie begrijpelijk te maken, te bewaren, te communiceren, te analyseren of te gebruiken.",
+        "hoe": "Door informatie om te zetten naar een geschikte vorm, zoals tekst, beeld, getallen, symbolen, grafieken, modellen of digitale gegevens."
       },
       "tags": [
-        "representatie",
-        "afbeelding",
-        "model",
+        "ai",
+        "beeld",
         "betekenis",
-        "informaties",
+        "computer",
+        "diagram",
+        "getal",
+        "grafiek",
+        "kaart",
         "kennis",
-        "neutraal\n\n⭐ weten\nbegrip"
+        "model",
+        "schema",
+        "symbool",
+        "tekst",
+        "weergave",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550777,7 +550648,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.367731+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:01:19.134932+00:00"
       },
       "media": [],
       "needs": [],
@@ -550789,27 +550661,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Reputatie is het beeld dat anderen van iemand of iets hebben.",
-        "laag2": "Een reputatie ontstaat door ervaringen, gedrag en communicatie.",
-        "laag3": "Reputatie beïnvloedt vertrouwen en relaties.",
-        "laag4": "Binnen Spark verwijst reputatie naar identiteit, vertrouwen en sociale informatie."
+        "laag1": "Een reputatie is het beeld of de mening die anderen over een persoon, organisatie, bedrijf, product of merk hebben.",
+        "laag2": "Een reputatie ontstaat door ervaringen, gedrag, prestaties, communicatie en informatie die mensen met elkaar delen.\n\nVoorbeeld:\n\nEen bedrijf dat afspraken nakomt en goede service geeft, kan een betrouwbare reputatie opbouwen.\n\nEen reputatie kan:\n\npositief;\nnegatief;\nneutraal;\nsterk;\nzwak;\nbekend;\nonbekend zijn.",
+        "laag3": "Een reputatie wordt vaak opgebouwd over een langere periode.\n\nVerschillende factoren kunnen invloed hebben op een reputatie.\n\nGedrag",
+        "laag4": "Een reputatie is een beeld dat anderen vormen. Dit beeld hoeft niet altijd volledig, eerlijk of juist te zijn.\n\nEen reputatie kan worden beïnvloed door:\n\npersoonlijke ervaringen;\nverhalen van anderen;\nnieuws;\nsociale media;\nbeoordelingen;\ngeruchten;\nzichtbare prestaties;\neerdere gebeurtenissen.\n\nEen reputatie kan veranderen.\n\nEen positieve reputatie kan sterker worden door:\n\nbetrouwbaar gedrag;\ngoede prestaties;\nduidelijke communicatie;\nrespectvolle omgang;\nhet nakomen van afspraken;\nverantwoordelijkheid nemen.\n\nEen negatieve reputatie kan ontstaan door:\n\nherhaaldelijk afspraken niet nakomen;\nslechte prestaties;\nonduidelijke of misleidende communicatie;\nonrespectvol gedrag;\nernstige fouten;\nnegatieve ervaringen.\n\nEen reputatie kan soms snel beschadigd raken, terwijl herstel veel tijd kan kosten.\n\nReputatie herstellen\n\nHet herstellen van een reputatie kan onder andere bestaan uit:\n\nerkennen wat er is gebeurd;\nverantwoordelijkheid nemen;\ngevolgen onderzoeken;\nfouten of schade herstellen;\nuitleg geven wanneer dat passend is;\ngedrag of werkwijzen verbeteren;\nover langere tijd betrouwbaar handelen.\n\nAlleen zeggen dat iets beter zal gaan is meestal niet genoeg. Een reputatie verandert vooral door zichtbaar en consequent gedrag.\n\nReputatie en imago\n\nReputatie en imago zijn verwante begrippen, maar betekenen niet precies hetzelfde.\n\nImago is het beeld dat iemand of een organisatie op een bepaald moment wil uitstralen of dat anderen waarnemen.\nReputatie ontstaat meestal over een langere periode door ervaringen, gedrag en prestaties.\n\nEen organisatie kan bijvoorbeeld een betrouwbaar imago proberen uit te stralen, terwijl de reputatie anders kan zijn door ervaringen van klanten.\n\nOnline reputatie\n\nOp internet kan een reputatie worden beïnvloed door:\n\nbeoordelingen;\nrecensies;\nzoekresultaten;\nberichten;\nfoto’s en video’s;\nsociale media;\nopenbare reacties.\n\nOnline informatie kan snel worden verspreid en lang zichtbaar blijven. Daardoor kan online gedrag invloed hebben op hoe anderen iemand of een organisatie beoordelen.\n\nEen reputatie is niet hetzelfde als een feit.\n\nEen reputatie is een verzameling van indrukken, meningen en ervaringen. Deze kunnen gebaseerd zijn op feiten, maar ook op onvolledige informatie, misverstanden of geruchten.\n\nDaarom is het belangrijk om onderscheid te maken tussen:\n\ncontroleerbare informatie;\npersoonlijke ervaringen;\nmeningen;\ngeruchten;\nalgemene beeldvorming."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Personen, organisaties, bedrijven, merken, producten, instellingen en andere partijen die door anderen worden beoordeeld.",
+        "wat": "Het beeld, de mening of de algemene beoordeling die anderen over iemand of iets hebben.",
+        "wanneer": "Wanneer mensen ervaringen opdoen, gedrag waarnemen, informatie ontvangen of meningen en ervaringen met anderen delen.",
+        "waar": "In sociale contacten, werk, organisaties, media, internet, beoordelingen, gemeenschappen en de samenleving.",
+        "waarom": "Omdat reputatie invloed kan hebben op vertrouwen, samenwerking, keuzes, relaties en de bereidheid van anderen om met iemand of een organisatie om te gaan.",
+        "hoe": "Door gedrag, prestaties, communicatie, ervaringen, beoordelingen, verhalen en informatie die over een persoon, organisatie of ander onderwerp wordt gedeeld."
       },
       "tags": [
-        "reputatie",
-        "vertrouwen",
-        "identiteit",
+        "aanbeveling",
+        "beoordeling",
+        "ervaring",
         "gedrag",
-        "communicatie",
-        "samenleving",
-        "neutraal\n\n💻 spreken\nbegrip"
+        "gerucht",
+        "identiteit",
+        "imago",
+        "indruk",
+        "mening",
+        "prestaties",
+        "recensie",
+        "reputatie",
+        "review",
+        "vertrouwen",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -550819,90 +550699,8 @@
         "ingedeeld_op": "2026-07-26T11:41:09.388120+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-3a47e6c2",
-      "begrip": "Request",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Een request is een verzoek om informatie of een actie uit te voeren.",
-        "laag2": "In computers betekent een request vaak een aanvraag tussen systemen.",
-        "laag3": "Requests vormen een basis van communicatie tussen software.",
-        "laag4": "Binnen Spark verwijst request naar interactie, communicatie en systemen."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "request",
-        "verzoek",
-        "communicatie",
-        "software",
-        "systeem",
-        "api",
-        "neutraal\n\n📅 doen\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:41:09.408958+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-8643beee",
-      "begrip": "Reserveren",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Reserveren betekent iets vooraf vastleggen voor later gebruik.",
-        "laag2": "Dit wordt gebruikt bij bijvoorbeeld afspraken, plaatsen of diensten.",
-        "laag3": "Reserveren helpt planning en beschikbaarheid regelen.",
-        "laag4": "Binnen Spark verwijst reserveren naar planning, organisatie en afspraken."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "reserveren",
-        "planning",
-        "afspraak",
-        "organisatie",
-        "beschikbaarheid",
-        "systeem"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:41:09.429458+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:01:55.723701+00:00"
       },
       "media": [],
       "needs": [],
@@ -552165,74 +551963,40 @@
       "emotie": "neutraal"
     },
     {
-      "id": "kbv2-07b283b8",
-      "begrip": "Rest",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Rest betekent dat iets overblijft nadat een deel gebruikt of verwijderd is.",
-        "laag2": "Een rest kan gaan over materiaal, tijd, geld of informatie.",
-        "laag3": "Resten kunnen opnieuw gebruikt, verwerkt of geanalyseerd worden.",
-        "laag4": "Binnen Spark verwijst rest naar overgebleven informatie, kringlopen en processen."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "rest",
-        "overblijven",
-        "proces",
-        "materiaal",
-        "informaties",
-        "systeem",
-        "neutraal\n\n🧠 weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:26.388146+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
       "id": "kbv2-f0763952",
       "begrip": "Restant",
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een restant is een overgebleven deel van iets.",
-        "laag2": "Een restant ontstaat nadat een hoeveelheid gedeeltelijk gebruikt is.",
-        "laag3": "Restanten kunnen waarde hebben of opnieuw gebruikt worden.",
-        "laag4": "Binnen Spark verwijst restant naar voorraad, behoud en verwerking."
+        "laag1": "Een restant is het deel dat overblijft nadat iets is gebruikt, verdeeld, verwijderd, verkocht of verwerkt.",
+        "laag2": "Een restant is wat er nog over is van een oorspronkelijke hoeveelheid.\n\nVoorbeelden:\n\nEr waren tien koekjes. Er zijn er zeven opgegeten. Het restant is drie koekjes.\nNa de verkoop is er nog een restant van twintig producten.\nNa het betalen van de kosten blijft een geldrestant over.\n\nEen restant kan bestaan uit:\n\ngeld;\nproducten;\nmaterialen;\nvoorraad;\ntijd;\nruimte;\ngegevens;\neen hoeveelheid.",
+        "laag3": "Een restant ontstaat vaak doordat een deel van een oorspronkelijke hoeveelheid is gebruikt of verdwenen.\n\nVoorbeeld:\n\nEen winkel heeft 100 producten. Er worden 75 producten verkocht. Het restant is 25 producten.\n\nEen restant kan op verschillende manieren worden gebruikt.\n\nRestant van een hoeveelheid\n\nEen deel van een hoeveelheid blijft over.\n\nVoorbeeld:\n\nVan 20 liter water wordt 15 liter gebruikt. Het restant is 5 liter.\n\nGeldrestant\n\nEen deel van een geldbedrag blijft beschikbaar nadat kosten of uitgaven zijn betaald.\n\nVoorbeeld:\n\nIemand heeft €500. Na een uitgave van €350 blijft een restant van €150 over.\n\nVoorraadrestant\n\nEen deel van de voorraad is nog niet gebruikt of verkocht.\n\nVoorbeeld:\n\nNa een drukke verkoopdag blijft een klein voorraadrestant over.\n\nMateriaalrestant\n\nEen deel van het materiaal blijft over na productie, bouw of verwerking.\n\nVoorbeelden:\n\neen stuk hout;\neen rest stof;\novergebleven verf;\neen stuk metaal.\nTijdsrestant\n\nEen deel van de beschikbare tijd is nog niet gebruikt.\n\nVoorbeeld:\n\nEen taak duurt 30 minuten. Na 20 minuten blijft een tijdsrestant van 10 minuten over.",
+        "laag4": "Een restant kan worden berekend door de gebruikte, verwijderde of verwerkte hoeveelheid af te trekken van de oorspronkelijke hoeveelheid.\n\nVoorbeeld:\n\nEen voorraad bestaat uit 80 producten.\n\nEr worden 50 producten verkocht.\n\nHet restant is:\n\n80 − 50 = 30 producten.\n\nEen restant kan:\n\nworden bewaard;\nopnieuw worden gebruikt;\nverder worden verwerkt;\nverkocht;\nverdeeld;\nweggegooid;\ngerecycled."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Personen, bedrijven, winkels, producenten, beheerders en andere partijen die hoeveelheden gebruiken, verdelen, verkopen of beheren.",
+        "wat": "Het deel of de hoeveelheid die overblijft nadat een ander deel is gebruikt, verkocht, verwijderd, verdeeld of verwerkt.",
+        "wanneer": "Nadat een deel van een oorspronkelijke hoeveelheid is gebruikt of niet meer beschikbaar is.",
+        "waar": "In huishoudens, winkels, magazijnen, bedrijven, productie, bouw, financiën, administratie en berekeningen.",
+        "waarom": "Om te weten hoeveel er nog beschikbaar is en om restanten te kunnen bewaren, gebruiken, verwerken, verkopen of beheren.",
+        "hoe": "Door de gebruikte, verkochte, verwijderde of verwerkte hoeveelheid af te trekken van de oorspronkelijke hoeveelheid."
       },
       "tags": [
-        "restant",
-        "overblijven",
-        "voorraad",
+        "aftrekken",
+        "afval",
+        "berekening",
+        "hergebruik",
         "materiaal",
         "proces",
+        "productie",
+        "recycling",
+        "rest",
+        "restant",
+        "reststuk",
+        "saldo",
         "systeem",
-        "neutraal\n\n♻️ weten\nbegrip"
+        "voorraad",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -552242,7 +552006,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.409316+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:05:46.535521+00:00"
       },
       "media": [],
       "needs": [],
@@ -552254,27 +552019,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een restproduct is een materiaal dat overblijft tijdens een productieproces.",
-        "laag2": "Een restproduct kan afval zijn of opnieuw gebruikt worden.",
-        "laag3": "In duurzame systemen worden restproducten vaak opnieuw verwerkt.",
-        "laag4": "Binnen Spark verwijst restproduct naar productie, recycling en kringlopen."
+        "laag1": "Een restproduct is een product, materiaal of stof die overblijft na een productieproces, verwerking of andere activiteit.",
+        "laag2": "Een restproduct ontstaat wanneer bij het maken, verwerken of gebruiken van iets niet alle materialen in het hoofdproduct terechtkomen.\n\nEen restproduct kan nog:\n\nbruikbaar zijn;\nwaarde hebben;\nopnieuw worden verwerkt;\nals grondstof worden gebruikt;\nworden gerecycled;\nworden afgevoerd.\n\nVoorbeeld:\n\nBij het zagen van hout blijven zaagsel en houtresten over. Deze kunnen als restproduct worden gebruikt.",
+        "laag3": "Restproducten kunnen op verschillende manieren ontstaan.\n\nBij productie\n\nTijdens het maken van een product kunnen materialen overblijven.\n\nVoorbeelden:\n\nzaagsel bij houtbewerking;\nmetaalsnippers bij metaalbewerking;\ntextielresten bij het maken van kleding;\nsnijresten bij de productie van voedsel.\nBij voedselverwerking\n\nBij het verwerken van voedsel kunnen delen overblijven die niet het hoofdproduct zijn.\n\nVoorbeelden:\n\nschillen;\npitten;\npulp;\nkaf;\nresten van groente of fruit.\n\nSommige van deze restproducten kunnen opnieuw worden gebruikt, bijvoorbeeld als:\n\ndierenvoer;\ncompost;\ngrondstof;\nenergiebron.\nBij landbouw\n\nBij de productie van gewassen kunnen plantaardige delen overblijven.\n\nVoorbeelden:\n\nstro;\nbladeren;\nstengels;\nschillen;\nplantenresten.\nBij energieproductie\n\nNa een energieproces kunnen stoffen of materialen overblijven.\n\nVoorbeelden:\n\nas;\nslakken;\nrestwarmte;\ngebruikte materialen.\nBij recycling\n\nTijdens het scheiden en verwerken van materialen kunnen restproducten ontstaan.\n\nEen deel kan opnieuw worden gebruikt, terwijl een ander deel verder moet worden verwerkt of afgevoerd.",
+        "laag4": "Een restproduct is niet automatisch afval.\n\nEen restproduct kan nog waarde hebben of een nieuwe toepassing krijgen.\n\nVoorbeeld:\n\nZaagsel kan worden verwerkt tot pellets of worden gebruikt als bodembedekking.\n\nHet verschil hangt vaak af van:\n\nde kwaliteit;\nde samenstelling;\nde veiligheid;\nde hoeveelheid;\nde mogelijke toepassingen;\nde kosten van verwerking;\nde vraag naar het materiaal.\n\nEen restproduct kan worden:\n\nhergebruikt;\ngerecycled;\nverwerkt tot een nieuw product;\ngebruikt als grondstof;\ngebruikt voor energie;\nopgeslagen;\nafgevoerd.\nRestproduct en bijproduct\n\nEen restproduct en een bijproduct lijken op elkaar, maar betekenen niet altijd hetzelfde.\n\nEen restproduct is iets dat overblijft na een proces.\nEen bijproduct ontstaat naast het hoofdproduct en kan een bruikbare of waardevolle toepassing hebben.\n\nEen materiaal kan dus als restproduct beginnen en later als bijproduct of grondstof worden gebruikt.\n\nRestproduct en afval\nEen restproduct is een materiaal of product dat na een proces overblijft.\nAfval is materiaal waarvan iemand zich ontdoet of wil ontdoen.\n\nEen restproduct wordt niet automatisch afval. Wanneer het opnieuw wordt gebruikt, kan het onderdeel worden van een nieuwe productieketen.\n\nRestproducten en circulariteit\n\nHet opnieuw gebruiken van restproducten kan bijdragen aan een circulaire economie.\n\nDaarbij worden materialen zo lang mogelijk gebruikt en opnieuw ingezet.\n\nMogelijke voordelen zijn:\n\nminder afval;\nminder gebruik van nieuwe grondstoffen;\nlagere milieubelasting;\nminder verspilling;\nnieuwe producten of toepassingen.\n\nHet opnieuw gebruiken van een restproduct is niet altijd mogelijk. Sommige restproducten zijn:\n\nvervuild;\ngevaarlijk;\nmoeilijk te scheiden;\nvan onvoldoende kwaliteit;\nte duur om opnieuw te verwerken.\n\nDaarom wordt per restproduct bekeken welke verwerking technisch, economisch en veilig mogelijk is."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Producenten, bedrijven, landbouwers, voedselverwerkers, fabrikanten, afvalverwerkers, recyclers en andere organisaties die materialen verwerken.",
+        "wat": "Een product, materiaal of stof die overblijft na productie, verwerking, gebruik of een ander proces.",
+        "wanneer": "Tijdens of na een productieproces, verwerking, landbouwactiviteit, voedselbewerking, recycling of energieproductie.",
+        "waar": "In fabrieken, werkplaatsen, landbouwbedrijven, voedselbedrijven, recyclinginstallaties, energiecentrales en andere productieomgevingen.",
+        "waarom": "Omdat niet alle gebruikte materialen onderdeel worden van het hoofdproduct en sommige overgebleven materialen nog kunnen worden gebruikt of verwerkt.",
+        "hoe": "Door restproducten te verzamelen, scheiden, onderzoeken en opnieuw te gebruiken, te recyclen, verder te verwerken of af te voeren."
       },
       "tags": [
-        "restproduct",
-        "productie",
-        "recycling",
-        "duurzaamheid",
-        "materiaal",
+        "afval",
+        "bijproduct",
+        "compost",
+        "dierenvoer",
         "economie",
-        "neutraal\n\n♻️ weten\nbegrip"
+        "grondstof",
+        "hergebruik",
+        "houtrest",
+        "materiaal",
+        "productie",
+        "recyclen",
+        "reststof",
+        "snijrest",
+        "weten",
+        "zaagsel"
       ],
       "topic": "",
       "verbanden": [],
@@ -552284,7 +552057,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.429353+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:06:30.627630+00:00"
       },
       "media": [],
       "needs": [],
@@ -552296,27 +552070,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een reststof is een stof die overblijft na een proces.",
-        "laag2": "Reststoffen komen voor in industrie, natuur en biologische processen.",
-        "laag3": "Beheer van reststoffen is belangrijk voor milieu en gezondheid.",
-        "laag4": "Binnen Spark verwijst reststof naar chemie, natuur en materiaalstromen."
+        "laag1": "Een reststof is een stof of materiaal dat overblijft na een productieproces, verwerking, gebruik of andere activiteit.",
+        "laag2": "Een reststof ontstaat wanneer niet alle gebruikte materialen onderdeel worden van het gewenste eindproduct.\n\nEen reststof kan:\n\nnog bruikbaar zijn;\nopnieuw worden verwerkt;\nals grondstof worden gebruikt;\nworden gerecycled;\nworden afgevoerd;\nals afval worden behandeld.\n\nVoorbeeld:\n\nBij het verwerken van fruit blijft pulp over. Deze pulp is een reststof en kan soms opnieuw worden gebruikt.",
+        "laag3": "Reststoffen kunnen in verschillende situaties ontstaan.\n\nBij productie\n\nTijdens de productie kunnen stoffen of materialen overblijven.\n\nVoorbeelden:\n\nzaagsel bij houtbewerking;\nmetaalsnippers bij metaalbewerking;\nsnijresten bij de productie van materialen;\nresten van grondstoffen.\nBij voedselverwerking\n\nBij het verwerken van voedsel kunnen delen overblijven die niet in het hoofdproduct terechtkomen.\n\nVoorbeelden:\n\nschillen;\npitten;\npulp;\nkaf;\nresten van groente en fruit.\n\nSommige reststoffen kunnen worden gebruikt voor:\n\ndierenvoer;\ncompost;\nnieuwe producten;\nenergie.\nBij landbouw\n\nNa het oogsten of verwerken van gewassen kunnen reststoffen overblijven.\n\nVoorbeelden:\n\nstro;\nbladeren;\nstengels;\nplantenresten;\nschillen.\nBij energieproductie\n\nBij het opwekken of gebruiken van energie kunnen reststoffen ontstaan.\n\nVoorbeelden:\n\nas;\nslakken;\nrookgassen;\ngebruikte filtermaterialen.\nBij waterzuivering\n\nBij het reinigen van water kunnen stoffen worden afgescheiden.\n\nVoorbeelden:\n\nslib;\nbezinksel;\ngefilterde stoffen.",
+        "laag4": "Een reststof is niet automatisch afval.\n\nEen reststof kan nog waarde hebben en opnieuw worden gebruikt.\n\nVoorbeeld:\n\nZaagsel kan worden verwerkt tot houtpellets of worden gebruikt als bodembedekking.\n\nOf een reststof opnieuw kan worden gebruikt, hangt onder andere af van:\n\nde samenstelling;\nde kwaliteit;\nde zuiverheid;\nde veiligheid;\nde hoeveelheid;\nde mogelijke toepassingen;\nde kosten van verwerking;\nde vraag naar het materiaal.\n\nEen reststof kan worden:\n\nhergebruikt;\ngerecycled;\ngescheiden;\ngereinigd;\nverwerkt tot een nieuw product;\ngebruikt als grondstof;\ngebruikt voor energie;\nopgeslagen;\nafgevoerd.\nReststof en restproduct\n\nDe begrippen reststof en restproduct lijken op elkaar.\n\nEen reststof is meestal een overgebleven stof of materiaal.\nEen restproduct is meestal een overgebleven product of materiaal dat mogelijk opnieuw kan worden gebruikt.\n\nHet verschil is niet altijd scherp. De betekenis kan afhangen van het vakgebied en de manier waarop het materiaal wordt gebruikt.\n\nReststof en bijproduct\n\nEen bijproduct ontstaat naast het hoofdproduct en kan een duidelijke, bruikbare of economische functie hebben.\n\nEen reststof kan later als bijproduct of grondstof worden gebruikt wanneer er een geschikte toepassing voor wordt gevonden.\n\nReststof en afval\nEen reststof is iets dat na een proces overblijft.\nAfval is materiaal waarvan iemand zich ontdoet of wil ontdoen.\n\nEen reststof kan afval worden wanneer deze niet meer bruikbaar is of wordt afgevoerd. Een reststof kan ook opnieuw worden gebruikt en daardoor waarde behouden.\n\nReststoffen en circulariteit\n\nHet opnieuw gebruiken van reststoffen kan bijdragen aan een circulaire economie.\n\nDaarbij worden materialen zo lang mogelijk gebruikt en opnieuw ingezet.\n\nMogelijke voordelen zijn:\n\nminder afval;\nminder verspilling;\nminder gebruik van nieuwe grondstoffen;\neen lagere milieubelasting;\nnieuwe toepassingen voor bestaande materialen.\n\nNiet iedere reststof kan veilig of praktisch opnieuw worden gebruikt.\n\nSommige reststoffen kunnen:\n\nvervuild zijn;\nschadelijke stoffen bevatten;\nmoeilijk te scheiden zijn;\nvan onvoldoende kwaliteit zijn;\nte duur zijn om opnieuw te verwerken.\n\nDaarom wordt onderzocht welke verwerking technisch, economisch en veilig mogelijk is."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Producenten, bedrijven, landbouwers, voedselverwerkers, fabrikanten, energiebedrijven, afvalverwerkers, recyclers en andere organisaties die stoffen of materialen verwerken.",
+        "wat": "Een stof of materiaal dat overblijft na productie, verwerking, gebruik of een ander proces.",
+        "wanneer": "Tijdens of na productie, voedselverwerking, landbouw, energieproductie, waterzuivering, recycling of andere activiteiten.",
+        "waar": "In fabrieken, werkplaatsen, landbouwbedrijven, voedselbedrijven, energiecentrales, waterzuiveringsinstallaties, recyclingbedrijven en andere productieomgevingen.",
+        "waarom": "Omdat niet alle gebruikte stoffen en materialen onderdeel worden van het hoofdproduct en sommige overgebleven stoffen nog kunnen worden gebruikt of verwerkt.",
+        "hoe": "Door reststoffen te verzamelen, scheiden, onderzoeken, reinigen, hergebruiken, recyclen, verwerken of veilig af te voeren."
       },
       "tags": [
-        "reststof",
-        "stof",
-        "chemie",
-        "natuur",
         "afval",
-        "materiaal",
-        "neutraal\n\n📊 weten\nbegrip"
+        "as",
+        "chemie",
+        "compost",
+        "houtrest",
+        "natuur",
+        "pitten",
+        "pulp",
+        "recyclen",
+        "reststof",
+        "schillen",
+        "slib",
+        "stof",
+        "weten",
+        "zaagsel"
       ],
       "topic": "",
       "verbanden": [],
@@ -552326,49 +552108,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.449993+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-c152bf29",
-      "begrip": "Resultaataam",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Resultaataam lijkt een typefout; waarschijnlijk wordt \"resultaat\" bedoeld.",
-        "laag2": "Een resultaat is de uitkomst van een actie, proces of berekening.",
-        "laag3": "Resultaten worden gebruikt om doelen, prestaties en effecten te beoordelen.",
-        "laag4": "Binnen Spark verwijst resultaat naar meten, evalueren en ontwikkeling."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "resultaat",
-        "uitkomst",
-        "meten",
-        "evaluatie",
-        "doel",
-        "ontwikkeling",
-        "neutraal\n\n🛒 doen\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:26.470408+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:07:02.594098+00:00"
       },
       "media": [],
       "needs": [],
@@ -552381,26 +552122,34 @@
       "status": "active",
       "lagen": {
         "laag1": "Retail is de verkoop van producten of diensten rechtstreeks aan consumenten.",
-        "laag2": "Winkels, webshops en markten vallen onder retail.",
-        "laag3": "Retail draait om klant, aanbod, verkoop en service.",
-        "laag4": "Binnen Spark verwijst retail naar economie, handel en klantrelaties."
+        "laag2": "Bij retail koopt een consument een product of dienst voor persoonlijk gebruik.\n\nVoorbeelden van retail zijn:\n\neen supermarkt;\neen kledingwinkel;\neen speelgoedwinkel;\neen elektronicawinkel;\neen webshop;\neen drogisterij.\n\nEen winkel die producten rechtstreeks aan klanten verkoopt, is onderdeel van de retail.",
+        "laag3": "Retail bestaat uit verschillende onderdelen.\n\nRetailer\n\nEen retailer is een bedrijf of organisatie die producten of diensten rechtstreeks aan consumenten verkoopt.\n\nVoorbeelden:\n\neen fysieke winkel;\neen supermarkt;\neen webshop;\neen winkelketen.\nConsument\n\nDe consument is de persoon die een product of dienst koopt voor persoonlijk gebruik.\n\nProduct\n\nEen product is het artikel dat wordt verkocht.\n\nVoorbeelden:\n\nvoedsel;\nkleding;\nelektronica;\nmeubels;\nverzorgingsproducten.\nVerkoopkanaal\n\nEen verkoopkanaal is de manier waarop een product bij de klant komt.\n\nVoorbeelden:\n\neen fysieke winkel;\neen webshop;\neen mobiele winkel;\neen verkoopautomaat;\neen online platform.\nVoorraad\n\nDe voorraad bestaat uit producten die beschikbaar zijn om te verkopen.\n\nEen retailer moet bijhouden:\n\nwelke producten beschikbaar zijn;\nhoeveel producten er zijn;\nwelke producten bijna op zijn;\nwelke producten moeten worden besteld.\nKlantenservice\n\nKlantenservice helpt klanten voor, tijdens en na een aankoop.\n\nVoorbeelden:\n\nvragen beantwoorden;\ninformatie geven;\nproblemen oplossen;\nproducten ruilen;\nretouren verwerken.",
+        "laag4": "Retail vormt vaak de laatste stap tussen een product en de consument.\n\nEen product kan bijvoorbeeld deze weg volgen:\n\nProducent → groothandel → retailer → consument\n\nNiet iedere retailer gebruikt een groothandel. Sommige winkels kopen rechtstreeks bij een producent.\n\nFysieke retail\n\nBij fysieke retail koopt een klant producten in een winkel of andere fysieke verkooplocatie.\n\nVoorbeelden:\n\neen supermarkt;\neen winkelcentrum;\neen markt;\neen speciaalzaak.\nOnline retail\n\nBij online retail worden producten via internet verkocht.\n\nVoorbeelden:\n\nwebshops;\nonline marktplaatsen;\ndigitale winkels.\n\nDe klant kan een product:\n\nthuis laten bezorgen;\nophalen bij een afhaalpunt;\nophalen in een fysieke winkel.\nOmnichannel retail\n\nBij omnichannel retail worden verschillende verkoopkanalen met elkaar verbonden.\n\nVoorbeeld:\n\nEen klant bestelt een product online en haalt het op in een winkel.\n\nDe klant kan daarbij dezelfde informatie, service en ervaring krijgen via verschillende kanalen.\n\nRetail en prijs\n\nDe verkoopprijs kan bestaan uit verschillende onderdelen:\n\ninkoopkosten;\ntransportkosten;\nopslagkosten;\npersoneelskosten;\nbedrijfskosten;\nbelastingen;\nwinstmarge.\n\nDe verkoopprijs is niet altijd gelijk aan de inkoopprijs.\n\nRetail en klantbeleving\n\nDe ervaring van een klant kan invloed hebben op de kans dat diegene terugkomt.\n\nOnderwerpen die hierbij belangrijk kunnen zijn:\n\nbereikbaarheid;\nassortiment;\nprijs;\nkwaliteit;\nservice;\nsnelheid;\nduidelijkheid;\ngebruiksgemak;\nvertrouwen.\nRetail en voorraadbeheer\n\nGoed voorraadbeheer helpt om:\n\nproducten beschikbaar te houden;\ntekorten te voorkomen;\nte grote voorraden te beperken;\nverspilling te verminderen;\nkosten te beheersen.\nRetail en retouren\n\nEen klant kan een product soms terugsturen of terugbrengen.\n\nDe retailer verwerkt dan bijvoorbeeld:\n\nde ontvangst;\nde controle van het product;\neen terugbetaling;\neen omruiling;\nhet opnieuw opnemen in de voorraad.\n\nRetail is niet hetzelfde als groothandel.\n\nRetail verkoopt meestal rechtstreeks aan consumenten.\nGroothandel verkoopt meestal grotere hoeveelheden aan bedrijven, winkels of andere organisaties.\n\nRetail is ook niet hetzelfde als e-commerce.\n\nRetail gaat over verkoop aan consumenten, zowel fysiek als online.\nE-commerce is handel via digitale netwerken en kan ook verkoop tussen bedrijven omvatten."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Retailers, winkeliers, winkelmedewerkers, webshops, consumenten, producenten, leveranciers en groothandels.",
+        "wat": "De verkoop van producten of diensten rechtstreeks aan consumenten.",
+        "wanneer": "Wanneer een consument een product of dienst koopt voor persoonlijk gebruik.",
+        "waar": "In winkels, supermarkten, winkelcentra, markten, webshops, online platforms en andere verkoopkanalen.",
+        "waarom": "Om producten en diensten beschikbaar te maken voor consumenten en verkoop tussen producenten of leveranciers en eindgebruikers mogelijk te maken.",
+        "hoe": "Door producten in te kopen, op voorraad te houden, te presenteren, te verkopen, te bezorgen of beschikbaar te maken voor afhalen en klantenservice te bieden."
       },
       "tags": [
-        "retail",
-        "verkoop",
-        "winkel",
+        "aankoop",
+        "afhalen",
+        "bezorging",
         "economie",
-        "klant",
         "handel",
-        "neutraal\n\n👃 weten\nbegrip"
+        "inkoop",
+        "klant",
+        "omruilen",
+        "retail",
+        "retour",
+        "verkoop",
+        "voorraad",
+        "webshop",
+        "weten",
+        "winkel"
       ],
       "topic": "",
       "verbanden": [],
@@ -552410,91 +552159,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.489755+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-9fa78d0a",
-      "begrip": "Reuk",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Reuk is het vermogen om geuren waar te nemen.",
-        "laag2": "Reuk wordt verwerkt door het lichaam en beïnvloedt herkenning en herinnering.",
-        "laag3": "Geur speelt een rol bij voedsel, emoties en omgeving.",
-        "laag4": "Binnen Spark verwijst reuk naar zintuigen, lichaam en geheugen."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "reuk",
-        "geur",
-        "zintuigen",
-        "lichaam",
-        "geheugen",
-        "waarneming",
-        "neutraal\n\n🏥 doen\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:26.509654+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-86f3dba6",
-      "begrip": "Revalidatie",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Revalidatie is het proces van herstel na ziekte, letsel of beperking.",
-        "laag2": "Het richt zich op het verbeteren van functioneren en zelfstandigheid.",
-        "laag3": "Revalidatie kan lichamelijk, geestelijk of sociaal gericht zijn.",
-        "laag4": "Binnen Spark verwijst revalidatie naar herstel, gezondheid en ontwikkeling."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "revalidatie",
-        "herstel",
-        "gezondheid",
-        "lichaam",
-        "ontwikkeling",
-        "zorg",
-        "positief\n\n⭐ spreken\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:26.529208+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:08:03.239458+00:00"
       },
       "media": [],
       "needs": [],
@@ -552506,27 +552172,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een review is een beoordeling of mening over iets.",
-        "laag2": "Reviews helpen anderen keuzes maken.",
-        "laag3": "Reviews komen voor bij producten, diensten, ervaringen en media.",
-        "laag4": "Binnen Spark verwijst review naar feedback, kwaliteit en beoordeling."
+        "laag1": "Een review is een beoordeling of evaluatie van een product, dienst, proces, persoon of ander onderwerp op basis van ervaring, onderzoek of controle.",
+        "laag2": "Een review helpt om de kwaliteit, werking, sterke punten en verbeterpunten van iets inzichtelijk te maken.\n\nVoorbeelden:\n\neen klant schrijft een review over een hotel;\neen programmeur voert een code review uit;\neen medewerker beoordeelt een rapport;\neen gebruiker geeft een review over een app.\n\nEen review kan positief, negatief of gemengd zijn.",
+        "laag3": "Een review bestaat vaak uit meerdere onderdelen.\n\nOnderwerp\n\nEr wordt bepaald wat wordt beoordeeld.\n\nVoorbeelden:\n\neen product;\neen dienst;\nsoftware;\neen document;\neen proces;\neen presentatie.\nBeoordeling\n\nEr wordt gekeken naar eigenschappen zoals:\n\nkwaliteit;\nwerking;\nbetrouwbaarheid;\ngebruiksgemak;\nprestaties;\nvolledigheid.\nOnderbouwing\n\nEen goede review legt uit waarom een bepaalde beoordeling wordt gegeven.\n\nVoorbeeld:\n\n\"De app werkt snel, maar mist een zoekfunctie.\"\n\nAdvies\n\nSoms bevat een review aanbevelingen of verbeterpunten.\n\nVoorbeelden:\n\nonderdelen aanpassen;\nfouten herstellen;\nfuncties uitbreiden;\nkwaliteit verbeteren.",
+        "laag4": "Reviews kunnen verschillende doelen hebben.\n\nGebruikersreview\n\nEen gebruiker deelt ervaringen om anderen te informeren.\n\nTechnische review\n\nEen deskundige controleert bijvoorbeeld software, ontwerpen of documenten op kwaliteit en fouten.\n\nKwaliteitsreview\n\nEen product, proces of dienst wordt beoordeeld aan de hand van vooraf bepaalde criteria.\n\nPeer review\n\nWerk wordt beoordeeld door collega's of vakgenoten voordat het wordt gepubliceerd of goedgekeurd.\n\nEen review verloopt vaak volgens deze stappen:\n\nhet onderwerp bekijken;\ninformatie verzamelen;\nbeoordelen aan de hand van criteria;\nsterke en zwakke punten benoemen;\nconclusies trekken;\neventueel verbeteringen adviseren.\n\nEen review is niet hetzelfde als een test.\n\nEen test onderzoekt of iets werkt.\nEen review beoordeelt vaak ook kwaliteit, bruikbaarheid en verbeterpunten.\n\nEen review is ook niet hetzelfde als een inspectie.\n\nEen inspectie richt zich vaak op het controleren van regels, veiligheid of normen.\nEen review heeft meestal een bredere beoordeling als doel.\n\nEen goede review is:\n\nobjectief;\nduidelijk;\nonderbouwd;\nrespectvol;\ncontroleerbaar."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Gebruikers, klanten, collega's, deskundigen, beoordelaars en organisaties.",
+        "wat": "Een beoordeling of evaluatie van een product, dienst, proces, document, persoon of ander onderwerp.",
+        "wanneer": "Nadat iets is gebruikt, onderzocht, gecontroleerd of beoordeeld.",
+        "waar": "In winkels, bedrijven, softwareontwikkeling, wetenschap, onderwijs, media en online platforms.",
+        "waarom": "Om kwaliteit inzichtelijk te maken, ervaringen te delen, verbeterpunten te vinden of anderen te helpen bij een keuze.",
+        "hoe": "Door het onderwerp te beoordelen op basis van ervaringen, observaties, criteria of onderzoek en de bevindingen vast te leggen."
       },
       "tags": [
-        "review",
-        "feedback",
+        "analyse",
         "beoordeling",
-        "kwaliteit",
-        "ervaring",
+        "code review",
         "communicatie",
-        "neutraal\n\n📜 weten\nbegrip"
+        "ervaring",
+        "evaluatie",
+        "feedback",
+        "gebruikersreview",
+        "kwaliteit",
+        "kwaliteitsreview",
+        "peer review",
+        "recensie",
+        "review",
+        "verbeterpunten",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -552536,7 +552210,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.548387+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-06T07:55:15.964654+00:00"
       },
       "media": [],
       "needs": [],
@@ -552548,27 +552223,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Richtlijnen zijn afspraken of aanbevelingen voor handelen.",
-        "laag2": "Ze helpen mensen om op een bepaalde manier te werken.",
-        "laag3": "Richtlijnen worden gebruikt in zorg, techniek, onderwijs en beleid.",
-        "laag4": "Binnen Spark verwijst richtlijnen naar structuur, normen en kwaliteit."
+        "laag1": "Richtlijnen zijn aanbevelingen of aanwijzingen die helpen om op een bepaalde manier te handelen, werken of beslissingen te nemen.",
+        "laag2": "Richtlijnen geven richting aan gedrag of werkwijzen, maar zijn niet altijd juridisch verplicht.\n\nZe worden gebruikt om:\n\nkwaliteit te verbeteren;\nveiligheid te vergroten;\nduidelijkheid te geven;\neenheid in werkwijzen te bevorderen;\nfouten te voorkomen.\n\nVoorbeelden:\n\nmedische richtlijnen;\nveiligheidsrichtlijnen;\nhuisregels;\nontwerprichtlijnen;\nprogrammeerrichtlijnen.",
+        "laag3": "Richtlijnen bestaan vaak uit verschillende onderdelen.\n\nDoel\n\nDe richtlijn beschrijft waarom deze bestaat.\n\nVoorbeeld:\n\nVeilig werken met machines.\n\nToepassingsgebied\n\nEr wordt aangegeven wanneer en voor wie de richtlijn geldt.\n\nVoorbeelden:\n\nmedewerkers;\nstudenten;\ngebruikers;\norganisaties;\nbezoekers.\nAanbevolen werkwijze\n\nDe richtlijn beschrijft hoe iets bij voorkeur wordt uitgevoerd.\n\nVoorbeelden:\n\nbeschermende kleding dragen;\ngegevens controleren;\neen vaste procedure volgen;\nzorgvuldig documenteren.\nUitzonderingen\n\nSoms is het toegestaan om van een richtlijn af te wijken, mits daarvoor een goede reden bestaat.",
+        "laag4": "Richtlijnen helpen om vergelijkbare situaties op een consistente manier te behandelen.\n\nZe kunnen gebaseerd zijn op:\n\nervaring;\nonderzoek;\nwetenschappelijke kennis;\npraktijkervaring;\nveiligheidsinzichten;\nkwaliteitsnormen.\n\nRichtlijnen kunnen regelmatig worden aangepast wanneer:\n\nnieuwe kennis beschikbaar komt;\nwetgeving verandert;\nrisico's veranderen;\nde praktijk daarom vraagt.\n\nEen richtlijn is niet hetzelfde als een wet.\n\nEen wet is juridisch bindend.\nEen richtlijn is meestal een aanbeveling of advies, tenzij deze onderdeel is van bindende afspraken binnen een organisatie.\n\nEen richtlijn is ook niet hetzelfde als een procedure.\n\nEen richtlijn geeft richting en ruimte voor professionele afweging.\nEen procedure beschrijft meestal stap voor stap hoe iets moet worden uitgevoerd.\n\nEen goede richtlijn is:\n\nduidelijk;\nbegrijpelijk;\ntoepasbaar;\nactueel;\ncontroleerbaar;\nafgestemd op het doel."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Organisaties, professionals, medewerkers, gebruikers, instellingen en andere betrokkenen.",
+        "wat": "Aanbevelingen of aanwijzingen die richting geven aan handelen, werken of beslissingen.",
+        "wanneer": "Wanneer een consistente, veilige of kwalitatieve werkwijze gewenst is.",
+        "waar": "Binnen organisaties, zorg, onderwijs, techniek, overheid, bedrijven, sport en andere werk- of leefomgevingen.",
+        "waarom": "Om kwaliteit, veiligheid, duidelijkheid en eenheid in handelen te bevorderen.",
+        "hoe": "Door aanbevelingen op te stellen, toe te passen, regelmatig te evalueren en waar nodig aan te passen."
       },
       "tags": [
-        "richtlijnen",
-        "regels",
-        "normen",
-        "kwaliteit",
-        "structuur",
+        "aanbeveling",
+        "advies",
+        "beleid",
         "gedrag",
-        "neutraal\n\n🚗 doen\nbegrip"
+        "instructie",
+        "kwaliteit",
+        "norm",
+        "procedure",
+        "protocol",
+        "regels",
+        "richtlijn",
+        "standaard",
+        "structuur",
+        "werkwijze",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -552578,7 +552261,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.568632+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-06T08:09:29.232954+00:00"
       },
       "media": [],
       "needs": [],
@@ -552590,27 +552274,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een rijbewijs is een officieel bewijs dat iemand een voertuig mag besturen.",
-        "laag2": "Het behalen van een rijbewijs vraagt kennis en vaardigheden.",
-        "laag3": "Een rijbewijs geeft toegang tot zelfstandig vervoer.",
-        "laag4": "Binnen Spark verwijst rijbewijs naar mobiliteit, verantwoordelijkheid en vaardigheden."
+        "laag1": "Een rijbewijs is een officieel document dat aantoont dat iemand bevoegd is om een bepaald voertuig te besturen.",
+        "laag2": "Een rijbewijs wordt afgegeven nadat is vastgesteld dat iemand voldoet aan de gestelde voorwaarden om veilig aan het verkeer deel te nemen.\n\nAfhankelijk van het type rijbewijs mag iemand bijvoorbeeld rijden met:\n\neen bromfiets;\neen motor;\neen personenauto;\neen vrachtwagen;\neen autobus;\neen voertuig met aanhanger.\n\nEen rijbewijs is persoonlijk en mag niet door iemand anders worden gebruikt.",
+        "laag3": "Het behalen van een rijbewijs bestaat meestal uit verschillende onderdelen.\n\nTheorie\n\nDe bestuurder leert onder andere:\n\nverkeersregels;\nverkeersborden;\nverkeersinzicht;\nveilig rijgedrag;\nrisicoherkenning.\nPraktijk\n\nTijdens rijlessen leert iemand een voertuig veilig besturen.\n\nVoorbeelden:\n\nsturen;\nschakelen;\nparkeren;\ninvoegen;\nbijzondere verrichtingen;\ndeelnemen aan het verkeer.\nExamen\n\nOm een rijbewijs te behalen moet meestal een theorie- en praktijkexamen worden afgelegd.\n\nNa het behalen kan het rijbewijs worden aangevraagd bij de bevoegde overheid.\n\nGeldigheid\n\nEen rijbewijs is meestal gedurende een bepaalde periode geldig en moet daarna worden vernieuwd.\n\nIn sommige gevallen kunnen aanvullende voorwaarden gelden, bijvoorbeeld vanwege leeftijd of medische geschiktheid.",
+        "laag4": "Een rijbewijs bevat vaak gegevens zoals:\n\nnaam;\ngeboortedatum;\npasfoto;\nhandtekening;\nrijbewijscategorieën;\nafgiftedatum;\nvervaldatum;\ndocumentnummer.\n\nEen rijbewijs kan verschillende categorieën bevatten, afhankelijk van welke voertuigen iemand mag besturen.\n\nEen rijbewijs betekent niet dat iemand altijd met elk voertuig mag rijden. Alleen de categorieën die op het rijbewijs staan vermeld, zijn toegestaan.\n\nEen rijbewijs is niet hetzelfde als een kentekenbewijs.\n\nEen rijbewijs hoort bij de bestuurder.\nEen kentekenbewijs hoort bij het voertuig.\n\nEen rijbewijs is ook niet hetzelfde als een identiteitsbewijs, hoewel het in sommige situaties wel als identificatiemiddel kan worden gebruikt.\n\nEen bestuurder blijft verantwoordelijk om:\n\nverkeersregels na te leven;\nveilig te rijden;\nrekening te houden met andere weggebruikers;\nalleen te rijden wanneer dit veilig en toegestaan is.\n\nEen rijbewijs kan onder bepaalde omstandigheden:\n\nverlopen;\nworden vernieuwd;\ntijdelijk ongeldig worden;\nworden ingenomen of ongeldig verklaard volgens de geldende regelgeving."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Personen die bevoegd zijn of bevoegd willen worden om een voertuig te besturen.",
+        "wat": "Een officieel document dat aantoont dat iemand een of meer categorieën voertuigen mag besturen.",
+        "wanneer": "Nadat aan de gestelde voorwaarden is voldaan en de benodigde examens zijn behaald.",
+        "waar": "Op de openbare weg en in situaties waarin een geldig rijbewijs vereist is.",
+        "waarom": "Om aan te tonen dat een bestuurder bevoegd is om veilig en volgens de geldende regels een voertuig te besturen.",
+        "hoe": "Door rijlessen te volgen, theorie- en praktijkexamens af te leggen, aan de wettelijke voorwaarden te voldoen en het rijbewijs aan te vragen."
       },
       "tags": [
-        "rijbewijs",
-        "voertuig",
+        "autorijden",
+        "bestuurder",
         "mobiliteit",
-        "verkeer",
+        "praktijkexamen",
+        "rijbevoegdheid",
+        "rijbewijs",
+        "rijbewijs halen",
+        "rijexamen",
+        "theorie-examen",
         "vaardigheden",
         "veiligheid",
-        "neutraal\n\n🚗 doen\nbegrip"
+        "verkeer",
+        "verkeersregels",
+        "voertuig",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -552620,131 +552312,8 @@
         "ingedeeld_op": "2026-07-26T11:50:26.588196+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-ec380ab2",
-      "begrip": "Rijtechniek",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Rijtechniek is de manier waarop iemand een voertuig bestuurt.",
-        "laag2": "Het omvat sturen, remmen, schakelen en veilig reageren.",
-        "laag3": "Goede rijtechniek verhoogt veiligheid en controle.",
-        "laag4": "Binnen Spark verwijst rijtechniek naar vaardigheden, gedrag en mobiliteit."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "rijtechniek",
-        "rijden",
-        "voertuig",
-        "veiligheid",
-        "vaardigheden",
-        "gedrag"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:26.607475+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-e88da007",
-      "begrip": "Ritueel",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Een ritueel is een vaste handeling of reeks handelingen met een bepaalde betekenis.",
-        "laag2": "Rituelen komen voor in cultuur, religie, tradities en dagelijks leven.",
-        "laag3": "Rituelen kunnen zorgen voor structuur, verbinding en herkenning.",
-        "laag4": "Binnen Spark verwijst ritueel naar gedrag, cultuur en betekenisvolle patronen."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "ritueel",
-        "cultuur",
-        "gedrag",
-        "traditie",
-        "patroon",
-        "verbinding",
-        "neutraal\n\n⚔️ weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:52.714523+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-25850163",
-      "begrip": "Rivaliteit",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Rivaliteit is een situatie waarin personen of groepen met elkaar concurreren.",
-        "laag2": "Rivaliteit kan ontstaan door verschil in doelen, belangen of prestaties.",
-        "laag3": "Het kan zowel positief (motivatie) als negatief (conflict) werken.",
-        "laag4": "Binnen Spark verwijst rivaliteit naar competitie, relaties en gedrag."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "rivaliteit",
-        "competitie",
-        "conflict",
-        "samenwerking",
-        "gedrag",
-        "neutraal\n\n🛡️ weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:52.734995+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-06T08:10:04.838331+00:00"
       },
       "media": [],
       "needs": [],
@@ -552756,27 +552325,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Robuust betekent sterk, stevig en bestand tegen belasting.",
-        "laag2": "Een robuust systeem blijft werken onder moeilijke omstandigheden.",
-        "laag3": "Robuustheid is belangrijk bij techniek, software en organisaties.",
-        "laag4": "Binnen Spark verwijst robuust naar betrouwbaarheid en stabiliteit."
+        "laag1": "Robuust betekent dat iets sterk, duurzaam en bestand is tegen belasting, schade of veranderende omstandigheden.",
+        "laag2": "Een robuust object, systeem of ontwerp blijft goed functioneren, ook wanneer het zwaar wordt belast of wanneer zich onverwachte situaties voordoen.\n\nVoorbeelden:\n\neen robuuste brug;\neen robuust softwaresysteem;\neen robuuste machine;\neen robuuste planning.\n\nRobuust betekent niet dat iets onverwoestbaar is, maar dat het tegen veel omstandigheden bestand is.",
+        "laag3": "Robuustheid kan op verschillende gebieden voorkomen.\n\nFysieke robuustheid\n\nEen voorwerp is sterk en kan tegen slijtage, schokken of zware belasting.\n\nVoorbeelden:\n\neen stevige gereedschapskist;\neen robuuste fiets;\neen industriële machine.\nTechnische robuustheid\n\nEen systeem blijft betrouwbaar werken, ook wanneer er fouten of onverwachte situaties optreden.\n\nVoorbeelden:\n\nsoftware die fouten opvangt;\neen netwerk dat blijft werken bij storingen;\neen apparaat dat tegen temperatuurschommelingen kan.\nOrganisatorische robuustheid\n\nEen organisatie kan goed omgaan met veranderingen of tegenslagen.\n\nVoorbeelden:\n\neen noodplan;\nreservepersoneel;\nmeerdere leveranciers.\nWetenschappelijke robuustheid\n\nEen conclusie blijft geldig wanneer verschillende onderzoeken of omstandigheden vergelijkbare resultaten laten zien.",
+        "laag4": "Robuustheid wordt vaak bereikt door:\n\nsterke materialen;\neenvoudige ontwerpen;\nreserveonderdelen;\nfoutafhandeling;\nveiligheidsmarges;\nregelmatige controles;\ngoede onderhoudsplannen.\n\nEen robuust systeem kan beter omgaan met:\n\nstoringen;\nslijtage;\nonverwachte belasting;\nveranderende omstandigheden;\nmenselijke fouten;\nextreme situaties.\n\nRobuust is niet hetzelfde als sterk.\n\nSterk verwijst vooral naar fysieke kracht of weerstand.\nRobuust betekent dat iets in bredere zin betrouwbaar en bestand is tegen verschillende omstandigheden.\n\nRobuust is ook niet hetzelfde als flexibel.\n\nRobuust blijft goed functioneren ondanks veranderingen.\nFlexibel past zich gemakkelijk aan veranderingen aan.\n\nEen systeem kan zowel robuust als flexibel zijn, maar dat hoeft niet.\n\nEen robuust ontwerp kan bijdragen aan:\n\nbetrouwbaarheid;\nveiligheid;\nlangere levensduur;\nminder storingen;\nlagere onderhoudskosten;\nvoorspelbare prestaties."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Ontwerpers, ingenieurs, programmeurs, organisaties, onderzoekers en andere partijen die producten of systemen ontwikkelen of gebruiken.",
+        "wat": "Een eigenschap waarbij een object, systeem of ontwerp sterk, betrouwbaar en bestand is tegen belasting, storingen of veranderende omstandigheden.",
+        "wanneer": "Wanneer een product, systeem of proces onder normale of uitzonderlijke omstandigheden goed blijft functioneren.",
+        "waar": "In techniek, bouw, software, wetenschap, industrie, logistiek, organisaties en andere toepassingsgebieden.",
+        "waarom": "Om betrouwbaarheid, veiligheid, duurzaamheid en continuïteit te vergroten.",
+        "hoe": "Door sterke materialen, doordachte ontwerpen, foutafhandeling, veiligheidsmarges, onderhoud en redundantie toe te passen."
       },
       "tags": [
+        "bestand tegen",
+        "betrouwbaar",
+        "duurzaam",
+        "fouttolerant",
+        "onderhoud",
         "robuust",
-        "sterk",
-        "techniek",
-        "systeem",
-        "betrouwbaarheid",
+        "robuustheid",
+        "stabiel",
         "stabiliteit",
-        "neutraal\n\n🎸 weten\nbegrip"
+        "sterk",
+        "systeem",
+        "techniek",
+        "veerkrachtig",
+        "veiligheid",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -552786,7 +552363,8 @@
         "ingedeeld_op": "2026-07-26T11:50:52.754611+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-06T13:08:10.082829+00:00"
       },
       "media": [],
       "needs": [],
@@ -552839,27 +552417,35 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een roepnaam is de naam waarmee iemand meestal aangesproken wordt.",
-        "laag2": "Een roepnaam kan verschillen van de officiële naam.",
-        "laag3": "Roepnamen spelen een rol in identiteit en sociale contacten.",
-        "laag4": "Binnen Spark verwijst roepnaam naar identiteit, namen en persoonlijke verbinding."
+        "laag1": "Een roepnaam is de naam waarmee iemand meestal wordt aangesproken of genoemd.",
+        "laag2": "Een roepnaam is vaak de naam die iemand in het dagelijks leven gebruikt.\n\nDe roepnaam kan hetzelfde zijn als de officiële voornaam, maar kan ook anders zijn.\n\nVoorbeeld:\n\nIemand heet officieel Johannes, maar wordt meestal Jan genoemd. Jan is dan de roepnaam.",
+        "laag3": "Een roepnaam kan op verschillende manieren ontstaan.\n\nDe officiële voornaam\n\nSoms is de roepnaam gelijk aan de officiële voornaam.\n\nVoorbeeld:\n\nDe officiële voornaam is Emma. Mensen noemen haar ook Emma.\n\nEen verkorte naam\n\nEen langere naam kan worden ingekort.\n\nVoorbeelden:\n\nAlexander → Alex;\nElisabeth → Els;\nJohannes → Jan.\nEen afgeleide naam\n\nEen roepnaam kan zijn afgeleid van een officiële voornaam.\n\nVoorbeelden:\n\nWillem → Wim;\nHendrik → Henk;\nCatharina → Karin.\n\nDe relatie tussen de officiële naam en de roepnaam is niet altijd direct zichtbaar.\n\nEen zelfgekozen naam\n\nIemand kan ervoor kiezen om een andere naam te gebruiken dan de officiële voornaam.\n\nVoorbeeld:\n\nIemand gebruikt in het dagelijks leven een zelfgekozen naam waarmee diegene aangesproken wil worden.\n\nEen naam uit de familie\n\nEen roepnaam kan binnen een familie ontstaan en jarenlang worden gebruikt.\n\nVoorbeeld:\n\nEen kind krijgt binnen de familie een naam die later ook buiten de familie wordt gebruikt.",
+        "laag4": "Een roepnaam kan belangrijk zijn voor iemands herkenning en persoonlijke voorkeur.\n\nDe roepnaam wordt vaak gebruikt:\n\nthuis;\nop school;\nop het werk;\nonder vrienden;\nin gesprekken;\nin informele communicatie.\n\nEen roepnaam hoeft niet dezelfde naam te zijn als de naam die in officiële documenten staat.\n\nOp officiële documenten kunnen bijvoorbeeld staan:\n\nvolledige voornamen;\nachternaam;\ngeboortedatum;\nandere geregistreerde gegevens.\n\nIn dagelijkse communicatie wordt vaak de roepnaam gebruikt.\n\nVoorbeeld:\n\nOp een officieel document staat Johannes Hendrikus de Vries. In het dagelijks leven wordt hij Hans genoemd.\n\nEen roepnaam is niet hetzelfde als een bijnaam.\n\nEen roepnaam is de naam waarmee iemand gewoonlijk wordt aangesproken.\nEen bijnaam is een extra naam die iemand krijgt of gebruikt naast de gewone naam.\n\nVoorbeeld:\n\nIemands roepnaam is Sophie. Haar vrienden noemen haar soms Soof. Soof kan een bijnaam zijn.\n\nEen roepnaam is ook niet altijd hetzelfde als een gebruikersnaam.\n\nEen roepnaam wordt gebruikt om iemand persoonlijk aan te spreken.\nEen gebruikersnaam wordt gebruikt om iemand binnen een digitaal systeem te herkennen of te laten inloggen.\n\nEen roepnaam kan wel als gebruikersnaam worden gebruikt.\n\nRoepnaam en voorkeur\n\nHet is respectvol om iemand aan te spreken met de naam die diegene zelf gebruikt of aangeeft."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Personen die een naam gebruiken of door anderen met een naam worden aangesproken.",
+        "wat": "De naam waarmee iemand meestal of bij voorkeur wordt genoemd en aangesproken.",
+        "wanneer": "Tijdens dagelijkse gesprekken, sociale contacten, werk, school en andere vormen van persoonlijke communicatie.",
+        "waar": "Thuis, in families, onder vrienden, op school, op het werk, in verenigingen en andere sociale omgevingen.",
+        "waarom": "Om personen herkenbaar en persoonlijk aan te spreken op een manier die aansluit bij hun gebruikelijke naam of voorkeur.",
+        "hoe": "Door een officiële voornaam, verkorte naam, afgeleide naam, zelfgekozen naam of andere gebruikelijke naam te gebruiken."
       },
       "tags": [
-        "roepnaam",
-        "naam",
-        "identiteit",
+        "aanspreeknaam",
+        "aanspreken",
+        "bijnaam",
         "communicatie",
+        "familienaam",
+        "herkenning",
+        "identiteit",
+        "naam",
+        "naamgebruik",
+        "naamvoorkeur",
         "persoon",
-        "sociale verbinding",
-        "neutraal\n\n🍲 doen\nbegrip"
+        "roepnaam",
+        "roepnamen",
+        "voornaam",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -552869,91 +552455,8 @@
         "ingedeeld_op": "2026-07-26T11:50:52.794664+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-fb25d6b3",
-      "begrip": "Roeren",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Roeren betekent iets mengen door een draaiende beweging te maken.",
-        "laag2": "Roeren wordt gebruikt bij koken, mengen en processen.",
-        "laag3": "Door roeren worden stoffen gelijkmatig verdeeld.",
-        "laag4": "Binnen Spark verwijst roeren naar beweging, bereiding en processen."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "roeren",
-        "mengen",
-        "beweging",
-        "koken",
-        "proces",
-        "techniek",
-        "neutraal\n\n🚬 doen\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:52.814269+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-a29b3197",
-      "begrip": "Roken",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Roken is het inhaleren van rook afkomstig van een brandende stof.",
-        "laag2": "Roken wordt vaak geassocieerd met tabaksproducten.",
-        "laag3": "Roken kan gevolgen hebben voor gezondheid en omgeving.",
-        "laag4": "Binnen Spark verwijst roken naar gedrag, gezondheid en keuzes."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "roken",
-        "gezondheid",
-        "gedrag",
-        "tabak",
-        "keuze",
-        "lichaam",
-        "neutraal\n\n🏥 weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:52.834264+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-04T19:08:39.362296+00:00"
       },
       "media": [],
       "needs": [],
@@ -552993,48 +552496,6 @@
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-07-26T11:50:52.853803+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-d04d169f",
-      "begrip": "Rommel",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Rommel is een verzameling spullen die ongeordend of ongewenst aanwezig zijn.",
-        "laag2": "Rommel kan ontstaan door gebruik, opslag of gebrek aan organisatie.",
-        "laag3": "Rommel kan invloed hebben op overzicht, stress en omgeving.",
-        "laag4": "Binnen Spark verwijst rommel naar structuur, omgeving en ordening."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "rommel",
-        "opruimen",
-        "omgeving",
-        "structuur",
-        "organisatie",
-        "gedrag",
-        "neutraal\n\n🔴 weten\nbegrip"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T11:50:52.873311+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
         "hooks_fired": []
@@ -553091,27 +552552,34 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "Een roofdier is een dier dat andere dieren vangt en eet.",
-        "laag2": "Roofdieren spelen een rol in natuurlijke voedselketens.",
-        "laag3": "Ze helpen ecosystemen in balans te houden.",
-        "laag4": "Binnen Spark verwijst roofdier naar natuur, gedrag en ecologie."
+        "laag1": "Een roofdier is een dier dat andere dieren vangt en eet om te overleven.",
+        "laag2": "Roofdieren jagen op levende prooien of eten soms dieren die al gestorven zijn.\n\nVoorbeelden zijn:\n\nleeuwen;\nwolven;\nvossen;\nadelaars;\nhaaien;\nspinnen.\n\nNiet ieder roofdier eet uitsluitend vlees.",
+        "laag3": "Roofdieren hebben vaak eigenschappen die helpen bij het jagen.\n\nVoorbeelden:\n\nscherpe tanden;\nklauwen;\neen goed gehoor;\nscherpe ogen;\neen sterk reukvermogen;\nsnelheid;\ncamouflage.\n\nEen jacht verloopt vaak in verschillende stappen:\n\neen prooi zoeken;\nde prooi benaderen;\nde prooi aanvallen;\nde prooi doden of uitschakelen;\nde prooi opeten.\n\nSommige roofdieren jagen alleen, terwijl andere in groepen samenwerken.",
+        "laag4": "Roofdieren spelen een belangrijke rol binnen een ecosysteem.\n\nZe helpen om:\n\npopulaties van prooidieren in balans te houden;\nzwakke of zieke dieren uit een populatie te verwijderen;\nde biodiversiteit te beïnvloeden;\nvoedselketens in stand te houden.\n\nRoofdieren kunnen worden ingedeeld op verschillende manieren.\n\nToproofdieren\n\nDeze hebben in hun leefgebied nauwelijks natuurlijke vijanden.\n\nVoorbeelden:\n\norka;\nleeuw;\ntijger.\nKleine roofdieren\n\nDeze jagen op kleinere dieren zoals insecten, knaagdieren of vissen.\n\nVoorbeelden:\n\nwezel;\nuil;\nspin.\n\nEen roofdier is niet hetzelfde als een aaseter.\n\nEen roofdier vangt meestal zelf een prooi.\nEen aaseter eet vooral dieren die al dood zijn.\n\nSommige dieren zijn zowel roofdier als aaseter.\n\nEen roofdier is ook niet hetzelfde als een carnivoor.\n\nEen carnivoor is een dier dat voornamelijk vlees eet.\nEen roofdier verwijst vooral naar het gedrag waarbij actief op prooien wordt gejaagd."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Dieren die op andere dieren jagen om voedsel te verkrijgen.",
+        "wat": "Een dier dat andere dieren vangt en eet.",
+        "wanneer": "Wanneer het voedsel nodig heeft om te overleven.",
+        "waar": "In bossen, zeeën, rivieren, graslanden, woestijnen, bergen en andere natuurlijke leefgebieden.",
+        "waarom": "Om energie en voedingsstoffen te verkrijgen.",
+        "hoe": "Door prooien op te sporen, te achtervolgen, te vangen en op te eten."
       },
       "tags": [
-        "roofdier",
-        "dier",
-        "natuur",
-        "ecosysteem",
-        "voedselketen",
+        "aaseter",
         "biologie",
-        "neutraal\n\n🚬 weten\nbegrip"
+        "carnivoor",
+        "dier",
+        "ecosysteem",
+        "jagen",
+        "natuur",
+        "neutraal\n\n🚬 weten\nbegrip",
+        "predator",
+        "prooi",
+        "roofdier",
+        "toproofdier",
+        "voedselketen",
+        "weten"
       ],
       "topic": "",
       "verbanden": [],
@@ -553121,7 +552589,8 @@
         "ingedeeld_op": "2026-07-26T11:50:52.912319+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "updated_at": "2026-08-06T13:11:28.027138+00:00"
       },
       "media": [],
       "needs": [],
@@ -567837,186 +567306,6 @@
       },
       "media": [],
       "needs": [],
-      "emotie": "neutraal"
-    },
-    {
-      "id": "kbv2-6983e526",
-      "begrip": "Release",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Een release is het beschikbaar maken van een nieuwe versie van een product, software of systeem.",
-        "laag2": "Bij software betekent een release dat nieuwe functies, verbeteringen of oplossingen worden gepubliceerd.",
-        "laag3": "Een release is een belangrijk moment binnen ontwikkeling waarbij testen, kwaliteit en gebruikerservaring samenkomen.",
-        "laag4": "Binnen Spark verwijst release naar ontwikkeling, versiebeheer, groei en het beschikbaar maken van nieuwe mogelijkheden."
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "release",
-        "software",
-        "ontwikkeling",
-        "versiebeheer",
-        "update",
-        "productontwikkeling",
-        "technologie",
-        "wetenbegrip"
-      ],
-      "topic": "",
-      "verbanden": [
-        {
-          "kaart_id": "kbv2-068d0fbc",
-          "begrip": "versie",
-          "lade": "weten",
-          "overlap": 5,
-          "shared_tags": [
-            "ontwikkeling",
-            "release",
-            "software",
-            "update",
-            "versiebeheer"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-d91180f3",
-          "begrip": "Nieuwe features",
-          "lade": "weten",
-          "overlap": 4,
-          "shared_tags": [
-            "ontwikkeling",
-            "software",
-            "technologie",
-            "update"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b160a64a",
-          "begrip": "Technologie",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "software",
-            "technologie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b10cab5a",
-          "begrip": "Even kijken naar je nieuwe features.",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "technologie",
-            "update"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-fix-93584f94ad",
-          "begrip": "Even kijken naar je nieuwe features.",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "technologie",
-            "update"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-88a58bcf",
-          "begrip": "unity",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "software",
-            "technologie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-5b5fc090",
-          "begrip": "Perl",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "software",
-            "technologie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-541008c5",
-          "begrip": "Broncode",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "software",
-            "versiebeheer"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ab929fea",
-          "begrip": "Bugfix",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "release",
-            "update",
-            "versiebeheer"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-36b3df85",
-          "begrip": "Programmering",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "ontwikkeling",
-            "software",
-            "technologie"
-          ]
-        }
-      ],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-07-26T13:14:31.273689+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-07-26T13:17:52.546492+00:00",
-            "result": {
-              "active": true,
-              "is_new": true
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-07-26T13:17:52.555680+00:00",
-            "result": {
-              "n_found": 10,
-              "top_overlap": 5
-            }
-          }
-        ],
-        "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-26T13:17:52.054471+00:00"
-      },
-      "media": [],
-      "needs": [
-        "ws5",
-        "voice",
-        "image"
-      ],
       "emotie": "neutraal"
     },
     {

@@ -15,6 +15,7 @@ from modules.boekhouder import books as book_svc
 from modules.boekhouder import migration as book_migration
 from modules.sepa_hub import get_hub as get_sepa_hub
 from modules.boekhouder import notify as book_notify
+from modules.boekhouder import shop_hooks as shop_book_hooks
 
 router = APIRouter(prefix="/boekhouding", tags=["boekhouding"])
 
@@ -334,3 +335,152 @@ def notify_test_invoice(book_id: str, viewer_id: str, naam: str, amount_eur: flo
         raise HTTPException(403)
     result = book_notify.on_new_invoice(b, invoice_naam=naam, amount_eur=amount_eur)
     return {"success": True, **result}
+
+
+# ============================================================
+# Shop verkoop/aankoop hooks
+# ============================================================
+
+class ShopSaleIn(BaseModel):
+    shop_id: str
+    netto_eur: float  # v13b: verkoper geeft netto op, systeem berekent bruto met BTW
+    koper_naam: Optional[str] = ""
+    remittance: Optional[str] = ""
+    source_id: Optional[str] = None
+    btw_pct_override: Optional[float] = None
+    spark_pct_override: Optional[float] = None
+
+
+@router.post("/hooks/shop-sale")
+def hook_shop_sale(payload: ShopSaleIn, viewer_id: str):
+    """Boek een shop-verkoop: NETTO in shop-book, BTW zichtbaar voor koper, Spark-fee openstaand."""
+    from pathlib import Path as _P
+    shops_meta = load_json(_P(__file__).parent.parent.parent / "data" / "shops" / "_meta.json", default={"shops": []})
+    shop = next((s for s in shops_meta.get("shops", []) if s.get("id") == payload.shop_id), None)
+    if not shop:
+        raise HTTPException(404, "Shop niet gevonden")
+    if not (_is_admin(viewer_id) or shop.get("owner_user_id") == viewer_id):
+        raise HTTPException(403, "Alleen shop-eigenaar of admin")
+    return shop_book_hooks.record_shop_sale(
+        shop_id=payload.shop_id,
+        netto_eur=payload.netto_eur,
+        koper_naam=payload.koper_naam or "",
+        remittance=payload.remittance or "",
+        source_id=payload.source_id,
+        btw_pct_override=payload.btw_pct_override,
+        spark_pct_override=payload.spark_pct_override,
+    )
+
+
+@router.get("/hooks/openstaand/{shop_id}")
+def hook_openstaand(shop_id: str, viewer_id: str):
+    from pathlib import Path as _P
+    shops_meta = load_json(_P(__file__).parent.parent.parent / "data" / "shops" / "_meta.json", default={"shops": []})
+    shop = next((s for s in shops_meta.get("shops", []) if s.get("id") == shop_id), None)
+    if not shop:
+        raise HTTPException(404)
+    if not (_is_admin(viewer_id) or shop.get("owner_user_id") == viewer_id):
+        raise HTTPException(403)
+    return shop_book_hooks.get_openstaand(shop_id)
+
+
+class ShopFinanceConfigIn(BaseModel):
+    btw_default_pct: Optional[float] = None
+    spark_fee_pct: Optional[float] = None
+    btw_kor_default: Optional[bool] = None
+    commissie_default_pct: Optional[float] = None
+
+
+@router.get("/shop-finance-config")
+def get_shop_finance_config(viewer_id: str):
+    from pathlib import Path as _P
+    fp = _P(__file__).parent.parent.parent / "data" / "shops" / "_meta.json"
+    d = load_json(fp, default={})
+    return {
+        "success": True,
+        "commissie_default_pct": d.get("commissie_default_pct", 1.0),
+        "config": d.get("config", {"btw_default_pct": 21.0, "spark_fee_pct": 1.0, "btw_kor_default": False}),
+    }
+
+
+@router.patch("/shop-finance-config")
+def patch_shop_finance_config(payload: ShopFinanceConfigIn, viewer_id: str):
+    if not _is_admin(viewer_id):
+        raise HTTPException(403, "Alleen admin")
+    from pathlib import Path as _P
+    fp = _P(__file__).parent.parent.parent / "data" / "shops" / "_meta.json"
+    d = load_json(fp, default={})
+    d.setdefault("config", {})
+    for k in ("btw_default_pct", "spark_fee_pct", "btw_kor_default"):
+        v = getattr(payload, k)
+        if v is not None:
+            d["config"][k] = v
+    if payload.commissie_default_pct is not None:
+        d["commissie_default_pct"] = payload.commissie_default_pct
+    from modules.core.storage import save_json as _save
+    _save(fp, d)
+    return {"success": True, "commissie_default_pct": d.get("commissie_default_pct"), "config": d.get("config")}
+
+
+@router.post("/hooks/inlossen/{shop_id}")
+def hook_inlossen(shop_id: str, viewer_id: str):
+    from pathlib import Path as _P
+    shops_meta = load_json(_P(__file__).parent.parent.parent / "data" / "shops" / "_meta.json", default={"shops": []})
+    shop = next((s for s in shops_meta.get("shops", []) if s.get("id") == shop_id), None)
+    if not shop:
+        raise HTTPException(404)
+    if not (_is_admin(viewer_id) or shop.get("owner_user_id") == viewer_id):
+        raise HTTPException(403)
+    return shop_book_hooks.inlossen_openstaand(shop_id, viewer_id)
+
+
+class ShopPurchaseIn(BaseModel):
+    shop_id: str
+    amount_eur: float
+    leverancier_naam: Optional[str] = ""
+    remittance: Optional[str] = ""
+    source_id: Optional[str] = None
+
+
+@router.post("/hooks/shop-purchase")
+def hook_shop_purchase(payload: ShopPurchaseIn, viewer_id: str):
+    from pathlib import Path as _P
+    shops_meta = load_json(_P(__file__).parent.parent.parent / "data" / "shops" / "_meta.json", default={"shops": []})
+    shop = next((s for s in shops_meta.get("shops", []) if s.get("id") == payload.shop_id), None)
+    if not shop:
+        raise HTTPException(404, "Shop niet gevonden")
+    if not (_is_admin(viewer_id) or shop.get("owner_user_id") == viewer_id):
+        raise HTTPException(403, "Alleen shop-eigenaar of admin")
+    return shop_book_hooks.record_shop_purchase(
+        shop_id=payload.shop_id,
+        amount_eur=payload.amount_eur,
+        leverancier_naam=payload.leverancier_naam or "",
+        remittance=payload.remittance or "",
+        source_id=payload.source_id,
+    )
+
+
+@router.get("/winst-events")
+def winst_events(viewer_id: str, limit: int = 50):
+    """Alle winst-events uit papertrail 'winst_events' topic (spark-deel-inzicht)."""
+    if not _is_admin(viewer_id):
+        raise HTTPException(403, "Alleen admin")
+    from modules.boekhouder.agents.log_agent import LogAgent
+    from pathlib import Path as _P
+    import json as _json
+    logs_dir = _P(__file__).parent.parent.parent / "data" / "boekhouder" / "logs" / "winst_events"
+    events = []
+    if logs_dir.exists():
+        for fp in sorted(logs_dir.glob("*.jsonl"), reverse=True):
+            with fp.open() as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        events.append(_json.loads(line))
+            if len(events) >= limit:
+                break
+    return {
+        "success": True,
+        "events": events[-limit:],
+        "total_spark_deel_eur": round(sum(e.get("data", {}).get("spark_deel_eur", 0) for e in events), 2),
+    }

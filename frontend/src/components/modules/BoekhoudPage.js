@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { AdminTikkieReview } from './AdminTikkieReview';
 import { BoekhoudingBoekenTab } from './BoekhoudingBoekenTab';
+import { WinstEventsTab } from './WinstEventsTab';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -15,7 +16,7 @@ const entityColors = { spark_core: '#f59e0b', spark_your_life: '#a855f7', roadki
 export function BoekhoudPage({ onNavigate }) {
   const { user, isAdmin } = useAuth();
   const userId = user?.id || 'user-001';
-  const [activeTab, setActiveTab] = useState('overzicht');
+  const [activeTab, setActiveTab] = useState('boeken');
   const [kasboeken, setKasboeken] = useState([]);
   const [reconcile, setReconcile] = useState(null);  // v6_commitments_001
   const [summary, setSummary] = useState(null);
@@ -166,12 +167,12 @@ export function BoekhoudPage({ onNavigate }) {
   const catOptions = newTx.type === 'income' ? categories.income : categories.expense;
 
   const tabs = isAdmin ? [
-    { id: 'overzicht', label: 'Kasboeken' },
-    { id: 'transacties', label: 'Transacties' },
-    { id: 'boeken', label: 'Boeken (v13)' },
-    { id: 'klanten', label: 'Klanten' },  // v6_bonnetje_001
+    { id: 'boeken', label: 'Boeken' },
+    { id: 'winst', label: 'Winst → Spark' },
+    { id: 'klanten', label: 'Klanten' },
+    { id: 'overzicht', label: 'Archief: Kasboeken' },  // v13: oude single-hub view, historisch
+    { id: 'transacties', label: 'Archief: Transacties' },
   ] : [
-    { id: 'overzicht', label: 'Mijn Privé' },  // non-admin ziet alleen eigen kasboek
     { id: 'boeken', label: 'Mijn Boeken' },
   ];
 
@@ -438,6 +439,7 @@ export function BoekhoudPage({ onNavigate }) {
 
             {activeTab === 'klanten' && <KlantenTab API={API} />}
             {activeTab === 'boeken' && <BoekhoudingBoekenTab userId={userId} />}
+            {activeTab === 'winst' && <WinstEventsTab userId={userId} />}
           </div>
         </div>
       </div>

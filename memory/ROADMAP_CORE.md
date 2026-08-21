@@ -22,7 +22,59 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 6. **Gastheer-toon** — bij twijfel/onzekerheid: warm ontvangen, niet docerend. Erkenning voor prestatie. "We doen het samen."
 7. **NO MONGODB** — alle data via `load_json`/`save_json` uit `modules.core.storage`. Backups zijn zip-exports.
 
-Zie ook: `PRD.md` voor product-visie, `LEARNINGS.md` voor concrete fouten om te vermijden.
+## 💰 CLUSTER — Boekhouding v13 & SEPA (sessie 52, feb 2026)
+
+**Doel**: Multi-container boekhouding per user/entity + lokale SEPA voorbereiding + verifieerbare winst-events. Alles JSON-only, geen cloud.
+
+### 🏗️ Architectuur-scheiding (Willem, sessie 52i)
+
+Drie duidelijke lagen die nooit mogen mixen:
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│  BITVAVO potjes │    │  Spark WALLET    │    │ Zakelijke bank   │
+│  (crypto/trade) │    │  (EUR tokens)    │    │  (SEPA IBAN)     │
+│                 │    │                  │    │                  │
+│  RAW ASSETS     │    │  SPENDABLE       │    │  UITBETAALD      │
+│  waarde staat   │───▶│  bridge-laag     │───▶│  Moneybird/BTW   │
+│  op Bitvavo     │    │  wallet.spend    │    │  aangifte hier   │
+└─────────────────┘    └──────────────────┘    └──────────────────┘
+```
+
+- **Bitvavo potjes** = trader-buckets. Waarde staat FYSIEK op Bitvavo, boekhouding tracked alleen namens jou. Niet uit te geven vanuit Spark.
+- **Wallet** = Spark's spendable tokens. Bridge-laag. Winst uit shops/trades komt hier binnen. Uitgifte naar bank via SEPA-XML batch (of handmatig).
+- **Zakelijke bank** = eindstation. Hier gaat je BTW-aangifte overheen (Moneybird). Boekhouding boekt schone netto omzet, spark-vergoeding is een aparte uitgave.
+
+### ✅ Gedaan (sessie 52 e/f/g/h/i)
+- [x] **Multi-book containers** — `/data/boekhouding/books/book-{id}/` met _meta, kasboek, reserve, closings, documents, sepa_batches, bank_imports. 4 initiële boeken geseed (`v13_boekhouding_books_001`).
+- [x] **CRUD + owner-only** endpoints — `GET/POST /api/boekhouding/books`, PATCH, DELETE, entries.
+- [x] **Retroactieve migratie** — spark_kasboek + audit_log via heuristics naar juiste books (`v13_boekhouding_migration_001`). Ruis daarna gewist (nulpunt).
+- [x] **SEPA-Hub eigen module** (`modules/sepa_hub/`) — CAMT.053 + MT940 parsers, pain.001 XML generator, reconcile-skeleton (`v13_sepa_hub_001`).
+- [x] **Papertrail hash-chain** — elke boeking via LogAgent met prev-hash + eigen `winst_events` topic (`v13_boekhouding_papertrail_001`).
+- [x] **Shop → Book brug** — `ensure_shop_book()` auto-hook in create_shop; `record_shop_sale()` / `record_shop_purchase()` (`v13_shop_book_hook_001`).
+- [x] **BTW + KOR verkoop-flow** — verkoper geeft netto, systeem berekent bruto+BTW, 2 bonnen (netto+bruto), KOR-toggle per shop (`v13b_btw_kor_openstaand_001`).
+- [x] **Spark-vergoeding als openstaande post** — 1% van bruto, niet ingehouden; `POST /api/boekhouding/hooks/inlossen/{shop_id}` boekt door + probeert wallet-inhouding.
+- [x] **Frontend "Boeken" tab** — 4 cards + detail-bark (kasboek/instellingen/SEPA) (`v13_boekhouding_ui_001`).
+- [x] **Frontend "Winst → Spark" tab** — totaal-teller, events met hash, chain-uitleg (`v13_winst_events_papertrail_001`).
+- [x] **Shop finance-config endpoints** — `GET/PATCH /api/boekhouding/shop-finance-config` (btw_default_pct, spark_fee_pct, btw_kor_default, commissie_default_pct).
+- [x] **Notify-hook** — nieuwe factuur/openstaand triggert taak + urgent-glow.
+
+### 🟡 Deels / voorbereid
+- [~] **SEPA import/export UI** — endpoints werken, UI-knoppen in Beheer→Boekhouding→Boek-detail→SEPA-tab. Nog niet getest met echt bank-afschrift.
+- [~] **Wallet-integratie inlossen** — endpoint probeert `modules.wallet.service.spend_tokens`, module bestaat niet onder die naam. Boeking gaat wel door.
+
+### 🔴 Nog te doen
+- [ ] **Bank → Wallet brug** — detecteer SEPA-import met remittance `SPARKWALLET-{user_id}` → auto-wallet-topup + book-entry `bank_to_wallet`.
+- [ ] **BTW per product-categorie** — nu per shop, moet ook 9%/0% opties per product (voedsel/boeken/uitvoer).
+- [ ] **Bonnen als PDF** — nu JSON-response. PDF-generator (reportlab of weasyprint) voor download.
+- [ ] **Chain-integrity endpoint** — `GET /api/boekhouding/verify-chain/{topic}` loopt hash-chain na en meldt breuken.
+- [ ] **Trader winst-hook** — bij trade-close een `record_winst_event` zodat trade-winst ook in `winst_events` chain landt.
+- [ ] **Voorwaarden pagina live spark-deel** — toon aan users bij shop-opening: "1% naar Spark, deze maand: €X, chain: [hash]".
+- [ ] **Grace-period openstaand** — 30d openstaand → herinnering, 60d → shop-pauze.
+- [ ] **Wallet-service correct koppelen** — juiste import voor `spend_tokens` vinden of aanmaken.
+- [ ] **Fronts-editor voor BTW/fee-widget** — hoort bij Fronts-cluster hierboven.
+- [ ] **Ruis-scan test-users** — 12 test-users (`test-bank-*`, `test-snap-*`, `test-vk`, etc.) staan nog in `/data/users/`. Batch-cleanup naar `_backups/`.
+- [ ] **Klanten-tab moderniseren** — leest oude `archief/bonnetjes` (nu leeg), moet nieuwe `winst_events` + `record_shop_sale` bonnen tonen.
 
 ---
 

@@ -1,6 +1,6 @@
 {
-  "version": "0.2-draft",
-  "last_updated": "2026-06-27",
+  "version": "0.3-draft-boekhouding-v13",
+  "last_updated": "2026-02-21",
   "scope": "Spark Core 2.0 — privacy beschrijving voor users",
   "intro": "Spark draait standalone op een lokale server (FastAPI + lokale JSON-store). Geen cloud database, geen tracking, geen advertenties. Wat jij deelt blijft bij jou. Externe verbindingen worden alleen gebruikt voor specifieke integraties die JIJ aanzet.",
   "secties": [
@@ -73,6 +73,19 @@
         "Lokale server — geen poorten open naar internet behalve de bewust geconfigureerde web-ingang.",
         "Bij brute-force pogingen worden login_counters bijgehouden.",
         "Bitvavo API-keys per user gescheiden in `data/system/settings/{user_id}/`."
+      ]
+    },
+    {
+      "titel": "Geld & boekhouding (v13, feb 2026)",
+      "items": [
+        "**Drie gescheiden lagen** — Bitvavo (crypto/trader potjes) ≠ Spark Wallet (spendable EUR-tokens) ≠ je zakelijke bankrekening (SEPA). Deze zijn bewust gescheiden zodat waarde nooit ongemerkt tussen lagen migreert.",
+        "**Multi-book boekhouding** — elke user/entity/shop krijgt een eigen boek-container onder `data/boekhouding/books/book-{id}/`. Owner-only zichtbaar (admin ook).",
+        "**Papertrail hash-chain** — elke boeking krijgt een SHA256-hash met verwijzing naar vorige. Manipulatie achteraf is detecteerbaar. Chain blijft bewaard ook na reset.",
+        "**Verkoop-flow** — jij geeft NETTO verkoopprijs op. Spark berekent bruto (netto + BTW) voor de koper-bon en houdt jouw netto in je shop-boek. Zo blijft jouw eigen boekhouding schoon voor Moneybird/BTW-aangifte.",
+        "**KOR-schakelaar** — als je onder de kleine-ondernemersregeling valt (< €20k omzet), schakel dat aan op shop-niveau; Spark rekent dan géén BTW.",
+        "**Spark-vergoeding** — Spark rekent standaard 1% van de bruto verkoop als platform-fee (aanpasbaar door admin). Wordt NIET direct ingehouden — het staat als 'openstaand' bij jouw shop. Je lost het handmatig in via wallet-transfer. Zo houd je grip op je cashflow.",
+        "**SEPA (voorbereid, niet actief)** — CAMT.053 en MT940 bank-afschriften kun je importeren naar je boek. Uitgaande SEPA-batches als pain.001.001.03 XML kun je downloaden en zelf bij je bank uploaden. Geen live bank-koppeling (dat is cloud-afhankelijkheid die Spark bewust vermijdt).",
+        "**Geen cloud-boekhouding** — Spark heeft geen koppeling met Moneybird of andere cloud-boekhouders. Je exporteert bonnen (netto voor jou, bruto voor koper) en importeert die zelf."
       ]
     }
   ],

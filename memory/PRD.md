@@ -1,6 +1,76 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52i (2026-02-21) — BTW/KOR + openstaand + ruis-cleanup + docs
+
+### v13b_btw_kor_openstaand_001 — Verkoop-flow refactor
+- Verkoper geeft **NETTO** op, systeem berekent BRUTO = NETTO × (1 + btw_pct/100)
+- **KOR-toggle** per shop → geen BTW berekening
+- Verkoper's book krijgt schone NETTO omzet (Moneybird-vriendelijk)
+- **Spark-vergoeding (1% van bruto)** wordt NIET ingehouden — komt in `openstaand_spark.json` per shop
+- **2 bonnen** gegenereerd: netto (voor Moneybird) + bruto (voor koper met BTW-splitsing of KOR-opmerking)
+- Endpoints: `POST /hooks/shop-sale` (netto_eur veld), `GET /hooks/openstaand/{shop_id}`, `POST /hooks/inlossen/{shop_id}` (wallet-transfer + boek naar spark-core)
+- Getest ✅: netto €100 → bruto €121 (BTW €21) → Roadkillshop €100, openstaand €1.21. Ook KOR-flow (BTW=0)
+
+### v13_shop_finance_config_001 — Admin BTW/fee-config endpoint
+`GET/PATCH /api/boekhouding/shop-finance-config` — admin-only. Velden: `btw_default_pct`, `spark_fee_pct`, `btw_kor_default`, `commissie_default_pct`. Nieuwe shops erven deze defaults.
+
+### v13_boekhouding_tabs_cleanup_001 — Dubbele tabs opgelost
+`BoekhoudPage` default tab is nu `boeken` (was `overzicht`). Oude tabs verplaatst en hernoemd naar "Archief: Kasboeken" en "Archief: Transacties" — alleen zichtbaar voor admin. Non-admin ziet alleen "Mijn Boeken".
+
+### v13_ruis_cleanup_001 — Bonnetjes-testdata weg
+`data/users/user-a0ee2d7e/archief/bonnetjes/` (3× dezelfde tx-id `2921e03a...`, test van "de Geiser") gewist. `bonnetjes_index.json` leeg. Alle boeken op nulpunt.
+
+### v13_architecture_note_001 — Drie-lagen-scheiding in privacy + roadmap
+`legal_privacy.json`: nieuwe sectie "Geld & boekhouding (v13)" met de architectuur-scheiding:
+- **Bitvavo potjes** = crypto/trader raw assets
+- **Spark Wallet** = spendable EUR-tokens (bridge)
+- **Zakelijke bank** = SEPA-XML eindstation (Moneybird-input)
+Papertrail, KOR, BTW-suggestie, geen live bank-koppeling — alles uitgelegd in privacy-tekst zichtbaar voor users.
+`legal_privacy.json` versie bumped naar `0.3-draft-boekhouding-v13`.
+
+### v13_admin_help_001 — gradatie_2 help-topic "Boekhouding v13"
+`data/help/gradatie_2.json` topic `boekhouding-v13` met korte + diepe uitleg, synoniemen, nav-path. Erft door naar gradatie 1. Getest: `/api/help/for-viewer` toont 27 topics inclusief nieuwe.
+
+### Files changed
+- `/app/backend/data/shops/_meta.json` — `commissie_default_pct: 1.0`, `config.btw_default_pct: 21.0`, `config.spark_fee_pct: 1.0`, `config.btw_kor_default: false`. Ook `shop-roadkill.commissie_pct: 1.0`.
+- `/app/backend/modules/boekhouder/shop_hooks.py` — BTW/KOR/openstaand refactor
+- `/app/backend/modules/boekhouder/books_routes.py` — nieuwe `/hooks/openstaand/{id}`, `/hooks/inlossen/{id}`, `/shop-finance-config` GET+PATCH
+- `/app/frontend/src/components/modules/BoekhoudPage.js` — default tab `boeken`, oude tabs archief-label
+- `/app/backend/data/help/gradatie_2.json` — nieuw topic boekhouding-v13
+- `/app/backend/data/system/legal_privacy.json` — architecture-sectie + versie bump
+- `/app/memory/ROADMAP_CORE.md` — architectuur-diagram + Cluster Boekhouding uitgebreid
+- `/app/backend/data/users/user-a0ee2d7e/archief/bonnetjes*` — testdata gewist
+
+---
+
+
+## Sessie 52h (2026-02-21) — Shop→Book brug + Winst-events papertrail
+
+### v13_shop_book_hook_001 — Shop-verkoop/aankoop koppelt aan boek
+- Winkelstraat `create_shop()` roept `ensure_shop_book()` → elke nieuwe shop krijgt automatisch een book
+- Nieuwe service `boekhouder/shop_hooks.py`:
+  - `record_shop_sale(shop_id, amount_eur)` → netto naar shop-book + spark_deel naar book-spark-core (op basis van `commissie_pct` of override)
+  - `record_shop_purchase(shop_id, amount_eur)` → uitgave in shop-book
+- Endpoints: `POST /api/boekhouding/hooks/shop-sale` + `.../shop-purchase`
+- Getest: €100 verkoop → €97.50 netto Roadkillshop + €2.50 Spark Core (2.5% commissie), beide met papertrail-hash
+
+### v13_winst_events_papertrail_001 — Aparte winst_events topic
+Elke shop-sale (en straks trader-winst) logt óók een record in papertrail-topic `winst_events` met `{bruto_eur, spark_deel_eur, netto_eur, shop_id, book_id, source_id}`. Hash-chain per topic.
+- Endpoint `GET /api/boekhouding/winst-events?viewer_id=X&limit=N` (admin-only): geeft events + `total_spark_deel_eur`
+- Frontend tab **"Winst → Spark"** in Boekhouding: card met totaal-Spark-uitkering, events-lijst met bruto/netto/spark-deel/hash, uitleg-blok over chain
+- Fundament voor: voorwaarden-uitleg aan users, audit door externe boekhouder, echte ROAR-uitkering met verifieerbaar spoor
+
+### Files changed
+- `/app/backend/modules/winkelstraat/__init__.py` — auto-book hook bij create_shop
+- `/app/backend/modules/boekhouder/shop_hooks.py` — NIEUW, sale/purchase → book brug
+- `/app/backend/modules/boekhouder/books_routes.py` — `/hooks/shop-sale`, `/hooks/shop-purchase`, `/winst-events` endpoints
+- `/app/frontend/src/components/modules/WinstEventsTab.js` — NIEUW, winst-viewer met chain-uitleg
+- `/app/frontend/src/components/modules/BoekhoudPage.js` — nieuwe tab `winst` (admin-only)
+
+---
+
+
 ## Sessie 52g (2026-02-21) — Nulpunt + Papertrail hash-chain
 
 ### v13_boekhouding_papertrail_001 — Elke boeking hash-verankerd

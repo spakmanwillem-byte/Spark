@@ -182,6 +182,17 @@ async def create_shop(body: CreateShopBody):
     except Exception as _ex:
         print(f"[winkelstraat] container create voor {new_shop['id']} faalde: {_ex}")
 
+    # v13_shop_book_hook_001 — Auto-book per shop voor multi-boekhouding
+    try:
+        from modules.boekhouder import books as _book_svc
+        _book_svc.ensure_shop_book(
+            shop_id=new_shop["id"],
+            owner_user_id=new_shop["owner_user_id"],
+            shop_naam=new_shop["naam"],
+        )
+    except Exception as _ex:
+        print(f"[winkelstraat] auto-book voor {new_shop['id']} faalde: {_ex}")
+
     return {"success": True, "shop": new_shop,
             "message": f"Winkel '{body.naam}' aangemaakt. Commissie {new_shop['commissie_pct']}%."}
 

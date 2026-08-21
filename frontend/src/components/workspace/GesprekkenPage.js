@@ -1302,32 +1302,36 @@ export function GesprekkenPage({ onNavigate }) {
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
-                        <button
-                          data-testid="call-btn"
-                          onClick={() => openPriveCall('audio')}
-                          title={`Bel ${selectedContact.naam}`}
-                          className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
-                          style={{
-                            color: 'var(--glow-base, #f59e0b)',
-                            backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
-                            boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
-                          }}
-                        >
-                          <Phone className="w-4 h-4" />
-                        </button>
-                        <button
-                          data-testid="video-btn"
-                          onClick={() => openPriveCall('video')}
-                          title={`Beeldbellen met ${selectedContact.naam}`}
-                          className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
-                          style={{
-                            color: 'var(--glow-base, #f59e0b)',
-                            backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
-                            boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
-                          }}
-                        >
-                          <Video className="w-4 h-4" />
-                        </button>
+                        {!(selectedContact.is_bot || selectedContact.is_collective) && (
+                          <>
+                            <button
+                              data-testid="call-btn"
+                              onClick={() => openPriveCall('audio')}
+                              title={`Bel ${selectedContact.naam}`}
+                              className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
+                              style={{
+                                color: 'var(--glow-base, #f59e0b)',
+                                backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
+                                boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
+                              }}
+                            >
+                              <Phone className="w-4 h-4" />
+                            </button>
+                            <button
+                              data-testid="video-btn"
+                              onClick={() => openPriveCall('video')}
+                              title={`Beeldbellen met ${selectedContact.naam}`}
+                              className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
+                              style={{
+                                color: 'var(--glow-base, #f59e0b)',
+                                backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
+                                boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
+                              }}
+                            >
+                              <Video className="w-4 h-4" />
+                            </button>
+                          </>
+                        )}
                       </div>
                     </div>
                     <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3">

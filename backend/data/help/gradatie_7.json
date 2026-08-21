@@ -112,6 +112,15 @@
       "synonyms": ["modus", "werkmodus", "brainstorm", "energy saving", "spaar energie", "neutraal", "max woorden", "woord limiet"]
     },
     {
+      "id": "prive-bellen",
+      "label": "Privé-bellen (UI-shell)",
+      "korte_uitleg": "Ga naar Gesprekken → Privé, klik op een contact. Rechtsboven verschijnen bel + camera iconen (glowen in jouw kleurschema). Klik om audio- of beeld-oproep te starten. Bots + collectief-accounts kunnen niet gebeld worden.",
+      "deep_uitleg": "**Wat werkt nu (v13, feb 2026)**:\n- UI-shell modal met status-badge (Verbinden/Overgaan/Verbonden/Offline) + actie-tekst met contact-naam\n- Als contact offline is: badge wordt Offline, actie-tekst 'Geen antwoord — {naam} is offline'. Auto-hangup na 15s.\n- Beeldbellen toont zwart VLC-placeholder + jouw zelfbeeld picture-in-picture\n- Mute/Camera/Hangup knoppen (lokale UI-state)\n\n**Wat NOG niet werkt**:\n- Echte verbinding — dit is puur UI-shell. Lokale-socket verbinding (Odroid LAN mesh, geen cloud) komt in aparte sessie.\n\n**Instellingen voor bellen**:\n- Mijn Profiel → Instellingen → 'Beeld & Geluid — Apparaten voor bellen': kies microfoon + camera, test met live VU-meter en camera-preview. Alles lokaal via `navigator.mediaDevices`.\n\n**Snelkoppeling naar externe app**: in de chat werkt 'bel mijn moeder' / 'bel Marieke' — dat opent een WhatsApp deep-link pop-up (blijft als optie naast in-app bellen).",
+      "nav_path": "/chat",
+      "nav_testid": "nav-chat",
+      "synonyms": ["bellen", "bel", "video", "beeldbellen", "camera", "call", "prive bellen", "video call", "spark bellen", "mic", "microfoon"]
+    },
+    {
       "id": "spark-voorwaarden-privacy",
       "label": "Voorwaarden & Privacy",
       "korte_uitleg": "Vraag 'lees de voorwaarden' of 'wat zegt de privacy' om de volledige tekst van Spark voor te horen.",

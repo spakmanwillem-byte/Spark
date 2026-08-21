@@ -73,37 +73,68 @@ def _handle_tellen_bestanden(user_id: Optional[str]) -> Optional[Dict]:
 
 
 def _handle_taken_lijst(user_id: Optional[str]) -> Optional[Dict]:
-    """v10_roadmap_md_reader_001 — Spark leest nu direct /app/memory/ROADMAP.md
-    (waar wij dagelijks bijhouden). Fallback naar oude data/system/roadmap.json + statische lijst."""
+    """v10_roadmap_md_reader_001 — Spark leest primair /app/memory/ROADMAP_CORE.md
+    (dagelijks bijgehouden actieve roadmap). Fallback: ROADMAP.md (index) →
+    legacy data/system/roadmap.json → statische leeg-melding.
+
+    v13_roadmap_split_reader_001 (feb 2026): ROADMAP.md is opgesplitst tot wegwijzer;
+    CORE bevat de actieve items met [x]/[~]/[ ] checkboxes."""
     from pathlib import Path as _P
-    md_fp = _P("/app/memory/ROADMAP.md")
-    if md_fp.exists():
+    # Zoek volgorde: CORE eerst (heeft de actieve items), dan legacy ROADMAP.md
+    candidates = [_P("/app/memory/ROADMAP_CORE.md"), _P("/app/memory/ROADMAP.md")]
+    for md_fp in candidates:
+        if not md_fp.exists():
+            continue
         try:
             lines = md_fp.read_text(encoding="utf-8").splitlines()
-            # Pak de eerste "🟡 Nog te doen" of "P1"/"P2" bullets uit de recentste sessie
             todo_lines = []
+            done_lines = []
+            partial_lines = []
             current_h2 = None
-            first_h2 = None  # onthoud eerste sessie waar bullets uit kwamen
-            for ln in lines[:400]:
+            first_h2 = None
+            for ln in lines[:800]:
                 if ln.startswith("## "):
                     current_h2 = ln[3:].strip()
-                if ln.startswith("- **") or (ln.startswith("- ") and any(m in ln for m in ["P1", "P2", "P0", "Nog te doen", "Next"])):
-                    if len(ln.strip()) > 5 and len(todo_lines) < 12:
-                        clean = ln.strip().lstrip("- ").replace("**", "").replace("`", "")
+                s = ln.strip()
+                # Checkbox-items (nieuwe stijl in CORE)
+                if s.startswith("- [x]"):
+                    clean = s[5:].strip().replace("**", "").replace("`", "")
+                    done_lines.append(f"✅ {clean[:140]}")
+                    if first_h2 is None:
+                        first_h2 = current_h2
+                elif s.startswith("- [~]"):
+                    clean = s[5:].strip().replace("**", "").replace("`", "")
+                    partial_lines.append(f"🟡 {clean[:140]}")
+                    if first_h2 is None:
+                        first_h2 = current_h2
+                elif s.startswith("- [ ]"):
+                    clean = s[5:].strip().replace("**", "").replace("`", "")
+                    todo_lines.append(f"⏳ {clean[:140]}")
+                    if first_h2 is None:
+                        first_h2 = current_h2
+                # Legacy bullets (oude ROADMAP stijl)
+                elif ln.startswith("- **") or (ln.startswith("- ") and any(m in ln for m in ["P1", "P2", "P0", "Nog te doen", "Next"])):
+                    if len(s) > 5 and len(todo_lines) < 20:
+                        clean = s.lstrip("- ").replace("**", "").replace("`", "")
                         todo_lines.append(f"• {clean[:140]}")
                         if first_h2 is None:
                             first_h2 = current_h2
-                        if len(todo_lines) >= 12:
-                            break
-            if todo_lines:
-                header = f"📋 **Roadmap** _(uit `/app/memory/ROADMAP.md`, sessie: {first_h2 or 'onbekend'})_:"
+            if todo_lines or done_lines or partial_lines:
+                header = f"📋 **Roadmap** _(uit `{md_fp.name}`, cluster: {first_h2 or 'onbekend'})_:"
+                blocks = []
+                if todo_lines:
+                    blocks.append("**Te doen:**\n" + "\n".join(todo_lines[:8]))
+                if partial_lines:
+                    blocks.append("**Deels:**\n" + "\n".join(partial_lines[:5]))
+                if done_lines:
+                    blocks.append("**Recent gedaan:**\n" + "\n".join(done_lines[:6]))
                 return {
                     "type": "capability_response",
                     "capability_id": "taken_lijst",
-                    "message": header + "\n" + "\n".join(todo_lines) + "\n\n_Vraag 'wat zullen we doen?' voor concreter suggestie._",
+                    "message": header + "\n\n" + "\n\n".join(blocks) + "\n\n_Vraag 'wat zullen we doen?' voor concreter suggestie._",
                 }
         except Exception:
-            pass
+            continue
 
     # Legacy fallback (roadmap.json)
     rm = load_json(DATA / "system" / "roadmap.json", default={})
@@ -122,7 +153,7 @@ def _handle_taken_lijst(user_id: Optional[str]) -> Optional[Dict]:
     return {
         "type": "capability_response",
         "capability_id": "taken_lijst",
-        "message": "📋 Roadmap niet leesbaar (`/app/memory/ROADMAP.md` ontbreekt of parse-fout).",
+        "message": "📋 Roadmap niet leesbaar (`/app/memory/ROADMAP_CORE.md` ontbreekt of parse-fout).",
     }
 
 

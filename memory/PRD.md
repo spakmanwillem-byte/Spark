@@ -1,6 +1,32 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52d (2026-02-21) — Roadmap opgeschoond + help synced
+
+### v13_roadmap_split_reader_001 — Roadmap-reader leest CORE
+`capability_handler_service._handle_taken_lijst`:
+- Zoekt eerst in `ROADMAP_CORE.md` (waar de actieve items staan), fallback naar `ROADMAP.md` (wegwijzer) → `roadmap.json` legacy
+- Herkent nieuwe checkbox-stijl: `[x]` = gedaan, `[~]` = deels, `[ ]` = te doen
+- Response groepeert nu op **Te doen** / **Deels** / **Recent gedaan** met eigen emoji-prefix
+- Getest via `/api/chat/message` "welke taken staan er nog?" → Spark toont het v13 Skype-Spark cluster met alle statussen
+
+### Nieuwe cluster in ROADMAP_CORE.md
+"📞 CLUSTER — Skype-Spark & Fronts (v13, sessie 52, feb 2026)" bovenaan, na moreel kompas.
+- ✅ 8 items gedaan (bel-icons, PriveCallBark, offline-detectie, --alert-base, split status/actie, mic/cam devices, bot-filter, WhatsApp fallback)
+- 🟡 1 item deels (Fronts config schema in Kladblok, backend endpoints nog te bouwen)
+- 🔴 5 items open (Beheer→Fronts tab, loginscherm dots+font, inkomende oproep, lokale-socket verbinding)
+
+### Help-topic Privé-bellen
+`data/help/gradatie_7.json` → topic `prive-bellen` met korte + diepe uitleg, wat werkt/wat nog niet, waar de instellingen zitten, synoniemen voor zoeken. Erft door naar alle gradaties (2-7). Getest: `GET /api/help/for-viewer?user_id=user-001` toont 26 topics, "Privé-bellen (UI-shell)" gevonden.
+
+### Files changed
+- `/app/memory/ROADMAP_CORE.md` — nieuwe cluster bovenaan
+- `/app/backend/modules/chat/capability_handler_service.py` — leest CORE + checkboxes parsed
+- `/app/backend/data/help/gradatie_7.json` — topic prive-bellen
+
+---
+
+
 ## Sessie 52c (2026-02-21) — Bark status/actie split + Fronts draft in Kladblok
 
 ### v13_alert_color_var_001 — `--alert-base` CSS-variabele

@@ -61261,11 +61261,45 @@
         "session_id": "default",
         "gesprek_nummer": 2428
       }
+    },
+    {
+      "id": "conv-c4c4099d",
+      "timestamp": "2026-08-21T13:38:54.954293+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke taken staan er nog?",
+      "spark_response": "📋 **Roadmap** _(uit `ROADMAP_CORE.md`, cluster: 📞 CLUSTER — Skype-Spark & Fronts (v13, sessie 52, feb 2026))_:\n\n**Te doen:**\n⏳ Beheer → Fronts tab — Kladblok-schema promoveren naar echte editor. Backend: data/system/fronts_config.json + endpoints. Frontend: tab onder\n⏳ Loginscherm pulserende glow-dots — random posities, primaire kleuren, hartslag-ritme (Emmy's oorspronkelijke wens). Kandidaat om te bouwen b\n⏳ Inkomende oproep laag — signaal-detectie (lokaal), bel-iconen pulseren, accept/decline-bark. Bel-icoon glow-puls koppelen aan inkomend signa\n⏳ Loginscherm lettertype-instelling — via Fronts config (screens['auth.login'].font).\n⏳ Lokale-socket bel-verbinding (grote sessie, ~500c) — mic/cam devices doorkoppelen naar echte peer-verbinding op Odroid-netwerk (LAN mesh, ge\n• v12_admin_capable_unlock_001 — /api/auth/users?admin_id=... (register-with-override) accepteert nu iedereen met admin_capable=True of gradat\n• v12_admin_type_001 — RBAC light: admin_type veld op user + admin_types.json config met 3 vaste types (full / community / user_admin, elk met\n• Trader-reset uitgevoerd — alle logs, balances, anker, monitor_state gewist. 12 potjes over 6 users op nul. Backup: /app/_backups/trader_rese\n\n**Deels:**\n🟡 Fronts Config schema — draft-widget in Beheer → Kladblok (FrontsConfigDraftWidget) met JSON-schema per scherm: colors, font, status_labels, \n\n**Recent gedaan:**\n✅ Bel/Camera iconen rechtsboven in privé-chat header, glow via --glow-base uit profiel-kleurschema (v13_prive_call_ui_001)\n✅ PriveCallBark modal — UI-shell (audio + video mode), VLC-placeholder, avatar-glow tijdens verbinden/pauze, self-PIP, Mute/Camera/Hangup knop\n✅ Bot/Collectief filter — iconen verborgen bij is_bot of is_collective (alleen echte personen)\n✅ Offline detectie — contact.online === false → no_answer state na 4.8s, auto-hangup 15s\n✅ Status vs. actie-tekst split — badge = \"Offline\", tekst = \"Geen antwoord — {naam} is offline\" (v13_state_action_split_001)\n✅ --alert-base CSS-variabele — schema-tunable rood-alternatief, vervangt hardcoded rgba (v13_alert_color_var_001)\n\n_Vraag 'wat zullen we doen?' voor concreter suggestie._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staan"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "test-roadmap",
+        "gesprek_nummer": 2429
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2428,
-    "last_updated": "2026-08-21T13:33:15.139577+00:00"
+    "total_conversations": 2429,
+    "last_updated": "2026-08-21T13:38:54.954293+00:00"
   }
 }

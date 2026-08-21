@@ -26,6 +26,32 @@ Zie ook: `PRD.md` voor product-visie, `LEARNINGS.md` voor concrete fouten om te 
 
 ---
 
+## 📞 CLUSTER — Skype-Spark & Fronts (v13, sessie 52, feb 2026)
+
+**Doel**: Lokale in-app bel/beeldbel-laag + per-scherm ("front") tunable UI zonder telkens agent te vragen. Alles blijft **lokaal** (geen WebRTC/cloud). Naam-metafoor: "onze Skype".
+
+### ✅ Gedaan
+- [x] **Bel/Camera iconen** rechtsboven in privé-chat header, glow via `--glow-base` uit profiel-kleurschema (`v13_prive_call_ui_001`)
+- [x] **`PriveCallBark` modal** — UI-shell (audio + video mode), VLC-placeholder, avatar-glow tijdens verbinden/pauze, self-PIP, Mute/Camera/Hangup knoppen
+- [x] **Bot/Collectief filter** — iconen verborgen bij `is_bot` of `is_collective` (alleen echte personen)
+- [x] **Offline detectie** — `contact.online === false` → `no_answer` state na 4.8s, auto-hangup 15s
+- [x] **Status vs. actie-tekst split** — badge = "Offline", tekst = "Geen antwoord — {naam} is offline" (`v13_state_action_split_001`)
+- [x] **`--alert-base` CSS-variabele** — schema-tunable rood-alternatief, vervangt hardcoded rgba (`v13_alert_color_var_001`)
+- [x] **Mic/Camera device-selectie in Mijn Profiel → Instellingen** (`v13_call_devices_001`) — `DeviceSettingsPanel` met enumerateDevices, systeem-standaard toggle, live VU-meter test-mic (4s), live video preview test-cam (5s). Backend prefs uitgebreid met 5 velden. Volledig lokaal (`navigator.mediaDevices`).
+- [x] **WhatsApp deep-link popup** (fallback voor "bel mijn moeder" chat-intent, blijft als externe snelkoppeling)
+
+### 🟡 Deels / concept-fase
+- [~] **Fronts Config schema** — draft-widget in Beheer → Kladblok (`FrontsConfigDraftWidget`) met JSON-schema per scherm: `colors`, `font`, `status_labels`, `action_texts` met `{naam}`-token, `timings_ms`, `animations`. Nog niet gepersistend — `data/system/fronts_config.json` bestaat niet, `GET/PUT /api/system/fronts-config` niet gebouwd.
+
+### 🔴 Nog te doen
+- [ ] **Beheer → Fronts tab** — Kladblok-schema promoveren naar echte editor. Backend: `data/system/fronts_config.json` + endpoints. Frontend: tab onder Beheer → Instellingen. Per screen: kleuren + lettertype + status_labels + action_texts + timings.
+- [ ] **Loginscherm pulserende glow-dots** — random posities, primaire kleuren, hartslag-ritme (Emmy's oorspronkelijke wens). Kandidaat om te bouwen bovenop Fronts-tab (`screens['auth.login'].animations.background_dots`).
+- [ ] **Inkomende oproep laag** — signaal-detectie (lokaal), bel-iconen pulseren, accept/decline-bark. Bel-icoon glow-puls koppelen aan inkomend signaal.
+- [ ] **Loginscherm lettertype-instelling** — via Fronts config (`screens['auth.login'].font`).
+- [ ] **Lokale-socket bel-verbinding** (grote sessie, ~500c) — mic/cam devices doorkoppelen naar echte peer-verbinding op Odroid-netwerk (LAN mesh, geen cloud). Signaling via lokale socket, media via WebRTC-datachannel binnen LAN. Alle mic/cam-prefs uit `v13_call_devices_001` staan al klaar.
+
+---
+
 ## 📋 SESSIE 57 EXECUTIE-ROADMAP — Leger & XP-Motor Herkalibratie
 
 **Context**: Willem wil admins ook vanaf de community kunnen aanstellen (bv. gradatie 3 "Vriend" als community-onderhoud) én overweegt een parallelle rang-schaal (legerrang-idee: Sergeant/Luitenant of neutraal Rookie→Legend). Snuffel-rapport sessie 56d wees uit: **veel bestaat al** — niet dubbel bouwen.

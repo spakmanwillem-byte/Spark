@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-08-03T14:58:38.723283+00:00",
+  "generated_at": "2026-08-13T11:38:37.375066+00:00",
   "summary": {
     "total_containers": 115,
     "by_status": {
@@ -13,7 +13,7 @@
       "dir": 75,
       "data": 40
     },
-    "total_endpoints_detected": 660
+    "total_endpoints_detected": 663
   },
   "tree": {
     "backend_modules": {
@@ -175,6 +175,7 @@
           "GET /admin/capabilities/links",
           "GET /admin/capabilities/list",
           "GET /admin/capabilities/read",
+          "GET /admin/capabilities/types",
           "POST /admin/capabilities/grant",
           "POST /admin/capabilities/help-bark",
           "POST /admin/capabilities/links",
@@ -1725,6 +1726,7 @@
           "GET /kb/v2/homonyms",
           "GET /kb/v2/image/file/{filename}",
           "GET /kb/v2/inbox",
+          "GET /kb/v2/inbox/incomplete",
           "GET /kb/v2/lade-check",
           "GET /kb/v2/lade/{lade}",
           "GET /kb/v2/priority/missing-laag1",
@@ -1761,6 +1763,7 @@
           "POST /kb/v2/lade-move/{card_id}",
           "POST /kb/v2/move",
           "POST /kb/v2/suggest-accept",
+          "POST /kb/v2/tags/cleanup",
           "POST /kb/v2/tags/merge",
           "POST /kb/v2/tags/normalize-batch",
           "POST /kb/v2/vocab/sync",
@@ -1779,7 +1782,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
-        "file_count": 13,
+        "file_count": 14,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3475,8 +3478,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.306301+00:00",
-        "last_touched": "2026-06-05T13:13:09.202299+00:00",
-        "activity_count": 2,
+        "last_touched": "2026-08-03T16:46:58.021734+00:00",
+        "activity_count": 5,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -3502,8 +3505,8 @@
           "key_holder": null
         },
         "created_at": "2026-07-23T14:32:50.505354+00:00",
-        "last_touched": "2026-07-23T14:32:50.505354+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-08-03T18:05:05.472256+00:00",
+        "activity_count": 48,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -3529,8 +3532,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-31T23:48:37.354567+00:00",
-        "last_touched": "2026-08-03T14:08:53.167783+00:00",
-        "activity_count": 192,
+        "last_touched": "2026-08-13T11:25:08.688282+00:00",
+        "activity_count": 226,
         "file_count": 9,
         "subdir_count": 1,
         "extra": {}
@@ -3637,8 +3640,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-08-03T10:56:02.081843+00:00",
-        "activity_count": 2662,
+        "last_touched": "2026-08-13T11:38:29.211406+00:00",
+        "activity_count": 2715,
         "file_count": 115,
         "subdir_count": 3,
         "extra": {}
@@ -3664,8 +3667,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-08-03T14:16:48.558355+00:00",
-        "activity_count": 225,
+        "last_touched": "2026-08-06T13:40:12.514762+00:00",
+        "activity_count": 235,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -3774,7 +3777,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-06-27T23:00:41.216091+00:00",
         "activity_count": 2,
-        "file_count": 48,
+        "file_count": 50,
         "subdir_count": 2,
         "extra": {}
       },
@@ -3799,8 +3802,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-08-03T14:56:01.176522+00:00",
-        "activity_count": 132922,
+        "last_touched": "2026-08-13T11:35:13.545974+00:00",
+        "activity_count": 134520,
         "file_count": 10,
         "subdir_count": 0,
         "extra": {}
@@ -3853,8 +3856,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-08-03T14:33:22.908974+00:00",
-        "activity_count": 1336,
+        "last_touched": "2026-08-13T11:38:15.804163+00:00",
+        "activity_count": 1394,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3896,6 +3899,165 @@
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/knowledge.md",
         "footnote": "v2/spark_tag_curatie_public.json (v1.1, 2026-08-03) — Publieke uitleg-blauwdruk voor Tag-Curatie mechanisme in KB v2. Beschrijft stemming-regels, risk-detectie (bekende false-positive-paren zoals wet/weten, kaars/kaart), veiligheden en Sessie-55 wensen. UI: Kennisbank v2 → tab Tag-curatie. Endpoints: /api/kb/v2/tags/scan + /tags/merge.",
+        "kaart_veldsemantiek": {
+          "_doel": "v12_kb_veld_semantiek_001 — Definieert per KB-kaart wat elk veld UNIEK betekent. Absolute waarheid waarnaar Spark verwijst bij verbeter-opdrachten: 'werk aan laag2' is dan een chirurgisch precieze instructie, geen 'werk aan de lagen'. Incomplete kaarten worden detecteerbaar via deze regels.",
+          "_gebruikt_door": [
+            "5W-Filler LLM-prompt (curation_routes.suggest_5w)",
+            "Lade-Reclassificatie beslislogica",
+            "Toekomstige refine-endpoint per veld (bv. POST /api/kb/v2/card/{id}/refine?field=laag3)",
+            "Chat-antwoord waarin Spark uitlegt hoe hij een concept begrijpt"
+          ],
+          "lagen": {
+            "_type": "diepte-progressie (surface → essentie)",
+            "_regel": "Elke laag is een aparte cognitieve stap. Ze vullen elkaar aan, ze herhalen elkaar niet.",
+            "laag1": {
+              "doel": "OPPERVLAKKIG — hoe zou een kind of nieuwkomer dit uitleggen in 1-2 zinnen?",
+              "toon": "casual, dagelijkse taal, geen jargon",
+              "verboden": [
+                "definitie-jargon",
+                "abstracte begrippen zonder concreet voorbeeld"
+              ]
+            },
+            "laag2": {
+              "doel": "FUNDAMENTEEL — wat is de kern-eigenschap of definitie? Waaraan herken je het?",
+              "toon": "helder feitelijk, iets formeler dan laag1",
+              "verboden": [
+                "herhaling van laag1",
+                "vage abstracties"
+              ]
+            },
+            "laag3": {
+              "doel": "STRUCTUREEL — hoe past het in een groter systeem? Welke onderdelen/relaties?",
+              "toon": "analytisch, benoemt subsystemen of connecties",
+              "verboden": [
+                "losse feiten zonder relatie",
+                "herhaling laag2"
+              ]
+            },
+            "laag4": {
+              "doel": "ESSENTIE — wat is het diepe waarom? Filosofisch, existentieel, betekenis-vol?",
+              "toon": "reflectief, meta, mag poëtisch zijn",
+              "verboden": [
+                "nietszeggende platitudes",
+                "cliché-uitspraken"
+              ]
+            }
+          },
+          "ws5": {
+            "_type": "context-vragen (wie/wat/wanneer/waar/waarom/hoe)",
+            "_regel": "Elke W-vraag heeft strikt eigen scope. Niet overlappen met lagen — lagen zijn DIEPTE, W's zijn CONTEXT.",
+            "wie": {
+              "doel": "SUBJECT — welke actor, entiteit of groep is betrokken?",
+              "verboden": [
+                "abstract 'iedereen'",
+                "leeg-generaliseren als 'mensen'"
+              ]
+            },
+            "wat": {
+              "doel": "SPECIFIEKE KERN-EIGENSCHAP — wat maakt DIT begrip anders dan naburige begrippen? Discriminerend, niet omschrijvend.",
+              "verboden": [
+                "herhaling van laag1/laag2 (die zijn OMSCHRIJVEND, wat is DISCRIMINEREND)"
+              ]
+            },
+            "wanneer": {
+              "doel": "CONCRETE TIJD OF SITUATIE — wanneer treedt dit op, welke gelegenheden?",
+              "verboden": [
+                "altijd/nooit als antwoord",
+                "vage 'in bepaalde situaties'"
+              ]
+            },
+            "waar": {
+              "doel": "CONCRETE PLAATS OF DOMEIN — fysiek, virtueel of conceptueel",
+              "verboden": [
+                "'overal' zonder context",
+                "puur abstract"
+              ]
+            },
+            "waarom": {
+              "doel": "DOEL, MOTIVATIE OF FUNCTIE — waarom bestaat dit, welke behoefte vervult het?",
+              "verboden": [
+                "'omdat het zo is'",
+                "puur beschrijvend antwoord"
+              ]
+            },
+            "hoe": {
+              "doel": "CONCRETE WERKING OF METHODE — welke stappen, mechanismen of technieken zijn actief?",
+              "verboden": [
+                "'gewoon door te doen'",
+                "herhaling van wat"
+              ]
+            }
+          },
+          "andere_velden": {
+            "id": "unieke identifier (kbv2-{hash} of kbv2-skel-{hash} voor draft) — niet muteerbaar",
+            "begrip": "canoniek kern-woord, lowercase, enkelvoud tenzij regel_1 werkwoord (dan meervoud/infinitief)",
+            "lade": "1 van 4: voelen/spreken/weten/doen — volgens spark_tag_curatie_public.json § 8",
+            "status": "active/draft/skel/deprecated — skel = skeleton (nog te verrijken)",
+            "tags": "impliciete labels, genormaliseerd via tag_normalizer",
+            "verbanden": "expliciete relaties naar andere kaarten met type (parent/child/related/opposite) en gewicht",
+            "footnote": "audit-metadata: bron, ingedeeld_door, laatst_bewerkt_door, curation_history log"
+          },
+          "incompleet_criterium": {
+            "_wat_maakt_een_kaart_incompleet": "Een kaart is INCOMPLEET bij één of meer van deze:",
+            "checks": [
+              "lagen: minder dan 4 lagen ingevuld (elk >20 chars)",
+              "lagen: 2 lagen bevatten (bijna) dezelfde tekst — herhaling signaleert dat cognitieve stap niet is gezet",
+              "ws5: minder dan 6 velden ingevuld",
+              "ws5: placeholder-tekst zoals 'nog te vullen', '?', 'onbekend'",
+              "begrip: leeg of alleen whitespace",
+              "lade: niet in [voelen, spreken, weten, doen]",
+              "status: 'skel' langer dan 30 dagen zonder aanraking = orphan-skel"
+            ],
+            "detectie_endpoint": "GET /api/kb/v2/curation/summary → empty_5w + partial_5w counters",
+            "toon_in_ui": "Kennisbank v2 → Inbox tab → subtab 'Onvolledig' (hergebruik inbox-filter i.p.v. nieuwe top-tab)"
+          },
+          "infinitief_regel": {
+            "_arch_ref": "v12_infinitief_regel_001",
+            "_doel": "Absolute wet waaraan Spark de 695 lade-voorstellen toetst tijdens de Grote Lade-Reclassificatie. Voorkomt dat 'lopen', 'liep', 'loopt' als 3 losse kaarten in het systeem terechtkomen.",
+            "regel_1_infinitief_anker": {
+              "wat": "Elk werkwoord heeft precies 1 hoofdkaart op de INFINITIEF-vorm (bv. 'lopen', 'helpen', 'groeien'), altijd in de Doen-lade.",
+              "waarom": "De infinitief is het actieve centrum — alle vervoegingen wijzen daar naartoe. Dit voorkomt versnippering."
+            },
+            "regel_2_vervoegings_tags": {
+              "wat": "Varianten van het werkwoord (stam, stam+t, verleden tijd, voltooid deelwoord) worden NIET als losse kaarten opgeslagen, maar als metadata-tags gekoppeld aan de anker-kaart.",
+              "voorbeeld": "kaart 'lopen' [Doen] heeft tags: ['loop', 'loopt', 'liep', 'liepen', 'gelopen']",
+              "gevolg_voor_zoek": "Zoekopdracht op 'liep' → tag_normalizer resolvet naar stem 'loop' → anker-kaart 'lopen' wordt teruggegeven",
+              "gevolg_voor_tag_cleaner": "tag_cleaner.py past dezelfde stemming toe zodat vervoegingen niet als aparte tags mergen in de tags-lijst van een niet-werkwoord kaart"
+            },
+            "regel_3_homoniem_uitzondering": {
+              "wat": "SPLITSEN in 2 aparte kaarten alleen als een stam een totaal andere betekenis heeft dan de actie-vorm.",
+              "voorbeelden": [
+                {
+                  "stam": "bank (meubel)",
+                  "lade": "weten",
+                  "reden": "concreet object"
+                },
+                {
+                  "stam": "banken (financieel handelen)",
+                  "lade": "doen",
+                  "reden": "actie op de markt"
+                },
+                {
+                  "stam": "wet (regel)",
+                  "lade": "weten",
+                  "reden": "juridisch concept"
+                },
+                {
+                  "stam": "weten (kennen)",
+                  "lade": "doen",
+                  "reden": "cognitieve actie"
+                }
+              ],
+              "detectie": "Zie spark_tag_curatie_public.json § risk-detectie voor bekende false-positive-paren. Deze paren MOGEN nooit door tag_cleaner._stem worden gemerged.",
+              "toon_in_ui": "Reclassificatie-voorstel toont 'homoniem-flag' zodat Willem per geval bevestigt of split gewenst is."
+            },
+            "toepassing": {
+              "lade_reclassificatie": "Bij de 695 lade-voorstellen: elk werkwoord in enkelvoud/vervoeging → voorstel = move naar infinitief-anker in Doen (of maak anker aan als nog niet bestaat). Niet-werkwoorden blijven in Weten tenzij homoniem-uitzondering geldt.",
+              "text_importer": "Bij bulk-import: als kaart-begrip een werkwoord-vervoeging is, redirect naar de infinitief-anker (met begrip-vervanging + tag-append) i.p.v. nieuwe kaart aanmaken.",
+              "refine_endpoint": "Toekomstige POST /api/kb/v2/card/{id}/refine?field=laag3 respecteert deze regels: werkt niet op vervoegingen (die verwijzen enkel naar de anker)."
+            }
+          }
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [],
@@ -3913,8 +4075,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-08-03T14:36:08.525551+00:00",
-        "activity_count": 17988,
+        "last_touched": "2026-08-13T11:38:03.407367+00:00",
+        "activity_count": 20757,
         "file_count": 48,
         "subdir_count": 2,
         "extra": {}
@@ -4000,8 +4162,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-08-03T10:55:33.604470+00:00",
-        "activity_count": 12071,
+        "last_touched": "2026-08-13T11:36:39.507387+00:00",
+        "activity_count": 12074,
         "file_count": 16,
         "subdir_count": 1,
         "extra": {}
@@ -4054,8 +4216,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-08-03T14:55:57.942051+00:00",
-        "activity_count": 4901,
+        "last_touched": "2026-08-13T11:35:09.864202+00:00",
+        "activity_count": 5266,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -4110,7 +4272,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 49,
+        "file_count": 52,
         "subdir_count": 1,
         "extra": {}
       },
@@ -4216,9 +4378,9 @@
           "key_holder": null
         },
         "created_at": "2026-06-29T20:01:15.844742+00:00",
-        "last_touched": "2026-08-03T02:04:12.521683+00:00",
-        "activity_count": 66,
-        "file_count": 10,
+        "last_touched": "2026-08-04T02:02:31.350348+00:00",
+        "activity_count": 75,
+        "file_count": 11,
         "subdir_count": 1,
         "extra": {}
       },
@@ -4243,9 +4405,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-08-03T14:58:38.365363+00:00",
-        "activity_count": 51583,
-        "file_count": 242,
+        "last_touched": "2026-08-13T11:38:37.065806+00:00",
+        "activity_count": 54503,
+        "file_count": 233,
         "subdir_count": 5,
         "extra": {}
       },
@@ -4270,9 +4432,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.338797+00:00",
-        "last_touched": "2026-08-03T08:57:53.010373+00:00",
-        "activity_count": 113,
-        "file_count": 142,
+        "last_touched": "2026-08-03T17:20:41.813347+00:00",
+        "activity_count": 121,
+        "file_count": 146,
         "subdir_count": 5,
         "extra": {}
       },
@@ -4297,9 +4459,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-08-03T14:55:59.920696+00:00",
-        "activity_count": 6473,
-        "file_count": 71,
+        "last_touched": "2026-08-13T11:25:10.104270+00:00",
+        "activity_count": 7090,
+        "file_count": 74,
         "subdir_count": 4,
         "extra": {}
       },
@@ -4351,8 +4513,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.343028+00:00",
-        "last_touched": "2026-06-04T10:34:34.862504+00:00",
-        "activity_count": 1,
+        "last_touched": "2026-08-06T08:09:05.465206+00:00",
+        "activity_count": 2,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}

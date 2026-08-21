@@ -296,6 +296,31 @@ def set_opening_balance(book_id: str, viewer_id: str, amount_eur: float, naam: s
     return {"success": True, "entry": e, "summary": book_svc.book_summary(book_id)}
 
 
+@router.post("/books/{book_id}/reset")
+def reset_book(book_id: str, viewer_id: str, keep_meta: bool = True):
+    """Wipe alle entries van dit book — schoon nulpunt. Meta blijft (IBAN/naam/etc)."""
+    b = book_svc.get_book(book_id)
+    if not b:
+        raise HTTPException(404)
+    if not _can_access_book(viewer_id, b):
+        raise HTTPException(403)
+    from pathlib import Path
+    from modules.core.storage import save_json
+    bdir = Path(__file__).parent.parent.parent / "data" / "boekhouding" / "books" / book_id
+    save_json(bdir / "kasboek.json", {"entries": []})
+    save_json(bdir / "reserve.json", {"balance_eur": 0.0, "history": []})
+    save_json(bdir / "closings.json", {"closings": []})
+    save_json(bdir / "documents.json", {"documents": []})
+    save_json(bdir / "sepa_batches.json", {"batches": []})
+    save_json(bdir / "bank_imports.json", {"imports": []})
+    return {"success": True, "book_id": book_id, "reset_at": datetime_now_iso()}
+
+
+def datetime_now_iso():
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).isoformat()
+
+
 # ============================================================
 # Notify test-hook (voor UI-development)
 # ============================================================

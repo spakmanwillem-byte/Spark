@@ -192,9 +192,12 @@ def delete_book(book_id: str, archive: bool = True) -> bool:
 # ============================================================
 
 def add_entry(book_id: str, entry: Dict) -> Optional[Dict]:
-    """Voeg entry toe aan book kasboek.
+    """Voeg entry toe aan book kasboek + hash-chain (papertrail).
     entry-velden: type (income/expense/mint/gift/trade), amount_eur, naam,
     ts (auto), tegenrekening_iban, note, source, source_id, tags.
+
+    v13_boekhouding_papertrail_001: elke entry wordt gelogd in de LogAgent
+    papertrail met prev_hash chain. Zo is manipulatie achteraf detecteerbaar.
     """
     meta = get_book(book_id)
     if not meta:
@@ -215,9 +218,29 @@ def add_entry(book_id: str, entry: Dict) -> Optional[Dict]:
         "source_id": entry.get("source_id"),
         "tags": entry.get("tags", []),
     }
+    # Papertrail — hash-chain via LogAgent
+    try:
+        from modules.boekhouder.agents.log_agent import LogAgent
+        agent = LogAgent()
+        rec = agent.record(
+            topic=f"book_{book_id}",
+            event_type=e["type"],
+            actor=meta.get("owner_user_id", "system"),
+            data={
+                "entry_id": eid,
+                "amount_eur": e["amount_eur"],
+                "naam": e["naam"][:80],
+                "source": e["source"],
+                "source_id": e.get("source_id"),
+                "ts": e["ts"],
+            },
+        )
+        e["papertrail_hash"] = rec.get("event_hash")
+    except Exception as _pt_err:
+        e["papertrail_error"] = str(_pt_err)[:120]
+
     data["entries"].append(e)
     save_json(kasboek_fp, data)
-    # bump meta
     meta["last_touched"] = _now()
     save_json(_meta_fp(book_id), meta)
     return e

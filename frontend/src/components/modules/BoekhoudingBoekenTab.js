@@ -157,6 +157,12 @@ function BookDetailBark({ bookId, userId, onClose }) {
     setFlash('Openingsbalans gezet'); setTimeout(() => setFlash(''), 1500); setOpeningAmt(''); load();
   };
 
+  const resetBook = async () => {
+    if (!window.confirm(`Zeker weten? Alle regels van "${book?.naam}" worden gewist (papertrail blijft bewaard).`)) return;
+    await fetch(`${API}/api/boekhouding/books/${bookId}/reset?viewer_id=${userId}`, { method: 'POST' });
+    setFlash('Boek gereset naar nulpunt'); setTimeout(() => setFlash(''), 2000); load();
+  };
+
   const uploadCamt = async (file) => {
     const fd = new FormData(); fd.append('file', file);
     const r = await fetch(`${API}/api/boekhouding/books/${bookId}/sepa/import-camt?viewer_id=${userId}`, { method: 'POST', body: fd });
@@ -239,7 +245,14 @@ function BookDetailBark({ bookId, userId, onClose }) {
                 <div key={e.id} className="flex items-center justify-between p-2 rounded bg-slate-800/40 border border-slate-800">
                   <div className="min-w-0 flex-1">
                     <p className="text-xs text-white truncate">{e.naam}</p>
-                    <p className="text-[10px] text-slate-500">{e.ts?.slice(0,10)} · {e.type}</p>
+                    <p className="text-[10px] text-slate-500 flex items-center gap-2">
+                      <span>{e.ts?.slice(0,10)} · {e.type}</span>
+                      {e.papertrail_hash && (
+                        <span className="font-mono text-[9px] text-cyan-500/70" title="Papertrail hash">
+                          #{e.papertrail_hash.slice(0,8)}
+                        </span>
+                      )}
+                    </p>
                   </div>
                   <p className={`text-sm font-semibold ${e.amount_eur >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>€{e.amount_eur.toFixed(2)}</p>
                 </div>
@@ -271,6 +284,13 @@ function BookDetailBark({ bookId, userId, onClose }) {
                   </button>
                 </div>
                 <p className="text-[10px] text-slate-500 mt-1">Overschrijft eventuele bestaande opening.</p>
+              </div>
+              <div className="pt-4 border-t border-red-500/20">
+                <p className="text-[11px] text-red-300 font-semibold mb-1">Boek resetten naar nulpunt</p>
+                <p className="text-[10px] text-slate-500 mb-2">Wist alle regels. Papertrail (hash-chain) blijft bewaard — dus je kan verifieerbaar terugzien dat er een reset is geweest.</p>
+                <button data-testid="book-reset-btn" onClick={resetBook} className="px-3 py-2 rounded bg-red-500/20 border border-red-500/40 text-red-200 text-xs">
+                  Reset naar €0.00
+                </button>
               </div>
             </div>
           )}

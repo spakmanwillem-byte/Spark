@@ -1,6 +1,31 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52g (2026-02-21) — Nulpunt + Papertrail hash-chain
+
+### v13_boekhouding_papertrail_001 — Elke boeking hash-verankerd
+`books.add_entry()` haakt nu in `LogAgent.record()` — schrijft naar
+`/data/boekhouder/logs/book_{book_id}/YYYY-MM.jsonl`:
+- SHA256 hash-chain: `hash_prev` van vorige event + huidige data → `event_hash`
+- Eerste boeking begint met `GENESIS`
+- Bij manipulatie achteraf breekt de hash — verifieerbaar
+- `entry.papertrail_hash` staat mee in kasboek.json én zichtbaar in UI (mono cyan `#4f37f341`)
+
+### v13_boekhouding_reset_001 — Schoon nulpunt
+`POST /api/boekhouding/books/{id}/reset` wist alle entries (papertrail blijft bewaard).
+UI-knop toegevoegd bij Instellingen-tab van detail-bark: rode "Reset naar €0.00" met confirm.
+
+### Ruis opgeruimd
+276 vervuilde audit_log migratie-entries in `book-spark-core` gewist. Ook Roadkillshop, Zorgboerderij, Willem-Privé gereset. Alle 4 boeken staan nu op **€0.00** — echt nulpunt zoals gevraagd.
+
+### Files changed
+- `/app/backend/modules/boekhouder/books.py` — LogAgent-hook + `data=` param fix
+- `/app/backend/modules/boekhouder/books_routes.py` — `POST .../reset` endpoint
+- `/app/frontend/src/components/modules/BoekhoudingBoekenTab.js` — reset-knop + papertrail-hash tonen bij entries
+
+---
+
+
 ## Sessie 52f (2026-02-21) — Boekhouding frontend + balances + SepaHub refactor
 
 ### v13_sepa_hub_001 — SEPA als eigen hub-module

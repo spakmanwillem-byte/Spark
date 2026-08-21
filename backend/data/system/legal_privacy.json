@@ -78,7 +78,7 @@
     {
       "titel": "Geld & boekhouding (v13, feb 2026)",
       "items": [
-        "**Drie gescheiden lagen** — Bitvavo (crypto/trader potjes) ≠ Spark Wallet (spendable EUR-tokens) ≠ je zakelijke bankrekening (SEPA). Deze zijn bewust gescheiden zodat waarde nooit ongemerkt tussen lagen migreert.",
+        "**Drie gescheiden lagen** — Bitvavo (systeem-account van Spark waar de trader crypto potjes beheert) ≠ Spark Wallet (spendable EUR-tokens per user) ≠ jouw zakelijke bankrekening (SEPA). Deze zijn bewust gescheiden zodat waarde nooit ongemerkt tussen lagen migreert.",
         "**Multi-book boekhouding** — elke user/entity/shop krijgt een eigen boek-container onder `data/boekhouding/books/book-{id}/`. Owner-only zichtbaar (admin ook).",
         "**Papertrail hash-chain** — elke boeking krijgt een SHA256-hash met verwijzing naar vorige. Manipulatie achteraf is detecteerbaar. Chain blijft bewaard ook na reset.",
         "**Verkoop-flow** — jij geeft NETTO verkoopprijs op. Spark berekent bruto (netto + BTW) voor de koper-bon en houdt jouw netto in je shop-boek. Zo blijft jouw eigen boekhouding schoon voor Moneybird/BTW-aangifte.",

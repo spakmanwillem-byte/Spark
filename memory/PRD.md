@@ -1,6 +1,31 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52l (2026-02-21) — Correcties: Bitvavo=Spark + tab-rename
+
+### v13_bitvavo_ownership_correctie_001 — Bitvavo is Spark's account
+Verkeerde aanname vorige sessie: user-001 (Willem) had Bitvavo-baseline gekregen. **Correctie**:
+- **Bitvavo = Spark's systeem-account** (user-000). Trader-bot beheert crypto potjes namens users.
+- **user-001 (Willem)** heeft géén eigen Bitvavo-koppeling — alleen wallet-tokens.
+- Baseline verplaatst: user-001 → €0.00, user-000 (Spark) → €120.99
+- Update in `legal_privacy.json`, `ROADMAP_CORE.md` architectuur-blok, `gradatie_2.json` help-topic
+
+### v13_tab_rename_001 — Duidelijker naam
+- Tab **"Winst → Spark"** → **"Spark Verdiensten"** (admin-only, platform-fee stroom vanuit Spark's perspectief)
+- In tab: "Totaal → Spark" → "Spark platform-fee inkomsten"; "Winst-stroom" → "Spark platform-fee events"
+- Voor gewone users blijft de tab verborgen; zij zien alleen hun eigen shop-book met inkomsten & openstaande fees
+
+### Files changed
+- `/app/backend/data/trade/capital_baseline.json` — user-001 → 0, user-000 → 120.99
+- `/app/frontend/src/components/modules/BoekhoudPage.js` — tab-label
+- `/app/frontend/src/components/modules/WinstEventsTab.js` — labels binnen tab
+- `/app/backend/data/system/legal_privacy.json` — Bitvavo-omschrijving
+- `/app/backend/data/help/gradatie_2.json` — help-topic bijgewerkt
+- `/app/memory/ROADMAP_CORE.md` — architectuur-diagram bijgewerkt
+
+---
+
+
 ## Sessie 52k (2026-02-21) — Absoluut nulpunt + trader-baseline gezet
 
 ### v13_papertrail_reset_001 — Papertrail volledig gewist

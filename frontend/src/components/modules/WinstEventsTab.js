@@ -34,7 +34,7 @@ export function WinstEventsTab({ userId }) {
         <div className="p-4 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/30">
           <div className="flex items-center gap-2 mb-1">
             <Sparkles className="w-4 h-4 text-amber-400" />
-            <p className="text-[11px] text-amber-300 uppercase tracking-wider">Totaal → Spark</p>
+            <p className="text-[11px] text-amber-300 uppercase tracking-wider">Spark platform-fee inkomsten</p>
           </div>
           <p className="text-2xl font-bold text-amber-100" data-testid="winst-total-spark">€{total.toFixed(2)}</p>
           <p className="text-[10px] text-amber-400/70 mt-1">Hash-verankerd, verifieerbaar</p>
@@ -58,7 +58,7 @@ export function WinstEventsTab({ userId }) {
 
       <div>
         <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-          <TrendingUp className="w-4 h-4" /> Winst-stroom (nieuwste bovenaan)
+          <TrendingUp className="w-4 h-4" /> Spark platform-fee events (nieuwste bovenaan)
         </h3>
         {loading ? (
           <p className="text-slate-400 text-sm p-4">Laden…</p>

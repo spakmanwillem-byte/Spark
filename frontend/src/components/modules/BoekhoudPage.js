@@ -168,7 +168,7 @@ export function BoekhoudPage({ onNavigate }) {
 
   const tabs = isAdmin ? [
     { id: 'boeken', label: 'Boeken' },
-    { id: 'winst', label: 'Winst → Spark' },
+    { id: 'winst', label: 'Spark Verdiensten' },  // v13k: platform-fee stroom (admin only)
     { id: 'klanten', label: 'Klanten' },
   ] : [
     { id: 'boeken', label: 'Mijn Boeken' },

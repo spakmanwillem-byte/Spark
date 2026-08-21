@@ -26,24 +26,27 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 
 **Doel**: Multi-container boekhouding per user/entity + lokale SEPA voorbereiding + verifieerbare winst-events. Alles JSON-only, geen cloud.
 
-### 🏗️ Architectuur-scheiding (Willem, sessie 52i)
+### 🏗️ Architectuur-scheiding (Willem, sessie 52i/52l)
 
 Drie duidelijke lagen die nooit mogen mixen:
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│  BITVAVO potjes │    │  Spark WALLET    │    │ Zakelijke bank   │
-│  (crypto/trade) │    │  (EUR tokens)    │    │  (SEPA IBAN)     │
-│                 │    │                  │    │                  │
-│  RAW ASSETS     │    │  SPENDABLE       │    │  UITBETAALD      │
-│  waarde staat   │───▶│  bridge-laag     │───▶│  Moneybird/BTW   │
-│  op Bitvavo     │    │  wallet.spend    │    │  aangifte hier   │
-└─────────────────┘    └──────────────────┘    └──────────────────┘
+┌───────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│ BITVAVO (Spark)   │    │  Spark WALLET    │    │ Zakelijke bank   │
+│ SYSTEEM-account   │    │  (EUR tokens)    │    │  (SEPA IBAN)     │
+│ trader crypto     │    │  per user        │    │                  │
+│                   │    │                  │    │                  │
+│ RAW ASSETS bij    │───▶│  SPENDABLE       │───▶│  UITBETAALD      │
+│ Spark (niet users)│    │  bridge-laag     │    │  Moneybird/BTW   │
+│ users doneren EUR │    │  wallet.spend    │    │                  │
+└───────────────────┘    └──────────────────┘    └──────────────────┘
 ```
 
-- **Bitvavo potjes** = trader-buckets. Waarde staat FYSIEK op Bitvavo, boekhouding tracked alleen namens jou. Niet uit te geven vanuit Spark.
-- **Wallet** = Spark's spendable tokens. Bridge-laag. Winst uit shops/trades komt hier binnen. Uitgifte naar bank via SEPA-XML batch (of handmatig).
+- **Bitvavo** = Spark's **systeem-Bitvavo-account** waar de trader-bot crypto potjes beheert. Users hebben géén eigen Bitvavo-koppeling; ze doneren/storten EUR naar Spark, en Spark's trader werkt daarmee.
+- **Spark Wallet** = per-user spendable tokens. Winst uit shops/trades komt hier binnen. Uitgifte naar zakelijke bank via SEPA-XML batch (of handmatig).
 - **Zakelijke bank** = eindstation. Hier gaat je BTW-aangifte overheen (Moneybird). Boekhouding boekt schone netto omzet, spark-vergoeding is een aparte uitgave.
+
+**Live P&L / baseline** is per user in `capital_baseline.json`. user-000 (Spark) heeft de Bitvavo-baseline; users hebben alleen wallet-baseline.
 
 ### ✅ Gedaan (sessie 52 e/f/g/h/i)
 - [x] **Multi-book containers** — `/data/boekhouding/books/book-{id}/` met _meta, kasboek, reserve, closings, documents, sepa_batches, bank_imports. 4 initiële boeken geseed (`v13_boekhouding_books_001`).

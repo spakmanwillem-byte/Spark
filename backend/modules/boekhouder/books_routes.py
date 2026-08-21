@@ -16,6 +16,7 @@ from modules.boekhouder import migration as book_migration
 from modules.sepa_hub import get_hub as get_sepa_hub
 from modules.boekhouder import notify as book_notify
 from modules.boekhouder import shop_hooks as shop_book_hooks
+from modules.boekhouder import shop_announcer as shop_ann
 
 router = APIRouter(prefix="/boekhouding", tags=["boekhouding"])
 
@@ -483,3 +484,40 @@ def winst_events(viewer_id: str, limit: int = 50):
         "events": events[-limit:],
         "total_spark_deel_eur": round(sum(e.get("data", {}).get("spark_deel_eur", 0) for e in events), 2),
     }
+
+
+
+# ============================================================
+# v13n_shop_announcer_001 — Per-user shop-report + boekhouder DM
+# ============================================================
+
+@router.get("/shop-report/{user_id}")
+def shop_report_user(user_id: str, viewer_id: str, days: int = 7):
+    """Rapport bouwen voor 1 user. Owner of admin mag zien."""
+    if not (_is_admin(viewer_id) or user_id == viewer_id):
+        raise HTTPException(403, "Alleen owner of admin")
+    return {"success": True, "report": shop_ann.build_user_shop_report(user_id, days=days)}
+
+
+@router.post("/shop-report/{user_id}/announce")
+def announce_shop_report(user_id: str, viewer_id: str, days: int = 7, force: bool = False):
+    """Verstuur DM van boekhouder-bot naar user met eigen shop-rapport."""
+    if not (_is_admin(viewer_id) or user_id == viewer_id):
+        raise HTTPException(403)
+    return shop_ann.announce_to_user(user_id, days=days, force=force)
+
+
+@router.post("/shop-report/announce-all")
+def announce_all(viewer_id: str, days: int = 7, force: bool = False):
+    """Admin-only: alle shop-eigenaren krijgen hun rapport."""
+    if not _is_admin(viewer_id):
+        raise HTTPException(403, "Alleen admin")
+    return shop_ann.announce_all_shop_owners(days=days, force=force)
+
+
+@router.get("/shop-report-aggregate")
+def shop_report_aggregate(viewer_id: str, days: int = 7):
+    """Admin-only: aggregate view over alle shop-owners."""
+    if not _is_admin(viewer_id):
+        raise HTTPException(403, "Alleen admin")
+    return shop_ann.admin_aggregate_report(days=days)

@@ -82,7 +82,8 @@ Drie duidelijke lagen die nooit mogen mixen:
 - [ ] **Scheduler voor maand-snapshot** — nu handmatig via `POST /api/trade/baseline/run-scheduled-snapshot`. Automatisch draaien via APScheduler op 1e vd maand 00:05.
 - [ ] **Vermogens-tab (Balans)** — Activa (books + wallets + Bitvavo) − Passiva (openstaand spark-fees) = Eigen vermogen. Admin-only, Spark-perspectief.
 - [ ] **Weekly-report bron fixen** — `modules/boekhouder/weekly_report.py` leest `audit_log.json` (nu leeg door nulpunt). Migreren naar boek-entries als bron zodat het weer werkt.
-- [ ] **Weekly + Monthly alignment** — beide DM-flows opnieuw laten samenwerken zonder overlap: weekly = korte in-app DM van boekhouder-bot, monthly = ijkpunt-reset + archief per user notes. Duidelijkheid over waar welke stroom hoort.
+- [x] **Per-user shop-announcer** — `modules/boekhouder/shop_announcer.py`: user-scoped shop-rapport via boekhouder-bot DM. Endpoints: `/shop-report/{uid}` (owner+admin), `/shop-report/{uid}/announce`, `/shop-report/announce-all` (admin), `/shop-report-aggregate` (admin). RBAC 403 getest ✅ (`v13n_shop_announcer_001`).
+
 
 ---
 

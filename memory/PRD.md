@@ -1,6 +1,33 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52o (2026-02-21) — Per-user shop-announcer (het gat gevuld)
+
+### v13n_shop_announcer_001 — Gap gevuld
+Nieuwe module `modules/boekhouder/shop_announcer.py`:
+- `build_user_shop_report(uid, days)` — leest uit **nieuwe shop-books** (niet lege audit_log). Filter `owner_user_id=uid`. Verzamelt per shop: n_verkopen, omzet, uitgaven, resultaat, openstaand-Spark-fee.
+- `announce_to_user(uid, days, force)` — DM van boekhouder-bot naar user met eigen rapport, gebruikt bestaande `_send_dm()`.
+- `announce_all_shop_owners()` — batch voor alle users met minstens 1 shop.
+- `admin_aggregate_report()` — admin ziet aggregatie: totaal-omzet + openstaand-fees over alle users.
+
+Endpoints:
+- `GET /api/boekhouding/shop-report/{user_id}?viewer_id=X&days=7` — owner of admin
+- `POST /api/boekhouding/shop-report/{user_id}/announce` — owner of admin, force optioneel
+- `POST /api/boekhouding/shop-report/announce-all` — admin-only
+- `GET /api/boekhouding/shop-report-aggregate` — admin-only
+
+**RBAC** (Emmy's punt): user ziet ALLEEN eigen shops. Andere user krijgt 403. Aggregate is admin-only. Getest ✅.
+
+Vult het gat dat `weekly_report.py` liet vallen (audit_log leeg). Deze announcer werkt op nieuwe boek-bron. Kan als scheduler-target op maandag/vrijdag om 08:00.
+
+### Files changed
+- `/app/backend/modules/boekhouder/shop_announcer.py` — NIEUW
+- `/app/backend/modules/boekhouder/books_routes.py` — 4 nieuwe endpoints
+- `/app/memory/ROADMAP_CORE.md` — item afgevinkt
+
+---
+
+
 ## Sessie 52n (2026-02-21) — Analyse + shop-omzet in maand-snapshot
 
 ### Emmy's inzicht: bestaande weekly_report vs nieuwe monthly_baseline

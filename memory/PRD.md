@@ -1,6 +1,38 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52b (2026-02-21) — Offline-gehoor + Mic/Cam device selectie
+
+### v13_call_offline_state_001 — "Geen gehoor" bij offline contact
+`PriveCallBark` leest nu `contact.online`. Als false:
+- Overgaan → na 4.8s → `no_answer` state
+- Rode "Geen gehoor" badge + grijs-gefilterde avatar + "X is offline — probeer later opnieuw"
+- Auto-hangup 15s later
+Bug gefixt: `onClose` in dep-array veroorzaakte oneindige re-mount → `onCloseRef` pattern.
+
+### v13_call_devices_001 — Mic/Camera selectie in Mijn Profiel
+Backend (`profile/__init__.py`): 5 nieuwe pref-velden — `audio_input_device_id`, `video_input_device_id`, `audio_input_label`, `video_input_label`, `use_default_devices`. Default = "default"/systeem-standaard.
+
+Frontend (`DeviceSettingsPanel.js`, NIEUW):
+- `navigator.mediaDevices.enumerateDevices()` (lokale browser-API, geen cloud)
+- Toggle "Gebruik systeem-standaard apparaten" (default aan)
+- Dropdowns mic + cam (labels pas zichtbaar na permission-grant)
+- Test-mic → 4s live VU-meter met `AnalyserNode`
+- Test-cam → 5s live `<video>` preview
+- Alle streams stoppen automatisch na test (geen achtergrond-capture)
+- Ververs-knop vraagt eenmalig `getUserMedia({audio:true,video:true})` voor de labels
+- "Huidige keuze"-samenvatting onderaan
+Ingehaakt in `UserProfilePage.js` na Geluid-panel.
+
+### Files changed
+- `/app/frontend/src/components/chat/PriveCallBark.js` — offline state + ref-fix
+- `/app/frontend/src/components/profile/DeviceSettingsPanel.js` — NIEUW
+- `/app/frontend/src/components/profile/UserProfilePage.js` — import + render
+- `/app/backend/modules/profile/__init__.py` — UIPreferences + DEFAULT_UI_PREFS uitgebreid
+
+---
+
+
 ## Sessie 52 (2026-02-21) — Privé-bel UI-shell + WebRTC-verwarring weg
 
 ### v13_prive_call_ui_001 — Lokale bel-shell in privé chat

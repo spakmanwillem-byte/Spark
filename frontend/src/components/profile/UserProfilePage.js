@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { DnDCharacterSheet } from './DnDCharacterSheet';
 import { BarkModal } from '../shared/BarkModal';
+import { DeviceSettingsPanel } from './DeviceSettingsPanel';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -1274,6 +1275,14 @@ function InstellingenTab({ userId, user }) {
           </label>
         </div>
       </Panel>
+
+      {/* v13_call_devices_001 — Beeld & Geluid apparaten (mic/cam) voor privé-bellen */}
+      <DeviceSettingsPanel
+        prefs={prefs}
+        updatePref={updatePref}
+        savePrefs={savePrefs}
+        saving={saving}
+      />
 
       {/* v12_chat_visibility_001 — Chat-modules aan/uit per user */}
       <Panel>

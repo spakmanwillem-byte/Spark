@@ -9,25 +9,36 @@
  *   - Mute / Camera-toggle / Hangup knoppen (lokale UI-state)
  *   - Glow-rand met --glow-base CSS variabele (kleurschema uit profiel)
  */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { UserAvatar } from '../common/UserAvatar';
 import { Phone, Video, VideoOff, Mic, MicOff, PhoneOff, Camera } from 'lucide-react';
 
 export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
   const [muted, setMuted] = useState(false);
   const [videoPaused, setVideoPaused] = useState(false);
-  const [callState, setCallState] = useState('connecting'); // connecting | ringing | active
+  const [callState, setCallState] = useState('connecting'); // connecting | ringing | active | no_answer
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
 
   useEffect(() => {
     if (!open) return;
     setMuted(false);
     setVideoPaused(false);
     setCallState('connecting');
+    const isOnline = contact?.online === true;
+    const timers = [];
     // Fake state-progressie zodat de shell "leeft" — echt bellen komt later
-    const t1 = setTimeout(() => setCallState('ringing'), 800);
-    const t2 = setTimeout(() => setCallState('active'), 3200);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [open, contact?.id, mode]);
+    timers.push(setTimeout(() => setCallState('ringing'), 800));
+    if (isOnline) {
+      timers.push(setTimeout(() => setCallState('active'), 3200));
+    } else {
+      // Offline: laat 'm 4s overgaan, dan "geen gehoor"
+      timers.push(setTimeout(() => setCallState('no_answer'), 4800));
+      // Auto-hangup 15s na "no_answer"
+      timers.push(setTimeout(() => onCloseRef.current && onCloseRef.current(), 4800 + 15000));
+    }
+    return () => timers.forEach(clearTimeout);
+  }, [open, contact?.id, contact?.online, mode]);
 
   if (!open || !contact) return null;
 
@@ -36,7 +47,9 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
     connecting: 'Verbinden…',
     ringing: 'Overgaan…',
     active: isVideo ? 'In beeld' : 'In gesprek',
+    no_answer: 'Geen gehoor',
   }[callState];
+  const isNoAnswer = callState === 'no_answer';
 
   return (
     <div
@@ -66,10 +79,14 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
           <span
             data-testid="prive-call-state"
             className="text-[11px] px-2 py-0.5 rounded-full"
-            style={{
-              backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 15%, transparent)',
-              color: 'var(--glow-base, #f59e0b)',
-            }}
+            style={
+              isNoAnswer
+                ? { backgroundColor: 'rgba(239,68,68,0.15)', color: '#fca5a5' }
+                : {
+                    backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 15%, transparent)',
+                    color: 'var(--glow-base, #f59e0b)',
+                  }
+            }
           >
             {stateLabel}
           </span>
@@ -80,18 +97,26 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
           data-testid="prive-call-stage"
           className="relative w-full aspect-video bg-black flex items-center justify-center"
         >
-          {/* Avatar tijdens verbinden / paused / audio-only */}
+          {/* Avatar tijdens verbinden / paused / audio-only / geen-gehoor */}
           {(!isVideo || videoPaused || callState !== 'active') && (
             <div
               data-testid="prive-call-avatar"
-              className="flex flex-col items-center gap-3 animate-pulse-slow"
+              className={`flex flex-col items-center gap-3 ${isNoAnswer ? 'opacity-60' : 'animate-pulse-slow'}`}
             >
               <div
                 className="rounded-2xl p-1"
-                style={{
-                  backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 25%, transparent)',
-                  boxShadow: '0 0 30px color-mix(in srgb, var(--glow-base, #f59e0b) 60%, transparent)',
-                }}
+                style={
+                  isNoAnswer
+                    ? {
+                        backgroundColor: 'rgba(239,68,68,0.15)',
+                        boxShadow: '0 0 30px rgba(239,68,68,0.35)',
+                        filter: 'grayscale(0.6)',
+                      }
+                    : {
+                        backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 25%, transparent)',
+                        boxShadow: '0 0 30px color-mix(in srgb, var(--glow-base, #f59e0b) 60%, transparent)',
+                      }
+                }
               >
                 <UserAvatar
                   user={{
@@ -105,7 +130,11 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
                 />
               </div>
               <p className="text-slate-300 text-sm font-medium">{contact.naam}</p>
-              <p className="text-slate-500 text-xs">{stateLabel}</p>
+              <p className={`text-xs ${isNoAnswer ? 'text-red-300' : 'text-slate-500'}`}>
+                {isNoAnswer
+                  ? `${contact.naam} is offline — probeer later opnieuw`
+                  : stateLabel}
+              </p>
             </div>
           )}
 

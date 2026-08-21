@@ -252,6 +252,12 @@ class UIPreferences(BaseModel):
     # v12_chat_visibility_001 — per-user zichtbaarheid van chat-modules
     community_chat_enabled: Optional[bool] = None  # default False; alleen gradatie ≤ 5
     private_chats_enabled: Optional[bool] = None   # default True; alle gradaties
+    # v13_call_devices_001 — mic/cam device-keuze voor privé-bellen
+    audio_input_device_id: Optional[str] = None    # browser mediaDevice deviceId of "default"
+    video_input_device_id: Optional[str] = None
+    audio_input_label: Optional[str] = None        # menselijk leesbare naam voor UI
+    video_input_label: Optional[str] = None
+    use_default_devices: Optional[bool] = None     # true = systeem-default, negeer bovenstaande
 
 
 DEFAULT_UI_PREFS = {
@@ -263,6 +269,12 @@ DEFAULT_UI_PREFS = {
     # v12_chat_visibility_001
     "community_chat_enabled": False,
     "private_chats_enabled": True,
+    # v13_call_devices_001
+    "audio_input_device_id": "default",
+    "video_input_device_id": "default",
+    "audio_input_label": "Systeem-standaard microfoon",
+    "video_input_label": "Systeem-standaard camera",
+    "use_default_devices": True,
 }
 
 

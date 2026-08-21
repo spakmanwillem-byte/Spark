@@ -1,6 +1,34 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52p (2026-02-21) — Auto-announce alle automatische boekingen
+
+### v13o_auto_announce_001 — Transparantie voor auto-acties
+Hook `_auto_announce_entry` in `books.add_entry`: elke boeking waarvan `source` NIET in `{manual, manual_opening}` zit, triggert automatisch een boekhouder-bot DM naar `owner_user_id`.
+
+**Bronnen die announcen**:
+- `shop_hook` — shop-verkoop/aankoop → "📈 Verkoop in Roadkillshop €+10"
+- `camt053` / `mt940` — bank-import → "SEPA bank-import €+X"
+- `migration` — retroactieve migratie → "Migratie-entry"
+- `spark_fee_inlossen` — Spark-fee betaling → "Spark-fee inlossing €-X"
+
+**Bronnen die NIET announcen** (bewust gedaan door user):
+- `manual` — direct via API/UI door user zelf
+- `manual_opening` — openingsbalans instellen via UI
+
+**DM-formaat**: emoji (📈/📉) · book naam · bron-label · bedrag · omschrijving · papertrail-hash prefix
+
+**Uitzondering**: user-000 (Spark) krijgt geen DM want dat is de bot zelf.
+
+Getest ✅: verkoop €10 in Roadkillshop → Willem's boekhouder-inbox krijgt DM met hash `82a9e8c0`.
+
+### Files changed
+- `/app/backend/modules/boekhouder/books.py` — `_auto_announce_entry()` + hook in `add_entry()`
+- `/app/memory/ROADMAP_CORE.md` — item afgevinkt
+
+---
+
+
 ## Sessie 52o (2026-02-21) — Per-user shop-announcer (het gat gevuld)
 
 ### v13n_shop_announcer_001 — Gap gevuld

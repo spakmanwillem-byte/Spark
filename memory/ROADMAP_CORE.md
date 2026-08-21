@@ -83,6 +83,7 @@ Drie duidelijke lagen die nooit mogen mixen:
 - [ ] **Vermogens-tab (Balans)** — Activa (books + wallets + Bitvavo) − Passiva (openstaand spark-fees) = Eigen vermogen. Admin-only, Spark-perspectief.
 - [ ] **Weekly-report bron fixen** — `modules/boekhouder/weekly_report.py` leest `audit_log.json` (nu leeg door nulpunt). Migreren naar boek-entries als bron zodat het weer werkt.
 - [x] **Per-user shop-announcer** — `modules/boekhouder/shop_announcer.py`: user-scoped shop-rapport via boekhouder-bot DM. Endpoints: `/shop-report/{uid}` (owner+admin), `/shop-report/{uid}/announce`, `/shop-report/announce-all` (admin), `/shop-report-aggregate` (admin). RBAC 403 getest ✅ (`v13n_shop_announcer_001`).
+- [x] **Auto-announce automatische boekingen** — `books.add_entry` hook `_auto_announce_entry` stuurt DM naar owner voor alle non-manuele bronnen (shop_hook, camt053, mt940, migration, spark_fee_inlossen). Skip bij `manual` / `manual_opening`. Getest ✅ (`v13o_auto_announce_001`).
 
 
 ---

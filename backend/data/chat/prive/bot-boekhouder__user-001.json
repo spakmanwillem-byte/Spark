@@ -4150,6 +4150,20 @@
       "system": true,
       "kind": "boekhouder_user_shop_report",
       "period_days": 7
+    },
+    {
+      "id": "bh-48a17c93",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📈 **Auto-boeking in Roadkillshop**\nType: verkoop\nBedrag: €+10.00\nOmschrijving: Verkoop aan Auto-DM Test\nHash: `82a9e8c0c6dc`",
+      "ts": "2026-08-21T15:07:50.545174+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_auto_entry",
+      "book_id": "book-roadkillshop",
+      "entry_id": "entry-6dbc547b",
+      "source": "shop_hook"
     }
   ]
 }

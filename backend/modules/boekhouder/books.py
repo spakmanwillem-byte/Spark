@@ -243,7 +243,47 @@ def add_entry(book_id: str, entry: Dict) -> Optional[Dict]:
     save_json(kasboek_fp, data)
     meta["last_touched"] = _now()
     save_json(_meta_fp(book_id), meta)
+
+    # v13o_auto_announce_001 — Automatische boekingen worden gemeld
+    # aan owner via boekhouder-bot DM. Alleen skippen bij expliciet manueel.
+    if e["source"] not in ("manual", "manual_opening"):
+        try:
+            _auto_announce_entry(meta, e)
+        except Exception:
+            pass  # DM-fail mag boeking niet blokkeren
+
     return e
+
+
+def _auto_announce_entry(meta: Dict, entry: Dict):
+    """Verstuur DM naar boek-owner over automatische boeking."""
+    owner = meta.get("owner_user_id")
+    if not owner or owner in ("user-000", "system"):
+        return  # Spark zelf krijgt geen DM
+    from modules.boekhouder.service import _send_dm
+    src = entry.get("source", "auto")
+    amt = entry["amount_eur"]
+    arrow = "📈" if amt >= 0 else "📉"
+    src_label = {
+        "shop_hook": "verkoop",
+        "camt053": "SEPA bank-import",
+        "mt940": "MT940 bank-import",
+        "migration": "migratie",
+        "spark_fee_inlossen": "Spark-fee inlossing",
+    }.get(src, f"auto-boeking ({src})")
+    text = (
+        f"{arrow} **Auto-boeking in {meta['naam']}**\n"
+        f"Type: {src_label}\n"
+        f"Bedrag: €{amt:+.2f}\n"
+        f"Omschrijving: {entry.get('naam', '?')}\n"
+        + (f"Hash: `{entry.get('papertrail_hash', '-')[:12]}`" if entry.get('papertrail_hash') else "")
+    )
+    _send_dm(
+        text,
+        kind="boekhouder_auto_entry",
+        extra={"book_id": meta["id"], "entry_id": entry["id"], "source": src},
+        recipient_id=owner,
+    )
 
 
 def list_entries(book_id: str, limit: int = 200) -> List[Dict]:

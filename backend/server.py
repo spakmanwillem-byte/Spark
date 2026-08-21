@@ -294,6 +294,9 @@ app.include_router(dnd_daily_event_router, prefix="/api")
 # v6_reconcile_001 — Reconciliation: potje-saldo vs Bitvavo (alleen Spark)
 from modules.trade.reconcile import router as trade_reconcile_router
 app.include_router(trade_reconcile_router, prefix="/api")
+# v12_trader_strategy_cfg_001 — Data-driven trader-parameters (GET/PATCH)
+from modules.trade.strategy_config_routes import router as trade_strategy_cfg_router
+app.include_router(trade_strategy_cfg_router, prefix="/api")
 
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
@@ -357,11 +360,12 @@ except Exception as _ex:
     print(f"   ⚠️  Admin seed failed: {_ex}")
 
 # Module 27: Knowledge Base v2 (v5_kbv2_001 — 4 lades + inbox + index)
-from modules.kb_v2 import kbv2_router, kbv2_media_router, kbv2_llm_router, kbv2_curation_router
+from modules.kb_v2 import kbv2_router, kbv2_media_router, kbv2_llm_router, kbv2_curation_router, kbv2_bulk_5w_router
 app.include_router(kbv2_router, prefix="/api")
 app.include_router(kbv2_media_router, prefix="/api")
 app.include_router(kbv2_llm_router, prefix="/api")
 app.include_router(kbv2_curation_router, prefix="/api")
+app.include_router(kbv2_bulk_5w_router, prefix="/api")
 
 # v6_emotion_pipeline_001 — 7-laags emotie-pipeline (dry-run)
 from modules.emotion_pipeline.routes import router as emotion_pipeline_router

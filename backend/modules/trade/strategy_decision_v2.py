@@ -79,6 +79,13 @@ def _gap_breakout_check(candles):
     return {"signal": "NONE", "reason": "v2 gebruikt geen gap-check"}
 
 
-def _detect_daily_drop(candles, threshold_pct=5.0):
+def _detect_daily_drop(candles, threshold_pct=None):
     # v2 heeft geen event-pauze mechanisme
-    return {"is_event": False, "engine": "v2"}
+    # v12_trader_strategy_cfg_001 — Als threshold_pct None: lees uit strategy_config.json
+    if threshold_pct is None:
+        try:
+            from modules.trade.strategy_config_routes import get_strategy_value
+            threshold_pct = get_strategy_value("buy", "daily_drop_threshold_pct", 5.0)
+        except Exception:
+            threshold_pct = 5.0
+    return {"is_event": False, "engine": "v2", "threshold_pct": threshold_pct}

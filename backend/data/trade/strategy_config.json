@@ -1,0 +1,43 @@
+{
+  "_arch_ref": "v12_trader_strategy_cfg_001",
+  "_doel": "Data-driven trader-parameters. Post trader-reset (2026-08-06) willen we zonder code-deploy kunnen tunen. Elke consumer in modules/trade leest hieruit i.p.v. hardcoded constants.",
+  "_geraakt_door": [
+    "modules/trade/strategy_decision_v2.py (_detect_daily_drop threshold)",
+    "modules/trade/anker_service.py (blueprint-based, aparte config — laat staan)"
+  ],
+  "buy": {
+    "daily_drop_threshold_pct": 5.0,
+    "gap_confirmation_required": false,
+    "gap_confirmation_min_greens": 3,
+    "cooldown_between_buys_sec": 3600,
+    "min_position_eur": 5.0,
+    "max_open_positions_per_market": 1
+  },
+  "sell": {
+    "loss_cut_pct": -1.0,
+    "loss_cut_window_hours": 48,
+    "take_profit_pct": 3.0,
+    "trailing_active_above_pct": 2.0,
+    "trailing_step_pct": 0.5,
+    "fee_aware": true,
+    "min_fee_buffer_pct": 0.4
+  },
+  "risk": {
+    "max_open_positions_global": 6,
+    "daily_max_loss_eur": 5.0,
+    "event_pause_on_drop_pct": 5.0,
+    "event_pause_duration_hours": 24
+  },
+  "pots": {
+    "default_capital_eur": 10.0,
+    "max_pot_size_ratio": 8.0,
+    "overflow_to_pool_pct": 0.0
+  },
+  "created_at": "2026-08-06T13:00:00Z",
+  "last_updated": "2026-08-21T12:32:03.697830+00:00",
+  "notes": {
+    "wijzigen_via": "PATCH /api/trader/strategy-config {section.key: value}",
+    "geldigheid": "Nieuwe waarden werken direct — geen restart nodig (elke tick leest opnieuw).",
+    "backup": "Handmatige aanpassingen worden gelogd in curation_history-stijl in trade/strategy_config_history.json"
+  }
+}

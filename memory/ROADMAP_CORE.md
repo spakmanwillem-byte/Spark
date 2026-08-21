@@ -46,10 +46,16 @@ Zie ook: `PRD.md` voor product-visie, `LEARNINGS.md` voor concrete fouten om te 
 ### 🔓 In sessie 56d gefixt
 - **`v12_admin_capable_unlock_001`** — `/api/auth/users?admin_id=...` (register-with-override) accepteert nu iedereen met `admin_capable=True` of gradatie 1/2, i.p.v. alleen gradatie 1/2. Getest met 3 curl-scenarios, allemaal groen. Marieke (gradatie 3) getest en teruggezet — Willem kiest zelf wie sub-admin wordt.
 - **`v12_admin_type_001`** — RBAC light: `admin_type` veld op user + `admin_types.json` config met 3 vaste types (full / community / user_admin, elk met kleur en scope-array). `POST /api/admin/grant` accepteert nu `admin_type` param. `GET /api/admin/types` publiek endpoint. In `AdminSettingsPanel` bark: dropdown "Admin-type" tussen user-select en wachtwoord. In admins-lijst: gekleurde type-badge naast naam. **Nog niet gates**: elke tab/endpoint zonder scope-check draait als vanouds. Scope-enforcement is sessie 57.
+- **Trader-reset uitgevoerd** — alle logs, balances, anker, monitor_state gewist. 12 potjes over 6 users op nul. Backup: `/app/_backups/trader_reset_20260821_121757/`.
+- **`v12_5w_bulk_fill_001`** — bulk-endpoint `POST /api/kb/v2/curation/5w-fill-bulk?limit=N` vult ontbrekende 5W/lagen op onvolledige lade-kaarten via LLM (Emergent Universal Key via `llm_router.chat_complete`). Alleen ontbrekende velden worden aangeraakt, bestaande content blijft intact. Elke wijziging wordt gelogd in `curation_history.json`. Status via `GET /5w-fill-status`. Getest: 347 onvolledig → 346 na 1 kaart (kaart "overleden" kreeg `ws5.wanneer` gevuld).
+- **`v12_trader_strategy_cfg_001`** — data-driven trader-parameters in `/app/backend/data/trade/strategy_config.json` (buy/sell/risk/pots secties, 15 tunable keys). `GET /api/trader/strategy-config`, `PATCH ...` en `GET .../history`. Elke wijziging gelogd. Eerste consumer: `strategy_decision_v2._detect_daily_drop()` leest nu `buy.daily_drop_threshold_pct` uit config i.p.v. hardcoded 5.0. Volgende hardcoded constants kunnen per taak migreren zonder deploy.
 
 ### ❓ Open vragen / gaps voor sessie 57
 
-1. **XP-veld ontbreekt in edit-modal**
+1. **Trade-monitor sync-bug** (nieuw, sessie 56d)
+   Willem meldt: monitor in trader-tab start soms niet gelijk met analytisch-tab. Moet dan opnieuw klikken. *Actie*: check `TraderPage` (of vergelijkbaar) — mogelijk aparte state per tab i.p.v. gedeelde monitor-status. Klein maar irritant.
+
+2. **XP-veld ontbreekt in edit-modal**
    `AchievementsPage.js` edit-modal past nu alleen titel + icon aan. `xp_reward` en `threshold`/`trigger`-waarden zijn nog blueprint-JSON-alleen (niet via GUI editable). *Vraag*: wil Willem die velden editable in de modal, of blijft dat blueprint-only werk voor Willem alleen?
 
 2. **Rang-drempel-mapping**

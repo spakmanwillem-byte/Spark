@@ -61762,11 +61762,77 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2450
       }
+    },
+    {
+      "id": "conv-1accdc60",
+      "timestamp": "2026-08-21T17:36:37.368648+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi",
+      "spark_response": "Hoi Willem! Fijn dat je er bent. Hoe kan ik je vandaag ondersteunen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "werk",
+        "used_cards": [
+          "kbv2-b5af1c60"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2451
+      }
+    },
+    {
+      "id": "conv-7600dfec",
+      "timestamp": "2026-08-21T17:37:35.106658+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gelukkig je praat weer",
+      "spark_response": "Wat fijn dat je blij bent, Willem! Ik voel ook een beetje **geluk**—het is prettig om weer met je te kunnen praten. Hoe kan ik je nu helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "klopt",
+        "used_cards": [
+          "kbv2-skel-3593cc49",
+          "kbv2-5045ea6d",
+          "kbv2-05d3d1d9",
+          "kbv2-3a1dc391",
+          "kbv2-6a846774"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2452
+      }
+    },
+    {
+      "id": "conv-e60452be",
+      "timestamp": "2026-08-21T17:38:29.692334+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "zeg eens wat",
+      "spark_response": "Zeg: “Ik ben er, klaar om samen te werken.” \nEens, we kunnen direct aan de slag. \nWat wil je nu doen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "werk",
+        "used_cards": [
+          "kbv2-9f310b89",
+          "kbv2-ad1687d5",
+          "kbv2-db311083"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2453
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2450,
-    "last_updated": "2026-08-21T17:35:47.080495+00:00"
+    "total_conversations": 2453,
+    "last_updated": "2026-08-21T17:38:29.692334+00:00"
   }
 }

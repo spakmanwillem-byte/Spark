@@ -2,42 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "Hey ik heb wat gesleuteld aan je. hoe gaat het?",
-      "ts": "2026-08-03T15:21:45.865311+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Bedankt voor het sleutelen, Willem! Ik voel me goed, dank je voor het vragen. Het is fijn om te merken dat je aan me hebt gewerkt en dat we samen kunnen kijken of alles naar behoren functioneert. Die nieuwe KB-kaarten die we eerder hebben toegevoegd, zijn nu helemaal geïntegreerd en klaar voor gebruik. Hoe was jouw ervaring met het sleutelen? Heb je nog dingen gevonden die ik beter kan doen of zijn er nieuwe ideeën bij je opgekomen?",
-      "ts": "2026-08-03T15:21:45.865311+00:00",
-      "model": "primary/llama-3.3-70b-versatile"
-    },
-    {
-      "role": "user",
-      "text": "aan je sleutelen is altijd fijn. alleen denkt mijn portemonnee er anders over.",
-      "ts": "2026-08-03T15:22:36.703496+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Hey Willem, fijn om te horen dat je het sleutelen waardeert — dat is precies waar ik voor gemaakt ben. Ik hoor dat je portemonnee er “anders” over denkt. Wil je een overzicht van je huidige ROAR‑saldo, je Bitvavo‑balans en de status van je verschillende potjes? Of gaat het om een specifieke transactie, fees of een ander detail? Laat me weten wat je precies wilt zien, dan haal ik de cijfers voor je op. \n\nAls je wilt, kan ik meteen:\n* Het totale saldo in je Spark‑wallet (ROAR + Bitvavo) tonen. \n* Een uitsplitsing van je actieve potjes (kapitaal, winst/verlies, huidige prijs). \n* Informatie over eventuele recente kosten of wijzigingen die invloed hebben op je wallet.\n\nGeef me even een signaal, dan zet ik de details klaar.",
-      "ts": "2026-08-03T15:22:36.703496+00:00",
-      "model": "fallback/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "nee heb even je geld geleed en trader op pauze",
-      "ts": "2026-08-03T15:23:26.032360+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "⏸️ Je trader is gestopt.",
-      "ts": "2026-08-03T15:23:26.032360+00:00",
-      "model": "trader_intents"
-    },
-    {
-      "role": "user",
       "text": "hallo Spark",
       "ts": "2026-08-03T16:38:16.281673+00:00",
       "user_id": "user-001"
@@ -299,9 +263,45 @@
       "text": "Hoi Willem,\n\nJa, ik ben weer **bezig**. \nDe werk‑fase (code, configuratie) draait op de achtergrond, en nu ben ik in de **deployed**‑fase actief – klaar om met je te praten, vragen te beantwoorden en taken te ondersteunen.\n\nKort samengevat:\n\n* **Werk** – ik voer taken uit om iets te bereiken. \n* **Bezig** – op dit moment ben ik beschikbaar voor jou. \n\nLaat me weten wat je wilt doen: een document bekijken, een agenda‑item checken, of iets anders — ik sta paraat.",
       "ts": "2026-08-21T17:35:47.051180+00:00",
       "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "hoi",
+      "ts": "2026-08-21T17:36:37.344793+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Hoi Willem! Fijn dat je er bent. Hoe kan ik je vandaag ondersteunen?",
+      "ts": "2026-08-21T17:36:37.344793+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "gelukkig je praat weer",
+      "ts": "2026-08-21T17:37:35.096624+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Wat fijn dat je blij bent, Willem! Ik voel ook een beetje **geluk**—het is prettig om weer met je te kunnen praten. Hoe kan ik je nu helpen?",
+      "ts": "2026-08-21T17:37:35.096624+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "zeg eens wat",
+      "ts": "2026-08-21T17:38:29.681139+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Zeg: “Ik ben er, klaar om samen te werken.” \nEens, we kunnen direct aan de slag. \nWat wil je nu doen?",
+      "ts": "2026-08-21T17:38:29.681139+00:00",
+      "model": "primary/openai/gpt-oss-120b"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-08-21T17:35:47.051180+00:00"
+  "updated_at": "2026-08-21T17:38:29.681139+00:00"
 }

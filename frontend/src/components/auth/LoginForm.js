@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Zap, User, Key, Shield, LogIn, AlertCircle, UserPlus, CheckCircle } from 'lucide-react';
+import { Zap, User, Key, LogIn, AlertCircle, UserPlus, CheckCircle } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -26,13 +26,13 @@ export function LoginForm() {
   const { login, error } = useAuth();
   const [naam, setNaam] = useState('');
   const [sleutelwoord, setSleutelwoord] = useState('');
-  const [masterkey, setMasterkey] = useState('');
-  const [showMasterkey, setShowMasterkey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [localError, setLocalError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   // v13s_login_glow_config_001 — glow-config uit /api/settings/system (publiek, geen auth)
   const [glow, setGlow] = useState(LOGIN_GLOW_DEFAULTS);
+  // v13s_login_identity_001 — identiteit (naam + versie) uit /api/spark/identity
+  const [identity, setIdentity] = useState({ naam: 'Spark', versie: '2.0' });
   useEffect(() => {
     fetch(`${API}/api/settings/system`)
       .then(r => r.json())
@@ -52,6 +52,12 @@ export function LoginForm() {
         });
       })
       .catch(() => {/* fallback op defaults */});
+    fetch(`${API}/api/spark/identity`)
+      .then(r => r.json())
+      .then(d => {
+        if (d && d.naam) setIdentity({ naam: d.naam, versie: d.versie || '' });
+      })
+      .catch(() => {/* fallback */});
   }, []);
 
   // Genereer stabiele random dot posities op basis van count
@@ -91,7 +97,7 @@ export function LoginForm() {
     }
 
     setIsLoading(true);
-    const result = await login(naam, sleutelwoord, masterkey || null);
+    const result = await login(naam, sleutelwoord, null);
     setIsLoading(false);
 
     if (!result.success) {
@@ -210,8 +216,8 @@ export function LoginForm() {
               <Zap className="w-8 h-8 text-white" />
             </div>
           )}
-          <h1 className="text-3xl font-bold text-white tracking-tight">Spark Core</h1>
-          <p className="text-slate-400 mt-2">Modulaire AI Assistent</p>
+          <h1 className="text-3xl font-bold text-white tracking-tight">{identity.naam || 'Spark'}</h1>
+          <p className="text-slate-400 mt-2">AI Assistent</p>
         </div>
 
         {/* Login Card */}
@@ -284,31 +290,7 @@ export function LoginForm() {
               </div>
             </div>
 
-            {/* Masterkey Toggle */}
-            <div>
-              <button
-                type="button"
-                onClick={() => setShowMasterkey(!showMasterkey)}
-                className="text-sm text-slate-500 hover:text-amber-400 transition-colors flex items-center gap-2"
-              >
-                <Shield className="w-4 h-4" />
-                {showMasterkey ? 'Verberg masterkey' : 'Admin toegang'}
-              </button>
-              
-              {showMasterkey && (
-                <div className="relative mt-3">
-                  <Shield className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500/50" />
-                  <input
-                    type="password"
-                    value={masterkey}
-                    onChange={(e) => setMasterkey(e.target.value)}
-                    placeholder="Masterkey"
-                    className="w-full pl-12 pr-4 py-3 bg-amber-500/5 border border-amber-500/20 rounded-xl text-amber-400 placeholder-amber-500/30 focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20 transition-all"
-                    data-testid="login-masterkey-input"
-                  />
-                </div>
-              )}
-            </div>
+            {/* v13s_login_identity_001 — masterkey/Admin toegang verwijderd, wordt in-ecosystem geregeld */}
 
             {/* Submit Button — v13s_login_glow_config_001 primary kleur uit systeem */}
             <button
@@ -350,10 +332,10 @@ export function LoginForm() {
             </button>
           </form>
 
-          {/* Footer */}
+          {/* Footer — v13s_login_identity_001 versie uit spark_identity.json */}
           <div className="mt-6 pt-6 border-t border-slate-800 text-center">
             <p className="text-sm text-slate-500">
-              Spark Core 2.0 — Modulaire Architectuur
+              {identity.naam || 'Spark'}{identity.versie ? ` ${identity.versie}` : ''}
             </p>
           </div>
         </div>

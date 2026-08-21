@@ -203,7 +203,7 @@ async def bulk_5w_fill(limit: int = Query(20, ge=1, le=100),
                 skipped += 1
                 continue
 
-            resp = await llm_router.chat_complete(messages, temperature=0.3, max_tokens=1400, timeout=45.0)
+            resp = await llm_router.chat_complete(messages, temperature=0.3, max_tokens=2400, timeout=45.0)
             if not resp.get("success"):
                 errors.append({"card_id": c.get("id"), "error": resp.get("error", "unknown")})
                 skipped += 1

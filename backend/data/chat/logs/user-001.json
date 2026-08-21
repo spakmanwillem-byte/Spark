@@ -61655,11 +61655,47 @@
         "session_id": "t-nocloud",
         "gesprek_nummer": 2445
       }
+    },
+    {
+      "id": "conv-31afc4ac",
+      "timestamp": "2026-08-21T17:24:28.770051+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2446
+      }
+    },
+    {
+      "id": "conv-83053fb0",
+      "timestamp": "2026-08-21T17:24:28.925997+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2447
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2445,
-    "last_updated": "2026-08-21T16:26:18.535817+00:00"
+    "total_conversations": 2447,
+    "last_updated": "2026-08-21T17:24:28.925997+00:00"
   }
 }

@@ -7,24 +7,23 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.15,
+          "capital": 10.12,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 245.03,
-            "highest_price": 245.03,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-21T17:09:28.817720+00:00",
-            "amount_eur": 10.1
+            "entry_time": null
           },
           "market": "BCH-EUR",
           "stats": {
-            "trades": 1,
-            "wins": 0,
+            "trades": 2,
+            "wins": 1,
             "losses": 0,
-            "total_pnl": 0.0
+            "total_pnl": 0.2483
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
           "minted_from": "willem_inleg_basis",
@@ -41,7 +40,8 @@
             }
           ],
           "reconcile_audit": [],
-          "last_action": "BUY @ €245.03"
+          "last_action": "SELL @ €252.25 | netto €+0.248",
+          "original_max_size": 0.0
         },
         {
           "id": "pot-002",
@@ -53,7 +53,7 @@
           "position": {
             "is_open": true,
             "entry_price": 66035.0,
-            "highest_price": 66035.0,
+            "highest_price": 66448.0,
             "trailing_active": false,
             "entry_time": "2026-08-21T17:09:28.914557+00:00",
             "amount_eur": 10.0994
@@ -92,8 +92,8 @@
           "position": {
             "is_open": true,
             "entry_price": 2047.88,
-            "highest_price": 2047.88,
-            "trailing_active": false,
+            "highest_price": 2069.02,
+            "trailing_active": true,
             "entry_time": "2026-08-21T17:09:28.990767+00:00",
             "amount_eur": 10.1
           },
@@ -131,7 +131,7 @@
           "position": {
             "is_open": true,
             "entry_price": 78.224,
-            "highest_price": 78.224,
+            "highest_price": 78.564,
             "trailing_active": false,
             "entry_time": "2026-08-21T17:09:29.078227+00:00",
             "amount_eur": 10.1
@@ -212,7 +212,7 @@
           "position": {
             "is_open": true,
             "entry_price": 1.3529,
-            "highest_price": 1.3529,
+            "highest_price": 1.3535,
             "trailing_active": false,
             "entry_time": "2026-08-21T17:09:29.254489+00:00",
             "amount_eur": 10.1
@@ -240,7 +240,7 @@
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.15,
+          "capital": 10.12,
           "max_size": 0.0,
           "pot_locked": false,
           "market": "ETH-EUR",
@@ -257,10 +257,38 @@
           },
           "trade_log": [],
           "reconcile_audit": []
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "nummer": 8,
+          "capital": 10.12,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "market": "EUR",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "trade_log": [],
+          "minted_at": "2026-08-21T17:22:00.697624+00:00",
+          "minted_from": "overflow_auto_mint_instant",
+          "last_action": "Auto-minted from overflow_pool"
         }
       ],
       "last_buy_cycle": 0,
-      "overflow_pool": 0.0,
+      "overflow_pool": 0.3983,
       "created_at": "2026-07-09T22:02:52.798397+00:00"
     },
     "user-001": {
@@ -269,7 +297,7 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.16,
+          "capital": 10.15,
           "max_size": 0.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -291,7 +319,7 @@
           "id": "pot-002",
           "index": 1,
           "nummer": 2,
-          "capital": 10.16,
+          "capital": 10.15,
           "max_size": 0.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -314,7 +342,7 @@
           "id": "pot-003",
           "index": 2,
           "nummer": 3,
-          "capital": 10.16,
+          "capital": 10.15,
           "max_size": 0.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -344,7 +372,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.15,
+          "capital": 10.12,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -366,7 +394,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.15,
+          "capital": 10.12,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,

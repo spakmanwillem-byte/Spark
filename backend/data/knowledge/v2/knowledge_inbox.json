@@ -569,8 +569,8 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-182649fb",
-      "begrip": "eerlijke",
+      "id": "kbv2-884b5886",
+      "begrip": "emergent-vangnet",
       "lade": null,
       "status": "draft",
       "lagen": {
@@ -580,72 +580,39 @@
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
       "verbanden": [],
       "footnote": {
-        "bron": "llm_auto_extract",
+        "bron": "snap-auto",
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-08-21T16:26:18.793424+00:00",
         "ingedeeld_door": null,
         "ingedeeld_op": null,
-        "vorige_versie_v1": null,
         "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-21T15:39:59.531354+00:00"
+        "snap_context": "Werk je nu zonder Emergent-vangnet?"
       },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-5d384dd9",
-      "begrip": "allebei",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
       },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-21T15:39:59.592329+00:00"
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-69fae5e1",
-      "begrip": "gelijkwaardig",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-21T15:39:59.654833+00:00"
-      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
       "_inbox_reason": "missing_laag1"
     }
   ],
-  "card_count": 20,
+  "card_count": 22,
   "metadata": {
-    "last_updated": "2026-08-21T15:39:54.221071+00:00"
+    "last_updated": "2026-08-21T16:26:18.793683+00:00"
   }
 }

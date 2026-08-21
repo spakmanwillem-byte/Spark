@@ -3,14 +3,19 @@
     {
       "user_id": "user-000",
       "running": true,
-      "interval": 60,
+      "interval": 300,
       "market": "BCH-EUR",
       "markets": [
-        "BCH-EUR"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
       ],
-      "candle_interval": "1h",
-      "auto_trade": false,
-      "trade_amount": 5.0,
+      "candle_interval": "15m",
+      "auto_trade": true,
+      "trade_amount": 10.1,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 7
@@ -18,14 +23,19 @@
     {
       "user_id": "user-a0ee2d7e",
       "running": true,
-      "interval": 60,
+      "interval": 300,
       "market": "BCH-EUR",
       "markets": [
-        "BCH-EUR"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
       ],
-      "candle_interval": "1h",
-      "auto_trade": false,
-      "trade_amount": 5.0,
+      "candle_interval": "15m",
+      "auto_trade": true,
+      "trade_amount": 10.1,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 2
@@ -45,7 +55,7 @@
       ],
       "candle_interval": "15m",
       "auto_trade": true,
-      "trade_amount": 10.09,
+      "trade_amount": 10.1,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 0
@@ -65,11 +75,11 @@
       ],
       "candle_interval": "15m",
       "auto_trade": true,
-      "trade_amount": 10.09,
+      "trade_amount": 10.1,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 0
     }
   ],
-  "saved_at": "2026-08-21T16:16:07.644062+00:00"
+  "saved_at": "2026-08-21T16:26:15.312763+00:00"
 }

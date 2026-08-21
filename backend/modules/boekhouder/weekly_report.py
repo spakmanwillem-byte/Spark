@@ -23,10 +23,15 @@ from modules.core.storage import load_json, save_json
 
 DATA = Path(__file__).parent.parent.parent / "data"
 POTJES_FILE = DATA / "financial" / "user_potjes.json"
-ACC_FILE = DATA / "accounting" / "transactions.json"
 ROAR_FILE = DATA / "roar" / "roar_balances.json"
 REPORTS_FILE = DATA / "boekhouder" / "weekly_reports.json"
 GROWTH_STATE = DATA / "trade" / "growth_state.json"
+
+# v13p_weekly_bookbased_001 — nieuwe bron: boek-entries per boek.
+# audit_log.json + accounting/transactions.json zijn niet meer de bron sinds v13
+# nulpunt en de multi-book refactor. Weekly report leest nu uit
+# /data/boekhouding/books/*/kasboek.json.
+BOOKS_ROOT = DATA / "boekhouding" / "books"
 
 ADMIN_USER = "user-001"
 SPARK_USER = "user-000"
@@ -101,13 +106,56 @@ def build_weekly_report(force_since_days: int = 7) -> Dict:
         if p.get("minted_at") and datetime.fromisoformat(p["minted_at"].replace("Z", "+00:00")) >= since
     ]
 
-    # Trade results (income/expense Crypto Profit deze week)
-    acc = load_json(ACC_FILE, default={"transactions": []})
-    week_acc = _filter_tx_since(acc.get("transactions", []), since)
-    crypto_pnl_in = sum(t.get("amount", 0) for t in week_acc
-                       if t.get("category") == "Crypto Profit" and t.get("type") == "income")
-    crypto_pnl_out = sum(t.get("amount", 0) for t in week_acc
-                        if t.get("category") == "Crypto Profit" and t.get("type") == "expense")
+    # v13p_weekly_bookbased_001 — Boek-entries aggregatie (nieuwe bron)
+    # Loop door alle /data/boekhouding/books/book-*/kasboek.json bestanden en
+    # tel per book de income/expense van entries met ts >= since.
+    books_summary: List[Dict] = []
+    total_income_books = 0.0
+    total_expense_books = 0.0
+    total_entries_week = 0
+    if BOOKS_ROOT.exists():
+        for bdir in sorted(BOOKS_ROOT.glob("book-*")):
+            if not bdir.is_dir():
+                continue
+            meta = load_json(bdir / "_meta.json", default=None)
+            if not meta:
+                continue
+            kasboek = load_json(bdir / "kasboek.json", default={"entries": []})
+            recent = _filter_tx_since(kasboek.get("entries", []), since, ts_key="ts")
+            if not recent:
+                continue
+            b_income = sum(e.get("amount_eur", 0) for e in recent if e.get("amount_eur", 0) > 0)
+            b_expense = sum(abs(e.get("amount_eur", 0)) for e in recent if e.get("amount_eur", 0) < 0)
+            b_net = round(b_income - b_expense, 2)
+            total_income_books += b_income
+            total_expense_books += b_expense
+            total_entries_week += len(recent)
+            books_summary.append({
+                "book_id": meta.get("id"),
+                "naam": meta.get("naam", "?"),
+                "type": meta.get("type"),
+                "owner_user_id": meta.get("owner_user_id"),
+                "n_entries": len(recent),
+                "income_eur": round(b_income, 2),
+                "expense_eur": round(b_expense, 2),
+                "netto_eur": b_net,
+            })
+
+    # Crypto Profit approximatie uit spark-core book (source contains 'trade')
+    crypto_pnl_in = 0.0
+    crypto_pnl_out = 0.0
+    spark_book_dir = BOOKS_ROOT / "book-spark-core"
+    if spark_book_dir.exists():
+        spark_kb = load_json(spark_book_dir / "kasboek.json", default={"entries": []})
+        recent_spark = _filter_tx_since(spark_kb.get("entries", []), since, ts_key="ts")
+        for e in recent_spark:
+            src = (e.get("source") or "").lower()
+            if "trade" in src or "spark_fee" in src or "winst" in src:
+                amt = e.get("amount_eur", 0)
+                if amt > 0:
+                    crypto_pnl_in += amt
+                elif amt < 0:
+                    crypto_pnl_out += abs(amt)
     crypto_net = round(crypto_pnl_in - crypto_pnl_out, 2)
 
     # ROAR token activiteit
@@ -144,6 +192,14 @@ def build_weekly_report(force_since_days: int = 7) -> Dict:
             "winst_total": round(crypto_pnl_in, 2),
             "verlies_total": round(crypto_pnl_out, 2),
             "netto": crypto_net,
+        },
+        "boeken": {
+            "n_boeken_actief": len(books_summary),
+            "n_entries_week": total_entries_week,
+            "total_income_eur": round(total_income_books, 2),
+            "total_expense_eur": round(total_expense_books, 2),
+            "netto_eur": round(total_income_books - total_expense_books, 2),
+            "per_book": books_summary,
         },
         "roar_activity": {
             "tokens_bought": int(tokens_bought),
@@ -183,6 +239,22 @@ def format_report_text(report: Dict) -> str:
     lines.append(f"💰 **Trade resultaat**: €{t['netto']:+.2f}")
     if t['winst_total'] > 0 or t['verlies_total'] > 0:
         lines.append(f"   → Winst €{t['winst_total']:.2f} · Verlies €{t['verlies_total']:.2f}")
+
+    # v13p_weekly_bookbased_001 — per-book breakdown
+    boeken = report.get("boeken", {})
+    per_book = boeken.get("per_book", [])
+    if per_book:
+        lines.append("")
+        lines.append(f"📚 **Boeken deze week** — {boeken.get('n_entries_week', 0)} regels · netto €{boeken.get('netto_eur', 0):+.2f}")
+        for b in per_book:
+            lines.append(
+                f"   • {b['naam']} · {b['n_entries']} regels · "
+                f"in €{b['income_eur']:.2f} · uit €{b['expense_eur']:.2f} · "
+                f"netto €{b['netto_eur']:+.2f}"
+            )
+    else:
+        lines.append("")
+        lines.append("📚 **Boeken deze week**: geen boekingen")
 
     lines.append("")
     lines.append(f"🌊 **Overflow pool**: €{ov['now']:.2f}")

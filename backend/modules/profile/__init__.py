@@ -258,6 +258,11 @@ class UIPreferences(BaseModel):
     audio_input_label: Optional[str] = None        # menselijk leesbare naam voor UI
     video_input_label: Optional[str] = None
     use_default_devices: Optional[bool] = None     # true = systeem-default, negeer bovenstaande
+    # v13o_announce_prefs_001 — welke auto-boekingen wil user via boekhouder-bot horen?
+    announce_shop_sale: Optional[bool] = None      # verkoop → DM
+    announce_sepa_import: Optional[bool] = None    # camt053/mt940 → DM
+    announce_migration: Optional[bool] = None      # migration → DM
+    announce_spark_fee: Optional[bool] = None      # spark_fee_inlossen → DM
 
 
 DEFAULT_UI_PREFS = {
@@ -275,6 +280,11 @@ DEFAULT_UI_PREFS = {
     "audio_input_label": "Systeem-standaard microfoon",
     "video_input_label": "Systeem-standaard camera",
     "use_default_devices": True,
+    # v13o_announce_prefs_001 — defaults: alles aan
+    "announce_shop_sale": True,
+    "announce_sepa_import": True,
+    "announce_migration": True,
+    "announce_spark_fee": True,
 }
 
 

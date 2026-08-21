@@ -10,6 +10,7 @@ import {
 import { DnDCharacterSheet } from './DnDCharacterSheet';
 import { BarkModal } from '../shared/BarkModal';
 import { DeviceSettingsPanel } from './DeviceSettingsPanel';
+import { AnnouncePrefsPanel } from './AnnouncePrefsPanel';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -1282,6 +1283,13 @@ function InstellingenTab({ userId, user }) {
         updatePref={updatePref}
         savePrefs={savePrefs}
         saving={saving}
+      />
+
+      {/* v13o_announce_prefs_001 — Boekhouder-meldingen (DM opt-in/out per bron) */}
+      <AnnouncePrefsPanel
+        prefs={prefs}
+        updatePref={updatePref}
+        savePrefs={savePrefs}
       />
 
       {/* v12_chat_visibility_001 — Chat-modules aan/uit per user */}

@@ -256,12 +256,32 @@ def add_entry(book_id: str, entry: Dict) -> Optional[Dict]:
 
 
 def _auto_announce_entry(meta: Dict, entry: Dict):
-    """Verstuur DM naar boek-owner over automatische boeking."""
+    """Verstuur DM naar boek-owner over automatische boeking.
+    v13o_announce_prefs_001: check user prefs — user kan per bron-type uitzetten."""
     owner = meta.get("owner_user_id")
     if not owner or owner in ("user-000", "system"):
-        return  # Spark zelf krijgt geen DM
-    from modules.boekhouder.service import _send_dm
+        return
     src = entry.get("source", "auto")
+    # Check user prefs
+    src_to_pref = {
+        "shop_hook": "announce_shop_sale",
+        "camt053": "announce_sepa_import",
+        "mt940": "announce_sepa_import",
+        "migration": "announce_migration",
+        "spark_fee_inlossen": "announce_spark_fee",
+    }
+    pref_key = src_to_pref.get(src)
+    if pref_key:
+        try:
+            prefs_fp = DATA_ROOT / "users" / owner / "ui_preferences.json"
+            if prefs_fp.exists():
+                prefs = load_json(prefs_fp, default={})
+                if prefs.get(pref_key) is False:
+                    return  # user heeft deze bron uitgezet
+        except Exception:
+            pass
+
+    from modules.boekhouder.service import _send_dm
     amt = entry["amount_eur"]
     arrow = "📈" if amt >= 0 else "📉"
     src_label = {

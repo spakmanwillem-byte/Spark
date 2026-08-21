@@ -1,6 +1,45 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52q (2026-02-21) — Weekly-report boek-bron + AnnouncePrefs wiring + Monthly scheduler
+
+### v13p_weekly_bookbased_001 — Weekly report leest nu uit boek-entries
+`modules/boekhouder/weekly_report.py` had `accounting/transactions.json` als bron voor "Trade resultaat" — die tabel is sinds v13 Absolute Nulpunt niet meer de single source of truth. Gemigreerd naar `boekhouding/books/*/kasboek.json`:
+- Loopt door alle books, filtert entries op `ts >= now-7d`
+- Per book: n_entries, income, expense, netto → nieuwe sectie `boeken.per_book`
+- Aggregaat: `boeken.n_boeken_actief`, `boeken.n_entries_week`, `boeken.netto_eur`
+- Crypto-PnL approx uit spark-core book (source ∈ {trade, spark_fee, winst})
+- Format toont nu **📚 Boeken deze week** met per-book breakdown
+- Spark-brede DM naar Willem (via `_send_dm`) én naar alle ROAR token-holders werkt weer
+
+Getest ✅: `GET /api/boekhouder/weekly/preview` toont Roadkillshop-verkoop €+10 als boek-regel.
+
+### v13p_monthly_baseline_scheduler_001 — Monthly baseline in scheduler-loop
+Nieuwe hook `_maybe_monthly_baseline_snapshot()` in `modules/scheduler/__init__.py`:
+- Triggert tussen 02:00-03:00 UTC (rustige uren)
+- Roept `should_run_snapshot()` (1e vd maand + geen marker)
+- Balance-fn: user-000 = Bitvavo `last_known_eur`, andere users = 0.0
+- `snapshot_all` + `mark_snapshot_done` → idempotent per maand
+- Log-lijn: `[scheduler] monthly baseline snapshot: N users`
+
+### v13o_announce_prefs_wiring — AnnouncePrefsPanel in profielpagina
+`AnnouncePrefsPanel.js` bestond al maar was niet ingehaakt. Nu geïmporteerd + gerenderd in `UserProfilePage.js` na `DeviceSettingsPanel`. Toggles voor:
+- `announce_shop_sale`, `announce_sepa_import`, `announce_migration`, `announce_spark_fee`
+- Default alle 4 aan; blok werkt via `_auto_announce_entry` in `books.py` die `ui_preferences.json` leest
+
+Getest ✅: 
+- `GET /api/profile/ui-preferences/user-001` → 4 announce-flags, default true
+- `PUT` toggle false → persist correct, toggle true → herstel correct
+- `_auto_announce_entry` skipt DM als pref=false (verified via code + prefs-endpoint round-trip)
+
+### Files changed (sessie 52q)
+- `/app/backend/modules/boekhouder/weekly_report.py` — bron gemigreerd naar `BOOKS_ROOT`, `boeken.per_book` toegevoegd, format uitgebreid
+- `/app/backend/modules/scheduler/__init__.py` — `_maybe_monthly_baseline_snapshot` + loop-hook
+- `/app/frontend/src/components/profile/UserProfilePage.js` — import + render `AnnouncePrefsPanel`
+
+---
+
+
 ## Sessie 52p (2026-02-21) — Auto-announce alle automatische boekingen
 
 ### v13o_auto_announce_001 — Transparantie voor auto-acties

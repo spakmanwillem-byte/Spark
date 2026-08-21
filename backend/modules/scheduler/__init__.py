@@ -416,6 +416,36 @@ async def _maybe_anker_reconciliation():
     print(f"[scheduler] anker reconciliation: refreshed={refreshed} errors={errors}")
 
 
+async def _maybe_monthly_baseline_snapshot():
+    """v13p_monthly_baseline_scheduler_001 — 1×/dag rond 03:00 UTC check op
+    de 1e vd maand. Als het de 1e is en de vorige maand nog niet is afgesloten,
+    draaien we `snapshot_all` met een balance-fn die de laatst bekende Bitvavo-EUR
+    gebruikt (via deposit_watcher_state). Idempotent: `mark_snapshot_done()`
+    schrijft een marker-bestand zodat een 2e run in dezelfde maand skipt.
+    """
+    now = datetime.now(timezone.utc)
+    if now.hour not in (2, 3):
+        return
+    try:
+        from modules.trade import monthly_baseline as _mb
+        if not _mb.should_run_snapshot():
+            return
+        from modules.core.storage import load_json as _lj
+        dw = _lj(DATA / "system" / "deposit_watcher_state.json", default={})
+        bitvavo_eur = float(dw.get("last_known_eur", 0.0) or dw.get("last_balance_eur", 0.0) or 0.0)
+        def _bal(uid: str) -> float:
+            return bitvavo_eur if uid == "user-000" else 0.0
+        results = _mb.snapshot_all(_bal)
+        _mb.mark_snapshot_done()
+        state = _load_state()
+        state["monthly_baseline_last"] = now.isoformat()
+        state["monthly_baseline_last_count"] = len(results)
+        _save_state(state)
+        print(f"[scheduler] monthly baseline snapshot: {len(results)} users")
+    except Exception as ex:
+        print(f"[scheduler] monthly baseline snapshot failed: {ex}")
+
+
 async def scheduler_loop():
     """Hoofdloop — draait elke 5 minuten."""
     print("[scheduler] v6_scheduler_001 gestart (interval 5min)")
@@ -429,6 +459,7 @@ async def scheduler_loop():
             await _maybe_daily_brief()
             await _maybe_auto_mint()
             await _maybe_anker_reconciliation()
+            await _maybe_monthly_baseline_snapshot()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

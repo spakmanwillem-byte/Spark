@@ -720,7 +720,11 @@ function SystemLoginGlow({ userId, userGrad }) {
             />
             <span
               data-testid="admin-spark-logo-upload-btn"
-              className={`inline-flex w-full items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg border transition-colors ${canEdit && !uploading ? 'bg-amber-500/10 border-amber-500/40 text-amber-300 hover:bg-amber-500/20 cursor-pointer' : 'bg-slate-800/40 border-slate-700 text-slate-500'}`}
+              className={`inline-flex w-full items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium text-white transition-all ${canEdit && !uploading ? 'hover:brightness-110 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
+              style={{
+                background: canEdit && !uploading ? 'linear-gradient(135deg, #a855f7, #7c3aed)' : '#334155',
+                boxShadow: canEdit && !uploading ? '0 6px 18px -14px #a855f788' : 'none',
+              }}
             >
               {uploading ? 'Bezig met uploaden…' : (cfg.spark_logo_url ? 'Vervang logo' : 'Kies bestand')}
             </span>
@@ -750,7 +754,7 @@ function SystemLoginGlow({ userId, userGrad }) {
             onClick={() => update('login_corner_glow_enabled', !cfg.corner_enabled)}
             disabled={!canEdit || busy}
             className="relative w-10 h-5 rounded-full transition-colors flex-shrink-0 disabled:opacity-40"
-            style={{ background: cfg.corner_enabled ? '#f59e0b' : '#334155' }}
+            style={{ background: cfg.corner_enabled ? '#a855f7' : '#334155' }}
           >
             <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform shadow ${cfg.corner_enabled ? 'left-[22px]' : 'left-[2px]'}`} />
           </button>
@@ -806,7 +810,7 @@ function SystemLoginGlow({ userId, userGrad }) {
             onMouseUp={e => update('login_dots_count', Number(e.target.value))}
             onTouchEnd={e => update('login_dots_count', Number(e.target.value))}
             disabled={!canEdit || busy}
-            className="w-full mt-1 accent-amber-500"
+            className="w-full mt-1 accent-purple-500"
           />
           <div className="flex justify-between text-[9px] text-slate-500"><span>4</span><span>24</span></div>
         </div>
@@ -824,7 +828,7 @@ function SystemLoginGlow({ userId, userGrad }) {
             onMouseUp={e => update('login_dots_contrast', Number(e.target.value))}
             onTouchEnd={e => update('login_dots_contrast', Number(e.target.value))}
             disabled={!canEdit || busy}
-            className="w-full mt-1 accent-amber-500"
+            className="w-full mt-1 accent-purple-500"
           />
           <div className="flex justify-between text-[9px] text-slate-500"><span>zacht</span><span>fel</span></div>
         </div>
@@ -842,7 +846,7 @@ function SystemLoginGlow({ userId, userGrad }) {
             onMouseUp={e => update('login_dots_size', Number(e.target.value))}
             onTouchEnd={e => update('login_dots_size', Number(e.target.value))}
             disabled={!canEdit || busy}
-            className="w-full mt-1 accent-amber-500"
+            className="w-full mt-1 accent-purple-500"
           />
           <div className="flex justify-between text-[9px] text-slate-500"><span>klein</span><span>groot</span></div>
         </div>
@@ -1044,13 +1048,19 @@ function Divider() {
 }
 
 function SaveButton({ saving, onClick }) {
+  // v13s_admin_button_style_001 — Admin actions krijgen een eigen violet/paars gradient
+  // (past bij Palette-icoon van Beeld-tab) i.p.v. amber (dat is de user/login primary).
+  // Zo weet je in 1 oogopslag: dit is een admin-actie, niet een gebruikers-inlogknop.
   return (
     <button
       data-testid="save-settings-btn"
       onClick={onClick}
       disabled={saving}
-      className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-white transition-all"
-      style={{ background: saving ? '#334155' : 'linear-gradient(135deg, #f59e0b, #ea580c)' }}
+      className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:brightness-110 disabled:opacity-50"
+      style={{
+        background: saving ? '#334155' : 'linear-gradient(135deg, #a855f7, #7c3aed)',
+        boxShadow: saving ? 'none' : '0 8px 22px -14px #a855f788',
+      }}
     >
       <Save className="w-4 h-4" /> {saving ? 'Opgeslagen!' : 'Instellingen Opslaan'}
     </button>

@@ -1,0 +1,44 @@
+{
+  "trades": [
+    {
+      "trade_id": "00000000-0000-0431-0100-0007fe10d34c",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T19:09:57.181790+00:00",
+      "action": "BUY",
+      "market": "BTC-EUR",
+      "order_id": "00000000-0000-0431-0100-0007fe10d34c",
+      "amount": 9.97,
+      "price": 62886.337832723606,
+      "filled": 0.00015854,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.03037064,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 10.0,
+      "proxied_via_spark": true
+    },
+    {
+      "trade_id": "00000000-0000-0431-0100-0007fe10dc1c",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T19:09:59.609643+00:00",
+      "action": "SELL",
+      "market": "BTC-EUR",
+      "order_id": "00000000-0000-0431-0100-0007fe10dc1c",
+      "amount": 0.0001587,
+      "price": 62882.0,
+      "filled": 0.0001587,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0293734,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 0.0001587,
+      "proxied_via_spark": true
+    }
+  ]
+}

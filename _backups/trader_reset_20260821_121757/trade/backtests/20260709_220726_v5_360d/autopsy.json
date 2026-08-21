@@ -1,0 +1,1075 @@
+{
+  "aggregate": {
+    "n_events": 373,
+    "recovery_24h": {
+      "n": 120,
+      "mean_pct": 1.42,
+      "median_pct": 1.14,
+      "pct_positive": 60.0,
+      "pct_over_2": 41.7,
+      "pct_over_5": 24.2
+    },
+    "recovery_48h": {
+      "n": 120,
+      "mean_pct": 1.4,
+      "median_pct": 0.73,
+      "pct_positive": 57.5,
+      "pct_over_2": 43.3,
+      "pct_over_5": 27.5
+    },
+    "recovery_72h": {
+      "n": 120,
+      "mean_pct": 0.38,
+      "median_pct": 0.33,
+      "pct_positive": 51.7,
+      "pct_over_2": 40.8,
+      "pct_over_5": 24.2
+    }
+  },
+  "per_market": {
+    "BCH-EUR": {
+      "per_event": [
+        {
+          "drop_pct": 7.17,
+          "low_price": 420.13,
+          "recovery_24h_pct": 2.42,
+          "recovery_48h_pct": 2.27,
+          "recovery_72h_pct": 5.21
+        },
+        {
+          "drop_pct": 7.09,
+          "low_price": 429.86,
+          "recovery_24h_pct": 10.36,
+          "recovery_48h_pct": 5.1,
+          "recovery_72h_pct": 3.03
+        },
+        {
+          "drop_pct": 6.46,
+          "low_price": 451.09,
+          "recovery_24h_pct": -0.32,
+          "recovery_48h_pct": -5.58,
+          "recovery_72h_pct": 0.78
+        },
+        {
+          "drop_pct": 7.75,
+          "low_price": 429.45,
+          "recovery_24h_pct": 10.87,
+          "recovery_48h_pct": 16.74,
+          "recovery_72h_pct": 15.4
+        },
+        {
+          "drop_pct": 9.77,
+          "low_price": 481.92,
+          "recovery_24h_pct": -0.76,
+          "recovery_48h_pct": 2.23,
+          "recovery_72h_pct": 1.55
+        },
+        {
+          "drop_pct": 7.4,
+          "low_price": 480.0,
+          "recovery_24h_pct": 3.72,
+          "recovery_48h_pct": 4.79,
+          "recovery_72h_pct": 3.24
+        },
+        {
+          "drop_pct": 5.59,
+          "low_price": 480.0,
+          "recovery_24h_pct": 6.31,
+          "recovery_48h_pct": 11.14,
+          "recovery_72h_pct": 9.19
+        },
+        {
+          "drop_pct": 5.75,
+          "low_price": 505.12,
+          "recovery_24h_pct": 3.13,
+          "recovery_48h_pct": 0.27,
+          "recovery_72h_pct": 0.46
+        },
+        {
+          "drop_pct": 8.09,
+          "low_price": 495.99,
+          "recovery_24h_pct": 1.39,
+          "recovery_48h_pct": -2.41,
+          "recovery_72h_pct": -3.48
+        },
+        {
+          "drop_pct": 5.13,
+          "low_price": 480.74,
+          "recovery_24h_pct": -0.51,
+          "recovery_48h_pct": 0.42,
+          "recovery_72h_pct": -0.33
+        },
+        {
+          "drop_pct": 8.31,
+          "low_price": 474.6,
+          "recovery_24h_pct": 5.88,
+          "recovery_48h_pct": 5.72,
+          "recovery_72h_pct": -2.22
+        },
+        {
+          "drop_pct": 9.19,
+          "low_price": 482.5,
+          "recovery_24h_pct": -1.84,
+          "recovery_48h_pct": -1.16,
+          "recovery_72h_pct": -5.12
+        },
+        {
+          "drop_pct": 6.37,
+          "low_price": 461.0,
+          "recovery_24h_pct": 1.19,
+          "recovery_48h_pct": 5.4,
+          "recovery_72h_pct": 11.51
+        },
+        {
+          "drop_pct": 6.59,
+          "low_price": 456.55,
+          "recovery_24h_pct": 12.8,
+          "recovery_48h_pct": 10.2,
+          "recovery_72h_pct": 12.89
+        },
+        {
+          "drop_pct": 6.32,
+          "low_price": 503.17,
+          "recovery_24h_pct": 2.43,
+          "recovery_48h_pct": -1.31,
+          "recovery_72h_pct": -1.26
+        },
+        {
+          "drop_pct": 7.44,
+          "low_price": 498.76,
+          "recovery_24h_pct": 2.86,
+          "recovery_48h_pct": -3.37,
+          "recovery_72h_pct": -5.72
+        },
+        {
+          "drop_pct": 7.8,
+          "low_price": 473.0,
+          "recovery_24h_pct": 1.42,
+          "recovery_48h_pct": -2.25,
+          "recovery_72h_pct": -1.63
+        },
+        {
+          "drop_pct": 6.79,
+          "low_price": 475.58,
+          "recovery_24h_pct": 5.51,
+          "recovery_48h_pct": 9.79,
+          "recovery_72h_pct": 4.95
+        },
+        {
+          "drop_pct": 5.13,
+          "low_price": 496.53,
+          "recovery_24h_pct": 1.66,
+          "recovery_48h_pct": 2.34,
+          "recovery_72h_pct": -0.06
+        },
+        {
+          "drop_pct": 21.58,
+          "low_price": 492.39,
+          "recovery_24h_pct": -3.6,
+          "recovery_48h_pct": -6.25,
+          "recovery_72h_pct": -8.81
+        }
+      ],
+      "stats": {
+        "recovery_24h_pct": {
+          "n": 63,
+          "mean": 1.56,
+          "median": 1.8,
+          "min": -29.81,
+          "max": 14.14,
+          "pct_positive": 69.8,
+          "pct_over_2": 49.2
+        },
+        "recovery_48h_pct": {
+          "n": 63,
+          "mean": 1.27,
+          "median": 1.39,
+          "min": -27.96,
+          "max": 19.34,
+          "pct_positive": 61.9,
+          "pct_over_2": 49.2
+        },
+        "recovery_72h_pct": {
+          "n": 63,
+          "mean": 0.8,
+          "median": 0.46,
+          "min": -31.3,
+          "max": 20.8,
+          "pct_positive": 50.8,
+          "pct_over_2": 41.3
+        }
+      },
+      "n_events": 64
+    },
+    "BTC-EUR": {
+      "per_event": [
+        {
+          "drop_pct": 5.27,
+          "low_price": 98508.0,
+          "recovery_24h_pct": -0.55,
+          "recovery_48h_pct": 0.28,
+          "recovery_72h_pct": 1.53
+        },
+        {
+          "drop_pct": 15.09,
+          "low_price": 100634.0,
+          "recovery_24h_pct": -0.87,
+          "recovery_48h_pct": -0.59,
+          "recovery_72h_pct": -2.9
+        },
+        {
+          "drop_pct": 5.18,
+          "low_price": 95113.0,
+          "recovery_24h_pct": 0.62,
+          "recovery_48h_pct": -2.82,
+          "recovery_72h_pct": -3.97
+        },
+        {
+          "drop_pct": 7.91,
+          "low_price": 91284.0,
+          "recovery_24h_pct": 0.38,
+          "recovery_48h_pct": 2.56,
+          "recovery_72h_pct": 3.88
+        },
+        {
+          "drop_pct": 6.2,
+          "low_price": 92633.0,
+          "recovery_24h_pct": 2.3,
+          "recovery_48h_pct": 2.34,
+          "recovery_72h_pct": 3.42
+        },
+        {
+          "drop_pct": 5.01,
+          "low_price": 92842.0,
+          "recovery_24h_pct": 1.74,
+          "recovery_48h_pct": 2.75,
+          "recovery_72h_pct": 3.28
+        },
+        {
+          "drop_pct": 7.59,
+          "low_price": 88056.0,
+          "recovery_24h_pct": 1.87,
+          "recovery_48h_pct": 0.44,
+          "recovery_72h_pct": 0.41
+        },
+        {
+          "drop_pct": 8.78,
+          "low_price": 85222.0,
+          "recovery_24h_pct": -3.24,
+          "recovery_48h_pct": -3.89,
+          "recovery_72h_pct": -8.75
+        },
+        {
+          "drop_pct": 7.17,
+          "low_price": 78566.0,
+          "recovery_24h_pct": 0.94,
+          "recovery_48h_pct": 0.43,
+          "recovery_72h_pct": -6.27
+        },
+        {
+          "drop_pct": 12.73,
+          "low_price": 76580.0,
+          "recovery_24h_pct": -3.6,
+          "recovery_48h_pct": -0.86,
+          "recovery_72h_pct": 0.33
+        },
+        {
+          "drop_pct": 9.08,
+          "low_price": 74974.0,
+          "recovery_24h_pct": 6.28,
+          "recovery_48h_pct": 5.35,
+          "recovery_72h_pct": 2.83
+        },
+        {
+          "drop_pct": 5.94,
+          "low_price": 76487.0,
+          "recovery_24h_pct": 0.62,
+          "recovery_48h_pct": 0.33,
+          "recovery_72h_pct": -1.33
+        },
+        {
+          "drop_pct": 5.49,
+          "low_price": 72878.0,
+          "recovery_24h_pct": 1.35,
+          "recovery_48h_pct": 2.19,
+          "recovery_72h_pct": 3.34
+        },
+        {
+          "drop_pct": 5.56,
+          "low_price": 73047.0,
+          "recovery_24h_pct": 3.03,
+          "recovery_48h_pct": 2.92,
+          "recovery_72h_pct": 3.46
+        },
+        {
+          "drop_pct": 6.11,
+          "low_price": 76118.0,
+          "recovery_24h_pct": 1.14,
+          "recovery_48h_pct": 0.4,
+          "recovery_72h_pct": -0.3
+        },
+        {
+          "drop_pct": 8.51,
+          "low_price": 71308.0,
+          "recovery_24h_pct": -3.97,
+          "recovery_48h_pct": -8.14,
+          "recovery_72h_pct": -7.03
+        },
+        {
+          "drop_pct": 10.22,
+          "low_price": 67508.0,
+          "recovery_24h_pct": -1.8,
+          "recovery_48h_pct": -4.68,
+          "recovery_72h_pct": -13.06
+        },
+        {
+          "drop_pct": 17.84,
+          "low_price": 63551.0,
+          "recovery_24h_pct": -5.35,
+          "recovery_48h_pct": -7.12,
+          "recovery_72h_pct": -8.81
+        },
+        {
+          "drop_pct": 6.36,
+          "low_price": 58113.0,
+          "recovery_24h_pct": -0.63,
+          "recovery_48h_pct": -2.09,
+          "recovery_72h_pct": -4.4
+        },
+        {
+          "drop_pct": 5.81,
+          "low_price": 55848.0,
+          "recovery_24h_pct": -1.41,
+          "recovery_48h_pct": 4.14,
+          "recovery_72h_pct": 5.39
+        }
+      ],
+      "stats": {
+        "recovery_24h_pct": {
+          "n": 35,
+          "mean": 0.56,
+          "median": 1.14,
+          "min": -10.63,
+          "max": 8.01,
+          "pct_positive": 62.9,
+          "pct_over_2": 31.4
+        },
+        "recovery_48h_pct": {
+          "n": 35,
+          "mean": 0.37,
+          "median": 0.43,
+          "min": -9.98,
+          "max": 12.5,
+          "pct_positive": 62.9,
+          "pct_over_2": 40.0
+        },
+        "recovery_72h_pct": {
+          "n": 35,
+          "mean": -0.33,
+          "median": 0.76,
+          "min": -13.06,
+          "max": 10.1,
+          "pct_positive": 60.0,
+          "pct_over_2": 37.1
+        }
+      },
+      "n_events": 35
+    },
+    "ETH-EUR": {
+      "per_event": [
+        {
+          "drop_pct": 6.69,
+          "low_price": 2717.4,
+          "recovery_24h_pct": 10.25,
+          "recovery_48h_pct": 13.05,
+          "recovery_72h_pct": 13.47
+        },
+        {
+          "drop_pct": 6.69,
+          "low_price": 2907.4,
+          "recovery_24h_pct": 7.06,
+          "recovery_48h_pct": 10.87,
+          "recovery_72h_pct": 10.87
+        },
+        {
+          "drop_pct": 6.31,
+          "low_price": 3124.0,
+          "recovery_24h_pct": -1.54,
+          "recovery_48h_pct": 1.04,
+          "recovery_72h_pct": -0.64
+        },
+        {
+          "drop_pct": 6.61,
+          "low_price": 3037.9,
+          "recovery_24h_pct": 5.23,
+          "recovery_48h_pct": 5.53,
+          "recovery_72h_pct": 9.37
+        },
+        {
+          "drop_pct": 9.28,
+          "low_price": 3204.5,
+          "recovery_24h_pct": -4.79,
+          "recovery_48h_pct": -1.17,
+          "recovery_72h_pct": -1.68
+        },
+        {
+          "drop_pct": 5.1,
+          "low_price": 3063.4,
+          "recovery_24h_pct": 3.1,
+          "recovery_48h_pct": 9.57,
+          "recovery_72h_pct": 12.84
+        },
+        {
+          "drop_pct": 6.58,
+          "low_price": 3845.0,
+          "recovery_24h_pct": 0.41,
+          "recovery_48h_pct": -3.01,
+          "recovery_72h_pct": -6.98
+        },
+        {
+          "drop_pct": 7.58,
+          "low_price": 3715.0,
+          "recovery_24h_pct": -1.82,
+          "recovery_48h_pct": 10.86,
+          "recovery_72h_pct": 8.63
+        },
+        {
+          "drop_pct": 12.24,
+          "low_price": 3624.1,
+          "recovery_24h_pct": 11.36,
+          "recovery_48h_pct": 12.32,
+          "recovery_72h_pct": 3.7
+        },
+        {
+          "drop_pct": 9.26,
+          "low_price": 3989.7,
+          "recovery_24h_pct": -0.14,
+          "recovery_48h_pct": -2.99,
+          "recovery_72h_pct": -7.14
+        },
+        {
+          "drop_pct": 6.9,
+          "low_price": 3761.7,
+          "recovery_24h_pct": 1.42,
+          "recovery_48h_pct": -0.43,
+          "recovery_72h_pct": -0.1
+        },
+        {
+          "drop_pct": 6.06,
+          "low_price": 3633.0,
+          "recovery_24h_pct": 2.67,
+          "recovery_48h_pct": 3.8,
+          "recovery_72h_pct": 2.2
+        },
+        {
+          "drop_pct": 5.32,
+          "low_price": 3636.0,
+          "recovery_24h_pct": 0.49,
+          "recovery_48h_pct": 0.93,
+          "recovery_72h_pct": 1.13
+        },
+        {
+          "drop_pct": 10.0,
+          "low_price": 3636.0,
+          "recovery_24h_pct": -4.46,
+          "recovery_48h_pct": -5.21,
+          "recovery_72h_pct": -6.53
+        },
+        {
+          "drop_pct": 8.02,
+          "low_price": 3374.6,
+          "recovery_24h_pct": 2.05,
+          "recovery_48h_pct": 1.55,
+          "recovery_72h_pct": 4.3
+        },
+        {
+          "drop_pct": 5.02,
+          "low_price": 3710.84,
+          "recovery_24h_pct": 2.67,
+          "recovery_48h_pct": 3.58,
+          "recovery_72h_pct": 7.73
+        },
+        {
+          "drop_pct": 21.32,
+          "low_price": 3835.26,
+          "recovery_24h_pct": -3.68,
+          "recovery_48h_pct": -7.79,
+          "recovery_72h_pct": -11.42
+        },
+        {
+          "drop_pct": 10.45,
+          "low_price": 3503.4,
+          "recovery_24h_pct": -4.45,
+          "recovery_48h_pct": -2.35,
+          "recovery_72h_pct": -2.11
+        },
+        {
+          "drop_pct": 8.0,
+          "low_price": 3324.55,
+          "recovery_24h_pct": -0.15,
+          "recovery_48h_pct": 1.76,
+          "recovery_72h_pct": 2.3
+        },
+        {
+          "drop_pct": 6.87,
+          "low_price": 3398.74,
+          "recovery_24h_pct": -1.85,
+          "recovery_48h_pct": -1.16,
+          "recovery_72h_pct": -3.12
+        }
+      ],
+      "stats": {
+        "recovery_24h_pct": {
+          "n": 68,
+          "mean": 0.91,
+          "median": 1.48,
+          "min": -25.78,
+          "max": 11.36,
+          "pct_positive": 66.2,
+          "pct_over_2": 45.6
+        },
+        "recovery_48h_pct": {
+          "n": 67,
+          "mean": 1.74,
+          "median": 2.33,
+          "min": -25.89,
+          "max": 13.47,
+          "pct_positive": 64.2,
+          "pct_over_2": 52.2
+        },
+        "recovery_72h_pct": {
+          "n": 67,
+          "mean": 0.93,
+          "median": 1.31,
+          "min": -29.41,
+          "max": 14.25,
+          "pct_positive": 59.7,
+          "pct_over_2": 46.3
+        }
+      },
+      "n_events": 68
+    },
+    "SOL-EUR": {
+      "per_event": [
+        {
+          "drop_pct": 6.12,
+          "low_price": 136.32,
+          "recovery_24h_pct": 5.77,
+          "recovery_48h_pct": 9.63,
+          "recovery_72h_pct": 11.59
+        },
+        {
+          "drop_pct": 6.61,
+          "low_price": 141.21,
+          "recovery_24h_pct": 8.24,
+          "recovery_48h_pct": 15.29,
+          "recovery_72h_pct": 21.29
+        },
+        {
+          "drop_pct": 11.07,
+          "low_price": 152.72,
+          "recovery_24h_pct": 3.91,
+          "recovery_48h_pct": 4.65,
+          "recovery_72h_pct": 3.9
+        },
+        {
+          "drop_pct": 6.31,
+          "low_price": 157.53,
+          "recovery_24h_pct": -1.69,
+          "recovery_48h_pct": -1.19,
+          "recovery_72h_pct": -6.89
+        },
+        {
+          "drop_pct": 9.61,
+          "low_price": 149.15,
+          "recovery_24h_pct": -6.13,
+          "recovery_48h_pct": -2.17,
+          "recovery_72h_pct": -5.15
+        },
+        {
+          "drop_pct": 6.41,
+          "low_price": 140.82,
+          "recovery_24h_pct": 4.96,
+          "recovery_48h_pct": 7.7,
+          "recovery_72h_pct": 10.71
+        },
+        {
+          "drop_pct": 10.47,
+          "low_price": 151.19,
+          "recovery_24h_pct": 9.3,
+          "recovery_48h_pct": 5.07,
+          "recovery_72h_pct": 1.0
+        },
+        {
+          "drop_pct": 12.63,
+          "low_price": 158.35,
+          "recovery_24h_pct": 12.51,
+          "recovery_48h_pct": 10.96,
+          "recovery_72h_pct": 10.55
+        },
+        {
+          "drop_pct": 8.45,
+          "low_price": 177.23,
+          "recovery_24h_pct": -1.21,
+          "recovery_48h_pct": -4.3,
+          "recovery_72h_pct": -3.0
+        },
+        {
+          "drop_pct": 5.65,
+          "low_price": 166.24,
+          "recovery_24h_pct": 7.66,
+          "recovery_48h_pct": 8.04,
+          "recovery_72h_pct": 4.96
+        },
+        {
+          "drop_pct": 7.38,
+          "low_price": 200.22,
+          "recovery_24h_pct": -0.43,
+          "recovery_48h_pct": 4.17,
+          "recovery_72h_pct": 5.05
+        },
+        {
+          "drop_pct": 6.06,
+          "low_price": 196.0,
+          "recovery_24h_pct": 7.26,
+          "recovery_48h_pct": 4.04,
+          "recovery_72h_pct": 4.56
+        },
+        {
+          "drop_pct": 6.64,
+          "low_price": 203.89,
+          "recovery_24h_pct": 0.19,
+          "recovery_48h_pct": -1.17,
+          "recovery_72h_pct": -8.34
+        },
+        {
+          "drop_pct": 10.81,
+          "low_price": 191.64,
+          "recovery_24h_pct": -9.98,
+          "recovery_48h_pct": -6.63,
+          "recovery_72h_pct": -4.9
+        },
+        {
+          "drop_pct": 5.42,
+          "low_price": 173.94,
+          "recovery_24h_pct": 10.64,
+          "recovery_48h_pct": 12.94,
+          "recovery_72h_pct": 11.85
+        },
+        {
+          "drop_pct": 5.58,
+          "low_price": 190.66,
+          "recovery_24h_pct": 2.64,
+          "recovery_48h_pct": 5.41,
+          "recovery_72h_pct": 0.88
+        },
+        {
+          "drop_pct": 6.9,
+          "low_price": 189.81,
+          "recovery_24h_pct": 2.49,
+          "recovery_48h_pct": 0.73,
+          "recovery_72h_pct": -14.83
+        },
+        {
+          "drop_pct": 22.71,
+          "low_price": 187.49,
+          "recovery_24h_pct": -14.68,
+          "recovery_48h_pct": -13.45,
+          "recovery_72h_pct": -12.72
+        },
+        {
+          "drop_pct": 8.83,
+          "low_price": 158.05,
+          "recovery_24h_pct": 5.69,
+          "recovery_48h_pct": 5.34,
+          "recovery_72h_pct": 5.1
+        },
+        {
+          "drop_pct": 9.43,
+          "low_price": 165.71,
+          "recovery_24h_pct": -2.47,
+          "recovery_48h_pct": -2.12,
+          "recovery_72h_pct": -7.51
+        }
+      ],
+      "stats": {
+        "recovery_24h_pct": {
+          "n": 71,
+          "mean": 1.49,
+          "median": 2.28,
+          "min": -14.68,
+          "max": 14.01,
+          "pct_positive": 67.6,
+          "pct_over_2": 53.5
+        },
+        "recovery_48h_pct": {
+          "n": 71,
+          "mean": 1.44,
+          "median": 1.66,
+          "min": -19.39,
+          "max": 15.29,
+          "pct_positive": 57.7,
+          "pct_over_2": 49.3
+        },
+        "recovery_72h_pct": {
+          "n": 71,
+          "mean": 0.27,
+          "median": 0.9,
+          "min": -25.51,
+          "max": 21.29,
+          "pct_positive": 57.7,
+          "pct_over_2": 42.3
+        }
+      },
+      "n_events": 72
+    },
+    "ADA-EUR": {
+      "per_event": [
+        {
+          "drop_pct": 7.09,
+          "low_price": 0.6197,
+          "recovery_24h_pct": 4.18,
+          "recovery_48h_pct": 11.34,
+          "recovery_72h_pct": 16.4
+        },
+        {
+          "drop_pct": 11.09,
+          "low_price": 0.6355,
+          "recovery_24h_pct": 17.07,
+          "recovery_48h_pct": 24.22,
+          "recovery_72h_pct": 16.39
+        },
+        {
+          "drop_pct": 13.36,
+          "low_price": 0.7248,
+          "recovery_24h_pct": -2.89,
+          "recovery_48h_pct": -2.84,
+          "recovery_72h_pct": -5.52
+        },
+        {
+          "drop_pct": 7.68,
+          "low_price": 0.689,
+          "recovery_24h_pct": -3.55,
+          "recovery_48h_pct": -0.51,
+          "recovery_72h_pct": -8.1
+        },
+        {
+          "drop_pct": 9.82,
+          "low_price": 0.6569,
+          "recovery_24h_pct": -3.01,
+          "recovery_48h_pct": -4.7,
+          "recovery_72h_pct": -3.16
+        },
+        {
+          "drop_pct": 6.61,
+          "low_price": 0.6255,
+          "recovery_24h_pct": 4.93,
+          "recovery_48h_pct": 10.36,
+          "recovery_72h_pct": 10.69
+        },
+        {
+          "drop_pct": 5.8,
+          "low_price": 0.6364,
+          "recovery_24h_pct": 7.6,
+          "recovery_48h_pct": 9.05,
+          "recovery_72h_pct": 9.2
+        },
+        {
+          "drop_pct": 13.78,
+          "low_price": 0.6751,
+          "recovery_24h_pct": 8.93,
+          "recovery_48h_pct": 18.17,
+          "recovery_72h_pct": 14.67
+        },
+        {
+          "drop_pct": 11.54,
+          "low_price": 0.7269,
+          "recovery_24h_pct": 5.13,
+          "recovery_48h_pct": 2.59,
+          "recovery_72h_pct": -0.64
+        },
+        {
+          "drop_pct": 10.73,
+          "low_price": 0.758,
+          "recovery_24h_pct": -1.49,
+          "recovery_48h_pct": -3.87,
+          "recovery_72h_pct": -7.98
+        },
+        {
+          "drop_pct": 6.62,
+          "low_price": 0.716,
+          "recovery_24h_pct": 0.0,
+          "recovery_48h_pct": -3.41,
+          "recovery_72h_pct": -2.45
+        },
+        {
+          "drop_pct": 7.35,
+          "low_price": 0.6787,
+          "recovery_24h_pct": 5.01,
+          "recovery_48h_pct": 3.34,
+          "recovery_72h_pct": 4.4
+        },
+        {
+          "drop_pct": 7.4,
+          "low_price": 0.7682,
+          "recovery_24h_pct": -3.23,
+          "recovery_48h_pct": -0.45,
+          "recovery_72h_pct": 0.63
+        },
+        {
+          "drop_pct": 6.73,
+          "low_price": 0.7253,
+          "recovery_24h_pct": 9.12,
+          "recovery_48h_pct": 5.24,
+          "recovery_72h_pct": 5.01
+        },
+        {
+          "drop_pct": 5.12,
+          "low_price": 0.755,
+          "recovery_24h_pct": 0.97,
+          "recovery_48h_pct": -2.27,
+          "recovery_72h_pct": -7.93
+        },
+        {
+          "drop_pct": 10.25,
+          "low_price": 0.7297,
+          "recovery_24h_pct": -5.28,
+          "recovery_48h_pct": -7.66,
+          "recovery_72h_pct": -8.69
+        },
+        {
+          "drop_pct": 7.94,
+          "low_price": 0.6694,
+          "recovery_24h_pct": 0.52,
+          "recovery_48h_pct": 0.9,
+          "recovery_72h_pct": 2.17
+        },
+        {
+          "drop_pct": 6.74,
+          "low_price": 0.7192,
+          "recovery_24h_pct": 0.23,
+          "recovery_48h_pct": 3.53,
+          "recovery_72h_pct": -0.74
+        },
+        {
+          "drop_pct": 5.92,
+          "low_price": 0.7023,
+          "recovery_24h_pct": 4.4,
+          "recovery_48h_pct": -0.04,
+          "recovery_72h_pct": 0.16
+        },
+        {
+          "drop_pct": 21.75,
+          "low_price": 0.711,
+          "recovery_24h_pct": -24.07,
+          "recovery_48h_pct": -21.78,
+          "recovery_72h_pct": -20.38
+        }
+      ],
+      "stats": {
+        "recovery_24h_pct": {
+          "n": 74,
+          "mean": 0.56,
+          "median": 0.97,
+          "min": -26.75,
+          "max": 18.4,
+          "pct_positive": 58.1,
+          "pct_over_2": 44.6
+        },
+        "recovery_48h_pct": {
+          "n": 74,
+          "mean": 0.7,
+          "median": 0.05,
+          "min": -23.17,
+          "max": 24.22,
+          "pct_positive": 50.0,
+          "pct_over_2": 39.2
+        },
+        "recovery_72h_pct": {
+          "n": 74,
+          "mean": -0.19,
+          "median": -0.29,
+          "min": -25.49,
+          "max": 39.24,
+          "pct_positive": 48.6,
+          "pct_over_2": 31.1
+        }
+      },
+      "n_events": 75
+    },
+    "ATOM-EUR": {
+      "per_event": [
+        {
+          "drop_pct": 5.76,
+          "low_price": 3.6753,
+          "recovery_24h_pct": 8.73,
+          "recovery_48h_pct": 7.59,
+          "recovery_72h_pct": 6.58
+        },
+        {
+          "drop_pct": 6.6,
+          "low_price": 3.8684,
+          "recovery_24h_pct": 4.31,
+          "recovery_48h_pct": 0.07,
+          "recovery_72h_pct": 5.18
+        },
+        {
+          "drop_pct": 8.39,
+          "low_price": 3.9197,
+          "recovery_24h_pct": 12.85,
+          "recovery_48h_pct": 11.79,
+          "recovery_72h_pct": 9.48
+        },
+        {
+          "drop_pct": 13.1,
+          "low_price": 4.2997,
+          "recovery_24h_pct": -5.15,
+          "recovery_48h_pct": -2.52,
+          "recovery_72h_pct": -4.71
+        },
+        {
+          "drop_pct": 9.28,
+          "low_price": 4.026,
+          "recovery_24h_pct": -8.1,
+          "recovery_48h_pct": -8.19,
+          "recovery_72h_pct": -8.11
+        },
+        {
+          "drop_pct": 6.03,
+          "low_price": 3.901,
+          "recovery_24h_pct": 5.47,
+          "recovery_48h_pct": -0.15,
+          "recovery_72h_pct": -1.05
+        },
+        {
+          "drop_pct": 8.98,
+          "low_price": 3.8332,
+          "recovery_24h_pct": 0.61,
+          "recovery_48h_pct": 7.55,
+          "recovery_72h_pct": 8.17
+        },
+        {
+          "drop_pct": 8.52,
+          "low_price": 3.6992,
+          "recovery_24h_pct": 11.96,
+          "recovery_48h_pct": 10.43,
+          "recovery_72h_pct": 3.6
+        },
+        {
+          "drop_pct": 10.31,
+          "low_price": 3.9557,
+          "recovery_24h_pct": -1.24,
+          "recovery_48h_pct": 1.68,
+          "recovery_72h_pct": -3.12
+        },
+        {
+          "drop_pct": 8.05,
+          "low_price": 3.9097,
+          "recovery_24h_pct": -0.89,
+          "recovery_48h_pct": -2.62,
+          "recovery_72h_pct": -1.36
+        },
+        {
+          "drop_pct": 5.81,
+          "low_price": 3.75,
+          "recovery_24h_pct": 2.82,
+          "recovery_48h_pct": 0.67,
+          "recovery_72h_pct": -0.48
+        },
+        {
+          "drop_pct": 6.69,
+          "low_price": 3.9337,
+          "recovery_24h_pct": -3.49,
+          "recovery_48h_pct": 0.97,
+          "recovery_72h_pct": -3.08
+        },
+        {
+          "drop_pct": 6.2,
+          "low_price": 3.8245,
+          "recovery_24h_pct": -1.33,
+          "recovery_48h_pct": -7.98,
+          "recovery_72h_pct": -6.68
+        },
+        {
+          "drop_pct": 10.69,
+          "low_price": 3.6368,
+          "recovery_24h_pct": -1.26,
+          "recovery_48h_pct": -4.87,
+          "recovery_72h_pct": -3.93
+        },
+        {
+          "drop_pct": 5.98,
+          "low_price": 3.415,
+          "recovery_24h_pct": 2.5,
+          "recovery_48h_pct": 3.5,
+          "recovery_72h_pct": 0.25
+        },
+        {
+          "drop_pct": 6.11,
+          "low_price": 3.5142,
+          "recovery_24h_pct": 1.68,
+          "recovery_48h_pct": -0.97,
+          "recovery_72h_pct": 2.08
+        },
+        {
+          "drop_pct": 5.96,
+          "low_price": 3.4654,
+          "recovery_24h_pct": 0.17,
+          "recovery_48h_pct": -31.5,
+          "recovery_72h_pct": -21.52
+        },
+        {
+          "drop_pct": 62.27,
+          "low_price": 3.43,
+          "recovery_24h_pct": -7.98,
+          "recovery_48h_pct": -12.95,
+          "recovery_72h_pct": -16.91
+        },
+        {
+          "drop_pct": 11.4,
+          "low_price": 3.0051,
+          "recovery_24h_pct": -6.81,
+          "recovery_48h_pct": -6.5,
+          "recovery_72h_pct": -9.18
+        },
+        {
+          "drop_pct": 9.99,
+          "low_price": 2.737,
+          "recovery_24h_pct": -1.19,
+          "recovery_48h_pct": -1.28,
+          "recovery_72h_pct": 0.43
+        }
+      ],
+      "stats": {
+        "recovery_24h_pct": {
+          "n": 58,
+          "mean": -0.02,
+          "median": 0.12,
+          "min": -19.96,
+          "max": 13.28,
+          "pct_positive": 51.7,
+          "pct_over_2": 41.4
+        },
+        "recovery_48h_pct": {
+          "n": 58,
+          "mean": -1.13,
+          "median": -0.21,
+          "min": -31.5,
+          "max": 12.89,
+          "pct_positive": 46.6,
+          "pct_over_2": 36.2
+        },
+        "recovery_72h_pct": {
+          "n": 58,
+          "mean": -1.67,
+          "median": -0.96,
+          "min": -21.52,
+          "max": 14.01,
+          "pct_positive": 46.6,
+          "pct_over_2": 36.2
+        }
+      },
+      "n_events": 59
+    }
+  }
+}

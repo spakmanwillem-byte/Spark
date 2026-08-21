@@ -1,6 +1,33 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52n (2026-02-21) — Analyse + shop-omzet in maand-snapshot
+
+### Emmy's inzicht: bestaande weekly_report vs nieuwe monthly_baseline
+- `boekhouder/weekly_report.py` bestond al (7d DM via boekhouder-bot). Leest `audit_log.json` → **nu leeg** door v13 nulpunt → weekly-report is **BROKEN**.
+- `trade/monthly_baseline.py` (nieuw) leest `capital_baseline` + live balance. Werkt.
+- Beide zijn **complementair, niet dubbel**:
+  - Weekly = korte in-app DM ("boekhouder-bot vertelt")
+  - Monthly = ijkpunt-reset + archief-notitie ("verifieerbaar per maand")
+
+### v13m_shop_omzet_in_snapshot_001 — Shop-omzet meegenomen
+`snapshot_user()` verzamelt nu voor iedere user óók alle **shop-books** (`type=shop`, `owner_user_id=user`) die entries hebben in de te-sluiten maand:
+- Per shop in de snapshot: `omzet_eur`, `uitgaven_eur`, `resultaat_eur`, `openstaand_spark_fee_eur`
+- Notitie in `notes.json` bevat "**Shops deze maand:**" blokje met alle shops + omzet/resultaat/openstaand
+- Tags in notitie: `shop_{linked_shop_id}` per shop
+- Getest ✅: user-001 juli-afsluiting toont 0 shops (want alles nulpunt), na eerste verkoop komen ze mee
+
+### Nieuwe todos in roadmap
+- `weekly_report.py` bron migreren naar boek-entries (was audit_log, nu leeg)
+- Weekly + Monthly alignment: verduidelijk waar welke stroom hoort (DM vs archief)
+
+### Files changed (sessie 52n)
+- `/app/backend/modules/trade/monthly_baseline.py` — `_collect_shop_omzet()` + notitie-uitbreiding
+- `/app/memory/ROADMAP_CORE.md` — 2 nieuwe todos over weekly-report
+
+---
+
+
 ## Sessie 52m (2026-02-21) — Maandelijkse baseline-snapshot
 
 ### v13_trader_monthly_baseline_001 — Maand-afsluiting per user

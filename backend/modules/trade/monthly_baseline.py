@@ -27,6 +27,40 @@ def _now() -> datetime:
     return datetime.now(timezone.utc)
 
 
+def _collect_shop_omzet(user_id: str, month_key: str) -> List[Dict]:
+    """v13m: verzamel shop-boek entries voor deze user voor de gegeven maand (YYYY-MM)."""
+    from modules.boekhouder import books as _book_svc
+    out: List[Dict] = []
+    for meta in _book_svc.list_books(owner_user_id=None):
+        if meta.get("type") != "shop":
+            continue
+        if meta.get("owner_user_id") != user_id:
+            continue
+        entries = _book_svc.list_entries(meta["id"], limit=100_000)
+        month_entries = [e for e in entries if (e.get("ts") or "")[:7] == month_key]
+        if not month_entries:
+            continue
+        income = sum(e["amount_eur"] for e in month_entries if e["amount_eur"] > 0)
+        expense = sum(abs(e["amount_eur"]) for e in month_entries if e["amount_eur"] < 0)
+        # Openstaand spark-fee
+        ofp = Path(_book_svc._book_dir(meta["id"])) / "openstaand_spark.json"
+        os_total = 0.0
+        if ofp.exists():
+            os_data = load_json(ofp, default={})
+            os_total = float(os_data.get("totaal_openstaand_eur", 0.0) or 0.0)
+        out.append({
+            "book_id": meta["id"],
+            "shop_naam": meta["naam"],
+            "linked_shop_id": meta.get("linked_shop_id"),
+            "n_entries": len(month_entries),
+            "omzet_eur": round(income, 2),
+            "uitgaven_eur": round(expense, 2),
+            "resultaat_eur": round(income - expense, 2),
+            "openstaand_spark_fee_eur": round(os_total, 2),
+        })
+    return out
+
+
 def _month_str(dt: Optional[datetime] = None) -> str:
     dt = dt or _now()
     return dt.strftime("%Y-%m")
@@ -40,7 +74,11 @@ def _prev_month_str() -> str:
 
 
 def snapshot_user(user_id: str, current_balance_eur: float) -> Dict:
-    """Neem snapshot voor 1 user: log oude baseline + resultaat, reset naar huidige balance."""
+    """Neem snapshot voor 1 user: log oude baseline + resultaat, reset naar huidige balance.
+
+    v13m: verzamelt óók shop-omzet vorige maand (via linked_shop_id books) zodat
+    Emmy's wens 'shop-data per maand' meteen zichtbaar is in de snapshot.
+    """
     baseline_data = load_json(BASELINE_FP, default={})
     old_baseline = baseline_data.get(user_id, {})
     if isinstance(old_baseline, (int, float)):
@@ -48,7 +86,11 @@ def snapshot_user(user_id: str, current_balance_eur: float) -> Dict:
     old_eur = float(old_baseline.get("baseline_eur", 0.0) or 0.0)
     old_set_at = old_baseline.get("set_at")
 
-    month_key = _prev_month_str()  # afsluiting = vorige maand
+    month_key = _prev_month_str()
+
+    # v13m: zoek shop-books van deze user en verzamel omzet vorige maand
+    shop_omzet = _collect_shop_omzet(user_id, month_key)
+
     month_dir = MONTHLY_ROOT / month_key
     month_dir.mkdir(parents=True, exist_ok=True)
 
@@ -63,6 +105,7 @@ def snapshot_user(user_id: str, current_balance_eur: float) -> Dict:
         "closing_balance_eur": round(current_balance_eur, 2),
         "resultaat_eur": resultaat,
         "resultaat_pct": round((resultaat / old_eur * 100.0) if old_eur > 0 else 0.0, 2),
+        "shops": shop_omzet,  # v13m nieuw
     }
     save_json(month_dir / f"{user_id}.json", snapshot)
 
@@ -81,16 +124,23 @@ def snapshot_user(user_id: str, current_balance_eur: float) -> Dict:
         notes_fp.parent.mkdir(parents=True, exist_ok=True)
         ndata = load_json(notes_fp, default={"notes": []})
         arrow = "📈" if resultaat >= 0 else "📉"
+        shop_lines = ""
+        if shop_omzet:
+            shop_lines = "\n\n**Shops deze maand:**\n" + "\n".join(
+                f"- {s['shop_naam']}: omzet €{s['omzet_eur']:.2f}, resultaat €{s['resultaat_eur']:+.2f}, openstaand Spark-fee €{s['openstaand_spark_fee_eur']:.2f}"
+                for s in shop_omzet
+            )
         ndata.setdefault("notes", []).append({
             "id": "note-" + secrets.token_hex(4),
             "titel": f"{arrow} Trader-resultaat {month_key}: €{resultaat:+.2f}",
             "inhoud": f"Maand-afsluiting {month_key}\n"
                      f"Startsaldo: €{old_eur:.2f}\n"
                      f"Eindsaldo: €{current_balance_eur:.2f}\n"
-                     f"Resultaat: €{resultaat:+.2f} ({snapshot['resultaat_pct']:+.2f}%)\n\n"
+                     f"Resultaat: €{resultaat:+.2f} ({snapshot['resultaat_pct']:+.2f}%)"
+                     f"{shop_lines}\n\n"
                      f"Nieuwe baseline per {_now().strftime('%Y-%m-%d')}: €{current_balance_eur:.2f}",
             "created_at": _now().isoformat(),
-            "tags": ["trader", "maand-afsluiting", month_key],
+            "tags": ["trader", "maand-afsluiting", month_key] + [f"shop_{s['linked_shop_id']}" for s in shop_omzet if s.get('linked_shop_id')],
             "source": "monthly_baseline_snapshot",
         })
         save_json(notes_fp, ndata)

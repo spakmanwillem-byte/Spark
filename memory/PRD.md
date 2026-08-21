@@ -1,6 +1,31 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52m (2026-02-21) — Maandelijkse baseline-snapshot
+
+### v13_trader_monthly_baseline_001 — Maand-afsluiting per user
+Nieuwe module `modules/trade/monthly_baseline.py`:
+- `snapshot_user(uid, balance)`: log oude baseline → `/data/trade/monthly_baselines/YYYY-MM/{uid}.json`, reset baseline naar huidige, notitie in user's `notes.json` met resultaat + %
+- `snapshot_all(get_balance_fn)`: alle users met baseline
+- `should_run_snapshot()` + `mark_snapshot_done()`: 1e-vd-maand-idempotency check via marker-bestand
+- Endpoints:
+  - `POST /api/trade/baseline/monthly-snapshot/{user_id}?current_balance_eur=X` — handmatig
+  - `GET /api/trade/baseline/monthly/{user_id}?limit=12` — historie per user
+  - `GET /api/trade/baseline/monthly?limit=12` — alle users
+  - `POST /api/trade/baseline/run-scheduled-snapshot` — check-and-run (idempotent per maand)
+- Getest ✅: Spark user-000 juli-afsluiting €120.99 → €121.52 = **+€0.53 (+0.44%)**, snapshot + notitie aangemaakt, nieuwe baseline live.
+
+### Voordeel (Emmy's inzicht)
+User kan achteraf per maand precies zien wat trader-resultaat was. Logs + notities blijven bewaard. Voor voorwaarden-uitleg + ooit echte ROAR live essentieel: verifieerbaar per maand.
+
+### Files changed
+- `/app/backend/modules/trade/monthly_baseline.py` — NIEUW, snapshot service
+- `/app/backend/modules/trade/routes.py` — 4 nieuwe endpoints
+- `/app/memory/ROADMAP_CORE.md` — todos: scheduler-automatisering, trader-UI opruimen, vermogens-tab
+
+---
+
+
 ## Sessie 52l (2026-02-21) — Correcties: Bitvavo=Spark + tab-rename
 
 ### v13_bitvavo_ownership_correctie_001 — Bitvavo is Spark's account

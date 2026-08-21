@@ -208,6 +208,47 @@ async def set_baseline(user_id: str, req: BaselineSetRequest):
     return {"success": True, "baseline": data[user_id]}
 
 
+
+# ============================================================
+# v13_trader_monthly_baseline_001 — Maandelijkse snapshot
+# ============================================================
+
+from modules.trade import monthly_baseline as _mb
+
+
+@router.post("/baseline/monthly-snapshot/{user_id}")
+async def monthly_snapshot(user_id: str, current_balance_eur: float):
+    """Manuele snapshot voor 1 user (test / handmatig)."""
+    snap = _mb.snapshot_user(user_id, current_balance_eur)
+    return {"success": True, "snapshot": snap}
+
+
+@router.get("/baseline/monthly/{user_id}")
+async def monthly_history(user_id: str, limit: int = 12):
+    return {"success": True, "history": _mb.list_monthly_snapshots(user_id, limit=limit)}
+
+
+@router.get("/baseline/monthly")
+async def monthly_history_all(limit: int = 12):
+    return {"success": True, "history": _mb.list_monthly_snapshots(limit=limit)}
+
+
+@router.post("/baseline/run-scheduled-snapshot")
+async def run_scheduled_snapshot():
+    """Check-and-run: als het de 1e is en nog niet gedraaid, snapshot alle users."""
+    if not _mb.should_run_snapshot():
+        return {"success": True, "ran": False, "reason": "Niet de 1e vd maand of al gedaan"}
+    dw = load_json(DATA_DIR.parent / "system" / "deposit_watcher_state.json", default={})
+    bitvavo_eur = float(dw.get("last_known_eur", 0.0) or dw.get("last_balance_eur", 0.0) or 0.0)
+    def _bal(uid: str) -> float:
+        return bitvavo_eur if uid == "user-000" else 0.0
+    results = _mb.snapshot_all(_bal)
+    _mb.mark_snapshot_done()
+    return {"success": True, "ran": True, "snapshots": len(results), "results": results}
+
+
+
+
 # ============================================================
 # DEPOSITS / DONATIES — Externe geldtoevoegingen (niet trading)
 # ============================================================

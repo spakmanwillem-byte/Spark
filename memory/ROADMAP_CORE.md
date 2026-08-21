@@ -78,6 +78,9 @@ Drie duidelijke lagen die nooit mogen mixen:
 - [ ] **Fronts-editor voor BTW/fee-widget** — hoort bij Fronts-cluster hierboven.
 - [ ] **Ruis-scan test-users** — 12 test-users (`test-bank-*`, `test-snap-*`, `test-vk`, etc.) staan nog in `/data/users/`. Batch-cleanup naar `_backups/`.
 - [ ] **Klanten-tab moderniseren** — leest oude `archief/bonnetjes` (nu leeg), moet nieuwe `winst_events` + `record_shop_sale` bonnen tonen.
+- [ ] **Trader-tab visueel opruimen** — "Anker gap-up guard" + "Anker per markt" zijn 2 blokken die 1 collapsable card kunnen worden. Reconciliatie-blok ook mergen.
+- [ ] **Scheduler voor maand-snapshot** — nu handmatig via `POST /api/trade/baseline/run-scheduled-snapshot`. Automatisch draaien via APScheduler op 1e vd maand 00:05.
+- [ ] **Vermogens-tab (Balans)** — Activa (books + wallets + Bitvavo) − Passiva (openstaand spark-fees) = Eigen vermogen. Admin-only, Spark-perspectief.
 
 ---
 

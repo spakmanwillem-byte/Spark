@@ -408,11 +408,13 @@ async def compose_response(
 
         # v6_identity_facts_002 — PRE-PEND facts (vóór toon-instructie) voor max prominentie
         # v10_admin_facts_full_001 — Voor gradatie 1 (Maker/Beheerder): geen cap.
+        # v13s_identity_facts_tpm_cap_001 — cap toch nodig voor Groq's 8000 TPM. 15 per type
+        # is ruim voldoende (~150 facts totaal), voorheen "999" gaf 8477-token prompts.
         try:
             from modules.chat import identity_facts
-            # Detect gradatie 1 → toon ALLE facts (Willem is admin, mag alles zien)
+            # Detect gradatie 1 → toon meer facts (Willem is admin), maar wel binnen TPM budget
             _grad = (user_profile or {}).get("gradatie") if isinstance(user_profile, dict) else None
-            _cap = 999 if _grad == 1 else 5
+            _cap = 15 if _grad == 1 else 5
             facts = identity_facts.load_for_prompt(user_id, max_per_type=_cap)
             facts_snippet = identity_facts.format_for_prompt(facts)
             if facts_snippet:
@@ -540,9 +542,12 @@ async def compose_response(
 
         # Bouw OpenAI-compatible messages (system + accumulated turns + current user)
         messages = [{"role": "system", "content": system_prompt}]
-        # Voeg eerdere turns toe als context (laatste paar, system_prompt heeft ze al deels)
+        # v13s_llm_tpm_trim_001 — laatste 3 turns i.p.v. 6 om binnen Groq's 8000 TPM
+        # free-tier limit te blijven. Bij lange history overschreed de prompt 8000
+        # tokens → 413 rate_limit_exceeded → all_providers_failed. Identity + user_view
+        # zitten al in system_prompt, dus 3 turns is voldoende voor korte continuïteit.
         if turns:
-            for t in turns[-6:]:
+            for t in turns[-3:]:
                 role = "user" if t.get("role") == "user" else "assistant"
                 ttxt = (t.get("text") or t.get("message") or "").strip()
                 if ttxt:

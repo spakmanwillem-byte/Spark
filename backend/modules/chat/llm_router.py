@@ -275,6 +275,22 @@ async def chat_complete(
             provider, messages,
             temperature=temperature, max_tokens=max_tokens, timeout=timeout,
         )
+        # v13s_llm_tpm_auto_trim_001 — Bij 413 (Request too large / rate_limit_exceeded op
+        # tokens per minute) probeer 1× opnieuw met de helft van de non-system messages
+        # geknipt. Voorkomt all_providers_failed als de deep-history de prompt te groot maakt.
+        if (not result["success"]) and ("413" in str(result.get("error", "")) or "rate_limit_exceeded" in str(result.get("error", "")).lower()):
+            non_sys = [m for m in messages if m.get("role") != "system"]
+            if len(non_sys) > 2:
+                keep_n = max(1, len(non_sys) // 2)
+                trimmed = [m for m in messages if m.get("role") == "system"] + non_sys[-keep_n:]
+                logger.warning(
+                    "[llm_router] %s 413/TPM overshoot — retry met getrimde context (%d → %d msgs)",
+                    provider.name, len(messages), len(trimmed),
+                )
+                result = await _call_openai_compat(
+                    provider, trimmed,
+                    temperature=temperature, max_tokens=max_tokens, timeout=timeout,
+                )
         tried.append({
             "provider": provider.name,
             "model": provider.model,

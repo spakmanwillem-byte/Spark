@@ -61691,11 +61691,82 @@
         "session_id": "default",
         "gesprek_nummer": 2447
       }
+    },
+    {
+      "id": "conv-f409a0f9",
+      "timestamp": "2026-08-21T17:31:38.916809+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoi spark",
+      "spark_response": "Hallo Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "test-live-1",
+        "gesprek_nummer": 2448
+      }
+    },
+    {
+      "id": "conv-4805a5b2",
+      "timestamp": "2026-08-21T17:32:25.605243+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi spark",
+      "spark_response": "Hoi Willem! Hoe gaat het vandaag? 😊",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-aaf81efb",
+          "kbv2-0a5d1838",
+          "kbv2-9bc67e82",
+          "kbv2-0d7af765"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "test-compose",
+        "gesprek_nummer": 2449
+      }
+    },
+    {
+      "id": "conv-c91a4d62",
+      "timestamp": "2026-08-21T17:35:47.080495+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi spark, werk je nu weer?",
+      "spark_response": "Hoi Willem,\n\nJa, ik ben weer **bezig**. \nDe werk‑fase (code, configuratie) draait op de achtergrond, en nu ben ik in de **deployed**‑fase actief – klaar om met je te praten, vragen te beantwoorden en taken te ondersteunen.\n\nKort samengevat:\n\n* **Werk** – ik voer taken uit om iets te bereiken. \n* **Bezig** – op dit moment ben ik beschikbaar voor jou. \n\nLaat me weten wat je wilt doen: een document bekijken, een agenda‑item checken, of iets anders — ik sta paraat.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "toegang",
+        "used_cards": [
+          "kbv2-c3473be0",
+          "kbv2-b5af1c60",
+          "kbv2-5045ea6d",
+          "kbv2-aaf81efb",
+          "kbv2-2905ecd8"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2450
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2447,
-    "last_updated": "2026-08-21T17:24:28.925997+00:00"
+    "total_conversations": 2450,
+    "last_updated": "2026-08-21T17:35:47.080495+00:00"
   }
 }

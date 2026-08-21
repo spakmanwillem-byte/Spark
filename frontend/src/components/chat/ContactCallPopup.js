@@ -6,7 +6,8 @@
  *  - Bellen (tel: link)
  *  - Sluiten
  *
- * Placeholder tot echte in-app calling (WebRTC) er is.
+ * Snelkoppeling naar externe app. Voor in-app calling zie PriveCallBark
+ * (UI-shell) — echte lokale-socket verbinding komt in aparte sessie.
  */
 import React from 'react';
 import { X, MessageCircle, Phone, UserPlus } from 'lucide-react';
@@ -79,7 +80,7 @@ export function ContactCallPopup({ action, onClose }) {
                 </a>
               )}
               <p className="text-[10px] text-slate-500 text-center mt-2">
-                Placeholder — echte in-app calling (WebRTC) komt later.
+                Snelkoppeling — voor in-app bellen: klik op contact in Privé-tab.
               </p>
             </div>
           </>

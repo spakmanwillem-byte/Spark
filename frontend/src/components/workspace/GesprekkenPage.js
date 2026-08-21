@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
 import DnDBarkPanel from '../dnd/DnDBarkPanel';
 import { ContactCallPopup } from '../chat/ContactCallPopup';
+import { PriveCallBark } from '../chat/PriveCallBark';
 import { RpsBark } from '../games/RpsBark';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
@@ -359,6 +360,14 @@ export function GesprekkenPage({ onNavigate }) {
   const [priveMessages, setPriveMessages] = useState([]);
   const [priveSearch, setPriveSearch] = useState('');
   const [sendingPrive, setSendingPrive] = useState(false);
+
+  // v13_prive_call_ui_001 — UI-shell voor bel/beeld in privé chat header
+  const [callBark, setCallBark] = useState({ open: false, mode: 'audio' });
+  const openPriveCall = (mode) => {
+    if (!selectedContact) return;
+    setCallBark({ open: true, mode });
+  };
+  const closePriveCall = () => setCallBark((s) => ({ ...s, open: false }));
 
   const loadPriveContacts = async () => {
     if (!userId) return;
@@ -1293,11 +1302,31 @@ export function GesprekkenPage({ onNavigate }) {
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
-                        <button data-testid="call-btn" className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
-                          <Phone className="w-4 h-4 text-slate-400" />
+                        <button
+                          data-testid="call-btn"
+                          onClick={() => openPriveCall('audio')}
+                          title={`Bel ${selectedContact.naam}`}
+                          className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
+                          style={{
+                            color: 'var(--glow-base, #f59e0b)',
+                            backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
+                            boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
+                          }}
+                        >
+                          <Phone className="w-4 h-4" />
                         </button>
-                        <button data-testid="video-btn" className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
-                          <Video className="w-4 h-4 text-slate-400" />
+                        <button
+                          data-testid="video-btn"
+                          onClick={() => openPriveCall('video')}
+                          title={`Beeldbellen met ${selectedContact.naam}`}
+                          className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
+                          style={{
+                            color: 'var(--glow-base, #f59e0b)',
+                            backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
+                            boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
+                          }}
+                        >
+                          <Video className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
@@ -1368,6 +1397,13 @@ export function GesprekkenPage({ onNavigate }) {
         <RpsBark userId={userId} open={rpsOpen} opponent={rpsOpponent} onClose={() => setRpsOpen(false)} />
         {/* v12_contact_call_001 */}
         <ContactCallPopup action={contactCallAction} onClose={() => setContactCallAction(null)} />
+        {/* v13_prive_call_ui_001 — UI-shell privé-bel bark (lokaal, geen cloud) */}
+        <PriveCallBark
+          open={callBark.open}
+          mode={callBark.mode}
+          contact={selectedContact}
+          onClose={closePriveCall}
+        />
       </div>
     </MainLayout>
   );

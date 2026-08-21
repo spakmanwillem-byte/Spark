@@ -1,5 +1,34 @@
 # Spark Core 2.0 — PRD
 
+
+## Sessie 52 (2026-02-21) — Privé-bel UI-shell + WebRTC-verwarring weg
+
+### v13_prive_call_ui_001 — Lokale bel-shell in privé chat
+Willems visie geimplementeerd: bel + camera icoon persistent rechtsboven wanneer een privé-contact geopend is. Iconen gloed via `--glow-base` (uit profielkleurschema). Klik opent een bark-modal.
+
+**Bark-modal (`PriveCallBark.js`)**:
+- Zwart video-vlak = VLC/lokale-cam placeholder
+- Avatar van gebelde persoon zichtbaar tijdens verbinden / pauze / audio-only
+- State-progressie: `Verbinden → Overgaan → In gesprek/In beeld` (visuele feedback zonder echte verbinding)
+- Controls: Mute-toggle, Camera-toggle (alleen video), Hangup
+- Self-PIP blok (jouw zelfbeeld) rechtsonder in video-modus
+- Glow-rand rondom hele modal via CSS variabele
+- LIVE-badge wanneer state = active
+
+### Ruis-opruiming
+- WebRTC-comments in `ContactCallPopup.js` neutraal gemaakt (was verwarrend "WebRTC komt later" — nu "in-app bellen zit in Privé-tab")
+- Geen enkele WebRTC-code aanwezig. Alles blijft lokaal.
+
+### Files changed
+- `/app/frontend/src/components/chat/PriveCallBark.js` — NIEUW, UI-shell modal
+- `/app/frontend/src/components/workspace/GesprekkenPage.js` — import + state + bel/video click handlers + glow styling op header-buttons + render bark
+- `/app/frontend/src/components/chat/ContactCallPopup.js` — comment-refactor (geen gedragsverandering)
+
+### Volgende sessie
+Voor echte in-app calling: aparte sessie voor lokale-socket verbinding (Odroid-netwerk), mic/cam capture, VLC-koppeling. Deze shell staat klaar.
+
+---
+
 ## Sessie 51 (2026-07-31) — Prod-merge + trade-log fix
 
 ### Merge productie-backup

@@ -233,15 +233,17 @@ Deze scheiding staat in de blauwdrukken en wordt gerespecteerd door alle nieuwe 
 
 ---
 
-### MODULE 7 — Inbox subtab "Onvolledig" (klein maar bruikbaar)
+### MODULE 7 — Inbox subtab "Onvolledig" ✅ DONE (sessie 52a, feb 2026)
 **Doel**: 680 lege-5W kaarten zichtbaar maken in bestaande Inbox-tab i.p.v. nieuwe top-tab.  
 **Anker**: `knowledge/_meta.json § kaart_veldsemantiek.incompleet_criterium.toon_in_ui`
 
-**Executie-stappen**:
-1. Backend: `/api/kb/v2/inbox` endpoint krijgt optionele `?filter=incomplete` param
-2. Filter-logica hergebruikt `incompleet_criterium.checks` uit meta (7 regels)
-3. Frontend `KennisbankV2Page.js`: 2 sub-buttons onder Inbox-tab — `Inbox (2112)` en `Onvolledig (680)`
-4. Klik op subtab → herlaadt met andere query-param
+**Status**: Geïmplementeerd én geïntegreerd in de sort-dropdown flow. `KennisbankV2Page` toont Onvolledig als filter binnen de Inbox-grid met sort-support. Zie CHANGELOG sessie 52a.
+
+**Executie-stappen** (referentie, gedaan):
+1. ~~Backend: `/api/kb/v2/inbox` endpoint krijgt optionele `?filter=incomplete` param~~
+2. ~~Filter-logica hergebruikt `incompleet_criterium.checks` uit meta (7 regels)~~
+3. ~~Frontend `KennisbankV2Page.js`: subtabs + sort-dropdown~~
+4. ~~Klik op subtab → herlaadt met andere query-param~~
 
 **Zones**:
 - 🤖 **Spark autonoom**: incompleet-detectie via meta-regels

@@ -19,8 +19,6 @@
 
 ---
 
-## 🎲 P2 — Spark World D&D Tab herstructurering (idee Willem, 2026-05-31)
-
 ## 🎲 P2 — Spark World D&D Tab herstructurering (2026-05-31, idee Willem)
 
 **Quick wins al uitgerold** (sessie 17): huis/opslag slots groter (aspect-square min-h-56, text-2xl iconen), worldmap onder dorp i.p.v. apart (zelfde breedte), worldmap-svg langer (h-56 → h-72), dorp-kader langer (h-40 → h-52), event-feed/charinfo herverdeeld zonder MiniMap-kolom (7+5 i.p.v. 5+4+3).
@@ -48,8 +46,6 @@
 
 
 ---
-
-## 🌷 P1 — Spark als Gastheer (Onthaal-laag)
 
 ## 🌷 P1 — Spark als Gastheer (Onthaal-laag voor app-onwennige mensen)
 
@@ -108,8 +104,6 @@ Wanneer iemand een woord typt dat Spark niet kent (= niet in `spark_vocab.json::
 
 
 ---
-
-## 🗺️ P0/P1/P2/P3 items (open)
 
 ## 🗺️ Backlog (prioriteit hoog → laag)
 
@@ -245,8 +239,6 @@ Wanneer iemand een woord typt dat Spark niet kent (= niet in `spark_vocab.json::
 
 ## 🌱 Backlog 2026-05-28 — 21 nieuwe ideeën (Willem brainstorm)
 
-## 🌱 Backlog 2026-05-28 — 21 nieuwe ideeën (Willem brainstorm)
-
 Geordend per cluster. Veel haakt aan op fundering van v6_command_registry_001 (al live).
 
 ### Cluster A — KB curation & normalisatie
@@ -272,6 +264,7 @@ Geordend per cluster. Veel haakt aan op fundering van v6_command_registry_001 (a
 - [ ] **#trigger-hooks** — Hook-systeem voor triggers/commands (gebruiker-uitbreidbaar). Schema: `/data/triggers/user_triggers.json` met owner/gradatie/pattern/action.
 - [ ] **#trigger-community** — Triggers community-extensible: g2+ stelt voor, g1 keurt goed. Workflow: voorstel → review-queue → approve/reject.
 - [ ] **#negate-trigger** — Negatie-trigger: "nee niet [onderwerp]" → exclude voor sessie. Hook in session_state met `excluded_topics[]`.
+- [~] **#front-scheme** — **Fronts-config per scherm** (kleuren/lettertype/status_labels/action_texts/timings/animations). Zusje van #trigger-hooks maar voor UI-laag i.p.v. gedrag-laag. Draft-widget `FrontsConfigDraftWidget` in Beheer → Kladblok toont het schema. Volgende stap: backend `data/system/fronts_config.json` + `GET/PUT /api/system/fronts-config` + Beheer → Fronts tab. Zie ROADMAP_CORE cluster "Skype-Spark & Fronts".
 
 ### Cluster C — Command Registry uitbreiding (fundering v6_command_registry_001 leeft al)
 - [x] **#cmd-registry** — ✅ DONE (v6_command_registry_001): elke api-endpoint krijgt intent-tags. 27 commands in `/data/system/command_registry.json`. Uitbreiden naar alle 418 endpoints (Synapse-scan).
@@ -295,15 +288,11 @@ Geordend per cluster. Veel haakt aan op fundering van v6_command_registry_001 (a
 2. **#kb-similarity** + **#kb-node-hierarchy** (semantische upgrade)
 3. **#cmd-disambiguation** (UI op bestaande matcher-output)
 4. **#cmd-skill-discovery** (accept/reject UI op bestaande intent_log)
-5. **#trigger-hooks** + **#trigger-community** (gemeenschap-uitbreidbaar)
+5. **#trigger-hooks** + **#trigger-community** + **#front-scheme** (gemeenschap-uitbreidbaar: gedrag én UI)
 6. **#cmd-gradatie-files** + **#cmd-grad-lock** + **#cmd-priv-fallback** (privacy/governance)
 7. Rest in fluctuerende volgorde
 
 ---
-
----
-
-## 🎭 Backlog 2026-05-28 — D&D / Spark World (29 items)
 
 ## 🎭 Backlog 2026-05-28 — D&D / Spark World (29 items)
 

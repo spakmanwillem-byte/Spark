@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Zap, User, Key, Shield, LogIn, AlertCircle, UserPlus, CheckCircle } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+
+// v13s_login_glow_config_001 — DEFAULTS (fallback als backend niet reageert of nog geen setting).
+// Willem beheert deze via Beheer → Instellingen → Beeld → "Login Glow & Spark-logo".
+const LOGIN_GLOW_DEFAULTS = {
+  primary: '#f59e0b',
+  secondary: '#06b6d4',
+  bg_tint: '#0f172a',
+  dots_count: 8,
+  dots_contrast: 0.6,
+  dots_size: 1.0,
+  corner_enabled: true,
+  corner_a: '#f59e0b',
+  corner_b: '#f97316',
+  spark_logo_url: null,
+};
+
+// Kleuren palet voor de dots (rotatie door de primaire + secundaire tint + accenten)
+const DOT_PALETTE = ['#f59e0b', '#06b6d4', '#a855f7', '#10b981', '#ec4899', '#f97316', '#3b82f6', '#22c55e'];
 
 export function LoginForm() {
   const { login, error } = useAuth();
@@ -13,6 +31,49 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [localError, setLocalError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  // v13s_login_glow_config_001 — glow-config uit /api/settings/system (publiek, geen auth)
+  const [glow, setGlow] = useState(LOGIN_GLOW_DEFAULTS);
+  useEffect(() => {
+    fetch(`${API}/api/settings/system`)
+      .then(r => r.json())
+      .then(d => {
+        const s = d.settings || {};
+        setGlow({
+          primary: s.app_primary_accent || LOGIN_GLOW_DEFAULTS.primary,
+          secondary: s.app_secondary_accent || LOGIN_GLOW_DEFAULTS.secondary,
+          bg_tint: s.app_background_tint || LOGIN_GLOW_DEFAULTS.bg_tint,
+          dots_count: Number.isFinite(s.login_dots_count) ? s.login_dots_count : LOGIN_GLOW_DEFAULTS.dots_count,
+          dots_contrast: Number.isFinite(s.login_dots_contrast) ? s.login_dots_contrast : LOGIN_GLOW_DEFAULTS.dots_contrast,
+          dots_size: Number.isFinite(s.login_dots_size) ? s.login_dots_size : LOGIN_GLOW_DEFAULTS.dots_size,
+          corner_enabled: s.login_corner_glow_enabled !== false,
+          corner_a: s.login_corner_glow_color_a || LOGIN_GLOW_DEFAULTS.corner_a,
+          corner_b: s.login_corner_glow_color_b || LOGIN_GLOW_DEFAULTS.corner_b,
+          spark_logo_url: s.spark_logo_url || null,
+        });
+      })
+      .catch(() => {/* fallback op defaults */});
+  }, []);
+
+  // Genereer stabiele random dot posities op basis van count
+  const dots = useMemo(() => {
+    const seed = (i) => {
+      // deterministisch pseudo-random per index zodat re-renders niet flikkeren
+      const x = Math.sin(i * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    };
+    const arr = [];
+    for (let i = 0; i < glow.dots_count; i++) {
+      arr.push({
+        top: `${5 + seed(i) * 90}%`,
+        left: `${5 + seed(i + 100) * 90}%`,
+        color: DOT_PALETTE[i % DOT_PALETTE.length],
+        size: Math.round(3 + seed(i + 200) * 4) * glow.dots_size,
+        delay: `${(seed(i + 300) * 2).toFixed(2)}s`,
+      });
+    }
+    return arr;
+  }, [glow.dots_count, glow.dots_size]);
+
   // v4_self_delete_001: toon alert na account-delete redirect
   const [deletedAlert, setDeletedAlert] = useState(() => {
     if (typeof window === 'undefined') return false;
@@ -78,21 +139,30 @@ export function LoginForm() {
   const displayError = localError || error;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4">
-      {/* Animated background — v13 hartslag-dots in primaire kleuren, random posities */}
+    <div
+      className="min-h-screen flex items-center justify-center p-4"
+      style={{
+        background: `linear-gradient(135deg, ${glow.bg_tint}, #0f1728, ${glow.bg_tint})`,
+      }}
+    >
+      {/* v13s_login_glow_config_001 — Animated background: 2 corner glows + N dots
+          Beheer: Beheer → Instellingen → Beeld → "Login Glow & Spark-logo" */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" data-testid="login-glow-dots">
-        <div className="absolute w-96 h-96 -top-48 -left-48 bg-amber-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        {[
-          { top: '12%', left: '8%',  color: '#f59e0b', size: 6,  delay: '0s'   },
-          { top: '22%', left: '82%', color: '#06b6d4', size: 4,  delay: '0.3s' },
-          { top: '68%', left: '18%', color: '#a855f7', size: 5,  delay: '0.6s' },
-          { top: '82%', left: '72%', color: '#10b981', size: 4,  delay: '0.9s' },
-          { top: '45%', left: '90%', color: '#ec4899', size: 3,  delay: '1.2s' },
-          { top: '55%', left: '4%',  color: '#f59e0b', size: 5,  delay: '1.5s' },
-          { top: '35%', left: '50%', color: '#3b82f6', size: 3,  delay: '0.4s' },
-          { top: '90%', left: '35%', color: '#f97316', size: 6,  delay: '0.7s' },
-        ].map((d, i) => (
+        {glow.corner_enabled && (
+          <>
+            <div
+              className="absolute w-96 h-96 -top-48 -left-48 rounded-full blur-3xl animate-pulse"
+              style={{ backgroundColor: glow.corner_a + '1a' /* ~10% opacity */ }}
+              data-testid="login-corner-glow-a"
+            />
+            <div
+              className="absolute w-96 h-96 -bottom-48 -right-48 rounded-full blur-3xl animate-pulse"
+              style={{ backgroundColor: glow.corner_b + '1a', animationDelay: '1s' }}
+              data-testid="login-corner-glow-b"
+            />
+          </>
+        )}
+        {dots.map((d, i) => (
           <div
             key={i}
             className="absolute rounded-full"
@@ -103,26 +173,43 @@ export function LoginForm() {
               boxShadow: `0 0 ${d.size * 4}px ${d.color}`,
               animation: `heartbeatDot 2.4s ease-in-out infinite`,
               animationDelay: d.delay,
-              opacity: 0.6,
+              opacity: glow.dots_contrast,
             }}
           />
         ))}
         <style>{`
           @keyframes heartbeatDot {
-            0%, 40%, 100% { transform: scale(1); opacity: 0.4; }
-            15% { transform: scale(1.6); opacity: 0.9; }
-            25% { transform: scale(1.2); opacity: 0.7; }
-            30% { transform: scale(1.5); opacity: 0.85; }
+            0%, 40%, 100% { transform: scale(1); opacity: ${(glow.dots_contrast * 0.66).toFixed(2)}; }
+            15% { transform: scale(1.6); opacity: ${(glow.dots_contrast * 1.5).toFixed(2)}; }
+            25% { transform: scale(1.2); opacity: ${(glow.dots_contrast * 1.15).toFixed(2)}; }
+            30% { transform: scale(1.5); opacity: ${(glow.dots_contrast * 1.4).toFixed(2)}; }
           }
         `}</style>
       </div>
 
       <div className="relative w-full max-w-md">
-        {/* Logo */}
+        {/* v13s_login_glow_config_001 — Spark Logo (systeem-branding uit /api/settings/system) */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl shadow-lg shadow-amber-500/25 mb-4">
-            <Zap className="w-8 h-8 text-white" />
-          </div>
+          {glow.spark_logo_url ? (
+            <img
+              src={`${API}${glow.spark_logo_url}`}
+              alt="Spark logo"
+              data-testid="login-spark-logo"
+              className="inline-block w-16 h-16 rounded-2xl mb-4 shadow-lg object-cover"
+              style={{ boxShadow: `0 10px 40px -10px ${glow.primary}66` }}
+            />
+          ) : (
+            <div
+              data-testid="login-spark-logo-fallback"
+              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-lg mb-4"
+              style={{
+                background: `linear-gradient(135deg, ${glow.primary}, ${glow.corner_b})`,
+                boxShadow: `0 10px 30px -10px ${glow.primary}66`,
+              }}
+            >
+              <Zap className="w-8 h-8 text-white" />
+            </div>
+          )}
           <h1 className="text-3xl font-bold text-white tracking-tight">Spark Core</h1>
           <p className="text-slate-400 mt-2">Modulaire AI Assistent</p>
         </div>
@@ -223,11 +310,15 @@ export function LoginForm() {
               )}
             </div>
 
-            {/* Submit Button */}
+            {/* Submit Button — v13s_login_glow_config_001 primary kleur uit systeem */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-semibold rounded-xl shadow-lg shadow-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 text-white font-semibold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 hover:brightness-110"
+              style={{
+                background: `linear-gradient(90deg, ${glow.primary}, ${glow.corner_b})`,
+                boxShadow: `0 10px 24px -12px ${glow.primary}88`,
+              }}
               data-testid="login-submit-btn"
             >
               {isLoading ? (
@@ -240,12 +331,18 @@ export function LoginForm() {
               )}
             </button>
 
-            {/* Register Button (v4_025) */}
+            {/* Register Button — v13s_login_glow_config_001 secondary kleur (contrast met primary) */}
             <button
               type="button"
               disabled={isLoading}
               onClick={handleRegister}
-              className="w-full py-3 bg-slate-800/60 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white font-medium rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+              className="w-full py-3 font-medium rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 hover:brightness-125"
+              style={{
+                backgroundColor: `${glow.secondary}20`,
+                color: glow.secondary,
+                border: `1px solid ${glow.secondary}55`,
+                boxShadow: `0 6px 20px -14px ${glow.secondary}88`,
+              }}
               data-testid="register-btn"
             >
               <UserPlus className="w-4 h-4" />

@@ -39,6 +39,15 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "app_primary_accent": {"type": "str", "scope": "system"},   # hex bv #f59e0b
     "app_secondary_accent": {"type": "str", "scope": "system"}, # hex bv #06b6d4
     "app_background_tint": {"type": "str", "scope": "system"},  # hex bv #0f172a
+    # v13s_login_glow_config_001 — login-scherm glow + logo (systeem, admin only)
+    # Zie Beheer → Instellingen → Beeld → "Login Glow & Spark-logo"
+    "login_dots_count": {"type": "int", "scope": "system", "min": 4, "max": 24},        # aantal glow-puntjes (default 8)
+    "login_dots_contrast": {"type": "float", "scope": "system", "min": 0.1, "max": 1.0},# opacity/contrast (default 0.6)
+    "login_dots_size": {"type": "float", "scope": "system", "min": 0.5, "max": 3.0},    # grootte-multiplier (default 1.0)
+    "login_corner_glow_enabled": {"type": "bool", "scope": "system"},                    # aan/uit vinkje (default true)
+    "login_corner_glow_color_a": {"type": "str", "scope": "system"},                     # linksboven hex (default primary)
+    "login_corner_glow_color_b": {"type": "str", "scope": "system"},                     # rechtsonder hex (default secondary)
+    "spark_logo_url": {"type": "str", "scope": "system"},                                # URL/path naar Spark-logo (default null → fallback Sparkles icon)
     # v5_bot_color_scheme_001 — per-bot accent kleur (admin) — gebruikt door GesprekkenPage / CommunityPage bubbles
     "bot_color_madelief": {"type": "str", "scope": "system"},   # default #ec4899
     "bot_color_harry":    {"type": "str", "scope": "system"},   # default #06b6d4
@@ -190,3 +199,71 @@ async def reset_user(user_id: str, key: str, viewer_id: str):
         del data[key]
         save_json(fp, data)
     return {"success": True, "key": key, "reset_to_default": True}
+
+
+# ============================================================
+# v13s_login_glow_config_001 — Spark-logo upload endpoint
+# ============================================================
+from fastapi import UploadFile, File, Form
+from fastapi.responses import FileResponse
+
+LOGO_DIR = DATA_ROOT / "system" / "branding"
+LOGO_DIR.mkdir(parents=True, exist_ok=True)
+ALLOWED_LOGO_EXT = {".png", ".jpg", ".jpeg", ".webp", ".svg"}
+
+
+@router.post("/system/spark-logo")
+async def upload_spark_logo(viewer_id: str = Form(...), file: UploadFile = File(...)):
+    """Upload Spark's systeem-logo. Bewaart in /data/system/branding/spark_logo.{ext}
+    en zet `spark_logo_url` in system settings naar de public serve URL.
+    Alleen gradatie ≤ SYSTEM_EDIT_GRAD (admin) mag dit.
+    """
+    grad = _get_user_gradatie(viewer_id)
+    if grad is None or grad > SYSTEM_EDIT_GRAD:
+        raise HTTPException(status_code=403, detail=f"Alleen gradatie ≤ {SYSTEM_EDIT_GRAD} mag Spark-logo uploaden")
+
+    filename = file.filename or ""
+    ext = "." + filename.split(".")[-1].lower() if "." in filename else ""
+    if ext not in ALLOWED_LOGO_EXT:
+        raise HTTPException(status_code=400, detail=f"Bestandstype '{ext}' niet toegestaan. Kies: {sorted(ALLOWED_LOGO_EXT)}")
+
+    # Overschrijf altijd naar consistente naam met huidige extensie
+    for existing in LOGO_DIR.glob("spark_logo.*"):
+        existing.unlink(missing_ok=True)
+    target = LOGO_DIR / f"spark_logo{ext}"
+    content = await file.read()
+    if len(content) > 5 * 1024 * 1024:  # 5 MB cap
+        raise HTTPException(status_code=413, detail="Logo mag max 5 MB zijn")
+    target.write_bytes(content)
+
+    # Update system setting met de public serve URL (via /api/settings/spark-logo/serve)
+    from datetime import datetime, timezone
+    data = load_json(SYSTEM_FILE, default={})
+    # Cache-buster via timestamp zodat browser niet oude versie toont
+    ts = int(datetime.now(timezone.utc).timestamp())
+    data["spark_logo_url"] = f"/api/settings/spark-logo/serve?v={ts}"
+    save_json(SYSTEM_FILE, data)
+
+    return {"success": True, "url": data["spark_logo_url"], "size_bytes": len(content), "ext": ext}
+
+
+@router.get("/spark-logo/serve")
+async def serve_spark_logo():
+    """Publieke serve endpoint voor het Spark-logo (bereikbaar vanaf login-scherm zonder auth)."""
+    for existing in LOGO_DIR.glob("spark_logo.*"):
+        return FileResponse(existing, media_type=f"image/{existing.suffix[1:]}")
+    raise HTTPException(status_code=404, detail="Nog geen Spark-logo geupload")
+
+
+@router.delete("/system/spark-logo")
+async def delete_spark_logo(viewer_id: str):
+    """Verwijder Spark-logo → fallback naar Sparkles icon."""
+    grad = _get_user_gradatie(viewer_id)
+    if grad is None or grad > SYSTEM_EDIT_GRAD:
+        raise HTTPException(status_code=403, detail=f"Alleen gradatie ≤ {SYSTEM_EDIT_GRAD} mag Spark-logo verwijderen")
+    for existing in LOGO_DIR.glob("spark_logo.*"):
+        existing.unlink(missing_ok=True)
+    data = load_json(SYSTEM_FILE, default={})
+    data.pop("spark_logo_url", None)
+    save_json(SYSTEM_FILE, data)
+    return {"success": True, "reset_to_default": True}

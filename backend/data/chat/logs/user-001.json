@@ -61852,11 +61852,47 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2454
       }
+    },
+    {
+      "id": "conv-c553ca4a",
+      "timestamp": "2026-08-21T17:50:43.538503+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2455
+      }
+    },
+    {
+      "id": "conv-ed806045",
+      "timestamp": "2026-08-21T17:50:43.642357+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2456
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2454,
-    "last_updated": "2026-08-21T17:44:42.503065+00:00"
+    "total_conversations": 2456,
+    "last_updated": "2026-08-21T17:50:43.642357+00:00"
   }
 }

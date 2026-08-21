@@ -190,6 +190,15 @@ export function InstellingenPage({ onNavigate }) {
                   <AdminColorScheme userId={userId} userGrad={userGrad} />
                 </SettingsCard>
 
+                {/* v13s_login_glow_config_001 — Login Glow + Spark Logo (systeem) */}
+                <SettingsCard title="Login Glow & Spark-logo (systeem)" icon={Sparkles} accent="#f59e0b">
+                  <p className="text-xs text-slate-400 mb-3">
+                    Achtergrond-animatie + Spark-logo op het inlog-scherm. Losstaand van
+                    persoonlijke glow — dit is de systeem-huid die alle gasten zien.
+                  </p>
+                  <SystemLoginGlow userId={userId} userGrad={userGrad} />
+                </SettingsCard>
+
                 <SettingsCard title="Visuele Instellingen" icon={Palette} accent="#a855f7">
                   <Toggle label="Mood Colors" sub="Interface kleurt mee met Spark's emotie" checked={settings.mood_colors} onChange={v => set('mood_colors', v)} color="#a855f7" />
                   <Divider />
@@ -564,6 +573,296 @@ function AdminColorScheme({ userId, userGrad }) {
 
       {msg && (
         <p data-testid="scheme-msg"
+          className={`text-[11px] px-3 py-2 rounded-lg border ${msg.kind === 'ok' ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' : 'bg-red-500/10 text-red-300 border-red-500/30'}`}>
+          {msg.text}
+        </p>
+      )}
+    </div>
+  );
+}
+
+
+// ============================================================
+// v13s_login_glow_config_001 — SystemLoginGlow
+// Beheer voor inlog-scherm glow-orbs, hoek-glows, dot-count, contrast & Spark-logo upload.
+// System-scope: alle gasten zien wat hier is ingesteld.
+// ============================================================
+function SystemLoginGlow({ userId, userGrad }) {
+  const [cfg, setCfg] = React.useState({
+    dots_count: 8,
+    dots_contrast: 0.6,
+    dots_size: 1.0,
+    corner_enabled: true,
+    corner_a: '#f59e0b',
+    corner_b: '#f97316',
+    spark_logo_url: null,
+  });
+  const [busy, setBusy] = React.useState(false);
+  const [msg, setMsg] = React.useState(null);
+  const [uploading, setUploading] = React.useState(false);
+  const canEdit = (userGrad ?? 7) <= 1;
+
+  const flash = (kind, text) => { setMsg({ kind, text }); setTimeout(() => setMsg(null), 2500); };
+
+  const load = React.useCallback(() => {
+    fetch(`${API}/api/settings/system`).then(r => r.json()).then(d => {
+      const s = d.settings || {};
+      setCfg({
+        dots_count: Number.isFinite(s.login_dots_count) ? s.login_dots_count : 8,
+        dots_contrast: Number.isFinite(s.login_dots_contrast) ? s.login_dots_contrast : 0.6,
+        dots_size: Number.isFinite(s.login_dots_size) ? s.login_dots_size : 1.0,
+        corner_enabled: s.login_corner_glow_enabled !== false,
+        corner_a: s.login_corner_glow_color_a || '#f59e0b',
+        corner_b: s.login_corner_glow_color_b || '#f97316',
+        spark_logo_url: s.spark_logo_url || null,
+      });
+    }).catch(() => {});
+  }, []);
+  React.useEffect(() => { load(); }, [load]);
+
+  const saveOne = async (key, value) => {
+    const r = await fetch(`${API}/api/settings/system/${key}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ value, viewer_id: userId }),
+    });
+    if (!r.ok) {
+      const d = await r.json().catch(() => ({}));
+      throw new Error(d.detail || `HTTP ${r.status}`);
+    }
+  };
+
+  const update = async (key, value) => {
+    if (!canEdit) { flash('err', 'Alleen gradatie ≤ 1 mag dit aanpassen'); return; }
+    setBusy(true);
+    try {
+      await saveOne(key, value);
+      setCfg(c => ({ ...c, [key.replace(/^login_/, '').replace(/^corner_glow_/, 'corner_').replace(/^dots_/, 'dots_')]: value }));
+      flash('ok', 'Opgeslagen');
+    } catch (e) {
+      flash('err', e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const uploadLogo = async (file) => {
+    if (!canEdit) { flash('err', 'Alleen gradatie ≤ 1 mag Spark-logo uploaden'); return; }
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('viewer_id', userId);
+      fd.append('file', file);
+      const r = await fetch(`${API}/api/settings/system/spark-logo`, { method: 'POST', body: fd });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.detail || `HTTP ${r.status}`);
+      setCfg(c => ({ ...c, spark_logo_url: d.url }));
+      flash('ok', `Logo geupload (${(d.size_bytes/1024).toFixed(1)} KB)`);
+    } catch (e) {
+      flash('err', e.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const deleteLogo = async () => {
+    if (!canEdit) return;
+    if (!window.confirm('Weet je zeker dat je het Spark-logo wilt verwijderen? Terug naar het standaard-icoon.')) return;
+    setBusy(true);
+    try {
+      const r = await fetch(`${API}/api/settings/system/spark-logo?viewer_id=${encodeURIComponent(userId)}`, { method: 'DELETE' });
+      if (!r.ok) {
+        const d = await r.json().catch(() => ({}));
+        throw new Error(d.detail || `HTTP ${r.status}`);
+      }
+      setCfg(c => ({ ...c, spark_logo_url: null }));
+      flash('ok', 'Logo verwijderd — fallback op standaard-icoon');
+    } catch (e) {
+      flash('err', e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Spark Logo Upload */}
+      <div className="p-3 bg-slate-900/40 rounded-lg border border-slate-800">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-14 h-14 flex-shrink-0 rounded-lg overflow-hidden border border-slate-700 bg-slate-800 flex items-center justify-center">
+            {cfg.spark_logo_url ? (
+              <img
+                data-testid="admin-spark-logo-preview"
+                src={`${API}${cfg.spark_logo_url}`}
+                alt="Spark logo"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-[10px] text-slate-500">geen logo</span>
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-white">Spark Logo</p>
+            <p className="text-[10px] text-slate-500">
+              PNG/JPG/WEBP/SVG · max 5 MB · aanbevolen 512×512. Verschijnt op login-scherm
+              en in de header wanneer je bent ingelogd.
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="flex-1">
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
+              onChange={e => e.target.files?.[0] && uploadLogo(e.target.files[0])}
+              disabled={!canEdit || uploading}
+              className="hidden"
+              data-testid="admin-spark-logo-file-input"
+            />
+            <span
+              data-testid="admin-spark-logo-upload-btn"
+              className={`inline-flex w-full items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg border transition-colors ${canEdit && !uploading ? 'bg-amber-500/10 border-amber-500/40 text-amber-300 hover:bg-amber-500/20 cursor-pointer' : 'bg-slate-800/40 border-slate-700 text-slate-500'}`}
+            >
+              {uploading ? 'Bezig met uploaden…' : (cfg.spark_logo_url ? 'Vervang logo' : 'Kies bestand')}
+            </span>
+          </label>
+          {cfg.spark_logo_url && (
+            <button
+              onClick={deleteLogo}
+              disabled={!canEdit || busy}
+              className="px-3 py-2 text-xs rounded-lg border border-red-500/40 text-red-300 hover:bg-red-500/10 disabled:opacity-40"
+              data-testid="admin-spark-logo-delete-btn"
+            >
+              Verwijder
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Corner Glow */}
+      <div className="p-3 bg-slate-900/40 rounded-lg border border-slate-800 space-y-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-white">Hoek-glow (corner glow)</p>
+            <p className="text-[10px] text-slate-500">Twee grote wazige gloed-vlekken in de hoeken van het login-scherm.</p>
+          </div>
+          <button
+            data-testid="admin-corner-glow-toggle"
+            onClick={() => update('login_corner_glow_enabled', !cfg.corner_enabled)}
+            disabled={!canEdit || busy}
+            className="relative w-10 h-5 rounded-full transition-colors flex-shrink-0 disabled:opacity-40"
+            style={{ background: cfg.corner_enabled ? '#f59e0b' : '#334155' }}
+          >
+            <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform shadow ${cfg.corner_enabled ? 'left-[22px]' : 'left-[2px]'}`} />
+          </button>
+        </div>
+        <div className={`grid grid-cols-2 gap-2 ${!cfg.corner_enabled ? 'opacity-40 pointer-events-none' : ''}`}>
+          <label className="text-[11px] text-slate-400 space-y-1">
+            <span>Linksboven</span>
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={cfg.corner_a}
+                onChange={e => setCfg(c => ({ ...c, corner_a: e.target.value }))}
+                onBlur={e => update('login_corner_glow_color_a', e.target.value)}
+                disabled={!canEdit}
+                data-testid="admin-corner-color-a"
+                className="w-9 h-8 rounded border border-slate-700 bg-transparent"
+              />
+              <span className="text-[10px] font-mono text-slate-400">{cfg.corner_a}</span>
+            </div>
+          </label>
+          <label className="text-[11px] text-slate-400 space-y-1">
+            <span>Rechtsonder</span>
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={cfg.corner_b}
+                onChange={e => setCfg(c => ({ ...c, corner_b: e.target.value }))}
+                onBlur={e => update('login_corner_glow_color_b', e.target.value)}
+                disabled={!canEdit}
+                data-testid="admin-corner-color-b"
+                className="w-9 h-8 rounded border border-slate-700 bg-transparent"
+              />
+              <span className="text-[10px] font-mono text-slate-400">{cfg.corner_b}</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      {/* Glow Dots */}
+      <div className="p-3 bg-slate-900/40 rounded-lg border border-slate-800 space-y-3">
+        <p className="text-sm font-medium text-white">Glow-puntjes</p>
+
+        <div>
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
+            <span>Aantal puntjes</span>
+            <span className="font-mono">{cfg.dots_count}</span>
+          </div>
+          <input
+            data-testid="admin-dots-count-slider"
+            type="range" min="4" max="24" step="1"
+            value={cfg.dots_count}
+            onChange={e => setCfg(c => ({ ...c, dots_count: Number(e.target.value) }))}
+            onMouseUp={e => update('login_dots_count', Number(e.target.value))}
+            onTouchEnd={e => update('login_dots_count', Number(e.target.value))}
+            disabled={!canEdit || busy}
+            className="w-full mt-1 accent-amber-500"
+          />
+          <div className="flex justify-between text-[9px] text-slate-500"><span>4</span><span>24</span></div>
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
+            <span>Contrast (opacity)</span>
+            <span className="font-mono">{Math.round(cfg.dots_contrast * 100)}%</span>
+          </div>
+          <input
+            data-testid="admin-dots-contrast-slider"
+            type="range" min="0.1" max="1.0" step="0.05"
+            value={cfg.dots_contrast}
+            onChange={e => setCfg(c => ({ ...c, dots_contrast: Number(e.target.value) }))}
+            onMouseUp={e => update('login_dots_contrast', Number(e.target.value))}
+            onTouchEnd={e => update('login_dots_contrast', Number(e.target.value))}
+            disabled={!canEdit || busy}
+            className="w-full mt-1 accent-amber-500"
+          />
+          <div className="flex justify-between text-[9px] text-slate-500"><span>zacht</span><span>fel</span></div>
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
+            <span>Grootte-multiplier</span>
+            <span className="font-mono">×{cfg.dots_size.toFixed(1)}</span>
+          </div>
+          <input
+            data-testid="admin-dots-size-slider"
+            type="range" min="0.5" max="3.0" step="0.1"
+            value={cfg.dots_size}
+            onChange={e => setCfg(c => ({ ...c, dots_size: Number(e.target.value) }))}
+            onMouseUp={e => update('login_dots_size', Number(e.target.value))}
+            onTouchEnd={e => update('login_dots_size', Number(e.target.value))}
+            disabled={!canEdit || busy}
+            className="w-full mt-1 accent-amber-500"
+          />
+          <div className="flex justify-between text-[9px] text-slate-500"><span>klein</span><span>groot</span></div>
+        </div>
+      </div>
+
+      {/* Live-preview hint */}
+      <div className="p-2 bg-slate-800/40 rounded-lg border border-slate-700/50">
+        <p className="text-[10px] text-slate-400">
+          💡 Wijzigingen zijn direct actief op het login-scherm (uitloggen om te bekijken).
+        </p>
+      </div>
+
+      {!canEdit && (
+        <p className="text-[11px] text-amber-300/80 italic">
+          Alleen gradatie 1 (beheerder) kan Login Glow &amp; Spark-logo instellen.
+        </p>
+      )}
+
+      {msg && (
+        <p data-testid="login-glow-msg"
           className={`text-[11px] px-3 py-2 rounded-lg border ${msg.kind === 'ok' ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' : 'bg-red-500/10 text-red-300 border-red-500/30'}`}>
           {msg.text}
         </p>

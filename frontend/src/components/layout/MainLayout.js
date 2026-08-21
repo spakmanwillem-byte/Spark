@@ -138,6 +138,26 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   // Urgent notifications glow (v4_glow_001) — pollt elke 60s
   const [urgentGlow, setUrgentGlow] = useState({});
   const [urgentItems, setUrgentItems] = useState([]);
+
+  // v13s_login_identity_001 — Systeem-branding (naam + versie + logo) uit spark_identity + settings/system
+  // Zelfde bron als login-scherm — 1 plek beheren, overal consistent
+  const [branding, setBranding] = useState({ naam: 'Spark', versie: '2.0', logo_url: null, primary: '#f59e0b', accent: '#ea580c' });
+  useEffect(() => {
+    const API = process.env.REACT_APP_BACKEND_URL;
+    Promise.all([
+      fetch(`${API}/api/spark/identity`).then(r => r.json()).catch(() => ({})),
+      fetch(`${API}/api/settings/system`).then(r => r.json()).catch(() => ({ settings: {} })),
+    ]).then(([id, sys]) => {
+      const s = sys.settings || {};
+      setBranding({
+        naam: id?.naam || 'Spark',
+        versie: id?.versie || '',
+        logo_url: s.spark_logo_url || null,
+        primary: s.app_primary_accent || '#f59e0b',
+        accent: s.login_corner_glow_color_b || '#ea580c',
+      });
+    });
+  }, []);
   useEffect(() => {
     if (!user?.id) return;
     const API = process.env.REACT_APP_BACKEND_URL;
@@ -454,15 +474,33 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
         className="bg-slate-900/50 border-r border-slate-800 flex flex-col flex-shrink-0 relative"
         style={{ width: sidebarCollapsed ? 80 : sidebarWidth, transition: isResizing ? 'none' : 'width 300ms ease-in-out' }}
       >
-        {/* Logo */}
+        {/* v13s_login_identity_001 — Logo + naam + versie uit spark_identity/settings.
+            Zelfde bron als login-scherm — 1 plek beheren via Beheer → Instellingen → Beeld. */}
         <div className="h-16 flex items-center px-4 border-b border-slate-800">
-          <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20 cursor-pointer" onClick={() => onNavigate && onNavigate('dashboard', '/')}>
-            <Zap className="w-5 h-5 text-white" />
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg cursor-pointer overflow-hidden"
+            style={{
+              background: branding.logo_url ? 'transparent' : `linear-gradient(135deg, ${branding.primary}, ${branding.accent})`,
+              boxShadow: `0 8px 22px -12px ${branding.primary}55`,
+            }}
+            onClick={() => onNavigate && onNavigate('dashboard', '/')}
+            data-testid="sidebar-spark-logo"
+            title={`${branding.naam}${branding.versie ? ' ' + branding.versie : ''}`}
+          >
+            {branding.logo_url ? (
+              <img
+                src={`${process.env.REACT_APP_BACKEND_URL}${branding.logo_url}`}
+                alt={branding.naam}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Zap className="w-5 h-5 text-white" />
+            )}
           </div>
           {!sidebarCollapsed && (
             <div className="ml-3">
-              <h1 className="text-lg font-bold text-white">Spark Core</h1>
-              <p className="text-xs text-slate-500">v2.0</p>
+              <h1 className="text-lg font-bold text-white">{branding.naam}</h1>
+              {branding.versie && <p className="text-xs text-slate-500">v{branding.versie}</p>}
             </div>
           )}
         </div>

@@ -1,6 +1,41 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52f (2026-02-21) — Boekhouding frontend + balances + SepaHub refactor
+
+### v13_sepa_hub_001 — SEPA als eigen hub-module
+Refactor: `modules/boekhouder/sepa.py` verplaatst naar `modules/sepa_hub/`:
+- `SepaHub` class met `parse_camt053` / `parse_mt940` / `generate_pain001` / `reconcile`
+- `get_hub()` singleton, `_meta.json` voor Synapslaag zichtbaarheid
+- Books-routes consumeren via `get_sepa_hub()` — geen boekhouder-dependency meer
+- Reconcile-skeleton: matcht op datum+bedrag+iban tegen bestaande entries
+- Ontkoppeld → later ook bruikbaar voor wallet/shop/andere modules
+
+### v13_boekhouding_opening_balance_001 — Openingsbalans-endpoint
+`POST /api/boekhouding/books/{id}/opening-balance?amount_eur=X`: idempotent (vervangt bestaande opening). Gebruikt voor "balances goed zetten" bij nieuwe boeken.
+
+### v13_boekhouding_ui_001 — Frontend "Boeken" tab
+Nieuw component `BoekhoudingBoekenTab.js`, ingehaakt in `BoekhoudPage`:
+- Grid met 4 books-cards (Spark Core €975.85, Roadkillshop, Zorgboerderij, Willem-Privé €0)
+- Elke card: icon+kleur uit meta, balans (groen/rood), in/uit/regels, IBAN-status
+- Klik op card → **detail-bark** met 3 sub-tabs:
+  - **Kasboek**: entries lijst (natte in/uit-kleuring, timestamp, type)
+  - **Instellingen**: IBAN + Bank naam invoer, openingsbalans instellen
+  - **SEPA**: CAMT.053 upload + MT940 upload + pain.001 export (download XML)
+- Admin ziet alle 4 tabs (Kasboeken, Transacties, Boeken, Klanten), non-admin ziet "Mijn Privé + Mijn Boeken"
+- `data-testid`s: `book-card-{id}`, `book-tab-{entries|instellingen|sepa}`, `book-iban-input`, `book-camt-file`, `book-mt940-file`, `book-export-pain001-btn`, etc.
+
+### Files changed (sessie 52f)
+- `/app/backend/modules/sepa_hub/__init__.py` — NIEUW (SepaHub class + get_hub)
+- `/app/backend/modules/sepa_hub/parsers.py` — verplaatst van boekhouder/sepa.py
+- `/app/backend/modules/sepa_hub/_meta.json` — hub-metadata
+- `/app/backend/modules/boekhouder/books_routes.py` — SepaHub import + opening-balance endpoint
+- `/app/frontend/src/components/modules/BoekhoudingBoekenTab.js` — NIEUW
+- `/app/frontend/src/components/modules/BoekhoudPage.js` — nieuwe 'boeken' tab + import
+
+---
+
+
 ## Sessie 52e (2026-02-21) — Multi-boekhouding + SEPA + Inkomende oproep + Login-dots
 
 ### v13_boekhouding_books_001 — Multi-container boekhouding

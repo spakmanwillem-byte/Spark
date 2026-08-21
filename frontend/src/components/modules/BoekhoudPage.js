@@ -6,6 +6,7 @@ import {
   Building2, TrendingUp, TrendingDown, Filter, X, Inbox
 } from 'lucide-react';
 import { AdminTikkieReview } from './AdminTikkieReview';
+import { BoekhoudingBoekenTab } from './BoekhoudingBoekenTab';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -167,9 +168,11 @@ export function BoekhoudPage({ onNavigate }) {
   const tabs = isAdmin ? [
     { id: 'overzicht', label: 'Kasboeken' },
     { id: 'transacties', label: 'Transacties' },
+    { id: 'boeken', label: 'Boeken (v13)' },
     { id: 'klanten', label: 'Klanten' },  // v6_bonnetje_001
   ] : [
     { id: 'overzicht', label: 'Mijn Privé' },  // non-admin ziet alleen eigen kasboek
+    { id: 'boeken', label: 'Mijn Boeken' },
   ];
 
   if (loading) return <MainLayout activePage="boekhouding" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin" /></div></MainLayout>;
@@ -434,6 +437,7 @@ export function BoekhoudPage({ onNavigate }) {
             )}
 
             {activeTab === 'klanten' && <KlantenTab API={API} />}
+            {activeTab === 'boeken' && <BoekhoudingBoekenTab userId={userId} />}
           </div>
         </div>
       </div>

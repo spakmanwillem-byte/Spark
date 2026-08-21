@@ -270,6 +270,32 @@ def export_pain001(book_id: str, payload: SepaBatchIn, viewer_id: str):
     }
 
 
+@router.post("/books/{book_id}/opening-balance")
+def set_opening_balance(book_id: str, viewer_id: str, amount_eur: float, naam: str = "Openingsbalans"):
+    """Zet een openingsbalans-entry (idempotent: vervangt bestaande opening als aanwezig)."""
+    b = book_svc.get_book(book_id)
+    if not b:
+        raise HTTPException(404)
+    if not _can_access_book(viewer_id, b):
+        raise HTTPException(403)
+    # Verwijder bestaande opening
+    from pathlib import Path
+    from modules.core.storage import load_json, save_json
+    kfp = Path(__file__).parent.parent.parent / "data" / "boekhouding" / "books" / book_id / "kasboek.json"
+    data = load_json(kfp, default={"entries": []})
+    data["entries"] = [e for e in data.get("entries", []) if e.get("type") != "opening_balance"]
+    save_json(kfp, data)
+    e = book_svc.add_entry(book_id, {
+        "type": "opening_balance",
+        "amount_eur": float(amount_eur),
+        "naam": naam,
+        "note": "Handmatig ingesteld startsaldo",
+        "source": "manual_opening",
+        "tags": ["opening"],
+    })
+    return {"success": True, "entry": e, "summary": book_svc.book_summary(book_id)}
+
+
 # ============================================================
 # Notify test-hook (voor UI-development)
 # ============================================================

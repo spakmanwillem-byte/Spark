@@ -72,6 +72,84 @@ Drie duidelijke lagen die nooit mogen mixen:
 - [ ] **Bonnen als PDF** — nu JSON-response. PDF-generator (reportlab of weasyprint) voor download.
 - [ ] **Chain-integrity endpoint** — `GET /api/boekhouding/verify-chain/{topic}` loopt hash-chain na en meldt breuken.
 - [ ] **Trader winst-hook** — bij trade-close een `record_winst_event` zodat trade-winst ook in `winst_events` chain landt.
+## 🌟 CLUSTER — Login Glow, Spark-branding & Admin-look (v13s, sessie 52s, feb 2026)
+
+**Filosofie**: Spark's visuele identiteit is ook meta-data over wie hij is. Elk icoon,
+kleur en logo dat het systeem gebruikt wordt via `settings/system` beheerbaar zodat de
+synapse-laag straks kan lezen: *"ik toon mezelf als X, met kleur Y"* — fundering voor
+zelf-perceptie. LLM = mond, JSON = geheugen, icons = spiegel.
+
+### ✅ Gedaan (sessie 52s)
+- [x] **Login glow-config backend** — 7 nieuwe system keys in `modules/settings/routes.py`: `login_dots_count` (4-24), `login_dots_contrast` (0.1-1.0), `login_dots_size` (0.5-3.0), `login_corner_glow_enabled/color_a/color_b`, `spark_logo_url`. Publiek uitleesbaar (no-auth) voor login-scherm.
+- [x] **Spark-logo upload endpoint** — `POST/GET/DELETE /api/settings/system/spark-logo` (multipart, admin-only, max 5MB, PNG/JPG/WEBP/SVG). Bestand in `/data/system/branding/spark_logo.*`, publieke serve via `/api/settings/spark-logo/serve?v={ts}`.
+- [x] **LoginForm gedynamiseerd** — leest `/api/settings/system` + `/api/spark/identity` op mount. Corner-glows/dots/logo/naam/versie config-driven. Titel `Spark Core` → `Spark`, subtitel `AI Assistent`, footer `Spark 2.0` uit identity. Masterkey/Admin-toggle verwijderd (regelt in-ecosystem).
+- [x] **LoginForm buttons** — Inloggen = primary → corner_b gradient · Nieuwe gebruiker = secondary tint (was grijs, viel niet op).
+- [x] **SidebarHeader consistent** — `MainLayout.js` leest zelfde branding: naam+versie uit identity, logo uit settings. Zap-icon fallback als geen logo.
+- [x] **Admin-button style** — `SaveButton` + logo-upload + toggle + 3 sliders krijgen violet gradient (`#a855f7 → #7c3aed`) i.p.v. amber (dat is user/login-kleur).
+- [x] **SystemLoginGlow admin-panel** — in `Beheer → Instellingen → Beeld`. Logo uploader, corner-glow toggle + colors, 3 sliders. Auto-save op release. Alleen grad ≤ 1.
+
+### 🔴 Nog te doen — Fase A/B/C
+- [ ] **Fase A: admin-accent op alle admin-tabs** — wanneer `adminModeActive===true` → tabs onder Beheer/Modules/Admin + alle admin action-buttons krijgen violet accent i.p.v. user-primary. `identity_facts`-entry `admin_mode_kleur: paars` toevoegen.
+- [ ] **Fase B: admin-override neemt user-kleuren over (tijdelijk)** — `--app-primary/secondary` CSS-vars overschreven met admin-accent wanneer admin actief; bij `disableAdmin` terug naar Mijn Profiel-voorkeur. Meta-flag "hij weet dat hij anders oogt".
+- [ ] **Fase C: icon-registry + upload (fundering-steen synapse)** — grote sessie:
+  - Backend: `data/branding/system_icons.json` met `{key: {url, uploaded_by, uploaded_at, reason, emoji_fallback, original_lucide}}` + per-key endpoints
+  - Frontend: `<SystemIcon name="settings" fallback={Settings} />` wrapper → vervangt ~50-80 lucide-plekken
+  - Admin-UI: sectie "Systeem-iconen" onder Beeld met per-icoon uploader
+  - **Synapse-hook**: `system_icons.json` als scanner-bron toevoegen
+  - **Identity-facts**: bij upload auto `spark_icon_{key}: eigen ontwerp`
+  - Scope: 2-3 uur
+
+
+---
+
+## 🧠 CLUSTER — Chat/LLM (v13r-s, sessie 52r, feb 2026)
+
+### ✅ Gedaan
+- [x] **Groq model-migratie** — `llama-3.3-70b-versatile` gedeprecateerd 16-aug → `openai/gpt-oss-120b` (officiële replacement).
+- [x] **Emergent Universal Key uit** — `LLM_EMERGENCY_USE_EMERGENT=false` (Willem's wens: geen cloud).
+- [x] **TPM auto-trim retry** — router probeert 1× opnieuw met halve context bij 413/rate_limit_exceeded.
+- [x] **Identity facts cap grad 1** — was 999, nu 15/type (was 8477-token overshoot, nu ~2000).
+- [x] **Turns 6 → 3** — extra headroom voor system_prompt.
+
+### 🔴 Nog te doen
+- [ ] **Cerebras quota-watchdog** — bij 402 → DM naar Willem: "fallback op quota, reset ~X". Nu geen zichtbaarheid.
+- [ ] **Alternatieve fallback** — Together.ai / DeepInfra als 3e provider (3-regel `.env`).
+- [ ] **Ollama-migratie (P2)** — lokaal via `LLM_PRIMARY_BASE_URL=http://localhost:11434/v1`. Hardware-eis: 16 GB RAM (mini-PC) voor Llama 3.1 8B (~75% kwaliteit), 24+ GB voor gpt-oss-120b (identiek aan nu). Code is klaar.
+
+
+---
+
+## 📊 CLUSTER — Trader & Potjes (v13q-r, sessie 52r, feb 2026)
+
+### ✅ Gedaan
+- [x] **Trader-monitor sync-bug** — `monitor.start()` idempotent (`already_running=True`), UI leest ook `data.message`.
+- [x] **`open_pot()` overwrite guard** — bij `is_open=True + andere market` → BLOCK. Bij zelfde market → idempotent skip. Voorkomt ATOM-overschrijving door BCH.
+- [x] **Bitvavo-reconcile 6 potjes** — preview only; BCH/BTC/ETH/SOL/ADA/ATOM elk €10 gekoppeld aan echte Bitvavo entry-prijzen.
+
+### 🔴 Nog te doen
+- [ ] **Bitvavo-reconcile op productie draaien** — zelfde script tegen prod na deploy.
+- [ ] **Trader-tab visueel opruimen** — Anker + Reconciliatie = 1 collapsable card.
+- [ ] **Vermogens-tab** — Activa − Passiva = Eigen vermogen (admin-only).
+
+
+---
+
+## 📚 CLUSTER — KB v2 (sessie 52s)
+
+### ✅ Gedaan
+- [x] **Bulk 5w-filler max_tokens** 1400 → 2400 (skip 60% → 10%).
+- [x] **~74 kaarten gevuld** door bulk-run.
+- [x] **Voelen + spreken 100% compleet**.
+
+### 🔴 Nog te doen
+- [ ] **216 kaarten resterend** — 192 weten (lange wetenschappelijke termen), 24 doen. Willem vult zelf verder.
+- [ ] **Collectieve intelligentie / Laag-2 kennis** — 2e prompt-laag uit patronen over álle users. Bouwstenen aanwezig (shadow_observer, KB v2, synapse, learned_knowledge). Missen: pattern-distiller, stelling-generator, toets-loop, injectie-kanaal, privacy-anonymizer.
+
+
+---
+
+## 💳 CLUSTER — Boekhouding backlog (uit sessie 52)
+
 - [ ] **Voorwaarden pagina live spark-deel** — toon aan users bij shop-opening: "1% naar Spark, deze maand: €X, chain: [hash]".
 - [ ] **Grace-period openstaand** — 30d openstaand → herinnering, 60d → shop-pauze.
 - [ ] **Wallet-service correct koppelen** — juiste import voor `spend_tokens` vinden of aanmaken.

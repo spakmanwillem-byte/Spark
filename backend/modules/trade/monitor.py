@@ -656,7 +656,16 @@ class MonitorService:
 
         with self._lock:
             if self._running:
-                return {"success": False, "message": "Monitor draait al", "status": self.get_status()}
+                # v13q_monitor_start_idempotent_001 — 'draait al' is geen fout, idempotent gedrag.
+                # Voorheen returnde de UI 'Monitor draait al' als fout waardoor de user
+                # meerdere keren klikte en dacht dat de sync stuk was. Nu: success=True met
+                # flag `already_running` zodat de UI netjes syncht op de bestaande status.
+                return {
+                    "success": True,
+                    "already_running": True,
+                    "message": "Monitor draait al — status gesynchroniseerd.",
+                    "status": self.get_status(),
+                }
             self._interval = max(10, min(interval, 86400))
             # v4_multi_market_001: `markets` (lijst) heeft voorrang op `market` (string)
             if markets:

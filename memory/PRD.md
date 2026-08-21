@@ -1,6 +1,36 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52r (2026-02-21, avond) — Post-deploy hotfix: LLM + Trader-sync + WalletView-banner
+
+### v13q_llm_groq_deprecation_fix_001 — Primary model gemigreerd naar gpt-oss-120b
+`llama-3.3-70b-versatile` is per **16-aug-2026** door Groq stilletjes gedeprecateerd → 404 op elke call → chain viel door naar Cerebras (402 quota op) → Emergent Universal Key (budget €7.03/€7.00 op) → `all_providers_failed` in productie.
+- `.env` gewijzigd: `LLM_PRIMARY_MODEL=openai/gpt-oss-120b` (Groq's officiële replacement, gratis tier)
+- Getest ✅: `/api/spark/compose` retourneert warme response via `primary/openai/gpt-oss-120b`
+
+### v13q_llm_no_cloud_001 — Emergency (Emergent Universal Key) uitgezet
+Op Willem's expliciete wens (geen cloud-fallback): `LLM_EMERGENCY_USE_EMERGENT=false`.
+Trade-off: als beide free-tiers (Groq + Cerebras) tegelijk falen = Spark eerlijk stil (bewuste keuze i.p.v. cloud-vangnet).
+
+### v13q_monitor_start_idempotent_001 — Trader-monitor sync-bug opgelost
+Root cause: `monitor.start()` returnde `{success: False, message: "Monitor draait al"}` als de monitor al liep. Frontend las alleen `data.error` (niet `data.message`) → geen alert → user klikte 5-10× voordat 'ie een `bot_stop` deed. Log toonde 8× falen in 4 min (16:00-16:04).
+- **Backend**: `monitor.py` regel 658 — bij `_running=True` return nu `{success: True, already_running: True, status: ...}` (idempotent)
+- **Frontend**: `TraderPage.js` `startMonitor` — bij `!success` fallback naar `data.message` in alert
+- Getest ✅ via curl: 2× snel achter elkaar start → 1e = "gestart", 2e = "draait al" met success=true
+
+### v13q_walletview_banner_001 — Dikke banner als admin in Spark-view zit
+Willem klikte Quick-Buy terwijl `walletView === 'spark'` → potje/trade landde op user-000, niet user-001. Hij zag niets in "zijn" front omdat het op Spark's wallet stond. UI toonde alleen een kleine toggle-knop.
+- **Fix**: `TraderPage.js` — grote amber banner boven de pagina wanneer `isAdmin && walletView === 'spark'`. Inclusief "→ Terug naar mijn wallet"-knop.
+- data-testid: `wallet-view-spark-banner`, `wallet-view-spark-banner-switch`
+
+### Files changed (sessie 52r)
+- `/app/backend/.env` — `LLM_PRIMARY_MODEL` + `LLM_EMERGENCY_USE_EMERGENT`
+- `/app/backend/modules/trade/monitor.py` — idempotent `start()`
+- `/app/frontend/src/components/modules/TraderPage.js` — banner + alert-fix
+
+---
+
+
 ## Sessie 52q (2026-02-21) — Weekly-report boek-bron + AnnouncePrefs wiring + Monthly scheduler
 
 ### v13p_weekly_bookbased_001 — Weekly report leest nu uit boek-entries

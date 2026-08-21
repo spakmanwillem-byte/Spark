@@ -142,8 +142,8 @@ Drie duidelijke lagen die nooit mogen mixen:
 
 ### ❓ Open vragen / gaps voor sessie 57
 
-1. **Trade-monitor sync-bug** (nieuw, sessie 56d)
-   Willem meldt: monitor in trader-tab start soms niet gelijk met analytisch-tab. Moet dan opnieuw klikken. *Actie*: check `TraderPage` (of vergelijkbaar) — mogelijk aparte state per tab i.p.v. gedeelde monitor-status. Klein maar irritant.
+1. ~~**Trade-monitor sync-bug**~~ ✅ **Opgelost sessie 52r** (`v13q_monitor_start_idempotent_001`)
+   Root cause: backend returnde `success=False` bij "draait al" → UI showde geen alert (las alleen `data.error`, niet `data.message`). Fix: backend nu idempotent (`success=True, already_running=True`), frontend leest ook `data.message` bij fout. Getest ✅.
 
 2. **XP-veld ontbreekt in edit-modal**
    `AchievementsPage.js` edit-modal past nu alleen titel + icon aan. `xp_reward` en `threshold`/`trigger`-waarden zijn nog blueprint-JSON-alleen (niet via GUI editable). *Vraag*: wil Willem die velden editable in de modal, of blijft dat blueprint-only werk voor Willem alleen?

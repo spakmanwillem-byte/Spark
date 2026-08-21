@@ -43,13 +43,22 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
   if (!open || !contact) return null;
 
   const isVideo = mode === 'video';
-  const stateLabel = {
-    connecting: 'Verbinden…',
-    ringing: 'Overgaan…',
-    active: isVideo ? 'In beeld' : 'In gesprek',
-    no_answer: 'Geen gehoor',
+  // v13_state_action_split_001 — badge = pure STATUS (kort), text = ACTIE-context.
+  // Beide teksten straks tunable via Beheer → Fronts.
+  // Zie also FrontsConfigDraftWidget in Kladblok voor volledige schema.
+  const statusLabel = {
+    connecting: 'Verbinden',
+    ringing: 'Overgaan',
+    active: isVideo ? 'In beeld' : 'Verbonden',
+    no_answer: 'Offline',
   }[callState];
-  const isNoAnswer = callState === 'no_answer';
+  const actionText = {
+    connecting: `Probeert ${contact.naam} te bereiken…`,
+    ringing: `${contact.naam} wordt gebeld…`,
+    active: isVideo ? `Beeldgesprek met ${contact.naam}` : `Gesprek met ${contact.naam}`,
+    no_answer: `Geen antwoord — ${contact.naam} is offline. Probeer later opnieuw.`,
+  }[callState];
+  const isAlert = callState === 'no_answer';
 
   return (
     <div
@@ -80,15 +89,18 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
             data-testid="prive-call-state"
             className="text-[11px] px-2 py-0.5 rounded-full"
             style={
-              isNoAnswer
-                ? { backgroundColor: 'rgba(239,68,68,0.15)', color: '#fca5a5' }
+              isAlert
+                ? {
+                    backgroundColor: 'color-mix(in srgb, var(--alert-base, #ef4444) 18%, transparent)',
+                    color: 'var(--alert-base, #ef4444)',
+                  }
                 : {
                     backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 15%, transparent)',
                     color: 'var(--glow-base, #f59e0b)',
                   }
             }
           >
-            {stateLabel}
+            {statusLabel}
           </span>
         </div>
 
@@ -101,15 +113,15 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
           {(!isVideo || videoPaused || callState !== 'active') && (
             <div
               data-testid="prive-call-avatar"
-              className={`flex flex-col items-center gap-3 ${isNoAnswer ? 'opacity-60' : 'animate-pulse-slow'}`}
+              className={`flex flex-col items-center gap-3 ${isAlert ? 'opacity-70' : 'animate-pulse-slow'}`}
             >
               <div
                 className="rounded-2xl p-1"
                 style={
-                  isNoAnswer
+                  isAlert
                     ? {
-                        backgroundColor: 'rgba(239,68,68,0.15)',
-                        boxShadow: '0 0 30px rgba(239,68,68,0.35)',
+                        backgroundColor: 'color-mix(in srgb, var(--alert-base, #ef4444) 20%, transparent)',
+                        boxShadow: '0 0 30px color-mix(in srgb, var(--alert-base, #ef4444) 45%, transparent)',
                         filter: 'grayscale(0.6)',
                       }
                     : {
@@ -130,10 +142,15 @@ export function PriveCallBark({ open, mode = 'audio', contact, onClose }) {
                 />
               </div>
               <p className="text-slate-300 text-sm font-medium">{contact.naam}</p>
-              <p className={`text-xs ${isNoAnswer ? 'text-red-300' : 'text-slate-500'}`}>
-                {isNoAnswer
-                  ? `${contact.naam} is offline — probeer later opnieuw`
-                  : stateLabel}
+              <p
+                className="text-xs max-w-sm text-center px-3"
+                style={
+                  isAlert
+                    ? { color: 'color-mix(in srgb, var(--alert-base, #ef4444) 75%, white)' }
+                    : { color: 'rgb(148 163 184)' }
+                }
+              >
+                {actionText}
               </p>
             </div>
           )}

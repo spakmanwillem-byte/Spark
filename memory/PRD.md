@@ -1,6 +1,33 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52c (2026-02-21) — Bark status/actie split + Fronts draft in Kladblok
+
+### v13_alert_color_var_001 — `--alert-base` CSS-variabele
+`index.css`: nieuwe root variabele `--alert-base: #ef4444`. Gebruikt door PriveCallBark voor offline/geen-gehoor tint. Later tunable via Fronts. Vervangt hardgecodeerde `rgba(239,68,68,...)`.
+
+### v13_state_action_split_001 — Status-badge vs actie-tekst gesplitst
+Voorheen zelfde tekst op 2 plekken. Nu:
+- **Status-badge** rechtsboven = puur status: `Verbinden` / `Overgaan` / `Verbonden` / `In beeld` / **`Offline`**
+- **Actie-tekst** onder avatar = context met `{naam}`: `Probeert Heidi te bereiken…` / `Heidi wordt gebeld…` / `Gesprek met Heidi` / **`Geen antwoord — Heidi is offline. Probeer later opnieuw.`**
+Kleuren via `color-mix(--glow-base)` en `color-mix(--alert-base)` — geen hardcoded hex meer.
+
+### v13_fronts_config_draft_widget_001 — Fronts draft in Kladblok
+Nieuwe widget `FrontsConfigDraftWidget` in Kladblok. Toont concept-JSON-schema:
+- `screens[auth.login|chat.prive.call|workspace.dashboard]`
+- Per screen: kleuren · lettertype · animaties · `status_labels` · `action_texts` (met `{naam}` template) · `timings_ms`
+- Copy-JSON knop
+Volgt Emmy's suggestie: eerst parkeren in Kladblok, dan verplaatsen naar Beheer → Instellingen → Fronts wanneer schema definitief is. Toekomst-endpoint: `GET/PUT /api/system/fronts-config`.
+
+### Files changed
+- `/app/frontend/src/index.css` — `--alert-base` variabele
+- `/app/frontend/src/components/chat/PriveCallBark.js` — status/actie split, CSS-var kleuren
+- `/app/frontend/src/components/admin/sandbox/widgets/FrontsConfigDraftWidget.js` — NIEUW
+- `/app/frontend/src/components/admin/sandbox/registry.js` — widget geregistreerd
+
+---
+
+
 ## Sessie 52b (2026-02-21) — Offline-gehoor + Mic/Cam device selectie
 
 ### v13_call_offline_state_001 — "Geen gehoor" bij offline contact

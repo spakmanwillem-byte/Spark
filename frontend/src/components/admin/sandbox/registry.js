@@ -22,6 +22,7 @@
  */
 import { LlmTokenUsageWidget } from './widgets/LlmTokenUsageWidget';
 import { PapertrailWidget } from './widgets/PapertrailWidget';
+import { FrontsConfigDraftWidget } from './widgets/FrontsConfigDraftWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -43,6 +44,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 51',
     reden: "Willem wil visueel bewijs dat mint/gift/buy allemaal via dezelfde treasury_pool gaan zonder losse eindjes. Fraude-preventie.",
     Component: PapertrailWidget,
+  },
+  {
+    id: 'fronts-config-draft',
+    naam: 'Fronts Config Draft',
+    doel: 'Concept-schema per scherm (kleuren, teksten, animaties) voor de latere Beheer → Fronts tab. Statusbadge vs actie-tekst gesplitst.',
+    waar_hoort_het: 'Beheer → Instellingen → nieuwe tab "Fronts"',
+    aangemaakt_op: '2026-02-21',
+    aangemaakt_door: 'e1 sessie 52c',
+    reden: "Emmy wil hardgecodeerde teksten (bv 'Heidi is offline') en kleuren (bv rood alert) instelbaar maken per scherm zonder telkens de agent te vragen. Kladblok = eerste parking.",
+    Component: FrontsConfigDraftWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

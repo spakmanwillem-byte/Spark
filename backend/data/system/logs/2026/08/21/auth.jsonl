@@ -30,3 +30,5 @@
 {"ts": "2026-08-21T16:24:20.739973+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'Willem', 'volledige_naam': 'Wille…", "duration_ms": 60.42}
 {"ts": "2026-08-21T17:24:27.142176+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
 {"ts": "2026-08-21T17:24:27.178130+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'Willem', 'volledige_naam': 'Wille…", "duration_ms": 36.21}
+{"ts": "2026-08-21T17:44:16.577440+00:00", "module": "auth", "fn": "logout", "phase": "pre", "intent": "user uitloggen + sessie eindigen", "args": {"user_id": "user-001"}}
+{"ts": "2026-08-21T17:44:16.583683+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 6.01}

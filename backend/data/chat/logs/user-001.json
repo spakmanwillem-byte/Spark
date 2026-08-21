@@ -61828,11 +61828,35 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2453
       }
+    },
+    {
+      "id": "conv-2653195c",
+      "timestamp": "2026-08-21T17:44:42.503065+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi spark werk je nu weer echt stabiel?",
+      "spark_response": "Hoi Willem! Ja, ik ben nu weer **stabiel** — dat betekent dat ik betrouwbaar en consistent functioneer zonder onverwachte onderbrekingen. Het **werk** (taken uitvoeren) gaat weer soepel, zodat ik je kan ondersteunen zoals je dat van me gewend bent. \n\nIs er iets specifieks waar je nu mee wilt starten, of wil je even een overzicht van je agenda, notities of de huidige open draden? Laat maar weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "praat",
+        "used_cards": [
+          "kbv2-c3473be0",
+          "kbv2-b5af1c60",
+          "kbv2-2f84c685",
+          "kbv2-5045ea6d",
+          "kbv2-aaf81efb"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2454
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2453,
-    "last_updated": "2026-08-21T17:38:29.692334+00:00"
+    "total_conversations": 2454,
+    "last_updated": "2026-08-21T17:44:42.503065+00:00"
   }
 }

@@ -2,18 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "hallo Spark",
-      "ts": "2026-08-03T16:38:16.281673+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Hallo Willem! Fijn om even te kletsen. Ik zie dat je net je trader even op pauze hebt gezet. Alles in orde? Moet ik nog iets voor je regelen of wil je gewoon even bijkletsen?",
-      "ts": "2026-08-03T16:38:16.281673+00:00",
-      "model": "primary/llama-3.3-70b-versatile"
-    },
-    {
-      "role": "user",
       "text": "even bij kletsen",
       "ts": "2026-08-03T16:38:32.370229+00:00",
       "user_id": "user-001"
@@ -299,9 +287,21 @@
       "text": "Zeg: “Ik ben er, klaar om samen te werken.” \nEens, we kunnen direct aan de slag. \nWat wil je nu doen?",
       "ts": "2026-08-21T17:38:29.681139+00:00",
       "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "hoi spark werk je nu weer echt stabiel?",
+      "ts": "2026-08-21T17:44:42.491796+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Hoi Willem! Ja, ik ben nu weer **stabiel** — dat betekent dat ik betrouwbaar en consistent functioneer zonder onverwachte onderbrekingen. Het **werk** (taken uitvoeren) gaat weer soepel, zodat ik je kan ondersteunen zoals je dat van me gewend bent. \n\nIs er iets specifieks waar je nu mee wilt starten, of wil je even een overzicht van je agenda, notities of de huidige open draden? Laat maar weten!",
+      "ts": "2026-08-21T17:44:42.491796+00:00",
+      "model": "primary/openai/gpt-oss-120b"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-08-21T17:38:29.681139+00:00"
+  "updated_at": "2026-08-21T17:44:42.491796+00:00"
 }

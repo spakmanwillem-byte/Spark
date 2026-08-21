@@ -1,6 +1,24 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52k (2026-02-21) — Absoluut nulpunt + trader-baseline gezet
+
+### v13_papertrail_reset_001 — Papertrail volledig gewist
+Naast eerdere kasboek-reset ook `/data/boekhouder/logs/winst_events/` en `/data/boekhouder/logs/book_book-*/` gewist. Backup in `_backups/pre_v13_nulpunt_20260821_144252/papertrail/`. Nieuwe boekingen starten hash-chain vanaf GENESIS. Winst-events tab toont nu 0 events, €0 totaal.
+
+### v13_trader_baseline_ijkpunt_001 — Live P&L baseline op huidige Bitvavo
+`/data/trade/capital_baseline.json` per user gezet:
+- **user-001 (Willem)**: €120.99 (huidige Bitvavo EUR-balance uit `deposit_watcher_state.json`)
+- **5 andere users** (Spark, Geiser, +3): baseline €0
+Live P&L begint dus nu bij €0.53 (kleine drift na set). Toekomstige stortingen/opnames rekenen vanaf dit ijkpunt.
+
+### Files changed (sessie 52k)
+- `/app/backend/data/boekhouder/logs/` — winst_events + book_* logs verwijderd
+- `/app/backend/data/trade/capital_baseline.json` — 6 users met nulpunt-baseline
+
+---
+
+
 ## Sessie 52j (2026-02-21) — Grote schoonveeg: absoluut nulpunt
 
 ### Wat is weg (backup in `_backups/pre_v13_nulpunt_20260821_144252/`)

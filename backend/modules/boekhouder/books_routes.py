@@ -462,7 +462,6 @@ def hook_shop_purchase(payload: ShopPurchaseIn, viewer_id: str):
 
 @router.get("/winst-events")
 def winst_events(viewer_id: str, limit: int = 50):
-    """Alle winst-events uit papertrail 'winst_events' topic (spark-deel-inzicht)."""
     if not _is_admin(viewer_id):
         raise HTTPException(403, "Alleen admin")
     from modules.boekhouder.agents.log_agent import LogAgent

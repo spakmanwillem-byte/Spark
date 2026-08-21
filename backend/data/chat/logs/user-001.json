@@ -61583,11 +61583,59 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2442
       }
+    },
+    {
+      "id": "conv-9d2a1a1c",
+      "timestamp": "2026-08-21T16:17:21.512839+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Werkt Spark weer? Antwoord in 1 warme zin.",
+      "spark_response": "Ja, Spark draait weer soepel en staat warm klaar om je te ondersteunen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-c3473be0",
+          "kbv2-f5509fdf",
+          "kbv2-eab440c4",
+          "kbv2-b5af1c60",
+          "kbv2-skel-028cb626"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "test-heal-3",
+        "gesprek_nummer": 2443
+      }
+    },
+    {
+      "id": "conv-a5295b14",
+      "timestamp": "2026-08-21T16:18:25.335212+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Werkt Spark weer? Antwoord in 1 warme zin.",
+      "spark_response": "Ja, ik ben weer helemaal operationeel en klaar om je warm te ondersteunen, Willem.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-c3473be0",
+          "kbv2-f5509fdf",
+          "kbv2-eab440c4",
+          "kbv2-b5af1c60",
+          "kbv2-skel-028cb626"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "test-heal-4",
+        "gesprek_nummer": 2444
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2442,
-    "last_updated": "2026-08-21T15:39:54.157207+00:00"
+    "total_conversations": 2444,
+    "last_updated": "2026-08-21T16:18:25.335212+00:00"
   }
 }

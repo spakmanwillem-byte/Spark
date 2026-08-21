@@ -170,8 +170,6 @@ export function BoekhoudPage({ onNavigate }) {
     { id: 'boeken', label: 'Boeken' },
     { id: 'winst', label: 'Winst → Spark' },
     { id: 'klanten', label: 'Klanten' },
-    { id: 'overzicht', label: 'Archief: Kasboeken' },  // v13: oude single-hub view, historisch
-    { id: 'transacties', label: 'Archief: Transacties' },
   ] : [
     { id: 'boeken', label: 'Mijn Boeken' },
   ];
@@ -188,7 +186,11 @@ export function BoekhoudPage({ onNavigate }) {
             </div>
             <div>
               <h1 className="text-base font-bold text-white leading-tight">Boekhouding</h1>
-              <p className="text-[10px] text-slate-500 uppercase tracking-wider">{kasboeken.length} kasboeken | {transactions.length} transacties</p>
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider">
+                {isAdmin
+                  ? `${kasboeken.length} kasboeken | ${transactions.length} transacties`
+                  : 'Multi-book boekhouding'}
+              </p>
             </div>
             <div className="ml-auto flex items-center gap-2">
               {isAdmin && (

@@ -1,6 +1,40 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52j (2026-02-21) — Grote schoonveeg: absoluut nulpunt
+
+### Wat is weg (backup in `_backups/pre_v13_nulpunt_20260821_144252/`)
+- **7 trade_history files** — 93+120+2401+3+2+2+8 = **2629 oude trades** gewist bij Spark, Willem, Emmy en 4 andere users
+- **13 user_wallets** — alle `balance_tokens` en `balance_eur` op 0
+- **tikkie_topups** — leeg
+- **system/spark_kasboek.json** — lijsten leeg (was oude centrale audit)
+- **system/audit_log.json** — leeg (was bron van de 276 migratie-ruis)
+- **trade/deposits.json** — leeg (was Bitvavo deposit-watcher log)
+- **system/deposit_watcher_state.json** — gereset
+- **10 test-users** — `test-bank`, `test-bank-001..003`, `test-snap-001`, `test-user-5061f3d2/97bf8c9a/b95ac972/bfb67f3e`, `test-vk` → verplaatst naar `_backups/`
+- **Alle 4 boeken + openstaand_spark** — gereset naar €0
+
+### UI opgeschoond
+- Tabs "Archief: Kasboeken" en "Archief: Transacties" **verwijderd** uit BoekhoudPage (verwezen naar dode data). Admin ziet nu: Boeken · Winst → Spark · Klanten
+- Header-teller `4 kasboeken | 100 transacties` verborgen voor non-admin (was verwarrend want telde oude data)
+
+### Verified nulpunt
+```
+Books:             all €0.00 (n=0)
+Wallets:           13× balance=0
+Openstaand Spark:  €0.00
+Trade history:     0 in alle files
+Test-users:        0 in /data/users/
+Bonnetjes:         0 in alle archives
+```
+
+### Files changed (sessie 52j)
+- `/app/frontend/src/components/modules/BoekhoudPage.js` — Archief-tabs weg, tellers conditional
+- `/app/backend/data/*/` — 10 files gewist naar nulpunt, 10 test-users gearchiveerd
+
+---
+
+
 ## Sessie 52i (2026-02-21) — BTW/KOR + openstaand + ruis-cleanup + docs
 
 ### v13b_btw_kor_openstaand_001 — Verkoop-flow refactor

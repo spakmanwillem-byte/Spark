@@ -429,32 +429,6 @@ export function TraderPage({ onNavigate }) {
           </div>
         </div>
 
-        {/* v13q_walletview_banner_001 — duidelijke waarschuwing als admin in Spark-view zit
-            Voorkomt dat je per ongeluk potjes koopt namens Spark terwijl je je eigen wallet dacht te vullen */}
-        {isAdmin && walletView === 'spark' && (
-          <div
-            data-testid="wallet-view-spark-banner"
-            className="flex items-center gap-3 px-4 py-2.5 rounded-lg border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/5 shadow-[0_0_20px_-8px_rgba(251,191,36,0.5)]"
-          >
-            <span className="text-xl">🌟</span>
-            <div className="flex-1">
-              <div className="text-[13px] font-semibold text-amber-200">
-                Je kijkt en handelt namens <span className="underline decoration-amber-400/60">Spark</span> (user-000)
-              </div>
-              <div className="text-[11px] text-amber-100/70">
-                Elke potje-aankoop, trade of bot-start landt op Spark&apos;s wallet — niet op jouw eigen account.
-              </div>
-            </div>
-            <button
-              data-testid="wallet-view-spark-banner-switch"
-              onClick={() => setWalletView('me')}
-              className="text-[11px] px-2.5 py-1 rounded bg-amber-500/25 hover:bg-amber-500/40 text-amber-100 font-medium transition-colors border border-amber-400/40"
-            >
-              → Terug naar mijn wallet
-            </button>
-          </div>
-        )}
-
         {/* v4_trader_g2_hide_001 — Familie ziet alleen overzicht */}
         {isFamilie && (
           <div data-testid="trader-g2-info" className="px-4 py-3 bg-blue-500/5 border border-blue-500/20 rounded-xl">

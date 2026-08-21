@@ -3,6 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
 import DnDBarkPanel from '../dnd/DnDBarkPanel';
+import { ContactCallPopup } from '../chat/ContactCallPopup';
 import { RpsBark } from '../games/RpsBark';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
@@ -306,6 +307,8 @@ export function GesprekkenPage({ onNavigate }) {
   const [showSparkWorld, setShowSparkWorld] = useState(false);
   // v6_rps_001 — Steen-Papier-Schaar mini-game bark
   const [rpsOpen, setRpsOpen] = useState(false);
+  // v12_contact_call_001 — WhatsApp deep-link popup
+  const [contactCallAction, setContactCallAction] = useState(null);
 
   // v4_community_session_start_001 — alleen berichten vanaf inlog tonen
   const [communitySessionStart] = useState(() => {
@@ -881,6 +884,11 @@ export function GesprekkenPage({ onNavigate }) {
           window.dispatchEvent(new CustomEvent('spark:open-help'));
         }
 
+        // v12_contact_call_001 — "bel mijn moeder" → WhatsApp popup
+        if (data.type === 'contact_call' && data.action) {
+          setContactCallAction(data.action);
+        }
+
         // v6_kb_sound_001b — KB-kaart geluid EERST afspelen, daarna TTS (onweer → "ik ben boos")
         // Wacht tot geluid klaar is (max 4s) voordat TTS begint.
         const playKbSound = () => {
@@ -1358,6 +1366,8 @@ export function GesprekkenPage({ onNavigate }) {
 
         {/* v6_rps_001 — Steen-Papier-Schaar mini-game bark */}
         <RpsBark userId={userId} open={rpsOpen} opponent={rpsOpponent} onClose={() => setRpsOpen(false)} />
+        {/* v12_contact_call_001 */}
+        <ContactCallPopup action={contactCallAction} onClose={() => setContactCallAction(null)} />
       </div>
     </MainLayout>
   );

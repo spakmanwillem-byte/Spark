@@ -127,6 +127,35 @@ async def process_message(req: ChatMessage):
     except Exception:
         pass
 
+    # v12_contact_call_001 — "bel mijn moeder" → WhatsApp deep-link popup.
+    # Geen admin-gate: Willem wil dat elke user dit kan (contacten zijn user-scoped).
+    try:
+        from modules.bel_contacts import detect_contact_call
+        _cc = detect_contact_call(text, req.user_id or "user-001")
+        if _cc:
+            _msg = _cc.get("message", "")
+            _resp = {
+                "type": "contact_call",
+                "message": _msg,
+                "spark_response": _msg,
+                "success": True,
+                "action": _cc,  # frontend gebruikt dit voor popup
+                "used_model": "contact_call_detector",
+                "fast_path": True,
+                "knowledge_matches": [],
+                "sentiment": snap.detect_sentiment(text),
+                "emotion": None,
+                "unknown_words": [],
+                "snap_suggestions": [],
+            }
+            try:
+                _save_log(req, _resp, "contact_call")
+            except Exception:
+                pass
+            return _resp
+    except Exception as _ex:
+        print(f"[contact_call detect] failed: {_ex}")
+
     # v12_trader_intents_fastpath_001 — Trader-commando's ('start bot', 'hoe staat mijn bot',
     # 'wat verdiend?', etc.) direct via trader_intents afhandelen zodat gewone chat
     # niet meer terugvalt op KB-card definities van 'staat'/'bot'. Diep-modus deed dit

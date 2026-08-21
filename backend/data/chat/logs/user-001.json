@@ -60953,11 +60953,103 @@
         "session_id": "default",
         "gesprek_nummer": 2412
       }
+    },
+    {
+      "id": "conv-e117e2f1",
+      "timestamp": "2026-08-21T12:48:33.205460+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bel mijn moeder",
+      "spark_response": "Klik om Ma te bellen via WhatsApp. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "test-call-1",
+        "gesprek_nummer": 2413
+      }
+    },
+    {
+      "id": "conv-e5a6f363",
+      "timestamp": "2026-08-21T12:48:33.532786+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bel Ma even",
+      "spark_response": "Klik om Ma te bellen via WhatsApp. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "test-call-2",
+        "gesprek_nummer": 2414
+      }
+    },
+    {
+      "id": "conv-fd8ee220",
+      "timestamp": "2026-08-21T12:48:33.763840+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bel mijn oma",
+      "spark_response": "Ik ken geen contact 'oma'. Voeg toe via Beheer → Bel-contacten of `POST /api/bel-contacts/user-001`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "test-call-3",
+        "gesprek_nummer": 2415
+      }
+    },
+    {
+      "id": "conv-7bf65e52",
+      "timestamp": "2026-08-21T12:48:34.474636+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hallo, hoe gaat het",
+      "spark_response": "Hallo Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "test-call-4",
+        "gesprek_nummer": 2416
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2412,
-    "last_updated": "2026-08-21T12:29:18.814854+00:00"
+    "total_conversations": 2416,
+    "last_updated": "2026-08-21T12:48:34.474636+00:00"
   }
 }

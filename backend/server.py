@@ -297,6 +297,9 @@ app.include_router(trade_reconcile_router, prefix="/api")
 # v12_trader_strategy_cfg_001 — Data-driven trader-parameters (GET/PATCH)
 from modules.trade.strategy_config_routes import router as trade_strategy_cfg_router
 app.include_router(trade_strategy_cfg_router, prefix="/api")
+# v12_contact_call_001 — Bel-contacten + WhatsApp deep-link
+from modules.bel_contacts import bel_contacts_router
+app.include_router(bel_contacts_router, prefix="/api")
 
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router

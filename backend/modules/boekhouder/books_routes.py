@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from modules.core.storage import load_json
 from modules.boekhouder import books as book_svc
 from modules.boekhouder import migration as book_migration
-from modules.boekhouder import sepa as sepa_svc
+from modules.sepa_hub import get_hub as get_sepa_hub
 from modules.boekhouder import notify as book_notify
 
 router = APIRouter(prefix="/boekhouding", tags=["boekhouding"])
@@ -204,7 +204,7 @@ async def import_camt(book_id: str, viewer_id: str, file: UploadFile = File(...)
     if not _can_access_book(viewer_id, b):
         raise HTTPException(403)
     content = (await file.read()).decode("utf-8", errors="ignore")
-    parsed = sepa_svc.parse_camt053(content)
+    parsed = get_sepa_hub().parse_camt053(content)
     if "error" in parsed:
         raise HTTPException(400, parsed["error"])
     imported = 0
@@ -227,7 +227,7 @@ async def import_mt940(book_id: str, viewer_id: str, file: UploadFile = File(...
     if not _can_access_book(viewer_id, b):
         raise HTTPException(403)
     content = (await file.read()).decode("utf-8", errors="ignore")
-    parsed = sepa_svc.parse_mt940(content)
+    parsed = get_sepa_hub().parse_mt940(content)
     imported = 0
     for tx in parsed.get("transactions", []):
         existing = book_svc.list_entries(book_id, limit=100_000)
@@ -253,7 +253,7 @@ def export_pain001(book_id: str, payload: SepaBatchIn, viewer_id: str):
         raise HTTPException(403)
     if not b.get("iban"):
         raise HTTPException(400, "Book heeft geen IBAN — vul die eerst in bij book-instellingen.")
-    xml_out = sepa_svc.generate_pain001(
+    xml_out = get_sepa_hub().generate_pain001(
         debtor_naam=b["naam"],
         debtor_iban=b["iban"],
         payments=payload.payments,

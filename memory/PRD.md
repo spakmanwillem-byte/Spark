@@ -16,11 +16,14 @@ Elk boek is een eigen container met unique ID onder `/data/boekhouding/books/boo
 `spark_kasboek.json` + `audit_log.json` (276 entries) gemigreerd naar books via heuristics: shop_id → shop-book, "zorgboerderij" in tekst → book-zorgboerderij, user-001 personal → willem-prive, fallback → spark-core. Origineel spark_kasboek.json blijft ongewijzigd — additief met `source_id` duplicate-check. Getest: 276/276 → book-spark-core (audit_log heeft geen shop-context; handmatig verplaatsen kan later).
 
 ### v13_boekhouding_sepa_001 — Lokale SEPA parsers (geen cloud)
-- **CAMT.053 XML** parser voor bank-afschriften import
-- **MT940 SWIFT** parser voor legacy afschriften
-- **pain.001.001.03 XML** generator voor uitgaande betalings-batches
-- Endpoints: `POST /api/boekhouding/books/{id}/sepa/import-camt`, `.../import-mt940`, `.../export-pain001`
-- Getest: pain.001 export van €50 loonbetaling naar Willem-privé werkt met correcte IBAN
+Uitgesplitst als **eigen hub-module** `modules/sepa_hub/` (agent-hub pattern zoals FinanceHub):
+- `SepaHub.parse_camt053()` voor bank-afschriften import
+- `SepaHub.parse_mt940()` voor legacy SWIFT afschriften
+- `SepaHub.generate_pain001()` voor uitgaande betalings-batches
+- `SepaHub.reconcile(book_id, tx)` — matched/unmatched op datum+bedrag+iban (skeleton)
+- Books-routes consumeren via `get_sepa_hub()` singleton
+- Endpoints (via boekhouding-router): `POST /api/boekhouding/books/{id}/sepa/import-camt`, `.../import-mt940`, `.../export-pain001`
+- Getest via nieuwe hub: pain.001 export van €25 via `SepaHub.generate_pain001()` werkt
 
 ### v13_boekhouding_notify_001 — Notitie + urgent hook
 Bij nieuwe factuur/deadline in een book → automatisch:
@@ -44,7 +47,9 @@ Bij nieuwe factuur/deadline in een book → automatisch:
 - `/app/backend/modules/boekhouder/books.py` — NIEUW, book CRUD service
 - `/app/backend/modules/boekhouder/books_routes.py` — NIEUW, REST + SEPA endpoints
 - `/app/backend/modules/boekhouder/migration.py` — NIEUW, retroactieve splitser
-- `/app/backend/modules/boekhouder/sepa.py` — NIEUW, CAMT/MT940/pain.001 parsers
+- `/app/backend/modules/sepa_hub/__init__.py` — NIEUW, SepaHub agent-hub (parse + generate + reconcile)
+- `/app/backend/modules/sepa_hub/parsers.py` — verplaatst (was boekhouder/sepa.py) — pure parsers
+- `/app/backend/modules/sepa_hub/_meta.json` — hub-metadata voor Synapslaag
 - `/app/backend/modules/boekhouder/notify.py` — NIEUW, task/urgent hooks
 - `/app/backend/modules/prive_call/__init__.py` — NIEUW, incoming ring signalering
 - `/app/backend/server.py` — imports + seed on startup

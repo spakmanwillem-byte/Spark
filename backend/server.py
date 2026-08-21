@@ -189,6 +189,19 @@ app.include_router(accounting_router, prefix="/api")
 # v5_closing_flow_001 — De Boekhouder closing-flow (terlens-terug-boek)
 from modules.boekhouder.routes import router as boekhouder_router
 
+# v13_boekhouding_books_001 — Multi-container boeken + SEPA
+from modules.boekhouder.books_routes import router as boekhouding_books_router
+from modules.boekhouder import books as _boekhouding_books_svc
+app.include_router(boekhouding_books_router, prefix="/api")
+try:
+    _boekhouding_books_svc.seed_initial_books()
+except Exception as _e:
+    print(f"[boekhouding_books] seed skipped: {_e}")
+
+# v13_prive_incoming_call_001 — Lokaal signaal voor inkomende oproepen
+from modules.prive_call import router as prive_call_router
+app.include_router(prive_call_router, prefix="/api")
+
 # v6_boekhouder_weekrapport_001 — Wekelijks rapport
 from modules.boekhouder.weekly_report import router as boekhouder_weekly_router
 app.include_router(boekhouder_weekly_router, prefix="/api")

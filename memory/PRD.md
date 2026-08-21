@@ -1,6 +1,60 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52e (2026-02-21) — Multi-boekhouding + SEPA + Inkomende oproep + Login-dots
+
+### v13_boekhouding_books_001 — Multi-container boekhouding
+Elk boek is een eigen container met unique ID onder `/data/boekhouding/books/book-{id}/`:
+- 4 initiële seed-boeken: `book-spark-core`, `book-roadkillshop`, `book-zorgboerderij`, `book-willem-prive`
+- Types: `spark_core` / `shop` / `entity` / `user_prive`
+- Elk boek: `_meta.json` (id, naam, type, owner, iban, bank_naam, linked_shop_id, kleur, icoon), `kasboek.json`, `reserve.json`, `closings.json`, `documents.json`, `sepa_batches.json`, `bank_imports.json`
+- Endpoints: `GET/POST /api/boekhouding/books`, `GET/PATCH/DELETE /api/boekhouding/books/{id}`, `GET/POST .../entries`
+- Owner-only + admin (gradatie ≤ 2). Spark-core is systeem-boek (readable by all).
+- Auto-hook `ensure_shop_book()` klaar voor koppeling aan shop-create-flow.
+
+### v13_boekhouding_migration_001 — Retroactief opsplitsen
+`spark_kasboek.json` + `audit_log.json` (276 entries) gemigreerd naar books via heuristics: shop_id → shop-book, "zorgboerderij" in tekst → book-zorgboerderij, user-001 personal → willem-prive, fallback → spark-core. Origineel spark_kasboek.json blijft ongewijzigd — additief met `source_id` duplicate-check. Getest: 276/276 → book-spark-core (audit_log heeft geen shop-context; handmatig verplaatsen kan later).
+
+### v13_boekhouding_sepa_001 — Lokale SEPA parsers (geen cloud)
+- **CAMT.053 XML** parser voor bank-afschriften import
+- **MT940 SWIFT** parser voor legacy afschriften
+- **pain.001.001.03 XML** generator voor uitgaande betalings-batches
+- Endpoints: `POST /api/boekhouding/books/{id}/sepa/import-camt`, `.../import-mt940`, `.../export-pain001`
+- Getest: pain.001 export van €50 loonbetaling naar Willem-privé werkt met correcte IBAN
+
+### v13_boekhouding_notify_001 — Notitie + urgent hook
+Bij nieuwe factuur/deadline in een book → automatisch:
+- Taak in user's `tasks.json` met tag `book_{id}` + `boekhouding`
+- Urgent-item in `/data/urgent/{user_id}.json` voor sidebar-glow (severity amber/red)
+- SEPA-batch klaar → red urgent + taak "downloaden"
+
+### v13_prive_incoming_call_001 — Inkomende oproep bark
+- Backend `/api/prive-call/ring|incoming|answer` — 30s ring timeout, lokaal signaal
+- Frontend polt elke 4s in `GesprekkenPage`, toont `IncomingCallBark` modal met:
+  - Pulserende glow-rand in kleurschema
+  - Beller-avatar met puls-animatie
+  - "belt je" / "wil beeldbellen" + rode weiger / groene accept (extra puls op accept)
+- Bel-iconen in privé-header pulseren mee wanneer geselecteerd contact belt
+- Accept → open PriveCallBark met beller als contact
+
+### v13_login_glow_dots_001 — Loginscherm hartslag-dots
+8 dots in primaire kleuren (amber/cyaan/paars/groen/pink/blauw/oranje) op vaste posities met `heartbeatDot` keyframe (2.4s cyclus, scale + opacity puls). CSS-only, weinig werk. Klaar voor latere Fronts-tab tuning.
+
+### Files changed
+- `/app/backend/modules/boekhouder/books.py` — NIEUW, book CRUD service
+- `/app/backend/modules/boekhouder/books_routes.py` — NIEUW, REST + SEPA endpoints
+- `/app/backend/modules/boekhouder/migration.py` — NIEUW, retroactieve splitser
+- `/app/backend/modules/boekhouder/sepa.py` — NIEUW, CAMT/MT940/pain.001 parsers
+- `/app/backend/modules/boekhouder/notify.py` — NIEUW, task/urgent hooks
+- `/app/backend/modules/prive_call/__init__.py` — NIEUW, incoming ring signalering
+- `/app/backend/server.py` — imports + seed on startup
+- `/app/frontend/src/components/chat/IncomingCallBark.js` — NIEUW
+- `/app/frontend/src/components/workspace/GesprekkenPage.js` — polling + ring-op-openPriveCall + bel-icon puls-animatie
+- `/app/frontend/src/components/auth/LoginForm.js` — 8 heartbeat dots
+
+---
+
+
 ## Sessie 52d (2026-02-21) — Roadmap opgeschoond + help synced
 
 ### v13_roadmap_split_reader_001 — Roadmap-reader leest CORE

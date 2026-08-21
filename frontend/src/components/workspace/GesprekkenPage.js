@@ -5,6 +5,7 @@ import { UserAvatar } from '../common/UserAvatar';
 import DnDBarkPanel from '../dnd/DnDBarkPanel';
 import { ContactCallPopup } from '../chat/ContactCallPopup';
 import { PriveCallBark } from '../chat/PriveCallBark';
+import { IncomingCallBark } from '../chat/IncomingCallBark';
 import { RpsBark } from '../games/RpsBark';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
@@ -365,9 +366,60 @@ export function GesprekkenPage({ onNavigate }) {
   const [callBark, setCallBark] = useState({ open: false, mode: 'audio' });
   const openPriveCall = (mode) => {
     if (!selectedContact) return;
+    // Stuur ook een lokaal 'ring'-signaal naar de ontvanger (voor incoming bark)
+    if (selectedContact?.id) {
+      fetch(`${API}/api/prive-call/ring`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from_user_id: userId, to_user_id: selectedContact.id, mode }),
+      }).catch(() => {});
+    }
     setCallBark({ open: true, mode });
   };
   const closePriveCall = () => setCallBark((s) => ({ ...s, open: false }));
+
+  // v13_prive_incoming_call_001 — poll inkomende oproepen elke 4s
+  const [incomingCall, setIncomingCall] = useState(null);
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    const pollIncoming = async () => {
+      try {
+        const r = await fetch(`${API}/api/prive-call/incoming/${userId}`);
+        const d = await r.json();
+        if (cancelled) return;
+        const active = (d.calls || []).find((c) => c.state === 'ringing');
+        setIncomingCall((prev) => {
+          if (active && (!prev || prev.id !== active.id)) return active;
+          if (!active && prev) return null;
+          return prev;
+        });
+      } catch { /* ignore */ }
+    };
+    pollIncoming();
+    const t = setInterval(pollIncoming, 4000);
+    return () => { cancelled = true; clearInterval(t); };
+  }, [userId]);
+
+  const answerIncoming = async (action) => {
+    if (!incomingCall) return;
+    try {
+      await fetch(`${API}/api/prive-call/answer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, call_id: incomingCall.id, action }),
+      });
+    } catch { /* ignore */ }
+    if (action === 'accept') {
+      // Open bark, contact is de beller
+      const callerContact = priveContacts.find((c) => c.id === incomingCall.from_user_id) || {
+        id: incomingCall.from_user_id, naam: 'Onbekend', online: true,
+      };
+      setSelectedContact(callerContact);
+      setCallBark({ open: true, mode: incomingCall.mode || 'audio' });
+    }
+    setIncomingCall(null);
+  };
 
   const loadPriveContacts = async () => {
     if (!userId) return;
@@ -1302,36 +1354,43 @@ export function GesprekkenPage({ onNavigate }) {
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
-                        {!(selectedContact.is_bot || selectedContact.is_collective) && (
-                          <>
-                            <button
-                              data-testid="call-btn"
-                              onClick={() => openPriveCall('audio')}
-                              title={`Bel ${selectedContact.naam}`}
-                              className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
-                              style={{
-                                color: 'var(--glow-base, #f59e0b)',
-                                backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
-                                boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
-                              }}
-                            >
-                              <Phone className="w-4 h-4" />
-                            </button>
-                            <button
-                              data-testid="video-btn"
-                              onClick={() => openPriveCall('video')}
-                              title={`Beeldbellen met ${selectedContact.naam}`}
-                              className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
-                              style={{
-                                color: 'var(--glow-base, #f59e0b)',
-                                backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
-                                boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
-                              }}
-                            >
-                              <Video className="w-4 h-4" />
-                            </button>
-                          </>
-                        )}
+                        {!(selectedContact.is_bot || selectedContact.is_collective) && (() => {
+                          const isRingingFromThis = incomingCall && incomingCall.from_user_id === selectedContact.id;
+                          const pulseAnim = isRingingFromThis ? { animation: 'callIconPulse 1s ease-in-out infinite' } : {};
+                          return (
+                            <>
+                              <button
+                                data-testid="call-btn"
+                                onClick={() => openPriveCall('audio')}
+                                title={`Bel ${selectedContact.naam}`}
+                                className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
+                                style={{
+                                  color: 'var(--glow-base, #f59e0b)',
+                                  backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
+                                  boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
+                                  ...pulseAnim,
+                                }}
+                              >
+                                <Phone className="w-4 h-4" />
+                              </button>
+                              <button
+                                data-testid="video-btn"
+                                onClick={() => openPriveCall('video')}
+                                title={`Beeldbellen met ${selectedContact.naam}`}
+                                className="p-2 rounded-lg transition-all border border-transparent hover:border-[color:var(--glow-base,#f59e0b)]/40"
+                                style={{
+                                  color: 'var(--glow-base, #f59e0b)',
+                                  backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 8%, transparent)',
+                                  boxShadow: '0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent)',
+                                  ...pulseAnim,
+                                }}
+                              >
+                                <Video className="w-4 h-4" />
+                              </button>
+                            </>
+                          );
+                        })()}
+                        <style>{`@keyframes callIconPulse { 0%,100% { transform: scale(1); box-shadow: 0 0 12px color-mix(in srgb, var(--glow-base, #f59e0b) 30%, transparent); } 50% { transform: scale(1.15); box-shadow: 0 0 24px color-mix(in srgb, var(--glow-base, #f59e0b) 80%, transparent); } }`}</style>
                       </div>
                     </div>
                     <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3">
@@ -1407,6 +1466,13 @@ export function GesprekkenPage({ onNavigate }) {
           mode={callBark.mode}
           contact={selectedContact}
           onClose={closePriveCall}
+        />
+        {/* v13_prive_incoming_call_001 — inkomende oproep bark */}
+        <IncomingCallBark
+          call={incomingCall}
+          caller={priveContacts.find((c) => c.id === incomingCall?.from_user_id)}
+          onAccept={() => answerIncoming('accept')}
+          onDecline={() => answerIncoming('decline')}
         />
       </div>
     </MainLayout>

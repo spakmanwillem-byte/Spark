@@ -79,10 +79,42 @@ export function LoginForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated background — v13 hartslag-dots in primaire kleuren, random posities */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" data-testid="login-glow-dots">
         <div className="absolute w-96 h-96 -top-48 -left-48 bg-amber-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        {[
+          { top: '12%', left: '8%',  color: '#f59e0b', size: 6,  delay: '0s'   },
+          { top: '22%', left: '82%', color: '#06b6d4', size: 4,  delay: '0.3s' },
+          { top: '68%', left: '18%', color: '#a855f7', size: 5,  delay: '0.6s' },
+          { top: '82%', left: '72%', color: '#10b981', size: 4,  delay: '0.9s' },
+          { top: '45%', left: '90%', color: '#ec4899', size: 3,  delay: '1.2s' },
+          { top: '55%', left: '4%',  color: '#f59e0b', size: 5,  delay: '1.5s' },
+          { top: '35%', left: '50%', color: '#3b82f6', size: 3,  delay: '0.4s' },
+          { top: '90%', left: '35%', color: '#f97316', size: 6,  delay: '0.7s' },
+        ].map((d, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              top: d.top, left: d.left,
+              width: `${d.size}px`, height: `${d.size}px`,
+              backgroundColor: d.color,
+              boxShadow: `0 0 ${d.size * 4}px ${d.color}`,
+              animation: `heartbeatDot 2.4s ease-in-out infinite`,
+              animationDelay: d.delay,
+              opacity: 0.6,
+            }}
+          />
+        ))}
+        <style>{`
+          @keyframes heartbeatDot {
+            0%, 40%, 100% { transform: scale(1); opacity: 0.4; }
+            15% { transform: scale(1.6); opacity: 0.9; }
+            25% { transform: scale(1.2); opacity: 0.7; }
+            30% { transform: scale(1.5); opacity: 0.85; }
+          }
+        `}</style>
       </div>
 
       <div className="relative w-full max-w-md">

@@ -61318,11 +61318,47 @@
         "session_id": "test-roadmap-2",
         "gesprek_nummer": 2430
       }
+    },
+    {
+      "id": "conv-65eff735",
+      "timestamp": "2026-08-21T14:00:15.918646+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2431
+      }
+    },
+    {
+      "id": "conv-c7528d5d",
+      "timestamp": "2026-08-21T14:00:15.980425+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2432
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2430,
-    "last_updated": "2026-08-21T13:44:22.589056+00:00"
+    "total_conversations": 2432,
+    "last_updated": "2026-08-21T14:00:15.980425+00:00"
   }
 }

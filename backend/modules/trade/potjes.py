@@ -898,6 +898,29 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
             if p.get("pot_locked"):
                 print(f"[potjes] BLOCK: open_pot geweigerd voor {pot_id} ({p.get('market')}) — pot_locked=True (reason={p.get('lock_reason','?')})")
                 return {}
+            # v13r_open_pot_overwrite_guard_001 — Voorkom dat een lopende BUY een al-open
+            # potje overschrijft. Sessie 52r: pot-001 was ATOM (open sinds 16:03), monitor
+            # kwam om 18:02 met een BCH-BUY, koos pot-001 opnieuw en overschreef entry+market
+            # naar BCH €245 — ATOM werd "orphan" (coin nog op Bitvavo, geen potje-link meer).
+            # Fix: als potje al open is, weiger tenzij het exact dezelfde market betreft
+            # (dan alleen entry_price averagen — voor later, nu return {} = de monitor gaat
+            # dan via `event_notifications.json` en logs een fallback zoeken).
+            existing_pos = p.get("position") or {}
+            if existing_pos.get("is_open"):
+                existing_market = p.get("market") or "?-EUR"
+                if market and market != existing_market:
+                    print(
+                        f"[potjes] BLOCK: open_pot geweigerd voor {pot_id} — "
+                        f"potje al open met {existing_market} @ €{existing_pos.get('entry_price')}, "
+                        f"nieuwe BUY was voor {market}. Voorkomt overschrijving van bestaande positie."
+                    )
+                    return {}
+                # Zelfde markt + al open → dubbele BUY-poging, negeer stil (idempotent)
+                print(
+                    f"[potjes] SKIP: open_pot voor {pot_id} — potje al open met {existing_market} "
+                    f"@ €{existing_pos.get('entry_price')} (idempotent skip, geen dubbele BUY-log)."
+                )
+                return p
             p["position"] = {
                 "is_open": True,
                 "entry_price": entry_price,

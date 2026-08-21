@@ -4164,6 +4164,23 @@
       "book_id": "book-roadkillshop",
       "entry_id": "entry-6dbc547b",
       "source": "shop_hook"
+    },
+    {
+      "id": "bh-0b5933ee",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • TEST @ €100.0000\nPotje: pot-002\nInleg: €10.00\nEigenaar: Spark",
+      "ts": "2026-08-21T16:51:49.986689+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "TEST-EUR",
+      "pot_id": "pot-002",
+      "price": 100.0,
+      "user_id": "user-000"
     }
   ]
 }

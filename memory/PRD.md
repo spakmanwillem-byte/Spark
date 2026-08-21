@@ -1,6 +1,35 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 52r-3 (2026-02-21, laat) — Root cause `open_pot()` overschreef open positie
+
+### v13r_open_pot_overwrite_guard_001 — Guard tegen overschrijven van open potje
+**Root cause**: Willem's ATOM-koop van 16:03 (pot-001) werd om 18:02 overschreven door een BCH-BUY. Ontdekt via Bitvavo API live-poll (6 non-zero coins voor €60 crypto + €60 EUR = €121) vs. potjes JSON (7 potjes, alleen ATOM als open — later verdween ATOM ook). De reconcile-panel toonde de "orphan" coins correct.
+
+`open_pot()` (`backend/modules/trade/potjes.py` regel 895) had alleen een guard tegen `pot_locked`, niet tegen `is_open`. Elke call overschreef `p["position"]` + `p["market"]` onvoorwaardelijk. Auto-monitor koos "vrij" potje via `get_available_pot()` (dat filtert wél op `is_open=False`), maar als er ergens tussen selectie en execute een race is (of een tweede call-path zonder guard), verloren we historie.
+
+**Fix**: guard toegevoegd:
+- Al open + andere market → return `{}` (BLOCK, met log-regel)
+- Al open + zelfde market → return bestaande pot (idempotent skip, geen dubbele BUY-log/accounting)
+- Vrij → gewoon openen (bestaande gedrag)
+
+**Test** (`v13r_open_pot_guard_test`, inline via python3):
+- ✅ ATOM-potje niet overschreven door BCH-BUY
+- ✅ Idempotent skip bij zelfde markt (entry_price niet vernieuwd, geen dubbele stats.trades)
+- ✅ Vrij potje wordt gewoon geopend
+- State-backup + restore rondom test (geen data-mutatie op productie/preview)
+
+### Files changed (sessie 52r-3)
+- `/app/backend/modules/trade/potjes.py` — guard in `open_pot()` (regel 897-923)
+
+### Niet aangeraakt
+- `wallet/trade_history/user-000.json` (5 nieuwe trades van 18:02-18:03 blijven)
+- Bestaande ATOM-orphan → Willem lost op via reconcile-panel na redeploy
+- Dubbele BCH pot-007 → Willem beslist zelf (mergen of laten)
+
+---
+
+
 ## Sessie 52r (2026-02-21, avond) — Post-deploy hotfix: LLM + Trader-sync + WalletView-banner
 
 ### v13q_llm_groq_deprecation_fix_001 — Primary model gemigreerd naar gpt-oss-120b

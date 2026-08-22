@@ -1545,13 +1545,23 @@ function SparkBubble({ msg, sparkAvatarUrl }) {
           </div>
         )}
         <div>
-          <div className={`px-4 py-2.5 rounded-2xl ${
+          {/* v13_bubble_glow_persoonlijk_001 (sessie 53) — bubbles gebruiken
+              nu persoonlijke glow-kleuren uit Mijn Profiel → Instellingen → Beeld
+              via CSS-variabelen. User = primary (glow-base), Spark = secondary
+              (glow-accent). Fallback: amber/slate defaults. Willem: "gesprek-
+              wolken moeten mee met eigen kleuren, secondary is tegen-kleur". */}
+          <div className={`px-4 py-2.5 rounded-2xl ${isUser ? 'rounded-br-md' : 'rounded-bl-md'} ${
+            msg.deep && !isUser ? 'border border-indigo-500/30' : ''
+          }`}
+          style={
             isUser
-              ? 'bg-amber-500 text-white rounded-br-md'
-              : msg.deep ? 'bg-indigo-900/50 text-white rounded-bl-md border border-indigo-500/30' : 'bg-slate-800 text-white rounded-bl-md'
-          }`}>
+              ? { background: 'var(--glow-base, #f59e0b)', color: 'white' }
+              : msg.deep
+                ? { background: 'rgba(99, 102, 241, 0.35)', color: 'white' }
+                : { background: 'var(--glow-accent, #1e293b)', color: 'white' }
+          }>
             <p className="text-sm leading-relaxed whitespace-pre-line">{msg.message}</p>
-            <div className={`text-[10px] mt-1 flex items-center gap-1.5 ${isUser ? 'text-amber-200' : 'text-slate-500'}`}>
+            <div className={`text-[10px] mt-1 flex items-center gap-1.5 ${isUser ? 'text-white/70' : 'text-slate-400'}`}>
               <span>{msg.time}</span>
               {msg.deep && (
                 <>

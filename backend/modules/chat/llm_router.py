@@ -340,9 +340,11 @@ def _diagnose_missing_keys() -> str:
     """Return mensen-leesbare hint over welke LLM-keys ontbreken."""
     import os as _os
     checks = [
-        ("EMERGENT_LLM_KEY", "Emergent Universal Key (fallback voor Claude/Gemini/GPT). Verkrijgbaar via Emergent dashboard."),
-        ("LLM_A_API_KEY", "Primary provider (Groq of ander). Gezet in .env als LLM_A_*."),
-        ("LLM_B_API_KEY", "Secondary provider (Cerebras of ander). Gezet in .env als LLM_B_*."),
+        ("LLM_PRIMARY_API_KEY", "Primary LLM provider (Groq). Verkrijgbaar via https://console.groq.com/keys."),
+        ("LLM_PRIMARY_BASE_URL", "Base URL voor primary (bv. https://api.groq.com/openai/v1)."),
+        ("LLM_PRIMARY_MODEL", "Model-naam voor primary (bv. openai/gpt-oss-120b)."),
+        ("LLM_FALLBACK_API_KEY", "Secondary LLM provider (Cerebras). Optioneel maar aangeraden."),
+        ("EMERGENT_LLM_KEY", "Emergent Universal Key (emergency fallback). Alleen actief als LLM_EMERGENCY_USE_EMERGENT=true."),
     ]
     missing = []
     for env_name, desc in checks:
@@ -350,4 +352,4 @@ def _diagnose_missing_keys() -> str:
             missing.append(f"{env_name}: {desc}")
     if not missing:
         return "Alle keys aanwezig — provider-call zelf faalde (netwerk, budget of rate-limit). Check LLM-router logs."
-    return "Missende env-vars: " + " | ".join(missing)
+    return "Missende env-vars op deze omgeving: " + " | ".join(missing)

@@ -23,7 +23,7 @@
             "trades": 3,
             "wins": 1,
             "losses": 1,
-            "total_pnl": -0.3587
+            "total_pnl": 0.1421
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
           "minted_from": "willem_inleg_basis",
@@ -57,7 +57,14 @@
               "capital_after": 9.523,
               "netto": -0.607,
               "expected_coin": 0.03993849,
-              "actual_coin": 0.00095644
+              "actual_coin": 0.00095644,
+              "repaired_at": "2026-08-22T06:26:48.046289+00:00",
+              "repair_reason": "echte SELL @ €252.2500 uit trade_history",
+              "old_netto": -0.607,
+              "new_netto": -0.1062,
+              "old_exit_price": 239.71,
+              "new_exit_price": 252.25,
+              "capital_after_repair": 10.0238
             }
           ],
           "last_action": "SELL @ €239.71 | reconcile | netto €-0.607",
@@ -81,8 +88,8 @@
           "stats": {
             "trades": 2,
             "wins": 0,
-            "losses": 1,
-            "total_pnl": -0.0649
+            "losses": 0,
+            "total_pnl": 0.0
           },
           "created_at": "2026-07-09T22:02:52.798397+00:00",
           "minted_from": "willem_inleg_basis",
@@ -108,7 +115,14 @@
               "capital_after": 10.0851,
               "netto": -0.0649,
               "expected_coin": 0.00015294,
-              "actual_coin": 2.08e-06
+              "actual_coin": 2.08e-06,
+              "repaired_at": "2026-08-22T06:26:48.046289+00:00",
+              "repair_reason": "geen SELL in trade_history → break-even",
+              "old_netto": -0.0649,
+              "new_netto": 0.0,
+              "old_exit_price": 65943.0,
+              "new_exit_price": 66035.0,
+              "capital_after_repair": 10.15
             }
           ],
           "last_action": "SELL @ €65943.00 | reconcile | netto €-0.065"
@@ -451,8 +465,8 @@
           "stats": {
             "trades": 1,
             "wins": 0,
-            "losses": 1,
-            "total_pnl": -0.5196
+            "losses": 0,
+            "total_pnl": 0.0
           },
           "created_at": "2026-07-31T07:33:04.005890+00:00",
           "source": "token_buy_expansion",
@@ -476,7 +490,14 @@
               "capital_after": 9.6104,
               "netto": -0.5196,
               "expected_coin": 0.03997789,
-              "actual_coin": 0.00095644
+              "actual_coin": 0.00095644,
+              "repaired_at": "2026-08-22T06:26:48.046289+00:00",
+              "repair_reason": "geen SELL in trade_history → break-even",
+              "old_netto": -0.5196,
+              "new_netto": 0.0,
+              "old_exit_price": 241.66,
+              "new_exit_price": 253.39003248911803,
+              "capital_after_repair": 10.13
             }
           ],
           "last_action": "SELL @ €241.66 | reconcile | netto €-0.520"

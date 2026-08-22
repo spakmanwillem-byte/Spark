@@ -1402,10 +1402,58 @@ async def reconcile_close_sold(user_id: str, dry_run: bool = True):
         actual_coin = coin_avail.get(sym, 0.0)
         # Coin bijna weg (< 5% van verwacht)? Dan is 'ie op Bitvavo verkocht
         if actual_coin < expected_coin * THRESHOLD_COIN:
+            # v13_reconcile_real_sell_price_001 — gebruik ECHTE SELL-prijs uit
+            # trade_history/{user}.json in plaats van huidige marktprijs. Voorheen
+            # werd de exit_price = huidige ticker gebruikt → als coin sinds SELL
+            # gedaald was, werd er kunstmatig verlies geboekt (fantoom-verlies).
+            # Nieuwe volgorde:
+            #   1. Zoek meest recente SELL voor deze market in wallet trade_history
+            #      (binnen 7 dagen vóór nu).
+            #   2. Geen match → break-even (exit_price = entry_price, netto = -fees
+            #      alleen). Dat voorkomt fake winst/verlies bij orphan coins.
+            #   3. price_map (huidige ticker) blijft als laatste fallback voor
+            #      audit-transparantie, maar wordt NIET meer als exit gebruikt.
+            real_sell_price = None
+            real_sell_ts = None
+            try:
+                from modules.core.storage import load_json as _lj_hist
+                _hist_fp = Path(__file__).parent.parent.parent / "data" / "wallet" / "trade_history" / f"{user_id}.json"
+                _hd = _lj_hist(_hist_fp, default=[])
+                _trades = _hd if isinstance(_hd, list) else (_hd.get("trades") or [])
+                _now = datetime.now(timezone.utc)
+                _candidates = []
+                for _t in _trades:
+                    if (_t.get("action") or "").upper() != "SELL":
+                        continue
+                    if _t.get("market") != market:
+                        continue
+                    _tp = _t.get("price")
+                    _tts = _t.get("timestamp") or ""
+                    try:
+                        _dt = datetime.fromisoformat(_tts.replace("Z", "+00:00"))
+                    except Exception:
+                        continue
+                    if (_now - _dt).days > 7:
+                        continue
+                    if _tp:
+                        _candidates.append((_dt, float(_tp), _tts))
+                if _candidates:
+                    _candidates.sort(key=lambda x: x[0], reverse=True)
+                    real_sell_price = _candidates[0][1]
+                    real_sell_ts = _candidates[0][2]
+            except Exception as _rex:
+                print(f"[reconcile] trade_history lookup failed (non-blocking): {_rex}")
+
             current_price = price_map.get(market)
-            if not current_price:
-                skipped.append({"pot_id": pot["id"], "reason": "no live price"})
-                continue
+            if real_sell_price is not None:
+                exit_price = real_sell_price
+                exit_source = f"trade_history SELL @ {real_sell_ts}"
+            else:
+                exit_price = entry  # break-even fallback (geen fake P&L)
+                exit_source = "break-even (geen SELL in trade_history)"
+                if not current_price:
+                    # Zonder ticker EN zonder history: nog steeds break-even, geen skip
+                    current_price = entry
             action = {
                 "pot_id": pot["id"],
                 "market": market,
@@ -1413,15 +1461,17 @@ async def reconcile_close_sold(user_id: str, dry_run: bool = True):
                 "amount_eur": amt_eur,
                 "expected_coin": round(expected_coin, 8),
                 "actual_coin": round(actual_coin, 8),
-                "exit_price": current_price,
-                "estimated_pnl_pct": round(((current_price - entry) / entry) * 100, 2),
+                "exit_price": exit_price,
+                "exit_source": exit_source,
+                "current_ticker_price": current_price,
+                "estimated_pnl_pct": round(((exit_price - entry) / entry) * 100, 2),
             }
             if not dry_run:
                 # v13u_reconcile_close_sold_001 — VEILIGE in-place close (geen finance_hub
                 # auto-mint side-effect). close_pot() triggert `check_auto_mint_hook` die
                 # de bestaande potjes-capital revalueert → capital=0. Hier alleen JSON-mutatie.
                 capital = float(pot.get("capital", 0) or 0)
-                profit_pct = (current_price - entry) / entry
+                profit_pct = (exit_price - entry) / entry
                 bruto = capital * profit_pct
                 fees = capital * 0.0025 * 2  # BITVAVO_TAKER_FEE roundtrip
                 netto = round(bruto - fees, 4)
@@ -1438,15 +1488,17 @@ async def reconcile_close_sold(user_id: str, dry_run: bool = True):
                 stats["trades"] = int(stats.get("trades", 0)) + 1
                 if netto > 0:
                     stats["wins"] = int(stats.get("wins", 0)) + 1
-                else:
+                elif netto < 0:
                     stats["losses"] = int(stats.get("losses", 0)) + 1
                 stats["total_pnl"] = round(float(stats.get("total_pnl", 0)) + netto, 4)
-                pot["last_action"] = f"SELL @ €{current_price:.2f} | reconcile | netto €{netto:+.3f}"
+                pot["last_action"] = f"SELL @ €{exit_price:.2f} | reconcile ({exit_source[:20]}) | netto €{netto:+.3f}"
                 pot.setdefault("reconcile_audit", []).append({
-                    "ts": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+                    "ts": datetime.now(timezone.utc).isoformat(),
                     "type": "reconcile_close_sold",
                     "entry": entry,
-                    "exit_price": current_price,
+                    "exit_price": exit_price,
+                    "exit_source": exit_source,
+                    "current_ticker_price": current_price,
                     "capital_before": capital,
                     "capital_after": new_capital,
                     "netto": netto,

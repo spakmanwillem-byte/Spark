@@ -62652,11 +62652,71 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2490
       }
+    },
+    {
+      "id": "conv-a4a7e471",
+      "timestamp": "2026-08-22T06:25:35.497741+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2491
+      }
+    },
+    {
+      "id": "conv-113e4926",
+      "timestamp": "2026-08-22T06:25:35.566472+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2492
+      }
+    },
+    {
+      "id": "conv-a9cdc7d8",
+      "timestamp": "2026-08-22T06:26:18.569507+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hallo Spark, Zeg eens hallo Danielle. (ze kijkt mee)",
+      "spark_response": "Hallo Danielle! 👋 \n\n(En hallo Willem, fijn dat je me weer aanspreekt.)",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "weet",
+        "used_cards": [
+          "kbv2-1ebd40fb",
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-7badb7d5",
+          "kbv2-be4ef430"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2493
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2490,
-    "last_updated": "2026-08-22T05:20:04.936980+00:00"
+    "total_conversations": 2493,
+    "last_updated": "2026-08-22T06:26:18.569507+00:00"
   }
 }

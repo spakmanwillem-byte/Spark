@@ -158,14 +158,19 @@ export function LoginForm() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none" data-testid="login-glow-dots">
         {glow.corner_enabled && (
           <>
+            {/* v13_corner_glow_follow_scheme_001 (sessie 53) — hoeken volgen nu
+                automatisch het app-kleurenschema (primary + secondary). Voorheen
+                waren corner_a/b losse pickers in Beheer→Beeld → dubbele config.
+                Nu: 1 plek voor kleuren, hoeken doen mee. Kaartcomment (Willem):
+                "veel makkelijker". */}
             <div
               className="absolute w-96 h-96 -top-48 -left-48 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: glow.corner_a + '1a' /* ~10% opacity */ }}
+              style={{ backgroundColor: glow.primary + '1a' /* ~10% opacity */ }}
               data-testid="login-corner-glow-a"
             />
             <div
               className="absolute w-96 h-96 -bottom-48 -right-48 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: glow.corner_b + '1a', animationDelay: '1s' }}
+              style={{ backgroundColor: glow.secondary + '1a', animationDelay: '1s' }}
               data-testid="login-corner-glow-b"
             />
           </>

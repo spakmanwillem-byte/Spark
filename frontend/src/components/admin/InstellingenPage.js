@@ -614,8 +614,9 @@ function SystemLoginGlow({ userId, userGrad }) {
         dots_size: Number.isFinite(s.login_dots_size) ? s.login_dots_size : 1.0,
         dots_fade: Number.isFinite(s.login_dots_fade) ? s.login_dots_fade : 0.0,
         corner_enabled: s.login_corner_glow_enabled !== false,
-        corner_a: s.login_corner_glow_color_a || '#f59e0b',
-        corner_b: s.login_corner_glow_color_b || '#f97316',
+        // v13_corner_glow_follow_scheme_001 — hoeken volgen app-kleurenschema
+        primary: s.app_primary_accent || '#f59e0b',
+        secondary: s.app_secondary_accent || '#06b6d4',
         spark_logo_url: s.spark_logo_url || null,
       });
     }).catch(() => {});
@@ -761,37 +762,22 @@ function SystemLoginGlow({ userId, userGrad }) {
             <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform shadow ${cfg.corner_enabled ? 'left-[22px]' : 'left-[2px]'}`} />
           </button>
         </div>
-        <div className={`grid grid-cols-2 gap-2 ${!cfg.corner_enabled ? 'opacity-40 pointer-events-none' : ''}`}>
-          <label className="text-[11px] text-slate-400 space-y-1">
-            <span>Linksboven</span>
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={cfg.corner_a}
-                onChange={e => setCfg(c => ({ ...c, corner_a: e.target.value }))}
-                onBlur={e => update('login_corner_glow_color_a', e.target.value)}
-                disabled={!canEdit}
-                data-testid="admin-corner-color-a"
-                className="w-9 h-8 rounded border border-slate-700 bg-transparent"
-              />
-              <span className="text-[10px] font-mono text-slate-400">{cfg.corner_a}</span>
-            </div>
-          </label>
-          <label className="text-[11px] text-slate-400 space-y-1">
-            <span>Rechtsonder</span>
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={cfg.corner_b}
-                onChange={e => setCfg(c => ({ ...c, corner_b: e.target.value }))}
-                onBlur={e => update('login_corner_glow_color_b', e.target.value)}
-                disabled={!canEdit}
-                data-testid="admin-corner-color-b"
-                className="w-9 h-8 rounded border border-slate-700 bg-transparent"
-              />
-              <span className="text-[10px] font-mono text-slate-400">{cfg.corner_b}</span>
-            </div>
-          </label>
+        {/* v13_corner_glow_follow_scheme_001 (sessie 53) — losse hoek-pickers
+            verwijderd. Hoeken volgen nu automatisch Primary (linksboven) +
+            Secondary (rechtsonder) uit "App Kleurenschema" hierboven.
+            Willem: "veel makkelijker" — 1 plek voor kleur, hoeken doen mee. */}
+        <div className={`text-[11px] text-slate-400 bg-slate-900/60 border border-slate-800 rounded p-2 space-y-0.5 ${!cfg.corner_enabled ? 'opacity-40' : ''}`}>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full border border-slate-700" style={{ backgroundColor: cfg.primary || '#f59e0b' }} />
+            <span>Linksboven — volgt <span className="text-slate-200 font-medium">Primary</span> ({cfg.primary || '#f59e0b'})</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full border border-slate-700" style={{ backgroundColor: cfg.secondary || '#06b6d4' }} />
+            <span>Rechtsonder — volgt <span className="text-slate-200 font-medium">Secondary</span> ({cfg.secondary || '#06b6d4'})</span>
+          </div>
+          <p className="text-[10px] text-slate-500 pt-1 italic">
+            Wijzig via {'"App Kleurenschema"'} bovenaan deze pagina.
+          </p>
         </div>
       </div>
 

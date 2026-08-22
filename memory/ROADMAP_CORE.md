@@ -22,6 +22,51 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 6. **Gastheer-toon** — bij twijfel/onzekerheid: warm ontvangen, niet docerend. Erkenning voor prestatie. "We doen het samen."
 7. **NO MONGODB** — alle data via `load_json`/`save_json` uit `modules.core.storage`. Backups zijn zip-exports.
 
+---
+
+## 🧹 CLUSTER — Trader Accounting Hygiene (sessie 53, 22 feb 2026)
+
+**Doel**: Alle "verdachte cijfers" die Willem aanwees systematisch oplossen én preventie inbouwen zodat nieuwe token-holders niet dezelfde issues krijgen.
+
+### ✅ Bug-fixes (alle geverifieerd)
+
+- [x] **v13_pot_value_consistency_001** — TraderPage €10.00 vs AnalyticsPage €10.26 mismatch.
+      `GET /api/trade/potjes/{user_id}` overlayde `live_value = token_price` voor closed pots. Fix: closed → `live_value = capital`, open → mark-to-market. Regressietest: `/app/backend/tests/test_iter52_pot_value_consistency.py` (verified via testing_agent iter52, 100% pass).
+- [x] **v13_pot_open_price_clarity_ui_001** — pot-card UI voor open pos: hover-tooltip met aankoop→huidige prijs + unrealized P&L + trailing piek. Trader-tab compact, Analytics-tab uitgebreid met "Nu"- en "Open P&L"-kolommen. `auto-rows-fr` voor gelijke card-hoogte.
+- [x] **v13_reconcile_real_sell_price_001** — reconcile-close-sold gebruikte huidige ticker-prijs → fantoom-verliezen als coin sinds SELL was gedaald. Fix: zoekt echte SELL in `wallet/trade_history/{user}.json` binnen 7 dagen; anders break-even (exit=entry). `exit_source` in audit voor transparantie.
+- [x] **v13_sell_eur_calc_001** — stats endpoint sommeerde `amount` voor SELLs = coin-hoeveelheid ipv EUR. Fix: BUY → `amount` (EUR), SELL → `filled × price`. Spark klopt nu (€10.09 gekocht → €10.14 verkocht, netto -€0.01 door fees).
+- [x] **v13_reconcile_synthetic_sell_001** — reconcile schrijft synthetische SELL naar trade-history, **alleen** als er matching BUY bestaat voor deze market (voorkomt fake wins bij orphan coins).
+
+### ✅ Data-repair scripts uitgevoerd (herbruikbaar)
+
+- [x] `repair_phantom_losses_v13.py` — 3 fake verliezen weg: Gijs BCH −€0.52 → €0, Spark BTC −€0.06 → €0, Spark BCH bijgesteld naar echte −€0.11 (Bitvavo SELL @ €252.25 < entry €253.64).
+- [x] `gap_scan_v13.py` — systematische diagnose (9 gap-types: fees, baseline, orphan markets, audit-drift, max_size, non-EUR fees, ghost sells, unclosed buys, corrupt state).
+- [x] `fix_max_size_zero_v13.py` — **KRITIEKE bug**: alle 12 non-Spark pots hadden `max_size=0` → winst boven €0 werd afgeknipt. Gefixt naar `INITIAL_MAX (€50)` of `capital × 5`.
+- [x] `close_remaining_gaps_v13.py` — Baselines gezet voor Willem & Gijs (€123.03) met `set_at` vóór eerste trade. Gijs 2× €20 BCH-BUYs gesloten met synthetische break-even SELLs (met BUY-timestamp).
+
+### ✅ Preventie voor nieuwe users
+
+- [x] **v13_auto_baseline_on_provision_001** — `auto_provision_bot_for_token_holder()` zet nu automatisch baseline op huidige Bitvavo total als user er nog geen heeft. Idempotent.
+- [x] **v13_auto_baseline_on_mint_001** — `finance_ops.mint_tokens()` roept nu ook `auto_provision` aan zodat auto-mint scheduler en admin-gifts óók baseline+bot-config krijgen.
+
+### 📊 Gap-scan resultaat: van 16 issues → 1 info-only
+
+Enige overgebleven "issue" (Spark pot-001 audit vs stats drift €0.25) is verklaarbaar: 1 echte trade met winst zonder audit + 1 gerepareerde audit met verlies. Geen bug.
+
+### 💾 Backups (alles reversibel)
+- `data/financial/user_potjes.json.bak_phantom_loss_repair_20260822_062648`
+- `data/financial/user_potjes.json.bak_maxsize_fix_20260822_064245`
+- `data/financial/user_potjes.json.bak_backfill_20260822_063929`
+- `data/wallet/trade_history/user-*.bak_gapclose_20260822_065541.json`
+
+### 🔍 Learnings
+- **Reconcile ≠ echte trade**: bij close-flow altijd echte SELL-prijs uit trade-history opzoeken, nooit huidige ticker. Als niet vindbaar → break-even (safe default).
+- **`amount` semantiek verschilt per side**: Bitvavo BUY = EUR, SELL = coin-hoeveelheid. Stats/summary calls moeten altijd `filled × price` voor SELL-EUR.
+- **Mens-check onmisbaar**: Willem's "hé dit voelt niet goed" bij €10.00 vs €10.26 leidde tot 4 extra ontdekte bugs + kritieke max_size=0.
+
+---
+
+
 ## 💰 CLUSTER — Boekhouding v13 & SEPA (sessie 52, feb 2026)
 
 **Doel**: Multi-container boekhouding per user/entity + lokale SEPA voorbereiding + verifieerbare winst-events. Alles JSON-only, geen cloud.

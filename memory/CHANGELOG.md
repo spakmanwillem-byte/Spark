@@ -2,6 +2,42 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+
+## 2026-02-22 (sessie 53) — Trader Accounting Hygiene sprint
+
+Systematische fix-batch geïnitieerd door Willem's "waarom staat er verlies terwijl ik alleen winst deed?". Elke stap onthulde volgende bug — resultaat: alle known gaps dicht, preventie voor nieuwe users, herbruikbare diagnose-scripts.
+
+### 🔧 v13_pot_value_consistency_001 — TraderPage vs AnalyticsPage mismatch
+€10.00 vs €10.26 verschil opgelost. Backend `/api/trade/potjes/{user_id}` overschreef `live_value` met dynamische token-prijs voor closed pots. Fix: closed → `live_value = capital` (boekwaarde met realized P&L), open → mark-to-market. Verified via testing_agent iter52 (100% pass, 3 users). Regressietest bewaard.
+
+### 🎨 v13_pot_card_ui_split_001 — Trader compact, Analytics uitgebreid
+Trader-tab pot-card kreeg tooltip met aankoop→huidige prijs + open P&L + trailing piek (was inline, te druk). Analytics-tab kreeg 2 extra kolommen (Nu-prijs, Open P&L). `auto-rows-fr` voor gelijke card-hoogte.
+
+### 🔧 v13_reconcile_real_sell_price_001 — Fantoom-verliezen opgelost
+Reconcile-close-sold gebruikte huidige ticker-prijs als exit_price → als coin sinds SELL was gedaald, werd fake verlies geboekt. Fix: zoekt eerst echte SELL in `wallet/trade_history/{user}.json` binnen 7 dagen, anders break-even. `repair_phantom_losses_v13.py` opgeruimd: 3 fake verliezen weg (Gijs −€0.52, Spark BTC −€0.06, Spark BCH bijgesteld).
+
+### 🔧 v13_sell_eur_calc_001 — Stats endpoint semantiek
+Bitvavo SELL `amount` is coin-hoeveelheid, niet EUR. Voorheen: "Verkocht €0.04" toonde 0.04 BCH ipv €10.14 → -€10 fantoom-verlies in Netto P&L. Fix: BUY → `amount` (EUR), SELL → `filled × price`.
+
+### 🔧 v13_reconcile_synthetic_sell_001 — Trade-history sync
+Reconcile schrijft nu synthetische SELL bij close (alleen als matching BUY in history bestaat, anders gap laten). Voorkomt dat closed pots met "open" trade-history rondslingeren.
+
+### 🔧 v13_max_size_repair — Kritieke groei-blocker
+Alle 12 non-Spark pots hadden `max_size=0` → elke winst boven €0 werd naar overflow-pool afgeknipt. `fix_max_size_zero_v13.py` reset naar `INITIAL_MAX (€50)`. Nieuwe pots (via mint / shop-buy) hebben al correcte `max_size = price × 5`, dus dit was legacy-corruption.
+
+### 🔧 v13_auto_baseline_on_provision_001 + on_mint_001 — Preventie
+`auto_provision_bot_for_token_holder()` zet nu automatisch `capital_baseline.json` op huidige Bitvavo total als user er nog geen heeft. `finance_ops.mint_tokens()` roept auto_provision aan (was alleen `sync_potjes_to_tokens`). Effect: nieuwe user → live_pnl start op €0 in plaats van "alles is winst".
+
+### 🛠️ Nieuwe diagnose-scripts
+- `scripts/gap_scan_v13.py` — 9-punts diagnose (fees, baseline, orphan markets, audit-drift, max_size, non-EUR fees, ghost sells, unclosed buys, corrupt state)
+- `scripts/repair_phantom_losses_v13.py` — audit-driven fake-loss repair
+- `scripts/fix_max_size_zero_v13.py` — legacy pot repair
+- `scripts/close_remaining_gaps_v13.py` — baselines + orphan-BUYs close
+
+### 📊 Resultaat gap-scan
+16 issues → 1 info-only. Alle backups bewaard (`.bak_phantom_loss_repair_*`, `.bak_maxsize_fix_*`, `.bak_gapclose_*`).
+
+
 ## 2026-08-04 (sessie 56d) — Sidebar-collapse + active-tab + persoonlijke glow
 
 ### 🔧 v12_sidebar_collapse_persist_001 — Sidebar blijft ingeklapt na navigatie

@@ -63596,11 +63596,75 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2527
       }
+    },
+    {
+      "id": "conv-7e082270",
+      "timestamp": "2026-08-22T12:48:15.608781+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "zeg eens wat",
+      "spark_response": "Oké, ik zeg wat: het is een mooie middag, en ik sta klaar om je te helpen. Waar wil je het over hebben?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "jammer",
+        "used_cards": [
+          "kbv2-9f310b89",
+          "kbv2-63c2beae",
+          "kbv2-8fa54454"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2528
+      }
+    },
+    {
+      "id": "conv-da68daef",
+      "timestamp": "2026-08-22T12:48:47.886818+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "zeg nog keer wat maar wat anders",
+      "spark_response": "Het is een heldere middag, en ik ben er klaar voor om samen iets leuks te ontdekken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "veel",
+        "used_cards": [
+          "kbv2-9f310b89",
+          "kbv2-fb7fc170",
+          "kbv2-d915b9e4",
+          "kbv2-b7582786",
+          "kbv2-skel-f9efce92"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2529
+      }
+    },
+    {
+      "id": "conv-27539d9e",
+      "timestamp": "2026-08-22T13:18:48.784778+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is 3+3?",
+      "spark_response": "3 + 3 = 6.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "budget-test-1",
+        "gesprek_nummer": 2530
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2527,
-    "last_updated": "2026-08-22T12:44:35.369250+00:00"
+    "total_conversations": 2530,
+    "last_updated": "2026-08-22T13:18:48.784778+00:00"
   }
 }

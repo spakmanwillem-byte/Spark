@@ -858,7 +858,11 @@ export function GesprekkenPage({ onNavigate }) {
 
           const msg = {
             id: Date.now() + 1, role: 'spark',
-            message: d.success ? (d.message || '...') : `Even iets mis: ${d.error || 'onbekende fout'}`,
+            // v13_llm_budget_user_message_001: gebruik d.message als backend die zet
+            // (bv. "alle drie LLM-lijnen op budget"), anders de generieke error.
+            message: d.success
+              ? (d.message || '...')
+              : (d.message || `Even iets mis: ${d.error || 'onbekende fout'}`),
             time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
             deep: true,
             used_cards: d.used_cards || [],

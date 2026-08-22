@@ -638,11 +638,45 @@ async def compose_response(
         )
 
         if not router_resp.get("success"):
-            # Alle providers gefaald — geef structured error terug
+            # v13_llm_budget_user_message_001 (sessie 53): "all_providers_failed" was
+            # cryptisch voor Willem. Nu: kijk naar de errors van de gefaalde providers
+            # en geef een concreet Nederlands verhaal terug.
+            tried = router_resp.get("tried") or []
+
+            def _classify(err: str) -> str:
+                e = (err or "").lower()
+                if "tpd" in e or "tokens per day" in e or ("429" in e and "day" in e):
+                    return "tpd"
+                if "429" in e or "rate limit" in e or "rate_limit" in e:
+                    return "rate"
+                if "402" in e or "payment required" in e or "quota" in e or "budget" in e:
+                    return "budget"
+                if "timeout" in e:
+                    return "timeout"
+                return "other"
+
+            classes = {_classify(t.get("error", "")) for t in tried if not t.get("ok")}
+            if classes and classes.issubset({"tpd", "rate", "budget"}):
+                # Alles op quota — Willem herkent dit pattern nu
+                friendly = (
+                    "Even niet mogelijk — mijn drie LLM-lijnen zijn vandaag allemaal "
+                    "over hun budget (Groq TPD vol, Cerebras quota op, Emergent budget op). "
+                    "Reset volgt vanzelf, óf vul één van deze bij: "
+                    "Emergent = *Profile → Manage plan → Universal Key → Add Balance*."
+                )
+            elif "timeout" in classes:
+                friendly = "Verbinding hapert even — probeer over een moment opnieuw."
+            else:
+                friendly = (
+                    "Even iets mis met mijn taalmodel-lijnen. "
+                    "Ik geef 't door aan de admin (details staan in de logs)."
+                )
+
             return {
                 "success": False,
                 "error": router_resp.get("error", "llm_router_failed"),
-                "tried": router_resp.get("tried", []),
+                "message": friendly,
+                "tried": tried,
                 "fallback": True,
             }
 

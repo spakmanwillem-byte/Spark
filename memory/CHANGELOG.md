@@ -3,7 +3,28 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
-## 2026-02-22 (sessie 53 vervolg) — Chat-weergave-fixes (JSON-leak + HTML-error)
+## 2026-02-22 (sessie 53 vervolg) — Nood-nood emergency + vriendelijke budget-fout
+
+### 🚨 v13_emergent_nood_nood_001 — Emergent alléén bij écht code-rood
+Vorige tweak (default OFF) was té strikt. Willem zei letterlijk *"alleen nood nood"*, en dít is nood-nood: Groq TPD op + Cerebras quota op tegelijk → alles down.
+
+**Nieuwe logic** in `llm_router.py`:
+- `_try_emergent_emergency(..., true_emergency=bool)`
+- `chat_complete` detecteert of *alle* gefaalde providers een quota/rate-limit/budget-error hadden. Zo ja → `true_emergency=True` → Emergent wordt gebruikt (ongeacht env-flag). Bij bv. netwerk-time-out of config-fout → Emergent blijft dicht.
+
+**Quota-detector** matcht: `429`, `402`, `quota`, `rate_limit`, `rate limit`, `budget`, `tokens per day`, `tpd`, `insufficient`. 6/6 unit-tests groen (Groq TPD, Cerebras 402, Emergent budget = true; timeout, 404 = false).
+
+### 🗣️ v13_llm_budget_user_message_001 — cryptische error → Nederlands verhaal
+`Even iets mis: all_providers_failed` was voor Willem betekenisloos. Nu genereert `response_composer.py` een concrete Nederlandse zin per faal-categorie:
+
+- **Alle 3 op quota** (Willem's productie-scenario, 22 feb): *"Mijn drie LLM-lijnen zijn vandaag allemaal over hun budget (Groq TPD vol, Cerebras quota op, Emergent budget op). Reset volgt vanzelf, óf vul één van deze bij: Emergent = Profile → Manage plan → Universal Key → Add Balance."*
+- **Timeout**: *"Verbinding hapert even — probeer over een moment opnieuw."*
+- **Andere**: *"Even iets mis met mijn taalmodel-lijnen. Ik geef 't door aan de admin (details staan in de logs)."*
+
+Frontend `GesprekkenPage.js` gebruikt `d.message` als backend die zet, anders de generieke fallback.
+
+
+## 2026-02-22 (sessie 53) — Chat-weergave-fixes (JSON-leak + HTML-error)
 
 ### 🧹 v13_tts_json_leak_sanitizer_001 — action/payload JSON-blokken weg uit chat
 Spark begon soms ```json {"action": "tts_speak", "payload": {"text": "..."}} ``` te typen in plaats van gewoon te antwoorden. De bestaande tool-leak-sanitizer (v7) ving alleen `[tool_name {...}]` bracket-syntax, niet dit nieuwe JSON-blok-patroon.

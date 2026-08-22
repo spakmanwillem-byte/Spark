@@ -226,13 +226,17 @@ async def _try_emergent_emergency(
     *,
     temperature: float,
     max_tokens: int,
+    true_emergency: bool = False,
 ) -> Dict[str, Any]:
-    """v13_emergent_default_off_001 (sessie 53) — Emergent Universal Key is nu
-    default UIT (Willem: 'alleen nood nood'). Enige route naar Emergent is een
-    expliciete `LLM_EMERGENCY_USE_EMERGENT=true` in env-vars.
-    Kost credits — vandaar opt-in i.p.v. opt-out.
+    """v13_emergent_nood_nood_001 (sessie 53) — Emergent Universal Key wordt gebruikt als:
+       (A) admin heeft 'em expliciet aangezet (`LLM_EMERGENCY_USE_EMERGENT=true`), OF
+       (B) `true_emergency=True` — d.w.z. álle andere providers faalden met
+           quota/rate-limit/budget errors (echte nood-nood zoals Willem 't formuleerde).
+    In alle andere gevallen: skip. Zo blijft de key veilig van dagelijkse calls
+    maar vangt hij wél op als productie in code-rood staat.
     """
-    if os.environ.get("LLM_EMERGENCY_USE_EMERGENT", "false").lower() != "true":
+    forced_on = os.environ.get("LLM_EMERGENCY_USE_EMERGENT", "false").lower() == "true"
+    if not (forced_on or true_emergency):
         return {"success": False, "error": "emergency_disabled", "provider": "emergent"}
     key = os.environ.get("EMERGENT_LLM_KEY", "").strip()
     if not key:
@@ -336,9 +340,19 @@ async def chat_complete(
             return result
         logger.warning("[llm_router] %s faalde: %s", provider.name, result.get("error"))
 
-    # Alles gefaald → emergency
+    # Alles gefaald → check of het écht nood-nood is (quota/rate-limit op alle providers).
+    # v13_emergent_nood_nood_001: alleen dán mag Emergent invallen — anders niet.
+    def _is_quota_error(err: str) -> bool:
+        e = (err or "").lower()
+        return any(x in e for x in [
+            "429", "402", "quota", "rate_limit", "rate limit",
+            "budget", "tokens per day", "tpd", "insufficient",
+        ])
+    all_quota = tried and all(_is_quota_error(t.get("error", "")) for t in tried if not t.get("ok"))
+
     emergency = await _try_emergent_emergency(
         messages, temperature=temperature, max_tokens=max_tokens,
+        true_emergency=all_quota,
     )
     tried.append({
         "provider": "emergent",

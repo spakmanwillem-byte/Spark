@@ -23,6 +23,7 @@
 import { LlmTokenUsageWidget } from './widgets/LlmTokenUsageWidget';
 import { PapertrailWidget } from './widgets/PapertrailWidget';
 import { FrontsConfigDraftWidget } from './widgets/FrontsConfigDraftWidget';
+import { LlmBudgetSettingsWidget } from './widgets/LlmBudgetSettingsWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -54,6 +55,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 52c',
     reden: "Emmy wil hardgecodeerde teksten (bv 'Heidi is offline') en kleuren (bv rood alert) instelbaar maken per scherm zonder telkens de agent te vragen. Kladblok = eerste parking.",
     Component: FrontsConfigDraftWidget,
+  },
+  {
+    id: 'llm-budget-settings',
+    naam: 'LLM Budget Settings',
+    doel: '8 char-caps voor Groq TPM-budget: turns, user_text, system_prompt, hard-cap, identity-facts, frontend counter-thresholds. Voorkomt `all_providers_failed` bij lange plakkerige input.',
+    waar_hoort_het: 'Beheer → Instellingen → nieuwe card "Chat & LLM budget" onder Algemeen, of eigen LLM-tab',
+    aangemaakt_op: '2026-08-22',
+    aangemaakt_door: 'e1 sessie 52t',
+    reden: "Willem: 'ik wil die waardes zelf kunnen tunen zonder redeploy'. Waardes stonden hardcoded in response_composer.py. Nu leest backend ze uit settings/system bij elke chat-request.",
+    Component: LlmBudgetSettingsWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

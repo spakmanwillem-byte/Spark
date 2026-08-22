@@ -48,6 +48,16 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "login_corner_glow_color_a": {"type": "str", "scope": "system"},                     # linksboven hex (default primary)
     "login_corner_glow_color_b": {"type": "str", "scope": "system"},                     # rechtsonder hex (default secondary)
     "spark_logo_url": {"type": "str", "scope": "system"},                                # URL/path naar Spark-logo (default null → fallback Sparkles icon)
+    # v13t_llm_budget_settings_001 — LLM/Chat prompt-cap knoppen (admin only)
+    # Zie Beheer → Kladblok → widget "LLM Budget Settings"
+    "chat_context_turns": {"type": "int", "scope": "system", "min": 1, "max": 12},              # hoeveel oude turns mee (default 3)
+    "chat_max_turn_chars": {"type": "int", "scope": "system", "min": 300, "max": 5000},         # cap per oude turn (default 1500)
+    "chat_max_user_prompt_chars": {"type": "int", "scope": "system", "min": 500, "max": 8000},  # cap huidige user_text (default 3000)
+    "chat_max_system_prompt_chars": {"type": "int", "scope": "system", "min": 4000, "max": 32000},  # cap system-prompt (default 16000)
+    "chat_hard_input_budget": {"type": "int", "scope": "system", "min": 8000, "max": 60000},    # totaal-cap over alles (default 22000)
+    "chat_identity_facts_cap_admin": {"type": "int", "scope": "system", "min": 3, "max": 200},  # facts/type voor grad 1 (default 15)
+    "chat_input_warn_at": {"type": "int", "scope": "system", "min": 500, "max": 10000},         # frontend counter amber (default 3500)
+    "chat_input_hard_at": {"type": "int", "scope": "system", "min": 1000, "max": 10000},        # frontend counter rood (default 5500)
     # v5_bot_color_scheme_001 — per-bot accent kleur (admin) — gebruikt door GesprekkenPage / CommunityPage bubbles
     "bot_color_madelief": {"type": "str", "scope": "system"},   # default #ec4899
     "bot_color_harry":    {"type": "str", "scope": "system"},   # default #06b6d4

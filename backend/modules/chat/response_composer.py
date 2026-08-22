@@ -412,9 +412,16 @@ async def compose_response(
         # is ruim voldoende (~150 facts totaal), voorheen "999" gaf 8477-token prompts.
         try:
             from modules.chat import identity_facts
-            # Detect gradatie 1 → toon meer facts (Willem is admin), maar wel binnen TPM budget
+            # v13t_llm_budget_settings_001 — admin-cap uit settings/system
+            from modules.core.storage import load_json as _lj2
+            _cap_setting = None
+            try:
+                _sys2 = _lj2(Path(__file__).parent.parent.parent / "data" / "settings" / "system.json", default={}) or {}
+                _cap_setting = int(_sys2.get("chat_identity_facts_cap_admin", 15))
+            except Exception:
+                _cap_setting = 15
             _grad = (user_profile or {}).get("gradatie") if isinstance(user_profile, dict) else None
-            _cap = 15 if _grad == 1 else 5
+            _cap = _cap_setting if _grad == 1 else 5
             facts = identity_facts.load_for_prompt(user_id, max_per_type=_cap)
             facts_snippet = identity_facts.format_for_prompt(facts)
             if facts_snippet:
@@ -535,12 +542,19 @@ async def compose_response(
     ]
     user_prompt = "\n".join(user_prompt_parts)
 
-    # v13t_user_text_tpm_guard_001 — Hard totale token-cap: Groq free-tier = 8000 TPM,
-    # -1024 max_tokens output = 6976 budget voor input. ~3.5 chars/token → 24k chars input.
-    # Verdeling: system 18k · turns 3k · user 3k. Bij overshoot: eerst user trimmen,
-    # dan turns weglaten, dan system op laatste plek trimmen.
-    HARD_INPUT_CHAR_BUDGET = 22000
-    MAX_USER_PROMPT_CHARS = 3000
+    # v13t_llm_budget_settings_001 — waardes uit settings/system (admin-tunable via
+    # Beheer → Kladblok → LLM Budget Settings widget). Fallback op sensible defaults.
+    try:
+        from modules.core.storage import load_json as _lj
+        _sys_settings = _lj(Path(__file__).parent.parent.parent / "data" / "settings" / "system.json", default={}) or {}
+    except Exception:
+        _sys_settings = {}
+    HARD_INPUT_CHAR_BUDGET = int(_sys_settings.get("chat_hard_input_budget", 22000))
+    MAX_USER_PROMPT_CHARS = int(_sys_settings.get("chat_max_user_prompt_chars", 3000))
+    MAX_SYSTEM_PROMPT_CHARS = int(_sys_settings.get("chat_max_system_prompt_chars", 16000))
+    _CONTEXT_TURNS = int(_sys_settings.get("chat_context_turns", 3))
+    _MAX_TURN_CHARS = int(_sys_settings.get("chat_max_turn_chars", 1500))
+
     if len(user_prompt) > MAX_USER_PROMPT_CHARS:
         original_len = len(user_prompt)
         keep_head = int(MAX_USER_PROMPT_CHARS * 0.7)
@@ -551,8 +565,6 @@ async def compose_response(
             + user_prompt[-keep_tail:]
         )
 
-    # System-prompt ook cappen (harde bovengrens)
-    MAX_SYSTEM_PROMPT_CHARS = 16000
     if len(system_prompt) > MAX_SYSTEM_PROMPT_CHARS:
         system_prompt = system_prompt[:MAX_SYSTEM_PROMPT_CHARS] + "\n[…system context ingekort voor TPM-budget…]"
 
@@ -563,18 +575,14 @@ async def compose_response(
 
         # Bouw OpenAI-compatible messages (system + accumulated turns + current user)
         messages = [{"role": "system", "content": system_prompt}]
-        # v13s_llm_tpm_trim_001 — laatste 3 turns i.p.v. 6 om binnen Groq's 8000 TPM
-        # free-tier limit te blijven. Bij lange history overschreed de prompt 8000
-        # tokens → 413 rate_limit_exceeded → all_providers_failed. Identity + user_view
-        # zitten al in system_prompt, dus 3 turns is voldoende voor korte continuïteit.
+        # v13t_llm_budget_settings_001 — laatste N turns uit settings (default 3)
         if turns:
-            for t in turns[-3:]:
+            for t in turns[-_CONTEXT_TURNS:]:
                 role = "user" if t.get("role") == "user" else "assistant"
                 ttxt = (t.get("text") or t.get("message") or "").strip()
-                # v13t_user_text_tpm_guard_001 — ook oude turns cappen
                 if ttxt:
-                    if len(ttxt) > 1500:
-                        ttxt = ttxt[:1000] + " […ingekort…] " + ttxt[-300:]
+                    if len(ttxt) > _MAX_TURN_CHARS:
+                        ttxt = ttxt[:int(_MAX_TURN_CHARS * 0.7)] + " […ingekort…] " + ttxt[-int(_MAX_TURN_CHARS * 0.2):]
                     messages.append({"role": role, "content": ttxt})
         messages.append({"role": "user", "content": user_prompt})
 

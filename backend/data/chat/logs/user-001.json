@@ -63349,11 +63349,59 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2516
       }
+    },
+    {
+      "id": "conv-11ed1c79",
+      "timestamp": "2026-08-22T12:21:38.957483+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "leg kort uit wat cognitieve dissonantie is",
+      "spark_response": "Willem, cognitieve dissonantie is een psychologisch fenomeen waarbij een persoon twee tegengestelde gedachten, overtuigingen of gedragingen tegelijk houdt. \n\n**Kernpunten** \n- **Spanning**: De tegenstrijdigheid veroorzaakt een onaangename innerlijke spanning. \n- **Motivatie tot reductie**: Mensen willen die spanning verlagen. \n- **Mogelijke strategieën**: \n 1. **Gedrag aanpassen** – handelen in lijn met de overtuiging. \n 2. **Overtuiging herzien** – de overtuiging bijstellen om beter bij het gedrag te passen. \n 3. **Rationaliseren** – een verklaring zoeken die de tegenstrijdigheid verzacht. \n 4. **Selectieve blootstelling** – informatie vermijden die de dissonantie versterkt. \n\n**Voorbeeld** \nIemand gelooft dat roken ongezond is, maar rookt toch. De spanning kan worden verlicht door te stoppen, de risico’s te bagatelliseren, of te denken “ik rook alleen als ik stress heb”.\n\nKort samengevat: cognitieve dissonantie is de ongemakkelijke psychologische reactie op tegenstrijdige gedachten of handelingen, en we reageren hierop door gedrag, overtuigingen of de interpretatie van de situatie aan te passen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-skel-e80e80fa",
+          "kbv2-39c0803f",
+          "kbv2-762f2a67",
+          "kbv2-c5066cd1",
+          "kbv2-b974b9f2"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "post-fix-001",
+        "gesprek_nummer": 2517
+      }
+    },
+    {
+      "id": "conv-7b6ca579",
+      "timestamp": "2026-08-22T12:21:52.817627+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "leg kort uit wat cognitieve dissonantie is",
+      "spark_response": "**Cognitieve dissonantie – een korte uitleg**\n\n- **Wat:** Een mentale spanning die ontstaat wanneer iemand twee (of meer) tegenstrijdige gedachten, overtuigingen, of gedragingen tegelijk heeft. \n- **Waarom:** De geest streeft naar innerlijke consistentie; tegenstrijdigheden voelen ongemakkelijk. \n- **Hoe het zich uit:** Mensen proberen de spanning te verminderen door: \n 1. Een van de tegenstrijdige elementen te veranderen (bijv. een overtuiging bijstellen). \n 2. Het andere element te rechtvaardigen of te rationaliseren. \n 3. De betekenis van één van de elementen te herinterpreteren. \n- **Voorbeeld:** Je gelooft dat roken ongezond is, maar je rookt toch. De dissonantie kan leiden tot het zoeken van excuses (“ik rook alleen als ik gestrest ben”) of tot stoppen met roken. \n\n---\n\n**NB:** De KB‑kaarten *cognitieve* en *dissonantie* missen nog een volledige invulling van de 5 W’s (wie, wat, waar, wanneer, waarom). Wil je die informatie aanvullen, zodat de kaarten compleet worden? Dan kan ik ze meteen bijwerken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-skel-e80e80fa",
+          "kbv2-39c0803f",
+          "kbv2-762f2a67",
+          "kbv2-02a0e39e",
+          "kbv2-11c39ef4"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "post-fix-002",
+        "gesprek_nummer": 2518
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2516,
-    "last_updated": "2026-08-22T12:17:40.576574+00:00"
+    "total_conversations": 2518,
+    "last_updated": "2026-08-22T12:21:52.817627+00:00"
   }
 }

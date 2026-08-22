@@ -48,12 +48,41 @@ class ProviderConfig:
         return bool(self.base_url and self.api_key and self.model)
 
 
+# v13_model_alias_self_heal_001 (sessie 53) — Willem's productie had nog
+# `llama-3.3-70b-versatile` in env, dat model is 16-aug 2025 door Groq
+# gedeprecateerd → elke call gaf 404. Als code een gedeprecateerd model
+# tegenkomt, swap 'em naar de vervanger. Productie werkt zo direct na
+# redeploy zonder dat env-vars aangepast hoeven te worden.
+_DEPRECATED_MODEL_ALIAS = {
+    # Groq deprecations (bron: https://console.groq.com/docs/deprecations)
+    "llama-3.3-70b-versatile": "openai/gpt-oss-120b",
+    "llama-3.1-70b-versatile": "openai/gpt-oss-120b",
+    "llama3-70b-8192": "openai/gpt-oss-120b",
+    "mixtral-8x7b-32768": "openai/gpt-oss-120b",
+}
+
+
+def _resolve_model(model: str) -> str:
+    """Vervang gedeprecateerde modelnamen automatisch door de current recommended.
+    Logt bij eerste substitutie zodat admin het in de logs ziet."""
+    if not model:
+        return model
+    replacement = _DEPRECATED_MODEL_ALIAS.get(model.strip())
+    if replacement:
+        logger.warning(
+            "[llm_router] Model '%s' is deprecated → auto-swap naar '%s' "
+            "(v13_model_alias_self_heal_001)", model, replacement,
+        )
+        return replacement
+    return model
+
+
 def _get_provider(prefix: str, default_name: str) -> ProviderConfig:
     return ProviderConfig(
         name=default_name,
         base_url=os.environ.get(f"LLM_{prefix}_BASE_URL", "").strip(),
         api_key=os.environ.get(f"LLM_{prefix}_API_KEY", "").strip(),
-        model=os.environ.get(f"LLM_{prefix}_MODEL", "").strip(),
+        model=_resolve_model(os.environ.get(f"LLM_{prefix}_MODEL", "").strip()),
     )
 
 

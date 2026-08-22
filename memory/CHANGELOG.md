@@ -40,11 +40,17 @@ Test 4: idempotent (nogmaals cliënt) → geen wijziging ✓
 ### 🩺 v13_llm_router_diagnostics_002 — env-hint fix
 `_diagnose_missing_keys()` checkte oude namen (`LLM_A_API_KEY`, `LLM_B_API_KEY`) die niet meer bestaan. Nu de correcte `LLM_PRIMARY_API_KEY`, `LLM_PRIMARY_BASE_URL`, `LLM_PRIMARY_MODEL`, `LLM_FALLBACK_API_KEY`, `EMERGENT_LLM_KEY`.
 
-### 🚨 Productie LLM-uitval — GEEN codebase-bug (staat vast op hosting-config)
-Diagnose via `POST /api/spark/compose` op productie:
-1. **Primary (Groq)**: 404 `llama-3.3-70b-versatile does not exist` → productie draait nog op oude gedeprecateerd model. Preview `.env` heeft correcte `openai/gpt-oss-120b`. **Willem moet productie env-var updaten.**
-2. **Fallback (Cerebras)**: 402 Payment Required (quota op).
-3. **Emergency (Emergent)**: budget exceeded ($8.05 / $8.00).
+### 🛠️ v13_model_alias_self_heal_001 — productie LLM zelfherstellend
+Productie draaide nog op env-var `LLM_PRIMARY_MODEL=llama-3.3-70b-versatile` (door Groq gedeprecateerd 16-aug 2025 → elke call 404).
+
+**Fix**: `_DEPRECATED_MODEL_ALIAS` map in `llm_router.py` swapt automatisch 4 bekende gedeprecateerde Groq-modellen naar `openai/gpt-oss-120b` bij `_get_provider()`. Waarschuwing in logs bij eerste substitutie. Modern model blijft onaangeraakt.
+
+**Effect**: na redeploy werkt productie zonder dat env-vars aangepast hoeven te worden. Emergent-fallback staat default aan (`LLM_EMERGENCY_USE_EMERGENT` default `true`), dus met bijgevulde credits werkt de emergency-tier ook als Groq per ongeluk faalt.
+
+**Live-verificatie preview**:
+- Deprecated env → swap-log + `openai/gpt-oss-120b` in provider config ✓
+- Modern env → geen swap ✓
+- Chat-call na fix → success via `primary/openai/gpt-oss-120b`, latency <2s ✓
 
 
 ## 2026-02-22 (sessie 53) — Trader Accounting Hygiene sprint

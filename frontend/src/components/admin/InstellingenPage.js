@@ -202,6 +202,9 @@ export function InstellingenPage({ onNavigate }) {
                 <SettingsCard title="Visuele Instellingen" icon={Palette} accent="#a855f7">
                   <Toggle label="Mood Colors" sub="Interface kleurt mee met Spark's emotie" checked={settings.mood_colors} onChange={v => set('mood_colors', v)} color="#a855f7" />
                   <Divider />
+                  {/* v13_corner_glow_moved_to_visual_001 — verplaatst uit Beeld-tab */}
+                  <CornerGlowToggle canEdit={isAdmin} />
+                  <Divider />
                   <SelectField label="Theme" value={settings.theme} onChange={v => set('theme', v)} options={[
                     { value: 'dark', label: 'Dark (standaard)' },
                     { value: 'light', label: 'Light (coming soon)', disabled: true },
@@ -745,41 +748,10 @@ function SystemLoginGlow({ userId, userGrad }) {
         </div>
       </div>
 
-      {/* Corner Glow */}
-      <div className="p-3 bg-slate-900/40 rounded-lg border border-slate-800 space-y-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-medium text-white">Hoek-glow (corner glow)</p>
-            <p className="text-[10px] text-slate-500">Twee grote wazige gloed-vlekken in de hoeken van het login-scherm.</p>
-          </div>
-          <button
-            data-testid="admin-corner-glow-toggle"
-            onClick={() => update('login_corner_glow_enabled', !cfg.corner_enabled)}
-            disabled={!canEdit || busy}
-            className="relative w-10 h-5 rounded-full transition-colors flex-shrink-0 disabled:opacity-40"
-            style={{ background: cfg.corner_enabled ? '#a855f7' : '#334155' }}
-          >
-            <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform shadow ${cfg.corner_enabled ? 'left-[22px]' : 'left-[2px]'}`} />
-          </button>
-        </div>
-        {/* v13_corner_glow_follow_scheme_001 (sessie 53) — losse hoek-pickers
-            verwijderd. Hoeken volgen nu automatisch Primary (linksboven) +
-            Secondary (rechtsonder) uit "App Kleurenschema" hierboven.
-            Willem: "veel makkelijker" — 1 plek voor kleur, hoeken doen mee. */}
-        <div className={`text-[11px] text-slate-400 bg-slate-900/60 border border-slate-800 rounded p-2 space-y-0.5 ${!cfg.corner_enabled ? 'opacity-40' : ''}`}>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full border border-slate-700" style={{ backgroundColor: cfg.primary || '#f59e0b' }} />
-            <span>Linksboven — volgt <span className="text-slate-200 font-medium">Primary</span> ({cfg.primary || '#f59e0b'})</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full border border-slate-700" style={{ backgroundColor: cfg.secondary || '#06b6d4' }} />
-            <span>Rechtsonder — volgt <span className="text-slate-200 font-medium">Secondary</span> ({cfg.secondary || '#06b6d4'})</span>
-          </div>
-          <p className="text-[10px] text-slate-500 pt-1 italic">
-            Wijzig via {'"App Kleurenschema"'} bovenaan deze pagina.
-          </p>
-        </div>
-      </div>
+      {/* v13_corner_glow_moved_to_visual_001 (sessie 53) — Corner Glow toggle
+          verplaatst naar "Visuele Instellingen" (bij Mood Colors / Theme).
+          Willem: kader hier was overbodig, hoort thematisch bij visuele opties.
+          Kleuren-hints (#hex) waren dubbel-info want app-kleurenschema regelt dat al. */}
 
       {/* Glow Dots */}
       <div className="p-3 bg-slate-900/40 rounded-lg border border-slate-800 space-y-3">
@@ -893,6 +865,54 @@ function SettingsCard({ title, icon: Icon, accent, children }) {
         <h3 className="text-sm font-semibold text-white">{title}</h3>
       </div>
       <div className="p-4 space-y-3">{children}</div>
+    </div>
+  );
+}
+
+function CornerGlowToggle({ canEdit }) {
+  // v13_corner_glow_moved_to_visual_001 (sessie 53) — losse toggle die de globale
+  // /api/settings/system waarde login_corner_glow_enabled beheert. Non-admins zien
+  // 'm read-only. Zit nu naast Mood Colors + Theme voor consistente UX.
+  const API = process.env.REACT_APP_BACKEND_URL;
+  const [enabled, setEnabled] = React.useState(true);
+  const [busy, setBusy] = React.useState(false);
+  React.useEffect(() => {
+    fetch(`${API}/api/settings/system`)
+      .then(r => r.json())
+      .then(d => {
+        const s = d.settings || d || {};
+        setEnabled(s.login_corner_glow_enabled !== false);
+      }).catch(() => {});
+  }, [API]);
+  const toggle = async () => {
+    if (!canEdit || busy) return;
+    setBusy(true);
+    const next = !enabled;
+    setEnabled(next);
+    try {
+      await fetch(`${API}/api/settings/system`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'login_corner_glow_enabled', value: next }),
+      });
+    } catch (_) { /* niet-blokkerend */ }
+    finally { setBusy(false); }
+  };
+  return (
+    <div className="flex items-start justify-between py-2 gap-3">
+      <div className="flex-1 min-w-0">
+        <p className="text-sm text-white">Hoek-glow op inlog-scherm</p>
+        <p className="text-[11px] text-slate-400">Wazige gloed-vlekken in twee hoeken. Kleur volgt App Kleurenschema.</p>
+      </div>
+      <button
+        data-testid="visuele-corner-glow-toggle"
+        onClick={toggle}
+        disabled={!canEdit || busy}
+        className="relative w-10 h-5 rounded-full transition-colors flex-shrink-0 disabled:opacity-40"
+        style={{ background: enabled ? '#a855f7' : '#334155' }}
+      >
+        <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform shadow ${enabled ? 'left-[22px]' : 'left-[2px]'}`} />
+      </button>
     </div>
   );
 }

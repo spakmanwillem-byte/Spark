@@ -87,6 +87,37 @@ Telefoon         ✅       ✅         ☐          ☐
 
 **Waarom bijzonder**: dit is niet "Spark wordt slimmer" maar **"Spark wordt betrouwbaarder"**. Combineert met de andere principes van sessie 53 (reden zichtbaar, retrieval-gap-hints, zelflerende loop) tot één consistente ethiek: **Spark is nooit stiller dan de user hem ingesteld heeft, en nooit luider ook**.
 
+### 🌅 Sub-concept: begroetings-moment als vraag-portaal
+
+Bij ochtend-begroeting ("goedemorgen") heeft Spark al een gewoonte om iets attents te noemen (koffie, agenda vandaag, wat je gisteren deed). Dit moment kan óók dienen als **max 1 controlevraag per dag**:
+
+**Timing**: dagbegin = laag cognitive-load, momentum voor "één ding regelen".
+
+**Bron van vragen** (round-robin, 1 per ochtend):
+1. `kb_fill_pending` — ws5-gap uit KB v2 (bestaande retrieval-flow)
+2. `relatie_te_verifieren` — nieuwe relatie zonder wederkerigheid (shadow-vraag naar target-user)
+3. `privacy_matrix_leeg` — nieuwe user zonder ingevulde matrix → default-preset kiezen
+
+**Consent-first**: gebruik bestaande `pending_wv_consent` in session_state. *"Mag ik je even iets vragen?"* → ja/nee → dan pas de echte vraag.
+
+**Frequentie-cap**: max 1× per dag per user. Anders wordt Spark een vragende bureaucraat.
+
+**Voorbeeldflow**:
+```
+Willem: "goedemorgen"
+Spark:  "Goedemorgen! Ga je vandaag weer bij Roeline in de tuin?
+         Trouwens, mag ik je iets vragen?"
+Willem: "ja"
+Spark:  "Ik zag dat je Heidi je moeder noemde. Zal ik haar vragen om
+         dit te bevestigen zodat ik jullie relatie zeker weet?"
+```
+
+Waar dit bouwt op bestaand code:
+- `smart_intents.detect_greeting_intent` (of equivalent) — herkent begroeting
+- `chat/routes.py` begroetings-branch — voeg pending-check toe na de bestaande "wat geleerd"-tegel
+- `pending_wv_consent` — bestaande consent-machine hergebruiken
+- `interaction_count` in session_state — al aanwezig voor frequentie-cap
+
 ### 💾 Backups (alles reversibel)
 - `data/financial/user_potjes.json.bak_phantom_loss_repair_20260822_062648`
 - `data/financial/user_potjes.json.bak_maxsize_fix_20260822_064245`

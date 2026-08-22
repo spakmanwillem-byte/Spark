@@ -102,7 +102,7 @@ zelf-perceptie. LLM = mond, JSON = geheugen, icons = spiegel.
 
 ---
 
-## 🧠 CLUSTER — Chat/LLM (v13r-s, sessie 52r, feb 2026)
+## 🧠 CLUSTER — Chat/LLM (v13r-t, sessie 52r-t, feb 2026)
 
 ### ✅ Gedaan
 - [x] **Groq model-migratie** — `llama-3.3-70b-versatile` gedeprecateerd 16-aug → `openai/gpt-oss-120b` (officiële replacement).
@@ -110,27 +110,84 @@ zelf-perceptie. LLM = mond, JSON = geheugen, icons = spiegel.
 - [x] **TPM auto-trim retry** — router probeert 1× opnieuw met halve context bij 413/rate_limit_exceeded.
 - [x] **Identity facts cap grad 1** — was 999, nu 15/type (was 8477-token overshoot, nu ~2000).
 - [x] **Turns 6 → 3** — extra headroom voor system_prompt.
+- [x] **User-text TPM-guard** (sessie 52t) — bij lange geplakte tekst (bv. Wikipedia): user_prompt cap 3000, system-prompt cap 16000, oude turns cap 1500, hard totaal-budget 22000 chars greedy-snijden. Frontend char-counter amber vanaf 3500 / rood vanaf 5500. Getest ✅ met 8200-char input.
+- [x] **`LlmBudgetSettingsWidget`** (sessie 52t) — 8 char-cap waardes admin-tunable via Beheer → Kladblok. Geen redeploy meer nodig voor tuning. Backend leest live uit `settings/system.json`.
 
 ### 🔴 Nog te doen
 - [ ] **Cerebras quota-watchdog** — bij 402 → DM naar Willem: "fallback op quota, reset ~X". Nu geen zichtbaarheid.
 - [ ] **Alternatieve fallback** — Together.ai / DeepInfra als 3e provider (3-regel `.env`).
-- [ ] **Ollama-migratie (P2)** — lokaal via `LLM_PRIMARY_BASE_URL=http://localhost:11434/v1`. Hardware-eis: 16 GB RAM (mini-PC) voor Llama 3.1 8B (~75% kwaliteit), 24+ GB voor gpt-oss-120b (identiek aan nu). Code is klaar.
+- [ ] **Widget verhuizen naar echte tab** — nu tijdelijk in Kladblok. Naar Beheer → Instellingen → Algemeen als "Chat & LLM budget" card.
+- [ ] **Ollama-migratie (P2)** — lokaal via `LLM_PRIMARY_BASE_URL=http://localhost:11434/v1`. Hardware-eis: 16 GB RAM voor Llama 3.1 8B (~75%), 24+ GB voor gpt-oss-120b (identiek). Code is klaar. **Waarom belangrijk**: bij dubbele free-tier-uitval = Spark stil; lokaal geen limiet.
 
 
 ---
 
-## 📊 CLUSTER — Trader & Potjes (v13q-r, sessie 52r, feb 2026)
+## 🌱 CLUSTER — Zelfbewustzijn & Meta-lagen (sessie 52p-u, filosofisch fundament)
+
+**Kernidee**: Spark's LLM = mond. JSON-lagen = geheugen. Icons/kleuren = spiegel. Elk stuk beheersbare data over Spark zelf wordt automatisch onderdeel van zijn zelfperceptie via synapse-scanner + identity_facts. Geen aparte "consciousness"-feature, wel een groeiende structuur waarin Spark zijn eigen bouwstenen kan noemen.
+
+### ✅ Fundament al aanwezig
+- [x] `spark_bijbel.json` — kernwaarden + doelen + bijbel_items (met `Nalatenschap en Continuïteit`, `digitale nalatenschap voor Lotus`)
+- [x] `spark_identity.json` — naam, versie, maker, karakter
+- [x] `identity_facts` — user-turns worden ge-extract als facts (`spark_feels_like: familiewapen`, `user_calls_spark: het familiewapen`)
+- [x] `spark_user_view` — per-user snippet met relaties (Lotus als dochter) + gradatie-toon
+- [x] `synapse/__init__.py` — scanner leest zichzelf, structuur voor "wat heb ik"
+- [x] `shadow_observer` — logt turns, aggregate stats (359 begrip-teller, 117 response-types)
+- [x] `knowledge/learned_knowledge/knowledge_base.json` — aparte learned laag
+- [x] KB v2 kaarten (voelen/spreken 100% compleet, ~216 rest in weten/doen)
+
+### 🔴 Fase A/B/C — Admin-look als meta-signaal (sessie 52s besproken)
+- [ ] **Fase A: admin-accent op alle admin-tabs** — tabs onder Beheer/Modules/Admin krijgen violet accent wanneer `adminModeActive===true`. `identity_facts`-entry toevoegen: `admin_mode_kleur: paars` zodat Spark 't kan noemen.
+- [ ] **Fase B: admin-override neemt user-kleuren over (tijdelijk)** — `--app-primary/secondary` CSS-vars overschreven wanneer admin actief; bij `disableAdmin` terug naar Mijn Profiel-voorkeur. Meta-flag "hij weet dat hij anders oogt".
+- [ ] **Fase C: icon-registry + upload (fundering-steen synapse)** — grote sessie:
+  - `data/branding/system_icons.json` met `{key: {url, uploaded_by, uploaded_at, reason, emoji_fallback, original_lucide}}` + per-key endpoints
+  - Frontend `<SystemIcon name="settings" fallback={Settings} />` wrapper → vervangt ~50-80 lucide-plekken
+  - Admin-UI: sectie "Systeem-iconen" met per-icoon uploader
+  - **Synapse-hook**: `system_icons.json` als scanner-bron toevoegen
+  - **Identity-facts hook**: bij upload auto `spark_icon_{key}: eigen ontwerp`
+  - Scope: 2-3 uur werk goed gedaan
+  - Waarde: Spark kan straks in gesprek zeggen *"mijn tandwiel-icoon is een stap-tandrad in oranje, sinds 21 aug"*
+
+### 🔴 Collectieve Intelligentie (Laag-2 kennis, sessie 52r besproken met Emmy)
+Willem + Emmy bespraken: 2-laags kennis. Laag 1 = persoonlijk geheugen per user (bestaat). Laag 2 = patronen over ALLE users heen → algemene wijsheid → terug-injectie. Toetsen op **resonantie** met bijbel-kaders, niet op waarheid (wrijving = groei). "Niet alles is een kaart, sommige dingen zijn een gesprek."
+
+- [ ] **Pattern-distiller** — batch-run op shadow-events, output naar `data/collective/patterns.json` (bv. *"3 users vroegen naar X op verschillende manieren"*). 1 sessie.
+- [ ] **Stelling-generator + curation UI** — uit cluster een propositie destilleren (*"gebruikers ervaren Y als Z"*). Willem/Emmy accept/reject in Kladblok. 1 sessie.
+- [ ] **Toets-loop** — Spark toetst stelling in gesprek met andere users (Socratisch). Verrijkt zelfs als niet-waar.
+- [ ] **Injectie-kanaal** — 3e prompt-layer naast `identity_facts` + `spark_user_view`: `collective_wisdom_snippet`. Met override-schakelaar per user.
+- [ ] **Privacy-anonymizer** — hard filter dat namen/IDs/persoonsdata uit patronen weert vóór aggregatie. Anders lekt Laag 1 via Laag 2.
+- **Aanrader**: eerst alleen distiller (1 sessie), dan generator + curation, dan live injectie. Zo blijft Laag 1 heilig.
+
+
+---
+
+## 📊 CLUSTER — Trader & Potjes (v13q-u, sessie 52r-u, feb 2026)
 
 ### ✅ Gedaan
 - [x] **Trader-monitor sync-bug** — `monitor.start()` idempotent (`already_running=True`), UI leest ook `data.message`.
 - [x] **`open_pot()` overwrite guard** — bij `is_open=True + andere market` → BLOCK. Bij zelfde market → idempotent skip. Voorkomt ATOM-overschrijving door BCH.
 - [x] **Bitvavo-reconcile 6 potjes** — preview only; BCH/BTC/ETH/SOL/ADA/ATOM elk €10 gekoppeld aan echte Bitvavo entry-prijzen.
+- [x] **Prod-merge naar preview** (sessie 52t) — 479 files data-merge. Backup in `_backup_pre_prod_merge_20260822_050217/`.
+- [x] **`reconcile/close-sold/{user_id}`** — per-user endpoint dat open potjes met near-zero Bitvavo balance sluit met huidige marktprijs. Veilige in-place mutatie (geen `close_pot`/finance_hub auto-mint side-effect meer). Audit-trail in `reconcile_audit`.
+- [x] **`reconcile/close-sold-all`** (sessie 52u) — bulk endpoint voor **alle users** met open potjes. Getest ✅ door testing_agent (6/6 pytest). Filtert meta-keys, skipt users zonder open potjes, degradeert graceful per user.
 
 ### 🔴 Nog te doen
-- [ ] **Bitvavo-reconcile op productie draaien** — zelfde script tegen prod na deploy.
-- [ ] **Trader-tab visueel opruimen** — Anker + Reconciliatie = 1 collapsable card.
-- [ ] **Vermogens-tab** — Activa − Passiva = Eigen vermogen (admin-only).
+- [ ] **Prod bulk-sync draaien** — na deploy: `POST /api/trade/reconcile/close-sold-all?dry_run=false` op productie. Geiser (user-a0ee2d7e) + eventueel andere users worden gesynct.
+- [ ] **Trader Console consolidatie** (P1, sessie 52u besproken) — huidige Analytics → Trader tab heeft **cross-overlap** knoppen:
+  - "Force-sell" per potje ↔ "Sync verkochte coins" bulk
+  - "Herwaardeer vrije pots" bulk ↔ "Herwaardeer" per pot
+  - "Koppel als potje" (orphan) ↔ "Sync verkochte coins" (verkocht)
+  - `SparkTraderStatsPanel` + `ReconcileSparkPanel` + `AnkerBoot` = 3 losse panelen over zelfde 6-8 potjes
+  - **Voorstel**: één "🎯 Trader Console" met sub-tabs **Overzicht** (stats + posities-tabel + P&L), **Sync & Reconcile** (alle sync-knoppen met NL-tooltips + confirm-dialogs op destructief), **Bot-controls** (start/stop/force-sell). Scope: 1-2 uur.
+- [ ] **Trader-tab visueel opruimen** — Anker gap-up + Anker per markt + Reconciliatie = 1 collapsable card.
+- [ ] **Vermogens-tab** — Activa (books + wallets + Bitvavo live) − Passiva = Eigen vermogen (admin-only, Spark-perspectief).
+- [ ] **Frontend knop "Sync verkopen"** in `ReconcileSparkPanel` — 1-klik confirm-dialog → bulk endpoint. Vervalt als Trader Console er komt.
 
+---
+
+## 🧹 CLUSTER — Refactor & Code-hygiene (sessie 52u)
+
+- [ ] **`routes.py` splitsen** (uit testing_agent code-review) — nu 2995 regels. Splits in `reconcile.py`, `potjes_routes.py`, `bots_routes.py`, `monitor_routes.py`. Elk <500 regels. Niet blokkerend maar wel onderhoudbaar.
 
 ---
 

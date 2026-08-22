@@ -1341,6 +1341,145 @@ async def get_audit_log(limit: int = Query(100)):
 # POTJES SYSTEEM (10 onafhankelijke potjes)
 # ============================================================
 
+
+# v13u_reconcile_close_sold_001 — close open potjes waarvan coin bijna weg is op Bitvavo
+@router.post("/reconcile/close-sold/{user_id}")
+async def reconcile_close_sold(user_id: str, dry_run: bool = True):
+    """Sync potjes met Bitvavo realiteit: voor elk open potje waar de coin nu ~0 op
+    Bitvavo staat (i.p.v. de amount die het potje verwacht), roep `close_pot()` aan
+    met de laatst-bekende marktprijs. Zo klopt de potjes-JSON weer met de werkelijkheid.
+
+    Gebruikt door de reconcile-panel-knop "Sync verkopen met Bitvavo".
+
+    Args:
+        user_id: user wiens potjes gesynct moeten worden (meestal user-000)
+        dry_run: True = alleen tonen wat er zou gebeuren, geen wijziging
+
+    Returns:
+        {success, closed: [...], skipped: [...], dry_run}
+    """
+    from modules.trade.monitor import fetch_bitvavo_balance, fetch_tickers
+    from modules.trade import potjes as _p
+
+    bal = fetch_bitvavo_balance(user_id)
+    if not bal.get("success"):
+        return {"success": False, "error": bal.get("error", "bitvavo balance fetch failed")}
+    coin_avail = {b["symbol"]: float(b.get("available", 0)) for b in bal.get("balances", [])}
+
+    data = _p._load(user_id)
+    potjes = data.get("users", {}).get(user_id, {}).get("potjes", []) or []
+
+    # Verzamel unieke markten van open potjes en fetch tickers
+    open_markets = list({p.get("market") for p in potjes if (p.get("position") or {}).get("is_open") and p.get("market")})
+    price_map = {}
+    if open_markets:
+        symbols = [m.split("-")[0] for m in open_markets]
+        for t in fetch_tickers(symbols):
+            sym = t.get("symbol") or (t.get("market", "").split("-")[0])
+            last = t.get("last") or t.get("price")
+            if sym and last:
+                price_map[f"{sym}-EUR"] = float(last)
+
+    closed = []
+    skipped = []
+    THRESHOLD_COIN = 0.05  # <5% van verwachte coin-amount = verkocht
+
+    for pot in potjes:
+        pos = pot.get("position") or {}
+        if not pos.get("is_open"):
+            continue
+        if pot.get("pot_locked"):
+            skipped.append({"pot_id": pot["id"], "reason": "pot_locked"})
+            continue
+        market = pot.get("market", "")
+        sym = market.split("-")[0] if market else ""
+        entry = pos.get("entry_price")
+        amt_eur = pos.get("amount_eur") or pot.get("capital", 0)
+        if not (sym and entry and amt_eur):
+            skipped.append({"pot_id": pot["id"], "reason": "missing market/entry/amount"})
+            continue
+        expected_coin = amt_eur / entry
+        actual_coin = coin_avail.get(sym, 0.0)
+        # Coin bijna weg (< 5% van verwacht)? Dan is 'ie op Bitvavo verkocht
+        if actual_coin < expected_coin * THRESHOLD_COIN:
+            current_price = price_map.get(market)
+            if not current_price:
+                skipped.append({"pot_id": pot["id"], "reason": "no live price"})
+                continue
+            action = {
+                "pot_id": pot["id"],
+                "market": market,
+                "entry": entry,
+                "amount_eur": amt_eur,
+                "expected_coin": round(expected_coin, 8),
+                "actual_coin": round(actual_coin, 8),
+                "exit_price": current_price,
+                "estimated_pnl_pct": round(((current_price - entry) / entry) * 100, 2),
+            }
+            if not dry_run:
+                # v13u_reconcile_close_sold_001 — VEILIGE in-place close (geen finance_hub
+                # auto-mint side-effect). close_pot() triggert `check_auto_mint_hook` die
+                # de bestaande potjes-capital revalueert → capital=0. Hier alleen JSON-mutatie.
+                capital = float(pot.get("capital", 0) or 0)
+                profit_pct = (current_price - entry) / entry
+                bruto = capital * profit_pct
+                fees = capital * 0.0025 * 2  # BITVAVO_TAKER_FEE roundtrip
+                netto = round(bruto - fees, 4)
+                new_capital = round(capital + netto, 4)
+                pot["capital"] = new_capital
+                pot["position"] = {
+                    "is_open": False,
+                    "entry_price": None,
+                    "highest_price": None,
+                    "trailing_active": False,
+                    "entry_time": None,
+                }
+                stats = pot.setdefault("stats", {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0})
+                stats["trades"] = int(stats.get("trades", 0)) + 1
+                if netto > 0:
+                    stats["wins"] = int(stats.get("wins", 0)) + 1
+                else:
+                    stats["losses"] = int(stats.get("losses", 0)) + 1
+                stats["total_pnl"] = round(float(stats.get("total_pnl", 0)) + netto, 4)
+                pot["last_action"] = f"SELL @ €{current_price:.2f} | reconcile | netto €{netto:+.3f}"
+                pot.setdefault("reconcile_audit", []).append({
+                    "ts": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+                    "type": "reconcile_close_sold",
+                    "entry": entry,
+                    "exit_price": current_price,
+                    "capital_before": capital,
+                    "capital_after": new_capital,
+                    "netto": netto,
+                    "expected_coin": round(expected_coin, 8),
+                    "actual_coin": round(actual_coin, 8),
+                })
+                action["closed"] = True
+                action["netto_eur"] = netto
+                action["capital_after"] = new_capital
+            closed.append(action)
+        else:
+            skipped.append({
+                "pot_id": pot["id"],
+                "market": market,
+                "reason": "still open on bitvavo",
+                "expected_coin": round(expected_coin, 8),
+                "actual_coin": round(actual_coin, 8),
+            })
+
+    # v13u_reconcile_close_sold_001 — persist mutaties naar disk
+    if not dry_run and closed:
+        _p._save(data)
+
+    return {
+        "success": True,
+        "dry_run": dry_run,
+        "closed": closed,
+        "skipped": skipped,
+        "n_closed": len(closed),
+        "n_skipped": len(skipped),
+    }
+
+
 @router.get("/potjes/{user_id}")
 async def get_user_potjes(user_id: str):
     """Haal potjes overzicht op — v10_finance_hub: overlay dynamische capital uit token-prijs.

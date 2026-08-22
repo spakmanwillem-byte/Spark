@@ -62628,11 +62628,35 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2489
       }
+    },
+    {
+      "id": "conv-44675f68",
+      "timestamp": "2026-08-22T05:20:04.936980+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "je weet niks meer van alle text die ik deelde",
+      "spark_response": "Sorry, Willem, ik heb de exacte tekst die je eerder deelde niet meer in mijn actieve geheugen. Maar ik kan wel opnieuw zoeken in de kennisbank of de relevante kaarten ophalen als je me een hint geeft — bijvoorbeeld een trefwoord, een onderwerp of een fragment. Laat me weten wat je precies terug wilt zien, dan haal ik het voor je op.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "lange",
+        "used_cards": [
+          "kbv2-4ef4f1ed",
+          "kbv2-b64bd6d4",
+          "kbv2-9115c6a7",
+          "kbv2-f9f2179e",
+          "kbv2-73c40dc1"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2490
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2489,
-    "last_updated": "2026-08-22T05:18:05.138705+00:00"
+    "total_conversations": 2490,
+    "last_updated": "2026-08-22T05:20:04.936980+00:00"
   }
 }

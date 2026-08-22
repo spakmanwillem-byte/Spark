@@ -67,6 +67,14 @@ REL_TYPES = {
     "schoonzoon": "familie/schoonzoon",
     "schoondochter": "familie/schoondochter",
     "bekende": "bekende",
+    # v13_roles_array_001 (sessie 53) — professionele rollen voor Zorgboerderij dossiers
+    # Een persoon kan meerdere rollen tegelijk hebben (bv. vriend + cliënt).
+    "cliënt": "professioneel/cliënt",
+    "client": "professioneel/cliënt",
+    "klant": "professioneel/klant",
+    "medewerker": "professioneel/medewerker",
+    "werkgever": "professioneel/werkgever",
+    "begeleider": "professioneel/begeleider",
 }
 
 # Sorteer langste eerst zodat "goede vriend" matched vóór "vriend"
@@ -78,11 +86,14 @@ NAAM_REGEX = r"([A-Z][a-zà-ÿ]+(?:[\s\-]+[A-Z][a-zà-ÿ]+){0,2})"  # bv. "Annek
 
 # NB: alleen "mijn" mag case-insensitive zijn, naam-regex MOET hoofdletter eisen.
 # Anders worden "heeft", "werkt" etc. ook als naam-vervolg gezien.
+# v13_roles_array_001: optionele adverbia ("ook", "nu", "tegenwoordig", "sinds kort")
+# tussen "is" en "mijn" zodat "X is ook mijn cliënt" wél matcht (voor dual-role).
+_ADV = r"(?:ook|nu|tegenwoordig|sinds\s+kort|inmiddels|ook\s+nog)?"
 PATTERN_MIJN_REL_NAAM = re.compile(
     rf"\b[Mm]ijn\s+({REL_REGEX})\s+{NAAM_REGEX}\b"
 )
 PATTERN_NAAM_IS_MIJN = re.compile(
-    rf"\b{NAAM_REGEX}\s+is\s+[Mm]ijn\s+({REL_REGEX})\b"
+    rf"\b{NAAM_REGEX}\s+is\s+{_ADV}\s*[Mm]ijn\s+({REL_REGEX})\b"
 )
 PATTERN_NAAM_KOMMA = re.compile(
     rf"\b{NAAM_REGEX}\s*,\s*[Mm]ijn\s+({REL_REGEX})(?:\s|,|\.|$)"
@@ -236,21 +247,60 @@ def extract(text: str, user_id: Optional[str] = None) -> List[Dict]:
 def add_relations(user_id: str, findings: List[Dict]) -> List[Dict]:
     """Append nieuwe relaties (dedup op person_name + relation_type).
     v4_rel_002: synchroniseert óók de persons cards file (/persons/{user_id}.json)
-    zodat de Persoonkaarten UI de relatie direct toont."""
+    zodat de Persoonkaarten UI de relatie direct toont.
+
+    v13_roles_array_001 (sessie 53): elke entry krijgt/behoudt een `roles: []` array.
+    Als een persoon al bestaat maar met een andere role → nieuwe role wordt toegevoegd
+    aan bestaande entry (i.p.v. dubbel entry). Foundation voor Zorgboerderij-dossiers
+    waar iemand tegelijk vriend én cliënt kan zijn.
+    """
     if not findings or not user_id:
         return []
     fp = _rel_file(user_id)
     data = load_json(fp, default={"user_id": user_id, "relationships": []})
     existing = data.get("relationships", [])
-    existing_keys = {(r.get("person_name","").lower(), r.get("relation_type","").lower()) for r in existing}
-    new_entries = []
+
+    # Migratie: zorg dat elke bestaande entry een roles-array heeft (backwards-compat)
+    for r in existing:
+        if "roles" not in r or not isinstance(r.get("roles"), list):
+            rt = r.get("relation_type") or ""
+            r["roles"] = [rt] if rt else []
+
+    # Index op persoonsnaam (lowercase) voor role-merge
+    by_name: Dict[str, Dict] = {}
+    for r in existing:
+        nm = (r.get("person_name") or "").strip().lower()
+        if nm and nm not in by_name:
+            by_name[nm] = r
+
+    new_entries: List[Dict] = []
+    role_added_entries: List[Dict] = []
+
     for f in findings:
-        k = (f["person_name"].lower(), f["relation_type"].lower())
-        if k in existing_keys:
+        naam = f["person_name"]
+        rtype = f["relation_type"]
+        nm_lc = naam.strip().lower()
+
+        # Persoon bestaat al → check of role nieuw is
+        if nm_lc in by_name:
+            entry = by_name[nm_lc]
+            roles = entry.setdefault("roles", [])
+            if rtype in roles:
+                continue  # role al bekend, skip
+            roles.append(rtype)
+            entry["updated_at"] = datetime.now(timezone.utc).isoformat()
+            role_added_entries.append({
+                "person_name": entry["person_name"],
+                "added_role": rtype,
+                "all_roles": list(roles),
+            })
             continue
+
+        # Nieuwe persoon
         entry = {
-            "person_name": f["person_name"],
-            "relation_type": f["relation_type"],
+            "person_name": naam,
+            "relation_type": rtype,
+            "roles": [rtype],
             "knows_about_me": True,
             "i_know_about": True,
             "notes": f"Auto-detected uit chat ({datetime.now(timezone.utc).strftime('%Y-%m-%d')})",
@@ -258,9 +308,10 @@ def add_relations(user_id: str, findings: List[Dict]) -> List[Dict]:
             "detected_at": datetime.now(timezone.utc).isoformat(),
         }
         existing.append(entry)
-        existing_keys.add(k)
+        by_name[nm_lc] = entry
         new_entries.append(entry)
-    if new_entries:
+
+    if new_entries or role_added_entries:
         data["relationships"] = existing
         save_json(fp, data)
         # Sync naar persons cards file zodat UI Persoonkaarten ze toont
@@ -268,7 +319,93 @@ def add_relations(user_id: str, findings: List[Dict]) -> List[Dict]:
             _sync_persons_cards(user_id, new_entries)
         except Exception as e:
             print(f"[rel-extract] persons-card sync failed: {e}")
-    return new_entries
+    return new_entries + role_added_entries
+
+
+def get_roles(user_id: str, person_name: str) -> List[str]:
+    """Return alle rollen die deze persoon voor de user vervult (leeg = geen relatie)."""
+    if not user_id or not person_name:
+        return []
+    data = load_json(_rel_file(user_id), default={"relationships": []})
+    nm_lc = person_name.strip().lower()
+    for r in data.get("relationships", []):
+        if (r.get("person_name") or "").strip().lower() == nm_lc:
+            roles = r.get("roles")
+            if isinstance(roles, list) and roles:
+                return list(roles)
+            # Fallback naar relation_type voor oude entries zonder migratie
+            rt = r.get("relation_type")
+            return [rt] if rt else []
+    return []
+
+
+def has_role(user_id: str, person_name: str, role: str) -> bool:
+    """Check of een persoon een specifieke rol heeft. Role kan het volledige rel_type
+    (bv. 'professioneel/cliënt') of het korte woord (bv. 'cliënt') zijn."""
+    if not role:
+        return False
+    all_roles = get_roles(user_id, person_name)
+    role_lc = role.lower().strip()
+    for r in all_roles:
+        if r.lower() == role_lc:
+            return True
+        # Match op laatste segment: 'cliënt' matcht 'professioneel/cliënt'
+        tail = r.split("/")[-1].lower() if "/" in r else r.lower()
+        if tail == role_lc:
+            return True
+    return False
+
+
+def add_role(user_id: str, person_name: str, role: str) -> bool:
+    """Voeg handmatig een rol toe aan een bestaande persoon. Returns True als toegevoegd,
+    False als de persoon niet bestaat of de rol al aanwezig was."""
+    if not (user_id and person_name and role):
+        return False
+    fp = _rel_file(user_id)
+    data = load_json(fp, default={"relationships": []})
+    nm_lc = person_name.strip().lower()
+    for r in data.get("relationships", []):
+        if (r.get("person_name") or "").strip().lower() == nm_lc:
+            if "roles" not in r or not isinstance(r.get("roles"), list):
+                rt = r.get("relation_type") or ""
+                r["roles"] = [rt] if rt else []
+            # Normaliseer role via REL_TYPES als het een kort woord is
+            rtype = REL_TYPES.get(role.lower(), role)
+            if rtype in r["roles"]:
+                return False
+            r["roles"].append(rtype)
+            r["updated_at"] = datetime.now(timezone.utc).isoformat()
+            save_json(fp, data)
+            return True
+    return False
+
+
+def migrate_all_to_roles_array() -> Dict[str, int]:
+    """One-shot migratie: voeg `roles: [relation_type]` toe aan elke entry in élk
+    /persons/{uid}_relationships.json bestand dat nog geen roles-array heeft.
+    Idempotent — kan meermaals veilig gedraaid worden."""
+    stats = {"files": 0, "entries_migrated": 0, "entries_ok": 0}
+    if not PERSONS_DIR.exists():
+        return stats
+    for fp in PERSONS_DIR.glob("*_relationships.json"):
+        try:
+            data = load_json(fp, default={"relationships": []})
+        except Exception:
+            continue
+        rels = data.get("relationships", [])
+        changed = False
+        for r in rels:
+            if isinstance(r.get("roles"), list) and r["roles"]:
+                stats["entries_ok"] += 1
+                continue
+            rt = r.get("relation_type") or ""
+            r["roles"] = [rt] if rt else []
+            stats["entries_migrated"] += 1
+            changed = True
+        if changed:
+            save_json(fp, data)
+        stats["files"] += 1
+    return stats
 
 
 def _sync_persons_cards(user_id: str, new_relations: List[Dict]):

@@ -3,6 +3,50 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-22 (sessie 53 vervolg) — Roles-array + productie ZIP-merge + LLM-diag fix
+
+### 🐄 v13_roles_array_001 — Zorgboerderij foundation
+Een persoon kan nu meerdere rollen tegelijk hebben (vriend + cliënt + medewerker) zonder dubbele entries. Fundament voor care-farm dossiers, hourly tracking en gedragingen die per rol verschillen.
+
+**Wat is er gebouwd:**
+- Elke entry in `/data/persons/{uid}_relationships.json` heeft nu een `roles: []` array naast bestaande `relation_type` (backwards-compat).
+- `add_relations()` merged automatisch: persoon bestaat al met andere rol → nieuwe rol wordt geappend, geen dubbel-entry.
+- Nieuwe rel_types onder `professioneel/…`: cliënt, klant, medewerker, werkgever, begeleider.
+- Regex-patronen accepteren nu adverbia: "Roeline is **ook** mijn cliënt", "Roeline is **inmiddels** mijn medewerker".
+- Helpers: `get_roles(uid, name)`, `has_role(uid, name, role)`, `add_role(uid, name, role)`. `has_role()` matcht zowel korte woord als volledige rel_type.
+- `migrate_all_to_roles_array()` idempotent one-shot; ge-live gedraaid → 14 Willem-entries gemigreerd, 0 zonder roles.
+
+**Regression-test** (`/app/backend/tests/test_roles_array_v13.py`, 7 tests groen):
+- new person gets roles array
+- second role appends not duplicates
+- idempotent duplicate role
+- has_role matches short + full
+- add_role helper + idempotent
+- migration preserves existing data
+- migration idempotent
+
+**Live-verificatie**:
+```
+Test 1: "Roeline is mijn vriendin"                    → roles: ['vriend']
+Test 2: "Roeline is ook mijn cliënt sinds vorige week" → roles: ['vriend', 'professioneel/cliënt']
+Test 3: "Roeline is inmiddels mijn medewerker"        → roles: ['vriend', 'professioneel/cliënt', 'professioneel/medewerker']
+Test 4: idempotent (nogmaals cliënt) → geen wijziging ✓
+```
+
+### 📦 Productie ZIP-merge (spark_backup_changes_20260822_115856.zip)
+- 2449 files gemerged: 4 nieuw + 2445 overschreven + 0 skipped/errors.
+- Backup vóór merge: `/app/_backups/pre_merge_20260822_1205/backup.tgz`.
+
+### 🩺 v13_llm_router_diagnostics_002 — env-hint fix
+`_diagnose_missing_keys()` checkte oude namen (`LLM_A_API_KEY`, `LLM_B_API_KEY`) die niet meer bestaan. Nu de correcte `LLM_PRIMARY_API_KEY`, `LLM_PRIMARY_BASE_URL`, `LLM_PRIMARY_MODEL`, `LLM_FALLBACK_API_KEY`, `EMERGENT_LLM_KEY`.
+
+### 🚨 Productie LLM-uitval — GEEN codebase-bug (staat vast op hosting-config)
+Diagnose via `POST /api/spark/compose` op productie:
+1. **Primary (Groq)**: 404 `llama-3.3-70b-versatile does not exist` → productie draait nog op oude gedeprecateerd model. Preview `.env` heeft correcte `openai/gpt-oss-120b`. **Willem moet productie env-var updaten.**
+2. **Fallback (Cerebras)**: 402 Payment Required (quota op).
+3. **Emergency (Emergent)**: budget exceeded ($8.05 / $8.00).
+
+
 ## 2026-02-22 (sessie 53) — Trader Accounting Hygiene sprint
 
 Systematische fix-batch geïnitieerd door Willem's "waarom staat er verlies terwijl ik alleen winst deed?". Elke stap onthulde volgende bug — resultaat: alle known gaps dicht, preventie voor nieuwe users, herbruikbare diagnose-scripts.

@@ -49,6 +49,18 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 - [x] **v13_auto_baseline_on_provision_001** — `auto_provision_bot_for_token_holder()` zet nu automatisch baseline op huidige Bitvavo total als user er nog geen heeft. Idempotent.
 - [x] **v13_auto_baseline_on_mint_001** — `finance_ops.mint_tokens()` roept nu ook `auto_provision` aan zodat auto-mint scheduler en admin-gifts óók baseline+bot-config krijgen.
 
+### ✅ v13_roles_array_001 — Zorgboerderij foundation (sessie 53, 22 feb 2026)
+
+**Doel**: Fundament voor de care-farm dossiers. Een persoon kan meerdere rollen tegelijk hebben (vriend + cliënt + medewerker) zonder dubbele entries of dataverlies.
+
+- [x] **Roles-array op relationships.json** — elke entry heeft nu `roles: []` naast bestaande `relation_type`. Backwards-compat: bij load wordt lege roles automatisch afgeleid uit relation_type.
+- [x] **Auto-merge bij extractie** — `add_relations()` detecteert bestaande persoon → nieuwe rol wordt append aan roles-array i.p.v. dubbel-entry. Zo krijgt "Roeline" één record met `["vriend", "professioneel/cliënt", "professioneel/medewerker"]`.
+- [x] **Nieuwe rel_types** — `cliënt`, `client`, `klant`, `medewerker`, `werkgever`, `begeleider` (allemaal onder `professioneel/…`).
+- [x] **Regex-uitbreiding** — patroon `X is [ook|nu|inmiddels|tegenwoordig|sinds kort] mijn Y` matcht nu ook adverbia voor dual-role zinnen.
+- [x] **Helper-functies** — `get_roles(uid, name)`, `has_role(uid, name, role)`, `add_role(uid, name, role)`. `has_role()` matcht op zowel het korte woord ("cliënt") als het volledige rel_type ("professioneel/cliënt").
+- [x] **Migration** — `migrate_all_to_roles_array()` idempotent one-shot; ge-live gedraaid → 14 Willem-entries gemigreerd, 0 zonder roles.
+- [x] **Regression-test** — `/app/backend/tests/test_roles_array_v13.py` (7 tests groen: new-person, dual-role, idempotent, has_role matching, add_role helper, migration preserve, migration idempotent).
+
 ### 📊 Gap-scan resultaat: van 16 issues → 1 info-only
 
 Enige overgebleven "issue" (Spark pot-001 audit vs stats drift €0.25) is verklaarbaar: 1 echte trade met winst zonder audit + 1 gerepareerde audit met verlies. Geen bug.

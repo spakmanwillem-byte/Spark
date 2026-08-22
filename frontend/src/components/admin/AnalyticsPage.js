@@ -1328,6 +1328,56 @@ function TradeAnalyticsTab() {
     } finally { setBusyUser(null); load(); }
   };
 
+  // v13_admin_bot_config_001 (sessie 53) — Willem: admin moet cycle + candle +
+  // markets per user kunnen instellen vanuit Analytics. Voor lopende bots:
+  // hot-swap via /monitor/candle en /monitor/markets. Voor stopped bots: sla
+  // op in lokale draft en gebruik bij volgende start.
+  const [botDraft, setBotDraft] = React.useState({});   // { uid: { interval, candle, markets } }
+  const [botDraftBusy, setBotDraftBusy] = React.useState(null);
+
+  const getBotDraft = (b) => botDraft[b.user_id] || {
+    interval: b.interval || 300,
+    candle: b.candle_interval || '15m',
+    markets: b.markets || ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR', 'ATOM-EUR'],
+  };
+
+  const updateBotDraft = (uid, patch) => {
+    setBotDraft(d => ({ ...d, [uid]: { ...getBotDraft({ user_id: uid, ...(d[uid] || {}) }), ...patch } }));
+  };
+
+  const applyBotCandle = async (b, newCandle) => {
+    setBotDraftBusy(b.user_id);
+    updateBotDraft(b.user_id, { candle: newCandle });
+    try {
+      if (b.running) {
+        await fetch(`${API}/api/trade/monitor/candle/${b.user_id}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ candle_interval: newCandle }),
+        });
+      }
+    } finally { setBotDraftBusy(null); load(); }
+  };
+
+  const applyBotMarkets = async (b, newMarkets) => {
+    if (!newMarkets || newMarkets.length === 0) return;
+    setBotDraftBusy(b.user_id);
+    updateBotDraft(b.user_id, { markets: newMarkets });
+    try {
+      if (b.running) {
+        await fetch(`${API}/api/trade/monitor/markets/${b.user_id}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markets: newMarkets }),
+        });
+      }
+    } finally { setBotDraftBusy(null); load(); }
+  };
+
+  const applyBotInterval = async (b, newInterval) => {
+    // interval (cycle-tijd) kan alleen bij herstart worden gewijzigd → sla in draft
+    updateBotDraft(b.user_id, { interval: newInterval });
+  };
+  const ALL_ADMIN_MARKETS = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR', 'ATOM-EUR'];
+
   // v7_admin_start_all_bots_001 — admin bulk aan/uit
   const [bulkBusy, setBulkBusy] = React.useState(false);
   const startAllBots = async () => {
@@ -1552,7 +1602,10 @@ function TradeAnalyticsTab() {
                       {/* v5_admin_bot_controls_001 — Start/Pause/Stop knoppen per bot */}
                       <div className="flex items-center gap-2 flex-wrap">
                         {!b.running && (
-                          <button onClick={() => startBot(b.user_id, b)} disabled={busyUser === b.user_id}
+                          <button onClick={() => {
+                            const draft = getBotDraft(b);
+                            startBot(b.user_id, { ...b, markets: draft.markets, candle_interval: draft.candle, interval: draft.interval });
+                          }} disabled={busyUser === b.user_id}
                             data-testid={`bot-start-${b.user_id}`}
                             className="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded text-[11px] font-medium disabled:opacity-40">
                             ▶ Start bot
@@ -1578,6 +1631,81 @@ function TradeAnalyticsTab() {
                           className="px-3 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 rounded text-[11px] font-medium ml-auto">
                           ↻ Herwaardeer vrije pots
                         </button>
+                      </div>
+
+                      {/* v13_admin_bot_config_001 (sessie 53) — Cycle / Candle / Markets per user */}
+                      <div className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-3 space-y-2.5">
+                        <p className="text-[11px] text-slate-400 font-semibold">⚙️ Bot-configuratie {b.running ? <span className="text-emerald-400 font-normal">(live aanpasbaar)</span> : <span className="text-slate-500 font-normal">(bij volgende start)</span>}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {/* Cycle (interval seconden) */}
+                          <div>
+                            <label className="text-[10px] text-slate-500 uppercase tracking-wide" title="Hoe vaak de bot een beslissing neemt. Alleen wijzigbaar bij herstart.">
+                              Cycle-tijd {b.running && '(alleen bij herstart)'}
+                            </label>
+                            <select
+                              value={getBotDraft(b).interval}
+                              onChange={(e) => applyBotInterval(b, Number(e.target.value))}
+                              disabled={botDraftBusy === b.user_id}
+                              data-testid={`bot-cycle-${b.user_id}`}
+                              className="w-full mt-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-[11px] text-slate-200"
+                            >
+                              <option value={300}>5 min</option>
+                              <option value={600}>10 min</option>
+                              <option value={900}>15 min</option>
+                              <option value={1800}>30 min</option>
+                              <option value={3600}>60 min</option>
+                            </select>
+                          </div>
+                          {/* Candle (chart-cycle) */}
+                          <div>
+                            <label className="text-[10px] text-slate-500 uppercase tracking-wide" title="Grootte van de chart-candles die de bot analyseert.">
+                              Candle-interval {b.running && '(hot-swap)'}
+                            </label>
+                            <select
+                              value={getBotDraft(b).candle}
+                              onChange={(e) => applyBotCandle(b, e.target.value)}
+                              disabled={botDraftBusy === b.user_id}
+                              data-testid={`bot-candle-${b.user_id}`}
+                              className="w-full mt-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-[11px] text-slate-200"
+                            >
+                              <option value="5m">5m</option>
+                              <option value="15m">15m</option>
+                              <option value="1h">1h</option>
+                              <option value="4h">4h</option>
+                            </select>
+                          </div>
+                        </div>
+                        {/* Markets (pills) */}
+                        <div>
+                          <label className="text-[10px] text-slate-500 uppercase tracking-wide">
+                            Coins die deze user monitort ({(getBotDraft(b).markets || []).length}/6) {b.running && '(hot-swap)'}
+                          </label>
+                          <div className="flex flex-wrap gap-1.5 mt-1.5">
+                            {ALL_ADMIN_MARKETS.map(mk => {
+                              const active = (getBotDraft(b).markets || []).includes(mk);
+                              return (
+                                <button
+                                  key={mk}
+                                  data-testid={`bot-market-${b.user_id}-${mk}`}
+                                  onClick={() => {
+                                    const cur = getBotDraft(b).markets || [];
+                                    const next = active ? cur.filter(x => x !== mk) : [...cur, mk];
+                                    if (next.length === 0) return;   // minstens 1
+                                    applyBotMarkets(b, next);
+                                  }}
+                                  disabled={botDraftBusy === b.user_id}
+                                  className={`px-2 py-0.5 rounded text-[10px] font-mono border transition-colors ${
+                                    active
+                                      ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
+                                      : 'bg-slate-900 border-slate-700 text-slate-500 hover:text-slate-300'
+                                  }`}
+                                >
+                                  {mk.replace('-EUR', '')}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
                       </div>
 
                       {/* Potjes-tabel */}

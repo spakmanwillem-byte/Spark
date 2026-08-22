@@ -3,6 +3,28 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-22 (sessie 53 vervolg) — LLM Usage Tracker live
+
+### 📊 v13_llm_usage_tracker_001 — /api/chat/llm/usage/today endpoint
+Willem's LLM-token-widget was tot nu toe placeholder-data. Nu leest hij **echte** gebruikscijfers per provider per dag.
+
+**Backend**:
+- `_log_usage(provider, model, usage)` in `llm_router.py` schrijft naar `/data/llm/usage_YYYY-MM-DD.json` bij élke succesvolle call. Providers zonder token-info in de response (bv. Emergent SDK) krijgen alleen call-count.
+- `get_usage_today()` returned per provider: `used`, `calls`, `limit`, `pct`, `tier`, `last_call`.
+- Limits configureerbaar via env-vars `LLM_PRIMARY_TPD_LIMIT` (default 100000), `LLM_FALLBACK_TPD_LIMIT` (default null), `LLM_PRIMARY_TIER`, `LLM_FALLBACK_TIER`.
+- Endpoint `GET /api/chat/llm/usage/today` in `routes.py`.
+
+**Frontend** (`LlmTokenUsageWidget.js`):
+- URL geswitched van placeholder `/api/llm/usage/today` naar echte `/api/chat/llm/usage/today`.
+- Auto-refresh elke 30s zodat je live ziet wanneer een lijn vol raakt.
+- Placeholder-tekst vervangen door status-hint: *"Live-data via /api/chat/llm/usage/today, auto-refresh 30s. Limits configureerbaar via env LLM_*_TPD_LIMIT."*
+
+**Live-verificatie preview**:
+- Baseline: Groq 571 tokens, 1 call ✓
+- Extra call via emergency-tier: Emergent +1 call gelogd (0 tokens want SDK ✓)
+- Endpoint returned volledige provider-snapshot met pct-progressie ✓
+
+
 ## 2026-02-22 (sessie 53 vervolg) — Nood-nood emergency + vriendelijke budget-fout
 
 ### 🚨 v13_emergent_nood_nood_001 — Emergent alléén bij écht code-rood

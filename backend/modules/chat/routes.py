@@ -67,6 +67,14 @@ async def clear_llm_cache():
     return {"success": True, **llm_router.clear_cache()}
 
 
+# v13_llm_usage_tracker_001 (sessie 53) — usage-per-provider vandaag.
+# Voedt LlmTokenUsageWidget zodat je vooraf ziet welke lijn bijna vol zit.
+@router.get("/llm/usage/today")
+async def get_llm_usage_today():
+    from . import llm_router
+    return {"success": True, **llm_router.get_usage_today()}
+
+
 
 
 @router.post("/message")

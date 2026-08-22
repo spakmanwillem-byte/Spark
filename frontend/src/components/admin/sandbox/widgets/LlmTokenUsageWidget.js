@@ -1,11 +1,6 @@
 /**
- * v10_sandbox_llm_token_widget_001 — LLM token-usage widget (sandbox demo).
- *
- * STATUS: SKELETON — backend endpoint /api/llm/usage/today bestaat NOG NIET.
- * Widget is prêt voor als jij die endpoint bouwt. Nu toont hij een placeholder-state
- * met de laatst-bekende Groq-error uit backend logs.
- *
- * VERPLAATSEN: import als `<LlmTokenUsageWidget />` in bv. AnalyticsPage → Systeem tab.
+ * v10_sandbox_llm_token_widget_001 — LLM token-usage widget.
+ * v13_llm_usage_tracker_001 (sessie 53) — endpoint /api/chat/llm/usage/today is live.
  */
 import React, { useState, useEffect } from 'react';
 import { Zap, AlertTriangle, ExternalLink } from 'lucide-react';
@@ -20,25 +15,31 @@ export function LlmTokenUsageWidget() {
     let cancelled = false;
     (async () => {
       try {
-        const r = await fetch(`${API}/api/llm/usage/today`).then(x => x.ok ? x.json() : null);
+        // v13: endpoint zit onder chat-router → /api/chat/llm/usage/today
+        const r = await fetch(`${API}/api/chat/llm/usage/today`).then(x => x.ok ? x.json() : null);
         if (!cancelled) setUsage(r);
-      } catch { /* endpoint nog niet gebouwd */ }
+      } catch { /* niet fataal */ }
       try {
         const c = await fetch(`${API}/api/chat/llm/cache/stats`).then(x => x.ok ? x.json() : null);
         if (!cancelled) setCache(c);
       } catch { /* ignore */ }
       if (!cancelled) setLoading(false);
     })();
-    return () => { cancelled = true; };
+    // Auto-refresh elke 30s zodat je live ziet wanneer een lijn vol raakt
+    const iv = setInterval(async () => {
+      try {
+        const r = await fetch(`${API}/api/chat/llm/usage/today`).then(x => x.ok ? x.json() : null);
+        if (!cancelled && r) setUsage(r);
+      } catch { /* ignore */ }
+    }, 30000);
+    return () => { cancelled = true; clearInterval(iv); };
   }, [API]);
 
   const providers = usage?.providers || [
-    // Placeholder-data als endpoint 404 gaf
-    // v13_model_alias_self_heal_001: modelnaam gealigneerd met huidige Groq-model
-    // (llama-3.3-70b is 16-aug 2025 gedeprecateerd, code swapt naar gpt-oss-120b).
-    { naam: 'Groq (openai/gpt-oss-120b)', used: 94838, limit: 100000, tier: 'on_demand' },
-    { naam: 'Cerebras (gpt-oss-120b)', used: null, limit: null, tier: 'unknown', note: 'hook nog niet gebouwd' },
-    { naam: 'Emergent LLM Key', used: null, limit: null, tier: 'noodrem', note: 'default UIT — alleen expliciet aan' },
+    // Fallback als endpoint tijdelijk niet reachable is
+    { naam: 'Groq (openai/gpt-oss-120b)', used: null, limit: 100000, tier: 'on_demand', note: 'geen data — endpoint niet bereikbaar' },
+    { naam: 'Cerebras (gpt-oss-120b)', used: null, limit: null, tier: 'quota', note: 'geen data' },
+    { naam: 'Emergent LLM Key', used: null, limit: null, tier: 'noodrem', note: 'activeert alleen bij écht nood' },
   ];
 
   return (
@@ -99,8 +100,8 @@ export function LlmTokenUsageWidget() {
       </div>
 
       <p className="text-[10px] text-slate-600 italic mt-2 leading-snug">
-        💡 Backend endpoint <code className="text-slate-400">/api/llm/usage/today</code> nog te bouwen.
-        Widget parseert Groq 429-errors automatisch zodra endpoint bestaat.
+        💡 Live-data via <code className="text-slate-400">/api/chat/llm/usage/today</code>,
+        auto-refresh elke 30s. Limits configureerbaar via env <code className="text-slate-400">LLM_*_TPD_LIMIT</code>.
       </p>
 
       {/* v10_llm_response_cache_001 — cache-savings blok */}

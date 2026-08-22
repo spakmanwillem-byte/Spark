@@ -36,6 +36,106 @@ logger = logging.getLogger(__name__)
 _LAST_STATS: Dict[str, Any] = {}
 
 
+# =========================================================================
+# v13_llm_usage_tracker_001 (sessie 53) — Willem's wens: widget moet
+# vooraf zien welke provider bijna vol zit. Elke succesvolle LLM-call
+# schrijft tokens weg naar /data/llm/usage_YYYY-MM-DD.json.
+# Provider-limits komen uit env-vars zodat admin ze kan tunen (Groq
+# on-demand = 100k, dev tier = 200k+).
+# =========================================================================
+from pathlib import Path as _Path
+from datetime import datetime as _dt, timezone as _tz
+
+_USAGE_DIR = _Path(__file__).resolve().parent.parent.parent / "data" / "llm"
+
+
+def _usage_file_for_today() -> _Path:
+    today = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+    _USAGE_DIR.mkdir(parents=True, exist_ok=True)
+    return _USAGE_DIR / f"usage_{today}.json"
+
+
+def _log_usage(provider: str, model: str, usage: Dict[str, Any]) -> None:
+    """Append tokens naar dagelijkse usage-file. Non-fatal — faalt stil.
+    v13: bij providers zonder usage-info (bv. Emergent SDK) wordt tenminste
+    het aantal calls geteld zodat je activiteit ziet."""
+    total = int((usage or {}).get("total_tokens") or 0)
+    try:
+        from modules.core.storage import load_json, save_json
+        fp = _usage_file_for_today()
+        today = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+        data = load_json(fp, default={"date": today, "providers": {}})
+        p = data["providers"].setdefault(provider, {
+            "tokens": 0, "calls": 0, "model": model, "last_call": None,
+        })
+        p["tokens"] += total  # 0 als provider geen tokens rapporteert
+        p["calls"] += 1
+        p["model"] = model
+        p["last_call"] = _dt.now(_tz.utc).isoformat()
+        save_json(fp, data)
+    except Exception as e:
+        logger.debug("[llm_usage] log failed: %s", e)
+
+
+def get_usage_today() -> Dict[str, Any]:
+    """Return usage-snapshot van vandaag incl. limits + %-progressie.
+    Publieke API voor /api/llm/usage/today endpoint."""
+    from modules.core.storage import load_json
+    today = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+    data = load_json(_usage_file_for_today(), default={"date": today, "providers": {}})
+
+    # Provider-metadata + limits uit env of defaults
+    def _limit(env_key: str, default: Optional[int]) -> Optional[int]:
+        try:
+            v = int(os.environ.get(env_key, "").strip() or 0)
+            return v if v > 0 else default
+        except (TypeError, ValueError):
+            return default
+
+    provider_meta = {
+        "primary": {
+            "naam": f"Groq ({os.environ.get('LLM_PRIMARY_MODEL', 'openai/gpt-oss-120b')})",
+            "limit": _limit("LLM_PRIMARY_TPD_LIMIT", 100000),
+            "tier": os.environ.get("LLM_PRIMARY_TIER", "on_demand"),
+        },
+        "fallback": {
+            "naam": f"Cerebras ({os.environ.get('LLM_FALLBACK_MODEL', 'gpt-oss-120b')})",
+            "limit": _limit("LLM_FALLBACK_TPD_LIMIT", None),
+            "tier": os.environ.get("LLM_FALLBACK_TIER", "quota"),
+        },
+        "emergent": {
+            "naam": "Emergent LLM Key",
+            "limit": None,
+            "tier": "noodrem",
+            "note": "activeert alleen bij écht nood (alle providers op quota)",
+        },
+    }
+
+    providers = []
+    for prov_id, meta in provider_meta.items():
+        stats = data["providers"].get(prov_id, {})
+        used = int(stats.get("tokens", 0))
+        limit = meta["limit"]
+        pct = (100.0 * used / limit) if (limit and used) else 0.0
+        providers.append({
+            "id": prov_id,
+            "naam": meta["naam"],
+            "used": used,
+            "calls": int(stats.get("calls", 0)),
+            "limit": limit,
+            "pct": round(pct, 1),
+            "tier": meta["tier"],
+            "note": meta.get("note"),
+            "last_call": stats.get("last_call"),
+        })
+
+    return {
+        "date": today,
+        "providers": providers,
+        "generated_at": _dt.now(_tz.utc).isoformat(),
+    }
+
+
 @dataclass
 class ProviderConfig:
     name: str
@@ -335,6 +435,7 @@ async def chat_complete(
         if result["success"]:
             result["tried"] = tried
             _LAST_STATS = result
+            _log_usage(provider.name, provider.model, result.get("usage") or {})
             if use_cache:
                 _cache_store(messages, temperature, result)
             return result
@@ -364,6 +465,7 @@ async def chat_complete(
     emergency["tried"] = tried
     _LAST_STATS = emergency
     if emergency["success"]:
+        _log_usage("emergent", emergency.get("model") or "emergent", emergency.get("usage") or {})
         if use_cache:
             _cache_store(messages, temperature, emergency)
         return emergency

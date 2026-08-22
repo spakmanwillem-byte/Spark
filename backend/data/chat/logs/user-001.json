@@ -63660,11 +63660,83 @@
         "session_id": "budget-test-1",
         "gesprek_nummer": 2530
       }
+    },
+    {
+      "id": "conv-92a2fd3f",
+      "timestamp": "2026-08-22T13:22:37.304125+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kort: wat is de hoofdstad van Frankrijk?",
+      "spark_response": "Parijs.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-e13ed399",
+          "kbv2-6649e45b",
+          "kbv2-skel-e80e80fa",
+          "kbv2-39c0803f",
+          "kbv2-bf42e8d2"
+        ],
+        "model": "emergent/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "usage-test-1",
+        "gesprek_nummer": 2531
+      }
+    },
+    {
+      "id": "conv-0704b0a4",
+      "timestamp": "2026-08-22T13:23:54.808161+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kort: geef een woord dat begint met b",
+      "spark_response": "**Boom.**",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-51a8a639",
+          "kbv2-595cef85",
+          "kbv2-ea7ce894",
+          "kbv2-skel-e80e80fa",
+          "kbv2-39c0803f"
+        ],
+        "model": "emergent/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "usage-test-2",
+        "gesprek_nummer": 2532
+      }
+    },
+    {
+      "id": "conv-7d4e0a50",
+      "timestamp": "2026-08-22T13:24:26.281380+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kort: geef één cijfer tussen 1 en 9",
+      "spark_response": "**5**",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-ea7ce894",
+          "kbv2-skel-e80e80fa",
+          "kbv2-39c0803f",
+          "kbv2-f6d601a6",
+          "kbv2-762f2a67"
+        ],
+        "model": "emergent/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "usage-test-3",
+        "gesprek_nummer": 2533
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2530,
-    "last_updated": "2026-08-22T13:18:48.784778+00:00"
+    "total_conversations": 2533,
+    "last_updated": "2026-08-22T13:24:26.281380+00:00"
   }
 }

@@ -118,6 +118,44 @@ Waar dit bouwt op bestaand code:
 - `pending_wv_consent` — bestaande consent-machine hergebruiken
 - `interaction_count` in session_state — al aanwezig voor frequentie-cap
 
+### 💌 Sub-concept: Spark als postbode (twee-weg tussen users)
+
+Voortbouwend op het vraag-portaal: dezelfde ochtend-hook kan ook **boodschappen doorgeven én verificaties bevestigen** tussen users. Spark wordt dan een relationele brug, niet alleen een geheugen.
+
+**A. Boodschap doorgeven** (user-initiated):
+```
+Willem: "zeg tegen Heidi dat ze lief is"
+Spark check: Heidi = user? → ja
+Spark schrijft naar Heidi's user_messages queue:
+    { from: "Willem", body: "je bent lief", verbatim: true, ts: ... }
+Heidi's volgende chat:
+    Spark noemt de boodschap met bron letterlijk.
+```
+
+**B. Wederkerige relatie-verificatie** (system-initiated):
+```
+Willem zegt "mijn moeder Heidi" → relatie in Willem's container = eenzijdig
+Systeem: queue shadow-vraag in Heidi's relatie_te_verifieren queue
+Heidi zegt "goedemorgen"
+Spark: "Willem heeft in zijn profiel gezegd dat jij zijn moeder bent. Klopt dat?"
+Ja → wederkerig, privacy-matrix actief tussen jullie
+Nee → melding terug in Willem's queue: "Heidi zei dat de relatie niet klopt"
+```
+
+**Plooien**:
+- **Boodschap-inhoud**: Spark filtert niet. Wel volledige bron-transparantie ("Willem zei letterlijk: ..."). Anders wordt Spark een boodschapper-die-liegt.
+- **Ongelezen stapel**: max 1 boodschap per ochtendbark, oudste eerst. Rest wacht.
+- **Nee bij verificatie**: nette terugkoppeling naar de vragende user. Die kan intrekken of opnieuw proberen.
+
+**Waarde**: 
+- Laagdrempelig contact tussen family/vrienden zonder aparte DM-app
+- Verificatie sluit asymmetrische-relatie-plooi
+- Alles via bestaande begroetings-hook — geen aparte notificatie-infrastructuur
+
+**Nieuwe queues** (naast bestaande kb_fill_pending):
+- `/data/persons/{user_id}_message_inbox.json` (inkomende boodschappen)
+- `/data/persons/{user_id}_relation_verify_queue.json` (te verifiëren relaties)
+
 ### 💾 Backups (alles reversibel)
 - `data/financial/user_potjes.json.bak_phantom_loss_repair_20260822_062648`
 - `data/financial/user_potjes.json.bak_maxsize_fix_20260822_064245`

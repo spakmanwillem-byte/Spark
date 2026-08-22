@@ -3,6 +3,31 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-22 (sessie 53 vervolg) — Chat-weergave-fixes (JSON-leak + HTML-error)
+
+### 🧹 v13_tts_json_leak_sanitizer_001 — action/payload JSON-blokken weg uit chat
+Spark begon soms ```json {"action": "tts_speak", "payload": {"text": "..."}} ``` te typen in plaats van gewoon te antwoorden. De bestaande tool-leak-sanitizer (v7) ving alleen `[tool_name {...}]` bracket-syntax, niet dit nieuwe JSON-blok-patroon.
+
+**Fix** in `response_composer.py`:
+- Detecteert zowel fenced (```json ... ```) als bare `{"action": ..., "payload": {...}}` blokken
+- Als het blok een `payload.text` bevat → **extraheer die tekst** als antwoord (zo blijft Spark's bedoeling behouden)
+- Anders → blok volledig strippen
+- Bonus: `\n{3,}` → `\n\n` normalisatie voor cleane whitespace
+
+**Getest** met Willem's twee originele voorbeelden:
+- *"Jammer, ik hoor je. Wat kan ik doen om het beter te maken?"* → schone tekst ✓
+- *"Ja, dat is best veel. Waar wil je dieper op ingaan?"* → schone tekst ✓
+- Normale tekst blijft ongewijzigd ✓
+
+### 🔌 v13_deep_response_guard_001 — HTML-error i.p.v. crash
+Frontend deed onvoorwaardelijk `r.json()` op `/api/spark/compose`. Bij gateway-timeout (502/504) kwam er HTML terug → `Failed to execute 'json' on 'Response': Unexpected token '<'` in de chat.
+
+**Fix** in `GesprekkenPage.js`:
+- Check `content-type` header vóór `r.json()`
+- Bij niet-JSON → toon Nederlandse fout: *"server had het even druk — probeer over een moment opnieuw"* (HTTP-5xx) of *"HTTP {status}"* (andere)
+- Error-message opnieuw geformuleerd: *"Even geen verbinding — [reden]. Probeer het over een tel opnieuw."*
+
+
 ## 2026-02-22 (sessie 53 vervolg) — Login-dots rand-fade + Emergent default OFF + widget-labels
 
 ### 🎚️ v13_login_dots_fade_setting_001 — rand-fade slider werkt

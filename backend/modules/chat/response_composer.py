@@ -650,16 +650,50 @@ async def compose_response(
         # v7_tool_leak_sanitizer_001 — strip elke tool-call syntax die de LLM per ongeluk
         # in de user-reactie plakt (bv. "[agenda_lezen {"date":"2026-05-17"}]" of
         # "We need to call agenda_lezen with date..."). Deze mogen NOOIT bij de user komen.
+        # v13_tts_json_leak_sanitizer_001 (sessie 53): LLM begint soms "action/payload"
+        # JSON-blokken te typen (tts_speak, open_help, ...). Als er een `text`-veld in zit
+        # extraheren we dat als antwoord; anders halen we het blok gewoon weg.
         try:
             import re as _re
+            import json as _json
+
+            # Fase 0: JSON-actie-blokken detecteren (```json ... ``` of los blok)
+            # Patroon vangt zowel ```json {...} ``` als bare {"action": ...}
+            def _extract_text_from_action_block(match_body: str) -> str:
+                try:
+                    parsed = _json.loads(match_body)
+                    payload = parsed.get("payload") or {}
+                    inner = payload.get("text")
+                    if isinstance(inner, str) and inner.strip():
+                        return inner.strip()
+                except Exception:
+                    pass
+                return ""
+
+            # Fenced ```json {...} ```
+            def _fenced_repl(m):
+                return _extract_text_from_action_block(m.group(1))
+            text = _re.sub(
+                r"```(?:json)?\s*(\{[^`]*?\"action\"\s*:\s*\"[a-z_]+\"[^`]*?\})\s*```",
+                _fenced_repl, text, flags=_re.DOTALL,
+            )
+            # Bare JSON-blok in tekst
+            def _bare_repl(m):
+                return _extract_text_from_action_block(m.group(1))
+            text = _re.sub(
+                r"(\{\s*\"action\"\s*:\s*\"[a-z_]+\"\s*,\s*\"payload\"\s*:\s*\{[^{}]*\}\s*\})",
+                _bare_repl, text, flags=_re.DOTALL,
+            )
+
             # Verwijder bracket-tool-calls: [tool_name {json}] of [tool_name(...)]
             text = _re.sub(r"\[[a-z_][a-z0-9_]{2,30}\s*[\{\(][^\]]*?[\}\)]\]", "", text)
             # Verwijder "We need to call X" / "Let me call X" / "I will call X" zinnen tot punt
             text = _re.sub(r"(?i)\b(we need to|let me|i (?:will|should)|ik moet)\s+call\s+[a-z_]+[^\.\n]*\.\s*", "", text)
             # Verwijder losse tool-annotaties als "[tool_name]" (zonder args)
             text = _re.sub(r"\[[a-z_][a-z0-9_]{4,30}\](?=[A-Z\n])", "", text)
-            # Meerdere spaties normaliseren
-            text = _re.sub(r"[ \t]{2,}", " ", text).strip()
+            # Meerdere spaties + lege regels normaliseren
+            text = _re.sub(r"[ \t]{2,}", " ", text)
+            text = _re.sub(r"\n{3,}", "\n\n", text).strip()
         except Exception:
             pass  # sanitize is best-effort, faalt geen response op
         used_provider = router_resp.get("provider", "?")

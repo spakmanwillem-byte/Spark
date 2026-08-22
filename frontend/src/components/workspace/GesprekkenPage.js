@@ -790,6 +790,15 @@ export function GesprekkenPage({ onNavigate }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}`, active_tab: lastTab || undefined }),
           });
+          // v13_deep_response_guard_001 (sessie 53): backend kan HTML terugsturen bij
+          // gateway-timeout (502/504) of proxy-fout. Vroeger deed `r.json()` een harde
+          // crash met 'Unexpected token <'. Nu: eerst content-type checken en netjes
+          // een leesbare boodschap tonen zonder de raw HTML te lekken.
+          const ct = (r.headers.get('content-type') || '').toLowerCase();
+          if (!ct.includes('application/json')) {
+            const statusHint = r.status >= 500 ? 'server had het even druk' : `HTTP ${r.status}`;
+            throw new Error(`${statusHint} — probeer over een moment opnieuw`);
+          }
           const d = await r.json();
 
           // v6_deep_side_effects_001 — Diep gebruikt nu DEZELFDE audio-pipeline als normale chat
@@ -872,7 +881,7 @@ export function GesprekkenPage({ onNavigate }) {
         } catch (e) {
           setSparkMessages(prev => [...prev, {
             id: Date.now() + 1, role: 'spark',
-            message: `Diep-gesprek verbinding faalde: ${e.message}`,
+            message: `Even geen verbinding — ${e.message}. Probeer het over een tel opnieuw.`,
             time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
             deep: true,
           }]);

@@ -1598,8 +1598,10 @@ function TradeAnalyticsTab() {
                                   <th className="text-right py-1.5 pr-2">Capital</th>
                                   <th className="text-right py-1.5 pr-2">Live</th>
                                   <th className="text-right py-1.5 pr-2">Entry</th>
+                                  <th className="text-right py-1.5 pr-2" title="Huidige marktprijs (Bitvavo ticker)">Nu</th>
+                                  <th className="text-right py-1.5 pr-2" title="Open winst/verlies (nog niet verkocht)">Open P&L</th>
                                   <th className="text-right py-1.5 pr-2">Trades</th>
-                                  <th className="text-right py-1.5 pr-2">P&L</th>
+                                  <th className="text-right py-1.5 pr-2" title="Gerealiseerde P&L (gesloten trades)">P&L</th>
                                   <th className="text-right py-1.5">Actie</th>
                                 </tr>
                               </thead>
@@ -1617,6 +1619,11 @@ function TradeAnalyticsTab() {
                                       <td className="py-1.5 pr-2 text-right text-slate-300">€{(p.capital ?? 0).toFixed(2)}</td>
                                       <td className="py-1.5 pr-2 text-right text-cyan-400">€{(p.live_value ?? p.capital ?? 0).toFixed(2)}</td>
                                       <td className="py-1.5 pr-2 text-right text-slate-400">{isOpenPos && p.position?.entry_price ? `€${p.position.entry_price.toFixed(2)}` : '—'}</td>
+                                      <td className="py-1.5 pr-2 text-right text-slate-400">{isOpenPos && p.current_price != null ? `€${p.current_price.toFixed(2)}` : '—'}</td>
+                                      <td className={`py-1.5 pr-2 text-right ${p.unrealized_pnl == null ? 'text-slate-600' : p.unrealized_pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}
+                                          title={p.unrealized_pnl_pct != null ? `${p.unrealized_pnl_pct >= 0 ? '+' : ''}${p.unrealized_pnl_pct.toFixed(2)}%` : ''}>
+                                        {isOpenPos && p.unrealized_pnl != null ? `€${p.unrealized_pnl >= 0 ? '+' : ''}${p.unrealized_pnl.toFixed(3)}` : '—'}
+                                      </td>
                                       <td className="py-1.5 pr-2 text-right text-slate-400">{p.stats?.trades || 0}</td>
                                       <td className={`py-1.5 pr-2 text-right ${pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>€{pnl.toFixed(2)}</td>
                                       <td className="py-1.5 text-right">

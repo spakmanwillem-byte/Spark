@@ -705,7 +705,7 @@ export function TraderPage({ onNavigate }) {
                         </div>
                       </div>
                     )}
-                    <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-2 auto-rows-fr">
                       {(() => {
                         // v6_shadow_pot_001 — Build per-pot shadow lookup
                         const shadowByPot = {};
@@ -771,38 +771,15 @@ export function TraderPage({ onNavigate }) {
                                 <p className="text-[9px] text-slate-500 truncate">{p.market || '—'}</p>
                               </div>
                             ) : open ? (
-                              <div>
+                              <div title={
+                                `Aankoop: €${p.position.entry_price?.toFixed(4)}` +
+                                (p.current_price != null ? `\nHuidig: €${p.current_price.toFixed(4)}` : '') +
+                                (p.unrealized_pnl != null ? `\nOpen P&L: ${p.unrealized_pnl >= 0 ? '+' : ''}€${p.unrealized_pnl.toFixed(3)} (${p.unrealized_pnl_pct >= 0 ? '+' : ''}${p.unrealized_pnl_pct?.toFixed(2)}%)` : '') +
+                                (p.position.trailing_active && p.position.highest_price ? `\nTrailing piek: €${p.position.highest_price.toFixed(4)}` : '')
+                              }>
                                 <p className="text-[9px] text-green-400 font-bold">GEKOCHT</p>
-                                {/* v13_pot_open_price_clarity_001 — toon aankoop → huidige prijs
-                                    zodat unrealized winst direct duidelijk is (voorheen alleen
-                                    entry_price zichtbaar; unrealized P&L verborgen achter
-                                    live_value in de header en gerealiseerde stats.total_pnl
-                                    onderaan gaf 0 → verwarrend). */}
-                                <p className="text-[9px] text-slate-400" title={`Aankoop: €${p.position.entry_price?.toFixed(4)}${p.current_price ? ` — Nu: €${p.current_price.toFixed(4)}` : ''}`}>
-                                  @ €{p.position.entry_price?.toFixed(2)}
-                                  {p.current_price != null && (
-                                    <span className={`ml-1 ${p.current_price >= p.position.entry_price ? 'text-green-300' : 'text-red-300'}`}>
-                                      → €{p.current_price.toFixed(2)}
-                                    </span>
-                                  )}
-                                </p>
-                                {p.unrealized_pnl != null && (
-                                  <p className={`text-[9px] font-semibold ${p.unrealized_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
-                                     title="Open winst/verlies (nog niet verkocht)">
-                                    {p.unrealized_pnl >= 0 ? '+' : ''}€{p.unrealized_pnl.toFixed(3)}
-                                    {p.unrealized_pnl_pct != null && (
-                                      <span className="ml-0.5 text-[8px] opacity-80">
-                                        ({p.unrealized_pnl_pct >= 0 ? '+' : ''}{p.unrealized_pnl_pct.toFixed(2)}%)
-                                      </span>
-                                    )}
-                                  </p>
-                                )}
-                                {p.position.trailing_active && (
-                                  <p className="text-[9px] text-emerald-300"
-                                     title={`Trailing stop geactiveerd bij piek €${p.position.highest_price?.toFixed(4)} (bot vergrendelt winst)`}>
-                                    🔒 trailing (piek €{p.position.highest_price?.toFixed(2)})
-                                  </p>
-                                )}
+                                <p className="text-[9px] text-slate-400">@ €{p.position.entry_price?.toFixed(2)}</p>
+                                {p.position.trailing_active && <p className="text-[9px] text-emerald-300">🔒 trailing</p>}
                                 {activeShadows.map(as => (
                                   <p key={as.shadow_id} className="text-[9px] text-purple-300 font-semibold mt-0.5" title={as.trigger_reason || ''}>
                                     🌑 S{as.slot}/3 @ €{as.entry_price?.toFixed(2)}
@@ -815,7 +792,7 @@ export function TraderPage({ onNavigate }) {
                             <div className="flex justify-between mt-1">
                               <span className="text-[9px] text-slate-500">{p.stats?.trades || 0} trades</span>
                               <span className={`text-[9px] ${pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
-                                    title="Gerealiseerde totaal-P&L (som van afgeronde trades)">
+                                    title="Gerealiseerde totaal-P&L (gesloten trades). Open winst zie je in de hover-tooltip.">
                                 €{pnl.toFixed(3)}
                               </span>
                             </div>

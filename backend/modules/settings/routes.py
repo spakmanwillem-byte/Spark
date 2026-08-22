@@ -44,6 +44,7 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "login_dots_count": {"type": "int", "scope": "system", "min": 4, "max": 24},        # aantal glow-puntjes (default 8)
     "login_dots_contrast": {"type": "float", "scope": "system", "min": 0.1, "max": 1.0},# opacity/contrast (default 0.6)
     "login_dots_size": {"type": "float", "scope": "system", "min": 0.5, "max": 3.0},    # grootte-multiplier (default 1.0)
+    "login_dots_fade": {"type": "float", "scope": "system", "min": 0.0, "max": 1.0},    # rand-fade (0=gelijkmatig, 1=alleen midden)
     "login_corner_glow_enabled": {"type": "bool", "scope": "system"},                    # aan/uit vinkje (default true)
     "login_corner_glow_color_a": {"type": "str", "scope": "system"},                     # linksboven hex (default primary)
     "login_corner_glow_color_b": {"type": "str", "scope": "system"},                     # rechtsonder hex (default secondary)

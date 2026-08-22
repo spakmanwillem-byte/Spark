@@ -3,6 +3,12 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-22 (sessie 53 vervolg) — Login-dots rand-fade + Emergent default OFF + widget-labels
+
+### 🎚️ v13_login_dots_fade_setting_001 — rand-fade slider werkt
+Backend allowlist in `settings/routes.py` miste de key `login_dots_fade` waardoor de slider "Rand-fade (buiten zachter)" een `Onbekende setting 'login_dots_fade'`-fout gaf. Frontend + LoginForm gebruikten 'm al. Fix: toegevoegd aan SCHEMA met bereik `[0.0, 1.0]`. Value 0.3 succesvol opgeslagen + terug uitgelezen ✓.
+
+
 ## 2026-02-22 (sessie 53 vervolg) — Roles-array + productie ZIP-merge + LLM-diag fix
 
 ### 🐄 v13_roles_array_001 — Zorgboerderij foundation

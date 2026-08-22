@@ -63397,11 +63397,35 @@
         "session_id": "post-fix-002",
         "gesprek_nummer": 2518
       }
+    },
+    {
+      "id": "conv-21f41f05",
+      "timestamp": "2026-08-22T12:30:53.831077+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "even testen",
+      "spark_response": "Oké, laten we even kijken. Wat wil je precies testen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "spark",
+        "used_cards": [
+          "kbv2-0e1e7f9c",
+          "kbv2-0cfd731e",
+          "kbv2-c5066cd1",
+          "kbv2-b10cab5a",
+          "kbv2-fix-93584f94ad"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2519
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2518,
-    "last_updated": "2026-08-22T12:21:52.817627+00:00"
+    "total_conversations": 2519,
+    "last_updated": "2026-08-22T12:30:53.831077+00:00"
   }
 }

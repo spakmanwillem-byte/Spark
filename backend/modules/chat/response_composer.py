@@ -360,6 +360,40 @@ async def compose_response(
     bijbel = _load_bijbel_essence()
     turns = _load_recent_turns(session_id) if session_id else []
 
+    # v13_semantic_lookup_gap_offer_001 (sessie 53) — Zelflerende loop:
+    # Als semantic_lookup een relevante kaart met ws5-gap teruggaf, plaats
+    # kb_fill_pending offer in session_state. De bestaande state-machine in
+    # chat/routes.py (fasen offer → awaiting_answer → awaiting_confirm) pikt
+    # dan Willem's volgende bericht op en PATCHt de kaart automatisch.
+    # Voorwaarden:
+    #   • user_id aanwezig
+    #   • geen actieve kb_fill_pending (respecteer lopende flow)
+    #   • ten minste 1 kaart met _ws5_gap=True EN score >= 10 (relevant genoeg)
+    if user_id and cards:
+        try:
+            from modules.chat import session_state as _ss
+            from modules.chat import wedervraag_service as _wv
+            cur_state = _ss.get_state(user_id) or {}
+            if not cur_state.get("kb_fill_pending"):
+                gap_cards = [c for c in cards
+                             if c.get("_ws5_gap") and int(c.get("_match_score", 0)) >= 10]
+                if gap_cards:
+                    # Pak hoogst-scorende gap-kaart
+                    top_gap = sorted(gap_cards, key=lambda c: -int(c.get("_match_score", 0)))[0]
+                    offer = _wv.build_offer_from_card(top_gap)
+                    if offer:
+                        _ss.set_state(user_id, kb_fill_pending={
+                            "phase": "awaiting_answer",   # skip offer-fase — de gap is al genoemd in prompt
+                            "entry_id": offer["entry_id"],
+                            "begrip": offer["begrip"],
+                            "field": offer["field"],
+                            "question": offer["question"],
+                            "source": "semantic_lookup_gap",
+                        })
+        except Exception as _gex:
+            # Loop mag composer nooit blokkeren
+            pass
+
     # v6_topic_tracker_001 — detecteer dominant onderwerp over recente turns
     tt_cfg = bp.get("topic_tracker", {}) or {}
     topic: Optional[str] = None

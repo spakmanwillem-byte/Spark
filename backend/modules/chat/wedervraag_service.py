@@ -349,6 +349,38 @@ def format_offer(offer: dict) -> str:
     )
 
 
+def build_offer_from_card(card: dict) -> Optional[dict]:
+    """v13_semantic_lookup_gap_offer_001 — bouw kb_fill_pending offer uit een
+    kaart die door semantic_lookup als ws5-gap gemarkeerd is.
+
+    Verschil met pick_random_kbv2_card_with_gap:
+      - Die pakt een willekeurige kaart bij "kan ik wat voor je doen"-trigger
+      - Deze pakt een SPECIFIEKE kaart die net in het gesprek relevant was
+        (dus veel relevanter voor Willem om te beantwoorden)
+
+    Returns offer-dict met dezelfde vorm als pick_random_kbv2_card_with_gap.
+    """
+    eid = card.get("id") or ""
+    begrip = (card.get("begrip") or "").strip()
+    if not eid or not begrip:
+        return None
+    ws = card.get("ws5") or {}
+    if not isinstance(ws, dict):
+        return None
+    empty_fields = [f for f in FIELD_PRIORITY if not str(ws.get(f) or "").strip()]
+    if not empty_fields:
+        return None
+    field = empty_fields[0]
+    return {
+        "entry_id": eid,
+        "begrip": begrip,
+        "field": field,
+        "lade": card.get("lade") or card.get("_lade") or "",
+        "question": build_question(field, begrip),
+        "source": "semantic_lookup_gap",  # onderscheid met random-pick
+    }
+
+
 def format_paraphrase(begrip: str, field: str, answer: str) -> str:
     """Bouw parafrase voor bevestiging."""
     field_label = {

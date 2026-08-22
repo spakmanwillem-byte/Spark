@@ -50,6 +50,23 @@ export function TraderPage({ onNavigate }) {
   const [decisions, setDecisions] = useState([]);
   const monitorPollRef = useRef(null);
 
+  // v13_trader_dual_monitor_badge_001 (sessie 53) — Willem: "als ik in trader
+  // aan zet moet de ander ook groen worden anders verwart". Bij admin: haal
+  // ALLE bots-statussen op zodat naast de walletView-switch beide status-dots
+  // zichtbaar zijn (Spark: aan/uit  |  Willem: aan/uit). Voorkomt de illusie
+  // "AnalyticsPage klopt niet met TraderPage".
+  const [allBotsStatus, setAllBotsStatus] = useState([]);
+  useEffect(() => {
+    if (!isAdmin) return;
+    const fetchAll = () => fetch(`${API}/api/trade/admin/bots`)
+      .then(r => r.json())
+      .then(d => setAllBotsStatus(d.bots || []))
+      .catch(() => {});
+    fetchAll();
+    const id = setInterval(fetchAll, 5000);
+    return () => clearInterval(id);
+  }, [isAdmin]);
+
   // Live Bitvavo balance
   const [bvBalance, setBvBalance] = useState(null);
 
@@ -402,11 +419,25 @@ export function TraderPage({ onNavigate }) {
             {isAdmin && (
               <div data-testid="wallet-switch" className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg border border-slate-700">
                 <button onClick={() => setWalletView('me')} data-testid="wallet-switch-me"
-                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1 ${walletView === 'me' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1.5 ${walletView === 'me' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}
+                  title={(() => {
+                    const b = allBotsStatus.find(x => x.user_id === (user?.id || 'user-001'));
+                    return b?.running ? `Jouw monitor draait (${b.cycles || 0} cycles)` : 'Jouw monitor staat uit';
+                  })()}
+                >
+                  {/* v13_trader_dual_monitor_badge_001 — status-dot voor 'me' */}
+                  <span className={`w-1.5 h-1.5 rounded-full ${(allBotsStatus.find(x => x.user_id === (user?.id || 'user-001'))?.running) ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600'}`} />
                   👤 Mijn
                 </button>
                 <button onClick={() => setWalletView('spark')} data-testid="wallet-switch-spark"
-                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'spark' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1.5 ${walletView === 'spark' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}
+                  title={(() => {
+                    const b = allBotsStatus.find(x => x.user_id === 'user-000');
+                    return b?.running ? `Spark's monitor draait (${b.cycles || 0} cycles)` : "Spark's monitor staat uit";
+                  })()}
+                >
+                  {/* v13_trader_dual_monitor_badge_001 — status-dot voor 'spark' */}
+                  <span className={`w-1.5 h-1.5 rounded-full ${(allBotsStatus.find(x => x.user_id === 'user-000')?.running) ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600'}`} />
                   🌟 Spark
                 </button>
               </div>

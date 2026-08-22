@@ -53,6 +53,40 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 
 Enige overgebleven "issue" (Spark pot-001 audit vs stats drift €0.25) is verklaarbaar: 1 echte trade met winst zonder audit + 1 gerepareerde audit met verlies. Geen bug.
 
+### 🌱 BACKLOG-CONCEPT (sessie 53) — Attente Spark met privacy-matrix
+
+**Idee** (Willem + Emmy): Spark wordt attent per gradatie. Voorbeeld: Willem zegt *"mijn moeder Heidi"* → Spark checkt of Heidi als user bestaat, checkt haar privacy-matrix voor gradatie 2 (familie), ziet dat verjaardag gedeeld is met familie → Spark aan Willem: *"Trouwens: morgen is Heidi jarig — vergeet geen cadeau."*
+
+**Kern**: gradaties krijgen inhoud als privacy-grens. Elke user beheert per info-categorie × gradatie wie wat mag zien.
+
+**Regel**:
+- G1-G2 (self + familie): Spark mag attent zijn met gedeelde info
+- G3 (vrienden): alleen wat expliciet gedeeld
+- G4+ (community/klanten): nooit cross-container info
+- Elke user opt-in per veld × gradatie (default = niks)
+
+**Voorbeeld-matrix per user**:
+```
+                Familie  Vrienden  Community  Klanten
+Verjaardag       ✅       ✅         ☐          ☐
+Adres            ✅       ☐         ☐          ☐
+Telefoon         ✅       ✅         ☐          ☐
+```
+
+**Uitdagingen om over na te denken**:
+- Asymmetrische relaties (A ziet B als familie, B niet omgekeerd → shadow-vraag)
+- Onboarding-leegte (default = niks delen → dormant feature. Fix: 3 presets Open/Voorzichtig/Gesloten)
+- Rollen-conflict (Roeline = vriend én cliënt → bij twijfel strengste kiezen)
+- UI-complexiteit (6 gradaties × 15 velden = 90 vinkjes → progressive disclosure)
+
+**Afhankelijkheden** (in volgorde):
+1. Rollen-array op relationships.json (`roles: []`)
+2. `/data/persons/{user_id}_privacy_matrix.json`
+3. Cross-user relatie-verificatie via bestaande shadow-vragen queue
+4. Attente-hook in `response_composer` (pre-check bij persoons-mention)
+
+**Waarom bijzonder**: dit is niet "Spark wordt slimmer" maar **"Spark wordt betrouwbaarder"**. Combineert met de andere principes van sessie 53 (reden zichtbaar, retrieval-gap-hints, zelflerende loop) tot één consistente ethiek: **Spark is nooit stiller dan de user hem ingesteld heeft, en nooit luider ook**.
+
 ### 💾 Backups (alles reversibel)
 - `data/financial/user_potjes.json.bak_phantom_loss_repair_20260822_062648`
 - `data/financial/user_potjes.json.bak_maxsize_fix_20260822_064245`

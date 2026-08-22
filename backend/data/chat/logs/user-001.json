@@ -63066,11 +63066,83 @@
         "session_id": "test-D",
         "gesprek_nummer": 2504
       }
+    },
+    {
+      "id": "conv-a926233c",
+      "timestamp": "2026-08-22T09:40:50.401092+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2505
+      }
+    },
+    {
+      "id": "conv-d4860b6d",
+      "timestamp": "2026-08-22T09:40:50.466015+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2506
+      }
+    },
+    {
+      "id": "conv-853de17c",
+      "timestamp": "2026-08-22T09:40:53.269604+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2507
+      }
+    },
+    {
+      "id": "conv-a8658a62",
+      "timestamp": "2026-08-22T09:40:53.395950+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2508
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2504,
-    "last_updated": "2026-08-22T09:33:26.891841+00:00"
+    "total_conversations": 2508,
+    "last_updated": "2026-08-22T09:40:53.395950+00:00"
   }
 }

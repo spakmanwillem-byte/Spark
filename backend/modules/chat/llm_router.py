@@ -227,11 +227,12 @@ async def _try_emergent_emergency(
     temperature: float,
     max_tokens: int,
 ) -> Dict[str, Any]:
-    """v10_llm_emergency_default_on_001 — Laatste redmiddel: Emergent Universal Key (Claude).
-    Default AAN sinds sessie 47 (Groq TPD-limit haalde Spark vandaag onderuit).
-    Kost credits van Emergent LLM key. Uit te zetten via env: LLM_EMERGENCY_USE_EMERGENT=false.
+    """v13_emergent_default_off_001 (sessie 53) — Emergent Universal Key is nu
+    default UIT (Willem: 'alleen nood nood'). Enige route naar Emergent is een
+    expliciete `LLM_EMERGENCY_USE_EMERGENT=true` in env-vars.
+    Kost credits — vandaar opt-in i.p.v. opt-out.
     """
-    if os.environ.get("LLM_EMERGENCY_USE_EMERGENT", "true").lower() != "true":
+    if os.environ.get("LLM_EMERGENCY_USE_EMERGENT", "false").lower() != "true":
         return {"success": False, "error": "emergency_disabled", "provider": "emergent"}
     key = os.environ.get("EMERGENT_LLM_KEY", "").strip()
     if not key:

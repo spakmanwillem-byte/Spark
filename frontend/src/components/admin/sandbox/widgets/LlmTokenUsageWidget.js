@@ -34,9 +34,11 @@ export function LlmTokenUsageWidget() {
 
   const providers = usage?.providers || [
     // Placeholder-data als endpoint 404 gaf
-    { naam: 'Groq (llama-3.3-70b)', used: 94838, limit: 100000, tier: 'on_demand' },
-    { naam: 'Cerebras', used: null, limit: null, tier: 'unknown', note: 'hook nog niet gebouwd' },
-    { naam: 'Emergent LLM Key', used: null, limit: null, tier: 'unlimited', note: 'geen dag-limiet' },
+    // v13_model_alias_self_heal_001: modelnaam gealigneerd met huidige Groq-model
+    // (llama-3.3-70b is 16-aug 2025 gedeprecateerd, code swapt naar gpt-oss-120b).
+    { naam: 'Groq (openai/gpt-oss-120b)', used: 94838, limit: 100000, tier: 'on_demand' },
+    { naam: 'Cerebras (gpt-oss-120b)', used: null, limit: null, tier: 'unknown', note: 'hook nog niet gebouwd' },
+    { naam: 'Emergent LLM Key', used: null, limit: null, tier: 'noodrem', note: 'default UIT — alleen expliciet aan' },
   ];
 
   return (

@@ -45,12 +45,26 @@ Productie draaide nog op env-var `LLM_PRIMARY_MODEL=llama-3.3-70b-versatile` (do
 
 **Fix**: `_DEPRECATED_MODEL_ALIAS` map in `llm_router.py` swapt automatisch 4 bekende gedeprecateerde Groq-modellen naar `openai/gpt-oss-120b` bij `_get_provider()`. Waarschuwing in logs bij eerste substitutie. Modern model blijft onaangeraakt.
 
-**Effect**: na redeploy werkt productie zonder dat env-vars aangepast hoeven te worden. Emergent-fallback staat default aan (`LLM_EMERGENCY_USE_EMERGENT` default `true`), dus met bijgevulde credits werkt de emergency-tier ook als Groq per ongeluk faalt.
+### 🚫 v13_emergent_default_off_001 — Emergent-key alleen op verzoek
+Default omgedraaid van `true` naar `false`. Emergent Universal Key wordt nu alléén gebruikt als env-var `LLM_EMERGENCY_USE_EMERGENT=true` expliciet gezet is. Willem: *"alleen nood nood"*. Voorheen: default `true` → onbedoeld credits opgemaakt.
+
+**Provider chain nu**:
+```
+1. Groq        → openai/gpt-oss-120b   (primary)
+2. Cerebras    → gpt-oss-120b          (fallback)
+3. Emergent    → default UIT           (alleen als env-var expliciet true)
+```
+
+### 🎨 Widget-label sync
+`LlmTokenUsageWidget.js` toonde nog `Groq (llama-3.3-70b)` — placeholder ge-updated naar `Groq (openai/gpt-oss-120b)` + Cerebras krijgt naam-label + Emergent staat als `noodrem, default UIT`.
+
+**Effect**: na redeploy werkt productie zonder dat env-vars aangepast hoeven te worden. Emergent-fallback verbruikt geen credits meer tenzij expliciet aangezet.
 
 **Live-verificatie preview**:
 - Deprecated env → swap-log + `openai/gpt-oss-120b` in provider config ✓
 - Modern env → geen swap ✓
 - Chat-call na fix → success via `primary/openai/gpt-oss-120b`, latency <2s ✓
+- Provider chain check → 2 providers actief (Groq + Cerebras), Emergent uit ✓
 
 
 ## 2026-02-22 (sessie 53) — Trader Accounting Hygiene sprint

@@ -62712,11 +62712,113 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2493
       }
+    },
+    {
+      "id": "conv-f8647bde",
+      "timestamp": "2026-08-22T09:23:56.244740+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "dinsdag 26 februari 11:00 tot 13:00 tuin werk bij Roeline",
+      "spark_response": "Ik hoorde dat je dinsdag om 11:00 iets met tuin bij Roeline hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "februari"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "test-agenda-bug",
+        "gesprek_nummer": 2494
+      }
+    },
+    {
+      "id": "conv-c8be2d66",
+      "timestamp": "2026-08-22T09:24:13.167244+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "dinsdag 26 februari 11:00 tot 13:00 tuin werk bij Roeline",
+      "spark_response": "Ik hoorde dat je dinsdag om 11:00 iets met tuin bij Roeline hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "februari"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "test-agenda-bug",
+        "gesprek_nummer": 2495
+      }
+    },
+    {
+      "id": "conv-1b29d653",
+      "timestamp": "2026-08-22T09:24:13.393176+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja graag",
+      "spark_response": "Genoteerd! 'Tuin bij Roeline' staat in je agenda.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "graag"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "test-agenda-bug",
+        "gesprek_nummer": 2496
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2493,
-    "last_updated": "2026-08-22T06:26:18.569507+00:00"
+    "total_conversations": 2496,
+    "last_updated": "2026-08-22T09:24:13.393176+00:00"
   }
 }

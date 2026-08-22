@@ -65,6 +65,24 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 
 Enige overgebleven "issue" (Spark pot-001 audit vs stats drift €0.25) is verklaarbaar: 1 echte trade met winst zonder audit + 1 gerepareerde audit met verlies. Geen bug.
 
+### 🐛 PARKED-BUGS (sessie 53, ontdekt via LLM-hallucinatie-audit 22 feb) — wacht op Willem's terugkeer
+
+**Bug 1 — Zelfscan verzint statistieken** (P1)
+- **Symptoom**: Bij commando "doe eens een zelfscan" verzint de LLM percentages (bv. "73% blij, 12% neutraal") die niet in de data staan.
+- **Grond-waarheid** (uit `pipeline_shadow/2026-08-*.jsonl`, 22 events): 95% neutraal, 5% blij. Niks lijkt op wat Spark rapporteerde.
+- **Root cause**: Er is geen `selfscan_fact_tool` die de emotie-jsonl leest en samenvat naar de prompt. LLM krijgt daarom géén cijfers en vult ze creatief in.
+- **Fix-richting**: Bouw `modules/system_status/selfscan_facts.py` dat leest uit `data/emotions/pipeline_shadow/*.jsonl` van laatste 24u/7d en een compact JSON-blokje meegeeft aan de LLM-prompt. Alternatief: fast-path zelfscan-intent die zelf de MD-tabel genereert, LLM alleen als toelichting.
+- **Waar te beginnen**: `response_composer.py` → detecteer intent "zelfscan" → hydrateer facts uit shadow-log → prompt met echte cijfers.
+
+**Bug 2 — Emotie-pipeline mislabelt negatieve zinnen** (P1)
+- **Symptoom**: `msg_preview: "jammer, ik voel me niet zo goed"` → geclassificeerd als `emotie: "blij"` (moet verdrietig/laag zijn).
+- **Grond-waarheid**: 1/22 gevonden case, maar dit is een confidence-critical misdetectie voor Attente Spark.
+- **Root cause**: Onbekend — te onderzoeken in `modules/chat/emotion_service.py`. Waarschijnlijk LLM-prompt te enthousiast of geen negatieve-signaal-woordenlijst.
+- **Fix-richting**: (a) Voeg negatieve-woorden-veto toe (jammer, niet goed, verdrietig, moe, boos) die "blij" hard tegenspreekt. (b) Voeg de misdetectie toe aan een pytest-fixture. (c) Overweeg LLM-prompt te verstevigen met tegenvoorbeelden.
+- **Waar te beginnen**: `emotion_service.py` (deel dat labelt) + evt. `data/emotions/emotion_triggers.json`.
+
+Beide bugs geparkeerd op verzoek van Willem — pak op zodra hij zich meldt.
+
 ### 🌱 BACKLOG-CONCEPT (sessie 53) — Attente Spark met privacy-matrix
 
 **Idee** (Willem + Emmy): Spark wordt attent per gradatie. Voorbeeld: Willem zegt *"mijn moeder Heidi"* → Spark checkt of Heidi als user bestaat, checkt haar privacy-matrix voor gradatie 2 (familie), ziet dat verjaardag gedeeld is met familie → Spark aan Willem: *"Trouwens: morgen is Heidi jarig — vergeet geen cadeau."*

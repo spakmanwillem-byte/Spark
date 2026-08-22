@@ -173,6 +173,17 @@ def mint_tokens(user_id: str, n_tokens: int, source: str = "manual",
         except Exception as _ex:
             print(f"[mint] container sync (non-blocking): {_ex}")
 
+        # v13_auto_baseline_on_mint_001 — trigger auto_provision zodat mint-only
+        # users (bijv. via boekhouding auto-mint scheduler) ook een bot-config
+        # + baseline krijgen. Idempotent: als bot al configured is, alleen
+        # baseline-hook draait. Voorkomt dat nieuwe users vast lopen op
+        # "live_pnl = alles is winst".
+        try:
+            from modules.trade.monitor import auto_provision_bot_for_token_holder
+            auto_provision_bot_for_token_holder(user_id, use_mock=False, auto_trade=True, autostart=False)
+        except Exception as _ex:
+            print(f"[mint] auto-provision (non-blocking): {_ex}")
+
     # v10_log_reserve_001 — Log-agent + Reserve-kluis
     try:
         from .agents.log_agent import LogAgent

@@ -1684,6 +1684,39 @@ def auto_provision_bot_for_token_holder(
     except Exception:
         pass
 
+    # v13_auto_baseline_on_provision_001 — Bij eerste token/pot voor deze user:
+    # zet baseline = huidige Bitvavo total. Dat zorgt dat `live_pnl` correct
+    # start op €0 in plaats van "€123 = alles is winst". Idempotent: alleen
+    # als user nog geen baseline > 0 heeft.
+    baseline_set = None
+    try:
+        from pathlib import Path as _P
+        from modules.core.storage import load_json as _lj, save_json as _sj
+        _bl_fp = _P(__file__).parent.parent.parent / "data" / "trade" / "capital_baseline.json"
+        _bl_data = _lj(_bl_fp, default={}) or {}
+        _cur = _bl_data.get(user_id)
+        _cur_eur = None
+        if isinstance(_cur, (int, float)):
+            _cur_eur = float(_cur)
+        elif isinstance(_cur, dict):
+            _cur_eur = _cur.get("baseline_eur")
+
+        if not _cur_eur or _cur_eur <= 0:
+            _bv = fetch_bitvavo_balance(user_id)
+            if _bv.get("success"):
+                _total = round(float(_bv.get("total_eur") or 0), 2)
+                if _total > 0:
+                    _bl_data[user_id] = {
+                        "baseline_eur": _total,
+                        "set_at": datetime.now(timezone.utc).isoformat(),
+                        "note": "auto-set bij eerste token-provision (v13_auto_baseline_on_provision_001)",
+                    }
+                    _bl_fp.parent.mkdir(parents=True, exist_ok=True)
+                    _sj(_bl_fp, _bl_data)
+                    baseline_set = _total
+    except Exception as _blex:
+        logger.warning(f"auto-baseline failed for {user_id} (non-blocking): {_blex}")
+
     # v7_shadow_removed_001 — Shadow auto-ensure block removed.
 
     return {
@@ -1695,6 +1728,7 @@ def auto_provision_bot_for_token_holder(
         "configured": getattr(m, "_user_configured", False),
         "started": started,
         "running": bool(getattr(m, "_running", False)),
+        "baseline_auto_set_eur": baseline_set,
     }
 
 

@@ -13,7 +13,7 @@ Strategie:
 """
 from pathlib import Path
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from modules.core.storage import load_json
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
@@ -82,6 +82,56 @@ def extract_datetime(text: str, now: datetime = None):
             else:
                 default_hour, default_minute = h, m
             break
+
+    # v13_agenda_explicit_date_001 (sessie 53) — Willem: "als ik zeg 'dinsdag'
+    # is dat de eerste dinsdag van nu. Zeg ik 'dinsdag 26 februari', dan die
+    # datum, ook als het niet de eerstvolgende dinsdag is. Verleden mag ook:
+    # 'ik ben vergeten gisteren te noteren dat ik werkte'."
+    # Check EERST op expliciete datum (zoals "26 februari" of "26-02" of "26/2")
+    # zodat die de weekdag-heuristiek overschrijft.
+    if base_date is None:
+        MAANDEN = {
+            "januari": 1, "jan": 1, "februari": 2, "feb": 2,
+            "maart": 3, "mrt": 3, "april": 4, "apr": 4,
+            "mei": 5, "juni": 6, "jun": 6, "juli": 7, "jul": 7,
+            "augustus": 8, "aug": 8, "september": 9, "sep": 9, "sept": 9,
+            "oktober": 10, "okt": 10, "november": 11, "nov": 11,
+            "december": 12, "dec": 12,
+        }
+        # Patroon 1: "26 februari" of "26 feb" (optioneel jaartal)
+        m = re.search(
+            r"\b(\d{1,2})\s+(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december|jan|feb|mrt|apr|jun|jul|aug|sep|sept|okt|nov|dec)\b(?:\s+(\d{4}))?",
+            text_lower,
+        )
+        if m:
+            try:
+                day = int(m.group(1))
+                month = MAANDEN[m.group(2)]
+                year = int(m.group(3)) if m.group(3) else now.year
+                # v13_agenda_explicit_date_001 — als datum al voorbij dit jaar
+                # ligt EN gebruiker noemt geen expliciet jaar, ga ervan uit dat
+                # het (a) verleden = achteraf-registratie ← toegestaan
+                # of (b) een typo → simpelweg gebruiken (respect user intent).
+                base_date = date(year, month, day)
+                dag_woord = f"{day} {m.group(2)}"
+            except (ValueError, KeyError):
+                pass  # ongeldige datum → val terug op weekdag-heuristiek
+
+        # Patroon 2: "26-02", "26/2", "26-2-2026"
+        if base_date is None:
+            m = re.search(r"\b(\d{1,2})[-/](\d{1,2})(?:[-/](\d{2,4}))?\b", text_lower)
+            if m:
+                try:
+                    day = int(m.group(1))
+                    month = int(m.group(2))
+                    year_raw = m.group(3)
+                    year = int(year_raw) if year_raw else now.year
+                    if year < 100:
+                        year += 2000
+                    base_date = date(year, month, day)
+                    dag_woord = f"{day}-{month:02d}"
+                except (ValueError, KeyError):
+                    pass
 
     # Relatieve dag (vandaag/morgen)
     if base_date is None:
@@ -262,8 +312,11 @@ def detect_agenda_intent(text: str, now: datetime = None, user: dict = None) -> 
             now_cmp = now.replace(tzinfo=None)
         else:
             now_cmp = now
-        if target < now_cmp:
-            return {"has_intent": False}
+        # v13_agenda_explicit_date_001 — verleden toestaan (achteraf-registratie:
+        # "vergeten gisteren te noteren dat ik gewerkt heb"). Voorheen: `target
+        # < now_cmp` returnde has_intent=False → user's registratie verdween.
+        # Nu: alleen filter als de datum-parser NIETS vond (dan zou dit een
+        # relatieve match zijn die per ongeluk naar het verleden slaat).
     except Exception:
         return {"has_intent": False}
 
@@ -277,9 +330,36 @@ def detect_agenda_intent(text: str, now: datetime = None, user: dict = None) -> 
     if waar and waar.lower() == (wat or "").lower():
         waar = ""
 
+    # v13_agenda_end_time_001 (sessie 53) — Willem: "11:00 tot 13:00" → bewaar
+    # ook einde. Voorheen: alleen start-tijd, duur ging verloren → uren-registratie
+    # klopte niet. Zoek naar "start tot einde" of "van start tot einde" of
+    # "start-einde" (met dash tussen twee tijden).
+    end_iso = None
+    duration_minutes = None
+    m_end = re.search(
+        r"\b(\d{1,2})[:.]?(\d{2})?\s*(?:tot|-|—|totdat|to)\s*(\d{1,2})[:.]?(\d{2})?\s*(?:uur|u\b)?",
+        text.lower(),
+    )
+    if m_end:
+        try:
+            end_h = int(m_end.group(3))
+            end_m = int(m_end.group(4) or 0)
+            if 0 <= end_h <= 23 and 0 <= end_m <= 59:
+                base = datetime.fromisoformat(when_iso)
+                end_dt = base.replace(hour=end_h, minute=end_m)
+                if end_dt <= base:
+                    # bv "23:00 tot 01:00" → einde volgende dag
+                    end_dt = end_dt + timedelta(days=1)
+                end_iso = end_dt.isoformat()
+                duration_minutes = int((end_dt - base).total_seconds() / 60)
+        except (ValueError, TypeError):
+            pass
+
     return {
         "has_intent": True,
         "datetime_iso": when_iso,
+        "end_datetime_iso": end_iso,
+        "duration_minutes": duration_minutes,
         "raw_time": raw_time,
         "dag": dag,
         "tijd": tijd,

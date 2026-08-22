@@ -62814,11 +62814,263 @@
         "session_id": "test-agenda-bug",
         "gesprek_nummer": 2496
       }
+    },
+    {
+      "id": "conv-9a317f23",
+      "timestamp": "2026-08-22T09:29:35.417852+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "maak een notitie: bloembakken moeten volgende week worden verplaatst",
+      "spark_response": "Ik ken 'bloembakken' niet, maar herken er 'bloem' (natuur) en 'bakken' (proces) in. Klinkt als een samengesteld begrip — wat is een 'bloembakken' eigenlijk?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "verplaatst"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "compositional",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "compositional"
+      },
+      "metadata": {
+        "session_id": "test-notitie-bug",
+        "gesprek_nummer": 2497
+      }
+    },
+    {
+      "id": "conv-f0e34bcf",
+      "timestamp": "2026-08-22T09:29:37.140051+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bug: als ik agenda open zie ik niks in februari",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "februari"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "test-bug-bug",
+        "gesprek_nummer": 2498
+      }
+    },
+    {
+      "id": "conv-e1df4a01",
+      "timestamp": "2026-08-22T09:32:42.277340+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "dinsdag 26 februari 11:00 tot 13:00 tuin werk bij Roeline",
+      "spark_response": "Ik hoorde dat je 26 februari om 11:00 iets met tuin bij Roeline hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "februari"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "test-A",
+        "gesprek_nummer": 2499
+      }
+    },
+    {
+      "id": "conv-b5a4b817",
+      "timestamp": "2026-08-22T09:32:42.529883+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Genoteerd! 'Tuin bij Roeline' staat in je agenda.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "test-A",
+        "gesprek_nummer": 2500
+      }
+    },
+    {
+      "id": "conv-f52fe147",
+      "timestamp": "2026-08-22T09:32:42.752706+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "maak een notitie: bloembakken moeten volgende week worden verplaatst",
+      "spark_response": "📝 Notitie opgeslagen: **bloembakken moeten volgende week worden verplaatst**. Je kan 'm zien in 'Notities & Taken'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "verplaatst"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "make_note",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "note_created"
+      },
+      "metadata": {
+        "session_id": "test-B",
+        "gesprek_nummer": 2501
+      }
+    },
+    {
+      "id": "conv-25d87c6a",
+      "timestamp": "2026-08-22T09:32:42.954899+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bug: als ik agenda open zie ik niks in februari",
+      "spark_response": "🐛 Bug-melding opgeslagen: **als ik agenda open zie ik niks in februari**. Admin ziet 'm in de Bugs-tab (status: open).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "februari"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "make_bug",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "bug_created"
+      },
+      "metadata": {
+        "session_id": "test-C",
+        "gesprek_nummer": 2502
+      }
+    },
+    {
+      "id": "conv-99e9f97c",
+      "timestamp": "2026-08-22T09:33:26.680972+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "dinsdag 26 februari 11:00 tot 13:00 tuin werk bij Roeline",
+      "spark_response": "Ik hoorde dat je 26 februari om 11:00 iets met tuin bij Roeline hebt. Je agenda zit op die tijd al vol. Toch noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "februari"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "test-D",
+        "gesprek_nummer": 2503
+      }
+    },
+    {
+      "id": "conv-b0d1d060",
+      "timestamp": "2026-08-22T09:33:26.891841+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Genoteerd! 'Tuin bij Roeline' staat in je agenda.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "test-D",
+        "gesprek_nummer": 2504
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2496,
-    "last_updated": "2026-08-22T09:24:13.393176+00:00"
+    "total_conversations": 2504,
+    "last_updated": "2026-08-22T09:33:26.891841+00:00"
   }
 }

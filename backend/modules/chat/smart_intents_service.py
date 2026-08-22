@@ -175,9 +175,21 @@ def handle_agenda(user_id: str, user: Optional[dict], text: str) -> Dict:
 
 
 # ============== NOTE INTENT ==============
+# v13_write_intent_patterns_001 (sessie 53) — verbrede triggers voor "maak notitie",
+# "notitie", "bug", "taak". Voorheen: `maak notitie: X` matchte, maar `maak EEN
+# notitie: X` niet (de "een" brak de regex). Willem's gebruik: hij schrijft
+# natuurlijk Nederlands, niet clipped-commands. Elk patroon accepteert nu
+# optioneel: een/de/mijn/nieuwe tussen werkwoord en zelfstandig nw.
 _NOTE_PATTERNS = [
-    r"^\s*(maak |voeg )?(notitie|note)\s*[:\-]\s*(.+)$",
-    r"^\s*(noteer|onthoud)\s*[:\-]?\s*(.+)$",
+    r"^\s*(?:maak|voeg|schrijf|zet|noteer|onthoud|leg)\s+(?:eens\s+)?(?:een|de|mijn|nieuwe|deze)?\s*(?:nieuwe\s+)?(?:notitie|note|memo|aantekening)\s*(?:aan|toe|op|vast)?\s*[:\-]\s*(.+)$",
+    r"^\s*(?:nieuwe\s+)?(?:notitie|note|memo|aantekening)\s*[:\-]\s*(.+)$",
+    r"^\s*(?:noteer|onthoud|schrijf\s+op|leg\s+vast)\s*[:\-]?\s*(.+)$",
+]
+
+# v13_write_intent_patterns_001 — bug-intent kort én natuurlijk
+_BUG_PATTERNS = [
+    r"^\s*(?:meld|rapporteer|voeg\s+toe)?\s*(?:een\s+|de\s+)?(?:nieuwe\s+)?(?:bug|foutmelding|issue)\s*(?:rapport)?\s*[:\-]\s*(.+)$",
+    r"^\s*(?:er\s+is\s+(?:een\s+)?(?:bug|fout|probleem)|er\s+gaat\s+iets\s+mis)\s*[:\-]?\s*(.+)$",
 ]
 
 
@@ -214,6 +226,49 @@ def handle_note(user: Optional[dict], user_id: Optional[str], content: str) -> D
         "type": "note_created",
         "message": f"📝 Notitie opgeslagen: **{content[:80]}**. Je kan 'm zien in 'Notities & Taken'.",
         "note_id": note["id"],
+    }
+
+
+# v13_write_intent_patterns_001 — bug-detectie + write (analoog aan note-flow).
+def detect_bug_intent(text: str):
+    """Return (matched: bool, content: str|None)"""
+    if not text:
+        return False, None
+    t = text.strip()
+    for pat in _BUG_PATTERNS:
+        m = re.match(pat, t, re.IGNORECASE)
+        if m:
+            content = m.group(m.lastindex).strip()
+            if content and len(content) >= 5:
+                return True, content
+    return False, None
+
+
+def handle_bug(user: Optional[dict], user_id: Optional[str], content: str) -> Dict:
+    """Schrijf bug naar /data/bugs/bugs.json — zelfde bestand als bugs-module."""
+    bugs_fp = NOTES_FILE.parent.parent / "bugs" / "bugs.json"
+    bugs_fp.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(bugs_fp, default={"bugs": []})
+    bug = {
+        "id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "titel": content[:80],
+        "beschrijving": content,
+        "status": "open",
+        "severity": "medium",
+        "created": datetime.now(timezone.utc).isoformat(),
+        "created_by": (user or {}).get("naam") if user else user_id,
+        "source": "chat-intent",
+    }
+    data.setdefault("bugs", []).insert(0, bug)
+    save_json(bugs_fp, data)
+    return {
+        "type": "bug_created",
+        "message": (
+            f"🐛 Bug-melding opgeslagen: **{bug['titel']}**. "
+            f"Admin ziet 'm in de Bugs-tab (status: open)."
+        ),
+        "bug_id": bug["id"],
     }
 
 

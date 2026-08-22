@@ -1,17 +1,17 @@
 {
   "totals": {
-    "events": 1526,
+    "events": 1534,
     "corrections": 2,
     "confirmations": 4,
     "fallbacks": 0,
     "knowledge_matches": 700
   },
   "triggers_used": {
-    "wedervraag_done": 28,
+    "wedervraag_done": 29,
     "wedervraag": 44,
     "wedervraag_skip": 17,
     "agenda_overview": 7,
-    "make_note": 2,
+    "make_note": 3,
     "help_overview": 50,
     "suggest_action": 2,
     "clarify_question": 1,
@@ -33,8 +33,8 @@
     "identity_maker": 2,
     "identity_waarden": 1,
     "identity_uniek": 1,
-    "agenda_proposal": 7,
-    "agenda_created": 5,
+    "agenda_proposal": 9,
+    "agenda_created": 7,
     "thanks": 2,
     "homonym_reject": 3,
     "consent_declined": 1,
@@ -104,7 +104,7 @@
     "personalia_save": 7,
     "personalia_intrek": 2,
     "homonym_disambig": 3,
-    "compositional": 4,
+    "compositional": 5,
     "kbv2_neighbor": 1,
     "kbv2_direct": 1,
     "kb_fill_offer": 9,
@@ -116,16 +116,17 @@
     "kb_fill_skipped": 2,
     "trader_intent": 4,
     "agenda_declined": 1,
-    "contact_call": 3
+    "contact_call": 3,
+    "make_bug": 1
   },
   "response_types": {
     "knowledge": 344,
     "unknown": 34,
-    "wedervraag_done": 28,
+    "wedervraag_done": 29,
     "wedervraag": 44,
     "wedervraag_skip": 17,
     "agenda_overview": 7,
-    "note_created": 2,
+    "note_created": 3,
     "help_overview": 16,
     "suggest_action": 2,
     "clarify_question": 1,
@@ -149,8 +150,8 @@
     "identity_maker": 2,
     "identity_waarden": 1,
     "identity_uniek": 1,
-    "agenda_proposal": 7,
-    "agenda_created": 5,
+    "agenda_proposal": 9,
+    "agenda_created": 7,
     "thanks": 2,
     "homonym_question": 3,
     "consent_declined": 1,
@@ -224,7 +225,7 @@
     "personalia_save": 7,
     "personalia_intrek": 2,
     "homonym_disambig": 3,
-    "compositional": 4,
+    "compositional": 5,
     "kbv2_direct": 1,
     "kb_fill_offer": 9,
     "kb_fill_question": 7,
@@ -235,7 +236,8 @@
     "kb_fill_skipped": 2,
     "trader_intent": 4,
     "agenda_declined": 1,
-    "contact_call": 3
+    "contact_call": 3,
+    "bug_created": 1
   },
   "begrip_used": {
     "vroeg": 2,
@@ -602,6 +604,6 @@
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-08-22T09:24:13.454760+00:00",
+  "last_event_at": "2026-08-22T09:33:26.952818+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

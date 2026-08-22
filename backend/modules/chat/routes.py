@@ -944,6 +944,18 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "make_note")
             return response
 
+        # v13_write_intent_patterns_001 — Bug-melding: "bug: ..." vroeg in flow
+        # om compositional-hijack ("bloembakken → laag1+laag2") te vermijden.
+        # Willem: "als ik notitie of bug meld zegt Spark ja maar doet niks"
+        # → bevestigd: bug-intent bestond niet in main-route (alleen spark_handen
+        # late-path). Nu direct hier afhandelen naar /data/bugs/bugs.json.
+        bug_matched, bug_content = si.detect_bug_intent(text)
+        if bug_matched and bug_content:
+            out = si.handle_bug(_load_user(), req.user_id, bug_content)
+            response.update(out)
+            _save_log(req, response, "make_bug")
+            return response
+
         # v12_agenda_intent_split_001 — Route-splitter voor agenda-intents.
         # Voorheen: `smart_intents.detect_agenda_intent` (simpel — matcht op woord
         # "agenda") ving alles af → altijd overzicht. Nieuw event aanmaken werd
@@ -961,6 +973,8 @@ async def process_message(req: ChatMessage):
                 has_conflict = agenda_intent_service.has_agenda_conflict(req.user_id, create_intent["datetime_iso"])
                 pending = {
                     "datetime_iso": create_intent["datetime_iso"],
+                    "end_datetime_iso": create_intent.get("end_datetime_iso"),  # v13_agenda_end_time_001
+                    "duration_minutes": create_intent.get("duration_minutes"),   # v13_agenda_end_time_001
                     "raw_time": create_intent.get("raw_time"),
                     "wat": create_intent.get("wat"),
                     "waar": create_intent.get("waar"),
@@ -1156,6 +1170,9 @@ async def process_message(req: ChatMessage):
                 "titel": agenda_intent_service.format_event_title(pending_agenda),
                 "beschrijving": f"Genoteerd via chat: {pending_agenda.get('raw_text','')}",
                 "date": pending_agenda["datetime_iso"],
+                # v13_agenda_end_time_001 — bewaar eindtijd + duur als beschikbaar
+                "end_date": pending_agenda.get("end_datetime_iso"),
+                "duration_minutes": pending_agenda.get("duration_minutes"),
                 "location": pending_agenda.get("waar", ""),
                 "reminder": False,
                 "status": "upcoming",

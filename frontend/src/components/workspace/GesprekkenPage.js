@@ -459,36 +459,15 @@ export function GesprekkenPage({ onNavigate }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, selectedContact?.id, userId]);
 
-  // Welkomstboodschap ophalen (v4_welcome_001, sessie 30: Diep-welkom voor non-admin)
-  useEffect(() => {
-    if (activeTab !== 'spark' || !userId) return;
-    if (sparkMessages.length > 0) return; // al bezig met chat → niet overschrijven
-    let cancelled = false;
-    const useDeepWelcome = !isAdmin; // non-admin krijgt LLM-gegenereerd welkom
-    fetch(`${API}/api/chat/welcome`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_id: userId,
-        user_naam: userName,
-        deep: useDeepWelcome,
-      }),
-    })
-      .then(r => r.json())
-      .then(d => {
-        if (cancelled || !d?.message) return;
-        const msg = {
-          id: Date.now(),
-          role: 'spark',
-          message: d.message,
-          time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
-        };
-        setSparkMessages([msg]);
-      })
-      .catch(() => {});
-    return () => { cancelled = true; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, userId, isAdmin]);
+  // v13_no_auto_welcome_001 (sessie 53) — Willem: dubbele begroeting was raar.
+  // Spark opende chat met "Hallo Willem, klaar om iets te leren?" → user antwoordt
+  // "hallo Spark" → Spark antwoordt weer "hallo". Onnatuurlijk.
+  // Nu: chat begint LEEG. Paarse Spark-messages tonen vanzelf dat Spark er is
+  // zodra jij begint. Gevoel = normale chat-app. Backend /api/chat/welcome
+  // blijft bestaan voor eventuele bewuste opt-in later.
+  //
+  // Voorheen: useEffect die /api/chat/welcome aanriep en setSparkMessages([msg]).
+  // Verwijderd op verzoek Willem (sessie 53).
 
   const messagesEndRef = useRef(null);
 

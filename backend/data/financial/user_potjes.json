@@ -12,13 +12,16 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 1.338200008160396,
+            "highest_price": 1.338200008160396,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-22T11:27:55.078194+00:00",
+            "amount_eur": 10.23,
+            "cluster_id": "3e50fdb54b63",
+            "cluster_size": 1
           },
-          "market": "BCH-EUR",
+          "market": "ATOM-EUR",
           "stats": {
             "trades": 3,
             "wins": 1,
@@ -45,6 +48,14 @@
               "trade_id": "00000000-0000-041f-0100-0009dbbdab35",
               "entry_price": 253.64004860848297,
               "amount_eur": 10.13
+            },
+            {
+              "ts": "2026-08-22T11:27:55.078194+00:00",
+              "action": "BUY",
+              "cluster_id": "3e50fdb54b63",
+              "trade_id": "00000000-0000-0410-0100-0009e3f521ef",
+              "entry_price": 1.338200008160396,
+              "amount_eur": 10.23
             }
           ],
           "reconcile_audit": [
@@ -67,7 +78,7 @@
               "capital_after_repair": 10.0238
             }
           ],
-          "last_action": "SELL @ €239.71 | reconcile | netto €-0.607",
+          "last_action": "BUY cluster 3e50fd @ EUR1.3382",
           "original_max_size": 0.0
         },
         {
@@ -464,13 +475,16 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 1.338200008160396,
+            "highest_price": 1.338200008160396,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-22T11:27:52.384446+00:00",
+            "amount_eur": 10.23,
+            "cluster_id": "44a2df2b34ac",
+            "cluster_size": 1
           },
-          "market": "BCH-EUR",
+          "market": "ATOM-EUR",
           "stats": {
             "trades": 1,
             "wins": 0,
@@ -487,6 +501,14 @@
               "trade_id": "00000000-0000-041f-0100-0009dbbd792e",
               "entry_price": 253.39003248911803,
               "amount_eur": 10.13
+            },
+            {
+              "ts": "2026-08-22T11:27:52.384446+00:00",
+              "action": "BUY",
+              "cluster_id": "44a2df2b34ac",
+              "trade_id": "00000000-0000-0410-0100-0009e3f517ed",
+              "entry_price": 1.338200008160396,
+              "amount_eur": 10.23
             }
           ],
           "reconcile_audit": [
@@ -509,7 +531,7 @@
               "capital_after_repair": 10.13
             }
           ],
-          "last_action": "SELL @ €241.66 | reconcile | netto €-0.520",
+          "last_action": "BUY cluster 44a2df @ EUR1.3382",
           "original_max_size": 50.0
         },
         {

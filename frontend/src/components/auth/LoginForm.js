@@ -13,6 +13,7 @@ const LOGIN_GLOW_DEFAULTS = {
   dots_count: 8,
   dots_contrast: 0.6,
   dots_size: 1.0,
+  dots_fade: 0.0,   // v13s_login_glow_extras_002 — radial fade sterkte (0=uniform, 1=sterk midden→buiten)
   corner_enabled: true,
   corner_a: '#f59e0b',
   corner_b: '#f97316',
@@ -45,6 +46,7 @@ export function LoginForm() {
           dots_count: Number.isFinite(s.login_dots_count) ? s.login_dots_count : LOGIN_GLOW_DEFAULTS.dots_count,
           dots_contrast: Number.isFinite(s.login_dots_contrast) ? s.login_dots_contrast : LOGIN_GLOW_DEFAULTS.dots_contrast,
           dots_size: Number.isFinite(s.login_dots_size) ? s.login_dots_size : LOGIN_GLOW_DEFAULTS.dots_size,
+          dots_fade: Number.isFinite(s.login_dots_fade) ? s.login_dots_fade : LOGIN_GLOW_DEFAULTS.dots_fade,
           corner_enabled: s.login_corner_glow_enabled !== false,
           corner_a: s.login_corner_glow_color_a || LOGIN_GLOW_DEFAULTS.corner_a,
           corner_b: s.login_corner_glow_color_b || LOGIN_GLOW_DEFAULTS.corner_b,
@@ -168,21 +170,37 @@ export function LoginForm() {
             />
           </>
         )}
-        {dots.map((d, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              top: d.top, left: d.left,
-              width: `${d.size}px`, height: `${d.size}px`,
-              backgroundColor: d.color,
-              boxShadow: `0 0 ${d.size * 4}px ${d.color}`,
-              animation: `heartbeatDot 2.4s ease-in-out infinite`,
-              animationDelay: d.delay,
-              opacity: glow.dots_contrast,
-            }}
-          />
-        ))}
+        {/* v13s_login_glow_extras_002 — dots-container wrapper met radial-mask
+            (fade=0 → uniform, fade=1 → sterk midden→buiten donker). Voorkomt dat
+            de buiten-ring dots even hard blijven als het midden bij lage contrast. */}
+        <div
+          data-testid="login-dots-container"
+          className="absolute inset-0"
+          style={{
+            maskImage: glow.dots_fade > 0
+              ? `radial-gradient(circle at center, black ${Math.round((1 - glow.dots_fade) * 60 + 20)}%, transparent 100%)`
+              : 'none',
+            WebkitMaskImage: glow.dots_fade > 0
+              ? `radial-gradient(circle at center, black ${Math.round((1 - glow.dots_fade) * 60 + 20)}%, transparent 100%)`
+              : 'none',
+          }}
+        >
+          {dots.map((d, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                top: d.top, left: d.left,
+                width: `${d.size}px`, height: `${d.size}px`,
+                backgroundColor: d.color,
+                boxShadow: `0 0 ${d.size * 4}px ${d.color}`,
+                animation: `heartbeatDot 2.4s ease-in-out infinite`,
+                animationDelay: d.delay,
+                opacity: glow.dots_contrast,
+              }}
+            />
+          ))}
+        </div>
         <style>{`
           @keyframes heartbeatDot {
             0%, 40%, 100% { transform: scale(1); opacity: ${(glow.dots_contrast * 0.66).toFixed(2)}; }
@@ -201,15 +219,15 @@ export function LoginForm() {
               src={`${API}${glow.spark_logo_url}`}
               alt="Spark logo"
               data-testid="login-spark-logo"
-              className="inline-block w-16 h-16 rounded-2xl mb-4 shadow-lg object-cover"
+              className="inline-block w-16 h-16 rounded-full mb-4 shadow-lg object-cover"
               style={{ boxShadow: `0 10px 40px -10px ${glow.primary}66` }}
             />
           ) : (
             <div
               data-testid="login-spark-logo-fallback"
-              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-lg mb-4"
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg mb-4"
               style={{
-                background: `linear-gradient(135deg, ${glow.primary}, ${glow.corner_b})`,
+                background: `linear-gradient(135deg, ${glow.primary}, ${glow.secondary})`,
                 boxShadow: `0 10px 30px -10px ${glow.primary}66`,
               }}
             >
@@ -298,7 +316,7 @@ export function LoginForm() {
               disabled={isLoading}
               className="w-full py-3.5 text-white font-semibold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 hover:brightness-110"
               style={{
-                background: `linear-gradient(90deg, ${glow.primary}, ${glow.corner_b})`,
+                background: `linear-gradient(90deg, ${glow.primary}, ${glow.secondary})`,
                 boxShadow: `0 10px 24px -12px ${glow.primary}88`,
               }}
               data-testid="login-submit-btn"

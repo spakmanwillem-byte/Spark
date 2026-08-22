@@ -592,6 +592,7 @@ function SystemLoginGlow({ userId, userGrad }) {
     dots_count: 8,
     dots_contrast: 0.6,
     dots_size: 1.0,
+    dots_fade: 0.0,  // v13s_login_glow_extras_002 — radial fade sterkte 0-1
     corner_enabled: true,
     corner_a: '#f59e0b',
     corner_b: '#f97316',
@@ -611,6 +612,7 @@ function SystemLoginGlow({ userId, userGrad }) {
         dots_count: Number.isFinite(s.login_dots_count) ? s.login_dots_count : 8,
         dots_contrast: Number.isFinite(s.login_dots_contrast) ? s.login_dots_contrast : 0.6,
         dots_size: Number.isFinite(s.login_dots_size) ? s.login_dots_size : 1.0,
+        dots_fade: Number.isFinite(s.login_dots_fade) ? s.login_dots_fade : 0.0,
         corner_enabled: s.login_corner_glow_enabled !== false,
         corner_a: s.login_corner_glow_color_a || '#f59e0b',
         corner_b: s.login_corner_glow_color_b || '#f97316',
@@ -849,6 +851,27 @@ function SystemLoginGlow({ userId, userGrad }) {
             className="w-full mt-1 accent-purple-500"
           />
           <div className="flex justify-between text-[9px] text-slate-500"><span>klein</span><span>groot</span></div>
+        </div>
+
+        {/* v13s_login_glow_extras_002 (sessie 53) — Fade-slider: radial-mask sterkte
+            zodat de buitenring dots zachter fade in plaats van even hard te blijven
+            als het midden. 0 = uniform, 1 = sterk midden→buiten. */}
+        <div>
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
+            <span>Rand-fade (buiten zachter)</span>
+            <span className="font-mono">{Math.round((cfg.dots_fade || 0) * 100)}%</span>
+          </div>
+          <input
+            data-testid="admin-dots-fade-slider"
+            type="range" min="0" max="1" step="0.05"
+            value={cfg.dots_fade || 0}
+            onChange={e => setCfg(c => ({ ...c, dots_fade: Number(e.target.value) }))}
+            onMouseUp={e => update('login_dots_fade', Number(e.target.value))}
+            onTouchEnd={e => update('login_dots_fade', Number(e.target.value))}
+            disabled={!canEdit || busy}
+            className="w-full mt-1 accent-purple-500"
+          />
+          <div className="flex justify-between text-[9px] text-slate-500"><span>gelijkmatig</span><span>midden fel, rand zacht</span></div>
         </div>
       </div>
 

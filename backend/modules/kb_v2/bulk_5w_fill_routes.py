@@ -12,6 +12,39 @@ Verschil met bestaande /cards/{id}/llm-generate (llm_generate_routes.py):
 
 Autonomie-scheiding: Willem's expliciete goedkeuring: "LLM doet zware werk, ik scan
 achteraf". Elke wijziging wordt gelogd in curation_history.json.
+
+---
+
+📌 STATUS SINDS SESSIE 53 (v13_semantic_lookup_001):
+
+Deze bulk-filler is NIET meer de dagelijkse route voor gap-vulling.
+Nieuwe standaard-flow: chat-retrieval met live gap-detectie.
+
+  gebruiker vraagt Spark iets
+      ↓
+  semantic_lookup vindt relevante kaart
+      ↓
+  kaart heeft ws5-gap? → Spark meldt dat in antwoord + vraagt aanvulling
+      ↓
+  Willem antwoordt → PATCH /api/kb/v2/cards/{id} vult W in
+      ↓
+  volgende sessie: gap dicht
+
+Voordelen chat-flow t.o.v. bulk-filler:
+  ✓ Menselijke waarheid ipv LLM-gok
+  ✓ Alleen kaarten die er nu toe doen krijgen aandacht
+  ✓ Zelf-lerende loop (Emmy's punt): meer gesprek → meer kennis → betere vragen
+  ✓ Verifieerbaar per veld
+
+DEZE endpoint blijft actief als BATCH/IMPORT-TOOL:
+  • bij massa-import van nieuwe kaarten (bv. via KB v2 migratie)
+  • als eenmalige "eerste-boost" voordat chat-flow overneemt
+  • als admin-fallback als retrieval te weinig gap-detectie doet
+
+Niet meer scheduler-getriggerd. Niet meer default UI-knop.
+Verwante shadow-vragen queue (personalia_intrek_service.py) doet vergelijkbare
+gap-vulling maar voor kennis over ANDERE users — andere richting van
+dezelfde motor (Willem sessie 53).
 """
 from __future__ import annotations
 

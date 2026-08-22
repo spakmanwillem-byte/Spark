@@ -90,6 +90,218 @@ def get_stats() -> Dict:
     return stats
 
 
+# ---------------------------------------------------------------------------
+# Semantic Lookup — v13_semantic_lookup_001 (Spark zelfbewust laten worden)
+#
+# Filosofie (Willem, sessie 53): Spark heeft 6000+ kaarten met 5W-gevulde
+# betekenissen. Voorheen zocht `list_lade`/`list_inbox` alleen in `begrip`
+# (regel 1 van de kaart). Effect: al Willem's 5W-werk lag in de kluis maar
+# Spark las alleen het opschrift. Deze lookup opent alle velden en scoort met
+# gewichten zodat een chat-vraag matcht op de vólle inhoud.
+#
+# Ranking (in aflopend gewicht):
+#   +10  match in `begrip` (hoofd-concept)
+#   + 5  match in `ws5.{wie,wat,waar,wanneer,waarom}` waarden
+#   + 3  match in `tags`
+#   + 2  match in `verbanden.{laag1_refs, related, ...}`
+#   + 1  match in `footnote.{bron, ...}`
+#
+# Ws5-gap awareness: elke kaart in het resultaat bevat `_ws5_gap: bool` zodat
+# response_composer.py Spark kan laten melden "hé, ws5 leeg — help me even".
+# ---------------------------------------------------------------------------
+
+import re as _re
+import unicodedata as _ud
+
+# Nederlandse stopwoorden (kort — filtert veel-ruis maar houdt semantische kern)
+_STOPWORDS = {
+    "de", "het", "een", "en", "of", "maar", "als", "dan", "dus", "want",
+    "die", "dat", "deze", "dit", "wat", "wie", "waar", "hoe", "wanneer", "waarom",
+    "is", "was", "zijn", "waren", "wordt", "worden", "heeft", "hebben", "had",
+    "ik", "jij", "je", "hij", "zij", "we", "wij", "jullie", "ze", "u", "me", "mij",
+    "van", "voor", "met", "op", "in", "aan", "bij", "om", "over", "onder",
+    "naar", "uit", "door", "tot", "tegen", "tussen", "na", "vóór", "voor",
+    "niet", "geen", "wel", "ook", "nog", "al", "maar", "toch", "eens",
+    "kan", "kunnen", "moet", "moeten", "wil", "willen", "zou", "zouden",
+}
+
+
+def _normalize(text) -> str:
+    """Lowercase + strip accenten + collapse whitespace. Robuust voor None/int."""
+    if text is None:
+        return ""
+    s = str(text).lower()
+    s = _ud.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii")
+    s = _re.sub(r"[^a-z0-9\s]", " ", s)
+    s = _re.sub(r"\s+", " ", s).strip()
+    return s
+
+
+def _tokenize(text) -> List[str]:
+    """Splits + strip stopwoorden + minlen 2."""
+    norm = _normalize(text)
+    return [t for t in norm.split(" ") if t and len(t) >= 2 and t not in _STOPWORDS]
+
+
+def _has_ws5_gap(card: Dict) -> bool:
+    """True als >= 1 van de 5 W's leeg is."""
+    ws5 = card.get("ws5") or {}
+    for k in ("wie", "wat", "waar", "wanneer", "waarom"):
+        v = ws5.get(k)
+        if not v or not str(v).strip():
+            return True
+    return False
+
+
+def _score_card(card: Dict, query_tokens: List[str]) -> Dict:
+    """Score een kaart tegen query tokens. Return {score, matched_fields}."""
+    if not query_tokens:
+        return {"score": 0, "matched_fields": []}
+
+    matched_fields: List[str] = []
+    score = 0
+
+    # 1. begrip (+10 per matching token, max 3× = +30)
+    begrip_tokens = set(_tokenize(card.get("begrip")))
+    begrip_hits = len(begrip_tokens & set(query_tokens))
+    if begrip_hits:
+        score += min(begrip_hits, 3) * 10
+        matched_fields.append("begrip")
+
+    # 2. ws5 waarden (+5 per matching token, max 5× = +25)
+    ws5 = card.get("ws5") or {}
+    ws5_text = " ".join(str(ws5.get(k, "")) for k in ("wie", "wat", "waar", "wanneer", "waarom"))
+    ws5_tokens = set(_tokenize(ws5_text))
+    ws5_hits = len(ws5_tokens & set(query_tokens))
+    if ws5_hits:
+        score += min(ws5_hits, 5) * 5
+        matched_fields.append("ws5")
+
+    # 3. tags (+3 per matching tag, max 5× = +15)
+    tags = card.get("tags") or []
+    tag_tokens = set()
+    for t in tags:
+        tag_tokens |= set(_tokenize(t))
+    tag_hits = len(tag_tokens & set(query_tokens))
+    if tag_hits:
+        score += min(tag_hits, 5) * 3
+        matched_fields.append("tags")
+
+    # 4. verbanden (+2 per match; kan een lijst refs of dict zijn)
+    verbanden = card.get("verbanden") or {}
+    if isinstance(verbanden, dict):
+        v_items: List = []
+        for key in ("laag1_refs", "related", "gerelateerd", "referenties"):
+            vv = verbanden.get(key)
+            if isinstance(vv, list):
+                v_items.extend(vv)
+        v_text = " ".join(str(x) for x in v_items)
+    else:
+        v_text = str(verbanden)
+    v_tokens = set(_tokenize(v_text))
+    v_hits = len(v_tokens & set(query_tokens))
+    if v_hits:
+        score += min(v_hits, 5) * 2
+        matched_fields.append("verbanden")
+
+    # 5. footnote (+1 per match, alleen op tekstuele velden)
+    footnote = card.get("footnote") or {}
+    if isinstance(footnote, dict):
+        fn_text = " ".join(str(v) for k, v in footnote.items()
+                           if k in ("bron", "context", "notitie") and v)
+    else:
+        fn_text = str(footnote)
+    fn_tokens = set(_tokenize(fn_text))
+    fn_hits = len(fn_tokens & set(query_tokens))
+    if fn_hits:
+        score += min(fn_hits, 3) * 1
+        matched_fields.append("footnote")
+
+    # 6. lagen.laag1 (extra: soms de betekenis-tekst; +2 per match, max +6)
+    lagen = card.get("lagen") or {}
+    laag1_tokens = set(_tokenize(lagen.get("laag1")))
+    l1_hits = len(laag1_tokens & set(query_tokens))
+    if l1_hits:
+        score += min(l1_hits, 3) * 2
+        matched_fields.append("laag1")
+
+    return {"score": score, "matched_fields": matched_fields}
+
+
+def _all_cards_with_lade() -> List[Dict]:
+    """Laad alle kaarten uit 4 lades + inbox, met `_lade` en `_source` velden."""
+    all_cards: List[Dict] = []
+    for lade in LADES:
+        d = load_json(_lade_path(lade), default={"kaarten": []})
+        for k in d.get("kaarten", []):
+            k = dict(k)
+            k["_lade"] = lade
+            all_cards.append(k)
+    inbox = load_json(_inbox_path(), default={"kaarten": []})
+    for k in inbox.get("kaarten", []):
+        k = dict(k)
+        k["_lade"] = "inbox"
+        all_cards.append(k)
+    return all_cards
+
+
+@traced(intent="Spark raadpleegt zijn eigen KB v2 kaarten op basis van user-vraag")
+def semantic_lookup(query: str, top_n: int = 5, min_score: int = 5) -> Dict:
+    """Zoek in alle KB v2 kaarten (begrip + tags + ws5 + verbanden + footnote + laag1).
+
+    Args:
+        query: user-vraag of trefwoord (Nederlands, vrije tekst)
+        top_n: maximaal aantal kaarten terug (default 5)
+        min_score: minimale score-drempel om terug te geven (filter ruis)
+
+    Returns:
+        {
+          "query": str,
+          "query_tokens": [str],
+          "n_scanned": int,
+          "n_matched": int,
+          "results": [
+            {
+              "kaart": {...volledige kaart...},
+              "score": int,
+              "matched_fields": [str],
+              "ws5_gap": bool,          # True als 1+ van 5 W's leeg
+              "lade": str,              # voelen/spreken/weten/doen/inbox
+            }
+          ],
+        }
+
+    Voor response_composer.py: elke result bevat `ws5_gap`. Als True, kan Spark
+    de gebruiker vragen om hulp: "ik vond 'X' relevant maar mijn W's zijn hier
+    niet volledig. Wil je 'wie/wat/...' aanvullen?"
+    """
+    query_tokens = _tokenize(query)
+    if not query_tokens:
+        return {"query": query, "query_tokens": [], "n_scanned": 0, "n_matched": 0, "results": []}
+
+    all_cards = _all_cards_with_lade()
+    scored: List[Dict] = []
+    for c in all_cards:
+        s = _score_card(c, query_tokens)
+        if s["score"] >= min_score:
+            scored.append({
+                "kaart": c,
+                "score": s["score"],
+                "matched_fields": s["matched_fields"],
+                "ws5_gap": _has_ws5_gap(c),
+                "lade": c.get("_lade", "?"),
+            })
+
+    scored.sort(key=lambda x: x["score"], reverse=True)
+    return {
+        "query": query,
+        "query_tokens": query_tokens,
+        "n_scanned": len(all_cards),
+        "n_matched": len(scored),
+        "results": scored[:top_n],
+    }
+
+
 def list_lade(lade: str, limit: int = 50, offset: int = 0, search: str = "") -> Dict:
     """Lijst kaarten in 1 lade. Paged + optioneel zoekfilter op 'begrip'."""
     if lade not in LADES:

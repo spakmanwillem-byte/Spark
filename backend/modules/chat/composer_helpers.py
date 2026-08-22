@@ -68,6 +68,54 @@ def _load_relevant_kb(user_text: str, current_user_id: Optional[str] = None) -> 
     """Zoek begrippen uit user_text in V2 en geef hun kaarten terug.
 
     v6_kb_privacy_filter_001: filtert privé-kaarten van andere users uit.
+    v13_semantic_lookup_001 (sessie 53): gebruikt nu `kb_v2.service.semantic_lookup`
+    die scoort op begrip + ws5 + tags + verbanden + footnote + laag1. Voorheen
+    keek deze functie alleen naar exact-match op begrip en tag-woord-match →
+    Spark's 5W-inhoud werd niet geraadpleegd bij een chat-vraag.
+
+    Elke kaart krijgt extra velden voor de composer:
+      - `_ws5_gap`: True als 1+ van 5 W's leeg (Spark meldt dat in antwoord)
+      - `_match_score`: rank-score
+      - `_matched_fields`: op welke velden gematcht (voor debug/transparantie)
+    """
+    bp = _bp()
+    limits = bp["limits"]
+
+    try:
+        from modules.kb_v2 import service as kbv2_svc
+        top_n = int(limits.get("max_relevant_cards", 5))
+        result = kbv2_svc.semantic_lookup(user_text, top_n=top_n * 2, min_score=5)
+    except Exception:
+        result = {"results": []}
+
+    # Privacy-filter (v6_kb_privacy_filter_001)
+    def _is_visible(card: Dict) -> bool:
+        if card.get("privacy") != "private":
+            return True
+        bron = card.get("bron_user_id")
+        if not bron:
+            return True
+        return current_user_id is not None and bron == current_user_id
+
+    out: List[Dict] = []
+    for r in (result.get("results") or []):
+        k = r.get("kaart") or {}
+        if not _is_visible(k):
+            continue
+        # Annotatie voor composer
+        k = dict(k)
+        k["_ws5_gap"] = bool(r.get("ws5_gap"))
+        k["_match_score"] = int(r.get("score", 0))
+        k["_matched_fields"] = list(r.get("matched_fields") or [])
+        out.append(k)
+        if len(out) >= int(limits.get("max_relevant_cards", 5)):
+            break
+    return out
+
+
+def _load_relevant_kb_legacy(user_text: str, current_user_id: Optional[str] = None) -> List[Dict]:
+    """LEGACY (v6): exact-begrip + tag-match. Bewaard voor rollback of debug.
+    Niet meer aangeroepen sinds v13_semantic_lookup_001.
     """
     bp = _bp()
     paths = bp["paths"]
@@ -578,24 +626,54 @@ def _format_self_awareness_for_prompt(aw: Dict) -> str:
 
 
 def _format_kb_cards(cards: List[Dict]) -> str:
+    """v13_semantic_lookup_001 (sessie 53) — toont nu ook ws5 (5W-antwoorden) én
+    markeert kaarten met een ws5-gap zodat Spark kan zeggen "ik vond X maar mijn
+    W's zijn hier niet volledig, wil je even helpen invullen?".
+    """
     if not cards:
         return "(geen specifieke kaarten gevonden — antwoord vanuit algemene Spark-identiteit)"
     limits = _bp()["limits"]
     lines = []
+    gap_cards = []
     for c in cards:
         b = c.get("begrip", "?")
         laag1 = (c.get("lagen") or {}).get("laag1", "")[:limits["max_card_laag1_chars"]]
         laag2 = (c.get("lagen") or {}).get("laag2", "")[:limits["max_card_laag2_chars"]]
-        lade = c.get("lade", "?")
+        lade = c.get("lade") or c.get("_lade") or "?"
         tags = ", ".join((c.get("tags") or [])[:limits["max_card_tags_shown"]])
         vertrouwen = (c.get("footnote") or {}).get("vertrouwen", "?")
-        lines.append(f"• [{lade}] {b} (vertrouwen={vertrouwen})")
+        matched_fields = c.get("_matched_fields") or []
+        gap = bool(c.get("_ws5_gap"))
+
+        # Header met eventuele gap-marker
+        gap_mark = " ⚠️ws5-onvolledig" if gap else ""
+        lines.append(f"• [{lade}] {b} (vertrouwen={vertrouwen}{gap_mark})")
         if laag1:
-            lines.append(f"    {laag1}")
+            lines.append(f"    betekenis: {laag1}")
         if laag2:
-            lines.append(f"    {laag2}")
+            lines.append(f"    verdieping: {laag2}")
+
+        # v13_semantic_lookup_001 — toon ws5 (max 90 chars per W om budget te sparen)
+        ws5 = c.get("ws5") or {}
+        for w_key in ("wie", "wat", "waar", "wanneer", "waarom"):
+            v = ws5.get(w_key)
+            if v and str(v).strip():
+                lines.append(f"    {w_key}: {str(v)[:90]}")
         if tags:
             lines.append(f"    tags: {tags}")
+
+        if gap:
+            gap_cards.append(b)
+
+    # Meta-instructie voor Spark: als er kaarten met gap zijn, moedig aan om te vragen
+    if gap_cards:
+        gap_list = ", ".join(f"'{g}'" for g in gap_cards[:3])
+        lines.append("")
+        lines.append(
+            f"⚠️ Sommige kaarten hierboven ({gap_list}) hebben nog niet alle 5 W's ingevuld. "
+            f"Als je merkt dat je antwoord daar tegenaan loopt: zeg dat, en vraag Willem "
+            f"vriendelijk of hij die W nog wil aanvullen. Nooit doen alsof je het weet."
+        )
     return "\n".join(lines)
 
 

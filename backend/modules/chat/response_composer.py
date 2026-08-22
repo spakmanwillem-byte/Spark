@@ -535,6 +535,27 @@ async def compose_response(
     ]
     user_prompt = "\n".join(user_prompt_parts)
 
+    # v13t_user_text_tpm_guard_001 — Hard totale token-cap: Groq free-tier = 8000 TPM,
+    # -1024 max_tokens output = 6976 budget voor input. ~3.5 chars/token → 24k chars input.
+    # Verdeling: system 18k · turns 3k · user 3k. Bij overshoot: eerst user trimmen,
+    # dan turns weglaten, dan system op laatste plek trimmen.
+    HARD_INPUT_CHAR_BUDGET = 22000
+    MAX_USER_PROMPT_CHARS = 3000
+    if len(user_prompt) > MAX_USER_PROMPT_CHARS:
+        original_len = len(user_prompt)
+        keep_head = int(MAX_USER_PROMPT_CHARS * 0.7)
+        keep_tail = int(MAX_USER_PROMPT_CHARS * 0.25)
+        user_prompt = (
+            user_prompt[:keep_head]
+            + f"\n\n[…{original_len - keep_head - keep_tail} tekens weggelaten om binnen TPM-limiet te blijven — Spark: als je dit ziet, meld dat de tekst was ingekort…]\n\n"
+            + user_prompt[-keep_tail:]
+        )
+
+    # System-prompt ook cappen (harde bovengrens)
+    MAX_SYSTEM_PROMPT_CHARS = 16000
+    if len(system_prompt) > MAX_SYSTEM_PROMPT_CHARS:
+        system_prompt = system_prompt[:MAX_SYSTEM_PROMPT_CHARS] + "\n[…system context ingekort voor TPM-budget…]"
+
     try:
         # v6_llm_router_001 — gebruik multi-provider router i.p.v. directe Emergent-call.
         # Volgorde: Groq → Cerebras/Fallback → Emergent → template.
@@ -550,9 +571,22 @@ async def compose_response(
             for t in turns[-3:]:
                 role = "user" if t.get("role") == "user" else "assistant"
                 ttxt = (t.get("text") or t.get("message") or "").strip()
+                # v13t_user_text_tpm_guard_001 — ook oude turns cappen
                 if ttxt:
+                    if len(ttxt) > 1500:
+                        ttxt = ttxt[:1000] + " […ingekort…] " + ttxt[-300:]
                     messages.append({"role": role, "content": ttxt})
         messages.append({"role": "user", "content": user_prompt})
+
+        # v13t_user_text_tpm_guard_001 — als totaal boven budget: agressief snijden op turns eerst
+        total_chars = sum(len(m.get("content", "")) for m in messages)
+        while total_chars > HARD_INPUT_CHAR_BUDGET and len(messages) > 2:
+            # verwijder oudste non-system message
+            for i, m in enumerate(messages):
+                if m.get("role") != "system":
+                    messages.pop(i)
+                    break
+            total_chars = sum(len(m.get("content", "")) for m in messages)
 
         router_resp = await llm_router.chat_complete(
             messages,

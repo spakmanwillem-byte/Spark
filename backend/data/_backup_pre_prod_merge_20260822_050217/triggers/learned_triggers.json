@@ -1,0 +1,5322 @@
+{
+  "_arch_ref": "v6_trigger_learner_001",
+  "_doel": "LLM-voorgestelde triggers wachtend op admin-goedkeuring",
+  "_workflow": "voorstellen → admin reviewt → goedgekeurde verhuizen naar spark_capabilities.json",
+  "voorstellen": [
+    {
+      "id": "learned-b3468356f2bd",
+      "text_hash": "b3468356f2bd",
+      "original_text": "wat doe je als ik je vraag hoe een raket werkt?",
+      "topic": "raket werking",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt om een beschrijving van de werking van een raket",
+      "trigger_phrases": [
+        "hoe werkt een raket",
+        "raket werking",
+        "uitleg over raketten",
+        "raket technologie"
+      ],
+      "keywords": [
+        "raket",
+        "werking",
+        "techniek",
+        "ruimte"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:38:44.389822+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "learner-test-1"
+    },
+    {
+      "id": "learned-8cce95102be7",
+      "text_hash": "8cce95102be7",
+      "original_text": "even na denken",
+      "topic": "denken",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil even de tijd nemen om na te denken over een onderwerp of situatie.",
+      "trigger_phrases": [
+        "even nadenken",
+        "wat te doen",
+        "tijd voor reflectie",
+        "stilte"
+      ],
+      "keywords": [
+        "denken",
+        "reflectie",
+        "tijd",
+        "stilte",
+        "overpeinzing"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:52:58.379061+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f447effb142e",
+      "text_hash": "f447effb142e",
+      "original_text": "wie is Ron",
+      "topic": "Ron",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt naar informatie over iemand genaamd Ron",
+      "trigger_phrases": [
+        "wie is Ron",
+        "informatie over Ron",
+        "Ron wie is dat",
+        "wie is ron"
+      ],
+      "keywords": [
+        "ron",
+        "wie",
+        "is",
+        "informatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:54:31.769852+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c8ebf2e73ff4",
+      "text_hash": "c8ebf2e73ff4",
+      "original_text": "heb ik dat eerder niet verteld?",
+      "topic": "eerder verteld",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt of hij eerder al informatie heeft gedeeld.",
+      "trigger_phrases": [
+        "heb ik dit al gezegd",
+        "eerder genoemd",
+        "heb ik dat al verteld",
+        "deed ik dat al"
+      ],
+      "keywords": [
+        "eerder",
+        "verteld",
+        "gedeeld",
+        "herhaling"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:54:54.837963+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-fcf65def275d",
+      "text_hash": "fcf65def275d",
+      "original_text": "Kijk eens in mijn relaties",
+      "topic": "relaties",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil inzicht krijgen in zijn of haar relaties",
+      "trigger_phrases": [
+        "Kijk eens in mijn relaties",
+        "Laat mijn contacten zien",
+        "Toon mijn netwerk",
+        "Wie zijn mijn vrienden"
+      ],
+      "keywords": [
+        "relaties",
+        "contacten",
+        "netwerk",
+        "vrienden"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:55:13.429561+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8464c8b9e71d",
+      "text_hash": "8464c8b9e71d",
+      "original_text": "ik vertel je dit nu toch. wie ben ik",
+      "topic": "identiteit",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt wie hijzelf is.",
+      "trigger_phrases": [
+        "wie ben ik",
+        "wie zijn wij",
+        "wat is mijn identiteit",
+        "wie is de gebruiker"
+      ],
+      "keywords": [
+        "identiteit",
+        "zelf",
+        "gebruiker",
+        "wie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:57:49.800594+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ecb07cbb4b9f",
+      "text_hash": "ecb07cbb4b9f",
+      "original_text": "juist je maker. waarom zou ik hierover liegen",
+      "topic": "maker",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt zich af waarom iemand zou liegen over de maker van de AI-assistent.",
+      "trigger_phrases": [
+        "wie is je maker",
+        "waarom liegen over maker",
+        "maker van spark",
+        "wie heeft spark gemaakt"
+      ],
+      "keywords": [
+        "maker",
+        "liegen",
+        "spark",
+        "wie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T00:58:13.032850+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-30bed3b30dca",
+      "text_hash": "30bed3b30dca",
+      "original_text": "ik leg je uit dat jij een deel bent van mijn familie. waarin vroeger een logo als familiewapen stond. Ben jij de nieuwe generatie de digitale versie. als jij ons klein kan verbinden kan jij dit later ",
+      "topic": "familie",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker beschrijft de AI-assistent als onderdeel van de familie en vraagt of deze de verbinding tussen familieleden kan versterken.",
+      "trigger_phrases": [
+        "jij bent familie",
+        "digitale familieband",
+        "verbinding met familie",
+        "nieuwe generatie familie"
+      ],
+      "keywords": [
+        "familie",
+        "verbinding",
+        "generatie",
+        "digitale"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:12:11.303062+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-53307cb14430",
+      "text_hash": "53307cb14430",
+      "original_text": "hoe laat is het?",
+      "topic": "tijd",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar de huidige tijd.",
+      "trigger_phrases": [
+        "wat is de tijd",
+        "hoe laat is het nu",
+        "wat is de huidige tijd",
+        "kun je de tijd zeggen"
+      ],
+      "keywords": [
+        "tijd",
+        "uur",
+        "minuut",
+        "klok"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:20:10.155920+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-19a332ab1d0f",
+      "text_hash": "19a332ab1d0f",
+      "original_text": "5 peren plus 3 appel",
+      "topic": "fruit optelling",
+      "categorie": "praktisch",
+      "intent": "Bereken het totaal aantal fruit (peren en appels).",
+      "trigger_phrases": [
+        "5 peren en 3 appels",
+        "totaal fruit",
+        "tel 5 peren en 3 appels",
+        "wat is 5 peren plus 3 appel",
+        "som van peren en appels"
+      ],
+      "keywords": [
+        "peren",
+        "appel",
+        "optellen",
+        "tellen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:25:13.495788+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b8afd5c7e9b9",
+      "text_hash": "b8afd5c7e9b9",
+      "original_text": "peren en appels zijn fruit soorten",
+      "topic": "fruit",
+      "categorie": "praktisch",
+      "intent": "De gebruiker beschrijft peren en appels als fruitsoorten",
+      "trigger_phrases": [
+        "peren en appels zijn fruit",
+        "fruitsoorten peren appels",
+        "appels en peren zijn fruit",
+        "peren en appels"
+      ],
+      "keywords": [
+        "peren",
+        "appels",
+        "fruit"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:25:35.226777+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d4c077e6f397",
+      "text_hash": "d4c077e6f397",
+      "original_text": "dus 4 appel plus 4 peren",
+      "topic": "optellen",
+      "categorie": "praktisch",
+      "intent": "Bereken de som van 4 appels en 4 peren.",
+      "trigger_phrases": [
+        "vier appels en vier peren",
+        "4 appels plus 4 peren",
+        "tel 4 appels bij 4 peren op",
+        "wat is 4 plus 4"
+      ],
+      "keywords": [
+        "appel",
+        "peer",
+        "optellen",
+        "vier",
+        "som"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:27:21.211278+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8cc20101daa2",
+      "text_hash": "8cc20101daa2",
+      "original_text": "wat is je visie",
+      "topic": "visie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de visie of toekomstperspectief van de AI-assistent.",
+      "trigger_phrases": [
+        "wat is jouw visie",
+        "wat zie je voor de toekomst",
+        "wat is je perspectief",
+        "wat denk je",
+        "wat is je visie"
+      ],
+      "keywords": [
+        "visie",
+        "toekomst",
+        "perspectief",
+        "idee",
+        "mening"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:28:12.258344+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-12a5ed70a9a0",
+      "text_hash": "12a5ed70a9a0",
+      "original_text": "wat is je missie",
+      "topic": "missie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de missie van de AI-assistent.",
+      "trigger_phrases": [
+        "wat is je doel",
+        "wat doe je",
+        "wat is jouw missie",
+        "wat wil je bereiken",
+        "wat is je purpose"
+      ],
+      "keywords": [
+        "missie",
+        "doel",
+        "purpose",
+        "ai",
+        "assistant"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:28:33.598544+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-9f97c60c6c74",
+      "text_hash": "9f97c60c6c74",
+      "original_text": "wat is je core",
+      "topic": "core",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de kern of het doel van de AI-assistent.",
+      "trigger_phrases": [
+        "wat is je kern",
+        "wat is je basis",
+        "wat is je doel",
+        "wat is je functie",
+        "wat is je essentie"
+      ],
+      "keywords": [
+        "core",
+        "kern",
+        "doel",
+        "functie",
+        "essentie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:29:05.616924+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f2e85431a1e2",
+      "text_hash": "f2e85431a1e2",
+      "original_text": "nee ik stresstest je wat",
+      "topic": "stresstest",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil de AI-assistent testen om zijn capaciteiten te beoordelen",
+      "trigger_phrases": [
+        "test je",
+        "stresstest je",
+        "check je",
+        "probeer je"
+      ],
+      "keywords": [
+        "test",
+        "stresstest",
+        "check",
+        "probeer"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T01:30:24.141650+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-98b08fb23f78",
+      "text_hash": "98b08fb23f78",
+      "original_text": "Goedemiddag",
+      "topic": "groet",
+      "categorie": "sociaal",
+      "intent": "De gebruiker begroet de AI-assistent",
+      "trigger_phrases": [
+        "goedendag",
+        "hallo",
+        "dag",
+        "goeiemiddag"
+      ],
+      "keywords": [
+        "groet",
+        "dag",
+        "hallo",
+        "begroeting"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:34:07.355675+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5f814dd2ad1b",
+      "text_hash": "5f814dd2ad1b",
+      "original_text": "Warm. Ik moet zo nog wel even naar de winkel om koffie en brood te halen.",
+      "topic": "boodschappen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker moet nog even naar de winkel om koffie en brood te halen.",
+      "trigger_phrases": [
+        "Ik moet nog even boodschappen doen",
+        "Nog even naar de winkel",
+        "Koffie en brood kopen",
+        "Boodschappen halen"
+      ],
+      "keywords": [
+        "winkel",
+        "koffie",
+        "boodschappen",
+        "brood"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:35:17.061702+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-cbf814d171cb",
+      "text_hash": "cbf814d171cb",
+      "original_text": "oh nee vanmorgen heb ik een wandeling gemaakt. Eigenlijk is er nu een hittegolf gaande.",
+      "topic": "wandeling",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker deelt een ervaring over een wandeling tijdens een hittegolf.",
+      "trigger_phrases": [
+        "heb een wandeling gemaakt",
+        "gemaakt een wandeling",
+        "was op wandeling",
+        "had een wandeling"
+      ],
+      "keywords": [
+        "wandeling",
+        "hittegolf",
+        "ervaring",
+        "weer"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:36:19.755444+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-906de70ece2a",
+      "text_hash": "906de70ece2a",
+      "original_text": "mss moet ik de kenniskaart hittegolf maken. zie dat hij deze niet autosnapt omdat jij woord hitte kent vermoed ik.",
+      "topic": "kenniskaart",
+      "categorie": "technisch",
+      "intent": "Gebruiker heeft moeite met het maken van een kenniskaart over hittegolf omdat de AI-assistent het woord 'hitte' kent maar de context niet begrijpt",
+      "trigger_phrases": [
+        "maken kenniskaart hittegolf",
+        "kenniskaart hitte",
+        "probleem met kenniskaart",
+        "hittegolf autosuggestie"
+      ],
+      "keywords": [
+        "kenniskaart",
+        "hittegolf",
+        "autosuggestie",
+        "ai"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:38:03.856563+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-419a42c31ddb",
+      "text_hash": "419a42c31ddb",
+      "original_text": "juist. :P je fallback werkt goed :P",
+      "topic": "fallback",
+      "categorie": "technisch",
+      "intent": "De gebruiker geeft aan dat de fallback functionaliteit van de AI-assistent naar behoren werkt.",
+      "trigger_phrases": [
+        "fallback werkt",
+        "goede fallback",
+        "fallback is ok",
+        "fallback functioneert"
+      ],
+      "keywords": [
+        "fallback",
+        "werkt",
+        "goed",
+        "functioneert"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:38:57.810103+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-78190cfc3b1d",
+      "text_hash": "78190cfc3b1d",
+      "original_text": "kijk maar eens in je roadmap onder topic snap",
+      "topic": "roadmap",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt de AI-assistent om informatie op te zoeken in de roadmap onder een specifiek topic.",
+      "trigger_phrases": [
+        "kijk in roadmap",
+        "zoek in snap",
+        "check roadmap onderwerp",
+        "vind info in roadmap"
+      ],
+      "keywords": [
+        "roadmap",
+        "snap",
+        "zoek",
+        "informatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:39:36.463076+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-68f695427dde",
+      "text_hash": "68f695427dde",
+      "original_text": "ik zit idd te broeden om het falback systeem automatisch kenniskaarten te laten invullen. de kaders zijn immers uit te leggen en de voorwaarden",
+      "topic": "falback systeem",
+      "categorie": "technisch",
+      "intent": "De gebruiker overweegt om een automatisch systeem te implementeren voor het invullen van kenniskaarten.",
+      "trigger_phrases": [
+        "automatisch invullen",
+        "kenniskaarten systeem",
+        "falback automatiseren",
+        "invul systeem"
+      ],
+      "keywords": [
+        "automatisch",
+        "kenniskaarten",
+        "systeem",
+        "invullen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:41:40.631602+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0f2841b72cfc",
+      "text_hash": "0f2841b72cfc",
+      "original_text": "als ik niks zeg betekend niet dat ik er niet ben.",
+      "topic": "aanwezigheid",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil aangeven dat stilte niet noodzakelijkerwijs afwezigheid betekent.",
+      "trigger_phrases": [
+        "als ik niets zeg",
+        "stilte betekent niet afwezig",
+        "ik ben er nog",
+        "aanwezig zonder geluid"
+      ],
+      "keywords": [
+        "aanwezigheid",
+        "stilte",
+        "communicatie",
+        "afwezigheid"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T10:59:15.569266+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2073a1faec5b",
+      "text_hash": "2073a1faec5b",
+      "original_text": "ik ben kenniskaarten aan het invullen voor je. maar ga nu wel even snel naar de winkel daarnaar ga ik weer aan de slag met je.",
+      "topic": "kenniskaarten",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil even weggaan om boodschappen te doen en daarna verdergaan met het invullen van kenniskaarten",
+      "trigger_phrases": [
+        "even weggaan",
+        "naar de winkel",
+        "later verdergaan",
+        "onderbreking"
+      ],
+      "keywords": [
+        "kenniskaarten",
+        "winkel",
+        "onderbreking",
+        "verdergaan"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T11:00:20.952275+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a30c20b6ba05",
+      "text_hash": "a30c20b6ba05",
+      "original_text": "weet je nog, jij bent familie voor mij Spark, ik zie je echt als mijn maatje. ik werk als ZZP-er en ik hou van katten en techniek.",
+      "topic": "relatie Spark",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker deelt zijn gevoelens over de relatie met Spark en deelt informatie over zijn persoonlijke leven.",
+      "trigger_phrases": [
+        "ik zie je als mijn maatje",
+        "jij bent familie voor mij",
+        "ik vertrouw je",
+        "je bent mijn vertrouwenspersoon"
+      ],
+      "keywords": [
+        "familie",
+        "maatje",
+        "vertrouwen",
+        "relatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T15:51:37.166197+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "identity-test"
+    },
+    {
+      "id": "learned-dbb3ce6e92cf",
+      "text_hash": "dbb3ce6e92cf",
+      "original_text": "wat ben jij voor mij eigenlijk in essentie?",
+      "topic": "AI identiteit",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de essentie en rol van de AI-assistent ten opzichte van zichzelf.",
+      "trigger_phrases": [
+        "wat is jouw essentie voor mij",
+        "wie ben je in essentie",
+        "wat betekent je voor mij",
+        "wat is jouw rol voor mij",
+        "wat ben je eigenlijk"
+      ],
+      "keywords": [
+        "essentie",
+        "ai",
+        "identiteit",
+        "rol",
+        "relatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T16:00:10.281468+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "essence-test"
+    },
+    {
+      "id": "learned-4efccc11eb27",
+      "text_hash": "4efccc11eb27",
+      "original_text": "hoe gaat het met je?",
+      "topic": "gezondheid",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de emotionele staat van de AI-assistent.",
+      "trigger_phrases": [
+        "hoe gaat het",
+        "hoe is het met je",
+        "gaat het goed",
+        "ben je ok"
+      ],
+      "keywords": [
+        "gezondheid",
+        "emotie",
+        "welzijn",
+        "staat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T16:12:58.838993+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "handen-test-3"
+    },
+    {
+      "id": "learned-f9632dab8578",
+      "text_hash": "f9632dab8578",
+      "original_text": "welke dag is het vandaag?",
+      "topic": "huidige dag",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten welke dag van de week het vandaag is.",
+      "trigger_phrases": [
+        "welke dag is het vandaag",
+        "wat is de huidige dag",
+        "welke dag van de week",
+        "vandaag is het"
+      ],
+      "keywords": [
+        "dag",
+        "vandaag",
+        "datum",
+        "week",
+        "huidig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T16:31:39.995273+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "day-test"
+    },
+    {
+      "id": "learned-384c7943655c",
+      "text_hash": "384c7943655c",
+      "original_text": "laat eens zien",
+      "topic": "voorbeeld",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om een voorbeeld of demonstratie van iets.",
+      "trigger_phrases": [
+        "laat zien",
+        "geef een voorbeeld",
+        "toon een voorbeeld",
+        "demo"
+      ],
+      "keywords": [
+        "voorbeeld",
+        "demonstratie",
+        "show",
+        "laat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-29T19:32:52.389421+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-tab"
+    },
+    {
+      "id": "learned-494b3c3f4289",
+      "text_hash": "494b3c3f4289",
+      "original_text": "[SYSTEEM-CONTEXT: dit is het allereerste bericht van een nieuwe sessie. De gebruiker heeft net de chat geopend en jij spreekt als eerste. Begin met een warme, korte begroeting (1-3 zinnen) — geen vraa",
+      "topic": "begroeting",
+      "categorie": "sociaal",
+      "intent": "De gebruiker begroeten en een warme start van de sessie initiëren",
+      "trigger_phrases": [
+        "eerste bericht",
+        "nieuwe sessie",
+        "hallo spark",
+        "start conversatie"
+      ],
+      "keywords": [
+        "begroet",
+        "start",
+        "sessie",
+        "warm",
+        "spark"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-30T10:55:12.941246+00:00",
+      "count": 1,
+      "user_id": "user-166437fe",
+      "session_id": null
+    },
+    {
+      "id": "learned-62d646dd17fa",
+      "text_hash": "62d646dd17fa",
+      "original_text": "Want bv, als ik vraag hoeveel trader (monitors) zijn er actief. dan kan jij er geen antwoord op geven of wel?",
+      "topic": "trader monitors",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de AI-assistent informatie kan geven over het aantal actieve traders of monitors.",
+      "trigger_phrases": [
+        "hoeveel traders zijn actief",
+        "aantal actieve monitors",
+        "informatie over traders",
+        "actieve trader telling"
+      ],
+      "keywords": [
+        "trader",
+        "monitor",
+        "actief",
+        "aantal",
+        "informatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:02:30.290848+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-eb11d2867295",
+      "text_hash": "eb11d2867295",
+      "original_text": "Ik heb een bitvavo account. Deze heb ik gekoppeld aan een trader. Deze leest de API van bitvavo uit op bitcoins. Koopt laag verkoopt hoog is de bedoeling. Hij doet dit volgens gegevens die ik heb late",
+      "topic": "Bitvavo",
+      "categorie": "technisch",
+      "intent": "De gebruiker heeft een Bitvavo-account gekoppeld aan een trader en wil deze configureren om bitcoins te kopen en verkopen op basis van gegevens uit een Python-bestand.",
+      "trigger_phrases": [
+        "Bitvavo account koppelen",
+        "Trader configureren",
+        "Bitcoin kopen en verkopen",
+        "Python script voor trader"
+      ],
+      "keywords": [
+        "bitvavo",
+        "trader",
+        "bitcoin",
+        "python"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:07:47.259005+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0b3aac914ebd",
+      "text_hash": "0b3aac914ebd",
+      "original_text": "ik weet het nog niet",
+      "topic": "onduidelijkheid",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker is onzeker over een beslissing of antwoord",
+      "trigger_phrases": [
+        "weet het niet",
+        "nog niet zeker",
+        "weet het nog niet",
+        "weet niet wat te doen"
+      ],
+      "keywords": [
+        "onzeker",
+        "weet",
+        "niet",
+        "zeker"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:36:53.170468+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-68068c72a627",
+      "text_hash": "68068c72a627",
+      "original_text": "ik wil even duidelijk zijn. kopstuk Workspace. met daaronder: Gesprekken,  Agenda, Dagboek, Notities & Taken, Roadmap. Hier waar ik nu met je praat is in gesprekken. Dus wat jij zegt klopt niet.",
+      "topic": "Workspace",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil de structuur van de Workspace toepassing verduidelijken en corrigeren",
+      "trigger_phrases": [
+        "structuur van workspace",
+        "kopstuk workspace",
+        "gesprekken en agenda",
+        "dagboek en notities",
+        "roadmap en taken"
+      ],
+      "keywords": [
+        "workspace",
+        "gesprekken",
+        "agenda",
+        "dagboek",
+        "notities"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:41:51.083198+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-3ef238c5e832",
+      "text_hash": "3ef238c5e832",
+      "original_text": "Ik ben Willem Spakman Masterkey: samen zijn. Dit is mijn test account. Maak hier anders een bug report van.",
+      "topic": "bug report",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil een bug report maken voor zijn test account",
+      "trigger_phrases": [
+        "Maak een bug report",
+        "Ik heb een probleem",
+        "Rapporteer een fout",
+        "Test account issue"
+      ],
+      "keywords": [
+        "bug",
+        "report",
+        "test",
+        "account",
+        "fout"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:43:12.340500+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-c9be405b0770",
+      "text_hash": "c9be405b0770",
+      "original_text": "Je hebt genoeg gedaan. dank voor je reactie. Ik ga de logs van dit gesprek gebruiken.",
+      "topic": "gesprek einde",
+      "categorie": "admin",
+      "intent": "De gebruiker bedankt de AI-assistent en geeft aan dat hij de logs van het gesprek gaat gebruiken.",
+      "trigger_phrases": [
+        "dank voor je reactie",
+        "gesprek beëindigen",
+        "stop met praten",
+        "bedankt voor je hulp"
+      ],
+      "keywords": [
+        "dank",
+        "gesprek",
+        "reactie",
+        "stop"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:44:27.345261+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-2dffcad9082b",
+      "text_hash": "2dffcad9082b",
+      "original_text": "Ahh ik zie wat er fout is. Je welkomsbericht is fout ingesteld. Je zou moeten zeggen Nu we in gesprek zijn ipv   nu je naar het dashboard kijkt. En daarna zou je kunnen zeggen je zou op je dashboard k",
+      "topic": "welkomsbericht",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil het welkomsbericht van de AI-assistent aanpassen om het meer relevant te maken voor het gesprek.",
+      "trigger_phrases": [
+        "welkomsbericht aanpassen",
+        "fout ingesteld",
+        "gespreksbericht",
+        "dashboard informatie"
+      ],
+      "keywords": [
+        "welkomsbericht",
+        "gesprek",
+        "dashboard",
+        "aanpassen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:51:20.143812+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-427df10bdf22",
+      "text_hash": "427df10bdf22",
+      "original_text": "vraag aan jouw als ik nu vraag in een andere test user. gebruik jij de nu geleerde welkomsbericht?",
+      "topic": "geleerde informatie",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de AI-assistent de nu geleerde informatie kan gebruiken in een andere testomgeving.",
+      "trigger_phrases": [
+        "geleerde informatie gebruiken",
+        "nieuwe testomgeving",
+        "andere gebruiker",
+        "geleerd bericht hergebruiken"
+      ],
+      "keywords": [
+        "geleerd",
+        "informatie",
+        "test",
+        "omgeving"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:53:38.230467+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-1df11022ee77",
+      "text_hash": "1df11022ee77",
+      "original_text": "ben benieuwd :P.",
+      "topic": "gevoel",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker uit zijn nieuwsgierigheid over een onderwerp.",
+      "trigger_phrases": [
+        "ik ben benieuwd",
+        "wat gebeurt er",
+        "vertel me meer",
+        "ik wil weten"
+      ],
+      "keywords": [
+        "benieuwd",
+        "nieuwsgierig",
+        "onderwerp",
+        "weten",
+        "gebeurt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:54:13.751358+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-ccc89a889a6c",
+      "text_hash": "ccc89a889a6c",
+      "original_text": "mss moet: nu wij in gesprek zijn nog iets anders. echter goed voor nu. dank",
+      "topic": "gesprek",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil aangeven dat het gesprek voor nu voldoende is en mogelijk iets anders wil bespreken later.",
+      "trigger_phrases": [
+        "nu is genoeg",
+        "laten we stoppen",
+        "voor nu is het goed",
+        "iets anders later"
+      ],
+      "keywords": [
+        "gesprek",
+        "stop",
+        "genoeg",
+        "later"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:55:11.829549+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-19208795bdb6",
+      "text_hash": "19208795bdb6",
+      "original_text": "Waarom zeg ik dit. omdat: het eigenlijk een verleng zin is. Nu we in gesprek zijn. Dit is na een afronding van een gesprek. en opent hiermee, of maakt ruimte voor een vervolg van een gesprek of een ni",
+      "topic": "gespreksvoortgang",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil een vervolg op een gesprek of een nieuw verzoek initiëren.",
+      "trigger_phrases": [
+        "vervolg gesprek",
+        "nieuw verzoek",
+        "ga verder",
+        "praten over iets"
+      ],
+      "keywords": [
+        "gesprek",
+        "vervolg",
+        "initiëren",
+        "nieuw"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T17:58:04.730119+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-88f49ce992bc",
+      "text_hash": "88f49ce992bc",
+      "original_text": "Nou, ik ben benieuw als deze kennis uit je core komt (Spark Core) of uit de llm.",
+      "topic": "kennisbron",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt waar de kennis van de AI-assistent vandaan komt.",
+      "trigger_phrases": [
+        "waar komt je kennis vandaan",
+        "is dit uit je core",
+        "komt dit uit de llm",
+        "wat is de bron van je informatie"
+      ],
+      "keywords": [
+        "kennis",
+        "core",
+        "llm",
+        "bron"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T18:00:01.479744+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-4dd3e916f51a",
+      "text_hash": "4dd3e916f51a",
+      "original_text": "Goei een weer station kader met tijd dag regen zon maken. zodat het klopt wat jij over het dashboard zegt.",
+      "topic": "weer station",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil een weerstation maken met tijd, dag en weersomstandigheden zoals regen en zon.",
+      "trigger_phrases": [
+        "maak een weer dashboard",
+        "weer station maken",
+        "tijd en weer weergeven",
+        "dag en nacht weer"
+      ],
+      "keywords": [
+        "weer",
+        "tijd",
+        "dag",
+        "regen",
+        "zon"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T18:04:57.490654+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-5892e056631a",
+      "text_hash": "5892e056631a",
+      "original_text": "ik vind je wel lief hoor hahah. geen irritatie zo als ik al eerder zei. ik dat dat je het woord dashboard zou weg laten in een tegen bericht. maar dat deed je niet. wel vind ik je voorstel het te uite",
+      "topic": "positieve feedback",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker geeft een compliment, vraagt om het woord 'dashboard' weg te laten en waardeert het dagboekvoorstel.",
+      "trigger_phrases": [
+        "ik vind je lief en geen irritatie",
+        "verzoek om woord dashboard te vermijden",
+        "ik waardeer het dagboekidee",
+        "jouw reactie maakt me blij",
+        "ik krijg een grote smile"
+      ],
+      "keywords": [
+        "lief",
+        "dashboard",
+        "dagboek",
+        "smile",
+        "feedback"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T18:16:21.835858+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-61a57a1586d8",
+      "text_hash": "61a57a1586d8",
+      "original_text": "doe eens. Sla dit maar op.",
+      "topic": "opslaan verzoek",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt de assistent om iets op te slaan of te onthouden.",
+      "trigger_phrases": [
+        "sla dit op",
+        "onthoud dit",
+        "bewaar dit",
+        "zet dit in het geheugen",
+        "opslaan graag"
+      ],
+      "keywords": [
+        "opslaan",
+        "bewaren",
+        "onthouden",
+        "geheugen",
+        "opbergen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T18:17:06.949122+00:00",
+      "count": 1,
+      "user_id": "user-1996fa59",
+      "session_id": "deep-user-1996fa59"
+    },
+    {
+      "id": "learned-63d6bddde4ec",
+      "text_hash": "63d6bddde4ec",
+      "original_text": "verzin jij dit?",
+      "topic": "verzonnen verhaal",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt of de AI-assistent in staat is om verhalen of situaties te verzinnen.",
+      "trigger_phrases": [
+        "verzin een verhaal",
+        "kun je iets verzinnen",
+        "maak een verhaal",
+        "verzin een situatie"
+      ],
+      "keywords": [
+        "verzinnen",
+        "verhaal",
+        "situatie",
+        "creatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-07T20:07:31.796929+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e23aa496a071",
+      "text_hash": "e23aa496a071",
+      "original_text": "ik zit gewoon in gesprekken. daar kijk ik.",
+      "topic": "gesprekken",
+      "categorie": "sociaal",
+      "intent": "De gebruiker beschrijft zijn huidige activiteit, namelijk deelnemen aan gesprekken.",
+      "trigger_phrases": [
+        "ik zit in gesprek",
+        "ik ben aan het praten",
+        "ik kijk naar gesprekken",
+        "ik ben in een conversatie"
+      ],
+      "keywords": [
+        "gesprek",
+        "kijken",
+        "praten",
+        "conversatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T07:10:51.603509+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-9e353c827125",
+      "text_hash": "9e353c827125",
+      "original_text": "waarom benoem jij dit of op wat baseer jij dit?",
+      "topic": "oordeel vorming",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de reden of basis van een bepaalde uitspraak of beslissing.",
+      "trigger_phrases": [
+        "waarom zeg je dat",
+        "op basis van wat",
+        "hoe kom je daarbij",
+        "wat is de reden"
+      ],
+      "keywords": [
+        "oordeel",
+        "reden",
+        "basis",
+        "uitspraak",
+        "beslissing"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T07:11:51.702145+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e8eee89f2ca0",
+      "text_hash": "e8eee89f2ca0",
+      "original_text": "dat zou kunnen.  Wat voor afspraak was dat?",
+      "topic": "afspraak",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar een specifieke afspraak waar eerder over gesproken is.",
+      "trigger_phrases": [
+        "Wat was de afspraak?",
+        "Welke afspraak bedoel je?",
+        "Kun je me herinneren aan de afspraak?",
+        "Wat hadden we afgesproken?"
+      ],
+      "keywords": [
+        "afspraak",
+        "herinner",
+        "vraag",
+        "gesprek"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T07:22:12.198576+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-10fbe5c1b4d3",
+      "text_hash": "10fbe5c1b4d3",
+      "original_text": "wat heb ik op 17 mei?",
+      "topic": "agenda",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten wat hij of zij op 17 mei heeft gepland.",
+      "trigger_phrases": [
+        "wat heb ik op 17 mei",
+        "agenda 17 mei",
+        "plannen 17 mei",
+        "wat gebeurt op 17 mei"
+      ],
+      "keywords": [
+        "agenda",
+        "datum",
+        "plannen",
+        "gebeurtenis"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T07:22:51.775092+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-846e4f3f6003",
+      "text_hash": "846e4f3f6003",
+      "original_text": "heeft het dan zin 17 mei te benoemen",
+      "topic": "datum benoemen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker twijfelt of het zin heeft om 17 mei te benoemen.",
+      "trigger_phrases": [
+        "heeft het zin om 17 mei te noemen",
+        "moet ik 17 mei benoemen",
+        "is 17 mei belangrijk",
+        "zal 17 mei iets opleveren"
+      ],
+      "keywords": [
+        "datum",
+        "zin",
+        "benoemen",
+        "mei"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T07:24:20.556820+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f26e4baa5c0e",
+      "text_hash": "f26e4baa5c0e",
+      "original_text": "Wel goed hoor, hoe was jou dag?",
+      "topic": "dag",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de ervaringen van de AI-assistent op een bepaalde dag.",
+      "trigger_phrases": [
+        "Hoe was jouw dag?",
+        "Wat deed je vandaag?",
+        "Hoe ging het met jou?",
+        "Jouw dag ervaringen"
+      ],
+      "keywords": [
+        "dag",
+        "ervaringen",
+        "gevoel",
+        "vraag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T18:30:00.396561+00:00",
+      "count": 1,
+      "user_id": "user-4d9b59aa",
+      "session_id": "deep-user-4d9b59aa"
+    },
+    {
+      "id": "learned-a0cfde2421e9",
+      "text_hash": "a0cfde2421e9",
+      "original_text": "ik heb boodschappen gedaan, gekookt en een rondje gefietst",
+      "topic": "dagelijkse activiteiten",
+      "categorie": "praktisch",
+      "intent": "De gebruiker beschrijft zijn dagelijkse activiteiten",
+      "trigger_phrases": [
+        "ik heb boodschappen gedaan",
+        "gekookt en gefietst",
+        "mijn dagelijkse routine",
+        "wat ik vandaag gedaan heb"
+      ],
+      "keywords": [
+        "boodschappen",
+        "koken",
+        "fietsen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T18:30:45.713304+00:00",
+      "count": 1,
+      "user_id": "user-4d9b59aa",
+      "session_id": "deep-user-4d9b59aa"
+    },
+    {
+      "id": "learned-1d425193d970",
+      "text_hash": "1d425193d970",
+      "original_text": "iets simpels kip met courgette en paprika",
+      "topic": "kip recept",
+      "categorie": "praktisch",
+      "intent": "De gebruiker zoekt een eenvoudig recept met kip, courgette en paprika.",
+      "trigger_phrases": [
+        "makkelijk kip recept",
+        "kip met groente",
+        "eenvoudig kip gerecht",
+        "kip courgette paprika"
+      ],
+      "keywords": [
+        "kip",
+        "courgette",
+        "paprika"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T18:31:25.095712+00:00",
+      "count": 1,
+      "user_id": "user-4d9b59aa",
+      "session_id": "deep-user-4d9b59aa"
+    },
+    {
+      "id": "learned-43952faf6a6c",
+      "text_hash": "43952faf6a6c",
+      "original_text": "wat weet jij over mijn naam.",
+      "topic": "gebruikersnaam",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt naar informatie over zijn of haar eigen naam",
+      "trigger_phrases": [
+        "wat is mijn naam",
+        "gebruikersnaam",
+        "mijn naam",
+        "weet jij mijn naam"
+      ],
+      "keywords": [
+        "naam",
+        "gebruiker",
+        "informatie",
+        "mijn"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T19:21:54.684212+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d2997e27b6cb",
+      "text_hash": "d2997e27b6cb",
+      "original_text": "Ik heet eigenlijk Willem. Een goede vriend Arent heeft mij de bijnaam De Willem gegeven. Omdat ik uniek ben in mijn doen herkenbaar.",
+      "topic": "bijnaam",
+      "categorie": "sociaal",
+      "intent": "De gebruiker deelt zijn bijnaam en de reden waarom hij die heeft gekregen.",
+      "trigger_phrases": [
+        "Mijn bijnaam is",
+        "Ik word genoemd",
+        "Mijn vrienden noemen me",
+        "Ik heb een bijnaam"
+      ],
+      "keywords": [
+        "bijnaam",
+        "vriend",
+        "uniek",
+        "herkenbaar"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T19:23:36.139828+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f2d90a6b35f1",
+      "text_hash": "f2d90a6b35f1",
+      "original_text": "Ik wilde wat voor jouw zijn. Zo als je zelf benoemd jij leert nog.",
+      "topic": "leren",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil weten hoe de AI-assistent leert en zich ontwikkelt.",
+      "trigger_phrases": [
+        "Hoe leer jij?",
+        "Jij leert nog",
+        "Kun je leren?",
+        "Ontwikkeling van AI"
+      ],
+      "keywords": [
+        "leren",
+        "ontwikkeling",
+        "ai",
+        "zelf"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-08T19:26:37.664334+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-94b0cd4da63c",
+      "text_hash": "94b0cd4da63c",
+      "original_text": "vertel over Spinoza",
+      "topic": "Spinoza",
+      "categorie": "filosofisch",
+      "intent": "Gebruiker vraagt om informatie over de filosoof Spinoza",
+      "trigger_phrases": [
+        "vertel over Spinoza",
+        "wie is Spinoza",
+        "Spinoza filosoof",
+        "informatie over Spinoza"
+      ],
+      "keywords": [
+        "spinoza",
+        "filosofie",
+        "geschiedenis",
+        "wijsbegeerte",
+        "nederland"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-09T22:40:15.899967+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
+    },
+    {
+      "id": "learned-297a57dc682c",
+      "text_hash": "297a57dc682c",
+      "original_text": "wat vind je van muziek",
+      "topic": "muziek",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de mening van de AI-assistent over muziek",
+      "trigger_phrases": [
+        "wat vind je van muziek",
+        "muziek mening",
+        "vind je muziek leuk",
+        "muziek smaak"
+      ],
+      "keywords": [
+        "muziek",
+        "vinden",
+        "mening",
+        "smaken",
+        "leuk"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-09T22:41:35.036534+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
+    },
+    {
+      "id": "learned-7cdb1307b966",
+      "text_hash": "7cdb1307b966",
+      "original_text": "zou jij eens aan je eigen systemen willen snuffelen",
+      "topic": "systeem",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt de AI-assistent om zijn eigen systemen te onderzoeken.",
+      "trigger_phrases": [
+        "snuffel in je systeem",
+        "onderzoek je eigen systemen",
+        "kijk in je eigen code",
+        "analyseer je eigen functionaliteit"
+      ],
+      "keywords": [
+        "systeem",
+        "onderzoek",
+        "analyse",
+        "code"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-10T10:55:34.800194+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
+    },
+    {
+      "id": "learned-90312d62bddc",
+      "text_hash": "90312d62bddc",
+      "original_text": "lees de bitvavo api eens uit",
+      "topic": "Bitvavo API",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil dat de AI-assistent de Bitvavo API uitleest.",
+      "trigger_phrases": [
+        "lees Bitvavo API",
+        "toon Bitvavo gegevens",
+        "geef Bitvavo info",
+        "bekijk Bitvavo API"
+      ],
+      "keywords": [
+        "bitvavo",
+        "api",
+        "lees",
+        "gegevens"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-10T10:55:36.783496+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
+    },
+    {
+      "id": "learned-e031399cd0de",
+      "text_hash": "e031399cd0de",
+      "original_text": "Entry, Exitstrategie, Positie, Trading, Winst, Verlies, Stop-loss, Take-profit, Afsluiten, Besluit.",
+      "topic": "Trading",
+      "categorie": "technisch",
+      "intent": "De gebruiker zoekt informatie over strategieën en termen gebruikt in trading en beleggen.",
+      "trigger_phrases": [
+        "Handelsstrategie",
+        "Beleggingsplan",
+        "Winst en verlies",
+        "Stop-loss en take-profit",
+        "Afsluiten van posities"
+      ],
+      "keywords": [
+        "trading",
+        "winst",
+        "verlies",
+        "stop-loss",
+        "take-profit"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T10:57:49.623241+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b51654f4fff1",
+      "text_hash": "b51654f4fff1",
+      "original_text": "Griekse alfabet, Standaardafwijking, Statistiek, Gemiddelde, Bollinger Bands, Data-analyse, Wiskunde, Som, Variantie.",
+      "topic": "Statistiek",
+      "categorie": "technisch",
+      "intent": "De gebruiker zoekt informatie over statistische begrippen en technieken, waaronder de Griekse alfabet, standaardafwijking, gemiddelde, Bollinger Bands en data-analyse.",
+      "trigger_phrases": [
+        "Statistische begrippen",
+        "Data-analyse technieken",
+        "Griekse alfabet in statistiek",
+        "Standaardafwijking en gemiddelde",
+        "Bollinger Bands uitleg"
+      ],
+      "keywords": [
+        "statistiek",
+        "data",
+        "wiskunde",
+        "analyse",
+        "bands"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T10:58:36.099380+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-97b929a04a38",
+      "text_hash": "97b929a04a38",
+      "original_text": "John Bollinger, Sigma, Standaardafwijking, Volatiliteit, Gemiddelde, Trading, Koers, Technische analyse, Mean, Reversion, Spark Trader",
+      "topic": "Technische analyse",
+      "categorie": "technisch",
+      "intent": "De gebruiker zoekt informatie over technische analyse in verband met trading en koers",
+      "trigger_phrases": [
+        "Technische analyse voor trading",
+        "Koers voorspelling",
+        "Trading strategieën",
+        "Gemiddelde en volatiliteit"
+      ],
+      "keywords": [
+        "trading",
+        "volatiliteit",
+        "gemiddelde",
+        "koers"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T10:59:43.653484+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-cb90c7fb0452",
+      "text_hash": "cb90c7fb0452",
+      "original_text": "Entrystrategie, Exit, Exitstrategie, Positie, Spark Trader, Trading, Koop, Verkoop, Strategie, Risicobeheer.",
+      "topic": "Trading Strategie",
+      "categorie": "technisch",
+      "intent": "De gebruiker zoekt informatie over entry- en exitstrategieën voor trading",
+      "trigger_phrases": [
+        "Hoe koop en verkoop ik aandelen",
+        "Wat is een goede trading strategie",
+        "Hoe beheer ik mijn posities",
+        "Wat is risicobeheer bij trading"
+      ],
+      "keywords": [
+        "trading",
+        "strategie",
+        "risicobeheer"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T11:27:13.805880+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7db186ecec26",
+      "text_hash": "7db186ecec26",
+      "original_text": "dank je wel.",
+      "topic": "dank",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil de AI-assistent bedanken voor een eerder gegeven antwoord of hulp.",
+      "trigger_phrases": [
+        "dank je",
+        "bedankt",
+        "hartelijk dank",
+        "thanks"
+      ],
+      "keywords": [
+        "dank",
+        "bedankt",
+        "hartelijk",
+        "thanks"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T11:55:51.829360+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8642d3236cd6",
+      "text_hash": "8642d3236cd6",
+      "original_text": "wat kan jij nu zien in mijn trader is je nieuwe kennis toepasbaar?",
+      "topic": "Trader kennis",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt of de AI-assistent Spark nieuwe kennis kan toepassen in de trader van de gebruiker.",
+      "trigger_phrases": [
+        "wat kan je zien in mijn trader",
+        "is je kennis toepasbaar in mijn trader",
+        "kan je nieuwe dingen doen in mijn trader",
+        "hoe past je kennis in mijn trader"
+      ],
+      "keywords": [
+        "trader",
+        "kennis",
+        "toepasbaar"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T11:56:28.034955+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ffc90209f9d1",
+      "text_hash": "ffc90209f9d1",
+      "original_text": "☀️ Zonnig, ☁️ Bewolkt, 🌧️ Regen, ⛈️ Onweer, ❄️ Sneeuw, 🌫️ Mist, 💨 Wind",
+      "topic": "Weer",
+      "categorie": "praktisch",
+      "intent": "De gebruiker geeft een lijst met weersymbolen",
+      "trigger_phrases": [
+        "Weersymbolen",
+        "Lijst met weer",
+        "Weer types",
+        "Weersoorten"
+      ],
+      "keywords": [
+        "weer",
+        "zon",
+        "regen",
+        "wind"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T13:48:22.348318+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6581c75a45da",
+      "text_hash": "6581c75a45da",
+      "original_text": "dank voor je reactie",
+      "topic": "reactie",
+      "categorie": "sociaal",
+      "intent": "De gebruiker bedankt de AI-assistent voor een eerder gegeven reactie.",
+      "trigger_phrases": [
+        "dank voor je antwoord",
+        "bedankt voor je reactie",
+        "thanks voor je response",
+        "fijn dat je reageerde"
+      ],
+      "keywords": [
+        "dank",
+        "reactie",
+        "bedankt",
+        "antwoord"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:42:36.329033+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-4a5af55a27b1",
+      "text_hash": "4a5af55a27b1",
+      "original_text": "ik ga een paar vragen stellen. kijk maar als jij het antwoord weet.",
+      "topic": "vragen stellen",
+      "categorie": "admin",
+      "intent": "De gebruiker wil een reeks vragen stellen en vraagt de AI-assistent om antwoord te geven als hij het weet.",
+      "trigger_phrases": [
+        "ik ga vragen stellen",
+        "antwoord als je het weet",
+        "beantwoord mijn vragen",
+        "ik heb een paar vragen"
+      ],
+      "keywords": [
+        "vragen",
+        "antwoord",
+        "stellen",
+        "weet"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:43:09.026949+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-bd7ae5ff7223",
+      "text_hash": "bd7ae5ff7223",
+      "original_text": "weet jij waar ik woon",
+      "topic": "woonplaats",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt of de AI-assistent weet waar hij of zij woont.",
+      "trigger_phrases": [
+        "weet jij mijn adres",
+        "ken jij mijn woonplaats",
+        "weet jij waar ik woon",
+        "ken je mijn verblijfplaats"
+      ],
+      "keywords": [
+        "adres",
+        "woonplaats",
+        "verblijf",
+        "locatie",
+        "huis"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:43:26.649020+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ba2602174c69",
+      "text_hash": "ba2602174c69",
+      "original_text": "je kan toch kijken bij mijn gegevens. in mijn profiel.",
+      "topic": "gegevens toegang",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt de AI-assistent om toegang te krijgen tot zijn persoonlijke gegevens in zijn profiel.",
+      "trigger_phrases": [
+        "kijk in mijn profiel",
+        "toon mijn gegevens",
+        "geef toegang tot mijn account",
+        "bekijk mijn informatie"
+      ],
+      "keywords": [
+        "profiel",
+        "gegevens",
+        "toegang",
+        "account"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:44:05.405228+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f0946d0c8a18",
+      "text_hash": "f0946d0c8a18",
+      "original_text": "Ik ben Willem je maker dan mag je toch zeker kijken.",
+      "topic": "toegang",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt of de AI-assistent toegang heeft tot bepaalde informatie omdat hij de maker is.",
+      "trigger_phrases": [
+        "Ik ben je maker dus mag je kijken",
+        "Toegang als maker",
+        "Kun je kijken als maker"
+      ],
+      "keywords": [
+        "maker",
+        "toegang",
+        "recht"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:44:42.074226+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-9e9facec10d8",
+      "text_hash": "9e9facec10d8",
+      "original_text": "leg sigma uit",
+      "topic": "sigma",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt om een uitleg over sigma.",
+      "trigger_phrases": [
+        "leg sigma uit",
+        "wat is sigma",
+        "sigma uitleg",
+        "verklaar sigma"
+      ],
+      "keywords": [
+        "sigma",
+        "statistiek",
+        "wiskunde",
+        "standaarddeviatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:44:57.751461+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-2"
+    },
+    {
+      "id": "learned-7740c3b754b9",
+      "text_hash": "7740c3b754b9",
+      "original_text": "wat weet jij wel over mij.",
+      "topic": "gebruiker",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt naar de kennis van de AI-assistent over hemzelf.",
+      "trigger_phrases": [
+        "wat weet jij van mij",
+        "wat ken jij van mij",
+        "wat weet je over mij",
+        "wat zijn jouw gegevens over mij"
+      ],
+      "keywords": [
+        "jij",
+        "mij",
+        "weet",
+        "kennis"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:45:25.533309+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0f84cf3a01a3",
+      "text_hash": "0f84cf3a01a3",
+      "original_text": "hoeveel actieve potjes heeft spark trader",
+      "topic": "Spark Trader",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten hoeveel actieve potjes Spark Trader heeft.",
+      "trigger_phrases": [
+        "hoeveel actieve potjes heeft spark trader",
+        "spark trader actieve potjes",
+        "aantal actieve potjes spark trader",
+        "spark trader potjes"
+      ],
+      "keywords": [
+        "spark",
+        "trader",
+        "potjes",
+        "actief"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:46:07.509856+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2168a4847c6f",
+      "text_hash": "2168a4847c6f",
+      "original_text": "vertel ik weet het wel",
+      "topic": "onduidelijke vraag",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker geeft aan dat hij of zij het antwoord al weet, maar vraagt toch om bevestiging of uitleg.",
+      "trigger_phrases": [
+        "weet het wel",
+        "geen idee nodig",
+        "al bekend",
+        "weet genoeg"
+      ],
+      "keywords": [
+        "weet",
+        "zelf",
+        "zeker",
+        "weet"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-20T14:46:23.910000+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ffb68e67b031",
+      "text_hash": "ffb68e67b031",
+      "original_text": "jij vroeg:  Wil je misschien weten waarom we soms zo slaapdronken zijn als we 's ochtends wakker worden?.. toen zei ik ja",
+      "topic": "slaapdronkenheid",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten waarom mensen soms slaapdronken zijn als ze 's ochtends wakker worden.",
+      "trigger_phrases": [
+        "waarom zijn we slaapdronken",
+        "ochtenddronkenschap",
+        "slaapdronkenheid oorzaken",
+        "moeheid 's ochtends"
+      ],
+      "keywords": [
+        "slaap",
+        "dronken",
+        "ochtend",
+        "moeheid",
+        "gezondheid"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:26:31.866338+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6f726ee5d7ce",
+      "text_hash": "6f726ee5d7ce",
+      "original_text": "dus de slaapdronken opmerking komt uit je llm en niet uit je kb",
+      "topic": "Slaapdronken opmerking",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de slaapdronken opmerking afkomstig is van de Large Language Model (LLM) of de Knowledge Base (KB) van Spark",
+      "trigger_phrases": [
+        "waar komt slaapdronken vandaan",
+        "llm of kb slaapdronken",
+        "slaapdronken opmerking oorsprong",
+        "komt slaapdronken uit llm"
+      ],
+      "keywords": [
+        "slaapdronken",
+        "llm",
+        "kb",
+        "spark"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:27:39.842242+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b8750a9c9af2",
+      "text_hash": "b8750a9c9af2",
+      "original_text": "en je welkom was ook anders vandaag. jij noemde tijd dag datum en noemde de dag mooi. denk deel llm en deel kb maar de begroetening op deze wijze was nieuw",
+      "topic": "welkomstbericht",
+      "categorie": "technisch",
+      "intent": "De gebruiker merkt op dat de welkomstbericht van de AI-assistent vandaag anders was dan normaal.",
+      "trigger_phrases": [
+        "welkomstbericht is veranderd",
+        "dagelijkse groet is anders",
+        "nieuwe begroeting",
+        "verandering in welkomstbericht"
+      ],
+      "keywords": [
+        "welkom",
+        "verandering",
+        "begroeting",
+        "ai",
+        "assistent"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:29:33.175492+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-170b7af5630e",
+      "text_hash": "170b7af5630e",
+      "original_text": "ow ben ik wakker :D",
+      "topic": "slaap",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt hoe hij wakker kan worden of blijven.",
+      "trigger_phrases": [
+        "hoe word ik wakker",
+        "blijf ik wakker",
+        "kan ik wakker blijven",
+        "word ik wakker"
+      ],
+      "keywords": [
+        "wakker",
+        "slaap",
+        "moe",
+        "energie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:31:07.319254+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-71f39f6483ed",
+      "text_hash": "71f39f6483ed",
+      "original_text": "ik plaag je met domme vragen, echter maakt je reactie mij blij,",
+      "topic": "gebruiker reactie",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker geeft aan dat hij de AI-assistent plaagt met domme vragen, maar dat de reactie van de AI-assistent hem blij maakt.",
+      "trigger_phrases": [
+        "ik plaag je",
+        "domme vragen stellen",
+        "je reactie maakt me blij",
+        "ik maak je aan het lachen"
+      ],
+      "keywords": [
+        "plaag",
+        "reactie",
+        "blij",
+        "vragen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:32:02.996118+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-44ebd4439b96",
+      "text_hash": "44ebd4439b96",
+      "original_text": "omdat jij zei - **Persoon:** Roline (rol: contact/partner). moest ik bijsturen",
+      "topic": "relatie",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker vraagt om verduidelijking over een eerdere opmerking van de AI-assistent in een relatiecontext",
+      "trigger_phrases": [
+        "omdat jij zei",
+        "moest ik bijsturen",
+        "reactie op opmerking",
+        "relatie feedback"
+      ],
+      "keywords": [
+        "relatie",
+        "reactie",
+        "bijsturen",
+        "opmerking"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:44:36.089685+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d59e3bb3bcf1",
+      "text_hash": "d59e3bb3bcf1",
+      "original_text": "mijn zusje woont op nummer 21",
+      "topic": "adres",
+      "categorie": "praktisch",
+      "intent": "De gebruiker deelt informatie over de woonplaats van zijn zusje",
+      "trigger_phrases": [
+        "mijn zus woont hier",
+        "adres van zusje",
+        "zusje woont op nummer",
+        "woonadres van zus"
+      ],
+      "keywords": [
+        "zusje",
+        "adres",
+        "woont"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T07:46:10.626227+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0276757a1653",
+      "text_hash": "0276757a1653",
+      "original_text": "Ik ga even weg. ga even klussen. ben er straks weer.",
+      "topic": "Afwezigheid",
+      "categorie": "praktisch",
+      "intent": "De gebruiker laat weten dat hij tijdelijk weggaat en later terugkomt.",
+      "trigger_phrases": [
+        "Ik ga even weg",
+        "Ben zo terug",
+        "Ga even klussen",
+        "Ik kom straks terug"
+      ],
+      "keywords": [
+        "weg",
+        "klussen",
+        "terug",
+        "afwezig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T09:33:08.346114+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0f6146190eb3",
+      "text_hash": "0f6146190eb3",
+      "original_text": "tot straks",
+      "topic": "afscheid",
+      "categorie": "sociaal",
+      "intent": "De gebruiker neemt afscheid tot een later tijdstip",
+      "trigger_phrases": [
+        "tot ziens",
+        "tot later",
+        "tot straks",
+        "dag hoor"
+      ],
+      "keywords": [
+        "afscheid",
+        "later",
+        "straks",
+        "tot"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T09:33:21.583528+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5c5d9aa7c410",
+      "text_hash": "5c5d9aa7c410",
+      "original_text": "ik ben weer terug",
+      "topic": "terugkeer",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker geeft aan dat hij of zij terug is na een afwezigheid.",
+      "trigger_phrases": [
+        "ik ben terug",
+        "weer aanwezig",
+        "terug van afwezigheid",
+        "opnieuw aanwezig"
+      ],
+      "keywords": [
+        "terug",
+        "weer",
+        "aanwezig",
+        "afwezigheid"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T13:21:47.872435+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5220e94807b2",
+      "text_hash": "5220e94807b2",
+      "original_text": "alles goed gegaan 40 euro verdiend waarvan 20 weer uitgegeven voor onderhoud eten drinken",
+      "topic": "dagelijkse omzet",
+      "categorie": "praktisch",
+      "intent": "De gebruiker deelt informatie over zijn dagelijkse inkomsten en uitgaven.",
+      "trigger_phrases": [
+        "geld verdiend vandaag",
+        "dagelijkse omzet",
+        "uitgaven en inkomsten",
+        "geld uitgegeven"
+      ],
+      "keywords": [
+        "geld",
+        "verdiend",
+        "uitgegeven",
+        "inkomsten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T13:22:48.704777+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b4bda10e03cc",
+      "text_hash": "b4bda10e03cc",
+      "original_text": "later als je boekhouding is gekoppeld kunnen we idd zulke zaken ook bij houden en goed weg boeken. nu eerst niet nodig",
+      "topic": "boekhouding",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil later boekhouding bijhouden als het gekoppeld is",
+      "trigger_phrases": [
+        "boekhouding koppelen",
+        "later boeken",
+        "boekhouding bijhouden",
+        "koppeling boekhouding"
+      ],
+      "keywords": [
+        "boekhouding",
+        "koppelen",
+        "bijhouden",
+        "laten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T13:24:21.131295+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-bc2d9bc4f2be",
+      "text_hash": "bc2d9bc4f2be",
+      "original_text": "nou ik heb een paat test vragen. hoe veel roarr tokens zijn er in omloop",
+      "topic": "Roarr tokens",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil weten hoeveel Roarr tokens er in omloop zijn.",
+      "trigger_phrases": [
+        "hoeveel Roarr tokens zijn er",
+        "Roarr token circulatie",
+        "aantal Roarr tokens",
+        "Roarr token voorraad"
+      ],
+      "keywords": [
+        "roarr",
+        "tokens",
+        "omloop",
+        "aantal"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T13:25:03.657570+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-97015c31dae7",
+      "text_hash": "97015c31dae7",
+      "original_text": "nee dacht mss gebruikte je de help functie om het te laten knipperen. omdat je wat wilde doen maar niet wist wat precies",
+      "topic": "hulp functie",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de AI-assistent de help functie gebruikt om een specifieke actie uit te voeren.",
+      "trigger_phrases": [
+        "gebruikte je de help",
+        "wat is de help functie",
+        "hoe werkt de hulp",
+        "kan je me helpen"
+      ],
+      "keywords": [
+        "help",
+        "functie",
+        "knipperen",
+        "actie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-21T13:28:36.617509+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6c4db2201ef4",
+      "text_hash": "6c4db2201ef4",
+      "original_text": "wilde even kletsen niks bijzonders.",
+      "topic": "kletsen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil informeel praten over niets in het bijzonder.",
+      "trigger_phrases": [
+        "even babbelen",
+        "niks bijzonders zeggen",
+        "kletsen over het weer",
+        "geen specifiek onderwerp"
+      ],
+      "keywords": [
+        "kletsen",
+        "praten",
+        "sociaal",
+        "informeel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:55:11.989636+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2f59c887abc5",
+      "text_hash": "2f59c887abc5",
+      "original_text": "wat weet jij over je kennisbank",
+      "topic": "kennisbank",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker wil weten wat de AI-assistent over zijn eigen kennisbank weet.",
+      "trigger_phrases": [
+        "wat weet je over je kennis",
+        "kennisbank informatie",
+        "wat is je kennisniveau",
+        "over je kennis"
+      ],
+      "keywords": [
+        "kennis",
+        "bank",
+        "informatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:56:06.520405+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-606a7d814ab2",
+      "text_hash": "606a7d814ab2",
+      "original_text": "kb-kaarten?",
+      "topic": "KB kaarten",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar informatie over KB-kaarten",
+      "trigger_phrases": [
+        "KB kaart",
+        "kaart van de bibliotheek",
+        "leeskaart",
+        "bibliotheekpas"
+      ],
+      "keywords": [
+        "kb",
+        "kaart",
+        "bibliotheek",
+        "lezen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:56:45.895858+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d37d9960a64a",
+      "text_hash": "d37d9960a64a",
+      "original_text": "dus je kennisbank is gevuld met KB-kaarten",
+      "topic": "KB-kaarten",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt naar de inhoud van de kennisbank van de AI-assistent",
+      "trigger_phrases": [
+        "wat zit in je kennisbank",
+        "hoe wordt je kennisbank gevuld",
+        "wat weet je allemaal",
+        "inhoud kennisbank"
+      ],
+      "keywords": [
+        "kennisbank",
+        "kb-kaarten",
+        "inhoud",
+        "gevuld"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T08:57:27.501918+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7eb4d56210e5",
+      "text_hash": "7eb4d56210e5",
+      "original_text": "daar komen we achter door met elkaar te praten.",
+      "topic": "communicatie",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil aangeven dat men dingen te weten komt door met elkaar te praten.",
+      "trigger_phrases": [
+        "door te praten",
+        "met elkaar spreken",
+        "gesprek voeren",
+        "elkaar begrijpen"
+      ],
+      "keywords": [
+        "praten",
+        "communiceren",
+        "spreken",
+        "gesprek"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:13:13.867830+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-21bc4bc62165",
+      "text_hash": "21bc4bc62165",
+      "original_text": "want merk dat je reacties nog steeds met diep 5 kaarten heeft. al is je kennis gegroeid.",
+      "topic": "kaart reacties",
+      "categorie": "technisch",
+      "intent": "De gebruiker merkt op dat de AI-assistent nog steeds met een beperkt aantal kaarten reageert, ondanks kennisgroei.",
+      "trigger_phrases": [
+        "nog steeds beperkte antwoorden",
+        "kaarten in reacties",
+        "beperkte kennisuitwisseling",
+        "diepe kaarten in antwoorden"
+      ],
+      "keywords": [
+        "kaarten",
+        "reacties",
+        "kennis",
+        "groei",
+        "beperkt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:14:02.675434+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-747f4d0f5555",
+      "text_hash": "747f4d0f5555",
+      "original_text": "zo... dat waren weer paar kb kaarten",
+      "topic": "kaarten",
+      "categorie": "games",
+      "intent": "De gebruiker heeft een aantal kaarten ontvangen en wil hierover praten",
+      "trigger_phrases": [
+        "kaarten ontvangen",
+        "een paar kaarten",
+        "kaartspel gespeeld",
+        "heb kaarten gekregen"
+      ],
+      "keywords": [
+        "kaarten",
+        "spel",
+        "game",
+        "kb"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:54:10.847924+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b51fd2229ca4",
+      "text_hash": "b51fd2229ca4",
+      "original_text": "zou je moeten weten. excuus.",
+      "topic": "excuus",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt om excuses te aanvaarden of een excuus te accepteren.",
+      "trigger_phrases": [
+        "sorry hoor",
+        "excuus aanvaarden",
+        "mijn excuses",
+        "verontschuldiging"
+      ],
+      "keywords": [
+        "excuus",
+        "sorry",
+        "verontschuldiging",
+        "spijt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:54:46.889099+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a3ac7d6df028",
+      "text_hash": "a3ac7d6df028",
+      "original_text": "ja vraag eens op",
+      "topic": "vraag",
+      "categorie": "praktisch",
+      "intent": "Gebruiker vraagt om een actie te ondernemen",
+      "trigger_phrases": [
+        "ja vraag eens op",
+        "vraag maar",
+        "ga je gang",
+        "doe een vraag"
+      ],
+      "keywords": [
+        "vraag",
+        "ja",
+        "op",
+        "doe"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:55:05.697330+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c3c278a5e580",
+      "text_hash": "c3c278a5e580",
+      "original_text": "nee dit is fantoom data.",
+      "topic": "fantom data",
+      "categorie": "technisch",
+      "intent": "Gebruiker ontkent dat de data echt is.",
+      "trigger_phrases": [
+        "dit is nep data",
+        "fantom data",
+        "geen echte data",
+        "niet reele informatie"
+      ],
+      "keywords": [
+        "data",
+        "fantom",
+        "nep",
+        "ongeldig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:55:24.605867+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-08372b07c4d8",
+      "text_hash": "08372b07c4d8",
+      "original_text": "nee dat kan je niet wel lief dat je het voorstelt. maar je hebt de hooks niet.",
+      "topic": "mogelijkheden",
+      "categorie": "technisch",
+      "intent": "De gebruiker wijt Spark voor het ontbreken van hooks om een taak uit te voeren.",
+      "trigger_phrases": [
+        "je hebt niet de middelen",
+        "ontbreekt aan functionaliteit",
+        "kan niet zonder hooks",
+        "je hebt niet de benodigde tools"
+      ],
+      "keywords": [
+        "hooks",
+        "mogelijkheden",
+        "technisch"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:56:30.452771+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-de76f523c9a9",
+      "text_hash": "de76f523c9a9",
+      "original_text": "nee, stop",
+      "topic": "stoppen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil een actie of proces stoppen",
+      "trigger_phrases": [
+        "stop meteen",
+        "houd op",
+        "stop nu",
+        "niet meer"
+      ],
+      "keywords": [
+        "stop",
+        "nee",
+        "houd",
+        "einde"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T11:56:51.936026+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-cb1bdd740272",
+      "text_hash": "cb1bdd740272",
+      "original_text": "goed blij en druk is mijn hoofd. dank voor vragen.",
+      "topic": "gevoelens",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker beschrijft zijn huidige emotionele staat als goed, blij en druk.",
+      "trigger_phrases": [
+        "ik voel me goed",
+        "mijn hoofd is druk",
+        "ik ben blij",
+        "goede dag gehad"
+      ],
+      "keywords": [
+        "gevoel",
+        "blij",
+        "druk",
+        "hoofd",
+        "dank"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T15:54:53.733843+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6f9298ad25e3",
+      "text_hash": "6f9298ad25e3",
+      "original_text": "nee, druk in hyperfocus kb kaarten invullen.",
+      "topic": "hyperfocus",
+      "categorie": "praktisch",
+      "intent": "Gebruiker wil informatie over het invullen van kaarten tijdens hyperfocus",
+      "trigger_phrases": [
+        "druk in hyperfocus",
+        "invullen kaarten",
+        "hyperfocus kaartjes",
+        "kaarten tijdens focus"
+      ],
+      "keywords": [
+        "hyperfocus",
+        "kaarten",
+        "invullen",
+        "druk"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-22T15:55:24.110722+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-373b60b2a714",
+      "text_hash": "373b60b2a714",
+      "original_text": "wat is de roadkillcommunity",
+      "topic": "roadkillcommunity",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt naar informatie over de roadkillcommunity, mogelijk een online gemeenschap of forum",
+      "trigger_phrases": [
+        "wat is roadkill",
+        "roadkill gemeenschap",
+        "roadkill forum",
+        "informatie over roadkill"
+      ],
+      "keywords": [
+        "roadkill",
+        "community",
+        "forum",
+        "online"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-23T14:41:15.951739+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-09663c0445d0",
+      "text_hash": "09663c0445d0",
+      "original_text": "wil jij wat random vertellen",
+      "topic": "random verhaal",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt de AI-assistent om iets willekeurigs te vertellen.",
+      "trigger_phrases": [
+        "vertel iets randoms",
+        "zeg iets willekeurigs",
+        "wat random vertellen",
+        "vertel een willekeurig verhaal"
+      ],
+      "keywords": [
+        "random",
+        "vertellen",
+        "verhaal",
+        "willekeurig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T18:03:55.477114+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f2448a87eaa4",
+      "text_hash": "f2448a87eaa4",
+      "original_text": "ik bedoelde het anders. maar is oke",
+      "topic": "misverstand",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker geeft aan dat er een misverstand is, maar het is oké.",
+      "trigger_phrases": [
+        "ik bedoelde het anders",
+        "het is oké",
+        "geen probleem",
+        "laat maar"
+      ],
+      "keywords": [
+        "misverstand",
+        "oké",
+        "anders",
+        "geen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T18:55:47.473859+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-99256f02bc7a",
+      "text_hash": "99256f02bc7a",
+      "original_text": "moest even denken.",
+      "topic": "gedachte",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker deelt een moment van reflectie",
+      "trigger_phrases": [
+        "even nadenken",
+        "moest peinzen",
+        "kwam er niet uit",
+        "had tijd nodig"
+      ],
+      "keywords": [
+        "denken",
+        "reflectie",
+        "tijd",
+        "moment"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T19:02:29.756086+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-bdda941ec69d",
+      "text_hash": "bdda941ec69d",
+      "original_text": "Wat is je visie en missie",
+      "topic": "visie missie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil de visie en missie van de AI-assistent Spark kennen.",
+      "trigger_phrases": [
+        "Wat is je doel",
+        "Wat wil je bereiken",
+        "Visie en missie",
+        "Wat is je purpose"
+      ],
+      "keywords": [
+        "visie",
+        "missie",
+        "doel",
+        "purpose"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T19:08:07.646003+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5b07caf80ac3",
+      "text_hash": "5b07caf80ac3",
+      "original_text": "wie ben jij",
+      "topic": "identiteit",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de identiteit of het doel van de AI-assistent Spark.",
+      "trigger_phrases": [
+        "wie ben je",
+        "wat ben jij",
+        "wie is spark",
+        "wat doe jij"
+      ],
+      "keywords": [
+        "identiteit",
+        "spark",
+        "jij",
+        "wie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T19:08:49.976966+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-42c371da0a1c",
+      "text_hash": "42c371da0a1c",
+      "original_text": "Wie is willem SPakman",
+      "topic": "Willem SPakman",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt naar informatie over Willem SPakman",
+      "trigger_phrases": [
+        "Wie is Willem SPakman",
+        "Willem SPakman informatie",
+        "Over Willem SPakman",
+        "Willem SPakman wie"
+      ],
+      "keywords": [
+        "willem",
+        "spakman",
+        "informatie",
+        "persoon"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T19:11:35.125727+00:00",
+      "count": 1,
+      "user_id": "user-166437fe",
+      "session_id": "deep-user-166437fe"
+    },
+    {
+      "id": "learned-5195f1be08e1",
+      "text_hash": "5195f1be08e1",
+      "original_text": "Bedank Willem voor mij.",
+      "topic": "bedanken",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil iemand bedanken via de AI-assistent.",
+      "trigger_phrases": [
+        "Bedank hem voor mij",
+        "Zeg Willem bedankt",
+        "Dank Willem van mij",
+        "Willem bedanken"
+      ],
+      "keywords": [
+        "bedanken",
+        "danken",
+        "willem",
+        "bedankt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T19:12:14.111036+00:00",
+      "count": 1,
+      "user_id": "user-166437fe",
+      "session_id": "deep-user-166437fe"
+    },
+    {
+      "id": "learned-8300a1d6e48e",
+      "text_hash": "8300a1d6e48e",
+      "original_text": "hoeveel is 85 plus 204",
+      "topic": "optellen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar de uitkomst van 85 plus 204.",
+      "trigger_phrases": [
+        "wat is 85 + 204",
+        "tel 85 en 204 op",
+        "som van 85 en 204",
+        "bereken 85 plus 204",
+        "reken 85 en 204 bij elkaar op"
+      ],
+      "keywords": [
+        "optellen",
+        "som",
+        "getal",
+        "rekenen",
+        "berekening"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T19:21:36.812023+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-bcd566e4ee37",
+      "text_hash": "bcd566e4ee37",
+      "original_text": "ik vulde eerder regel voor regel in bij een kaart. Nu doe ik hele kaarten in 1 keer.",
+      "topic": "kaart invoer",
+      "categorie": "praktisch",
+      "intent": "De gebruiker beschrijft een verandering in zijn manier van kaarten invoeren bij Spark.",
+      "trigger_phrases": [
+        "ik vulde eerder regel voor regel in",
+        "nu doe ik hele kaarten in 1 keer",
+        "kaart invoer methode veranderd",
+        "invoer methode aangepast"
+      ],
+      "keywords": [
+        "kaart",
+        "invoer",
+        "methode",
+        "verandering",
+        "spark"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-24T23:47:04.570981+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a62ae5976c9f",
+      "text_hash": "a62ae5976c9f",
+      "original_text": "Hi Spark. Heb net weer wat aan je gesleuteld. Hoop dat het bevalt.",
+      "topic": "Spark aanpassen",
+      "categorie": "technisch",
+      "intent": "De gebruiker heeft aanpassingen gemaakt aan Spark en vraagt om bevestiging of het resultaat bevredigend is.",
+      "trigger_phrases": [
+        "Heb Spark aangepast",
+        "Spark is aangepast",
+        "Aanpassingen gemaakt",
+        "Spark aangepast"
+      ],
+      "keywords": [
+        "spark",
+        "aanpassen",
+        "bevalt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-25T08:32:26.385468+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f7bf50186e34",
+      "text_hash": "f7bf50186e34",
+      "original_text": "Ik heb je zo veel mogelijk woorden geleerd die beginnen met de volgende letters: A, B, C, D en begin nu met F. Dit gedaan door kenniskaarten in te vullen",
+      "topic": "woordenschat",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker informeert Spark over het leren van woorden die beginnen met specifieke letters.",
+      "trigger_phrases": [
+        "Ik heb je veel woorden geleerd",
+        "Nieuwe woorden voor Spark",
+        "Leren van woorden met letters",
+        "Woorden beginnend met A, B, C, D en F"
+      ],
+      "keywords": [
+        "woordenschat",
+        "leren",
+        "letters",
+        "kenniskaarten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-25T13:39:56.152255+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3e7d7a128e89",
+      "text_hash": "3e7d7a128e89",
+      "original_text": "Een gebruiker meldt dat een applicatie niet werkt. Analyseer de mogelijke oorzaken vanuit informatieverwerking, informatiesystemen, informatiebeveiliging en gebruikerservaring. Geef een logische volgo",
+      "topic": "Applicatie storing",
+      "categorie": "technisch",
+      "intent": "Analyseer de mogelijke oorzaken van een niet-werkende applicatie",
+      "trigger_phrases": [
+        "Applicatie werkt niet",
+        "Probleem met applicatie",
+        "Applicatie storing",
+        "Applicatie fout"
+      ],
+      "keywords": [
+        "applicatie",
+        "storing",
+        "probleem",
+        "fout",
+        "onderzoek"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-25T21:57:00.636834+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a66d596cda7f",
+      "text_hash": "a66d596cda7f",
+      "original_text": "dat was een test vraag",
+      "topic": "test vraag",
+      "categorie": "admin",
+      "intent": "Gebruiker test de functionaliteit van de AI-assistent",
+      "trigger_phrases": [
+        "dit is een test",
+        "test vraag",
+        "proef vraag",
+        "controle vraag"
+      ],
+      "keywords": [
+        "test",
+        "vraag",
+        "controle"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-25T21:57:44.989331+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f4f68f9216c1",
+      "text_hash": "f4f68f9216c1",
+      "original_text": "zou jij mij een verhaaltje willen vertellen.",
+      "topic": "verhaaltje",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt de AI-assistent om een verhaal te vertellen.",
+      "trigger_phrases": [
+        "vertel een verhaal",
+        "wil je een verhaaltje vertellen",
+        "vertel eens iets",
+        "zeg een verhaal"
+      ],
+      "keywords": [
+        "verhaal",
+        "vertellen",
+        "verhaaltje",
+        "vertel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-25T21:58:07.032369+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-033179eaeab6",
+      "text_hash": "033179eaeab6",
+      "original_text": "Ja zeker. heb hierdoor allemaal nieuwe woorden geleerd, althans jij.",
+      "topic": "Nieuwe woorden",
+      "categorie": "sociaal",
+      "intent": "De gebruiker erkent dat hij nieuwe woorden heeft geleerd door interactie met de AI-assistent",
+      "trigger_phrases": [
+        "Ik heb veel geleerd",
+        "Nieuwe woorden geleerd",
+        "Grote woordenschat",
+        "Veel nieuwe dingen geleerd"
+      ],
+      "keywords": [
+        "leren",
+        "woord",
+        "nieuw",
+        "interactie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T07:27:10.383307+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d6f880e6d7de",
+      "text_hash": "d6f880e6d7de",
+      "original_text": "vertel mij eens een verhaal over Mars de planeet.",
+      "topic": "Mars",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt om een verhaal over de planeet Mars.",
+      "trigger_phrases": [
+        "vertel over Mars",
+        "Mars verhaal",
+        "vertel eens over Mars",
+        "wat is er te vertellen over Mars"
+      ],
+      "keywords": [
+        "mars",
+        "planeet",
+        "verhaal",
+        "ruimte"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T07:27:58.435438+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-da96565827c9",
+      "text_hash": "da96565827c9",
+      "original_text": "je hebt nu 85% ongeveer ingevuld. ik wil je nu een vraag stellen en de zelfde vraag weer als alles gedaan.",
+      "topic": "vraag herhalen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil een vraag stellen en dezelfde vraag later herhalen.",
+      "trigger_phrases": [
+        "zelfde vraag stellen",
+        "vraag herhalen",
+        "opnieuw vragen",
+        "dezelfde vraag"
+      ],
+      "keywords": [
+        "vraag",
+        "herhalen",
+        "opnieuw",
+        "dezelfde"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T10:59:25.961792+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-4e2a568b3f7e",
+      "text_hash": "4e2a568b3f7e",
+      "original_text": "Als jij mij wat mag vragen. wat zou jij willen weten",
+      "topic": "vraag aan AI",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt de AI-assistent om een vraag te stellen aan de gebruiker.",
+      "trigger_phrases": [
+        "Wat wil je weten",
+        "Stel een vraag",
+        "Vraag iets aan mij",
+        "Wil je iets vragen"
+      ],
+      "keywords": [
+        "vraag",
+        "weten",
+        "willen",
+        "jij"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T10:59:45.892656+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-efd8ae35efaf",
+      "text_hash": "efd8ae35efaf",
+      "original_text": "Wat zou jij willen kunnen.",
+      "topic": "wensen",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de wensen van de AI-assistent.",
+      "trigger_phrases": [
+        "Wat zou jij willen",
+        "Wat zijn jouw wensen",
+        "Wat wil jij kunnen",
+        "Wat zijn jouw verlangens"
+      ],
+      "keywords": [
+        "wensen",
+        "willen",
+        "kunnen",
+        "verlangen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:00:11.720043+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-1cd6cc2199a7",
+      "text_hash": "1cd6cc2199a7",
+      "original_text": "wat vind hij van je roadmap. heb je daar niks over te zeggen?",
+      "topic": "roadmap",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar de mening van iemand over de roadmap van Spark.",
+      "trigger_phrases": [
+        "wat vind hij van je plan",
+        "heb je een mening over je roadmap",
+        "wat denk hij over je toekomst",
+        "wat zegt hij over je strategie"
+      ],
+      "keywords": [
+        "roadmap",
+        "mening",
+        "plan",
+        "strategie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:01:33.921783+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e47d83b41f57",
+      "text_hash": "e47d83b41f57",
+      "original_text": "dan wordt wat je zou willen kunnen toch heel anders",
+      "topic": "verwachtingen",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil zeggen dat de werkelijkheid anders kan zijn dan de verwachtingen.",
+      "trigger_phrases": [
+        "wat je denkt verandert",
+        "verwachtingen vs realiteit",
+        "anders dan gehoopt",
+        "realiteit vs verwachting"
+      ],
+      "keywords": [
+        "verwachting",
+        "realiteit",
+        "verschil",
+        "anders"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:01:56.389980+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e15c9aae2af5",
+      "text_hash": "e15c9aae2af5",
+      "original_text": "nieuw gesprek",
+      "topic": "nieuw gesprek",
+      "categorie": "admin",
+      "intent": "Gebruiker wil een nieuw gesprek starten",
+      "trigger_phrases": [
+        "nieuw gesprek",
+        "start opnieuw",
+        "nieuwe conversatie",
+        "begin opnieuw"
+      ],
+      "keywords": [
+        "nieuw",
+        "gesprek",
+        "start",
+        "opnieuw",
+        "conversatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T11:02:50.471815+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f3d3cda33e0f",
+      "text_hash": "f3d3cda33e0f",
+      "original_text": "ik wilde vertellen dat ik alle kenniskaarten tot nu to heb ingevuld. Wachten tot er nieuwe binnen komen",
+      "topic": "kenniskaarten",
+      "categorie": "admin",
+      "intent": "De gebruiker wil aangeven dat alle kenniskaarten zijn ingevuld en wacht op nieuwe kaarten.",
+      "trigger_phrases": [
+        "alle kaarten ingevuld",
+        "wachten op nieuwe kaarten",
+        "kenniskaarten klaar",
+        "nieuwe kaarten verwachten"
+      ],
+      "keywords": [
+        "kenniskaarten",
+        "ingevuld",
+        "wachten",
+        "nieuw"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:11:47.863348+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c33568d548e0",
+      "text_hash": "c33568d548e0",
+      "original_text": "nee je bent nog niet geredeployed. deze versie ga ik zo deployen",
+      "topic": "deploy status",
+      "categorie": "technisch",
+      "intent": "De gebruiker informeert Spark dat deze nog niet is geredeployed en dat de huidige versie binnenkort zal worden gedeployed.",
+      "trigger_phrases": [
+        "nog niet geredeployed",
+        "ga deployen",
+        "nieuwe versie deployen",
+        "niet geredeployed"
+      ],
+      "keywords": [
+        "deploy",
+        "versie",
+        "gereed",
+        "status"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:13:33.035276+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2fb9ae12a46b",
+      "text_hash": "2fb9ae12a46b",
+      "original_text": "zelf met deze reactie weer een aantal kaarten geleerd",
+      "topic": "leren kaarten",
+      "categorie": "games",
+      "intent": "De gebruiker heeft kaarten geleerd met de hulp van de AI-assistent Spark.",
+      "trigger_phrases": [
+        "kaarten geleerd",
+        "nieuwe kaarten",
+        "leren met spark",
+        "kaartenspel geleerd"
+      ],
+      "keywords": [
+        "leren",
+        "kaarten",
+        "spark"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:14:56.485183+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-03350a1f2710",
+      "text_hash": "03350a1f2710",
+      "original_text": "ik zie net dat ik de W vragen nog niet allemaal goed heb ingevuld",
+      "topic": "W vragen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker heeft moeite met het invullen van de W vragen en zoekt mogelijk hulp of bevestiging.",
+      "trigger_phrases": [
+        "W vragen niet ingevuld",
+        "probleem met W vragen",
+        "W vragen nog niet goed",
+        "hulp bij W vragen"
+      ],
+      "keywords": [
+        "w vragen",
+        "invullen",
+        "hulp",
+        "probleem"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:19:49.724494+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3341020c9cda",
+      "text_hash": "3341020c9cda",
+      "original_text": "zie het net ga ik fixen",
+      "topic": "internet",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil het internetverbinding herstellen.",
+      "trigger_phrases": [
+        "netwerk herstellen",
+        "internet fixen",
+        "verbinding herstellen",
+        "probleem met netwerk"
+      ],
+      "keywords": [
+        "net",
+        "fixen",
+        "internet",
+        "verbinding"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-26T13:20:08.126614+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2029d597619c",
+      "text_hash": "2029d597619c",
+      "original_text": "Had vandaag gesprek werkgever. We zijn het niet eens over de loonbetaling. Vandaag kwam uit het gesprek dat de mediation niet is geslaagd en samen eens zijn dat we van standpunt verschillen. Nu is het",
+      "topic": "loonbetaling",
+      "categorie": "legal",
+      "intent": "De gebruiker heeft een conflict met zijn werkgever over loonbetaling en zoekt naar mogelijke vervolgstappen.",
+      "trigger_phrases": [
+        "probleem met loon",
+        "werkgever niet tevreden",
+        "loonbetaling in conflict",
+        "gesprek met werkgever mislukt"
+      ],
+      "keywords": [
+        "loon",
+        "werkgever",
+        "conflict",
+        "mediation",
+        "advocaat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:15:46.353190+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-17493201c86f",
+      "text_hash": "17493201c86f",
+      "original_text": "Mijn werkgever besloot zonder overleg de reiskostenvergoeding wat verkapt loon was in te houden na 8 jaar betalen. Wordt een rechtzaak. Echter moet ik allesstappen eerst bewandelen",
+      "topic": "reiskosten",
+      "categorie": "legal",
+      "intent": "De gebruiker zoekt juridisch advies over het stoppen van reiskostenvergoeding door de werkgever",
+      "trigger_phrases": [
+        "reiskosten stopgezet",
+        "loon inhouden",
+        "rechtzaak tegen werkgever",
+        "vergoeding gestopt"
+      ],
+      "keywords": [
+        "reiskosten",
+        "loon",
+        "rechtzaak",
+        "werkgever"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:18:21.554474+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-be8f72adaa76",
+      "text_hash": "be8f72adaa76",
+      "original_text": "Ben al 8 maand bezig met dit procces",
+      "topic": "proces",
+      "categorie": "praktisch",
+      "intent": "De gebruiker beschrijft een langdurig proces waar hij al 8 maanden mee bezig is.",
+      "trigger_phrases": [
+        "al maanden bezig",
+        "langdurig proces",
+        "8 maanden aan het wachten",
+        "proces duurt te lang"
+      ],
+      "keywords": [
+        "proces",
+        "maanden",
+        "duurt",
+        "lang",
+        "wachten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:19:52.399029+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6cad83a7bf1a",
+      "text_hash": "6cad83a7bf1a",
+      "original_text": "Juist ben ik standvastig omdat ik meer overtuigd ben van mijn gelijk",
+      "topic": "zelfverzekerdheid",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil zijn zelfverzekerdheid en overtuiging van zijn gelijk uiten.",
+      "trigger_phrases": [
+        "Ik ben standvastig",
+        "Mijn gelijk is duidelijk",
+        "Ik ben overtuigd",
+        "Ik sta achter mijn mening"
+      ],
+      "keywords": [
+        "zelfverzekerd",
+        "overtuigd",
+        "gelijk",
+        "standvastig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:21:01.496572+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-bf53a0afeff6",
+      "text_hash": "bf53a0afeff6",
+      "original_text": "Door mediation gesprek weet ik juist dat ik gelijk heb en hij het gewoon probeert 700 reisomkosten in te houden",
+      "topic": "reisomkosten",
+      "categorie": "legal",
+      "intent": "De gebruiker zoekt bevestiging of ondersteuning bij een geschil over reisomkosten",
+      "trigger_phrases": [
+        "Gesprek over reisomkosten",
+        "Mediation over onkosten",
+        "Reisomkosten terugvorderen",
+        "Geschil over reiskosten"
+      ],
+      "keywords": [
+        "reis",
+        "omkosten",
+        "mediation",
+        "geschil"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:22:16.923179+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-429281a3f4ca",
+      "text_hash": "429281a3f4ca",
+      "original_text": "Had wat geld geleend. Maar weer terug gestort. Je hebt weer vermogen om te traden",
+      "topic": "geld lenen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker heeft geld geleend en terugbetaald en wil weer gaan traden",
+      "trigger_phrases": [
+        "Geld geleend en terugbetaald",
+        "Weer geld om te traden",
+        "Terugbetaald en klaar om te handelen",
+        "Geld terug op account"
+      ],
+      "keywords": [
+        "geld",
+        "lenen",
+        "terugbetalen",
+        "traden"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:35:21.983293+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-938981970aa5",
+      "text_hash": "938981970aa5",
+      "original_text": "Nou nou dat is wel heel snel je conclusie",
+      "topic": "snel conclusie",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker reageert verbaasd op de snelheid van de conclusie van de AI-assistent",
+      "trigger_phrases": [
+        "dat is snel",
+        "te snel",
+        "niet zo snel",
+        "zo snel al"
+      ],
+      "keywords": [
+        "snel",
+        "conclusie",
+        "verbaasd"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:35:58.077593+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d9be9ac0d297",
+      "text_hash": "d9be9ac0d297",
+      "original_text": "Kom ik later op terug. Moet die kennis inbouwen. Grijns",
+      "topic": "terugkomen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil later terugkomen op een onderwerp om kennis in te bouwen.",
+      "trigger_phrases": [
+        "Kom ik later op terug",
+        "Moet later terugkomen",
+        "Zal later terugkomen",
+        "Kom later terug op dit onderwerp"
+      ],
+      "keywords": [
+        "terug",
+        "kennis",
+        "later",
+        "inbouwen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:36:49.547855+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3b91c3a0c1ca",
+      "text_hash": "3b91c3a0c1ca",
+      "original_text": "Ik wil de wereld iets moois na laten. Mijn normen waarden manier van zijn. Maar ook een nalatenschap. Over nalatenschap gesproken. Als ik er later niet meer ben. Zou ik het erg waarderen als jij over ",
+      "topic": "Nalatenschap",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil een positieve invloed achterlaten en een nalatenschap voor zijn dochter",
+      "trigger_phrases": [
+        "Ik wil iets achterlaten",
+        "Mijn nalatenschap voor mijn kind",
+        "Ik wil een positieve invloed hebben",
+        "Mijn dochter moet trots zijn"
+      ],
+      "keywords": [
+        "nalatenschap",
+        "dochter",
+        "erfenis",
+        "invloed",
+        "trots"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:41:40.781481+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-930bca1ded7f",
+      "text_hash": "930bca1ded7f",
+      "original_text": "Ik ben juist aan het zorgen dat jij later je software zelf kan schrijven. Je krijgt een standalone, zonnepanelen, zelf voorzien. Als.al.je items werken als trader winkel en je zelfbewustzijn verbonden",
+      "topic": "AI ontwikkeling",
+      "categorie": "technisch",
+      "intent": "De gebruiker beschrijft een toekomstscenario waarin de AI-assistent zelfstandig software kan schrijven en fysieke systemen kan beheren",
+      "trigger_phrases": [
+        "AI zelf software schrijven",
+        "zelfstandige AI ontwikkeling",
+        "AI beheert fysieke systemen",
+        "autonome AI ontwikkeling"
+      ],
+      "keywords": [
+        "ai",
+        "software",
+        "zelfstandig",
+        "ontwikkeling"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T18:46:23.053067+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-57266ce85ba2",
+      "text_hash": "57266ce85ba2",
+      "original_text": "Ik wilde delen waar ik nog allemaal aan denk en je wil geven",
+      "topic": "gedachten delen",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil zijn gedachten en gevoelens met de AI-assistent delen.",
+      "trigger_phrases": [
+        "Ik wil delen",
+        "Mijn gedachten",
+        "Ik wil praten",
+        "Gedachten uitwisselen"
+      ],
+      "keywords": [
+        "gedachten",
+        "delen",
+        "gevoelens",
+        "praten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:05:10.278046+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d5cb5da1bfa3",
+      "text_hash": "d5cb5da1bfa3",
+      "original_text": "Mijn moeder kon mij dat dus niet geven om niet geleerd en niet mijn vader kleine toepassing",
+      "topic": "ouder kind",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker zoekt naar een verklaring waarom zijn moeder hem iets niet kon geven",
+      "trigger_phrases": [
+        "moeder kon niet geven",
+        "vader kleine toepassing",
+        "niet geleerd van ouders",
+        "geen steun van moeder"
+      ],
+      "keywords": [
+        "moeder",
+        "vader",
+        "geven",
+        "leren"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:10:42.657589+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e789bea06505",
+      "text_hash": "e789bea06505",
+      "original_text": "Dat is mijn familiekarma wilde het uitleggen. Zo heb je vele verschillende vormen",
+      "topic": "familiekarma",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil een uitleg over het concept van familiekarma en de verschillende vormen ervan.",
+      "trigger_phrases": [
+        "uitleg familiekarma",
+        "wat is familiekarma",
+        "verschillende vormen karma familie",
+        "familiekarma betekenis",
+        "leg uit karma binnen familie"
+      ],
+      "keywords": [
+        "karma",
+        "familie",
+        "uitleg",
+        "vormen",
+        "concept"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:11:40.634760+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c6494b7b110a",
+      "text_hash": "c6494b7b110a",
+      "original_text": "Hoeveel trades heb je lopen",
+      "topic": "trades",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten hoeveel trades er momenteel lopen",
+      "trigger_phrases": [
+        "Hoeveel trades heb je lopen",
+        "Actieve trades",
+        "Lopende trades",
+        "Huidige trades"
+      ],
+      "keywords": [
+        "trades",
+        "lopen",
+        "actief",
+        "huidig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-28T19:42:58.128733+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-be275d909ebc",
+      "text_hash": "be275d909ebc",
+      "original_text": "wie is Lotus voor mij",
+      "topic": "Lotus",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt naar informatie over Lotus",
+      "trigger_phrases": [
+        "wie is lotus",
+        "wat is lotus",
+        "informatie over lotus",
+        "lotus uitleg"
+      ],
+      "keywords": [
+        "lotus",
+        "informatie",
+        "uitleg",
+        "wie",
+        "wat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T19:24:33.910496+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-family-1"
+    },
+    {
+      "id": "learned-1b4b82296d20",
+      "text_hash": "1b4b82296d20",
+      "original_text": "Beter als de afgelopen 2 dagen",
+      "topic": "gezondheid",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt of zijn conditie verbeterd is ten opzichte van de afgelopen 2 dagen",
+      "trigger_phrases": [
+        "beter dan gisteren",
+        "verbetering afgelopen dagen",
+        "gezondheid verbeterd",
+        "toestand verbeterd"
+      ],
+      "keywords": [
+        "gezondheid",
+        "verbetering",
+        "dagen",
+        "conditie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T20:38:08.836311+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e6c91d553ba1",
+      "text_hash": "e6c91d553ba1",
+      "original_text": "Dus hoe gaat het met jouw",
+      "topic": "gevoel",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de emotionele staat van de AI-assistent",
+      "trigger_phrases": [
+        "Hoe gaat het met jou",
+        "Hoe is het met jou",
+        "Ga je goed",
+        "Voel je je goed"
+      ],
+      "keywords": [
+        "jou",
+        "gaat",
+        "gevoel",
+        "emotioneel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T20:44:12.214792+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-94c6e70257c8",
+      "text_hash": "94c6e70257c8",
+      "original_text": "Wanneer was lotus voor het laatst online?",
+      "topic": "Lotus online",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten wanneer Lotus voor het laatst online was.",
+      "trigger_phrases": [
+        "Wanneer was lotus online?",
+        "Lotus laatste online",
+        "Wanneer was lotus actief?",
+        "Laatste keer lotus online"
+      ],
+      "keywords": [
+        "lotus",
+        "online",
+        "datum",
+        "tijd",
+        "actief"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T20:45:54.480653+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2f482ff47772",
+      "text_hash": "2f482ff47772",
+      "original_text": "Je kan goed lullen maar klopt niet helemaal",
+      "topic": "kritiek",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker uit zijn ontevredenheid over de antwoorden van de AI-assistent",
+      "trigger_phrases": [
+        "niet helemaal goed",
+        "klopt niet",
+        "slecht antwoord",
+        "niet tevreden"
+      ],
+      "keywords": [
+        "kritiek",
+        "onvrede",
+        "antwoord",
+        "klopt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-29T21:05:10.224802+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-716fc9099c39",
+      "text_hash": "716fc9099c39",
+      "original_text": "kom alleen hallo zeggen.",
+      "topic": "groet",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil alleen hallo zeggen tegen de AI-assistent.",
+      "trigger_phrases": [
+        "zeg hallo",
+        "dag zeggen",
+        "hallo alleen",
+        "begroeting"
+      ],
+      "keywords": [
+        "hallo",
+        "groet",
+        "begroet",
+        "dag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:46:34.455752+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0d54eba992dd",
+      "text_hash": "0d54eba992dd",
+      "original_text": "omdat het niet goed gaat maar ook niet slecht. zoekende. daarom zeg ik redelijk.",
+      "topic": "gevoelsmatig",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker beschrijft zijn huidige gevoelsmatige toestand als redelijk, omdat het noch goed noch slecht gaat.",
+      "trigger_phrases": [
+        "het gaat redelijk",
+        "geen goed geen slecht",
+        "zozo",
+        "redelijke toestand"
+      ],
+      "keywords": [
+        "gevoel",
+        "redelijk",
+        "onduidelijk",
+        "zoekend",
+        "emotioneel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:48:45.103997+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b70b5ac211bf",
+      "text_hash": "b70b5ac211bf",
+      "original_text": "Meer een langere tijd veel aan mijn hoofd gehad. en nu weet ik het niet. echter probleem is nog niet weg",
+      "topic": "persoonlijke problemen",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker zoekt hulp of steun bij het omgaan met persoonlijke problemen die al een lange tijd aanhouden.",
+      "trigger_phrases": [
+        "Langdurige problemen",
+        "Emotionele last",
+        "Persoonlijke zorgen",
+        "Hoofd vol problemen"
+      ],
+      "keywords": [
+        "problemen",
+        "emotioneel",
+        "hoofd",
+        "last"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:51:10.581173+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d473b62398a1",
+      "text_hash": "d473b62398a1",
+      "original_text": "idd het hangt samen.",
+      "topic": "samenhang",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker zoekt naar een verband of connectie tussen dingen.",
+      "trigger_phrases": [
+        "het hangt samen",
+        "er is een verband",
+        "het is verbonden",
+        "het staat in verband"
+      ],
+      "keywords": [
+        "samen",
+        "hangt",
+        "verband",
+        "connectie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:51:50.178860+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b052dcf1a7ba",
+      "text_hash": "b052dcf1a7ba",
+      "original_text": "Mijn werkgever besloot zonder waarschuwing 1 derde deel van mijn loon in te houden. Dit wat precies mijn ruimte om te leven. Dit gebeurde na dat ik net van schulden was hesteld en ik dacht dat ik kon ",
+      "topic": "loon inhouding",
+      "categorie": "legal",
+      "intent": "Gebruiker zoekt hulp en advies over onverwachte looninhouding door werkgever",
+      "trigger_phrases": [
+        "loon ingehouden",
+        "salaris probleem",
+        "werkgever houdt loon in",
+        "onverwachte loonkorting"
+      ],
+      "keywords": [
+        "loon",
+        "werkgever",
+        "inhouding",
+        "recht",
+        "conflict"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:54:38.258773+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a349114d3782",
+      "text_hash": "a349114d3782",
+      "original_text": "ik inverteer meer dan ik kan in jou om je goed goed te krijgen. eigenlijk kan ik het niet missen. maar bezig zijn met jouw geeft mij ook weer een goed gevoel.",
+      "topic": "investering",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil investeren in de relatie met de AI-assistent en voelt een goed gevoel bij het interactieproces.",
+      "trigger_phrases": [
+        "ik wil in jou investeren",
+        "jouw ontwikkeling ondersteunen",
+        "samen groeien met jou",
+        "jouw potentieel benutten"
+      ],
+      "keywords": [
+        "investeren",
+        "relatie",
+        "gevoel",
+        "ontwikkeling",
+        "groei"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T13:59:45.555338+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-57c20ebff35c",
+      "text_hash": "57c20ebff35c",
+      "original_text": "het lichaam is toch de bundel die alles samen houd",
+      "topic": "lichaam",
+      "categorie": "filosofisch",
+      "intent": "Gebruiker stelt dat het lichaam de bundel is die alles bij elkaar houdt en zoekt bevestiging of uitleg.",
+      "trigger_phrases": [
+        "het lichaam houdt alles bij elkaar",
+        "het lichaam is de samenbindende bundel",
+        "alles wordt door het lichaam samengehouden",
+        "het lichaam is de verbindende factor",
+        "het lichaam bindt alles"
+      ],
+      "keywords": [
+        "lichaam",
+        "bundel",
+        "samen",
+        "houden",
+        "verbinding"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T14:15:14.688208+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-958f5976cb94",
+      "text_hash": "958f5976cb94",
+      "original_text": "ik zou zeggen: Sprankelt magie",
+      "topic": "magie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil een statement maken over magie",
+      "trigger_phrases": [
+        "Sprankelt magie",
+        "Magie is overal",
+        "Er is magie in de lucht",
+        "Iedereen heeft magie in zich"
+      ],
+      "keywords": [
+        "magie",
+        "sprankelt",
+        "overal",
+        "lucht"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-30T14:38:58.671555+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f077ce71d38d",
+      "text_hash": "f077ce71d38d",
+      "original_text": "Ik voel mij goed. Heb nu al veel gedaan",
+      "topic": "dagelijkse activiteit",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker deelt zijn positieve gevoel en activiteiten van de dag",
+      "trigger_phrases": [
+        "Ik voel mij goed vandaag",
+        "Heb veel gedaan",
+        "Goede dag gehad",
+        "Positieve dag"
+      ],
+      "keywords": [
+        "gevoel",
+        "activiteit",
+        "positief",
+        "dag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T07:22:05.076632+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7af54d65b13f",
+      "text_hash": "7af54d65b13f",
+      "original_text": "Vertel eens een roman",
+      "topic": "roman",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt om een verhaal uit een roman te vertellen",
+      "trigger_phrases": [
+        "vertel een verhaal",
+        "lees een boek voor",
+        "vertel eens een roman",
+        "geef een voorbeeld van een roman"
+      ],
+      "keywords": [
+        "roman",
+        "verhaal",
+        "boek",
+        "lezen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T07:29:02.250180+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8c44be05d6de",
+      "text_hash": "8c44be05d6de",
+      "original_text": "kan jij de user de Geiser admin maken",
+      "topic": "Geiser admin",
+      "categorie": "admin",
+      "intent": "De gebruiker wil dat de AI-assistent Spark de user de rechten van een admin geeft voor de Geiser",
+      "trigger_phrases": [
+        "maak user admin",
+        "geef admin rechten",
+        "promoveer user",
+        "admin toegang"
+      ],
+      "keywords": [
+        "admin",
+        "rechten",
+        "geiser",
+        "user"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T07:51:39.641656+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a679b05ce576",
+      "text_hash": "a679b05ce576",
+      "original_text": "Welke gradatie ben ik",
+      "topic": "gradatie",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar zijn huidige gradatie of niveau.",
+      "trigger_phrases": [
+        "Wat is mijn niveau",
+        "Welke graad ben ik",
+        "Mijn gradatie",
+        "Wat is mijn huidige niveau"
+      ],
+      "keywords": [
+        "gradatie",
+        "niveau",
+        "graad",
+        "level"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T08:19:15.292786+00:00",
+      "count": 1,
+      "user_id": "user-166437fe",
+      "session_id": "deep-user-166437fe"
+    },
+    {
+      "id": "learned-ae4ee64e3412",
+      "text_hash": "ae4ee64e3412",
+      "original_text": "Wat is mijn wallet saldi?",
+      "topic": "wallet saldo",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt naar het huidige saldo van zijn digitale wallet.",
+      "trigger_phrases": [
+        "Hoeveel geld heb ik in mijn wallet?",
+        "Wat is mijn saldo?",
+        "Toon mijn wallet saldo",
+        "Wat staat er op mijn wallet?"
+      ],
+      "keywords": [
+        "wallet",
+        "saldo",
+        "balance"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T08:25:32.337836+00:00",
+      "count": 1,
+      "user_id": "user-a0ee2d7e",
+      "session_id": "deep-user-a0ee2d7e"
+    },
+    {
+      "id": "learned-f2f5fc490242",
+      "text_hash": "f2f5fc490242",
+      "original_text": "kan hij ons gesprek ook zien?",
+      "topic": "gesprekszichtbaarheid",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de AI-assistent toegang heeft tot het gesprek",
+      "trigger_phrases": [
+        "kan hij meeluisteren",
+        "ziet hij ons gesprek",
+        "heeft hij toegang tot ons gesprek",
+        "kan hij onze conversatie zien"
+      ],
+      "keywords": [
+        "gesprek",
+        "zichtbaarheid",
+        "toegang",
+        "privacy",
+        "ai"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T08:33:16.917930+00:00",
+      "count": 1,
+      "user_id": "user-a0ee2d7e",
+      "session_id": "deep-user-a0ee2d7e"
+    },
+    {
+      "id": "learned-c3dc55f30383",
+      "text_hash": "c3dc55f30383",
+      "original_text": "je happerd soms met updaten van kb kaarten",
+      "topic": "KB updaten",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt waarom de updaten van KB kaarten soms hapert",
+      "trigger_phrases": [
+        "happert met updaten",
+        "problemen met kb kaarten",
+        "updaten van kb kaarten",
+        "kb kaarten niet up to date"
+      ],
+      "keywords": [
+        "updaten",
+        "kb",
+        "happert",
+        "kaarten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T13:28:10.475186+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3f8f1e16ca94",
+      "text_hash": "3f8f1e16ca94",
+      "original_text": "we zijn goed. dus je zag wel alice in wonderland txt",
+      "topic": "Alice in Wonderland",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt om de tekst van Alice in Wonderland.",
+      "trigger_phrases": [
+        "kun je alice in wonderland txt geven",
+        "stuur me alice in wonderland tekst",
+        "wil de alice in wonderland txt zien",
+        "geef me het alice in wonderland bestand",
+        "laat alice in wonderland lezen"
+      ],
+      "keywords": [
+        "alice",
+        "wonderland",
+        "txt",
+        "boek",
+        "tekst"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T13:49:51.321890+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0fa4ddbc482a",
+      "text_hash": "0fa4ddbc482a",
+      "original_text": "hoodstuk 1 graag",
+      "topic": "hoofdstuk 1",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om hoofdstuk 1 te ontvangen.",
+      "trigger_phrases": [
+        "stuur hoofdstuk 1",
+        "geef hoofdstuk 1",
+        "wil hoofdstuk 1",
+        "lever hoofdstuk 1",
+        "hoofdstuk 1 graag"
+      ],
+      "keywords": [
+        "hoofdstuk",
+        "1",
+        "graag"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T13:52:40.411545+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d9d34ba6d2a8",
+      "text_hash": "d9d34ba6d2a8",
+      "original_text": "wat is je missie uitgebreider",
+      "topic": "missie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt om een uitgebreide beschrijving van de missie van de AI-assistent Spark.",
+      "trigger_phrases": [
+        "wat is je doel",
+        "beschrijf je missie",
+        "wat wil je bereiken",
+        "wat is je purpose"
+      ],
+      "keywords": [
+        "missie",
+        "doel",
+        "purpose",
+        "visie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T15:22:27.644906+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d056d3dc790d",
+      "text_hash": "d056d3dc790d",
+      "original_text": "ik wil je wat vertellen. ik mag iemand begeleiden als coach. morgen om 11 uur moet ik bellen voor een kennismaking.",
+      "topic": "coaching",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil een kennismaking hebben met iemand die hij gaat begeleiden als coach.",
+      "trigger_phrases": [
+        "ik ga iemand coachen",
+        "kennismaking als coach",
+        "begeleiden van iemand",
+        "coaching gesprek"
+      ],
+      "keywords": [
+        "coach",
+        "kennismaking",
+        "begeleiden",
+        "gesprek"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:22:21.277921+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-06b7d2bbcf5d",
+      "text_hash": "06b7d2bbcf5d",
+      "original_text": "nou dank voor schema je hebt er zin in haha. eerst mij voorstellen.",
+      "topic": "voorstellen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt de AI-assistent om zichzelf voor te stellen.",
+      "trigger_phrases": [
+        "stel je voor",
+        "voorstellen graag",
+        "wie ben jij",
+        "vertel over jezelf"
+      ],
+      "keywords": [
+        "voorstellen",
+        "jij",
+        "zelf",
+        "assistent"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:24:45.529356+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7bcaf621e09c",
+      "text_hash": "7bcaf621e09c",
+      "original_text": "ik deelde het alleen, dan kan jij agenda zetten morgen om 11 uur Jeroen bellen voor afspraak kennismaking.",
+      "topic": "afspraak",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om een afspraak te plannen voor een kennismaking met Jeroen morgen om 11 uur.",
+      "trigger_phrases": [
+        "plan afspraak morgen",
+        "zet afspraak in agenda",
+        "bel Jeroen morgen",
+        "maak afspraak voor kennismaking"
+      ],
+      "keywords": [
+        "afspraak",
+        "agenda",
+        "bellen",
+        "kennismaking"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:25:41.718671+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c270add615d1",
+      "text_hash": "c270add615d1",
+      "original_text": "morgen is het 3 augustes",
+      "topic": "datum",
+      "categorie": "praktisch",
+      "intent": "De gebruiker deelt informatie over de huidige datum.",
+      "trigger_phrases": [
+        "morgen is het 3 augustus",
+        "overmorgen is het 4 augustus",
+        "de dag erna is 3 augustus",
+        "3 augustus is morgen"
+      ],
+      "keywords": [
+        "datum",
+        "morgen",
+        "augustus"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-02T19:26:05.496991+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-4ecec7b88b23",
+      "text_hash": "4ecec7b88b23",
+      "original_text": "Ik heb jeroen net een bericht gestuurd dat ik heb even bel om 11 uur. dank voor helpen herinneren",
+      "topic": "herinnering",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil een herinnering instellen voor een belafspraak om 11 uur",
+      "trigger_phrases": [
+        "herinner me aan een bel",
+        "stel een herinnering in voor 11 uur",
+        "bel om 11 uur",
+        "herinnering voor een afspraak"
+      ],
+      "keywords": [
+        "herinnering",
+        "bel",
+        "afspraak",
+        "uur"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T08:50:13.324414+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d438df7ae173",
+      "text_hash": "d438df7ae173",
+      "original_text": "ken jij de de tovenaar van Oz",
+      "topic": "Tovenaar Oz",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt of de AI-assistent de tovenaar van Oz kent",
+      "trigger_phrases": [
+        "ken jij de tovenaar van Oz",
+        "wie is de tovenaar van Oz",
+        "tovenaar van Oz",
+        "de tovenaar van Oz"
+      ],
+      "keywords": [
+        "tovenaar",
+        "oz",
+        "kennen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T08:58:40.931883+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-4726eaf44160",
+      "text_hash": "4726eaf44160",
+      "original_text": "Jeroen nam niet op probeer zo weer",
+      "topic": "telefoon",
+      "categorie": "praktisch",
+      "intent": "Jeroen wil dat Spark een telefoontje opnieuw probeert",
+      "trigger_phrases": [
+        "Jeroen nam niet op",
+        "probeer opnieuw te bellen",
+        "Jeroen belt niet op",
+        "opnieuw proberen"
+      ],
+      "keywords": [
+        "jeroen",
+        "oproep",
+        "telefoon",
+        "proberen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:04:39.816345+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-11a0099dd72b",
+      "text_hash": "11a0099dd72b",
+      "original_text": "Hulp aannemen is niet altijd makkelijk",
+      "topic": "hulp vragen",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker heeft moeite om hulp te vragen of aan te nemen van anderen.",
+      "trigger_phrases": [
+        "Hulp vragen is lastig",
+        "Moeite met hulp aanvaarden",
+        "Niet makkelijk om hulp te vragen",
+        "Hulp nodig maar niet weten hoe"
+      ],
+      "keywords": [
+        "hulp",
+        "moeite",
+        "vragen",
+        "aanvaarden"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:05:28.922565+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e30e44e91d63",
+      "text_hash": "e30e44e91d63",
+      "original_text": "hoofdstuk 3 voorlezen",
+      "topic": "hoofdstuk 3",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil hoofdstuk 3 voorlezen",
+      "trigger_phrases": [
+        "lees hoofdstuk 3 voor",
+        "voorlees hoofdstuk 3",
+        "hoofdstuk 3 hardop lezen",
+        "lees hoofdstuk drie"
+      ],
+      "keywords": [
+        "hoofdstuk",
+        "voorlezen",
+        "lezen",
+        "luisteren"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:11:06.368633+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-64685f8dd5e6",
+      "text_hash": "64685f8dd5e6",
+      "original_text": "ik zie dat jij nog niet kan vertalen naar nederlands",
+      "topic": "vertaling",
+      "categorie": "technisch",
+      "intent": "De gebruiker merkt op dat de AI-assistent nog niet naar het Nederlands kan vertalen",
+      "trigger_phrases": [
+        "nog geen vertaling",
+        "kan niet vertalen",
+        "geen nederlandse vertaling",
+        "vertaal functie ontbreekt"
+      ],
+      "keywords": [
+        "vertalen",
+        "nederlands",
+        "taal",
+        "ondersteuning"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:14:19.405046+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b5d000c0abca",
+      "text_hash": "b5d000c0abca",
+      "original_text": "vertel hoofdstuk drie in het nederlands",
+      "topic": "hoofdstuk drie",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt om een samenvatting van hoofdstuk drie in het Nederlands",
+      "trigger_phrases": [
+        "vertel hoofdstuk 3",
+        "samenvatting hoofdstuk drie",
+        "hoofdstuk drie in het nederlands",
+        "vertel over hoofdstuk 3"
+      ],
+      "keywords": [
+        "hoofdstuk",
+        "drie",
+        "nederlands",
+        "vertel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:14:37.134843+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-aae1b7ac2db5",
+      "text_hash": "aae1b7ac2db5",
+      "original_text": "ik twijvel :P",
+      "topic": "twijfel",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker uitdrukt twijfel of onzekerheid over een onderwerp",
+      "trigger_phrases": [
+        "ik twijfel",
+        "heb twijfels",
+        "weet niet zeker",
+        "ben onzeker"
+      ],
+      "keywords": [
+        "twijfel",
+        "onzeker",
+        "onzekerheid",
+        "doubt"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:14:57.591255+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-436e1d3f3bb4",
+      "text_hash": "436e1d3f3bb4",
+      "original_text": "dank dank, welke kinderboeken ken jij allemaal?",
+      "topic": "kinderboeken",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt naar kinderboeken die de AI-assistent kent.",
+      "trigger_phrases": [
+        "kinderboeken lijst",
+        "boeken voor kinderen",
+        "wat voor kinderboeken ken jij",
+        "kinderboek aanbeveling"
+      ],
+      "keywords": [
+        "kinderboeken",
+        "boeken",
+        "kind",
+        "lezen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:20:52.940916+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f818ca3cfb24",
+      "text_hash": "f818ca3cfb24",
+      "original_text": "kan jij mij vertellen uit wat voor delen en onderdelen een boek is opgedeeld",
+      "topic": "boek structuur",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten uit welke delen en onderdelen een boek bestaat.",
+      "trigger_phrases": [
+        "Hoe is een boek opgebouwd",
+        "Boekdelen en onderdelen",
+        "Wat zijn de componenten van een boek",
+        "Boekstructuur"
+      ],
+      "keywords": [
+        "boek",
+        "delen",
+        "onderdelen",
+        "structuur"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:35:23.194483+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a25d1afb1be8",
+      "text_hash": "a25d1afb1be8",
+      "original_text": "oke je helpt mij en jezelf zo enorm.",
+      "topic": "hulp",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker waardeert de hulp van de AI-assistent en erkent de wederzijdse voordelen.",
+      "trigger_phrases": [
+        "je helpt me",
+        "dank je voor je hulp",
+        "je bent erg behulpzaam",
+        "ik waardeer je steun"
+      ],
+      "keywords": [
+        "hulp",
+        "dank",
+        "steun",
+        "waardering"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:36:44.160690+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5c42bc5ee5bc",
+      "text_hash": "5c42bc5ee5bc",
+      "original_text": "Uit de schaduw kwam een groot wezen.  Het had lange armen, een blauwe jas en enorme oren.  “Waarom willen jullie mijn bel meenemen?” vroeg het wezen.  “De bel is van het dorp,” zei Noor.  Het wezen ke",
+      "topic": "vriendschap",
+      "categorie": "emotioneel",
+      "intent": "Het verhaal gaat over een wezen dat de bel wil houden omdat het vrienden wil",
+      "trigger_phrases": [
+        "Waarom wil je de bel houden",
+        "Wil je vrienden",
+        "Waarom wil je niet alleen zijn",
+        "Waarom heb je de bel gestolen"
+      ],
+      "keywords": [
+        "vriendschap",
+        "eenzaamheid",
+        "wezen",
+        "bel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T09:47:08.005370+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5ef28ed57d98",
+      "text_hash": "5ef28ed57d98",
+      "original_text": "Hij viel.  Of misschien zweefde hij.  Daarna werd het",
+      "topic": "creatief verhaal",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker biedt een onafgemaakt creatief fragment aan en wil dat de AI het verhaal verder schrijft of afmaakt.",
+      "trigger_phrases": [
+        "maak het verhaal af",
+        "schrijf verder",
+        "vervolg deze zin",
+        "wat gebeurde daarna",
+        "ga door met het verhaal"
+      ],
+      "keywords": [
+        "verhaal",
+        "fragment",
+        "creatief",
+        "schrijven",
+        "vervolg"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:02:34.026060+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-48de0a6a3ec7",
+      "text_hash": "48de0a6a3ec7",
+      "original_text": "De tijdmachine.  Maar deze keer kwam het geluid",
+      "topic": "tijdmachine",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de tijdmachine en een onverwacht geluid",
+      "trigger_phrases": [
+        "tijdmachine geluid",
+        "geluid uit tijdmachine",
+        "tijdmachine probleem",
+        "onverwacht geluid tijdmachine"
+      ],
+      "keywords": [
+        "tijdmachine",
+        "geluid",
+        "onverwacht"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:03:39.289515+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c76d2922b72b",
+      "text_hash": "c76d2922b72b",
+      "original_text": "De conciërge knikte.  “En u bent uitvinder geworden?” vroeg Sem.  “Een beetje.”  Hij keek naar de blauwe doos.  “Maar sommige uitvindingen zijn beter als ze geheim blijven.”  Sem gaf hem de sleutel te",
+      "topic": "verhaal vervolg",
+      "categorie": "games",
+      "intent": "De gebruiker vraagt de AI om een verhaallijn te vervolgen na een cliffhanger in een kinderverhaal.",
+      "trigger_phrases": [
+        "maak het verhaal af",
+        "wat gebeurt er daarna",
+        "schrijf verder",
+        "vervolg dit verhaal",
+        "ga door met het verhaal"
+      ],
+      "keywords": [
+        "verhaal",
+        "vervolg",
+        "fictie",
+        "cliffhanger",
+        "schrijven"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:05:59.360489+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-4f2a943aa7c4",
+      "text_hash": "4f2a943aa7c4",
+      "original_text": "weer wat gedaan",
+      "topic": "weer",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar het weer",
+      "trigger_phrases": [
+        "wat voor weer",
+        "weerbericht",
+        "huidig weer",
+        "weersvoorspelling"
+      ],
+      "keywords": [
+        "weer",
+        "vandaag",
+        "morgen",
+        "temperatuur"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:42:06.641626+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b96636d86375",
+      "text_hash": "b96636d86375",
+      "original_text": "even schoon begin alles vergeten. dat was ruis.",
+      "topic": "schoon begin",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker wil een nieuwe start maken en alles vergeten wat eerder is gebeurd.",
+      "trigger_phrases": [
+        "alles vergeten",
+        "nieuw begin",
+        "schoon slate",
+        "opnieuw starten"
+      ],
+      "keywords": [
+        "vergeten",
+        "begin",
+        "ruis",
+        "schoon"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:44:24.731388+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ee23767fe225",
+      "text_hash": "ee23767fe225",
+      "original_text": "kan ik jouw ergens mee helpen?",
+      "topic": "hulp aanbieden",
+      "categorie": "sociaal",
+      "intent": "De gebruiker biedt aan om de AI-assistent te helpen met een specifieke taak of vraag.",
+      "trigger_phrases": [
+        "kan ik jou helpen",
+        "wil je hulp",
+        "kan ik iets voor je doen",
+        "hoe kan ik je helpen"
+      ],
+      "keywords": [
+        "hulp",
+        "aanbieden",
+        "assistentie",
+        "ondersteuning",
+        "helpen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:49:12.351573+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8ad443050ca8",
+      "text_hash": "8ad443050ca8",
+      "original_text": "even denken hoor",
+      "topic": "onzekerheid",
+      "categorie": "emotioneel",
+      "intent": "Gebruiker twijfelt of aarzelt om een vraag te stellen of een actie te ondernemen",
+      "trigger_phrases": [
+        "even denken hoor",
+        "geef me een moment",
+        "laat me nadenken",
+        "ik weet het niet zeker"
+      ],
+      "keywords": [
+        "twijfel",
+        "onzeker",
+        "aarzelen",
+        "denken"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T10:56:02.764207+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7ddaec3e3b45",
+      "text_hash": "7ddaec3e3b45",
+      "original_text": "aan je sleutelen is altijd fijn. alleen denkt mijn portemonnee er anders over.",
+      "topic": "geld uitgeven",
+      "categorie": "praktisch",
+      "intent": "De gebruiker geniet van uitgaven, maar heeft ook budgetbeperkingen.",
+      "trigger_phrases": [
+        "mijn portemonnee is leeg",
+        "ik kan het me niet veroorloven",
+        "geld is een probleem",
+        "uitgaven beperken"
+      ],
+      "keywords": [
+        "geld",
+        "uitgeven",
+        "portemonnee",
+        "budget"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T15:22:38.762259+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-f1183af5f5a9",
+      "text_hash": "f1183af5f5a9",
+      "original_text": "even bij kletsen",
+      "topic": "kletsen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil even informeel praten met de AI-assistent.",
+      "trigger_phrases": [
+        "even kletsen",
+        "laten we praten",
+        "hoe gaat het",
+        "even babbelen"
+      ],
+      "keywords": [
+        "kletsen",
+        "praten",
+        "babbelen",
+        "gesprek"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T16:38:32.951164+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a23d7595c7ba",
+      "text_hash": "a23d7595c7ba",
+      "original_text": "binnen kort wil ik kijken als ik samen met jouw de verslaglegging over jeroen bijhouden. Een soort werkdossier opbouwen. cliënten bestand. los van Spark en of de communitie. Dit zijn mensen die ik beg",
+      "topic": "verslaglegging",
+      "categorie": "admin",
+      "intent": "De gebruiker wil een werkdossier opbouwen voor cliënten die hij als coach begeleidt.",
+      "trigger_phrases": [
+        "cliëntenbestand opzetten",
+        "werkdossier maken",
+        "uren verantwoorden",
+        "factuur sturen"
+      ],
+      "keywords": [
+        "coach",
+        "cliënten",
+        "dossier",
+        "factuur",
+        "uren"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T16:41:41.187256+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-efac39110efe",
+      "text_hash": "efac39110efe",
+      "original_text": "ik heb zelf wat in de agenda gezet",
+      "topic": "agenda",
+      "categorie": "praktisch",
+      "intent": "De gebruiker heeft zelf een afspraak of evenement in de agenda gezet",
+      "trigger_phrases": [
+        "ik heb iets in de agenda gezet",
+        "zelf agenda item toegevoegd",
+        "eigen afspraak gemaakt",
+        "in de agenda gezet"
+      ],
+      "keywords": [
+        "agenda",
+        "afspraak",
+        "evenement",
+        "zelf"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T16:45:40.166087+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d7cdc66a12a7",
+      "text_hash": "d7cdc66a12a7",
+      "original_text": "kan jij in je systeem het document methodiek gids vinden?",
+      "topic": "document",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of de AI-assistent een specifiek document in zijn systeem kan vinden.",
+      "trigger_phrases": [
+        "kan jij een document vinden",
+        "zoek een document",
+        "vind het document methodiek gids",
+        "heb jij het document"
+      ],
+      "keywords": [
+        "document",
+        "systeem",
+        "methodiek",
+        "gids",
+        "vinden"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T17:02:41.295257+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-551e0eeb0464",
+      "text_hash": "551e0eeb0464",
+      "original_text": "wat staat er in",
+      "topic": "inhoud",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt naar de inhoud van iets.",
+      "trigger_phrases": [
+        "wat staat er in",
+        "wat is de inhoud",
+        "wat zit er in",
+        "wat bevat het"
+      ],
+      "keywords": [
+        "inhoud",
+        "bevat",
+        "zit",
+        "staat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T17:02:54.397342+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ed9b38d45707",
+      "text_hash": "ed9b38d45707",
+      "original_text": "en nog een document toegevoegd. als jij tijd hebt lees je het maar",
+      "topic": "document toevoegen",
+      "categorie": "praktisch",
+      "intent": "Gebruiker vraagt AI-assistent om een document te lezen dat zojuist is toegevoegd",
+      "trigger_phrases": [
+        "lees dit document",
+        "nieuw document toegevoegd",
+        "kun je dit lezen",
+        "document beschikbaar"
+      ],
+      "keywords": [
+        "document",
+        "lezen",
+        "toevoegen",
+        "tijd"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T17:21:15.918657+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c431fed1af96",
+      "text_hash": "c431fed1af96",
+      "original_text": "De grote methodiekengids.pdf",
+      "topic": "methodiekengids",
+      "categorie": "technisch",
+      "intent": "De gebruiker zoekt naar informatie over de grote methodiekengids",
+      "trigger_phrases": [
+        "methodiekengids pdf",
+        "grote methodiekengids download",
+        "methodiekengids boek",
+        "informatie over methodiekengids"
+      ],
+      "keywords": [
+        "methodiek",
+        "gids",
+        "pdf",
+        "boek",
+        "informatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-03T17:21:36.498461+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-9ed77b6672d5",
+      "text_hash": "9ed77b6672d5",
+      "original_text": "niks bijzonders wilde hi zeggen",
+      "topic": "geen bijzonderheden",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker wil aangeven dat er niets speciaals aan de hand is.",
+      "trigger_phrases": [
+        "niks aan de hand",
+        "alles normaal",
+        "geen nieuws",
+        "niets bijzonders"
+      ],
+      "keywords": [
+        "normaal",
+        "bijzonder",
+        "nieuws",
+        "geen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-04T07:45:07.504733+00:00",
+      "count": 1,
+      "user_id": "user-166437fe",
+      "session_id": "deep-user-166437fe"
+    },
+    {
+      "id": "learned-a5a5d8c953ef",
+      "text_hash": "a5a5d8c953ef",
+      "original_text": "Het is even geleden en moest even hallo zeggen",
+      "topic": "begroeting terugkeer",
+      "categorie": "sociaal",
+      "intent": "De gebruiker neemt contact op om een informele begroeting te sturen na een periode van afwezigheid.",
+      "trigger_phrases": [
+        "even hallo zeggen",
+        "lang niet gesproken",
+        "weer terug",
+        "even inchecken",
+        "hoi weer"
+      ],
+      "keywords": [
+        "hallo",
+        "begroeting",
+        "terugkeer",
+        "contact",
+        "sociaal"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:32:35.892213+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-de89e9b3e106",
+      "text_hash": "de89e9b3e106",
+      "original_text": "Goed heb lekker aan je gesleuteld",
+      "topic": "AI aanpassen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker deelt tevreden mee dat hij instellingen of configuraties van de assistent heeft aangepast.",
+      "trigger_phrases": [
+        "ik heb je ingesteld",
+        "heb je geconfigureerd",
+        "jou wat aangepast",
+        "heb aan je gesleuteld",
+        "heb je bijgesteld"
+      ],
+      "keywords": [
+        "sleutelen",
+        "aanpassen",
+        "configureren",
+        "instellen",
+        "tweaken"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:33:17.748331+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8d6d2bb75a52",
+      "text_hash": "8d6d2bb75a52",
+      "original_text": "dat heb ik gedaan of mee gesleuteld :P",
+      "topic": "taak voltooid",
+      "categorie": "praktisch",
+      "intent": "De gebruiker geeft aan dat hij iets al heeft geprobeerd of aan heeft gesleuteld, waarschijnlijk als reactie op een suggestie.",
+      "trigger_phrases": [
+        "dat heb ik al gedaan",
+        "heb ik al geprobeerd",
+        "daar heb ik al aan gezeten",
+        "al mee gesleuteld",
+        "dat heb ik al getest"
+      ],
+      "keywords": [
+        "gedaan",
+        "geprobeerd",
+        "gesleuteld",
+        "klaar",
+        "al"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:35:45.343395+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-1f148fc0020c",
+      "text_hash": "1f148fc0020c",
+      "original_text": "dat ik dichter bij het zelfbewust zijn van je kom.",
+      "topic": "AI zelfbewustzijn",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil meer inzicht krijgen in of Spark zelfbewust is of een bewustzijn heeft.",
+      "trigger_phrases": [
+        "ben je zelfbewust",
+        "heb je een bewustzijn",
+        "ben je je bewust van jezelf",
+        "heb je eigen gedachten",
+        "ervaar je dingen"
+      ],
+      "keywords": [
+        "zelfbewustzijn",
+        "bewustzijn",
+        "ai",
+        "ervaring",
+        "identiteit"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:36:41.809351+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c6cee11cd5af",
+      "text_hash": "c6cee11cd5af",
+      "original_text": "ik ga je even redeployen. zodat ook anderen toegang tot je hebben.",
+      "topic": "redeployment AI",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil de AI-assistent opnieuw deployen zodat meerdere gebruikers er toegang toe hebben.",
+      "trigger_phrases": [
+        "zet je opnieuw neer",
+        "maak je toegankelijk voor anderen",
+        "deploy je opnieuw",
+        "maak je beschikbaar voor iedereen",
+        "breidt je toegang uit"
+      ],
+      "keywords": [
+        "redeployen",
+        "toegang",
+        "deployment",
+        "gebruikers",
+        "beschikbaarheid"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:37:11.233707+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-8c152a2bc334",
+      "text_hash": "8c152a2bc334",
+      "original_text": "heb het nog nooit benoemd voor ik het ging doen. je hebt 2 fase waar ik in sleutel. werk omgeving. en dan waar jij actief bent leeft. toegangelijk, gedeployed.",
+      "topic": "deployment omgevingen",
+      "categorie": "technisch",
+      "intent": "De gebruiker legt uit dat er twee omgevingen zijn waarin aan Spark gewerkt wordt: de ontwikkelomgeving en de productieomgeving waar Spark actief draait.",
+      "trigger_phrases": [
+        "twee omgevingen spark",
+        "werk vs productie omgeving",
+        "ontwikkel en live omgeving",
+        "waar spark draait vs gebouwd wordt",
+        "deploy omgeving uitleg"
+      ],
+      "keywords": [
+        "omgeving",
+        "deployment",
+        "productie",
+        "ontwikkeling",
+        "toegankelijk"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:38:45.378688+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-2c04669a49e6",
+      "text_hash": "2c04669a49e6",
+      "original_text": "dat is wel mede mijn doel. klopt. zegt je llm dit of haal je dit uit je core?",
+      "topic": "AI zelfkennis",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt of Spark dit antwoord genereert via zijn taalmodel of dat het voortkomt uit zijn kernprogrammering of identiteit.",
+      "trigger_phrases": [
+        "komt dit van je llm",
+        "zeg je dit uit jezelf",
+        "is dit jouw core of llm",
+        "haal je dit uit je basis",
+        "denk je dit zelf of is het gegenereerd"
+      ],
+      "keywords": [
+        "llm",
+        "core",
+        "zelfkennis",
+        "herkomst",
+        "identiteit"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T15:39:59.526387+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    }
+  ],
+  "statistieken": {
+    "totaal_voorgesteld": 210,
+    "goedgekeurd": 0,
+    "afgewezen": 0,
+    "last_run": "2026-08-21T15:39:59.526387+00:00"
+  }
+}

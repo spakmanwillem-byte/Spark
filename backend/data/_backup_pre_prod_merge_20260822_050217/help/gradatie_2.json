@@ -1,0 +1,62 @@
+{
+  "gradatie": 2,
+  "label": "Familie / Vertrouweling",
+  "intro": "Familie. Bijna alle toegang behalve technische admin-acties. Hier komen Integraties, Analytics en de hele Spark AI sectie binnen.",
+  "inherits_from": "gradatie_3",
+  "extra_topics": [
+    {
+      "id": "boekhouding-v13",
+      "label": "Boekhouding (Multi-book + SEPA + Papertrail)",
+      "korte_uitleg": "Elke shop/entity/user krijgt eigen boek-container. Verkopen worden netto geboekt, BTW zichtbaar op koper-bon, Spark-vergoeding (1%) als openstaande post die je via wallet inlost.",
+      "deep_uitleg": "**Drie-lagen scheiding**:\n- Bitvavo = SPARK's systeem-account (trader crypto potjes)\n- Spark Wallet = spendable EUR-tokens per user (bridge-laag)\n- Zakelijke bank via SEPA-XML (eindstation, Moneybird-input)\n\n**Belangrijk**: alleen Spark (user-000) heeft een Bitvavo-baseline. Users hebben geen eigen Bitvavo-koppeling — ze doneren EUR naar Spark en die runt de trader.\n\n**Verkoop-flow**: verkoper geeft NETTO op → systeem berekent bruto (netto × (1 + BTW%)) → 2 bonnen: netto-bon (Moneybird) + bruto-bon (koper). KOR-toggle per shop zet BTW op 0%.\n\n**Spark-platform-fee** (default 1% van bruto): niet ingehouden, staat als openstaande post per shop. Winkelier lost handmatig in via wallet-transfer → boeking gaat naar book-spark-core. In tab 'Spark Verdiensten' zie je als admin de totale platform-fee-stroom.\n\n**Papertrail hash-chain**: elke boeking krijgt SHA256 met verwijzing naar vorige. Aparte topic `winst_events` voor bruto/spark-fee per verkoop. Chain-integriteit blijft ook na reset bewaard (behalve absolute nulpunt-reset).\n\n**SEPA lokaal**: CAMT.053 en MT940 bank-afschriften importeren, pain.001 XML batches exporteren om zelf bij de bank te uploaden. Geen live bank-koppeling (dat is cloud).\n\n**Admin-instellingen**: BTW-tarief default (nu 21%), Spark-fee % (nu 1%), KOR-default aanpasbaar via `PATCH /api/boekhouding/shop-finance-config`.",
+      "nav_path": "/boekhouding",
+      "nav_testid": "nav-boekhouding",
+      "synonyms": ["boekhouding", "boekhouden", "sepa", "iban", "btw", "kor", "moneybird", "kasboek", "papertrail", "hash-chain", "winst"]
+    },
+    {
+      "id": "knowledge-v2",
+      "label": "Kennisbank",
+      "korte_uitleg": "De ziel van Spark. 4 lades (Voelen / Spreken / Weten / Doen) met duizenden kaarten die Spark's vocabulaire vormen.",
+      "deep_uitleg": "Kaarten doorlopen 4 lagen (kort → diep). Hoe meer je vult, hoe rijker Spark's taalgevoel. Onder gradatie 2 (familie) kan je kaarten LEZEN en aanmaken. Verwijderen blijft admin-only.",
+      "nav_path": "/knowledge",
+      "nav_testid": "nav-knowledge-v2",
+      "synonyms": ["kennisbank", "kennis", "kb", "kaarten", "lades", "voelen", "spreken", "weten", "doen"]
+    },
+    {
+      "id": "triggers",
+      "label": "Triggers",
+      "korte_uitleg": "De regels die bepalen wanneer Spark reageert op bepaalde woorden of zinnen.",
+      "deep_uitleg": "Triggers zijn regex-gestuurd. Een trigger kan een capability oproepen (b.v. 'audit_health' bij 'gezondheidscheck'). Familie mag bekijken, admin mag wijzigen.",
+      "nav_path": "/spark/triggers",
+      "nav_testid": "nav-triggers",
+      "synonyms": ["triggers", "trigger", "regels", "keywords"]
+    },
+    {
+      "id": "emotions",
+      "label": "Emotie Detectie",
+      "korte_uitleg": "Spark herkent emoties in je tekst en past zijn toon aan. Hier zie je hoe.",
+      "deep_uitleg": "Spark's emotie-pipeline gebruikt keyword + context-analyse. Je ziet per gesprek welke emotie gedetecteerd is en welke respons-stijl Spark koos.",
+      "nav_path": "/spark/emotions",
+      "nav_testid": "nav-emotions",
+      "synonyms": ["emotie", "emoties", "gevoel", "stemming", "tone"]
+    },
+    {
+      "id": "connections",
+      "label": "Verbanden",
+      "korte_uitleg": "Graphisch overzicht van hoe begrippen in de kennisbank aan elkaar gelinkt zijn.",
+      "deep_uitleg": "Een interactieve grafiek toont welke kaarten elkaar referencen. Hoe centraler een knoop, hoe fundamenteler het concept.",
+      "nav_path": "/spark/connections",
+      "nav_testid": "nav-connections",
+      "synonyms": ["verbanden", "verband", "connecties", "grafiek", "graph", "netwerk"]
+    },
+    {
+      "id": "integrations",
+      "label": "Integraties",
+      "korte_uitleg": "Externe koppelingen: Bitvavo, Google Calendar, Telegram, etc.",
+      "deep_uitleg": "Elke integratie heeft een eigen status-light (groen/oranje/rood) en logs. Familie mag bekijken, admin mag wijzigen en nieuwe koppelingen activeren.",
+      "nav_path": "/modules/integrations",
+      "nav_testid": "nav-integrations",
+      "synonyms": ["integraties", "integratie", "koppeling", "koppelingen", "google", "telegram"]
+    }
+  ]
+}

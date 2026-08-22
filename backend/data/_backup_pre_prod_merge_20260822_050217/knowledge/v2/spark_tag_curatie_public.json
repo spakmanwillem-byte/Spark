@@ -1,0 +1,154 @@
+{
+  "_type": "publieke_module_uitleg",
+  "_module": "kb_tag_curatie",
+  "_doel": "Volledig transparante uitleg van Spark's Tag-curatie mechaniek — de flow die duplicate tag-varianten (bv. 'emotie'/'emoties'/'Emoties') detecteert en samenvoegt tot één canonieke stam. Zichtbaar via Workspace → Kennisbank v2 → tab Tag-curatie.",
+  "_versie": "v1.1",
+  "_bijgewerkt_op": "2026-08-03T09:15:00+00:00",
+  "_licentie": "openbaar_leesbaar",
+  "_bron_van_waarheid": {
+    "kb_kaart_id": null,
+    "kb_kaart_todo": "Maak KB v2 kaart 'Spark Tag-Curatie' in lade doen, verwijst naar dit bestand",
+    "runtime_data": [
+      "backend/data/knowledge/v2/knowledge_v2_{lade}.json — 4 lades (voelen, spreken, weten, doen)"
+    ],
+    "code_modules": [
+      "backend/modules/kb_v2/tag_normalizer.py (stemming + risk-detectie)",
+      "backend/modules/kb_v2/routes.py (endpoints /tags/scan + /tags/merge)"
+    ],
+    "ui_component": "frontend/src/components/workspace/KbV2TagCuration.js",
+    "regel": "Willem-regel: risky merges vereisen expliciete admin-confirmatie."
+  },
+
+  "1_kernidee": {
+    "wat_is_het": "Regel-gebaseerd stemmer voor Nederlandse tags. Herleidt varianten naar één canonieke stam via strip-regels (plurale -en/-s/-eren + verb -t achter consonant + dubbele-consonant-fix). Geen ML — puur morfologie.",
+    "waarom_zo_gebouwd": "Nederlandse morfologie is voor 80% consistent genoeg voor regel-strippen. Snelheid en voorspelbaarheid boven perfectie. LLM-check zou traag zijn en kost tokens.",
+    "wat_het_NIET_is": [
+      "GEEN semantische disambiguation (wet ≠ weten wordt niet door stemmer gezien)",
+      "GEEN Engelse woorden",
+      "GEEN onregelmatige werkwoorden (buiten kleine seed-list)",
+      "GEEN garantie dat gemergde varianten dezelfde betekenis hebben — daarom risk-flag"
+    ]
+  },
+
+  "2_hoe_het_werkt": {
+    "flow": [
+      "1. Scan-endpoint loopt door alle KB-kaarten in 4 lades",
+      "2. Elke tag wordt genormaliseerd naar stam via normalize_tag()",
+      "3. Stammen met ≥2 verschillende input-varianten worden 'dedupe-kansen'",
+      "4. Elk pair wordt gecheckt tegen _KNOWN_FALSE_POSITIVE_SET → is_risky flag",
+      "5. Frontend toont lijst met stam + varianten + count + risk-badge",
+      "6. Admin kiest keep_variant + klikt Merge",
+      "7. Bij risky: expliciete confirm-popup met uitleg",
+      "8. Merge-endpoint vervangt ALLE varianten in ALLE 4 lades met keep_variant"
+    ],
+    "stemming_regels": {
+      "keep_as_is": "Korte stopwoorden (ik/jij/is/de) — niet strippen (zou stam <3 maken).",
+      "irregular_plural": "Vaste tabel voor kinderen→kind, eieren→ei, steden→stad, wegen→weg etc.",
+      "noun_t_exception": "Nouns eindigend op -t achter consonant die GEEN verb zijn (plant/kunst/rust/markt/etc.) — blijven staan.",
+      "plural_suffix": "Strip -eren, -en, -s in die volgorde. Voorwaarde: stam ≥3 chars over.",
+      "verb_3rd_person": "Als tag ≥5 chars en eindigt op -t achter consonant (werkt/loopt) — strip -t.",
+      "dubbele_consonant_fix": "Na strip: 'bakk' → 'bak', 'lopp' → 'lop'."
+    },
+    "risk_detectie": {
+      "wat": "Hardgecodeerde lijst van bekende false-positive-paren die het stemmer ten onrechte samenvoegt.",
+      "voorbeelden": [
+        "wet (law) + weten (to know) → beide stem 'wet' — MERGE zou fout zijn",
+        "kaars (candle) + kaart (card) → beide stem 'kaar' — semantisch niet gelijk",
+        "leveren (deliver) + leven (life) → beide stem 'lev' — verschillend",
+        "waarderen (appreciate) + waarden (values) → beide stem 'waard' — verschillend",
+        "logeren (to lodge) + log (log-entry) → merge zou fout zijn"
+      ],
+      "lijst_locatie": "backend/modules/kb_v2/tag_normalizer.py → _KNOWN_FALSE_POSITIVE_SET",
+      "hoe_uitbreiden": "Voeg tuple (variant_a, variant_b) toe aan _KNOWN_FALSE_POSITIVE_PAIRS. Wordt automatisch bidirectioneel.",
+      "effect_in_ui": "Rode rand + ⚠ RISICO badge + risk_reason regel + rode Merge-knop + confirm-popup bij klik."
+    }
+  },
+
+  "3_veiligheden": {
+    "read_only_default": "tag_scan is read-only — geen mutatie op de KB.",
+    "explicit_admin_action": "Merge vereist keep_variant selectie + Merge-klik + (bij risky) confirm-popup.",
+    "risky_confirm": "Bij is_risky=true krijgt user JS-confirm met varianten + risk_reason. Merge alleen bij OK.",
+    "session_history": "Tot 20 recente merges zichtbaar in UI met stem + keep-variant + tags_replaced + cards_touched.",
+    "no_partial_state": "Merge-endpoint schrijft atomair per lade — of alle instances van de variant worden vervangen, of niks.",
+    "wat_niet_gedekt": [
+      "Onderlinge verschillen tussen ww/zn met zelfde spelling (bank=zit vs bank=geld) — beide dezelfde stem, kan risky-lijst uitbreiden",
+      "Homoniemen die volledig identiek geschreven zijn (kraai=vogel vs kraai=huilen) — niet detecteerbaar zonder context"
+    ]
+  },
+
+  "4_wat_te_doen_bij_risky_merges": {
+    "context": "Als je een rode rand ziet: stop en denk na.",
+    "checks": [
+      "1. Zijn de varianten écht dezelfde betekenis? (kaars vs kaart = nee)",
+      "2. Zijn ze in dezelfde context gebruikt? (open kaarten.json en check)",
+      "3. Zou een enkelvoud/meervoud regel logisch zijn, of gaat het om verschillende woordsoorten?"
+    ],
+    "als_je_twijfelt": "SKIP — laat de tag onaangetast. Beter twee tags dan één foute samenvoeging.",
+    "als_je_weet_dat_het_klopt": "Bevestig via confirm-popup. Wordt gelogd in mergeHistory."
+  },
+
+  "5_verbindingen_met_ander_mechanisme": {
+    "groeien_tab": "Tag-curatie is complementair aan Spark Groeien → subtab 'Tags zonder kaart' (zie spark_groeien_public.json). Eerst curatie (samenvoegen dubbelen), dan tag→kaart (canonieke kaart maken).",
+    "chat_matching": "Genormaliseerde tags worden gebruikt in KB-lookup bij chat — gemergde varianten geven consistente hits.",
+    "trust_class": "Merge-actie is class-A (admin-canoniek) — de gekozen keep_variant wordt de canonieke vorm voor Spark's toekomstige uitspraak."
+  },
+
+  "6_hoe_spark_dit_kan_uitleggen": {
+    "instructie": "Als iemand vraagt 'hoe worden tags opgeruimd' of 'wat is de risk-badge' — lees dit bestand en formuleer een antwoord op basis van 1_kernidee en 4_wat_te_doen. Als iemand vraagt 'waar hoort deze kaart' of 'in welke lade' — gebruik sectie 8_lade_toewijzing_regels.",
+    "voorbeeld_antwoord_tag_curatie": "Ik heb een tag-curatie systeem dat dubbele varianten van hetzelfde woord opspoort (bv. 'emotie' en 'emoties' zijn hetzelfde). Willem kiest welke variant blijft en klikt Merge. Bij twijfelgevallen zoals 'wet' en 'weten' krijgt hij een rode waarschuwing want die zijn semantisch verschillend ondanks dezelfde stam.",
+    "voorbeeld_antwoord_lade": "Kaarten worden verdeeld over 4 lades: voelen (emoties/zintuigen), spreken (taal/communicatie), weten (feiten/concepten), doen (acties/praktijk). Werkwoorden in hun meervoudsvorm — de infinitief zoals 'lopen', 'werken', 'voelen' — horen in de doen-lade omdat een werkwoord per definitie een handeling is. Sommige enkelvoudige zelfstandige naamwoorden horen óók in doen als ze een proces beschrijven (onderhoud, procedure, keuze) — niet iets dat je weet, maar iets dat je doet."
+  },
+
+  "7_status_en_roadmap": {
+    "werkt_nu": [
+      "Regel-gebaseerde stemmer (tag_normalizer.py)",
+      "Scan-endpoint met is_risky-flag per pair",
+      "UI met rode rand + confirm bij risky",
+      "Session-history van laatste 20 merges"
+    ],
+    "sessie_55_wensen": [
+      "LLM-check endpoint: bij risky wordt LLM gevraagd 'zijn deze semantisch gelijk?' — extra veiligheidslaag",
+      "Uitbreiding _KNOWN_FALSE_POSITIVE_SET met meer bekende paren (nu ~25, kan groeien)",
+      "Merge-undo: laatste 5 merges rollback-bare",
+      "Auto-suggest keep-variant obv frequentie in KB (kortste of meest gebruikte)"
+    ],
+    "hardcoded_waarden": {
+      "scan_limit": "?limit=200 (frontend hardcode KbV2TagCuration.js:23)",
+      "min_stem_chars": "3 (tag_normalizer.py:_strip_suffix)",
+      "false_positive_pairs": "~25 pairs (tag_normalizer.py:_KNOWN_FALSE_POSITIVE_PAIRS)"
+    }
+  },
+
+  "8_lade_toewijzing_regels": {
+    "context": "Willem's taxonomie-principes voor kaart-plaatsing in KB v2. Deze regels zijn taxonomie, geen morfologie — de tag-stemmer bemoeit zich hier niet mee. Bedoeld als richtlijn voor snap-flow (tag→kaart), wees-recover, en handmatige kaart-aanmaak.",
+    "de_vier_lades": {
+      "voelen": "Emoties, gevoelens, zintuigen, lichaamssensaties. Voorbeelden: blij, verdrietig, prikkel, angst, warmte, rust, spanning.",
+      "spreken": "Taal, communicatie, uitingen, gesprek-elementen. Voorbeelden: woord, boodschap, gesprek, vraag, antwoord, dialoog, stem.",
+      "weten": "Kennis, feiten, concepten, theorieën, systemen als kennis-object. Voorbeelden: geschiedenis, wet, natuurwet, logica, definitie, filosofie, biologie.",
+      "doen": "Handelingen, acties, procedures, praktijk. Voorbeelden: lopen, onderhouden, kiezen, repareren, procedure, actie, handeling."
+    },
+    "regel_1_werkwoorden_meervoud_naar_doen": {
+      "wat": "Werkwoorden in hun meervoudsvorm (de infinitief in NL, eindigend op -en) horen in de doen-lade.",
+      "waarom": "Een werkwoord is per definitie een handeling. De infinitief is de canonieke woordenboek-vorm — 'lopen' is de handeling zelf, niet een gedachte over lopen. Dat maakt het inherent een doen-kaart, niet een weten-kaart.",
+      "voorbeelden_correct": ["lopen", "werken", "voelen", "helpen", "zoeken", "denken", "spreken", "eten", "schrijven", "leren"],
+      "waarom_niet_stam_vorm": "De enkelvoudige stam ('loop', 'werk', 'voel') is dubbelzinnig — het kan een zn zijn (een loop, het werk, een gevoel). Meervoud/infinitief geeft het duidelijke werkwoords-signaal.",
+      "uitzondering_zn_op_en": "Sommige zn eindigen ook op -en (leven, wapen, teken) — die volgen regel 2, niet regel 1. Semantiek beslist, niet spelling."
+    },
+    "regel_2_kernwoord_enkelvoud_naar_doen": {
+      "wat": "Bepaalde enkelvoudige zelfstandige naamwoorden horen óók in doen — ondanks dat ze niet werkwoord zijn.",
+      "criterium": "Het zn beschrijft een handeling, proces of praktische activiteit — geen mentale kennis of gevoel. Vraag: 'doe je het, of denk je erover?'",
+      "voorbeelden_correct": ["onderhoud", "procedure", "keuze", "actie", "handeling", "reparatie", "operatie", "instructie", "beweging", "training", "installatie"],
+      "voorbeelden_uitzondering_wel_weten": ["filosofie", "wet", "theorie", "definitie", "logica", "geschiedenis", "biologie", "wiskunde"],
+      "vuistregel": "Als je bij het woord een verborgen 'doen' hoort (onderhoud = onderhouden, keuze = kiezen, procedure = procedurele stappen), dan hoort het in doen. Als je een verborgen 'weten' hoort (wet = kennis over regels, theorie = een gedachtemodel), dan hoort het in weten."
+    },
+    "checklist_bij_twijfel": [
+      "1. Is het een werkwoord in meervoud (-en)? → doen (regel 1)",
+      "2. Is het een gevoel/emotie/zintuig? → voelen",
+      "3. Gaat het over taal/uiting? → spreken",
+      "4. Is het een proces of actie ondanks enkelvoud? → doen (regel 2)",
+      "5. Is het feitelijke kennis of een concept? → weten",
+      "6. Twijfel je nog? → weten is default voor abstract, doen voor concreet"
+    ],
+    "dyslectische_precisie": "Deze regels zijn Willems eigen taxonomie — niet standaard NL grammatica. De 'meervoud is doen' regel is een pragmatisch onderscheid om taalkundige dubbelzinnigheid te vermijden. Consistent volgen levert een KB op waarin Spark altijd weet waar hij moet zoeken."
+  }
+}

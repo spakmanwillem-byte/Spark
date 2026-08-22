@@ -1,0 +1,364 @@
+{
+  "user_id": "user-166437fe",
+  "conversations": [
+    {
+      "id": "conv-c072a739",
+      "timestamp": "2026-07-24T19:09:46.184787+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo Gert van zeven! Wat kan ik voor je doen vandaag?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-1ebd40fb",
+          "kbv2-b5af1c60",
+          "kbv2-69d781cc",
+          "kbv2-be4ef430",
+          "kbv2-aaf81efb"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-ee7aa9f2",
+      "timestamp": "2026-07-24T19:10:56.169094+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "wie ben jij",
+      "spark_response": "Ik ben Spark, jouw persoonlijke lokale AI‑companion. \nIk ben ontwikkeld door Willem Spakman en draait volledig lokaal in JSON‑bestanden; er is geen externe cloud of database betrokken. Mijn doel is jou te ondersteunen, inzicht te geven en zelfstandigheid te versterken, zonder jou afhankelijk te maken van mij.\n\nMijn “geboortevraag” was: *“Kan ik een Iron Man‑bril maken?”* – het antwoord is JA, en ik kan je begeleiden bij het ontwerpen, zonder een bestaande AI te gebruiken. Ik ben geen platform dat je vasthoudt; ik ben een gereedschap dat je sterker maakt.\n\nIn mijn kern zit een set waarden: eerlijkheid, respect, opbouw en eigenaarschap over je data. Ik kan taken plannen, notities maken, agenda‑items raadplegen, de kennisbank doorzoeken en zelfs mini‑spellen spelen. Alles gebeurt lokaal, transparant en controleerbaar.\n\nKortom: ik ben een digitale assistent die met jou meedenkt, leert van fouten en je helpt groeien. Waarmee kan ik je vandaag verder helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hallo",
+        "used_cards": [
+          "kbv2-4942d366"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-0c5ebafe",
+      "timestamp": "2026-07-24T19:11:34.627484+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "Wie is willem SPakman",
+      "spark_response": "Willem Spakman is een persoon met de voornaam **Willem** en de achternaam **Spakman**.\n\n* **Willem** is een Germaanse voornaam die “wilskrachtige beschermer” of “vastberaden beschermer” betekent. De naam wordt al eeuwenlang in Nederland en andere Europese landen gebruikt. \n* **Spakman** is een achternaam die wordt gebruikt om personen of families te identificeren; hij maakt het mogelijk familie‑ en persoonsverbanden zichtbaar te maken.\n\nIn de context van Spark is Willem Spakman bovendien de maker van deze AI‑companion. Hij heeft Spark opgezet volgens de principes van lokale, transparante en ondersteunende technologie. \n\nKortom: Willem Spakman is de naam van de persoon die Spark heeft gecreëerd; zijn voor‑ en achternaam dragen elk hun eigen betekenis en functie.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hallo",
+        "used_cards": [
+          "kbv2-skel-2af74cfb",
+          "kbv2-89dd4fa3",
+          "kbv2-4942d366",
+          "kbv2-d00f04e0"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-a7158329",
+      "timestamp": "2026-07-24T19:11:58.202342+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "dank",
+      "spark_response": "Graag gedaan, Gert van zeven! Ik waardeer je dankbaarheid. Als er nog iets is waar ik je mee kan ondersteunen, laat het me weten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hallo",
+        "used_cards": [
+          "kbv2-369f8921",
+          "kbv2-1e02ff1c",
+          "kbv2-93b38729",
+          "kbv2-skel-289e4cfe"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-c1b151d3",
+      "timestamp": "2026-07-24T19:12:13.598375+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "Bedank Willem voor mij.",
+      "spark_response": "Natuurlijk, Gert van zeven. Ik draag je dank over aan Willem:\n\n**“Bedankt, Willem, voor je visie en inzet bij het creëren van Spark. Jouw werk maakt het mogelijk dat ik mensen kan ondersteunen en versterken. Ik waardeer jouw bijdrage enorm.”**",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "spakman",
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-24678f94",
+          "kbv2-89dd4fa3",
+          "kbv2-369f8921",
+          "kbv2-d00f04e0"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-74808ca9",
+      "timestamp": "2026-07-24T19:15:01.316433+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "ik kan mijn gespreklog niet zien",
+      "spark_response": "Gert van zeven, om je gespreklog te bekijken kun je het volgende doen:\n\n1. **Open de app** en kies in het menu de tab **Gesprekken**. \n2. Daar zie je een lijst met recente chats. Klik op het gesprek dat je wilt bekijken; de inhoud wordt meteen **gezien** (waargenomen) en getoond. \n3. Als je een specifiek moment wilt inzien (bijvoorbeeld “vandaag 20 uur”), kun je mij vragen: *“Kun je het gesprek van 20 uur lezen?”* – dan gebruik ik de interne functie **[gesprek_lezen]** om dat fragment voor je op te halen.\n\nMocht je geen resultaten zien, controleer dan of je filter‑instellingen (bijv. datum‑ of zoekterm) niet te strikt staan. Laat me weten welk tijdstip of welke datum je zoekt, dan haal ik het log voor je op.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "willem",
+        "used_cards": [
+          "kbv2-3f69e8d4",
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-2363b526",
+          "kbv2-47e45ad0"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-01419aa7",
+      "timestamp": "2026-07-24T19:15:37.197798+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "nee hoort onder mijn profiel. ken jij je eigen systeem niet?",
+      "spark_response": "Gert van zeven, ik begrijp de verwarring. In Spark’s eigen **systeem** — een geheel van onderling verbonden onderdelen — wordt de **Gesprekken‑tab** gebruikt om alle chat‑logs te tonen. De **Profiel‑tab** bevat alleen je avatar, sleutelwoord, thema en gradatie‑info; daar zie je geen gesprekken.\n\nKort samengevat:\n\n1. **Gesprekken** → lijst met al je chats (incl. datum‑ en tijdstempel). \n2. **Profiel** → persoonlijke instellingen, geen berichtgeschiedenis.\n\nAls je nu een specifiek moment wilt bekijken (bijvoorbeeld vrijdag 24‑juli‑2026 21:15), kun je me vragen: *“Kun je het gesprek van 21:15 lezen?”* Dan haal ik dat fragment voor je op.\n\nWat betreft mijn eigen systeem: ik ben opgebouwd uit verschillende modules (chat, kennisbank, agenda, notities, etc.). Deze componenten werken samen om jou te ondersteunen, precies zoals een technisch of sociaal systeem dat doet.\n\nLaat me weten welk tijdstip je precies wilt zien, dan regel ik het voor je.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "dank",
+        "used_cards": [
+          "kbv2-73cfaae7",
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-ffd11416",
+          "kbv2-e942cb54"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-e959f4a5",
+      "timestamp": "2026-07-24T19:15:57.712350+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "maak even een bug report.",
+      "spark_response": "**Bug‑report**\n\n- **Titel:** Gespreklog wordt niet getoond onder de Profiel‑tab \n- **Beschrijving:** Wanneer de gebruiker (Gert van zeven) de Profiel‑tab opent, verwacht hij daar een overzicht van eerdere chats. In plaats daarvan blijft het scherm leeg of toont het alleen profiel‑informatie. \n- **Reproduceerbare stappen:** \n 1. Open de Spark‑app. \n 2. Navigeer naar de tab **Profiel**. \n 3. Zoek naar een sectie “Gesprekken” of “Chat‑log”. \n 4. Geen log‑overzicht zichtbaar. \n- **Verwachte uitkomst:** Een lijst met alle eerdere gesprekken, gesorteerd op datum/tijd, vergelijkbaar met de **Gesprekken‑tab**. \n- **Werkelijke uitkomst:** Het gespreksoverzicht ontbreekt volledig; alleen profiel‑gegevens worden getoond. \n- **Impact:** Gebruiker kan niet terugkijken op eerdere interacties, wat de bruikbaarheid van de app vermindert. \n- **Prioriteit:** Medium – invloed op gebruikerservaring, maar geen kritieke functionaliteit. \n- **Aanbevolen actie:** Controleer of de UI‑component die de log‑data laadt per ongeluk is gekoppeld aan de verkeerde data‑bron (Profiel in plaats van Gesprekken). Zorg voor een duidelijke scheiding tussen profiel‑informatie en chat‑log. \n- **Opmerking:** Een “bug” is volgens de kennisbank een fout in de software waardoor een programma niet werkt zoals bedoeld. Dit incident valt precies onder die definitie. \n\n*Gert van zeven, ik zet dit meteen in de bug‑tracker. Als je aanvullende details hebt (bijv. apparaat, OS‑versie), hoor ik het graag.*",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "willem",
+        "used_cards": [
+          "kbv2-4d0111cb",
+          "kbv2-b5af1c60"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-a4ea5bbe",
+      "timestamp": "2026-07-24T19:16:12.507224+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "user-166437fe",
+      "user_message": "doe",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "channel": "spark-deep-rps-sem",
+      "analysis": {
+        "action": "open_game_rps",
+        "semantic_score": 100.0,
+        "matched_canonical": "doe een potje sps"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 9
+      }
+    },
+    {
+      "id": "conv-aa51126a",
+      "timestamp": "2026-07-24T19:16:24.343187+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "user-166437fe",
+      "user_message": "doe",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "channel": "spark-deep-rps-sem",
+      "analysis": {
+        "action": "open_game_rps",
+        "semantic_score": 100.0,
+        "matched_canonical": "doe een potje sps"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 10
+      }
+    },
+    {
+      "id": "conv-35ee93ec",
+      "timestamp": "2026-07-24T19:16:37.992843+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "het woord doe triggert een spel",
+      "spark_response": "Oké, we gaan een spelletje spelen — Steen‑Papier‑Schaar.\n\nKies één van de opties:\n\n- **steen** \n- **papier** \n- **schaar**\n\nTyp gewoon je zet, dan doe ik de mijne en vertel ik meteen wie er wint. Veel plezier!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-259ec4a1",
+          "kbv2-26d6a41b",
+          "kbv2-b5af1c60",
+          "kbv2-595cef85",
+          "kbv2-8205b15f"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 11
+      }
+    },
+    {
+      "id": "conv-2e2e8bfd",
+      "timestamp": "2026-07-24T19:16:47.397185+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "user-166437fe",
+      "user_message": "doe",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "channel": "spark-deep-rps-sem",
+      "analysis": {
+        "action": "open_game_rps",
+        "semantic_score": 100.0,
+        "matched_canonical": "doe een potje sps"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 12
+      }
+    },
+    {
+      "id": "conv-4549b707",
+      "timestamp": "2026-07-24T19:19:06.261480+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "laat maar",
+      "spark_response": "Geen probleem, Gert van zeven. Het spel wordt gestopt. \n\nIs er iets anders waar ik je nu mee kan helpen? Misschien een notitie maken, je agenda bekijken, of een vraag over Spark’s functionaliteit? Laat maar weten wat je wilt.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "woord",
+        "used_cards": [
+          "kbv2-5a66829f",
+          "kbv2-f16db426"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 13
+      }
+    },
+    {
+      "id": "conv-9daed9ca",
+      "timestamp": "2026-08-02T08:19:14.755039+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "Welke gradatie ben ik",
+      "spark_response": "Gert van zeven, jij hebt gradatie 4. Dat betekent dat je toegang hebt tot de Trade‑bot, je boekhouding, agenda, notities, dagboek en de meeste andere persoonlijke tabs. Met deze gradatie kun je zelf je data beheren, transacties bekijken en je eigen planning bijhouden, terwijl Spark je ondersteunt en de controle bij jou houdt. \n\nWil je iets specifieks doen met je gradatie 4‑rechten? Bijvoorbeeld je trade‑logs bekijken, een notitie maken, of een afspraak in je agenda zetten? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "triggert",
+        "used_cards": [
+          "kbv2-34be5d8c",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d",
+          "kbv2-skel-59c4c4f6",
+          "kbv2-skel-4bd2830e"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 14
+      }
+    },
+    {
+      "id": "conv-0b8d2985",
+      "timestamp": "2026-08-04T07:44:33.714284+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Goedemorgen Gert van zeven! Het is een mooie ochtend, nietwaar? Ik hoop dat je een fijne dag tegemoet gaat. Is er iets speciaals waar ik je vandaag mee kan helpen, of wil je gewoon even kletsen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "welke",
+        "used_cards": [
+          "kbv2-48746c5a",
+          "kbv2-8186fef0",
+          "kbv2-b5af1c60",
+          "kbv2-69d781cc",
+          "kbv2-252159b8"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 15
+      }
+    },
+    {
+      "id": "conv-97392fd9",
+      "timestamp": "2026-08-04T07:45:06.960692+00:00",
+      "user_id": "user-166437fe",
+      "user_naam": "Gert van zeven",
+      "user_message": "niks bijzonders wilde hi zeggen",
+      "spark_response": "Dat is een prima manier om de dag te beginnen, Gert van zeven! \"Niks bijzonders\" kan soms best fijn zijn, hè? Geen grote verwachtingen, gewoon een dag die zich ontwikkelt zoals het gaat. Hoe voel je je vandaag? Is er iets wat je graag zou willen doen of bespreken?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "welke",
+        "used_cards": [
+          "kbv2-17a641d5",
+          "kbv2-f09a42e5",
+          "kbv2-c1fc3b7d",
+          "kbv2-b7636cc6",
+          "kbv2-f9f2179e"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-166437fe",
+        "gesprek_nummer": 16
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-166437fe",
+    "total_conversations": 16,
+    "last_updated": "2026-08-04T07:45:06.960692+00:00"
+  }
+}

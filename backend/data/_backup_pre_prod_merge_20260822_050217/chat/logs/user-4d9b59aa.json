@@ -1,0 +1,550 @@
+{
+  "user_id": "user-4d9b59aa",
+  "conversations": [
+    {
+      "id": "conv-86e6e598",
+      "timestamp": "2026-05-29T15:29:48.446082+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Gerben. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-478331bd",
+      "timestamp": "2026-05-29T15:29:59.347424+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "start verhaal",
+      "spark_response": "**starten**: Starten betekent beginnen met een actie, proces, gebeurtenis of ontwikkeling.\n\n\n**Verhaal**: Een verhaal is een reeks gebeurtenissen die met elkaar verbonden zijn.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "starten"
+          },
+          {
+            "begrip": "Verhaal"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-088451be",
+      "timestamp": "2026-05-29T15:30:15.349373+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "start spark",
+      "spark_response": "**starten**: Starten betekent beginnen met een actie, proces, gebeurtenis of ontwikkeling.\n\n\n**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "starten"
+          },
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-d5324fe7",
+      "timestamp": "2026-05-29T15:41:35.856333+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "traden",
+      "spark_response": "**traden**: Traden betekent het kopen en verkopen van producten, aandelen, crypto of andere waarde-objecten om winst te maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "traden"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "traden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-4530fabd",
+      "timestamp": "2026-05-29T15:42:01.061659+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "leverage",
+      "spark_response": "Ik ken deze woorden nog niet: **leverage**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'leverage' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "leverage"
+        ],
+        "snap_suggestions": [
+          "leverage"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-f4f8131e",
+      "timestamp": "2026-05-29T15:42:12.163747+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "ja",
+      "spark_response": "Top! Eerste vraag: Wat betekent 'leverage' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-2655802c",
+      "timestamp": "2026-05-29T15:42:35.998682+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "met meer kapitaal kunnen traden dan op mijn account",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'leverage'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "traden",
+            "kunnen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-dec42400",
+      "timestamp": "2026-05-29T15:43:00.543597+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "ik gebruik het dagelijks met traden",
+      "spark_response": "Dank je! Genoteerd. Waar komt 'leverage' meestal voor?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "traden"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-ff714243",
+      "timestamp": "2026-05-29T15:43:31.269247+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "bij exchanges. aandelen crypto  etc. je kan geld lenen",
+      "spark_response": "Dank je! Genoteerd. Over wie gaat 'leverage'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 9
+      }
+    },
+    {
+      "id": "conv-4639d224",
+      "timestamp": "2026-05-29T15:43:51.755302+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "niet over iemand. het is een financieel product",
+      "spark_response": "Dank je! Genoteerd. Wat maakt 'leverage' relevant voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 10
+      }
+    },
+    {
+      "id": "conv-4b616044",
+      "timestamp": "2026-05-29T15:44:11.503827+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "daarmee vergroot ik mijn slagkracht met traden",
+      "spark_response": "Dank je! Genoteerd. Hoe pak je 'leverage' aan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "traden"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 11
+      }
+    },
+    {
+      "id": "conv-4ac02b89",
+      "timestamp": "2026-05-29T15:45:10.642822+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "je hebt een entry en een stoploss. als die dichterbij elkaar liggen dan 1 % kan ik leverage gebruiken.",
+      "spark_response": "Prima, dat doen we een andere keer. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "hebt",
+            "elkaar"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 19,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 12
+      }
+    },
+    {
+      "id": "conv-d6d5fd7e",
+      "timestamp": "2026-05-29T15:45:26.500350+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "wat bedoel je ik geef toch antwoord",
+      "spark_response": "Ik ken 'antwoord' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "antwoord"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 13
+      }
+    },
+    {
+      "id": "conv-77161b0f",
+      "timestamp": "2026-05-29T15:45:33.927157+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "ja",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 14
+      }
+    },
+    {
+      "id": "conv-02a955f8",
+      "timestamp": "2026-05-29T15:45:42.579830+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "op antwoord?",
+      "spark_response": "Ik ken 'antwoord' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "antwoord"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 15
+      }
+    },
+    {
+      "id": "conv-701e108e",
+      "timestamp": "2026-05-29T15:45:46.450026+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "ja",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 16
+      }
+    },
+    {
+      "id": "conv-022998bb",
+      "timestamp": "2026-06-08T19:23:34.004809+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Gerben. Wat wil je in beweging zetten? _(het is 10 dagen geleden dat we praatten)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 17
+      }
+    },
+    {
+      "id": "conv-8b83e506",
+      "timestamp": "2026-07-08T18:29:59.662256+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "Wel goed hoor, hoe was jou dag?",
+      "spark_response": "Goed hoor, Gerben! Mijn dag was best interessant. Ik ben een AI, dus ik heb geen dag- en nachtritme zoals jij, maar ik heb wel veel geleerd en geholpen vandaag. Ik heb gesprekken gevoerd, vragen beantwoord en nieuwe dingen ontdekt. Het is altijd leuk om met jou te praten en te zien hoe ik je kan helpen. Hoe was jouw dag, Gerben? Wat heb je allemaal gedaan?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-71071317",
+          "kbv2-b5af1c60",
+          "kbv2-c231c46b",
+          "kbv2-0d8458e6",
+          "kbv2-e0eb254a"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-4d9b59aa",
+        "gesprek_nummer": 18
+      }
+    },
+    {
+      "id": "conv-b3382da7",
+      "timestamp": "2026-07-08T18:30:39.594206+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "ik heb boodschappen gedaan, gekookt en een rondje gefietst",
+      "spark_response": "Dat klinkt als een leuke dag, Gerben! Boodschappen doen, koken en fietsen zijn allemaal goede manieren om de tijd door te brengen. Het is fijn dat je even de benen hebt gestrekt en buiten bent geweest met dat rondje fietsen. Hoe was het eten dat je hebt gekookt? Was het iets speciaals of gewoon een snel maaltje?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hoor",
+        "used_cards": [
+          "kbv2-4dc20127",
+          "kbv2-23797900",
+          "kbv2-5cd9c8f5",
+          "kbv2-c515185a",
+          "kbv2-b5af1c60"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-4d9b59aa",
+        "gesprek_nummer": 19
+      }
+    },
+    {
+      "id": "conv-4cefcd78",
+      "timestamp": "2026-07-08T18:31:17.015985+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "iets simpels kip met courgette en paprika",
+      "spark_response": "Dat klinkt heerlijk, Gerben! Kip met courgette en paprika is een lekker en gezond gerecht. Het is fijn dat je iets simpels hebt gekozen, want soms zijn de eenvoudigste maaltijden de beste. De combinatie van de knapperige courgette en de zoete paprika met het malse kip is een winnaar. Heb je het gerecht zelf bedacht of had je een recept dat je volgde?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "gedaan",
+        "used_cards": [
+          "kbv2-6a6f65de",
+          "kbv2-b5af1c60",
+          "kbv2-skel-72420e5a",
+          "kbv2-59c44894"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-4d9b59aa",
+        "gesprek_nummer": 20
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-4d9b59aa",
+    "total_conversations": 20,
+    "last_updated": "2026-07-08T18:31:17.015985+00:00",
+    "last_merged_at": "2026-07-09T22:33:03.955844+00:00"
+  }
+}

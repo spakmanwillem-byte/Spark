@@ -1501,6 +1501,17 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
           </button>
         )}
         {/* v6_diep_always_on_001 — toggle weggehaald, Diep is altijd aan */}
+        {/* v13t_user_text_tpm_guard_001 — char-counter zichtbaar zodra > 3500 chars,
+             rood > 5500 chars (backend truncate). Verhindert stille TPM-crashes. */}
+        {value.length > 3500 && (
+          <span
+            className={`text-[10px] tabular-nums flex-shrink-0 ${value.length > 5500 ? 'text-red-400 font-semibold' : 'text-amber-400'}`}
+            data-testid="chat-input-char-counter"
+            title={value.length > 5500 ? 'Tekst wordt automatisch ingekort — knip in stukken voor beste resultaat' : 'Lange tekst — LLM kan traag reageren'}
+          >
+            {value.length}/5500
+          </span>
+        )}
         <input
           type="text"
           data-testid="chat-input"

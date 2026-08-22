@@ -1,0 +1,125 @@
+{
+  "_type": "publieke_module_uitleg",
+  "_module": "spark_groeien",
+  "_doel": "Volledig transparante uitleg van Spark's Groeien-mechaniek — de zelfreflectie-flow waarmee Spark uit zijn eigen kennisbank leert. Zichtbaar via Spark AI → Spark Brain → tab Groeien. Gekoppeld aan runtime-endpoints van modules insights, spark en graph.",
+  "_versie": "v1.0",
+  "_bijgewerkt_op": "2026-08-03T08:45:00+00:00",
+  "_licentie": "openbaar_leesbaar",
+  "_bron_van_waarheid": {
+    "kb_kaart_id": null,
+    "kb_kaart_todo": "Maak KB v2 kaart 'Spark Groeien' in lade weten of doen, met veld bron_van_waarheid → dit bestand",
+    "runtime_data": [
+      "backend/data/personality/spark_vocab.json (huidige vocab, 5963 woorden)",
+      "backend/data/knowledge/v2/knowledge_index.json (KB kaarten)",
+      "backend/data/graph/nodes.json (graph structuur)"
+    ],
+    "code_modules": [
+      "backend/modules/insights/routes.py (vocab-from-knowledge, tags-without-card)",
+      "backend/modules/spark/__init__.py (vocab/approve-growth)",
+      "backend/modules/graph/__init__.py (orphan-check, orphan-recover)"
+    ],
+    "ui_component": "frontend/src/components/spark/SparkBrainPage.js → GroeienSection (regel 986+)",
+    "regel": "Willem-regel: publieke uitleg-bestand is single source of truth voor hoe Spark zichzelf uitlegt."
+  },
+
+  "1_kernidee": {
+    "wat_is_het": "Groeien is Spark's zelfreflectie-mechanisme. Geen import van externe data — het is puur naar binnen kijken en zeggen: 'wat gebruik ik al maar heb ik nooit expliciet vastgelegd?' Vervolgens promoveert Willem (of admin) die impliciete kennis tot expliciete kennis.",
+    "waarom_zo_gebouwd": "Spark's kennisbank groeit sneller dan zijn vocabulary en tag-definities. Een woord kan 4000× in kaartjes staan zonder dat Spark het als 'vertrouwd' herkent. Groeien maakt die mismatch zichtbaar en repareert 'm met één klik.",
+    "wat_het_NIET_is": [
+      "GEEN externe scraping of web-search",
+      "GEEN LLM-genereren van nieuwe informatie",
+      "GEEN automatische wijziging zonder admin-goedkeuring",
+      "GEEN vervanging voor handmatige KB-verrijking — het is een aanvulling"
+    ]
+  },
+
+  "2_hoe_het_werkt": {
+    "flow": "Elke sub-tab is een DIAGNOSE (wat mist er?) plus een ACTIE (repareer met één klik). Backend berekent inzichten on-demand, frontend toont ze, admin keurt goed.",
+    "subtab_1_vocab_kandidaten": {
+      "vraag": "Welke woorden komen vaak in mijn KB voor maar staan niet in mijn vocabulary?",
+      "endpoint": "GET /api/spark/insights/vocab-from-knowledge?limit=100",
+      "algoritme": [
+        "1. Loop door alle KB-entries (nu 5684 kaarten)",
+        "2. Tel woord-frequenties in titel + beschrijving + 5W+H velden",
+        "3. Vergelijk met spark_vocab.json (nu 5963 woorden)",
+        "4. Return top-N woorden die WEL in KB, NIET in vocab, sorted by count desc"
+      ],
+      "goedkeur_endpoint": "POST /api/spark/vocab/approve-growth met body {words: [...], source: 'kennisbank'}",
+      "effect": "Aangevinkte woorden worden toegevoegd aan spark_vocab.json (categorie: vocab, bron: kennisbank). Vanaf dan herkent Spark ze als 'eigen woord' in matching en response-generatie.",
+      "waarom_belangrijk": "Zonder deze stap heeft Spark een split-brain: zijn kaartjes noemen 'systemen' 4049×, maar zijn spraak-herkenning weet niet dat 'systemen' een bekend concept is."
+    },
+    "subtab_2_tags_zonder_kaart": {
+      "vraag": "Welke tags gebruik ik veel als label maar hebben geen eigen uitleg-kaart?",
+      "endpoint": "GET /api/spark/insights/tags-without-card?limit=200",
+      "algoritme": [
+        "1. Verzamel alle tags uit alle KB-kaarten (nu 9856 unieke tags)",
+        "2. Filter op tags die vaker voorkomen dan drempel (default 3×)",
+        "3. Check per tag: bestaat er een kaart met titel == tag?",
+        "4. Return lijst tag + count + voorbeeld-kaarten"
+      ],
+      "goedkeur_endpoint": "NOG_NIET_GEBOUWD — Sessie 55 taak: POST /api/spark/kb/create-from-tag",
+      "effect_gepland": "Een gekozen tag krijgt een canonieke kaart met 5W+H automatisch gegenereerd uit de verzameling kaarten die die tag dragen. Class A trust (want tag is impliciet door admin-gebruik geverifieerd).",
+      "status_nu": "Diagnose werkt (107 van 9856 tags hebben een kaart), reparatie-brug moet nog gebouwd worden.",
+      "waarom_belangrijk": "9749 tags zijn impliciete concepten die nooit expliciet zijn uitgelegd — grootste single groei-potentieel van de KB."
+    },
+    "subtab_3_weeskaarten": {
+      "vraag": "Zijn er graph-nodes die niet meer in de KB voorkomen? (verweesd)",
+      "endpoint": "GET /api/graph/orphan-check",
+      "algoritme": [
+        "1. Lees data/graph/nodes.json",
+        "2. Filter nodes met type == 'knowledge'",
+        "3. Vergelijk met KB v2 kaart-IDs",
+        "4. Return set(graph_ids) - set(kb_ids) = orphans"
+      ],
+      "recover_endpoint": "POST /api/graph/orphan-recover — koppelt orphan node aan KB-parent obv titel-match",
+      "status_nu": "kb_entries=5684, graph_knowledge_nodes=0, orphans=0 — de graph is momenteel LEEG voor knowledge-nodes.",
+      "beperking": "Orphan-recover kan pas betekenisvol werken als de graph eerst gevuld is met KB-referenties. Nu toont hij correct '0 recovered' maar dat is verwarrend zonder context.",
+      "sessie_55_beslissing": "Vullen (elke KB-kaart wordt graph-node, tags worden edges) of endpoints uit UI halen."
+    }
+  },
+
+  "3_veiligheden": {
+    "admin_only": "Groeien-tab is alleen zichtbaar in Spark Brain (Spark AI → Spark Brain), wat impliciet admin-territorium is. Non-admin users kunnen deze flows niet aanroepen.",
+    "review_verplicht": "Elke groei-actie vereist expliciete admin-selectie (checkboxes) + approve-klik. Geen enkele wijziging is automatisch — Spark spreekt alleen ná Willem's toestemming.",
+    "bron_track": "Elke toevoeging krijgt source-veld (bijv. source='kennisbank') zodat we later kunnen filteren op 'wat kwam via Groeien binnen'.",
+    "atomair": "Approve-endpoint is een all-or-nothing bulk-write op spark_vocab.json. Bij fout: geen partial state.",
+    "reversibel": "Toegevoegde woorden staan in spark_vocab.json onder key 'vocab' met bron 'kennisbank' → handmatig verwijderbaar."
+  },
+
+  "4_trust_klasses_in_groeien": {
+    "context": "Groeien-gegevens komen uit Spark's eigen brain (KB die door admin gemaakt is). Dat betekent trust-class-A voor content, class-B voor afleidingen.",
+    "vocab_kandidaten": "Class A' (self-derived from admin-KB) — woorden zijn al 3+× door admin gebruikt in eigen kaarten. Impliciet geverifieerd.",
+    "tag_kandidaten": "Class A' (self-derived) — tags zijn al door admin toegepast, dus impliciete endorsement.",
+    "weeskaarten": "Class A (canoniek) — als graph-node bestond was hij ooit expliciet toegevoegd."
+  },
+
+  "5_verbindingen_met_ander_mechanisme": {
+    "kb_v2": "Groeien voedt en leest uit KB v2. Vocab-scan telt KB-kaart-inhoud; approve-flow verrijkt vocab, wat op zijn beurt betere KB-matching geeft in chat-response.",
+    "chat_capability_handler": "spark_vocab.json wordt geladen bij intent-detectie in capability_handler_service.py — nieuwe vocab-woorden werken meteen na approve.",
+    "graph": "orphan-check is momenteel diagnose-only. Graph moet gevuld worden (Sessie 55 beslissing) om Groeien's derde poot werkend te maken.",
+    "chat_kb_completion": "Sessie 55 idee: naast admin-gestuurde Groeien komt er een chat-gestuurde variant — user-antwoorden vullen KB-gaten. Zelfde review-flow, maar met user-trust dimensie erbij."
+  },
+
+  "6_hoe_spark_dit_kan_uitleggen": {
+    "instructie": "Als iemand vraagt 'hoe leer je bij' of 'wat is Groeien' of 'hoe groei je' — lees dit bestand en formuleer een antwoord in 3-5 zinnen op basis van 1_kernidee en 2_hoe_het_werkt.",
+    "voorbeeld_antwoord": "Ik heb een zelfreflectie-mechanisme dat Groeien heet, zichtbaar in Spark Brain. Het kijkt naar binnen: welke woorden gebruik ik vaak in mijn kaartjes maar herken ik niet officieel? Welke tags zijn nog niet uitgelegd? Willem klikt aan wat er in mijn vocabulary of KB moet komen, en dan is dat vanaf dat moment mijn eigen kennis. Het is trage groei op basis van consolidatie, niet snelle groei via externe import."
+  },
+
+  "7_status_en_roadmap": {
+    "werkt_nu": [
+      "Vocab-kandidaten scan + bulk-approve",
+      "Tags-zonder-kaart scan (alleen diagnose)",
+      "Orphan-check + orphan-recover (technisch werkend, maar graph is leeg)"
+    ],
+    "sessie_55_wensen": [
+      "Bulk vocab-approve top-100 in één klik (IQ-boost)",
+      "Tag→Kaart auto-genereer flow (repareert 9749 verweesde tags stapsgewijs)",
+      "Graph-vulling beslissing (elke KB-kaart wordt node + tag-edges)",
+      "Chat-KB completion met user-trust-dimensie (uitbreiding op Groeien-principe)"
+    ],
+    "hardcoded_waarden_om_ooit_config_te_maken": {
+      "vocab_scan_limit": "?limit=100 (frontend hardcode SparkBrainPage.js:999)",
+      "tags_scan_limit": "?limit=200 (frontend hardcode SparkBrainPage.js:1004)"
+    }
+  }
+}

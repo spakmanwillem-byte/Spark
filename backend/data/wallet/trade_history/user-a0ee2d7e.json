@@ -1,4 +1,45 @@
 {
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "00000000-0000-041f-0100-0009dbca8bcb",
+      "run_id": "manual",
+      "timestamp": "2026-08-21T18:41:05.464618+00:00",
+      "action": "BUY",
+      "market": "BCH-EUR",
+      "order_id": "00000000-0000-041f-0100-0009dbca8bcb",
+      "amount": 10.09,
+      "price": 252.99005917058875,
+      "filled": 0.03988299,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0300023599,
+      "fee_currency": "EUR",
+      "requested_amount": 10.12,
+      "effective_amount": 10.12,
+      "proxied_via_spark": true
+    },
+    {
+      "trade_id": "00000000-0000-041f-0100-0009df2d42f4",
+      "run_id": "manual",
+      "timestamp": "2026-08-22T02:42:12.196567+00:00",
+      "action": "BUY",
+      "market": "BCH-EUR",
+      "order_id": "00000000-0000-041f-0100-0009df2d42f4",
+      "amount": 10.15,
+      "price": 251.7800102547642,
+      "filled": 0.04031297,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0300004134,
+      "fee_currency": "EUR",
+      "requested_amount": 10.18,
+      "effective_amount": 10.18,
+      "proxied_via_spark": true
+    }
+  ],
   "entries": []
 }

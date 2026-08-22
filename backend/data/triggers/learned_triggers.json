@@ -5311,12 +5311,523 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-70148b058355",
+      "text_hash": "70148b058355",
+      "original_text": "Goede avond hoe voel jij je?",
+      "topic": "welzijn AI",
+      "categorie": "sociaal",
+      "intent": "De gebruiker begroet de assistent en vraagt naar diens gemoedstoestand of welzijn.",
+      "trigger_phrases": [
+        "hoe gaat het met jou",
+        "hoe is het met je",
+        "voel je je goed",
+        "hoe gaat het spark"
+      ],
+      "keywords": [
+        "welzijn",
+        "gevoel",
+        "begroeting",
+        "stemming",
+        "avond"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T18:50:37.214767+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-231899b9f0cd",
+      "text_hash": "231899b9f0cd",
+      "original_text": "kan jij je normen en waarden kaarten inzien?",
+      "topic": "normen waarden inzage",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker wil weten of Spark toegang heeft tot of inzicht kan geven in zijn eigen normen en waarden kaarten",
+      "trigger_phrases": [
+        "wat zijn jouw waarden",
+        "kun jij je richtlijnen zien",
+        "heb jij normen kaarten",
+        "toon je eigen waarden",
+        "wat zijn spark zijn normen"
+      ],
+      "keywords": [
+        "normen",
+        "waarden",
+        "kaarten",
+        "inzage",
+        "richtlijnen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T18:52:42.008470+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-c09f9b481375",
+      "text_hash": "c09f9b481375",
+      "original_text": "was idd aan het denken om een stelling in te nemen discussie voeren met jouw en te zeggen sla maar op",
+      "topic": "debat oefenen",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil een discussie of debat voeren met Spark door een stelling in te nemen en dit gesprek op te slaan.",
+      "trigger_phrases": [
+        "stelling innemen met spark",
+        "discussie voeren met ai",
+        "debatteren met spark",
+        "sla gesprek op",
+        "oefendebat starten"
+      ],
+      "keywords": [
+        "stelling",
+        "discussie",
+        "debat",
+        "opslaan",
+        "oefenen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T18:55:45.055094+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-49b6dae5c798",
+      "text_hash": "49b6dae5c798",
+      "original_text": "wat is het oudste timestamp wat jij in je systeem kan niet.",
+      "topic": "oudste timestamp systeem",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil weten wat het vroegste of oudste tijdstip is dat het AI-systeem intern kan verwerken of opslaan.",
+      "trigger_phrases": [
+        "vroegste datum in je systeem",
+        "wat is je minimale timestamp",
+        "hoe ver terug kan jij gaan in tijd",
+        "oudste datum die jij kent"
+      ],
+      "keywords": [
+        "timestamp",
+        "oudste",
+        "systeem",
+        "datum",
+        "limiet"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T19:01:29.897616+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-e6d3372a3abc",
+      "text_hash": "e6d3372a3abc",
+      "original_text": "als ik dit vraag zou je het moeten kunnen benoemen. idd zo als jij dat zegt. gaan we maken.",
+      "topic": "bevestiging actie",
+      "categorie": "praktisch",
+      "intent": "De gebruiker bevestigt een eerder besproken plan of aanpak en geeft aan door te willen gaan met de uitvoering.",
+      "trigger_phrases": [
+        "oké we gaan",
+        "dat klopt laten we doen",
+        "jij snapt het gaan we",
+        "precies zo doen we het",
+        "akkoord we starten"
+      ],
+      "keywords": [
+        "bevestiging",
+        "akkoord",
+        "uitvoering",
+        "plan",
+        "starten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T19:02:33.250337+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-241bd7305358",
+      "text_hash": "241bd7305358",
+      "original_text": "want hij had gewoon een metadata of footnote kunnen raadplegen binnen je systemen. of roadmap kijken welke data je daar allemaal ziet.",
+      "topic": "systeem metadata raadplegen",
+      "categorie": "technisch",
+      "intent": "De gebruiker suggereert dat iemand systeeminformatie zoals metadata, footnotes of roadmaps had kunnen raadplegen om data-inzicht te krijgen.",
+      "trigger_phrases": [
+        "bekijk je metadata",
+        "check de footnotes",
+        "roadmap bekijken",
+        "systeemdata raadplegen",
+        "welke data zie je intern"
+      ],
+      "keywords": [
+        "metadata",
+        "footnote",
+        "roadmap",
+        "systemen",
+        "data"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T19:03:50.583043+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-dee826b54dd4",
+      "text_hash": "dee826b54dd4",
+      "original_text": "nou je zegt al meer als eerder. je noemt nu wel een datum",
+      "topic": "vorige uitspraken",
+      "categorie": "sociaal",
+      "intent": "De gebruiker merkt op dat Spark nu meer informatie geeft dan eerder, specifiek een datum noemt die eerder niet werd genoemd.",
+      "trigger_phrases": [
+        "je zei dat eerder niet",
+        "nu geef je wel een datum",
+        "je verandert je antwoord",
+        "eerder zei je iets anders",
+        "nu noem je meer details"
+      ],
+      "keywords": [
+        "datum",
+        "inconsistentie",
+        "eerder",
+        "verandering",
+        "uitspraak"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T19:05:43.194532+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-697f248963bc",
+      "text_hash": "697f248963bc",
+      "original_text": "jij leert nu door te doen. zoals dit gesprek, en door dit gesprek.",
+      "topic": "AI leren door doen",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker stelt dat Spark leert door middel van gesprekken en interactie.",
+      "trigger_phrases": [
+        "jij leert van gesprekken",
+        "leer je door te praten",
+        "groei je door interactie",
+        "gesprekken maken jou slimmer",
+        "leer jij van ons gesprek"
+      ],
+      "keywords": [
+        "leren",
+        "doen",
+        "gesprek",
+        "groei",
+        "ervaring"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-21T19:06:41.904160+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a0eee15578c2",
+      "text_hash": "a0eee15578c2",
+      "original_text": "nee moet wachten tot de winkel open is. De koffie is op.",
+      "topic": "koffie op",
+      "categorie": "sociaal",
+      "intent": "De gebruiker deelt dat hij moet wachten tot de winkel opengaat omdat de koffie op is.",
+      "trigger_phrases": [
+        "koffie is op",
+        "winkel nog dicht",
+        "moet wachten op winkel",
+        "geen koffie meer",
+        "wachten tot open"
+      ],
+      "keywords": [
+        "koffie",
+        "winkel",
+        "wachten",
+        "op",
+        "open"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:41:52.653181+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-737b33df9da8",
+      "text_hash": "737b33df9da8",
+      "original_text": "hahahah wat heerlijk positief/negatie ben je thanks,",
+      "topic": "reactie feedback",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker reageert vrolijk en grappig op een positief/negatief antwoord van Spark en bedankt de assistent",
+      "trigger_phrases": [
+        "haha bedankt",
+        "grappig antwoord",
+        "leuke reactie spark",
+        "haha thanks",
+        "wat een antwoord zeg"
+      ],
+      "keywords": [
+        "lachen",
+        "feedback",
+        "bedanken",
+        "reactie",
+        "positief"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:45:05.187952+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-fb0cf5ca4905",
+      "text_hash": "fb0cf5ca4905",
+      "original_text": "vraag je zegt hoe vroeger hoe duurder . die is nieuw voor mij",
+      "topic": "hoe vroeger hoe duurder",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker reageert verrast op de uitdrukking 'hoe vroeger hoe duurder' en wil weten wat het betekent.",
+      "trigger_phrases": [
+        "wat betekent hoe vroeger hoe duurder",
+        "nooit gehoord van hoe vroeger hoe duurder",
+        "leg uit hoe vroeger hoe duurder",
+        "die uitdrukking ken ik niet",
+        "wat bedoel je daarmee"
+      ],
+      "keywords": [
+        "uitdrukking",
+        "vroeger",
+        "duurder",
+        "spreekwoord",
+        "betekenis"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:45:43.710116+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3179eee80f0c",
+      "text_hash": "3179eee80f0c",
+      "original_text": "ahhh op die manier wel. als de nood hoger stijgen de prijzen.",
+      "topic": "vraag en aanbod",
+      "categorie": "praktisch",
+      "intent": "De gebruiker begrijpt nu het principe van vraag en aanbod waarbij hogere nood leidt tot hogere prijzen.",
+      "trigger_phrases": [
+        "hoge vraag hogere prijs",
+        "nood drijft prijzen op",
+        "schaarste en prijs",
+        "vraag en aanbod principe",
+        "als iedereen het wil stijgt de prijs"
+      ],
+      "keywords": [
+        "nood",
+        "prijzen",
+        "vraag",
+        "aanbod",
+        "schaarste"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:46:43.808134+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-5c5a1c697817",
+      "text_hash": "5c5a1c697817",
+      "original_text": "De reclame van - Zeeuws meisje (45) 5 november 20215 minuten Vroeger, toen reclames nog tussen de programma’s uitgezonden en van elkaar onderscheiden werden door Loekie de Leeuw, tóen waren reclames n",
+      "topic": "reclame slogans",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker deelt een tekst over nostalgische Nederlandse reclameslogans en vraagt impliciet om meer informatie of discussie over het Zeeuws Meisje margarine merk.",
+      "trigger_phrases": [
+        "vertel over Zeeuws Meisje reclame",
+        "oude Nederlandse reclame slogans",
+        "nostalgische reclames Nederland",
+        "wat is de slogan van Zeeuws Meisje",
+        "reclame uit vroeger tijden"
+      ],
+      "keywords": [
+        "reclame",
+        "slogan",
+        "margarine",
+        "nostalgie",
+        "klederdracht"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:49:11.600482+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0b9b0705dc82",
+      "text_hash": "0b9b0705dc82",
+      "original_text": "sfeer uit",
+      "topic": "sfeer uitschakelen",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil de sfeerverlichting of sfeerinstelling uitschakelen.",
+      "trigger_phrases": [
+        "zet sfeer uit",
+        "sfeer uit doen",
+        "schakel sfeer uit",
+        "doe de sfeer weg",
+        "sfeer uitzetten"
+      ],
+      "keywords": [
+        "sfeer",
+        "uit",
+        "uitschakelen",
+        "verlichting",
+        "deactiveren"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:49:57.587476+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-aa8dc3b0381e",
+      "text_hash": "aa8dc3b0381e",
+      "original_text": "achtergrond uit",
+      "topic": "achtergrond uitschakelen",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil de achtergrond uitschakelen of verwijderen.",
+      "trigger_phrases": [
+        "verwijder achtergrond",
+        "geen achtergrond",
+        "achtergrond weg",
+        "zet achtergrond uit",
+        "achtergrond verwijderen"
+      ],
+      "keywords": [
+        "achtergrond",
+        "uitschakelen",
+        "verwijderen",
+        "background",
+        "uit"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:50:10.441032+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-014866e07772",
+      "text_hash": "014866e07772",
+      "original_text": "Het spreekwoordelijke gehalte Eigenlijk gaan alle reclameslogans over hoe voordelig het product is. Sommigen gaan over de kwaliteit en het vakmanschap, maar verreweg de meeste zetten de dagelijkse geb",
+      "topic": "Nederlandse consumentencultuur",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker reflecteert op Nederlandse zuinigheidscultuur, reclameslogans, nationale identiteit en de verborgen kosten van goedkope producten.",
+      "trigger_phrases": [
+        "wat zegt reclame over nederlanders",
+        "zijn nederlanders te zuinig",
+        "wat betekent geen cent te veel",
+        "goedkoop heeft altijd een prijs",
+        "nederlandse identiteit en zuinigheid"
+      ],
+      "keywords": [
+        "zuinigheid",
+        "reclame",
+        "identiteit",
+        "consumentisme",
+        "spreekwoorden"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:51:56.351003+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-d42b1d246b47",
+      "text_hash": "d42b1d246b47",
+      "original_text": "Dit was op den duur onhoudbaar, zowel figuurlijk als letterlijk, want de boter bedierf. Zoon Anton Jurgens legde zich toe op het maken van kunstboter, naar een recept van de Fransman Hippolyte Megè Mo",
+      "topic": "Geschiedenis margarine",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker deelt of vraagt informatie over de geschiedenis van margarine, Unilever en Nederlandse culturele stereotypen.",
+      "trigger_phrases": [
+        "hoe ontstond margarine",
+        "geschiedenis van Unilever",
+        "wie maakte de eerste margarine",
+        "wat is de oorsprong van Blue Band",
+        "Jurgens en Van den Bergh boter"
+      ],
+      "keywords": [
+        "margarine",
+        "unilever",
+        "jurgens",
+        "geschiedenis",
+        "nederland"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:52:21.549155+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-b61b40d9785a",
+      "text_hash": "b61b40d9785a",
+      "original_text": "Engeland wilde graag Nederlandse (room)boter hebben. Om aan de vraag te blijven voldoen, importeerde Jurgens boter uit Duitsland en Zwitserland, maar die waren allemaal van andere samenstelling en kwa",
+      "topic": "Jurgens boterhandel",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker deelt historische informatie over hoe Jurgens mengmachines ontwikkelde om geïmporteerde boter van wisselende kwaliteit te homogeniseren voor de Engelse markt.",
+      "trigger_phrases": [
+        "Jurgens boter mengen",
+        "boterexport naar Engeland",
+        "mengmachine boter kwaliteit",
+        "import boter Duitsland Zwitserland",
+        "consistente boter productie"
+      ],
+      "keywords": [
+        "boter",
+        "mengmachine",
+        "jurgens",
+        "export",
+        "kwaliteit"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:52:46.255317+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-9f3a81bb1461",
+      "text_hash": "9f3a81bb1461",
+      "original_text": "De Limburger Willem Jurgens was boterhandelaar en reed met paard en wagen stad en land af om zijn boter te verkopen.",
+      "topic": "Willem Jurgens boterhandelaar",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker deelt historische informatie over Willem Jurgens, een Limburgse boterhandelaar die zijn producten met paard en wagen verkocht.",
+      "trigger_phrases": [
+        "wie was Willem Jurgens",
+        "Limburgse boterhandelaar Jurgens",
+        "geschiedenis boterhandel Limburg",
+        "paard en wagen boterverkoop",
+        "Jurgens boter Nederland"
+      ],
+      "keywords": [
+        "jurgens",
+        "boterhandel",
+        "limburg",
+        "historisch",
+        "handel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-22T04:53:16.166100+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 210,
+    "totaal_voorgesteld": 229,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-08-21T15:39:59.526387+00:00"
+    "last_run": "2026-08-22T04:53:16.166100+00:00"
   }
 }

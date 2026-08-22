@@ -328,4 +328,26 @@ async def chat_complete(
         "success": False,
         "error": "all_providers_failed",
         "tried": tried,
+        # v13_llm_router_diagnostics_001 (sessie 53) — Willem: "all_providers_failed
+        # zegt niks op productie". Bij falen: toon exact welke env-vars ontbreken
+        # zodat admin direct weet wat te configureren. Preview vs productie
+        # verschilt vaak alleen in .env → deze hint bespaart support-tickets.
+        "hint": _diagnose_missing_keys(),
     }
+
+
+def _diagnose_missing_keys() -> str:
+    """Return mensen-leesbare hint over welke LLM-keys ontbreken."""
+    import os as _os
+    checks = [
+        ("EMERGENT_LLM_KEY", "Emergent Universal Key (fallback voor Claude/Gemini/GPT). Verkrijgbaar via Emergent dashboard."),
+        ("LLM_A_API_KEY", "Primary provider (Groq of ander). Gezet in .env als LLM_A_*."),
+        ("LLM_B_API_KEY", "Secondary provider (Cerebras of ander). Gezet in .env als LLM_B_*."),
+    ]
+    missing = []
+    for env_name, desc in checks:
+        if not _os.environ.get(env_name, "").strip():
+            missing.append(f"{env_name}: {desc}")
+    if not missing:
+        return "Alle keys aanwezig — provider-call zelf faalde (netwerk, budget of rate-limit). Check LLM-router logs."
+    return "Missende env-vars: " + " | ".join(missing)

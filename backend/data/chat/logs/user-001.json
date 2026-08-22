@@ -63138,11 +63138,180 @@
         "session_id": "default",
         "gesprek_nummer": 2508
       }
+    },
+    {
+      "id": "conv-4e6a7d8e",
+      "timestamp": "2026-08-22T11:04:09.947178+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Ik luister. _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2509
+      }
+    },
+    {
+      "id": "conv-3acd2f62",
+      "timestamp": "2026-08-22T11:04:10.013587+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2510
+      }
+    },
+    {
+      "id": "conv-8347955c",
+      "timestamp": "2026-08-22T11:04:16.401056+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo Spark",
+      "spark_response": "Hallo Willem! 👋 Hoe kan ik je vandaag helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "weet",
+        "used_cards": [
+          "kbv2-be4ef430",
+          "kbv2-0211e5df",
+          "kbv2-4f1b2721",
+          "kbv2-f1d5db2f",
+          "kbv2-77d62b2e"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2511
+      }
+    },
+    {
+      "id": "conv-bb24751f",
+      "timestamp": "2026-08-22T11:11:04.884001+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hallo",
+      "spark_response": "Hallo Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "preview-test-llm",
+        "gesprek_nummer": 2512
+      }
+    },
+    {
+      "id": "conv-fb7e49f0",
+      "timestamp": "2026-08-22T11:11:54.524363+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "jammer, ik voel me niet zo goed",
+      "spark_response": "Wat fijn om te horen! 😊\n\n**Jammer**: Jammer betekent dat iets teleurstellend of vervelend is.\n\n**Voel**: Voel betekent dat iemand lichamelijk of emotioneel iets ervaart.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goed"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Jammer"
+          },
+          {
+            "begrip": "Voel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "llm-test-fixed",
+        "gesprek_nummer": 2513
+      }
+    },
+    {
+      "id": "conv-a4cdb0b0",
+      "timestamp": "2026-08-22T11:12:06.498063+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel eens een grap over programmeren",
+      "spark_response": "**vertel**: Vertel is een opdracht of verzoek om informatie, een verhaal of uitleg te geven.\n\n**grap**: Een grap is iets dat bedoeld is om mensen te laten lachen.\n\n**Programmeren**: Programmeren is het schrijven van instructies waarmee een computer of software kan uitvoeren wat een mens wil.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "grap",
+            "vertel"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "vertel"
+          },
+          {
+            "begrip": "grap"
+          },
+          {
+            "begrip": "Programmeren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "llm-test-real",
+        "gesprek_nummer": 2514
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2508,
-    "last_updated": "2026-08-22T09:40:53.395950+00:00"
+    "total_conversations": 2514,
+    "last_updated": "2026-08-22T11:12:06.498063+00:00"
   }
 }

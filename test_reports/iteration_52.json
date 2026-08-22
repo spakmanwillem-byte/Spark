@@ -1,0 +1,22 @@
+{
+  "summary": "Verified v13_pot_value_consistency_001 fix. Backend: 12/12 pytest cases pass — for every CLOSED pot across user-000 (8 pots), user-001 (3 pots), user-a0ee2d7e (2 pots), `capital == live_value` (bit-exact). Open pot user-000/pot-006 keeps mark-to-market live_value distinct from capital. Response schema regression checks pass: every pot has id/capital/live_value/capital_stored/capital_dynamic/position/market/stats + `_hybrid_source == finance_hub_v13`. Summary contains all 13 required fields. Related endpoints /api/trade/stats, /api/trade/history, /api/trade/bot/status all 200. Frontend: logged in as Willem, navigated to Trade page; 10-Potjes Systeem now renders €10.15 per closed pot (== capital) for user-001 — NO €10.00 anywhere on the page (count=0). Header aggregation reads 'Live: €123.10, P&L: €+123.10' consistent with capital sums.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter52_pot_value_consistency.py",
+    "/app/test_reports/pytest/iter52.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Prompt mentions 'POST /api/trade/potjes/user-000' as regression check, but no such route exists in /app/backend/modules/trade/routes.py (only GET plus sub-paths like /expand, /reset-cycle, /distribute etc). Prompt wording is inaccurate — no bug.",
+    "_hybrid_source is emitted on every pot object (correct); it is NOT on the top-level response. If a client relies on top-level marker, consider mirroring it in the outer envelope for observability."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter52_pot_value_consistency.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Willem / Welkom01 (user-001, admin)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "iter52 verified P0 potjes capital/live_value consistency. Reusable regression test at /app/backend/tests/test_iter52_pot_value_consistency.py — covers 3 users, schema, summary schema, related trade endpoints. UI screenshots at /app/test_reports/iter52_trade_pots*.png. If further pot-value logic changes, re-run this file first.",
+  "rca of the issue": "Original bug: get_user_potjes overlaid live_value with dynamic token price for idle/closed pots, so TraderPage's `live_value ?? capital` displayed €10.00 (token-priced) while AnalyticsPage's separate Capital column showed €10.26 (stored capital incl. realized P&L). Fix v13_pot_value_consistency_001 in routes.py ~1552: for CLOSED pots, force live_value = capital (book value); for OPEN pots, keep live_value = mark-to-market. capital_dynamic remains as separate token-priced field for UIs that need it. Verified: closed pots now show 10.15/10.26 in both TraderPage and API responses; open pot-006 keeps its MtM value distinct."
+}

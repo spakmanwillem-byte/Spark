@@ -1553,15 +1553,24 @@ async def get_user_potjes(user_id: str):
             stored = float(p.get("capital", 0) or 0)
             p["capital_stored"] = stored
             p["capital_dynamic"] = dynamic_price
-            # Hybride: als pot idle (geen open positie) → live_value = dynamic_price
-            # Als open positie → laat bestaande live_value (real Bitvavo-waarde) staan
+            # v13_pot_value_consistency_001 — voorheen overschreef deze overlay
+            # `live_value` van CLOSED pots met dynamic_price (€10.00) waardoor
+            # TraderPage (toont live_value) en AnalyticsPage (toont capital) uit
+            # elkaar liepen: €10.00 vs €10.26. Nu geldt semantisch:
+            #   • CLOSED pot → live_value = capital (boekwaarde met realized P&L)
+            #   • OPEN pot   → live_value = mark-to-market (zie get_potjes())
+            # dynamic_price blijft beschikbaar via `capital_dynamic` voor UI's die
+            # de token-prijs apart willen laten zien (bv. finance-hub badge).
             position = p.get("position") or {}
-            has_open = position.get("is_open") or position.get("entry_price")
+            has_open = bool(position.get("is_open"))
             if not has_open:
-                p["live_value"] = dynamic_price
-            elif "live_value" not in p or p.get("live_value") is None:
-                p["live_value"] = dynamic_price
-            p["_hybrid_source"] = "finance_hub_v10"
+                # Sync live_value naar boekwaarde (get_potjes() zette dit al zo,
+                # maar we bevestigen expliciet voor duidelijkheid).
+                p["live_value"] = stored
+            elif p.get("live_value") is None:
+                # Fallback voor open pots zonder mark-to-market fill.
+                p["live_value"] = stored
+            p["_hybrid_source"] = "finance_hub_v13"
         # Update summary total_capital naar dynamische som
         if potjes_list:
             summary["total_capital_dynamic"] = round(len(potjes_list) * dynamic_price, 2)

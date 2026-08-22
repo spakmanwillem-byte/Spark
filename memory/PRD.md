@@ -1,6 +1,30 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 53 (2026-02-22) — Pot-value consistency fix (TraderPage vs AnalyticsPage)
+
+### v13_pot_value_consistency_001 — €10.00 vs €10.26 mismatch opgelost
+**Root cause**: `GET /api/trade/potjes/{user_id}` (`routes.py` ~1552) overlayde `live_value = dynamic_price` (finance_hub token-prijs €10.00) voor alle CLOSED pots. Gevolg:
+- `TraderPage.js` toont `p.live_value ?? p.capital` → **€10.00** (dynamic)
+- `AnalyticsPage.js` toont in aparte kolom `p.capital` → **€10.26** (boekwaarde incl. realized P&L)
+
+**Fix**: voor closed pots wordt `live_value` nu gelijkgezet aan `capital` (boekwaarde). Voor open pots blijft `live_value` = mark-to-market (bestaand gedrag uit `potjes.get_potjes()`). `capital_dynamic` blijft als apart veld beschikbaar voor UIs die de token-prijs willen tonen. `_hybrid_source` bumped naar `finance_hub_v13`.
+
+**Verificatie via `testing_agent` iter52**:
+- ✅ Backend 12/12 pytest cases pass (3 users: user-000/8 pots, user-001/3 pots, user-a0ee2d7e/2 pots)
+- ✅ Alle closed pots: `capital == live_value` bit-exact
+- ✅ Open pot-006 (ATOM): mark-to-market waarde behouden apart van capital
+- ✅ Frontend screenshot bevestigd: geen €10.00 meer op de Trader pagina; €10.15/€10.26 zichtbaar
+- ✅ Regressietest bewaard op `/app/backend/tests/test_iter52_pot_value_consistency.py` (hergebruikbaar bij toekomstige pot-logic wijzigingen)
+
+### Files changed (sessie 53)
+- `/app/backend/modules/trade/routes.py` — get_user_potjes overlay (regel ~1552-1571)
+- `/app/backend/tests/test_iter52_pot_value_consistency.py` — nieuwe regressietest (via testing_agent)
+
+---
+
+
+
 ## Sessie 52r-3 (2026-02-21, laat) — Root cause `open_pot()` overschreef open positie
 
 ### v13r_open_pot_overwrite_guard_001 — Guard tegen overschrijven van open potje

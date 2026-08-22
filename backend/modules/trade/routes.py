@@ -127,8 +127,22 @@ async def get_trade_stats(user_id: str):
     buys = [t for t in trades if t.get("action") == "BUY" and t.get("success")]
     sells = [t for t in trades if t.get("action") == "SELL" and t.get("success")]
     markets = list(set(t.get("market", "?") for t in trades))
-    total_buy_eur = sum(t.get("amount", 0) for t in buys)
-    total_sell_eur = sum(t.get("amount", 0) for t in sells)
+
+    # v13_sell_eur_calc_001 — Bitvavo geeft voor SELL het `amount` veld in COIN-hoeveelheid
+    # (bv 0.04 BCH), niet in EUR. Voorheen werd `sum(amount)` gebruikt → "Verkocht €0.04"
+    # in plaats van €10.14 → fantoom -€10 verlies in de stats. Nieuw:
+    #   BUY  → EUR = amount (Bitvavo boekt BUY in EUR wat je uitgeeft)
+    #   SELL → EUR = filled × price (coin-hoeveelheid × verkoopprijs). Fallback: amount×price.
+    def _buy_eur(t):
+        return float(t.get("amount") or 0)
+
+    def _sell_eur(t):
+        filled = float(t.get("filled") or t.get("amount") or 0)
+        price = float(t.get("price") or 0)
+        return round(filled * price, 4)
+
+    total_buy_eur = sum(_buy_eur(t) for t in buys)
+    total_sell_eur = sum(_sell_eur(t) for t in sells)
     avg_buy_price = sum(t.get("price", 0) for t in buys) / max(len(buys), 1)
     avg_sell_price = sum(t.get("price", 0) for t in sells) / max(len(sells), 1)
     # Fee-aware profit calculation
@@ -1508,6 +1522,51 @@ async def reconcile_close_sold(user_id: str, dry_run: bool = True):
                 action["closed"] = True
                 action["netto_eur"] = netto
                 action["capital_after"] = new_capital
+
+                # v13_reconcile_synthetic_sell_001 — schrijf synthetische SELL naar
+                # wallet/trade_history/{user}.json ALLEEN als er ook een matching BUY
+                # in de history staat voor deze market. Anders ontstaan fake wins
+                # (SELL zonder BUY = fantoom-winst in stats). Voor "orphan" pots
+                # zonder BUY-log blijft de gap zichtbaar in stats maar dat is
+                # correct: de trade zit niet in de bookkeeping.
+                try:
+                    from modules.core.storage import load_json as _lj, save_json as _sj
+                    _hist_fp = Path(__file__).parent.parent.parent / "data" / "wallet" / "trade_history" / f"{user_id}.json"
+                    _hist = _lj(_hist_fp, default=[])
+                    _trades_list = _hist if isinstance(_hist, list) else _hist.setdefault("trades", [])
+                    _has_matching_buy = any(
+                        (t.get("action") or "").upper() == "BUY" and t.get("market") == market
+                        for t in _trades_list
+                    )
+                    if _has_matching_buy:
+                        _trades_list.append({
+                            "trade_id": f"reconcile-{pot['id']}-{int(datetime.now(timezone.utc).timestamp())}",
+                            "run_id": "reconcile_close_sold",
+                            "timestamp": datetime.now(timezone.utc).isoformat(),
+                            "action": "SELL",
+                            "market": market,
+                            "amount": round(expected_coin, 8),
+                            "price": exit_price,
+                            "filled": round(expected_coin, 8),
+                            "status": "filled",
+                            "mock": False,
+                            "success": True,
+                            "synthetic": True,
+                            "source": "reconcile_close_sold",
+                            "exit_source": exit_source,
+                            "fee": round(capital * 0.0025, 4),
+                            "fee_currency": "EUR",
+                            "requested_amount": amt_eur,
+                            "effective_amount": round(expected_coin, 8),
+                            "proxied_via_spark": False,
+                        })
+                        _sj(_hist_fp, _hist)
+                        action["synthetic_sell_written"] = True
+                    else:
+                        action["synthetic_sell_written"] = False
+                        action["synthetic_sell_skip_reason"] = "no matching BUY in trade_history"
+                except Exception as _sxe:
+                    print(f"[reconcile] synthetic SELL write failed (non-blocking): {_sxe}")
             closed.append(action)
         else:
             skipped.append({

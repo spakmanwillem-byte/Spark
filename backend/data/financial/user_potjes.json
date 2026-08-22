@@ -8,7 +8,7 @@
           "id": "pot-001",
           "index": 0,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -74,7 +74,7 @@
           "id": "pot-002",
           "index": 1,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -125,13 +125,14 @@
               "capital_after_repair": 10.15
             }
           ],
-          "last_action": "SELL @ €65943.00 | reconcile | netto €-0.065"
+          "last_action": "SELL @ €65943.00 | reconcile | netto €-0.065",
+          "original_max_size": 50.0
         },
         {
           "id": "pot-003",
           "index": 2,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -175,13 +176,14 @@
               "actual_coin": 4.671e-05
             }
           ],
-          "last_action": "SELL @ €2081.75 | reconcile | netto €+0.117"
+          "last_action": "SELL @ €2081.75 | reconcile | netto €+0.117",
+          "original_max_size": 50.0
         },
         {
           "id": "pot-004",
           "index": 3,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -225,13 +227,14 @@
               "actual_coin": 0.00138955
             }
           ],
-          "last_action": "SELL @ €80.15 | reconcile | netto €+0.199"
+          "last_action": "SELL @ €80.15 | reconcile | netto €+0.199",
+          "original_max_size": 50.0
         },
         {
           "id": "pot-005",
           "index": 4,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -275,14 +278,15 @@
               "actual_coin": 1.90146
             }
           ],
-          "last_action": "SELL @ €0.19 | reconcile | netto €+0.257"
+          "last_action": "SELL @ €0.19 | reconcile | netto €+0.257",
+          "original_max_size": 50.0
         },
         {
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
           "capital": 10.15,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "market": "ATOM-EUR",
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
@@ -312,14 +316,15 @@
             }
           ],
           "reconcile_audit": [],
-          "last_action": "BUY @ €1.35"
+          "last_action": "BUY @ €1.35",
+          "original_max_size": 50.0
         },
         {
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "market": "ETH-EUR",
           "minted_at": "2026-07-23T09:16:23.939810+00:00",
@@ -334,7 +339,8 @@
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "reconcile_audit": []
+          "reconcile_audit": [],
+          "original_max_size": 50.0
         },
         {
           "id": "pot-008",
@@ -376,7 +382,7 @@
           "index": 0,
           "nummer": 1,
           "capital": 10.15,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
           "minted_at": "2026-07-20T16:52:48.805064+00:00",
@@ -391,14 +397,15 @@
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "reconcile_audit": []
+          "reconcile_audit": [],
+          "original_max_size": 50.0
         },
         {
           "id": "pot-002",
           "index": 1,
           "nummer": 2,
           "capital": 10.15,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
           "minted_at": "2026-07-31T10:20:50.733070+00:00",
@@ -414,14 +421,15 @@
           },
           "trade_log": [],
           "note": "v11_potjes_reconcile — auto-added to match token balance",
-          "reconcile_audit": []
+          "reconcile_audit": [],
+          "original_max_size": 50.0
         },
         {
           "id": "pot-003",
           "index": 2,
           "nummer": 3,
           "capital": 10.15,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
           "minted_at": "2026-07-31T10:20:50.733070+00:00",
@@ -437,7 +445,8 @@
           },
           "trade_log": [],
           "note": "v11_potjes_reconcile — auto-added to match token balance",
-          "reconcile_audit": []
+          "reconcile_audit": [],
+          "original_max_size": 50.0
         }
       ],
       "overflow_pool": 0.0,
@@ -451,7 +460,7 @@
           "id": "pot-001",
           "index": 0,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -500,13 +509,14 @@
               "capital_after_repair": 10.13
             }
           ],
-          "last_action": "SELL @ €241.66 | reconcile | netto €-0.520"
+          "last_action": "SELL @ €241.66 | reconcile | netto €-0.520",
+          "original_max_size": 50.0
         },
         {
           "id": "pot-002",
           "index": 1,
           "capital": 10.25,
-          "max_size": 0.0,
+          "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
@@ -522,7 +532,8 @@
           "created_at": "2026-07-31T07:53:42.395026+00:00",
           "source": "token_buy_expansion",
           "trade_log": [],
-          "reconcile_audit": []
+          "reconcile_audit": [],
+          "original_max_size": 50.0
         }
       ],
       "last_buy_cycle": null,

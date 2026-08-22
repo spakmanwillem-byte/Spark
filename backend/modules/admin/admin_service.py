@@ -73,7 +73,12 @@ def is_admin_or_legacy_grad12(user_id: Optional[str]) -> bool:
 def ensure_seed_admins() -> Dict:
     """Idempotent: zorg dat SEED_ADMIN_USER_IDS admin=True hebben.
     Verwijdert geen bestaande admins (additive).
-    Wordt aangeroepen bij backend startup."""
+    Wordt aangeroepen bij backend startup.
+    
+    v13_admin_capable_fix_001 — óók backfill admin_capable=True voor alle
+    bestaande admins die dat veld missen. Voorheen: grant_admin zette dit
+    niet, dus admins konden 'Admin aan'-modus niet activeren.
+    """
     data = _load_users()
     changed = []
     for u in data.get("users", []):
@@ -82,6 +87,14 @@ def ensure_seed_admins() -> Dict:
             u["admin_granted_at"] = _now_iso()
             u["admin_granted_by"] = "system-seed"
             changed.append(u["id"])
+        # v13_admin_capable_fix_001 — backfill voor bestaande admins
+        if u.get("admin") is True:
+            if not u.get("admin_capable"):
+                u["admin_capable"] = True
+                if u["id"] not in changed:
+                    changed.append(u["id"] + "-capable-added")
+            if not u.get("admin_key"):
+                u["admin_key"] = "admin"
     if changed:
         _save_users(data)
     return {"seeded": changed, "total_admins": sum(1 for u in data.get("users", []) if u.get("admin") is True)}
@@ -127,6 +140,16 @@ def grant_admin(target_user_id: str, granted_by: str, password: str, admin_type:
     target["admin_type"] = admin_type
     target["admin_granted_at"] = _now_iso()
     target["admin_granted_by"] = granted_by
+    # v13_admin_capable_fix_001 (sessie 53) — Willem: "admin-toewijzing werkt
+    # niet voor gradatie 3/4/5". Root cause: grant_admin zette wel admin=True
+    # maar niet admin_capable=True + admin_key. Gevolg: verify_admin_key faalt
+    # bij "Admin aan"-knop want admin_capable=False → user kan admin-modus
+    # niet inschakelen, ook al is 'ie technisch admin. Gradatie is dus GEEN
+    # blocker (klopt met principe "admin = technisch, gradatie = sociaal").
+    if not target.get("admin_capable"):
+        target["admin_capable"] = True
+    if not target.get("admin_key"):
+        target["admin_key"] = "admin"  # default, user kan resetten
     _save_users(data)
     return {
         "success": True,

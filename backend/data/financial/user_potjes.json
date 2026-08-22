@@ -7,7 +7,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -66,7 +66,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -116,7 +116,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -166,7 +166,7 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -216,7 +216,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -304,7 +304,7 @@
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "market": "ETH-EUR",
@@ -326,7 +326,7 @@
           "id": "pot-008",
           "index": 7,
           "nummer": 8,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -436,26 +436,23 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.13,
+          "capital": 9.6104,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 253.39003248911803,
-            "highest_price": 254.28,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-21T18:32:36.197221+00:00",
-            "amount_eur": 10.13,
-            "cluster_id": "6baba2f12f51",
-            "cluster_size": 1
+            "entry_time": null
           },
           "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
+            "losses": 1,
+            "total_pnl": -0.5196
           },
           "created_at": "2026-07-31T07:33:04.005890+00:00",
           "source": "token_buy_expansion",
@@ -469,13 +466,25 @@
               "amount_eur": 10.13
             }
           ],
-          "reconcile_audit": [],
-          "last_action": "BUY cluster 6baba2 @ EUR253.3900"
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:34:46.017883+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 253.39003248911803,
+              "exit_price": 241.66,
+              "capital_before": 10.13,
+              "capital_after": 9.6104,
+              "netto": -0.5196,
+              "expected_coin": 0.03997789,
+              "actual_coin": 0.00095644
+            }
+          ],
+          "last_action": "SELL @ €241.66 | reconcile | netto €-0.520"
         },
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.25,
+          "capital": 10.26,
           "max_size": 0.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -526,6 +535,14 @@
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
       "created_at": "2026-07-31T06:04:59.563690+00:00"
+    },
+    "__ignored__": {
+      "user_id": "__ignored__",
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-22T05:32:50.808191+00:00"
     }
   },
   "_pre_deploy_reset_at": "2026-06-03T14:02:40.629249+00:00",

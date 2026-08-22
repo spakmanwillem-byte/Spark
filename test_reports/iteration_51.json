@@ -1,0 +1,31 @@
+{
+  "summary": "Backend-only test of new bulk reconcile endpoint POST /api/trade/reconcile/close-sold-all. Wrote 6 pytest cases covering dry_run structure/success, meta-key filtering, skip-logic for users without open potjes, candidate-user inclusion, single-user backwards compatibility, and dry_run=false persistence. All 6/6 tests PASSED. Verified user-a0ee2d7e/pot-001 correctly transitioned from is_open=true -> is_open=false with stats.trades incremented 0 -> 1 and last_action set to 'SELL @ €241.66 | reconcile | netto €-0.520'. user-000/pot-006 remained open (Bitvavo still shows coin present >5% — graceful, correct behaviour). user-001 correctly skipped (no open potjes). Meta-keys 'null', '__ignored__' under users and top-level '_reset_at','_final_reset_at','_trim_at','_pre_deploy_reset_at' correctly excluded.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter_reconcile_close_sold_all.py",
+    "/app/test_reports/pytest/reconcile_close_sold_all.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "reconcile_close_sold_all correctly skips meta-keys ('null','__ignored__' + non-dict values). Top-level meta-keys like '_reset_at' live outside 'users' dict so are naturally ignored — good.",
+    "Endpoint degrades gracefully per user: user-000 iteration still returned success but did not close pot-006 because Bitvavo still holds coin (>5%). This is expected behaviour — no crash.",
+    "Minor code-review note (not blocking): routes.py is 2995 lines — consider splitting into smaller module files (reconcile.py, potjes.py routes, etc.). Not tested here."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter_reconcile_close_sold_all.py (new test file)"
+  ],
+  "success_rate": {"backend": "100% (6/6)", "frontend": "n/a"},
+  "seed_data_creation": "None. Test intentionally ran dry_run=false ONCE per request, which mutated user_potjes.json (user-a0ee2d7e/pot-001 closed). A backup was saved at /app/backend/data/financial/user_potjes.json.testbkp.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bulk reconcile endpoint /api/trade/reconcile/close-sold-all is verified working for dry_run + live modes; iterates all users, filters meta-keys, skips users without open potjes, and persists mutations. Backup of pre-test user_potjes.json is at user_potjes.json.testbkp. user-000/pot-006 (ROAR-like coin) is still open because Bitvavo balance still >5% — this is expected and not a bug.",
+  "rca of the issue": "Original bug: reconcile ran only for user-000, missing Willem (user-001) and Geiser (user-a0ee2d7e). Fix: added bulk endpoint iterating over all users in data['users'], filtering meta-keys and empty users. Confirmed working end-to-end: Geiser's stale open potje (pot-001) is now closed via bulk call with correct netto PnL and audit trail."
+}

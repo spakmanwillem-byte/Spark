@@ -1480,6 +1480,52 @@ async def reconcile_close_sold(user_id: str, dry_run: bool = True):
     }
 
 
+# v13u_reconcile_close_sold_all_001 — bulk voor ALLE users met potjes (Spark + Willem + Geiser + ...)
+@router.post("/reconcile/close-sold-all")
+async def reconcile_close_sold_all(dry_run: bool = True):
+    """Draai `reconcile_close_sold` voor elke user die potjes heeft in user_potjes.json.
+    Zo werken Spark (user-000), Willem (user-001), Geiser (user-a0ee2d7e) en andere
+    trader-users allemaal in 1 klik gesynced met hun eigen Bitvavo-balance.
+    """
+    from modules.trade import potjes as _p
+    from modules.core.storage import load_json as _lj
+    from pathlib import Path as _Path
+    # Direct de JSON lezen zonder een fake user aan te maken via _load(user_id)
+    _fp = _Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
+    data = _lj(_fp, default={"users": {}}) or {"users": {}}
+    users = (data or {}).get("users", {}) or {}
+    per_user = {}
+    total_closed = 0
+    total_skipped = 0
+    errors = []
+    for uid, u in users.items():
+        # Skip meta-keys en de "null" string-key uit oude data
+        if not isinstance(u, dict) or uid in (None, "null", "__ignored__"):
+            continue
+        potjes = u.get("potjes") or []
+        # Alleen users die minstens 1 open potje hebben verdienen een sync-poging
+        if not any((p.get("position") or {}).get("is_open") for p in potjes):
+            per_user[uid] = {"skipped": True, "reason": "no open potjes"}
+            continue
+        try:
+            result = await reconcile_close_sold(uid, dry_run=dry_run)
+            per_user[uid] = result
+            total_closed += result.get("n_closed", 0)
+            total_skipped += result.get("n_skipped", 0)
+        except Exception as ex:
+            errors.append({"user_id": uid, "error": str(ex)})
+            per_user[uid] = {"success": False, "error": str(ex)}
+    return {
+        "success": True,
+        "dry_run": dry_run,
+        "n_users_processed": len(per_user),
+        "total_closed": total_closed,
+        "total_skipped": total_skipped,
+        "per_user": per_user,
+        "errors": errors,
+    }
+
+
 @router.get("/potjes/{user_id}")
 async def get_user_potjes(user_id: str):
     """Haal potjes overzicht op — v10_finance_hub: overlay dynamische capital uit token-prijs.

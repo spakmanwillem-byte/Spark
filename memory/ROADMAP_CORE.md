@@ -57,6 +57,34 @@ Voor auto-extract-kaarten extra: `extract_source`, `extract_turn_id`, `extract_a
 
 ---
 
+## 🎯 P0 VOLGENDE SESSIE — Zelfscan-fundering (metadata-integriteit)
+
+Willem's inzicht sessie 55: "kan Spark z'n eigen data zien" = zelfscan. Zonder
+`footnote`-metadata op elke bron kan Spark niet zeggen waar iets vandaan komt →
+zelfscan silent kapot. Drie taken (in volgorde):
+
+### 1. Metadata backfill (P0)
+Script dat door **5706 KB-kaarten + agenda-events + notes + files + memories** loopt
+en per document checkt: heeft het `footnote.bron`, `aangemaakt_door`, `aangemaakt_op`,
+`vertrouwen`? Missende velden invullen met beste gok (bron="legacy_backfill",
+aangemaakt_op = file-mtime of eerste history-entry, vertrouwen=0.5).
+Output: rapport per module met percentage-compleet + lijst geraakte IDs.
+
+### 2. Write-guard (P0)
+Alle write-hooks (KB `add_to_inbox`, agenda `create_event`, notes, files, memories)
+moeten aan het begin een `_validate_footnote()` doen die hard failt als vereiste
+velden ontbreken. Voorkomt regressie richting incomplete data.
+
+### 3. Trace-capability (P1)
+Nieuwe chat-capability `document_trace`: "waar heb ik dit gezegd?", "wanneer heb ik
+Roeline voor het laatst genoemd?", "welke kaarten hebben Willem als bron?".
+Leest footnote-index en antwoordt uit Spark's eigen data.
+
+**Rationale**: dit is de fundering waarop 'attente Spark' (v13-serie) leunt. Zonder
+deze drie kan Spark z'n eigen geheugen niet betrouwbaar doorzoeken.
+
+---
+
 ## 🌷 Moreel Kompas — Kernvisie (blijft altijd bovenaan)
 
 Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft aan zijn dochter Lotus. Dat betekent:

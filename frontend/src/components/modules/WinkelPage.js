@@ -266,8 +266,8 @@ export function WinkelPage({ onNavigate }) {
         {selectedShop && activeTab === 'digital' && (
           <div className="flex gap-2 px-1">
             {[
-              { id: 'storage', label: 'Opslag', icon: HardDrive, color: '#3b82f6' },
-              { id: 'tokens', label: 'ROAR Token', icon: Coins, color: '#f59e0b' },
+              { id: 'storage', label: 'Opslag', icon: HardDrive },
+              { id: 'tokens', label: 'ROAR Token', icon: Coins },
             ].map(sub => (
               <button key={sub.id} data-testid={`shop-subtab-${sub.id}`}
                 onClick={() => setDigitalSubTab(sub.id)}
@@ -276,7 +276,7 @@ export function WinkelPage({ onNavigate }) {
                     ? 'bg-slate-800 text-white border border-slate-700'
                     : 'text-slate-500 hover:text-slate-300 border border-transparent'
                 }`}
-                style={{ color: digitalSubTab === sub.id ? sub.color : undefined }}>
+                style={{ color: digitalSubTab === sub.id ? 'var(--glow-base)' : undefined }}>
                 <sub.icon className="w-3 h-3" />
                 {sub.label}
               </button>

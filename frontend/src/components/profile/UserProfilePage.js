@@ -16,10 +16,10 @@ import { ShopTabView } from '../workspace/ShopTabView';
 const API = process.env.REACT_APP_BACKEND_URL;
 
 const TABS = [
-  { id: 'algemeen', label: 'Algemeen', accent: '#f59e0b' },
+  { id: 'algemeen', label: 'Algemeen' },
   // v13c_avatar_admin_only_001 (sessie 54) — Avatar-tab tot af alleen voor admins.
-  { id: 'avatar', label: 'Avatar', accent: '#ec4899', adminOnly: true },
-  { id: 'instellingen', label: 'Instellingen', accent: '#06b6d4' },
+  { id: 'avatar', label: 'Avatar', adminOnly: true },
+  { id: 'instellingen', label: 'Instellingen' },
 ];
 
 export function UserProfilePage({ onNavigate }) {
@@ -99,10 +99,10 @@ export function UserProfilePage({ onNavigate }) {
                   data-testid={`profile-tab-${t.id}`}
                   onClick={() => setActiveTab(t.id)}
                   className="relative px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap"
-                  style={{ color: a ? t.accent : '#94a3b8' }}
+                  style={{ color: a ? 'var(--glow-base)' : '#94a3b8' }}
                 >
                   {t.label}
-                  {a && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: t.accent }} />}
+                  {a && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: 'var(--glow-base)' }} />}
                 </button>
               );
             })}

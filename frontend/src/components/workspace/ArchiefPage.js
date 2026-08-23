@@ -11,13 +11,17 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const MAANDEN = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
 
+// v13c_global_glow_theme_001 (sessie 54) — Categorie-kleuren gedrooid.
+// Actieve tab + icoon volgen nu de user-glow via --glow-base i.p.v. hardcoded
+// per-categorie kleuren (was: foto=groen, geluiden=paars, etc). Semantische
+// kleuren (mood, status, priority) blijven wel per-context.
 const CATEGORIES = [
-  { id: 'bestanden', label: 'Bestanden', icon: FileIcon, color: '#64748b', accept: '*' },
-  { id: 'foto', label: 'Foto', icon: ImageIcon, color: '#22c55e', accept: 'image/*' },
-  { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7', accept: 'audio/*' },
-  { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899', accept: 'video/*' },
-  { id: 'documenten', label: 'Documenten', icon: FileText, color: '#f59e0b', accept: null },
-  { id: 'gesprekken', label: 'Gesprekken', icon: MessageSquare, color: '#06b6d4', accept: null },
+  { id: 'bestanden', label: 'Bestanden', icon: FileIcon, accept: '*' },
+  { id: 'foto', label: 'Foto', icon: ImageIcon, accept: 'image/*' },
+  { id: 'geluiden', label: 'Geluiden', icon: Music, accept: 'audio/*' },
+  { id: 'filmpjes', label: 'Filmpjes', icon: Video, accept: 'video/*' },
+  { id: 'documenten', label: 'Documenten', icon: FileText, accept: null },
+  { id: 'gesprekken', label: 'Gesprekken', icon: MessageSquare, accept: null },
 ];
 
 function formatBytes(n) {
@@ -218,11 +222,11 @@ export function ArchiefPage({ onNavigate }) {
                 <button key={c.id} data-testid={`archief-tab-${c.id}`}
                   onClick={() => setActiveTab(c.id)}
                   className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
-                  style={{ color: isActive ? c.color : '#94a3b8' }}>
+                  style={{ color: isActive ? 'var(--glow-base)' : '#94a3b8' }}>
                   <c.icon className="w-3.5 h-3.5" />
                   {c.label}
                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 ml-0.5">{count}</span>
-                  {isActive && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: c.color }} />}
+                  {isActive && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: 'var(--glow-base)' }} />}
                 </button>
               );
             })}
@@ -391,7 +395,7 @@ function FileCard({ file, userId, category, isEditing, editForm, setEditForm, on
         ) : (
           <>
             <div className="flex items-start gap-2 mb-1">
-              <Icon className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: category.color }} />
+              <Icon className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--glow-base)' }} />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate" title={file.original_name}>{file.original_name}</p>
                 <p className="text-[10px] text-slate-500">{formatBytes(file.size_bytes)} · {ts}</p>

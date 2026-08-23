@@ -72,9 +72,48 @@ def _log_usage(provider: str, model: str, usage: Dict[str, Any]) -> None:
         p["calls"] += 1
         p["model"] = model
         p["last_call"] = _dt.now(_tz.utc).isoformat()
+        # Reset error-state bij een succesvolle call
+        p["last_error"] = None
+        p["last_error_ts"] = None
+        p["failed_calls"] = int(p.get("failed_calls", 0))
         save_json(fp, data)
     except Exception as e:
         logger.debug("[llm_usage] log failed: %s", e)
+
+
+def _log_failure(provider: str, model: str, error: str) -> None:
+    """v13c_llm_failure_log_001 (sessie 54) — log failed calls per provider
+    zodat het widget kan tonen 'Cerebras: 402 quota op' i.p.v. 'geen data'
+    als een provider vandaag alleen maar geweigerd heeft.
+    """
+    try:
+        from modules.core.storage import load_json, save_json
+        fp = _usage_file_for_today()
+        today = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+        data = load_json(fp, default={"date": today, "providers": {}})
+        p = data["providers"].setdefault(provider, {
+            "tokens": 0, "calls": 0, "model": model, "last_call": None,
+        })
+        # Classificeer error kort
+        err_str = (error or "")
+        e_lc = err_str.lower()
+        if "402" in err_str or "payment required" in e_lc or "quota" in e_lc:
+            summary = "402 quota/betaling vereist"
+        elif "429" in err_str or "rate_limit" in e_lc or "rate limit" in e_lc:
+            summary = "429 tokens-per-day-limiet bereikt"
+        elif "401" in err_str or "unauthorized" in e_lc or "invalid api key" in e_lc:
+            summary = "401 ongeldige API-key"
+        elif "timeout" in e_lc:
+            summary = "timeout"
+        else:
+            summary = err_str[:120]
+        p["last_error"] = summary
+        p["last_error_ts"] = _dt.now(_tz.utc).isoformat()
+        p["failed_calls"] = int(p.get("failed_calls", 0)) + 1
+        p["model"] = model
+        save_json(fp, data)
+    except Exception as e:
+        logger.debug("[llm_usage] failure log failed: %s", e)
 
 
 def get_usage_today() -> Dict[str, Any]:
@@ -95,7 +134,10 @@ def get_usage_today() -> Dict[str, Any]:
     provider_meta = {
         "primary": {
             "naam": f"Groq ({os.environ.get('LLM_PRIMARY_MODEL', 'openai/gpt-oss-120b')})",
-            "limit": _limit("LLM_PRIMARY_TPD_LIMIT", 100000),
+            # v13c_widget_limit_fix_001 (sessie 54) — Groq on_demand tier is
+            # feitelijk 200k tokens/dag (bron: error-response 'Limit 200000').
+            # De oude default (100k) toonde 140% terwijl echte usage <100% was.
+            "limit": _limit("LLM_PRIMARY_TPD_LIMIT", 200000),
             "tier": os.environ.get("LLM_PRIMARY_TIER", "on_demand"),
         },
         "fallback": {
@@ -127,6 +169,11 @@ def get_usage_today() -> Dict[str, Any]:
             "tier": meta["tier"],
             "note": meta.get("note"),
             "last_call": stats.get("last_call"),
+            # v13c_llm_failure_log_001 — toon last_error zodat widget "Cerebras:
+            # 402 quota op" laat zien i.p.v. het cryptische "geen data".
+            "last_error": stats.get("last_error"),
+            "last_error_ts": stats.get("last_error_ts"),
+            "failed_calls": int(stats.get("failed_calls", 0)),
         })
 
     return {
@@ -439,6 +486,9 @@ async def chat_complete(
             if use_cache:
                 _cache_store(messages, temperature, result)
             return result
+        # v13c_llm_failure_log_001 — log de faal-status per provider zodat
+        # widget kan tonen 'Cerebras: 402 quota op' i.p.v. 'geen data'.
+        _log_failure(provider.name, provider.model, result.get("error") or "unknown")
         logger.warning("[llm_router] %s faalde: %s", provider.name, result.get("error"))
 
     # Alles gefaald → check of het écht nood-nood is (quota/rate-limit op alle providers).

@@ -37,7 +37,7 @@ export function LlmTokenUsageWidget() {
 
   const providers = usage?.providers || [
     // Fallback als endpoint tijdelijk niet reachable is
-    { naam: 'Groq (openai/gpt-oss-120b)', used: null, limit: 100000, tier: 'on_demand', note: 'geen data — endpoint niet bereikbaar' },
+    { naam: 'Groq (openai/gpt-oss-120b)', used: null, limit: 200000, tier: 'on_demand', note: 'geen data — endpoint niet bereikbaar' },
     { naam: 'Cerebras (gpt-oss-120b)', used: null, limit: null, tier: 'quota', note: 'geen data' },
     { naam: 'Emergent LLM Key', used: null, limit: null, tier: 'noodrem', note: 'activeert alleen bij écht nood' },
   ];
@@ -91,8 +91,18 @@ export function LlmTokenUsageWidget() {
                     </div>
                   )}
                 </>
+              ) : p.last_error ? (
+                // v13c_llm_failure_log_001 — toon foutstatus in plaats van "geen data"
+                <div className="flex items-center gap-1 text-[10px] text-red-300"
+                     data-testid={`provider-${i}-error`}>
+                  <AlertTriangle className="w-3 h-3 flex-shrink-0" />
+                  <span>{p.last_error}</span>
+                  {p.failed_calls > 0 && (
+                    <span className="text-slate-500 ml-1">({p.failed_calls}× geweigerd)</span>
+                  )}
+                </div>
               ) : (
-                <p className="text-[10px] text-slate-500 italic">{p.note || 'geen data'}</p>
+                <p className="text-[10px] text-slate-500 italic">{p.note || 'geen data — nog geen call vandaag'}</p>
               )}
             </div>
           );

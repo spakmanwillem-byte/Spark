@@ -65324,11 +65324,126 @@
         "session_id": "test-privacy-4",
         "gesprek_nummer": 2598
       }
+    },
+    {
+      "id": "conv-36c0026f",
+      "timestamp": "2026-08-23T10:07:48.108158+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "schrijf één zin over water",
+      "spark_response": "**schrijf**: “Schrijf” betekent het maken of opschrijven van woorden, teksten of informatie.\n\n**zin**: Een zin is een reeks woorden die samen betekenis, intentie of een complete gedachte uitdrukken.\n\n**Water**: Water is een vloeistof die essentieel is voor al het leven op aarde.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **één** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "zin",
+            "schrijf"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "schrijf"
+          },
+          {
+            "begrip": "zin"
+          },
+          {
+            "begrip": "Water"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "één"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "seed-fail",
+        "gesprek_nummer": 2599
+      }
+    },
+    {
+      "id": "conv-d79fc140",
+      "timestamp": "2026-08-23T10:09:01.626229+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zeg pong",
+      "spark_response": "Ik ken deze woorden nog niet: **pong**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'pong' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zeg"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "pong"
+        ],
+        "snap_suggestions": [
+          "pong"
+        ],
+        "word_count": 2,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "reset-primary",
+        "gesprek_nummer": 2600
+      }
+    },
+    {
+      "id": "conv-84039665",
+      "timestamp": "2026-08-23T10:09:13.768043+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "reflecteer even over 14991 en 10163 in max 20 woorden",
+      "spark_response": "**Woorden**: Woorden zijn betekenisvolle eenheden van taal waarmee mensen informatie, gedachten, gevoelens en ideeën uitdrukken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **reflecteer, max** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Woorden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "reflecteer",
+          "max"
+        ],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "reset-primary-7757",
+        "gesprek_nummer": 2601
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2598,
-    "last_updated": "2026-08-23T10:01:21.875218+00:00"
+    "total_conversations": 2601,
+    "last_updated": "2026-08-23T10:09:13.768043+00:00"
   }
 }

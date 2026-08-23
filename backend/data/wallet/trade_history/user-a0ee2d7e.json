@@ -101,6 +101,26 @@
       "requested_amount": 10.23,
       "effective_amount": 10.23,
       "proxied_via_spark": true
+    },
+    {
+      "trade_id": "00000000-0000-0410-0100-0009ebd1ba54",
+      "run_id": "manual",
+      "timestamp": "2026-08-23T12:50:47.002704+00:00",
+      "action": "SELL",
+      "market": "ATOM-EUR",
+      "order_id": "00000000-0000-0410-0100-0009ebd1ba54",
+      "amount": 7.528375,
+      "price": 1.3549,
+      "filled": 7.528375,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0301952875,
+      "fee_currency": "EUR",
+      "requested_amount": 10.23,
+      "effective_amount": 7.528375,
+      "proxied_via_spark": true
     }
   ],
   "entries": []

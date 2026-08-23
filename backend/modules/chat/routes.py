@@ -801,6 +801,41 @@ async def process_message(req: ChatMessage):
 
     # 0b3b. CAPABILITY ROUTER (v6_intent_router_001) — Spark's handen: match→execute
     # Pakt "hoeveel users", "weet jij X", "log van trade", "winst", "taken" etc.
+    # v13d_agenda_delete_001 — Vóór capability-router agenda_delete + agenda_read
+    # afvangen, anders pakt de "agenda_vandaag" capability het generieke woord
+    # "agenda" op en toont Spark een READ-overzicht i.p.v. de delete-flow te
+    # starten (of een generieke read-boilerplate i.p.v. onze verrijkte lezer).
+    try:
+        from . import smart_intents_service as _si_early
+        if req.user_id and _si_early.detect_agenda_delete_intent(text):
+            try:
+                from modules.auth.service import AuthService as _AuthEarly
+                _user_early = _AuthEarly.get_user_by_id(req.user_id)
+            except Exception:
+                _user_early = None
+            out = _si_early.handle_agenda_delete_start(req.user_id, _user_early, text)
+            response.update(out)
+            if isinstance(out.get("pending_state"), dict):
+                session_state.set_state(req.user_id, pending_agenda_delete=out["pending_state"])
+            _save_log(req, response, out.get("type", "agenda_delete_start"))
+            return response
+        # v13d_agenda_read_early_001 — READ intent ook vóór capability, anders
+        # matcht "wat staat er morgen" via agenda_vandaag capability i.p.v.
+        # onze uitgebreide handle_agenda die weekdagen kent.
+        if req.user_id and _si_early.detect_agenda_intent(text):
+            try:
+                from modules.auth.service import AuthService as _AuthEarly
+                _user_early = _AuthEarly.get_user_by_id(req.user_id)
+            except Exception:
+                _user_early = None
+            out = _si_early.handle_agenda(req.user_id, _user_early, text)
+            response.update(out)
+            response["type"] = "agenda_overview"
+            _save_log(req, response, "agenda_overview")
+            return response
+    except Exception as _ex_del:
+        print(f"[agenda-early] failed: {_ex_del}")
+
     try:
         from . import capability_handler_service
         cap_resp = capability_handler_service.route_capability(text, req.user_id)
@@ -1084,6 +1119,56 @@ async def process_message(req: ChatMessage):
         # triggerde. READ-intent (bv "wat staat er", "uit de agenda") is
         # specifieker; alleen als er GEEN read-match is gaan we CREATE proberen.
 
+        # v13d_agenda_delete_001 (sessie 55) — DELETE vóór READ + CREATE.
+        # "haal aanstaande dinsdag uit de agenda" is een commando; niet meer
+        # doorverwijzen naar UI. Flow: detect → matches → confirm → execute.
+        # Pending-check moet HIER staan (niet later verderop): de smart-intents
+        # block doet aan het einde een onvoorwaardelijke `return response` voor
+        # logged-in users, dus alles na dit block is onbereikbaar met user_id.
+        pending_agenda_delete = state.get("pending_agenda_delete")
+        if pending_agenda_delete and req.user_id:
+            step = pending_agenda_delete.get("step")
+            # Annuleren
+            if si.is_no(text) or wedervraag_service.is_skip(text):
+                session_state.set_state(req.user_id, pending_agenda_delete=None)
+                out = si.handle_agenda_delete_cancel()
+                response.update(out)
+                _save_log(req, response, "agenda_delete_cancel")
+                return response
+            if step == "choose":
+                out = si.handle_agenda_delete_choose(pending_agenda_delete, text)
+                response.update(out)
+                new_pending = out.get("pending_state")
+                if isinstance(new_pending, dict):
+                    session_state.set_state(req.user_id, pending_agenda_delete=new_pending)
+                _save_log(req, response, out.get("type", "agenda_delete_choose"))
+                return response
+            # step == 1 → wacht op ja
+            if si.is_yes(text) or snap.detect_confirmation(text):
+                ids = pending_agenda_delete.get("event_ids") or []
+                out = si.execute_agenda_delete(req.user_id, ids)
+                session_state.set_state(req.user_id, pending_agenda_delete=None)
+                response.update(out)
+                _save_log(req, response, out.get("type", "agenda_deleted"))
+                return response
+            # Onbekend antwoord — herhalen
+            response["type"] = "agenda_delete_repeat"
+            response["message"] = (
+                f"Nog even bevestigen: **{pending_agenda_delete.get('summary','afspraak')}** "
+                f"verwijderen? Typ **ja** of **nee**."
+            )
+            _save_log(req, response, "agenda_delete_repeat")
+            return response
+
+        if req.user_id and si.detect_agenda_delete_intent(text):
+            out = si.handle_agenda_delete_start(req.user_id, _load_user(), text)
+            response.update(out)
+            # Als het een confirm/choose is, bewaar pending_state
+            if isinstance(out.get("pending_state"), dict):
+                session_state.set_state(req.user_id, pending_agenda_delete=out["pending_state"])
+            _save_log(req, response, out.get("type", "agenda_delete_start"))
+            return response
+
         # Agenda-overzicht (READ) — heeft prioriteit
         if si.detect_agenda_intent(text) and req.user_id:
             out = si.handle_agenda(req.user_id, _load_user(), text)
@@ -1280,6 +1365,9 @@ async def process_message(req: ChatMessage):
                 spontaneous_hint = "\n\n" + spontaneous_w_service.build_hint(filled)
 
     # 0a. AGENDA-PROPOSAL-FLOW (v3_303): wachten op ja/nee voor genoteerd voorstel
+    # NB: v13d_agenda_delete_001 — pending_agenda_delete wordt hoger in de
+    # flow afgehandeld (binnen de smart-intents block) omdat die block een
+    # onvoorwaardelijke return doet aan het einde voor logged-in users.
     pending_agenda = state.get("pending_agenda")
     if pending_agenda:
         if snap.detect_confirmation(text):

@@ -3,6 +3,94 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-23 (sessie 55) — Agenda DELETE hook + Intent Patronen live-editable + RULE_-prefix
+
+Willem's frustratie: "als ik in chat zeg 'haal aanstaande dinsdag uit de agenda' dan
+moet Spark dat doen, niet zeggen 'via de agenda-tab'." + "vind raar dat je die Triggers
+tabs nooit bent gaan gebruiken." + Emmy: "v13 = Spark-versie, geen agent-regel." → dit fixt drie.
+
+### 📜 RULE_-prefix voor agent-gedragsregels — Naamgevingsscheiding
+**Probleem**: `v13_agent_selfcheck_001` verwart Willem: `v13_` is Spark feature-versie,
+niet agent-gedrag. Bovendien stond de regel nergens formeel in code/memory → per sessie
+kwijt.
+
+**Fix** — `/app/memory/ROADMAP_CORE.md`:
+- Nieuwe sectie bovenaan "🚨 AGENT GEDRAGSREGELS (RULE_*) — VERPLICHT LEZEN & OPVOLGEN"
+- Regels geherformuleerd met `RULE_`-prefix (los van feature-versies):
+  - `RULE_agent_selfcheck_001` — sessie-start protocol (lees CORE + CHANGELOG + grep vóór bouwen)
+  - `RULE_dutch_only_001` — Nederlands antwoorden
+  - `RULE_no_database_001` — strict JSON, geen DB
+  - `RULE_deploy_preview_split_001` — preview vs productie
+  - `RULE_no_placeholder_data_001` — geen mock/fake data
+  - `RULE_footnote_metadata_001` — verplichte metadata per KB v2 kaart
+
+Rationale: nu staan de regels prominent in de codebase, niet enkel in vluchtige
+handoff-samenvattingen die per fork wegvallen.
+
+### 🗓️ v13d_agenda_delete_001 — Chat-gestuurde agenda-DELETE flow
+**Probleem**: DELETE-intent bestond niet; Spark antwoordde met "doe dat via de agenda-tab".
+
+**Backend** — `smart_intents_service.py`:
+- `detect_agenda_delete_intent(text)` matcht op "haal/verwijder/schrap/annuleer … uit de agenda".
+- `handle_agenda_delete_start(user_id, user, text)` — vindt matching events:
+  - **0 matches** → melding + hint om READ te vragen.
+  - **1 match** → bevestigingsvraag met titel + datum/tijd, `pending_state` opgeslagen.
+  - **>1 matches** → genummerde lijst (max 8), user kiest **1** of **alle**.
+- `handle_agenda_delete_choose(pending, text)` — verwerkt nummer/alle keuze → 2e confirmatie.
+- `execute_agenda_delete(user_id, event_ids)` — verwijdert events uit `/data/agenda/{uid}.json`.
+- `handle_agenda_delete_cancel()` — bij "nee".
+
+**Routes** — `chat/routes.py`:
+- Early hook vóór capability-router: agenda_delete + agenda_read direct afvangen (voorheen
+  vong "agenda_vandaag" capability alle agenda-woorden op → verkeerde antwoord).
+- `pending_agenda_delete` handler binnen smart-intents blok (verplichte plek: block doet
+  aan einde onvoorwaardelijke `return response` voor logged-in users, dus buiten dat blok
+  onbereikbaar).
+
+**Regressie fix bonus**: pre-bestaande test-failure "wat staat er morgen → capability_response
+i.p.v. agenda_overview" is opgelost via de early-hook (test_agenda_weekday_no_emoji nu 13/13).
+
+### 🎛️ v13d_intent_patterns_json_001 — Live-editable regex-intents (Triggers-tab)
+**Probleem**: Intent-detectors (`smart_intents_service`, `action_intents_service`) hadden
+regex-patronen hardcoded in Python. Willem kon in Triggers-tab wél trigger-woorden bewerken
+maar géén regex-patronen voor intents → moest per commit-cycle wachten.
+
+**Architectuur**:
+- Nieuw module `/app/backend/modules/chat/intent_pattern_store.py`:
+  - `BASELINE: Dict[str, List[str]]` — hardcoded fallback, niet-verwijderbaar (garantie:
+    basisgedrag altijd werkend, ook bij lege/foute JSON).
+  - `/app/backend/data/triggers/intent_patterns.json` — live-editable additions.
+  - `match_any(intent_key, text)` runtime lookup = BASELINE ∪ JSON.
+  - Cache met mtime-invalidation: JSON-edit werkt direct door.
+  - Auto-bootstrap: als JSON niet bestaat, wordt hij aangemaakt met alle bekende intent-keys
+    op empty-additions.
+
+**Gemigreerd** (BASELINE bevat alle voormalige hardcoded lijsten):
+- `agenda_read`, `agenda_delete` (nieuw), `note_create`, `bug_report`, `help_overview`,
+  `suggest_action`, `topic_overview`, `clarify`, `community_recap`, `dnd_help`,
+  `account_delete`, `stt_on`, `stt_off`, `tts_on`, `tts_off`, `ambient_off` = **16 intents,
+  118 baseline-patronen**.
+
+**API** — `triggers/routes.py`:
+- `GET  /api/triggers/intent-patterns` — lijst met per-intent baseline + additions + counts.
+- `POST /api/triggers/edit/intent/{key}/add`  body `{pattern}` — regex-toevoegen (met compile-validatie).
+- `DELETE /api/triggers/edit/intent/{key}/pattern?pattern=...` — verwijderen (weigert baseline).
+- `POST /api/triggers/intent-patterns/test?text=...` — preview welke intents matchen.
+
+**UI** — `TriggersPage.js`:
+- Nieuw uitklapbaar blok "Intent Patronen (regex)" onderaan de Triggers-tab.
+- Per intent-key: baseline (locked, groen) + additions (deletable, amber) + regex-input
+  met live compile-check via backend.
+- Toont totalen in header: `X patronen in Y intents · Z live-toegevoegd`.
+
+**Tests**: `tests/test_agenda_delete_v13d.py` — 9 tests (single/multi/alle/cancel flow +
+regex-store CRUD + baseline-protection). Alle groen.
+
+**Impact voor Willem**: 
+1. Chat-commando "haal aanstaande dinsdag uit de agenda" werkt nu end-to-end zonder UI-omweg.
+2. Nieuwe intent-patronen kunnen via Triggers-tab live worden toegevoegd zonder redeploy.
+
+
 ## 2026-02-22 (sessie 53 vervolg) — LLM Usage Tracker live
 
 ### 📊 v13_llm_usage_tracker_001 — /api/chat/llm/usage/today endpoint

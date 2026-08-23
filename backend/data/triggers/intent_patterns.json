@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "purpose": "Live-editable intent patronen. Voeg regex-strings toe om patronen aan te vullen naast BASELINE.",
+    "note": "BASELINE staat in intent_pattern_store.py en is niet-verwijderbaar.",
+    "known_keys": [
+      "account_delete",
+      "agenda_delete",
+      "agenda_read",
+      "ambient_off",
+      "bug_report",
+      "clarify",
+      "community_recap",
+      "dnd_help",
+      "help_overview",
+      "note_create",
+      "stt_off",
+      "stt_on",
+      "suggest_action",
+      "topic_overview",
+      "tts_off",
+      "tts_on"
+    ]
+  },
+  "agenda_read": [],
+  "agenda_delete": [
+    "\\bplan.*(af|weg)\\b"
+  ],
+  "note_create": [],
+  "bug_report": [],
+  "help_overview": [],
+  "suggest_action": [],
+  "topic_overview": [],
+  "account_delete": [],
+  "clarify": [],
+  "community_recap": [],
+  "dnd_help": [],
+  "stt_on": [],
+  "stt_off": [],
+  "tts_on": [],
+  "tts_off": [],
+  "ambient_off": []
+}

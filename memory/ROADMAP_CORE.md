@@ -8,6 +8,55 @@
 
 ---
 
+## 🚨 AGENT GEDRAGSREGELS (RULE_*) — VERPLICHT LEZEN & OPVOLGEN
+
+> **Naamgevingsconventie**:
+> - `RULE_*` = gedragsregels voor de agent (deze sectie). Blijven altijd geldig.
+> - `v13_*`, `v14_*` = feature/architectuur-versies van Spark zelf. Niet verwarren.
+> Bron van de scheiding: Willem + Emmy, sessie 55 — "v13 is een Spark-versie, geen agent-regel".
+
+### RULE_agent_selfcheck_001 — Sessie-start protocol (P0, verplicht)
+Bij ELKE nieuwe sessie / fork / handoff, **VÓÓR** je begint met coderen:
+1. Lees `/app/memory/ROADMAP_CORE.md` (dit bestand) volledig.
+2. Lees de laatste sectie van `/app/memory/CHANGELOG.md` (top ~50 regels).
+3. Lees `/app/memory/test_credentials.md` als er auth-flows ter sprake komen.
+4. Voer `grep -rln "<feature-naam>" /app/backend/modules/` uit vóór je iets nieuws bouwt — vaak bestaat het al.
+5. Meld in je eerste antwoord welke regels je hebt gelezen (max 1 zin).
+
+**Rationale**: Willem raakt gefrustreerd dat hij dezelfde instructie 3-5× moet herhalen.
+Zonder deze checkregel valt de agent per default terug op de snelste route en
+worden bestaande modules genegeerd → duplicaten + gaps.
+
+### RULE_dutch_only_001 — Communicatietaal
+Antwoord ALTIJD in het Nederlands (Willem is Nederlander). Interne thoughts mogen in
+het Engels.
+
+### RULE_no_database_001 — Storage
+Spark gebruikt STRICT alleen JSON-files in `/app/backend/data/`. **NOOIT** MongoDB,
+Postgres, SQLite of andere databases voorstellen — óók niet voor "even snel testen".
+
+### RULE_deploy_preview_split_001 — Preview vs Productie
+- Fixes landen eerst in Preview (deze omgeving).
+- Willem klikt zelf "Deploy" om ze naar Productie te promoten.
+- Als Willem meldt dat iets in productie kapot is: gentle reminder dat de fix
+  eerst gedeployed moet worden.
+
+### RULE_no_placeholder_data_001 — Geen fake data
+Geen mock users, geen "placeholder" antwoorden, geen "dit werkt over enkele minuten".
+Als iets niet werkt: eerlijk zeggen + concreet vervolg.
+
+### RULE_footnote_metadata_001 — Kaart-aanmaak flow
+Iedere nieuwe KB v2 inbox-kaart moet minstens deze metadata dragen:
+- `footnote.bron` (waar komt de kaart vandaan?)
+- `footnote.aangemaakt_door` + `aangemaakt_op`
+- `footnote.vertrouwen` (default 0.3 bij auto-extract)
+- `_inbox_reason` (waarom in inbox?)
+- `needs` (welke velden ontbreken?)
+Voor auto-extract-kaarten extra: `extract_source`, `extract_turn_id`, `extract_at`,
+`extract_context_snippet`, `needs_review: true`.
+
+---
+
 ## 🌷 Moreel Kompas — Kernvisie (blijft altijd bovenaan)
 
 Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft aan zijn dochter Lotus. Dat betekent:

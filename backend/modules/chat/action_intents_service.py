@@ -16,88 +16,20 @@ import json
 from pathlib import Path
 from typing import Optional, Dict
 
+from modules.chat import intent_pattern_store as _patterns  # v13d_intent_patterns_json_001
+
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 AMBIENT_DIR = DATA_ROOT / "system" / "ambient"
 AMBIENT_REGISTRY = AMBIENT_DIR / "registry.json"
 
 
-# ============== STT ==============
-STT_ON_PATTERNS = [
-    # Haakjes-trigger — eenduidig, geen woordconflict
-    r"\(\s*s[ts]t\s+aan\s*\)",
-    r"\(\s*spraak\s+naar\s+te?xt\s+aan\s*\)",
-    r"\(\s*spraak\s+naar\s+tekst\s+aan\s*\)",
-    # Losse varianten
-    r"\bspeech[-\s]?to[-\s]?text\s+(aan|aanzetten|activeren|start|aan zetten|aanzettten)\b",
-    r"\bs[ts]t\s+(aan|aanzetten|activeren|start)\b",
-    r"\bspraak\s+naar\s+te?xt\s+aan\b",
-    r"\bspraak\s+naar\s+tekst\s+aan\b",
-    r"\b(zet|doe)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic)\s+aan\b",
-    r"\b(start|activeer)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic|spraak|spraakherkenning)\b",
-    r"\bik\s+wil\s+(praten|spreken|inspreken)\b",
-    r"\bmicrofoon\s+aan\b",
-    r"\b(luister|hoor)\s+(naar\s+)?(me|mij)\b",
-]
-
-STT_OFF_PATTERNS = [
-    r"\(\s*s[ts]t\s+uit\s*\)",
-    r"\(\s*spraak\s+naar\s+te?xt\s+uit\s*\)",
-    r"\(\s*spraak\s+naar\s+tekst\s+uit\s*\)",
-    r"\bspeech[-\s]?to[-\s]?text\s+(uit|uitzetten|stoppen|stop|deactiveren|uit zetten)\b",
-    r"\bs[ts]t\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
-    r"\bspraak\s+naar\s+te?xt\s+uit\b",
-    r"\bspraak\s+naar\s+tekst\s+uit\b",
-    r"\b(zet|doe)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic)\s+uit\b",
-    r"\b(stop|deactiveer)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic|spraak|spraakherkenning)\b",
-    r"\b(ik\s+wil\s+)?(weer\s+)?typen\b",
-    r"\bmicrofoon\s+uit\b",
-]
+# v13d_intent_patterns_json_001 — regex-patronen leven nu in
+# `intent_pattern_store` (BASELINE + JSON). Handmatig toevoegen via
+# /api/triggers/edit/intent/{stt_on|stt_off|tts_on|tts_off|ambient_off}/add.
 
 
-def _match_any(text: str, patterns) -> bool:
-    t = text.lower()
-    return any(re.search(p, t) for p in patterns)
-
-
-# ============== AMBIENT ==============
-# v13_action_intent_context_fix_001 (sessie 54) — Willem's GPT-gesprek liep dood
-# omdat "de fallback mag niet stil zijn" triggerde als 'stilte'-commando (loose \b(stil)\b).
-# Fix: alleen matchen als het woord alleen staat (heel bericht ≤3 woorden) of als
-# expliciet commando ("wees stil", "even stilte"). Losse "stil" mid-zin negeren.
-AMBIENT_OFF_PATTERNS = [
-    r"^\s*(stilte|stil)[\s.!?]*$",                              # single-word command
-    r"\b(even|nu|zet)\s+(stilte|het\s+stil)\b",                  # expliciet "even stilte"
-    r"\bambient\s*\d*\s*(uit|stop|af|weg)\b",
-    r"\b(stop|zet)\s+(de\s+)?(muziek|geluid|loop|ambient|achtergrondgeluid|natuur|vogels|vogeltjes)\s*(uit|af|stop)?\b",
-    r"\b(muziek|geluid|loop|ambient|achtergrondgeluid|natuur|vogels|vogeltjes)\s+(uit|stop|weg)\b",
-    r"\b(geen|niks)\s+geluid\s*(meer)?\b",
-]
-
-
-# ============== TTS (text-to-speech: Spark spreekt zijn antwoord uit) ==============
-TTS_ON_PATTERNS = [
-    r"\(\s*t[ts]s\s+aan\s*\)",
-    r"\(\s*te?xt\s+naar\s+spraak\s+aan\s*\)",
-    r"\btext[-\s]?to[-\s]?speech\s+(aan|aanzetten|activeren|start)\b",
-    r"\bt[ts]s\s+(aan|aanzetten|activeren|start)\b",
-    r"\bte?xt\s+naar\s+spraak\s+aan\b",
-    r"\b(zet|doe)\s+(de\s+)?(t[ts]s|text[-\s]?to[-\s]?speech|stem|spraak\s*output)\s+aan\b",
-    r"\bik\s+wil\s+(je|spark|hem)\s+horen\b",
-    r"\b(spreek|praat)\s+(tegen\s+)?(me|mij|tegen)\b",
-    r"\b(stem|spraak)\s+aan\b",
-    r"\b(zet|doe)\s+(je\s+)?stem\s+aan\b",
-]
-TTS_OFF_PATTERNS = [
-    r"\(\s*t[ts]s\s+uit\s*\)",
-    r"\(\s*te?xt\s+naar\s+spraak\s+uit\s*\)",
-    r"\btext[-\s]?to[-\s]?speech\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
-    r"\bt[ts]s\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
-    r"\bte?xt\s+naar\s+spraak\s+uit\b",
-    r"\b(zet|doe)\s+(de\s+)?(t[ts]s|text[-\s]?to[-\s]?speech|stem|spraak\s*output)\s+uit\b",
-    r"\b(stop|hou\s+op)\s+(met\s+)?(praten|spreken)\b",
-    r"\b(wees|ben)\s+(stil|stilletjes)\b",
-    r"\b(stem|spraak)\s+uit\b",
-]
+def _match_any(text: str, intent_key: str) -> bool:
+    return _patterns.match_any(intent_key, text or "")
 
 
 def _load_loops():
@@ -142,7 +74,7 @@ def try_detect(text: str) -> Optional[Dict]:
         return None
 
     # 1. STT off (eerst, want "stt uit" mag niet als "stt aan" matchen)
-    if _match_any(text, STT_OFF_PATTERNS):
+    if _match_any(text, "stt_off"):
         return {
             "action": "disable_stt",
             "message": "Speech-to-Text uitgezet. Je kunt weer typen 🌝",
@@ -150,7 +82,7 @@ def try_detect(text: str) -> Optional[Dict]:
         }
 
     # 2. STT on
-    if _match_any(text, STT_ON_PATTERNS):
+    if _match_any(text, "stt_on"):
         return {
             "action": "enable_stt",
             "message": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
@@ -158,7 +90,7 @@ def try_detect(text: str) -> Optional[Dict]:
         }
 
     # 2b. TTS off (vóór on)
-    if _match_any(text, TTS_OFF_PATTERNS):
+    if _match_any(text, "tts_off"):
         return {
             "action": "disable_tts",
             "message": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
@@ -166,7 +98,7 @@ def try_detect(text: str) -> Optional[Dict]:
         }
 
     # 2c. TTS on
-    if _match_any(text, TTS_ON_PATTERNS):
+    if _match_any(text, "tts_on"):
         return {
             "action": "enable_tts",
             "message": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
@@ -174,7 +106,7 @@ def try_detect(text: str) -> Optional[Dict]:
         }
 
     # 3. Ambient off
-    if _match_any(text, AMBIENT_OFF_PATTERNS):
+    if _match_any(text, "ambient_off"):
         return {
             "action": "stop_ambient",
             "message": "Achtergrondgeluid uitgezet.",

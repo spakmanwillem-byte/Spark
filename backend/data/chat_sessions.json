@@ -204,7 +204,7 @@
   },
   "user-rps-test-agent": {
     "interaction_count": 3,
-    "updated_at": "2026-06-02T20:13:44.684943+00:00"
+    "updated_at": "2026-08-23T14:04:45.407546+00:00"
   },
   "test-snap-001": {
     "interaction_count": 3,
@@ -277,14 +277,36 @@
     "updated_at": "2026-07-29T19:57:23.291357+00:00",
     "kb_fill_pending": null
   },
+  "test-user-63626ea3": {
+    "interaction_count": 4,
+    "updated_at": "2026-08-23T14:03:32.948169+00:00",
+    "kb_fill_pending": null
+  },
+  "test-user-09fe627c": {
+    "interaction_count": 2,
+    "updated_at": "2026-08-23T14:03:33.259341+00:00",
+    "kb_fill_pending": null
+  },
+  "test-user-a212ad9a": {
+    "interaction_count": 4,
+    "updated_at": "2026-08-23T14:03:33.782523+00:00",
+    "kb_fill_pending": {
+      "phase": "awaiting_answer",
+      "entry_id": "kbv2-f5c97990",
+      "begrip": "tag-curatie",
+      "field": "wat",
+      "question": "Wat betekent 'tag-curatie' voor jou?",
+      "answer": null
+    }
+  },
+  "test-user-fd382fa5": {
+    "interaction_count": 3,
+    "updated_at": "2026-08-23T14:03:34.231391+00:00",
+    "kb_fill_pending": null
+  },
   "user-001": {
-    "interaction_count": 33,
-    "updated_at": "2026-08-23T13:34:01.636010+00:00",
-    "last_begrip": "Woorden",
-    "last_entry_id": "kbv2-c8088b66",
-    "awaiting_homonym_confirm": false,
-    "current_depth": 1,
-    "pending_wv_consent": null,
+    "interaction_count": 35,
+    "updated_at": "2026-08-23T14:09:58.081716+00:00",
     "pending_agenda": {
       "datetime_iso": "2026-08-24T14:00:00",
       "end_datetime_iso": null,
@@ -294,6 +316,7 @@
       "waar": "",
       "raw_text": "ik heb morgen om 14:00 een afspraak met de tandarts",
       "has_conflict": false
-    }
+    },
+    "pending_agenda_delete": null
   }
 }

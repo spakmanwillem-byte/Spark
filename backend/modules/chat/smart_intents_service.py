@@ -21,6 +21,7 @@ from typing import Dict, List, Optional
 
 from modules.core.storage import load_json, save_json
 from . import user_time_service
+from . import intent_pattern_store as _patterns  # v13d_intent_patterns_json_001
 
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 AGENDA_DIR = DATA_ROOT / "agenda"
@@ -30,27 +31,9 @@ ROADMAP_FILE = DATA_ROOT / "system" / "roadmap.json"
 
 
 # ============== AGENDA INTENT ==============
-_AGENDA_PATTERNS = [
-    r"\bwat staat\b.*\b(agenda|planning|gepland)\b",
-    r"\bwat staat (er|op (de )?planning)\b",
-    r"\bwat (staat|heb ik) (er )?(vandaag|morgen|overmorgen|deze week)\b",
-    # v13c_agenda_weekdays_001 (sessie 54) — Willem: "wat staat er voor dinsdag" viel
-    # buiten patronen. Toegevoegd: weekdagnamen + "aanstaande/volgende" prefix.
-    r"\bwat staat er\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
-    r"\bafspraak\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
-    r"\b(uit )?(mijn )?agenda\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
-    # v13c_agenda_read_first_001 — "uit de agenda halen/lezen/kijken" = altijd READ
-    r"\b(uit|in|van)\s+(de|mijn)\s+agenda\b.*\b(halen|lezen|kijken|zien|checken)\b",
-    r"\b(afspraak|afspraken)\b.*\b(van|voor|op)\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|vandaag|morgen|overmorgen)\b",
-    r"\b(heb|hebben) ik\b.*\b(afspraken|afspraak|in (de )?agenda)\b",
-    r"\b(heb|hebben) ik\s+(vandaag|morgen|overmorgen)\b.*\b(afspraken|afspraak|wat te doen|iets te doen)\b",
-    r"\b(heb|hebben) ik\s+(vandaag|morgen|overmorgen|deze week)\b.*\b(te doen|iets|wat)",
-    r"\bagenda\b.*\b(vandaag|morgen|overmorgen|deze week)\b",
-    r"\bkijk\s+(?:in|naar)?\s*(?:de\s+|mijn\s+)?(agenda|planning)\b",
-    r"\bwelke afspraken\b",
-    r"\b(mijn |de )?planning\b.*\b(vandaag|morgen)\b",
-]
-
+# v13d_intent_patterns_json_001 — patronen leven nu in intent_pattern_store
+# (BASELINE + /data/triggers/intent_patterns.json). Nieuwe patronen kunnen
+# live via Triggers-UI worden toegevoegd zonder redeploy.
 
 # v13c_agenda_weekdays_001 — day-focus regex nu ook weekdagen + prefix
 _AGENDA_DAY_RX = re.compile(
@@ -63,8 +46,13 @@ _WEEKDAY_INDEX = {"maandag": 0, "dinsdag": 1, "woensdag": 2, "donderdag": 3,
 
 
 def detect_agenda_intent(text: str) -> bool:
-    t = (text or "").lower()
-    return any(re.search(p, t) for p in _AGENDA_PATTERNS)
+    return _patterns.match_any("agenda_read", text or "")
+
+
+def detect_agenda_delete_intent(text: str) -> bool:
+    """v13d_agenda_delete_001 — Willem: 'haal aanstaande dinsdag uit de agenda'
+    moet DELETE-flow triggeren (met bevestiging), niet 'doe dat via de UI'."""
+    return _patterns.match_any("agenda_delete", text or "")
 
 
 def _parse_event_dt(ev: dict) -> Optional[datetime]:
@@ -199,22 +187,18 @@ def handle_agenda(user_id: str, user: Optional[dict], text: str) -> Dict:
 
 
 # ============== NOTE INTENT ==============
-# v13_write_intent_patterns_001 (sessie 53) — verbrede triggers voor "maak notitie",
-# "notitie", "bug", "taak". Voorheen: `maak notitie: X` matchte, maar `maak EEN
-# notitie: X` niet (de "een" brak de regex). Willem's gebruik: hij schrijft
-# natuurlijk Nederlands, niet clipped-commands. Elk patroon accepteert nu
-# optioneel: een/de/mijn/nieuwe tussen werkwoord en zelfstandig nw.
-_NOTE_PATTERNS = [
-    r"^\s*(?:maak|voeg|schrijf|zet|noteer|onthoud|leg)\s+(?:eens\s+)?(?:een|de|mijn|nieuwe|deze)?\s*(?:nieuwe\s+)?(?:notitie|note|memo|aantekening)\s*(?:aan|toe|op|vast)?\s*[:\-]\s*(.+)$",
-    r"^\s*(?:nieuwe\s+)?(?:notitie|note|memo|aantekening)\s*[:\-]\s*(.+)$",
-    r"^\s*(?:noteer|onthoud|schrijf\s+op|leg\s+vast)\s*[:\-]?\s*(.+)$",
-]
+# v13d_intent_patterns_json_001 — patronen zitten nu in intent_pattern_store
+# (BASELINE + JSON). Deze lokale lijsten zijn nog nodig omdat we `.match()`
+# doen om de content-group te extracten. Ze worden bij runtime samengevoegd
+# met de JSON-additions.
 
-# v13_write_intent_patterns_001 — bug-intent kort én natuurlijk
-_BUG_PATTERNS = [
-    r"^\s*(?:meld|rapporteer|voeg\s+toe)?\s*(?:een\s+|de\s+)?(?:nieuwe\s+)?(?:bug|foutmelding|issue)\s*(?:rapport)?\s*[:\-]\s*(.+)$",
-    r"^\s*(?:er\s+is\s+(?:een\s+)?(?:bug|fout|probleem)|er\s+gaat\s+iets\s+mis)\s*[:\-]?\s*(.+)$",
-]
+
+def _note_pattern_strs():
+    return _patterns.get_raw_patterns("note_create")
+
+
+def _bug_pattern_strs():
+    return _patterns.get_raw_patterns("bug_report")
 
 
 def detect_note_intent(text: str):
@@ -222,9 +206,12 @@ def detect_note_intent(text: str):
     if not text:
         return False, None
     t = text.strip()
-    for pat in _NOTE_PATTERNS:
-        m = re.match(pat, t, re.IGNORECASE)
-        if m:
+    for pat in _note_pattern_strs():
+        try:
+            m = re.match(pat, t, re.IGNORECASE)
+        except re.error:
+            continue
+        if m and m.lastindex:
             content = m.group(m.lastindex).strip()
             if content:
                 return True, content
@@ -356,9 +343,12 @@ def detect_bug_intent(text: str):
     if not text:
         return False, None
     t = text.strip()
-    for pat in _BUG_PATTERNS:
-        m = re.match(pat, t, re.IGNORECASE)
-        if m:
+    for pat in _bug_pattern_strs():
+        try:
+            m = re.match(pat, t, re.IGNORECASE)
+        except re.error:
+            continue
+        if m and m.lastindex:
             content = m.group(m.lastindex).strip()
             if content and len(content) >= 5:
                 return True, content
@@ -394,26 +384,11 @@ def handle_bug(user: Optional[dict], user_id: Optional[str], content: str) -> Di
 
 
 # ============== HELP / WAT KAN JE ==============
-_HELP_PATTERNS = [
-    r"\bwat kan je\b",
-    r"\bwat kun je\b",
-    r"\bhoe werk je\b",
-    # v6_help_patterns_strict_001: 'help' moet de HELE message zijn (optionele leestekens),
-    # anders matchen "help me met X" / "help haar" als false-positive.
-    r"^\s*/?help[\s.!?]*$",
-    r"\bwelke (commands|opdrachten|functies)\b",
-    r"\bwat zijn je (mogelijkheden|capaciteiten)\b",
-    # v6_help_patterns_extend_001 — natuurlijker frasering (alleen mét help-kader-context)
-    r"\b(open|toon|laat zien|geef|opent?)\s+(de\s+|het\s+)?help(\s+(kader|overzicht|menu|popup|venster|paneel))?\b",
-    r"\bhelp(\s+(kader|overzicht|menu|popup|venster|paneel))\b",
-    r"\bik wil de? help\b",
-    r"\bhelp\s+nodig\b",
-]
+# v13d_intent_patterns_json_001 — patronen in intent_pattern_store
 
 
 def detect_help_intent(text: str) -> bool:
-    t = (text or "").lower().strip()
-    return any(re.search(p, t) for p in _HELP_PATTERNS)
+    return _patterns.match_any("help_overview", (text or "").strip())
 
 
 def handle_help(is_admin: bool = False) -> Dict:
@@ -503,18 +478,9 @@ def handle_help(is_admin: bool = False) -> Dict:
 
 
 # ============== WAT ZULLEN WE DOEN ==============
-_SUGGEST_PATTERNS = [
-    r"\bwat zullen we\b",
-    r"\bwat (kunnen|gaan) we (gaan )?doen\b",
-    r"\b(geef me|heb je) (een )?(idee|voorstel|suggestie)\b",
-    r"\bwaar (moet|zou) ik aan werken\b",
-    r"\bwat is (er )?(belangrijk|urgent)\b",
-]
-
 
 def detect_suggest_intent(text: str) -> bool:
-    t = (text or "").lower().strip()
-    return any(re.search(p, t) for p in _SUGGEST_PATTERNS)
+    return _patterns.match_any("suggest_action", (text or "").strip())
 
 
 def handle_suggest(user_id: str, user: Optional[dict]) -> Dict:
@@ -586,17 +552,9 @@ def handle_suggest(user_id: str, user: Optional[dict]) -> Dict:
 
 
 # ============== CLARIFY INTENT (loopt door als correction) ==============
-_CLARIFY_PATTERNS = [
-    r"\bnee\b.*\b(bedoel|bedoelde)\b",
-    r"\b(bedoel|bedoelde) ik niet\b",
-    r"\bdat (bedoel|bedoelde) ik niet\b",
-    r"\b(verkeerd|fout)\b.*(begrepen|begrip|woord)\b",
-]
-
 
 def detect_clarify_intent(text: str) -> bool:
-    t = (text or "").lower().strip()
-    return any(re.search(p, t) for p in _CLARIFY_PATTERNS)
+    return _patterns.match_any("clarify", (text or "").strip())
 
 
 def handle_clarify(last_begrip: Optional[str]) -> Dict:
@@ -616,14 +574,7 @@ def handle_clarify(last_begrip: Optional[str]) -> Dict:
 
 
 # ============== TOPIC OVERVIEW INTENT (v4_topic_001) ==============
-# "vertel me over X" / "wat heb je over X" / "alles over X"
-_TOPIC_PATTERNS = [
-    r"\bvertel (me |mij )?(eens )?over\s+(.+)$",
-    r"\bwat heb je (allemaal )?over\s+(.+)\?",
-    r"\balles over\s+(.+)$",
-    r"\bwat weet je over\s+(.+)\?",
-    r"\boverzicht\s+(van )?(.+)$",
-]
+# v13d_intent_patterns_json_001 — patronen in intent_pattern_store
 KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
 KBV2_DIR = DATA_ROOT / "knowledge" / "v2"
 
@@ -644,9 +595,12 @@ def detect_topic_intent(text: str):
     if not text:
         return False, None
     t = text.strip()
-    for pat in _TOPIC_PATTERNS:
-        m = re.search(pat, t, re.IGNORECASE)
-        if m:
+    for pat in _patterns.get_raw_patterns("topic_overview"):
+        try:
+            m = re.search(pat, t, re.IGNORECASE)
+        except re.error:
+            continue
+        if m and m.lastindex:
             topic = m.group(m.lastindex).strip().rstrip("?.! ")
             if topic and len(topic) >= 3:
                 return True, topic
@@ -744,20 +698,13 @@ def handle_topic_overview(topic_query: str) -> Dict:
 
 
 # ============== ACCOUNT DELETE (v4_self_delete_001) ==============
-_DELETE_PATTERNS = [
-    r"\b(verwijder|wis|delete|sluit|stop)\s+(mijn|m'n|me)\s+account\b",
-    r"\b(ik wil|wil)\s+mijn\s+account\s+(verwijder|wissen|opzeggen|deleten|kwijt|weg)",
-    r"\bmijn\s+account\s+(verwijder|wissen|deleten|opzeggen)",
-    r"\b(deactiveer|opheffen|opzeggen)\s+(mijn|m'n|me)\s+account\b",
-    r"\baccount\s+(verwijder|opzeggen|sluiten)\b",
-]
+# v13d_intent_patterns_json_001 — patronen in intent_pattern_store
 _YES_PATTERNS = [r"^\s*(ja|yes|jawel|zeker|inderdaad|akkoord|bevestig|ok|oké|prima|doe maar|graag)\b"]
 _NO_PATTERNS = [r"^\s*(nee|nope|niet doen|stop|annuleer|annuleren|cancel|laat maar|nvm)\b"]
 
 
 def detect_account_delete_intent(text: str) -> bool:
-    t = (text or "").lower().strip()
-    return any(re.search(p, t) for p in _DELETE_PATTERNS)
+    return _patterns.match_any("account_delete", (text or "").strip())
 
 
 def is_yes(text: str) -> bool:
@@ -804,21 +751,13 @@ def handle_account_delete_cancel() -> Dict:
 
 
 # ============== COMMUNITY RECAP INTENT (v4_community_recap_001) ==============
-_COMMUNITY_RECAP_PATTERNS = [
-    r"\bwat (is|was|werd) (er )?(gisteren|vandaag|eergisteren).{0,40}(besproken|gezegd|gepraat|gepost)\b",
-    r"\bwat (is|was) er (gisteren|vandaag|eergisteren).{0,30}(community|chat)\b",
-    r"\bcommunity (recap|samenvatting|overzicht)\b",
-    r"\b(samenvatting|recap) (van )?(de )?community\b",
-    r"\bwat heeft (de )?community (gisteren|vandaag|eergisteren) (gezegd|besproken)\b",
-    r"\bwat (is|was) er (gisteren|vandaag|eergisteren) (besproken|gezegd|gepraat)\b",
-]
+# v13d_intent_patterns_json_001 — patronen in intent_pattern_store
 
 
 def detect_community_recap_intent(text: str) -> Optional[int]:
     """Returnt offset_days (0=vandaag, 1=gisteren, 2=eergisteren) of None."""
     t = (text or "").lower()
-    matched = any(re.search(p, t) for p in _COMMUNITY_RECAP_PATTERNS)
-    if not matched:
+    if not _patterns.match_any("community_recap", t):
         return None
     if "eergisteren" in t:
         return 2
@@ -894,23 +833,11 @@ def handle_community_recap(offset_days: int = 1) -> Dict:
 
 
 # ============== D&D HELP INTENT (v4_dnd_help_001) ==============
-_DND_HELP_PATTERNS = [
-    r"\bd\&?d (help|uitleg|wat is)\b",
-    r"\bhelp.{0,10}d\&?d\b",
-    r"\bwat (is|zijn) d\&?d\b",
-    r"\bhoe werkt d\&?d\b",
-    r"\bspark world (uitleg|help)\b",
-    r"\bbase line (uitleg|wat)\b",
-    r"\bpersoonskaart (help|uitleg)\b",
-    r"\brugzak (help|uitleg)\b",
-    r"\binventory (help|uitleg)\b",
-    r"\bbark (help|uitleg|wat is)\b",
-]
+# v13d_intent_patterns_json_001 — patronen in intent_pattern_store
 
 
 def detect_dnd_help_intent(text: str) -> bool:
-    t = (text or "").lower()
-    return any(re.search(p, t) for p in _DND_HELP_PATTERNS)
+    return _patterns.match_any("dnd_help", text or "")
 
 
 def handle_dnd_help() -> Dict:
@@ -933,6 +860,223 @@ def handle_dnd_help() -> Dict:
         "voor diepere lagen."
     )
     return {"type": "dnd_help", "message": msg}
+
+
+# ============== AGENDA DELETE (v13d_agenda_delete_001) ==============
+# Willem, sessie 55: "als ik in chat zeg 'haal aanstaande dinsdag uit de
+# agenda' dan moet Spark dat doen, niet zeggen 'via de agenda-tab'." Flow:
+#  1. Detect delete-intent + parse dag-focus.
+#  2. Zoek matchende events; als 0 → melden. Als 1 → bevestiging vragen.
+#     Als >1 → lijstje met numers, gebruiker mag "1" typen of "alle".
+#  3. Bij bevestiging → verwijder event(s) uit /data/agenda/{uid}.json.
+#
+# Gebruikt bestaande handle_agenda-logica voor dag-focus (weekdag / morgen / …).
+
+
+def _parse_delete_day_focus(text: str, user: Optional[dict]):
+    """Return (day_focus_date, day_label) of (None, None)."""
+    day_match = _AGENDA_DAY_RX.search(text or "")
+    if not day_match:
+        return None, None
+    now_utc = datetime.now(timezone.utc)
+    tz = user_time_service.resolve_user_timezone(user)
+    try:
+        from zoneinfo import ZoneInfo
+        local_now = now_utc.astimezone(ZoneInfo(tz))
+    except Exception:
+        local_now = now_utc
+    today = local_now.date()
+    word = day_match.group(1).lower()
+    if word == "vandaag":
+        return today, "vandaag"
+    if word == "morgen":
+        return today + timedelta(days=1), "morgen"
+    if word == "overmorgen":
+        return today + timedelta(days=2), "overmorgen"
+    if word in _WEEKDAY_INDEX:
+        target_dow = _WEEKDAY_INDEX[word]
+        today_dow = today.weekday()
+        delta = (target_dow - today_dow) % 7
+        if delta == 0:
+            delta = 7
+        return today + timedelta(days=delta), word
+    return None, None
+
+
+def _matching_events(user_id: str, day_focus, text: str) -> list:
+    """Return list of (event_dict, local_dt) for events matching day/text."""
+    fpath = AGENDA_DIR / f"{user_id}.json"
+    data = load_json(fpath, default={"events": []})
+    events = data.get("events", []) or []
+    now_utc = datetime.now(timezone.utc)
+    from zoneinfo import ZoneInfo
+    matches = []
+    text_lower = (text or "").lower()
+    for ev in events:
+        if ev.get("status") in ("done", "completed", "cancelled"):
+            continue
+        dt = _parse_event_dt(ev)
+        if not dt:
+            continue
+        # Alleen toekomstige (of vandaag)
+        if dt < now_utc - timedelta(hours=1):
+            continue
+        # Match op day_focus als gegeven
+        if day_focus is not None:
+            try:
+                # gebruik user-tz om date te vergelijken
+                local_dt = dt.astimezone(ZoneInfo("Europe/Amsterdam"))
+            except Exception:
+                local_dt = dt
+            if local_dt.date() != day_focus:
+                continue
+            matches.append((ev, local_dt))
+        else:
+            # Geen day_focus: probeer op titel-substring te matchen (bv "haal Tineke afspraak weg")
+            titel = (ev.get("titel") or ev.get("title") or "").lower()
+            loc = (ev.get("location") or "").lower()
+            # Neem alleen mee als text expliciet iets van titel/location noemt
+            for token in re.findall(r"[a-zà-ÿ]{4,}", text_lower):
+                if token in ("agenda", "afspraak", "afspraken", "event", "haal", "verwijder", "schrap",
+                             "cancel", "delete", "annuleer", "weghalen", "leegmaken", "morgen",
+                             "vandaag", "aanstaande", "volgende", "komende"):
+                    continue
+                if token and (token in titel or token in loc):
+                    try:
+                        local_dt = dt.astimezone(ZoneInfo("Europe/Amsterdam"))
+                    except Exception:
+                        local_dt = dt
+                    matches.append((ev, local_dt))
+                    break
+    matches.sort(key=lambda x: x[1])
+    return matches
+
+
+def handle_agenda_delete_start(user_id: str, user: Optional[dict], text: str) -> Dict:
+    """Stap 1: vind matchende events + vraag bevestiging."""
+    day_focus, day_label = _parse_delete_day_focus(text, user)
+    matches = _matching_events(user_id, day_focus, text)
+
+    if not matches:
+        if day_focus:
+            return {
+                "type": "agenda_delete_none",
+                "message": f"📅 Ik zie geen afspraken op **{day_label}** om te verwijderen. "
+                           "Wil je 'wat staat er op {day_label}?' vragen om te kijken wat er wel staat?",
+            }
+        return {
+            "type": "agenda_delete_none",
+            "message": "Ik weet niet precies welke afspraak je bedoelt. Noem een dag "
+                       "(bv. 'haal dinsdag uit de agenda') of een titel-woord (bv. 'verwijder tandarts uit agenda').",
+        }
+
+    if len(matches) == 1:
+        ev, local_dt = matches[0]
+        titel = ev.get("titel") or ev.get("title") or "afspraak"
+        when_str = local_dt.strftime("%A %d %b om %H:%M")
+        pending = {
+            "flow": "agenda_delete",
+            "step": 1,
+            "event_ids": [ev.get("id")],
+            "summary": f"{titel} ({when_str})",
+        }
+        return {
+            "type": "agenda_delete_confirm",
+            "message": f"Wil je **{titel}** op {when_str} verwijderen? _Zeg **ja** om te bevestigen, **nee** om te annuleren._",
+            "pending_state": pending,
+        }
+
+    # >1 matches → toon lijst
+    lines = [f"Ik vond **{len(matches)}** afspraken die daarbij passen:"]
+    for i, (ev, local_dt) in enumerate(matches[:8], start=1):
+        titel = ev.get("titel") or ev.get("title") or "afspraak"
+        when_str = local_dt.strftime("%A %d %b om %H:%M")
+        lines.append(f"  {i}. **{titel}** — {when_str}")
+    lines.append("")
+    lines.append("_Typ het nummer (bv. **1**) om er één te verwijderen, of **alle** om alles te wissen._")
+    pending = {
+        "flow": "agenda_delete",
+        "step": "choose",
+        "event_ids": [ev.get("id") for ev, _ in matches[:8]],
+        "summaries": [
+            f"{(ev.get('titel') or ev.get('title') or 'afspraak')} ({local_dt.strftime('%A %d %b %H:%M')})"
+            for ev, local_dt in matches[:8]
+        ],
+    }
+    return {
+        "type": "agenda_delete_choose",
+        "message": "\n".join(lines),
+        "pending_state": pending,
+    }
+
+
+def handle_agenda_delete_choose(pending: dict, text: str) -> Dict:
+    """Verwerk keuze bij multi-match. Return dict met of nieuwe pending (voor confirm)
+    of directe delete."""
+    t = (text or "").strip().lower()
+    ids = pending.get("event_ids") or []
+    summaries = pending.get("summaries") or []
+    if re.match(r"^\s*(alle|allemaal|alle afspraken|all)\b", t):
+        new_pending = {
+            "flow": "agenda_delete",
+            "step": 1,
+            "event_ids": list(ids),
+            "summary": f"{len(ids)} afspraken",
+        }
+        return {
+            "type": "agenda_delete_confirm",
+            "message": f"Weet je zeker dat je **alle {len(ids)}** afspraken wilt verwijderen? _Zeg **ja** of **nee**._",
+            "pending_state": new_pending,
+        }
+    m = re.match(r"^\s*(\d+)\s*$", t)
+    if m:
+        idx = int(m.group(1)) - 1
+        if 0 <= idx < len(ids):
+            new_pending = {
+                "flow": "agenda_delete",
+                "step": 1,
+                "event_ids": [ids[idx]],
+                "summary": summaries[idx] if idx < len(summaries) else "afspraak",
+            }
+            return {
+                "type": "agenda_delete_confirm",
+                "message": f"Wil je **{new_pending['summary']}** verwijderen? _Zeg **ja** of **nee**._",
+                "pending_state": new_pending,
+            }
+    return {
+        "type": "agenda_delete_repeat",
+        "message": "Ik snap 'm niet — typ een nummer (bv. **1**), **alle**, of **nee** om te annuleren.",
+        "pending_state": pending,
+    }
+
+
+def execute_agenda_delete(user_id: str, event_ids: list) -> Dict:
+    """Verwijder events uit de user-agenda file. Return dict met resultaat."""
+    fpath = AGENDA_DIR / f"{user_id}.json"
+    data = load_json(fpath, default={"events": []})
+    events = data.get("events", []) or []
+    kept = [ev for ev in events if ev.get("id") not in event_ids]
+    removed_count = len(events) - len(kept)
+    if removed_count == 0:
+        return {
+            "type": "agenda_delete_failed",
+            "message": "Hmm, die afspraken waren al weg. Niks veranderd.",
+        }
+    data["events"] = kept
+    save_json(fpath, data)
+    return {
+        "type": "agenda_deleted",
+        "message": f"Klaar — **{removed_count}** afspra{'ken' if removed_count > 1 else 'ak'} uit je agenda verwijderd.",
+        "removed_count": removed_count,
+    }
+
+
+def handle_agenda_delete_cancel() -> Dict:
+    return {
+        "type": "agenda_delete_cancelled",
+        "message": "Oké, ik laat de agenda staan zoals hij is.",
+    }
+
 
 # v6_smart_intents_split_001 — Re-export profile/relation/age intents voor backwards-compat
 from modules.chat.smart_intents_profile import (  # noqa: E402

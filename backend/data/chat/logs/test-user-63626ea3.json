@@ -1,0 +1,124 @@
+{
+  "user_id": "test-user-63626ea3",
+  "conversations": [
+    {
+      "id": "conv-64f75744",
+      "timestamp": "2026-08-23T14:03:31.803630+00:00",
+      "user_id": "test-user-63626ea3",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**inclusief**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-63626ea3",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-f860d70a",
+      "timestamp": "2026-08-23T14:03:31.923466+00:00",
+      "user_id": "test-user-63626ea3",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat betekent 'inclusief' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-63626ea3",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-463729a3",
+      "timestamp": "2026-08-23T14:03:32.087509+00:00",
+      "user_id": "test-user-63626ea3",
+      "user_naam": "Willem",
+      "user_message": "mijn testantwoord tekst",
+      "spark_response": "Dus voor '**inclusief**' — Wat: _mijn testantwoord tekst_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "tekst"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-flow-63626ea3",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-d93be530",
+      "timestamp": "2026-08-23T14:03:32.950269+00:00",
+      "user_id": "test-user-63626ea3",
+      "user_naam": "Willem",
+      "user_message": "ja klopt",
+      "spark_response": "Genoteerd — 'wat' op kaart '**inclusief**' is bijgewerkt. Dank je wel. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_saved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_fill_saved"
+      },
+      "metadata": {
+        "session_id": "test-flow-63626ea3",
+        "gesprek_nummer": 4
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-user-63626ea3",
+    "total_conversations": 4,
+    "last_updated": "2026-08-23T14:03:32.950269+00:00"
+  }
+}

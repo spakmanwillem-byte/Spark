@@ -1,0 +1,124 @@
+{
+  "user_id": "test-user-a212ad9a",
+  "conversations": [
+    {
+      "id": "conv-37ab2bc4",
+      "timestamp": "2026-08-23T14:03:33.399735+00:00",
+      "user_id": "test-user-a212ad9a",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**tag-curatie**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-a212ad9a",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-73313b6b",
+      "timestamp": "2026-08-23T14:03:33.521155+00:00",
+      "user_id": "test-user-a212ad9a",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat betekent 'tag-curatie' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-a212ad9a",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-9baa9b5e",
+      "timestamp": "2026-08-23T14:03:33.652913+00:00",
+      "user_id": "test-user-a212ad9a",
+      "user_naam": "Willem",
+      "user_message": "eerste poging antwoord",
+      "spark_response": "Dus voor '**tag-curatie**' — Wat: _eerste poging antwoord_.\n\nKlopt dit? (ja / nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "antwoord"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_paraphrase",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kb_fill_paraphrase"
+      },
+      "metadata": {
+        "session_id": "test-flow-a212ad9a",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-5aec6d8d",
+      "timestamp": "2026-08-23T14:03:33.785078+00:00",
+      "user_id": "test-user-a212ad9a",
+      "user_naam": "Willem",
+      "user_message": "nee",
+      "spark_response": "OK, hoe zou jij het formuleren? Wat betekent 'tag-curatie' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_retry",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_retry"
+      },
+      "metadata": {
+        "session_id": "test-flow-a212ad9a",
+        "gesprek_nummer": 4
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-user-a212ad9a",
+    "total_conversations": 4,
+    "last_updated": "2026-08-23T14:03:33.785078+00:00"
+  }
+}

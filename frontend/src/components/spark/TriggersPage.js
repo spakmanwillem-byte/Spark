@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import {
   Zap, Search, ChevronDown, ChevronRight, X, Tag, Plus,
-  MessageSquare, Calendar as CalIcon, Heart, Shield, Settings, Sparkles
+  MessageSquare, Calendar as CalIcon, Heart, Shield, Settings, Sparkles,
+  Regex, Lock,
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -23,9 +24,17 @@ export function TriggersPage({ onNavigate }) {
   const [expandedList, setExpandedList] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
-  const [inputs, setInputs] = useState({});  // { 'key::triggers': '...', 'key::responses': '...' }
+  const [inputs, setInputs] = useState({});
   const setIn = (k, v) => setInputs(prev => ({ ...prev, [k]: v }));
   const inputKey = (key, field) => `${key}::${field}`;
+
+  // v13d_intent_patterns_json_001 (sessie 55) — intent-patronen (regex) editor
+  const [intentGroups, setIntentGroups] = useState({});
+  const [intentStats, setIntentStats] = useState({ total_intents: 0, total_patterns: 0, total_additions: 0 });
+  const [expandedIntent, setExpandedIntent] = useState(null);
+  const [intentInputs, setIntentInputs] = useState({});
+  const [showIntentPatterns, setShowIntentPatterns] = useState(false);
+  const setIntentIn = (k, v) => setIntentInputs(prev => ({ ...prev, [k]: v }));
 
   const reloadAll = async () => {
     const d = await fetch(`${API}/api/triggers/all`).then(r => r.json()).catch(() => ({}));
@@ -33,9 +42,40 @@ export function TriggersPage({ onNavigate }) {
     setStats(d.stats || {});
   };
 
+  const reloadIntents = async () => {
+    const d = await fetch(`${API}/api/triggers/intent-patterns`).then(r => r.json()).catch(() => ({}));
+    setIntentGroups(d.intent_groups || {});
+    setIntentStats(d.stats || {});
+  };
+
   useEffect(() => {
-    reloadAll().finally(() => setLoading(false));
+    Promise.all([reloadAll(), reloadIntents()]).finally(() => setLoading(false));
   }, []);
+
+  // Intent-pattern CRUD
+  const addIntentPattern = async (intentKey, pattern) => {
+    if (!pattern.trim()) return;
+    const r = await fetch(`${API}/api/triggers/edit/intent/${encodeURIComponent(intentKey)}/add`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pattern: pattern.trim() }),
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      alert(`Kon patroon niet toevoegen: ${err.detail || 'ongeldig regex'}`);
+    }
+    await reloadIntents();
+  };
+  const deleteIntentPattern = async (intentKey, pattern) => {
+    const r = await fetch(`${API}/api/triggers/edit/intent/${encodeURIComponent(intentKey)}/pattern?pattern=${encodeURIComponent(pattern)}`, {
+      method: 'DELETE',
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      alert(err.detail || 'Verwijderen mislukt');
+    }
+    await reloadIntents();
+  };
 
   // === VOCAB endpoints (spark_vocab.json) ===
   const addVocabWord = async (vocabPath, word) => {
@@ -284,6 +324,126 @@ export function TriggersPage({ onNavigate }) {
                 <p className="text-slate-400 text-sm">Geen triggers gevonden{searchQuery ? ` voor "${searchQuery}"` : ''}</p>
               </div>
             )}
+
+            {/* v13d_intent_patterns_json_001 — Intent-patronen (regex) editor */}
+            <div className="mt-8 pt-6 border-t border-slate-800">
+              <button
+                data-testid="intent-patterns-toggle"
+                onClick={() => setShowIntentPatterns(v => !v)}
+                className="w-full flex items-center justify-between p-3 bg-slate-900/60 border border-slate-800 rounded-xl hover:border-emerald-500/30 transition-all">
+                <div className="flex items-center gap-2.5">
+                  {showIntentPatterns ? <ChevronDown className="w-4 h-4 text-emerald-400" /> : <ChevronRight className="w-4 h-4 text-emerald-400" />}
+                  <Regex className="w-4 h-4 text-emerald-400" />
+                  <div className="text-left">
+                    <h3 className="text-sm text-white font-medium">Intent Patronen (regex)</h3>
+                    <p className="text-[10px] text-slate-500">
+                      {intentStats.total_patterns} patronen in {intentStats.total_intents} intents · {intentStats.total_additions} live-toegevoegd
+                    </p>
+                  </div>
+                </div>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+                  ADVANCED
+                </span>
+              </button>
+              {showIntentPatterns && (
+                <div className="mt-3 space-y-2">
+                  <div className="p-3 bg-slate-900/40 border border-slate-800 rounded-lg text-[11px] text-slate-400 leading-relaxed">
+                    <b className="text-slate-300">Wat is dit?</b> Chat-intents (agenda-delete, notitie, help, tts…) matchen op regex-patronen.
+                    De <span className="text-emerald-400">baseline</span> zit hardcoded in Spark en kan niet worden verwijderd — dat garandeert
+                    dat de basis altijd werkt. Je kunt <span className="text-amber-400">extra patronen</span> toevoegen die live worden bijgeladen
+                    (geen redeploy nodig). Voorbeeld voor <code>agenda_delete</code>: <code>\bschrap\s+.+\s+van\s+(morgen|vandaag)\b</code>.
+                  </div>
+                  {Object.entries(intentGroups).map(([ikey, ig]) => {
+                    const isOpen = expandedIntent === ikey;
+                    return (
+                      <div key={ikey} data-testid={`intent-group-${ikey}`}
+                        className={`border rounded-xl overflow-hidden transition-all ${isOpen ? 'border-emerald-500/30' : 'border-slate-800'} bg-slate-900/40`}>
+                        <button onClick={() => setExpandedIntent(isOpen ? null : ikey)}
+                          className="w-full flex items-center justify-between p-3 hover:bg-slate-800/20 transition-colors">
+                          <div className="flex items-center gap-2.5">
+                            {isOpen ? <ChevronDown className="w-4 h-4 text-emerald-400" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+                            <div className="text-left">
+                              <h4 className="text-[13px] text-white font-medium">{ig.label}</h4>
+                              <p className="text-[10px] text-slate-500 font-mono">{ikey}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400" title="Baseline (hardcoded)">
+                              <Lock className="w-2.5 h-2.5 inline mr-0.5" />{ig.baseline.length}
+                            </span>
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400" title="Live toegevoegde patronen">
+                              +{ig.additions.length}
+                            </span>
+                          </div>
+                        </button>
+                        {isOpen && (
+                          <div className="px-3 pb-3 pt-1 space-y-2">
+                            {ig.baseline.length > 0 && (
+                              <div>
+                                <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                                  <Lock className="w-2.5 h-2.5" /> Baseline ({ig.baseline.length}) — hardcoded, niet-verwijderbaar
+                                </p>
+                                <div className="space-y-1 mb-2">
+                                  {ig.baseline.map((p, i) => (
+                                    <div key={i} className="text-[10px] font-mono text-emerald-300/70 px-2 py-1 rounded bg-emerald-500/5 border border-emerald-500/15 break-all">
+                                      {p}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            <div>
+                              <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">
+                                Live toegevoegde patronen ({ig.additions.length})
+                              </p>
+                              {ig.additions.length === 0 ? (
+                                <p className="text-[11px] text-slate-500 italic mb-2">Nog geen extra patronen — voeg hieronder één toe.</p>
+                              ) : (
+                                <div className="space-y-1 mb-2">
+                                  {ig.additions.map((p, i) => (
+                                    <div key={i} className="flex items-center gap-2 text-[10px] font-mono px-2 py-1 rounded bg-amber-500/5 border border-amber-500/20">
+                                      <span className="text-amber-300 flex-1 break-all">{p}</span>
+                                      <button
+                                        data-testid={`del-intent-pattern-${ikey}-${i}`}
+                                        onClick={() => deleteIntentPattern(ikey, p)}
+                                        className="text-slate-500 hover:text-red-400 flex-shrink-0"
+                                        title="Verwijder patroon">
+                                        <X className="w-3 h-3" />
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                              <div className="flex gap-2">
+                                <input
+                                  data-testid={`add-intent-input-${ikey}`}
+                                  type="text"
+                                  value={intentInputs[ikey] || ''}
+                                  onChange={e => setIntentIn(ikey, e.target.value)}
+                                  onKeyDown={e => {
+                                    if (e.key === 'Enter') {
+                                      e.preventDefault();
+                                      addIntentPattern(ikey, intentInputs[ikey] || '').then(() => setIntentIn(ikey, ''));
+                                    }
+                                  }}
+                                  placeholder={`Nieuw regex-patroon voor ${ikey}...`}
+                                  className="flex-1 bg-slate-800/60 border border-emerald-500/30 rounded-lg px-3 py-1.5 text-[11px] font-mono text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/60" />
+                                <button
+                                  data-testid={`add-intent-btn-${ikey}`}
+                                  onClick={() => addIntentPattern(ikey, intentInputs[ikey] || '').then(() => setIntentIn(ikey, ''))}
+                                  className="px-2 py-1.5 rounded-lg text-[11px] flex items-center gap-1 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25">
+                                  <Plus className="w-3 h-3" /> Regex
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

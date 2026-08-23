@@ -1,0 +1,90 @@
+{
+  "user_id": "test-user-fd382fa5",
+  "conversations": [
+    {
+      "id": "conv-e4ca6920",
+      "timestamp": "2026-08-23T14:03:33.908168+00:00",
+      "user_id": "test-user-fd382fa5",
+      "user_naam": "Willem",
+      "user_message": "kan ik wat voor je doen",
+      "spark_response": "Ja graag — op de kaart '**tag-curatie**' mist het veld 'Wat'. Wil jij die aanvullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kb_fill_offer",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "kb_fill_offer"
+      },
+      "metadata": {
+        "session_id": "test-flow-fd382fa5",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-3489ebc2",
+      "timestamp": "2026-08-23T14:03:34.055749+00:00",
+      "user_id": "test-user-fd382fa5",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Wat houdt 'tag-curatie' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_question"
+      },
+      "metadata": {
+        "session_id": "test-flow-fd382fa5",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-786cf4ae",
+      "timestamp": "2026-08-23T14:03:34.233936+00:00",
+      "user_id": "test-user-fd382fa5",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "OK, laten we het overslaan. 🌿 Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_fill_skipped",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kb_fill_skipped"
+      },
+      "metadata": {
+        "session_id": "test-flow-fd382fa5",
+        "gesprek_nummer": 3
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-user-fd382fa5",
+    "total_conversations": 3,
+    "last_updated": "2026-08-23T14:03:34.233936+00:00"
+  }
+}

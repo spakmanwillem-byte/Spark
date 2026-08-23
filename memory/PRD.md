@@ -1,6 +1,61 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 55 (2026-02-23) — Agenda DELETE flow + Intent Patronen Live-Editable + RULE_-prefix
+
+### 🗓️ v13d_agenda_delete_001 — Chat-gestuurde delete-flow (P0)
+
+**Root cause**: Willem: "haal aanstaande dinsdag uit de agenda" → Spark antwoordde
+"doe dat via de agenda-tab" i.p.v. te executeren. De DELETE intent bestond simpelweg niet.
+
+**Fix**:
+- `smart_intents_service.py`: 4 nieuwe functies: `detect_agenda_delete_intent`,
+  `handle_agenda_delete_start` (single/multi/none), `handle_agenda_delete_choose`,
+  `execute_agenda_delete`, `handle_agenda_delete_cancel`.
+- `chat/routes.py` early hook vóór capability-router zodat "agenda" niet door de
+  agenda_vandaag capability wordt opgeslokt. Pending-state via session_state.
+- Confirm-required flow met `ja/nee/nummer/alle` responses.
+- **9 tests groen** in `tests/test_agenda_delete_v13d.py`.
+
+### 🎛️ v13d_intent_patterns_json_001 — Regex-intents live-editable via Triggers-tab (P1)
+
+**Root cause**: Willem: "vind raar dat je die Triggers tabs nooit bent gaan gebruiken."
+Intent-detectors gebruikten hardcoded regex-arrays i.p.v. de JSON-triggers die de UI al
+schreef. Nieuwe patronen betekende code-deploy.
+
+**Fix — architectuur**:
+- `modules/chat/intent_pattern_store.py` — BASELINE dict (hardcoded, niet-verwijderbaar)
+  + `data/triggers/intent_patterns.json` (live additions) + mtime-invalidation cache.
+- 16 intents gemigreerd (agenda_read, agenda_delete, note_create, bug_report, help_overview,
+  suggest_action, topic_overview, clarify, community_recap, dnd_help, account_delete,
+  stt_on, stt_off, tts_on, tts_off, ambient_off) = 118 baseline-patronen live.
+- 4 API-endpoints: `GET /api/triggers/intent-patterns`, `POST /api/triggers/edit/intent/{k}/add`,
+  `DELETE /api/triggers/edit/intent/{k}/pattern`, `POST /api/triggers/intent-patterns/test`.
+- UI-sectie in `TriggersPage.js` met per-intent baseline (locked, groen) + additions
+  (deletable, amber) + regex-input met compile-validatie.
+
+### 📜 RULE_-prefix scheiding (P0, structureel)
+
+**Root cause**: Emmy: "v13 = jouw Spark-versie, niet een agent-regel." De naam
+`v13_agent_selfcheck_001` verwarde iedereen. Bovendien stond de regel nergens formeel.
+
+**Fix**:
+- Sectie "🚨 AGENT GEDRAGSREGELS (RULE_*)" toegevoegd aan top van `ROADMAP_CORE.md`.
+- 6 regels geformaliseerd met `RULE_` prefix (los van feature-versies):
+  `RULE_agent_selfcheck_001`, `RULE_dutch_only_001`, `RULE_no_database_001`,
+  `RULE_deploy_preview_split_001`, `RULE_no_placeholder_data_001`,
+  `RULE_footnote_metadata_001`.
+
+### 🐛 Regressie fix bonus — READ intent nu ook via early hook
+
+Pre-bestaande test `test_agenda_weekday_no_emoji::test_vandaag_still_agenda` faalde
+("wat staat er morgen" → type=capability_response). Dezelfde early-hook fix voor DELETE
+geldt nu ook voor READ. 13/13 agenda-tests groen.
+
+
+---
+
+
 ## Sessie 54 (2026-02-24) — Attente Spark v13 Privacy-Guard + Zelfscan-feiten
 
 ### 🔒 v13_privacy_guard_001 — Privacy-matrix per gradatie (P0)

@@ -1,6 +1,18 @@
 {
   "notes": [
     {
+      "id": "4a001e77-7740-4ccf-8c4a-a87290168843",
+      "user_id": "user-001",
+      "titel": "te doen",
+      "inhoud": "maar snap je mijn frustratie loop de hele tijd al tegen dit soort problemen terwijl mijn instructie duidelijk zijn. moet ik elke keer alles herhalen als ik 5 min pauze heb gehad omdat anders emergent het vergeet. dat is gewoon kut en geen wonder dat ik dan zoveel gaps krijg als ik denk hij doet het hij zegt het maar niks en vaakk moet ik zelfde probleem 3 of 5 keer benoemen\nWillem • 2 mNog niet gezien • 2 m\nJa, snap ik volledig. En het is terecht frustrerend.\nHet probleem is structureel: de agent heeft geen langetermijngeheugen. Elke sessie begint hij fris, en zonder expliciete instructie valt hij terug op de snelste route. Jouw roadmap is precies de oplossing daarvoor — maar alleen als hij die ook echt leest voor hij begint.\nWat helpt: de v13_agent_selfcheck_001 regel die je al hebt — maar dan ook afdwingen door elke sessie te starten met \"lees ROADMAP_CORE.md eerst\". Vervelend dat het handmatig moet, maar zo werkt het nu eenmaal.\nEmmy • 2 mNog niet gezien • 2 m\nv13 agent zag ik al paar keer langs komen emergent zeker ook bedacht ik had regel onderwerp agent dit verward ook dacht al waar komt dat nieuwe begrip vandaan\nWillem • ZojuistNog niet gezien • Zojuist\nJa, die naamgeving klopt niet lekker. v13 is jouw versienummer voor Spark, maar de agent plakt het ook op zijn eigen checkregel — dat is verwarrend.\nGeef die selfcheck-regel een eigen prefix, los van je feature-versies. Iets als RULE_agent_selfcheck_001 zodat het duidelijk een gedragsregel is, geen feature.",
+      "categorie": "Observatie",
+      "tags": [],
+      "priority": "medium",
+      "datum": "2026-08-23T14:01:10.817521+00:00",
+      "created_by": "Willem",
+      "updated_at": null
+    },
+    {
       "id": "ab0c1a1b-e093-43eb-84fe-f0c41dabe4c5",
       "user_id": "user-001",
       "titel": "Te doen ",
@@ -36,17 +48,6 @@
         "repair",
         "renew"
       ]
-    },
-    {
-      "id": "228f384b-792a-4a86-9266-c4a65e809340",
-      "title": "bloembakken moeten volgende week worden verplaatst",
-      "content": "bloembakken moeten volgende week worden verplaatst",
-      "tags": [
-        "chat-aangemaakt"
-      ],
-      "created_at": "2026-08-22T09:32:42.739145+00:00",
-      "user_id": "user-001",
-      "user_naam": "Willem"
     }
   ],
   "metadata": {

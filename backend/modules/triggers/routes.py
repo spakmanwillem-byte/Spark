@@ -188,6 +188,80 @@ async def get_all_triggers():
     }
 
 
+# ============================================================
+# INTENT PATTERNS (v13d_intent_patterns_json_001, sessie 55)
+# ============================================================
+# Chat-intent detectie (agenda-delete, note-create, help, tts, …) leest nu
+# regex-patronen live uit `intent_pattern_store` (BASELINE + JSON). Deze
+# endpoints stellen die patronen bloot voor de Triggers-UI zodat Willem
+# nieuwe patronen kan toevoegen zonder redeploy.
+
+class IntentPattern(BaseModel):
+    pattern: str
+
+
+@router.get("/intent-patterns")
+async def list_intent_patterns():
+    """Return alle intent-keys met hun baseline + JSON-additions."""
+    from modules.chat import intent_pattern_store as _store
+    keys = _store.list_intent_keys()
+    groups = {}
+    for k in keys:
+        baseline = _store.get_baseline(k)
+        additions = _store.get_json_additions(k)
+        groups[k] = {
+            "key": k,
+            "label": k.replace("_", " ").title(),
+            "baseline": baseline,
+            "additions": additions,
+            "total": len(baseline) + len(additions),
+        }
+    return {
+        "intent_groups": groups,
+        "stats": {
+            "total_intents": len(groups),
+            "total_patterns": sum(g["total"] for g in groups.values()),
+            "total_additions": sum(len(g["additions"]) for g in groups.values()),
+        },
+    }
+
+
+@router.post("/edit/intent/{intent_key}/add")
+async def intent_add_pattern(intent_key: str, body: IntentPattern):
+    """Voeg een regex-patroon toe aan een intent-key."""
+    from modules.chat import intent_pattern_store as _store
+    if intent_key not in _store.list_intent_keys() and intent_key not in _store.BASELINE:
+        # Sta ook nieuwe intent-keys toe voor toekomstige uitbreidingen
+        pass
+    ok = _store.add_pattern(intent_key, body.pattern or "")
+    if not ok:
+        raise HTTPException(400, "Ongeldig regex-patroon of leeg")
+    return {"success": True}
+
+
+@router.delete("/edit/intent/{intent_key}/pattern")
+async def intent_delete_pattern(intent_key: str, pattern: str):
+    """Verwijder een JSON-addition regex-patroon (BASELINE kan niet worden verwijderd)."""
+    from modules.chat import intent_pattern_store as _store
+    if pattern in _store.get_baseline(intent_key):
+        raise HTTPException(400, "BASELINE patronen kunnen niet worden verwijderd (hardcoded voor veiligheid)")
+    ok = _store.remove_pattern(intent_key, pattern)
+    if not ok:
+        raise HTTPException(404, "Patroon niet gevonden")
+    return {"success": True}
+
+
+@router.post("/intent-patterns/test")
+async def intent_patterns_test(text: str):
+    """Test welke intents matchen op een gegeven tekst (voor UI-preview)."""
+    from modules.chat import intent_pattern_store as _store
+    hits = []
+    for k in _store.list_intent_keys():
+        if _store.match_any(k, text or ""):
+            hits.append(k)
+    return {"text": text, "matched_intents": hits}
+
+
 @router.get("/by-type/{trigger_type}")
 async def get_triggers_by_type(trigger_type: str):
     """Get triggers filtered by type: conversation, calendar, emotion, admin, system"""

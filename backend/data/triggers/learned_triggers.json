@@ -6307,12 +6307,335 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-487c648da013",
+      "text_hash": "487c648da013",
+      "original_text": "wat zijn mijn admin-rechten?",
+      "topic": "admin rechten",
+      "categorie": "admin",
+      "intent": "De gebruiker vraagt om een overzicht van zijn administratieve rechten en privileges.",
+      "trigger_phrases": [
+        "wat kan ik als admin doen",
+        "welke rechten heb ik",
+        "wat zijn mijn privileges",
+        "wat mag ik als admin",
+        "mijn admin-rechten"
+      ],
+      "keywords": [
+        "admin",
+        "rechten",
+        "privileges",
+        "toegang",
+        "machtigingen"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:01:53.911852+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "iter39-admin-c"
+    },
+    {
+      "id": "learned-f6a5d7581703",
+      "text_hash": "f6a5d7581703",
+      "original_text": "wie is mijn zus?",
+      "topic": "familielid identificeren",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker vraagt de AI om persoonlijke informatie over zijn of haar zus te geven.",
+      "trigger_phrases": [
+        "wie is mijn broer",
+        "ken jij mijn familie",
+        "wat weet je van mijn zus",
+        "vertel over mijn familielid"
+      ],
+      "keywords": [
+        "zus",
+        "familie",
+        "identiteit",
+        "persoon",
+        "verwant"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:02:44.907861+00:00",
+      "count": 1,
+      "user_id": "user-672f0e5c",
+      "session_id": "iter39-priv-1"
+    },
+    {
+      "id": "learned-99acbb5bccfb",
+      "text_hash": "99acbb5bccfb",
+      "original_text": "Wat is filosofie volgens jou?",
+      "topic": "filosofie",
+      "categorie": "filosofisch",
+      "intent": "Uitleg geven over wat filosofie is volgens de AI-assistent.",
+      "trigger_phrases": [
+        "wat is filosofie",
+        "definieer filosofie",
+        "leg filosofie uit",
+        "wat betekent filosofie",
+        "kun je filosofie beschrijven"
+      ],
+      "keywords": [
+        "filosofie",
+        "definitie",
+        "uitleg",
+        "concept",
+        "betekenis"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:05:41.500590+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-fork-topic"
+    },
+    {
+      "id": "learned-5bb888c91c4e",
+      "text_hash": "5bb888c91c4e",
+      "original_text": "Vertel meer over Spinoza",
+      "topic": "Spinoza filosofie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil meer informatie over de filosoof Baruch Spinoza en zijn gedachtegoed.",
+      "trigger_phrases": [
+        "wie was Spinoza",
+        "filosofie van Spinoza",
+        "leg Spinoza uit",
+        "wat leerde Spinoza",
+        "uitleg over Spinoza"
+      ],
+      "keywords": [
+        "spinoza",
+        "filosoof",
+        "filosofie",
+        "pantheïsme",
+        "ethica"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:06:00.618146+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-fork-topic"
+    },
+    {
+      "id": "learned-6c89a9f07e9d",
+      "text_hash": "6c89a9f07e9d",
+      "original_text": "En wat met bewustzijn?",
+      "topic": "bewustzijn AI",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt of de AI bewustzijn heeft of wat de AI denkt over het concept bewustzijn.",
+      "trigger_phrases": [
+        "ben jij bewust",
+        "heb jij bewustzijn",
+        "wat is bewustzijn",
+        "ben je je bewust van jezelf",
+        "heb jij zelfbewustzijn"
+      ],
+      "keywords": [
+        "bewustzijn",
+        "zelfbewustzijn",
+        "sentient",
+        "filosofie",
+        "ai"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:06:18.287107+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-fork-topic"
+    },
+    {
+      "id": "learned-50784cffc9cb",
+      "text_hash": "50784cffc9cb",
+      "original_text": "welke tabs ken jij?",
+      "topic": "tabs overzicht",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker wil weten welke tabbladen of categorieën beschikbaar zijn in de Spark-assistent.",
+      "trigger_phrases": [
+        "wat zijn de tabs",
+        "welke tabbladen zijn er",
+        "toon me de tabs",
+        "wat kan ik openen",
+        "welke secties zijn er"
+      ],
+      "keywords": [
+        "tabs",
+        "tabbladen",
+        "overzicht",
+        "navigatie",
+        "secties"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:06:46.768557+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "reg-tabs-b77d36"
+    },
+    {
+      "id": "learned-d25a1f1da533",
+      "text_hash": "d25a1f1da533",
+      "original_text": "wat betekent rust voor jou?",
+      "topic": "betekenis rust",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt wat het concept rust persoonlijk betekent voor de AI-assistent.",
+      "trigger_phrases": [
+        "wat is rust voor jou",
+        "hoe ervaar jij rust",
+        "wat vind jij rustgevend",
+        "betekenis van rust spark",
+        "jouw idee van rust"
+      ],
+      "keywords": [
+        "rust",
+        "betekenis",
+        "ervaring",
+        "persoonlijk",
+        "reflectie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:07:09.040172+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "regress-multi-a0f01a88"
+    },
+    {
+      "id": "learned-badddce0d363",
+      "text_hash": "badddce0d363",
+      "original_text": "hoe ervaar je dat?",
+      "topic": "AI ervaring",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt hoe de AI-assistent een bepaalde situatie of ervaring subjectief beleeft.",
+      "trigger_phrases": [
+        "wat voel jij daarbij",
+        "hoe beleef jij dat",
+        "wat is jouw ervaring",
+        "hoe is dat voor jou",
+        "ervaar jij dat ook"
+      ],
+      "keywords": [
+        "ervaring",
+        "beleving",
+        "gevoel",
+        "bewustzijn",
+        "subjectief"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:07:20.972857+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "regress-multi-a0f01a88"
+    },
+    {
+      "id": "learned-9384d188e093",
+      "text_hash": "9384d188e093",
+      "original_text": "wat is filosofie?",
+      "topic": "definitie filosofie",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker wil weten wat filosofie is en wat het inhoudt.",
+      "trigger_phrases": [
+        "wat betekent filosofie",
+        "leg filosofie uit",
+        "wat is de betekenis van filosofie",
+        "vertel over filosofie",
+        "filosofie uitleg"
+      ],
+      "keywords": [
+        "filosofie",
+        "definitie",
+        "betekenis",
+        "wetenschap",
+        "denken"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:07:33.228652+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "reg-deep-1"
+    },
+    {
+      "id": "learned-51ecef2818f7",
+      "text_hash": "51ecef2818f7",
+      "original_text": "wat kan jij voor mij doen?",
+      "topic": "mogelijkheden Spark",
+      "categorie": "kb-vraag",
+      "intent": "De gebruiker wil weten welke taken of functies de AI-assistent Spark kan uitvoeren.",
+      "trigger_phrases": [
+        "wat kun jij",
+        "wat doe jij",
+        "hoe kun je helpen",
+        "wat zijn je functies",
+        "waarvoor kan ik je gebruiken"
+      ],
+      "keywords": [
+        "mogelijkheden",
+        "functies",
+        "hulp",
+        "taken",
+        "assistent"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:08:07.645608+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "aw-caps-test"
+    },
+    {
+      "id": "learned-e18ec1c36abf",
+      "text_hash": "e18ec1c36abf",
+      "original_text": "welke tabs zie ik in deze app?",
+      "topic": "app navigatie",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten welke tabbladen beschikbaar zijn in de huidige app.",
+      "trigger_phrases": [
+        "wat zijn de tabs",
+        "welke menu items zijn er",
+        "toon de navigatie",
+        "wat zie ik in het menu",
+        "welke opties heeft de app"
+      ],
+      "keywords": [
+        "tabs",
+        "navigatie",
+        "menu",
+        "app",
+        "overzicht"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:08:23.428908+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "aw-tabs-test"
+    },
+    {
+      "id": "learned-24d7d01e030b",
+      "text_hash": "24d7d01e030b",
+      "original_text": "ik ben Willem, wie is mijn zus?",
+      "topic": "familie",
+      "categorie": "sociaal",
+      "intent": "De gebruiker vraagt naar de identiteit of naam van zijn zus.",
+      "trigger_phrases": [
+        "wie is mijn zus",
+        "wat is de naam van mijn zus",
+        "wie is de zus van Willem",
+        "wie is mijn zusje",
+        "wie is mijn sibling"
+      ],
+      "keywords": [
+        "willem",
+        "zus",
+        "familie",
+        "naam",
+        "sibling"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-23T14:09:31.619787+00:00",
+      "count": 1,
+      "user_id": "user-672f0e5c",
+      "session_id": "regress-privacy-aw"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 247,
+    "totaal_voorgesteld": 259,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-08-23T09:43:40.644531+00:00"
+    "last_run": "2026-08-23T14:09:31.619787+00:00"
   }
 }

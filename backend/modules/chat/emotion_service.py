@@ -102,7 +102,14 @@ class EmotionDetectionService:
 
     @staticmethod
     def detect_emotion(message):
-        """Detecteer emotie in bericht - hybride (static + learned)"""
+        """Detecteer emotie in bericht - hybride (static + learned).
+
+        v13_negatie_veto_001 (sessie 54): woorden als "goed" en "fijn" gaven blij-punten
+        óók bij "niet zo goed" of "geen fijne dag". Nu: als een blij/positieve trigger
+        binnen 4 woorden ná "niet/geen/nooit/geenszins/nauwelijks" staat, negeren we
+        die trigger. Voorbeeld:
+          "jammer, ik voel me niet zo goed" → 'goed' na 'niet' → geen blij-score.
+        """
         triggers_data = EmotionDetectionService._load_triggers()
         learned = EmotionDetectionService._load_learned_triggers()
         emotions = triggers_data.get("emotions", {})
@@ -112,15 +119,32 @@ class EmotionDetectionService:
         msg_lower = message.lower()
         word_freq = Counter(msg_lower.split())
 
+        # v13_negatie_veto_001: bouw set van gene­gerde woorden
+        # (woorden die binnen 4 tokens na een negatie staan)
+        NEGATIES = {"niet", "geen", "nooit", "geenszins", "nauwelijks", "amper"}
+        POSITIEVE_EMOTIES = {"blij"}  # alleen positive scores worden ge-veto'd
+        tokens = msg_lower.replace(",", " ").replace(".", " ").split()
+        negated_positions = set()
+        for i, t in enumerate(tokens):
+            if t in NEGATIES:
+                for j in range(i + 1, min(i + 5, len(tokens))):
+                    negated_positions.add(j)
+        vetoed_words = {tokens[i] for i in negated_positions if i < len(tokens)}
+
         scores = {}
         for emo_name, emo_data in emotions.items():
             score = 0
             triggered = []
             sources = set()
+            skipped_by_veto = []
 
             # Static triggers
             for word, points in emo_data.get("triggers", {}).items():
                 if word in msg_lower:
+                    # v13_negatie_veto_001: skip positive-emotie triggers na negatie
+                    if emo_name in POSITIEVE_EMOTIES and word in vetoed_words:
+                        skipped_by_veto.append(word)
+                        continue
                     occ = min(word_freq.get(word, 0), max_word_count)
                     if occ > 0:
                         score += points * occ
@@ -130,6 +154,9 @@ class EmotionDetectionService:
             # Learned triggers
             for word, points in learned.get(emo_name, {}).items():
                 if word in msg_lower:
+                    if emo_name in POSITIEVE_EMOTIES and word in vetoed_words:
+                        skipped_by_veto.append(word)
+                        continue
                     occ = min(word_freq.get(word, 0), max_word_count)
                     if occ > 0:
                         score += points * occ
@@ -143,6 +170,7 @@ class EmotionDetectionService:
                     "score": score, "triggered_words": triggered,
                     "source": source, "emoji": emo_data.get("emoji", ""),
                     "color": emo_data.get("color", ""),
+                    "vetoed": skipped_by_veto,
                 }
 
         if not scores:

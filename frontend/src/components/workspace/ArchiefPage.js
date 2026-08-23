@@ -238,22 +238,24 @@ export function ArchiefPage({ onNavigate }) {
                 <button
                   data-testid="foto-subtab-prive"
                   onClick={() => setFotoSubTab('prive')}
-                  className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
-                    fotoSubTab === 'prive'
-                      ? 'bg-green-500/20 text-green-300 border border-green-500/40'
-                      : 'text-slate-400 hover:text-white border border-transparent'
-                  }`}
+                  className="px-3 py-1.5 text-xs rounded-md transition-colors border"
+                  style={fotoSubTab === 'prive' ? {
+                    backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 12%, transparent)',
+                    color: 'var(--glow-base, #f59e0b)',
+                    borderColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 25%, transparent)',
+                  } : { color: '#94a3b8', borderColor: 'transparent' }}
                 >
                   Privé {stats?.foto_prive != null && <span className="ml-1 opacity-60">({stats.foto_prive})</span>}
                 </button>
                 <button
                   data-testid="foto-subtab-winkel"
                   onClick={() => setFotoSubTab('winkel')}
-                  className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
-                    fotoSubTab === 'winkel'
-                      ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
-                      : 'text-slate-400 hover:text-white border border-transparent'
-                  }`}
+                  className="px-3 py-1.5 text-xs rounded-md transition-colors border"
+                  style={fotoSubTab === 'winkel' ? {
+                    backgroundColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 12%, transparent)',
+                    color: 'var(--glow-base, #f59e0b)',
+                    borderColor: 'color-mix(in srgb, var(--glow-base, #f59e0b) 25%, transparent)',
+                  } : { color: '#94a3b8', borderColor: 'transparent' }}
                 >
                   Winkel {stats?.foto_winkel != null && <span className="ml-1 opacity-60">({stats.foto_winkel})</span>}
                 </button>

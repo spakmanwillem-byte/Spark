@@ -60,8 +60,13 @@ def _match_any(text: str, patterns) -> bool:
 
 
 # ============== AMBIENT ==============
+# v13_action_intent_context_fix_001 (sessie 54) — Willem's GPT-gesprek liep dood
+# omdat "de fallback mag niet stil zijn" triggerde als 'stilte'-commando (loose \b(stil)\b).
+# Fix: alleen matchen als het woord alleen staat (heel bericht ≤3 woorden) of als
+# expliciet commando ("wees stil", "even stilte"). Losse "stil" mid-zin negeren.
 AMBIENT_OFF_PATTERNS = [
-    r"\b(stilte|stil)\b",
+    r"^\s*(stilte|stil)[\s.!?]*$",                              # single-word command
+    r"\b(even|nu|zet)\s+(stilte|het\s+stil)\b",                  # expliciet "even stilte"
     r"\bambient\s*\d*\s*(uit|stop|af|weg)\b",
     r"\b(stop|zet)\s+(de\s+)?(muziek|geluid|loop|ambient|achtergrondgeluid|natuur|vogels|vogeltjes)\s*(uit|af|stop)?\b",
     r"\b(muziek|geluid|loop|ambient|achtergrondgeluid|natuur|vogels|vogeltjes)\s+(uit|stop|weg)\b",

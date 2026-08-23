@@ -2,12 +2,15 @@
 LLM Router — v6_llm_router_001
 
 Multi-provider OpenAI-compatible LLM router voor Spark's Diep-mode.
-Doel: één code-pad voor Groq, Cerebras, OpenRouter, Ollama (lokaal),
-of welke OpenAI-compatible API dan ook. Switchen = .env-vars wijzigen.
+Doel: één code-pad voor Groq, OpenRouter, Ollama (lokaal), of welke
+OpenAI-compatible API dan ook. Switchen = .env-vars wijzigen.
 
 Architectuur (fallback-chain):
   1. PRIMARY  — LLM_PRIMARY_BASE_URL (bv. Groq)
-  2. FALLBACK — LLM_FALLBACK_BASE_URL (bv. Cerebras) — optioneel
+  2. FALLBACK — LLM_FALLBACK_BASE_URL — optioneel, alleen actief als
+                admin een echt-gratis alternatief aansluit (Ollama lokaal,
+                Together.ai, DeepInfra, ...). Cerebras is per sessie 54
+                verwijderd omdat hun 'gratis' tier 402'de op elke call.
   3. EMERGENCY — Emergent Universal Key (Anthropic Claude) — alleen als
                  LLM_EMERGENCY_USE_EMERGENT=true. Kost geld, gebruik spaarzaam.
   4. TEMPLATE — laatste redmiddel, geen LLM-call, return Spark-template.
@@ -83,8 +86,8 @@ def _log_usage(provider: str, model: str, usage: Dict[str, Any]) -> None:
 
 def _log_failure(provider: str, model: str, error: str) -> None:
     """v13c_llm_failure_log_001 (sessie 54) — log failed calls per provider
-    zodat het widget kan tonen 'Cerebras: 402 quota op' i.p.v. 'geen data'
-    als een provider vandaag alleen maar geweigerd heeft.
+    zodat het widget kan tonen '402 quota op' i.p.v. 'geen data' als een
+    provider vandaag alleen maar geweigerd heeft.
     """
     try:
         from modules.core.storage import load_json, save_json
@@ -173,8 +176,8 @@ def get_usage_today() -> Dict[str, Any]:
             "tier": meta["tier"],
             "note": meta.get("note"),
             "last_call": stats.get("last_call"),
-            # v13c_llm_failure_log_001 — toon last_error zodat widget "Cerebras:
-            # 402 quota op" laat zien i.p.v. het cryptische "geen data".
+            # v13c_llm_failure_log_001 — toon last_error zodat widget "402
+            # quota op" laat zien i.p.v. het cryptische "geen data".
             "last_error": stats.get("last_error"),
             "last_error_ts": stats.get("last_error_ts"),
             "failed_calls": int(stats.get("failed_calls", 0)),
@@ -243,9 +246,8 @@ def list_providers() -> List[ProviderConfig]:
     v13c_cerebras_removed_001 (sessie 54) — Cerebras eruit gehaald: hun
     'gratis' tier bleek 402-payment-required te geven op elke call.
     Chain is nu: Groq (primary) → Emergent (noodrem).
-    Toekomstige alternatieven (Ollama, Together.ai, DeepInfra) kunnen als
-    FALLBACK worden ingezet — code respecteert LLM_FALLBACK_* env-vars nog
-    steeds mocht je die zetten.
+    Toekomstige alternatieven (Ollama, Together.ai, DeepInfra) kunnen via
+    LLM_FALLBACK_* env-vars ingehangen worden — code respecteert dat nog.
     """
     chain: List[ProviderConfig] = []
     primary = _get_provider("PRIMARY", "primary")
@@ -499,7 +501,7 @@ async def chat_complete(
                 _cache_store(messages, temperature, result)
             return result
         # v13c_llm_failure_log_001 — log de faal-status per provider zodat
-        # widget kan tonen 'Cerebras: 402 quota op' i.p.v. 'geen data'.
+        # widget kan tonen '402 quota op' i.p.v. 'geen data'.
         _log_failure(provider.name, provider.model, result.get("error") or "unknown")
         logger.warning("[llm_router] %s faalde: %s", provider.name, result.get("error"))
 

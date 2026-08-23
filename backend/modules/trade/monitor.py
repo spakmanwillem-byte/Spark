@@ -1051,7 +1051,15 @@ class MonitorService:
                 # check of er rest van deze coin is die kan meegaan met de SELL.
                 # Rest die anders bleef staan (te klein voor eigen Bitvavo min-order)
                 # wordt hier "gratis" meegepakt en toegevoegd aan pot capital.
+                #
+                # v13c_rest_bonus_cap_001 (sessie 54, ATOM-drift fix) — Willem:
+                # bot probeerde 61.4 ATOM te verkopen terwijl pot maar 7.6 bezat.
+                # Root cause: rest_bonus greep ALLE extra coins op Bitvavo op — óók
+                # legacy holdings van vóór Spark én coins van andere users die via
+                # Spark's keys proxied worden. Fix: cap rest tot max 10% van
+                # pot's eigen expected_coins (echte dust) én skip proxy-cases.
                 rest_bonus_eur = 0.0
+                _is_proxied_user = self._user_id != "user-000"  # non-Spark users → Spark's keys
                 try:
                     base_asset = market.split("-")[0]
                     bal = fetch_bitvavo_balance(self._user_id)
@@ -1062,6 +1070,26 @@ class MonitorService:
                         # Verwachte coins in pot(s) op basis van entry-prijs
                         expected_coins = cluster_capital / entry if entry > 0 else 0
                         rest_coins = actual_coins - expected_coins
+                        # v13c cap: alleen echte dust meepakken (≤10% van pot-omvang).
+                        # Alles daarboven is verdachte drift (legacy/andere-user coins).
+                        max_dust_coins = expected_coins * 0.10
+                        if rest_coins > max_dust_coins:
+                            logger.warning(
+                                f"[rest-bonus] {market}: {rest_coins:.4f} rest > "
+                                f"10%-dust-cap ({max_dust_coins:.4f}) — waarschijnlijk "
+                                f"legacy/andere-user coins. Skip rest-sweep, alleen "
+                                f"pot-eigen {expected_coins:.4f} coins verkopen."
+                            )
+                            rest_coins = 0.0
+                        # Skip rest-sweep bij proxy: andere users delen deze Bitvavo-
+                        # balance dus 'rest' zou hun coins zijn.
+                        if _is_proxied_user and rest_coins > 0:
+                            logger.info(
+                                f"[rest-bonus] {market}: skip rest-sweep want user "
+                                f"{self._user_id} is proxied via Spark — coins kunnen "
+                                f"van andere users zijn."
+                            )
+                            rest_coins = 0.0
                         # Alleen meepakken als rest zinvol groot is (dust-filter)
                         if rest_coins > 0 and (rest_coins * price) > 0.02:
                             rest_bonus_eur = rest_coins * price
@@ -1209,7 +1237,12 @@ class MonitorService:
                     if self._auto_trade:
                         # v11_rest_bonus_001 — NA trail-trigger (nooit ervoor!),
                         # check of er rest van deze coin is die kan meegaan met SELL.
+                        #
+                        # v13c_rest_bonus_cap_001 (sessie 54, ATOM-drift fix) —
+                        # zelfde cap-logica als in het cluster-SELL pad hierboven:
+                        # rest max 10% van pot-eigen coins, skip bij proxy.
                         rest_bonus_eur = 0.0
+                        _is_proxied_user = self._user_id != "user-000"
                         try:
                             base_asset = market.split("-")[0]
                             bal = fetch_bitvavo_balance(self._user_id)
@@ -1219,6 +1252,18 @@ class MonitorService:
                                 actual_coins = float(b.get("available", 0) or 0)
                                 expected_coins = cluster_capital / entry if entry > 0 else 0
                                 rest_coins = actual_coins - expected_coins
+                                max_dust_coins = expected_coins * 0.10
+                                if rest_coins > max_dust_coins:
+                                    logger.warning(
+                                        f"[rest-bonus] {market}: {rest_coins:.4f} rest > "
+                                        f"10%-dust-cap ({max_dust_coins:.4f}) — skip rest-sweep."
+                                    )
+                                    rest_coins = 0.0
+                                if _is_proxied_user and rest_coins > 0:
+                                    logger.info(
+                                        f"[rest-bonus] {market}: skip rest-sweep — {self._user_id} is proxied."
+                                    )
+                                    rest_coins = 0.0
                                 if rest_coins > 0 and (rest_coins * price) > 0.02:
                                     rest_bonus_eur = rest_coins * price
                                     logger.info(

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   User, Save, X, AlertTriangle, Globe,
   Camera, MapPin, Upload, Check, MessageSquare,
-  Image as ImageIcon, Sparkles, ChevronDown, Trash2, Store,
+  Image as ImageIcon, Sparkles, ChevronDown, Trash2,
   Backpack, Award, Plus, Settings, Palette, Volume2, Link2, KeyRound, RotateCcw, ShieldCheck,
 } from 'lucide-react';
 import { DnDCharacterSheet } from './DnDCharacterSheet';
@@ -115,10 +115,9 @@ export function UserProfilePage({ onNavigate }) {
                   key={tabId}
                   data-testid={`profile-tab-${tabId}`}
                   onClick={() => setActiveTab(tabId)}
-                  className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
+                  className="relative px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
                   style={{ color: a ? accent : '#94a3b8' }}
                 >
-                  <Store className="w-3.5 h-3.5" />
                   Winkel: {s.naam}
                   {a && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: accent }} />}
                 </button>

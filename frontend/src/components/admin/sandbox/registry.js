@@ -24,6 +24,7 @@ import { LlmTokenUsageWidget } from './widgets/LlmTokenUsageWidget';
 import { PapertrailWidget } from './widgets/PapertrailWidget';
 import { FrontsConfigDraftWidget } from './widgets/FrontsConfigDraftWidget';
 import { LlmBudgetSettingsWidget } from './widgets/LlmBudgetSettingsWidget';
+import { IncompleteCardsWidget } from './widgets/IncompleteCardsWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -65,6 +66,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 52t',
     reden: "Willem: 'ik wil die waardes zelf kunnen tunen zonder redeploy'. Waardes stonden hardcoded in response_composer.py. Nu leest backend ze uit settings/system bij elke chat-request.",
     Component: LlmBudgetSettingsWidget,
+  },
+  {
+    id: 'incomplete-cards',
+    naam: 'Onvolledige Kaarten',
+    doel: 'Auto-scan + edit-panel voor KB-kaarten met leeg 5W of laag<20 chars. Links lijst, rechts full-card editor. Save → herscan → kaart verdwijnt als compleet.',
+    waar_hoort_het: 'Admin → eigen kader (KB-Beheer), of Kennisbank → sidepanel. Voorlopig in Kladblok.',
+    aangemaakt_op: '2026-02-22',
+    aangemaakt_door: 'e1 sessie 54',
+    reden: "Willem: ⚠ Onvolledig subtab in Inbox maakte kaart-kopieën met dezelfde id → dubbels-bug. Widget is monitoring + edit i.p.v. een tweede kaart-collectie. Geen bulk-import meer nodig.",
+    Component: IncompleteCardsWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

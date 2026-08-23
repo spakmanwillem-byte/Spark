@@ -64428,11 +64428,96 @@
         "session_id": "snap-test-1",
         "gesprek_nummer": 2563
       }
+    },
+    {
+      "id": "conv-783a40ae",
+      "timestamp": "2026-08-23T07:11:12.707251+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Webserver",
+      "spark_response": "Een **webserver** is software (en vaak ook de onderliggende hardware) die HTTP‑ en HTTPS‑verzoeken van clients (bijvoorbeeld browsers) ontvangt, verwerkt en beantwoordt met webcontent — HTML‑pagina’s, afbeeldingen, scripts, API‑responses, enzovoort. \n\n**Hoe een webserver werkt** \n1. **Verbinding**: Een client stuurt een verzoek naar een IP‑adres of een domeinnaam. \n2. **Routing**: DNS vertaalt de domeinnaam naar het IP‑adres van de server. \n3. **Verwerking**: De webserver (bijv. **IIS** op Windows, Apache of Nginx op Linux) accepteert het verzoek, zoekt de gevraagde bron en voert eventuele server‑side logica uit (ASP.NET, PHP, etc.). \n4. **Respons**: Het resultaat wordt via HTTP/HTTPS teruggestuurd naar de client.\n\n**Belangrijke onderdelen** \n- **HTTPS**: Versleutelt de communicatie zodat gegevens niet kunnen worden onderschept. \n- **Domeinnaam**: Maakt het adres mens‑vriendelijk; zonder een domein zou je een IP‑adres moeten invoeren. \n- **Netwerkdiensten** zoals DNS en DHCP zorgen dat de server bereikbaar is binnen het netwerk of via het internet.\n\n**Voorbeelden in onze kennisbank** \n- **IIS** – Microsoft‑webserver voor Windows‑omgevingen. \n- **WordPress** – Populair CMS dat draait op een webserver (vaak Apache of Nginx). \n\nWil je meer details over een van deze kaarten, of een overzicht van alle web‑gerelateerde kaarten in de kennisbank, laat het me weten! 🚀",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "kaarten",
+        "used_cards": [
+          "kbv2-c27ea10f",
+          "kbv2-3f579c19",
+          "kbv2-48725051",
+          "kbv2-c9000acb",
+          "kbv2-78ba46df"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2564
+      }
+    },
+    {
+      "id": "conv-d5dd1607",
+      "timestamp": "2026-08-23T07:12:04.317886+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Vriezen",
+      "spark_response": "**Vriezen** betekent in het Nederlands *bevriezen* – iets wordt zo koud dat het stolt. \n\nIn de techniek wordt de term vaak gebruikt voor een **freeze** van een systeem of proces: je stopt alle activiteit zodat de huidige staat behouden blijft (bijvoorbeeld een “code‑freeze” vóór een release, of een “database‑freeze” tijdens onderhoud). \n\nWil je meer weten over een specifieke toepassing, zoals hoe je een proces in Spark kunt pauzeren of een data‑freeze kunt uitvoeren? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "verkeerde",
+        "used_cards": [],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2565
+      }
+    },
+    {
+      "id": "conv-ac24f376",
+      "timestamp": "2026-08-23T07:12:55.668378+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Spinnenweb",
+      "spark_response": "**Spinnenweb** – een netwerk van dunne, kleverige draden die een spin weeft.\n\n- **Betekenis**: Een spinnenweb is een door een spin vervaardigd web van spindraden. \n- **Verdieping**: Spinnen gebruiken hun web om prooien (bijv. vliegen) te vangen, zich te verschuilen of als structuur voor hun ei‑legplaats. Niet alle spinnen jagen met een web. \n- **Wie**: Spinnen maken spinnenwebben. \n- **Wat**: Een netwerk van spindraden met verschillende functies (jacht, bescherming, ei‑legplaats). \n- **Waar**: Tussen planten, takken, gebouwen, in hoeken van ruimtes, of waar de spin een geschikte plek vindt. \n- **Wanneer**: Wanneer een spin een web nodig heeft voor jacht, bescherming of andere doeleinden. \n- **Waarom**: Om prooien te vangen, te schuilen of andere functies te vervullen. \n\n**Tags**: ai, bos, dier, draden, edge, eieren, huis, jacht. \n\nWil je de kaart in een andere lade plaatsen of meer details bekijken? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "verkeerde",
+        "used_cards": [
+          "kbv2-d64b1b71"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2566
+      }
+    },
+    {
+      "id": "conv-fd147afc",
+      "timestamp": "2026-08-23T07:13:54.071299+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Terugbetaald",
+      "spark_response": "**Terugbetaald** betekent dat een eerder geleend bedrag of een openstaande verplichting volledig is afgelost. In de context van onze KB‑kaarten heeft “terugbetaald” de volgende relaties:\n\n| KB‑kaart | Hoe “terugbetaald” erop van toepassing is |\n|----------|-------------------------------------------|\n| **Lening** | Wanneer een lening wordt terugbetaald, verdwijnt de openstaande schuld en wordt de lening als *afgesloten* gemarkeerd. |\n| **Schulden** | Een schuld is terugbetaald zodra het verschuldigde bedrag volledig is voldaan; de schuld verdwijnt dan uit de balans. |\n| **Passiva** | Passiva bestaan uit alle schulden en verplichtingen. Zodra een verplichting is terugbetaald, neemt het totale passiva‑bedrag af. |\n| **Geleende** | Een geleend voorwerp of bedrag is terugbetaald wanneer het aan de uitlener wordt geretourneerd of het geld wordt teruggestort. |\n\n### Praktisch stappenplan (als je een terugbetaling wilt registreren)\n\n1. **Open de “Trade”‑ of “Kasboek”‑tab** en zoek de betreffende lening of schuld (via `tellen_gebruikers` of `kasboek_overzicht`). \n2. **Voer een “betaal‑transactie” in**: gebruik de capability `winst_verlies_overzicht` om de aflossing te boeken; zet het bedrag op *negatief* bij passiva. \n3. **Markeer de kaart**: via `snuffel_bestand` kun je de JSON‑record van de lening openen (`data/financial/leningen.json`) en het veld `status` op `\"terugbetaald\"` zetten. \n4. **Controle**: roep `kasboek_overzicht` opnieuw op om te bevestigen dat het passiva‑saldo is gedaald en dat de lening nu als afgesloten staat. \n\nNa deze stappen is de verplichting officieel **terugbetaald** en wordt de balans bijgewerkt. Mocht je een specifieke lening of schuld willen doorzoeken, laat het me weten; ik kan meteen de juiste kaart voor je vinden. 🚀",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "verkeerde",
+        "used_cards": [
+          "kbv2-42b72693",
+          "kbv2-8c060be2",
+          "kbv2-bc609332",
+          "kbv2-eaf8fba8"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2567
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2563,
-    "last_updated": "2026-08-23T06:57:58.831729+00:00"
+    "total_conversations": 2567,
+    "last_updated": "2026-08-23T07:13:54.071299+00:00"
   }
 }

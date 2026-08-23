@@ -140,18 +140,22 @@ def get_usage_today() -> Dict[str, Any]:
             "limit": _limit("LLM_PRIMARY_TPD_LIMIT", 200000),
             "tier": os.environ.get("LLM_PRIMARY_TIER", "on_demand"),
         },
-        "fallback": {
-            "naam": f"Cerebras ({os.environ.get('LLM_FALLBACK_MODEL', 'gpt-oss-120b')})",
-            "limit": _limit("LLM_FALLBACK_TPD_LIMIT", None),
-            "tier": os.environ.get("LLM_FALLBACK_TIER", "quota"),
-        },
         "emergent": {
             "naam": "Emergent LLM Key",
             "limit": None,
             "tier": "noodrem",
-            "note": "activeert alleen bij écht nood (alle providers op quota)",
+            "note": "activeert alleen bij écht nood (Groq op quota)",
         },
     }
+
+    # v13c_cerebras_removed_001 — Cerebras (fallback) alleen tonen als
+    # admin 'em expliciet configureert. Willem: 'hun gratis was niet gratis'.
+    if os.environ.get("LLM_FALLBACK_API_KEY", "").strip():
+        provider_meta["fallback"] = {
+            "naam": f"Fallback ({os.environ.get('LLM_FALLBACK_MODEL', '?')})",
+            "limit": _limit("LLM_FALLBACK_TPD_LIMIT", None),
+            "tier": os.environ.get("LLM_FALLBACK_TIER", "quota"),
+        }
 
     providers = []
     for prov_id, meta in provider_meta.items():
@@ -234,7 +238,15 @@ def _get_provider(prefix: str, default_name: str) -> ProviderConfig:
 
 
 def list_providers() -> List[ProviderConfig]:
-    """Geeft de actieve provider-chain terug (in volgorde)."""
+    """Geeft de actieve provider-chain terug (in volgorde).
+
+    v13c_cerebras_removed_001 (sessie 54) — Cerebras eruit gehaald: hun
+    'gratis' tier bleek 402-payment-required te geven op elke call.
+    Chain is nu: Groq (primary) → Emergent (noodrem).
+    Toekomstige alternatieven (Ollama, Together.ai, DeepInfra) kunnen als
+    FALLBACK worden ingezet — code respecteert LLM_FALLBACK_* env-vars nog
+    steeds mocht je die zetten.
+    """
     chain: List[ProviderConfig] = []
     primary = _get_provider("PRIMARY", "primary")
     fallback = _get_provider("FALLBACK", "fallback")

@@ -38,7 +38,6 @@ export function LlmTokenUsageWidget() {
   const providers = usage?.providers || [
     // Fallback als endpoint tijdelijk niet reachable is
     { naam: 'Groq (openai/gpt-oss-120b)', used: null, limit: 200000, tier: 'on_demand', note: 'geen data — endpoint niet bereikbaar' },
-    { naam: 'Cerebras (gpt-oss-120b)', used: null, limit: null, tier: 'quota', note: 'geen data' },
     { naam: 'Emergent LLM Key', used: null, limit: null, tier: 'noodrem', note: 'activeert alleen bij écht nood' },
   ];
 

@@ -695,10 +695,9 @@ async def compose_response(
             if classes and classes.issubset({"tpd", "rate", "budget"}):
                 # Alles op quota — Willem herkent dit pattern nu
                 friendly = (
-                    "Even niet mogelijk — mijn drie LLM-lijnen zijn vandaag allemaal "
-                    "over hun budget (Groq TPD vol, Cerebras quota op, Emergent budget op). "
-                    "Reset volgt vanzelf, óf vul één van deze bij: "
-                    "Emergent = *Profile → Manage plan → Universal Key → Add Balance*."
+                    "Even niet mogelijk — Groq zit vandaag op quota-limiet en "
+                    "Emergent-nood-nood is ook op. Reset volgt vanzelf, óf vul "
+                    "Emergent bij: *Profile → Manage plan → Universal Key → Add Balance*."
                 )
             elif "timeout" in classes:
                 friendly = "Verbinding hapert even — probeer over een moment opnieuw."

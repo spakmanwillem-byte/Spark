@@ -486,6 +486,20 @@ def _load_ops_context(user_text: str, user_id: Optional[str]) -> Optional[str]:
         except Exception:
             pass
 
+    # v13_zelfscan_facts_001 — bij emotie-vragen: laad echte distributie uit
+    # pipeline_shadow (voorkomt LLM-hallucinatie '73% blij' bij 95% neutraal).
+    if any(w in t for w in ["mijn emoties", "welke emoties", "emotie-distributie", "emotie distributie",
+                            "voelen mensen", "hoe voelen", "wat voel ik", "vaakst emotie",
+                            "meeste emotie", "meest voorkomend", "welke gevoelens"]):
+        try:
+            from modules.chat import zelfscan_facts
+            stats = zelfscan_facts.get_emotion_stats(days=30, user_id=user_id if user_id != "user-001" else None)
+            if stats.get("total", 0) > 0:
+                emo_snippet = zelfscan_facts.format_emotion_stats_for_prompt(stats)
+                lines.append(f"OPERATIONEEL — echte data uit pipeline_shadow (GEEN gok): {emo_snippet}")
+        except Exception:
+            pass
+
     return "\n".join(lines) if lines else None
 
 

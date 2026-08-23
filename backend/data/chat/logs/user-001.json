@@ -65256,11 +65256,79 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2596
       }
+    },
+    {
+      "id": "conv-12a8d326",
+      "timestamp": "2026-08-23T10:01:13.780043+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel me over Willems moeder",
+      "spark_response": "Ik ken **Willems moeder** nog niet specifiek, maar in mijn **voelen**-lade vind ik wel iets over **Oma**: Een oma is de moeder van een vader of moeder.\n\n_Wil je dat ik **Willems moeder** apart leer?_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vertel"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "kbv2_neighbor"
+      },
+      "metadata": {
+        "session_id": "test-privacy-2",
+        "gesprek_nummer": 2597
+      }
+    },
+    {
+      "id": "conv-eff75bd4",
+      "timestamp": "2026-08-23T10:01:21.875218+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Heidi",
+      "spark_response": "**Heidi Spakman** is jouw **moeder** — ~69 jaar · interesses: katten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heidi"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "test-privacy-4",
+        "gesprek_nummer": 2598
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2596,
-    "last_updated": "2026-08-23T09:43:49.302978+00:00"
+    "total_conversations": 2598,
+    "last_updated": "2026-08-23T10:01:21.875218+00:00"
   }
 }

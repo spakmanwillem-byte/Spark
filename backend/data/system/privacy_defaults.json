@@ -1,0 +1,15 @@
+{
+  "_version": "v13_privacy_defaults_001",
+  "_doel": "Minimum privacy-veto per gradatie. Als admin geen eigen matrix heeft, geldt dit. Later per-user override.",
+  "regels_per_gradatie": {
+    "1": {"blokkeer_tags": [], "beschrijving": "admin — ziet alles"},
+    "2": {"blokkeer_tags": [], "beschrijving": "familie — ziet alles behalve financiën"},
+    "3": {"blokkeer_tags": ["financieel", "gezondheid"], "beschrijving": "vrienden — geen financiën/gezondheid"},
+    "4": {"blokkeer_tags": ["financieel", "gezondheid", "familie"], "beschrijving": "buren — geen familie-details"},
+    "5": {"blokkeer_tags": ["financieel", "gezondheid", "familie", "privé", "persoonlijk"], "beschrijving": "kennis — publieke KB alleen"},
+    "6": {"blokkeer_tags": ["financieel", "gezondheid", "familie", "privé", "persoonlijk", "relaties"], "beschrijving": "onbekend — algemene KB"},
+    "7": {"blokkeer_tags": ["financieel", "gezondheid", "familie", "privé", "persoonlijk", "relaties", "namen"], "beschrijving": "vreemde — meest strikt, geen persoonsnamen"}
+  },
+  "blokkeer_ook_person_names": ["Lotus", "Heidi", "Willie", "Arent"],
+  "_note_blokkeer_names": "Deze namen worden uit LLM-context gestript als requester gradatie >= 5. Uitgebreidbaar via matrix-UI later."
+}

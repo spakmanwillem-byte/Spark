@@ -360,6 +360,27 @@ async def compose_response(
     bijbel = _load_bijbel_essence()
     turns = _load_recent_turns(session_id) if session_id else []
 
+    # v13_privacy_guard_001 (sessie 54) — Attente Spark privacy-matrix.
+    # Filter KB-kaarten met verboden tags (financieel/gezondheid/familie/privé)
+    # vóór ze in de LLM-context landen. Voorkomt dat lage-gradatie users
+    # (bv gradatie 5-7 kennissen/onbekenden) admin's familie/financiën zien.
+    _requester_grad = None
+    try:
+        from modules.chat.spark_user_view import _get_user_meta as _gum
+        _requester_meta = _gum(user_id) if user_id else {}
+        _requester_grad = _requester_meta.get("gradatie")
+    except Exception:
+        _requester_grad = None
+
+    try:
+        from modules.chat import privacy_guard
+        _cards_before = len(cards)
+        cards = privacy_guard.filter_kb_cards(cards, _requester_grad)
+        if _cards_before != len(cards):
+            print(f"[privacy_guard] grad={_requester_grad}: filtered {_cards_before - len(cards)}/{_cards_before} KB cards")
+    except Exception as _pgex:
+        print(f"[privacy_guard] KB filter error: {_pgex}")
+
     # v13_semantic_lookup_gap_offer_001 (sessie 53) — Zelflerende loop:
     # Als semantic_lookup een relevante kaart met ws5-gap teruggaf, plaats
     # kb_fill_pending offer in session_state. De bestaande state-machine in
@@ -457,6 +478,12 @@ async def compose_response(
             _grad = (user_profile or {}).get("gradatie") if isinstance(user_profile, dict) else None
             _cap = _cap_setting if _grad == 1 else 5
             facts = identity_facts.load_for_prompt(user_id, max_per_type=_cap)
+            # v13_privacy_guard_001 — strip about_user/about_relationship voor grad >= 5
+            try:
+                from modules.chat import privacy_guard as _pg
+                facts = _pg.filter_identity_facts(facts, _requester_grad)
+            except Exception:
+                pass
             facts_snippet = identity_facts.format_for_prompt(facts)
             if facts_snippet:
                 # Plaats facts BOVENAAN het user_snippet — vóór tone-block
@@ -504,6 +531,15 @@ async def compose_response(
         current_user_naam=(user_profile or {}).get("naam") or "Gebruiker",
         current_user_gradatie=(user_profile or {}).get("gradatie"),
     )
+
+    # v13_privacy_guard_001 — laatste veeg: strip privacy-gevoelige namen uit
+    # system_prompt voor grad >= 5. Requester's eigen naam blijft (die zit niet
+    # in de blokkeer-lijst; als familie: dan mag hij die zelf kennen).
+    try:
+        from modules.chat import privacy_guard as _pg
+        system_prompt = _pg.strip_person_names(system_prompt, _requester_grad)
+    except Exception:
+        pass
 
     # v6_diep_snaps_001 + v6_diep_ops_context_001 — extra context-lagen voor Diep
     snap_cluster = _load_snap_cluster(user_text)

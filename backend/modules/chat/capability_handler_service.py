@@ -560,6 +560,17 @@ def _handle_zelfscan(user_id):
     except Exception:
         pass
 
+    # 7. v13_zelfscan_facts_001 — echte emotie-distributie uit pipeline_shadow
+    # Voorkomt LLM-hallucinaties zoals '73% blij' terwijl data 95% neutraal is.
+    try:
+        from modules.chat import zelfscan_facts
+        emo_stats = zelfscan_facts.get_emotion_stats(days=7)
+        emo_line = zelfscan_facts.format_emotion_stats_for_prompt(emo_stats)
+        if emo_line:
+            lines.append(emo_line)
+    except Exception:
+        pass
+
     lines.append("")
     lines.append("_Vraag 'wat staat er nog open' voor de roadmap-stand of 'gezondheidscheck' voor diepere audit._")
 

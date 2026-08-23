@@ -69,7 +69,14 @@ Enige overgebleven "issue" (Spark pot-001 audit vs stats drift €0.25) is verkl
 
 **Idee** (Willem + Emmy): Spark wordt attent per gradatie. Voorbeeld: Willem zegt *"mijn moeder Heidi"* → Spark checkt of Heidi als user bestaat, checkt haar privacy-matrix voor gradatie 2 (familie), ziet dat verjaardag gedeeld is met familie → Spark aan Willem: *"Trouwens: morgen is Heidi jarig — vergeet geen cadeau."*
 
-**Kern**: gradaties krijgen inhoud als privacy-grens. Elke user beheert per info-categorie × gradatie wie wat mag zien.
+**✅ Fase 1 gebouwd (sessie 54)** — `v13_privacy_guard_001`:
+- `privacy_guard.py` filtert KB-kaarten op verboden tags per gradatie
+- Strip identity_facts (about_user/about_relationship) voor grad ≥ 5
+- Maskeer familie-namen (Lotus/Heidi/…) in system_prompt
+- 3 hook-punten in `response_composer.py`, 13 regressietests groen
+- Live geverifieerd: grad-6 user krijgt 4/5 kaarten weg + Spark weigert privé-info
+
+**🔴 Fase 2 (backlog)** — per-user privacy_matrix.json met opt-in vinkjes:
 
 **Regel**:
 - G1-G2 (self + familie): Spark mag attent zijn met gedeelde info

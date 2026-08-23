@@ -1,6 +1,54 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 54 (2026-02-24) — Attente Spark v13 Privacy-Guard + Zelfscan-feiten
+
+### 🔒 v13_privacy_guard_001 — Privacy-matrix per gradatie (P0)
+
+**Root cause**: Emmy (gradatie 5+) chatte met Spark en kreeg gevoelige familie-info van Willem terug (Lotus/Heidi in KB-context). `_load_relevant_kb` filterde alleen `privacy=="private"` — niet op tags (`familie`, `privé`, `financieel`).
+
+**Fix — 3 lagen**:
+1. **`modules/chat/privacy_guard.py`** — nieuwe module leest `data/system/privacy_defaults.json`:
+   - `filter_kb_cards(cards, gradatie)` strip kaarten met verboden tags + persoonlijke lades + admin-familie-namen in laag1/ws5
+   - `filter_identity_facts(facts, gradatie)` verwijdert about_user/about_relationship voor grad ≥ 5
+   - `strip_person_names(text, gradatie)` maskeert namen tot 'iemand' (Lotus/Heidi/Willie/Arent + admin-relaties auto-geladen)
+2. **`response_composer.py`** — 3 hook-punten na cards-load, na identity-facts-load, en na system_prompt-build
+3. **13 regressietests** groen (`tests/test_privacy_guard_v13.py`)
+
+**Regels per gradatie** (uit privacy_defaults.json):
+- G1-G2 (admin/familie): alles zichtbaar
+- G3-G4 (vrienden/buren): blokkeer financieel/gezondheid (+ familie voor G4)
+- G5+ (kennis/onbekend/vreemde): blokkeer ook privé/persoonlijk/relaties + maskeer familie-namen
+
+**Live geverifieerd**:
+- Marieke (G3): `[privacy_guard] grad=3: filtered 1/5 KB cards`
+- Fake G6: `filtered 4/5 KB cards` → Spark weigert netjes privé-info
+
+### 📊 v13_zelfscan_facts_001 — Feitelijke emotie-distributie (P1)
+
+**Root cause**: Zelfscan / emotie-vragen leidden tot LLM-hallucinaties ("73% blij") terwijl `data/emotions/pipeline_shadow/*.jsonl` 92% neutraal registreerde.
+
+**Fix**:
+- **`modules/chat/zelfscan_facts.py`** — `get_emotion_stats(days=7, user_id=None)` aggregeert JSONL events; normaliseert `neutral/neutraal` → `neutraal`
+- **`_handle_zelfscan`** injecteert emo-line in zelfscan-output
+- **`_load_ops_context`** vangt vragen als "wat voel ik", "welke emoties", "vaakst emotie" en levert feitelijke distributie als context vóór LLM-call
+
+**Live output** (27 dagen data):
+```
+🎭 Emotie-distributie (laatste 27 dagen, 745 events): neutraal 92.2% · blij 4.6% · bedroefd 1.9%
+```
+
+### Files changed (sessie 54)
+- `/app/backend/modules/chat/privacy_guard.py` (nieuw)
+- `/app/backend/modules/chat/zelfscan_facts.py` (nieuw)
+- `/app/backend/modules/chat/response_composer.py` (3 hooks)
+- `/app/backend/modules/chat/composer_helpers.py` (emotie ops-context)
+- `/app/backend/modules/chat/capability_handler_service.py` (zelfscan emo-injectie)
+- `/app/backend/tests/test_privacy_guard_v13.py` (nieuw, 13 tests)
+
+---
+
+
 ## Sessie 53 (2026-02-22) — Pot-value consistency fix (TraderPage vs AnalyticsPage)
 
 ### v13_pot_value_consistency_001 — €10.00 vs €10.26 mismatch opgelost

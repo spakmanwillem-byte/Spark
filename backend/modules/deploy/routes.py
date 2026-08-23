@@ -213,18 +213,27 @@ async def delete_anchor(anchor_id: str, viewer_id: str):
 
 @router.get("/pending/{user_id}")
 async def pending_barks(user_id: str):
-    """Welke anker-barks heeft deze user nog niet gezien? (gebruikt door frontend bij login)."""
+    """Welke anker-barks heeft deze user nog niet gezien? (gebruikt door frontend bij login).
+    v13_bark_version_reshow_001 (sessie 54): match op `id:version` in plaats van
+    alleen `id`, zodat als admin een bark bijwerkt (nieuwe `content_version`) alle
+    users hem opnieuw zien. Verplicht voor privacy/voorwaarden-updates."""
     data = _load_anchors()
     barks = data.get("barks", [])
     seen = _seen(user_id).get("seen", [])
     is_admin = _is_admin(user_id)
     pending: List[dict] = []
     for b in barks:
-        if b.get("id") in seen:
+        bid = b.get("id")
+        version = str(b.get("content_version") or "1")
+        key = f"{bid}:{version}"
+        # Ook `id` alleen accepteren voor backwards-compat (oude seen entries)
+        if key in seen or bid in seen:
             continue
         if (b.get("audience") or "all") == "admins" and not is_admin:
             continue
-        pending.append(b)
+        # Voeg version toe aan de bark-payload zodat frontend 'em terugmarkeert
+        b_out = {**b, "content_version": version}
+        pending.append(b_out)
     # Privacy eerst, dan welcome, dan chronologisch
     _kind_order = {"privacy": 0, "welcome": 1}
     pending.sort(key=lambda x: (_kind_order.get(x.get("kind"), 9), x.get("anchored_at") or ""))
@@ -234,15 +243,22 @@ async def pending_barks(user_id: str):
 class SeenBody(BaseModel):
     user_id: str
     bark_id: str
+    content_version: Optional[str] = "1"
 
 
 @router.post("/seen")
 async def mark_seen(body: SeenBody):
-    """User markeert een anker-bark als gezien."""
+    """User markeert een anker-bark als gezien.
+    v13_bark_version_reshow_001: sla op als 'id:version' zodat een re-versioned bark
+    opnieuw zichtbaar wordt."""
     fp = _seen_path(body.user_id)
     data = _seen(body.user_id)
-    if body.bark_id not in data.get("seen", []):
-        data["seen"] = data.get("seen", []) + [body.bark_id]
+    version = str(body.content_version or "1")
+    key = f"{body.bark_id}:{version}"
+    seen_list = data.get("seen", [])
+    if key not in seen_list:
+        seen_list.append(key)
+    data["seen"] = seen_list
     data["last_check"] = datetime.now(timezone.utc).isoformat()
     save_json(fp, data)
     return {"success": True, "seen_count": len(data["seen"])}

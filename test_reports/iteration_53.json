@@ -1,0 +1,23 @@
+{
+  "summary": "Iter53 — Full verification of v13 bark-dedupe + version-reshow + logout-tab-reset (bug-report Willem). Backend 6/6 pytest cases pass: (1) version_anchor.json only contains privacy_v1 + welcome_v1 (game barks v0.6.4/aspect_madelief_stouten/aspect_de_boekhouder correctly removed); (2) /api/deploy/pending/{user_id} returns content_version on every bark (default '1'); (3) POST /api/deploy/seen with {user_id, bark_id, content_version} persists as 'bark_id:version' and hides bark from /pending; (4) Backwards-compat — a seen entry stored as bare 'privacy_v1' (old format) is still honoured; (5) Version-reshow — bumping content_version to '2' in version_anchor.json makes the bark reappear in /pending for that user, and marking it seen at v2 hides it again; (6) Anne (user-83270eb1) pending returns valid content_version and no admin-only barks. Frontend: (a) logged in as Willem → set sessionStorage 'spark_active_tab'='analytics' + 'spark_last_non_chat_tab'='analytics' → clicked logout-btn → both keys are null (tab reset OK). (b) After resetting Willem's seen file, on login the BarkQueueOverlay renders EXACTLY 2 unique barks with counter '2 / 2' (Privacy & Voorwaarden → Welkom), dismissed with exactly 2 clicks — no 3rd/4th duplicate. loadedRef/loadingRef race-condition guards effective under real React StrictMode double-mount.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter53_bark_dedupe_version.py",
+    "/app/test_reports/pytest/iter53.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "routes.py line 235 mutates the bark object with `b_out = {**b, 'content_version': version}` — this always overwrites even if the bark had a real content_version. It happens to be idempotent because `version` is derived from the same field, but be aware if you later add multi-version bookkeeping.",
+    "SeenBody.content_version default is '1' server-side AND client-side (BarkQueueOverlay dismiss). Consistent, but if an admin adds a bark WITHOUT content_version and later attaches one, the migration path is implicit (bare id in seen still matches thanks to backwards-compat branch). Fine as-is.",
+    "BarkQueueOverlay.dismiss() removes from `queue` state by `b.id !== active.id`. If the same id appears twice in the queue (already filtered by uniq Set on load), still no risk. Good."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter53_bark_dedupe_version.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Willem / Welkom01 (user-001)",
+  "seed_data_creation": "Test resets Willem's seen_barks.json via /api/deploy/reset-seen; fixture restores original content after each pytest run. version_anchor.json is snapshot-backed-up and restored around the version-bump test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Reusable regression file at /app/backend/tests/test_iter53_bark_dedupe_version.py exercises pending/seen/reset-seen/backwards-compat/version-reshow. Anne credentials unknown — pending endpoint tested unauthenticated (no login needed for /api/deploy/pending). If bark payload gains fields, extend TestPendingSeen.test_pending_returns_content_version_field.",
+  "rca of the issue": "Original 3 bugs (Willem): (1) After logout+login on another account, previous user's active tab persisted — root cause: sessionStorage keys 'spark_active_tab' + 'spark_last_non_chat_tab' were set by App.js on every route change but NEVER cleared on logout. Fix in AuthContext.logout() removes both keys. (2) Barks appeared duplicated (had to dismiss 2-3x) — root cause: BarkQueueOverlay.load() ran on every effect trigger + React StrictMode double-mount, so multiple parallel fetches populated the queue twice. Fix: loadingRef + loadedRef guard prevents parallel/repeat loads, plus Set-based uniq filter on returned pending array. (3) Privacy/voorwaarden updates never re-shown — root cause: /api/deploy/seen stored only bark_id, so once seen forever hidden. Fix: content_version field on every bark, seen persisted as 'bark_id:version', backwards-compat keeps bare 'bark_id' honoured for existing users. Bumping content_version resurfaces the bark for all users. All three verified working."
+}

@@ -49,6 +49,15 @@ export function AuthProvider({ children }) {
         // Ignore storage errors
       }
     }
+    // v13_tab_reset_on_switch_001 (sessie 54) — Willem: bij uitloggen + inloggen
+    // op ander account opent oude tab van vorige user. Reset actieve-tab
+    // sessionStorage bij elke logout zodat volgende user vers begint.
+    try {
+      sessionStorage.removeItem('spark_active_tab');
+      sessionStorage.removeItem('spark_last_non_chat_tab');
+    } catch {
+      // Ignore storage errors
+    }
     setUser(null);
     localStorage.removeItem(STORAGE_KEY);
   }, [user]);

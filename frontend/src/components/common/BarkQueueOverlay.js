@@ -12,24 +12,56 @@ const KIND_STYLES = {
   welcome: { icon: Hand, accent: '#10b981', tag: 'WELKOM' },
 };
 
+// v13_bark_dedup_and_version_001 (sessie 54, bug-report Willem):
+//  - Vroeger: load() kon meerdere keren tegelijk draaien → dubbele barks in queue,
+//    2-3× wegklikken nodig.
+//  - Ook: als een bark-tekst wijzigt (bv privacy-voorwaarden) zag user 'em niet
+//    opnieuw. Nu match `seen` op `bark_id + version`, dus bump je de version
+//    in DEPLOY_FILE en iedereen ziet 'em opnieuw.
 export function BarkQueueOverlay({ userId, onAllSeen }) {
   const [queue, setQueue] = useState([]);
   const [active, setActive] = useState(null);
   const [busy, setBusy] = useState(false);
+  const loadedRef = React.useRef(false);
+  const loadingRef = React.useRef(false);
+  const seenAllRef = React.useRef(false);
 
   const load = useCallback(async () => {
     if (!userId) return;
+    // v13_bark_dedup_and_version_001: voorkom parallelle loads + dubbele mounts
+    if (loadingRef.current || loadedRef.current) return;
+    loadingRef.current = true;
     try {
       const r = await fetch(`${API}/api/deploy/pending/${userId}`);
       const d = await r.json();
-      setQueue(d.pending || []);
-      if ((d.pending || []).length > 0) {
-        setActive(d.pending[0]);
-      } else {
+      const pending = d.pending || [];
+      // Dedup op id (voor het geval backend dubbel returnt)
+      const seen = new Set();
+      const uniq = pending.filter(b => {
+        if (!b?.id || seen.has(b.id)) return false;
+        seen.add(b.id);
+        return true;
+      });
+      setQueue(uniq);
+      if (uniq.length > 0) {
+        setActive(uniq[0]);
+      } else if (!seenAllRef.current) {
+        seenAllRef.current = true;
         onAllSeen && onAllSeen();
       }
-    } catch {}
+      loadedRef.current = true;
+    } catch {} finally {
+      loadingRef.current = false;
+    }
   }, [userId, onAllSeen]);
+
+  // Reset guard-refs als user wisselt (bv logout → nieuwe login)
+  useEffect(() => {
+    loadedRef.current = false;
+    seenAllRef.current = false;
+    setQueue([]);
+    setActive(null);
+  }, [userId]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -39,7 +71,11 @@ export function BarkQueueOverlay({ userId, onAllSeen }) {
     try {
       await fetch(`${API}/api/deploy/seen`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, bark_id: active.id }),
+        body: JSON.stringify({
+          user_id: userId,
+          bark_id: active.id,
+          content_version: String(active.content_version || '1'),
+        }),
       });
       const remaining = queue.filter(b => b.id !== active.id);
       setQueue(remaining);

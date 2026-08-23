@@ -76,6 +76,15 @@ BASELINE: Dict[str, List[str]] = {
         r"\bagenda\b.*\b(leegmaken|opschonen|opruimen)\b",
         r"\b(verwijder|haal weg|schrap)\s+(?:het\s+|de\s+|mijn\s+)?(evenement|event|afspraak)\b",
     ],
+    "shop_delete": [
+        # v13d_shop_owner_delete_001 — Willem: "verwijder deze test winkel TEST_PatchShop"
+        # Match op: verwijder/haal weg/sluit/delete + (test)?(shop|winkel) + naam
+        r"\b(verwijder|haal\s+weg|schrap|wis|delete|sluit|opheffen)\s+(?:de\s+|deze\s+|mijn\s+|die\s+)?(?:test\s+)?(shop|winkel)\b",
+        r"\b(shop|winkel)\s+.+\s+(verwijder|weghalen|schrappen|sluiten|deleten|opheffen|weg)\b",
+        r"\bwil je\s+(?:deze\s+|die\s+|de\s+|mijn\s+)?(?:test\s+)?(shop|winkel)\s+.+\s+(verwijder|weghalen|schrappen)",
+        r"\b(?:zou|wil)\s+(?:jij|je|u)\s+(?:deze\s+|die\s+|de\s+|mijn\s+)?(?:test\s+)?(shop|winkel)\b.*\b(verwijder|weghalen|schrappen|willen|sluiten)",
+        r"\b(gooi|smijt|haal)\s+(?:deze\s+|die\s+|de\s+)?(shop|winkel)\b.*\bweg\b",
+    ],
 
     # NOTES / BUGS
     "note_create": [

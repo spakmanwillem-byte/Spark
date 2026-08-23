@@ -1078,6 +1078,224 @@ def handle_agenda_delete_cancel() -> Dict:
     }
 
 
+# ============== SHOP DELETE (v13d_shop_owner_delete_001, sessie 55) ==============
+# Willem's logica: "gebruiker die een winkel heeft is admin over zijn winkel"
+# → owner mag eigen shops verwijderen via chat, ook zonder globaal admin-recht.
+# Flow: detect → find shop by name → check ownership → confirm → delete.
+
+SHOPS_FILE = DATA_ROOT.parent / "backend" / "data" / "shop" / "shops.json"
+# Fallback: DATA_ROOT / "shop" / "shops.json"
+_SHOPS_FP = Path("/app/backend/data/shop/shops.json")
+
+
+def detect_shop_delete_intent(text: str) -> bool:
+    """Match delete-intent voor winkels."""
+    return _patterns.match_any("shop_delete", text or "")
+
+
+def _extract_shop_name_from_text(text: str) -> Optional[str]:
+    """Probeer shop-naam te vinden in de gebruikers-tekst.
+    Zoekt naar tokens die er als shop-naam uitzien: CamelCase, ALL_CAPS_underscore,
+    of tussen quotes."""
+    t = text or ""
+    # 1) Tussen quotes: "TEST_PatchShop"
+    m = re.search(r'["\']([^"\']{3,40})["\']', t)
+    if m:
+        return m.group(1).strip()
+    # 2) Ondersteun ALL_CAPS_MIXED tokens (met underscore) of CamelCaseTokens
+    # Zoek tokens van 3+ chars die minimaal 1 hoofdletter hebben
+    tokens = re.findall(r'\b([A-Z][A-Za-z0-9_-]{2,39})\b', t)
+    # Skip generieke woorden
+    skip = {"TEST", "SHOP", "WINKEL", "DE", "EEN", "MIJN", "DIT", "DEZE", "DIE"}
+    for tok in tokens:
+        if tok.upper() not in skip and len(tok) >= 3:
+            return tok
+    # 3) "shop met naam X"-patroon
+    m = re.search(r"\b(?:shop|winkel)\s+(?:met naam |genaamd |heet )?(\S+)", t, re.IGNORECASE)
+    if m:
+        cand = m.group(1).strip().strip(".,!?;:")
+        if cand.lower() not in ("de", "een", "mijn", "deze", "die", "wil", "wilt", "zou", "je"):
+            return cand
+    return None
+
+
+def _find_shops_by_name(query: str) -> list:
+    """Zoek shops op naam-substring (case-insensitive)."""
+    if not _SHOPS_FP.exists() or not query:
+        return []
+    data = load_json(_SHOPS_FP, default={"shops": []})
+    shops = data.get("shops", []) if isinstance(data, dict) else data
+    q = query.lower().strip()
+    matches = []
+    for s in shops:
+        naam = (s.get("naam") or s.get("name") or "").lower()
+        sid = (s.get("id") or "").lower()
+        if q in naam or q in sid or q == naam:
+            matches.append(s)
+    return matches
+
+
+def _user_can_delete_shop(user_id: str, shop: dict) -> bool:
+    """Owner mag eigen shop verwijderen. Admin mag alle shops verwijderen."""
+    if not user_id:
+        return False
+    if shop.get("owner_user_id") == user_id:
+        return True
+    # Check admin-status via users.json
+    users = load_json(DATA_ROOT / "system" / "users.json", default={"users": []}).get("users", [])
+    me = next((u for u in users if u.get("id") == user_id), None) or {}
+    return bool(me.get("admin") or me.get("admin_capable"))
+
+
+def handle_shop_delete_start(user_id: str, text: str) -> Dict:
+    """Detecteer shop-naam, check ownership, vraag bevestiging."""
+    shop_name = _extract_shop_name_from_text(text)
+    if not shop_name:
+        return {
+            "type": "shop_delete_none",
+            "message": (
+                "Ik snap dat je een winkel wilt verwijderen, maar ik heb de naam nodig. "
+                "Zeg bv. **'verwijder winkel TEST_PatchShop'** of gebruik quotes rond de naam."
+            ),
+        }
+    matches = _find_shops_by_name(shop_name)
+    if not matches:
+        return {
+            "type": "shop_delete_none",
+            "message": f"Ik kan geen winkel vinden met '{shop_name}' in de naam. Check even de spelling?",
+        }
+    # System-default shop niet toestaan
+    matches = [s for s in matches if s.get("id") != "shop-roadkill"]
+    if not matches:
+        return {
+            "type": "shop_delete_none",
+            "message": "De system-default winkel (Roadkillshop) mag niet verwijderd worden. Andere winkels wel.",
+        }
+    # Filter op permissie
+    allowed = [s for s in matches if _user_can_delete_shop(user_id, s)]
+    if not allowed:
+        return {
+            "type": "shop_delete_denied",
+            "message": (
+                f"Ik vond **{len(matches)}** winkel(s) met '{shop_name}', maar je bent geen eigenaar "
+                "en geen admin — ik mag deze niet verwijderen. Vraag de eigenaar of een admin."
+            ),
+        }
+    if len(allowed) == 1:
+        s = allowed[0]
+        pending = {
+            "flow": "shop_delete",
+            "step": 1,
+            "shop_ids": [s.get("id")],
+            "summary": s.get("naam") or s.get("name") or s.get("id"),
+        }
+        return {
+            "type": "shop_delete_confirm",
+            "message": (
+                f"Wil je **{pending['summary']}** definitief verwijderen? "
+                f"_Alle producten in die winkel worden ook weggegooid._ "
+                f"Zeg **ja** om te bevestigen, **nee** om te annuleren."
+            ),
+            "pending_state": pending,
+        }
+    # >1 matches
+    lines = [f"Ik vond **{len(allowed)}** winkels met '{shop_name}':"]
+    for i, s in enumerate(allowed[:8], start=1):
+        naam = s.get("naam") or s.get("name") or s.get("id")
+        lines.append(f"  {i}. **{naam}** ({s.get('id')})")
+    lines.append("")
+    lines.append("_Typ het nummer (bv. **1**) om er één te verwijderen, of **alle** om alle te wissen._")
+    pending = {
+        "flow": "shop_delete",
+        "step": "choose",
+        "shop_ids": [s.get("id") for s in allowed[:8]],
+        "summaries": [s.get("naam") or s.get("name") or s.get("id") for s in allowed[:8]],
+    }
+    return {
+        "type": "shop_delete_choose",
+        "message": "\n".join(lines),
+        "pending_state": pending,
+    }
+
+
+def handle_shop_delete_choose(pending: dict, text: str) -> Dict:
+    t = (text or "").strip().lower()
+    ids = pending.get("shop_ids") or []
+    summaries = pending.get("summaries") or []
+    if re.match(r"^\s*(alle|allemaal|all)\b", t):
+        return {
+            "type": "shop_delete_confirm",
+            "message": f"Weet je zeker dat je **alle {len(ids)}** winkels wilt verwijderen? _Zeg **ja** of **nee**._",
+            "pending_state": {
+                "flow": "shop_delete", "step": 1,
+                "shop_ids": list(ids),
+                "summary": f"{len(ids)} winkels",
+            },
+        }
+    m = re.match(r"^\s*(\d+)\s*$", t)
+    if m:
+        idx = int(m.group(1)) - 1
+        if 0 <= idx < len(ids):
+            return {
+                "type": "shop_delete_confirm",
+                "message": f"Wil je **{summaries[idx]}** verwijderen? _Zeg **ja** of **nee**._",
+                "pending_state": {
+                    "flow": "shop_delete", "step": 1,
+                    "shop_ids": [ids[idx]],
+                    "summary": summaries[idx],
+                },
+            }
+    return {
+        "type": "shop_delete_repeat",
+        "message": "Typ een nummer (bv. **1**), **alle**, of **nee** om te annuleren.",
+        "pending_state": pending,
+    }
+
+
+def execute_shop_delete(user_id: str, shop_ids: list) -> Dict:
+    """Verwijder shops. Dubbele permissie-check per shop."""
+    if not _SHOPS_FP.exists():
+        return {"type": "shop_delete_failed", "message": "Shops-bestand niet gevonden."}
+    data = load_json(_SHOPS_FP, default={"shops": []})
+    shops = data.get("shops", [])
+    kept = []
+    removed = []
+    denied = []
+    for s in shops:
+        if s.get("id") in shop_ids:
+            if s.get("id") == "shop-roadkill":
+                kept.append(s)  # system-default nooit weg
+                continue
+            if _user_can_delete_shop(user_id, s):
+                removed.append(s.get("naam") or s.get("id"))
+                continue
+            denied.append(s.get("naam") or s.get("id"))
+            kept.append(s)
+        else:
+            kept.append(s)
+    if not removed:
+        if denied:
+            return {
+                "type": "shop_delete_denied",
+                "message": f"Ik mag deze winkels niet verwijderen: {', '.join(denied)}.",
+            }
+        return {"type": "shop_delete_failed", "message": "Geen winkels verwijderd."}
+    data["shops"] = kept
+    save_json(_SHOPS_FP, data)
+    msg = f"Klaar — **{len(removed)}** winkel{'s' if len(removed) > 1 else ''} verwijderd: {', '.join(removed)}."
+    if denied:
+        msg += f" _{len(denied)} zonder rechten overgeslagen: {', '.join(denied)}._"
+    return {
+        "type": "shop_deleted",
+        "message": msg,
+        "removed_count": len(removed),
+    }
+
+
+def handle_shop_delete_cancel() -> Dict:
+    return {"type": "shop_delete_cancelled", "message": "Oké, ik laat de winkels staan."}
+
+
 # v6_smart_intents_split_001 — Re-export profile/relation/age intents voor backwards-compat
 from modules.chat.smart_intents_profile import (  # noqa: E402
     detect_my_relation_lookup,

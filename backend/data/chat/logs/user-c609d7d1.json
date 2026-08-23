@@ -332,11 +332,45 @@
         "session_id": "4d581ff66f024c55aa9173bb918dfa69",
         "gesprek_nummer": 14
       }
+    },
+    {
+      "id": "conv-b6a7816a",
+      "timestamp": "2026-08-23T15:00:25.189006+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Gebruiker",
+      "user_message": "noem alle usernamen",
+      "spark_response": "👥 Ik mag je op jouw gradatie (3) deze namen tonen: **Anne, Arent, Emmy, GPT, Jayden, Marieke, Nick, Nick Teeuwen, Ron, Thomas, Tim, de Geiser, joel123**. Voor de volledige lijst heb je admin-toegang nodig.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "noem"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "276c1327d6d9414f84f85254bac635d5",
+        "gesprek_nummer": 15
+      }
     }
   ],
   "metadata": {
     "user_id": "user-c609d7d1",
-    "total_conversations": 14,
-    "last_updated": "2026-08-23T14:47:32.026114+00:00"
+    "total_conversations": 15,
+    "last_updated": "2026-08-23T15:00:25.189006+00:00"
   }
 }

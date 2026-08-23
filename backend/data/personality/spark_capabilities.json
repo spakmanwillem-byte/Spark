@@ -127,7 +127,13 @@
         "wie zit(?:ten)? er op spark",
         "(geef|toon|laat|noem) (me |mij )?(alle |de )?namen",
         "alle (gebruikers|namen|users) (noemen|opnoemen|zien|opgenoemd|opsommen|tonen|geven)",
-        "(who|wie) (are|zijn) (all )?(the )?users"
+        "(who|wie) (are|zijn) (all )?(the )?users",
+        "welke user\\s*namen\\s+(heb|hebben) (jij|je|we)",
+        "welke\\s+(usernames?|users?)\\s+(heb|hebben)",
+        "welke gebruikers?\\s+(heb|hebben) (jij|je|we)",
+        "wat voor user\\s*namen",
+        "geef .*(usernames?|gebruikersnamen|leden)",
+        "welke namen\\s+(heb|weet) (jij|je)"
       ],
       "status": "live",
       "module": "chat/capability_handler_service.py",

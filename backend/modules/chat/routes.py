@@ -819,6 +819,14 @@ async def process_message(req: ChatMessage):
                 session_state.set_state(req.user_id, pending_agenda_delete=out["pending_state"])
             _save_log(req, response, out.get("type", "agenda_delete_start"))
             return response
+        # v13d_shop_owner_delete_001 — shop-delete ook vóór capability-router
+        if req.user_id and _si_early.detect_shop_delete_intent(text):
+            out = _si_early.handle_shop_delete_start(req.user_id, text)
+            response.update(out)
+            if isinstance(out.get("pending_state"), dict):
+                session_state.set_state(req.user_id, pending_shop_delete=out["pending_state"])
+            _save_log(req, response, out.get("type", "shop_delete_start"))
+            return response
         # v13d_agenda_read_early_001 — READ intent ook vóór capability, anders
         # matcht "wat staat er morgen" via agenda_vandaag capability i.p.v.
         # onze uitgebreide handle_agenda die weekdagen kent.
@@ -1126,6 +1134,38 @@ async def process_message(req: ChatMessage):
         # block doet aan het einde een onvoorwaardelijke `return response` voor
         # logged-in users, dus alles na dit block is onbereikbaar met user_id.
         pending_agenda_delete = state.get("pending_agenda_delete")
+        pending_shop_delete = state.get("pending_shop_delete")  # v13d shop-delete
+        if pending_shop_delete and req.user_id:
+            step = pending_shop_delete.get("step")
+            if si.is_no(text) or wedervraag_service.is_skip(text):
+                session_state.set_state(req.user_id, pending_shop_delete=None)
+                out = si.handle_shop_delete_cancel()
+                response.update(out)
+                _save_log(req, response, "shop_delete_cancel")
+                return response
+            if step == "choose":
+                out = si.handle_shop_delete_choose(pending_shop_delete, text)
+                response.update(out)
+                new_pending = out.get("pending_state")
+                if isinstance(new_pending, dict):
+                    session_state.set_state(req.user_id, pending_shop_delete=new_pending)
+                _save_log(req, response, out.get("type", "shop_delete_choose"))
+                return response
+            if si.is_yes(text) or snap.detect_confirmation(text):
+                ids = pending_shop_delete.get("shop_ids") or []
+                out = si.execute_shop_delete(req.user_id, ids)
+                session_state.set_state(req.user_id, pending_shop_delete=None)
+                response.update(out)
+                _save_log(req, response, out.get("type", "shop_deleted"))
+                return response
+            response["type"] = "shop_delete_repeat"
+            response["message"] = (
+                f"Nog even bevestigen: **{pending_shop_delete.get('summary','winkel')}** "
+                f"verwijderen? Typ **ja** of **nee**."
+            )
+            _save_log(req, response, "shop_delete_repeat")
+            return response
+
         if pending_agenda_delete and req.user_id:
             step = pending_agenda_delete.get("step")
             # Annuleren
@@ -1167,6 +1207,15 @@ async def process_message(req: ChatMessage):
             if isinstance(out.get("pending_state"), dict):
                 session_state.set_state(req.user_id, pending_agenda_delete=out["pending_state"])
             _save_log(req, response, out.get("type", "agenda_delete_start"))
+            return response
+
+        # v13d_shop_owner_delete_001 (sessie 55) — Willem: "verwijder winkel X"
+        if req.user_id and si.detect_shop_delete_intent(text):
+            out = si.handle_shop_delete_start(req.user_id, text)
+            response.update(out)
+            if isinstance(out.get("pending_state"), dict):
+                session_state.set_state(req.user_id, pending_shop_delete=out["pending_state"])
+            _save_log(req, response, out.get("type", "shop_delete_start"))
             return response
 
         # Agenda-overzicht (READ) — heeft prioriteit

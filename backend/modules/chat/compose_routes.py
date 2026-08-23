@@ -28,9 +28,120 @@ class ComposeRequest(BaseModel):
 
 @router.post("")
 async def compose(req: ComposeRequest):
-    """Synthesizeer een gespreks-antwoord vanuit KB + bijbel + turns."""
-    if not (req.text or "").strip():
+    """Synthesizeer een gespreks-antwoord vanuit KB + bijbel + turns.
+
+    v13d_compose_capability_hook_001 (sessie 55) — Willem: op de Spark-tab werken
+    capabilities niet, want frontend gaat via /api/spark/compose (LLM-direct)
+    i.p.v. /api/chat/message (capability-router). Fix: eerst dezelfde intent-checks
+    doen als in /api/chat/message; alleen als niets matcht → LLM aanroepen.
+    """
+    text = (req.text or "").strip()
+    if not text:
         return {"success": False, "error": "empty text"}
+
+    # 1) HANDS-FIRST intent-hooks — DELETE flows en direct-execute capabilities
+    #    krijgen voorrang. Als één matcht → direct return, geen LLM-oproep.
+    try:
+        from . import smart_intents_service as si
+        from . import session_state
+        from modules.chat import wedervraag_service, snap_service
+        _snap = snap_service.SnapNLPService()
+        # Pending-states eerst (multi-turn confirmations)
+        state = session_state.get_state(req.user_id or "user-001")
+
+        pending_ad = state.get("pending_agenda_delete")
+        pending_sd = state.get("pending_shop_delete")
+
+        if pending_sd:
+            step = pending_sd.get("step")
+            if si.is_no(text) or wedervraag_service.is_skip(text):
+                session_state.set_state(req.user_id, pending_shop_delete=None)
+                out = si.handle_shop_delete_cancel()
+                return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+            if step == "choose":
+                # Bij choose mag alleen nummer/alle/ja/nee — anders is dat verwarrend
+                import re as _re
+                if _re.match(r"^\s*(alle|allemaal|all|\d+)\s*$", text.lower()):
+                    out = si.handle_shop_delete_choose(pending_sd, text)
+                    if isinstance(out.get("pending_state"), dict):
+                        session_state.set_state(req.user_id, pending_shop_delete=out["pending_state"])
+                    return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+                # Anders: clear pending en val door naar normale flow
+                session_state.set_state(req.user_id, pending_shop_delete=None)
+            elif si.is_yes(text) or _snap.detect_confirmation(text):
+                ids = pending_sd.get("shop_ids") or []
+                out = si.execute_shop_delete(req.user_id, ids)
+                session_state.set_state(req.user_id, pending_shop_delete=None)
+                return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+            else:
+                # Bij step==1 en tekst duidelijk iets ANDERS (langer dan een ja/nee/nummer),
+                # clear pending en val door naar normale flow. Alleen bij héél korte input
+                # (≤ 4 woorden) blijven we bij de "typ ja of nee" herhaling.
+                if len(text.split()) > 4:
+                    session_state.set_state(req.user_id, pending_shop_delete=None)
+                else:
+                    return {"success": True,
+                            "message": f"Nog even bevestigen: **{pending_sd.get('summary','winkel')}** verwijderen? Typ **ja** of **nee**.",
+                            "type": "shop_delete_repeat", "used_model": "hands"}
+
+        if pending_ad:
+            step = pending_ad.get("step")
+            if si.is_no(text) or wedervraag_service.is_skip(text):
+                session_state.set_state(req.user_id, pending_agenda_delete=None)
+                out = si.handle_agenda_delete_cancel()
+                return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+            if step == "choose":
+                import re as _re
+                if _re.match(r"^\s*(alle|allemaal|all|\d+)\s*$", text.lower()):
+                    out = si.handle_agenda_delete_choose(pending_ad, text)
+                    if isinstance(out.get("pending_state"), dict):
+                        session_state.set_state(req.user_id, pending_agenda_delete=out["pending_state"])
+                    return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+                session_state.set_state(req.user_id, pending_agenda_delete=None)
+            elif si.is_yes(text) or _snap.detect_confirmation(text):
+                ids = pending_ad.get("event_ids") or []
+                out = si.execute_agenda_delete(req.user_id, ids)
+                session_state.set_state(req.user_id, pending_agenda_delete=None)
+                return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+            else:
+                if len(text.split()) > 4:
+                    session_state.set_state(req.user_id, pending_agenda_delete=None)
+                else:
+                    return {"success": True,
+                            "message": f"Nog even bevestigen: **{pending_ad.get('summary','afspraak')}** verwijderen? Typ **ja** of **nee**.",
+                            "type": "agenda_delete_repeat", "used_model": "hands"}
+
+        # Nieuwe intents (delete-starts)
+        if req.user_id and si.detect_shop_delete_intent(text):
+            out = si.handle_shop_delete_start(req.user_id, text)
+            if isinstance(out.get("pending_state"), dict):
+                session_state.set_state(req.user_id, pending_shop_delete=out["pending_state"])
+            return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+
+        if req.user_id and si.detect_agenda_delete_intent(text):
+            from modules.auth.service import AuthService
+            _user = AuthService.get_user_by_id(req.user_id)
+            out = si.handle_agenda_delete_start(req.user_id, _user, text)
+            if isinstance(out.get("pending_state"), dict):
+                session_state.set_state(req.user_id, pending_agenda_delete=out["pending_state"])
+            return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
+
+        # 2) Capability-router (tellen_gebruikers, gebruikers_namen, etc.)
+        from . import capability_handler_service
+        cap_resp = capability_handler_service.route_capability(text, req.user_id)
+        if cap_resp and cap_resp.get("type") != "capability_placeholder":
+            return {
+                "success": True,
+                "message": cap_resp.get("message", ""),
+                "type": cap_resp.get("type", "capability_response"),
+                "capability_id": cap_resp.get("capability_id"),
+                "used_model": "hands",
+            }
+    except Exception as _hook_ex:
+        # Nooit de LLM-flow blokkeren door een hook-fout; log naar stdout en ga door.
+        print(f"[compose-hands-hook] {_hook_ex}")
+
+    # 3) Fallback: LLM-synthesizer (originele flow)
     result = await compose_response(
         user_text=req.text,
         user_id=req.user_id or "user-001",

@@ -772,13 +772,16 @@ def _require_admin_or_shop_owner(viewer_id: str, shop_id: str) -> None:
 
 
 # v6_shop_delete_001 — delete shop (test/legacy cleanup)
+# v13d_shop_owner_delete_001 (sessie 55) — Willem's logica: shop-eigenaar is
+# admin over zijn eigen winkel, ook zonder globaal admin-recht. Was voorheen
+# alleen admin-only → owner kon eigen testshops niet weggooien.
 @router.delete("/admin/shops/{shop_id}")
 async def admin_delete_shop(shop_id: str, viewer_id: str):
-    """Verwijder een shop. Alleen door admin. Roadkillshop (system-default)
-    kan niet verwijderd worden."""
-    _require_admin(viewer_id)
+    """Verwijder een shop. Toegestaan voor: globale admins OF de eigenaar van
+    die shop. Roadkillshop (system-default) kan niet verwijderd worden."""
     if shop_id == "shop-roadkill":
         raise HTTPException(400, "System-default shop kan niet verwijderd worden")
+    _require_admin_or_shop_owner(viewer_id, shop_id)
     data = load_json(SHOPS_FILE, default={"shops": []})
     shops = data.get("shops", [])
     before = len(shops)

@@ -83,7 +83,12 @@ def get_market_min_quote(market: str) -> float:
 
 
 def get_market_precision(market: str) -> Dict[str, int]:
-    """v7_market_precision_001 — Bitvavo precisie-instellingen per markt."""
+    """v7_market_precision_001 — Bitvavo precisie-instellingen per markt.
+
+    v13_atom_sell_precision_fix_001 (sessie 54): ATOM-EUR heeft `quantityDecimals=6`
+    terwijl code hardcoded 8 gebruikte. Bitvavo weigert dan met errorCode 429
+    ("too many decimal digits"). Nu leest hij het echte veld uit de markets-response.
+    """
     now = time.time()
     cached = _MARKETS_CACHE.get("data")
     if not cached or (now - _MARKETS_CACHE.get("ts", 0)) > _MARKETS_TTL:
@@ -92,8 +97,11 @@ def get_market_precision(market: str) -> Dict[str, int]:
     if cached and market in cached:
         info = cached[market]
         try:
+            # amount-precision uit Bitvavo `quantityDecimals` (aanwezig sinds 2024).
+            # Fallback naar 8 als het veld ontbreekt.
+            amount_prec = int(info.get("quantityDecimals") or 8)
             price_prec = int(info.get("pricePrecision") or 8)
-            return {"amount": 8, "price": price_prec}
+            return {"amount": amount_prec, "price": price_prec}
         except Exception:
             pass
     return {"amount": 8, "price": 8}

@@ -354752,40 +354752,34 @@
       "begrip": "Gedeployed",
       "status": "active",
       "lagen": {
-        "laag1": "Gedeployed betekent dat software of een nieuwe versie is uitgerold en beschikbaar is gemaakt.",
+        "laag1": "Gedeployed betekent dat software of een systeem beschikbaar is gemaakt om daadwerkelijk gebruikt te worden.",
         "laag2": "",
-        "laag3": "Gedeployed is de voltooide vorm van deployen.\n\nDeployen kan bestaan uit:\n\ncode bouwen;\nbestanden voorbereiden;\nsoftware plaatsen;\ninstellingen toepassen;\nde nieuwe versie starten;\ncontroleren of de toepassing werkt.\n\nEen deployment kan plaatsvinden naar:\n\neen ontwikkelomgeving;\neen testomgeving;\neen productieomgeving.",
-        "laag4": "Gedeployed geeft aan dat het uitrollen al heeft plaatsgevonden.\n\nVoorbeeld:\n\n“De nieuwe versie is gedeployed.”\n\nDe nieuwe versie is geplaatst en zou beschikbaar moeten zijn.\n\nBij een nieuwe deployment kan een eerdere versie worden vervangen of bijgewerkt.\n\nNa het deployen kan worden gecontroleerd:\n\nis de toepassing bereikbaar;\nis de juiste versie actief;\nwerken de functies;\nzijn de instellingen correct;\nzijn er fouten ontstaan.\n\nGedeployed is niet hetzelfde als:\n\nopgeslagen → de code staat in een bestand of project;\ngebouwd → de software is voorbereid;\ngetest → de werking is gecontroleerd;\nlive → de software is beschikbaar voor gebruikers.\n\nEen deployment kan onderdeel zijn van het proces om software live te zetten."
+        "laag3": "Gedeployed is het voltooid deelwoord van deployen. In softwareontwikkeling betekent het dat een programma, applicatie, update of andere software naar een doelomgeving is gebracht en daar beschikbaar is gemaakt voor gebruik. Dit kan bijvoorbeeld een server, cloudomgeving of productieomgeving zijn.",
+        "laag4": "Gedeployed is een Nederlandse vorm van het Engelse technische werkwoord deploy en betekent in softwareontwikkeling dat software naar een omgeving is uitgerold waar deze kan worden uitgevoerd of gebruikt. Dit kan bijvoorbeeld een testomgeving, stagingomgeving of productieomgeving zijn. Deployen kan bestaan uit het installeren van software, het beschikbaar maken van bestanden en configuraties en het uitvoeren van de benodigde stappen om de nieuwe versie operationeel te maken. Gedeployed betekent dus niet automatisch dat alles foutloos werkt; het geeft aan dat de software is uitgerold naar de betreffende omgeving."
       },
       "ws5": {
-        "wie": "Ontwikkelaars, beheerders en geautomatiseerde systemen.",
-        "wat": "Software of een nieuwe versie die is uitgerold en geplaatst.",
-        "wanneer": "Nadat het deployproces is uitgevoerd.",
-        "waar": "In een ontwikkel-, test- of productieomgeving.",
-        "waarom": "Om software, wijzigingen of een nieuwe versie beschikbaar te maken.",
-        "hoe": "Door de software te bouwen, te plaatsen, te configureren en te starten."
+        "wie": "Ontwikkelaars en beheerders deployen software.",
+        "wat": "Software beschikbaar maken in een doelomgeving.",
+        "wanneer": "Nadat software is ontwikkeld en klaar is om naar een andere omgeving te worden gebracht.",
+        "waar": "Bijvoorbeeld in een test-, staging- of productieomgeving.",
+        "waarom": "Om software daadwerkelijk te kunnen testen, gebruiken of beschikbaar te stellen.",
+        "hoe": "Door software, configuratie en benodigde onderdelen naar de doelomgeving uit te rollen en operationeel te maken."
       },
       "tags": [
-        "gedeployed",
-        "deployen",
-        "deployment",
-        "deployt",
-        "uitrollen",
-        "uitgerold",
-        "software",
-        "applicatie",
+        "build",
         "code",
-        "versie",
-        "update",
-        "release",
+        "deployt",
+        "live",
         "omgeving",
         "productie",
-        "testen",
-        "live",
-        "build",
-        "configuratie",
-        "automatisering",
+        "release",
+        "software",
+        "staging",
         "systeem",
+        "testen",
+        "uitgerold",
+        "update",
+        "versie",
         "weten"
       ],
       "topic": "",
@@ -354796,7 +354790,9 @@
       "created_at": "2026-08-03T19:23:50.540417+00:00",
       "metadata": {
         "source": "text_importer"
-      }
+      },
+      "updated_at": "2026-08-23T07:18:53.142768+00:00",
+      "updated_by": "user-001"
     },
     {
       "id": "kb-e775797e",
@@ -359195,6 +359191,362 @@
       "detected_by": "user-001",
       "created_by": "user-001",
       "created_at": "2026-08-23T07:16:50.553212+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-482665d7",
+      "begrip": "Bedrag",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bedrag is een hoeveelheid geld die ergens voor wordt betaald, ontvangen of gevraagd.",
+        "laag2": "Een bedrag wordt meestal uitgedrukt in een valuta, zoals euro's. Bijvoorbeeld: Het bedrag is €25.",
+        "laag3": "Bedrag verwijst naar een bepaalde hoeveelheid geld. Een bedrag kan bijvoorbeeld een prijs, betaling, schuld, vergoeding, inkomen of terugbetaling zijn. Het kan worden uitgedrukt in euro's of een andere valuta.",
+        "laag4": "Een bedrag is een bepaalde numerieke hoeveelheid geld die betrekking heeft op een financiële verplichting, betaling, ontvangst of waarde. Een bedrag kan bijvoorbeeld worden gevraagd voor een product of dienst, worden betaald als rekening, worden ontvangen als inkomen of worden terugbetaald. De waarde wordt doorgaans uitgedrukt in een bepaalde valuta, zoals de euro. In financiële administratie wordt een bedrag vaak gekoppeld aan een transactie, rekening of andere financiële registratie."
+      },
+      "ws5": {
+        "wie": "Een persoon, bedrijf of organisatie kan een bedrag betalen, ontvangen of vragen.",
+        "wat": "Een bepaalde hoeveelheid geld.",
+        "wanneer": "Bij financiële transacties, betalingen, inkomsten, schulden of vergoedingen.",
+        "waar": "Bijvoorbeeld op een rekening, factuur, bankrekening of betalingsbewijs.",
+        "waarom": "Om de financiële waarde van een betaling, verplichting of ontvangst aan te geven.",
+        "hoe": "Door een numerieke waarde te koppelen aan een valuta."
+      },
+      "tags": [
+        "bedrag",
+        "betaling",
+        "geld",
+        "inkomen",
+        "kosten",
+        "prijs",
+        "schuld",
+        "terugbetaling",
+        "valuta",
+        "vergoeding"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:17:11.710697+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-b1da2b36",
+      "begrip": "Vangen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vangen betekent dat je iets opvangt, vastpakt of bemachtigt.",
+        "laag2": "Je kunt bijvoorbeeld een bal vangen die naar je toe wordt gegooid. Het kan ook betekenen dat je een dier vangt of iemand aanhoudt.",
+        "laag3": "Vangen is een werkwoord met verschillende betekenissen. Het kan betekenen dat je een bewegend voorwerp opvangt of vastpakt, zoals een bal. Ook kan het betekenen dat je een dier of persoon bemachtigt, bijvoorbeeld een vis vangen of een dief vangen. Daarnaast kan vangen figuurlijk worden gebruikt, zoals in een glimp opvangen.",
+        "laag4": "Vangen betekent dat iemand of iets wordt onderschept, vastgepakt of bemachtigd. Bij een voorwerp gaat het bijvoorbeeld om het opvangen van een bal. Bij dieren kan het gaan om het bemachtigen van een dier, zoals bij vissen of jagen. In andere contexten kan vangen betekenen dat iemand wordt aangehouden of dat een bepaalde gebeurtenis of indruk wordt opgevangen. De betekenis wordt bepaald door de context."
+      },
+      "ws5": {
+        "wie": "Een persoon of dier kan iets vangen; mensen kunnen ook dieren of personen vangen.",
+        "wat": "Iets opvangen, vastpakken, onderscheppen of bemachtigen.",
+        "wanneer": "Wanneer iets of iemand wordt onderschept of wanneer je iets wilt bemachtigen.",
+        "waar": "Bijvoorbeeld bij sport, vissen, jagen, politie en dagelijkse situaties.",
+        "waarom": "Om iets of iemand vast te krijgen of te voorkomen dat het ontsnapt.",
+        "hoe": "Door iets op tijd te onderscheppen, vast te pakken of op een andere manier te bemachtigen."
+      },
+      "tags": [
+        "aanhouden",
+        "bal",
+        "bemachtigen",
+        "jagen",
+        "onderscheppen",
+        "opvangen",
+        "vangen",
+        "vastpakken",
+        "vissen"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:17:50.444299+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-28680764",
+      "begrip": "Prooien",
+      "status": "active",
+      "lagen": {
+        "laag1": "Prooien zijn dieren die door andere dieren worden gevangen en gegeten.",
+        "laag2": "Een roofdier jaagt op prooien om voedsel te vinden. Bijvoorbeeld: een spin vangt een vlieg als prooi.",
+        "laag3": "Prooien zijn dieren die worden bejaagd, gevangen of gegeten door andere dieren. Het dier dat jaagt wordt een roofdier genoemd. Een dier kan in de ene situatie een prooi zijn en in een andere situatie zelf een roofdier.",
+        "laag4": "Prooien zijn organismen die door andere organismen worden bejaagd of gevangen, meestal met als doel voedsel te verkrijgen. In de ecologie vormen prooien een belangrijk onderdeel van voedselketens en voedselwebben. De relatie tussen roofdier en prooi beïnvloedt onder andere populatiegroottes en het evenwicht binnen ecosystemen. Een soort kan tegelijkertijd zowel roofdier als prooi zijn, afhankelijk van de plaats die zij in de voedselketen inneemt."
+      },
+      "ws5": {
+        "wie": "Dieren en andere organismen kunnen als prooi dienen voor andere dieren.",
+        "wat": "Een organisme dat door een ander organisme wordt bejaagd of gevangen.",
+        "wanneer": "Wanneer een roofdier op zoek is naar voedsel.",
+        "waar": "In allerlei ecosystemen, zoals bossen, zeeën, graslanden en tuinen.",
+        "waarom": "Om voedsel te verkrijgen en energie binnen het ecosysteem door te geven.",
+        "hoe": "Door jagen, achtervolgen, lokken, verrassen of andere manieren van vangen."
+      },
+      "tags": [
+        "dieren",
+        "ecosysteem",
+        "jagen",
+        "natuur",
+        "prooi",
+        "roofdier",
+        "voedsel",
+        "voedselketen",
+        "voedselweb"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:18:10.477236+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-032d6a16",
+      "begrip": "Spindraden",
+      "status": "active",
+      "lagen": {
+        "laag1": "Spindraden zijn dunne, sterke draden die door spinnen worden gemaakt.",
+        "laag2": "Spinnen gebruiken spindraden bijvoorbeeld om webben te maken, prooien vast te houden of zich te verplaatsen.",
+        "laag3": "Spindraden worden door spinnen geproduceerd en bestaan voornamelijk uit eiwitrijke zijde. Ze kunnen verschillende eigenschappen hebben, zoals sterk, elastisch of kleverig. Afhankelijk van de soort spin en de functie worden verschillende soorten spindraad gebruikt.",
+        "laag4": "Spindraden zijn zijdeachtige draden die door spinnen worden geproduceerd met behulp van speciale klieren in hun achterlijf. Verschillende soorten spindraad kunnen verschillende eigenschappen hebben. Spinnen gebruiken de draden onder andere voor het bouwen van webben, het vastzetten van prooien, het maken van schuilplaatsen en het zich laten verplaatsen. Ondanks hun geringe dikte kunnen sommige spindraden relatief sterk en elastisch zijn."
+      },
+      "ws5": {
+        "wie": "Spinnen maken spindraden.",
+        "wat": "Dunne, zijdeachtige draden die door spinnen worden geproduceerd.",
+        "wanneer": "Wanneer een spin de draden nodig heeft voor bijvoorbeeld een web of bescherming.",
+        "waar": "Rond en vanuit het lichaam van de spin, bijvoorbeeld in een spinnenweb.",
+        "waarom": "Voor onder andere webben, het vangen van prooien en verplaatsing.",
+        "hoe": "Door zijdeachtige eiwitten via speciale klieren te produceren en tot draden te vormen."
+      },
+      "tags": [
+        "dieren",
+        "eiwitten",
+        "natuur",
+        "prooi",
+        "spin",
+        "spindraad",
+        "spindraden",
+        "spinnenweb",
+        "web",
+        "zijde"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:18:28.151339+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-1d9501c3",
+      "begrip": "Rapport",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een rapport is een document waarin informatie, bevindingen of resultaten worden beschreven.",
+        "laag2": "Een rapport geeft meestal op een overzichtelijke manier informatie over een onderwerp, onderzoek, gebeurtenis of situatie. Het kan bijvoorbeeld conclusies en aanbevelingen bevatten.",
+        "laag3": "Een rapport is een gestructureerd document waarin informatie over een bepaald onderwerp wordt vastgelegd. Een rapport kan bijvoorbeeld beschrijven wat er is onderzocht, welke resultaten zijn gevonden en welke conclusies daaruit volgen. Afhankelijk van het doel kan een rapport ook aanbevelingen of vervolgstappen bevatten.",
+        "laag4": "Een rapport is een gestructureerde schriftelijke weergave van informatie, bevindingen, resultaten of gebeurtenissen rond een bepaald onderwerp. Rapporten worden gebruikt om informatie vast te leggen, te analyseren en met anderen te delen. De opbouw verschilt per doel, maar kan onderdelen bevatten zoals een inleiding, onderzoeksvraag, methode, bevindingen, analyse, conclusie en aanbevelingen. Een rapport kan bijvoorbeeld worden opgesteld binnen onderwijs, wetenschap, zorg, bedrijfsvoering of overheid."
+      },
+      "ws5": {
+        "wie": "Een persoon, organisatie, onderzoeker of medewerker kan een rapport opstellen.",
+        "wat": "Een gestructureerd document met informatie, bevindingen of resultaten.",
+        "wanneer": "Wanneer informatie over een onderwerp moet worden vastgelegd of gedeeld.",
+        "waar": "Bijvoorbeeld in onderwijs, zorg, wetenschap, bedrijven en overheidsorganisaties.",
+        "waarom": "Om informatie overzichtelijk te documenteren en conclusies of bevindingen te communiceren.",
+        "hoe": "Door relevante informatie volgens een duidelijke structuur te verzamelen en vast te leggen."
+      },
+      "tags": [
+        "analyse",
+        "bevindingen",
+        "conclusie",
+        "document",
+        "informatie",
+        "onderzoek",
+        "rapport",
+        "rapportage",
+        "resultaten",
+        "verslag"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:19:16.279801+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-99f3e0d2",
+      "begrip": "Signaleren",
+      "status": "active",
+      "lagen": {
+        "laag1": "Signaleren betekent dat je iets opmerkt of herkent dat belangrijk kan zijn.",
+        "laag2": "Als je iets signaleert, merk je bijvoorbeeld een probleem, verandering, risico of bijzonder gedrag op. Daarna kun je bepalen of er iets mee moet gebeuren.",
+        "laag3": "Signaleren betekent dat je bewust iets opmerkt en onderkent. Het kan gaan om zichtbare of merkbare veranderingen, problemen, risico's, behoeften of gedrag. Signaleren is vaak een eerste stap voordat iemand verder onderzoekt, beoordeelt of handelt.",
+        "laag4": "Signaleren is het bewust opmerken en herkennen van een situatie, verandering, probleem, risico, behoefte of ander relevant verschijnsel. Het doel is om tijdig aandacht te geven aan iets dat mogelijk belangrijk is. Signaleren betekent niet automatisch dat de oorzaak of betekenis al vaststaat; het is vaak het begin van verdere observatie, onderzoek of actie."
+      },
+      "ws5": {
+        "wie": "Mensen, professionals en systemen kunnen signalen opmerken.",
+        "wat": "Een verandering, probleem, risico, behoefte of ander relevant verschijnsel herkennen.",
+        "wanneer": "Wanneer iets opvalt of mogelijk aandacht nodig heeft.",
+        "waar": "Bijvoorbeeld in zorg, onderwijs, werk, techniek en het dagelijks leven.",
+        "waarom": "Om belangrijke ontwikkelingen of problemen tijdig op te merken.",
+        "hoe": "Door goed te observeren, veranderingen te herkennen en relevante signalen vast te leggen of door te geven."
+      },
+      "tags": [
+        "behoefte",
+        "herkennen",
+        "observeren",
+        "opmerken",
+        "probleem",
+        "risico",
+        "signaal",
+        "signaleren",
+        "verandering"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:19:34.343517+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-8fd74bca",
+      "begrip": "Scherpe",
+      "status": "active",
+      "lagen": {
+        "laag1": "Scherpe betekent dat iets een punt of snijkant heeft waarmee het gemakkelijk kan prikken of snijden.",
+        "laag2": "Een mes kan scherp zijn en gemakkelijk door iets heen snijden. Scherpe kan ook figuurlijk betekenen dat iets krachtig, duidelijk of oplettend is.",
+        "laag3": "Scherpe is een verbogen vorm van het bijvoeglijk naamwoord scherp. Het kan letterlijk verwijzen naar een punt, rand of voorwerp waarmee je kunt snijden of prikken. Figuurlijk kan het bijvoorbeeld gaan om een scherpe opmerking, een scherp inzicht of iemand met een scherpe waarneming.",
+        "laag4": "Scherpe beschrijft iets dat letterlijk een fijne punt of snijdende rand heeft, waardoor het kan prikken of snijden. Het woord kan ook figuurlijk worden gebruikt voor iets dat duidelijk, intens, kritisch of opmerkzaam is. Zo kan een scherpe analyse diepgaand en kritisch zijn, terwijl scherp zien betekent dat iemand details goed kan waarnemen. De betekenis wordt bepaald door de context."
+      },
+      "ws5": {
+        "wie": "Mensen kunnen iets scherps gebruiken of scherpe eigenschappen hebben.",
+        "wat": "Een vorm van scherp die kan verwijzen naar een punt, snijkant of figuurlijke eigenschap.",
+        "wanneer": "Wanneer iets goed kan snijden of prikken, of wanneer iets opvallend duidelijk, kritisch of intens is.",
+        "waar": "Bijvoorbeeld bij messen, gereedschap, waarneming, taal en analyses.",
+        "waarom": "Om iets te kunnen snijden, nauwkeurig waar te nemen of iets krachtig te formuleren.",
+        "hoe": "Door een fijne punt of rand, of figuurlijk door nauwkeurigheid, duidelijkheid of scherpte."
+      },
+      "tags": [
+        "duidelijk",
+        "kritisch",
+        "mes",
+        "nauwkeurig",
+        "prikken",
+        "punt",
+        "scherp",
+        "snijden",
+        "waarneming"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:19:52.978986+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-fcbfd8f1",
+      "begrip": "Herindelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Herindelen betekent dat je iets opnieuw in groepen, delen of categorieën verdeelt.",
+        "laag2": "Als je iets herindeelt, verander je de bestaande indeling. Bijvoorbeeld: We gaan de bestanden opnieuw herindelen.",
+        "laag3": "Herindelen betekent dat een bestaande verzameling, ruimte of structuur opnieuw wordt verdeeld of georganiseerd. Daarbij kunnen onderdelen een andere plaats, groep of categorie krijgen. Het doel kan zijn om meer overzicht, een betere structuur of een andere ordening te creëren.",
+        "laag4": "Herindelen is het opnieuw organiseren of verdelen van onderdelen binnen een bestaand geheel. De oorspronkelijke indeling wordt daarbij aangepast, bijvoorbeeld door onderdelen te verplaatsen, categorieën te wijzigen of groepen opnieuw samen te stellen. Het kan worden toegepast op ruimtes, bestanden, informatie, organisaties, taken of andere structuren. Herindelen kan nodig zijn wanneer de bestaande structuur niet meer goed aansluit bij het doel of wanneer een overzichtelijkere indeling gewenst is."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties of systemen kunnen iets herindelen.",
+        "wat": "Een bestaande indeling opnieuw organiseren of verdelen.",
+        "wanneer": "Wanneer de huidige indeling niet meer geschikt of overzichtelijk is.",
+        "waar": "Bijvoorbeeld bij bestanden, ruimtes, informatie, taken en organisaties.",
+        "waarom": "Om een betere, duidelijkere of praktischere structuur te maken.",
+        "hoe": "Door onderdelen te verplaatsen, opnieuw te groeperen of andere categorieën te gebruiken."
+      },
+      "tags": [
+        "categorieën",
+        "groepen",
+        "herindelen",
+        "herstructureren",
+        "indelen",
+        "ordenen",
+        "organiseren",
+        "overzicht",
+        "structuur",
+        "verdelen"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:20:11.113428+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-5d43bf8c",
+      "begrip": "Herordenen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Herordenen betekent dat je iets opnieuw in een bepaalde volgorde zet.",
+        "laag2": "Als je iets herordent, verander je de bestaande volgorde om een andere of betere ordening te krijgen. Bijvoorbeeld: Ik ga de bestanden herordenen op datum.",
+        "laag3": "Herordenen betekent dat je onderdelen van een bestaande verzameling of structuur opnieuw rangschikt. De onderdelen blijven meestal hetzelfde, maar krijgen een andere volgorde of positie. Dit kan bijvoorbeeld bij teksten, bestanden, gegevens of taken.",
+        "laag4": "Herordenen is het opnieuw rangschikken van bestaande onderdelen volgens een bepaalde volgorde, regel of eigenschap. Anders dan bij herindelen hoeven de categorieën of groepen niet noodzakelijk te veranderen; het gaat vooral om het aanpassen van de volgorde. Je kunt bijvoorbeeld bestanden alfabetisch herordenen, taken op prioriteit zetten of informatie chronologisch rangschikken."
+      },
+      "ws5": {
+        "wie": "Mensen of systemen kunnen informatie of onderdelen herordenen.",
+        "wat": "Bestaande onderdelen opnieuw in een bepaalde volgorde plaatsen.",
+        "wanneer": "Wanneer de huidige volgorde niet meer handig, logisch of gewenst is.",
+        "waar": "Bijvoorbeeld bij bestanden, lijsten, teksten, gegevens en taken.",
+        "waarom": "Om meer overzicht, logica of efficiëntie te krijgen.",
+        "hoe": "Door onderdelen volgens een gekozen criterium opnieuw te rangschikken."
+      },
+      "tags": [
+        "herordenen",
+        "indeling",
+        "ordenen",
+        "organiseren",
+        "overzicht",
+        "prioriteit",
+        "rangschikken",
+        "sorteren",
+        "structuur",
+        "volgorde"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-23T07:21:04.065014+00:00",
       "metadata": {
         "source": "text_importer"
       }

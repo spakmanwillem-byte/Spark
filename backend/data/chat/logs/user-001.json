@@ -65044,11 +65044,103 @@
         "session_id": "ulk-3",
         "gesprek_nummer": 2587
       }
+    },
+    {
+      "id": "conv-425ae950",
+      "timestamp": "2026-08-23T09:15:46.382297+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bug: agenda-tab laadt niet",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Overmorgen heb je je eerste afspraak: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "bug-test-1",
+        "gesprek_nummer": 2588
+      }
+    },
+    {
+      "id": "conv-5e937e9a",
+      "timestamp": "2026-08-23T09:15:46.555231+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "doe eens een zelfscan",
+      "spark_response": "🪞 **Zelfscan van Spark** — even kijken hoe ik er voor sta:\n\n🧠 **Kennis**: 5685 kaarten in lades · **0** wachten in inbox\n   _Voelen=508 · Spreken=488 · Weten=3619 · Doen=1070_\n🗣️ **Woordenschat**: 6003 woorden bekend · **4366** actief in gebruik\n💬 **Activiteit**: 0 berichten verwerkt in laatste 24u\n🤲 **Handen**: 25/25 capabilities live (acties die ik echt kan)\n\n_Vraag 'wat staat er nog open' voor de roadmap-stand of 'gezondheidscheck' voor diepere audit._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "scan-test-1",
+        "gesprek_nummer": 2589
+      }
+    },
+    {
+      "id": "conv-fe86ff25",
+      "timestamp": "2026-08-23T09:17:06.060114+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bug: agenda-tab laadt niet",
+      "spark_response": "🐛 Bug-melding opgeslagen: **agenda-tab laadt niet**. Admin ziet 'm in de Bugs-tab (status: open).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "bug_early",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "bug_created"
+      },
+      "metadata": {
+        "session_id": "bug-final-1",
+        "gesprek_nummer": 2590
+      }
+    },
+    {
+      "id": "conv-1098e810",
+      "timestamp": "2026-08-23T09:17:06.229282+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "er is een probleem: notitie tab is stuk",
+      "spark_response": "🐛 Bug-melding opgeslagen: **notitie tab is stuk**. Admin ziet 'm in de Bugs-tab (status: open).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "bug_early",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "bug_created"
+      },
+      "metadata": {
+        "session_id": "bug-final-2",
+        "gesprek_nummer": 2591
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2587,
-    "last_updated": "2026-08-23T09:11:24.652206+00:00"
+    "total_conversations": 2591,
+    "last_updated": "2026-08-23T09:17:06.229282+00:00"
   }
 }

@@ -180,6 +180,36 @@ async def process_message(req: ChatMessage):
     try:
         from . import smart_intents_service as _si_note
         _matched_note, _note_content = _si_note.detect_note_intent(text)
+        _bug_matched, _bug_content = _si_note.detect_bug_intent(text)
+        # v13_bug_early_fastpath_001 (sessie 54) — "bug: agenda-tab laadt niet"
+        # werd overruled door agenda-capability check (want bevat 'agenda'). Nu
+        # bug-intent samen met note-intent in early fast-path.
+        if _bug_matched and _bug_content:
+            try:
+                from modules.auth.service import AuthService as _BugAuth
+                _user_obj = _BugAuth.get_user_by_id(req.user_id) if req.user_id else None
+            except Exception:
+                _user_obj = None
+            _out = _si_note.handle_bug(_user_obj, req.user_id, _bug_content)
+            _resp = {
+                "type": _out.get("type", "bug_created"),
+                "message": _out.get("message", ""),
+                "bug_id": _out.get("bug_id") or _out.get("id"),
+                "spark_response": _out.get("message", ""),
+                "success": True,
+                "used_model": "bug_detector",
+                "fast_path": True,
+                "knowledge_matches": [],
+                "sentiment": snap.detect_sentiment(text),
+                "emotion": None,
+                "unknown_words": [],
+                "snap_suggestions": [],
+            }
+            try:
+                _save_log(req, _resp, "bug_early")
+            except Exception:
+                pass
+            return _resp
         if _matched_note and _note_content:
             try:
                 from modules.auth.service import AuthService as _NoteAuth

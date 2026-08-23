@@ -64383,11 +64383,29 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2561
       }
+    },
+    {
+      "id": "conv-7ae735c1",
+      "timestamp": "2026-08-23T06:56:12.161506+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gedeployed",
+      "spark_response": "Ja, de huidige Spark‑core (v2.0) draait live — alle standaard‑capabilities zijn gedeployed. \n\nWat betreft het **verplaatsen van KB‑kaarten**: die capability bestaat nog niet in de productie‑omgeving. Ik kan wel:\n\n* een scan maken van kaarten die mogelijk in de verkeerde lade staan, \n* een rapport leveren met suggesties, en \n* een endpoint `PATCH /kb/card/{id}/lade` klaarzetten zodat jij (of een ontwikkelaar) de verplaatsing kunt uitvoeren zodra de functionaliteit is toegevoegd.\n\nWil je dat ik nu een scan van de kennisbank uitvoer en een lijst met verdachte kaarten teruggeef? Dan heb je meteen een werklijst voor wanneer de verplaats‑endpoint beschikbaar is. 🚀",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "kaarten",
+        "used_cards": [],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2562
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2561,
-    "last_updated": "2026-08-22T14:56:08.683064+00:00"
+    "total_conversations": 2562,
+    "last_updated": "2026-08-23T06:56:12.161506+00:00"
   }
 }

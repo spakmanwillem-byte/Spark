@@ -3,8 +3,26 @@
   "type": "hub",
   "doel": "Universele SEPA-vertaler (bank-formaat ↔ intern). Stateless parsers voor CAMT.053, MT940 en pain.001.001.03 generator. Reconcile-methodes voor matching tegen bestaande boek-entries.",
   "publiek": "SepaHub.parse_camt053, parse_mt940, generate_pain001, reconcile(book_id, tx_list)",
-  "afhankelijkheden": ["modules.boekhouder.books (alleen reconcile)"],
-  "endpoints": "geen eigen endpoints — geconsumeerd via boekhouding-books-routes",
+  "afhankelijkheden": [
+    "modules.boekhouder.books (alleen reconcile)"
+  ],
+  "endpoints": [],
   "encryption_slot": null,
-  "status": "active"
+  "status": "active",
+  "footnote": "",
+  "blueprint_ref": null,
+  "tags": [],
+  "owner": "spark-system",
+  "split_from": null,
+  "container_type": "dir",
+  "file_count": 2,
+  "subdir_count": 0,
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
+  "encryption": {
+    "enabled": false,
+    "algorithm": null,
+    "key_id": null,
+    "key_holder": null
+  }
 }

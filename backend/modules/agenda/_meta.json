@@ -19,7 +19,11 @@
   "children_max": 4,
   "endpoints": [
     "DELETE /agenda/events/{user_id}/{event_id}",
+    "GET /agenda/archive/{user_id}",
+    "GET /agenda/archive/{user_id}/{month}",
     "GET /agenda/events/{user_id}",
+    "POST /agenda/archive-now",
+    "POST /agenda/archive-now/{user_id}",
     "POST /agenda/events/{user_id}",
     "PUT /agenda/events/{user_id}/{event_id}"
   ],
@@ -33,7 +37,7 @@
   "created_at": "2026-05-26T15:54:32.113277+00:00",
   "last_touched": "2026-07-20T09:08:07.129452+00:00",
   "activity_count": 0,
-  "file_count": 2,
+  "file_count": 3,
   "subdir_count": 0,
   "extra": {}
 }

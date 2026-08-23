@@ -18,11 +18,14 @@
   "split_from": null,
   "children_max": 4,
   "endpoints": [
+    "DELETE /settings/system/spark-logo",
     "DELETE /settings/user/{user_id}/{key}",
     "GET /settings/effective/{user_id}",
     "GET /settings/schema",
+    "GET /settings/spark-logo/serve",
     "GET /settings/system",
     "GET /settings/user/{user_id}",
+    "POST /settings/system/spark-logo",
     "PUT /settings/system/{key}",
     "PUT /settings/user/{user_id}/{key}"
   ],

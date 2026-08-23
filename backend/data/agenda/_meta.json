@@ -10,15 +10,7 @@
   "footnote": "",
   "split_from": null,
   "children_max": 4,
-  "endpoints": [
-    "GET /api/agenda/events/{user_id}",
-    "POST /api/agenda/events/{user_id}",
-    "DELETE /api/agenda/events/{user_id}/{event_id}",
-    "GET /api/agenda/archive/{user_id}",
-    "GET /api/agenda/archive/{user_id}/{YYYY-MM}",
-    "POST /api/agenda/archive-now",
-    "POST /api/agenda/archive-now/{user_id}"
-  ],
+  "endpoints": [],
   "tags": [],
   "encryption": {
     "enabled": false,
@@ -29,7 +21,7 @@
   "created_at": "2026-05-26T15:54:32.306301+00:00",
   "last_touched": "2026-08-23T09:30:00+00:00",
   "activity_count": 11,
-  "file_count": 2,
+  "file_count": 3,
   "subdir_count": 0,
   "extra": {},
   "features": [

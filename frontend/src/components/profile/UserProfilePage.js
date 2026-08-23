@@ -4,13 +4,14 @@ import { useAuth } from '../../context/AuthContext';
 import {
   User, Save, X, AlertTriangle, Globe,
   Camera, MapPin, Upload, Check, MessageSquare,
-  Image as ImageIcon, Sparkles, ChevronDown, Trash2,
+  Image as ImageIcon, Sparkles, ChevronDown, Trash2, Store,
   Backpack, Award, Plus, Settings, Palette, Volume2, Link2, KeyRound, RotateCcw, ShieldCheck,
 } from 'lucide-react';
 import { DnDCharacterSheet } from './DnDCharacterSheet';
 import { BarkModal } from '../shared/BarkModal';
 import { DeviceSettingsPanel } from './DeviceSettingsPanel';
 import { AnnouncePrefsPanel } from './AnnouncePrefsPanel';
+import { ShopTabView } from '../workspace/ShopTabView';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -27,6 +28,16 @@ export function UserProfilePage({ onNavigate }) {
   const [saving, setSaving] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
   const [extProfile, setExtProfile] = useState({});
+  // v13c_shop_tab_moved_to_profile_001 (sessie 54) — Winkel-tabs verhuisd van
+  // Archief naar Mijn Profiel. Reden: shop-onderhoud hoort logisch bij de user,
+  // niet bij "archief" (dat is voor bestanden/gesprekken).
+  const [userShops, setUserShops] = useState([]);
+  useEffect(() => {
+    fetch(`${API}/api/winkelstraat/shops`)
+      .then(r => r.json())
+      .then(d => setUserShops((d.shops || []).filter(s => s.owner_user_id === userId)))
+      .catch(() => setUserShops([]));
+  }, [userId]);
   const [persona, setPersona] = useState({
     geslacht: 'man',
     introvert_extravert: 65,
@@ -94,6 +105,25 @@ export function UserProfilePage({ onNavigate }) {
                 </button>
               );
             })}
+            {/* v13c_shop_tab_moved_to_profile_001 — dynamische winkel-tabs per user-shop */}
+            {userShops.map(s => {
+              const tabId = `shop-${s.id}`;
+              const a = activeTab === tabId;
+              const accent = s.color_accent || '#a855f7';
+              return (
+                <button
+                  key={tabId}
+                  data-testid={`profile-tab-${tabId}`}
+                  onClick={() => setActiveTab(tabId)}
+                  className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
+                  style={{ color: a ? accent : '#94a3b8' }}
+                >
+                  <Store className="w-3.5 h-3.5" />
+                  Winkel: {s.naam}
+                  {a && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: accent }} />}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -115,6 +145,13 @@ export function UserProfilePage({ onNavigate }) {
             {activeTab === 'instellingen' && (
               <InstellingenTab userId={userId} user={user} />
             )}
+            {/* v13c_shop_tab_moved_to_profile_001 — winkel-tab render */}
+            {activeTab.startsWith('shop-') && (() => {
+              const shopId = activeTab.substring(5);
+              const shop = userShops.find(s => s.id === shopId);
+              if (!shop) return <div className="text-center py-16 text-xs text-slate-500">Winkel niet gevonden.</div>;
+              return <ShopTabView shop={shop} userId={userId} />;
+            })()}
           </div>
         </div>
       </div>

@@ -4,9 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import {
   Archive, Search, Upload, Trash2, X, File as FileIcon,
   Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag, HardDrive,
-  MessageSquare, Lock, Calendar, ChevronRight, ChevronDown, FileText, Store
+  MessageSquare, Lock, Calendar, ChevronRight, ChevronDown, FileText
 } from 'lucide-react';
-import { ShopTabView } from './ShopTabView';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -49,22 +48,9 @@ export function ArchiefPage({ onNavigate }) {
   const [personalDocs, setPersonalDocs] = useState([]);
   const [availableDocTypes, setAvailableDocTypes] = useState([]);
   const [openDoc, setOpenDoc] = useState(null);
-  // v11_shop_tab_in_archief_001 — eigen shops van deze user (dynamische tabs).
-  const [userShops, setUserShops] = useState([]);
-  useEffect(() => {
-    fetch(`${API}/api/winkelstraat/shops`)
-      .then(r => r.json())
-      .then(d => setUserShops((d.shops || []).filter(s => s.owner_user_id === userId)))
-      .catch(() => setUserShops([]));
-  }, [userId]);
 
   const load = useCallback(async () => {
     setLoading(true);
-    if (activeTab.startsWith('shop-')) {
-      // v11_shop_tab_in_archief_001 — ShopTabView doet zelf zijn fetches; hier niks laden.
-      setLoading(false);
-      return;
-    }
     if (activeTab === 'gesprekken') {
       // Read-only: gesprekslogs ophalen
       const params = new URLSearchParams({ limit: '200' });
@@ -224,29 +210,12 @@ export function ArchiefPage({ onNavigate }) {
                 </button>
               );
             })}
-            {/* v11_shop_tab_in_archief_001 — dynamische winkel-tabs per user-shop. */}
-            {userShops.map(s => {
-              const tabId = `shop-${s.id}`;
-              const isActive = activeTab === tabId;
-              return (
-                <button key={tabId} data-testid={`archief-tab-${tabId}`}
-                  onClick={() => setActiveTab(tabId)}
-                  className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
-                  style={{ color: isActive ? (s.color_accent || '#a855f7') : '#94a3b8' }}>
-                  <Store className="w-3.5 h-3.5" />
-                  Winkel: {s.naam}
-                  {isActive && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: s.color_accent || '#a855f7' }} />}
-                </button>
-              );
-            })}
           </div>
         </div>
 
         {/* Search + Content */}
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="max-w-5xl mx-auto">
-            {/* Search — niet voor shop-tabs (die hebben eigen UI) */}
-            {!activeTab.startsWith('shop-') && (
             <div className="relative mb-4 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
               <input data-testid="archief-search" type="text"
@@ -259,18 +228,9 @@ export function ArchiefPage({ onNavigate }) {
                 </button>
               )}
             </div>
-            )}
 
             {loading ? (
               <div className="text-center py-16 text-xs text-slate-500">Laden...</div>
-            ) : activeTab.startsWith('shop-') ? (
-              /* v11_shop_tab_in_archief_001 — Winkel-tab per user-shop */
-              (() => {
-                const shopId = activeTab.substring(5);
-                const shop = userShops.find(s => s.id === shopId);
-                if (!shop) return <div className="text-center py-16 text-xs text-slate-500">Winkel niet gevonden.</div>;
-                return <ShopTabView shop={shop} userId={userId} />;
-              })()
             ) : activeTab === 'gesprekken' ? (
               <ConversationsView
                 conversations={conversations}

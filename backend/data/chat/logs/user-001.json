@@ -65652,11 +65652,1123 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2609
       }
+    },
+    {
+      "id": "conv-56f085bd",
+      "timestamp": "2026-08-23T13:27:26.806510+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "agenda-tue",
+        "gesprek_nummer": 2610
+      }
+    },
+    {
+      "id": "conv-d756e7ea",
+      "timestamp": "2026-08-23T13:27:26.994729+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "mijn afspraak van aanstaande dinsdag uit de agenda",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "agenda-tue2",
+        "gesprek_nummer": 2611
+      }
+    },
+    {
+      "id": "conv-8ac062ba",
+      "timestamp": "2026-08-23T13:29:13.771916+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-1",
+        "gesprek_nummer": 2612
+      }
+    },
+    {
+      "id": "conv-3f5dec22",
+      "timestamp": "2026-08-23T13:29:14.187696+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "Ik hoorde dat je dinsdag iets met halen hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-2",
+        "gesprek_nummer": 2613
+      }
+    },
+    {
+      "id": "conv-a86a4ef4",
+      "timestamp": "2026-08-23T13:29:14.405663+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor vrijdag",
+      "spark_response": "📅 Geen afspraken Friday 28 Aug. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrijdag"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-3",
+        "gesprek_nummer": 2614
+      }
+    },
+    {
+      "id": "conv-3d37b21b",
+      "timestamp": "2026-08-23T13:29:14.596988+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "kun je even in mijn agenda kijken naar volgende week",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Overmorgen heb je je eerste afspraak: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "kijken"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "test-no-fake-tool-1",
+        "gesprek_nummer": 2615
+      }
+    },
+    {
+      "id": "conv-80deffc5",
+      "timestamp": "2026-08-23T13:29:14.835045+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoi Spark, hoe gaat het",
+      "spark_response": "Hallo Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "test-no-emoji-1",
+        "gesprek_nummer": 2616
+      }
+    },
+    {
+      "id": "conv-3fb648c2",
+      "timestamp": "2026-08-23T13:29:15.020963+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "test-regr-vandaag",
+        "gesprek_nummer": 2617
+      }
+    },
+    {
+      "id": "conv-d310fdca",
+      "timestamp": "2026-08-23T13:29:15.254306+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen",
+      "spark_response": "📅 Geen afspraken morgen. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "test-regr-morgen",
+        "gesprek_nummer": 2618
+      }
+    },
+    {
+      "id": "conv-982321bc",
+      "timestamp": "2026-08-23T13:29:34.252972+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "diag-wat staa",
+        "gesprek_nummer": 2619
+      }
+    },
+    {
+      "id": "conv-07f26eaf",
+      "timestamp": "2026-08-23T13:29:34.467830+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen",
+      "spark_response": "📅 Geen afspraken morgen. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "diag-wat staa",
+        "gesprek_nummer": 2620
+      }
+    },
+    {
+      "id": "conv-b6853c80",
+      "timestamp": "2026-08-23T13:29:34.800618+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "Ik hoorde dat je dinsdag iets met halen hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "diag-zou jij ",
+        "gesprek_nummer": 2621
+      }
+    },
+    {
+      "id": "conv-8cd09463",
+      "timestamp": "2026-08-23T13:32:04.626727+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "agenda-1b",
+        "gesprek_nummer": 2622
+      }
+    },
+    {
+      "id": "conv-bf5dcbdd",
+      "timestamp": "2026-08-23T13:32:04.813060+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "reg-vandaag",
+        "gesprek_nummer": 2623
+      }
+    },
+    {
+      "id": "conv-07d56841",
+      "timestamp": "2026-08-23T13:32:05.035704+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen",
+      "spark_response": "📅 Geen afspraken morgen. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "reg-morgen",
+        "gesprek_nummer": 2624
+      }
+    },
+    {
+      "id": "conv-35e602c0",
+      "timestamp": "2026-08-23T13:33:42.382198+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1b",
+        "gesprek_nummer": 2625
+      }
+    },
+    {
+      "id": "conv-4e768440",
+      "timestamp": "2026-08-23T13:33:42.597650+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1",
+        "gesprek_nummer": 2626
+      }
+    },
+    {
+      "id": "conv-0fccbbc8",
+      "timestamp": "2026-08-23T13:33:42.779445+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor vrijdag",
+      "spark_response": "📅 Geen afspraken Friday 28 Aug. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrijdag"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1c",
+        "gesprek_nummer": 2627
+      }
+    },
+    {
+      "id": "conv-dfa6121c",
+      "timestamp": "2026-08-23T13:33:42.962101+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "retest-vandaag",
+        "gesprek_nummer": 2628
+      }
+    },
+    {
+      "id": "conv-9e99f173",
+      "timestamp": "2026-08-23T13:33:43.158149+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen",
+      "spark_response": "📅 Geen afspraken morgen. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "retest-morgen",
+        "gesprek_nummer": 2629
+      }
+    },
+    {
+      "id": "conv-252abcb7",
+      "timestamp": "2026-08-23T13:33:43.415610+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik heb morgen om 14:00 een afspraak met de tandarts",
+      "spark_response": "Ik hoorde dat je morgen om 14:00 tandarts hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "retest-create",
+        "gesprek_nummer": 2630
+      }
+    },
+    {
+      "id": "conv-71c9fe53",
+      "timestamp": "2026-08-23T13:33:51.887525+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1b",
+        "gesprek_nummer": 2631
+      }
+    },
+    {
+      "id": "conv-5dc8f4b5",
+      "timestamp": "2026-08-23T13:33:52.095447+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1",
+        "gesprek_nummer": 2632
+      }
+    },
+    {
+      "id": "conv-f6c6e335",
+      "timestamp": "2026-08-23T13:33:52.284427+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor vrijdag",
+      "spark_response": "📅 Geen afspraken Friday 28 Aug. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrijdag"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1c",
+        "gesprek_nummer": 2633
+      }
+    },
+    {
+      "id": "conv-c9406058",
+      "timestamp": "2026-08-23T13:33:52.462944+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "retest-vandaag",
+        "gesprek_nummer": 2634
+      }
+    },
+    {
+      "id": "conv-63a74bbd",
+      "timestamp": "2026-08-23T13:33:52.656011+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen",
+      "spark_response": "📅 Geen afspraken morgen. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "retest-morgen",
+        "gesprek_nummer": 2635
+      }
+    },
+    {
+      "id": "conv-00ff55f1",
+      "timestamp": "2026-08-23T13:33:52.892533+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik heb morgen om 14:00 een afspraak met de tandarts",
+      "spark_response": "Ik hoorde dat je morgen om 14:00 tandarts hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "retest-create",
+        "gesprek_nummer": 2636
+      }
+    },
+    {
+      "id": "conv-dbcde961",
+      "timestamp": "2026-08-23T13:34:00.749306+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1b",
+        "gesprek_nummer": 2637
+      }
+    },
+    {
+      "id": "conv-8e840fa9",
+      "timestamp": "2026-08-23T13:34:00.923745+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Overmorgen: **Tuin bij Roeline** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1",
+        "gesprek_nummer": 2638
+      }
+    },
+    {
+      "id": "conv-8a4d179a",
+      "timestamp": "2026-08-23T13:34:01.107363+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor vrijdag",
+      "spark_response": "📅 Geen afspraken Friday 28 Aug. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrijdag"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "retest-1c",
+        "gesprek_nummer": 2639
+      }
+    },
+    {
+      "id": "conv-860ffdd3",
+      "timestamp": "2026-08-23T13:34:01.294233+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "retest-vandaag",
+        "gesprek_nummer": 2640
+      }
+    },
+    {
+      "id": "conv-a42deceb",
+      "timestamp": "2026-08-23T13:34:01.468978+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen",
+      "spark_response": "📅 Geen afspraken morgen. Wel daarna: **Tuin bij Roeline** (overmorgen om 13:00).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "retest-morgen",
+        "gesprek_nummer": 2641
+      }
+    },
+    {
+      "id": "conv-f7e70c1b",
+      "timestamp": "2026-08-23T13:34:01.638477+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik heb morgen om 14:00 een afspraak met de tandarts",
+      "spark_response": "Ik hoorde dat je morgen om 14:00 tandarts hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "retest-create",
+        "gesprek_nummer": 2642
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2609,
-    "last_updated": "2026-08-23T12:28:11.770013+00:00"
+    "total_conversations": 2642,
+    "last_updated": "2026-08-23T13:34:01.638477+00:00"
   }
 }

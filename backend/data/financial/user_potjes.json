@@ -7,18 +7,19 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.3065,
+          "capital": -0.05,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": -52.277195,
+            "size": 0.00095644,
+            "highest_price": 236.32,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:28:57.557582+00:00"
           },
-          "market": "ATOM-EUR",
+          "market": "BCH-EUR",
           "stats": {
             "trades": 4,
             "wins": 2,
@@ -89,16 +90,17 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 4.9,
+          "capital": 0.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 0.0,
+            "size": 2.08e-06,
+            "highest_price": 66163.0,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:28:57.991259+00:00"
           },
           "market": "BTC-EUR",
           "stats": {
@@ -147,16 +149,17 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 4.9,
+          "capital": 0.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 0.0,
+            "size": 4.671e-05,
+            "highest_price": 2098.55,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:29:01.179555+00:00"
           },
           "market": "ETH-EUR",
           "stats": {
@@ -198,16 +201,17 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 4.9,
+          "capital": 0.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 0.0,
+            "size": 0.00138955,
+            "highest_price": 81.242,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:28:59.425169+00:00"
           },
           "market": "SOL-EUR",
           "stats": {
@@ -249,16 +253,17 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 4.9,
+          "capital": 0.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 0.0,
+            "size": 1.90146,
+            "highest_price": 0.19431,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:28:56.784912+00:00"
           },
           "market": "ADA-EUR",
           "stats": {
@@ -301,22 +306,22 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 10.15,
+          "capital": -0.05,
           "max_size": 50.0,
           "pot_locked": false,
-          "market": "ATOM-EUR",
+          "market": "BCH-EUR",
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
             "is_open": true,
-            "entry_price": 1.3529,
-            "highest_price": 1.4604,
+            "entry_price": -52.277195,
+            "size": 0.00095644,
+            "highest_price": 236.32,
             "trailing_active": true,
-            "entry_time": "2026-08-21T17:09:29.254489+00:00",
-            "amount_eur": 10.1
+            "entry_time": "2026-08-23T13:29:03.099558+00:00"
           },
           "stats": {
-            "trades": 1,
+            "trades": 2,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -331,22 +336,34 @@
               "market": "ATOM-EUR"
             }
           ],
-          "reconcile_audit": [],
-          "last_action": "BUY @ €1.35",
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-23T13:28:27.455593+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 7.502402 ATOM maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 1.3529
+            }
+          ],
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €1.3529",
           "original_max_size": 50.0
         },
         {
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 4.9,
+          "capital": 0.0,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "ETH-EUR",
           "minted_at": "2026-07-23T09:16:23.939810+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": false
+            "is_open": true,
+            "entry_price": 0.0,
+            "size": 4.671e-05,
+            "highest_price": 2098.55,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:29:05.898380+00:00"
           },
           "stats": {
             "trades": 0,
@@ -362,18 +379,18 @@
           "id": "pot-008",
           "index": 7,
           "nummer": 8,
-          "capital": 4.9,
+          "capital": -0.05,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
-          "market": "EUR",
+          "market": "BCH-EUR",
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null,
-            "amount_eur": null
+            "is_open": true,
+            "entry_price": -52.277195,
+            "size": 0.00095644,
+            "highest_price": 236.32,
+            "trailing_active": true,
+            "entry_time": "2026-08-23T13:29:12.254549+00:00"
           },
           "stats": {
             "trades": 0,
@@ -389,7 +406,7 @@
         {
           "id": "pot-009",
           "index": 8,
-          "capital": 4.9,
+          "capital": 0.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -503,7 +520,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.3065,
+          "capital": 0.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -575,7 +592,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 4.9,
+          "capital": 0.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -608,7 +625,7 @@
       "potjes": [],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-08-23T06:36:48.942729+00:00"
+      "created_at": "2026-08-23T13:31:35.925634+00:00"
     },
     "user-1996fa59": {
       "user_id": "user-1996fa59",

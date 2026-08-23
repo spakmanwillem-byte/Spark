@@ -34,6 +34,14 @@ _AGENDA_PATTERNS = [
     r"\bwat staat\b.*\b(agenda|planning|gepland)\b",
     r"\bwat staat (er|op (de )?planning)\b",
     r"\bwat (staat|heb ik) (er )?(vandaag|morgen|overmorgen|deze week)\b",
+    # v13c_agenda_weekdays_001 (sessie 54) — Willem: "wat staat er voor dinsdag" viel
+    # buiten patronen. Toegevoegd: weekdagnamen + "aanstaande/volgende" prefix.
+    r"\bwat staat er\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
+    r"\bafspraak\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
+    r"\b(uit )?(mijn )?agenda\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
+    # v13c_agenda_read_first_001 — "uit de agenda halen/lezen/kijken" = altijd READ
+    r"\b(uit|in|van)\s+(de|mijn)\s+agenda\b.*\b(halen|lezen|kijken|zien|checken)\b",
+    r"\b(afspraak|afspraken)\b.*\b(van|voor|op)\b.*\b(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|vandaag|morgen|overmorgen)\b",
     r"\b(heb|hebben) ik\b.*\b(afspraken|afspraak|in (de )?agenda)\b",
     r"\b(heb|hebben) ik\s+(vandaag|morgen|overmorgen)\b.*\b(afspraken|afspraak|wat te doen|iets te doen)\b",
     r"\b(heb|hebben) ik\s+(vandaag|morgen|overmorgen|deze week)\b.*\b(te doen|iets|wat)",
@@ -44,7 +52,14 @@ _AGENDA_PATTERNS = [
 ]
 
 
-_AGENDA_DAY_RX = re.compile(r"\b(vandaag|morgen|overmorgen|deze week)\b", re.IGNORECASE)
+# v13c_agenda_weekdays_001 — day-focus regex nu ook weekdagen + prefix
+_AGENDA_DAY_RX = re.compile(
+    r"\b(?:aanstaande\s+|volgende\s+|komende\s+)?(vandaag|morgen|overmorgen|deze week|"
+    r"maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)\b",
+    re.IGNORECASE,
+)
+_WEEKDAY_INDEX = {"maandag": 0, "dinsdag": 1, "woensdag": 2, "donderdag": 3,
+                  "vrijdag": 4, "zaterdag": 5, "zondag": 6}
 
 
 def detect_agenda_intent(text: str) -> bool:
@@ -81,6 +96,7 @@ def handle_agenda(user_id: str, user: Optional[dict], text: str) -> Dict:
     horizon_end = local_now + timedelta(days=7)
 
     # v6_agenda_dayfocus_001 — Detecteer dag-focus (morgen/overmorgen) uit user-tekst
+    # v13c_agenda_weekdays_001 — nu ook weekdagen (dinsdag, aanstaande dinsdag, …)
     day_focus = None  # None = standaard (vandaag + komende week)
     day_match = _AGENDA_DAY_RX.search(text or "")
     if day_match:
@@ -91,6 +107,14 @@ def handle_agenda(user_id: str, user: Optional[dict], text: str) -> Dict:
             day_focus = today + timedelta(days=2)
         elif word == "vandaag":
             day_focus = today
+        elif word in _WEEKDAY_INDEX:
+            # Volgende voorkomen van deze weekdag (of vandaag als het al is)
+            target_dow = _WEEKDAY_INDEX[word]
+            today_dow = today.weekday()
+            delta = (target_dow - today_dow) % 7
+            if delta == 0:
+                delta = 7  # "aanstaande dinsdag" op een dinsdag = volgende week
+            day_focus = today + timedelta(days=delta)
         # "deze week" laat focus op None (alles toont)
 
     # Sorteer + filter toekomstige

@@ -1,0 +1,45 @@
+{
+  "summary": "Backend regression tests uitgevoerd voor v13c_agenda_weekdays_001 (BUG 1/1b/1c) + no-fake-tool-syntax (BUG 2) + no-emoji-in-LLM (BUG 2b) + vandaag/morgen regressie. 4/7 tests PASSED, 3/7 FAILED. Kern-fix (BUG 1 'wat staat er voor dinsdag' -> 'Tuin bij Roeline' overmorgen) werkt correct. BUG 1b ('aanstaande dinsdag ... willen halen') faalt: intent-detectie kiest agenda_proposal (nieuwe afspraak voorstellen) i.p.v. agenda_overview lezen. Regressie: 'wat staat er vandaag'/'morgen' geeft nu type='capability_response' i.p.v. type='agenda_overview' (content is wel correct met 'Tuin bij Roeline' info).",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "BUG 1b (agenda_proposal collision): message 'zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen' -> type='agenda_proposal' met response 'Ik hoorde dat je dinsdag iets met halen hebt. Zal ik het noteren?'. Verkeerde intent: user wil bestaande afspraak LEZEN, systeem interpreteert 'halen' als nieuw event om te noteren. agenda_proposal intent vuurt vóór/i.p.v. agenda_overview.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "Regressie type-veld: 'wat staat er vandaag' en 'wat staat er morgen' geven type='capability_response' i.p.v. type='agenda_overview'. Content wel correct (📅 emoji + 'Tuin bij Roeline overmorgen 13:00'). Review request eiste type='agenda_overview'."
+      },
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "BUG 2b niet echt getest: 'hoi Spark, hoe gaat het' triggert greeting fastpath (type='greeting', msg='Hallo Gebruiker!'), niet de LLM. Deep-mode toggle via body param 'mode':'diep'/'deep_mode':true werkt niet — greeting intent onderschept eerst. Kan niet valideren of LLM-output emoji-vrij is via deze weg."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_agenda_weekday_no_emoji.py",
+    "/app/test_reports/pytest/pytest_agenda_weekday.xml"
+  ],
+  "action_items": [
+    "Fix intent-prioriteit: agenda_overview MOET vóór agenda_proposal draaien wanneer bericht agenda-lees-woorden bevat ('uit de agenda halen', 'kijken', 'staat', 'afspraak van'). Nu wint agenda_proposal op 'halen' woord.",
+    "Herstel type='agenda_overview' voor 'wat staat er vandaag/morgen' — momenteel returned de handler capability_response terwijl content agenda-inhoud is. Check routes.py rond regel 1113 (composer helpers may zijn wrapping).",
+    "Voor BUG 2b test: verstrek een echte deep-mode trigger die greeting-fastpath omzeilt (bijv. mode-param dat greeting-intent skipt), of test met een prompt die niet als greeting/capability matched."
+  ],
+  "critical_code_review_comments": [
+    "smart_intents_service.py regel 39-41 nieuwe weekday patterns matchen breed op 'uit mijn agenda halen ... dinsdag' — maar agenda_proposal intent (elders) vuurt eerder door 'halen' als event-verb.",
+    "Voor natuurlijke NL zinnen zoals 'zou jij X uit de agenda halen' moet er negative-lookahead of intent-prioriteit zijn: als een van _AGENDA_PATTERNS matched dient dat prioritair te zijn over agenda_proposal/note-intents.",
+    "Type-veld inconsistentie tussen 'vandaag' (capability_response) en 'dinsdag' (agenda_overview) suggereert dat verschillende code-paden output-wrapping doen. Willem's productie-consumers rekenen op stabiele type-strings."
+  ],
+  "updated_files": ["/app/backend/tests/test_agenda_weekday_no_emoji.py"],
+  "success_rate": {"backend": "57% (4/7)", "frontend": "n/a"},
+  "test_credentials": "user_id=user-001 (no auth token required)",
+  "seed_data_creation": "Geen — gebruik bestaande agenda data (Tuin bij Roeline overmorgen 13:00 in /app/backend/data/agenda/user-001.json).",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Test file /app/backend/tests/test_agenda_weekday_no_emoji.py bevat 7 tests. PASSED: dinsdag (BUG 1), vrijdag (BUG 1c), volgende week no-fake-tool (BUG 2), greeting geen-emoji (indirect). FAILED: aanstaande-dinsdag-halen (agenda_proposal wint), vandaag/morgen regressie (type=capability_response i.p.v. agenda_overview). Fake-tool-syntax werd nergens gedetecteerd — die fix werkt.",
+  "rca of the issue": "BUG 1b RCA: In routes.py wordt waarschijnlijk detect_agenda_proposal() aangeroepen vóór of naast detect_agenda_intent(). Het bericht 'zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen' bevat werkwoord 'halen' dat door de proposal-intent als event-titel wordt geëxtraheerd. Mitigatie: (a) verhoog prioriteit van detect_agenda_intent() zodat READ-intents winnen als één van _AGENDA_PATTERNS matcht, of (b) voeg exclusie-regel toe aan agenda_proposal om NIET te vuren als tekst 'uit de agenda' / 'in de agenda' / 'staat er' bevat. Regressie RCA vandaag/morgen: type-veld dropped naar capability_response — mogelijk door nieuwe composer wrapper in composer_helpers.py na de SCHRIJFSTIJL-REGELS toevoeging. Reproductie: POST /api/chat/message met {user_id:'user-001', session_id:'x', message:'wat staat er vandaag'} — response.type moet 'agenda_overview' zijn, is nu 'capability_response'."
+}

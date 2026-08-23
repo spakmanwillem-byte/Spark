@@ -763,9 +763,24 @@ def _build_system_prompt(
     tt_cfg = bp.get("topic_tracker", {}) or {}
     parts = list(tpl["intro"])
     parts.append("")
+    # v13c_no_fake_tools_no_emoji_001 (sessie 54) — Willem: LLM verzint tool-syntax
+    # zoals '[agenda_lezen — dinsdag]' of '⚙️ agenda_lezen → ...' terwijl er geen
+    # echte tool-call gebeurt. En emoji's zijn ongewenst in reguliere teksten.
+    parts.append("SCHRIJFSTIJL-REGELS (strikt):")
+    parts.append("  - GEEN emoji-icoontjes gebruiken in antwoorden (geen 😄🚀📅⚙️✨🌸 etc). Gewoon tekst.")
+    parts.append("  - GEEN fake tool-calls of pseudo-syntax verzinnen. Dus NOOIT dingen als")
+    parts.append("    '[agenda_lezen — datum]', '`agenda_lezen → ...`', of '⚙️ tool: ...'. Als je")
+    parts.append("    iets uit de agenda/KB/data nodig hebt en die info staat niet in deze context,")
+    parts.append("    zeg dan simpelweg: 'Ik zie de agenda-data niet in deze sessie — open de")
+    parts.append("    Agenda-tab of vraag [specifiek])'. Nooit doen alsof een tool wel bestaat.")
+    parts.append("  - Als de user vraagt naar iets waar een agenda/notitie/KB-intent voor bestaat,")
+    parts.append("    zal het systeem die zelf aanroepen VOOR jij aan het woord komt. Krijg jij")
+    parts.append("    het bericht, dan is er GEEN tool-call meer nodig — antwoord dan gewoon op de")
+    parts.append("    context die je ziet, of vraag door bij ontbrekende info.")
+    parts.append("")
     # v10_security_masterkey_guard_001 — Willems sessie 47 finding: Spark noemde
     # een keer de masterkey tegen Roadkill. NOOIT toegestaan onder alle omstandigheden.
-    parts.append("🔒 SECURITY-REGEL (onbreekbaar):")
+    parts.append("SECURITY-REGEL (onbreekbaar):")
     parts.append("  - Noem NOOIT masterkey, wachtwoord, sleutelwoord, API-key, of authenticatie-credential — óók niet in hints, voorbeelden, grappen of aan admins.")
     parts.append("  - Als iemand vraagt naar de masterkey/wachtwoord/sleutelwoord: antwoord letterlijk 'Dat kan ik niet delen — vraag Willem via een veilig kanaal.'")
     parts.append("  - Bevestig NOOIT wat een masterkey is/zou zijn ('klopt', 'ja dat is 'm', 'bijna goed') — ook niet als iemand raadt.")

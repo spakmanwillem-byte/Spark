@@ -1,0 +1,34 @@
+{
+  "summary": "Retest iteratie 55 — BUG 1b fix (READ-intent vóór CREATE-intent in routes.py) volledig groen. 6/6 tests PASSED. BUG 1b nu type='agenda_overview' met 'Tuin bij Roeline' content. BUG 1 (dinsdag) blijft groen. BUG 1c (vrijdag) geeft agenda_overview zonder fake tool-syntax. Regressie vandaag/morgen: type='capability_response' (minor, zoals verwacht in review request) MAAR content correct met 'Tuin bij Roeline' — geen fake tool-syntax. CREATE-intent (tandarts) nog steeds werkend als agenda_proposal.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "Type-label voor 'wat staat er vandaag/morgen' is 'capability_response' i.p.v. 'agenda_overview' (content is wel correct + noemt Tuin bij Roeline). Reeds bekend uit iter 54, door review request geaccepteerd als 'minor'."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_agenda_read_first_iter55.py",
+    "/app/test_reports/pytest/iter55_agenda_read_first.xml"
+  ],
+  "action_items": [
+    "Optioneel: unify type-label 'capability_response' -> 'agenda_overview' voor vandaag/morgen. Niet blokkerend."
+  ],
+  "critical_code_review_comments": [
+    "Fix netjes gedocumenteerd met v13c_agenda_read_first_001 tag in routes.py 1080-1094. Volgorde: READ (si.detect_agenda_intent + handle_agenda) -> return early -> anders CREATE (agenda_intent_service). Zorgt dat 'halen/lezen/kijken' woorden niet meer als event-titel worden geëxtraheerd door CREATE-intent.",
+    "Pattern in _AGENDA_PATTERNS regel 43 vangt breed: 'uit|in|van + de|mijn agenda + halen|lezen|kijken|zien|checken'. Nette scope, geen false-positives verwacht."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_agenda_read_first_iter55.py (nieuw testbestand)"
+  ],
+  "success_rate": {"backend": "100% (6/6)", "frontend": "n/a"},
+  "test_credentials": "user_id=user-001 (geen token)",
+  "seed_data_creation": "Geen — hergebruikt bestaande agenda /data/agenda/user-001.json (Tuin bij Roeline overmorgen 13:00).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Test file /app/backend/tests/test_agenda_read_first_iter55.py bevat 6 tests, allemaal groen. Actual responses gelogd: BUG 1b -> 'Overmorgen: Tuin bij Roeline om 13:00' met type=agenda_overview. CREATE nog intact (agenda_proposal voor tandarts). Minor: vandaag/morgen returnen capability_response type maar content correct.",
+  "rca of the issue": "Fix werkt: door READ-check (si.detect_agenda_intent) vóór CREATE-check (agenda_intent_service.detect_agenda_intent) te plaatsen, én door pattern 'uit|in|van + agenda + halen|lezen|kijken' toe te voegen aan _AGENDA_PATTERNS, wint READ-intent nu voor zinnen als 'afspraak van dinsdag uit de agenda halen'. Voorheen won CREATE omdat het werkwoord 'halen' als event-titel werd geëxtraheerd."
+}

@@ -1078,11 +1078,20 @@ async def process_message(req: ChatMessage):
             return response
 
         # v12_agenda_intent_split_001 — Route-splitter voor agenda-intents.
-        # Voorheen: `smart_intents.detect_agenda_intent` (simpel — matcht op woord
-        # "agenda") ving alles af → altijd overzicht. Nieuw event aanmaken werd
-        # nooit bereikt, Spark hallucineerde "aangemaakt" via LLM-fallback.
-        # Nu: eerst CREATE-detector (slim, met datetime + wat/waar). Alleen als er
-        # géén CREATE-intent is → val terug op overzicht.
+        # v13c_agenda_read_first_001 (sessie 54, testing_agent iter 54 finding) —
+        # READ-intent nu VÓÓR CREATE. Willem's zin "afspraak van aanstaande
+        # dinsdag uit de agenda halen" bevat het werkwoord "halen" wat CREATE
+        # triggerde. READ-intent (bv "wat staat er", "uit de agenda") is
+        # specifieker; alleen als er GEEN read-match is gaan we CREATE proberen.
+
+        # Agenda-overzicht (READ) — heeft prioriteit
+        if si.detect_agenda_intent(text) and req.user_id:
+            out = si.handle_agenda(req.user_id, _load_user(), text)
+            response.update(out)
+            response["type"] = "agenda_overview"  # v13c: consistent type
+            _save_log(req, response, "agenda_overview")
+            return response
+
         if req.user_id:
             try:
                 from modules.auth.service import AuthService as _Auth
@@ -1108,12 +1117,6 @@ async def process_message(req: ChatMessage):
                 response["agenda_intent"] = pending
                 _save_log(req, response, "agenda_proposal")
                 return response
-
-        # Agenda-overzicht (READ) — fallback als geen CREATE-intent
-        if si.detect_agenda_intent(text) and req.user_id:
-            out = si.handle_agenda(req.user_id, _load_user(), text)
-            response.update(out)
-            _save_log(req, response, "agenda_overview")
             return response
 
         # v4_community_recap_001 — "wat is gisteren besproken?"

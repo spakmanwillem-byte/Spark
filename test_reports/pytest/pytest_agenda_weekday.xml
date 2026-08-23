@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="7" time="3.389" timestamp="2026-08-23T13:29:11.944017+00:00" hostname="agent-env-e75ff8bc-cb5f-42e2-aae3-d2d1dbfc6883"><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestAgendaWeekdayIntent" name="test_dinsdag_returns_agenda" time="2.052" /><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestAgendaWeekdayIntent" name="test_aanstaande_dinsdag_afspraak" time="0.197"><failure message="AssertionError: Onverwacht type: agenda_proposal&#10;assert 'agenda_proposal' in ('agenda_overview', 'capability_response')">backend/tests/test_agenda_weekday_no_emoji.py:83: in test_aanstaande_dinsdag_afspraak
+    assert rtype in ("agenda_overview", "capability_response"), f"Onverwacht type: {rtype}"
+E   AssertionError: Onverwacht type: agenda_proposal
+E   assert 'agenda_proposal' in ('agenda_overview', 'capability_response')</failure></testcase><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestAgendaWeekdayIntent" name="test_vrijdag_fallback" time="0.207" /><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestNoFakeToolSyntax" name="test_volgende_week_no_fake_tool" time="0.181" /><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestNoEmojiInLLM" name="test_hoi_spark_no_emoji" time="0.240" /><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestRegressionTodayTomorrow" name="test_vandaag_still_agenda" time="0.195"><failure message="AssertionError: Regressie: vandaag geeft type=capability_response&#10;assert 'capability_response' == 'agenda_overview'&#10;  &#10;  - agenda_overview&#10;  + capability_response">backend/tests/test_agenda_weekday_no_emoji.py:139: in test_vandaag_still_agenda
+    assert rtype == "agenda_overview", f"Regressie: vandaag geeft type={rtype}"
+E   AssertionError: Regressie: vandaag geeft type=capability_response
+E   assert 'capability_response' == 'agenda_overview'
+E     
+E     - agenda_overview
+E     + capability_response</failure></testcase><testcase classname="backend.tests.test_agenda_weekday_no_emoji.TestRegressionTodayTomorrow" name="test_morgen_still_agenda" time="0.218"><failure message="AssertionError: Regressie: morgen geeft type=capability_response&#10;assert 'capability_response' == 'agenda_overview'&#10;  &#10;  - agenda_overview&#10;  + capability_response">backend/tests/test_agenda_weekday_no_emoji.py:147: in test_morgen_still_agenda
+    assert rtype == "agenda_overview", f"Regressie: morgen geeft type={rtype}"
+E   AssertionError: Regressie: morgen geeft type=capability_response
+E   assert 'capability_response' == 'agenda_overview'
+E     
+E     - agenda_overview
+E     + capability_response</failure></testcase></testsuite></testsuites>

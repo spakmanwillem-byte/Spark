@@ -2,19 +2,19 @@
   "date": "2026-08-23",
   "providers": {
     "primary": {
-      "tokens": 154041,
-      "calls": 56,
+      "tokens": 155179,
+      "calls": 58,
       "model": "openai/gpt-oss-120b",
-      "last_call": "2026-08-23T15:04:47.301129+00:00",
-      "last_error": null,
-      "last_error_ts": null,
-      "failed_calls": 55
+      "last_call": "2026-08-23T15:15:13.762106+00:00",
+      "last_error": "429 tokens-per-day-limiet bereikt",
+      "last_error_ts": "2026-08-23T15:17:40.039453+00:00",
+      "failed_calls": 69
     },
     "emergent": {
       "tokens": 0,
-      "calls": 58,
+      "calls": 72,
       "model": "claude-sonnet-4-6",
-      "last_call": "2026-08-23T15:04:45.767816+00:00",
+      "last_call": "2026-08-23T15:17:46.351167+00:00",
       "last_error": null,
       "last_error_ts": null,
       "failed_calls": 0

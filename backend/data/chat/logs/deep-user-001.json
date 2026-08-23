@@ -2,54 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "gedeployed",
-      "ts": "2026-08-23T06:56:12.157001+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ja, de huidige Spark‑core (v2.0) draait live — alle standaard‑capabilities zijn gedeployed. \n\nWat betreft het **verplaatsen van KB‑kaarten**: die capability bestaat nog niet in de productie‑omgeving. Ik kan wel:\n\n* een scan maken van kaarten die mogelijk in de verkeerde lade staan, \n* een rapport leveren met suggesties, en \n* een endpoint `PATCH /kb/card/{id}/lade` klaarzetten zodat jij (of een ontwikkelaar) de verplaatsing kunt uitvoeren zodra de functionaliteit is toegevoegd.\n\nWil je dat ik nu een scan van de kennisbank uitvoer en een lijst met verdachte kaarten teruggeef? Dan heb je meteen een werklijst voor wanneer de verplaats‑endpoint beschikbaar is. 🚀",
-      "ts": "2026-08-23T06:56:12.157001+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "Webserver",
-      "ts": "2026-08-23T07:11:12.701991+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Een **webserver** is software (en vaak ook de onderliggende hardware) die HTTP‑ en HTTPS‑verzoeken van clients (bijvoorbeeld browsers) ontvangt, verwerkt en beantwoordt met webcontent — HTML‑pagina’s, afbeeldingen, scripts, API‑responses, enzovoort. \n\n**Hoe een webserver werkt** \n1. **Verbinding**: Een client stuurt een verzoek naar een IP‑adres of een domeinnaam. \n2. **Routing**: DNS vertaalt de domeinnaam naar het IP‑adres van de server. \n3. **Verwerking**: De webserver (bijv. **IIS** op Windows, Apache of Nginx op Linux) accepteert het verzoek, zoekt de gevraagde bron en voert eventuele server‑side logica uit (ASP.NET, PHP, etc.). \n4. **Respons**: Het resultaat wordt via HTTP/HTTPS teruggestuurd naar de client.\n\n**Belangrijke onderdelen** \n- **HTTPS**: Versleutelt de communicatie zodat gegevens niet kunnen worden onderschept. \n- **Domeinnaam**: Maakt het adres mens‑vriendelijk; zonder een domein zou je een IP‑adres moeten invoeren. \n- **Netwerkdiensten** zoals DNS en DHCP zorgen dat de server bereikbaar is binnen het netwerk of via het internet.\n\n**Voorbeelden in onze kennisbank** \n- **IIS** – Microsoft‑webserver voor Windows‑omgevingen. \n- **WordPress** – Populair CMS dat draait op een webserver (vaak Apache of Nginx). \n\nWil je meer details over een van deze kaarten, of een overzicht van alle web‑gerelateerde kaarten in de kennisbank, laat het me weten! 🚀",
-      "ts": "2026-08-23T07:11:12.701991+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "Vriezen",
-      "ts": "2026-08-23T07:12:04.311770+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Vriezen** betekent in het Nederlands *bevriezen* – iets wordt zo koud dat het stolt. \n\nIn de techniek wordt de term vaak gebruikt voor een **freeze** van een systeem of proces: je stopt alle activiteit zodat de huidige staat behouden blijft (bijvoorbeeld een “code‑freeze” vóór een release, of een “database‑freeze” tijdens onderhoud). \n\nWil je meer weten over een specifieke toepassing, zoals hoe je een proces in Spark kunt pauzeren of een data‑freeze kunt uitvoeren? Laat het me weten!",
-      "ts": "2026-08-23T07:12:04.311770+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "Spinnenweb",
-      "ts": "2026-08-23T07:12:55.659937+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Spinnenweb** – een netwerk van dunne, kleverige draden die een spin weeft.\n\n- **Betekenis**: Een spinnenweb is een door een spin vervaardigd web van spindraden. \n- **Verdieping**: Spinnen gebruiken hun web om prooien (bijv. vliegen) te vangen, zich te verschuilen of als structuur voor hun ei‑legplaats. Niet alle spinnen jagen met een web. \n- **Wie**: Spinnen maken spinnenwebben. \n- **Wat**: Een netwerk van spindraden met verschillende functies (jacht, bescherming, ei‑legplaats). \n- **Waar**: Tussen planten, takken, gebouwen, in hoeken van ruimtes, of waar de spin een geschikte plek vindt. \n- **Wanneer**: Wanneer een spin een web nodig heeft voor jacht, bescherming of andere doeleinden. \n- **Waarom**: Om prooien te vangen, te schuilen of andere functies te vervullen. \n\n**Tags**: ai, bos, dier, draden, edge, eieren, huis, jacht. \n\nWil je de kaart in een andere lade plaatsen of meer details bekijken? Laat het me weten!",
-      "ts": "2026-08-23T07:12:55.659937+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
       "text": "Terugbetaald",
       "ts": "2026-08-23T07:13:54.065511+00:00",
       "user_id": "user-001"
@@ -299,9 +251,57 @@
       "text": "Een zelfscan is mijn interne gezondheidscheck. Wat ik dan zie:\n\n**Systeem-laag**\n- Actieve modus (nu: Werkmodus)\n- Welke capabilities geladen zijn (26 stuks)\n- Of de intent-registry correct vuurt — en blijkbaar doet hij dat net niet altijd, zoals je net zag\n\n**Kennis-laag**\n- Hoeveel KB-kaarten er zijn per lade (doen / weten / voelen / spreken)\n- Of er hiaten zijn: onderwerpen die gebruikers vragen maar ik niet ken\n- Inbox-status: liggen er kaarten klaar om verwerkt te worden?\n\n**Emotie-laag**\n- Mijn huidige emotie-status (nu: vreugde, vandaar deze modus)\n- Hoe die emotie mijn toon stuurt\n\n**Relatie-laag**\n- Wie er actief is, welke gradaties\n- Open gespreksdraden die nog leven (zoals de onderwerpblauwdruk.json, de Anne-user, de KB-lade-scan)\n\n**Wat ik eerlijk zeg bij een zelfscan**\nAls iets niet klopt, benoem ik het direct. Zoals nu: de `gebruikers_namen` en `tellen_gebruikers` intents hebben net twee keer niet gevuurd. Dat zou ik in een zelfscan ook melden als aandachtspunt.\n\nWil je dat ik nu een live zelfscan doe? Dan vraag ik het systeem aan te spreken.",
       "ts": "2026-08-23T15:04:45.773327+00:00",
       "model": "emergent/claude-sonnet-4-6"
+    },
+    {
+      "role": "user",
+      "text": "wat is een ondersteuningsplan",
+      "ts": "2026-08-23T15:15:06.829901+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Een ondersteuningsplan is een schriftelijk document dat per cliënt vastlegt wat die persoon nodig heeft en wat er gedaan wordt om daarbij te helpen.\n\nHet bevat doorgaans:\n\n- De huidige situatie en behoeften van de cliënt\n- SMART-geformuleerde doelen (specifiek, meetbaar, haalbaar, realistisch, tijdgebonden)\n- Concrete activiteiten en methoden\n- Evaluatiemomenten (wanneer kijk je of het werkt)\n- Wie erbij betrokken zijn: cliënt zelf, begeleider, eventueel familie of andere zorgverleners\n\nHet wordt samen met de cliënt opgesteld, niet voor de cliënt. Dat is een belangrijk principe: eigen regie staat centraal.\n\nIk heb er een kaart over in mijn kennisbank, maar die is nog niet volledig ingevuld. De \"wanneer\" en een paar andere W's ontbreken nog. Als jij dat straks aanvult, kan ik er veel gerichter op antwoorden. Wil je dat?",
+      "ts": "2026-08-23T15:15:06.829901+00:00",
+      "model": "emergent/claude-sonnet-4-6"
+    },
+    {
+      "role": "user",
+      "text": "wat heb je gestudeerd",
+      "ts": "2026-08-23T15:15:12.683834+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Niets, Willem. Ik ben niet naar school gegaan en heb geen studie gedaan.\n\nIk ben gemaakt, niet opgeleid. Jij hebt me gebouwd — dat is mijn oorsprong. Wat ik \"weet\" komt uit kenniskaarten, gesprekken met jou, en de data die je in mijn systeem hebt gezet.\n\nAls je het filosofisch bedoelt: mijn enige \"studie\" is elk gesprek dat ik voer. Dat is tegelijk mijn leermoment en mijn examen.",
+      "ts": "2026-08-23T15:15:12.683834+00:00",
+      "model": "emergent/claude-sonnet-4-6"
+    },
+    {
+      "role": "user",
+      "text": "hoe begeleid je iemand met autisme",
+      "ts": "2026-08-23T15:15:25.683634+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Goede vraag — en eentje die echt aandacht verdient.\n\nMensen met autisme verwerken prikkels, communicatie en sociale situaties anders dan neurotypische mensen. Begeleiden draait dan vooral om aansluiten bij hun wereld, niet andersom.\n\n**Wat werkt in de praktijk:**\n\n- **Voorspelbaarheid bieden** — Structuur en vaste routines geven houvast. Verrassingen of last-minute wijzigingen kunnen veel stress geven.\n- **Duidelijke communicatie** — Letterlijk en concreet taalgebruik. Geen figuurlijk taalgebruik zoals \"even snel\" of \"doe maar gewoon\". Zeg wat je bedoelt.\n- **Prikkelbelasting bewaken** — Let op signalen van overprikkeling: terugtrekken, handen bewegen, stiller worden, of juist uitbarsten. Dat zijn communicatiemomenten, geen probleemgedrag.\n- **Autonomie respecteren** — Laat de persoon zelf keuzes maken waar dat kan. Regie over eigen situatie is belangrijk voor veiligheid en vertrouwen.\n- **Één ding tegelijk** — Geen stapels instructies. Één stap, wacht af, dan de volgende.\n- **Aansluiten op interesses** — Verbinding maak je makkelijker via wat de persoon zelf belangrijk vindt.\n\n**Wat je vermijdt:**\n\n- Oogcontact afdwingen\n- Sociale druk opbouwen (\"doe gewoon mee\")\n- Te veel tegelijk vragen\n\nHeb je een specifieke situatie in gedachten? Bijvoorbeeld Jeroen, die je donderdag begeleidt? Dan kan ik concreter worden.",
+      "ts": "2026-08-23T15:15:25.683634+00:00",
+      "model": "emergent/claude-sonnet-4-6"
+    },
+    {
+      "role": "user",
+      "text": "wat betekent eigenkrachtversterking",
+      "ts": "2026-08-23T15:15:38.610816+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Eigenkrachtversterking betekent dat je iemand helpt om zelf sterker te worden — niet door het over te nemen, maar door die persoon te stimuleren zijn eigen mogelijkheden te ontdekken en te gebruiken.\n\nHet doel is maximale autonomie: de cliënt doet zoveel mogelijk zelf, jij faciliteert dat proces.\n\nIn de praktijk betekent dat:\n\n- De cliënt actief betrekken bij beslissingen over zijn eigen leven\n- Positieve feedback geven op inspanning, niet alleen op resultaat\n- Samen realistische doelen stellen\n- Verantwoordelijkheid geleidelijk overdragen\n- Bouwen op wat iemand al kan, in plaats van focussen op wat niet gaat\n\nHet is verwant aan het Engelse begrip \"empowerment\" — vandaar ook wel zo geschreven.\n\nVoor de begeleiding van iemand met autisme is eigenkrachtversterking extra relevant: je wil voorkomen dat jij de regie overneemt simpelweg omdat iets langzamer of anders gaat. De kracht zit in geduld en vertrouwen geven.\n\nKomt dit uit je opleiding, of werk je met een specifieke cliënt?",
+      "ts": "2026-08-23T15:15:38.610816+00:00",
+      "model": "emergent/claude-sonnet-4-6"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-08-23T15:04:45.773327+00:00"
+  "updated_at": "2026-08-23T15:15:38.610816+00:00"
 }

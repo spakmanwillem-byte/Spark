@@ -99,6 +99,28 @@ Nieuwe chat-capability `document_trace`: "waar heb ik dit gezegd?", "wanneer heb
 Roeline voor het laatst genoemd?", "welke kaarten hebben Willem als bron?".
 Leest footnote-index en antwoordt uit Spark's eigen data.
 
+### 5. KB-vulling uit systeem-vakboeken (P1, sessie 55 ontdekt)
+In `/app/backend/data/system_archive/bestanden/` staan 4 publieke vakdocumenten
+die nog geen KB-kaarten hebben. Willem's confirm: **bruikbaar, dit oppakken**.
+
+**Te verwerken**:
+1. `3cbdf1cdb250.png` — STARR-gesprek gids
+2. `ced22db1a662.avif` — STARR-Model Flowchart
+3. `6e192f9ef833.pdf` (14MB) — **De Grote Methodiekengids: 28 begeleidingsmethoden voor VB**
+4. `8a079c0646e2.pdf` (3MB) — **Handboek Begeleid Leren: jongeren met psychische beperkingen**
+
+**Aanpak**:
+- Kaart "STARR-methode" (1 kaart, samenvatten uit gids + flowchart).
+- Grote Methodiekengids uitpakken → 28 concept-kaarten (1 per methode) met naam,
+  doelgroep, kernprincipe, wanneer toepassen. Tag: `methodiek`, `vb`, `zorg`.
+- Handboek Begeleid Leren → ~10-15 kaarten voor kernprincipes + doelgroep-specifieke
+  interventies. Tag: `psychisch`, `jongeren`, `begeleiding`.
+- **Bron-verwijzing** in `footnote.bron`: `system_archive:<filename>` + `verbanden[]`
+  naar file-hash zodat Spark bij vragen kan terugverwijzen naar het bronboek.
+
+**Privacy**: public — dit zijn publieke vakboeken, geen persoonlijk werk. Iedereen
+mag deze kennis gebruiken via Spark, ook non-admins.
+
 **Rationale**: dit is de fundering waarop 'attente Spark' (v13-serie) leunt. Zonder
 deze vier kan Spark z'n eigen geheugen niet betrouwbaar én privacy-veilig doorzoeken.
 

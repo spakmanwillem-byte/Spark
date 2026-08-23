@@ -456,6 +456,10 @@ async def restore(file: UploadFile = File(...), confirm: str = Form("false")):
       - Nieuwe bestanden worden toegevoegd
       - Bestaande bestanden worden overschreven met de versie uit de ZIP
       - Bestanden die WEL lokaal bestaan maar NIET in de ZIP zitten blijven onaangetast
+
+    v13_pre_merge_scan_001 (sessie 54): tip Willem's ATOM-KB-incident van 23 aug —
+    dubbele check via `POST /backup/pre-scan` VÓÓR restore om te zien welke files
+    de ZIP kleiner maakt dan wat er nu staat (dataverlies-risico).
     """
     if str(confirm).lower() not in ("true", "1", "yes", "ja"):
         raise HTTPException(status_code=400, detail="Bevestiging ontbreekt. Stuur 'confirm=true'.")
@@ -508,3 +512,41 @@ async def restore(file: UploadFile = File(...), confirm: str = Form("false")):
         "errors": errors,
         "restored_at": _iso_now(),
     }
+
+
+
+# v13_pre_merge_scan_001 (sessie 54) — Scan een ZIP vóór merge zodat gebruiker
+# kan zien welke files zouden krimpen / veranderen. Geen writes.
+@router.post("/pre-scan")
+async def pre_merge_scan(file: UploadFile = File(...)):
+    """Scan ZIP en vergelijk met huidige /data.
+
+    Return:
+      - summary: telling per verdict
+      - risks: files die kleiner worden of anders zijn (potentieel dataverlies)
+      - safe_count: aantal files die veilig zijn (NEW, IDENTICAL, ZIP_LARGER)
+
+    Willem's use-case: check vóór merge of hij preview-werk niet overschrijft
+    met een productie-ZIP die achterloopt.
+    """
+    import io as _io
+    import tempfile as _tempfile
+
+    content = await file.read()
+    # Schrijf tijdelijk naar disk voor pre_merge_scan
+    with _tempfile.NamedTemporaryFile(suffix=".zip", delete=False) as tmp:
+        tmp.write(content)
+        tmp_path = tmp.name
+
+    try:
+        from .pre_merge_scan import scan_zip_vs_current
+        result = scan_zip_vs_current(tmp_path)
+        result["filename"] = file.filename
+        result["size_bytes"] = len(content)
+        return result
+    finally:
+        try:
+            import os as _os
+            _os.unlink(tmp_path)
+        except Exception:
+            pass

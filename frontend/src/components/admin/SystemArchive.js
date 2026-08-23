@@ -5,7 +5,7 @@ import {
   MessageSquare, Server, FileText, Users, Code2, Store
 } from 'lucide-react';
 import { AvatarGallerySection } from './AvatarGallerySection';
-import { DnDGallerySection } from './DnDGallerySection';
+// v13c_dnd_sloop_001 (sessie 54) — DnDGallerySection import verwijderd.
 import { LogsBrowser } from './LogsBrowser';
 import { ShopTabView } from '../workspace/ShopTabView';
 
@@ -345,15 +345,10 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
-      {/* v6_dnd_gallery_001 — D&D Galerij sub-content */}
-      {activeTab === 'foto' && fotoSubTab === 'dnd' && (
-        <div data-testid="foto-dnd-pane" className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
-          <DnDGallerySection adminId={currentUserId} isAdmin={isAdmin} />
-        </div>
-      )}
+      {/* v13c_dnd_sloop_001 (sessie 54) — DnD Galerij verwijderd. */}
 
       {/* v5_kbv2_media_002 — bron sub-tabs binnen media-categorieën */}
-      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd' || fotoSubTab === 'merch')) && (
+      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'merch')) && (
         <div className="flex items-center gap-1.5">
           {[
             { id: 'alle',  label: 'Alles' },

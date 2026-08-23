@@ -81,15 +81,7 @@ async def create_knowledge_entry(data: dict):
         if creator:
             track(creator, "kb_create", 1)
             track(creator, "story_share", 1)
-            try:
-                from modules.dnd.routes import observe, ObserveBody  # type: ignore
-                await observe(ObserveBody(
-                    user_id=creator,
-                    kind="kb_added",
-                    detail={"begrip": entry.get("begrip"), "id": entry.get("id")},
-                ))
-            except Exception:
-                pass
+            # v13c_dnd_sloop_001 (sessie 54) — DnD observe-hook verwijderd.
     except Exception:
         pass
     return {"status": "ok", "entry": entry}

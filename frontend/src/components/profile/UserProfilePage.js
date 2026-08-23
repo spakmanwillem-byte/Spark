@@ -7,7 +7,7 @@ import {
   Image as ImageIcon, Sparkles, ChevronDown, Trash2,
   Backpack, Award, Plus, Settings, Palette, Volume2, Link2, KeyRound, RotateCcw, ShieldCheck,
 } from 'lucide-react';
-import { DnDCharacterSheet } from './DnDCharacterSheet';
+// v13c_dnd_sloop_001 (sessie 54) — DnDCharacterSheet import verwijderd.
 import { BarkModal } from '../shared/BarkModal';
 import { DeviceSettingsPanel } from './DeviceSettingsPanel';
 import { AnnouncePrefsPanel } from './AnnouncePrefsPanel';
@@ -17,8 +17,6 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const TABS = [
   { id: 'algemeen', label: 'Algemeen' },
-  // v13c_avatar_admin_only_001 (sessie 54) — Avatar-tab tot af alleen voor admins.
-  { id: 'avatar', label: 'Avatar', adminOnly: true },
   { id: 'instellingen', label: 'Instellingen' },
 ];
 
@@ -139,9 +137,7 @@ export function UserProfilePage({ onNavigate }) {
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
             )}
-            {activeTab === 'avatar' && isAdminUser && (
-              <AvatarTab userId={userId} isAdmin={isAdminUser} />
-            )}
+            {/* v13c_dnd_sloop_001 — Avatar-tab verwijderd (was 100% DnD-character-sheet) */}
             {activeTab === 'instellingen' && (
               <InstellingenTab userId={userId} user={user} />
             )}
@@ -312,154 +308,9 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
 }
 
 
-// ============================================================
-// TAB: AVATAR — galerij + upload
-// ============================================================
-function AvatarTab({ userId, isAdmin }) {
-  const [gallery, setGallery] = useState([]);
-  const [current, setCurrent] = useState({ avatar_ref: null, url: null });
-  const [uploading, setUploading] = useState(false);
-  const [msg, setMsg] = useState(null);
-  const fileRef = useRef(null);
-  const [hasUserPortrait, setHasUserPortrait] = useState(false);
 
-  const loadGallery = useCallback(() => {
-    fetch(`${API}/api/avatar/gallery`)
-      .then(r => r.json()).then(d => setGallery(d.avatars || []));
-  }, []);
-  const loadCurrent = useCallback(() => {
-    fetch(`${API}/api/avatar/current/${userId}`).then(r => r.json()).then(d => {
-      setCurrent(d);
-      setHasUserPortrait(d.avatar_ref === 'user');
-    });
-  }, [userId]);
+// v13c_dnd_sloop_001 (sessie 54) — AvatarTab + _LegacyAvatarBlock verwijderd (waren volledig DnD-character-sheet gebonden).
 
-  useEffect(() => { loadGallery(); loadCurrent(); }, [loadGallery, loadCurrent]);
-
-  const flash = (type, text) => { setMsg({ type, text }); setTimeout(() => setMsg(null), 2500); };
-
-  const selectAvatar = async ref => {
-    const r = await fetch(`${API}/api/avatar/select/${userId}`, {
-      method: 'PUT', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ avatar_ref: ref }),
-    });
-    if (r.ok) { flash('ok', 'Avatar ingesteld'); loadCurrent(); }
-    else flash('err', 'Instellen mislukt');
-  };
-
-  const uploadPortrait = async file => {
-    if (!file) return;
-    setUploading(true);
-    const fd = new FormData();
-    fd.append('file', file);
-    try {
-      const r = await fetch(`${API}/api/avatar/user/${userId}`, { method: 'POST', body: fd });
-      const d = await r.json();
-      if (r.ok && d.success) { flash('ok', `Geüpload (${d.width}×${d.height})`); loadCurrent(); }
-      else flash('err', d.detail || 'Upload mislukt');
-    } catch (e) { flash('err', e.message); }
-    finally { setUploading(false); if (fileRef.current) fileRef.current.value = ''; }
-  };
-
-  return (
-    <div className="space-y-4">
-      {/* v6_dnd_character_sheet_001 — Stormhaven-stijl D&D character sheet (kern van Avatar-tab) */}
-      <DnDCharacterSheet userId={userId} isAdmin={isAdmin} />
-      {/*
-        Verwijderd (sessie 17, 31 mei):
-        - PersoonskaartCard: was overbodig naast character sheet, info dupliceert XP/Rang/Slots.
-          Toekomst: integreren in Spark World D&D-laag (ROADMAP P2).
-        - Portret & Galerij beheren collapsible: vervangen door AvatarPickerPanel
-          in Mijn Profiel → Instellingen tab (waar het thuishoort als instelling).
-      */}
-    </div>
-  );
-}
-
-// Legacy AvatarTab vervolg — code voor msg/flash/selectAvatar/uploadPortrait/GalleryTabs
-// blijft staan voor mogelijk hergebruik. Niet aangeroepen vanuit AvatarTab.
-function _LegacyAvatarBlock({ gallery, current, flash, selectAvatar, uploadPortrait,
-  fileRef, uploading, msg, isAdmin, hasUserPortrait }) {
-  return (
-    <div className="space-y-4">
-      <details className="bg-slate-900 border border-slate-800 rounded-xl group">
-        <summary data-testid="avatar-portret-toggle"
-          className="cursor-pointer px-4 py-3 flex items-center justify-between hover:bg-slate-800/40">
-          <span className="text-sm font-bold text-white flex items-center gap-2">
-            <Camera className="w-4 h-4 text-pink-400" />
-            Portret &amp; Galerij beheren
-          </span>
-          <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
-        </summary>
-        <div className="border-t border-slate-800 p-4 space-y-4">
-          {/* Huidige Avatar */}
-          <div className="flex items-center gap-5">
-            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center overflow-hidden flex-shrink-0">
-              {current.url ? (
-                <img src={`${API}${current.url}?t=${Date.now()}`} alt="" className="w-full h-full object-cover" />
-              ) : (
-                <User className="w-12 h-12 text-white" />
-              )}
-            </div>
-            <div className="flex-1">
-              <p className="text-sm text-white font-medium">
-                {current.avatar_ref === 'user' ? 'Eigen portret' :
-                  current.avatar_ref?.startsWith('gallery:') ? 'Uit galerij' : 'Standaard (initialen)'}
-              </p>
-              <p className="text-xs text-slate-500 mt-1">Foto's worden geschaald naar max 512×512 om opslag te besparen.</p>
-              {current.avatar_ref && (
-                <button data-testid="clear-avatar" onClick={() => selectAvatar(null)}
-                  className="mt-2 px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg flex items-center gap-1.5">
-                  <X className="w-3 h-3" /> Verwijder selectie
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Upload */}
-          <div className="pt-3 border-t border-slate-800">
-            <p className="text-xs font-semibold text-white mb-2">Eigen portret uploaden</p>
-            <input data-testid="portrait-upload" ref={fileRef} type="file" accept="image/*"
-              onChange={e => uploadPortrait(e.target.files?.[0])} className="hidden" />
-            <div className="flex flex-wrap gap-3">
-              <button onClick={() => fileRef.current?.click()} disabled={uploading}
-                data-testid="upload-portrait-btn"
-                className="px-4 py-2 bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/40 rounded-lg flex items-center gap-2 text-sm disabled:opacity-50">
-                <Upload className="w-4 h-4" />
-                {uploading ? 'Uploaden...' : 'Kies een foto'}
-              </button>
-              {hasUserPortrait && (
-                <button onClick={() => selectAvatar('user')}
-                  className="px-4 py-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-400 border border-pink-500/40 rounded-lg flex items-center gap-2 text-sm">
-                  <Check className="w-4 h-4" /> Gebruik mijn portret
-                </button>
-              )}
-            </div>
-            {msg && (
-              <p className={`mt-2 text-xs ${msg.type === 'ok' ? 'text-green-400' : 'text-red-400'}`}>{msg.text}</p>
-            )}
-          </div>
-
-          {/* Galerij */}
-          <div className="pt-3 border-t border-slate-800">
-            <p className="text-xs font-semibold text-white mb-2 flex items-center gap-2">
-              <ImageIcon className="w-3.5 h-3.5 text-purple-400" />
-              Galerij ({gallery.length})
-            </p>
-            <GalleryTabs gallery={gallery} current={current} onSelect={selectAvatar} apiUrl={API} />
-            {isAdmin && (
-              <p className="text-[10px] text-amber-400/70 mt-3 italic">
-                Beheer galerij via: Beheer → Gebruikers → kies user → Avatar Beheer
-              </p>
-            )}
-          </div>
-        </div>
-      </details>
-    </div>
-  );
-}
-
-// v4_avatar_categories_001 — Tabs voor User vs D&D Archief
 function GalleryTabs({ gallery, current, onSelect, apiUrl }) {
   const [tab, setTab] = useState('user');
   const userAvatars = gallery.filter(a => (a.category || (a.locked ? 'system' : 'user')) === 'user');

@@ -736,7 +736,8 @@ async def rebuild_all_verbanden(viewer_id: str = "user-001"):
     """v11_verbanden_rebuild_001 — Loopt ALLE kaarten door en herberekent hun
     verbanden field via compute_verbanden. Gebruikt huidige top_n=10 default.
     Admin-only. Duurt ~30-60s voor 5000+ kaarten."""
-    from modules.dnd.world import _is_admin as _check_admin
+    from modules.chat.spark_user_view import _get_user_meta as _um
+    _check_admin = lambda uid: int((_um(uid) or {}).get('gradatie', 7) or 7) == 1
     if not _check_admin(viewer_id):
         return {"success": False, "error": "Alleen admin mag verbanden rebuilden."}
 
@@ -799,7 +800,8 @@ async def auto_resolve_inbox(body: AutoResolveBody):
     from modules.core.storage import load_json
     from .service import _inbox_path
     # Admin-guard
-    from modules.dnd.world import _is_admin as _check_admin
+    from modules.chat.spark_user_view import _get_user_meta as _um
+    _check_admin = lambda uid: int((_um(uid) or {}).get('gradatie', 7) or 7) == 1
     if not _check_admin(body.viewer_id):
         return {"success": False, "error": "Alleen admin (gradatie ≤ 2) mag inbox bulk-classifyen."}
 
@@ -908,7 +910,8 @@ async def sync_vocab(body: VocabSyncBody):
     from modules.core.storage import load_json
     from .service import _lade_path
     from . import hooks as kbv2_hooks
-    from modules.dnd.world import _is_admin as _check_admin
+    from modules.chat.spark_user_view import _get_user_meta as _um
+    _check_admin = lambda uid: int((_um(uid) or {}).get('gradatie', 7) or 7) == 1
     from pathlib import Path
     if not _check_admin(body.viewer_id):
         return {"success": False, "error": "Alleen admin (gradatie ≤ 2) mag vocab syncen."}

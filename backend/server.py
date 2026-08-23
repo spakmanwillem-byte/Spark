@@ -258,51 +258,11 @@ app.include_router(inventory_router, prefix="/api")
 from modules.deploy.routes import router as deploy_router
 app.include_router(deploy_router, prefix="/api")
 
-# v4_dnd_001 — D&D Lore + Behavior + Aura + Observations
-from modules.dnd.routes import router as dnd_router
-app.include_router(dnd_router, prefix="/api")
-
-# v6_dnd_bark_001 — Spark World bark-flow (zintuig-keuze + D&D kaarten)
-from modules.dnd.spark_world import router as spark_world_router
-app.include_router(spark_world_router, prefix="/api")
-
-# v6_spark_world_north_001 — Spark World locations (The North = Groningen base)
-from modules.dnd.spark_world_north import router as spark_world_north_router
-app.include_router(spark_world_north_router, prefix="/api")
-
-# v6_dnd_character_sheet_001 — Stormhaven-stijl character sheet (titel/rang/currency/equipment/event-feed)
-from modules.dnd.character import router as dnd_character_router
-app.include_router(dnd_character_router, prefix="/api")
-
-# v6_spark_world_map_001 — Persistente NL-map locaties (draggable for admin)
-from modules.dnd.spark_world_map import router as spark_world_map_router
-app.include_router(spark_world_map_router, prefix="/api")
-
-# v7_shadow_removed_001 — Shadow trader is verwijderd (dood spoor, werkte niet betrouwbaar).
-
-# v6_dnd_world_001 — 9 fracties + 12 provincies + 5 rarity tiers (WoW-style)
-from modules.dnd.world import router as dnd_world_router
-app.include_router(dnd_world_router, prefix="/api")
-# v6_dnd_economy_001 — economy blueprints + prijscurve + trader AI
-from modules.dnd.economy import router as dnd_economy_router
-app.include_router(dnd_economy_router, prefix="/api")
-
-# v6_dnd_body_layout_001 — Sleepbare body-slot posities over lijf-avatar
-from modules.dnd.body_layout import router as dnd_body_layout_router
-app.include_router(dnd_body_layout_router, prefix="/api")
-
-# v6_bewoner_001 — NPC bewoners + trade per gebouw/stad
-from modules.dnd.bewoner import router as dnd_bewoner_router
-app.include_router(dnd_bewoner_router, prefix="/api")
-
-# v6_dice_001 — D&D dobbelsteen-events (basis / super)
-from modules.dnd.dice import router as dnd_dice_router
-app.include_router(dnd_dice_router, prefix="/api")
-
-# v6_daily_event_001 — Dagelijks SPS-gevecht voor 10g
-from modules.dnd.daily_event import router as dnd_daily_event_router
-app.include_router(dnd_daily_event_router, prefix="/api")
-
+# v13c_dnd_sloop_001 (sessie 54) — Alle DnD-routers (dnd, spark_world,
+# spark_world_north, character, spark_world_map, world, economy, body_layout,
+# bewoner, dice, daily_event) verwijderd. Willem: "D&D staat in koelkast en
+# als het terugkomt bouwen we opnieuw met de dan geldende inzichten."
+# Git-history bewaart de code voor referentie.
 
 # v6_reconcile_001 — Reconciliation: potje-saldo vs Bitvavo (alleen Spark)
 from modules.trade.reconcile import router as trade_reconcile_router

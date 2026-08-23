@@ -407,16 +407,7 @@ async def select_avatar(user_id: str, body: AvatarSelect):
         except Exception as ex:
             print(f"[avatar] milestone unlock failed: {ex}")
 
-    # v4_dnd_001: log Spark-observatie zodat hij hem kan benoemen in volgende gesprek
-    try:
-        from modules.dnd.routes import observe, ObserveBody  # type: ignore
-        await observe(ObserveBody(
-            user_id=user_id,
-            kind="avatar_changed",
-            detail={"avatar_ref": ref, "title": avatar_title or (ref or "geen")},
-        ))
-    except Exception:
-        pass  # niet kritiek
+    # v13c_dnd_sloop_001 (sessie 54) — DnD observe-hook verwijderd.
     return {"success": True, "avatar_ref": ref}
 
 

@@ -24,6 +24,48 @@ Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft 
 
 ---
 
+## 🧹 CLUSTER — Sessie 54 Opruimwerk (23 feb 2026)
+
+**Doel**: Ruis weg, code strakker, glow-theming door hele app, D&D compleet uitfaseren tot het écht terugkomt.
+
+### ✅ AFGEROND
+
+**Privacy & Security**
+- 🛡️ **Privacy Guard v13** (`modules/chat/privacy_guard.py`): strip familie/privé/financieel/gezondheid uit KB-cards + identity_facts + system_prompt voor gradatie ≥5. 13 pytest groen. Emmy-lek gedicht.
+- 🔍 **User-lookup "weet jij wie X is"**: 2 nieuwe patronen + admin-bypass in `smart_intents_profile.py`. Was: Spark hallucineerde over Emmy.
+- 🧯 **LLM-lek preventie** (`modules/kb_v2/tag_sanitizer.py`): centrale sanitizer voorkomt dat LLM-multi-line output als tag opgeslagen wordt. Ingehaakt op 3 punten (generate + snap + frontend).
+
+**Trader Fixes**
+- 💰 **ATOM-drift bug** (`modules/trade/monitor.py`): rest_bonus_eur greep alle overtollige coins mee (61.4 ATOM verkopen ipv 7.6). Fix: cap op 10% dust + skip proxy-users. 8 pytest groen.
+
+**Data Cleanup**
+- 🏷️ **KB-tag cleanup**: 60932 tags gescand, LLM-lek fragmenten weg (`'neutraal\n\n🧠 weten\nbegrip'` → `'neutraal'`), 286 emoji's uit `lagen1-4` + `ws5`, 21 typo's gefixt (whitelist-approach; plurals/context-varianten behouden).
+- 📊 **Zelfscan feitelijk** (`modules/chat/zelfscan_facts.py`): emotie-distributie uit `pipeline_shadow/*.jsonl` ipv LLM-hallucinatie. Geeft `neutraal 92% · blij 4.6% · bedroefd 1.9%` op 27d-data.
+
+**UI/UX**
+- 🎨 **Globale glow-theming**: 1043 amber-classes gemapt naar `--glow-base` via 1 CSS-blok. Alle knoppen/tabs/highlights volgen user's profielkleur. Semantische kleuren (rood/groen) blijven.
+- 🎨 **ArchiefPage/GesprekkenPage/WinkelPage/UserProfilePage**: hardcoded per-tab accent-hex weg, alle actieve tabs volgen glow.
+- 🔒 **Glow admin-gate** (`modules/glow_nav/`): adminOnly flag op Kennisbank/Roadmap/Users/Settings/Spark Brain/Achievements/Leaderboard. Non-admin ziet 13/23 tabs. Systeem-archief vs user-archief nette scheiding via longest-alias-match.
+- 🚫 **Roadmap/Achievements/Leaderboard admin-only**: jargon voor oudere users; verborgen tot core af.
+- 🏪 **Winkel-tab verhuisd** naar Mijn Profiel (was in Archief).
+- 📸 **Foto sub-tabs** (Privé/Winkel) binnen Foto-tab: alleen zichtbaar voor shop-owners, filter via `source=shop_product_image`.
+
+**Sloop Sessie**
+- 🗑️ **4 bots verwijderd**: Mr Smith, Madelief Stouten, Harry Klokkenmaker, Magere Hein (bot-dood). Users: 25→21. Alleen De Boekhouder blijft.
+- 🗑️ **Baseline_intro.py** verwijderd (voorloper van Spark World, dubbel).
+- 🗑️ **Hele D&D-stapel weg** (`modules/dnd/` folder, 2104 regels): world, spark_world, spark_world_north, character, dice, economy, body_layout, bewoner, daily_event, spark_world_map, routes. Server.py 9 router-imports weg.
+- 🗑️ **Frontend DnD weg**: `components/dnd/`, `DnDGallerySection.js`, `DnDCharacterSheet.js`, `FractiesTab.js`. Refs in SystemArchive + GesprekkenPage + UserProfilePage opgeruimd.
+- 🗑️ **Avatar-tab** uit Mijn Profiel verwijderd (was 100% DnD character-sheet).
+- 🗑️ **AvatarTab + _LegacyAvatarBlock** functies uit UserProfilePage.js verwijderd (146 regels dead code).
+
+### 🧊 KOELKAST (later oppakken)
+- **D&D-systeem** komt terug als je zelf klaar bent — opnieuw ontwerpen met dan-geldende inzichten en échte user-NPCs
+- **Privacy Matrix UI** (per-user vinkjes met wederzijdse consent-flow Willem ↔ Heidi)
+- **Bestanden + Documenten samenvoegen** (1 tab "Mijn Bestanden" met Legacy sub-tab)
+- **Documenten hernoemen** (Legacy / Levenspagina's / Testament & Zorg)
+
+
+
 ## 🧹 CLUSTER — Trader Accounting Hygiene (sessie 53, 22 feb 2026)
 
 **Doel**: Alle "verdachte cijfers" die Willem aanwees systematisch oplossen én preventie inbouwen zodat nieuwe token-holders niet dezelfde issues krijgen.

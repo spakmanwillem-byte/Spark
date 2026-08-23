@@ -224,6 +224,11 @@ def detect_age_lookup(text: str, user_id: str) -> Optional[Dict]:
 
 _PROFILE_PATTERNS = [
     r"\bwie is\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
+    # v13c_wie_is_natural_001 (sessie 54) — Willem: "weet jij wie Emmy is" leidde
+    # tot LLM-hallucinatie omdat pattern alleen 'wie is X' snapt, niet
+    # 'weet jij wie X is' (X staat vóór 'is' i.p.v. erna).
+    r"\bweet\s+(?:jij|je|spark)\s+wie\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\s+is\??",
+    r"\b(?:weet|kent)\s+(?:jij|je|spark)\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??\s*$",
     # v6_profile_wat_weet_001 — "wat weet jij/je over X"
     r"\bwat\s+weet\s+(?:jij|je)\s+over\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
     r"\bwat\s+weet\s+ik\s+over\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
@@ -308,6 +313,16 @@ def _resolve_person(name_query: str, viewer_id: str):
     # Persons-cards uit user's eigen graaf zijn ALTIJD toegankelijk voor die user
     if person.get("_source") == "persons_card":
         return person, "ok"
+    # v13c_admin_profile_bypass_001 (sessie 54) — admins (grad 1) mogen alle
+    # user-profielen zien. Anders zegt Spark 'Emmy staat niet in jouw graaf'
+    # tegen zijn eigen maker.
+    try:
+        viewer = next((u for u in _users_data()
+                       if isinstance(u, dict) and u.get("id") == viewer_id), None)
+        if viewer and int(viewer.get("gradatie", 7) or 7) == 1:
+            return person, "ok"
+    except Exception:
+        pass
     grad = int(person.get("gradatie", 7) or 7)
     if grad <= 2 or person.get("id") == viewer_id:
         return person, "ok"

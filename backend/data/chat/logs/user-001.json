@@ -65511,11 +65511,136 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2604
       }
+    },
+    {
+      "id": "conv-b05c96f4",
+      "timestamp": "2026-08-23T11:31:01.899129+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "weet jij wie Emmy is",
+      "spark_response": "Ik weet wel wie Emmy is, maar deze persoon staat niet in jouw vrienden-graaf. Ik deel hun info alleen met vrienden.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "weet"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "profile_lookup_denied",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup_denied"
+      },
+      "metadata": {
+        "session_id": "emmy-test",
+        "gesprek_nummer": 2605
+      }
+    },
+    {
+      "id": "conv-1827c415",
+      "timestamp": "2026-08-23T11:31:46.565549+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "weet jij wie Emmy is",
+      "spark_response": "**Emmy** (gradatie 7, rang —). Lid van het Spark Core platform.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "weet"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "emmy-test-2",
+        "gesprek_nummer": 2606
+      }
+    },
+    {
+      "id": "conv-5234e312",
+      "timestamp": "2026-08-23T11:31:46.784445+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "weet jij wie ZzzzOnbestaand is",
+      "spark_response": "Ik ken geen 'ZzzzOnbestaand' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "weet"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "emmy-test-3",
+        "gesprek_nummer": 2607
+      }
+    },
+    {
+      "id": "conv-a9f9d968",
+      "timestamp": "2026-08-23T11:31:55.195653+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Emmy",
+      "spark_response": "**Emmy** (gradatie 7, rang —). Lid van het Spark Core platform.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "emmy-test-4",
+        "gesprek_nummer": 2608
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2604,
-    "last_updated": "2026-08-23T10:43:07.289493+00:00"
+    "total_conversations": 2608,
+    "last_updated": "2026-08-23T11:31:55.195653+00:00"
   }
 }

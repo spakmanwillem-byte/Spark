@@ -1,6 +1,6 @@
 {
   "_arch_ref": "v6_glow_nav_001 — UI tab → route + aliases voor NLP-navigatie. IDs matchen MainLayout.navigationConfig zodat glow_target = `nav-{id}` overeenkomt met data-testid in sidebar. v13c_glow_admin_gate_001 (sessie 54): adminOnly-flag toegevoegd om admin-routes voor gewone users te weren.",
-  "version": "v5",
+  "version": "v6",
   "tabs": [
     {
       "id": "dashboard",
@@ -227,7 +227,8 @@
         "punten",
         "xp"
       ],
-      "icon": "Trophy"
+      "icon": "Trophy",
+      "adminOnly": true
     },
     {
       "id": "leaderboard",
@@ -239,7 +240,8 @@
         "podium",
         "top"
       ],
-      "icon": "Award"
+      "icon": "Award",
+      "adminOnly": true
     },
     {
       "id": "integrations",

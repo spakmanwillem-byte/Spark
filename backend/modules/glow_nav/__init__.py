@@ -24,7 +24,7 @@ TABS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "tabs_regi
 def _default_tabs() -> dict:
     return {
         "_arch_ref": "v6_glow_nav_001 — UI tab → route + aliases voor NLP-navigatie. IDs matchen MainLayout.navigationConfig zodat glow_target = `nav-{id}` overeenkomt met data-testid in sidebar. v13c_glow_admin_gate_001 (sessie 54): adminOnly-flag toegevoegd om admin-routes voor gewone users te weren.",
-        "version": "v5",
+        "version": "v6",
         "tabs": [
             # WORKSPACE
             {"id": "dashboard", "label": "Dashboard", "route": "/", "aliases": ["dashboard", "home", "start", "overzicht"], "icon": "Home"},
@@ -46,8 +46,8 @@ def _default_tabs() -> dict:
             {"id": "wallet", "label": "Wallet", "route": "/modules/wallet", "aliases": ["wallet", "geld", "saldo", "tikkie", "portemonnee", "balans"], "icon": "Wallet"},
             {"id": "winkel", "label": "Winkel", "route": "/modules/winkel", "aliases": ["winkel", "winkelstraat", "shop", "roadkillshop", "merch"], "icon": "ShoppingBag"},
             {"id": "boekhouding", "label": "Boekhouding", "route": "/modules/boekhouding", "aliases": ["boekhouding", "kasboek", "boeken", "accounting"], "icon": "BookMarked"},
-            {"id": "achievements", "label": "Achievements", "route": "/modules/achievements", "aliases": ["achievement", "achievements", "milestone", "punten", "xp"], "icon": "Trophy"},
-            {"id": "leaderboard", "label": "Leaderboard", "route": "/modules/leaderboard", "aliases": ["leaderboard", "ranglijst", "podium", "top"], "icon": "Award"},
+            {"id": "achievements", "label": "Achievements", "route": "/modules/achievements", "aliases": ["achievement", "achievements", "milestone", "punten", "xp"], "icon": "Trophy", "adminOnly": True},
+            {"id": "leaderboard", "label": "Leaderboard", "route": "/modules/leaderboard", "aliases": ["leaderboard", "ranglijst", "podium", "top"], "icon": "Award", "adminOnly": True},
             {"id": "integrations", "label": "Integraties", "route": "/modules/integrations", "aliases": ["integraties", "integrations", "koppelingen", "api keys"], "icon": "Puzzle", "adminOnly": True},
             # BEHEER
             # v13c_shop_tab_moved_to_profile_001 — shop-onderhoud zit nu in Mijn Profiel als sub-tab

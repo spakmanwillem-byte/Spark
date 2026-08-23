@@ -17,7 +17,8 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const TABS = [
   { id: 'algemeen', label: 'Algemeen', accent: '#f59e0b' },
-  { id: 'avatar', label: 'Avatar', accent: '#ec4899' },
+  // v13c_avatar_admin_only_001 (sessie 54) — Avatar-tab tot af alleen voor admins.
+  { id: 'avatar', label: 'Avatar', accent: '#ec4899', adminOnly: true },
   { id: 'instellingen', label: 'Instellingen', accent: '#06b6d4' },
 ];
 
@@ -90,7 +91,7 @@ export function UserProfilePage({ onNavigate }) {
             </div>
           </div>
           <div className="flex overflow-x-auto gap-0 scrollbar-hide">
-            {TABS.map(t => {
+            {TABS.filter(t => !t.adminOnly || isAdminUser).map(t => {
               const a = activeTab === t.id;
               return (
                 <button
@@ -138,7 +139,7 @@ export function UserProfilePage({ onNavigate }) {
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
             )}
-            {activeTab === 'avatar' && (
+            {activeTab === 'avatar' && isAdminUser && (
               <AvatarTab userId={userId} isAdmin={isAdminUser} />
             )}
             {activeTab === 'instellingen' && (

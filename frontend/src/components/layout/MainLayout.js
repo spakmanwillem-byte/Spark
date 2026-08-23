@@ -49,8 +49,8 @@ export const navigationConfig = {
       { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/modules/wallet' },
       { id: 'winkel', label: 'Winkel', icon: ShoppingBag, path: '/modules/winkel' },
       { id: 'boekhouding', label: 'Boekhouding', icon: BookMarked, path: '/modules/boekhouding' },
-      { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
-      { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard' },
+      { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements', adminOnly: true },
+      { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard', adminOnly: true },
     ]
   },
   admin: {

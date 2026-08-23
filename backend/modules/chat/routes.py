@@ -135,6 +135,43 @@ async def process_message(req: ChatMessage):
     except Exception:
         pass
 
+    # v13_user_lookup_intent_001 (sessie 54) — Willem's GPT-gesprek: "heb jij een
+    # gebruiker anne" → Spark zei "nee" zonder /data/system/users.json te lezen.
+    # Nu leest hij écht en toont user + gradatie + (voor admin) user_id.
+    try:
+        from . import smart_intents_service as _si_ulk
+        _ulk = _si_ulk.detect_user_lookup_intent(text)
+        if _ulk:
+            _requester_is_admin = False
+            try:
+                from modules.auth.service import AuthService as _UlkAuth
+                _u = _UlkAuth.get_user_by_id(req.user_id) if req.user_id else None
+                _requester_is_admin = bool(_u and (_u.get("admin") or _u.get("admin_capable")))
+            except Exception:
+                pass
+            _out = _si_ulk.handle_user_lookup(_ulk, requester_is_admin=_requester_is_admin)
+            _resp = {
+                "type": _out.get("type", "user_lookup"),
+                "message": _out.get("message", ""),
+                "spark_response": _out.get("message", ""),
+                "success": True,
+                "used_model": "user_lookup_detector",
+                "fast_path": True,
+                "knowledge_matches": [],
+                "sentiment": snap.detect_sentiment(text),
+                "emotion": None,
+                "unknown_words": [],
+                "snap_suggestions": [],
+            }
+            try:
+                _save_log(req, _resp, "user_lookup")
+            except Exception:
+                pass
+            return _resp
+    except Exception as _ex:
+        print(f"[user_lookup detect] failed: {_ex}")
+
+
     # v13_note_before_contact_fix_001 (sessie 54) — Willem's gesprek van 22 aug:
     # "noteer: bel morgen de tandarts" werd gepakt door contact_call (want bevat 'bel')
     # i.p.v. note. Fix: als de tekst duidelijk een note-intent is ('noteer:', 'schrijf op:')

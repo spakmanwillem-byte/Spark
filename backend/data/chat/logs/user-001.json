@@ -64951,11 +64951,104 @@
         "session_id": "call-v3",
         "gesprek_nummer": 2583
       }
+    },
+    {
+      "id": "conv-a1360576",
+      "timestamp": "2026-08-23T09:07:56.774245+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "je kb kaarten zijn bijgewerkt.",
+      "spark_response": "**KB‑kaarten zijn bijgewerkt** ✅ \n\n| KB‑kaart | Kernpunt (bijgewerkt) |\n|----------|-----------------------|\n| **KB‑kaart** | Definitie aangescherpt: nu expliciet “gestructureerde eenheid waarin informatie over één onderwerp, begrip of concept wordt opgeslagen”, met extra metadata‑velden. |\n| **kaarten** | Uitgebreide beschrijving van fysieke / digitale objecten (speelkaart, landkaart, betaalkaart, kenniskaart, etc.). |\n| **bijgewerkt** | Nu duidelijker: “aanpassen met nieuwe of actuele informatie” → focus op actualiteit en correctheid. |\n| **kennisbankkaarten** | Toevoeging van lagen‑structuur (laag 1‑3) en voorbeeld‑relaties binnen de kennisbank. |\n\nDeze updates zorgen voor:\n\n* **Consistentere terminologie** – één definitie per concept. \n* **Betere vindbaarheid** – extra tags en metadata. \n* **Heldere relaties** – hoe kaarten zich tot elkaar en tot de kennisbank verhouden.\n\nWil je één van deze kaarten volledig bekijken of een zoekopdracht uitvoeren in de kennisbank? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "afspraak",
+        "used_cards": [
+          "kbv2-b29a7ab5",
+          "kbv2-20bc8e4a",
+          "kbv2-85d2b504",
+          "kbv2-0346ff68",
+          "kbv2-361005df"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2584
+      }
+    },
+    {
+      "id": "conv-0a40d75f",
+      "timestamp": "2026-08-23T09:11:24.315243+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "heb jij een gebruiker anne",
+      "spark_response": "Ja, **Anne** bestaat als user.\n- Gradatie: 5\n- User-ID: `user-83270eb1`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "user_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "user_lookup"
+      },
+      "metadata": {
+        "session_id": "ulk-1",
+        "gesprek_nummer": 2585
+      }
+    },
+    {
+      "id": "conv-8d8b338b",
+      "timestamp": "2026-08-23T09:11:24.485605+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zie je user willem",
+      "spark_response": "Ja, **Willem** bestaat als user.\n- Gradatie: 1 (admin)\n- User-ID: `user-001`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "user_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "user_lookup"
+      },
+      "metadata": {
+        "session_id": "ulk-2",
+        "gesprek_nummer": 2586
+      }
+    },
+    {
+      "id": "conv-528db092",
+      "timestamp": "2026-08-23T09:11:24.652206+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke users zijn er",
+      "spark_response": "Er zijn **27 users** in het systeem:\n- **Willem** (1) (admin) — `user-001`\n- **Madelief Stouten** (4) — `bot-madelief`\n- **Harry Klokkenmaker** (4) — `bot-harry`\n- **Mr Smith** (4) — `bot-smith`\n- **Spark** (1) (admin) — `user-000`\n- **Nick Teeuwen** (5) — `user-574ac78e`\n- **Roadkill** (5) — `user-1996fa59`\n- **Heidi** (2) — `user-64bf063d`\n- **Marieke** (3) — `user-c609d7d1`\n- **Ron** (3) — `user-ceeba762`\n- **joel123** (4) — `user-f57a2858`\n- **Arent** (3) — `user-9e4172d0`\n- **De Boekhouder** (4) — `bot-boekhouder`\n- **Magere Hein** (4) — `bot-dood`\n- **de Geiser** (3) — `user-a0ee2d7e`\n- **Nick** (3) — `user-4d81e2a4`\n- **Lotus** (2) — `user-5dd295db`\n- **Maaike** (2) — `user-fc2f683b`\n- **Joy** (2) — `user-c4507f59`\n- **Thomas** (5) — `user-9aa6d874`\n- **Jayden** (5) — `user-ff6da683`\n- **Gerben** (2) — `user-4d9b59aa`\n- **Tim** (3) — `user-3fbcf2f4`\n- **Gert van zeven** (4) — `user-166437fe`\n- **Marleen van Steen** (7) — `user-7b532909`\n- **Anne** (5) — `user-83270eb1`\n- **GPT** (7) — `user-7b75ad55`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "user_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "user_lookup"
+      },
+      "metadata": {
+        "session_id": "ulk-3",
+        "gesprek_nummer": 2587
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2583,
-    "last_updated": "2026-08-23T08:59:31.877951+00:00"
+    "total_conversations": 2587,
+    "last_updated": "2026-08-23T09:11:24.652206+00:00"
   }
 }

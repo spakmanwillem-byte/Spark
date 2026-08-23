@@ -748,3 +748,6 @@
 {"ts": "2026-08-23T08:58:57.725913+00:00", "user_id": "user-001", "text": "noteer: test-nummer 12345", "tag_vector": ["notitie", "emo:neutral", "behavior:informatief-functioneel", "waarde:eerlijkheid"], "tag_key": "behavior:informatief-functioneel|emo:neutral|notitie|waarde:eerlijkheid", "chosen_route": "make_note", "chosen_command_id": null}
 {"ts": "2026-08-23T08:59:31.760839+00:00", "user_id": "user-001", "text": "noteer: bel morgen de tandarts", "tag_vector": ["notitie", "morgen"], "tag_key": "morgen|notitie", "chosen_route": "note_early", "chosen_command_id": null}
 {"ts": "2026-08-23T08:59:31.936644+00:00", "user_id": "user-001", "text": "bel mijn moeder", "tag_vector": [], "tag_key": "", "chosen_route": "contact_call", "chosen_command_id": null}
+{"ts": "2026-08-23T09:11:24.373394+00:00", "user_id": "user-001", "text": "heb jij een gebruiker anne", "tag_vector": [], "tag_key": "", "chosen_route": "user_lookup", "chosen_command_id": null}
+{"ts": "2026-08-23T09:11:24.543627+00:00", "user_id": "user-001", "text": "zie je user willem", "tag_vector": ["bekijken"], "tag_key": "bekijken", "chosen_route": "user_lookup", "chosen_command_id": null}
+{"ts": "2026-08-23T09:11:24.709017+00:00", "user_id": "user-001", "text": "welke users zijn er", "tag_vector": ["gebruikers"], "tag_key": "gebruikers", "chosen_route": "user_lookup", "chosen_command_id": null}

@@ -228,6 +228,103 @@ def handle_note(user: Optional[dict], user_id: Optional[str], content: str) -> D
         "note_id": note["id"],
     }
 
+# ---------------------------------------------------------------------------
+# v13_user_lookup_intent_001 (sessie 54) — Willem's GPT-conversatie showed
+# Spark said "Nee ik zie geen gebruiker Anne" en zoekt "Maaike" in KB i.p.v.
+# in users.json. Nu: admin (én normale users) kunnen naar bestaande users
+# vragen — Spark leest /data/system/users.json en antwoordt op naam/user_id.
+# ---------------------------------------------------------------------------
+USER_LOOKUP_PATTERNS = [
+    # "zie je gebruiker anne", "ken je user maaike", "heb jij een gebruiker anne"
+    re.compile(r"\b(zie|ken|heb|hebben|kent|heeft)\s+(je|jij|spark)\s+(?:al\s+)?(?:een\s+|de\s+)?(user|gebruiker|account)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ0-9_\-]{1,30})\b", re.IGNORECASE),
+    # "welke users zijn er", "toon me alle gebruikers"
+    re.compile(r"\b(welke|hoeveel|toon|noem|lijst|list)\s+(users?|gebruikers?|accounts?)\b", re.IGNORECASE),
+    # "user X bestaat?"
+    re.compile(r"\b(user|gebruiker)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ0-9_\-]{1,30})\s+bestaat", re.IGNORECASE),
+]
+
+
+def detect_user_lookup_intent(text: str):
+    """Return dict {mode: 'single'|'list', name: str|None} of None."""
+    if not text:
+        return None
+    for pat in USER_LOOKUP_PATTERNS:
+        m = pat.search(text)
+        if not m:
+            continue
+        # Groep 4 (single) of geen (list)
+        groups = m.groups()
+        if len(groups) >= 4 and groups[3]:
+            return {"mode": "single", "name": groups[3].strip()}
+        if len(groups) >= 2 and groups[1] and groups[1].lower().startswith(("user", "gebruiker", "account")):
+            return {"mode": "list", "name": None}
+        return {"mode": "list", "name": None}
+    return None
+
+
+def handle_user_lookup(intent: dict, requester_is_admin: bool = False) -> Dict:
+    """Zoek in users.json en bouw antwoord. Voor niet-admins alleen naam+gradatie tonen,
+    voor admins ook user_id + admin-vlaggen."""
+    users_file = DATA_ROOT / "system" / "users.json"
+    users_data = load_json(users_file, default={"users": []})
+    users = users_data.get("users", []) if isinstance(users_data, dict) else users_data
+    if not isinstance(users, list):
+        users = []
+
+    if intent["mode"] == "list":
+        # Toon alle users compact
+        if not users:
+            return {"type": "user_lookup", "message": "Er zijn nog geen users in het systeem."}
+        lines = [f"Er zijn **{len(users)} users** in het systeem:"]
+        for u in users:
+            nm = u.get("naam") or u.get("username") or "?"
+            gr = u.get("gradatie") or "?"
+            uid = u.get("id") or "?"
+            adm = " (admin)" if u.get("admin") or u.get("admin_capable") else ""
+            if requester_is_admin:
+                lines.append(f"- **{nm}** ({gr}){adm} — `{uid}`")
+            else:
+                lines.append(f"- **{nm}** ({gr}){adm}")
+        return {"type": "user_lookup", "message": "\n".join(lines)}
+
+    # Single-mode: zoek op naam (case-insensitive, ook via username/email)
+    needle = intent["name"].lower()
+    match = None
+    for u in users:
+        candidates = [
+            str(u.get("naam", "")).lower(),
+            str(u.get("username", "")).lower(),
+            str(u.get("email", "")).lower().split("@")[0],
+        ]
+        if any(needle == c or (len(needle) >= 3 and needle in c) for c in candidates if c):
+            match = u
+            break
+
+    if not match:
+        # Niet gevonden — meld hoeveel wél bestaan
+        return {
+            "type": "user_lookup",
+            "message": f"Nee, ik zie geen user met de naam '**{intent['name']}**' in het systeem. "
+                       f"Er staan {len(users)} users geregistreerd. Wil je de volledige lijst zien?",
+        }
+
+    nm = match.get("naam") or match.get("username") or "?"
+    gr = match.get("gradatie") or "?"
+    uid = match.get("id") or "?"
+    adm = " (admin)" if match.get("admin") or match.get("admin_capable") else ""
+    created = (match.get("created_at") or match.get("aangemaakt_op") or "")[:10]
+
+    lines = [f"Ja, **{nm}** bestaat als user."]
+    lines.append(f"- Gradatie: {gr}{adm}")
+    if created:
+        lines.append(f"- Aangemaakt: {created}")
+    if requester_is_admin:
+        lines.append(f"- User-ID: `{uid}`")
+    return {"type": "user_lookup", "message": "\n".join(lines)}
+
+
+
+
 
 # v13_write_intent_patterns_001 — bug-detectie + write (analoog aan note-flow).
 def detect_bug_intent(text: str):

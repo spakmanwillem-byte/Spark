@@ -113,6 +113,28 @@
       "data_source": "/app/backend/data/system/users.json"
     },
     {
+      "id": "gebruikers_namen",
+      "naam": "Alle gebruikersnamen tonen",
+      "categorie": "system",
+      "beschrijving": "Toon alle usernamen (admin ziet alles + gradaties, non-admin ziet eigen gradatie/hoger). v13d_gebruikers_namen_001 sessie 55.",
+      "triggers": [
+        "noem (alle |de )?(gebruikers|users|leden|usernamen)",
+        "(welke|wat voor|geef|toon|laat zien) (alle |de )?(gebruikers|users|leden|namen|usernamen)",
+        "(alle |de )?(gebruikers|user|leden|username)?namen (?:opnoemen|noemen|zien|opgenoemd|opsommen|tonen|geven)",
+        "wie zijn (?:er )?(?:allemaal )?(?:op|in) (?:spark|het systeem)",
+        "gebruikers?lijst",
+        "(alle )?(usernames?|usernamen)",
+        "wie zit(?:ten)? er op spark",
+        "(geef|toon|laat|noem) (me |mij )?(alle |de )?namen",
+        "alle (gebruikers|namen|users) (noemen|opnoemen|zien|opgenoemd|opsommen|tonen|geven)",
+        "(who|wie) (are|zijn) (all )?(the )?users"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "endpoint": "-",
+      "data_source": "/app/backend/data/system/users.json"
+    },
+    {
       "id": "tellen_bestanden",
       "naam": "Hoeveel bestanden / volume",
       "categorie": "system",

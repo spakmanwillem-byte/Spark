@@ -240,11 +240,68 @@
         "session_id": "deep-user-3c4144bb",
         "gesprek_nummer": 10
       }
+    },
+    {
+      "id": "conv-1840afb1",
+      "timestamp": "2026-08-23T14:47:03.190255+00:00",
+      "user_id": "user-3c4144bb",
+      "user_naam": "Gebruiker",
+      "user_message": "wie zit er op spark",
+      "spark_response": "👥 Ik mag je op jouw gradatie (7) deze namen tonen: **Emmy, GPT**. Voor de volledige lijst heb je admin-toegang nodig.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zit"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "6f46d340-dfcd-4617-a909-fb752f021fb3",
+        "gesprek_nummer": 11
+      }
+    },
+    {
+      "id": "conv-39600098",
+      "timestamp": "2026-08-23T14:47:32.045718+00:00",
+      "user_id": "user-3c4144bb",
+      "user_naam": "Gebruiker",
+      "user_message": "gebruikerslijst",
+      "spark_response": "👥 Ik mag je op jouw gradatie (7) deze namen tonen: **Emmy, GPT**. Voor de volledige lijst heb je admin-toegang nodig.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "cbc0410387064c86b992f3df27ccdeef",
+        "gesprek_nummer": 12
+      }
     }
   ],
   "metadata": {
     "user_id": "user-3c4144bb",
-    "total_conversations": 10,
-    "last_updated": "2026-08-23T09:40:45.676056+00:00"
+    "total_conversations": 12,
+    "last_updated": "2026-08-23T14:47:32.045718+00:00"
   }
 }

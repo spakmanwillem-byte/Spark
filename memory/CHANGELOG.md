@@ -3,6 +3,28 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-23 (sessie 55, deel 2) — Chat: "noem alle gebruikers" werkt nu
+
+### 👥 v13d_gebruikers_namen_001 — Nieuwe capability
+
+**Willem's productie-frustratie**: "ik wil alle usernamen opgenoemd hebben" → Spark had
+wel `tellen_gebruikers` (aantal + eerste 8 namen) maar geen manier om **alle** namen te
+noemen. Antwoord: "Ga naar de Admin-tab". Dezelfde bug-klasse als agenda-delete.
+
+**Fix** — nieuwe capability `gebruikers_namen`:
+- Handler `_handle_gebruikers_namen(user_id)` in `capability_handler_service.py`:
+  - **Admin** (Willem, Spark) → volledige lijst gegroepeerd per gradatie (G1..G7).
+  - **Non-admin** → alleen users op eigen gradatie of hoger (geen leak van familie-namen).
+- 10 triggers in `spark_capabilities.json`: `noem alle gebruikers`, `gebruikerslijst`,
+  `wie zit er op spark`, `geef me alle namen`, etc.
+- 4 regressietests in `tests/test_gebruikers_namen_v13d.py` (varianten + admin-view +
+  non-admin filter + geen-lek-familie-namen naar G7).
+
+**Impact**: Willem's productie-scenario werkt nu. Elke Nederlander-frasering match.
+Privacy blijft intact (Emmy G7 ziet alleen Emmy + GPT, geen Lotus/Heidi).
+
+---
+
 ## 2026-02-23 (sessie 55) — Agenda DELETE hook + Intent Patronen live-editable + RULE_-prefix
 
 Willem's frustratie: "als ik in chat zeg 'haal aanstaande dinsdag uit de agenda' dan

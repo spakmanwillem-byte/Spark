@@ -55,6 +55,53 @@ def _handle_tellen_gebruikers(user_id: Optional[str]) -> Optional[Dict]:
     }
 
 
+def _handle_gebruikers_namen(user_id: Optional[str]) -> Optional[Dict]:
+    """v13d_gebruikers_namen_001 (sessie 55) — Willem: 'geef me alle usernamen'.
+    Spark had wél tellen_gebruikers maar geen manier om ALLE namen te noemen.
+    Admin ziet volledige lijst met gradatie. Niet-admin ziet alleen users op
+    eigen gradatie of hoger (om per ongeluk uitlekken van familie-namen naar
+    G5+ te voorkomen)."""
+    users = load_json(DATA / "system" / "users.json", default={"users": []}).get("users", [])
+    humans = [u for u in users if not (u.get("id") or "").startswith("bot-")]
+    bots = [u for u in users if (u.get("id") or "").startswith("bot-")]
+    # Vind de vragende user zelf om gradatie te bepalen
+    me = next((u for u in users if u.get("id") == user_id), None) or {}
+    is_admin = bool(me.get("admin") or me.get("admin_capable"))
+    my_grad = int(me.get("gradatie", 5) or 5)
+
+    if is_admin:
+        # Groepeer per gradatie
+        buckets = {}
+        for u in humans:
+            g = u.get("gradatie", "?")
+            buckets.setdefault(g, []).append(u.get("naam") or u.get("username") or "?")
+        lines = [f"📋 **{len(humans)} gebruikers** in Spark Core:"]
+        for g in sorted(buckets.keys(), key=lambda x: (isinstance(x, str), x)):
+            names = sorted(buckets[g])
+            lines.append(f"  · **G{g}** ({len(names)}): {', '.join(names)}")
+        lines.append("")
+        lines.append(f"_+ {len(bots)} bots: {', '.join((b.get('naam') or '?') for b in bots)}_")
+        return {
+            "type": "capability_response",
+            "capability_id": "gebruikers_namen",
+            "message": "\n".join(lines),
+        }
+
+    # Niet-admin: alleen users op eigen gradatie of hoger (= minder gevoelig)
+    visible = sorted(
+        [u.get("naam") or "?" for u in humans if int(u.get("gradatie", 9) or 9) >= my_grad]
+    )
+    return {
+        "type": "capability_response",
+        "capability_id": "gebruikers_namen",
+        "message": (
+            f"👥 Ik mag je op jouw gradatie ({my_grad}) deze namen tonen: "
+            f"**{', '.join(visible)}**. "
+            f"Voor de volledige lijst heb je admin-toegang nodig."
+        ),
+    }
+
+
 def _handle_tellen_bestanden(user_id: Optional[str]) -> Optional[Dict]:
     arc = load_json(DATA / "system_archive" / "_index.json", default={"files": []})
     files = arc.get("files", [])
@@ -747,6 +794,7 @@ def _handle_lees_privacy(user_id: Optional[str]) -> Optional[Dict]:
 
 _HANDLERS = {
     "tellen_gebruikers":         _handle_tellen_gebruikers,
+    "gebruikers_namen":          _handle_gebruikers_namen,  # v13d sessie 55
     "tellen_bestanden":          _handle_tellen_bestanden,
     "taken_lijst":               _handle_taken_lijst,
     "winst_verlies_overzicht":   _handle_winst_verlies,

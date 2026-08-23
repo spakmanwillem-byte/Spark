@@ -64401,11 +64401,38 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2562
       }
+    },
+    {
+      "id": "conv-c3067f09",
+      "timestamp": "2026-08-23T06:57:58.831729+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "gedeployed",
+      "spark_response": "Ik ken deze woorden nog niet: **gedeployed**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'gedeployed' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "gedeployed"
+        ],
+        "snap_suggestions": [
+          "gedeployed"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "snap-test-1",
+        "gesprek_nummer": 2563
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2562,
-    "last_updated": "2026-08-23T06:56:12.161506+00:00"
+    "total_conversations": 2563,
+    "last_updated": "2026-08-23T06:57:58.831729+00:00"
   }
 }

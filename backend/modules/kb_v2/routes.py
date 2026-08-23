@@ -192,37 +192,56 @@ async def get_inbox_incomplete(limit: int = Query(50, ge=1, le=500),
     LADES = ["voelen", "spreken", "weten", "doen"]
     PLACEHOLDER = {"", "?", "nog te vullen", "onbekend", "n.v.t.", "n/a"}
     out = []
+
+    def _score_card(c, source_lade):
+        """Bouw entry voor een kaart als incomplete."""
+        ws = c.get("ws5", {}) or {}
+        filled_5w = sum(1 for k in REQUIRED_5W
+                        if isinstance(ws.get(k), str)
+                        and ws[k].strip().lower() not in PLACEHOLDER)
+        lagen = c.get("lagen", {}) or {}
+        filled_lagen = sum(1 for i in (1, 2, 3, 4)
+                            if isinstance(lagen.get(f"laag{i}"), str)
+                            and len(lagen[f"laag{i}"].strip()) >= 20)
+        incomplete = filled_5w < 6 or filled_lagen < 4
+        if not incomplete:
+            return None
+        if search and search.lower().strip() not in (c.get("begrip") or "").lower():
+            return None
+        return {
+            "id": c.get("id"),
+            "begrip": c.get("begrip"),
+            "lade": source_lade,
+            "status": c.get("status"),
+            "filled_5w": filled_5w,
+            "filled_lagen": filled_lagen,
+            "missing_5w": sorted(REQUIRED_5W - {k for k, v in ws.items()
+                                                if isinstance(v, str) and v.strip().lower() not in PLACEHOLDER}),
+            "laag1": (lagen.get("laag1") or "")[:120],
+            "tags_sample": (c.get("tags") or [])[:5],
+            "_inbox_reason": "onvolledig" if source_lade != "inbox" else (c.get("_inbox_reason") or "missing_laag1"),
+            "_footnote_ts": (c.get("footnote") or {}).get("laatst_bewerkt_op")
+                            or (c.get("footnote") or {}).get("aangemaakt_op") or "",
+        }
+
     for lade in LADES:
         d = _lj(service._lade_path(lade), default={"kaarten": []})
         for c in d.get("kaarten", []):
-            ws = c.get("ws5", {}) or {}
-            filled_5w = sum(1 for k in REQUIRED_5W
-                            if isinstance(ws.get(k), str)
-                            and ws[k].strip().lower() not in PLACEHOLDER)
-            lagen = c.get("lagen", {}) or {}
-            filled_lagen = sum(1 for i in (1, 2, 3, 4)
-                                if isinstance(lagen.get(f"laag{i}"), str)
-                                and len(lagen[f"laag{i}"].strip()) >= 20)
-            incomplete = filled_5w < 6 or filled_lagen < 4
-            if not incomplete:
-                continue
-            if search and search.lower().strip() not in (c.get("begrip") or "").lower():
-                continue
-            out.append({
-                "id": c.get("id"),
-                "begrip": c.get("begrip"),
-                "lade": lade,
-                "status": c.get("status"),
-                "filled_5w": filled_5w,
-                "filled_lagen": filled_lagen,
-                "missing_5w": sorted(REQUIRED_5W - {k for k, v in ws.items()
-                                                    if isinstance(v, str) and v.strip().lower() not in PLACEHOLDER}),
-                "laag1": (lagen.get("laag1") or "")[:120],
-                "tags_sample": (c.get("tags") or [])[:5],
-                "_inbox_reason": "onvolledig",
-                "_footnote_ts": (c.get("footnote") or {}).get("laatst_bewerkt_op")
-                                or (c.get("footnote") or {}).get("aangemaakt_op") or "",
-            })
+            entry = _score_card(c, lade)
+            if entry is not None:
+                out.append(entry)
+
+    # v13_incomplete_include_inbox_001 (sessie 54) — Willem: "gedeployed" (in inbox)
+    # verscheen niet in de widget omdat we alleen door de 4 lades liepen. Inbox-kaarten
+    # zijn per definitie incompleet (missing_laag1 e.d.) dus die horen er óók bij.
+    try:
+        inbox = _lj(service.V2_DIR / "knowledge_inbox.json", default={"kaarten": []})
+        for c in inbox.get("kaarten", []):
+            entry = _score_card(c, "inbox")
+            if entry is not None:
+                out.append(entry)
+    except Exception:
+        pass  # inbox-fetch is best-effort
 
     # v12_kbv2_inbox_sort_001 — Sort volgens dropdown-keuze
     if sort == "alfa":

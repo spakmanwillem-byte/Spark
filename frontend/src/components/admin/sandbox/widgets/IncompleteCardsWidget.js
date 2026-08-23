@@ -62,7 +62,12 @@ export function IncompleteCardsWidget() {
     setSelectedLoading(true);
     (async () => {
       try {
-        const r = await fetch(`${API}/api/kb/v2/lade/${item.lade}`);
+        // v13_incomplete_include_inbox_001: inbox-kaarten via /inbox endpoint,
+        // lade-kaarten via /lade/{lade}
+        const url = item.lade === 'inbox'
+          ? `${API}/api/kb/v2/inbox?limit=500`
+          : `${API}/api/kb/v2/lade/${item.lade}`;
+        const r = await fetch(url);
         const d = await r.json();
         const full = (d.kaarten || []).find(k => k.id === selectedId);
         setSelectedCard(full || null);

@@ -34,6 +34,16 @@ export function ArchiefPage({ onNavigate }) {
   const fileInputRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState('bestanden');
+  // v13c_foto_subtab_001 (sessie 54) — Binnen de Foto-tab: Privé (default) of Winkel.
+  // Alleen als user shops heeft, wordt "Winkel" sub-tab zichtbaar.
+  const [fotoSubTab, setFotoSubTab] = useState('prive'); // 'prive' | 'winkel'
+  const [hasShops, setHasShops] = useState(false);
+  useEffect(() => {
+    fetch(`${API}/api/winkelstraat/shops`)
+      .then(r => r.json())
+      .then(d => setHasShops((d.shops || []).some(s => s.owner_user_id === userId)))
+      .catch(() => setHasShops(false));
+  }, [userId]);
   const [files, setFiles] = useState([]);
   const [stats, setStats] = useState(null);
   const [conversations, setConversations] = useState([]);
@@ -75,6 +85,12 @@ export function ArchiefPage({ onNavigate }) {
       const params = new URLSearchParams();
       params.append('category', activeTab);
       if (search) params.append('q', search);
+      // v13c_foto_subtab_001 — Foto sub-filter: alleen actief als user shops heeft
+      // (anders is er niks te scheiden en tonen we alles zoals voorheen).
+      if (activeTab === 'foto' && hasShops) {
+        if (fotoSubTab === 'prive') params.append('exclude_source', 'shop_product_image');
+        else if (fotoSubTab === 'winkel') params.append('source', 'shop_product_image');
+      }
       try {
         const res = await fetch(`${API}/api/archive/${userId}?${params}`).then(r => r.json());
         setFiles(res.files || []);
@@ -85,7 +101,7 @@ export function ArchiefPage({ onNavigate }) {
       } catch (e) { console.error(e); }
     }
     setLoading(false);
-  }, [userId, activeTab, search]);
+  }, [userId, activeTab, search, fotoSubTab, hasShops]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -216,11 +232,38 @@ export function ArchiefPage({ onNavigate }) {
         {/* Search + Content */}
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="max-w-5xl mx-auto">
+            {/* v13c_foto_subtab_001 — Sub-tabs binnen Foto: Privé (default) + Winkel (alleen shop-owners) */}
+            {activeTab === 'foto' && hasShops && (
+              <div className="flex gap-2 mb-3 pb-2 border-b border-slate-800">
+                <button
+                  data-testid="foto-subtab-prive"
+                  onClick={() => setFotoSubTab('prive')}
+                  className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
+                    fotoSubTab === 'prive'
+                      ? 'bg-green-500/20 text-green-300 border border-green-500/40'
+                      : 'text-slate-400 hover:text-white border border-transparent'
+                  }`}
+                >
+                  Privé {stats?.foto_prive != null && <span className="ml-1 opacity-60">({stats.foto_prive})</span>}
+                </button>
+                <button
+                  data-testid="foto-subtab-winkel"
+                  onClick={() => setFotoSubTab('winkel')}
+                  className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
+                    fotoSubTab === 'winkel'
+                      ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
+                      : 'text-slate-400 hover:text-white border border-transparent'
+                  }`}
+                >
+                  Winkel {stats?.foto_winkel != null && <span className="ml-1 opacity-60">({stats.foto_winkel})</span>}
+                </button>
+              </div>
+            )}
             <div className="relative mb-4 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
               <input data-testid="archief-search" type="text"
                 value={search} onChange={e => setSearch(e.target.value)}
-                placeholder={`Zoek in ${activeCat.label.toLowerCase()} (naam, beschrijving, tags)...`}
+                placeholder={`Zoek in ${activeCat.label.toLowerCase()}${activeTab === 'foto' && hasShops ? ' (' + fotoSubTab + ')' : ''} (naam, beschrijving, tags)...`}
                 className="w-full pl-8 pr-8 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
               {search && (
                 <button onClick={() => setSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">

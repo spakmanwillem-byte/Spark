@@ -1,6 +1,6 @@
 {
-  "_arch_ref": "v6_glow_nav_001 — UI tab → route + aliases voor NLP-navigatie. IDs matchen MainLayout.navigationConfig zodat glow_target = `nav-{id}` overeenkomt met data-testid in sidebar.",
-  "version": "v2",
+  "_arch_ref": "v6_glow_nav_001 — UI tab → route + aliases voor NLP-navigatie. IDs matchen MainLayout.navigationConfig zodat glow_target = `nav-{id}` overeenkomt met data-testid in sidebar. v13c_glow_admin_gate_001 (sessie 54): adminOnly-flag toegevoegd om admin-routes voor gewone users te weren.",
+  "version": "v5",
   "tabs": [
     {
       "id": "dashboard",
@@ -36,7 +36,11 @@
         "media",
         "foto's",
         "geluiden",
-        "filmpjes"
+        "filmpjes",
+        "winkel foto",
+        "product foto",
+        "product afbeelding",
+        "privé foto"
       ],
       "icon": "Archive"
     },
@@ -88,7 +92,8 @@
         "roadmap",
         "planning roadmap"
       ],
-      "icon": "Map"
+      "icon": "Map",
+      "adminOnly": true
     },
     {
       "id": "spark-brain",
@@ -103,7 +108,8 @@
         "bijbel",
         "emotie pipeline"
       ],
-      "icon": "Brain"
+      "icon": "Brain",
+      "adminOnly": true
     },
     {
       "id": "knowledge-v2",
@@ -117,7 +123,8 @@
         "weten",
         "kaarten"
       ],
-      "icon": "BookOpen"
+      "icon": "BookOpen",
+      "adminOnly": true
     },
     {
       "id": "triggers",
@@ -127,7 +134,8 @@
         "triggers",
         "trigger lijst"
       ],
-      "icon": "Zap"
+      "icon": "Zap",
+      "adminOnly": true
     },
     {
       "id": "emotions",
@@ -137,7 +145,8 @@
         "emoties",
         "emotie"
       ],
-      "icon": "Sparkles"
+      "icon": "Sparkles",
+      "adminOnly": true
     },
     {
       "id": "connections",
@@ -149,7 +158,8 @@
         "connecties",
         "relaties"
       ],
-      "icon": "Link"
+      "icon": "Link",
+      "adminOnly": true
     },
     {
       "id": "trade",
@@ -241,7 +251,8 @@
         "koppelingen",
         "api keys"
       ],
-      "icon": "Puzzle"
+      "icon": "Puzzle",
+      "adminOnly": true
     },
     {
       "id": "profiel",
@@ -251,7 +262,10 @@
         "profiel",
         "mijn profiel",
         "instellingen profiel",
-        "avatar instellen"
+        "avatar instellen",
+        "mijn winkel",
+        "winkel beheren",
+        "shop beheren"
       ],
       "icon": "User"
     },
@@ -264,7 +278,8 @@
         "users beheer",
         "leden"
       ],
-      "icon": "Users"
+      "icon": "Users",
+      "adminOnly": true
     },
     {
       "id": "analytics",
@@ -275,19 +290,26 @@
         "statistieken",
         "stats"
       ],
-      "icon": "BarChart"
+      "icon": "BarChart",
+      "adminOnly": true
     },
     {
       "id": "settings",
       "label": "Instellingen",
       "route": "/admin/settings",
       "aliases": [
-        "instellingen",
-        "settings",
         "beheer instellingen",
-        "system archief"
+        "systeem archief",
+        "beheer archief",
+        "spark archief",
+        "admin archief",
+        "system archive",
+        "system archief",
+        "instellingen",
+        "settings"
       ],
-      "icon": "Settings"
+      "icon": "Settings",
+      "adminOnly": true
     }
   ]
 }

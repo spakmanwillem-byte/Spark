@@ -200,8 +200,14 @@ async def list_files(
     user_id: str,
     category: Optional[str] = Query(None, description="bestanden|foto|geluiden|filmpjes"),
     q: Optional[str] = Query(None, description="zoekterm in naam/desc/tags"),
+    source: Optional[str] = Query(None, description="filter op source, bv 'shop_product_image'"),
+    exclude_source: Optional[str] = Query(None, description="exclusie van source, bv 'shop_product_image' om winkel-foto's te verbergen"),
 ):
-    """Lijst alle archief-bestanden van user, optioneel gefilterd op categorie + zoek."""
+    """Lijst alle archief-bestanden van user, optioneel gefilterd op categorie + zoek.
+
+    v13c_archive_source_filter_001 (sessie 54, foto-tab split) — bron-filter
+    zodat frontend 'Foto (privé)' en 'Winkel afbeeldingen' apart kan tonen.
+    """
     _user_dir(user_id)  # ensure dirs exist
     files = _load_index(user_id)
 
@@ -209,6 +215,11 @@ async def list_files(
         if category not in CATEGORIES:
             raise HTTPException(400, f"Onbekende categorie: {category}")
         files = [f for f in files if f.get("category") == category]
+
+    if source:
+        files = [f for f in files if (f.get("source") or "") == source]
+    if exclude_source:
+        files = [f for f in files if (f.get("source") or "") != exclude_source]
 
     if q:
         q_low = q.lower().strip()
@@ -226,10 +237,18 @@ async def list_files(
     all_files = _load_index(user_id)
     stats = {cat: 0 for cat in CATEGORIES}
     total_bytes = 0
+    # v13c_archive_source_filter_001 — split foto-count in privé vs winkel
+    foto_prive = 0
+    foto_winkel = 0
     for f in all_files:
         cat = f.get("category", "bestanden")
         if cat in stats:
             stats[cat] += 1
+        if cat == "foto":
+            if (f.get("source") or "") == "shop_product_image":
+                foto_winkel += 1
+            else:
+                foto_prive += 1
         total_bytes += f.get("size_bytes", 0)
 
     return {
@@ -238,6 +257,8 @@ async def list_files(
         "total": len(files),
         "stats": {
             "counts": stats,
+            "foto_prive": foto_prive,
+            "foto_winkel": foto_winkel,
             "total_files": len(all_files),
             "total_size_bytes": total_bytes,
         },

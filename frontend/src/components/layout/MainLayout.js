@@ -23,7 +23,9 @@ export const navigationConfig = {
       { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
-      { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap' },
+      // v13c_roadmap_admin_only_001 (sessie 54) — Roadmap tot core-af alleen
+      // voor admins. "Roadmap" is jargon dat oudere users verwart = ruis.
+      { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap', adminOnly: true },
     ]
   },
   spark: {
@@ -514,7 +516,11 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
 
             // Pas custom volgorde + cross-sectie relocations toe
             const allItems = getItemsForSection(key);
-            // Filter admin-only items voor non-admins + gradatie-hides
+            // v13c_admin_mode_glow_001 (sessie 54) — Verified: `isAdmin` is al
+            // `adminCapable && adminModeActive` (zie AuthContext r172). Dus
+            // deze filter respecteert automatisch de 'Admin aan/uit'-toggle:
+            // - Admin-capable + mode uit → isAdmin=false → admin-tabs verborgen
+            // - Non-admin gebruiker      → isAdmin=false → admin-tabs verborgen
             const visibleItems = allItems.filter(item =>
               (!item.adminOnly || isAdmin) && !visibility.hide.includes(item.id)
             );

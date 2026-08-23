@@ -659,7 +659,16 @@ async def process_message(req: ChatMessage):
             from modules.glow_nav import navigate as _nav_func
             import asyncio as _aio
             from modules.glow_nav import NavigateBody
-            body = NavigateBody(q=text)
+            # v13c_glow_admin_gate_001 — is_admin bepalen zodat admin-tabs
+            # niet aan gewone users worden geadviseerd.
+            _is_admin = False
+            try:
+                from modules.chat.spark_user_view import _get_user_meta as _gum
+                _um = _gum(req.user_id) if req.user_id else {}
+                _is_admin = int(_um.get("gradatie", 7) or 7) <= 2 or bool(_um.get("admin"))
+            except Exception:
+                pass
+            body = NavigateBody(q=text, is_admin=_is_admin)
             nav_result = await _nav_func(body) if _aio.iscoroutinefunction(_nav_func) else _nav_func(body)
             if nav_result and nav_result.get("success"):
                 response.update({

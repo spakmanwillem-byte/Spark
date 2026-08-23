@@ -135,6 +135,43 @@ async def process_message(req: ChatMessage):
     except Exception:
         pass
 
+    # v13_note_before_contact_fix_001 (sessie 54) — Willem's gesprek van 22 aug:
+    # "noteer: bel morgen de tandarts" werd gepakt door contact_call (want bevat 'bel')
+    # i.p.v. note. Fix: als de tekst duidelijk een note-intent is ('noteer:', 'schrijf op:')
+    # → dan die vóór contact_call laten runnen. Directe minimal-response bouwen zonder
+    # `response`/`_load_user` (die worden pas later in de function gedefinieerd).
+    try:
+        from . import smart_intents_service as _si_note
+        _matched_note, _note_content = _si_note.detect_note_intent(text)
+        if _matched_note and _note_content:
+            try:
+                from modules.auth.service import AuthService as _NoteAuth
+                _user_obj = _NoteAuth.get_user_by_id(req.user_id) if req.user_id else None
+            except Exception:
+                _user_obj = None
+            _out = _si_note.handle_note(_user_obj, req.user_id, _note_content)
+            _resp = {
+                "type": _out.get("type", "note"),
+                "message": _out.get("message", ""),
+                "note_id": _out.get("note_id") or _out.get("id"),
+                "spark_response": _out.get("message", ""),
+                "success": True,
+                "used_model": "note_detector",
+                "fast_path": True,
+                "knowledge_matches": [],
+                "sentiment": snap.detect_sentiment(text),
+                "emotion": None,
+                "unknown_words": [],
+                "snap_suggestions": [],
+            }
+            try:
+                _save_log(req, _resp, "note_early")
+            except Exception:
+                pass
+            return _resp
+    except Exception as _ex:
+        print(f"[note early-detect] failed: {_ex}")
+
     # v12_contact_call_001 — "bel mijn moeder" → WhatsApp deep-link popup.
     # Geen admin-gate: Willem wil dat elke user dit kan (contacten zijn user-scoped).
     try:

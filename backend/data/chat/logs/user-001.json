@@ -64710,11 +64710,252 @@
         "session_id": "agenda-fix-test-3",
         "gesprek_nummer": 2573
       }
+    },
+    {
+      "id": "conv-dafe5cc1",
+      "timestamp": "2026-08-23T08:55:56.854179+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "donderdag van 11 tot 13 uur begeleid ik Jeroen",
+      "spark_response": "Ik hoorde dat je donderdag van 11 uur tot 13 uur iets met begeleid hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "donderdag"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "agenda-e2e-1787475356",
+        "gesprek_nummer": 2574
+      }
+    },
+    {
+      "id": "conv-5ca89e67",
+      "timestamp": "2026-08-23T08:55:57.080541+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Genoteerd! 'Begeleid' staat in je agenda.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "agenda-e2e-1787475356",
+        "gesprek_nummer": 2575
+      }
+    },
+    {
+      "id": "conv-6d966b1c",
+      "timestamp": "2026-08-23T08:56:10.834127+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "noteer: bel morgen de tandarts",
+      "spark_response": "Ik ken geen contact 'morgen'. Voeg toe via Beheer → Bel-contacten of `POST /api/bel-contacts/user-001`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "note-e2e-1",
+        "gesprek_nummer": 2576
+      }
+    },
+    {
+      "id": "conv-c79c79be",
+      "timestamp": "2026-08-23T08:56:58.655405+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "noteer: bel morgen de tandarts",
+      "spark_response": "Ik ken geen contact 'morgen'. Voeg toe via Beheer → Bel-contacten of `POST /api/bel-contacts/user-001`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "note-fix-1",
+        "gesprek_nummer": 2577
+      }
+    },
+    {
+      "id": "conv-a81596ef",
+      "timestamp": "2026-08-23T08:56:58.826168+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bel mijn moeder",
+      "spark_response": "Klik om Ma te bellen via WhatsApp. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "call-1",
+        "gesprek_nummer": 2578
+      }
+    },
+    {
+      "id": "conv-29f83e85",
+      "timestamp": "2026-08-23T08:58:45.207507+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "noteer: bel morgen de tandarts",
+      "spark_response": "Ik ken geen contact 'morgen'. Voeg toe via Beheer → Bel-contacten of `POST /api/bel-contacts/user-001`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "note-final-1",
+        "gesprek_nummer": 2579
+      }
+    },
+    {
+      "id": "conv-f02ffd12",
+      "timestamp": "2026-08-23T08:58:45.432161+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bel mijn moeder",
+      "spark_response": "Klik om Ma te bellen via WhatsApp. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "call-2",
+        "gesprek_nummer": 2580
+      }
+    },
+    {
+      "id": "conv-132cd60c",
+      "timestamp": "2026-08-23T08:58:57.667716+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "noteer: test-nummer 12345",
+      "spark_response": "📝 Notitie opgeslagen: **test-nummer 12345**. Je kan 'm zien in 'Notities & Taken'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "make_note",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "note_created"
+      },
+      "metadata": {
+        "session_id": "note-debug",
+        "gesprek_nummer": 2581
+      }
+    },
+    {
+      "id": "conv-ac074a75",
+      "timestamp": "2026-08-23T08:59:31.701747+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "noteer: bel morgen de tandarts",
+      "spark_response": "📝 Notitie opgeslagen: **bel morgen de tandarts**. Je kan 'm zien in 'Notities & Taken'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "note_early",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "note_created"
+      },
+      "metadata": {
+        "session_id": "note-v3",
+        "gesprek_nummer": 2582
+      }
+    },
+    {
+      "id": "conv-46eb4d07",
+      "timestamp": "2026-08-23T08:59:31.877951+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bel mijn moeder",
+      "spark_response": "Klik om Ma te bellen via WhatsApp. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "contact_call",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "contact_call"
+      },
+      "metadata": {
+        "session_id": "call-v3",
+        "gesprek_nummer": 2583
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2573,
-    "last_updated": "2026-08-23T08:54:03.024848+00:00"
+    "total_conversations": 2583,
+    "last_updated": "2026-08-23T08:59:31.877951+00:00"
   }
 }

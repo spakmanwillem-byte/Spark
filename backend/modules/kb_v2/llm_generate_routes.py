@@ -166,10 +166,10 @@ async def llm_approve_card(card_id: str, req: ApproveRequest):
             if proposal["ws5"].get(k):
                 card["ws5"][k] = proposal["ws5"][k]
     if proposal.get("extra_tags"):
-        existing = set(card.get("tags", []))
-        for t in proposal["extra_tags"]:
-            if t not in existing:
-                card.setdefault("tags", []).append(t)
+        # v13c_tag_sanitizer_001 — LLM-output door centrale sanitizer.
+        # Voorkomt dat 'neutraal\n\n🧠 weten\nbegrip' als 1 tag opgeslagen wordt.
+        from .tag_sanitizer import merge_tags
+        card["tags"] = merge_tags(card.get("tags"), proposal["extra_tags"])
     # Footnote update
     card.setdefault("footnote", {})
     card["footnote"]["llm_generated"] = True

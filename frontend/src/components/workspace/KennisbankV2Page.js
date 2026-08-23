@@ -213,7 +213,19 @@ export function KennisbankV2Page({ onNavigate }) {
       const existingWs5 = selectedCard.ws5 || {};
       // v6_kb_llm_generate_002 — Beschermde systeem-tags die NOOIT mogen verdwijnen
       const PROTECTED_TAGS = ['knowledge-snap', 'auto-generated', 'from-diep', 'gap-fill'];
-      const llmTags = (p.extra_tags || []).filter(t => !PROTECTED_TAGS.includes(t));
+      // v13c_tag_sanitizer_001 — LLM kan multi-line output als tag pushen
+      // (bv 'neutraal\n\n🧠 weten\nbegrip'). Strippen vóór merge.
+      const sanitizeTag = (t) => {
+        if (typeof t !== 'string') return '';
+        const first = t.split('\n')[0];
+        // Emoji-range strip
+        // eslint-disable-next-line no-misleading-character-class
+        const noEmoji = first.replace(/[\u{1F300}-\u{1F9FF}\u{1FA00}-\u{1FAFF}\u2600-\u27BF]+/gu, '');
+        return noEmoji.trim().replace(/\s+/g, ' ').slice(0, 60);
+      };
+      const llmTags = (p.extra_tags || [])
+        .map(sanitizeTag)
+        .filter(t => t && !PROTECTED_TAGS.includes(t));
       const mergedTags = [...new Set([...(selectedCard.tags || []), ...llmTags])];
       setEditForm({
         begrip: selectedCard.begrip || '',

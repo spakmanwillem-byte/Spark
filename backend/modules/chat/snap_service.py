@@ -579,11 +579,20 @@ class SnapNLPService:
         if concept_fold != concept.lower() and concept_fold in index:
             return None
 
-        tags = ["knowledge-snap", "auto-generated"]
-        if extra_tags:
-            for t in extra_tags:
-                if t and t not in tags:
-                    tags.append(t)
+        # v13c_tag_sanitizer_001 — sanitize LLM/heuristic-tags voordat ze
+        # in de kaart landen. Voorkomt LLM-lek zoals 'neutraal\n\n🧠 weten\nbegrip'.
+        try:
+            from modules.kb_v2.tag_sanitizer import sanitize_tag_list
+            base_tags = ["knowledge-snap", "auto-generated"]
+            extras = sanitize_tag_list(extra_tags or [])
+            tags = base_tags + [t for t in extras if t not in base_tags]
+        except Exception:
+            # Fallback: oude gedrag als sanitizer niet importable
+            tags = ["knowledge-snap", "auto-generated"]
+            if extra_tags:
+                for t in extra_tags:
+                    if t and t not in tags:
+                        tags.append(t)
         if decomposed_from:
             tags.append("compositional")
 

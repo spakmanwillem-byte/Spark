@@ -5,7 +5,7 @@
   "previous_tx_count": 13,
   "balances": {
     "user-001": 3,
-    "user-000": 7,
+    "user-000": 8,
     "user-a0ee2d7e": 2
   },
   "transactions": [
@@ -207,10 +207,20 @@
       "gift_id": "33b5a700-fc3e-47cb-a815-cb71fb815741",
       "note": "Bijkoop-gift van Spark (via Willem)",
       "status": "completed"
+    },
+    {
+      "id": "0623b1eb8635",
+      "ts": "2026-08-22T14:59:58.592451+00:00",
+      "type": "spark_self_mint",
+      "user_id": "user-000",
+      "amount": 1,
+      "cost_eur": 11.14,
+      "price_per_token": 11.14,
+      "description": "Spark mint 1 ROAR — dekking: Bitvavo €68.58 @ €11.14"
     }
   ],
   "total_supply": 1000000,
-  "treasury_pool": 999988,
+  "treasury_pool": 999987,
   "anchor_price_eur": 5.08,
   "current_dynamic_price_eur": 7.6,
   "spark_bonus": {

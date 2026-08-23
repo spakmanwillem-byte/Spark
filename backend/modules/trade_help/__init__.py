@@ -115,7 +115,7 @@ TRADER_HELP_DOC = {
                 "**De Boekhouder** (`bot-boekhouder`) post elke BUY en SELL in community-chat.",
                 "Voorbeeld: *\"📈 Pot 1-3 kocht BCH @ €312.45 voor €5.14 (cycle #1832)\"*.",
                 "",
-                "**Madelief Stouten** (`bot-madelief`) bewaakt errors in trade-flow. ",
+                "**De Boekhouder** (`bot-boekhouder`) bewaakt óók errors in trade-flow. ",
                 "Bij `phase=error` in logs → bark in community (max 3 per scan, anti-spam).",
                 "",
                 "**Closings**: `POST /api/boekhouder/close-cycle/{user_id}` rollupt audit-events ",

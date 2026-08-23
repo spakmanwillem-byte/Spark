@@ -117,13 +117,15 @@ def _append_history(user_id: str, choice: str, max_keep: int = 100):
 def start_session(user_id: str, opponent: str = "spark") -> dict:
     """Forceer fresh sessie-state (reset score). Stats blijven intact.
 
-    opponent: "spark" (Spark zelf, leert) | "bot-dood" (slim/moeilijk) |
-              "bot-madelief"/"bot-harry"/"bot-smith"/"bot-boekhouder" (random, makkelijk).
+    opponent: "spark" (Spark zelf, leert) | "bot-boekhouder" (random, makkelijk).
+
+    v13c_bots_consolidatie_001 (sessie 54) — bot-madelief/harry/smith/dood zijn
+    naar koelkast; alleen bot-boekhouder blijft als tegenstander. Als DnD later
+    terugkomt kan bot-dood weer geactiveerd worden voor moeilijk-modus.
     """
     import random as _r
     if opponent == "bot":
-        # Kies random bot — bot-dood = moeilijk, anderen = random
-        opponent = _r.choice(["bot-madelief", "bot-harry", "bot-smith", "bot-boekhouder", "bot-dood"])
+        opponent = _r.choice(["spark", "bot-boekhouder"])
     session = {
         "wins": 0, "losses": 0, "ties": 0,
         "current_streak": 0, "best_streak_session": 0,

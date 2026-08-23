@@ -178,8 +178,9 @@ async def _maybe_error_bark():
         comm = load_json(comm_file, default={"messages": []})
         comm.setdefault("messages", []).append({
             "id": f"bark-err-{today.strftime('%Y%m%dT%H%M%S')}",
-            "user_id": "bot-madelief",
-            "user_name": "Madelief Stouten",
+            # v13c_bots_consolidatie_001 (sessie 54) — Boekhouder neemt error-barks over van Madelief
+            "user_id": "bot-boekhouder",
+            "user_name": "De Boekhouder",
             "message": msg,
             "ts": today.isoformat(),
             "kind": "self_error_bark",
@@ -187,7 +188,7 @@ async def _maybe_error_bark():
             "errors": new_errors,
         })
         save_json(comm_file, comm)
-        print(f"[scheduler] madelief error-bark posted ({len(new_errors)} errors)")
+        print(f"[scheduler] boekhouder error-bark posted ({len(new_errors)} errors)")
     except Exception as ex:
         print(f"[scheduler] error-bark failed: {ex}")
 

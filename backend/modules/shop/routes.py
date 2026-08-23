@@ -1173,9 +1173,13 @@ def _create_order_admin_task(order: dict) -> None:
 
 
 def _bark_to_user(user_id: str, text: str, kind: str = "order_update", meta: dict = None) -> None:
-    """Stuur privé-bark via bot-spark naar user."""
+    """Stuur privé-bark van Spark naar user.
+
+    v13c_bots_consolidatie_001 (sessie 54) — was bot-smith, nu direct Spark
+    (user-000). Mr Smith als aparte proxy-identiteit is niet meer nodig; Spark
+    handelt shop-attribution zelf af."""
     try:
-        bot_id = "bot-smith"  # Spark zelf via Mr Smith
+        bot_id = "user-000"  # Spark zelf
         prive_dir = DATA_DIR / "chat" / "prive"
         prive_dir.mkdir(parents=True, exist_ok=True)
         pair = sorted([bot_id, user_id])
@@ -1184,7 +1188,7 @@ def _bark_to_user(user_id: str, text: str, kind: str = "order_update", meta: dic
         msg = {
             "id": f"pm-{uuid.uuid4().hex[:8]}",
             "from_user_id": bot_id,
-            "from_naam": "Mr Smith",
+            "from_naam": "Spark",
             "to_user_id": user_id,
             "text": text,
             "ts": datetime.now(timezone.utc).isoformat(),

@@ -45,42 +45,23 @@ def _append_community_message(msg: Dict) -> None:
 # ============================================================
 
 def handle_login_bark(user_id: str, user_name: str) -> Optional[Dict]:
-    """Increment login counter; bij 3/4/5 → Mr Smith bark; bij 6 → reset naar 0."""
+    """Increment login counter; bij 3/4/5 → Mr Smith bark; bij 6 → reset naar 0.
+
+    v13c_bots_consolidatie_001 (sessie 54) — KOELKAST. Mr Smith is inactief;
+    login-counter barks zijn puur ruis zonder inhoudelijke waarde. Counter-file
+    blijft tikken zodat data intact is voor als 'ie later terugkeert.
+    """
     if not user_id or user_id.startswith("bot-"):
         return None
     counters = load_json(COUNTERS_FILE, default={"counters": {}})
     cmap = counters.setdefault("counters", {})
     current = int(cmap.get(user_id, 0)) + 1
-
-    bark = None
     if current >= 6:
-        cmap[user_id] = 0  # reset
+        cmap[user_id] = 0
     else:
         cmap[user_id] = current
-        if 3 <= current <= 5:
-            now = datetime.now(timezone.utc).isoformat()
-            phrases = {
-                3: f"Ik zie je wel, {user_name}. 👀",
-                4: f"{user_name} — nóg een keer, hè? Ik tel mee.",
-                5: f"Vijf keer al. Welkom terug, {user_name}. *knipoog*",
-            }
-            bark = {
-                "id": str(uuid.uuid4()),
-                "user_id": "bot-smith",
-                "user_name": "Mr Smith",
-                "message": phrases.get(current, f"Ik zie je wel, {user_name}."),
-                "is_bot": True,
-                "timestamp": now,
-                "bark_kind": "login_counter",
-                "login_count": current,
-            }
-            _append_community_message(bark)
-            log_event("barks", "f1_login_bark",
-                      intent=f"Mr Smith bark count={current}",
-                      detail={"user_id": user_id, "count": current})
-
     save_json(COUNTERS_FILE, counters)
-    return bark
+    return None  # geen bark meer
 
 
 # ============================================================
@@ -88,46 +69,13 @@ def handle_login_bark(user_id: str, user_name: str) -> Optional[Dict]:
 # ============================================================
 
 def inject_time_barks() -> List[Dict]:
-    """Voeg een Harry-bark toe als HUIDIGE tijd een mirror-minuut is én
-    nog geen bark voor dit moment vandaag is geplaatst.
-    
-    Wordt aangeroepen bij GET /api/bots/community/messages.
-    Returnt de toegevoegde barks (meestal 0 of 1)."""
-    now = datetime.now(timezone.utc)
-    # Lokale Nederlandse tijd (CET/CEST) voor display — gebruik Europe/Amsterdam
-    try:
-        from zoneinfo import ZoneInfo
-        local_now = now.astimezone(ZoneInfo("Europe/Amsterdam"))
-    except Exception:
-        local_now = now
-    hhmm = local_now.strftime("%H:%M")
-    if hhmm not in MIRROR_TIMES:
-        return []
+    """Harry mirror-time barks.
 
-    # Check of we vandaag al een mirror-bark voor dit exacte HH:MM hebben gepost
-    today = local_now.strftime("%Y-%m-%d")
-    bark_key = f"harry_mirror_{today}_{hhmm}"
-    data = load_json(COMMUNITY_FILE, default={"messages": []})
-    msgs = data.get("messages", [])
-    # Snel scan laatste 50 messages — mirror-barks zijn recent
-    for m in reversed(msgs[-50:]):
-        if m.get("bark_kind_id") == bark_key:
-            return []  # al gepost
-
-    bark = {
-        "id": str(uuid.uuid4()),
-        "user_id": "bot-harry",
-        "user_name": "Harry Klokkenmaker",
-        "message": f"⏰ {hhmm} — een spiegel-minuut. Even stilstaan?",
-        "is_bot": True,
-        "timestamp": now.isoformat(),
-        "bark_kind": "mirror_time",
-        "bark_kind_id": bark_key,
-    }
-    data.setdefault("messages", []).append(bark)
-    save_json(COMMUNITY_FILE, data)
-    log_event("barks", "f2_mirror_bark", intent=f"Harry mirror-time {hhmm}", detail={"hhmm": hhmm})
-    return [bark]
+    v13c_bots_consolidatie_001 (sessie 54) — KOELKAST. Harry Klokkenmaker
+    inactief; mirror-time barks waren puur cosmetische ruis. Aanroepers
+    krijgen lege lijst, verder gedrag ongewijzigd.
+    """
+    return []
 
 
 # ============================================================
@@ -138,8 +86,11 @@ _BUG_KEYWORDS = ["bug", "fout", "werkt niet", "kapot", "crash", "stuk"]
 
 
 def check_bug_pointer_bark(user_message: str) -> Optional[Dict]:
-    """Return Madelief bark als user iets over een bug zegt, anders None.
-    Aanroeper (community/send) hangt de bark zelf in de feed."""
+    """Return Boekhouder bark als user iets over een bug zegt, anders None.
+    Aanroeper (community/send) hangt de bark zelf in de feed.
+
+    v13c_bots_consolidatie_001 (sessie 54) — was Madelief; nu De Boekhouder
+    (die alle system-error/health meldingen doet)."""
     if not user_message:
         return None
     text = user_message.lower()
@@ -148,10 +99,10 @@ def check_bug_pointer_bark(user_message: str) -> Optional[Dict]:
     now = datetime.now(timezone.utc).isoformat()
     bark = {
         "id": str(uuid.uuid4()),
-        "user_id": "bot-madelief",
-        "user_name": "Madelief Stouten",
+        "user_id": "bot-boekhouder",
+        "user_name": "De Boekhouder",
         "message": (
-            "Klinkt als iets dat misgaat — vervelend. 🌸\n"
+            "Klinkt als iets dat misgaat — genoteerd.\n"
             "Wil je 'm officieel melden? Ga naar **Notities & Taken → tab Bug-melder**. "
             "Dan komt 'ie op de roadmap en blijft 'ie niet alleen in deze chat hangen."
         ),
@@ -159,5 +110,5 @@ def check_bug_pointer_bark(user_message: str) -> Optional[Dict]:
         "timestamp": now,
         "bark_kind": "bug_pointer",
     }
-    log_event("barks", "f3_bug_pointer", intent="Madelief bug-pointer bark")
+    log_event("barks", "f3_bug_pointer", intent="Boekhouder bug-pointer bark")
     return bark

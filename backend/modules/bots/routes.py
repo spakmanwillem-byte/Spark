@@ -291,11 +291,12 @@ async def send_community_message(msg: ChatMessage):
     for resp in bot_responses:
         resp["message"] = resp["message"].replace("{user}", msg.user_name)
 
-    # v5_barks_001 — F3: Madelief bug-pointer als user "bug/fout/werkt niet" zegt
+    # v5_barks_001 — F3: Boekhouder bug-pointer als user "bug/fout/werkt niet" zegt
+    # v13c_bots_consolidatie_001 — was bot-madelief; nu Boekhouder
     try:
         from .proactive_barks import check_bug_pointer_bark
         bug_bark = check_bug_pointer_bark(msg.message)
-        if bug_bark and not any(r.get("user_id") == "bot-madelief" for r in bot_responses):
+        if bug_bark and not any(r.get("user_id") == "bot-boekhouder" for r in bot_responses):
             bot_responses.append(bug_bark)
     except Exception:
         pass

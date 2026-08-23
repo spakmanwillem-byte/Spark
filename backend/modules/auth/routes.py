@@ -124,14 +124,19 @@ async def validate_session(user_id: str):
 # ============== USER MANAGEMENT ==============
 
 @router.get("/users")
-async def get_users():
+async def get_users(include_koelkast: bool = False):
     """
-    Get all users (admin only in production)
+    Get all users (admin only in production).
+
+    v13c_bots_consolidatie_001 (sessie 54) — koelkast=True bots (Mr Smith,
+    Madelief, Harry, Magere Hein) worden default verborgen om ruis in de
+    user-lijst weg te halen. Admins kunnen ze zien met ?include_koelkast=true.
     """
     users = AuthService.get_all_users()
-    # Remove sensitive fields
     safe_users = []
     for u in users:
+        if not include_koelkast and u.get("koelkast"):
+            continue
         safe_user = {k: v for k, v in u.items() if k not in ["masterkey"]}
         safe_users.append(safe_user)
     return {"users": safe_users, "count": len(safe_users)}

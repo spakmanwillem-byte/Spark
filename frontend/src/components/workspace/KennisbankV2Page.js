@@ -684,16 +684,11 @@ export function KennisbankV2Page({ onNavigate }) {
                   {v.label} {reasons[k] ? `(${reasons[k]})` : ''}
                 </button>
               ))}
-              {/* Onvolledig — kaarten uit lades met lege lagen (semantisch anders dan inbox) */}
-              <button
-                data-testid="kbv2-incomplete"
-                onClick={() => { setIncompleteMode(!incompleteMode); setReasonFilter(''); setPage(0); }}
-                title="Kaarten uit de 4 lades met leeg 5W of onvolledige lagen (volgens knowledge/_meta.json § incompleet_criterium)"
-                className={`px-2 py-1 rounded text-[10px] font-medium border ml-1 ${
-                  incompleteMode ? 'bg-orange-500/20 border-orange-500/40 text-orange-300' : 'border-orange-700/40 text-orange-400 hover:bg-orange-500/10'
-                }`}>
-                ⚠ Onvolledig
-              </button>
+              {/* v13_incomplete_tab_removed_001 (sessie 54) — Onvolledig-tab was
+                  tijdelijk vangnet dat kopieën met dezelfde id maakte (dubbels-bug).
+                  Nu ws5-vulling en bulk-import gestopt zijn is deze tab dood spul.
+                  Uitgeschakeld in UI (state + fetch-tak blijven staan zodat we
+                  makkelijk terug kunnen als bulk-invul ooit weer nodig is). */}
               {/* v12_kbv2_inbox_sort_001 — sort-dropdown werkt op alle 3 filters
                   (alle / Tag-tie / Onvolledig) zodat het geen off-grid tab meer voelt. */}
               <select

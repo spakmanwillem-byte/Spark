@@ -2,7 +2,7 @@
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
   "naam": "agenda",
-  "doel": "Data-store voor agenda: bevat 2 JSON-bestanden (agenda-test-1778743891, user-001).",
+  "doel": "Agenda-events per user + maand-archivering (v13_agenda_monthly_archive_001).",
   "container_type": "data",
   "status": "active",
   "owner": "spark-system",
@@ -10,7 +10,15 @@
   "footnote": "",
   "split_from": null,
   "children_max": 4,
-  "endpoints": [],
+  "endpoints": [
+    "GET /api/agenda/events/{user_id}",
+    "POST /api/agenda/events/{user_id}",
+    "DELETE /api/agenda/events/{user_id}/{event_id}",
+    "GET /api/agenda/archive/{user_id}",
+    "GET /api/agenda/archive/{user_id}/{YYYY-MM}",
+    "POST /api/agenda/archive-now",
+    "POST /api/agenda/archive-now/{user_id}"
+  ],
   "tags": [],
   "encryption": {
     "enabled": false,
@@ -19,9 +27,16 @@
     "key_holder": null
   },
   "created_at": "2026-05-26T15:54:32.306301+00:00",
-  "last_touched": "2026-08-23T08:55:57.076237+00:00",
-  "activity_count": 9,
+  "last_touched": "2026-08-23T09:30:00+00:00",
+  "activity_count": 11,
   "file_count": 2,
   "subdir_count": 0,
-  "extra": {}
+  "extra": {},
+  "features": [
+    "CRUD /api/agenda/events/{user_id}",
+    "Maand-archief: op 1e van elke maand → oude events naar /users/{uid}/archive/agenda_archief/agenda-YYYY-MM.json",
+    "Spark leest ook uit archief voor historie-vragen (\"wat deed ik in juli?\")",
+    "Handmatig: POST /api/agenda/archive-now (alle users) of /api/agenda/archive-now/{user_id}",
+    "Overzicht: GET /api/agenda/archive/{user_id} (lijst maanden) + /{user_id}/{YYYY-MM} (events)"
+  ]
 }

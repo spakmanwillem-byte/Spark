@@ -10,7 +10,15 @@
       "deep_uitleg": "Gradatie = sociaal (familie/lid), admin = technische permissie. Iemand op gradatie 5 kan admin zijn, een familielid op gradatie 2 hoeft het NIET te zijn. Bij dood-scenario (Lotus Martens neemt over) krijgt familie gradatie 1 — maar admin moet expliciet toegekend worden.",
       "nav_path": "/admin/settings",
       "nav_testid": "settings-tab-admin",
-      "synonyms": ["admin", "rechten", "grant", "verleen", "toekennen", "intrekken", "revoke"]
+      "synonyms": [
+        "admin",
+        "rechten",
+        "grant",
+        "verleen",
+        "toekennen",
+        "intrekken",
+        "revoke"
+      ]
     },
     {
       "id": "admin-password",
@@ -19,7 +27,11 @@
       "deep_uitleg": "Het wachtwoord staat in env-var ADMIN_PASSWORD en kan runtime overschreven via data/system/admin_password.json. Geldig is altijd het meest recent gewijzigde wachtwoord.",
       "nav_path": "/admin/settings",
       "nav_testid": "settings-tab-admin",
-      "synonyms": ["admin wachtwoord", "admin password", "admin pwd"]
+      "synonyms": [
+        "admin wachtwoord",
+        "admin password",
+        "admin pwd"
+      ]
     },
     {
       "id": "shadow-flag",
@@ -28,7 +40,12 @@
       "deep_uitleg": "Default UIT (veilige modus = alleen origineel-potje BUY/SELL). AAN-zetten zodra je vertrouwt dat alle actieve shadows clean zijn. Wanneer 1 origineel potje shadows krijgt, kan dat tot 4× capital op Bitvavo gebruiken.",
       "nav_path": "/modules/trade",
       "nav_testid": "shadow-flag-toggle",
-      "synonyms": ["shadow", "shadow flag", "cascade", "dip-buy"]
+      "synonyms": [
+        "shadow",
+        "shadow flag",
+        "cascade",
+        "dip-buy"
+      ]
     },
     {
       "id": "shadow-cleanup",
@@ -37,7 +54,12 @@
       "deep_uitleg": "Bij data-corruptie (b.v. ATOM-shadow met SOL-entry) zou trail-SELL nooit triggeren. Deze knop ruimt zulke vervuilingen op zodat de bot weer correct werkt.",
       "nav_path": "/modules/trade",
       "nav_testid": "shadow-cleanup-btn",
-      "synonyms": ["cleanup", "corrupt shadows", "shadow cleanup", "schoonmaak"]
+      "synonyms": [
+        "cleanup",
+        "corrupt shadows",
+        "shadow cleanup",
+        "schoonmaak"
+      ]
     },
     {
       "id": "force-sell",
@@ -46,7 +68,12 @@
       "deep_uitleg": "Endpoint: POST /api/trade/potjes/{user}/{pot}/force-sell. Voor noodgevallen of admin-cleanup. Niet voor dagelijks gebruik — de bot doet trail-SELL beter.",
       "nav_path": "/modules/trade",
       "nav_testid": "trade-potjes-list",
-      "synonyms": ["force sell", "force-sell", "noodverkoop", "direct verkopen"]
+      "synonyms": [
+        "force sell",
+        "force-sell",
+        "noodverkoop",
+        "direct verkopen"
+      ]
     },
     {
       "id": "kbv2-auto-resolve",
@@ -55,7 +82,12 @@
       "deep_uitleg": "Endpoint: POST /api/kb/v2/inbox/auto-resolve met {dry_run:false}. Verwerkt tag_tie + no_match kaarten. Dry-run eerst altijd om te zien wat er zou gebeuren.",
       "nav_path": "/knowledge",
       "nav_testid": "kb-inbox-tab",
-      "synonyms": ["auto resolve", "auto-resolve", "inbox classify", "bulk classify"]
+      "synonyms": [
+        "auto resolve",
+        "auto-resolve",
+        "inbox classify",
+        "bulk classify"
+      ]
     },
     {
       "id": "vocab-sync",
@@ -64,7 +96,11 @@
       "deep_uitleg": "Endpoint: POST /api/kb/v2/vocab/sync. Loopt over alle 4 lades, vindt vocab-gaten, runt register_in_vocab() opnieuw. Idempotent.",
       "nav_path": "/knowledge",
       "nav_testid": "kb-vocab-tab",
-      "synonyms": ["vocab sync", "vocab", "register vocab"]
+      "synonyms": [
+        "vocab sync",
+        "vocab",
+        "register vocab"
+      ]
     },
     {
       "id": "shop-admin",
@@ -73,7 +109,11 @@
       "deep_uitleg": "DELETE /api/shop/admin/shops/{id} verwijdert een shop. Roadkillshop is system-default en kan niet weg. Producten verwijder je via /admin/products/{id}.",
       "nav_path": "/modules/winkel",
       "nav_testid": "nav-winkel",
-      "synonyms": ["shop admin", "shop verwijderen", "winkel beheer"]
+      "synonyms": [
+        "shop admin",
+        "shop verwijderen",
+        "winkel beheer"
+      ]
     },
     {
       "id": "users-admin",
@@ -82,7 +122,28 @@
       "deep_uitleg": "Gradatie = sociaal. Voor admin-permissie: gebruik de Admin-tab (los systeem).",
       "nav_path": "/admin/users",
       "nav_testid": "nav-users",
-      "synonyms": ["users", "gebruikers", "user beheer", "user management"]
+      "synonyms": [
+        "users",
+        "gebruikers",
+        "user beheer",
+        "user management"
+      ]
+    },
+    {
+      "id": "agenda-archief",
+      "label": "Agenda-archief (maand-log)",
+      "korte_uitleg": "Op de 1e van elke maand verplaatst Spark automatisch de events van de vorige maand naar een archief-bestand onder je Bestanden → archive → agenda_archief/. Zo blijft je agenda-tab schoon terwijl je oude afspraken kunt terugvinden.",
+      "deep_uitleg": "Werking:\n- Elke server-start op de 1e van een nieuwe maand → oude events worden verplaatst.\n- Per bron-maand wordt één bestand aangemaakt: agenda-YYYY-MM.json.\n- Ze verschijnen in je Bestanden-tab onder archive/agenda_archief/ met een index-entry.\n- Spark kan er nog steeds bij: als je vraagt 'wat deed ik op 15 juli?' zoekt hij óók in het archief.\n\nHandmatig triggeren (voor admins):\n- POST /api/agenda/archive-now → alle users\n- POST /api/agenda/archive-now/{user_id} → 1 user\n\nOverzicht ophalen:\n- GET /api/agenda/archive/{user_id} → lijst van gearchiveerde maanden\n- GET /api/agenda/archive/{user_id}/{YYYY-MM} → alle events van die maand",
+      "nav_path": "/bestanden",
+      "nav_testid": "nav-bestanden",
+      "synonyms": [
+        "archief",
+        "agenda archief",
+        "oude afspraken",
+        "maand-log",
+        "vorige maand",
+        "geschiedenis agenda"
+      ]
     }
   ]
 }

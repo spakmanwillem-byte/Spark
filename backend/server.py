@@ -714,6 +714,18 @@ async def startup():
         print("   🚀 Trade monitor resume scheduled (non-blocking)")
     except Exception as e:
         print(f"   ⚠️  Could not schedule monitor resume: {e}")
+
+    # v13_agenda_monthly_archive_001 (sessie 54) — Willem: op de 1e van de maand
+    # oude agenda-events archiveren naar user/archive/agenda_archief/ zodat de
+    # agenda-tab schoon blijft maar Spark de historie behoudt.
+    try:
+        from modules.agenda import archive_service as _agenda_archive
+        _ares = _agenda_archive.archive_all_users_if_new_month()
+        _archived_users = sum(1 for r in _ares.get("results", []) if r.get("archived", 0) > 0)
+        if _archived_users:
+            print(f"   📅 Agenda maand-archief gedraaid voor {_archived_users} user(s)")
+    except Exception as _aae:
+        print(f"   ⚠️  Agenda monthly archive faalde: {_aae}")
     # v6_scheduler_001 — Boekhouder 21:00 bark + Madelief error-watcher
     try:
         from modules.scheduler import start_scheduler_in_background

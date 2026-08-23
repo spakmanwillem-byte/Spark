@@ -80,3 +80,55 @@ async def delete_event(user_id: str, event_id: str):
         save_json(filepath, data)
         return {"success": True}
     return {"success": False, "message": "Event niet gevonden"}
+
+
+
+# v13_agenda_monthly_archive_001 (sessie 54) — Willem: op de 1e van elke maand
+# oude events archiveren zodat de tab schoon blijft maar Spark de historie behoudt.
+from . import archive_service as _archive
+
+
+@router.get("/archive/{user_id}")
+async def list_archive(user_id: str):
+    """Lijst alle gearchiveerde maand-bestanden voor deze user. Elk bestand
+    bevat de events van één afgelopen maand."""
+    from pathlib import Path
+    d = Path("/app/backend/data/users") / user_id / "archive" / "agenda_archief"
+    if not d.exists():
+        return {"user_id": user_id, "months": [], "total_events": 0}
+    months = []
+    total = 0
+    for f in sorted(d.glob("agenda-*.json"), reverse=True):
+        data = load_json(f, default={"events": []})
+        n = len(data.get("events", []))
+        total += n
+        months.append({
+            "month": data.get("month") or f.stem.replace("agenda-", ""),
+            "filename": f.name,
+            "event_count": n,
+            "archived_at": data.get("archived_at"),
+        })
+    return {"user_id": user_id, "months": months, "total_events": total}
+
+
+@router.get("/archive/{user_id}/{month}")
+async def get_archived_month(user_id: str, month: str):
+    """Alle events van een specifieke maand. `month` = YYYY-MM."""
+    from pathlib import Path
+    f = Path("/app/backend/data/users") / user_id / "archive" / "agenda_archief" / f"agenda-{month}.json"
+    if not f.exists():
+        return {"user_id": user_id, "month": month, "events": []}
+    return load_json(f, default={"events": []})
+
+
+@router.post("/archive-now")
+async def archive_now_all():
+    """Trigger handmatig het maand-archief voor alle users (override state).
+    Normaal draait dit automatisch bij server-startup op de 1e van de maand."""
+    return _archive.archive_now()
+
+
+@router.post("/archive-now/{user_id}")
+async def archive_now_user(user_id: str):
+    """Trigger handmatig het maand-archief voor 1 user."""
+    return _archive.archive_now(user_id)

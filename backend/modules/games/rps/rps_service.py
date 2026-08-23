@@ -119,9 +119,9 @@ def start_session(user_id: str, opponent: str = "spark") -> dict:
 
     opponent: "spark" (Spark zelf, leert) | "bot-boekhouder" (random, makkelijk).
 
-    v13c_bots_consolidatie_001 (sessie 54) — bot-madelief/harry/smith/dood zijn
-    naar koelkast; alleen bot-boekhouder blijft als tegenstander. Als DnD later
-    terugkomt kan bot-dood weer geactiveerd worden voor moeilijk-modus.
+    v13c_bots_removed_001 (sessie 54) — bot-madelief/harry/smith/dood zijn
+    verwijderd; alleen bot-boekhouder blijft als tegenstander (naast spark).
+    Als DnD later terugkomt met échte user-NPCs, komt moeilijk-modus vanzelf mee.
     """
     import random as _r
     if opponent == "bot":
@@ -179,8 +179,8 @@ def play_round(user_id: str, player_choice: str) -> dict:
     sessie-score, XP-delta en eventuele nieuwe achievements.
 
     Tegenstander wordt afgeleid uit huidige sessie:
-      - "spark" / "bot-dood": slim algoritme (eerste 10 random, dan counter)
-      - andere bots: 100% random (makkelijk)
+      - "spark": slim algoritme (eerste 10 random, dan counter)
+      - andere bots (bot-boekhouder): 100% random (makkelijk)
     """
     import random as _r
     if not rps_engine.is_valid_choice(player_choice):
@@ -192,7 +192,7 @@ def play_round(user_id: str, player_choice: str) -> dict:
 
     # Bepaal tegenstander-keuze op basis van opponent-type
     history = _get_history(user_id)
-    if opponent in ("spark", "bot-dood"):
+    if opponent == "spark":
         opp_choice = rps_engine.predict_next(history)
         is_learning = len(history) < 10
     else:

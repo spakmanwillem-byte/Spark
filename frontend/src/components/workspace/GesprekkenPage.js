@@ -526,10 +526,13 @@ export function GesprekkenPage({ onNavigate }) {
   const communityAllowed = userGradatie <= 5 && chatPrefs.community_chat_enabled;
   const priveAllowed = chatPrefs.private_chats_enabled;
 
+  // v13c_global_glow_theme_001 (sessie 54) — accent-hex verwijderd; alle tabs
+  // gebruiken nu de user-glow via CSS var --glow-base zodat verandering in
+  // Profiel → Instellingen doorwerkt in Gesprekken-tabbar.
   const tabs = [
-    { id: 'spark', label: 'Spark AI', icon: Bot, accent: '#f59e0b' },
-    ...(communityAllowed ? [{ id: 'community', label: 'Community', icon: Users, accent: '#a855f7' }] : []),
-    ...(priveAllowed ? [{ id: 'prive', label: 'Privé', icon: Lock, accent: '#06b6d4' }] : []),
+    { id: 'spark', label: 'Spark AI', icon: Bot },
+    ...(communityAllowed ? [{ id: 'community', label: 'Community', icon: Users }] : []),
+    ...(priveAllowed ? [{ id: 'prive', label: 'Privé', icon: Lock }] : []),
   ];
 
   // Als user op verborgen tab staat, terug naar spark
@@ -1066,7 +1069,7 @@ export function GesprekkenPage({ onNavigate }) {
         {/* === TOP BANNER WITH TABS === */}
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--glow-base)' }}>
               <MessageSquare className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -1088,12 +1091,12 @@ export function GesprekkenPage({ onNavigate }) {
                   data-glow={tabGlow || undefined}
                   onClick={() => { setActiveTab(tab.id); setSelectedContact(null); }}
                   className={`relative flex items-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors ${glowRing}`}
-                  style={{ color: isActive ? tab.accent : (tabGlow === 'red' ? '#fca5a5' : tabGlow === 'amber' ? '#fcd34d' : '#94a3b8') }}
+                  style={{ color: isActive ? 'var(--glow-base)' : (tabGlow === 'red' ? '#fca5a5' : tabGlow === 'amber' ? '#fcd34d' : '#94a3b8') }}
                 >
                   <tab.icon className="w-4 h-4" />
                   {tab.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: tab.accent }} />
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: 'var(--glow-base)' }} />
                   )}
                 </button>
               );

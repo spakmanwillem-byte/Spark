@@ -94,14 +94,8 @@ SEED_LOCATIONS: List[Dict] = [
             },
         ],
         "npc_stubs": [
-            {
-                "id": "npc_de_dood",
-                "naam": "De Dood",
-                "rol": "Reflectie & afsluiten",
-                "appears_at": ["north_kampvuur"],
-                "color": "#0f172a",
-                "linked_bot_id": "bot-dood",
-            },
+            # v13c_bots_removed_001 (sessie 54) — De Dood NPC verwijderd (bot-dood weg).
+            # DnD komt later terug met échte user-NPCs; deze lijst is dan opnieuw op te bouwen.
             {
                 "id": "npc_boekhouder",
                 "naam": "De Boekhouder",

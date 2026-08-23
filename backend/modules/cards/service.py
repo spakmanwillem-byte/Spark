@@ -34,9 +34,9 @@ Schema:
       "trigger_count": 0,   (hoe vaak deze kaart fired)
     },
     # type-specifieke velden:
-    "dnd": { "verteller": "bot-dood", "scene": "...", "rewards": [...] },
+    "dnd": { "verteller": "user-000", "scene": "...", "rewards": [...] },
     "event": { "datum": "...", "locatie": "...", "deelnemers": [...] },
-    "bark": { "bot": "bot-madelief", "trigger_text": "...", "schedule": "..." }
+    "bark": { "bot": "bot-boekhouder", "trigger_text": "...", "schedule": "..." }
   }
 """
 import uuid

@@ -14,7 +14,9 @@ from typing import List, Dict
 def _new_msg(user_name: str, message: str, timestamp_iso: str, **extra) -> Dict:
     base = {
         "id": str(uuid.uuid4()),
-        "user_id": "bot-dood",  # De Dood is de Verteller — past bij rol "transities/eindes/beginpunten"
+        # v13c_bots_removed_001 (sessie 54) — was bot-dood; Willem: bots weg,
+        # DnD komt later terug met échte user-NPCs. Voor nu Spark als verteller.
+        "user_id": "user-000",
         "user_name": user_name,
         "message": message,
         "is_bot": True,

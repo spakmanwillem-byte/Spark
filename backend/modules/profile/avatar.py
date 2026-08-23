@@ -55,10 +55,8 @@ def _get_bot_owner(entry: dict) -> Optional[str]:
     if explicit:
         return explicit
     title = (entry.get("title") or "").strip().lower()
+    # v13c_bots_removed_001 (sessie 54) — alleen Boekhouder + Spark blijven.
     title_to_bot = {
-        "harry klokkenmaker": "bot-harry",
-        "madelief stouten": "bot-madelief",
-        "mr smith": "bot-smith",
         "de boekhouder": "bot-boekhouder",
         "spark": "user-000",
     }

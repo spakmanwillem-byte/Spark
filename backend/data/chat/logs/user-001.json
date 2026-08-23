@@ -64513,11 +64513,208 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2567
       }
+    },
+    {
+      "id": "conv-b68fd89e",
+      "timestamp": "2026-08-23T08:46:54.759317+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "spark heb ik voor aankomende donderdag een afspraak?",
+      "spark_response": "**Aankomende donderdag (27 augustus 2026)** \n\n| Tijd | Beschrijving | Locatie |\n|------|--------------|---------|\n| 10:00 – 12:00 | Begeleiding van Jeroen (zoon van cliënt Roline) | Bij Roline thuis / video‑call (afhankelijk van jouw voorkeur) |\n\nGeen andere afspraken staan gepland voor die dag. \n\nWil je deze afspraak bevestigen, verplaatsen of extra details toevoegen? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "spinnenweb",
+        "used_cards": [
+          "kbv2-aaf81efb",
+          "kbv2-f1d5db2f",
+          "kbv2-2ad0e675",
+          "kbv2-336bd0a9",
+          "kbv2-f6f6530b"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2568
+      }
+    },
+    {
+      "id": "conv-9ece0713",
+      "timestamp": "2026-08-23T08:47:48.281674+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "je weet het wel maar niet in agenda",
+      "spark_response": "**Agenda‑overzicht (vanaf vandaag)** \n\n| Datum | Tijd | Beschrijving | Locatie |\n|-------|------|--------------|---------|\n| **zondag 23 aug 2026** | – | (geen afspraken) | – |\n| **maandag 24 aug 2026** | – | (geen afspraken) | – |\n| **dinsdag 25 aug 2026** | – | (geen afspraken) | – |\n| **woensdag 26 aug 2026** | – | (geen afspraken) | – |\n| **donderdag 27 aug 2026** | **10:00 – 12:00** | Begeleiding van Jeroen (zoon van cliënt Roline) | Bij Roline thuis / video‑call (naar keuze) |\n| vrijdag 28 aug 2026 | – | (geen afspraken) | – |\n\n*Geen andere items staan in de agenda.* \n\nWil je deze afspraak bevestigen, verplaatsen of extra notities toevoegen? Laat het me weten!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "spinnenweb",
+        "used_cards": [
+          "kbv2-skel-d6a76349",
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-9115c6a7",
+          "kbv2-9d7d0d06"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 2569
+      }
+    },
+    {
+      "id": "conv-12754113",
+      "timestamp": "2026-08-23T08:49:59.639511+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "donderdag van 11 tot 13 uur begeleid ik Jeroen",
+      "spark_response": "**Donderdag**: Donderdag is de vierde dag van de week en volgt op woensdag.\n\n**Uur**: Een uur is een meeteenheid van tijd.\n\n**jeroen**: Jeroen is een Nederlandse jongens- of mannenvoornaam.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "donderdag"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Donderdag"
+          },
+          {
+            "begrip": "Uur"
+          },
+          {
+            "begrip": "begeleid"
+          },
+          {
+            "begrip": "jeroen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "agenda-repro-1",
+        "gesprek_nummer": 2570
+      }
+    },
+    {
+      "id": "conv-75b62763",
+      "timestamp": "2026-08-23T08:52:49.700301+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "donderdag van 11 tot 13 uur begeleid ik Jeroen",
+      "spark_response": "Ik hoorde dat je donderdag om 13 uur iets met begeleid hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "donderdag"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "agenda-fix-test-1",
+        "gesprek_nummer": 2571
+      }
+    },
+    {
+      "id": "conv-11498d64",
+      "timestamp": "2026-08-23T08:53:38.593954+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "donderdag van 11 tot 13 uur begeleid ik Jeroen",
+      "spark_response": "Ik hoorde dat je donderdag van 13 uur tot 13 uur iets met begeleid hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "donderdag"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "agenda-fix-test-2",
+        "gesprek_nummer": 2572
+      }
+    },
+    {
+      "id": "conv-fb127482",
+      "timestamp": "2026-08-23T08:54:03.024848+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "donderdag van 11 tot 13 uur begeleid ik Jeroen",
+      "spark_response": "Ik hoorde dat je donderdag van 11 uur tot 13 uur iets met begeleid hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "donderdag"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "agenda-fix-test-3",
+        "gesprek_nummer": 2573
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2567,
-    "last_updated": "2026-08-23T07:13:54.071299+00:00"
+    "total_conversations": 2573,
+    "last_updated": "2026-08-23T08:54:03.024848+00:00"
   }
 }

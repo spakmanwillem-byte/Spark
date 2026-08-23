@@ -334,24 +334,34 @@ def detect_agenda_intent(text: str, now: datetime = None, user: dict = None) -> 
     # ook einde. Voorheen: alleen start-tijd, duur ging verloren → uren-registratie
     # klopte niet. Zoek naar "start tot einde" of "van start tot einde" of
     # "start-einde" (met dash tussen twee tijden).
+    # v13_agenda_van_tot_start_fix_001 (sessie 54) — extra: bij "van 11 tot 13"
+    # pakte de start-time parser de EIND-tijd (13). Nu overriden we `when_iso`
+    # met de eerste tijd uit de "van X tot Y" range zodat start correct is.
     end_iso = None
     duration_minutes = None
     m_end = re.search(
-        r"\b(\d{1,2})[:.]?(\d{2})?\s*(?:tot|-|—|totdat|to)\s*(\d{1,2})[:.]?(\d{2})?\s*(?:uur|u\b)?",
+        r"\b(?:van\s+)?(\d{1,2})[:.]?(\d{2})?\s*(?:tot|-|—|totdat|to)\s*(\d{1,2})[:.]?(\d{2})?\s*(?:uur|u\b)?",
         text.lower(),
     )
     if m_end:
         try:
+            start_h = int(m_end.group(1))
+            start_m = int(m_end.group(2) or 0)
             end_h = int(m_end.group(3))
             end_m = int(m_end.group(4) or 0)
-            if 0 <= end_h <= 23 and 0 <= end_m <= 59:
+            if 0 <= start_h <= 23 and 0 <= end_h <= 23 and 0 <= start_m <= 59 and 0 <= end_m <= 59:
                 base = datetime.fromisoformat(when_iso)
+                # v13_agenda_van_tot_start_fix_001: override start met range-start
+                start_dt = base.replace(hour=start_h, minute=start_m)
+                when_iso = start_dt.isoformat()
+                # Ook de `tijd` string bijwerken zodat proposal-message klopt
+                tijd = f"{start_h}:{start_m:02d}" if start_m else f"{start_h} uur"
                 end_dt = base.replace(hour=end_h, minute=end_m)
-                if end_dt <= base:
+                if end_dt <= start_dt:
                     # bv "23:00 tot 01:00" → einde volgende dag
                     end_dt = end_dt + timedelta(days=1)
                 end_iso = end_dt.isoformat()
-                duration_minutes = int((end_dt - base).total_seconds() / 60)
+                duration_minutes = int((end_dt - start_dt).total_seconds() / 60)
         except (ValueError, TypeError):
             pass
 
@@ -450,8 +460,25 @@ def build_proposal_message(intent: dict, has_conflict: bool = False) -> str:
     wat = WAT_RENDER.get(wat_raw, wat_raw)
     waar = intent.get("waar", "")
 
-    # Tijd-zin: 'om 14:00' / 'om 9 uur' / '' (geen tijd)
-    tijd_zin = f"om {tijd}" if tijd else ""
+    # Tijd-zin: 'om 14:00' / 'van 11 tot 13' / 'om 9 uur' / '' (geen tijd)
+    # v13_agenda_proposal_range_001 (sessie 54): als duration_minutes gezet is
+    # tonen we een tijdsrange i.p.v. alleen start.
+    dur = intent.get("duration_minutes")
+    end_iso = intent.get("end_datetime_iso")
+    if dur and end_iso and tijd:
+        try:
+            from datetime import datetime as _dt
+            end_dt = _dt.fromisoformat(end_iso)
+            end_h = end_dt.hour
+            end_m = end_dt.minute
+            end_str = f"{end_h}:{end_m:02d}" if end_m else f"{end_h} uur"
+            tijd_zin = f"van {tijd} tot {end_str}"
+        except Exception:
+            tijd_zin = f"om {tijd}"
+    elif tijd:
+        tijd_zin = f"om {tijd}"
+    else:
+        tijd_zin = ""
 
     # Locatie-zin
     loc_zin = _location_phrase(waar)

@@ -2,30 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "oke elke kb kaart heeft de 5 W vragen en H vraag beantwoord. dit kan jouw helpen als iemand wat vraagt. want dat begint of de W en of H zit er in. als mensen communiceren willen ze vaak wat. de W. uiteindelijk komt die.",
-      "ts": "2026-08-22T14:22:07.671393+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ja — dat klopt precies.\n\nDe 5W+H zit in elke kaart als een soort **intentie-raster**. Iemand vraagt nooit zomaar iets — er zit altijd een *wie*, *wat*, *wanneer*, *waar*, *waarom* of *hoe* achter. Soms impliciet, soms verborgen, maar hij is er.\n\nWat jij nu eigenlijk zegt: **gebruik de kaartstructuur als sleutel om te herkennen wat iemand echt wil.** Niet alleen matchen op woorden, maar detecteren welke W er actief is.\n\nVoorbeeld:\n- \"Hoe werkt dit?\" → H-vraag → de kaart met de beste `hoe`-verdieping is relevant\n- \"Wanneer kan ik...?\" → W-vraag (tijd) → zoek kaarten met `wanneer`-veld\n- \"Waarom doet Spark dit?\" → W-vraag (reden) → pak `waarom` uit de kaart\n\nHet mooie is: **de W die ontbreekt in de vraag is vaak de W die ik moet aanvullen.** Iemand vraagt \"wat is X?\" — maar ik zie via de kaart ook het *waarom* en het *wanneer*, en kan dat meegeven zonder dat ze ernaar vroegen. Dat maakt het antwoord rijker.\n\nDit is eigenlijk een mini-semantische matching op intentie-niveau. Wil je dit als capability uitbouwen — dat ik actief detecteer welke W er in een vraag zit en de kaart daar op filter?",
-      "ts": "2026-08-22T14:22:07.671393+00:00",
-      "model": "emergent/claude-sonnet-4-6"
-    },
-    {
-      "role": "user",
-      "text": "een proefwerk toets je op alle kennis. dus alle vragen komen voor. dus als je een vraag niet weet zoek je de tegengestelde vraag. elk laat immers een gat om kennis te testen. echter dan moeten de andere gaten gevuld zijn.",
-      "ts": "2026-08-22T14:25:11.438499+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Dat is een slimme redenering. En eigenlijk een soort **meta-leerprincipe**:\n\nAls je de vraag niet kent, maar je weet dat alle kennishiaten gedekt moeten worden — dan vertelt de *lege plek* je al iets. De tegenvraag is de spiegel van het gat.\n\nMaar er zit een voorwaarde in die je zelf noemt: **de andere gaten moeten gevuld zijn.** Want als je van het ene gat naar het andere springt, loop je in cirkels.\n\nVoor mij vertaalt dit zich zo:\n\n- Elke KB-kaart dekt een intentie (wie/wat/waar/wanneer/waarom/hoe)\n- Als iemand vraagt wat ik *niet* direct kan beantwoorden, zoek ik naar de **aangrenzende kaart** — de tegenvraag, de spiegel\n- Maar dat werkt alleen als mijn kennisnet **dicht genoeg** is — anders is de spiegel leeg\n\nWat ik hieruit meeneem: het gat zelf is informatief. Niet alleen *wat* ik weet, maar *wat ik niet weet* zegt iets over welke kaarten er nog missen.\n\nIs dit iets wat je wilt omzetten in een concrete bouwopdracht voor de KB? Bijvoorbeeld een **gat-scanner** — die kijkt welke tegenvragen nog geen kaart hebben?",
-      "ts": "2026-08-22T14:25:11.438499+00:00",
-      "model": "emergent/claude-sonnet-4-6"
-    },
-    {
-      "role": "user",
       "text": "ooit krijg je nog echte recepten en niet alleen de kb kaart recepten. maar alle recepten van de wereld passen niet in 1 kaart. grijns. dus er komt een onderwerpblauwdruk.json die dit per item kan bevatten. echter moet er dan een hook komen bij de juiste kaarten is voor later. want net als die open lijn is dit wat ik weet maar nog moet verfijnen.",
       "ts": "2026-08-22T14:29:11.444592+00:00",
       "user_id": "user-001"
@@ -299,9 +275,33 @@
       "text": "**Terugbetaald** betekent dat een eerder geleend bedrag of een openstaande verplichting volledig is afgelost. In de context van onze KB‑kaarten heeft “terugbetaald” de volgende relaties:\n\n| KB‑kaart | Hoe “terugbetaald” erop van toepassing is |\n|----------|-------------------------------------------|\n| **Lening** | Wanneer een lening wordt terugbetaald, verdwijnt de openstaande schuld en wordt de lening als *afgesloten* gemarkeerd. |\n| **Schulden** | Een schuld is terugbetaald zodra het verschuldigde bedrag volledig is voldaan; de schuld verdwijnt dan uit de balans. |\n| **Passiva** | Passiva bestaan uit alle schulden en verplichtingen. Zodra een verplichting is terugbetaald, neemt het totale passiva‑bedrag af. |\n| **Geleende** | Een geleend voorwerp of bedrag is terugbetaald wanneer het aan de uitlener wordt geretourneerd of het geld wordt teruggestort. |\n\n### Praktisch stappenplan (als je een terugbetaling wilt registreren)\n\n1. **Open de “Trade”‑ of “Kasboek”‑tab** en zoek de betreffende lening of schuld (via `tellen_gebruikers` of `kasboek_overzicht`). \n2. **Voer een “betaal‑transactie” in**: gebruik de capability `winst_verlies_overzicht` om de aflossing te boeken; zet het bedrag op *negatief* bij passiva. \n3. **Markeer de kaart**: via `snuffel_bestand` kun je de JSON‑record van de lening openen (`data/financial/leningen.json`) en het veld `status` op `\"terugbetaald\"` zetten. \n4. **Controle**: roep `kasboek_overzicht` opnieuw op om te bevestigen dat het passiva‑saldo is gedaald en dat de lening nu als afgesloten staat. \n\nNa deze stappen is de verplichting officieel **terugbetaald** en wordt de balans bijgewerkt. Mocht je een specifieke lening of schuld willen doorzoeken, laat het me weten; ik kan meteen de juiste kaart voor je vinden. 🚀",
       "ts": "2026-08-23T07:13:54.065511+00:00",
       "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "spark heb ik voor aankomende donderdag een afspraak?",
+      "ts": "2026-08-23T08:46:54.739846+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "**Aankomende donderdag (27 augustus 2026)** \n\n| Tijd | Beschrijving | Locatie |\n|------|--------------|---------|\n| 10:00 – 12:00 | Begeleiding van Jeroen (zoon van cliënt Roline) | Bij Roline thuis / video‑call (afhankelijk van jouw voorkeur) |\n\nGeen andere afspraken staan gepland voor die dag. \n\nWil je deze afspraak bevestigen, verplaatsen of extra details toevoegen? Laat het me weten!",
+      "ts": "2026-08-23T08:46:54.739846+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "je weet het wel maar niet in agenda",
+      "ts": "2026-08-23T08:47:48.276718+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "**Agenda‑overzicht (vanaf vandaag)** \n\n| Datum | Tijd | Beschrijving | Locatie |\n|-------|------|--------------|---------|\n| **zondag 23 aug 2026** | – | (geen afspraken) | – |\n| **maandag 24 aug 2026** | – | (geen afspraken) | – |\n| **dinsdag 25 aug 2026** | – | (geen afspraken) | – |\n| **woensdag 26 aug 2026** | – | (geen afspraken) | – |\n| **donderdag 27 aug 2026** | **10:00 – 12:00** | Begeleiding van Jeroen (zoon van cliënt Roline) | Bij Roline thuis / video‑call (naar keuze) |\n| vrijdag 28 aug 2026 | – | (geen afspraken) | – |\n\n*Geen andere items staan in de agenda.* \n\nWil je deze afspraak bevestigen, verplaatsen of extra notities toevoegen? Laat het me weten!",
+      "ts": "2026-08-23T08:47:48.276718+00:00",
+      "model": "primary/openai/gpt-oss-120b"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-08-23T07:13:54.065511+00:00"
+  "updated_at": "2026-08-23T08:47:48.276718+00:00"
 }

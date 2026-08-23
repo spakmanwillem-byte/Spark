@@ -1,19 +1,19 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-08-23T10:33:26.856889+00:00",
+  "generated_at": "2026-08-23T12:42:09.251771+00:00",
   "summary": {
-    "total_containers": 124,
+    "total_containers": 122,
     "by_status": {
-      "active": 110,
+      "active": 109,
       "unknown": 3,
-      "skeleton": 11
+      "skeleton": 10
     },
     "by_container_type": {
-      "dir": 79,
+      "dir": 77,
       "data": 45
     },
-    "total_endpoints_detected": 717
+    "total_endpoints_detected": 642
   },
   "tree": {
     "backend_modules": {
@@ -733,7 +733,6 @@
           "GET /bots/community/recap",
           "GET /bots/list",
           "GET /bots/{bot_id}",
-          "POST /bots/community/dnd-choice",
           "POST /bots/community/send"
         ],
         "tags": [],
@@ -746,7 +745,7 @@
         "created_at": "2026-05-26T15:54:32.135497+00:00",
         "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
-        "file_count": 5,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1210,115 +1209,6 @@
         "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
-        "subdir_count": 0,
-        "extra": {}
-      },
-      "backend/modules/dnd": {
-        "_arch_ref": "v6_synapse_001",
-        "schema_version": "1.0",
-        "naam": "dnd",
-        "doel": "D&D Module (v4_dnd_001)",
-        "container_type": "dir",
-        "status": "active",
-        "owner": "spark-system",
-        "blueprint_ref": "/memory/blueprints/dnd.md",
-        "footnote": {
-          "generated_by": "v9_meta_enrich_001",
-          "generated_at": "2026-07-20T09:08:07.129452+00:00",
-          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
-          "has_blueprint": true,
-          "has_endpoints": true,
-          "requires_review": false
-        },
-        "split_from": null,
-        "children_max": 4,
-        "endpoints": [
-          "DELETE /dnd/economy/cards/{card_id}",
-          "DELETE /dnd/economy/game-cards/{card_id}",
-          "DELETE /dnd/economy/resources/{resource_id}",
-          "DELETE /dnd/economy/{bewoner_id}",
-          "DELETE /dnd/economy/{bewoner_id}/slot/{slot_index}",
-          "GET /dnd/economy/",
-          "GET /dnd/economy/aura/{user_id}",
-          "GET /dnd/economy/blueprints",
-          "GET /dnd/economy/blueprints/{name}",
-          "GET /dnd/economy/cards",
-          "GET /dnd/economy/cards/{card_id}",
-          "GET /dnd/economy/dorp-layout-overrides",
-          "GET /dnd/economy/fracties",
-          "GET /dnd/economy/fracties/full",
-          "GET /dnd/economy/game-cards",
-          "GET /dnd/economy/game-cards/{card_id}",
-          "GET /dnd/economy/game-items",
-          "GET /dnd/economy/items-blueprint",
-          "GET /dnd/economy/items-blueprint/{item_id}",
-          "GET /dnd/economy/locations",
-          "GET /dnd/economy/lore",
-          "GET /dnd/economy/observations/{user_id}",
-          "GET /dnd/economy/price/{resource_id}/{voorraad_pct}",
-          "GET /dnd/economy/provincies",
-          "GET /dnd/economy/rarities",
-          "GET /dnd/economy/resources",
-          "GET /dnd/economy/slots/config",
-          "GET /dnd/economy/spark-greeting/{user_id}",
-          "GET /dnd/economy/steden",
-          "GET /dnd/economy/steden/{stad_id}",
-          "GET /dnd/economy/trader-decision/{stad_id}",
-          "GET /dnd/economy/world-state",
-          "GET /dnd/economy/{bewoner_id}",
-          "GET /dnd/economy/{location_id}",
-          "GET /dnd/economy/{user_id}",
-          "PATCH /dnd/economy/fracties/{fractie_id}",
-          "PATCH /dnd/economy/provincies",
-          "PATCH /dnd/economy/resources/{resource_id}",
-          "PATCH /dnd/economy/steden/{stad_id}",
-          "PATCH /dnd/economy/{bewoner_id}",
-          "PATCH /dnd/economy/{user_id}",
-          "POST /dnd/economy/",
-          "POST /dnd/economy/admin/grant-daily-income",
-          "POST /dnd/economy/cards/{card_id}/lock",
-          "POST /dnd/economy/fracties/{fractie_id}/banner",
-          "POST /dnd/economy/fracties/{fractie_id}/import-from-card",
-          "POST /dnd/economy/game-cards",
-          "POST /dnd/economy/game-cards/edit",
-          "POST /dnd/economy/game-cards/lock",
-          "POST /dnd/economy/game-cards/migrate-items",
-          "POST /dnd/economy/game-cards/seed-missing-items",
-          "POST /dnd/economy/locations/reset",
-          "POST /dnd/economy/observations/mark-spoken",
-          "POST /dnd/economy/observe",
-          "POST /dnd/economy/provincies/reset",
-          "POST /dnd/economy/reset",
-          "POST /dnd/economy/resources",
-          "POST /dnd/economy/resources/{resource_id}/duplicate",
-          "POST /dnd/economy/respond",
-          "POST /dnd/economy/roll",
-          "POST /dnd/economy/seed",
-          "POST /dnd/economy/start",
-          "POST /dnd/economy/track",
-          "POST /dnd/economy/travel",
-          "POST /dnd/economy/{bewoner_id}/buy",
-          "POST /dnd/economy/{bewoner_id}/sell",
-          "POST /dnd/economy/{user_id}/equip",
-          "POST /dnd/economy/{user_id}/event",
-          "POST /dnd/economy/{user_id}/play",
-          "POST /dnd/economy/{user_id}/stats/reset",
-          "POST /dnd/economy/{user_id}/stats/spend",
-          "PUT /dnd/economy/dorp-layout-overrides",
-          "PUT /dnd/economy/locations",
-          "PUT /dnd/economy/{bewoner_id}/slot/{slot_index}"
-        ],
-        "tags": [],
-        "encryption": {
-          "enabled": false,
-          "algorithm": null,
-          "key_id": null,
-          "key_holder": null
-        },
-        "created_at": "2026-05-26T15:54:32.187293+00:00",
-        "last_touched": "2026-07-20T09:08:07.129452+00:00",
-        "activity_count": 0,
-        "file_count": 12,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1849,7 +1739,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
-        "file_count": 15,
+        "file_count": 16,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3103,7 +2993,7 @@
         "created_at": "2026-05-26T15:54:32.283390+00:00",
         "last_touched": "2026-05-26T15:54:32.283390+00:00",
         "activity_count": 0,
-        "file_count": 16,
+        "file_count": 15,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3212,33 +3102,6 @@
         "last_touched": "2026-05-26T15:54:32.288520+00:00",
         "activity_count": 0,
         "file_count": 2,
-        "subdir_count": 0,
-        "extra": {}
-      },
-      "frontend/components/dnd": {
-        "_arch_ref": "v6_synapse_001",
-        "schema_version": "1.0",
-        "naam": "dnd",
-        "doel": "Skelet — dnd module nog leeg of placeholder",
-        "container_type": "dir",
-        "status": "skeleton",
-        "owner": "spark-system",
-        "blueprint_ref": null,
-        "footnote": "",
-        "split_from": null,
-        "children_max": 4,
-        "endpoints": [],
-        "tags": [],
-        "encryption": {
-          "enabled": false,
-          "algorithm": null,
-          "key_id": null,
-          "key_holder": null
-        },
-        "created_at": "2026-05-26T15:54:32.290007+00:00",
-        "last_touched": "2026-05-26T15:54:32.290007+00:00",
-        "activity_count": 0,
-        "file_count": 1,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3373,7 +3236,7 @@
         "created_at": "2026-05-26T15:54:32.296770+00:00",
         "last_touched": "2026-05-26T15:54:32.296770+00:00",
         "activity_count": 0,
-        "file_count": 7,
+        "file_count": 5,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3731,8 +3594,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-31T23:48:37.354567+00:00",
-        "last_touched": "2026-08-23T09:45:38.987614+00:00",
-        "activity_count": 273,
+        "last_touched": "2026-08-23T11:46:45.379248+00:00",
+        "activity_count": 275,
         "file_count": 11,
         "subdir_count": 1,
         "extra": {}
@@ -3812,8 +3675,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.309307+00:00",
-        "last_touched": "2026-08-23T09:17:06.226974+00:00",
-        "activity_count": 44,
+        "last_touched": "2026-08-23T11:32:09.837851+00:00",
+        "activity_count": 48,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -3866,9 +3729,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-08-23T10:09:13.825342+00:00",
-        "activity_count": 3095,
-        "file_count": 132,
+        "last_touched": "2026-08-23T12:28:11.832412+00:00",
+        "activity_count": 3107,
+        "file_count": 130,
         "subdir_count": 3,
         "extra": {}
       },
@@ -3893,8 +3756,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-08-23T09:41:04.310933+00:00",
-        "activity_count": 268,
+        "last_touched": "2026-08-23T11:52:53.467405+00:00",
+        "activity_count": 271,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -4028,8 +3891,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-08-23T10:32:12.703771+00:00",
-        "activity_count": 137554,
+        "last_touched": "2026-08-23T12:38:09.490171+00:00",
+        "activity_count": 137778,
         "file_count": 14,
         "subdir_count": 0,
         "extra": {}
@@ -4055,8 +3918,8 @@
           "key_holder": null
         },
         "created_at": "2026-06-03T13:57:41.086997+00:00",
-        "last_touched": "2026-08-22T08:19:46.626999+00:00",
-        "activity_count": 309,
+        "last_touched": "2026-08-23T12:28:16.121931+00:00",
+        "activity_count": 313,
         "file_count": 6,
         "subdir_count": 1,
         "extra": {}
@@ -4082,8 +3945,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-08-23T10:27:25.442819+00:00",
-        "activity_count": 1570,
+        "last_touched": "2026-08-23T10:56:29.154319+00:00",
+        "activity_count": 1576,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -4301,9 +4164,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-08-23T10:27:01.220046+00:00",
-        "activity_count": 25511,
-        "file_count": 49,
+        "last_touched": "2026-08-23T10:49:27.397634+00:00",
+        "activity_count": 25520,
+        "file_count": 62,
         "subdir_count": 2,
         "extra": {}
       },
@@ -4328,8 +4191,8 @@
           "key_holder": null
         },
         "created_at": "2026-08-22T14:57:35.412153+00:00",
-        "last_touched": "2026-08-23T10:23:43.869671+00:00",
-        "activity_count": 48,
+        "last_touched": "2026-08-23T10:43:08.228082+00:00",
+        "activity_count": 57,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -4355,8 +4218,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.325005+00:00",
-        "last_touched": "2026-08-23T08:59:31.272366+00:00",
-        "activity_count": 16,
+        "last_touched": "2026-08-23T11:31:24.107379+00:00",
+        "activity_count": 18,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -4496,8 +4359,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-08-23T10:32:09.451468+00:00",
-        "activity_count": 5811,
+        "last_touched": "2026-08-23T12:38:05.451430+00:00",
+        "activity_count": 5833,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -4730,9 +4593,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-08-23T10:33:26.447624+00:00",
-        "activity_count": 59899,
-        "file_count": 215,
+        "last_touched": "2026-08-23T12:42:09.007886+00:00",
+        "activity_count": 60655,
+        "file_count": 217,
         "subdir_count": 6,
         "extra": {}
       },
@@ -4784,9 +4647,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-08-23T10:27:10.311446+00:00",
-        "activity_count": 10239,
-        "file_count": 60,
+        "last_touched": "2026-08-23T12:33:07.698436+00:00",
+        "activity_count": 10966,
+        "file_count": 61,
         "subdir_count": 5,
         "extra": {}
       },
@@ -4867,8 +4730,8 @@
         "created_at": "2026-05-26T15:54:32.345126+00:00",
         "last_touched": "2026-08-23T09:28:27.046652+00:00",
         "activity_count": 115,
-        "file_count": 115,
-        "subdir_count": 32,
+        "file_count": 103,
+        "subdir_count": 29,
         "extra": {}
       },
       "backend/data/wallet": {

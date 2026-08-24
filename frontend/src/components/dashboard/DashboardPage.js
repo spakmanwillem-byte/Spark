@@ -198,33 +198,13 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
         {/* Main Grid */}
         <div className="grid grid-cols-12 gap-4">
 
-          {/* === Col 1: Knowledge Base (span 4) === */}
+          {/* === Col 1: Kennisbank (span 4) === */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            {/* v6_dash_privacy_001 — KB Overview alleen voor admin */}
-            {isAdminUser && (
-            <Card title="Kennisbank" icon={Brain} accent="#f59e0b" badge={`${kbPercent}% compleet`} badgeColor="#22c55e" onClick={() => onNavigate('knowledge', '/knowledge')}>
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <MiniStat label="Totaal" value={kbTotal.toLocaleString()} color="#f59e0b" />
-                <MiniStat label="Beantwoord" value={kbAnswered.toLocaleString()} color="#22c55e" />
-                <MiniStat label="Onbeantwoord" value={kbUnanswered} color="#f97316" />
-                <MiniStat label="Renew" value={kbReviewPending} color="#ef4444" />
-              </div>
-              {/* Progress bar */}
-              <div className="space-y-1.5">
-                <div className="flex justify-between text-[10px] text-slate-500">
-                  <span>Voortgang</span>
-                  <span>{kbPercent}%</span>
-                </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${kbPercent}%`, background: 'linear-gradient(90deg, #f59e0b, #22c55e)' }} />
-                </div>
-              </div>
-            </Card>
-            )}
-
-            {/* v5_dashboard_kbv2_001 — KB v2 Lades verdeling (ADMIN gradatie ≤ 2) */}
+            {/* v13d_dashboard_kb_dedup_001 (sessie 55) — Willem: v1 legacy-blok
+                + KB v2 Lades kop + Bijbel-knop weg. Één 'Kennisbank' widget
+                volstaat op admin dashboard. */}
             {isAdminUser && kbv2Stats && (
-              <Card title="KB v2 Lades" icon={Brain} accent="#a855f7"
+              <Card title="Kennisbank" icon={Brain} accent="#a855f7"
                 badge={`${(kbv2Stats.lades ? Object.values(kbv2Stats.lades).reduce((a, b) => a + (b.count || 0), 0) : 0) + (kbv2Stats.inbox_count || 0)} totaal`}
                 badgeColor="#a855f7"
                 onClick={() => onNavigate('knowledge-v2', '/knowledge')}>
@@ -254,31 +234,13 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); onNavigate('namen', '/spark/namen'); }}
-                  className="w-full bg-purple-500/10 border border-purple-500/30 rounded-lg p-2 mb-2 hover:bg-purple-500/20 transition text-left"
+                  className="w-full bg-purple-500/10 border border-purple-500/30 rounded-lg p-2 hover:bg-purple-500/20 transition text-left"
                   data-testid="btn-open-namen"
                 >
                   <p className="text-[10px] text-purple-300">
                     🏷️ <strong>Namen-lade</strong> — voor- & achternamen, koosnamen (klik om te openen)
                   </p>
                 </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); onNavigate('bijbel', '/spark/bijbel'); }}
-                  className="w-full bg-amber-500/10 border border-amber-500/30 rounded-lg p-2 mb-2 hover:bg-amber-500/20 transition text-left"
-                  data-testid="btn-open-bijbel"
-                >
-                  <p className="text-[10px] text-amber-300">
-                    💎 <strong>Bijbel</strong> — wijsheden, patronen, ankers (semantische laag)
-                  </p>
-                </button>
-                {/* v6_kb_v1_v2_split_001 — Toon ook KB v1 totaal voor context */}
-                {knowledgeStats && (
-                  <div className="bg-slate-800/30 rounded-lg p-2 text-[10px] text-slate-400">
-                    KB v1 (legacy): <strong className="text-slate-300">{kbTotal}</strong> kaarten
-                    {kbReviewPending > 0 && (
-                      <span className="text-amber-400"> • {kbReviewPending} te herzien</span>
-                    )}
-                  </div>
-                )}
               </Card>
             )}
             {isAdminUser && (

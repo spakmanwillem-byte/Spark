@@ -18,10 +18,14 @@
   "split_from": null,
   "children_max": 4,
   "endpoints": [
+    "DELETE /triggers/edit/intent/{intent_key}/pattern",
     "DELETE /triggers/edit/{kind}/{key}/{field}/{word}",
     "GET /triggers/all",
     "GET /triggers/by-type/{trigger_type}",
-    "POST /triggers/edit/{kind}/{key}/add"
+    "GET /triggers/intent-patterns",
+    "POST /triggers/edit/intent/{intent_key}/add",
+    "POST /triggers/edit/{kind}/{key}/add",
+    "POST /triggers/intent-patterns/test"
   ],
   "tags": [],
   "encryption": {

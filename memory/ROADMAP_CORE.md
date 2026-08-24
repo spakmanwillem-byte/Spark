@@ -94,6 +94,24 @@ Alle write-hooks (KB `add_to_inbox`, agenda `create_event`, notes, files, memori
 moeten aan het begin een `_validate_footnote()` doen die hard failt als vereiste
 velden ontbreken. Voorkomt regressie richting incomplete data.
 
+### 6. Fuzzy-snap in chat-flow (P1, sessie 55 idee Willem)
+
+Willem: "een woord kan met 1 letter verschillen — wat met spelling-correctie?"
+
+**Fix**: in `snap_service.multi_lookup()` een rapidfuzz-fallback bouwen:
+- Exacte match faalt? → probeer fuzzy match (ratio ≥ 92) op begrip + tags.
+- Alleen boven de 92% (anders "leger" ↔ "leer" false positive).
+- Als match: geef antwoord + noem "je bedoelde waarschijnlijk X".
+
+**Niet doen bij KB-write**: bij het aanmaken van skeleton-kaarten NIET fuzzy-mergen
+— sessie 55 test toonde dat 85% van 88%-matches gewoon andere woorden zijn
+(lengte≠lente, politie≠politiek, contract≠contact). Bestaande whitelist-approach
+in `fix_kb_tag_typos_v13c.py` blijft de standaard voor typo-cleanup.
+
+**Rapport**: `orphan_typo_report_v13d.json` (105 kandidaten uit sessie 55 scan)
+staat klaar in `/data/knowledge/v2/` — kan via KbV2TagCuration UI ge-reviewed
+worden voor handmatige merges.
+
 ### 4. Trace-capability (P1)
 Nieuwe chat-capability `document_trace`: "waar heb ik dit gezegd?", "wanneer heb ik
 Roeline voor het laatst genoemd?", "welke kaarten hebben Willem als bron?".

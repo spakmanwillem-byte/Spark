@@ -508,14 +508,26 @@ def _load_ops_context(user_text: str, user_id: Optional[str]) -> Optional[str]:
 # ════════════════════════════════════════════════════════════
 
 def _auto_snap_from_diep(user_text: str, user_naam: str, had_kb_match: bool = False) -> None:
-    """v6_diep_snap_write_002 — Schrijf snaps vanuit Diep voor inhoudsvragen."""
+    """v6_diep_snap_write_002 — Schrijf snaps vanuit Diep voor inhoudsvragen.
+
+    v13d_snap_short_texts_001 (sessie 55) — Willem's bug: 'twee plus 5' (3 woorden)
+    gaf geen snap terwijl 'plus' een KB-kaart heeft. De 5-woorden drempel was
+    bedoeld om meta-vragen te skippen ('wat kan je') maar filterde ook korte
+    inhoudelijke vragen ('twee plus 5', 'verkoop uitleg', 'wat is X'). Fix:
+    drempel op 2 woorden + robuuste meta-skip lijst als eerste check.
+    """
     _ = had_kb_match
-    if not user_text or len(user_text.split()) < 5:
+    if not user_text:
         return
-    t = user_text.lower()
+    t = user_text.lower().strip()
     meta_skip = ["wat kan je", "wat kun je", "wie ben je", "welke modus", "help",
-                 "speel sps", "vertel je oorsprong", "lees de voorwaarden"]
+                 "speel sps", "vertel je oorsprong", "lees de voorwaarden",
+                 "hoe gaat het", "goedemorgen", "goedemiddag", "goedenavond",
+                 "goedenacht", "dank je", "dankjewel", "bedankt"]
     if any(m in t for m in meta_skip):
+        return
+    # v13d: min 2 woorden i.p.v. 5 — anders vallen "twee plus 5" en "verkoop uitleg" buiten
+    if len(user_text.split()) < 2:
         return
     try:
         from modules.chat.snap_service import SnapNLPService, STOPWOORDEN
@@ -523,7 +535,8 @@ def _auto_snap_from_diep(user_text: str, user_naam: str, had_kb_match: bool = Fa
         words = []
         for w in user_text.split():
             cw = w.strip(".,?!:;'\"()").lower()
-            if len(cw) >= 4 and cw not in STOPWOORDEN and not cw.isdigit():
+            # v13d: min 3 chars i.p.v. 4 — anders vallen 'min', 'som', 'iq' etc buiten
+            if len(cw) >= 3 and cw not in STOPWOORDEN and not cw.isdigit():
                 words.append(cw)
         seen = set()
         unique_words = []

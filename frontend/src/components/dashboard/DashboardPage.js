@@ -200,15 +200,34 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
 
           {/* === Col 1: Kennisbank (span 4) === */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            {/* v13d_dashboard_kb_dedup_001 (sessie 55) — Willem: v1 legacy-blok
-                + KB v2 Lades kop + Bijbel-knop weg. Één 'Kennisbank' widget
-                volstaat op admin dashboard. */}
+            {/* v13d_dashboard_kb_dedup_001 (sessie 55) — Willem: één 'Kennisbank'
+                widget met woordenschat-stats (totaal/beantwoord/onbeantwoord/renew)
+                + v2 lades verdeling. Bijbel-knop, Namen-knop, inbox-teller weg
+                (te veel sub-navigatie voor een dashboard-overzicht). */}
             {isAdminUser && kbv2Stats && (
               <Card title="Kennisbank" icon={Brain} accent="#a855f7"
-                badge={`${(kbv2Stats.lades ? Object.values(kbv2Stats.lades).reduce((a, b) => a + (b.count || 0), 0) : 0) + (kbv2Stats.inbox_count || 0)} totaal`}
-                badgeColor="#a855f7"
+                badge={`${kbPercent}% compleet`}
+                badgeColor="#22c55e"
                 onClick={() => onNavigate('knowledge-v2', '/knowledge')}>
-                <div className="grid grid-cols-2 gap-2 mb-3">
+                {/* Woordenschat stats (voorheen v1 legacy kaart, nu geïntegreerd) */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <MiniStat label="Totaal" value={kbTotal.toLocaleString()} color="#f59e0b" />
+                  <MiniStat label="Beantwoord" value={kbAnswered.toLocaleString()} color="#22c55e" />
+                  <MiniStat label="Onbeantwoord" value={kbUnanswered} color="#f97316" />
+                  <MiniStat label="Renew" value={kbReviewPending} color="#ef4444" />
+                </div>
+                {/* Voortgang bar */}
+                <div className="space-y-1.5 mb-4">
+                  <div className="flex justify-between text-[10px] text-slate-500">
+                    <span>Voortgang</span>
+                    <span>{kbPercent}%</span>
+                  </div>
+                  <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${kbPercent}%`, background: 'linear-gradient(90deg, #f59e0b, #22c55e)' }} />
+                  </div>
+                </div>
+                {/* Lades verdeling */}
+                <div className="grid grid-cols-2 gap-2">
                   {[
                     { id: 'voelen',  icon: '🌸', color: '#ec4899' },
                     { id: 'spreken', icon: '💬', color: '#06b6d4' },
@@ -227,20 +246,6 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                     );
                   })}
                 </div>
-                <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-2 mb-2">
-                  <p className="text-[10px] text-amber-300">
-                    📥 <strong>{kbv2Stats.inbox_count || 0}</strong> kaarten in inbox wachten op indeling
-                  </p>
-                </div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); onNavigate('namen', '/spark/namen'); }}
-                  className="w-full bg-purple-500/10 border border-purple-500/30 rounded-lg p-2 hover:bg-purple-500/20 transition text-left"
-                  data-testid="btn-open-namen"
-                >
-                  <p className="text-[10px] text-purple-300">
-                    🏷️ <strong>Namen-lade</strong> — voor- & achternamen, koosnamen (klik om te openen)
-                  </p>
-                </button>
               </Card>
             )}
             {isAdminUser && (

@@ -92,6 +92,9 @@ def _v2_to_entry(card: dict, source_lade: str | None) -> dict:
     return {
         "id": card.get("id"),
         "begrip": card.get("begrip") or "",
+        # v13d_snap_aliases_001 (sessie 55) — aliases behouden zodat _build_index
+        # ze ook als lookup-key kan registreren (user/gebruiker koppelen).
+        "aliases": list(card.get("aliases") or card.get("synoniemen") or []),
         "lagen": {
             "laag1": (lagen.get("laag1") or ""),
             "laag2": (lagen.get("laag2") or ""),
@@ -170,18 +173,29 @@ class SnapNLPService:
     def _build_index(self, entries):
         """Bouw een snelle lookup index op begrip (lowercase).
         v4_snap_dedupe_002: dubbele index op zowel ruwe als ascii-genormaliseerde begrip
-        zodat 'joel' en 'joël' op dezelfde kaarten matchen."""
+        zodat 'joel' en 'joël' op dezelfde kaarten matchen.
+        v13d_snap_aliases_001 (sessie 55): kaarten met een `aliases` lijst
+        worden ook onder elke alias geïndexeerd. Zo matcht "user" ook op de
+        "Gebruiker" kaart als aliases=["user","users","gebruikers"]."""
         index = {}
         for e in entries:
             tags = e.get("tags") or []
             if "context-zin" in tags or (e.get("metadata") or {}).get("is_sentence"):
                 continue
             begrip = (e.get("begrip") or "").lower().strip()
+            keys = set()
             if begrip:
-                keys = {begrip, _ascii_fold(begrip)}
-                for k in keys:
-                    if k:
-                        index.setdefault(k, []).append(e)
+                keys.add(begrip)
+                keys.add(_ascii_fold(begrip))
+            # v13d: aliases (synoniemen) ook als lookup-key
+            for alias in (e.get("aliases") or e.get("synoniemen") or []):
+                a = (alias or "").lower().strip()
+                if a:
+                    keys.add(a)
+                    keys.add(_ascii_fold(a))
+            for k in keys:
+                if k:
+                    index.setdefault(k, []).append(e)
         return index
 
     def _get_index(self):

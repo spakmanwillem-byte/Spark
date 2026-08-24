@@ -118,6 +118,64 @@ async def compose(req: ComposeRequest):
                 session_state.set_state(req.user_id, pending_shop_delete=out["pending_state"])
             return {"success": True, "message": out["message"], "type": out["type"], "used_model": "hands"}
 
+        # v13d_agenda_create_compose_001 (sessie 55) — Willem: "gedeployde Spark
+        # kan niet in agenda schrijven". Root cause: compose (Spark-tab) had
+        # geen CREATE-hook. Flow: detect → proposal + pending_agenda → ja → create.
+        pending_ac = state.get("pending_agenda")
+        if pending_ac:
+            if si.is_yes(text) or _snap.detect_confirmation(text):
+                # Schrijf event weg (kopie van chat/routes.py create-flow)
+                import uuid as _uuid
+                from pathlib import Path as _Path
+                from datetime import datetime as _dt, timezone as _tz
+                from modules.core.storage import load_json as _lj, save_json as _sj
+                from . import agenda_intent_service
+                ag_file = _Path(__file__).parent.parent.parent / "data" / "agenda" / f"{req.user_id}.json"
+                ag_data = _lj(ag_file, default={"events": []})
+                new_event = {
+                    "id": str(_uuid.uuid4())[:8],
+                    "titel": agenda_intent_service.format_event_title(pending_ac),
+                    "beschrijving": f"Genoteerd via chat: {pending_ac.get('raw_text','')}",
+                    "date": pending_ac["datetime_iso"],
+                    "end_date": pending_ac.get("end_datetime_iso"),
+                    "duration_minutes": pending_ac.get("duration_minutes"),
+                    "location": pending_ac.get("waar", ""),
+                    "reminder": False,
+                    "status": "upcoming",
+                    "created_at": _dt.now(_tz.utc).isoformat(),
+                    "source": "chat-intent-compose",
+                }
+                ag_data["events"].append(new_event)
+                _sj(ag_file, ag_data)
+                session_state.set_state(req.user_id, pending_agenda=None)
+                return {"success": True,
+                        "message": f"📅 Genoteerd! **{new_event['titel']}** staat in je agenda.",
+                        "type": "agenda_created", "agenda_event": new_event, "used_model": "hands"}
+            if si.is_no(text) or wedervraag_service.is_skip(text):
+                session_state.set_state(req.user_id, pending_agenda=None)
+                return {"success": True,
+                        "message": "Oké, ik laat het zo. Niks in je agenda gezet.",
+                        "type": "agenda_declined", "used_model": "hands"}
+            # geen ja/nee bij langere text → clear pending en val door
+            if len(text.split()) > 4:
+                session_state.set_state(req.user_id, pending_agenda=None)
+
+        # CREATE-intent detectie (nieuwe afspraak in chat)
+        if req.user_id:
+            try:
+                from . import agenda_intent_service
+                from modules.auth.service import AuthService as _Auth
+                _user_ac = _Auth.get_user_by_id(req.user_id)
+                create_intent = agenda_intent_service.detect_agenda_intent(text, user=_user_ac)
+                if create_intent.get("has_intent"):
+                    has_conflict = agenda_intent_service.has_agenda_conflict(req.user_id, create_intent["datetime_iso"])
+                    session_state.set_state(req.user_id, pending_agenda=create_intent)
+                    return {"success": True,
+                            "message": agenda_intent_service.build_proposal_message(create_intent, has_conflict),
+                            "type": "agenda_proposal", "used_model": "hands"}
+            except Exception as _ex_create:
+                print(f"[compose-agenda-create] {_ex_create}")
+
         if req.user_id and si.detect_agenda_delete_intent(text):
             from modules.auth.service import AuthService
             _user = AuthService.get_user_by_id(req.user_id)

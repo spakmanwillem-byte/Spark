@@ -6,7 +6,7 @@ import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
   Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus, Merge,
-  Volume2, Sparkles
+  Volume2, Sparkles, Zap
 } from 'lucide-react';
 import { KbV2TagCuration } from './KbV2TagCuration';
 import { robustFetch, getQueueSize, replayQueue } from '../../utils/robustFetch';
@@ -644,10 +644,43 @@ export function KennisbankV2Page({ onNavigate }) {
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-sky-500/40 text-sky-300 hover:bg-sky-500/10 flex items-center gap-1.5">
               <BookOpen className="w-3.5 h-3.5" /> Importeer txt
             </button>
+            {/* v13d_orphan_tag_scan_ui_001 (sessie 55) — Willem: knop om orphan-scan
+                te draaien zodat hij na invullen van skeletons opnieuw kan scannen. */}
+            <button
+              data-testid="kbv2-orphan-scan-btn"
+              onClick={async () => {
+                // Eerst dry-run tonen
+                try {
+                  const r = await fetch(`${API}/api/kb/v2/inbox/orphan-tag-scan?commit=false&min_count=3`, { method: 'POST' });
+                  const d = await r.json();
+                  const preview = (d.top_20_preview || []).slice(0, 10)
+                    .map(x => `  ${x.count}× ${x.tag}`).join('\n');
+                  const ok = window.confirm(
+                    `Orphan-tag scan resultaat (dry-run):\n\n` +
+                    `📊 ${d.total_unique_tags} unieke tags in KB\n` +
+                    `📊 ${d.total_known_begrippen} bestaande begrippen\n` +
+                    `🔍 ${d.orphans_found} tags zonder eigen kaart (min ${d.min_count_filter}× gebruikt)\n\n` +
+                    `Top 10 preview:\n${preview}\n\n` +
+                    `Wil je ${d.orphans_found} skeleton-kaarten aanmaken in de inbox?\n` +
+                    `(Dubbelingen worden automatisch overgeslagen — idempotent.)`
+                  );
+                  if (!ok) return;
+                  const r2 = await fetch(`${API}/api/kb/v2/inbox/orphan-tag-scan?commit=true&min_count=3`, { method: 'POST' });
+                  const d2 = await r2.json();
+                  alert(d2.message || `${d2.added || 0} skeletons toegevoegd`);
+                  // reload inbox stats
+                  if (typeof loadStats === 'function') loadStats();
+                  window.location.reload();
+                } catch (e) {
+                  alert(`Fout: ${e.message}`);
+                }
+              }}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5"
+              title="Scan alle KB-tags → maak skeleton-kaarten voor tags die nog geen eigen kaart hebben">
+              <Zap className="w-3.5 h-3.5" /> Orphan-tag scan
+            </button>
           </div>
         </div>
-
-        {/* Tab bar */}
         <div className="flex flex-wrap gap-1.5">
           <TabButton id="inbox" active={activeTab === 'inbox'} onClick={setActiveTab}
             count={stats?.inbox_count || 0} icon={<Inbox className="w-3.5 h-3.5" />}

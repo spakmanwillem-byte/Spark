@@ -1059,6 +1059,87 @@ async def inbox_add(body: InboxAddBody):
     return service.add_to_inbox(body.begrip, source=body.source, user_id=body.user_id)
 
 
+# ---------- v13d_orphan_tags_to_cards_001 (sessie 55) ----------
+# Willem's verzoek: UI-knop om orphan-tag scan te draaien zonder terminal.
+# Herbruikt logica uit /app/backend/scripts/orphan_tags_to_cards_v13d.py.
+
+@router.post("/inbox/orphan-tag-scan")
+async def orphan_tag_scan(
+    commit: bool = Query(False, description="False = dry-run, True = daadwerkelijk aanmaken"),
+    min_count: int = Query(3, ge=1, le=100, description="Minimaal aantal keer dat tag voorkomt"),
+):
+    """Scan alle KB-tags → welke hebben geen eigen kaart → skeleton in inbox.
+
+    - Dry-run (default): rapport zonder writes.
+    - Commit: skeleton-kaarten aanmaken met status='draft', needs=[laag1,laag2,ws5,lade],
+      needs_review=True, _inbox_reason='orphan_tag_v13d_sessie55'.
+    - Idempotent: bestaande orphan-skeletons worden overgeslagen.
+    - Filters: skip meta-tags (uitleg/patroon/concept…), min length 3, geen cijfer-only.
+    """
+    import sys as _sys
+    _sys.path.insert(0, '/app/backend')
+    try:
+        from scripts.orphan_tags_to_cards_v13d import (
+            collect_all, find_orphans, make_skeleton, INBOX_REASON,
+        )
+    except Exception as ex:
+        raise HTTPException(500, f"Orphan-scan module niet geladen: {ex}")
+
+    # Override MIN_COUNT via query
+    import scripts.orphan_tags_to_cards_v13d as _ot
+    _ot.MIN_COUNT = min_count
+
+    tag_counts, known_begrippen, tag_rep_card = collect_all()
+    orphans = find_orphans(tag_counts, known_begrippen)
+
+    result = {
+        "total_unique_tags": len(tag_counts),
+        "total_known_begrippen": len(known_begrippen),
+        "orphans_found": len(orphans),
+        "min_count_filter": min_count,
+        "top_20_preview": [{"tag": t, "count": c} for t, c in orphans[:20]],
+        "commit": commit,
+    }
+
+    if not commit:
+        result["message"] = f"Dry-run: {len(orphans)} orphan-tags gevonden. Zet commit=true om skeletons aan te maken."
+        return result
+
+    # COMMIT-mode: schrijf skeletons naar inbox
+    from modules.core.storage import load_json as _lj, save_json as _sj
+    from .service import _inbox_path
+    inbox_fp = _inbox_path()
+    inbox = _lj(inbox_fp, default={"kaarten": []})
+    kaarten = inbox.setdefault("kaarten", [])
+
+    existing_orphan_begrippen = {
+        (k.get("begrip") or "").lower()
+        for k in kaarten
+        if k.get("_inbox_reason") == INBOX_REASON
+    }
+
+    added = 0
+    for tag, count in orphans:
+        if tag.lower() in existing_orphan_begrippen:
+            continue
+        kaarten.append(make_skeleton(tag, count, tag_rep_card.get(tag)))
+        added += 1
+
+    _sj(inbox_fp, inbox)
+
+    # v13d: invalidate snap-cache omdat nieuwe kaarten toegevoegd zijn
+    try:
+        from modules.chat.snap_service import _invalidate_global_cache
+        _invalidate_global_cache()
+    except Exception:
+        pass
+
+    result["added"] = added
+    result["inbox_total_now"] = len(kaarten)
+    result["message"] = f"✅ {added} skeleton-kaarten toegevoegd aan inbox (totaal nu: {len(kaarten)})"
+    return result
+
+
 # ---------- v6_kbv2_hooks_landing_001: Eenmalige backfill ----------
 
 @router.post("/backfill-hooks")

@@ -209,14 +209,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 badge={`${kbPercent}% compleet`}
                 badgeColor="#22c55e"
                 onClick={() => onNavigate('knowledge-v2', '/knowledge')}>
-                {/* Woordenschat stats (voorheen v1 legacy kaart, nu geïntegreerd) */}
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  <MiniStat label="Totaal" value={kbTotal.toLocaleString()} color="#f59e0b" />
-                  <MiniStat label="Beantwoord" value={kbAnswered.toLocaleString()} color="#22c55e" />
-                  <MiniStat label="Onbeantwoord" value={kbUnanswered} color="#f97316" />
-                  <MiniStat label="Renew" value={kbReviewPending} color="#ef4444" />
-                </div>
-                {/* Voortgang bar */}
+                {/* Voortgang bar bovenaan (direct onder % compleet badge) */}
                 <div className="space-y-1.5 mb-4">
                   <div className="flex justify-between text-[10px] text-slate-500">
                     <span>Voortgang</span>
@@ -225,6 +218,13 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                   <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${kbPercent}%`, background: 'linear-gradient(90deg, #f59e0b, #22c55e)' }} />
                   </div>
+                </div>
+                {/* Woordenschat stats */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <MiniStat label="Totaal" value={kbTotal.toLocaleString()} color="#f59e0b" />
+                  <MiniStat label="Beantwoord" value={kbAnswered.toLocaleString()} color="#22c55e" />
+                  <MiniStat label="Onbeantwoord" value={kbUnanswered} color="#f97316" />
+                  <MiniStat label="Renew" value={kbReviewPending} color="#ef4444" />
                 </div>
                 {/* Lades verdeling */}
                 <div className="grid grid-cols-2 gap-2">

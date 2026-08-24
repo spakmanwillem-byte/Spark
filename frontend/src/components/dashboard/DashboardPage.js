@@ -206,17 +206,20 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 (te veel sub-navigatie voor een dashboard-overzicht). */}
             {isAdminUser && kbv2Stats && (
               <Card title="Kennisbank" icon={Brain} accent="#a855f7"
-                badge={`${kbPercent}% compleet`}
-                badgeColor="#22c55e"
                 onClick={() => onNavigate('knowledge-v2', '/knowledge')}>
-                {/* Voortgang bar bovenaan (direct onder % compleet badge) */}
+                {/* v13d: Voortgang-bar met dynamische kleur (rood<33% → amber<66% → groen>=66%).
+                    "% compleet" badge weg — was dezelfde info als de bar. */}
                 <div className="space-y-1.5 mb-4">
                   <div className="flex justify-between text-[10px] text-slate-500">
                     <span>Voortgang</span>
                     <span>{kbPercent}%</span>
                   </div>
                   <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${kbPercent}%`, background: 'linear-gradient(90deg, #f59e0b, #22c55e)' }} />
+                    <div className="h-full rounded-full transition-all duration-1000"
+                      style={{
+                        width: `${kbPercent}%`,
+                        background: kbPercent >= 66 ? '#22c55e' : (kbPercent >= 33 ? '#f59e0b' : '#ef4444'),
+                      }} />
                   </div>
                 </div>
                 {/* Woordenschat stats */}

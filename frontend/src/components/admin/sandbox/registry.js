@@ -25,6 +25,8 @@ import { PapertrailWidget } from './widgets/PapertrailWidget';
 import { FrontsConfigDraftWidget } from './widgets/FrontsConfigDraftWidget';
 import { LlmBudgetSettingsWidget } from './widgets/LlmBudgetSettingsWidget';
 import { IncompleteCardsWidget } from './widgets/IncompleteCardsWidget';
+import { ShadowObserverWidget } from './widgets/ShadowObserverWidget';
+import { PerformanceWidget } from './widgets/PerformanceWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -76,6 +78,26 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 54',
     reden: "Willem: ⚠ Onvolledig subtab in Inbox maakte kaart-kopieën met dezelfde id → dubbels-bug. Widget is monitoring + edit i.p.v. een tweede kaart-collectie. Geen bulk-import meer nodig.",
     Component: IncompleteCardsWidget,
+  },
+  {
+    id: 'shadow-observer',
+    naam: 'Shadow Observer',
+    doel: 'Live chat-events, correcties, fallbacks, top-triggers en nog niet gebruikte triggers/vocab/bijbel-items.',
+    waar_hoort_het: 'Spark AI → Spark Brain → Observer tab, of Analytics → Chat inzicht',
+    aangemaakt_op: '2026-02-23',
+    aangemaakt_door: 'e1 sessie 56',
+    reden: "Willem: 'Shadow Observer hoort niet op dashboard, park in Widget Kladblok tot goede plek gevonden.'",
+    Component: ShadowObserverWidget,
+  },
+  {
+    id: 'performance',
+    naam: 'Performance',
+    doel: 'Storage-cache overzicht (MB in geheugen, gecachede files, cache leegmaken).',
+    waar_hoort_het: 'Beheer → Systeem, of Analytics → Systeem tab',
+    aangemaakt_op: '2026-02-23',
+    aangemaakt_door: 'e1 sessie 56',
+    reden: "Willem: 'Performance-kaart hoort niet op dashboard, park in Widget Kladblok tot goede plek gevonden.'",
+    Component: PerformanceWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

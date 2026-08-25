@@ -2,6 +2,33 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-02-25 (sessie 56b) — Dashboard opschonen: Shadow Observer + Performance → Widget Kladblok
+
+**Willem's verzoek**: "deze 2 kaders in dashboard (Shadow Observer + Performance)
+wil ik verplaatsen naar Widget Kladblok, niet sandbox — dat is wat anders voor
+testen, dit is verzamel-sandbox tot betere plek".
+
+### 🧹 v13d_dashboard_kladblok_migratie_001
+
+**Verplaatst**:
+- `ShadowObserverWidget` (live chat-events, correcties, top-triggers, unused)
+- `PerformanceWidget` (storage-cache stats, cache leegmaken)
+
+Beide widgets zijn zelfstandig (eigen fetch, eigen state) in
+`components/admin/sandbox/widgets/` en geregistreerd in `sandbox/registry.js`
+met meta-info (doel, waar-hoort-het, aangemaakt-op, reden).
+
+**Dashboard opgeschoond**: fetches naar `/api/chat/shadow/stats`,
+`/api/chat/shadow/unused` en `/api/admin/storage-cache` verwijderd uit
+`DashboardPage.js`. State (`shadowStats`, `shadowUnused`, `perfStats`) weg.
+`ShadowCard`, `PerfCard`, `ShadowStat`, `UnusedRow` inline-functies (~173 regels)
+verwijderd. Ongebruikte imports (`Eye`, `Gauge`) opgeruimd.
+
+**Geverifieerd**: lint ✅, dashboard clean ✅, kladblok toont beide widgets ✅
+(data-testid `kladblok-item-shadow-observer` + `kladblok-item-performance`).
+
+
+
 
 ## 2026-02-24 (sessie 56) — Eco-container per user + template-spawn
 

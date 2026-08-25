@@ -8329,12 +8329,66 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-ddb42adf9af2",
+      "text_hash": "ddb42adf9af2",
+      "original_text": "Wat zal ik koken",
+      "topic": "koken",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om suggesties voor wat hij/zij kan koken.",
+      "trigger_phrases": [
+        "wat moet ik maken",
+        "wat moet ik koken",
+        "welk gerecht moet ik bereiden",
+        "wat te koken",
+        "suggestie voor maaltijd"
+      ],
+      "keywords": [
+        "koken",
+        "maaltijd",
+        "recept",
+        "suggestie",
+        "eten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-25T17:44:45.991884+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-6204959a7e30",
+      "text_hash": "6204959a7e30",
+      "original_text": "ik deploy je even",
+      "topic": "deployment",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil de AI-assistent inzetten of starten.",
+      "trigger_phrases": [
+        "ik zet je in",
+        "ik implementeer je",
+        "ik start je",
+        "ik lanceer je",
+        "ik activeer je"
+      ],
+      "keywords": [
+        "deploy",
+        "install",
+        "run",
+        "start",
+        "setup"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-25T17:54:39.410070+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 322,
+    "totaal_voorgesteld": 324,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-08-24T16:42:46.273711+00:00"
+    "last_run": "2026-08-25T17:54:39.410070+00:00"
   }
 }

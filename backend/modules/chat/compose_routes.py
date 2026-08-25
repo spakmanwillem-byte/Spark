@@ -144,7 +144,19 @@ async def compose(req: ComposeRequest):
                     "status": "upcoming",
                     "created_at": _dt.now(_tz.utc).isoformat(),
                     "source": "chat-intent-compose",
+                    # v13d_agenda_scope_001 (sessie 56b) — zakelijk-velden
+                    "scope": pending_ac.get("scope", "prive"),
+                    "opdrachtgever": pending_ac.get("opdrachtgever"),
+                    "pauze_minuten": pending_ac.get("pauze_minuten"),
+                    "onderwerp": pending_ac.get("onderwerp"),
+                    "product_code": None,
                 }
+                # totaal_uren bereken uit duration_minutes - pauze
+                if new_event["scope"] == "zakelijk" and new_event.get("duration_minutes"):
+                    minuten = new_event["duration_minutes"] - (new_event.get("pauze_minuten") or 0)
+                    new_event["totaal_uren"] = round(max(minuten, 0) / 60.0, 2) if minuten >= 0 else 0.0
+                else:
+                    new_event["totaal_uren"] = None
                 ag_data["events"].append(new_event)
                 _sj(ag_file, ag_data)
                 session_state.set_state(req.user_id, pending_agenda=None)

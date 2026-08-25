@@ -1439,7 +1439,18 @@ async def process_message(req: ChatMessage):
                 "status": "upcoming",
                 "created_at": datetime.now(timezone.utc).isoformat(),
                 "source": "chat-intent",
+                # v13d_agenda_scope_001 (sessie 56b) — zakelijk-velden
+                "scope": pending_agenda.get("scope", "prive"),
+                "opdrachtgever": pending_agenda.get("opdrachtgever"),
+                "pauze_minuten": pending_agenda.get("pauze_minuten"),
+                "onderwerp": pending_agenda.get("onderwerp"),
+                "product_code": None,
             }
+            if new_event["scope"] == "zakelijk" and new_event.get("duration_minutes"):
+                _min = new_event["duration_minutes"] - (new_event.get("pauze_minuten") or 0)
+                new_event["totaal_uren"] = round(max(_min, 0) / 60.0, 2)
+            else:
+                new_event["totaal_uren"] = None
             ag_data["events"].append(new_event)
             _sj(ag_file, ag_data)
             session_state.set_state(req.user_id, pending_agenda=None)

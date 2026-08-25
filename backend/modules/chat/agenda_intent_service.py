@@ -330,6 +330,10 @@ def detect_agenda_intent(text: str, now: datetime = None, user: dict = None) -> 
     if waar and waar.lower() == (wat or "").lower():
         waar = ""
 
+    # v13d_agenda_scope_001 (sessie 56b) — detect prive vs zakelijk + extract
+    # opdrachtgever/pauze voor uren-registratie via chat.
+    scope, opdrachtgever, pauze_min, onderwerp = _extract_zakelijk_fields(text)
+
     # v13_agenda_end_time_001 (sessie 53) — Willem: "11:00 tot 13:00" → bewaar
     # ook einde. Voorheen: alleen start-tijd, duur ging verloren → uren-registratie
     # klopte niet. Zoek naar "start tot einde" of "van start tot einde" of
@@ -376,7 +380,46 @@ def detect_agenda_intent(text: str, now: datetime = None, user: dict = None) -> 
         "wat": wat,
         "waar": waar,
         "categorie": categorie,
+        "scope": scope,
+        "opdrachtgever": opdrachtgever,
+        "pauze_minuten": pauze_min,
+        "onderwerp": onderwerp,
     }
+
+
+# v13d_agenda_scope_001 (sessie 56b) — Zakelijk-detectie voor chat-agenda:
+# trefwoorden 'zakelijk', 'werk', 'gewerkt', 'klus', 'opdracht' + 'voor <naam>'
+# als opdrachtgever. Pauze: 'met een uur pauze' / 'met 30 min pauze'.
+_ZAKELIJK_TRIGGERS = re.compile(
+    r"\b(zakelijk|voor werk|op werk|gewerkt|klus\b|klusje voor|opdracht|"
+    r"factureer|urenregistratie|uren registratie|declaratie)\b",
+    re.IGNORECASE,
+)
+
+
+def _extract_zakelijk_fields(text: str):
+    """Return (scope, opdrachtgever, pauze_minuten, onderwerp)."""
+    scope = "zakelijk" if _ZAKELIJK_TRIGGERS.search(text) else "prive"
+    opdrachtgever = None
+    pauze_min = None
+    onderwerp = None
+    if scope == "zakelijk":
+        # 'voor <Naam>' of 'bij opdrachtgever <Naam>' → opdrachtgever
+        m = re.search(r"\bvoor\s+([A-Z][a-zA-Zéèêëïüö&.\-\s]{1,40}?)(?=[.,;\n]|\s+op\b|\s+van\b|\s+om\b|\s+tot\b|$)", text)
+        if m:
+            opdrachtgever = m.group(1).strip()
+        # 'met (een) uur pauze' / 'met 30 min pauze' / '30 minuten pauze'
+        mp = re.search(r"\b(?:met\s+)?(een|[0-9]{1,3})\s*(uur|u|min|minuten)\s*pauze\b", text.lower())
+        if mp:
+            hoeveelheid = mp.group(1)
+            eenheid = mp.group(2)
+            num = 1 if hoeveelheid == "een" else int(hoeveelheid)
+            pauze_min = num * 60 if eenheid in ("uur", "u") else num
+        # 'onderwerp: X' of 'over X' (short)
+        mo = re.search(r"\bonderwerp[:\s]+([^\n.,;]{2,60})", text, re.IGNORECASE)
+        if mo:
+            onderwerp = mo.group(1).strip()
+    return scope, opdrachtgever, pauze_min, onderwerp
 
 
 # v4_024: Werkwoord-mapping per activiteit voor natuurlijke zinsbouw.

@@ -2,6 +2,49 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-02-25 (sessie 56b) — Agenda: Privé/Zakelijk + Uren-registratie
+
+**Willem's verzoek**: "kies privé/zakelijk, begin/eind tijd, bij zakelijk pauze +
+opdrachtgever + onderwerp voor uren-registratie. Later kunnen we dit door een
+agent laten verwerken."
+
+### 🗓️ v13d_agenda_uren_registratie_001
+
+**Backend** (`modules/agenda/routes.py`):
+- `EventCreate` / `EventUpdate` uitgebreid met: `scope` ('prive'|'zakelijk'),
+  `end_date`, `pauze_minuten`, `opdrachtgever`, `onderwerp`, `product_code`
+- `_compute_totaal_uren()` — server berekent uren = (end - start) - pauze
+- Bij scope=prive worden zakelijk-velden genegeerd (guard)
+- PUT herbetekent totaal_uren wanneer relevante velden wijzigen
+- Backwards compat: bestaande events zonder scope tonen als 'prive'
+
+**Frontend** (`workspace/AgendaPage.js`):
+- Privé/Zakelijk toggle bovenaan formulier (data-testid `scope-prive-btn` /
+  `scope-zakelijk-btn`)
+- Start + eind tijd (i.p.v. losse `time`)
+- Bij zakelijk: Opdrachtgever · Onderwerp · Pauze (min) velden
+- Live berekende uren-badge tijdens invoeren (data-testid `computed-uren`)
+- Event-cards krijgen amber-tint + "Zakelijk"-badge + toon opdrachtgever/uren
+
+**Spark chat-parser** (`modules/chat/agenda_intent_service.py`):
+- Nieuwe `_extract_zakelijk_fields()` detecteert trefwoorden 'zakelijk', 'werk',
+  'gewerkt', 'klus', 'opdracht', 'factureer', 'declaratie'
+- Extract opdrachtgever via 'voor <Naam>'
+- Extract pauze via 'met een uur pauze' / '30 min pauze'
+- `detect_agenda_intent()` return dict bevat nu scope/opdrachtgever/pauze_minuten
+
+**Chat-write hooks** (`compose_routes.py` + `chat/routes.py`):
+- Beide flows schrijven nieuwe velden naar agenda-JSON en berekenen totaal_uren
+
+**Tests**: `tests/test_agenda_scope_v13d.py` — 7/7 groen (backwards-compat prive,
+zakelijk full, geen end_date, guard prive, PUT herberekening, chat-scope
+detectie, chat-prive default).
+
+**Geverifieerd**: lint ✅ backend + frontend, screenshot toont "7.5 uur netto"
+badge bij 09:00-17:00 met 30 min pauze.
+
+
+
 ## 2026-02-25 (sessie 56b) — Dashboard opschonen: Shadow Observer + Performance → Widget Kladblok
 
 **Willem's verzoek**: "deze 2 kaders in dashboard (Shadow Observer + Performance)

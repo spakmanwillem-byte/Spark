@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
-import { 
-  Calendar, Clock, Plus, ChevronLeft, ChevronRight,
-  Check, AlertCircle, Tag, Bell, Trash2, MoreHorizontal, X, Save
+import {
+  Calendar, Plus, ChevronLeft, ChevronRight,
+  Bell, Trash2, Briefcase, Home, Clock
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+
+// v13d_agenda_scope_001 (sessie 56b) — Privé/Zakelijk + uren-registratie velden.
+// Zakelijk-modus toont extra velden: opdrachtgever, onderwerp, pauze. Totaal-uren
+// wordt server-side berekend uit (eind - start) - pauze.
+const EMPTY_FORM = {
+  scope: 'prive',
+  titel: '',
+  beschrijving: '',
+  date: '',
+  start_time: '09:00',
+  end_time: '17:00',
+  pauze_minuten: 30,
+  opdrachtgever: '',
+  onderwerp: '',
+};
 
 export function AgendaPage({ onNavigate }) {
   const { user } = useAuth();
@@ -16,26 +31,48 @@ export function AgendaPage({ onNavigate }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [showNew, setShowNew] = useState(false);
-  const [newEvent, setNewEvent] = useState({ titel: '', beschrijving: '', date: '', time: '09:00' });
+  const [form, setForm] = useState(EMPTY_FORM);
 
   useEffect(() => {
-    fetch(`${API}/api/agenda/events/${userId}`)
+    fetch(`${API}/api/agenda/events/${userId}?viewer_id=${userId}`)
       .then(r => r.json())
       .then(d => { setEvents(d.events || []); setLoading(false); })
       .catch(() => setLoading(false));
   }, [userId]);
 
+  const computedUren = React.useMemo(() => {
+    if (form.scope !== 'zakelijk' || !form.start_time || !form.end_time) return null;
+    const [sh, sm] = form.start_time.split(':').map(Number);
+    const [eh, em] = form.end_time.split(':').map(Number);
+    let minuten = (eh * 60 + em) - (sh * 60 + sm) - (Number(form.pauze_minuten) || 0);
+    if (minuten <= 0) return 0;
+    return Math.round((minuten / 60) * 100) / 100;
+  }, [form.scope, form.start_time, form.end_time, form.pauze_minuten]);
+
   const addEvent = async () => {
-    if (!newEvent.titel.trim() || !newEvent.date) return;
-    const dateStr = `${newEvent.date}T${newEvent.time || '09:00'}:00`;
+    if (!form.titel.trim() || !form.date) return;
+    const startISO = `${form.date}T${form.start_time || '09:00'}:00`;
+    const endISO = form.end_time ? `${form.date}T${form.end_time}:00` : null;
+    const body = {
+      titel: form.titel,
+      beschrijving: form.beschrijving || null,
+      date: startISO,
+      end_date: endISO,
+      scope: form.scope,
+    };
+    if (form.scope === 'zakelijk') {
+      body.pauze_minuten = Number(form.pauze_minuten) || 0;
+      body.opdrachtgever = form.opdrachtgever || null;
+      body.onderwerp = form.onderwerp || null;
+    }
     const res = await fetch(`${API}/api/agenda/events/${userId}`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ titel: newEvent.titel, beschrijving: newEvent.beschrijving || null, date: dateStr }),
+      body: JSON.stringify(body),
     });
     const data = await res.json();
     if (data.success) {
       setEvents([...events, data.event]);
-      setNewEvent({ titel: '', beschrijving: '', date: '', time: '09:00' });
+      setForm(EMPTY_FORM);
       setShowNew(false);
     }
   };
@@ -96,17 +133,81 @@ export function AgendaPage({ onNavigate }) {
             {/* New event form */}
             {showNew && (
               <div className="p-4 bg-slate-900/60 border border-blue-500/20 rounded-xl space-y-3">
-                <input data-testid="event-titel" type="text" value={newEvent.titel} onChange={e => setNewEvent({...newEvent, titel: e.target.value})} placeholder="Titel..."
-                  className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
-                <input type="text" value={newEvent.beschrijving} onChange={e => setNewEvent({...newEvent, beschrijving: e.target.value})} placeholder="Beschrijving..."
-                  className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none" />
+                {/* Scope toggle */}
                 <div className="flex gap-2">
-                  <input data-testid="event-date" type="date" value={newEvent.date} onChange={e => setNewEvent({...newEvent, date: e.target.value})}
-                    className="flex-1 px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white focus:outline-none" />
-                  <input type="time" value={newEvent.time} onChange={e => setNewEvent({...newEvent, time: e.target.value})}
-                    className="px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white focus:outline-none" />
-                  <button data-testid="save-event-btn" onClick={addEvent} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-xs font-medium">Opslaan</button>
+                  <button
+                    data-testid="scope-prive-btn"
+                    onClick={() => setForm({...form, scope: 'prive'})}
+                    className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition ${form.scope === 'prive' ? 'bg-blue-500/20 border border-blue-500/50 text-blue-300' : 'bg-slate-800/50 border border-slate-700/50 text-slate-400'}`}
+                  >
+                    <Home className="w-3.5 h-3.5" /> Privé
+                  </button>
+                  <button
+                    data-testid="scope-zakelijk-btn"
+                    onClick={() => setForm({...form, scope: 'zakelijk'})}
+                    className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition ${form.scope === 'zakelijk' ? 'bg-amber-500/20 border border-amber-500/50 text-amber-300' : 'bg-slate-800/50 border border-slate-700/50 text-slate-400'}`}
+                  >
+                    <Briefcase className="w-3.5 h-3.5" /> Zakelijk
+                  </button>
                 </div>
+
+                <input data-testid="event-titel" type="text" value={form.titel} onChange={e => setForm({...form, titel: e.target.value})} placeholder="Titel..."
+                  className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+                <input type="text" value={form.beschrijving} onChange={e => setForm({...form, beschrijving: e.target.value})} placeholder="Beschrijving..."
+                  className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none" />
+
+                {/* Zakelijk-only velden */}
+                {form.scope === 'zakelijk' && (
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      data-testid="event-opdrachtgever"
+                      type="text"
+                      value={form.opdrachtgever}
+                      onChange={e => setForm({...form, opdrachtgever: e.target.value})}
+                      placeholder="Opdrachtgever..."
+                      className="px-3 py-2 bg-slate-800/50 border border-amber-500/20 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    />
+                    <input
+                      data-testid="event-onderwerp"
+                      type="text"
+                      value={form.onderwerp}
+                      onChange={e => setForm({...form, onderwerp: e.target.value})}
+                      placeholder="Onderwerp..."
+                      className="px-3 py-2 bg-slate-800/50 border border-amber-500/20 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+                )}
+
+                {/* Datum + tijden */}
+                <div className="grid grid-cols-4 gap-2">
+                  <input data-testid="event-date" type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
+                    className="col-span-2 px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white focus:outline-none" />
+                  <input data-testid="event-start-time" type="time" value={form.start_time} onChange={e => setForm({...form, start_time: e.target.value})}
+                    className="px-2 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white focus:outline-none" title="Start" />
+                  <input data-testid="event-end-time" type="time" value={form.end_time} onChange={e => setForm({...form, end_time: e.target.value})}
+                    className="px-2 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white focus:outline-none" title="Eind" />
+                </div>
+
+                {/* Pauze (alleen zakelijk) + berekende uren */}
+                {form.scope === 'zakelijk' && (
+                  <div className="flex items-center gap-2">
+                    <label className="text-xs text-slate-400 whitespace-nowrap">Pauze (min)</label>
+                    <input
+                      data-testid="event-pauze"
+                      type="number"
+                      min="0"
+                      value={form.pauze_minuten}
+                      onChange={e => setForm({...form, pauze_minuten: e.target.value})}
+                      className="w-20 px-2 py-1.5 bg-slate-800/50 border border-amber-500/20 rounded-lg text-sm text-white focus:outline-none"
+                    />
+                    <div data-testid="computed-uren" className="ml-auto flex items-center gap-1.5 text-xs text-amber-300 bg-amber-500/10 px-2 py-1 rounded-lg">
+                      <Clock className="w-3 h-3" />
+                      {computedUren !== null ? `${computedUren} uur netto` : '—'}
+                    </div>
+                  </div>
+                )}
+
+                <button data-testid="save-event-btn" onClick={addEvent} className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition">Opslaan</button>
               </div>
             )}
 
@@ -140,16 +241,38 @@ export function AgendaPage({ onNavigate }) {
               <p className="text-xs text-slate-500 font-medium px-1">{selectedDate === todayStr ? 'Vandaag' : selectedDate} — {todayEvents.length} event{todayEvents.length !== 1 ? 's' : ''}</p>
               {todayEvents.map(ev => {
                 const time = ev.date ? new Date(ev.date).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : '';
+                const endTime = ev.end_date ? new Date(ev.end_date).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : null;
+                const isZakelijk = ev.scope === 'zakelijk';
                 return (
-                  <div key={ev.id} data-testid={`event-${ev.id}`} className="flex items-center gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-slate-700 transition-colors">
-                    <div className="w-10 text-center flex-shrink-0">
-                      <p className="text-xs font-medium text-blue-400">{time}</p>
+                  <div key={ev.id} data-testid={`event-${ev.id}`} className={`flex items-center gap-3 p-3 rounded-xl transition-colors border ${isZakelijk ? 'bg-amber-950/20 border-amber-500/20 hover:border-amber-500/40' : 'bg-slate-900/50 border-slate-800 hover:border-slate-700'}`}>
+                    <div className="w-14 text-center flex-shrink-0">
+                      <p className={`text-xs font-medium ${isZakelijk ? 'text-amber-400' : 'text-blue-400'}`}>{time}</p>
+                      {endTime && <p className="text-[10px] text-slate-500">tot {endTime}</p>}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-white">{ev.titel}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-medium text-white truncate">{ev.titel}</p>
+                        {isZakelijk && (
+                          <span className="inline-flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-medium uppercase tracking-wider">
+                            <Briefcase className="w-2.5 h-2.5" /> Zakelijk
+                          </span>
+                        )}
+                      </div>
+                      {isZakelijk && (ev.opdrachtgever || ev.onderwerp) && (
+                        <p className="text-[11px] text-amber-300/80 truncate">
+                          {ev.opdrachtgever ? `${ev.opdrachtgever}` : ''}
+                          {ev.opdrachtgever && ev.onderwerp ? ' · ' : ''}
+                          {ev.onderwerp || ''}
+                        </p>
+                      )}
                       {ev.beschrijving && <p className="text-[11px] text-slate-400 truncate">{ev.beschrijving}</p>}
+                      {isZakelijk && ev.totaal_uren != null && (
+                        <p className="text-[10px] text-amber-400/70 mt-0.5">
+                          <Clock className="w-2.5 h-2.5 inline-block mr-0.5" />
+                          {ev.totaal_uren} uur netto (pauze {ev.pauze_minuten || 0} min)
+                        </p>
+                      )}
                     </div>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400">{ev.status || 'upcoming'}</span>
                     <button onClick={() => deleteEvent(ev.id)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg"><Trash2 className="w-3.5 h-3.5" /></button>
                   </div>
                 );
@@ -170,6 +293,11 @@ export function AgendaPage({ onNavigate }) {
                   <div key={ev.id} className="flex items-center gap-3 p-2 bg-slate-800/30 rounded-lg">
                     <span className="text-[10px] text-slate-500 w-20 flex-shrink-0">{ev.date ? new Date(ev.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' }) : '?'}</span>
                     <span className="text-xs text-white flex-1 truncate">{ev.titel}</span>
+                    {ev.scope === 'zakelijk' && (
+                      <span className="text-[9px] text-amber-300">
+                        {ev.totaal_uren != null ? `${ev.totaal_uren}u` : 'zakelijk'}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>

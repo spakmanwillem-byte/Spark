@@ -19,11 +19,21 @@ router = APIRouter(prefix="/agenda", tags=["agenda"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "agenda"
 
 
+# v13d_agenda_uren_registratie_001 (sessie 56b) — Willem: "kies privé/zakelijk,
+# start/eind tijd, bij zakelijk pauze + opdrachtgever + onderwerp voor
+# uren-registratie". Alle nieuwe velden optioneel voor backwards compat.
 class EventCreate(BaseModel):
     titel: str
     beschrijving: Optional[str] = None
-    date: str
+    date: str  # ISO datetime — geldt als start-tijd
     reminder: bool = False
+    # Nieuwe velden (sessie 56b)
+    scope: Optional[str] = "prive"  # 'prive' | 'zakelijk'
+    end_date: Optional[str] = None  # ISO datetime — eind-tijd
+    pauze_minuten: Optional[int] = None  # alleen bij zakelijk
+    opdrachtgever: Optional[str] = None  # alleen bij zakelijk
+    onderwerp: Optional[str] = None  # alleen bij zakelijk
+    product_code: Optional[str] = None  # future-use bij zakelijk
 
 
 class EventUpdate(BaseModel):
@@ -32,6 +42,29 @@ class EventUpdate(BaseModel):
     date: Optional[str] = None
     reminder: Optional[bool] = None
     status: Optional[str] = None
+    scope: Optional[str] = None
+    end_date: Optional[str] = None
+    pauze_minuten: Optional[int] = None
+    opdrachtgever: Optional[str] = None
+    onderwerp: Optional[str] = None
+    product_code: Optional[str] = None
+
+
+def _compute_totaal_uren(start_iso: Optional[str], end_iso: Optional[str], pauze_min: Optional[int]) -> Optional[float]:
+    """Bereken gewerkte uren = (end - start) - pauze. Return None als niet mogelijk."""
+    if not start_iso or not end_iso:
+        return None
+    try:
+        s = datetime.fromisoformat(start_iso.replace("Z", "+00:00"))
+        e = datetime.fromisoformat(end_iso.replace("Z", "+00:00"))
+        if e <= s:
+            return None
+        minuten = (e - s).total_seconds() / 60.0 - (pauze_min or 0)
+        if minuten <= 0:
+            return 0.0
+        return round(minuten / 60.0, 2)
+    except (ValueError, TypeError):
+        return None
 
 
 def _get_file(user_id: str) -> Path:
@@ -51,6 +84,8 @@ async def get_events(user_id: str, viewer_id: Optional[str] = Query(None)):
 async def create_event(user_id: str, event: EventCreate):
     filepath = _get_file(user_id)
     data = load_json(filepath, default={"events": []})
+    scope = event.scope if event.scope in ("prive", "zakelijk") else "prive"
+    totaal_uren = _compute_totaal_uren(event.date, event.end_date, event.pauze_minuten) if scope == "zakelijk" else None
     new_event = {
         "id": str(uuid.uuid4())[:8],
         "titel": event.titel,
@@ -59,6 +94,13 @@ async def create_event(user_id: str, event: EventCreate):
         "reminder": event.reminder,
         "status": "upcoming",
         "created_at": datetime.now(timezone.utc).isoformat(),
+        "scope": scope,
+        "end_date": event.end_date,
+        "pauze_minuten": event.pauze_minuten if scope == "zakelijk" else None,
+        "opdrachtgever": event.opdrachtgever if scope == "zakelijk" else None,
+        "onderwerp": event.onderwerp if scope == "zakelijk" else None,
+        "product_code": event.product_code if scope == "zakelijk" else None,
+        "totaal_uren": totaal_uren,
     }
     data["events"].append(new_event)
     save_json(filepath, data)
@@ -73,6 +115,11 @@ async def update_event(user_id: str, event_id: str, updates: EventUpdate):
         if ev["id"] == event_id:
             for k, v in updates.model_dump(exclude_none=True).items():
                 ev[k] = v
+            # Herbereken totaal_uren wanneer relevante velden zijn aangepast
+            if ev.get("scope") == "zakelijk":
+                ev["totaal_uren"] = _compute_totaal_uren(
+                    ev.get("date"), ev.get("end_date"), ev.get("pauze_minuten")
+                )
             save_json(filepath, data)
             return {"success": True, "event": ev}
     return {"success": False, "message": "Event niet gevonden"}

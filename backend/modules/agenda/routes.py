@@ -1,14 +1,19 @@
 """
 Agenda Routes - Events CRUD per user
 Schema v1: {events: [{id, titel, beschrijving, date, reminder, status, created_at}]}
+
+v13d_multi_module_privacy_001 (sessie 55) — Willem: "iedere user in eco-container".
+GET/PATCH/DELETE endpoints eisen nu een `viewer_id` query-param die mag toegang
+tot target user_id in de path. Owner en admin mogen; anders 403.
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
 from typing import Optional
 from pathlib import Path
 from datetime import datetime, timezone
 import uuid
 from modules.core.storage import load_json, save_json
+from modules.core.privacy import require_access
 
 router = APIRouter(prefix="/agenda", tags=["agenda"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "agenda"
@@ -34,7 +39,10 @@ def _get_file(user_id: str) -> Path:
 
 
 @router.get("/events/{user_id}")
-async def get_events(user_id: str):
+async def get_events(user_id: str, viewer_id: Optional[str] = Query(None)):
+    # Backwards-compat: als viewer_id niet meegestuurd is, val terug op user_id
+    # (zelfde user opvraag). Nieuwe frontends sturen viewer_id expliciet mee.
+    require_access(viewer_id or user_id, user_id)
     data = load_json(_get_file(user_id), default={"events": []})
     return data
 

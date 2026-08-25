@@ -67,10 +67,16 @@ def _user_naam(user_id: str) -> str:
 # ============== NOTES ==============
 
 @router.get("/all")
-async def get_notes(user_id: str):
-    """Notes van DEZE user. user_id is verplicht."""
+async def get_notes(user_id: str, viewer_id: Optional[str] = None):
+    """Notes van DEZE user. user_id is verplicht.
+
+    v13d_multi_module_privacy_001 (sessie 55) — als viewer_id opgegeven én
+    verschilt van user_id én viewer is geen admin → 403. Zonder viewer_id
+    (backwards-compat) valt terug op user_id."""
     if not user_id:
         raise HTTPException(400, "user_id is verplicht")
+    from modules.core.privacy import require_access
+    require_access(viewer_id or user_id, user_id)
     data = load_json(NOTES_FILE, default={"notes": []})
     return {"notes": _filter_by_user(data.get("notes", []), user_id)}
 
@@ -133,9 +139,11 @@ async def delete_note(note_id: str, user_id: str):
 # ============== TASKS ==============
 
 @router.get("/tasks")
-async def get_tasks(user_id: str):
+async def get_tasks(user_id: str, viewer_id: Optional[str] = None):
     if not user_id:
         raise HTTPException(400, "user_id is verplicht")
+    from modules.core.privacy import require_access
+    require_access(viewer_id or user_id, user_id)
     data = load_json(TASKS_FILE, default={"tasks": []})
     return {"tasks": _filter_by_user(data.get("tasks", []), user_id)}
 

@@ -2,14 +2,18 @@
 Dagboek Routes - Diary entries CRUD per user
 Schema v1: {entries: [{id, content, mood, tags[], created_at, word_count}]}
 Extended v1 also has: {id, datum, tijd, titel, inhoud, mood, tags[], created_at, word_count}
+
+v13d_multi_module_privacy_001 (sessie 55) — dagboek is priveest van alle data.
+GET/PATCH/DELETE vereisen `viewer_id` query-param. Alleen owner + admin. Anders 403.
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
 from typing import Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 import uuid
 from modules.core.storage import load_json, save_json
+from modules.core.privacy import require_access
 
 router = APIRouter(prefix="/dagboek", tags=["dagboek"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "dagboek"
@@ -32,7 +36,8 @@ def _get_file(user_id: str) -> Path:
 
 
 @router.get("/entries/{user_id}")
-async def get_entries(user_id: str):
+async def get_entries(user_id: str, viewer_id: Optional[str] = Query(None)):
+    require_access(viewer_id or user_id, user_id)
     data = load_json(_get_file(user_id), default={"entries": []})
     return data
 

@@ -3,6 +3,46 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-24 (sessie 56) — Boekhouder privacy-lek + auto-privé-book + eco-container-fix
+
+### 🔒 v13d_multi_module_privacy_001 — Eco-container per user (kritieke lek)
+
+**Willem's melding**: "user Gerben had mijn kasboek". Snuffel toonde 4 open lekken:
+1. `boekhouding/books` — Gerben (G2) zag alle 7 Willem's boeken
+2. `agenda/events/{user_id}` — geen auth-check, iedereen ziet iedereens events
+3. `dagboek/entries/{user_id}` — idem, dagboek volledig open
+4. `notes/all` + `notes/tasks` — idem via `?user_id=X`
+
+**Root cause #1 (boekhouder)**: `_is_admin(user_id)` gaf True voor iedereen met
+`gradatie <= 2`. G2 = familie, geen admin. Fix: alleen echte `admin`/`admin_capable`
+flags tellen.
+
+**Root cause #2 (agenda/dagboek/notes)**: geen viewer_id-check op de path/query
+user_id. Nieuwe helper `modules/core/privacy.py`:
+```python
+require_access(viewer_id, target_user_id)  # 403 als geen owner/admin
+```
+
+**Fix in 4 endpoints**: `viewer_id` optionele query-param. Als afwezig → fallback
+op user_id (backwards-compat). Als aanwezig én niet-owner én niet-admin → 403.
+
+### 👤 v13d_boekhouder_auto_prive_001 — Auto-privé-book per user
+
+**Willem's logica**: "iedere gebruiker moet in zijn omgeving zijn eigen
+boekhouding en als ze zelf een winkel beginnen dan de winkel meenemen".
+
+**Fix**: bij eerste GET `/api/boekhouding/books` autocreate privé-book
+(`type=user_prive`, icoon 👤, kleur groen). Idempotent. Shop-books gaan al via
+bestaande `ensure_shop_book` hook.
+
+**Tests**: 17/17 groen (`test_boekhouder_privacy_v13d.py` 5× + `test_eco_container_privacy_v13d.py` 12×).
+
+**Impact live-versie na deploy**:
+- Alle 20 non-admin users zien nu alleen eigen data (agenda/dagboek/notes/books)
+- Elke user krijgt automatisch eigen kasboek bij eerste bezoek
+- Backwards-compat: bestaande frontend-calls zonder viewer_id blijven werken
+
+
 ## 2026-02-24 (sessie 56) — Boekhouder privacy-lek + auto-privé-book
 
 ### 🔒 v13d_boekhouder_admin_leak_001 — Kritieke privacy-lek

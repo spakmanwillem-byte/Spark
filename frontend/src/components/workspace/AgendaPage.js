@@ -107,21 +107,21 @@ export function AgendaPage({ onNavigate }) {
   const prevWeek = () => { const d = new Date(currentDate); d.setDate(d.getDate() - 7); setCurrentDate(d); };
   const nextWeek = () => { const d = new Date(currentDate); d.setDate(d.getDate() + 7); setCurrentDate(d); };
 
-  if (loading) return <MainLayout activePage="calendar" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" /></div></MainLayout>;
+  if (loading) return <MainLayout activePage="calendar" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 rounded-full animate-spin" style={{ borderColor: 'color-mix(in srgb, var(--glow-base) 30%, transparent)', borderTopColor: 'var(--glow-base)' }} /></div></MainLayout>;
 
   return (
     <MainLayout activePage="calendar" onNavigate={onNavigate}>
       <div data-testid="agenda-page" className="h-full flex flex-col">
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--glow-base)' }}>
               <Calendar className="w-4 h-4 text-white" />
             </div>
             <div>
               <h1 className="text-base font-bold text-white leading-tight">Agenda</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">{events.length} events</p>
             </div>
-            <button data-testid="add-event-btn" onClick={() => setShowNew(!showNew)} className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)' }}>
+            <button data-testid="add-event-btn" onClick={() => setShowNew(!showNew)} className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>
               <Plus className="w-3.5 h-3.5" /> Nieuw
             </button>
           </div>
@@ -132,13 +132,19 @@ export function AgendaPage({ onNavigate }) {
 
             {/* New event form */}
             {showNew && (
-              <div className="p-4 bg-slate-900/60 border border-blue-500/20 rounded-xl space-y-3">
+              <div className="p-4 bg-slate-900/60 rounded-xl space-y-3" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'color-mix(in srgb, var(--glow-base) 20%, transparent)' }}>
                 {/* Scope toggle */}
                 <div className="flex gap-2">
                   <button
                     data-testid="scope-prive-btn"
                     onClick={() => setForm({...form, scope: 'prive'})}
-                    className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition ${form.scope === 'prive' ? 'bg-blue-500/20 border border-blue-500/50 text-blue-300' : 'bg-slate-800/50 border border-slate-700/50 text-slate-400'}`}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition"
+                    style={form.scope === 'prive' ? {
+                      background: 'color-mix(in srgb, var(--glow-base) 20%, transparent)',
+                      borderWidth: '1px', borderStyle: 'solid',
+                      borderColor: 'color-mix(in srgb, var(--glow-base) 50%, transparent)',
+                      color: 'var(--glow-base)',
+                    } : { background: 'rgba(30,41,59,0.5)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(51,65,85,0.5)', color: '#94a3b8' }}
                   >
                     <Home className="w-3.5 h-3.5" /> Privé
                   </button>
@@ -207,7 +213,7 @@ export function AgendaPage({ onNavigate }) {
                   </div>
                 )}
 
-                <button data-testid="save-event-btn" onClick={addEvent} className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition">Opslaan</button>
+                <button data-testid="save-event-btn" onClick={addEvent} className="w-full px-4 py-2 text-white rounded-lg text-xs font-medium transition hover:brightness-110" style={{ background: 'var(--glow-base)' }}>Opslaan</button>
               </div>
             )}
 
@@ -226,10 +232,15 @@ export function AgendaPage({ onNavigate }) {
                   const dayEvents = getEventsForDate(ds);
                   return (
                     <button key={idx} onClick={() => setSelectedDate(ds)}
-                      className={`p-2.5 rounded-xl transition-all ${isSel ? 'bg-blue-500/20 border border-blue-500/50' : 'bg-slate-800/30 border border-transparent hover:border-slate-700'}`}>
+                      className="p-2.5 rounded-xl transition-all border"
+                      style={isSel ? {
+                        background: 'color-mix(in srgb, var(--glow-base) 20%, transparent)',
+                        borderColor: 'color-mix(in srgb, var(--glow-base) 50%, transparent)',
+                      } : { background: 'rgba(30,41,59,0.3)', borderColor: 'transparent' }}
+                    >
                       <p className="text-[10px] text-slate-500">{daysOfWeek[idx]}</p>
-                      <p className={`text-base font-bold ${isToday ? 'text-blue-400' : 'text-white'}`}>{date.getDate()}</p>
-                      {dayEvents.length > 0 && <span className="block w-1.5 h-1.5 bg-blue-500 rounded-full mx-auto mt-1" />}
+                      <p className="text-base font-bold" style={{ color: isToday ? 'var(--glow-base)' : '#ffffff' }}>{date.getDate()}</p>
+                      {dayEvents.length > 0 && <span className="block w-1.5 h-1.5 rounded-full mx-auto mt-1" style={{ background: 'var(--glow-base)' }} />}
                     </button>
                   );
                 })}
@@ -246,7 +257,7 @@ export function AgendaPage({ onNavigate }) {
                 return (
                   <div key={ev.id} data-testid={`event-${ev.id}`} className={`flex items-center gap-3 p-3 rounded-xl transition-colors border ${isZakelijk ? 'bg-amber-950/20 border-amber-500/20 hover:border-amber-500/40' : 'bg-slate-900/50 border-slate-800 hover:border-slate-700'}`}>
                     <div className="w-14 text-center flex-shrink-0">
-                      <p className={`text-xs font-medium ${isZakelijk ? 'text-amber-400' : 'text-blue-400'}`}>{time}</p>
+                      <p className="text-xs font-medium" style={{ color: isZakelijk ? '#fbbf24' : 'var(--glow-base)' }}>{time}</p>
                       {endTime && <p className="text-[10px] text-slate-500">tot {endTime}</p>}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -287,7 +298,7 @@ export function AgendaPage({ onNavigate }) {
 
             {/* All upcoming */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2"><Bell className="w-4 h-4 text-blue-400" /> Alle Events</h3>
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2"><Bell className="w-4 h-4" style={{ color: 'var(--glow-base)' }} /> Alle Events</h3>
               <div className="space-y-2">
                 {events.sort((a,b) => (a.date||'').localeCompare(b.date||'')).map(ev => (
                   <div key={ev.id} className="flex items-center gap-3 p-2 bg-slate-800/30 rounded-lg">

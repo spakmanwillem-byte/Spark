@@ -244,8 +244,16 @@ class AuthService:
         
         if AuthService._save_users(users):
             print(f"[AUTH] New user: {user_data.naam} (admin_override={admin_override})")
+            # v13d_user_container_001 (sessie 56) — Willem: elke nieuwe user
+            # krijgt automatisch dezelfde skeleton-files. Nooit meer stuk door
+            # ontbrekende data.
+            try:
+                from modules.core.user_container import ensure_user_container
+                ensure_user_container(user_dict["id"])
+            except Exception as ex:
+                print(f"[AUTH] user_container spawn faalde voor {user_dict['id']}: {ex}")
             return user_dict, ""
-        
+
         return None, "Kon gebruiker niet opslaan"
     
     @staticmethod

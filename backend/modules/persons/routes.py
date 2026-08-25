@@ -70,7 +70,10 @@ def _get_rel_file(user_id: str) -> Path:
 
 
 @router.get("/cards/{user_id}")
-async def get_person_cards(user_id: str):
+async def get_person_cards(user_id: str, viewer_id: Optional[str] = None):
+    # v13d_multi_module_privacy_001 — Persons/relaties per user beveiligd.
+    from modules.core.privacy import require_access
+    require_access(viewer_id or user_id, user_id)
     data = load_json(_get_file(user_id), default={"persons": [], "metadata": {}})
     return data
 

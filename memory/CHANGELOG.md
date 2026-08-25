@@ -3,6 +3,58 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-24 (sessie 56) — Eco-container per user + template-spawn
+
+**Willem's principe** (kernbeslissing sessie 56): "iedere gebruiker is een eigen
+ID en eco-container". Nieuwe users moeten automatisch dezelfde skeleton krijgen
+zodat het nooit stuk kan door ontbrekende data.
+
+### 🏠 v13d_user_container_001 — Auto-spawn template per user
+
+**Nieuw** — `modules/core/user_container.py`:
+- `ensure_user_container(user_id)` — creëert skeleton-files voor: agenda,
+  dagboek, persons (relaties), personalia (admin-view). Idempotent.
+- `backfill_all_users()` — bulk-run voor bestaande users.
+
+**Auto-hook**: `AuthService.create_user` roept `ensure_user_container` aan bij
+elke nieuwe registratie. Nieuwe users hebben direct een werkende omgeving.
+
+**Backfill uitgevoerd**: 20 van 21 bestaande users kregen hun ontbrekende
+skeleton-files (user-000 = system, skipped). Vanaf nu: nooit meer stuk.
+
+### 🔒 v13d_multi_module_privacy_001 — 4 open lekken dicht
+
+**Willem's melding**: "user Gerben had mijn kasboek". Snuffel toonde dat 4
+modules geen auth-check hadden op `GET /{user_id}`:
+1. **Boekhouding**: `_is_admin` gaf True voor iedereen met `gradatie<=2`.
+   G2 = familie, geen admin. Fix: alleen echte `admin`/`admin_capable` flags.
+2. **Agenda**: `GET /events/{uid}` was open. Nu `require_access(viewer_id, uid)`.
+3. **Dagboek**: idem. `require_access(viewer_id, uid)`.
+4. **Notes/Tasks**: `GET ?user_id=X` was open. Nu viewer_id-check.
+5. **Persons/Relaties**: `GET /cards/{uid}` was open. Nu viewer_id-check.
+
+**Nieuwe helper** — `modules/core/privacy.py`:
+```python
+require_access(viewer_id, target_user_id)  # 403 als geen owner/admin
+is_admin(user_id)  # alleen echte admin-flags, geen gradatie-check
+```
+
+### 👤 v13d_boekhouder_auto_prive_001 — Auto-privé-book per user
+
+Bij eerste GET `/api/boekhouding/books` autocreate `type=user_prive` book
+als user nog geen heeft. Idempotent. Shop-books via bestaande hook.
+
+**Tests**: 22/22 groen
+- `test_boekhouder_privacy_v13d.py` (5×)
+- `test_eco_container_privacy_v13d.py` (12×)
+- `test_agenda_delete_v13d.py` (9×) — bestaand, nog steeds groen
+
+**Impact live-versie na deploy**:
+- Alle 20 non-admin users: geen cross-user leaks meer in 5 modules
+- Nieuwe users krijgen automatisch werkende eco-container
+- Backwards-compat: bestaande frontend-calls zonder viewer_id blijven werken
+
+
 ## 2026-02-24 (sessie 56) — Boekhouder privacy-lek + auto-privé-book + eco-container-fix
 
 ### 🔒 v13d_multi_module_privacy_001 — Eco-container per user (kritieke lek)

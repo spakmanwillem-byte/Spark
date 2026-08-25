@@ -3,6 +3,40 @@
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 
+## 2026-02-24 (sessie 56) — Boekhouder privacy-lek + auto-privé-book
+
+### 🔒 v13d_boekhouder_admin_leak_001 — Kritieke privacy-lek
+
+**Willem's melding**: "user Gerben had mijn kasboek in boekhouden". Onderzoek
+bevestigde: Gerben (G2, familie) zag alle 7 boeken van Willem incl. Zorgboerderij,
+Roadkillshop, Willem-privé.
+
+**Root cause** — `modules/boekhouder/books_routes.py` line 36:
+```python
+return u.get("admin") is True or (u.get("gradatie") or 99) <= 2
+```
+De gradatie-check behandelde **iedereen ≤ G2 als admin**. G1 = admin (correct),
+maar G2 = familie (fout). Gerben, Lotus, Heidi, Nick, Marieke (G2/G3) werden
+onterecht als admin behandeld → volledige toegang tot alle books.
+
+**Fix**: `_is_admin` kijkt nu alleen naar `admin` en `admin_capable` flags,
+niet naar gradatie. Regressietests in `test_boekhouder_privacy_v13d.py` (5×).
+
+### 👤 v13d_boekhouder_auto_prive_001 — Elke user eigen kasboek
+
+**Willem's logica**: "iedere gebruiker moet in zijn omgeving zijn eigen boekhouding
+en als ze zelf een winkel beginnen dan de winkel meenemen".
+
+**Fix**: bij eerste GET `/api/boekhouding/books` wordt automatisch een privé-book
+(`type=user_prive`, `owner_user_id=viewer_id`, icoon 👤, kleur groen) aangemaakt
+als de user er nog geen heeft. Idempotent. Shop-books gaan al via bestaande
+`ensure_shop_book` in `shop_hooks.py`.
+
+**Impact**: Gerben ziet nu 2 boeken (Gerben-Privé + Spark Core), niet 7.
+Marieke idem, Heidi idem. Alle 20 users krijgen bij inloggen automatisch hun
+eigen eco-container.
+
+
 ## 2026-02-23 (sessie 55, deel 2) — Chat: "noem alle gebruikers" werkt nu
 
 ### 👥 v13d_gebruikers_namen_001 — Nieuwe capability

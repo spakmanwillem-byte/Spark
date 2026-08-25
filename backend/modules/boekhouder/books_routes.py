@@ -32,8 +32,11 @@ def _get_user(user_id: str) -> Optional[dict]:
 
 
 def _is_admin(user_id: str) -> bool:
+    """v13d_boekhouder_admin_leak_001 (sessie 55) — Willem meldde: 'Gerben (G2)
+    zag mijn kasboek'. Root cause: `gradatie <= 2` behandelde G2 als admin.
+    G2 is echter familie (niet admin). Fix: alleen echte admin-flags tellen."""
     u = _get_user(user_id) or {}
-    return u.get("admin") is True or (u.get("gradatie") or 99) <= 2
+    return bool(u.get("admin")) or bool(u.get("admin_capable"))
 
 
 def _can_access_book(viewer_id: str, book: dict) -> bool:
@@ -83,6 +86,27 @@ class AddEntryIn(BaseModel):
 
 @router.get("/books")
 def list_books(viewer_id: str):
+    # v13d_boekhouder_auto_prive_001 (sessie 55) — Willem: "iedere gebruiker
+    # moet in zijn omgeving zijn eigen boekhouding". Als user nog geen privé-book
+    # heeft, autocreate 'm bij eerste GET. Zo krijgt elke user bij eerste
+    # bezoek automatisch een lege privé-boekhouding zonder admin-actie.
+    if viewer_id and viewer_id != "user-000":
+        user = _get_user(viewer_id)
+        if user:
+            existing = book_svc.list_books(owner_user_id=viewer_id, include_system=False)
+            has_prive = any(b.get("type") == "user_prive" for b in existing)
+            if not has_prive:
+                try:
+                    book_svc.create_book(
+                        naam=f"{user.get('naam', 'Gebruiker')} — Privé",
+                        type_="user_prive",
+                        owner_user_id=viewer_id,
+                        iban=None, bank_naam=None, linked_shop_id=None,
+                        kleur="#22c55e", icoon="👤",
+                    )
+                except Exception as ex:
+                    print(f"[auto-prive-book] kon geen privé-book aanmaken voor {viewer_id}: {ex}")
+
     if _is_admin(viewer_id):
         items = book_svc.list_books(owner_user_id=None)
     else:

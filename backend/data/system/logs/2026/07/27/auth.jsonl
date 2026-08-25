@@ -1,8 +1,0 @@
-{"ts": "2026-07-27T05:01:00.285306+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
-{"ts": "2026-07-27T05:01:00.305619+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 20.4}
-{"ts": "2026-07-27T08:17:48.078545+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
-{"ts": "2026-07-27T08:17:48.135395+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 54.08}
-{"ts": "2026-07-27T09:51:03.999606+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
-{"ts": "2026-07-27T09:51:04.041590+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 41.68}
-{"ts": "2026-07-27T10:03:36.851441+00:00", "module": "auth", "fn": "logout", "phase": "pre", "intent": "user uitloggen + sessie eindigen", "args": {"user_id": "user-001"}}
-{"ts": "2026-07-27T10:03:36.853009+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 1.29}

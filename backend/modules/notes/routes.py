@@ -44,12 +44,26 @@ class TaskCreate(BaseModel):
     priority: str = "medium"
     user_id: str  # verplicht
     scope: Optional[str] = "prive"
+    # v13d_task_doel_001 (sessie 56b) — Willem: "taken zijn eigenlijk doelen met
+    # tijdvenster + budget-uren, zakelijk of prive". Ondersteunt urenmaken,
+    # offerte tijd-indeling, en later koppelen aan agenda-events als bron.
+    begin_datum: Optional[str] = None  # ISO date
+    eind_datum: Optional[str] = None   # ISO date
+    budget_uren: Optional[float] = None  # totaal beschikbaar budget
+    opdrachtgever: Optional[str] = None  # bij scope=zakelijk
+    onderwerp: Optional[str] = None      # bij scope=zakelijk
 
 
 class TaskUpdate(BaseModel):
     task: Optional[str] = None
     priority: Optional[str] = None
     status: Optional[str] = None
+    scope: Optional[str] = None
+    begin_datum: Optional[str] = None
+    eind_datum: Optional[str] = None
+    budget_uren: Optional[float] = None
+    opdrachtgever: Optional[str] = None
+    onderwerp: Optional[str] = None
 
 
 def _filter_by_user(items: list, user_id: str) -> list:
@@ -159,15 +173,22 @@ async def create_task(task: TaskCreate):
     if not task.user_id:
         raise HTTPException(400, "user_id is verplicht")
     data = load_json(TASKS_FILE, default={"tasks": []})
+    scope = task.scope if task.scope in ("prive", "zakelijk", "admin") else "prive"
     new_task = {
         "id": str(uuid.uuid4()),
         "user_id": task.user_id,
         "task": task.task,
         "priority": task.priority,
-        "scope": task.scope if task.scope in ("prive", "zakelijk", "admin") else "prive",
+        "scope": scope,
         "status": "todo",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "completed_at": None,
+        # v13d_task_doel_001 — tijdvenster + budget-uren (voor zakelijk relevant)
+        "begin_datum": task.begin_datum,
+        "eind_datum": task.eind_datum,
+        "budget_uren": task.budget_uren,
+        "opdrachtgever": task.opdrachtgever if scope == "zakelijk" else None,
+        "onderwerp": task.onderwerp if scope == "zakelijk" else None,
     }
     data["tasks"].append(new_task)
     save_json(TASKS_FILE, data)

@@ -29,7 +29,11 @@ export function NotitiesPage({ onNavigate }) {
   const [search, setSearch] = useState('');
   const [filterCat, setFilterCat] = useState('Alles');
   const [showNew, setShowNew] = useState(false);
-  const [newItem, setNewItem] = useState({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium', scope: 'prive' });
+  const [newItem, setNewItem] = useState({
+    type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium', scope: 'prive',
+    // v13d_task_doel_001 — taak = doel met tijdvenster + budget
+    begin_datum: '', eind_datum: '', budget_uren: '', opdrachtgever: '', onderwerp: '',
+  });
   const [bugs, setBugs] = useState([]);
   const [showBugForm, setShowBugForm] = useState(false);
   const [newBug, setNewBug] = useState({ description: '', when: '', page: '' });
@@ -62,7 +66,10 @@ export function NotitiesPage({ onNavigate }) {
   // Combine notes and tasks into unified list
   const items = [
     ...notes.map(n => ({ ...n, type: 'note', done: false })),
-    ...tasks.map(t => ({ ...t, type: 'task', titel: t.task, inhoud: '', categorie: 'Taak', tags: [], datum: t.created_at, created_by: 'Willem', done: t.status === 'done' })),
+    ...tasks.map(t => ({
+      ...t, type: 'task', titel: t.task, inhoud: '', categorie: 'Taak', tags: [],
+      datum: t.created_at, created_by: 'Willem', done: t.status === 'done',
+    })),
   ].sort((a, b) => (b.datum || b.created_at || '').localeCompare(a.datum || a.created_at || ''));
 
   const filtered = items.filter(i => {
@@ -140,12 +147,23 @@ export function NotitiesPage({ onNavigate }) {
     } else {
       const res = await fetch(`${API}/api/notes/tasks/create`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ task: newItem.titel, priority: newItem.priority, scope: newItem.scope, user_id: user.id }),
+        body: JSON.stringify({
+          task: newItem.titel,
+          priority: newItem.priority,
+          scope: newItem.scope,
+          user_id: user.id,
+          begin_datum: newItem.begin_datum || null,
+          eind_datum: newItem.eind_datum || null,
+          budget_uren: newItem.budget_uren ? Number(newItem.budget_uren) : null,
+          opdrachtgever: newItem.opdrachtgever || null,
+          onderwerp: newItem.onderwerp || null,
+        }),
       });
       const data = await res.json();
       if (data.success) setTasks([...tasks, data.task]);
     }
-    setNewItem({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium', scope: 'prive' });
+    setNewItem({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium', scope: 'prive',
+      begin_datum: '', eind_datum: '', budget_uren: '', opdrachtgever: '', onderwerp: '' });
     setShowNew(false);
   };
 
@@ -409,6 +427,40 @@ export function NotitiesPage({ onNavigate }) {
                 {newItem.type === 'note' && (
                   <textarea value={newItem.inhoud} onChange={e => setNewItem({ ...newItem, inhoud: e.target.value })} placeholder="Inhoud..." rows={3}
                     className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none resize-none" />
+                )}
+                {/* v13d_task_doel_001 — taak-specifieke velden: tijdvenster + budget */}
+                {newItem.type === 'task' && (
+                  <>
+                    <div className="grid grid-cols-3 gap-2">
+                      <input data-testid="task-begin-datum" type="date" value={newItem.begin_datum}
+                        onChange={e => setNewItem({ ...newItem, begin_datum: e.target.value })}
+                        title="Aanvang"
+                        className="px-2 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white focus:outline-none" />
+                      <input data-testid="task-eind-datum" type="date" value={newItem.eind_datum}
+                        onChange={e => setNewItem({ ...newItem, eind_datum: e.target.value })}
+                        title="Einde"
+                        className="px-2 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white focus:outline-none" />
+                      <input data-testid="task-budget-uren" type="number" step="0.5" min="0"
+                        value={newItem.budget_uren}
+                        onChange={e => setNewItem({ ...newItem, budget_uren: e.target.value })}
+                        placeholder="Budget u"
+                        className="px-2 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none" />
+                    </div>
+                    {newItem.scope === 'zakelijk' && (
+                      <div className="grid grid-cols-2 gap-2">
+                        <input data-testid="task-opdrachtgever" type="text"
+                          value={newItem.opdrachtgever}
+                          onChange={e => setNewItem({ ...newItem, opdrachtgever: e.target.value })}
+                          placeholder="Opdrachtgever..."
+                          className="px-3 py-1.5 bg-slate-800/50 border border-amber-500/20 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+                        <input data-testid="task-onderwerp" type="text"
+                          value={newItem.onderwerp}
+                          onChange={e => setNewItem({ ...newItem, onderwerp: e.target.value })}
+                          placeholder="Onderwerp / offerte..."
+                          className="px-3 py-1.5 bg-slate-800/50 border border-amber-500/20 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+                      </div>
+                    )}
+                  </>
                 )}
                 <div className="flex items-center gap-3">
                   {newItem.type === 'note' && (
@@ -682,6 +734,27 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
             )}
           </div>
           {item.inhoud && <p className="text-xs text-slate-400 mt-1 whitespace-pre-wrap">{item.inhoud}</p>}
+          {/* v13d_task_doel_001 — taak periode + budget + opdrachtgever/onderwerp */}
+          {item.type === 'task' && (item.begin_datum || item.eind_datum || item.budget_uren || item.opdrachtgever) && (
+            <div className="mt-1 flex items-center gap-2 flex-wrap text-[10px]">
+              {(item.begin_datum || item.eind_datum) && (
+                <span className="px-1.5 py-0.5 rounded" style={{ background: 'color-mix(in srgb, var(--app-secondary, #06b6d4) 15%, transparent)', color: 'var(--app-secondary, #06b6d4)' }}>
+                  📅 {item.begin_datum || '?'} → {item.eind_datum || '?'}
+                </span>
+              )}
+              {item.budget_uren != null && (
+                <span className="px-1.5 py-0.5 rounded" style={{ background: 'color-mix(in srgb, var(--app-secondary, #06b6d4) 15%, transparent)', color: 'var(--app-secondary, #06b6d4)' }}>
+                  ⏱️ {item.budget_uren}u budget
+                </span>
+              )}
+              {item.opdrachtgever && (
+                <span className="text-amber-300">💼 {item.opdrachtgever}</span>
+              )}
+              {item.onderwerp && (
+                <span className="text-slate-500">· {item.onderwerp}</span>
+              )}
+            </div>
+          )}
           {/* v6_order_shipped_ui_001 — Markeer verzonden knop voor shop-orders */}
           {item.source === 'shop_order' && item.order_id && !item.done && (
             <div className="mt-2 flex items-center gap-2 flex-wrap">

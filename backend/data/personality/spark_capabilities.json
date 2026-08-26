@@ -175,6 +175,41 @@
       "data_source": "/app/backend/data/agenda/{user_id}.json"
     },
     {
+      "id": "notities_terugblik",
+      "naam": "Notities terugblik + telling",
+      "categorie": "memory",
+      "beschrijving": "Hoeveel notities heb ik (in augustus), wat is mijn laatste notitie, notities deze week/maand.",
+      "triggers": [
+        "hoeveel notities.*(heb ik|zijn er)",
+        "hoeveel notities",
+        "(wat is|laat.*zien).*(laatste|meest recente|nieuwste) notitie",
+        "mijn laatste notitie",
+        "notities (deze|vorige|afgelopen) (week|maand)",
+        "notities in (januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "endpoint": "/api/notes/all",
+      "data_source": "/app/backend/data/notes/notes.json"
+    },
+    {
+      "id": "dagboek_terugblik",
+      "naam": "Dagboek terugblik",
+      "categorie": "memory",
+      "beschrijving": "Wat schreef ik gisteren/eergisteren/vandaag in mijn dagboek; wat is mijn laatste dagboek-entry.",
+      "triggers": [
+        "wat (schreef|zei) ik (gisteren|eergisteren|vandaag) in (mijn|het) dagboek",
+        "(wat is|laat.*zien).*(laatste|nieuwste) dagboek",
+        "mijn dagboek (gisteren|eergisteren|vandaag)",
+        "dagboek van (gisteren|eergisteren|vandaag)",
+        "laatste dagboek"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "endpoint": "/api/dagboek/entries/{user_id}",
+      "data_source": "/app/backend/data/dagboek/{user_id}.json"
+    },
+    {
       "id": "agenda_lezen",
       "naam": "Agenda raadplegen",
       "categorie": "memory",

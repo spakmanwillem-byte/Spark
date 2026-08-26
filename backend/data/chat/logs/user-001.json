@@ -75837,11 +75837,183 @@
         "session_id": "default",
         "gesprek_nummer": 2994
       }
+    },
+    {
+      "id": "conv-f25157ad",
+      "timestamp": "2026-08-26T08:05:10.495562+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel notities heb ik",
+      "spark_response": "📝 **Totaal** — **5** notities\n  · 2026-08-25 🏠 Agenda afspraak Jeroen ontruimen\n  · 2026-08-23 🏠 te doen\n  · 2026-07-09 🏠 Te doen \n  · 2026-06-05 🏠 # Lade-indeling: Doen versus Weten\n  ·  🏠 KB-repair pass (21 mei 2026)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "heb",
+            "notities"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2995
+      }
+    },
+    {
+      "id": "conv-ab616a86",
+      "timestamp": "2026-08-26T08:05:10.756476+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is mijn laatste notitie",
+      "spark_response": "📝 **Laatste notitie** (2026-08-25 · 🏠 privé)\n**Agenda afspraak Jeroen ontruimen**\nVandaag 2 keer naar de stort in Tynaarlo geweest van uit Hoogezand.  \n220 kilo grofvuil en 120 kilo grofvuil\nKosten stort  41 euro. (80 kilo korting 0,15 cent per kilo)\nBenzine kosten 20\naanhanger 22\n",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "laatste"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2996
+      }
+    },
+    {
+      "id": "conv-784d490b",
+      "timestamp": "2026-08-26T08:05:11.015356+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel notities heb ik in augustus",
+      "spark_response": "📝 **Augustus 2026** — **2** notities\n  · 2026-08-25 🏠 Agenda afspraak Jeroen ontruimen\n  · 2026-08-23 🏠 te doen",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "heb",
+            "notities"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2997
+      }
+    },
+    {
+      "id": "conv-046872d0",
+      "timestamp": "2026-08-26T08:05:11.317817+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat schreef ik gisteren in mijn dagboek",
+      "spark_response": "📔 Op gisteren heb je niks in je dagboek geschreven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2998
+      }
+    },
+    {
+      "id": "conv-bd0b6548",
+      "timestamp": "2026-08-26T08:05:11.522316+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is mijn laatste dagboek",
+      "spark_response": "📔 **Laatste dagboek** (2026-03-15 · gevoel: onbekend)\n",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "laatste"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2999
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2994,
-    "last_updated": "2026-08-26T07:44:08.616039+00:00"
+    "total_conversations": 2999,
+    "last_updated": "2026-08-26T08:05:11.522316+00:00"
   }
 }

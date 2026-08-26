@@ -29,7 +29,7 @@ export function NotitiesPage({ onNavigate }) {
   const [search, setSearch] = useState('');
   const [filterCat, setFilterCat] = useState('Alles');
   const [showNew, setShowNew] = useState(false);
-  const [newItem, setNewItem] = useState({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium' });
+  const [newItem, setNewItem] = useState({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium', scope: 'prive' });
   const [bugs, setBugs] = useState([]);
   const [showBugForm, setShowBugForm] = useState(false);
   const [newBug, setNewBug] = useState({ description: '', when: '', page: '' });
@@ -68,6 +68,9 @@ export function NotitiesPage({ onNavigate }) {
   const filtered = items.filter(i => {
     if (viewMode === 'notes' && i.type !== 'note') return false;
     if (viewMode === 'tasks' && i.type !== 'task') return false;
+    // v13d_notes_scope_001 — admin-scope hoort NIET op de reguliere notitie-pagina
+    // (staat in Widget Kladblok → AdminNotesWidget).
+    if ((i.scope || 'prive') === 'admin') return false;
     if (filterCat !== 'Alles' && i.categorie !== filterCat) return false;
     if (search && !(i.titel || '').toLowerCase().includes(search.toLowerCase()) && !(i.inhoud || '').toLowerCase().includes(search.toLowerCase())) return false;
     return true;
@@ -130,19 +133,19 @@ export function NotitiesPage({ onNavigate }) {
     if (newItem.type === 'note') {
       const res = await fetch(`${API}/api/notes/create`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titel: newItem.titel, inhoud: newItem.inhoud, categorie: newItem.categorie, priority: newItem.priority, user_id: user.id }),
+        body: JSON.stringify({ titel: newItem.titel, inhoud: newItem.inhoud, categorie: newItem.categorie, priority: newItem.priority, scope: newItem.scope, user_id: user.id }),
       });
       const data = await res.json();
       if (data.success) setNotes([data.note, ...notes]);
     } else {
       const res = await fetch(`${API}/api/notes/tasks/create`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ task: newItem.titel, priority: newItem.priority, user_id: user.id }),
+        body: JSON.stringify({ task: newItem.titel, priority: newItem.priority, scope: newItem.scope, user_id: user.id }),
       });
       const data = await res.json();
       if (data.success) setTasks([...tasks, data.task]);
     }
-    setNewItem({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium' });
+    setNewItem({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium', scope: 'prive' });
     setShowNew(false);
   };
 
@@ -367,6 +370,39 @@ export function NotitiesPage({ onNavigate }) {
                       {t === 'note' ? 'Notitie' : 'Taak'}
                     </button>
                   ))}
+                </div>
+                {/* v13d_notes_scope_001 — scope-toggle prive/zakelijk (admin alleen via directe backend of Kladblok) */}
+                <div className="flex gap-2">
+                  <button
+                    data-testid="scope-prive-note-btn"
+                    onClick={() => setNewItem({ ...newItem, scope: 'prive' })}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition"
+                    style={newItem.scope === 'prive' ? {
+                      background: 'color-mix(in srgb, var(--glow-base) 20%, transparent)',
+                      borderWidth: '1px', borderStyle: 'solid',
+                      borderColor: 'color-mix(in srgb, var(--glow-base) 50%, transparent)',
+                      color: 'var(--glow-base)',
+                    } : { background: 'rgba(30,41,59,0.5)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(51,65,85,0.5)', color: '#94a3b8' }}>
+                    🏠 Privé
+                  </button>
+                  <button
+                    data-testid="scope-zakelijk-note-btn"
+                    onClick={() => setNewItem({ ...newItem, scope: 'zakelijk' })}
+                    className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${newItem.scope === 'zakelijk' ? 'bg-amber-500/20 border border-amber-500/50 text-amber-300' : 'bg-slate-800/50 border border-slate-700/50 text-slate-400'}`}>
+                    💼 Zakelijk
+                  </button>
+                  {isAdminViewer && (
+                    <button
+                      data-testid="scope-admin-note-btn"
+                      onClick={() => setNewItem({ ...newItem, scope: 'admin' })}
+                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition"
+                      style={newItem.scope === 'admin' ? {
+                        background: 'rgba(147,51,234,0.2)', borderWidth: '1px', borderStyle: 'solid',
+                        borderColor: 'rgba(147,51,234,0.5)', color: '#c4b5fd',
+                      } : { background: 'rgba(30,41,59,0.5)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(51,65,85,0.5)', color: '#94a3b8' }}>
+                      ⚙️ Admin
+                    </button>
+                  )}
                 </div>
                 <input type="text" value={newItem.titel} onChange={e => setNewItem({ ...newItem, titel: e.target.value })} placeholder={newItem.type === 'note' ? 'Titel...' : 'Taak omschrijving...'}
                   className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none" />
@@ -641,6 +677,9 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
             <h4 className={`text-sm font-medium ${item.done ? 'line-through text-slate-500' : 'text-white'}`}>{item.titel}</h4>
             <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${pri.color}15`, color: pri.color }}>{pri.label}</span>
             {item.categorie && <span className="text-[10px] text-slate-600">{item.categorie}</span>}
+            {item.scope === 'zakelijk' && (
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-medium uppercase tracking-wider">💼 Zakelijk</span>
+            )}
           </div>
           {item.inhoud && <p className="text-xs text-slate-400 mt-1 whitespace-pre-wrap">{item.inhoud}</p>}
           {/* v6_order_shipped_ui_001 — Markeer verzonden knop voor shop-orders */}

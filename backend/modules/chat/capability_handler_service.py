@@ -890,6 +890,170 @@ def _handle_lees_privacy(user_id: Optional[str]) -> Optional[Dict]:
             "message": _legal_to_md(doc, "privacy")}
 
 
+# v13d_notities_terugblik_001 (sessie 56b) — Willem's hook uit gesprek 25 aug:
+# "hoeveel notities heb ik in augustus" en "wat is mijn laatste notitie".
+def _handle_notities_terugblik(user_id, user_text: str = ""):
+    if not user_id:
+        return {"type": "capability_response", "capability_id": "notities_terugblik",
+                "message": "Ik moet weten wie je bent om notities terug te zoeken."}
+    try:
+        import re as _re
+        from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+        from modules.core.storage import load_json
+        from pathlib import Path
+        fpath = Path("/app/backend/data/notes/notes.json")
+        data = load_json(fpath, default={"notes": []})
+        # Filter op user + scope != admin (admin lives in kladblok)
+        mine = [n for n in data.get("notes", []) if (n.get("user_id") or "user-001") == user_id and n.get("scope") != "admin"]
+        text_lower = (user_text or "").lower()
+
+        # Periodefilter
+        today = _dt.now(_tz.utc).date()
+        maanden = {
+            "januari": 1, "februari": 2, "maart": 3, "april": 4, "mei": 5, "juni": 6,
+            "juli": 7, "augustus": 8, "september": 9, "oktober": 10, "november": 11, "december": 12,
+        }
+        maand_match = next((m for m in maanden if m in text_lower), None)
+        period_start = None; period_end = None; label = None
+        if maand_match:
+            m = maanden[maand_match]
+            jaar = today.year
+            # "vorig jaar" heuristic; anders huidig jaar
+            if "vorig jaar" in text_lower or "vorige jaar" in text_lower:
+                jaar -= 1
+            period_start = _dt(jaar, m, 1).date()
+            # laatste dag
+            if m == 12:
+                period_end = _dt(jaar, 12, 31).date()
+            else:
+                period_end = (_dt(jaar, m + 1, 1) - _td(days=1)).date()
+            label = f"{maand_match} {jaar}"
+        elif "vorige maand" in text_lower or "afgelopen maand" in text_lower:
+            first_this = today.replace(day=1); last_prev = first_this - _td(days=1)
+            period_start = last_prev.replace(day=1); period_end = last_prev
+            label = "vorige maand"
+        elif "deze maand" in text_lower:
+            period_start = today.replace(day=1); period_end = today; label = "deze maand"
+        elif "deze week" in text_lower:
+            mon = today - _td(days=today.weekday())
+            period_start = mon; period_end = mon + _td(days=6); label = "deze week"
+
+        # "wat is mijn laatste" / "laatste notitie" → return latest
+        if _re.search(r"\b(laatste|meest recente|nieuwste)\b", text_lower) and "hoeveel" not in text_lower:
+            if not mine:
+                return {"type": "capability_response", "capability_id": "notities_terugblik",
+                        "message": "📝 Je hebt nog geen notities."}
+            latest = max(mine, key=lambda n: n.get("datum", ""))
+            when = latest.get("datum", "")[:10]
+            titel = latest.get("titel", "")
+            inhoud = (latest.get("inhoud") or "")[:200]
+            scope = latest.get("scope") or "prive"
+            badge = "💼 zakelijk" if scope == "zakelijk" else "🏠 privé"
+            msg = f"📝 **Laatste notitie** ({when} · {badge})\n**{titel}**"
+            if inhoud:
+                msg += f"\n{inhoud}"
+            return {"type": "capability_response", "capability_id": "notities_terugblik", "message": msg}
+
+        # Filter op periode indien gezet
+        if period_start:
+            def _in(n):
+                try:
+                    d = _dt.fromisoformat((n.get("datum") or "").replace("Z", "+00:00")).date()
+                except Exception:
+                    return False
+                return period_start <= d <= period_end
+            filtered = [n for n in mine if _in(n)]
+        else:
+            filtered = mine
+            label = "totaal"
+
+        # Split per scope
+        prive_n = sum(1 for n in filtered if (n.get("scope") or "prive") == "prive")
+        zakelijk_n = sum(1 for n in filtered if n.get("scope") == "zakelijk")
+        totaal = len(filtered)
+        if totaal == 0:
+            msg = f"📝 In {label} heb je geen notities."
+        else:
+            lines = [f"📝 **{label.capitalize()}** — **{totaal}** notitie{'s' if totaal != 1 else ''}"]
+            if zakelijk_n > 0:
+                lines.append(f"  🏠 privé: {prive_n} · 💼 zakelijk: {zakelijk_n}")
+            # Show top 5 titles
+            for n in sorted(filtered, key=lambda x: x.get("datum", ""), reverse=True)[:5]:
+                when = (n.get("datum") or "")[:10]
+                sc = "💼" if n.get("scope") == "zakelijk" else "🏠"
+                lines.append(f"  · {when} {sc} {n.get('titel', '')[:80]}")
+            if totaal > 5:
+                lines.append(f"  … en nog {totaal - 5} meer.")
+            msg = "\n".join(lines)
+        return {"type": "capability_response", "capability_id": "notities_terugblik",
+                "message": msg, "count": totaal, "period": label}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "notities_terugblik",
+                "message": f"Kon notities niet terugzoeken: {ex}"}
+
+
+# v13d_dagboek_terugblik_001 (sessie 56b) — "wat schreef ik gisteren in mijn dagboek"
+def _handle_dagboek_terugblik(user_id, user_text: str = ""):
+    if not user_id:
+        return {"type": "capability_response", "capability_id": "dagboek_terugblik",
+                "message": "Ik moet weten wie je bent om je dagboek te lezen."}
+    try:
+        import re as _re
+        from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+        from modules.core.storage import load_json
+        from pathlib import Path
+        fpath = Path("/app/backend/data/dagboek") / f"{user_id}.json"
+        data = load_json(fpath, default={"entries": []})
+        entries = data.get("entries", []) or []
+
+        text_lower = (user_text or "").lower()
+        today = _dt.now(_tz.utc).date()
+
+        # Periode
+        if "eergisteren" in text_lower:
+            target = today - _td(days=2); label = "eergisteren"
+        elif "gisteren" in text_lower:
+            target = today - _td(days=1); label = "gisteren"
+        elif "vandaag" in text_lower:
+            target = today; label = "vandaag"
+        elif _re.search(r"\b(laatste|meest recente|nieuwste)\b", text_lower):
+            if not entries:
+                return {"type": "capability_response", "capability_id": "dagboek_terugblik",
+                        "message": "📔 Je hebt nog geen dagboek-entries."}
+            latest = max(entries, key=lambda e: e.get("datum", ""))
+            when = (latest.get("datum") or "")[:10]
+            mood = latest.get("mood") or "onbekend"
+            content = (latest.get("content") or latest.get("tekst") or "")[:400]
+            return {"type": "capability_response", "capability_id": "dagboek_terugblik",
+                    "message": f"📔 **Laatste dagboek** ({when} · gevoel: {mood})\n{content}"}
+        else:
+            target = today - _td(days=1); label = "gisteren"
+
+        # Filter op datum
+        matches = []
+        for e in entries:
+            try:
+                d = _dt.fromisoformat((e.get("datum") or "").replace("Z", "+00:00")).date()
+            except Exception:
+                continue
+            if d == target:
+                matches.append(e)
+
+        if not matches:
+            return {"type": "capability_response", "capability_id": "dagboek_terugblik",
+                    "message": f"📔 Op {label} heb je niks in je dagboek geschreven."}
+        lines = [f"📔 **Dagboek {label}** — {len(matches)} entry{'s' if len(matches) != 1 else ''}"]
+        for e in matches:
+            mood = e.get("mood") or "?"
+            content = (e.get("content") or e.get("tekst") or "")[:300]
+            lines.append(f"  🙂 {mood}: {content}")
+        return {"type": "capability_response", "capability_id": "dagboek_terugblik",
+                "message": "\n\n".join(lines)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "dagboek_terugblik",
+                "message": f"Kon dagboek niet lezen: {ex}"}
+
+
 _HANDLERS = {
     "tellen_gebruikers":         _handle_tellen_gebruikers,
     "gebruikers_namen":          _handle_gebruikers_namen,  # v13d sessie 55
@@ -906,6 +1070,8 @@ _HANDLERS = {
     "agenda_vandaag":            _handle_agenda_vandaag,
     "agenda_lezen":              _handle_agenda_vandaag,  # alias voor bestaande placeholder
     "agenda_terugblik":          _handle_agenda_terugblik,
+    "notities_terugblik":        _handle_notities_terugblik,
+    "dagboek_terugblik":         _handle_dagboek_terugblik,
     "kennis_inbox_status":       _handle_kennis_inbox_status,
     "bots_status":               _handle_bots_status,
     "audit_health":              _handle_audit_health,
@@ -977,7 +1143,8 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
     try:
         # v6_agenda_dayfocus_001 — geef user-tekst mee aan agenda-handler
         import inspect
-        if cap_id in ("agenda_vandaag", "agenda_lezen", "agenda_terugblik"):
+        if cap_id in ("agenda_vandaag", "agenda_lezen", "agenda_terugblik",
+                      "notities_terugblik", "dagboek_terugblik"):
             return handler(user_id, text)
         # v6_capability_reken_001 — reken-handler heeft user-tekst nodig
         if cap_id == "reken_uit":

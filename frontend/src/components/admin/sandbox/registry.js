@@ -29,6 +29,7 @@ import { ShadowObserverWidget } from './widgets/ShadowObserverWidget';
 import { PerformanceWidget } from './widgets/PerformanceWidget';
 import { BugsListWidget } from './widgets/BugsListWidget';
 import { DeployWidget } from './widgets/DeployWidget';
+import { AdminNotesWidget } from './widgets/AdminNotesWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -120,6 +121,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 56b',
     reden: "Willem: 'Deploy-tab uit notities mag ook naar Widget Kladblok tot betere plek'.",
     Component: DeployWidget,
+  },
+  {
+    id: 'admin-notes',
+    naam: 'Admin notities',
+    doel: 'Aparte scratchpad voor systeem-observaties, roadmap-brainfarts en dev-todos. Notities met scope=admin verschijnen hier i.p.v. in Notities & Taken.',
+    waar_hoort_het: 'Beheer → eigen "Admin notities" tab, of Analytics → Roadmap',
+    aangemaakt_op: '2026-02-25',
+    aangemaakt_door: 'e1 sessie 56b',
+    reden: "Willem: 'admin notities maar even een kader voor in Widget Kladblok om zo te splitten'.",
+    Component: AdminNotesWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

@@ -25,6 +25,9 @@ class NoteCreate(BaseModel):
     tags: List[str] = []
     priority: str = "medium"
     user_id: str  # verplicht (geen anonieme notes meer)
+    # v13d_notes_scope_001 (sessie 56b) — Willem: scope-label prive/zakelijk/admin
+    # zodat layout weer klopt en admin-notities apart in Kladblok kunnen.
+    scope: Optional[str] = "prive"  # 'prive' | 'zakelijk' | 'admin'
 
 
 class NoteUpdate(BaseModel):
@@ -33,12 +36,14 @@ class NoteUpdate(BaseModel):
     categorie: Optional[str] = None
     tags: Optional[List[str]] = None
     priority: Optional[str] = None
+    scope: Optional[str] = None
 
 
 class TaskCreate(BaseModel):
     task: str
     priority: str = "medium"
     user_id: str  # verplicht
+    scope: Optional[str] = "prive"
 
 
 class TaskUpdate(BaseModel):
@@ -94,6 +99,7 @@ async def create_note(note: NoteCreate):
         "categorie": note.categorie,
         "tags": note.tags,
         "priority": note.priority,
+        "scope": note.scope if note.scope in ("prive", "zakelijk", "admin") else "prive",
         "datum": datetime.now(timezone.utc).isoformat(),
         "created_by": _user_naam(note.user_id),
         "updated_at": None,
@@ -158,6 +164,7 @@ async def create_task(task: TaskCreate):
         "user_id": task.user_id,
         "task": task.task,
         "priority": task.priority,
+        "scope": task.scope if task.scope in ("prive", "zakelijk", "admin") else "prive",
         "status": "todo",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "completed_at": None,

@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-08-25T21:43:26.631905+00:00",
+      "last_active": "2026-08-26T07:20:11.396190",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1387,11 +1387,22 @@
             "type": "letter_completion",
             "unlocked_at": "2026-08-21T12:29:16.597108+00:00",
             "letter": "T"
+          },
+          {
+            "id": "words_2500",
+            "name": "This is a Milestone",
+            "description": "Je hebt de helft van het grote doel bereikt.",
+            "milestone": 2500,
+            "xp_reward": 15000,
+            "icon": "🎯",
+            "rarity": "legendary",
+            "type": "words",
+            "unlocked_at": "2026-08-25T22:04:58.197820+00:00"
           }
         ],
-        "total_xp_from_achievements": 31435
+        "total_xp_from_achievements": 46435
       },
-      "xp": 41958,
+      "xp": 56958,
       "credits": 0,
       "contact": {
         "telefoon": ""
@@ -2010,6 +2021,12 @@
           "reason": "rps_gewonnen",
           "granted_at": "2026-08-23T12:28:16.123857+00:00",
           "total_after": 41958
+        },
+        {
+          "amount": 15000,
+          "reason": "Achievement: This is a Milestone",
+          "granted_at": "2026-08-25T22:04:58.213775+00:00",
+          "total_after": 56958
         }
       ],
       "gradatie_titel": "Beheerder",

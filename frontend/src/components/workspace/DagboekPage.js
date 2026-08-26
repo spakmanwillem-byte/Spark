@@ -64,21 +64,21 @@ export function DagboekPage({ onNavigate }) {
 
   const moodStats = moods.map(m => ({ ...m, count: entries.filter(e => e.mood === m.id).length }));
 
-  if (loading) return <MainLayout activePage="dagboek" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-pink-500/30 border-t-pink-500 rounded-full animate-spin" /></div></MainLayout>;
+  if (loading) return <MainLayout activePage="dagboek" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 rounded-full animate-spin" style={{ borderColor: 'color-mix(in srgb, var(--glow-base) 30%, transparent)', borderTopColor: 'var(--glow-base)' }} /></div></MainLayout>;
 
   return (
     <MainLayout activePage="dagboek" onNavigate={onNavigate}>
       <div data-testid="dagboek-page" className="h-full flex flex-col">
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #ec4899, #a855f7)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--glow-base)' }}>
               <BookHeart className="w-4 h-4 text-white" />
             </div>
             <div>
               <h1 className="text-base font-bold text-white leading-tight">Dagboek</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">{entries.length} entries</p>
             </div>
-            <button data-testid="add-dagboek-btn" onClick={() => setShowNew(!showNew)} className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #ec4899, #a855f7)' }}>
+            <button data-testid="add-dagboek-btn" onClick={() => setShowNew(!showNew)} className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>
               <Plus className="w-3.5 h-3.5" /> Nieuw
             </button>
           </div>
@@ -89,7 +89,7 @@ export function DagboekPage({ onNavigate }) {
 
             {/* New entry */}
             {showNew && (
-              <div className="p-4 bg-slate-900/60 border border-pink-500/20 rounded-xl space-y-3">
+              <div className="p-4 bg-slate-900/60 rounded-xl space-y-3" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'color-mix(in srgb, var(--glow-base) 20%, transparent)' }}>
                 <textarea data-testid="dagboek-content" value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Hoe was je dag?" rows={4}
                   className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none resize-none" />
                 <div className="flex items-center gap-2 flex-wrap">
@@ -104,7 +104,7 @@ export function DagboekPage({ onNavigate }) {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-[10px] text-slate-600">{newContent.trim().split(/\s+/).filter(Boolean).length} woorden</span>
-                  <button data-testid="save-dagboek-btn" onClick={addEntry} className="px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-pink-500">Opslaan</button>
+                  <button data-testid="save-dagboek-btn" onClick={addEntry} className="px-4 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>Opslaan</button>
                 </div>
               </div>
             )}
@@ -200,7 +200,14 @@ function DagboekTreeView({ entries, moods, onDelete }) {
           const isActive = y === activeYear;
           return (
             <button key={y} data-testid={`dagboek-year-${y}`} onClick={() => setActiveYear(y)}
-              className={`text-xs px-3 py-1.5 rounded-t-md transition-colors ${isActive ? 'text-pink-300 bg-pink-500/10 border-t border-x border-pink-500/30' : 'text-slate-500 hover:text-slate-300'}`}>
+              className="text-xs px-3 py-1.5 rounded-t-md transition-colors"
+              style={isActive ? {
+                color: 'var(--glow-base)',
+                background: 'color-mix(in srgb, var(--glow-base) 10%, transparent)',
+                borderTop: '1px solid color-mix(in srgb, var(--glow-base) 30%, transparent)',
+                borderLeft: '1px solid color-mix(in srgb, var(--glow-base) 30%, transparent)',
+                borderRight: '1px solid color-mix(in srgb, var(--glow-base) 30%, transparent)',
+              } : { color: '#64748b' }}>
               {y} {yearTotal > 0 && <span className="ml-1 text-[10px] text-slate-500">({yearTotal})</span>}
             </button>
           );

@@ -8383,12 +8383,145 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-7b783d8557b2",
+      "text_hash": "7b783d8557b2",
+      "original_text": "kan hij zien hoeveel uur ik heb gewerkt deze week",
+      "topic": "werkuren",
+      "categorie": "admin",
+      "intent": "De gebruiker wil weten of hij kan zien hoeveel uren hij deze week heeft gewerkt.",
+      "trigger_phrases": [
+        "kan ik mijn uren deze week zien",
+        "hoeveel uur heb ik gewerkt deze week",
+        "toon mijn werkuren van deze week",
+        "wat is mijn gewerkte tijd deze week",
+        "kan hij mijn uren bijhouden"
+      ],
+      "keywords": [
+        "uren",
+        "werk",
+        "week",
+        "zien",
+        "tijd"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-25T22:23:19.017696+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-336219abf7d9",
+      "text_hash": "336219abf7d9",
+      "original_text": "hoeveel notities heb ik",
+      "topic": "notities aantal",
+      "categorie": "admin",
+      "intent": "De gebruiker wil weten hoeveel notities hij/zij heeft opgeslagen.",
+      "trigger_phrases": [
+        "hoeveel notities heb ik",
+        "wat is mijn notitie telling",
+        "aantal notities",
+        "hoeveel notities staan er",
+        "hoeveel notities heb ik opgeslagen"
+      ],
+      "keywords": [
+        "notities",
+        "aantal",
+        "telling",
+        "hoeveel"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-25T22:24:07.908171+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-36f34376a8c7",
+      "text_hash": "36f34376a8c7",
+      "original_text": "wat zou nog meer een goede hook zijn  denk zij",
+      "topic": "hook ideeën",
+      "categorie": "praktisch",
+      "intent": "De gebruiker zoekt naar aanvullende suggesties voor een goede hook.",
+      "trigger_phrases": [
+        "wat is nog een goede hook",
+        "andere hook suggesties",
+        "wat zou een goede hook kunnen zijn",
+        "meer hook ideeën",
+        "suggesties voor een hook"
+      ],
+      "keywords": [
+        "hook",
+        "idee",
+        "suggestie",
+        "goed",
+        "meer"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-25T22:28:19.819584+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-0e15c1051021",
+      "text_hash": "0e15c1051021",
+      "original_text": "en later ook scripten.",
+      "topic": "scripten",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt of en hoe hij later ook kan gaan scripten.",
+      "trigger_phrases": [
+        "en later ook scripten",
+        "later scripten",
+        "script later",
+        "later ook programmeren",
+        "later scripts maken"
+      ],
+      "keywords": [
+        "scripten",
+        "later",
+        "programmeren",
+        "automatisering",
+        "code"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-25T22:31:33.073985+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-3dc5489b859b",
+      "text_hash": "3dc5489b859b",
+      "original_text": "Ik kwam je alleen begroeten",
+      "topic": "groet",
+      "categorie": "sociaal",
+      "intent": "De gebruiker wil alleen een begroeting uitwisselen.",
+      "trigger_phrases": [
+        "hallo",
+        "hey",
+        "even hallo",
+        "goedendag",
+        "groet"
+      ],
+      "keywords": [
+        "groet",
+        "hallo",
+        "hey",
+        "begroeten"
+      ],
+      "status": "pending",
+      "first_seen": "2026-08-26T07:12:47.981112+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "deep-user-001"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 324,
+    "totaal_voorgesteld": 329,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-08-25T17:54:39.410070+00:00"
+    "last_run": "2026-08-26T07:12:47.981112+00:00"
   }
 }

@@ -199,14 +199,14 @@ export function NotitiesPage({ onNavigate }) {
     if (data.success) setBugs(bugs.filter(b => b.id !== bug.id));
   };
 
-  if (loading) return <MainLayout activePage="notities" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" /></div></MainLayout>;
+  if (loading) return <MainLayout activePage="notities" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 rounded-full animate-spin" style={{ borderColor: 'color-mix(in srgb, var(--glow-base) 30%, transparent)', borderTopColor: 'var(--glow-base)' }} /></div></MainLayout>;
 
   return (
     <MainLayout activePage="notities" onNavigate={onNavigate}>
       <div data-testid="notities-page" className="h-full flex flex-col">
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #22c55e)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--glow-base)' }}>
               <StickyNote className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -218,7 +218,7 @@ export function NotitiesPage({ onNavigate }) {
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-red-300 border border-red-500/30 bg-red-500/5 hover:bg-red-500/10 transition-colors">
                 <Bug className="w-3.5 h-3.5" /> Bug melden
               </button>
-              <button data-testid="add-note-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #f59e0b, #22c55e)' }}>
+              <button data-testid="add-note-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>
                 <Plus className="w-3.5 h-3.5" /> Nieuw
               </button>
             </div>
@@ -233,9 +233,9 @@ export function NotitiesPage({ onNavigate }) {
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}
                 className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors"
-                style={{ color: viewMode === t.id ? '#f59e0b' : '#94a3b8' }}>
+                style={{ color: viewMode === t.id ? 'var(--glow-base)' : '#94a3b8' }}>
                 <t.icon className="w-3.5 h-3.5" /> {t.label}{t.count !== null ? ` (${t.count})` : ''}
-                {viewMode === t.id && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-amber-500" />}
+                {viewMode === t.id && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: 'var(--glow-base)' }} />}
               </button>
             ))}
           </div>
@@ -355,11 +355,14 @@ export function NotitiesPage({ onNavigate }) {
           ) : (
           <div className="max-w-3xl mx-auto space-y-4">
             {showNew && (
-              <div className="p-4 bg-slate-900/60 border border-amber-500/20 rounded-xl space-y-3">
+              <div className="p-4 bg-slate-900/60 rounded-xl space-y-3" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'color-mix(in srgb, var(--glow-base) 20%, transparent)' }}>
                 <div className="flex gap-2">
                   {['note', 'task'].map(t => (
                     <button key={t} onClick={() => setNewItem({ ...newItem, type: t })}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${newItem.type === t ? 'bg-amber-500 text-white' : 'bg-slate-800 text-slate-400'}`}>
+                      className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+                      style={newItem.type === t
+                        ? { background: 'var(--glow-base)', color: '#ffffff' }
+                        : { background: 'rgba(30,41,59,1)', color: '#94a3b8' }}>
                       {t === 'note' ? 'Notitie' : 'Taak'}
                     </button>
                   ))}
@@ -381,7 +384,7 @@ export function NotitiesPage({ onNavigate }) {
                     className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-slate-300 focus:outline-none">
                     {Object.entries(priorities).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
                   </select>
-                  <button data-testid="save-note-btn" onClick={addItem} className="ml-auto px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-green-500">Opslaan</button>
+                  <button data-testid="save-note-btn" onClick={addItem} className="ml-auto px-4 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>Opslaan</button>
                 </div>
               </div>
             )}
@@ -481,7 +484,14 @@ function NotitiesTreeView({ items, toggleDone, deleteItem, updateItem }) {
           const isActive = y === activeYear;
           return (
             <button key={y} data-testid={`notities-year-${y}`} onClick={() => setActiveYear(y)}
-              className={`text-xs px-3 py-1.5 rounded-t-md transition-colors ${isActive ? 'text-amber-300 bg-amber-500/10 border-t border-x border-amber-500/30' : 'text-slate-500 hover:text-slate-300'}`}>
+              className="text-xs px-3 py-1.5 rounded-t-md transition-colors"
+              style={isActive ? {
+                color: 'var(--glow-base)',
+                background: 'color-mix(in srgb, var(--glow-base) 10%, transparent)',
+                borderTop: '1px solid color-mix(in srgb, var(--glow-base) 30%, transparent)',
+                borderLeft: '1px solid color-mix(in srgb, var(--glow-base) 30%, transparent)',
+                borderRight: '1px solid color-mix(in srgb, var(--glow-base) 30%, transparent)',
+              } : { color: '#64748b' }}>
               {y} {yearTotal > 0 && <span className="ml-1 text-[10px] text-slate-500">({yearTotal})</span>}
             </button>
           );
@@ -567,10 +577,10 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
 
   if (editing) {
     return (
-      <div data-testid={`item-edit-${item.id}`} className="p-3 bg-slate-900/70 border border-amber-500/40 rounded-xl space-y-2">
+      <div data-testid={`item-edit-${item.id}`} className="p-3 bg-slate-900/70 rounded-xl space-y-2" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'color-mix(in srgb, var(--glow-base) 40%, transparent)' }}>
         <div className="flex items-center gap-2">
-          <Pencil className="w-3.5 h-3.5 text-amber-400" />
-          <span className="text-[10px] uppercase tracking-wider text-amber-400 font-medium">
+          <Pencil className="w-3.5 h-3.5" style={{ color: 'var(--glow-base)' }} />
+          <span className="text-[10px] uppercase tracking-wider font-medium" style={{ color: 'var(--glow-base)' }}>
             {item.type === 'note' ? 'Notitie bewerken' : 'Taak bewerken'}
           </span>
         </div>
@@ -580,7 +590,7 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
           onChange={e => setEditTitel(e.target.value)}
           placeholder="Titel..."
           data-testid={`edit-titel-${item.id}`}
-          className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700/60 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
+          className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700/60 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none"
           autoFocus
         />
         {item.type === 'note' && (
@@ -590,7 +600,7 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
             placeholder="Inhoud..."
             rows={4}
             data-testid={`edit-inhoud-${item.id}`}
-            className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700/60 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50 resize-none"
+            className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700/60 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none resize-none"
           />
         )}
         <div className="flex items-center justify-end gap-2">
@@ -604,7 +614,8 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
             onClick={saveEdit}
             disabled={saving || !editTitel.trim()}
             data-testid={`edit-save-${item.id}`}
-            className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-green-600 hover:bg-green-500 disabled:opacity-50 flex items-center gap-1">
+            className="px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:brightness-110 disabled:opacity-50 flex items-center gap-1"
+            style={{ background: 'var(--glow-base)' }}>
             <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : 'Opslaan'}
           </button>
         </div>
@@ -617,7 +628,7 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
       <div className="flex items-start gap-3">
         {item.type === 'task' ? (
           <button onClick={() => toggleDone(item)} className="mt-0.5 flex-shrink-0">
-            {item.done ? <CheckCircle className="w-5 h-5 text-green-400" /> : <Circle className="w-5 h-5 text-slate-600 hover:text-amber-400" />}
+            {item.done ? <CheckCircle className="w-5 h-5 text-green-400" /> : <Circle className="w-5 h-5 text-slate-600 hover:opacity-80" style={{ transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--glow-base)'} onMouseLeave={e => e.currentTarget.style.color = ''} />}
           </button>
         ) : (
           <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: `${pri.color}15` }}>
@@ -640,7 +651,7 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
                 onChange={e => { item._tracking = e.target.value; }}
                 placeholder="Track & trace (optioneel)"
                 data-testid={`ship-tracking-${item.order_id}`}
-                className="px-2 py-1 bg-slate-800 border border-slate-700 rounded text-[11px] text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                className="px-2 py-1 bg-slate-800 border border-slate-700 rounded text-[11px] text-white placeholder-slate-500 focus:outline-none"
               />
               <button
                 data-testid={`mark-shipped-${item.order_id}`}
@@ -665,7 +676,7 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
           <div className="flex items-center gap-3 mt-2">
             <span className="text-[10px] text-slate-600">{new Date(item.datum || item.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}</span>
             {item.created_by && <span className="text-[10px] text-slate-600">{item.created_by}</span>}
-            {item.updated_at && <span className="text-[10px] text-amber-600/80" title={`Bewerkt op ${new Date(item.updated_at).toLocaleString('nl-NL')}`}>(bewerkt)</span>}
+            {item.updated_at && <span className="text-[10px] text-slate-500" title={`Bewerkt op ${new Date(item.updated_at).toLocaleString('nl-NL')}`}>(bewerkt)</span>}
             {(item.tags || []).slice(0, 2).map((t, i) => <span key={i} className="text-[10px] text-slate-600">#{t}</span>)}
           </div>
         </div>
@@ -675,7 +686,9 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
               onClick={startEdit}
               data-testid={`edit-${item.id}`}
               title="Bewerken"
-              className="p-1.5 hover:bg-amber-500/10 text-slate-600 hover:text-amber-400 rounded-lg transition-colors">
+              className="p-1.5 rounded-lg transition-colors text-slate-600"
+              onMouseEnter={e => { e.currentTarget.style.color = 'var(--glow-base)'; e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--glow-base) 10%, transparent)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = ''; e.currentTarget.style.backgroundColor = ''; }}>
               <Pencil className="w-3.5 h-3.5" />
             </button>
           )}

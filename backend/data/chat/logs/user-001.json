@@ -75456,11 +75456,392 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 2983
       }
+    },
+    {
+      "id": "conv-9f0fadd4",
+      "timestamp": "2026-08-26T07:41:39.853375+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb ik gisteren gedaan",
+      "spark_response": "📅 **Gisteren** — 1 event:\n  💼 Tue 25 Aug 11:30 · **Ontruimen** — Jeroen  (5.0u)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 9,
+          "intensity": 0.66,
+          "triggered_words": [
+            "heb",
+            "gedaan",
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2984
+      }
+    },
+    {
+      "id": "conv-cf8ea3df",
+      "timestamp": "2026-08-26T07:42:13.144837+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel uur heb ik gewerkt deze week",
+      "spark_response": "⏱️ **Deze week** — totaal **9.5 uur** (3 events)\n  · Jeroen : 5.0 uur\n  · Jeroen: 3.0 uur\n  · Roline: 1.5 uur",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2985
+      }
+    },
+    {
+      "id": "conv-c538ead0",
+      "timestamp": "2026-08-26T07:42:13.340673+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb ik deze week gedaan",
+      "spark_response": "Vandaag staat **Bezoek Lotus en Maaike** om 18:00 op de planning. Morgen heb je **Schoonmaken en opruimen** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "heb",
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2986
+      }
+    },
+    {
+      "id": "conv-c9411967",
+      "timestamp": "2026-08-26T07:42:40.307814+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb ik deze week gedaan",
+      "spark_response": "Vandaag staat **Bezoek Lotus en Maaike** om 18:00 op de planning. Morgen heb je **Schoonmaken en opruimen** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2987
+      }
+    },
+    {
+      "id": "conv-1d942e7f",
+      "timestamp": "2026-08-26T07:42:40.498519+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er deze week op mijn agenda",
+      "spark_response": "Vandaag staat **Bezoek Lotus en Maaike** om 18:00 op de planning. Morgen heb je **Schoonmaken en opruimen** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2988
+      }
+    },
+    {
+      "id": "conv-502ff800",
+      "timestamp": "2026-08-26T07:43:38.480679+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb ik gisteren gedaan",
+      "spark_response": "📅 **Gisteren** — 1 event:\n  💼 Tue 25 Aug 11:30 · **Ontruimen** — Jeroen  (5.0u)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "heb",
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2989
+      }
+    },
+    {
+      "id": "conv-26d4becd",
+      "timestamp": "2026-08-26T07:43:38.675207+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb ik deze week gedaan",
+      "spark_response": "📅 **Deze week** — 4 events:\n  💼 Mon 24 Aug 12:00 · **Tuin werkzaamheden** — Roline (1.5u)\n  💼 Tue 25 Aug 11:30 · **Ontruimen** — Jeroen  (5.0u)\n  🏠 Wed 26 Aug 16:00 · **Bezoek Lotus en Maaike**\n  💼 Thu 27 Aug 11:00 · **Schoonmaken en opruimen** — Jeroen (3.0u)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2990
+      }
+    },
+    {
+      "id": "conv-ab6e3519",
+      "timestamp": "2026-08-26T07:43:38.984606+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel uur heb ik gewerkt deze week",
+      "spark_response": "⏱️ **Deze week** — totaal **9.5 uur** (3 events)\n  · Jeroen : 5.0 uur\n  · Jeroen: 3.0 uur\n  · Roline: 1.5 uur",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2991
+      }
+    },
+    {
+      "id": "conv-5fed69d0",
+      "timestamp": "2026-08-26T07:43:39.241691+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel uur heb ik gisteren gewerkt",
+      "spark_response": "⏱️ **Gisteren** — totaal **5.0 uur** (1 events)\n  · Jeroen : 5.0 uur",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "heb",
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2992
+      }
+    },
+    {
+      "id": "conv-df769312",
+      "timestamp": "2026-08-26T07:43:39.477457+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er morgen op mijn agenda",
+      "spark_response": "📅 Morgen: **Schoonmaken en opruimen** om 13:00.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2993
+      }
+    },
+    {
+      "id": "conv-6d14935d",
+      "timestamp": "2026-08-26T07:44:08.616039+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel uur heb ik gewerkt deze week",
+      "spark_response": "⏱️ **Deze week** — totaal **9.5 uur** (3 events)\n  · Jeroen: 8.0 uur\n  · Roline: 1.5 uur",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2994
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2983,
-    "last_updated": "2026-08-26T07:12:43.027350+00:00"
+    "total_conversations": 2994,
+    "last_updated": "2026-08-26T07:44:08.616039+00:00"
   }
 }

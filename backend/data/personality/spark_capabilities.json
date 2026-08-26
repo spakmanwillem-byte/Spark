@@ -156,6 +156,25 @@
       "data_source": "/app/backend/data/knowledge/knowledge_base.json"
     },
     {
+      "id": "agenda_terugblik",
+      "naam": "Agenda terugblik + urenregistratie",
+      "categorie": "memory",
+      "beschrijving": "Wat heb ik gisteren/eergisteren/deze week/deze maand gedaan; hoeveel uur heb ik gewerkt in een periode.",
+      "triggers": [
+        "wat heb ik (gisteren|eergisteren|vandaag|deze week|vorige week|afgelopen week|deze maand|vorige maand|afgelopen maand) gedaan",
+        "wat heb ik (gisteren|eergisteren) gewerkt",
+        "hoeveel uur.*(vandaag|gisteren|deze week|vorige week|afgelopen week|deze maand|vorige maand)",
+        "(vandaag|gisteren|deze week|vorige week|deze maand) hoeveel uur",
+        "hoeveel uren.*(gewerkt|gedeclareerd)",
+        "urenregistratie",
+        "wat deed ik (gisteren|eergisteren)"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "endpoint": "/api/agenda/events/{user_id}",
+      "data_source": "/app/backend/data/agenda/{user_id}.json"
+    },
+    {
       "id": "agenda_lezen",
       "naam": "Agenda raadplegen",
       "categorie": "memory",

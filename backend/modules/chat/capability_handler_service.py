@@ -425,6 +425,104 @@ def _handle_agenda_vandaag(user_id, user_text: str = ""):
                 "message": f"Kon agenda niet lezen: {ex}"}
 
 
+# v13d_agenda_terugblik_001 (sessie 56b) — Willem's hook uit gesprek 25 aug:
+# "wat heb ik gisteren/eergisteren/deze week gedaan" en "hoeveel uur gewerkt".
+# Leunt op de zakelijk/totaal_uren velden uit v13d_agenda_uren_registratie_001.
+def _handle_agenda_terugblik(user_id, user_text: str = ""):
+    if not user_id:
+        return {"type": "capability_response", "capability_id": "agenda_terugblik",
+                "message": "Ik moet weten wie je bent om terug te kijken."}
+    try:
+        import re as _re
+        from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+        from modules.core.storage import load_json
+        from pathlib import Path
+        fpath = Path("/app/backend/data/agenda") / f"{user_id}.json"
+        data = load_json(fpath, default={"events": []})
+        events = data.get("events", []) or []
+
+        text_lower = (user_text or "").lower()
+        today = _dt.now(_tz.utc).date()
+        # Bepaal periode
+        if "eergisteren" in text_lower:
+            period_start = today - _td(days=2); period_end = today - _td(days=2); label = "eergisteren"
+        elif "gisteren" in text_lower:
+            period_start = today - _td(days=1); period_end = today - _td(days=1); label = "gisteren"
+        elif "vorige week" in text_lower or "afgelopen week" in text_lower:
+            mon = today - _td(days=today.weekday() + 7)
+            period_start = mon; period_end = mon + _td(days=6); label = "vorige week"
+        elif "deze week" in text_lower:
+            mon = today - _td(days=today.weekday())
+            period_start = mon; period_end = mon + _td(days=6); label = "deze week"
+        elif "vorige maand" in text_lower or "afgelopen maand" in text_lower:
+            first_this = today.replace(day=1)
+            last_prev = first_this - _td(days=1)
+            period_start = last_prev.replace(day=1); period_end = last_prev
+            label = "vorige maand"
+        elif "deze maand" in text_lower:
+            period_start = today.replace(day=1); period_end = today; label = "deze maand"
+        elif "vandaag" in text_lower:
+            period_start = today; period_end = today; label = "vandaag"
+        else:
+            # Default: laatste 7 dagen
+            period_start = today - _td(days=6); period_end = today; label = "de afgelopen 7 dagen"
+
+        # Filter events in periode
+        in_period = []
+        for ev in events:
+            date_str = ev.get("date", "")
+            if not date_str:
+                continue
+            try:
+                ev_dt = _dt.fromisoformat(date_str.replace("Z", "+00:00"))
+                ev_date = ev_dt.date()
+            except Exception:
+                continue
+            if period_start <= ev_date <= period_end:
+                in_period.append((ev_dt, ev))
+        in_period.sort(key=lambda x: x[0])
+
+        # Uren-vraag?
+        is_uren_vraag = bool(_re.search(r"\b(hoeveel|uur|uren|gewerkt|declareer|urenregistratie)\b", text_lower))
+
+        if is_uren_vraag:
+            zakelijk = [ev for _, ev in in_period if ev.get("scope") == "zakelijk"]
+            totaal = sum((ev.get("totaal_uren") or 0) for ev in zakelijk)
+            by_opdr = {}
+            for ev in zakelijk:
+                opd = (ev.get("opdrachtgever") or "onbekend").strip()
+                by_opdr[opd] = by_opdr.get(opd, 0) + (ev.get("totaal_uren") or 0)
+            if not zakelijk:
+                msg = f"📊 Geen zakelijke uren geregistreerd in {label}. Voer bij een agenda-event 'Zakelijk' + start/eind/pauze in om uren mee te tellen."
+            else:
+                lines = [f"⏱️ **{label.capitalize()}** — totaal **{round(totaal, 2)} uur** ({len(zakelijk)} events)"]
+                for opd, u in sorted(by_opdr.items(), key=lambda x: -x[1]):
+                    lines.append(f"  · {opd}: {round(u, 2)} uur")
+                msg = "\n".join(lines)
+        else:
+            # Wat gedaan lijstje
+            if not in_period:
+                msg = f"📅 In {label} staat er niks in je agenda."
+            else:
+                lines = [f"📅 **{label.capitalize()}** — {len(in_period)} event{'s' if len(in_period) != 1 else ''}:"]
+                for ev_dt, ev in in_period[:15]:
+                    titel = ev.get("titel") or ev.get("title") or "afspraak"
+                    scope_badge = "💼" if ev.get("scope") == "zakelijk" else "🏠"
+                    opd = f" — {ev['opdrachtgever']}" if ev.get("opdrachtgever") else ""
+                    uren_txt = f" ({ev.get('totaal_uren')}u)" if ev.get("totaal_uren") else ""
+                    lines.append(f"  {scope_badge} {ev_dt.strftime('%a %d %b %H:%M')} · **{titel}**{opd}{uren_txt}")
+                if len(in_period) > 15:
+                    lines.append(f"  … en nog {len(in_period) - 15} meer.")
+                msg = "\n".join(lines)
+
+        return {"type": "capability_response", "capability_id": "agenda_terugblik",
+                "message": msg, "period": {"start": str(period_start), "end": str(period_end), "label": label},
+                "event_count": len(in_period)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "agenda_terugblik",
+                "message": f"Kon terugblik niet ophalen: {ex}"}
+
+
 def _handle_kennis_inbox_status(user_id):
     """Hoeveel kaarten wachten in KB v2 inbox."""
     try:
@@ -807,6 +905,7 @@ _HANDLERS = {
     "kasboek_overzicht":         _handle_kasboek_overzicht,
     "agenda_vandaag":            _handle_agenda_vandaag,
     "agenda_lezen":              _handle_agenda_vandaag,  # alias voor bestaande placeholder
+    "agenda_terugblik":          _handle_agenda_terugblik,
     "kennis_inbox_status":       _handle_kennis_inbox_status,
     "bots_status":               _handle_bots_status,
     "audit_health":              _handle_audit_health,
@@ -878,7 +977,7 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
     try:
         # v6_agenda_dayfocus_001 — geef user-tekst mee aan agenda-handler
         import inspect
-        if cap_id in ("agenda_vandaag", "agenda_lezen"):
+        if cap_id in ("agenda_vandaag", "agenda_lezen", "agenda_terugblik"):
             return handler(user_id, text)
         # v6_capability_reken_001 — reken-handler heeft user-tekst nodig
         if cap_id == "reken_uit":

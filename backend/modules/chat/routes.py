@@ -830,7 +830,12 @@ async def process_message(req: ChatMessage):
         # v13d_agenda_read_early_001 — READ intent ook vóór capability, anders
         # matcht "wat staat er morgen" via agenda_vandaag capability i.p.v.
         # onze uitgebreide handle_agenda die weekdagen kent.
-        if req.user_id and _si_early.detect_agenda_intent(text):
+        # v13d_agenda_terugblik_bypass_001 (sessie 56b) — als user vraagt naar
+        # verleden ("gedaan", "gewerkt", "uren") NIET early hooken maar door
+        # laten naar capability router → agenda_terugblik handler.
+        _terugblik_kw = ("gedaan", "gewerkt", "uren", "urenregistratie", "gedeclareerd", "deed ik")
+        _is_terugblik = any(k in (text or "").lower() for k in _terugblik_kw)
+        if req.user_id and not _is_terugblik and _si_early.detect_agenda_intent(text):
             try:
                 from modules.auth.service import AuthService as _AuthEarly
                 _user_early = _AuthEarly.get_user_by_id(req.user_id)
@@ -1218,8 +1223,10 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, out.get("type", "shop_delete_start"))
             return response
 
-        # Agenda-overzicht (READ) — heeft prioriteit
-        if si.detect_agenda_intent(text) and req.user_id:
+        # Agenda-overzicht (READ) — heeft prioriteit (behalve terugblik-vragen)
+        _terugblik_kw2 = ("gedaan", "gewerkt", "uren", "urenregistratie", "gedeclareerd", "deed ik")
+        _is_terugblik2 = any(k in (text or "").lower() for k in _terugblik_kw2)
+        if not _is_terugblik2 and si.detect_agenda_intent(text) and req.user_id:
             out = si.handle_agenda(req.user_id, _load_user(), text)
             response.update(out)
             response["type"] = "agenda_overview"  # v13c: consistent type

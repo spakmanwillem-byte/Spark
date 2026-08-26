@@ -2,6 +2,119 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-02-26 (sessie 56b, deel 3) — Multi-book Uren + Clienten per kasboek
+
+**Willem's verzoek**: "urenstaten + clienten horen niet als aparte modules, per
+kasboek. Zorg krijgt zorg-dossier, shop krijgt klant-facturatie. Ieder zijn eigen
+books (admin ziet default eigen, cross-user via Beheer → Gebruikers later)."
+
+### 🏗️ v13d_multi_book_uren_clienten_001
+
+**Sidebar cleanup**:
+- Urenstaat + Clienten weggehaald uit MODULES top-level nav (leven nu per book)
+- Routes `/modules/uren-rapport` en `/modules/clienten` blijven bestaan als deeplinks
+
+**Backend clienten uitgebreid** (`modules/clienten/routes.py`):
+- `book_id` veld — koppel client aan boek
+- `client_type` — 'zorgclient' | 'klant' | 'generiek' (book-type-aware)
+- Zorg-placeholder-velden: `geboortedatum`, `bsn`, `zorgindicatie`, `huisarts`, `noodcontact`
+- Klant-placeholder-velden: `factuur_adres`, `betalingstermijn_dagen`
+- `GET /list/{user_id}?book_id=X` — filter per book
+- `GET /index/{user_id}?book_id=X` — compacte lijst per book
+
+**Uren-rapport per book** (`GET /api/agenda/uren-rapport/{user}?book_id=X`):
+- Filtert zakelijke events waarbij `opdrachtgever` matcht met client uit dat book
+- Rest van API onveranderd (backwards compat)
+
+**BookDetailBark 2 nieuwe sub-tabs** (`BoekhoudingBoekenTab.js`):
+- 📊 **Uren** — periode-picker (dag/week/maand/jaar), samenvatting per opdrachtgever,
+  CSV-export, per book gefilterd; ◀ ▶ periode-navigatie
+- 💼 **Clienten** — book-type-aware label ("Zorgcliënt" / "Klant" / "Client"),
+  create-form + lijst; book-color doorgetrokken
+
+**Admin-view fix** (`modules/boekhouder/books_routes.py`):
+- Admin ziet default alleen eigen books (was: alle books)
+- `?target_user_id=X` cross-user access voor admin (voor Beheer → Gebruikers)
+- Live geverifieerd: Willem 4 books, Heidi 2, Marieke 2
+
+**Data-cleanup**:
+- 3× ghost TEST_ books opgeruimd uit preview (TEST_CloseMe/PatchShop/AdminShop)
+- Pytest teardown fixture toegevoegd (`test_winkelstraat_p1p4.py`) → autouse module-scope,
+  ruimt alle books met naam-prefix TEST_ na test-run
+
+**Live geverifieerd**:
+- Client aangemaakt bij Zorgboerderij (client_type=zorgclient, zorgindicatie ingevuld)
+- Client aangemaakt bij Roadkillshop (client_type=klant, betalingstermijn 30 dagen)
+- Uren-rapport augustus 2026: 9.5u totaal, Jeroen 8u + Roline 1.5u
+
+
+## 2026-02-25 (sessie 56b, deel 2) — Clienten-module + Uren-rapport page (voorloper)
+
+**Nieuwe module `clienten`** (backend + frontend, later gemigreerd naar per-book):
+- Aparte module (niet persons — persons = familie met D&D)
+- Dossier-entries (kop+inhoud+bron)
+- `POST /clienten/learning/` — Spark kan geleerde info wegschrijven per client
+
+**Nieuwe uren-rapport page** (`UrenRapportPage.js`, later verhuisd naar BookDetail):
+- Endpoint `GET /api/agenda/uren-rapport/{user}?period=dag|week|maand|jaar`
+- Per-opdrachtgever aggregatie
+- CSV-export
+
+
+## 2026-02-25 (sessie 56b, deel 1) — Chat terugblik + notes scope + taken doelen
+
+**Agenda-terugblik hook** (`v13d_agenda_terugblik_001`):
+- Nieuwe capability `agenda_terugblik` in `capability_handler_service.py`
+- Detecteert periode: gisteren/eergisteren/vandaag/deze week/vorige week/deze maand/vorige maand
+- Aggregatie per opdrachtgever bij zakelijke events + uren-vraag
+- Early-hooks in chat/routes.py laten "gedaan/gewerkt/uren" door naar capability router
+- Live geverifieerd: "hoeveel uur heb ik gewerkt deze week" → 9.5u
+- 7/7 pytest groen (`test_agenda_terugblik_v13d.py`)
+
+**Notities/Dagboek terugblik-hooks** (`v13d_notities_terugblik_001`, `dagboek_terugblik_001`):
+- "hoeveel notities in augustus" → 2 stuks
+- "wat is mijn laatste notitie" → volledige inhoud + scope-badge
+- "wat schreef ik gisteren in mijn dagboek"
+- Admin-notes uitgesloten (die leven in Kladblok)
+- 11/11 pytest groen (`test_notities_dagboek_terugblik_v13d.py`)
+
+**Notes scope-veld** (`v13d_notes_scope_001`):
+- Backend `NoteCreate` / `TaskCreate`: `scope` prive|zakelijk|admin (default prive)
+- Frontend: 3-way toggle in nieuw-formulier (Admin alleen voor admins)
+- Admin-notes verborgen uit reguliere pagina → **AdminNotesWidget** in Kladblok
+- Item-cards krijgen 💼 Zakelijk badge
+- Term "werk" → "zakelijk" (consistent met agenda)
+
+**Taken = doelen** (`v13d_task_doel_001`):
+- Task-model uitgebreid: `begin_datum`, `eind_datum`, `budget_uren`, `opdrachtgever`, `onderwerp`
+- Frontend: 3 datum/budget velden bij Taak-mode, zakelijk-velden bij scope=zakelijk
+- Task-cards krijgen secondary-color badges voor periode/budget (`var(--app-secondary)`)
+- Alles-tab toont notes + tasks gemixed
+
+
+## 2026-02-25 (sessie 56b, deel 0) — Widget Kladblok migraties + Alert-kleur
+
+**Dashboard → Kladblok** (`v13d_dashboard_kladblok_migratie_001`):
+- `ShadowObserverWidget` + `PerformanceWidget` verplaatst uit DashboardPage
+- Registreerd in `admin/sandbox/registry.js` met meta-info
+- Dashboard opgeschoond: ~173 regels inline code + 3 state-hooks + 3 fetches weg
+
+**Notities → Kladblok**:
+- `BugsListWidget`: Bugs-tab verplaatst uit Notities & Taken → eigen widget met fetch/status/bulk-close
+- `DeployWidget`: Deploy-tab verplaatst → dunne wrapper rond `DeployAnchorPanel`
+- Knop-volgorde in Notities: +Nieuw eerst, dan Bug melden (icoon weg → kleiner)
+
+**App Kleurenschema uitgebreid** (`v13d_app_alert_color_001`):
+- 4de kleur "Alert / Error" naast Primary/Secondary/Background
+- Nieuwe backend-key `app_alert_color`, App.js past `--alert-base` toe bij startup
+- Bug melden-knop nu gekoppeld aan `var(--alert-base)` — verandert mee met schema
+
+**Theming**:
+- Agenda, Dagboek, Notities: alle blauw/pink/amber accenten vervangen door `var(--glow-base)`
+- Semantische kleuren behouden (mood-badges, done=green, delete=alert)
+
+
+
 ## 2026-02-25 (sessie 56b) — Agenda: Privé/Zakelijk + Uren-registratie
 
 **Willem's verzoek**: "kies privé/zakelijk, begin/eind tijd, bij zakelijk pauze +

@@ -144,6 +144,97 @@ deze vier kan Spark z'n eigen geheugen niet betrouwbaar én privacy-veilig doorz
 
 ---
 
+## 🧹 CLUSTER — Sessie 56b (25-26 feb 2026) — Multi-book fundament + chat-terugblik
+
+**Focus**: Willem's zakelijke werkstroom fundering leggen. Agenda krijgt uren-registratie, chat kan terugkijken op eigen data, boekhouding-books krijgen elk hun eigen uren + clienten met book-type-aware placeholders (zorgclient vs klant).
+
+### ✅ AFGEROND
+
+**Dashboard opschonen**
+- `ShadowObserverWidget` + `PerformanceWidget` verplaatst uit DashboardPage naar Widget Kladblok (`admin/sandbox/registry.js`)
+- `BugsListWidget` (was tab in Notities) → Kladblok
+- `DeployWidget` (was tab in Notities) → Kladblok
+- `AdminNotesWidget` — nieuwe scratchpad in Kladblok voor scope=admin notes
+- Notities-header: knop-volgorde +Nieuw → Bug melden, Bug-icoon weg
+
+**Agenda uren-registratie** (`v13d_agenda_uren_registratie_001`)
+- EventCreate/Update velden: `scope` (prive/zakelijk), `end_date`, `pauze_minuten`, `opdrachtgever`, `onderwerp`, `product_code`, auto `totaal_uren`
+- Frontend: Privé/Zakelijk toggle, start+eind tijd, live 7.5u-netto badge, amber tint voor zakelijk
+- Spark chat-parser `_extract_zakelijk_fields()` herkent "voor X van 9 tot 17 met uur pauze"
+- 7/7 pytest groen (`test_agenda_scope_v13d.py`)
+
+**Chat terugblik-hooks** (`v13d_agenda_terugblik_001`, `notities_terugblik_001`, `dagboek_terugblik_001`)
+- Nieuwe capabilities in `capability_handler_service.py`:
+  - `agenda_terugblik`: "wat heb ik gisteren gedaan", "hoeveel uur heb ik gewerkt deze week" (aggregatie per opdrachtgever)
+  - `notities_terugblik`: "hoeveel notities in augustus", "wat is mijn laatste notitie" (excl. admin)
+  - `dagboek_terugblik`: "wat schreef ik gisteren in mijn dagboek"
+- Early-agenda-hooks in `routes.py` laten `gedaan/gewerkt/uren` door naar capability router
+- 18/18 pytest groen + live geverifieerd op Willem's data
+
+**Notes & Taken scope-veld** (`v13d_notes_scope_001`, `v13d_task_doel_001`)
+- `scope` prive/zakelijk/admin op notes en tasks (zelfde termen als agenda — NIET "werk")
+- Admin-notities uitgesloten van reguliere notitie-pagina (leven in Kladblok)
+- Taken = doelen met tijdvenster: `begin_datum`, `eind_datum`, `budget_uren`, `opdrachtgever`, `onderwerp`
+- Task-cards krijgen secondary-color badges voor periode/budget (`var(--app-secondary)`)
+- Alles-view mixed notes+tasks
+
+**Clienten-module** (`v13d_clienten_module_001`) — NIEUW MODULE
+- `/api/clienten/*` backend + `ClientenPage.js` frontend
+- Aparte module (niet persons — persons = familie/vrienden met D&D)
+- Velden: naam, contactpersoon, email, tel, adres+postcode+plaats, KVK, BTW, uurtarief, notities, book_id, client_type
+- **Dossier-entries** (kop+inhoud+bron) — handmatig of via chat/agenda
+- **Spark-learnings** endpoint (`POST /clienten/learning/`) — Spark kan geleerde info wegschrijven per client
+
+**Uren-registratie endpoint** (`v13d_uren_rapport_001`)
+- `GET /api/agenda/uren-rapport/{user_id}?period=dag|week|maand|jaar&book_id=X`
+- Aggregeert zakelijke agenda-events per opdrachtgever binnen periode
+- Book-filter: matcht via opdrachtgever ↔ client.naam van dat book
+- Live geverifieerd Augustus 2026: 9.5u totaal, Jeroen 8u + Roline 1.5u
+
+**Boekhouding view fix** (`v13d_admin_view_eigen_default_001`)
+- Admin ziet nu default alleen eigen books (was: alle books)
+- Cross-user access via `?target_user_id=X` — voor toekomstige Beheer→Gebruikers pagina
+- 3× ghost TEST_ books opgeruimd uit preview
+- Pytest teardown fix (`test_winkelstraat_p1p4.py` — autouse fixture ruimt TEST_-prefixed books na test-run)
+
+**Multi-book UI**: BookDetailBark 2 nieuwe sub-tabs (`v13d_book_uren_panel_001`, `v13d_book_clienten_panel_001`)
+- 📊 **Uren** — periode-picker + samenvatting per opdrachtgever + CSV-export, gefilterd per book
+- 💼 **Clienten** — lijst + create-form, book-type-aware label
+- Sidebar cleanup: Urenstaat + Clienten uit MODULES-nav
+- Book-type placeholders:
+  - `entity` (Zorgboerderij) → **Zorgcliënt** met dossier + placeholder-velden (BSN, geboortedatum, zorgindicatie, huisarts, noodcontact)
+  - `shop` (Roadkillshop) → **Klant** met factuur-info (factuur_adres, betalingstermijn_dagen)
+  - `user_prive` → **Client** generiek
+
+**App Kleurenschema** (`v13d_app_alert_color_001`)
+- 4de kleur "Alert / Error" toegevoegd naast Primary/Secondary/Background
+- `--alert-base` CSS var, live doorgetrokken naar Bug-melden knop
+- Setting `app_alert_color` in `/api/settings/system`
+
+**Theming**
+- Agenda + Dagboek + Notities volledig op `var(--glow-base)` — geen hardcoded blauw/pink/amber accents meer
+- Semantische kleuren behouden (mood-badges, done=green, delete=alert)
+
+### 🔴 P0 nog open (uit sessie 55, ongewijzigd)
+Alle 6 items van "Zelfscan-fundering" cluster staan nog open:
+1. Privacy-guard bypass op /api/spark/compose
+2. Metadata backfill script
+3. Write-guard `_validate_footnote()`
+4. Trace-capability "waar heb ik dit gezegd"
+5. KB-vulling uit systeem-vakboeken (STARR + Methodiekengids + Begeleid Leren)
+6. Fuzzy-snap in chat-flow
+
+### 🟡 P1 uit sessie 56b (nieuw op backlog)
+- **book_id op agenda events + notities + taken** → volle multi-book context
+- **Actief book globale context** in header (verandert alle tabs mee)
+- **Client-detail form** met tabbed zorg-velden vs factuur-velden
+- **Factuur-generator**: urenstaat-CSV + client-adres + betalingstermijn → PDF
+- **Documenten split** (Privé/Zakelijk) in Archief → Bestanden
+- **Roadkill categorisering**: inkopen labelen (spark merch vs doorverkoop)
+- **Spark auto-write client learnings**: bij naam-mention in chat de context oppikken en `POST /clienten/learning/{client_id}` doen
+
+---
+
 ## 🌷 Moreel Kompas — Kernvisie (blijft altijd bovenaan)
 
 Spark is een persoonlijke AI-metgezel die Willem ooit als **erfenis** doorgeeft aan zijn dochter Lotus. Dat betekent:

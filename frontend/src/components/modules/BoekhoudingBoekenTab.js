@@ -220,7 +220,13 @@ function BookDetailBark({ bookId, userId, onClose }) {
           {[
             { id: 'entries', label: 'Kasboek', icon: FileText },
             { id: 'uren', label: 'Uren', icon: Clock },
-            { id: 'clienten', label: 'Clienten', icon: Briefcase },
+            {
+              id: 'clienten',
+              // v13d_book_tab_label_per_type_001 (sessie 56b) — Willem:
+              // "bij shop moet 'client' → 'klant'". Per book-type ander label.
+              label: book.type === 'shop' ? 'Klanten' : book.type === 'entity' ? 'Zorgcliënten' : 'Clienten',
+              icon: Briefcase,
+            },
             { id: 'instellingen', label: 'Instellingen', icon: Settings },
             { id: 'sepa', label: 'SEPA', icon: Wallet },
           ].map((t) => {

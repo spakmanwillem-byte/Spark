@@ -199,6 +199,7 @@ async def uren_rapport(
     year: Optional[int] = None,
     month: Optional[int] = None,
     day: Optional[int] = None,
+    book_id: Optional[str] = None,  # v13d_uren_per_book_001 (sessie 56b)
     viewer_id: Optional[str] = None,
 ):
     """Uren-rapport voor een user over een periode.
@@ -206,6 +207,8 @@ async def uren_rapport(
     - period=week: geef year+month+day binnen die week, of neem huidige week
     - period=maand: geef year+month, of neem huidige maand
     - period=jaar: geef year, of neem huidige jaar
+    - book_id: filter alleen events waarbij opdrachtgever overeenkomt met een
+      client uit dat book (voor per-book urenstaat).
     """
     require_access(viewer_id or user_id, user_id)
     from datetime import datetime as _dt, timedelta as _td, timezone as _tz
@@ -240,6 +243,21 @@ async def uren_rapport(
                        "juli", "augustus", "september", "oktober", "november", "december"]
         label = f"{maand_namen[m - 1].capitalize()} {j}"
 
+    # v13d_uren_per_book_001 — als book_id gegeven, filter events op opdrachtgevers
+    # die als client in dat book staan.
+    book_opdrachtgevers = None
+    if book_id:
+        try:
+            from modules.clienten.routes import _get_file as _client_file
+            client_data = load_json(_client_file(user_id), default={"clienten": []})
+            book_opdrachtgevers = {
+                (c.get("naam") or "").strip().lower()
+                for c in client_data.get("clienten", [])
+                if c.get("book_id") == book_id
+            }
+        except Exception:
+            book_opdrachtgevers = set()
+
     # Filter + aggregeer
     in_period = []
     for ev in events:
@@ -252,17 +270,23 @@ async def uren_rapport(
             ev_date = _dt.fromisoformat(d.replace("Z", "+00:00")).date()
         except Exception:
             continue
-        if start <= ev_date <= end:
-            in_period.append({
-                "id": ev.get("id"),
-                "titel": ev.get("titel"),
-                "date": ev.get("date"),
-                "end_date": ev.get("end_date"),
-                "opdrachtgever": (ev.get("opdrachtgever") or "onbekend").strip(),
-                "onderwerp": ev.get("onderwerp"),
-                "pauze_minuten": ev.get("pauze_minuten") or 0,
-                "totaal_uren": ev.get("totaal_uren") or 0,
-            })
+        if not (start <= ev_date <= end):
+            continue
+        opd_clean = (ev.get("opdrachtgever") or "").strip()
+        # book-filter: alleen events waarbij opdrachtgever overeenkomt met client uit dit book
+        if book_opdrachtgevers is not None:
+            if opd_clean.lower() not in book_opdrachtgevers:
+                continue
+        in_period.append({
+            "id": ev.get("id"),
+            "titel": ev.get("titel"),
+            "date": ev.get("date"),
+            "end_date": ev.get("end_date"),
+            "opdrachtgever": opd_clean or "onbekend",
+            "onderwerp": ev.get("onderwerp"),
+            "pauze_minuten": ev.get("pauze_minuten") or 0,
+            "totaal_uren": ev.get("totaal_uren") or 0,
+        })
 
     in_period.sort(key=lambda x: x["date"])
 

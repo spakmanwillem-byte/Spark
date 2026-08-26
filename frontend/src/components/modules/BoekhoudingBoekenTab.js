@@ -7,7 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   BookOpen, Sparkles, ShoppingBag, Building, User, X,
-  Upload, Download, Settings, Wallet, RefreshCw, FileText, Plus,
+  Upload, Download, Settings, Wallet, RefreshCw, FileText, Plus, Clock, Briefcase,
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -219,6 +219,8 @@ function BookDetailBark({ bookId, userId, onClose }) {
         <div className="flex border-b border-slate-800">
           {[
             { id: 'entries', label: 'Kasboek', icon: FileText },
+            { id: 'uren', label: 'Uren', icon: Clock },
+            { id: 'clienten', label: 'Clienten', icon: Briefcase },
             { id: 'instellingen', label: 'Instellingen', icon: Settings },
             { id: 'sepa', label: 'SEPA', icon: Wallet },
           ].map((t) => {
@@ -294,6 +296,8 @@ function BookDetailBark({ bookId, userId, onClose }) {
               </div>
             </div>
           )}
+          {tab === 'uren' && <BookUrenPanel bookId={bookId} bookNaam={book.naam} userId={userId} kleur={book.kleur} />}
+          {tab === 'clienten' && <BookClientenPanel bookId={bookId} bookType={book.type} userId={userId} kleur={book.kleur} />}
           {tab === 'sepa' && (
             <div className="space-y-4" data-testid="book-sepa-tab">
               <div className="p-3 rounded-lg bg-slate-800/40 border border-slate-800">
@@ -326,6 +330,213 @@ function BookDetailBark({ bookId, userId, onClose }) {
             </div>
           )}
         </div>
+      </div>
+    </div>
+  );
+}
+
+
+// v13d_book_uren_panel_001 (sessie 56b) — Uren-samenvatting per book
+function BookUrenPanel({ bookId, bookNaam, userId, kleur }) {
+  const [period, setPeriod] = useState('maand');
+  const [anchor, setAnchor] = useState(new Date());
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const y = anchor.getFullYear(), m = anchor.getMonth() + 1, d = anchor.getDate();
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${API}/api/agenda/uren-rapport/${userId}?period=${period}&year=${y}&month=${m}&day=${d}&book_id=${bookId}&viewer_id=${userId}`)
+      .then(r => r.json()).then(d => { setData(d); setLoading(false); })
+      .catch(() => setLoading(false));
+    // eslint-disable-next-line
+  }, [bookId, userId, period, anchor]);
+
+  const shift = (dir) => {
+    const d = new Date(anchor);
+    if (period === 'dag') d.setDate(d.getDate() + dir);
+    else if (period === 'week') d.setDate(d.getDate() + 7 * dir);
+    else if (period === 'maand') d.setMonth(d.getMonth() + dir);
+    else d.setFullYear(d.getFullYear() + dir);
+    setAnchor(d);
+  };
+
+  const exportCSV = () => {
+    if (!data?.events?.length) return;
+    const rows = [['Datum', 'Titel', 'Opdrachtgever', 'Onderwerp', 'Pauze (min)', 'Uren']];
+    for (const e of data.events) {
+      rows.push([(e.date || '').slice(0, 10), (e.titel || '').replace(/,/g, ' '),
+        (e.opdrachtgever || '').replace(/,/g, ' '), (e.onderwerp || '').replace(/,/g, ' '),
+        e.pauze_minuten || 0, e.totaal_uren || 0]);
+    }
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `urenstaat_${bookNaam.replace(/[^a-zA-Z0-9]/g, '_')}_${data.label.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+    link.click();
+  };
+
+  return (
+    <div data-testid="book-uren-panel" className="space-y-3">
+      <div className="flex items-center gap-2 flex-wrap">
+        {['dag', 'week', 'maand', 'jaar'].map(p => (
+          <button key={p} data-testid={`book-uren-period-${p}`} onClick={() => setPeriod(p)}
+            className="px-3 py-1.5 rounded-lg text-xs font-medium transition"
+            style={period === p
+              ? { background: `${kleur}22`, borderWidth: '1px', borderStyle: 'solid', borderColor: `${kleur}60`, color: kleur }
+              : { background: 'rgba(30,41,59,0.5)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(51,65,85,0.5)', color: '#94a3b8' }}>
+            {p.charAt(0).toUpperCase() + p.slice(1)}
+          </button>
+        ))}
+        <button onClick={() => shift(-1)} className="ml-auto p-1.5 hover:bg-slate-800 rounded"><span className="text-xs text-slate-400">◀</span></button>
+        <p className="text-xs font-semibold text-white min-w-[140px] text-center">{data?.label || '...'}</p>
+        <button onClick={() => shift(1)} className="p-1.5 hover:bg-slate-800 rounded"><span className="text-xs text-slate-400">▶</span></button>
+        <button data-testid="book-uren-csv" onClick={exportCSV} disabled={!data?.events?.length}
+          className="flex items-center gap-1 px-2 py-1.5 rounded text-[10px] font-medium text-white disabled:opacity-40"
+          style={{ background: 'var(--app-secondary, #06b6d4)' }}>
+          <Download className="w-3 h-3" /> CSV
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div className="p-3 bg-slate-800/40 border border-slate-800 rounded-lg">
+          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Totaal uren</p>
+          <p className="text-2xl font-bold mt-0.5" style={{ color: kleur }}>{loading ? '...' : (data?.totaal_uren ?? 0)}</p>
+        </div>
+        <div className="p-3 bg-slate-800/40 border border-slate-800 rounded-lg">
+          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Events</p>
+          <p className="text-2xl font-bold text-white mt-0.5">{loading ? '...' : (data?.event_count ?? 0)}</p>
+        </div>
+      </div>
+
+      <div className="p-3 bg-slate-800/40 border border-slate-800 rounded-lg">
+        <p className="text-xs font-semibold text-white mb-2">Per opdrachtgever</p>
+        {!data || data.per_opdrachtgever.length === 0 ? (
+          <p className="text-[11px] text-slate-500 italic">Nog geen zakelijke uren voor {bookNaam} in deze periode. Koppel eerst clienten aan dit book en registreer zakelijke agenda-events.</p>
+        ) : data.per_opdrachtgever.map(row => (
+          <div key={row.opdrachtgever} className="flex items-center gap-2 py-1 text-xs">
+            <span className="text-white flex-1">{row.opdrachtgever}</span>
+            <span className="text-[10px] text-slate-500">{row.events}×</span>
+            <span className="font-bold" style={{ color: kleur }}>{row.uren}u</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+// v13d_book_clienten_panel_001 (sessie 56b) — Clienten per book, book-type-aware
+function BookClientenPanel({ bookId, bookType, userId, kleur }) {
+  const [clienten, setClienten] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showNew, setShowNew] = useState(false);
+  const [form, setForm] = useState({ naam: '', contactpersoon: '', email: '', telefoon: '', uurtarief: '' });
+
+  // Book-type bepaalt client_type: entity → zorgclient, shop → klant, rest → generiek
+  const clientType = bookType === 'entity' ? 'zorgclient' : bookType === 'shop' ? 'klant' : 'generiek';
+  const labelSingular = clientType === 'zorgclient' ? 'Zorgcliënt' : clientType === 'klant' ? 'Klant' : 'Client';
+
+  const load = () => {
+    setLoading(true);
+    fetch(`${API}/api/clienten/list/${userId}?viewer_id=${userId}&book_id=${bookId}`)
+      .then(r => r.json()).then(d => { setClienten(d.clienten || []); setLoading(false); })
+      .catch(() => setLoading(false));
+  };
+  useEffect(() => { load(); /* eslint-disable-next-line */ }, [bookId, userId]);
+
+  const create = async () => {
+    if (!form.naam.trim()) return;
+    await fetch(`${API}/api/clienten/create/${userId}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...form,
+        uurtarief: form.uurtarief ? Number(form.uurtarief) : null,
+        book_id: bookId,
+        client_type: clientType,
+        scope: 'zakelijk',
+      }),
+    });
+    setForm({ naam: '', contactpersoon: '', email: '', telefoon: '', uurtarief: '' });
+    setShowNew(false);
+    load();
+  };
+
+  const remove = async (c) => {
+    if (!window.confirm(`${labelSingular} "${c.naam}" verwijderen?`)) return;
+    await fetch(`${API}/api/clienten/delete/${userId}/${c.id}`, { method: 'DELETE' });
+    load();
+  };
+
+  return (
+    <div data-testid="book-clienten-panel" className="space-y-3">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs text-slate-400">
+            {clienten.length} {labelSingular.toLowerCase()}{clienten.length !== 1 ? 'en' : ''}
+            {clientType === 'zorgclient' && <span className="text-[10px] text-slate-500 ml-2">· dossier per cliënt</span>}
+            {clientType === 'klant' && <span className="text-[10px] text-slate-500 ml-2">· factuur-info per klant</span>}
+          </p>
+        </div>
+        <button data-testid="book-add-client-btn" onClick={() => setShowNew(!showNew)}
+          className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-white"
+          style={{ background: kleur }}>
+          <Plus className="w-3.5 h-3.5" /> Nieuw
+        </button>
+      </div>
+
+      {showNew && (
+        <div className="p-3 bg-slate-800/40 rounded-lg space-y-2" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: `${kleur}40` }}>
+          <input data-testid="book-client-naam" value={form.naam} onChange={e => setForm({ ...form, naam: e.target.value })}
+            placeholder={clientType === 'zorgclient' ? 'Naam cliënt...' : clientType === 'klant' ? 'Naam / bedrijf...' : 'Naam...'}
+            className="w-full px-2 py-1.5 bg-slate-900 border border-slate-700 rounded text-xs text-white placeholder-slate-500 focus:outline-none" />
+          <div className="grid grid-cols-2 gap-2">
+            <input value={form.contactpersoon} onChange={e => setForm({ ...form, contactpersoon: e.target.value })} placeholder="Contactpersoon..."
+              className="px-2 py-1.5 bg-slate-900 border border-slate-700 rounded text-xs text-white placeholder-slate-500 focus:outline-none" />
+            <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="Email..."
+              className="px-2 py-1.5 bg-slate-900 border border-slate-700 rounded text-xs text-white placeholder-slate-500 focus:outline-none" />
+            <input value={form.telefoon} onChange={e => setForm({ ...form, telefoon: e.target.value })} placeholder="Telefoon..."
+              className="px-2 py-1.5 bg-slate-900 border border-slate-700 rounded text-xs text-white placeholder-slate-500 focus:outline-none" />
+            <input type="number" step="0.5" value={form.uurtarief} onChange={e => setForm({ ...form, uurtarief: e.target.value })} placeholder="Uurtarief €..."
+              className="px-2 py-1.5 bg-slate-900 border border-slate-700 rounded text-xs text-white placeholder-slate-500 focus:outline-none" />
+          </div>
+          {clientType === 'zorgclient' && (
+            <p className="text-[10px] text-slate-500 italic">Meer zorg-velden (BSN, indicatie, huisarts) via de detail-view straks — placeholder klaar.</p>
+          )}
+          {clientType === 'klant' && (
+            <p className="text-[10px] text-slate-500 italic">Factuur-adres + betalingstermijn via detail-view — placeholder klaar.</p>
+          )}
+          <button data-testid="book-client-save" onClick={create}
+            className="w-full px-3 py-1.5 rounded text-xs font-medium text-white"
+            style={{ background: kleur }}>Opslaan</button>
+        </div>
+      )}
+
+      <div className="space-y-1">
+        {loading ? (
+          <p className="text-[11px] text-slate-500 italic">Laden...</p>
+        ) : clienten.length === 0 ? (
+          <div className="py-6 text-center border border-dashed border-slate-800 rounded-lg">
+            <Briefcase className="w-6 h-6 text-slate-700 mx-auto mb-1" />
+            <p className="text-[11px] text-slate-500">Nog geen {labelSingular.toLowerCase()}en gekoppeld aan {bookType === 'shop' ? 'deze winkel' : 'dit book'}.</p>
+          </div>
+        ) : clienten.map(c => (
+          <div key={c.id} data-testid={`book-client-${c.id}`} className="flex items-center gap-2 p-2 bg-slate-800/40 border border-slate-800 rounded">
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-white truncate">{c.naam}</p>
+              <p className="text-[10px] text-slate-500 truncate">
+                {c.contactpersoon || c.email || ''}
+                {c.uurtarief ? ` · €${c.uurtarief}/u` : ''}
+              </p>
+            </div>
+            <button onClick={() => remove(c)} className="p-0.5 text-slate-600"
+              onMouseEnter={e => { e.currentTarget.style.color = 'var(--alert-base)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; }}>
+              <X className="w-3 h-3" />
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

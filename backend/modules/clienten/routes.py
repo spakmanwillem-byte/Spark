@@ -36,6 +36,20 @@ class ClientCreate(BaseModel):
     uurtarief: Optional[float] = None
     notities: Optional[str] = None
     scope: Optional[str] = "zakelijk"  # standaard zakelijk, kan ook prive (particulier)
+    # v13d_client_book_type_001 (sessie 56b) — Willem: "zorg krijgt zorg-dossier,
+    # shop krijgt klant-facturatie, prive krijgt algemene client. Zelfde format,
+    # andere velden per book-type."
+    book_id: Optional[str] = None  # koppel client aan boek
+    client_type: Optional[str] = "generiek"  # 'zorgclient' | 'klant' | 'generiek'
+    # Zorg-specifieke placeholders
+    geboortedatum: Optional[str] = None
+    bsn: Optional[str] = None
+    zorgindicatie: Optional[str] = None
+    huisarts: Optional[str] = None
+    noodcontact: Optional[str] = None
+    # Klant-specifieke placeholders (facturatie)
+    factuur_adres: Optional[str] = None
+    betalingstermijn_dagen: Optional[int] = 14
 
 
 class ClientUpdate(BaseModel):
@@ -51,6 +65,15 @@ class ClientUpdate(BaseModel):
     uurtarief: Optional[float] = None
     notities: Optional[str] = None
     scope: Optional[str] = None
+    book_id: Optional[str] = None
+    client_type: Optional[str] = None
+    geboortedatum: Optional[str] = None
+    bsn: Optional[str] = None
+    zorgindicatie: Optional[str] = None
+    huisarts: Optional[str] = None
+    noodcontact: Optional[str] = None
+    factuur_adres: Optional[str] = None
+    betalingstermijn_dagen: Optional[int] = None
 
 
 class DossierEntry(BaseModel):
@@ -71,25 +94,32 @@ def _get_file(user_id: str) -> Path:
 
 
 @router.get("/index/{user_id}")
-async def list_clienten(user_id: str, viewer_id: Optional[str] = None):
-    """Compacte lijst — bedoeld voor dropdown-koppeling in agenda/boekhouding."""
+async def list_clienten(user_id: str, viewer_id: Optional[str] = None, book_id: Optional[str] = None):
+    """Compacte lijst — bedoeld voor dropdown-koppeling in agenda/boekhouding.
+    Filter optioneel op book_id (voor per-book weergave)."""
     from modules.core.privacy import require_access
     require_access(viewer_id or user_id, user_id)
     data = load_json(_get_file(user_id), default={"clienten": []})
-    # Compacte view: id, naam, uurtarief, scope
+    clienten = data.get("clienten", [])
+    if book_id:
+        clienten = [c for c in clienten if c.get("book_id") == book_id]
     return {"clienten": [
         {"id": c["id"], "naam": c["naam"], "contactpersoon": c.get("contactpersoon"),
-         "uurtarief": c.get("uurtarief"), "scope": c.get("scope", "zakelijk")}
-        for c in data.get("clienten", [])
+         "uurtarief": c.get("uurtarief"), "scope": c.get("scope", "zakelijk"),
+         "book_id": c.get("book_id"), "client_type": c.get("client_type", "generiek")}
+        for c in clienten
     ]}
 
 
 @router.get("/list/{user_id}")
-async def get_full_clienten(user_id: str, viewer_id: Optional[str] = None):
-    """Volledige lijst met alle velden."""
+async def get_full_clienten(user_id: str, viewer_id: Optional[str] = None, book_id: Optional[str] = None):
+    """Volledige lijst met alle velden. Filter optioneel op book_id."""
     from modules.core.privacy import require_access
     require_access(viewer_id or user_id, user_id)
-    return load_json(_get_file(user_id), default={"clienten": []})
+    data = load_json(_get_file(user_id), default={"clienten": []})
+    if book_id:
+        return {"clienten": [c for c in data.get("clienten", []) if c.get("book_id") == book_id]}
+    return data
 
 
 @router.get("/detail/{user_id}/{client_id}")
@@ -108,6 +138,7 @@ async def create_client(user_id: str, client: ClientCreate):
     fpath = _get_file(user_id)
     data = load_json(fpath, default={"clienten": []})
     scope = client.scope if client.scope in ("zakelijk", "prive") else "zakelijk"
+    client_type = client.client_type if client.client_type in ("zorgclient", "klant", "generiek") else "generiek"
     new_client = {
         "id": str(uuid.uuid4())[:8],
         "naam": client.naam,
@@ -122,6 +153,17 @@ async def create_client(user_id: str, client: ClientCreate):
         "uurtarief": client.uurtarief,
         "notities": client.notities,
         "scope": scope,
+        "book_id": client.book_id,
+        "client_type": client_type,
+        # Zorg-velden
+        "geboortedatum": client.geboortedatum,
+        "bsn": client.bsn,
+        "zorgindicatie": client.zorgindicatie,
+        "huisarts": client.huisarts,
+        "noodcontact": client.noodcontact,
+        # Klant/factuur-velden
+        "factuur_adres": client.factuur_adres,
+        "betalingstermijn_dagen": client.betalingstermijn_dagen,
         "aangemaakt_op": datetime.now(timezone.utc).isoformat(),
         "aangemaakt_door": user_id,
         "dossier": [],

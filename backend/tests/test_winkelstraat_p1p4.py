@@ -25,6 +25,37 @@ MARIEKE = "user-c609d7d1"   # Marieke gradatie 3
 GIJS = "user-a0ee2d7e"      # Gijs gradatie 3, 2 ROAR
 
 
+
+# v13d_pytest_book_teardown_001 (sessie 56b) — Willem: "je pytest laat TEST_
+# books achter in mijn boekhouding-tab". Shop-close markeert alleen status
+# 'closing', linked book blijft staan. Deze module-teardown ruimt alle
+# book-folders op die als naam met 'TEST_' beginnen.
+@pytest.fixture(scope="module", autouse=True)
+def _cleanup_test_books():
+    yield
+    import shutil, json
+    books_dir = Path("/app/backend/data/boekhouding/books")
+    if not books_dir.exists():
+        return
+    removed = []
+    for entry in books_dir.iterdir():
+        if not entry.is_dir():
+            continue
+        meta = entry / "_meta.json"
+        if not meta.exists():
+            continue
+        try:
+            m = json.loads(meta.read_text())
+            if (m.get("naam") or "").startswith("TEST_"):
+                shutil.rmtree(entry)
+                removed.append(m["naam"])
+        except Exception:
+            pass
+    if removed:
+        print(f"\n[cleanup] {len(removed)} TEST_ books opgeruimd: {removed}")
+
+
+
 # --------- Winkelstraat ---------
 class TestWinkelstraat:
     def test_list_shops(self):

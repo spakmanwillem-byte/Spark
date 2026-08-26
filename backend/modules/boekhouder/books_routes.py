@@ -85,11 +85,13 @@ class AddEntryIn(BaseModel):
 
 
 @router.get("/books")
-def list_books(viewer_id: str):
+def list_books(viewer_id: str, target_user_id: Optional[str] = None):
+    """List books voor viewer. Default: eigen books (ook voor admin).
+    Admin kan `target_user_id` meegeven om books van andere user te zien
+    (vanaf Beheer → Gebruikers → [user] pagina). v13d_admin_view_eigen_default_001."""
     # v13d_boekhouder_auto_prive_001 (sessie 55) — Willem: "iedere gebruiker
     # moet in zijn omgeving zijn eigen boekhouding". Als user nog geen privé-book
-    # heeft, autocreate 'm bij eerste GET. Zo krijgt elke user bij eerste
-    # bezoek automatisch een lege privé-boekhouding zonder admin-actie.
+    # heeft, autocreate 'm bij eerste GET.
     if viewer_id and viewer_id != "user-000":
         user = _get_user(viewer_id)
         if user:
@@ -107,8 +109,11 @@ def list_books(viewer_id: str):
                 except Exception as ex:
                     print(f"[auto-prive-book] kon geen privé-book aanmaken voor {viewer_id}: {ex}")
 
-    if _is_admin(viewer_id):
-        items = book_svc.list_books(owner_user_id=None)
+    # v13d_admin_view_eigen_default_001 (sessie 56b) — Willem: "ieder zijn eigen.
+    # Admin-hulp voor andere users doe ik via Beheer → Gebruikers, niet in mijn
+    # eigen boekhouding-tab". Admin kan cross-user zien via ?target_user_id=X.
+    if target_user_id and _is_admin(viewer_id):
+        items = book_svc.list_books(owner_user_id=target_user_id, include_system=True)
     else:
         items = book_svc.list_books(owner_user_id=viewer_id, include_system=True)
     return {"success": True, "books": items, "count": len(items)}

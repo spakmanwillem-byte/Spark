@@ -13,6 +13,8 @@ import { EmotiesPage } from "./components/spark/EmotiesPage";
 import { VerbandenPage } from "./components/spark/VerbandenPage";
 import { TriggersPage } from "./components/spark/TriggersPage";
 import { AgendaPage } from "./components/workspace/AgendaPage";
+import { ClientenPage } from "./components/workspace/ClientenPage";
+import { UrenRapportPage } from "./components/workspace/UrenRapportPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { ArchiefPage } from "./components/workspace/ArchiefPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
@@ -78,6 +80,8 @@ function AppContent() {
       '/modules/boekhouding': 'boekhouding',
       '/modules/community': 'community',
       '/modules/persons': 'persons',
+      '/modules/clienten': 'clienten',
+      '/modules/uren-rapport': 'uren-rapport',
       '/modules/integrations': 'integrations',
       '/workspace/voice': 'voice',
       '/profiel': 'profiel',
@@ -226,6 +230,10 @@ function AppContent() {
         return <TriggersPage onNavigate={handleNavigate} />;
       case 'calendar':
         return <AgendaPage onNavigate={handleNavigate} />;
+      case 'clienten':
+        return <ClientenPage onNavigate={handleNavigate} />;
+      case 'uren-rapport':
+        return <UrenRapportPage onNavigate={handleNavigate} />;
       case 'chat':
         return <GesprekkenPage onNavigate={handleNavigate} />;
       case 'archief':

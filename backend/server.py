@@ -154,6 +154,10 @@ app.include_router(triggers_router, prefix="/api")
 from modules.persons import persons_router
 app.include_router(persons_router, prefix="/api")
 
+# v13d_clienten_module_001 (sessie 56b) — opdrachtgevers/klanten dossier
+from modules.clienten import clienten_router
+app.include_router(clienten_router, prefix="/api")
+
 # Module 10: Dagboek
 from modules.dagboek import dagboek_router
 app.include_router(dagboek_router, prefix="/api")

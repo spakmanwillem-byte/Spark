@@ -187,3 +187,107 @@ async def archive_now_all():
 async def archive_now_user(user_id: str):
     """Trigger handmatig het maand-archief voor 1 user."""
     return _archive.archive_now(user_id)
+
+
+# v13d_uren_rapport_001 (sessie 56b) — Willem: "uren-registratie formulier per
+# dag/week/maand/jaar als bron waar wat we gemaakt hebben heen kan schrijven".
+# Aggregeert alle zakelijke agenda-events per opdrachtgever per periode.
+@router.get("/uren-rapport/{user_id}")
+async def uren_rapport(
+    user_id: str,
+    period: str = Query("maand", pattern="^(dag|week|maand|jaar)$"),
+    year: Optional[int] = None,
+    month: Optional[int] = None,
+    day: Optional[int] = None,
+    viewer_id: Optional[str] = None,
+):
+    """Uren-rapport voor een user over een periode.
+    - period=dag: geef year+month+day, of neem vandaag
+    - period=week: geef year+month+day binnen die week, of neem huidige week
+    - period=maand: geef year+month, of neem huidige maand
+    - period=jaar: geef year, of neem huidige jaar
+    """
+    require_access(viewer_id or user_id, user_id)
+    from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+
+    fpath = DATA_DIR / f"{user_id}.json"
+    data = load_json(fpath, default={"events": []})
+    events = data.get("events", []) or []
+
+    # Bepaal periode-range
+    today = _dt.now(_tz.utc).date()
+    if period == "dag":
+        target = _dt(year or today.year, month or today.month, day or today.day).date()
+        start = end = target
+        label = target.strftime("%A %d %b %Y")
+    elif period == "week":
+        anchor = _dt(year or today.year, month or today.month, day or today.day).date()
+        start = anchor - _td(days=anchor.weekday())  # ma
+        end = start + _td(days=6)  # zo
+        label = f"Week {start.isocalendar()[1]} · {start.strftime('%d %b')} - {end.strftime('%d %b %Y')}"
+    elif period == "jaar":
+        j = year or today.year
+        start = _dt(j, 1, 1).date(); end = _dt(j, 12, 31).date()
+        label = f"Jaar {j}"
+    else:  # maand
+        j = year or today.year; m = month or today.month
+        start = _dt(j, m, 1).date()
+        if m == 12:
+            end = _dt(j, 12, 31).date()
+        else:
+            end = (_dt(j, m + 1, 1) - _td(days=1)).date()
+        maand_namen = ["januari", "februari", "maart", "april", "mei", "juni",
+                       "juli", "augustus", "september", "oktober", "november", "december"]
+        label = f"{maand_namen[m - 1].capitalize()} {j}"
+
+    # Filter + aggregeer
+    in_period = []
+    for ev in events:
+        if ev.get("scope") != "zakelijk":
+            continue
+        d = ev.get("date", "")
+        if not d:
+            continue
+        try:
+            ev_date = _dt.fromisoformat(d.replace("Z", "+00:00")).date()
+        except Exception:
+            continue
+        if start <= ev_date <= end:
+            in_period.append({
+                "id": ev.get("id"),
+                "titel": ev.get("titel"),
+                "date": ev.get("date"),
+                "end_date": ev.get("end_date"),
+                "opdrachtgever": (ev.get("opdrachtgever") or "onbekend").strip(),
+                "onderwerp": ev.get("onderwerp"),
+                "pauze_minuten": ev.get("pauze_minuten") or 0,
+                "totaal_uren": ev.get("totaal_uren") or 0,
+            })
+
+    in_period.sort(key=lambda x: x["date"])
+
+    # Per opdrachtgever
+    per_opdr = {}
+    for ev in in_period:
+        opd = ev["opdrachtgever"]
+        per_opdr.setdefault(opd, {"opdrachtgever": opd, "uren": 0.0, "events": 0})
+        per_opdr[opd]["uren"] += ev["totaal_uren"] or 0
+        per_opdr[opd]["events"] += 1
+
+    per_opdr_list = sorted(per_opdr.values(), key=lambda x: -x["uren"])
+    for row in per_opdr_list:
+        row["uren"] = round(row["uren"], 2)
+
+    totaal_uren = round(sum(ev["totaal_uren"] or 0 for ev in in_period), 2)
+
+    return {
+        "period": period,
+        "label": label,
+        "start": str(start),
+        "end": str(end),
+        "totaal_uren": totaal_uren,
+        "event_count": len(in_period),
+        "per_opdrachtgever": per_opdr_list,
+        "events": in_period,
+    }
+

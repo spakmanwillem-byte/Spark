@@ -4,7 +4,7 @@ import {
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle, Volume2,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
-  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart,
+  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart, Briefcase, Clock,
   Activity, HelpCircle, Beaker
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -49,6 +49,8 @@ export const navigationConfig = {
       { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/modules/wallet' },
       { id: 'winkel', label: 'Winkel', icon: ShoppingBag, path: '/modules/winkel' },
       { id: 'boekhouding', label: 'Boekhouding', icon: BookMarked, path: '/modules/boekhouding' },
+      { id: 'clienten', label: 'Clienten', icon: Briefcase, path: '/modules/clienten' },
+      { id: 'uren-rapport', label: 'Urenstaat', icon: Clock, path: '/modules/uren-rapport' },
       { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements', adminOnly: true },
       { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard', adminOnly: true },
     ]

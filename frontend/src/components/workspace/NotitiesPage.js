@@ -215,7 +215,13 @@ export function NotitiesPage({ onNavigate }) {
             </div>
             <div className="ml-auto flex items-center gap-2">
               <button data-testid="report-bug-btn" onClick={() => { setShowBugForm(true); setBugSubmitMsg(null); }}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-red-300 border border-red-500/30 bg-red-500/5 hover:bg-red-500/10 transition-colors">
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                style={{
+                  color: 'color-mix(in srgb, var(--alert-base) 80%, white)',
+                  borderWidth: '1px', borderStyle: 'solid',
+                  borderColor: 'color-mix(in srgb, var(--alert-base) 30%, transparent)',
+                  background: 'color-mix(in srgb, var(--alert-base) 5%, transparent)',
+                }}>
                 <Bug className="w-3.5 h-3.5" /> Bug melden
               </button>
               <button data-testid="add-note-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>
@@ -228,7 +234,6 @@ export function NotitiesPage({ onNavigate }) {
               { id: 'all', label: 'Alles', icon: FileText, count: items.length },
               { id: 'notes', label: 'Notities', icon: StickyNote, count: notesTotal },
               { id: 'tasks', label: 'Taken', icon: ListTodo, count: tasksTotal },
-              { id: 'bugs', label: 'Bugs', icon: Bug, count: bugs.length || null },
               ...(isAdminViewer ? [{ id: 'deploy', label: 'Deploy', icon: Rocket, count: null }] : []),
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}
@@ -281,7 +286,7 @@ export function NotitiesPage({ onNavigate }) {
                 )}
                 <div className="flex justify-end gap-2 pt-1">
                   <button onClick={() => setShowBugForm(false)} className="px-3 py-1.5 text-xs text-slate-400 hover:text-white">Annuleer</button>
-                  <button data-testid="bug-submit" onClick={submitBug} className="px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-red-500 hover:bg-red-600">Verzenden</button>
+                  <button data-testid="bug-submit" onClick={submitBug} className="px-4 py-1.5 rounded-lg text-xs font-medium text-white hover:brightness-110" style={{ background: 'var(--alert-base)' }}>Verzenden</button>
                 </div>
               </div>
             </div>

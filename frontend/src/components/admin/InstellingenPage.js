@@ -409,7 +409,7 @@ const SCHEME_PRESETS = [
 ];
 
 function AdminColorScheme({ userId, userGrad }) {
-  const [scheme, setScheme] = React.useState({ primary: '#f59e0b', secondary: '#06b6d4', bg: '#0f172a' });
+  const [scheme, setScheme] = React.useState({ primary: '#f59e0b', secondary: '#06b6d4', bg: '#0f172a', alert: '#ef4444' });
   const [busy, setBusy] = React.useState(false);
   const [msg, setMsg] = React.useState(null);
   const canEdit = (userGrad ?? 7) <= 1;
@@ -422,6 +422,7 @@ function AdminColorScheme({ userId, userGrad }) {
         primary: s.app_primary_accent || '#f59e0b',
         secondary: s.app_secondary_accent || '#06b6d4',
         bg: s.app_background_tint || '#0f172a',
+        alert: s.app_alert_color || '#ef4444',
       };
       setScheme(next);
       applyToRoot(next);
@@ -432,6 +433,7 @@ function AdminColorScheme({ userId, userGrad }) {
     document.documentElement.style.setProperty('--app-primary', s.primary);
     document.documentElement.style.setProperty('--app-secondary', s.secondary);
     document.documentElement.style.setProperty('--app-bg-tint', s.bg);
+    document.documentElement.style.setProperty('--alert-base', s.alert);
   };
 
   const flash = (kind, text) => { setMsg({ kind, text }); setTimeout(() => setMsg(null), 2500); };
@@ -454,6 +456,7 @@ function AdminColorScheme({ userId, userGrad }) {
       await saveOne('app_primary_accent', next.primary);
       await saveOne('app_secondary_accent', next.secondary);
       await saveOne('app_background_tint', next.bg);
+      if (next.alert) await saveOne('app_alert_color', next.alert);
       setScheme(next);
       applyToRoot(next);
       flash('ok', 'Kleurenschema opgeslagen');
@@ -479,7 +482,8 @@ function AdminColorScheme({ userId, userGrad }) {
       return;
     }
     const key = field === 'primary' ? 'app_primary_accent' :
-                field === 'secondary' ? 'app_secondary_accent' : 'app_background_tint';
+                field === 'secondary' ? 'app_secondary_accent' :
+                field === 'alert' ? 'app_alert_color' : 'app_background_tint';
     setBusy(true);
     saveOne(key, v).then(() => flash('ok', 'Opgeslagen')).catch(e => flash('err', e.message)).finally(() => setBusy(false));
   };
@@ -494,6 +498,7 @@ function AdminColorScheme({ userId, userGrad }) {
             <div className="flex items-center gap-2 flex-wrap">
               <span className="px-3 py-1.5 rounded-lg text-xs font-medium" style={{ background: `${scheme.primary}22`, color: scheme.primary, border: `1px solid ${scheme.primary}50` }}>Primary</span>
               <span className="px-3 py-1.5 rounded-lg text-xs font-medium" style={{ background: `${scheme.secondary}22`, color: scheme.secondary, border: `1px solid ${scheme.secondary}50` }}>Secondary</span>
+              <span className="px-3 py-1.5 rounded-lg text-xs font-medium" style={{ background: `${scheme.alert}22`, color: scheme.alert, border: `1px solid ${scheme.alert}50` }}>Alert</span>
               <span className="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">Neutral</span>
             </div>
           </div>
@@ -532,10 +537,11 @@ function AdminColorScheme({ userId, userGrad }) {
       </div>
 
       {/* Custom hex pickers */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" data-testid="scheme-customs">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" data-testid="scheme-customs">
         {[
           { field: 'primary',   label: 'Primary accent',  hint: 'Hoofdkleur (buttons, highlights)' },
           { field: 'secondary', label: 'Secondary accent',hint: 'Secundair (badges, links)' },
+          { field: 'alert',     label: 'Alert / error',   hint: 'Rood-alternatief (Bug melden, offline, delete)' },
           { field: 'bg',        label: 'Background tint', hint: 'Donkere achtergrond' },
         ].map(({ field, label, hint }) => (
           <div key={field} className="p-3 rounded-lg bg-slate-800/40 border border-slate-800">

@@ -39,6 +39,10 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "app_primary_accent": {"type": "str", "scope": "system"},   # hex bv #f59e0b
     "app_secondary_accent": {"type": "str", "scope": "system"}, # hex bv #06b6d4
     "app_background_tint": {"type": "str", "scope": "system"},  # hex bv #0f172a
+    # v13d_app_alert_color_001 (sessie 56b) — semantische alert/error/offline
+    # kleur, tunable via App Kleurenschema. Alle rode buttons/statusmeldingen
+    # lezen dit via --alert-base CSS var.
+    "app_alert_color": {"type": "str", "scope": "system"},      # hex bv #ef4444
     # v13s_login_glow_config_001 — login-scherm glow + logo (systeem, admin only)
     # Zie Beheer → Instellingen → Beeld → "Login Glow & Spark-logo"
     "login_dots_count": {"type": "int", "scope": "system", "min": 4, "max": 24},        # aantal glow-puntjes (default 8)

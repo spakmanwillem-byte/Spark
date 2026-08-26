@@ -183,6 +183,8 @@ function AppContent() {
         apply('app_primary_accent', '--app-primary');
         apply('app_secondary_accent', '--app-secondary');
         apply('app_background_tint', '--app-bg-tint');
+        // v13d_app_alert_color_001 (sessie 56b) — semantische alert-kleur
+        apply('app_alert_color', '--alert-base');
       })
       .catch(() => {});
   }, [user?.id]);

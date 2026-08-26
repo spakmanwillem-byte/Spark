@@ -27,6 +27,7 @@ import { LlmBudgetSettingsWidget } from './widgets/LlmBudgetSettingsWidget';
 import { IncompleteCardsWidget } from './widgets/IncompleteCardsWidget';
 import { ShadowObserverWidget } from './widgets/ShadowObserverWidget';
 import { PerformanceWidget } from './widgets/PerformanceWidget';
+import { BugsListWidget } from './widgets/BugsListWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -98,6 +99,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 56',
     reden: "Willem: 'Performance-kaart hoort niet op dashboard, park in Widget Kladblok tot goede plek gevonden.'",
     Component: PerformanceWidget,
+  },
+  {
+    id: 'bugs-list',
+    naam: 'Bug meldingen',
+    doel: 'Admin-tab uit Notities & Taken: lijst van bug-reports, status wijzigen, bulk-close, verwijderen.',
+    waar_hoort_het: 'Beheer → eigen "Bug tracker" tab, of onder Analytics → Kwaliteit',
+    aangemaakt_op: '2026-02-25',
+    aangemaakt_door: 'e1 sessie 56b',
+    reden: "Willem: 'Bugs-tab in notities is een admin-ding, breng even onder in Widget Kladblok tot goede plek'.",
+    Component: BugsListWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

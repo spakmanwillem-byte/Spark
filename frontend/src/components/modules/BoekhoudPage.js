@@ -169,7 +169,8 @@ export function BoekhoudPage({ onNavigate }) {
   const tabs = isAdmin ? [
     { id: 'boeken', label: 'Boeken' },
     { id: 'winst', label: 'Spark Verdiensten' },  // v13k: platform-fee stroom (admin only)
-    { id: 'klanten', label: 'Klanten' },
+    // v13d_klanten_tab_removed_001 (sessie 56b) — Willem: "klanten-tab
+    // in boekhouding doen we niks mee, kan weg. Klanten leven nu per book."
   ] : [
     { id: 'boeken', label: 'Mijn Boeken' },
   ];
@@ -439,7 +440,6 @@ export function BoekhoudPage({ onNavigate }) {
               </>
             )}
 
-            {activeTab === 'klanten' && <KlantenTab API={API} />}
             {activeTab === 'boeken' && <BoekhoudingBoekenTab userId={userId} />}
             {activeTab === 'winst' && <WinstEventsTab userId={userId} />}
           </div>
@@ -483,86 +483,5 @@ export function BoekhoudPage({ onNavigate }) {
   );
 }
 
-// v6_bonnetje_001 — Klanten-tab toont per-klant aankoophistorie met link naar bonnetje-document
-function KlantenTab({ API }) {
-  const [klanten, setKlanten] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  React.useEffect(() => {
-    (async () => {
-      try {
-        // 1. Haal alle users op (zonder ankers en bots)
-        const users = await fetch(`${API}/api/auth/users?viewer_id=user-001`).then(r => r.json()).then(d => d.users || []);
-        const klantUsers = users.filter(u =>
-          !['user-000', 'user-001'].includes(u.id) && !(u.id || '').startsWith('bot-')
-        );
-        // 2. Voor elke klant: bonnetjes ophalen
-        const result = await Promise.all(klantUsers.map(async u => {
-          const b = await fetch(`${API}/api/bonnetjes/user/${u.id}`).then(r => r.json()).catch(() => ({ bonnetjes: [] }));
-          return { ...u, bonnetjes: b.bonnetjes || [] };
-        }));
-        setKlanten(result.filter(k => k.bonnetjes.length > 0));  // alleen klanten met aankopen
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [API]);
-
-  if (loading) return <div className="text-slate-400 text-sm py-8 text-center">Klanten laden...</div>;
-  if (klanten.length === 0) return (
-    <div className="py-12 text-center">
-      <BookMarked className="w-10 h-10 text-slate-700 mx-auto mb-3" />
-      <p className="text-sm text-slate-500">Nog geen klant-aankopen (anker-houders Spark/Willem worden niet getoond)</p>
-    </div>
-  );
-
-  return (
-    <div className="space-y-4" data-testid="boek-klanten-tab">
-      {klanten.map(k => {
-        const totaalIncl = k.bonnetjes.reduce((s, b) => s + (b.bedrag_eur || 0), 0);
-        const totaalBtw = k.bonnetjes.reduce((s, b) => s + (b.btw_eur || 0), 0);
-        const totaalNetto = k.bonnetjes.reduce((s, b) => s + (b.netto_eur || 0), 0);
-        const totaalTokens = k.bonnetjes.reduce((s, b) => s + (b.n_tokens || 0), 0);
-        return (
-          <div key={k.id} data-testid={`klant-card-${k.id}`}
-            className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-3">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <div>
-                <h3 className="text-base font-bold text-white">{k.naam}</h3>
-                <p className="text-[10px] text-slate-500 font-mono">{k.id}</p>
-              </div>
-              <div className="text-right">
-                <div className="text-xs text-slate-400">{k.bonnetjes.length} aankoop · {totaalTokens} ROAR</div>
-                <div className="text-sm text-emerald-300 font-semibold">€{totaalIncl.toFixed(2)} incl</div>
-                <div className="text-[10px] text-slate-500">netto €{totaalNetto.toFixed(2)} · BTW €{totaalBtw.toFixed(2)}</div>
-              </div>
-            </div>
-            <div className="space-y-1">
-              {k.bonnetjes.map(b => (
-                <div key={b.tx_id} className="flex items-center justify-between gap-3 py-2 px-3 bg-slate-800/40 rounded-lg text-xs">
-                  <div className="flex-1 min-w-0">
-                    <div className="text-slate-200">{b.n_tokens} ROAR — €{(b.bedrag_eur || 0).toFixed(2)} incl</div>
-                    <div className="text-[10px] text-slate-500">{(b.ts || '').slice(0, 16).replace('T', ' ')}</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-emerald-300">€{(b.netto_eur || 0).toFixed(2)}</div>
-                    <div className="text-[10px] text-amber-400">BTW €{(b.btw_eur || 0).toFixed(2)}</div>
-                  </div>
-                  <a
-                    data-testid={`bonnetje-link-${b.tx_id}`}
-                    href={`${API}/api/bonnetjes/${b.tx_id}/download/file`}
-                    target="_blank" rel="noreferrer"
-                    title="Download bonnetje (.md)"
-                    className="px-2 py-1 rounded bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-[10px] border border-amber-500/30">
-                    🧾 Bonnetje
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 export default BoekhoudPage;

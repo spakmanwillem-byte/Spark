@@ -28,6 +28,7 @@ import { IncompleteCardsWidget } from './widgets/IncompleteCardsWidget';
 import { ShadowObserverWidget } from './widgets/ShadowObserverWidget';
 import { PerformanceWidget } from './widgets/PerformanceWidget';
 import { BugsListWidget } from './widgets/BugsListWidget';
+import { DeployWidget } from './widgets/DeployWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -109,6 +110,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 56b',
     reden: "Willem: 'Bugs-tab in notities is een admin-ding, breng even onder in Widget Kladblok tot goede plek'.",
     Component: BugsListWidget,
+  },
+  {
+    id: 'deploy',
+    naam: 'Deploy Anchor',
+    doel: 'Admin-tab uit Notities & Taken: deploy/anchor state en actiepanel voor productie-promotie.',
+    waar_hoort_het: 'Beheer → eigen "Deploy" of "Systeem" tab',
+    aangemaakt_op: '2026-02-25',
+    aangemaakt_door: 'e1 sessie 56b',
+    reden: "Willem: 'Deploy-tab uit notities mag ook naar Widget Kladblok tot betere plek'.",
+    Component: DeployWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

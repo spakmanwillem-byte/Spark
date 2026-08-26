@@ -18,15 +18,15 @@
   "split_from": null,
   "children_max": 4,
   "endpoints": [
-    "GET /spark/kasboek/check",
-    "GET /spark/kasboek/entries",
-    "GET /spark/kasboek/history",
-    "GET /spark/kasboek/price-history",
-    "GET /spark/kasboek/reconcile",
-    "GET /spark/kasboek/saldo",
-    "GET /spark/kasboek/state",
-    "POST /spark/kasboek/price-snapshot",
-    "POST /spark/kasboek/reconcile/fix"
+    "GET /spark/deposit-watcher/check",
+    "GET /spark/deposit-watcher/entries",
+    "GET /spark/deposit-watcher/history",
+    "GET /spark/deposit-watcher/price-history",
+    "GET /spark/deposit-watcher/reconcile",
+    "GET /spark/deposit-watcher/saldo",
+    "GET /spark/deposit-watcher/state",
+    "POST /spark/deposit-watcher/price-snapshot",
+    "POST /spark/deposit-watcher/reconcile/fix"
   ],
   "tags": [],
   "encryption": {

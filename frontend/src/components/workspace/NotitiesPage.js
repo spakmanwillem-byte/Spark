@@ -3,9 +3,8 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   StickyNote, Plus, Search, Trash2,
   Tag, Clock, ListTodo, FileText, Save,
-  Circle, CheckCircle, Bug, AlertTriangle, Rocket, Pencil, X
+  Circle, CheckCircle, Bug, AlertTriangle, Pencil, X
 } from 'lucide-react';
-import { DeployAnchorPanel } from './DeployAnchorPanel';
 import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -214,18 +213,18 @@ export function NotitiesPage({ onNavigate }) {
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">{notesTotal} notities, {tasksDone}/{tasksTotal} taken klaar</p>
             </div>
             <div className="ml-auto flex items-center gap-2">
+              <button data-testid="add-note-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>
+                <Plus className="w-3.5 h-3.5" /> Nieuw
+              </button>
               <button data-testid="report-bug-btn" onClick={() => { setShowBugForm(true); setBugSubmitMsg(null); }}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                className="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
                 style={{
                   color: 'color-mix(in srgb, var(--alert-base) 80%, white)',
                   borderWidth: '1px', borderStyle: 'solid',
                   borderColor: 'color-mix(in srgb, var(--alert-base) 30%, transparent)',
                   background: 'color-mix(in srgb, var(--alert-base) 5%, transparent)',
                 }}>
-                <Bug className="w-3.5 h-3.5" /> Bug melden
-              </button>
-              <button data-testid="add-note-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'var(--glow-base)' }}>
-                <Plus className="w-3.5 h-3.5" /> Nieuw
+                Bug melden
               </button>
             </div>
           </div>
@@ -234,7 +233,6 @@ export function NotitiesPage({ onNavigate }) {
               { id: 'all', label: 'Alles', icon: FileText, count: items.length },
               { id: 'notes', label: 'Notities', icon: StickyNote, count: notesTotal },
               { id: 'tasks', label: 'Taken', icon: ListTodo, count: tasksTotal },
-              ...(isAdminViewer ? [{ id: 'deploy', label: 'Deploy', icon: Rocket, count: null }] : []),
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}
                 className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors"
@@ -292,9 +290,7 @@ export function NotitiesPage({ onNavigate }) {
             </div>
           )}
 
-          {viewMode === 'deploy' && isAdminViewer ? (
-            <DeployAnchorPanel viewerId={user.id} />
-          ) : viewMode === 'bugs' && isAdminViewer ? (
+          {viewMode === 'bugs' && isAdminViewer ? (
             <div className="max-w-3xl mx-auto space-y-2">
               {/* v6_bug_bulk_close_001 — Bulk-close knop */}
               <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">

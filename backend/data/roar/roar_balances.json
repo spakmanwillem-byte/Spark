@@ -5,8 +5,9 @@
   "previous_tx_count": 13,
   "balances": {
     "user-001": 3,
-    "user-000": 8,
-    "user-a0ee2d7e": 2
+    "user-000": 7,
+    "user-a0ee2d7e": 2,
+    "user-4d9b59aa": 1
   },
   "transactions": [
     {
@@ -154,7 +155,7 @@
       "amount": 1,
       "cost_eur": 13.93,
       "price_per_token": 13.93,
-      "description": "Spark mint 1 ROAR — dekking: Bitvavo €108.66 @ €13.93"
+      "description": "Spark mint 1 ROAR \u2014 dekking: Bitvavo \u20ac108.66 @ \u20ac13.93"
     },
     {
       "id": "bec893521218",
@@ -195,7 +196,7 @@
       "amount": 2,
       "cost_eur": 26.28,
       "price_per_token": 13.14,
-      "description": "Spark mint 2 ROAR — dekking: Bitvavo €126.40 @ €13.14"
+      "description": "Spark mint 2 ROAR \u2014 dekking: Bitvavo \u20ac126.40 @ \u20ac13.14"
     },
     {
       "id": "9e6248eb-0444-422f-94d4-070a391cc0d1",
@@ -216,7 +217,19 @@
       "amount": 1,
       "cost_eur": 11.14,
       "price_per_token": 11.14,
-      "description": "Spark mint 1 ROAR — dekking: Bitvavo €68.58 @ €11.14"
+      "description": "Spark mint 1 ROAR \u2014 dekking: Bitvavo \u20ac68.58 @ \u20ac11.14"
+    },
+    {
+      "id": "6504057daffb",
+      "ts": "2026-08-27T20:23:49.544382+00:00",
+      "type": "gift_accepted_retro",
+      "from_user_id": "user-000",
+      "to_user_id": "user-4d9b59aa",
+      "amount": 1,
+      "gift_id": "8dc10eb9-a7d2-45db-b580-08c83f288c06",
+      "note": "Retro-accept van verlopen gift (Willem 2026-02-24): Gerben krijgt token alsnog. Bookkeeping klopt daarna 1-op-1 met potjes.",
+      "status": "completed",
+      "operator": "user-001"
     }
   ],
   "total_supply": 1000000,
@@ -269,7 +282,7 @@
       "ts": "2026-06-03T12:04:57.407379+00:00",
       "action": "manual_balance_reset",
       "by": "user-001",
-      "reason": "Pre-redeploy schoonmaak — Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
+      "reason": "Pre-redeploy schoonmaak \u2014 Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
       "new_balances": {
         "user-000": 5,
         "user-001": 5,
@@ -355,6 +368,12 @@
       "to_user_id": "user-a0ee2d7e",
       "amount": 2,
       "gift_id": "33b5a700-fc3e-47cb-a815-cb71fb815741"
+    },
+    {
+      "ts": "2026-08-27T20:23:49.544382+00:00",
+      "action": "gift_retro_accept",
+      "gift_id": "8dc10eb9-a7d2-45db-b580-08c83f288c06",
+      "operator": "user-001"
     }
   ],
   "_clean_slate_1juni": {
@@ -367,10 +386,10 @@
       "ts": "2026-05-31T21:15:37.057791+00:00",
       "to_user_id": "user-000",
       "amount": 3,
-      "reason": "Surplus uit Bitvavo €29.74 → 3 tokens gemint naar Spark (nominaal €30, klein gemiddeld-correctie €0.26)",
+      "reason": "Surplus uit Bitvavo \u20ac29.74 \u2192 3 tokens gemint naar Spark (nominaal \u20ac30, klein gemiddeld-correctie \u20ac0.26)",
       "milestone": "echte_start_v1"
     }
   ],
   "_reset_at": "2026-07-09T22:03:12.853929+00:00",
-  "_reset_note": "v8_live_start: 5 tokens bij Willem (user-001) — Spark's trader-fonds. Treasury = TOTAL - 5."
+  "_reset_note": "v8_live_start: 5 tokens bij Willem (user-001) \u2014 Spark's trader-fonds. Treasury = TOTAL - 5."
 }

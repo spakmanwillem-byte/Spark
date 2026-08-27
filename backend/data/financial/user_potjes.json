@@ -77,7 +77,7 @@
               "expected_coin": 0.03993849,
               "actual_coin": 0.00095644,
               "repaired_at": "2026-08-22T06:26:48.046289+00:00",
-              "repair_reason": "echte SELL @ €252.2500 uit trade_history",
+              "repair_reason": "echte SELL @ \u20ac252.2500 uit trade_history",
               "old_netto": -0.607,
               "new_netto": -0.1062,
               "old_exit_price": 239.71,
@@ -152,7 +152,7 @@
               "expected_coin": 0.00015294,
               "actual_coin": 2.08e-06,
               "repaired_at": "2026-08-22T06:26:48.046289+00:00",
-              "repair_reason": "geen SELL in trade_history → break-even",
+              "repair_reason": "geen SELL in trade_history \u2192 break-even",
               "old_netto": -0.0649,
               "new_netto": 0.0,
               "old_exit_price": 65943.0,
@@ -474,7 +474,7 @@
             {
               "ts": "2026-08-27T19:27:50.574506+00:00",
               "action": "ghost_reset",
-              "reason": "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue",
+              "reason": "position.is_open=True maar geen BUY in trade_log \u2014 waarschijnlijk ghost door balance-issue",
               "before": {
                 "is_open": true,
                 "entry_price": 0.0,
@@ -486,82 +486,23 @@
             }
           ],
           "last_action": "AUTO-FIX ghost reset @ 2026-08-27T19:27"
-        },
-        {
-          "id": "pot-008",
-          "index": 7,
-          "nummer": 8,
-          "capital": 10.1,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "market": "ETH-EUR",
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null,
-            "amount_eur": null
-          },
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "trade_log": [],
-          "minted_at": "2026-08-21T17:22:00.697624+00:00",
-          "minted_from": "overflow_auto_mint_instant",
-          "last_action": "AUTO-FIX ghost reset @ 2026-08-27T19:27",
-          "audit_log": [
-            {
-              "ts": "2026-08-27T19:27:50.574506+00:00",
-              "action": "ghost_reset",
-              "reason": "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue",
-              "before": {
-                "is_open": true,
-                "entry_price": -52.277195,
-                "size": 0.00095644,
-                "highest_price": 243.16,
-                "trailing_active": true,
-                "entry_time": "2026-08-23T13:29:12.254549+00:00"
-              }
-            }
-          ]
-        },
-        {
-          "id": "pot-009",
-          "index": 8,
-          "capital": 10.1,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "SOL-EUR",
-          "assigned_market": null,
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-08-22T14:59:58.592451+00:00",
-          "last_action": null,
-          "source": "spark_mint_bonus",
-          "slot_type": "trade_slot_from_mint",
-          "origin_tx": "0623b1eb8635"
         }
       ],
       "last_buy_cycle": null,
       "overflow_pool": 0.3983,
-      "created_at": "2026-07-09T22:02:52.798397+00:00"
+      "created_at": "2026-07-09T22:02:52.798397+00:00",
+      "audit_log": [
+        {
+          "ts": "2026-08-27T20:23:49.544382+00:00",
+          "action": "remove_orphan_pots",
+          "removed": [
+            "pot-008",
+            "pot-009"
+          ],
+          "reason": "Retro-accept Gerben gift + supply-integrity 1-token=1-potje herstel",
+          "operator": "user-001"
+        }
+      ]
     },
     "user-001": {
       "potjes": [
@@ -610,7 +551,7 @@
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "note": "v11_potjes_reconcile — auto-added to match token balance",
+          "note": "v11_potjes_reconcile \u2014 auto-added to match token balance",
           "reconcile_audit": [],
           "original_max_size": 50.0
         },
@@ -634,7 +575,7 @@
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "note": "v11_potjes_reconcile — auto-added to match token balance",
+          "note": "v11_potjes_reconcile \u2014 auto-added to match token balance",
           "reconcile_audit": [],
           "original_max_size": 50.0
         }
@@ -707,7 +648,7 @@
               "expected_coin": 0.03997789,
               "actual_coin": 0.00095644,
               "repaired_at": "2026-08-22T06:26:48.046289+00:00",
-              "repair_reason": "geen SELL in trade_history → break-even",
+              "repair_reason": "geen SELL in trade_history \u2192 break-even",
               "old_netto": -0.5196,
               "new_netto": 0.0,
               "old_exit_price": 241.66,
@@ -797,11 +738,53 @@
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
       "created_at": "2026-08-27T19:27:35.964256+00:00"
+    },
+    "user-4d9b59aa": {
+      "user_id": "user-4d9b59aa",
+      "market": "BTC-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "nummer": 1,
+          "capital": 10.1,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "market": "BTC-EUR",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "filled_coin": 0
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-08-27T20:23:49.544382+00:00",
+          "minted_at": "2026-08-27T20:23:49.544382+00:00",
+          "minted_from": "gift_retro_accept:8dc10eb9-a7d2-45db-b580-08c83f288c06",
+          "trade_log": [],
+          "reconcile_audit": [],
+          "original_max_size": 50.0,
+          "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) \u2014 dekking is de van Spark afgeboekte token."
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-27T20:23:49.544382+00:00"
     }
   },
   "_pre_deploy_reset_at": "2026-06-03T14:02:40.629249+00:00",
   "_reset_at": "2026-08-21T12:18:27.720377+00:00",
   "_reset_note": "Volledige trader-reset: potjes op nul, positions gesloten, stats leeg, trade_log gewist. Schone start voor nieuwe strategie.",
   "_trim_at": "2026-07-09T22:03:38.887525+00:00",
-  "_final_reset_at": "2026-07-09T22:04:13.835479+00:00"
+  "_final_reset_at": "2026-07-09T22:04:13.835479+00:00",
+  "_last_supply_integrity_fix_at": "2026-08-27T20:23:49.544382+00:00",
+  "_last_supply_integrity_fix_note": "Willem retro-accept Gerben gift + Spark 2 ghost-pots opgeruimd (pot-008,pot-009)."
 }

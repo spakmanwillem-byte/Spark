@@ -112,10 +112,14 @@ def list_books(viewer_id: str, target_user_id: Optional[str] = None):
     # v13d_admin_view_eigen_default_001 (sessie 56b) — Willem: "ieder zijn eigen.
     # Admin-hulp voor andere users doe ik via Beheer → Gebruikers, niet in mijn
     # eigen boekhouding-tab". Admin kan cross-user zien via ?target_user_id=X.
+    # v13d_spark_core_admin_only_001 (sessie 56b) — Willem: "users zien Spark
+    # Core (systeem-book) in eigen boekhoud, dat is admin only". include_system
+    # alleen voor admins.
+    _include_system = _is_admin(viewer_id)
     if target_user_id and _is_admin(viewer_id):
         items = book_svc.list_books(owner_user_id=target_user_id, include_system=True)
     else:
-        items = book_svc.list_books(owner_user_id=viewer_id, include_system=True)
+        items = book_svc.list_books(owner_user_id=viewer_id, include_system=_include_system)
     return {"success": True, "books": items, "count": len(items)}
 
 

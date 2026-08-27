@@ -12,12 +12,13 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": -52.277195,
-            "size": 0.00095644,
-            "highest_price": 243.16,
-            "trailing_active": true,
-            "entry_time": "2026-08-23T13:28:57.557582+00:00"
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "BCH-EUR",
           "stats": {
@@ -84,8 +85,23 @@
               "capital_after_repair": 10.0238
             }
           ],
-          "last_action": "SELL cluster 3e50fd @ EUR1.3549 | share EUR+0.0765",
-          "original_max_size": 0.0
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 0.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": -52.277195,
+                "size": 0.00095644,
+                "highest_price": 243.16,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:57.557582+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
         },
         {
           "id": "pot-002",
@@ -95,12 +111,13 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.0,
-            "size": 2.08e-06,
-            "highest_price": 69352.0,
-            "trailing_active": true,
-            "entry_time": "2026-08-23T13:28:57.991259+00:00"
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "BTC-EUR",
           "stats": {
@@ -143,8 +160,23 @@
               "capital_after_repair": 10.15
             }
           ],
-          "last_action": "SELL @ €65943.00 | reconcile | netto €-0.065",
-          "original_max_size": 50.0
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 2.08e-06,
+                "highest_price": 69352.0,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:57.991259+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
         },
         {
           "id": "pot-003",
@@ -154,12 +186,13 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.0,
-            "size": 4.671e-05,
-            "highest_price": 2192.82,
-            "trailing_active": true,
-            "entry_time": "2026-08-23T13:29:01.179555+00:00"
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ETH-EUR",
           "stats": {
@@ -195,8 +228,23 @@
               "actual_coin": 4.671e-05
             }
           ],
-          "last_action": "SELL @ €2081.75 | reconcile | netto €+0.117",
-          "original_max_size": 50.0
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 4.671e-05,
+                "highest_price": 2192.82,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:29:01.179555+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
         },
         {
           "id": "pot-004",
@@ -206,12 +254,13 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.0,
-            "size": 0.00138955,
-            "highest_price": 93.796,
-            "trailing_active": true,
-            "entry_time": "2026-08-23T13:28:59.425169+00:00"
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "SOL-EUR",
           "stats": {
@@ -247,8 +296,23 @@
               "actual_coin": 0.00138955
             }
           ],
-          "last_action": "SELL @ €80.15 | reconcile | netto €+0.199",
-          "original_max_size": 50.0
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 0.00138955,
+                "highest_price": 93.796,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:59.425169+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
         },
         {
           "id": "pot-005",
@@ -258,12 +322,13 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.0,
-            "size": 1.90146,
-            "highest_price": 0.19657,
-            "trailing_active": true,
-            "entry_time": "2026-08-23T13:28:56.784912+00:00"
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ADA-EUR",
           "stats": {
@@ -299,8 +364,23 @@
               "actual_coin": 1.90146
             }
           ],
-          "last_action": "SELL @ €0.19 | reconcile | netto €+0.257",
-          "original_max_size": 50.0
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 1.90146,
+                "highest_price": 0.19657,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:56.784912+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
         },
         {
           "id": "pot-006",
@@ -313,12 +393,13 @@
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": true,
-            "entry_price": -52.277195,
-            "size": 0.00095644,
-            "highest_price": 243.16,
-            "trailing_active": true,
-            "entry_time": "2026-08-23T13:29:03.099558+00:00"
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "stats": {
             "trades": 2,
@@ -344,14 +425,29 @@
               "entry_price": 1.3529
             }
           ],
-          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €1.3529",
-          "original_max_size": 50.0
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": -52.277195,
+                "size": 0.00095644,
+                "highest_price": 243.16,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:29:03.099558+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
         },
         {
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.0,
+          "capital": 10.1,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "ETH-EUR",
@@ -395,7 +491,7 @@
           "id": "pot-008",
           "index": 7,
           "nummer": 8,
-          "capital": 10.0,
+          "capital": 10.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -437,7 +533,7 @@
         {
           "id": "pot-009",
           "index": 8,
-          "capital": 10.0,
+          "capital": 10.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,

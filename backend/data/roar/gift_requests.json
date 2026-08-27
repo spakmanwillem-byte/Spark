@@ -135,11 +135,12 @@
       "recipient_naam": "Gerben",
       "amount": 1,
       "note": "Deze krijg je van mij. maar altijd welkom om een token te kopen.",
-      "status": "pending",
+      "status": "expired",
       "created_at": "2026-08-25T16:51:48.183965+00:00",
       "expires_at": "2026-08-26T16:51:48.183969+00:00",
       "accepted_at": null,
-      "rejected_at": null
+      "rejected_at": null,
+      "expired_at": "2026-08-27T19:50:41.500776+00:00"
     }
   ],
   "_arch_ref": "DSP-006 — gift lifecycle state. Financial transfer logged separately in roar_balances.transactions[] na accept. Privacy: bevat user-pairs."

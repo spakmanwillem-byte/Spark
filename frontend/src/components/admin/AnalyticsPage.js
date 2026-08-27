@@ -1560,6 +1560,26 @@ function TradeAnalyticsTab() {
               className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 disabled:opacity-40 text-red-400 rounded text-[11px] font-medium">
               ⏹ Stop alle
             </button>
+            <button
+              data-testid="reset-all-potjes-btn"
+              disabled={bulkBusy}
+              title="Zet alle open potjes naar 'vrij' — clean slate na trader-issue"
+              onClick={async () => {
+                if (!window.confirm('Alle open potjes op VRIJ zetten voor ALLE users? Trade-history blijft in audit_log.')) return;
+                // Loop de bots (elk heeft eigen user_id) en reset per user
+                const uids = Array.from(new Set(bots.map(b => b.user_id)));
+                let total = 0;
+                for (const uid of uids) {
+                  const r = await fetch(`${API}/api/trade/potjes/reset-all-to-free/${uid}?dry_run=false`, { method: 'POST' })
+                    .then(x => x.json()).catch(() => null);
+                  if (r?.success) total += r.n_reset || 0;
+                }
+                alert(`${total} potjes gereset naar VRIJ.`);
+                load();
+              }}
+              className="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 disabled:opacity-40 text-amber-300 rounded text-[11px] font-medium">
+              ↺ Reset alle potjes
+            </button>
             <button onClick={load} disabled={loading} data-testid="refresh-bots"
               className="text-xs text-slate-400 hover:text-white ml-2">
               {loading ? '...' : 'Vernieuwen'}

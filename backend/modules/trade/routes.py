@@ -1637,6 +1637,245 @@ async def reconcile_close_sold_all(dry_run: bool = True):
     }
 
 
+# v13d_potjes_ghost_fix_001 (sessie 56b) — Willem: "trader op live gestopt na
+# ghost-pots door lege Bitvavo-saldo. Kan je alles rechtzetten?"
+#
+# Detecteert 2 soorten fout-state:
+#   1. GHOST: position.is_open=True maar géén BUY in trade_log (state-corruption
+#      door partial fill of order-rejection tijdens lege balance)
+#   2. HOLLOW: position.is_open=True, position.amount_eur > 0, maar geen filled_coin
+#      registratie (dus we WETEN niet of Bitvavo werkelijk heeft gevuld)
+#
+# Actie per fout-pot: reset naar 'vrij' status + audit-log entry.
+# Standaard dry_run=True voor veilig eerst kijken.
+@router.post("/potjes/auto-fix-ghosts/{user_id}")
+async def auto_fix_ghost_potjes(user_id: str, dry_run: bool = True):
+    """Detecteer + herstel ghost/hollow potjes na trading incident.
+
+    Args:
+        user_id: welke user's potjes checken
+        dry_run: True = alleen tonen wat er zou gebeuren, geen wijziging
+    """
+    import copy
+    from datetime import datetime as _dt, timezone as _tz
+    from modules.trade import potjes as _p
+    data = _p._load(user_id)
+    user = (data.get("users") or {}).get(user_id, {})
+    pots = user.get("potjes", [])
+    if not pots:
+        return {"success": False, "error": f"Geen potjes voor {user_id}", "n_ghost": 0}
+
+    fixed = []
+    skipped = []
+    now = _dt.now(_tz.utc).isoformat()
+
+    for i, pot in enumerate(pots):
+        pos = pot.get("position") or {}
+        if not pos.get("is_open"):
+            continue
+
+        trade_log = pot.get("trade_log") or []
+        buys = [t for t in trade_log if t.get("side") == "BUY"]
+        reason = None
+        severity = None
+
+        if not buys:
+            reason = "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue"
+            severity = "ghost"
+        elif pos.get("amount_eur") and pos.get("amount_eur") > 0 and not pos.get("filled_coin"):
+            # v13d_note — kan echte order zijn of hollow. Zonder Bitvavo-verify NIET
+            # auto-closen; wel taggen zodat UI 'm markeert. Sluiten doet Willem via reconcile-sync.
+            reason = "position open zonder filled_coin registratie — mogelijk hollow, niet auto-gesloten"
+            severity = "hollow-warning"
+
+        if not reason:
+            skipped.append({"id": pot["id"], "market": pot.get("market"), "reason": "OK"})
+            continue
+
+        entry = {
+            "pot_id": pot["id"],
+            "market": pot.get("market"),
+            "reason": reason,
+            "severity": severity,
+            "was_open_since": pos.get("entry_time"),
+            "amount_eur": pos.get("amount_eur"),
+            "entry_price": pos.get("entry_price"),
+        }
+
+        if not dry_run and severity == "ghost":
+            # Reset naar vrij (behoud stats/trade_log voor history)
+            pots[i]["position"] = {
+                "is_open": False, "entry_price": None, "highest_price": None,
+                "trailing_active": False, "entry_time": None, "amount_eur": None,
+            }
+            pots[i].setdefault("audit_log", []).append({
+                "ts": now, "action": "ghost_reset",
+                "reason": reason, "before": pos,
+            })
+            pots[i]["last_action"] = f"AUTO-FIX ghost reset @ {now[:16]}"
+            entry["action_taken"] = "reset_to_free"
+        elif not dry_run and severity == "hollow-warning":
+            # Tag maar sluit niet — hollow-check moet handmatig met Bitvavo-sync
+            pots[i]["hollow_flagged_at"] = now
+            pots[i]["hollow_reason"] = reason
+            entry["action_taken"] = "flagged_hollow"
+        else:
+            entry["action_taken"] = "would_" + ("reset" if severity == "ghost" else "flag") + " (dry_run)"
+
+        fixed.append(entry)
+
+    if not dry_run and fixed:
+        _p._save(data)
+
+    return {
+        "success": True,
+        "user_id": user_id,
+        "dry_run": dry_run,
+        "n_ghost": sum(1 for f in fixed if f["severity"] == "ghost"),
+        "n_hollow": sum(1 for f in fixed if f["severity"] == "hollow-warning"),
+        "fixed": fixed,
+        "n_ok": len(skipped),
+    }
+
+
+@router.post("/potjes/auto-fix-ghosts-all")
+async def auto_fix_ghost_potjes_all(dry_run: bool = True):
+    """Draai auto-fix-ghosts voor ALLE users met potjes."""
+    from modules.trade import potjes as _p
+    data = _p._load("dummy")  # laadt hele bestand
+    users = list((data.get("users") or {}).keys())
+    results = {}
+    totals = {"n_ghost": 0, "n_hollow": 0, "n_ok": 0}
+    for uid in users:
+        r = await auto_fix_ghost_potjes(uid, dry_run=dry_run)
+        results[uid] = r
+        totals["n_ghost"] += r.get("n_ghost", 0)
+        totals["n_hollow"] += r.get("n_hollow", 0)
+        totals["n_ok"] += r.get("n_ok", 0)
+    return {"success": True, "dry_run": dry_run, "totals": totals, "per_user": results}
+
+
+# v13d_potjes_sync_bitvavo_ijkpunt_001 (sessie 56b) — Willem: "kan je Bitvavo
+# API uitlezen én papertrail om kloppend te maken toch. Nieuw ijkpunt."
+#
+# Complete "make it right" flow:
+#   1. Fetch actual coin balance per market van Bitvavo
+#   2. Per market: pair coin met anchor-pot (of eerste open pot)
+#   3. Zet position.filled_coin = actual Bitvavo hoeveelheid
+#   4. Zet entry_price naar actual price (nu)
+#   5. Als Bitvavo 0 heeft maar pot open → auto-close (was ghost)
+#   6. Als Bitvavo coin heeft maar geen pot → return als orphan (Willem doet zelf)
+#   7. Papertrail-log entry per market als "ijkpunt" event
+@router.post("/potjes/sync-from-bitvavo-ijkpunt/{user_id}")
+async def sync_potjes_from_bitvavo_ijkpunt(user_id: str, dry_run: bool = True):
+    """Sync alle potjes-state met wat écht op Bitvavo staat. Nieuw ijkpunt."""
+    from datetime import datetime as _dt, timezone as _tz
+    from modules.trade import potjes as _p
+    from modules.trade.monitor import fetch_bitvavo_balance
+    from modules.trade.bitvavo_client import get_price as _get_price
+
+    data = _p._load(user_id)
+    user = (data.get("users") or {}).get(user_id, {})
+    pots = user.get("potjes", [])
+    if not pots:
+        return {"success": False, "error": f"Geen potjes voor {user_id}"}
+
+    # 1) Fetch actual Bitvavo balance
+    bal_resp = fetch_bitvavo_balance(user_id) or {}
+    balances = bal_resp.get("balances") or []
+    coin_actual = {}
+    for b in balances:
+        sym = str(b.get("symbol", ""))
+        try:
+            avail = float(b.get("available") or 0)
+        except Exception:
+            avail = 0.0
+        if avail > 0 and sym != "EUR":
+            coin_actual[sym] = avail
+
+    # 2) Group pots per market
+    now = _dt.now(_tz.utc).isoformat()
+    per_market = {}
+    for i, pot in enumerate(pots):
+        m = pot.get("market")
+        if not m:
+            continue
+        per_market.setdefault(m, []).append((i, pot))
+
+    results = []
+    for market, mp_pots in per_market.items():
+        base = market.split("-")[0]
+        actual_coin = coin_actual.get(base, 0.0)
+        current_price = _get_price(market) or 0.0
+
+        # Zoek anchor of eerste open
+        open_pots = [(i, p) for i, p in mp_pots if (p.get("position") or {}).get("is_open")]
+        anchor = next(((i, p) for i, p in mp_pots if p.get("pot_locked")), None) or (open_pots[0] if open_pots else None)
+
+        entry = {"market": market, "coin_actual": actual_coin, "current_price": current_price,
+                 "open_pots": len(open_pots), "action": None}
+
+        if actual_coin <= 0 and open_pots:
+            # Bitvavo heeft 0, potjes zijn open → alle open pots resetten (ghost)
+            entry["action"] = f"reset_{len(open_pots)}_open_pots_to_free"
+            if not dry_run:
+                for i, _pot in open_pots:
+                    pots[i].setdefault("audit_log", []).append({
+                        "ts": now, "action": "ijkpunt_reset_bitvavo_zero",
+                        "before": pots[i].get("position"),
+                    })
+                    pots[i]["position"] = {"is_open": False, "entry_price": None,
+                                            "highest_price": None, "trailing_active": False,
+                                            "entry_time": None, "amount_eur": None, "filled_coin": 0}
+                    pots[i]["last_action"] = f"IJKPUNT reset (Bitvavo=0) @ {now[:16]}"
+        elif actual_coin > 0 and anchor:
+            i, p = anchor
+            entry["action"] = f"sync_anchor_pot_{p['id']}_to_coin_{actual_coin:.6f}"
+            if not dry_run:
+                pos = pots[i].get("position") or {}
+                pots[i].setdefault("audit_log", []).append({
+                    "ts": now, "action": "ijkpunt_sync_from_bitvavo",
+                    "before": {"filled_coin": pos.get("filled_coin"),
+                               "entry_price": pos.get("entry_price"),
+                               "amount_eur": pos.get("amount_eur")},
+                    "bitvavo_actual": actual_coin,
+                })
+                pots[i]["position"] = {
+                    "is_open": True,
+                    "entry_price": current_price or pos.get("entry_price"),
+                    "highest_price": current_price or pos.get("highest_price"),
+                    "trailing_active": pos.get("trailing_active", False),
+                    "entry_time": pos.get("entry_time") or now,
+                    "amount_eur": round(actual_coin * (current_price or 0), 2),
+                    "filled_coin": actual_coin,
+                }
+                pots[i]["last_action"] = f"IJKPUNT sync = {actual_coin:.6f} {base} @ €{current_price} · {now[:16]}"
+        elif actual_coin > 0 and not anchor:
+            entry["action"] = "orphan_coin_on_bitvavo_no_pot"
+        else:
+            entry["action"] = "no_action"
+
+        results.append(entry)
+
+    # 3) Papertrail: log ijkpunt-event
+    if not dry_run:
+        _p._save(data)
+        try:
+            from modules.boekhouder.papertrail import log_event as pt_log
+            pt_log("trader_ijkpunt", {
+                "user_id": user_id, "ts": now,
+                "bitvavo_balances": coin_actual,
+                "actions": results,
+            })
+        except Exception as ex:
+            print(f"[ijkpunt] papertrail log skipped: {ex}")
+
+    return {"success": True, "dry_run": dry_run, "user_id": user_id,
+            "bitvavo_coins": coin_actual, "per_market": results,
+            "ijkpunt_ts": now if not dry_run else None}
+
+
+
 @router.get("/potjes/{user_id}")
 async def get_user_potjes(user_id: str):
     """Haal potjes overzicht op — v10_finance_hub: overlay dynamische capital uit token-prijs.

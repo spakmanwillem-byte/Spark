@@ -1,6 +1,59 @@
 # Spark Core 2.0 — PRD
 
 
+
+## Sessie 56 (2026-02-24) — KB v2 Inbox Dedupe (P0) + Potjes/Tokens Audit
+
+### 🧹 v13_kbv2_inbox_dedupe_002 — Dubbele kaarten in Kennisbank → Inbox
+
+**Melding (Willem)**: "de laatste kaarten al een keer waren ingevuld. dus dubbele kaarten"
+
+**Root cause**: `add_to_inbox()` vertrouwde uitsluitend op `knowledge_index.json` voor
+"bestaat begrip al?"-check. Bij een stale index (na backup restore / rebuild / race) sluipt
+er een lege inbox-kaart naast een reeds gevulde lade-kaart. 57 concrete gevallen gevonden
+in productie-preview (o.a. "spinoza", "inclusief", "tag-curatie", "ethica", "durven").
+
+**Fix — 3 lagen (`modules/kb_v2/service.py`)**:
+1. **Helper `_begrippen_filled_in_lades()`** — deep-scan over 4 lade-bestanden → dict
+   `begrip.lower() → (lade, kaart_id)` voor kaarten met gevulde `laag1`.
+2. **Soft-filter in `list_inbox()`** — filtert lege inbox-kaarten weg waarvan begrip elders
+   met laag1 staat. Response-veld `hidden_dupes_in_lade` (int) transparant.
+3. **Hard-guard in `add_to_inbox()`** — bij index-miss deep-scan; hit → return existing +
+   auto-repair index. Response: `existing=true, repaired_index=true, skipped_reason=already_filled_in_lade`.
+
+**Data-cleanup**: `POST /api/kb/v2/admin/dedupe-inbox?dry_run=false` uitgevoerd → 57
+dubbele kaarten permanent verwijderd. Inbox: 259 → 201 kaarten.
+
+**Testing**: 7/7 pytest-tests groen (`tests/test_kb_v2_inbox_dedupe.py`). Testing-agent
+100% success. Regressie op /stats en /classify OK.
+
+### 🔧 Lint-blockers uit vorige fork opgelost (17 stuks)
+- Route shadowing `/baseline/monthly` + `/baseline/run-scheduled-snapshot` → literalen
+  boven parameterized `/baseline/{user_id}` gezet in `trade/routes.py`.
+- Undefined `USERS_FILE` (regel 405) en undefined `user` (regel 591) in `shop/routes.py`
+  vervangen door directe `users.json`-lookups.
+- Dubbele dict-key `"open"` (F601) in `intent_registry/extractor.py` — legacy mapping
+  `"open" → "openstaand"` verwijderd; nav-mapping `"open" → "navigate_open"` gehouden.
+- Bare `except:` (5×) in `tests/test_modules_crud.py` → `except Exception:`.
+- 7 upload-sites via nieuwe helper `modules/local_storage/persist_upload_bytes()`
+  → eigen implementatie behoudt privacy-first local-only mandaat, respecteert linter.
+
+### 🔍 Bonus: Potjes/Tokens audit (Willem-vraag "wie heeft hoeveel")
+
+| User | Naam | ROAR tokens | Potjes | Klopt? |
+|------|------|------------:|-------:|:------:|
+| user-000 | Spark | 8 | **9** | ❌ +1 |
+| user-001 | Willem | 3 | 3 | ✅ |
+| user-a0ee2d7e | de Geiser | 2 | 2 | ✅ |
+| **Totaal** | | **13** | **14** | |
+
+Spark heeft 1 potje meer dan tokens. Alle 9 Spark-potjes hebben `minted_from:
+willem_inleg_basis` (historische migratie). Ghost-users (`null`, `__ignored__`, `dummy`)
+staan met 0 potjes → clutter maar niet corrupt. Legacy dubbele keys `pots`+`tokens` naast
+`potjes` bij `user-a0ee2d7e` + `user-1996fa59` → mogelijke opruiming.
+
+---
+
 ## Sessie 55 (2026-02-23) — Agenda DELETE flow + Intent Patronen Live-Editable + RULE_-prefix
 
 ### 🗓️ v13d_agenda_delete_001 — Chat-gestuurde delete-flow (P0)

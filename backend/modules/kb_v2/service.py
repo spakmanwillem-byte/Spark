@@ -49,6 +49,29 @@ def _index_path() -> Path:
     return V2_DIR / "knowledge_index.json"
 
 
+# v13_kbv2_inbox_dedupe_002 — Willem 2026-08-27:
+# "Ik zag dubbele kaarten in Inbox — begrip dat ik al eerder ingevuld had."
+# Root cause: knowledge_index.json kan stale zijn, waardoor add_to_inbox()
+# geen dubbel-detectie doet en een lege kaart naast de gevulde lade-kaart
+# neerzet. Deze helper doet een DEEP-scan over de 4 lade-bestanden en
+# retourneert een set van begrippen die daar met een gevulde laag1 staan.
+# Wordt gebruikt door list_inbox (soft-filter zonder data te muteren) en
+# door add_to_inbox (harde weiger + auto-repair index).
+def _begrippen_filled_in_lades() -> Dict[str, tuple]:
+    """Returns dict begrip.lower() → (lade, kaart_id) voor kaarten met gevulde laag1."""
+    result: Dict[str, tuple] = {}
+    for L in LADES:
+        d = load_json(_lade_path(L), default={"kaarten": []})
+        for k in d.get("kaarten", []):
+            b = (k.get("begrip") or "").lower().strip()
+            l1 = (k.get("lagen", {}) or {}).get("laag1", "") if isinstance(k.get("lagen"), dict) else ""
+            if b and (l1 or "").strip():
+                # Eerst-gevonden wint bij dubbels in verschillende lades (self-heal via dedupe)
+                result.setdefault(b, (L, k.get("id")))
+    return result
+
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -342,6 +365,28 @@ def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str =
     """
     data = load_json(_inbox_path(), default={"kaarten": []})
     kaarten = data.get("kaarten", [])
+
+    # v13_kbv2_inbox_dedupe_002 — Filter LEGE inbox-kaarten weg als het begrip
+    # elders in een lade al mét gevulde laag1 bestaat. Data zelf blijft intact
+    # (admin /dedupe-inbox verwijdert pas permanent), dit is de read-side guard
+    # zodat Willem geen dubbele kaarten meer ziet in Kennisbank → Inbox.
+    _lade_filled = _begrippen_filled_in_lades()
+    if _lade_filled:
+        _pre = len(kaarten)
+        _filtered = []
+        for k in kaarten:
+            b = (k.get("begrip") or "").lower().strip()
+            l1 = ((k.get("lagen", {}) or {}).get("laag1", "") if isinstance(k.get("lagen"), dict) else "") or ""
+            # skip: leeg inbox-kaart maar begrip staat al gevuld in een lade
+            if b and b in _lade_filled and not l1.strip():
+                continue
+            _filtered.append(k)
+        kaarten = _filtered
+        # transparant meesturen naar UI zodat we weten hoeveel we geskipt hebben
+        _hidden_dupes = _pre - len(kaarten)
+    else:
+        _hidden_dupes = 0
+
     if reason:
         kaarten = [k for k in kaarten if k.get("_inbox_reason") == reason]
     if search:
@@ -381,6 +426,7 @@ def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str =
         "sort": sort,
         "kaarten": kaarten[offset:offset + limit],
         "redenen": _count_reasons(data.get("kaarten", [])),
+        "hidden_dupes_in_lade": _hidden_dupes,
     }
 
 
@@ -1004,6 +1050,31 @@ def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000", d
     existing = find_by_begrip(begrip)
     if existing:
         return {"success": True, "kaart": existing["kaart"], "existing": True, "lade": existing["lade"]}
+
+    # 1b. v13_kbv2_inbox_dedupe_002 — Index-miss fallback:
+    # Index kan stale zijn (herbouwd, backup restore, race). Voordat we een
+    # nieuwe (mogelijk dubbele) kaart aanmaken, doen we ALTIJD een deep-scan
+    # over de 4 lade-bestanden. Als het begrip daar al gevuld staat: return
+    # existing + auto-repair index. Dit voorkomt de "dubbele kaart" bug.
+    _lade_hit = _begrippen_filled_in_lades().get(nb)
+    if _lade_hit:
+        _lade_name, _lade_id = _lade_hit
+        ld = load_json(_lade_path(_lade_name), default={"kaarten": []})
+        _kaart = next((k for k in ld.get("kaarten", []) if k.get("id") == _lade_id), None)
+        if _kaart:
+            # herstel index
+            idx = load_json(_index_path(), default={"entries": {}})
+            idx.setdefault("entries", {})[nb] = {
+                "kaart_id": _lade_id, "lade": _lade_name,
+                "has_lagen": [k for k, v in (_kaart.get("lagen") or {}).items() if (v or "").strip()],
+                "last_updated": _now(),
+            }
+            save_json(_index_path(), idx)
+            return {
+                "success": True, "kaart": _kaart, "existing": True,
+                "lade": _lade_name, "repaired_index": True,
+                "skipped_reason": "already_filled_in_lade",
+            }
 
     # 2. Deep scan alleen expliciet aanvragen (was default → grote IO-kosten)
     if deep_scan:

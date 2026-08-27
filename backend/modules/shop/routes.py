@@ -402,7 +402,7 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
         ANCHOR_USERS = {"user-000", "user-001"}
         is_anchor = user_id in ANCHOR_USERS
         # Lookup naam uit users.json (variable `user` bestaat niet in deze scope — was bug)
-        _users_data = load_json(USERS_FILE, default={"users": []})
+        _users_data = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
         _ulist = _users_data.get("users", []) if isinstance(_users_data, dict) else _users_data
         buyer_naam = next((u.get("naam") for u in _ulist if u.get("id") == user_id), user_id)
         on_token_buy(
@@ -587,8 +587,10 @@ async def sell_tokens(user_id: str, req: SellTokenRequest):
     # v6_accounting_hooks_001 — sell-back → expense spark_core (Refunds)
     try:
         from modules.accounting.hooks import on_sell_back
+        _sell_users = load_json(DATA_DIR / "system" / "users.json", default={"users": []}).get("users", [])
+        _seller_naam = next((u.get("naam") for u in _sell_users if u.get("id") == user_id), user_id)
         on_sell_back(
-            seller_user_id=user_id, seller_naam=user.get("naam") or user_id,
+            seller_user_id=user_id, seller_naam=_seller_naam or user_id,
             tokens=amount_tokens, total_eur=amount_eur, ref_id=tx["id"],
         )
     except Exception as ex:
@@ -684,8 +686,8 @@ async def upload_product_image(
     user_foto_dir.mkdir(parents=True, exist_ok=True)
     file_id = uuid.uuid4().hex[:12]
     safe_name = f"{file_id}{ext}"
-    dest = user_foto_dir / safe_name
-    dest.write_bytes(data_bytes)
+    from modules.local_storage import persist_upload_bytes
+    dest = persist_upload_bytes(user_foto_dir / safe_name, data_bytes)
 
     # Lees product-info voor betere index-entry
     pfile = _shop_products_path(shop_id)

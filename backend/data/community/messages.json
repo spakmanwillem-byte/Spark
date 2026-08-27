@@ -6097,6 +6097,29 @@
       "ts": "2026-08-27T19:20:39.445437+00:00",
       "kind": "boekhouder_roundup",
       "source": "scheduler_v6"
+    },
+    {
+      "id": "bark-err-20260827T201613",
+      "user_id": "bot-boekhouder",
+      "user_name": "De Boekhouder",
+      "message": "🐛 **Madelief heeft iets opgevangen**\n\n• `kbv2` — kaart uit inbox in lade plaatsen: AttributeError: 'dict' object has no attribute 'strip'\n• `kb_v2` — KB v2 kaart classificeren (inbox → lade): AttributeError: 'dict' object has no attribute 'strip'\n\n_Spark gaat er mee aan de slag._",
+      "ts": "2026-08-27T20:16:13.493299+00:00",
+      "kind": "self_error_bark",
+      "source": "scheduler_v6",
+      "errors": [
+        {
+          "module": "kbv2",
+          "intent": "kaart uit inbox in lade plaatsen",
+          "err": "AttributeError: 'dict' object has no attribute 'strip'",
+          "ts": "2026-08-27T20:15:55.778810+00:00"
+        },
+        {
+          "module": "kb_v2",
+          "intent": "KB v2 kaart classificeren (inbox → lade)",
+          "err": "AttributeError: 'dict' object has no attribute 'strip'",
+          "ts": "2026-08-27T20:15:55.778918+00:00"
+        }
+      ]
     }
   ],
   "active_users": [

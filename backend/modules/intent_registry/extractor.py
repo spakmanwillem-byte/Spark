@@ -33,7 +33,7 @@ _KEYWORD_MAP = {
     "gebruikers": "gebruikers", "leden": "gebruikers", "users": "gebruikers",
     # taken
     "taak": "taken", "taken": "taken", "todo": "taken", "to-do": "taken",
-    "openstaand": "openstaand", "open": "openstaand",
+    "openstaand": "openstaand",
     # notities
     "notitie": "notitie", "noteer": "notitie", "memo": "notitie",
     "onthoud": "onthouden", "onthouden": "onthouden",

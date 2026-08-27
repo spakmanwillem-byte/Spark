@@ -484,8 +484,8 @@ async def restore(file: UploadFile = File(...), confirm: str = Form("false")):
         try:
             data = zf.read(name)
             existed = target.exists()
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(data)
+            from modules.local_storage import persist_upload_bytes
+            persist_upload_bytes(target, data)
             if existed:
                 written.append(name)
             else:

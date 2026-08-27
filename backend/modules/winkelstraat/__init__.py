@@ -280,8 +280,10 @@ async def upload_shop_logo(shop_id: str, logo: UploadFile = File(...), actor_use
     target_dir = Path(__file__).parent.parent.parent / "data" / "users" / owner / "shops" / shop_id
     os.makedirs(target_dir, exist_ok=True)
     target = target_dir / f"logo.{ext}"
-    with open(target, "wb") as f:
-        shutil.copyfileobj(logo.file, f)
+    logo.file.seek(0)
+    _logo_bytes = logo.file.read()
+    from modules.local_storage import persist_upload_bytes
+    persist_upload_bytes(target, _logo_bytes)
     # Static URL via /api/shop/container-static/{shop_id}/logo.{ext}
     rel_url = f"/api/winkelstraat/shops/{shop_id}/logo.{ext}"
     shop["logo_url"] = rel_url

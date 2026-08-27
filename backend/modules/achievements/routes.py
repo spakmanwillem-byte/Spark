@@ -162,8 +162,8 @@ async def admin_upload_achievement_icon(
     ext = Path(original).suffix.lower() or ".png"
     file_id = uuid.uuid4().hex[:12]
     safe = f"{file_id}{ext}"
-    dest = ARCHIVE_DIR / cat / safe
-    dest.write_bytes(raw)
+    from modules.local_storage import persist_upload_bytes
+    dest = persist_upload_bytes(ARCHIVE_DIR / cat / safe, raw)
     entry = {
         "id": file_id, "filename": safe, "original_name": original,
         "category": cat, "extension": ext,

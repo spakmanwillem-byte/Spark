@@ -327,7 +327,7 @@ def cleanup_test_data():
         for note in notes_res.json().get("notes", []):
             if note.get("titel", "").startswith("TEST_"):
                 requests.delete(f"{BASE_URL}/api/notes/delete/{note['id']}")
-    except:
+    except Exception:
         pass
     
     # Cleanup tasks
@@ -336,7 +336,7 @@ def cleanup_test_data():
         for task in tasks_res.json().get("tasks", []):
             if task.get("task", "").startswith("TEST_"):
                 requests.delete(f"{BASE_URL}/api/notes/tasks/delete/{task['id']}")
-    except:
+    except Exception:
         pass
     
     # Cleanup events
@@ -345,7 +345,7 @@ def cleanup_test_data():
         for event in events_res.json().get("events", []):
             if event.get("titel", "").startswith("TEST_"):
                 requests.delete(f"{BASE_URL}/api/agenda/events/user-001/{event['id']}")
-    except:
+    except Exception:
         pass
     
     # Cleanup dagboek entries
@@ -354,7 +354,7 @@ def cleanup_test_data():
         for entry in entries_res.json().get("entries", []):
             if entry.get("content", "").startswith("TEST_"):
                 requests.delete(f"{BASE_URL}/api/dagboek/entries/user-001/{entry['id']}")
-    except:
+    except Exception:
         pass
     
     # Cleanup persons
@@ -363,7 +363,7 @@ def cleanup_test_data():
         for person in persons_res.json().get("persons", []):
             if person.get("naam", "").startswith("TEST_"):
                 requests.delete(f"{BASE_URL}/api/persons/cards/user-001/{person['id']}")
-    except:
+    except Exception:
         pass
     
     print("\n✓ Cleanup: Removed all TEST_ prefixed data")

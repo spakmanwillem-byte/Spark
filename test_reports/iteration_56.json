@@ -1,0 +1,34 @@
+{
+  "summary": "Backend regressietest voor KB v2 inbox dedupe-fix (v6_kbv2_dedupe_001). 7/7 pytest tests slagen. Alle 5 fix-eisen + 2 regressies (stats, classify) geverifieerd tegen live preview URL. Nieuwe response-shape `hidden_dupes_in_lade=0` is aanwezig. Spinoza-guard werkt: bestaand-in-lade begrip krijgt `existing=true` + `lade=weten` en inbox groeit NIET. Uniek nieuw begrip voegt kaart toe (+1). Dry-run dedupe retourneert removed=0. Er is 1 pre-existing bug ontdekt in classify_card (niet gerelateerd aan deze fix): AttributeError als `lagen.laag1` als dict wordt aangeleverd i.p.v. string.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "POST /api/kb/v2/classify",
+        "issue": "500 Internal Server Error wanneer updates.lagen.laag1 als dict {wie,wat,waarom,...} wordt aangeleverd. service.py:808 doet `(v or '').strip()` op dict values. Werkt wel met string laag1. Pre-existing bug, niet veroorzaakt door dedupe-fix. Frontend die 5W-dict stuurt zal crashen."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_kb_v2_inbox_dedupe.py",
+    "/app/test_reports/pytest/kb_v2_inbox_dedupe.xml"
+  ],
+  "action_items": [
+    "Optioneel: fix service.classify_card lagen_filled iteratie zodat dict-laagwaarden niet crashen (regel ~808 service.py: check isinstance(v, dict) → check dict-values individueel)."
+  ],
+  "critical_code_review_comments": [
+    "service.classify_card `lagen_filled = sum(1 for v in ... if (v or '').strip())` neemt aan dat lagen-values strings zijn, maar lade-files bewaren laag1 ook als dict (5W-structuur). Type-inconsistentie tussen inbox (string) en lades (dict) is technische schuld.",
+    "routes.py file is 1626 regels — overweeg opsplitsen (>700 lijnenrichtlijn)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_kb_v2_inbox_dedupe.py"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "n/a (skipped)"},
+  "test_credentials": "geen auth vereist voor KB v2 endpoints",
+  "seed_data_creation": "Tijdens de test wordt 1 unieke inbox-kaart aangemaakt met begrip `test-dupe-guard-<uuid>` en daarna via /classify verplaatst naar lade `weten` (met laag1='regressie-test-laag1-inhoud'). Elke run voegt 1 blijvend kaartje toe aan knowledge_v2_weten.json — main-agent kan die als test-artefact opruimen indien gewenst.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Test bestand /app/backend/tests/test_kb_v2_inbox_dedupe.py bevat 7 tests voor de KB v2 dedupe-fix. Draai met: pytest /app/backend/tests/test_kb_v2_inbox_dedupe.py -v. Elke run maakt een test-dupe-guard-* kaart in inbox + verplaatst deze naar lade weten met laag1 als STRING (niet dict, want dict laat classify crashen). BASE_URL komt uit /app/frontend/.env → REACT_APP_BACKEND_URL.",
+  "rca of the issue": "Origineel probleem (Willem): dubbele kaarten in Kennisbank → Inbox. Fix (E1): (a) helper `_begrippen_filled_in_lades()` scant lade-files, (b) `list_inbox()` filtert inbox-kaarten die al gevuld in lade zitten + returned counter `hidden_dupes_in_lade`, (c) `add_to_inbox()` doet deep-scan bij index-miss om echte duplicaten te voorkomen, (d) admin/dedupe-inbox is uitgevoerd (259→201). Verificatie: hidden_dupes_in_lade=0, spinoza-add levert existing=true, geen inbox-groei, dry_run-dedupe=0 removed. Alles conform verwachting."
+}

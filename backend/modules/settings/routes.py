@@ -249,7 +249,8 @@ async def upload_spark_logo(viewer_id: str = Form(...), file: UploadFile = File(
     content = await file.read()
     if len(content) > 5 * 1024 * 1024:  # 5 MB cap
         raise HTTPException(status_code=413, detail="Logo mag max 5 MB zijn")
-    target.write_bytes(content)
+    from modules.local_storage import persist_upload_bytes
+    persist_upload_bytes(target, content)
 
     # Update system setting met de public serve URL (via /api/settings/spark-logo/serve)
     from datetime import datetime, timezone

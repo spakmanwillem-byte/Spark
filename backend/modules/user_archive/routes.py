@@ -157,10 +157,8 @@ async def upload_file(
 
     file_id = uuid.uuid4().hex[:12]
     safe_name = f"{file_id}{ext}"
-    dest = user_dir / category / safe_name
-
-    with open(dest, "wb") as f:
-        f.write(content)
+    from modules.local_storage import persist_upload_bytes
+    dest = persist_upload_bytes(user_dir / category / safe_name, content)
 
     entry = {
         "id": file_id,

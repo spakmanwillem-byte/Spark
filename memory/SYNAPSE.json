@@ -1,19 +1,19 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-08-26T07:54:36.227915+00:00",
+  "generated_at": "2026-08-26T12:00:21.261568+00:00",
   "summary": {
-    "total_containers": 123,
+    "total_containers": 125,
     "by_status": {
-      "active": 110,
+      "active": 111,
       "unknown": 3,
-      "skeleton": 10
+      "skeleton": 11
     },
     "by_container_type": {
-      "dir": 77,
-      "data": 46
+      "dir": 78,
+      "data": 47
     },
-    "total_endpoints_detected": 647
+    "total_endpoints_detected": 656
   },
   "tree": {
     "backend_modules": {
@@ -224,6 +224,7 @@
           "GET /agenda/archive/{user_id}",
           "GET /agenda/archive/{user_id}/{month}",
           "GET /agenda/events/{user_id}",
+          "GET /agenda/uren-rapport/{user_id}",
           "POST /agenda/archive-now",
           "POST /agenda/archive-now/{user_id}",
           "POST /agenda/events/{user_id}",
@@ -935,6 +936,42 @@
           "key_id": null,
           "key_holder": null
         }
+      },
+      "backend/modules/clienten": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "clienten",
+        "doel": "(clienten — geen doel-omschrijving)",
+        "container_type": "dir",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [
+          "DELETE /clienten/delete/{user_id}/{client_id}",
+          "GET /clienten/detail/{user_id}/{client_id}",
+          "GET /clienten/index/{user_id}",
+          "GET /clienten/list/{user_id}",
+          "POST /clienten/create/{user_id}",
+          "POST /clienten/dossier/{user_id}/{client_id}",
+          "POST /clienten/learning/{user_id}/{client_id}",
+          "PUT /clienten/update/{user_id}/{client_id}"
+        ],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-08-26T12:00:20.743901+00:00",
+        "last_touched": "2026-08-26T12:00:20.743901+00:00",
+        "activity_count": 0,
+        "file_count": 2,
+        "subdir_count": 0,
+        "extra": {}
       },
       "backend/modules/contacts": {
         "_arch_ref": "v6_synapse_001",
@@ -2998,7 +3035,7 @@
         "created_at": "2026-05-26T15:54:32.283390+00:00",
         "last_touched": "2026-05-26T15:54:32.283390+00:00",
         "activity_count": 0,
-        "file_count": 19,
+        "file_count": 20,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3349,7 +3386,7 @@
         "created_at": "2026-05-26T15:54:32.302855+00:00",
         "last_touched": "2026-05-26T15:54:32.302855+00:00",
         "activity_count": 0,
-        "file_count": 16,
+        "file_count": 18,
         "subdir_count": 0,
         "extra": {}
       }
@@ -3538,8 +3575,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.306301+00:00",
-        "last_touched": "2026-08-26T07:44:09.093027+00:00",
-        "activity_count": 55,
+        "last_touched": "2026-08-26T08:08:41.352165+00:00",
+        "activity_count": 57,
         "file_count": 22,
         "subdir_count": 0,
         "extra": {},
@@ -3599,8 +3636,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-31T23:48:37.354567+00:00",
-        "last_touched": "2026-08-26T07:37:31.675348+00:00",
-        "activity_count": 306,
+        "last_touched": "2026-08-26T11:43:10.173277+00:00",
+        "activity_count": 310,
         "file_count": 11,
         "subdir_count": 1,
         "extra": {}
@@ -3628,7 +3665,7 @@
         "created_at": "2026-08-22T14:57:35.355095+00:00",
         "last_touched": "2026-08-22T14:57:35.355095+00:00",
         "activity_count": 0,
-        "file_count": 49,
+        "file_count": 37,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3734,10 +3771,37 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-08-26T07:44:08.679370+00:00",
-        "activity_count": 4001,
+        "last_touched": "2026-08-26T12:00:11.079488+00:00",
+        "activity_count": 4022,
         "file_count": 182,
         "subdir_count": 3,
+        "extra": {}
+      },
+      "backend/data/clienten": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "clienten",
+        "doel": "Skelet — clienten module nog leeg of placeholder",
+        "container_type": "data",
+        "status": "skeleton",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-08-26T12:00:20.822039+00:00",
+        "last_touched": "2026-08-26T12:00:20.822039+00:00",
+        "activity_count": 0,
+        "file_count": 1,
+        "subdir_count": 0,
         "extra": {}
       },
       "backend/data/community": {
@@ -3788,8 +3852,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.316170+00:00",
-        "last_touched": "2026-08-25T17:13:41.349619+00:00",
-        "activity_count": 20,
+        "last_touched": "2026-08-26T08:08:39.364169+00:00",
+        "activity_count": 22,
         "file_count": 21,
         "subdir_count": 0,
         "extra": {}
@@ -3896,9 +3960,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-08-26T07:54:11.467505+00:00",
-        "activity_count": 140960,
-        "file_count": 14,
+        "last_touched": "2026-08-26T11:58:41.357942+00:00",
+        "activity_count": 141560,
+        "file_count": 15,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3950,8 +4014,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-08-26T07:10:31.949423+00:00",
-        "activity_count": 1772,
+        "last_touched": "2026-08-26T12:00:11.773381+00:00",
+        "activity_count": 1800,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -4169,8 +4233,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-08-26T07:39:11.368795+00:00",
-        "activity_count": 31218,
+        "last_touched": "2026-08-26T12:00:11.174432+00:00",
+        "activity_count": 31790,
         "file_count": 63,
         "subdir_count": 2,
         "extra": {}
@@ -4196,8 +4260,8 @@
           "key_holder": null
         },
         "created_at": "2026-08-22T14:57:35.412153+00:00",
-        "last_touched": "2026-08-26T07:12:47.979367+00:00",
-        "activity_count": 624,
+        "last_touched": "2026-08-26T12:00:16.972028+00:00",
+        "activity_count": 639,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -4223,8 +4287,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.325005+00:00",
-        "last_touched": "2026-08-25T22:02:18.895209+00:00",
-        "activity_count": 22,
+        "last_touched": "2026-08-26T08:22:12.187861+00:00",
+        "activity_count": 34,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -4391,8 +4455,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-08-26T07:54:07.476546+00:00",
-        "activity_count": 6205,
+        "last_touched": "2026-08-26T11:58:12.568296+00:00",
+        "activity_count": 6252,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -4625,8 +4689,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-08-26T07:54:35.979644+00:00",
-        "activity_count": 66754,
+        "last_touched": "2026-08-26T12:00:20.964174+00:00",
+        "activity_count": 67717,
         "file_count": 223,
         "subdir_count": 6,
         "extra": {}
@@ -4679,8 +4743,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-08-26T07:44:07.149454+00:00",
-        "activity_count": 12118,
+        "last_touched": "2026-08-26T09:37:51.590044+00:00",
+        "activity_count": 12542,
         "file_count": 64,
         "subdir_count": 5,
         "extra": {}

@@ -302,7 +302,7 @@ function BookDetailBark({ bookId, userId, onClose }) {
               </div>
             </div>
           )}
-          {tab === 'uren' && <BookUrenPanel bookId={bookId} bookNaam={book.naam} userId={userId} kleur={book.kleur} />}
+          {tab === 'uren' && <BookUrenPanel bookId={bookId} bookNaam={book.naam} bookType={book.type} userId={userId} kleur={book.kleur} />}
           {tab === 'clienten' && <BookClientenPanel bookId={bookId} bookType={book.type} userId={userId} kleur={book.kleur} />}
           {tab === 'sepa' && (
             <div className="space-y-4" data-testid="book-sepa-tab">
@@ -343,12 +343,16 @@ function BookDetailBark({ bookId, userId, onClose }) {
 
 
 // v13d_book_uren_panel_001 (sessie 56b) — Uren-samenvatting per book
-function BookUrenPanel({ bookId, bookNaam, userId, kleur }) {
+function BookUrenPanel({ bookId, bookNaam, bookType, userId, kleur }) {
   const [period, setPeriod] = useState('maand');
   const [anchor, setAnchor] = useState(new Date());
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const y = anchor.getFullYear(), m = anchor.getMonth() + 1, d = anchor.getDate();
+
+  // v13d_book_label_per_type_001 — Willem: "per opdrachtgever is per zorgvrager"
+  const perLabel = bookType === 'entity' ? 'Per zorgvrager'
+    : bookType === 'shop' ? 'Per klant' : 'Per opdrachtgever';
 
   useEffect(() => {
     setLoading(true);
@@ -417,9 +421,9 @@ function BookUrenPanel({ bookId, bookNaam, userId, kleur }) {
       </div>
 
       <div className="p-3 bg-slate-800/40 border border-slate-800 rounded-lg">
-        <p className="text-xs font-semibold text-white mb-2">Per opdrachtgever</p>
+        <p className="text-xs font-semibold text-white mb-2">{perLabel}</p>
         {!data || data.per_opdrachtgever.length === 0 ? (
-          <p className="text-[11px] text-slate-500 italic">Nog geen zakelijke uren voor {bookNaam} in deze periode. Koppel eerst clienten aan dit book en registreer zakelijke agenda-events.</p>
+          <p className="text-[11px] text-slate-500 italic">Nog geen zakelijke uren voor {bookNaam} in deze periode. Koppel eerst {bookType === 'entity' ? 'zorgvragers' : bookType === 'shop' ? 'klanten' : 'clienten'} aan dit book en registreer zakelijke agenda-events.</p>
         ) : data.per_opdrachtgever.map(row => (
           <div key={row.opdrachtgever} className="flex items-center gap-2 py-1 text-xs">
             <span className="text-white flex-1">{row.opdrachtgever}</span>

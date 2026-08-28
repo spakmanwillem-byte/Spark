@@ -386,20 +386,21 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 10.04,
+          "capital": 10.1,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BTC-EUR",
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 69057.74242216432,
+            "highest_price": 69057.74242216432,
             "trailing_active": false,
-            "entry_time": null,
-            "amount_eur": null,
-            "filled_coin": 0
+            "entry_time": "2026-08-28T02:05:00.398118+00:00",
+            "amount_eur": 10.1,
+            "cluster_id": "ee655924736a",
+            "cluster_size": 1
           },
           "stats": {
             "trades": 2,
@@ -415,6 +416,14 @@
               "amount_eur": 10.1,
               "trade_id": "00000000-0000-0410-0000-00000013cd58",
               "market": "ATOM-EUR"
+            },
+            {
+              "ts": "2026-08-28T02:05:00.398118+00:00",
+              "action": "BUY",
+              "cluster_id": "ee655924736a",
+              "trade_id": "00000000-0000-0431-0100-000a0e605444",
+              "entry_price": 69057.74242216432,
+              "amount_eur": 10.1
             }
           ],
           "reconcile_audit": [
@@ -425,7 +434,7 @@
               "entry_price": 1.3529
             }
           ],
-          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "last_action": "BUY cluster ee6559 @ EUR69057.7424",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -510,7 +519,7 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -535,7 +544,7 @@
           "id": "pot-002",
           "index": 1,
           "nummer": 2,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -559,7 +568,7 @@
           "id": "pot-003",
           "index": 2,
           "nummer": 3,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -590,18 +599,21 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.04,
+          "capital": 10.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 69000.95929834178,
+            "highest_price": 69008.0,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-08-28T02:04:16.415997+00:00",
+            "amount_eur": 10.1,
+            "cluster_id": "1b14a1b1e3b3",
+            "cluster_size": 1
           },
-          "market": "ATOM-EUR",
+          "market": "BTC-EUR",
           "stats": {
             "trades": 2,
             "wins": 1,
@@ -634,6 +646,14 @@
               "exit_price": 1.3549,
               "netto": 0.076515,
               "share_pct": 100.0
+            },
+            {
+              "ts": "2026-08-28T02:04:16.415997+00:00",
+              "action": "BUY",
+              "cluster_id": "1b14a1b1e3b3",
+              "trade_id": "00000000-0000-0431-0100-000a0e5f6cce",
+              "entry_price": 69000.95929834178,
+              "amount_eur": 10.1
             }
           ],
           "reconcile_audit": [
@@ -656,7 +676,7 @@
               "capital_after_repair": 10.13
             }
           ],
-          "last_action": "SELL cluster 44a2df @ EUR1.3549 | share EUR+0.0765",
+          "last_action": "BUY cluster 1b14a1 @ EUR69000.9593",
           "original_max_size": 50.0
         },
         {
@@ -695,7 +715,7 @@
       "potjes": [],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-08-28T07:35:56.474246+00:00"
+      "created_at": "2026-08-27T20:29:50.457027+00:00"
     },
     "user-1996fa59": {
       "user_id": "user-1996fa59",
@@ -747,18 +767,20 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.04,
+          "capital": 10.1,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "market": "BTC-EUR",
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 69000.95929834178,
+            "highest_price": 69008.0,
             "trailing_active": false,
-            "entry_time": null,
-            "filled_coin": 0
+            "entry_time": "2026-08-28T02:04:16.193852+00:00",
+            "amount_eur": 10.1,
+            "cluster_id": "b6df16761b04",
+            "cluster_size": 1
           },
           "stats": {
             "trades": 0,
@@ -769,10 +791,20 @@
           "created_at": "2026-08-27T20:23:49.544382+00:00",
           "minted_at": "2026-08-27T20:23:49.544382+00:00",
           "minted_from": "gift_retro_accept:8dc10eb9-a7d2-45db-b580-08c83f288c06",
-          "trade_log": [],
+          "trade_log": [
+            {
+              "ts": "2026-08-28T02:04:16.193852+00:00",
+              "action": "BUY",
+              "cluster_id": "b6df16761b04",
+              "trade_id": "00000000-0000-0431-0100-000a0e5f6c15",
+              "entry_price": 69000.95929834178,
+              "amount_eur": 10.1
+            }
+          ],
           "reconcile_audit": [],
           "original_max_size": 50.0,
-          "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) — dekking is de van Spark afgeboekte token."
+          "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) — dekking is de van Spark afgeboekte token.",
+          "last_action": "BUY cluster b6df16 @ EUR69000.9593"
         }
       ],
       "last_buy_cycle": null,

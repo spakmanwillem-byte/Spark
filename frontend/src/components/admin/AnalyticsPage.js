@@ -1335,6 +1335,29 @@ function TradeAnalyticsTab() {
   const [botDraft, setBotDraft] = React.useState({});   // { uid: { interval, candle, markets } }
   const [botDraftBusy, setBotDraftBusy] = React.useState(null);
 
+  // v13_trader_console_subtabs_001 (sessie 57, Willem 28-aug) — 5 losse panels
+  // gebundeld onder 3 sub-tabs: Overzicht / Sync & Reconcile / Anker & Strategy.
+  // Voorkomt dat de tab een oneindig lange scroll wordt.
+  const [subTab, setSubTab] = React.useState('overzicht');
+  const [repairBusy, setRepairBusy] = React.useState(null);
+  const [repairResult, setRepairResult] = React.useState(null);
+
+  const runRepairAction = async (label, url, method = 'POST', confirmMsg = null) => {
+    if (confirmMsg && !window.confirm(confirmMsg)) return;
+    setRepairBusy(label);
+    setRepairResult(null);
+    try {
+      const r = await fetch(`${API}${url}`, { method });
+      const j = await r.json();
+      setRepairResult({ label, ok: !!j.success, data: j });
+    } catch (e) {
+      setRepairResult({ label, ok: false, data: { error: String(e) } });
+    } finally {
+      setRepairBusy(null);
+      load();
+    }
+  };
+
   const getBotDraft = (b) => botDraft[b.user_id] || {
     interval: b.interval || 300,
     candle: b.candle_interval || '15m',
@@ -1528,21 +1551,143 @@ function TradeAnalyticsTab() {
 
   return (
     <div data-testid="analytics-trade-tab" className="space-y-6">
-      {/* v7_restwaarde_portfolio_001 — Live Bitvavo restwaarde-portfolio.
-          Toont per coin de resterende hoeveelheid × huidige prijs. Vervangt
-          de Event Overlay test die hier per abuis stond. */}
-      <RestwaardePortfolio />
+      {/* v13_trader_console_subtabs_001 — Sub-tab bar */}
+      <div className="flex items-center gap-2 border-b border-slate-800 pb-2 flex-wrap">
+        {[
+          { id: 'overzicht', label: '📊 Overzicht', desc: 'Bots + potjes + portfolio' },
+          { id: 'sync',      label: '🔧 Sync & Reconcile', desc: 'Ghost-cleanup, drift-fix, Bitvavo-sync' },
+          { id: 'anker',     label: '⚓ Anker & Strategy', desc: 'Gap-up guard + strategy config' },
+        ].map(t => (
+          <button
+            key={t.id}
+            onClick={() => setSubTab(t.id)}
+            data-testid={`trader-subtab-${t.id}`}
+            title={t.desc}
+            className={`px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors ${
+              subTab === t.id
+                ? 'bg-cyan-500/25 text-cyan-200 border border-cyan-500/40'
+                : 'bg-slate-800/40 text-slate-400 hover:text-white border border-transparent'
+            }`}>
+            {t.label}
+          </button>
+        ))}
+      </div>
 
-      {/* v7_admin_trader_stats_001 — Trader stats verplaatst uit user-facing module */}
-      <SparkTraderStatsPanel />
+      {/* ═══════════════════ OVERZICHT ═══════════════════ */}
+      {subTab === 'overzicht' && (
+        <div className="space-y-6" data-testid="trader-subview-overzicht">
+          <RestwaardePortfolio />
+          <SparkTraderStatsPanel />
+          {/* Bot-kaarten sectie hieronder (was al aanwezig, blijft ongewijzigd) */}
+        </div>
+      )}
 
-      {/* v10_anker_panel_001 — Anker gap-up guard widget (shadow-log inzicht + flag) */}
-      <AnkerPanel />
+      {/* ═══════════════════ SYNC & RECONCILE ═══════════════════ */}
+      {subTab === 'sync' && (
+        <div className="space-y-6" data-testid="trader-subview-sync">
+          {/* v13_trader_console_subtabs_001 — repair-actions gebundeld */}
+          <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 space-y-4">
+            <div>
+              <h3 className="text-base font-semibold text-white flex items-center gap-2">
+                🔧 Repair & sync-acties
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-0.5">
+                Handmatige potjes-onderhoudsacties. Draai dry-run varianten (via curl) als je twijfelt.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <button
+                data-testid="repair-auto-fix-ghosts-all"
+                disabled={!!repairBusy}
+                onClick={() => runRepairAction(
+                  'auto-fix-ghosts-all',
+                  '/api/trade/potjes/auto-fix-ghosts-all?dry_run=false',
+                  'POST',
+                  'Reset alle ghost/hollow potjes (positie open zonder BUY-log) voor ALLE users?')}
+                className="px-4 py-3 bg-amber-500/15 hover:bg-amber-500/25 disabled:opacity-40 text-amber-200 rounded-lg text-left border border-amber-500/25 transition-colors">
+                <div className="text-[13px] font-medium">👻 Ghost-cleanup (alle users)</div>
+                <div className="text-[11px] text-amber-300/70 mt-0.5">Reset potjes met is_open=True maar geen BUY in trade_log</div>
+              </button>
 
-      {/* v7_reconcile_own_panel_001 — Reconciliatie in eigen kader (uit bots-lijst gehaald) */}
-      <ReconcileSparkPanel />
+              <button
+                data-testid="repair-close-sold-all"
+                disabled={!!repairBusy}
+                onClick={() => runRepairAction(
+                  'reconcile-close-sold-all',
+                  '/api/trade/reconcile/close-sold-all',
+                  'POST',
+                  'Sluit potjes waarvan Bitvavo-balance near-zero is (echte SELL uit trade_history)?')}
+                className="px-4 py-3 bg-emerald-500/15 hover:bg-emerald-500/25 disabled:opacity-40 text-emerald-200 rounded-lg text-left border border-emerald-500/25 transition-colors">
+                <div className="text-[13px] font-medium">✅ Close-sold-all (Bitvavo dust weg)</div>
+                <div className="text-[11px] text-emerald-300/70 mt-0.5">Sluit potjes met near-zero coin met echte SELL-prijs</div>
+              </button>
 
-      {/* v5_admin_bot_cards_001 — Bot kaarten (uitklap → potjes + history per wallet) */}
+              <button
+                data-testid="repair-rebalance-from-bitvavo"
+                disabled={!!repairBusy}
+                onClick={() => runRepairAction(
+                  'rebalance-from-bitvavo (Spark)',
+                  '/api/trade/potjes/rebalance-from-bitvavo/user-000',
+                  'POST',
+                  'Herverdeel Spark\'s potjes op basis van Bitvavo-werkelijkheid?')}
+                className="px-4 py-3 bg-cyan-500/15 hover:bg-cyan-500/25 disabled:opacity-40 text-cyan-200 rounded-lg text-left border border-cyan-500/25 transition-colors">
+                <div className="text-[13px] font-medium">⚖️ Rebalance from Bitvavo (Spark)</div>
+                <div className="text-[11px] text-cyan-300/70 mt-0.5">Herverdeel token-share over pots</div>
+              </button>
+
+              <button
+                data-testid="repair-refresh-anchors"
+                disabled={!!repairBusy}
+                onClick={async () => {
+                  const coins = ['BCH','BTC','ETH','SOL','ADA','ATOM'];
+                  setRepairBusy('sync-anchors');
+                  const results = [];
+                  for (const c of coins) {
+                    try {
+                      const r = await fetch(`${API}/api/trade/reconcile/spark/sync-anchor/${c}`, { method: 'POST' })
+                        .then(x => x.json());
+                      results.push({ coin: c, ok: !!r.success, msg: r.message || r.detail });
+                    } catch (e) { results.push({ coin: c, ok: false, msg: String(e) }); }
+                  }
+                  setRepairBusy(null);
+                  setRepairResult({ label: 'sync-anchors', ok: results.every(r => r.ok), data: { results } });
+                  load();
+                }}
+                className="px-4 py-3 bg-purple-500/15 hover:bg-purple-500/25 disabled:opacity-40 text-purple-200 rounded-lg text-left border border-purple-500/25 transition-colors">
+                <div className="text-[13px] font-medium">🔄 Sync anchors (alle 6 coins)</div>
+                <div className="text-[11px] text-purple-300/70 mt-0.5">Anchor-pots ↔ Bitvavo werkelijkheid per coin</div>
+              </button>
+            </div>
+
+            {repairBusy && (
+              <div className="text-[12px] text-amber-300 flex items-center gap-2">
+                <span className="animate-spin">⏳</span> Bezig: {repairBusy}...
+              </div>
+            )}
+            {repairResult && (
+              <div data-testid="repair-result"
+                className={`text-[11px] rounded p-3 border font-mono ${repairResult.ok
+                  ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-200'
+                  : 'bg-red-500/10 border-red-500/30 text-red-200'}`}>
+                <div className="font-semibold mb-1">{repairResult.ok ? '✅' : '❌'} {repairResult.label}</div>
+                <pre className="text-[10px] whitespace-pre-wrap max-h-40 overflow-auto">{JSON.stringify(repairResult.data, null, 2).slice(0, 1500)}</pre>
+              </div>
+            )}
+          </div>
+
+          <ReconcileSparkPanel />
+        </div>
+      )}
+
+      {/* ═══════════════════ ANKER & STRATEGY ═══════════════════ */}
+      {subTab === 'anker' && (
+        <div className="space-y-6" data-testid="trader-subview-anker">
+          <AnkerPanel />
+        </div>
+      )}
+
+      {/* ═══════════════════ Bot-kaarten (blijft altijd zichtbaar onder Overzicht) ═══════════════════ */}
+      {subTab === 'overzicht' && (
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-white flex items-center gap-2">
@@ -1831,6 +1976,7 @@ function TradeAnalyticsTab() {
           </div>
         )}
       </div>
+      )}
 
       {/* Force-sell confirm modal */}
       {forceSelling && (
@@ -1902,7 +2048,8 @@ function TradeAnalyticsTab() {
       {/* v7_boekhouder_moved_to_logs_001 — Community feed hoort niet in trade-tab.
           Verhuist later naar Analytics → Logs (roadmap P1). */}
 
-      {/* Audit log */}
+      {/* Audit log — altijd zichtbaar onder Overzicht */}
+      {subTab === 'overzicht' && (
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <h3 className="text-base font-semibold text-white mb-4">📋 Audit-trail (geld/token-bewegingen)</h3>
         {audit.length === 0 ? (
@@ -1923,6 +2070,7 @@ function TradeAnalyticsTab() {
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }

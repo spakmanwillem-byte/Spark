@@ -471,7 +471,7 @@ export function TraderPage({ onNavigate }) {
         )}
 
         {activeView === 'bitvavo' && !isFamilie ? (
-          <BitvavoSettings userId={userId} status={bitvavoStatus} settings={traderSettings} />
+          <BitvavoSettings userId={userId} status={bitvavoStatus} settings={traderSettings} isFamilie={isFamilie} />
         ) : (
           <>
             {/* v7_bitvavo_widget_admin_only_001 — Live Bitvavo Portfolio verplaatst naar
@@ -1203,7 +1203,7 @@ function QuickStat({ label, value, subtext, icon: Icon, color }) {
   );
 }
 
-function BitvavoSettings({ userId, status, settings }) {
+function BitvavoSettings({ userId, status, settings, isFamilie }) {
   const [apiKey, setApiKey] = useState('');
   const [apiSecret, setApiSecret] = useState('');
   const [saving, setSaving] = useState(false);

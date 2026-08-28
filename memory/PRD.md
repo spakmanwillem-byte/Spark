@@ -2,6 +2,61 @@
 
 
 
+## Sessie 57 (2026-02-24) — Trader Make It Right + Console consolidatie
+
+### 🔴 Spoor A — Root-bug fix (`filled_coin` persist)
+
+**Melding (Willem)**: "iedere user met potje moet trader werken. en hij is stuk."
+
+**Root cause**: `open_pot()` / `open_cluster()` in `potjes.py` sloegen `filled_coin`
+niet op in `position` → elk potje met echte BUY kwam in state `is_open=True,
+filled_coin=null`. Downstream SELL/reconcile moest compenseren via Bitvavo-balance-clamp
+→ drift op multi-user proxy accounts.
+
+**Fix**:
+1. `open_pot(user_id, pot_id, entry_price, current_cycle, ..., filled_coin=None)` —
+   persist `float(filled_coin)` in `position.filled_coin`. Default 0 als niet meegegeven.
+2. `open_cluster(user_id, pot_ids, ..., filled_coin=None)` — verdeelt totaal-`filled`
+   pro-rata over pot_ids naar `capital`-ratio.
+3. `monitor.py` — parseert `float(result["trade"]["filled"] or 0)` uit
+   `execute_real_trade` en geeft door aan `open_cluster` én de fallback `open_pot`-loop.
+4. Legacy €5.08 fallbacks vervangen door €10 (huidige potje-min) op:
+   - `monitor.py:1428` (`min_order = 10.0` bij market-info fail)
+   - `monitor.py:1709/1711` (`_trade_amount = 10.0` bij dynamic_price fail)
+5. `potjes.py:5` docstring geüpdatet ("Start: 10 potjes à €10.00").
+
+**Data-cleanup**:
+- `POST /api/trade/potjes/auto-fix-ghosts-all?dry_run=false` — 2 ghosts opgeruimd
+  (Geiser pot-001 BTC + Gerben pot-001 BTC) → status `free`.
+- **Spark pot-006 backfill**: `position.filled_coin` van `null` → `0.00102325` BTC
+  (uit Bitvavo werkelijkheid). Audit-log entry in pot.
+- **Willem's bot gestart** — was `running=false` ondanks 3 potjes. Nu draait de
+  trader voor alle 4 users met tokens (Willem 3/Spark 7/Geiser 2/Gerben 1).
+
+### 🎨 Spoor B — Trader Console consolidatie (P1 backlog → done)
+
+**Melding (ROADMAP sessie 52u)**: "Anker gap-up + Anker per markt + Reconciliatie =
+1 collapsable card. Trader-tab visueel opruimen."
+
+**Refactor** in `AnalyticsPage.js → TradeAnalyticsTab`:
+- Nieuw state `subTab` (default 'overzicht'). Sub-tab bar met 3 knoppen:
+  `trader-subtab-overzicht` / `-sync` / `-anker`. Cyan-highlight bij actief.
+- **Overzicht**: RestwaardePortfolio + SparkTraderStatsPanel + Bot-kaarten (uitklap
+  per user → potjes + history) + Audit-trail.
+- **Sync & Reconcile**: 4 repair-buttons met confirm-dialogs:
+  - `repair-auto-fix-ghosts-all` — reset ghost/hollow potjes (alle users)
+  - `repair-close-sold-all` — sluit potjes met near-zero Bitvavo-balance
+  - `repair-rebalance-from-bitvavo` — Spark's tokens herverdelen over pots
+  - `repair-refresh-anchors` — sync 6 coin-anchors (BCH/BTC/ETH/SOL/ADA/ATOM)
+  + `repair-result` panel toont JSON-response met success/fail.
+  + `ReconcileSparkPanel` (per-coin drift diff).
+- **Anker & Strategy**: `AnkerPanel` (gap-up guard + shadow-log + feature-flag).
+
+**Testing**: iteration_57 → 100% pass backend + frontend, geen regressies.
+
+---
+
+
 ## Sessie 56 (2026-02-24) — KB v2 Inbox Dedupe (P0) + Potjes/Tokens Audit
 
 ### 🧹 v13_kbv2_inbox_dedupe_002 — Dubbele kaarten in Kennisbank → Inbox

@@ -409,7 +409,7 @@ export function UsersAdminPage({ onNavigate }) {
               </div>
 
               {detailTab === 'bot-settings' && selectedUser?.is_bot && (
-                <BotSettingsView user={selectedUser} onSaved={() => loadUsers()} />
+                <BotSettingsView user={selectedUser} onSaved={() => AuthAPI.getUsers().then(r => setUsers(r.users || [])).catch(() => {})} />
               )}
 
               {detailTab === 'persons' && (

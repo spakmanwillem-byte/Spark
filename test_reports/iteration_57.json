@@ -1,0 +1,29 @@
+{
+  "summary": "Sessie 57 verificatie (Spark Core 2.0 - Willem's fix voor 'stuk' potjes trader + frontend Trade-tab consolidatie). Backend Spoor A én frontend Spoor B werken conform verwachting. 6/6 backend endpoints groen, 4/4 frontend sub-tab flows groen inclusief live 'repair-auto-fix-ghosts-all' click met JSON-result rendering. Geen regressies op /trader.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Analytics → Trade → Overzicht", "issues": ["De sectiekop is 'Trader stats (admin)' terwijl de review-request 'Spark Trader Stats' verwachtte. Content en testid `admin-trader-stats` zijn aanwezig, dus alleen cosmetisch/label-mismatch — geen bug."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "AnalyticsPage.js top-level tabs (Systeem/Data/…/Trade/Logs/Capabilities) hebben géén data-testid; alleen inner tab-content divs krijgen `analytics-*-tab`. Voor stabielere UI-tests kan een `data-testid={`analytics-tab-${tab.id}`}` op de <button> in regel 59-70 handig zijn.",
+    "AnalyticsPage.js is 2781 regels — overweeg opsplitsen per tab-module (>700 lijnenrichtlijn). TradeAnalyticsTab alleen is al ~700 regels.",
+    "Console-warning bij hydration: '<span> cannot be a child of <option>' - harmless maar rommelt console; check select-render in Sub-tab area of Restwaarde dropdowns."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Willem / Welkom01, admin-mode key: admin (getest, werkt).",
+  "seed_data_creation": "geen persistente seed data; auto-fix-ghosts-all is live gedraaid (niet dry_run) maar totals=0 ghosts/0 hollow, dus geen mutaties.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend GET /api/trade/potjes/user-000 toont 7 potjes; pot-006 is_open=true & filled_coin=0.00102325 (backfilled). GET /api/trade/reconcile/spark toont BTC actual_coin_amount=0.00102325 ✓. POST /api/trade/potjes/auto-fix-ghosts-all?dry_run=true → success:true, totals={n_ghost:0,n_hollow:0,n_ok:1}. Alle 4 gerechtigde users (Willem 3/Spark 7/Geiser 2/Gerben 1) hebben potjes==tokens, bots running=true. Frontend: /admin/analytics → TRADE tab → 3 sub-tabs `trader-subtab-overzicht|sync|anker` allemaal aanwezig+conditioneel gerenderd. Repair buttons in sync sub-tab werken (`repair-auto-fix-ghosts-all` klik → `repair-result` toont JSON). Anker sub-tab toont Anker gap-up guard panel; bot-cards en repair-buttons zijn correct verborgen. /trader page opent zonder JS errors voor Willem. Selector-tip: top-level Analytics tabs hebben nog geen data-testid, gebruik `page.get_by_role('button', name='TRADE', exact=True)` om Trade tab te klikken (voorkomt collision met sidebar 'Trade' link).",
+  "rca of the issue": "N/A - dit was verificatie, geen bug-run. Backend fix (open_pot/open_cluster accepteren filled_coin, monitor.py parseert filled uit execute_real_trade result, €5.08 legacy fallback vervangen door €10 default) persisteert correct in position.filled_coin. Data-cleanup (2 ghosts opgeruimd + Spark pot-006 backfilled naar 0.00102325 BTC) reflecteert in de reconcile output. Frontend refactor van TradeAnalyticsTab naar 3 sub-tabs is correct geïmplementeerd met juiste conditionele rendering, testids, en confirm-dialog UX."
+}

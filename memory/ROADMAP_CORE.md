@@ -144,6 +144,88 @@ deze vier kan Spark z'n eigen geheugen niet betrouwbaar én privacy-veilig doorz
 
 ---
 
+## 🧹 CLUSTER — Sessie 57 (28 feb 2026) — Trader Make It Right + Console consolidatie + BTC-ijkpunt
+
+**Trigger**: Willem: "iedere user met potje moet trader werken. en hij is stuk."
+Bitvavo had €69.79 aan BTC (7 potjes waardig) terwijl registratie maar 1 open pot bij
+Spark toonde. Ook: papertrail toonde Spark 8 tokens / 9 potjes na expired-gift Gerben.
+
+### ✅ AF (Spoor A — root-fix backend)
+
+- **v13_filled_coin_persist_001** — `open_pot()` + `open_cluster()` accepteren nu
+  `filled_coin` kwarg → persist in `position.filled_coin` (pro-rata bij cluster).
+  Was `null` → downstream drift op multi-user proxy. Nieuwe trades vullen dit
+  automatisch vanaf Bitvavo's `filledAmount`.
+- **v13_monitor_filled_pass_001** — `monitor.py` parseert `float(result["trade"]
+  ["filled"] or 0)` uit `execute_real_trade` en geeft door aan
+  `open_cluster`/`open_pot`-fallback.
+- **v13_legacy_508_removal_001** — 3 hardcoded €5.08 fallbacks → €10 (huidige
+  potje-min): `monitor.py:1428, 1709, 1711`. Docstring `potjes.py:5` bijgewerkt.
+- **v13_ghost_cleanup_57** — Geiser pot-001 + Gerben pot-001 (beide BTC-EUR
+  ghost) via `auto-fix-ghosts-all` naar `free`. Backfill Spark pot-006 met
+  0.00102325 BTC uit Bitvavo.
+- **v13_btc_redistribute_57** — 3 potjes verhuisd (Willem pot-001 BCH→BTC,
+  Spark pot-007 BCH→BTC, Spark pot-002 ETH→BTC) + 0.00102325 BTC verdeeld over
+  7 potjes (Willem 2, Spark 3, Geiser 1, Gerben 1). Bitvavo ↔ registratie diff = 0.
+- **v13_willem_bot_start_57** — Willem's bot was `running=false` ondanks 3 potjes;
+  gestart. Nu draaien alle 4 users met tokens.
+
+### ✅ AF (Spoor B — UI consolidatie)
+
+- **v13_trader_console_subtabs_001** — Analytics/Trade tab van 5 losse panels
+  → 3 sub-tabs `trader-subtab-overzicht|sync|anker`:
+  - **Overzicht**: RestwaardePortfolio + SparkTraderStatsPanel + Bot-cards + Audit-trail
+  - **Sync & Reconcile**: 4 repair-buttons (`repair-auto-fix-ghosts-all`,
+    `-close-sold-all`, `-rebalance-from-bitvavo`, `-refresh-anchors`) met
+    confirm-dialogs + JSON-result panel + ReconcileSparkPanel
+  - **Anker & Strategy**: AnkerPanel gap-up guard
+- Testing_agent: 100% backend + 100% frontend, geen regressies.
+
+### ✅ AF (Sessie 56 vervolg)
+
+- **v13_gerben_retro_accept_56** — Gerben's expired gift (24u+ overschreden) op
+  Willem's verzoek retro geaccepteerd: gift → `accepted`, Spark tokens 8→7,
+  Gerben 0→1, pot-008+pot-009 bij Spark opgeruimd (0 trades), pot-001 bij
+  Gerben aangemaakt (`minted_from: gift_retro_accept:8dc10eb9`). Papertrail
+  `roar_balances.transactions` bevat `gift_accepted_retro` entry.
+  Supply-integrity: Treasury (999.987) + Circulating (13) = 1.000.000 ✓
+- **v13_kbv2_text_import_ws5_fix_57** — 5W-vraagwoorden (wie/wat/wanneer/waar/
+  waarom/hoe) werden door text_importer als losse skip-tokens gefilterd →
+  legitieme kaart-titels ("Waar", "Wat", "Hoe") gingen verloren. Nu detecteert
+  regex `^\s*(wie|wat|...)\s*:` alleen 5W-VELDEN (met dubbele punt). Losse
+  vraagwoorden als kaart-titel komen door. 4/4 tests + 2 regressie-tests groen.
+- **v13_prod_merge_57** — Backup uit prod (deploy 2026-08-27 21:26) → preview:
+  13 trade-files gemerged (`user_potjes`, `trade_history/user-*`, `trade/anker/*`,
+  `roar/price_snapshots`, `trade/monitor_state`). Spark's pot-006 kreeg 1 extra
+  BUY-trade uit prod, capitals van 10.04 → 10.03 door lopende trades.
+
+### 📌 OPEN (dust + backlog Sessie 57)
+
+- **ETH-dust orphan**: 0.000047 ETH (€0.10) niet aan een pot toegewezen na de
+  BTC-redistribute (Spark's pot-002 is nu BTC). Actie: laten staan tot >€1 óf
+  reconcile close-sold-all draaien.
+- **CSPR orphan**: 159.24 CSPR (€0.40) heeft nooit een potje gehad. Aparte
+  markt-toewijzing zou nodig zijn om dit als pot-storage te gebruiken.
+- **Analytics testids**: top-level tab-knoppen missen `data-testid` → e2e-test
+  tip uit iteration_57. Klein.
+- **TradeAnalyticsTab splitsen**: functie is 700+ rgl binnen AnalyticsPage.js
+  (totaal 2781 rgl). Kandidaat voor extract naar eigen bestand (ROADMAP-grens 700).
+- **KB skeletons "wat" + "hoe"**: door de text_importer fix nu klaar in inbox
+  (`kbv2-68f1221c` + `kbv2-476fac19`). Wachten op Willem's GPT-invulling om
+  5W-cirkel compleet te maken.
+
+### ⚠️ VOOR DEPLOY
+
+- Spoor A + B zitten alleen in **preview**. Klik "Deploy" om prod-bots ook goed
+  te laten werken.
+- Sanity-check na deploy: `POST /api/trade/potjes/auto-fix-ghosts-all?dry_run=true`
+  → `n_ok:1, n_ghost:0, n_hollow:0` verwacht.
+- **Gerben retro-accept** staat alleen in preview (backup uit prod bevatte niet
+  `roar_balances.json` en `gift_requests.json`) → gaat mee bij volgende deploy.
+
+---
+
+
 ## 🧹 CLUSTER — Sessie 56b (25-26 feb 2026) — Multi-book fundament + chat-terugblik
 
 **Focus**: Willem's zakelijke werkstroom fundering leggen. Agenda krijgt uren-registratie, chat kan terugkijken op eigen data, boekhouding-books krijgen elk hun eigen uren + clienten met book-type-aware placeholders (zorgclient vs klant).

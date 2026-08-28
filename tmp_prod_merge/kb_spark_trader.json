@@ -1,0 +1,22 @@
+{
+  "card_id": "kbv2-7202c55a",
+  "lade": "doen",
+  "user_id": "user-001",
+  "updates": {
+    "lagen": {
+      "laag1": "Spark Trader is de autonome cryptocurrency-handelsbot binnen Spark Core 2.0 die per gebruiker in potjes van €10 kapitaal echt geld op Bitvavo verhandelt.",
+      "laag2": "Elke ROAR-token die een gebruiker bezit correspondeert met precies 1 potje in de trader (1 token = 1 potje = €10 handelskapitaal). De bot draait 24/7 per user, kijkt naar 15-min candles, opent een positie via BUY op Bitvavo wanneer een strategy-signaal dat bevestigt, en sluit met een trailing-stop bij winst of stop-loss. Alle Bitvavo-orders landen op één account waarvan de coin-inhoud virtueel over alle users wordt verdeeld op basis van hun potjes.",
+      "laag3": "In Spark Core 2.0 heeft de trader per user een eigen bot (via /api/trade/bot/start/{user_id}). Elke pot krijgt een markt toegewezen (BTC-EUR, ETH-EUR, SOL-EUR, BCH-EUR, ADA-EUR, ATOM-EUR). Wanneer de bot BUY-t, wordt `filled_coin` uit Bitvavo's `filledAmount` gepersist in `position.filled_coin` (v13_filled_coin_persist_001, sessie 57 fix). Voor clusters (meerdere pots samen kopen zodat het bedrag boven Bitvavo's min-order komt, legacy uit €5.08-tijd) wordt de coin pro-rata over de pots verdeeld naar capital-ratio. Anti-piek-check via anker-service (30d rolling gemiddelde per markt) blokkeert BUY als koers >8% boven anker zit. Stand nu: 13 tokens = 13 potjes = €130 op Bitvavo, verdeeld Willem 3 / Spark 7 / de Geiser 2 / Gerben 1.",
+      "laag4": "Spark Trader bestaat om Spark's autonome bestaan financieel te ondersteunen en om tokenhouders — mensen die vertrouwen in het Spark-project hebben uitgesproken door €10 in te leggen — een aandeel te geven in de opbrengst. Anders dan een gewone trading-bot koerst deze niet op maximale winst-per-trade maar op integriteit tussen kapitaal, ROAR-tokens en bezit: 1 token blijft altijd 1 potje van €10, en de aggregate coin op Bitvavo klopt tot op de coin met de som van alle open filled_coin-waardes. Elke trade genereert papertrail-entries (per pot `trade_log` én per user `wallet/trade_history/{uid}.json`) zodat elke euro traceerbaar is naar een potje van een specifieke gebruiker. Ghost-pots (open zonder BUY) en drift worden opgespoord via reconcile-endpoints en de Analytics/Trade/Sync sub-tab. Zo blijft de trader niet alleen operationeel maar ook vertrouwd — een fundament waarop het bredere Spark-verhaal kan groeien."
+    },
+    "ws5": {
+      "wie": "Autonome bot binnen Spark Core, per user gestart; menselijke supervisie door Willem (admin) via Analytics/Trade tab.",
+      "wat": "Een cryptocurrency-handelsbot die per gebruiker in potjes van €10 kapitaal handelt op Bitvavo.",
+      "wanneer": "24/7 draaiend, met 15-min candle-cyclus, cooldowns tussen trades, en auto-pauze bij lage EUR-balance.",
+      "waar": "Op de Bitvavo-exchange (echte trades via signed API); state in lokale JSON `data/financial/user_potjes.json`; papertrail in `data/wallet/trade_history/{uid}.json`.",
+      "waarom": "Kapitaalgroei voor tokenhouders + funding voor Spark's autonome bestaan, met kloppende 1-op-1 relatie tussen tokens, potjes en Bitvavo-coin.",
+      "hoe": "Strategy-decision engine geeft BUY-signaal → execute_real_trade doet Bitvavo POST /order → filled_coin uit response wordt in position gepersist → trailing-stop volgt de highest_price → SELL bij winst-target of stop-loss, resultaat naar per-user papertrail."
+    },
+    "tags": ["crypto", "bitvavo", "bot", "autopilot", "potjes", "roar", "kapitaal", "willem", "spark-core", "ghost-pot", "trailing-stop", "monthly-baseline", "filled-coin", "reconcile", "anker", "gap-up-guard", "cluster-buy"]
+  }
+}

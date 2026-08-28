@@ -76413,11 +76413,35 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3017
       }
+    },
+    {
+      "id": "conv-34962fcf",
+      "timestamp": "2026-08-28T12:10:58.796549+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Goede middag",
+      "spark_response": "Goede middag, Willem. Hoe kan ik je vandaag helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "wakker",
+        "used_cards": [
+          "kbv2-252159b8",
+          "kbv2-374e8b7d",
+          "kbv2-a55d5c6f",
+          "kbv2-0277bf8e",
+          "kbv2-174710bd"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3018
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3017,
-    "last_updated": "2026-08-27T20:47:07.114520+00:00"
+    "total_conversations": 3018,
+    "last_updated": "2026-08-28T12:10:58.796549+00:00"
   }
 }

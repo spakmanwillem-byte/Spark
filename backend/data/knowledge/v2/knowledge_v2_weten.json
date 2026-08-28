@@ -620145,10 +620145,438 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-b5df5493",
+      "begrip": "webserver",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een webserver is een computer of programma dat webpagina's, bestanden of gegevens beschikbaar maakt voor andere computers via een netwerk.",
+        "laag2": "Een webserver ontvangt verzoeken van bijvoorbeeld een webbrowser en stuurt daarop de gevraagde webpagina, bestanden of gegevens terug. Een webserver kan op internet staan, maar ook binnen een lokaal netwerk draaien.",
+        "laag3": "Een webserver is een server die webinhoud en webdiensten beschikbaar maakt via een netwerk. De webserver ontvangt HTTP- of HTTPS-verzoeken van clients, zoals webbrowsers, en geeft daarop bijvoorbeeld HTML-pagina's, afbeeldingen, bestanden of andere gegevens terug. Een webserver kan ook verzoeken doorgeven aan achterliggende software, zoals een webapplicatie.",
+        "laag4": "Een webserver is een computer en/of software die verzoeken via een netwerk ontvangt en webinhoud of webdiensten aan clients beschikbaar stelt. Een webbrowser kan bijvoorbeeld een verzoek sturen om een webpagina op te vragen. De webserver verwerkt dat verzoek en stuurt de benodigde gegevens terug. Naast statische bestanden, zoals HTML, afbeeldingen en JavaScript, kan een webserver verzoeken doorgeven aan een webapplicatie of andere achterliggende systemen. Webservers kunnen via internet bereikbaar zijn, maar ook lokaal worden gebruikt."
+      },
+      "ws5": {
+        "wie": "Een webserver bedient clients zoals webbrowsers en andere programma's.",
+        "wat": "Een systeem dat webinhoud en webdiensten beschikbaar stelt.",
+        "wanneer": "Wanneer een client webinhoud of een webdienst opvraagt.",
+        "waar": "Op een computer of server die via een netwerk bereikbaar is.",
+        "waarom": "Om webpagina's, bestanden, gegevens of webdiensten aan andere systemen beschikbaar te maken.",
+        "hoe": "Door netwerkverzoeken, meestal via HTTP of HTTPS, te ontvangen, te verwerken en een antwoord terug te sturen."
+      },
+      "tags": [
+        "webserver",
+        "server",
+        "web",
+        "internet",
+        "netwerk",
+        "webbrowser",
+        "client",
+        "HTTP",
+        "HTTPS",
+        "webpagina",
+        "HTML",
+        "bestand",
+        "gegevens",
+        "webdienst",
+        "webapplicatie",
+        "serversoftware",
+        "statische bestanden",
+        "verzoek",
+        "response",
+        "lokaal netwerk",
+        "internetserver"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c27ea10f",
+          "begrip": "IIS",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "http",
+            "internet",
+            "netwerk",
+            "response",
+            "server"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-76e67f57",
+          "begrip": "Webprotocol",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "http",
+            "internet",
+            "netwerk",
+            "web",
+            "webbrowser"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-90621841",
+          "begrip": "www",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "internet",
+            "netwerk",
+            "server",
+            "web",
+            "webpagina"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9000acb",
+          "begrip": "Netwerkdienst",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "client",
+            "internet",
+            "netwerk",
+            "server",
+            "webserver"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-347843ac",
+          "begrip": "Browser",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "html",
+            "internet",
+            "webapplicatie",
+            "webbrowser",
+            "webpagina"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5bf0527c",
+          "begrip": "Upload",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bestand",
+            "gegevens",
+            "internet",
+            "netwerk",
+            "server"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd085eee",
+          "begrip": "Web",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "internet",
+            "netwerk",
+            "web",
+            "webpagina",
+            "webserver"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d4af4a27",
+          "begrip": "Webpagina",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "html",
+            "internet",
+            "web",
+            "webpagina",
+            "webserver"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7c0e93",
+          "begrip": "Hyperlink",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bestand",
+            "html",
+            "internet",
+            "web",
+            "webpagina"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9eff4986",
+          "begrip": "Anonymous FTP",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bestand",
+            "internet",
+            "netwerk",
+            "server"
+          ]
+        }
+      ],
+      "topic": null,
+      "footnote": {
+        "bron": "kb_v2:tag_scan",
+        "aangemaakt_door": "orphan_tag_scanner",
+        "aangemaakt_op": "2026-08-24T14:03:47.129133+00:00",
+        "vertrouwen": 0.9,
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-28T12:06:46.921249+00:00",
+        "vorige_versie_v1": null,
+        "extract_source": "orphan_tag_scanner_v13d",
+        "extract_at": "2026-08-24T14:03:47.129133+00:00",
+        "extract_context_snippet": "Tag komt 7× voor in KB maar had geen eigen kaart",
+        "needs_review": true,
+        "llm_generated": false,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-28T12:06:47.482323+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-28T12:06:47.493437+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "_orphan_frequency": 7
+    },
+    {
+      "id": "kbv2-854c6c71",
+      "begrip": "waar",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Waar kan betekenen dat iets op een bepaalde plaats is, maar ook dat iets juist of echt is.",
+        "laag2": "Als vraagwoord gebruik je waar om naar een plaats te vragen. Bijvoorbeeld: \"Waar is mijn boek?\" Als iets waar is, betekent het dat het overeenkomt met de werkelijkheid. Bijvoorbeeld: \"Dat verhaal is waar.\"",
+        "laag3": "Waar heeft meerdere betekenissen. Als vraagwoord verwijst het naar een plaats of locatie, zoals in \"Waar woon je?\" Als bijvoeglijk naamwoord betekent het dat iets juist, echt of in overeenstemming met de werkelijkheid is. De betekenis van waar wordt bepaald door de context waarin het woord wordt gebruikt.",
+        "laag4": "Waar kan zowel betrekking hebben op een plaats als op waarheid. Als vraagwoord wordt waar gebruikt om naar een locatie te vragen: \"Waar ligt de sleutel?\" Als bijvoeglijk naamwoord geeft waar aan dat een bewering of informatie overeenkomt met de werkelijkheid: \"De bewering is waar.\" Hetzelfde woord heeft dus verschillende betekenissen en functies, afhankelijk van de zin."
+      },
+      "ws5": {
+        "wie": "Iemand die naar een plaats vraagt of aangeeft dat een uitspraak klopt.",
+        "wat": "Een woord dat naar een locatie kan vragen of waarheid kan aangeven.",
+        "wanneer": "Bij vragen over plaatsen of bij uitspraken over wat werkelijk of juist is.",
+        "waar": "In gesproken en geschreven taal.",
+        "waarom": "Om een locatie te achterhalen of om aan te geven dat iets overeenkomt met de werkelijkheid.",
+        "hoe": "Door waar als vraagwoord of als aanduiding van waarheid in een zin te gebruiken."
+      },
+      "tags": [
+        "waar",
+        "waarheid",
+        "locatie",
+        "plaats",
+        "vraagwoord",
+        "werkelijkheid",
+        "juist",
+        "echt",
+        "kloppen",
+        "waar zijn",
+        "waar of niet waar",
+        "waarheid spreken",
+        "bewering",
+        "informatie",
+        "vraag",
+        "locatievraag",
+        "grammatica",
+        "taal",
+        "betekenis",
+        "bijvoeglijk naamwoord"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bc672f4f",
+          "begrip": "Vraagwoord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "grammatica",
+            "informatie",
+            "taal",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea357020",
+          "begrip": "nergens",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "informatie",
+            "locatie",
+            "plaats",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a34689c5",
+          "begrip": "Echt",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "echt",
+            "waar",
+            "waarheid",
+            "werkelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f2a3c469",
+          "begrip": "Verifiëren",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bewering",
+            "juist",
+            "kloppen",
+            "waar",
+            "waarheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "informatie",
+            "taal",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4db90563",
+          "begrip": "welk",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "informatie",
+            "taal",
+            "vraag",
+            "vraagwoord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "grammatica",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d4e61d51",
+          "begrip": "Tegenwoordige tijd",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "grammatica",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9c9d01f9",
+          "begrip": "precies",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "informatie",
+            "juist",
+            "taal",
+            "waarheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-afbbb094",
+          "begrip": "talen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "grammatica",
+            "informatie",
+            "taal"
+          ]
+        }
+      ],
+      "topic": null,
+      "footnote": {
+        "bron": "kb_v2:tag_scan",
+        "aangemaakt_door": "orphan_tag_scanner",
+        "aangemaakt_op": "2026-08-24T14:03:47.129133+00:00",
+        "vertrouwen": 0.9,
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-28T12:06:47.952954+00:00",
+        "vorige_versie_v1": null,
+        "extract_source": "orphan_tag_scanner_v13d",
+        "extract_at": "2026-08-24T14:03:47.129133+00:00",
+        "extract_context_snippet": "Tag komt 3× voor in KB maar had geen eigen kaart",
+        "needs_review": true,
+        "llm_generated": false,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-28T12:06:48.473949+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-28T12:06:48.485038+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "_orphan_frequency": 3
     }
   ],
   "metadata": {
-    "card_count": 4523,
-    "last_updated": "2026-08-27T20:16:24.773429+00:00"
+    "card_count": 4693,
+    "last_updated": "2026-08-28T12:06:47.952971+00:00"
   }
 }

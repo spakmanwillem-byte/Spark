@@ -1,0 +1,822 @@
+{
+  "users": {
+    "user-000": {
+      "user_id": "user-000",
+      "market": "BCH-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.03,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 4,
+            "wins": 2,
+            "losses": 1,
+            "total_pnl": 0.2186
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "e2c5339f-70f7-469a-9757-5751dfd2bcaf",
+          "trade_log": [
+            {
+              "ts": "2026-08-21T17:09:28.817720+00:00",
+              "side": "BUY",
+              "price": 245.03,
+              "amount_eur": 10.1,
+              "trade_id": "00000000-0000-041f-0000-000000376a52",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-08-21T18:32:45.309831+00:00",
+              "action": "BUY",
+              "cluster_id": "5e60daae7523",
+              "trade_id": "00000000-0000-041f-0100-0009dbbdab35",
+              "entry_price": 253.64004860848297,
+              "amount_eur": 10.13
+            },
+            {
+              "ts": "2026-08-22T11:27:55.078194+00:00",
+              "action": "BUY",
+              "cluster_id": "3e50fdb54b63",
+              "trade_id": "00000000-0000-0410-0100-0009e3f521ef",
+              "entry_price": 1.338200008160396,
+              "amount_eur": 10.23
+            },
+            {
+              "ts": "2026-08-23T12:50:49.289555+00:00",
+              "action": "SELL",
+              "cluster_id": "3e50fdb54b63",
+              "exit_price": 1.3549,
+              "netto": 0.076515,
+              "share_pct": 100.0
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:24:23.732098+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 253.64004860848297,
+              "exit_price": 239.71,
+              "capital_before": 10.13,
+              "capital_after": 9.523,
+              "netto": -0.607,
+              "expected_coin": 0.03993849,
+              "actual_coin": 0.00095644,
+              "repaired_at": "2026-08-22T06:26:48.046289+00:00",
+              "repair_reason": "echte SELL @ €252.2500 uit trade_history",
+              "old_netto": -0.607,
+              "new_netto": -0.1062,
+              "old_exit_price": 239.71,
+              "new_exit_price": 252.25,
+              "capital_after_repair": 10.0238
+            }
+          ],
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 0.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": -52.277195,
+                "size": 0.00095644,
+                "highest_price": 243.16,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:57.557582+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.03,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
+          },
+          "market": "ETH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "1788329d-8511-4d39-8da5-e3581f394353",
+          "trade_log": [
+            {
+              "ts": "2026-08-21T17:09:28.914557+00:00",
+              "side": "BUY",
+              "price": 66035.0,
+              "amount_eur": 10.0994,
+              "trade_id": "00000000-0000-0431-0000-00000369d0b4",
+              "market": "BTC-EUR"
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:24:23.732124+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 66035.0,
+              "exit_price": 65943.0,
+              "capital_before": 10.15,
+              "capital_after": 10.0851,
+              "netto": -0.0649,
+              "expected_coin": 0.00015294,
+              "actual_coin": 2.08e-06,
+              "repaired_at": "2026-08-22T06:26:48.046289+00:00",
+              "repair_reason": "geen SELL in trade_history → break-even",
+              "old_netto": -0.0649,
+              "new_netto": 0.0,
+              "old_exit_price": 65943.0,
+              "new_exit_price": 66035.0,
+              "capital_after_repair": 10.15
+            }
+          ],
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 2.08e-06,
+                "highest_price": 69352.0,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:57.991259+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.03,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.1171
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "12b77d32-348a-4c55-8602-d7a9ef834d68",
+          "trade_log": [
+            {
+              "ts": "2026-08-21T17:09:28.990767+00:00",
+              "side": "BUY",
+              "price": 2047.88,
+              "amount_eur": 10.1,
+              "trade_id": "00000000-0000-047b-0000-0000020336ec",
+              "market": "ETH-EUR"
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:24:23.732134+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 2047.88,
+              "exit_price": 2081.75,
+              "capital_before": 10.15,
+              "capital_after": 10.2671,
+              "netto": 0.1171,
+              "expected_coin": 0.00493193,
+              "actual_coin": 4.671e-05
+            }
+          ],
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 4.671e-05,
+                "highest_price": 2192.82,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:29:01.179555+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.03,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.1986
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "00c6f3fa-7611-4524-9de5-f3be9de9fd64",
+          "trade_log": [
+            {
+              "ts": "2026-08-21T17:09:29.078227+00:00",
+              "side": "BUY",
+              "price": 78.224,
+              "amount_eur": 10.1,
+              "trade_id": "00000000-0000-0560-0000-0000017dde1c",
+              "market": "SOL-EUR"
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:24:23.732141+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 78.224,
+              "exit_price": 80.146,
+              "capital_before": 10.15,
+              "capital_after": 10.3486,
+              "netto": 0.1986,
+              "expected_coin": 0.12911638,
+              "actual_coin": 0.00138955
+            }
+          ],
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 0.00138955,
+                "highest_price": 93.796,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:59.425169+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.03,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.2566
+          },
+          "created_at": "2026-07-09T22:02:52.798397+00:00",
+          "minted_from": "willem_inleg_basis",
+          "retro_backfilled_at": "2026-07-21T08:23:47.025912+00:00",
+          "log_event_id": "37b7bce0-0ab6-4a16-83eb-b704320d3a60",
+          "trade_log": [
+            {
+              "ts": "2026-08-21T17:09:29.165444+00:00",
+              "side": "BUY",
+              "price": 0.18859,
+              "amount_eur": 10.1,
+              "trade_id": "00000000-0000-03f2-0000-000001c85988",
+              "market": "ADA-EUR"
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:24:23.732148+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 0.18859,
+              "exit_price": 0.1943,
+              "capital_before": 10.15,
+              "capital_after": 10.4066,
+              "netto": 0.2566,
+              "expected_coin": 53.55533167,
+              "actual_coin": 1.90146
+            }
+          ],
+          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 1.90146,
+                "highest_price": 0.19657,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:28:56.784912+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "nummer": 6,
+          "capital": 10.1,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "market": "BTC-EUR",
+          "minted_at": "2026-07-20T17:20:05.442195+00:00",
+          "minted_from": "auto_mint_24h_ruis",
+          "position": {
+            "is_open": true,
+            "entry_price": 69057.74242216432,
+            "highest_price": 69057.74242216432,
+            "trailing_active": false,
+            "entry_time": "2026-08-28T02:05:00.398118+00:00",
+            "amount_eur": 10.1,
+            "cluster_id": "ee655924736a",
+            "cluster_size": 1
+          },
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "trade_log": [
+            {
+              "ts": "2026-08-21T17:09:29.254489+00:00",
+              "side": "BUY",
+              "price": 1.3529,
+              "amount_eur": 10.1,
+              "trade_id": "00000000-0000-0410-0000-00000013cd58",
+              "market": "ATOM-EUR"
+            },
+            {
+              "ts": "2026-08-28T02:05:00.398118+00:00",
+              "action": "BUY",
+              "cluster_id": "ee655924736a",
+              "trade_id": "00000000-0000-0431-0100-000a0e605444",
+              "entry_price": 69057.74242216432,
+              "amount_eur": 10.1
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-23T13:28:27.455593+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 7.502402 ATOM maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 1.3529
+            }
+          ],
+          "last_action": "BUY cluster ee6559 @ EUR69057.7424",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:37:10.867426+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": -52.277195,
+                "size": 0.00095644,
+                "highest_price": 243.16,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:29:03.099558+00:00"
+              },
+              "reason": "Willem clean-slate na trader incident"
+            }
+          ]
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "nummer": 7,
+          "capital": 10.03,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "market": "BCH-EUR",
+          "minted_at": "2026-07-23T09:16:23.939810+00:00",
+          "minted_from": "auto_mint_24h_ruis",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "trade_log": [],
+          "reconcile_audit": [],
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-27T19:27:50.574506+00:00",
+              "action": "ghost_reset",
+              "reason": "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.0,
+                "size": 4.671e-05,
+                "highest_price": 2192.82,
+                "trailing_active": true,
+                "entry_time": "2026-08-23T13:29:05.898380+00:00"
+              }
+            }
+          ],
+          "last_action": "AUTO-FIX ghost reset @ 2026-08-27T19:27"
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.3983,
+      "created_at": "2026-07-09T22:02:52.798397+00:00",
+      "audit_log": [
+        {
+          "ts": "2026-08-27T20:23:49.544382+00:00",
+          "action": "remove_orphan_pots",
+          "removed": [
+            "pot-008",
+            "pot-009"
+          ],
+          "reason": "Retro-accept Gerben gift + supply-integrity 1-token=1-potje herstel",
+          "operator": "user-001"
+        }
+      ]
+    },
+    "user-001": {
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "nummer": 1,
+          "capital": 10.04,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "market": "BCH-EUR",
+          "minted_at": "2026-07-20T16:52:48.805064+00:00",
+          "minted_from": "test_reserve_log",
+          "position": {
+            "is_open": false
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "trade_log": [],
+          "reconcile_audit": [],
+          "original_max_size": 50.0,
+          "assigned_market": "BTC-EUR",
+          "assigned_at": "2026-08-23T14:04:43.334619+00:00"
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "nummer": 2,
+          "capital": 10.04,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "market": "BCH-EUR",
+          "minted_at": "2026-07-31T10:20:50.733070+00:00",
+          "minted_from": "v11_potjes_reconcile",
+          "position": {
+            "is_open": false
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "trade_log": [],
+          "note": "v11_potjes_reconcile — auto-added to match token balance",
+          "reconcile_audit": [],
+          "original_max_size": 50.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "nummer": 3,
+          "capital": 10.04,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "market": "BCH-EUR",
+          "minted_at": "2026-07-31T10:20:50.733070+00:00",
+          "minted_from": "v11_potjes_reconcile",
+          "position": {
+            "is_open": false
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "trade_log": [],
+          "note": "v11_potjes_reconcile — auto-added to match token balance",
+          "reconcile_audit": [],
+          "original_max_size": 50.0
+        }
+      ],
+      "overflow_pool": 0.0,
+      "market": "BCH-EUR"
+    },
+    "user-a0ee2d7e": {
+      "user_id": "user-a0ee2d7e",
+      "market": "BCH-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.1,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": true,
+            "entry_price": 69000.95929834178,
+            "highest_price": 69008.0,
+            "trailing_active": false,
+            "entry_time": "2026-08-28T02:04:16.415997+00:00",
+            "amount_eur": 10.1,
+            "cluster_id": "1b14a1b1e3b3",
+            "cluster_size": 1
+          },
+          "market": "BTC-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0765
+          },
+          "created_at": "2026-07-31T07:33:04.005890+00:00",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-08-21T18:32:36.197221+00:00",
+              "action": "BUY",
+              "cluster_id": "6baba2f12f51",
+              "trade_id": "00000000-0000-041f-0100-0009dbbd792e",
+              "entry_price": 253.39003248911803,
+              "amount_eur": 10.13
+            },
+            {
+              "ts": "2026-08-22T11:27:52.384446+00:00",
+              "action": "BUY",
+              "cluster_id": "44a2df2b34ac",
+              "trade_id": "00000000-0000-0410-0100-0009e3f517ed",
+              "entry_price": 1.338200008160396,
+              "amount_eur": 10.23
+            },
+            {
+              "ts": "2026-08-23T12:50:47.010309+00:00",
+              "action": "SELL",
+              "cluster_id": "44a2df2b34ac",
+              "exit_price": 1.3549,
+              "netto": 0.076515,
+              "share_pct": 100.0
+            },
+            {
+              "ts": "2026-08-28T02:04:16.415997+00:00",
+              "action": "BUY",
+              "cluster_id": "1b14a1b1e3b3",
+              "trade_id": "00000000-0000-0431-0100-000a0e5f6cce",
+              "entry_price": 69000.95929834178,
+              "amount_eur": 10.1
+            }
+          ],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-22T05:34:46.017883+00:00",
+              "type": "reconcile_close_sold",
+              "entry": 253.39003248911803,
+              "exit_price": 241.66,
+              "capital_before": 10.13,
+              "capital_after": 9.6104,
+              "netto": -0.5196,
+              "expected_coin": 0.03997789,
+              "actual_coin": 0.00095644,
+              "repaired_at": "2026-08-22T06:26:48.046289+00:00",
+              "repair_reason": "geen SELL in trade_history → break-even",
+              "old_netto": -0.5196,
+              "new_netto": 0.0,
+              "old_exit_price": 241.66,
+              "new_exit_price": 253.39003248911803,
+              "capital_after_repair": 10.13
+            }
+          ],
+          "last_action": "BUY cluster 1b14a1 @ EUR69000.9593",
+          "original_max_size": 50.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.04,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-07-31T07:53:42.395026+00:00",
+          "source": "token_buy_expansion",
+          "trade_log": [],
+          "reconcile_audit": [],
+          "original_max_size": 50.0
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-07-01T09:17:38.916929+00:00",
+      "pots": [],
+      "tokens": 0
+    },
+    "null": {
+      "user_id": null,
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-27T20:29:50.457027+00:00"
+    },
+    "user-1996fa59": {
+      "user_id": "user-1996fa59",
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-07-07T17:22:17.711873+00:00",
+      "pots": [],
+      "tokens": 0
+    },
+    "user-166437fe": {
+      "user_id": "user-166437fe",
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-07-31T06:04:59.563690+00:00"
+    },
+    "__ignored__": {
+      "user_id": "__ignored__",
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-22T05:32:50.808191+00:00"
+    },
+    "user-c609d7d1": {
+      "user_id": "user-c609d7d1",
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-23T14:09:18.551939+00:00"
+    },
+    "dummy": {
+      "user_id": "dummy",
+      "market": "BCH-EUR",
+      "potjes": [],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-27T19:27:35.964256+00:00"
+    },
+    "user-4d9b59aa": {
+      "user_id": "user-4d9b59aa",
+      "market": "BTC-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "nummer": 1,
+          "capital": 10.1,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "market": "BTC-EUR",
+          "position": {
+            "is_open": true,
+            "entry_price": 69000.95929834178,
+            "highest_price": 69008.0,
+            "trailing_active": false,
+            "entry_time": "2026-08-28T02:04:16.193852+00:00",
+            "amount_eur": 10.1,
+            "cluster_id": "b6df16761b04",
+            "cluster_size": 1
+          },
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-08-27T20:23:49.544382+00:00",
+          "minted_at": "2026-08-27T20:23:49.544382+00:00",
+          "minted_from": "gift_retro_accept:8dc10eb9-a7d2-45db-b580-08c83f288c06",
+          "trade_log": [
+            {
+              "ts": "2026-08-28T02:04:16.193852+00:00",
+              "action": "BUY",
+              "cluster_id": "b6df16761b04",
+              "trade_id": "00000000-0000-0431-0100-000a0e5f6c15",
+              "entry_price": 69000.95929834178,
+              "amount_eur": 10.1
+            }
+          ],
+          "reconcile_audit": [],
+          "original_max_size": 50.0,
+          "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) — dekking is de van Spark afgeboekte token.",
+          "last_action": "BUY cluster b6df16 @ EUR69000.9593"
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-08-27T20:23:49.544382+00:00"
+    }
+  },
+  "_pre_deploy_reset_at": "2026-06-03T14:02:40.629249+00:00",
+  "_reset_at": "2026-08-21T12:18:27.720377+00:00",
+  "_reset_note": "Volledige trader-reset: potjes op nul, positions gesloten, stats leeg, trade_log gewist. Schone start voor nieuwe strategie.",
+  "_trim_at": "2026-07-09T22:03:38.887525+00:00",
+  "_final_reset_at": "2026-07-09T22:04:13.835479+00:00",
+  "_last_supply_integrity_fix_at": "2026-08-27T20:23:49.544382+00:00",
+  "_last_supply_integrity_fix_note": "Willem retro-accept Gerben gift + Spark 2 ghost-pots opgeruimd (pot-008,pot-009)."
+}

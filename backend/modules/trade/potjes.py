@@ -2,7 +2,9 @@
 Potjes Systeem - 10 onafhankelijke trading pots.
 
 Regels (Willem's design):
-- Start: 10 potjes à €5.08
+- Start: 10 potjes à €10.00 (v6_potje_size_10_001).
+- Legacy: eerder €5.08 → cluster-buy nodig voor SOL/ADA min-order (€7). Cluster-buy
+  blijft in de code voor edge-cases, maar bij €10 potjes zelden actief.
 - Groei: winst blijft in potje, max €10/potje
 - Als alle potjes €10: voeg nieuwe potjes toe (volume uitbreiding)
 - Max 1 potje per monitor cycle mag kopen (staggered entry)
@@ -883,11 +885,15 @@ def get_available_pot(user_id: str, current_cycle: int, skip_cycle_check: bool =
 
 def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
              trade_id: Optional[str] = None, amount_eur: Optional[float] = None,
-             market: Optional[str] = None) -> Dict:
+             market: Optional[str] = None, filled_coin: Optional[float] = None) -> Dict:
     """Open positie in een potje + log de BUY-trade op het potje zelf.
     v4_potje_sync_001: trade_count + trade_log bijwerken zodat UI tellertje klopt.
     v4_potje_market_001: bewaar welke coin gekocht is per potje (was hardcoded BCH-EUR).
     v6_lock_enforce_002: hard guard tegen openen van een locked potje (defense in depth).
+    v13_filled_coin_persist_001 (sessie 57, Willem 28-aug): Bitvavo's `filledAmount`
+    (echte coin die aan dit potje toebehoort) moet in `position.filled_coin` landen.
+    Anders staat er `filled_coin=null` → downstream SELL/reconcile moet compenseren
+    via Bitvavo-balance-clamp → drift bij multi-user proxy accounts.
     """
     data = _load(user_id)
     user = data["users"][user_id]
@@ -931,6 +937,10 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
                 # er in dit potje vastzit. Was alleen in trade_log gezet → "potje
                 # wordt niet gevuld"-effect.
                 "amount_eur": amount_eur if amount_eur is not None else p.get("capital"),
+                # v13_filled_coin_persist_001 — daadwerkelijke coin die op Bitvavo
+                # aan dit potje toebehoort. Bron: Bitvavo `filledAmount` in de
+                # BUY-response (execute_real_trade). Was null → ghost-state.
+                "filled_coin": float(filled_coin) if filled_coin is not None else 0,
             }
             # v4_potje_market_001: leg vast WELKE coin in dit potje zit (BTC-EUR / BCH-EUR / ETH-EUR ...)
             if market:
@@ -1229,14 +1239,24 @@ def get_next_buy_cluster(user_id: str, market: str, min_order_eur: float,
 @trace_call(category="trade.pot.open")
 def open_cluster(user_id: str, pot_ids: List[str], entry_price: float, cluster_id: str,
                  current_cycle: int, trade_id: Optional[str] = None,
-                 market: Optional[str] = None) -> Dict:
-    """Open alle pots in de cluster gelijktijdig met shared entry + cluster_id."""
+                 market: Optional[str] = None, filled_coin: Optional[float] = None) -> Dict:
+    """Open alle pots in de cluster gelijktijdig met shared entry + cluster_id.
+    v13_filled_coin_persist_001 (sessie 57): `filled_coin` (totaal coin uit Bitvavo
+    BUY-response) wordt naar rato van capital verdeeld over de pots in de cluster.
+    """
     data = _load(user_id)
     user = data["users"][user_id]
     now = datetime.now(timezone.utc).isoformat()
     opened = []
+    # v13_filled_coin_persist_001 — bereken pro-rata coin per pot
+    _cluster_pots = [p for p in user["potjes"] if p["id"] in pot_ids and not p.get("pot_locked")]
+    _total_cap = sum(float(p.get("capital", 0) or 0) for p in _cluster_pots) or 1.0
     for p in user["potjes"]:
         if p["id"] in pot_ids and not p.get("pot_locked"):
+            _pot_share_coin = 0.0
+            if filled_coin is not None:
+                _pot_cap = float(p.get("capital", 0) or 0)
+                _pot_share_coin = float(filled_coin) * (_pot_cap / _total_cap)
             p["position"] = {
                 "is_open": True,
                 "entry_price": entry_price,
@@ -1246,6 +1266,8 @@ def open_cluster(user_id: str, pot_ids: List[str], entry_price: float, cluster_i
                 "amount_eur": p.get("capital"),
                 "cluster_id": cluster_id,
                 "cluster_size": len(pot_ids),
+                # v13_filled_coin_persist_001 — pro-rata coin per potje
+                "filled_coin": _pot_share_coin,
             }
             if market:
                 p["market"] = market

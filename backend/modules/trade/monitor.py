@@ -1425,7 +1425,9 @@ class MonitorService:
                 try:
                     min_order = get_market_min_quote(market)
                 except Exception:
-                    min_order = 5.0
+                    # v13_min_order_10_default_001 (sessie 57): fallback = €10
+                    # (huidige potje-min), was legacy €5.
+                    min_order = 10.0
                 cluster = potjes_svc.get_next_buy_cluster(self._user_id, market, min_order)
                 if cluster and self._auto_trade:
                     if self._use_mock:
@@ -1434,6 +1436,10 @@ class MonitorService:
                         result = execute_real_trade(self._user_id, market, "BUY", cluster["total_capital"])
                     if result.get("success"):
                         real_entry = result.get("trade", {}).get("price") or price
+                        # v13_filled_coin_persist_001 (sessie 57) — geef Bitvavo's
+                        # `filled` (echte coin) door aan open_cluster/open_pot zodat
+                        # `position.filled_coin` gevuld wordt. Voorheen: altijd null.
+                        real_filled = float(result.get("trade", {}).get("filled") or 0)
                         # v11_pot_registration_safety_001 — Bug A fix.
                         # Bitvavo BUY is geslaagd — potjes registratie MOET slagen anders
                         # coin gekocht zonder pot-tracking (silent loss). Wrap in try/except,
@@ -1445,26 +1451,32 @@ class MonitorService:
                                 cluster["cluster_id"], self._cycles,
                                 trade_id=result.get("trade", {}).get("trade_id"),
                                 market=market,
+                                filled_coin=real_filled,
                             )
                             cluster_opened = bool(open_result.get("success"))
                         except Exception as _oe:
                             logger.error(
                                 f"[CRITICAL] open_cluster FAILED na Bitvavo BUY success! "
                                 f"user={self._user_id} market={market} entry=€{real_entry} "
+                                f"filled_coin={real_filled} "
                                 f"pot_ids={cluster['pot_ids']} err={_oe}"
                             )
                         if not cluster_opened:
                             # Fallback: probeer per potje open_pot zodat er tenminste
                             # registratie is (voorkomt "coin gekocht maar geen pot"-scenario).
                             fallback_opened = []
+                            # v13_filled_coin_persist_001 — pro-rata coin per pot
+                            _n_pots = max(len(cluster["pot_ids"]), 1)
+                            _per_pot_coin = real_filled / _n_pots if real_filled else 0
                             for pid in cluster["pot_ids"]:
                                 try:
-                                    p_capital_share = float(cluster["total_capital"]) / max(len(cluster["pot_ids"]), 1)
+                                    p_capital_share = float(cluster["total_capital"]) / _n_pots
                                     r = potjes_svc.open_pot(
                                         self._user_id, pid, real_entry, self._cycles,
                                         trade_id=result.get("trade", {}).get("trade_id"),
                                         amount_eur=p_capital_share,
                                         market=market,
+                                        filled_coin=_per_pot_coin,
                                     )
                                     if r:
                                         fallback_opened.append(pid)
@@ -1702,13 +1714,16 @@ def auto_provision_bot_for_token_holder(
             m._candle_interval = "15m"
             m._auto_trade = bool(auto_trade)
             m._use_mock = bool(use_mock)
-            # v7_dynamic_defaults_001 — trade_amount = altijd huidige token-prijs
+            # v7_dynamic_defaults_001 — trade_amount = altijd huidige token-prijs.
+            # v13_potje_10_default_001 (sessie 57, Willem 28-aug): oude €5.08 fallback
+            # weg — potje-min is €10 sinds v6_potje_size_10_001. Als dynamic_price
+            # onbekend is → val terug op €10 (=1 potje), niet €5.08.
             try:
                 from modules.shop.routes import get_dynamic_price
                 _p = float(get_dynamic_price())
-                m._trade_amount = _p if _p > 0 else 5.08
+                m._trade_amount = _p if _p > 0 else 10.0
             except Exception:
-                m._trade_amount = float(getattr(m, "_trade_amount", 5.08) or 5.08)
+                m._trade_amount = float(getattr(m, "_trade_amount", 10.0) or 10.0)
             m._use_potjes = True
             m._user_configured = True
         except Exception as e:

@@ -7,7 +7,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -106,7 +106,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -181,7 +181,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -249,7 +249,7 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -317,7 +317,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -400,7 +400,8 @@
             "entry_time": "2026-08-28T02:05:00.398118+00:00",
             "amount_eur": 10.1,
             "cluster_id": "ee655924736a",
-            "cluster_size": 1
+            "cluster_size": 1,
+            "filled_coin": 0.00102325
           },
           "stats": {
             "trades": 2,
@@ -449,14 +450,25 @@
                 "entry_time": "2026-08-23T13:29:03.099558+00:00"
               },
               "reason": "Willem clean-slate na trader incident"
+            },
+            {
+              "ts": "2026-08-28T12:45:26.199052+00:00",
+              "action": "backfill_filled_coin",
+              "field": "position.filled_coin",
+              "old": null,
+              "new": 0.00102325,
+              "reason": "v13_filled_coin_persist_001 (sessie 57) — backfill uit Bitvavo werkelijkheid",
+              "operator": "user-001"
             }
-          ]
+          ],
+          "hollow_flagged_at": "2026-08-28T12:44:54.817132+00:00",
+          "hollow_reason": "position open zonder filled_coin registratie — mogelijk hollow, niet auto-gesloten"
         },
         {
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -519,7 +531,7 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.04,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -544,7 +556,7 @@
           "id": "pot-002",
           "index": 1,
           "nummer": 2,
-          "capital": 10.04,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -568,7 +580,7 @@
           "id": "pot-003",
           "index": 2,
           "nummer": 3,
-          "capital": 10.04,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -604,14 +616,12 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 69000.95929834178,
-            "highest_price": 69008.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T02:04:16.415997+00:00",
-            "amount_eur": 10.1,
-            "cluster_id": "1b14a1b1e3b3",
-            "cluster_size": 1
+            "entry_time": null,
+            "amount_eur": null
           },
           "market": "BTC-EUR",
           "stats": {
@@ -676,13 +686,30 @@
               "capital_after_repair": 10.13
             }
           ],
-          "last_action": "BUY cluster 1b14a1 @ EUR69000.9593",
-          "original_max_size": 50.0
+          "last_action": "AUTO-FIX ghost reset @ 2026-08-28T12:44",
+          "original_max_size": 50.0,
+          "audit_log": [
+            {
+              "ts": "2026-08-28T12:44:54.822601+00:00",
+              "action": "ghost_reset",
+              "reason": "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue",
+              "before": {
+                "is_open": true,
+                "entry_price": 69000.95929834178,
+                "highest_price": 69008.0,
+                "trailing_active": false,
+                "entry_time": "2026-08-28T02:04:16.415997+00:00",
+                "amount_eur": 10.1,
+                "cluster_id": "1b14a1b1e3b3",
+                "cluster_size": 1
+              }
+            }
+          ]
         },
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.03,
+          "capital": 10.02,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -773,14 +800,12 @@
           "lock_reason": null,
           "market": "BTC-EUR",
           "position": {
-            "is_open": true,
-            "entry_price": 69000.95929834178,
-            "highest_price": 69008.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T02:04:16.193852+00:00",
-            "amount_eur": 10.1,
-            "cluster_id": "b6df16761b04",
-            "cluster_size": 1
+            "entry_time": null,
+            "amount_eur": null
           },
           "stats": {
             "trades": 0,
@@ -804,7 +829,24 @@
           "reconcile_audit": [],
           "original_max_size": 50.0,
           "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) — dekking is de van Spark afgeboekte token.",
-          "last_action": "BUY cluster b6df16 @ EUR69000.9593"
+          "last_action": "AUTO-FIX ghost reset @ 2026-08-28T12:44",
+          "audit_log": [
+            {
+              "ts": "2026-08-28T12:44:54.829571+00:00",
+              "action": "ghost_reset",
+              "reason": "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue",
+              "before": {
+                "is_open": true,
+                "entry_price": 69000.95929834178,
+                "highest_price": 69008.0,
+                "trailing_active": false,
+                "entry_time": "2026-08-28T02:04:16.193852+00:00",
+                "amount_eur": 10.1,
+                "cluster_id": "b6df16761b04",
+                "cluster_size": 1
+              }
+            }
+          ]
         }
       ],
       "last_buy_cycle": null,

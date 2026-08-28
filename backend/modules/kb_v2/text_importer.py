@@ -132,13 +132,30 @@ def _extract_begrip(pre_laag_text: str) -> Optional[str]:
     # Strategie: neem laatste niet-lege regel die geen header is en niet "Laag 1" zelf,
     # filter typische sub-headers eruit
     lines = [ln.strip() for ln in pre_laag_text.strip().splitlines() if ln.strip()]
-    # Bekende headers die GEEN begrip zijn
+    # Bekende headers die GEEN begrip zijn.
+    # v13_kbv2_text_import_ws5_fix — Willem 2026-08-28:
+    # de 5W-vraagwoorden (wie/wat/wanneer/waar/waarom/hoe) zaten hier als losse
+    # entries — dat filterde ook een LEGITIEM begrip "waar" (als kaart-titel) weg.
+    # Nu detecteren we die alleen als ze als 5W-VELD in het blok voorkomen (dwz
+    # met een dubbele punt: "Waar: ..."). Losse "waar" als titel blijft geldig.
     skip = {"5w", "5w (wie/wat/wanneer/waar/waarom/hoe)", "tags", "lade", "emotie",
             "kernzin", "laag 1", "laag 2", "laag 3", "laag 4", "laag 1 — kort antwoord / definitie",
-            "wie", "wat", "wanneer", "waar", "waarom", "hoe",
             "praktijkvoorbeelden", "voorbeelden", "vaardigheid", "concept", "onderwerp"}
+    _ws5_words = {"wie", "wat", "wanneer", "waar", "waarom", "hoe"}
+    import re as _re
+    _ws5_field_rx = _re.compile(r"^\s*(wie|wat|wanneer|waar|waarom|hoe)\s*:", _re.IGNORECASE)
     # v6_text_importer_003 — filter ook lade-regels uit candidates
-    candidates = [ln for ln in lines if ln.lower() not in skip and not _normalize_lade(ln)]
+    candidates = []
+    for ln in lines:
+        low = ln.lower().rstrip(":").strip()
+        if low in skip:
+            continue
+        if _normalize_lade(ln):
+            continue
+        # 5W-VELD-regel skippen: "Waar: op netwerk" / "Wat:" / etc.
+        if _ws5_field_rx.match(ln):
+            continue
+        candidates.append(ln)
     if not candidates:
         return None
     # Begrip is de laatste candidate vóór Laag 1; vaak is dat een Capitalized

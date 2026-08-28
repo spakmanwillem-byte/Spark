@@ -1,0 +1,4 @@
+{"ts": "2026-08-28T10:28:22.560323+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "pre", "intent": "KB v2 kaart verwijderen", "args": {"body": "DeleteBody(card_id='kbv2-94411e78', lade='inbox', user_id='user-001', reason='')"}}
+{"ts": "2026-08-28T10:28:22.567186+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "post", "intent": "KB v2 kaart verwijderen", "result": "dict(success=True, keys=success,message,card_id,begrip,lade,remaining_in_lade)", "duration_ms": 6.64}
+{"ts": "2026-08-28T10:54:50.814632+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "pre", "intent": "KB v2 kaart verwijderen", "args": {"body": "DeleteBody(card_id='kbv2-00a385d2', lade='inbox', user_id='user-001', reason='')"}}
+{"ts": "2026-08-28T10:54:50.821260+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "post", "intent": "KB v2 kaart verwijderen", "result": "dict(success=True, keys=success,message,card_id,begrip,lade,remaining_in_lade)", "duration_ms": 6.44}

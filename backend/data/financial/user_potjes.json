@@ -7,7 +7,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -77,7 +77,7 @@
               "expected_coin": 0.03993849,
               "actual_coin": 0.00095644,
               "repaired_at": "2026-08-22T06:26:48.046289+00:00",
-              "repair_reason": "echte SELL @ \u20ac252.2500 uit trade_history",
+              "repair_reason": "echte SELL @ €252.2500 uit trade_history",
               "old_netto": -0.607,
               "new_netto": -0.1062,
               "old_exit_price": 239.71,
@@ -106,7 +106,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -152,7 +152,7 @@
               "expected_coin": 0.00015294,
               "actual_coin": 2.08e-06,
               "repaired_at": "2026-08-22T06:26:48.046289+00:00",
-              "repair_reason": "geen SELL in trade_history \u2192 break-even",
+              "repair_reason": "geen SELL in trade_history → break-even",
               "old_netto": -0.0649,
               "new_netto": 0.0,
               "old_exit_price": 65943.0,
@@ -181,7 +181,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -249,7 +249,7 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -317,7 +317,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -386,7 +386,7 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BTC-EUR",
@@ -447,7 +447,7 @@
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BCH-EUR",
@@ -474,7 +474,7 @@
             {
               "ts": "2026-08-27T19:27:50.574506+00:00",
               "action": "ghost_reset",
-              "reason": "position.is_open=True maar geen BUY in trade_log \u2014 waarschijnlijk ghost door balance-issue",
+              "reason": "position.is_open=True maar geen BUY in trade_log — waarschijnlijk ghost door balance-issue",
               "before": {
                 "is_open": true,
                 "entry_price": 0.0,
@@ -551,7 +551,7 @@
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "note": "v11_potjes_reconcile \u2014 auto-added to match token balance",
+          "note": "v11_potjes_reconcile — auto-added to match token balance",
           "reconcile_audit": [],
           "original_max_size": 50.0
         },
@@ -575,7 +575,7 @@
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "note": "v11_potjes_reconcile \u2014 auto-added to match token balance",
+          "note": "v11_potjes_reconcile — auto-added to match token balance",
           "reconcile_audit": [],
           "original_max_size": 50.0
         }
@@ -590,7 +590,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -648,7 +648,7 @@
               "expected_coin": 0.03997789,
               "actual_coin": 0.00095644,
               "repaired_at": "2026-08-22T06:26:48.046289+00:00",
-              "repair_reason": "geen SELL in trade_history \u2192 break-even",
+              "repair_reason": "geen SELL in trade_history → break-even",
               "old_netto": -0.5196,
               "new_netto": 0.0,
               "old_exit_price": 241.66,
@@ -662,7 +662,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -695,7 +695,7 @@
       "potjes": [],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-08-23T14:09:09.718202+00:00"
+      "created_at": "2026-08-28T07:35:56.474246+00:00"
     },
     "user-1996fa59": {
       "user_id": "user-1996fa59",
@@ -747,7 +747,7 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.1,
+          "capital": 10.04,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -772,7 +772,7 @@
           "trade_log": [],
           "reconcile_audit": [],
           "original_max_size": 50.0,
-          "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) \u2014 dekking is de van Spark afgeboekte token."
+          "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) — dekking is de van Spark afgeboekte token."
         }
       ],
       "last_buy_cycle": null,

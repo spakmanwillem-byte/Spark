@@ -1,323 +1,8 @@
 {
   "kaarten": [
     {
-      "id": "kbv2-48bd1344",
-      "begrip": "snap_agent",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De snap_agent is het centrale ingangspunt binnen Spark Core dat onbekende woorden in chat- en tekst-input detecteert en er automatisch skeleton-kaarten voor aanmaakt in de KB-inbox.",
-        "laag2": "Bundelt drie scan-flows achter \u00e9\u00e9n API: scan_user_input, scan_llm_output en scan_text_import. Voegt aan elke aangemaakte kaart footnote-metadata toe (aangemaakt_door, origin, herkomst_turn_id, context_snippet, llm_count). Hanteert een rate-limit van 30 kaarten per user per uur tegen inbox-explosie. Draait onvoorwaardelijk na elke chat-turn sinds v13_snap_agent_57 \u2014 voorheen alleen als een trigger-analyse ook succes had.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/snap_agent.py\n- API: scan_user_input, scan_llm_output, seed_self_awareness_cards\n- Delegeert lookup aan llm_output_scanner (bestaande util)\n- Delegeert schrijven aan kb_v2.service.add_to_inbox (met deep-scan dedupe)\n- Rate-limit: 30/hour/user (constante _RATE_LIMIT_PER_HOUR)\n- Idempotent bij bestaande begrippen (dankzij v13_kbv2_inbox_dedupe_002)",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "onbekend-woord",
-        "kb-inbox",
-        "skeleton",
-        "rate-limit",
-        "footnote",
-        "centraal-punt",
-        "v13",
-        "self-learn"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.209709+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-863f25bd",
-      "begrip": "llm_output_scanner",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De llm_output_scanner is een side-effect-vrije scan-utility die Sparks LLM-antwoord ontleedt op woorden die niet in de KB v2 staan en niet in de user-vraag voorkwamen.",
-        "laag2": "Retourneert kandidaten in de vorm {begrip, context_snippet, count_in_spark}. Puur en licht: geen writes, geen calls naar KB. Wordt aangeroepen door snap_agent.scan_llm_output en (legacy) direct door trigger_learner. Filtert stopwoorden, korte tokens (<4 chars), en bekende KB-begrippen zodat alleen echt nieuwe woorden overblijven.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/llm_output_scanner.py (86 rgl)\n- Public API: scan_spark_response(text, user_text, top_n)\n- Return: List[{\"begrip\", \"context_snippet\", \"count_in_spark\"}]\n- Filter: min-length 4, top-N default 8, ignoreert user-vraag-tokens\n- Puur \u2014 mag altijd worden aangeroepen zonder side-effects",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "llm",
-        "scanner",
-        "filter",
-        "onbekend-woord",
-        "side-effect-vrij",
-        "kb-lookup"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.270497+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-f52b1534",
-      "begrip": "trigger_learner",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De trigger_learner analyseert na elke chat-turn of het gesprek een gedrags-trigger voor Spark oplevert, en delegeert daarna de LLM-output-scan aan de snap_agent.",
-        "laag2": "Roept _llm_analyze(user_text, spark_response) aan om te bepalen of Sparks reactie een leerpatroon moet opleveren (categorie, voorwaarden, gedrag). Voegt geaccepteerde voorstellen toe aan learned_triggers.json. Sinds v13_snap_agent_57 draait de output-scan ONVOORWAARDELIJK \u2014 ook als _llm_analyze niks oplevert.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/trigger_learner.py (295 rgl)\n- Entry point: learn_from_interaction(user_text, spark_response, session_id, user_id)\n- Voorstellen: /app/backend/data/chat/learned_triggers.json\n- v13_snap_agent_57: _snap_llm_output wordt nu ALTIJD aangeroepen, niet alleen bij trigger-hit\n- Non-blocking: als scan faalt, gaat trigger-analyse gewoon door",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "chat",
-        "leren",
-        "trigger",
-        "gedrag",
-        "post-turn",
-        "non-blocking",
-        "v13"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.324944+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-63d9aeba",
-      "begrip": "lite_card_factory",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De lite_card_factory bouwt compacte skeleton-kaarten voor de KB-inbox op basis van een lijst scanner-kandidaten, met max N per turn.",
-        "laag2": "Neemt een candidates-list van llm_output_scanner en batcht ze naar add_to_inbox. Bewaakt een max_per_turn parameter (default 3) om te voorkomen dat \u00e9\u00e9n chat-turn de inbox overspoelt. Sinds v13_snap_agent_57 wordt hij niet meer direct aangeroepen door trigger_learner \u2014 snap_agent is de nieuwe voorkant.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/lite_card_factory.py\n- API: batch_create_from_scan(candidates, turn_id, user_id, max_per_turn)\n- Return: {\"created\": [...], \"created_count\": N}\n- Bron-tag in kaart: source=\"llm_auto_extract\"\n- Legacy: rechtstreeks aangeroepen tot sessie 57, nu via snap_agent",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "kb-inbox",
-        "skeleton",
-        "batch",
-        "rate-limit",
-        "factory",
-        "legacy-voorkant"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.379366+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-1690763a",
-      "begrip": "snap_service",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De snap_service (KB v2) doet user-facing kennis-lookups voor chat: exacte match op begrip + fuzzy fallback op tags.",
-        "laag2": "Wordt aangeroepen vanuit chat/routes.py wanneer een user-bericht een woord bevat dat mogelijk in KB staat. Retourneert de gevonden kaart met lagen 1-4 en 5W. Bij geen match kan de flow doorgaan naar snap_agent om een skeleton te cre\u00ebren. ROADMAP #6 P1: fuzzy-fallback met rapidfuzz ratio \u226592 nog niet gebouwd.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/snap_service.py (854 rgl)\n- Public API: multi_lookup, single_lookup\n- Return: List[{\"begrip\", \"kaart\", \"lade\", \"match_type\"}]\n- Backlog P1: rapidfuzz fuzzy-fallback (ratio \u226592)\n- Homoniem-handling nog handmatig (zie snap-drank vs snap-kenniskaart fix v13_57)",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "chat",
-        "lookup",
-        "kb-v2",
-        "fuzzy-backlog",
-        "homoniem",
-        "v1-1"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.435445+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-cce162f2",
-      "begrip": "text_importer",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De text_importer parseert lange tekst-blokken (bijv. GPT-antwoorden) en cre\u00ebert of update KB v2 kaarten met lagen, ws5 en tags op basis van herkende structuur.",
-        "laag2": "Herkent kaart-titel (het begrip v\u00f3\u00f3r \"Laag 1\"), 4 lagen, 5W-blokken en tags. Skipt lade-headers en 5W-VELD-regels (waar:..., wat:...) sinds v13_kbv2_text_import_ws5_fix_57 \u2014 losse vraagwoorden als kaart-titel (Waar, Wat, Hoe) komen nu w\u00e9l door. Grootste bron van KB-content: 3139+ kaarten via deze route.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/text_importer.py (456 rgl)\n- Endpoint: POST /api/kb/v2/admin/import-text\n- Herkenning: lade-header, begrip-titel, \"Laag 1..4\", \"5W\", \"Wie:\", \"Tags\"\n- Skip-lijst: lade-namen + 5W-VELDEN (met dubbele punt)\n- v13_kbv2_text_import_ws5_fix_57: regex ^\\s*(wie|wat|...)\\s*: voor 5W-velden",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "import",
-        "text-parsing",
-        "gpt-output",
-        "5w",
-        "lagen",
-        "fix-57"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.515546+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-ab4274ba",
-      "begrip": "tag_sanitizer",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "De tag_sanitizer is de LLM-lek-preventiefilter die tags opschoont voordat ze in de KB terechtkomen: verwijdert leestekens-tags, LLM-instructies-fragmenten, en te lange strings.",
-        "laag2": "Draait op drie haakpunten: (1) bij LLM-tag-generatie in kb_v2 hooks, (2) bij snap-lookup normalisatie, (3) frontend-check bij handmatige tag-invoer. Voorkomt dat prompt-fragmenten of instructie-tekens (uit LLM output) als \"tag\" in de KB belanden. Whitelist-approach: alfanumeriek + Nederlands-diacritics + streepjes; alles anders wordt geweigerd of geschoond.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/tag_sanitizer.py\n- API: sanitize_tag(str), sanitize_tag_list(list)\n- Whitelist: alfanumeriek, NL-diacritics, streep, spatie\n- Max lengte: 40 chars per tag\n- 3 haakpunten: LLM-generate + snap + frontend",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "kb-v2",
-        "sanitizer",
-        "llm-lek",
-        "tags",
-        "filter",
-        "whitelist",
-        "beveiliging"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.569613+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-5eaffe31",
-      "begrip": "kb_v2 (module)",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "kb_v2 is de kernmodule van Spark Core die alle kennis in de vorm van gestructureerde kaarten opslaat, indexeert en doorzoekbaar maakt via 4 lades: weten, doen, voelen, spreken.",
-        "laag2": "Bestaat uit een file-based JSON store (knowledge_v2_{lade}.json + knowledge_inbox.json + knowledge_index.json), routes.py met 30+ endpoints, en helpers als text_importer, tag_sanitizer, lite_card_factory. Werkt met dedupe (v13_kbv2_inbox_dedupe_002: index-check + deep-scan alle lades), homoniem-detectie en 5W-structuur per kaart.",
-        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- Directory: /app/backend/modules/kb_v2/\n- Data: /app/backend/data/knowledge/v2/ (5 JSON files)\n- Lades: weten (4693), doen (1102), voelen (548), spreken (499)\n- Kaart-structuur: begrip + lagen[laag1..4] + ws5[wie..hoe] + tags + footnote\n- Dedupe: index + deep-scan (v13_kbv2_inbox_dedupe_002 sessie 56)\n- Routes: GET /find, /inbox, /lade/{lade}, /stats, /homonyms + POST /classify, /edit, /import-text",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "spark-core",
-        "module",
-        "kennisbank",
-        "kb-v2",
-        "4-lades",
-        "5w",
-        "file-store",
-        "dedupe",
-        "homoniem",
-        "kernmodule"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "spark_self_awareness",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.623329+00:00",
-        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
-        "laatst_aangevuld_door": "snap_agent (aanzet)",
-        "klaar_voor": "GPT-elaboratie laag4 + ws5"
-      },
-      "_inbox_reason": "missing_laag1",
-      "aliassen": [
-        "kb_v2",
-        "kb v2",
-        "knowledge base v2"
-      ],
-      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
-    },
-    {
-      "id": "kbv2-ccc491e0",
-      "begrip": "transcedentie",
+      "id": "kbv2-0a292ae6",
+      "begrip": "mentale",
       "lade": null,
       "status": "draft",
       "lagen": {
@@ -330,24 +15,426 @@
       "tags": [],
       "verbanden": [],
       "footnote": {
-        "bron": "user_input_snap",
+        "bron": "llm_auto_extract",
         "ingedeeld_door": null,
         "ingedeeld_op": null,
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-08-29T09:46:58.767850+00:00",
-        "origin": "user_chat_input",
-        "herkomst_turn_id": "test-turn-002",
-        "context_snippet": "Ik heb over transcedentie nagedacht en de holobiotische balans.",
+        "aangemaakt_op": "2026-08-29T10:29:00.589653+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "Natuurlijk, Willem.\u202fGedachten zijn de mentale processen waarin idee\u00ebn, overwegingen en gevoelens ontstaan",
         "llm_count": 1
       },
       "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-13f33b34",
+      "begrip": "overwegingen",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:29:00.589653+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "ijn de mentale processen waarin idee\u00ebn, overwegingen en gevoelens ontstaan. Ze vormen de basis voor keuzes, emot",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-ad2e7f57",
+      "begrip": "bezighouden",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:29:00.589653+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "er in je hoofd speelt, welke vragen je bezighouden, of welke inspiratie je hebt. Ik luister en geef graag teru",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-ebc7a73c",
+      "begrip": "aansnijden",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:29:55.363473+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "n we een paar verschillende onderwerpen aansnijden.   Wanneer je een onderwerp noemt, kijkt de **snap_agent**",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-8fa5a31a",
+      "begrip": "vier",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:29:55.363473+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "kunt aanvullen.  Hier een voorstel van vier uiteenlopende thema\u2019s om te testen:  1. **Quantum\u2011biologie*",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-c8d36d08",
+      "begrip": "ingangspunt",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:30:53.522857+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "De **snap_agent** is het centrale ingangspunt binnen Spark Core voor het herkennen van onbekende woorden.",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-1311142b",
+      "begrip": "binnenkomende",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:30:53.522857+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "orden.   **Wat doet hij?**  - Scan alle binnenkomende tekst:   1.\u202f`scan_user_input`\u202f\u2192 tekst die jij typt.   2.\u202f`s",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-b7ba6676",
+      "begrip": "typt",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:30:53.522857+00:00",
+        "origin": "spark_llm_output",
+        "context_snippet": "1.\u202f`scan_user_input`\u202f\u2192 tekst die jij typt.   2.\u202f`scan_llm_output`\u202f\u2192 tekst die een LLM teruggeeft.   3",
+        "llm_count": 1
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-1e5f5cbf",
+      "begrip": "fuzzy\u2011matching",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "Fuzzy-matching is een techniek om twee tekstuele waardes te vergelijken op basis van gelijkenis in plaats van exacte overeenkomst, zodat kleine tikfouten, spellingvarianten of tussenspaties toch als \"hetzelfde\" worden herkend.",
+        "laag2": "Werkt door een score (meestal 0-100) toe te kennen aan het paar strings, waarbij een drempel (bv. \u226592) bepaalt of het als match telt. Populaire algoritmes zijn Levenshtein-afstand, Jaro-Winkler, ratio-based comparison (rapidfuzz) en token-set-ratio. Vaak wordt eerst genormaliseerd (lowercase, diacritics weg, spaties trimmen) voordat de score wordt berekend, en pas boven de threshold wordt de match als geldig aangenomen.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- Toepassingsgebieden: KB-lookup (\"kwestbaarheid\" \u2192 \"kwetsbaarheid\"), gebruikers-input-normalisatie, dedupe over KB-lades, tag-clustering, homoniem-detectie.\n- Score-schaal: 0-100 (0=totaal verschillend, 100=identiek). Threshold voor betrouwbare match meestal 85-95.\n- Trade-off: te lage threshold = false positives (verkeerde matches); te hoog = gemiste correcte matches (bv. typo blijft ongezien).\n- In Spark Core: geplaatst op de ROADMAP als P1 backlog #6 \"Fuzzy-snap in chat-flow\" \u2014 nog niet gebouwd op moment van sessie 57.\n- Bedoelde plaats: modules/chat/snap_service.py als tweede lookup-stap na exacte match faalt.\n- Library-keuze in Spark Core: rapidfuzz (snel, C-implementatie, drop-in replacement voor fuzzywuzzy).\n- Complementair aan homoniem-detectie: fuzzy-matching lost typo op, homoniem lost meerbetekenis op.",
+        "laag4": "Binnen Spark Core is fuzzy-matching een sleuteltechniek om de KB toegankelijk te maken voor menselijk taalgebruik: mensen tikken zelden foutloos, en dezelfde gedachte krijgt in verschillende gesprekken andere vormen. Zonder fuzzy-matching zou elke variant een aparte KB-kaart worden en groeit de kennisbank zonder verbinding. Door tijdens lookup fuzzy te vergelijken kan Spark kleine schrijffouten opvangen, dialectvarianten herkennen (\"snap\" \u2194 \"snaps\"), en overkoepelende begrippen verbinden. Het draagt zo bij aan de doelstelling dat kennis niet fragmenteert maar rijker wordt naarmate de gebruiker groeit \u2014 een fundament onder betrouwbaar terughalen van wat ooit gezegd of gedacht is."
+      },
+      "ws5": {
+        "wie": "Software-modules die tekst met elkaar moeten vergelijken zonder afhankelijk te zijn van exact-gelijk-zijn \u2014 in Spark Core: snap_service, kb_v2 dedupe, tag-clustering.",
+        "wat": "Een techniek om gelijkenis tussen twee strings uit te drukken als een score en op basis daarvan te bepalen of ze hetzelfde bedoelen.",
+        "wanneer": "Bij lookup wanneer exacte match faalt; bij dedupe wanneer je kaarten met kleine variaties samen wilt trekken; bij normalisatie van gebruikersinput.",
+        "waar": "Op elke plaats waar tekst-vergelijking plaatsvindt: chat/snap_service.py, kb_v2/service.py (find_by_begrip), tag_sanitizer, importer-dedupe.",
+        "waarom": "Om menselijke taal met haar tikfouten, dialecten en spellingvarianten toch te kunnen koppelen aan bestaande kennis, in plaats van elke variant als nieuw te behandelen.",
+        "hoe": "Via een score-functie (bv. rapidfuzz.ratio) op genormaliseerde strings; boven de threshold telt als match, anders als nieuw begrip."
+      },
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill",
+        "fuzzy",
+        "matching",
+        "string-similarity",
+        "rapidfuzz",
+        "levenshtein",
+        "ratio",
+        "threshold",
+        "normalisatie",
+        "kb-lookup",
+        "typo",
+        "dedupe",
+        "snap-service",
+        "p1-backlog",
+        "v13",
+        "roadmap"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-08-29T10:32:35.335484+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "wat is  fuzzy\u2011matching",
+        "laatst_aangevuld_op": "2026-08-29T10:37:07.697131+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-polish",
+        "doellade_advies": "weten"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "Zover mogelijk ingevuld door snap_agent (sessie 57). Advies-lade: weten. GPT hoeft alleen kleine polish te doen."
+    },
+    {
+      "id": "kbv2-280c9fb5",
+      "begrip": "strings",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:32:36.907811+00:00",
+        "origin": "spark_llm_output",
+        "herkomst_turn_id": "learned-f351341a0f5d",
+        "context_snippet": "eft een score die aangeeft hoe dicht de strings bij elkaar liggen.  ### Hoe werkt het? 1. **Edit\u2011distance (",
+        "llm_count": 3
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-5f6e3350",
+      "begrip": "rapidfuzz",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "rapidfuzz is een Python-library voor snelle fuzzy string-matching, met een C-backend die dezelfde API biedt als het oudere fuzzywuzzy maar aanzienlijk sneller is.",
+        "laag2": "Levert functies als fuzz.ratio, fuzz.partial_ratio, fuzz.token_sort_ratio en fuzz.token_set_ratio die twee strings vergelijken en een score 0-100 teruggeven. Daarnaast biedt process.extract en process.extractOne handige helpers om binnen een lijst kandidaten de beste match te vinden. Werkt gebaseerd op Levenshtein-afstand en varianten, en heeft geen afhankelijkheid van python-Levenshtein (in tegenstelling tot fuzzywuzzy).",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- Package op PyPI: rapidfuzz (import: rapidfuzz)\n- License: MIT\n- Kern-API: rapidfuzz.fuzz (score-functies), rapidfuzz.process (batch-matching), rapidfuzz.distance (edit-afstand)\n- Score-range: 0-100 (0 = niks gemeen, 100 = identiek).\n- Snelheid: 5-30x sneller dan fuzzywuzzy dankzij C++ implementatie.\n- Bedoelde inzet in Spark Core: snap_service.py fuzzy-fallback (ROADMAP #6 P1).\n- Threshold-advies in Spark Core: ratio \u2265 92 voor safe-match, 85-91 voor kandidaat-suggest.\n- Alternatieven: fuzzywuzzy (trager), python-Levenshtein (basis-afstand).",
+        "laag4": "rapidfuzz is voor Spark Core de logische keuze om fuzzy-matching te implementeren omdat het (a) snel genoeg is voor synchrone lookup binnen een chat-turn, (b) een duidelijke, uniforme API biedt die aansluit bij hoe Spark z'n KB doorzoekt, en (c) geen zware C-compileer-dependencies vraagt. In het bredere Spark-verhaal is het geen \"eigen\" bibliotheek maar een fundament dat de snap_service en KB-dedupe stiller en accurater maakt. Doordat het slechts een utility is, blijft de eigen Spark-logica (thresholds, homoniem-check, footnote-verrijking) op \u00e9\u00e9n centrale plek \u2014 de snap_agent \u2014 die deze utility op de juiste momenten inschakelt."
+      },
+      "ws5": {
+        "wie": "Python-ontwikkelaars die fuzzy string-matching nodig hebben; in Spark Core: de snap_service en KB-dedupe.",
+        "wat": "Een snelle Python-library voor string-gelijkenis met een C-backend en scikit-achtige API.",
+        "wanneer": "Bij elke lookup of dedupe waar exacte match onvoldoende is en menselijke taalvariatie moet worden overbrugd.",
+        "waar": "In Python-processen (backend van Spark Core, via pip install rapidfuzz).",
+        "waarom": "Om fuzzy-matching in productie snel genoeg te maken voor synchrone chat-flows, met een schone drop-in vervanging voor fuzzywuzzy.",
+        "hoe": "Door rapidfuzz.fuzz.ratio(a, b) aan te roepen, of process.extractOne(query, choices) voor batch-lookup, en de score te toetsen aan een threshold."
+      },
+      "tags": [
+        "rapidfuzz",
+        "python",
+        "library",
+        "fuzzy",
+        "matching",
+        "levenshtein",
+        "c-backend",
+        "fuzzywuzzy-vervanger",
+        "pypi",
+        "mit-license",
+        "spark-core",
+        "snap-service",
+        "v13"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:32:36.907811+00:00",
+        "origin": "spark_llm_output",
+        "herkomst_turn_id": "learned-f351341a0f5d",
+        "context_snippet": "nker) een lagere kost dan andere.  4. **RapidFuzz** \u2013 de library die Spark\u2019s **snap_agent** intern gebruikt.",
+        "llm_count": 3,
+        "laatst_aangevuld_op": "2026-08-29T10:37:07.697131+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-polish",
+        "doellade_advies": "weten"
+      },
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "Zover mogelijk ingevuld door snap_agent (sessie 57). Advies-lade: weten. GPT hoeft alleen kleine polish te doen."
+    },
+    {
+      "id": "kbv2-5537fbc9",
+      "begrip": "fuzz",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "Fuzz is de submodule binnen rapidfuzz (en fuzzywuzzy) die de eigenlijke score-functies bevat om twee strings te vergelijken op gelijkenis.",
+        "laag2": "Levert onder andere ratio (Levenshtein-gebaseerd), partial_ratio (voor substring-match), token_sort_ratio (volgorde-ongevoelig) en token_set_ratio (dubbel-token-tolerant). Elke functie neemt twee strings en geeft een integer 0-100 terug. Het is bedoeld als lichte, functionele API \u2014 geen state, geen configuratie \u2014 zodat de aanroep dicht bij de plek van gebruik kan staan.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- Onderdeel van: rapidfuzz.fuzz (of fuzzywuzzy.fuzz \u2014 dezelfde API)\n- Vier hoofd-functies:\n  * fuzz.ratio(a, b) \u2014 Levenshtein-gebaseerde gelijkenis over volledige strings\n  * fuzz.partial_ratio(a, b) \u2014 beste substring-match (goed voor \"wetenschap\" \u2194 \"wetenschappelijke\")\n  * fuzz.token_sort_ratio(a, b) \u2014 sorteer tokens dan ratio (goed voor volgorde-verschillen)\n  * fuzz.token_set_ratio(a, b) \u2014 sets van tokens, tolerant voor dubbels\n- Score-schaal: integer 0-100\n- Puur functioneel \u2014 geen side-effects, thread-safe\n- In Spark Core: geplande inzet voor fuzzy-fallback in snap_service.",
+        "laag4": "De fuzz-submodule is de \"meetlat\" van fuzzy-matching: het geeft geen oordeel over goed of fout, alleen een score. Voor Spark Core is dat precies wat nodig is \u2014 de beslissing wanneer een score \"genoeg\" is, hoort thuis bij de context (snap_service kiest zijn threshold, tag_sanitizer een andere). Doordat fuzz zelf niets weet van de KB, kan Spark z'n eigen semantiek stapelen: exacte match eerst, dan fuzz.ratio met threshold, dan pas een skeleton via snap_agent. Zo blijft de fuzz-laag stateless en herbruikbaar, en de Spark-laag betekenisvol."
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars die string-gelijkenis meten; wordt door rapidfuzz zelf en door Spark Core snap_service aangeroepen.",
+        "wat": "Een submodule met score-functies (ratio, partial_ratio, token_sort_ratio, token_set_ratio) die twee strings vergelijken.",
+        "wanneer": "Bij elke keer dat gelijkenis gemeten moet worden \u2014 lookup, dedupe, tag-clustering, homoniem-detectie.",
+        "waar": "In-process Python-aanroep: from rapidfuzz import fuzz; fuzz.ratio(a, b).",
+        "waarom": "Om de \"meet-stap\" van fuzzy-matching te scheiden van de \"beslis-stap\" \u2014 score is puur, beslissing is contextueel.",
+        "hoe": "Kies de juiste variant (ratio voor volledig, partial voor substring, token_* voor volgorde-ongevoelig), roep aan met twee strings, toets tegen threshold."
+      },
+      "tags": [
+        "fuzz",
+        "rapidfuzz",
+        "submodule",
+        "score",
+        "ratio",
+        "partial-ratio",
+        "token-sort",
+        "token-set",
+        "levenshtein",
+        "stateless",
+        "meet-stap",
+        "fuzzy"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "snap_agent",
+        "aangemaakt_op": "2026-08-29T10:32:36.907811+00:00",
+        "origin": "spark_llm_output",
+        "herkomst_turn_id": "learned-f351341a0f5d",
+        "context_snippet": "idFuzz) ```python from rapidfuzz import fuzz, process  score = fuzz.ratio(\"spark\", \"spak\") # \u2192 80 (van 1",
+        "llm_count": 3,
+        "laatst_aangevuld_op": "2026-08-29T10:37:07.697131+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-polish",
+        "doellade_advies": "weten"
+      },
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "Zover mogelijk ingevuld door snap_agent (sessie 57). Advies-lade: weten. GPT hoeft alleen kleine polish te doen."
     }
   ],
-  "card_count": 201,
+  "card_count": 11,
   "metadata": {
-    "last_updated": "2026-08-27T08:25:12.703781+00:00",
+    "last_updated": "2026-08-29T10:32:35.335616+00:00",
     "last_dedupe_at": "2026-08-27T20:14:21.406843+00:00",
     "last_dedupe_removed": 57
   },

@@ -98337,6 +98337,75 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-63d9aeba",
+      "begrip": "lite_card_factory",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De lite_card_factory bouwt compacte skeleton-kaarten voor de KB-inbox op basis van een lijst scanner-kandidaten, met max N per turn.",
+        "laag2": "Neemt een candidates-list van llm_output_scanner en batcht ze naar add_to_inbox. Bewaakt een max_per_turn parameter (default 3) om te voorkomen dat één chat-turn de inbox overspoelt. Sinds v13_snap_agent_57 wordt hij niet meer direct aangeroepen door trigger_learner — snap_agent is de nieuwe voorkant.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/lite_card_factory.py\n- API: batch_create_from_scan(candidates, turn_id, user_id, max_per_turn)\n- Return: {\"created\": [...], \"created_count\": N}\n- Bron-tag in kaart: source=\"llm_auto_extract\"\n- Legacy: rechtstreeks aangeroepen tot sessie 57, nu via snap_agent",
+        "laag4": "lite_card_factory is binnen kb_v2 de module die compacte skeleton-kaarten aanmaakt voor de KB-inbox. De module ontvangt kandidaten uit llm_output_scanner en verwerkt deze in batches naar add_to_inbox. Met max_per_turn wordt begrensd hoeveel kaarten per chat-turn kunnen worden aangemaakt, zodat één beurt de inbox niet kan overspoelen. Sinds v13_snap_agent_57 loopt deze route via snap_agent en wordt lite_card_factory niet meer rechtstreeks door trigger_learner aangeroepen."
+      },
+      "ws5": {
+        "wie": "llm_output_scanner, snap_agent en de KB-inbox maken gebruik van de functie van lite_card_fac",
+        "wat": "Een module die compacte skeleton-kaarten vanuit scanner-kandidaten aanmaakt.",
+        "wanneer": "Wanneer kandidaten uit llm_output_scanner als nieuwe KB-inhoud naar de inbox moeten worden verwerkt.",
+        "waar": "In /app/backend/modules/kb_v2/lite_card_factory.py.",
+        "waarom": "Om scanner-kandidaten gecontroleerd als compacte skeleton-kaarten aan de KB-inbox toe te voegen.",
+        "hoe": "Via batch_create_from_scan() met een max_per_turn-limiet en verwerking naar add_to_inbox."
+      },
+      "tags": [
+        "spark-core",
+        "module",
+        "kb-inbox",
+        "skeleton",
+        "batch",
+        "rate-limit",
+        "factory",
+        "legacy-voorkant"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:21:54.781335+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.379366+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:21:53.450582+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:21:54.949963+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
-  ]
+  ],
+  "metadata": {
+    "card_count": 549,
+    "last_updated": "2026-08-29T10:21:54.781348+00:00"
+  }
 }

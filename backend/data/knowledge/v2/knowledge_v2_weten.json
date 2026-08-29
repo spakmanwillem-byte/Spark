@@ -621168,10 +621168,1243 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-5eaffe31",
+      "begrip": "kb_v2 (module)",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "kb_v2 is de kernmodule van Spark Core die alle kennis in de vorm van gestructureerde kaarten opslaat, indexeert en doorzoekbaar maakt via 4 lades: weten, doen, voelen, spreken.",
+        "laag2": "Bestaat uit een file-based JSON store (knowledge_v2_{lade}.json + knowledge_inbox.json + knowledge_index.json), routes.py met 30+ endpoints, en helpers als text_importer, tag_sanitizer, lite_card_factory. Werkt met dedupe (v13_kbv2_inbox_dedupe_002: index-check + deep-scan alle lades), homoniem-detectie en 5W-structuur per kaart.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- Directory: /app/backend/modules/kb_v2/\n- Data: /app/backend/data/knowledge/v2/ (5 JSON files)\n- Lades: weten (4693), doen (1102), voelen (548), spreken (499)\n- Kaart-structuur: begrip + lagen[laag1..4] + ws5[wie..hoe] + tags + footnote\n- Dedupe: index + deep-scan (v13_kbv2_inbox_dedupe_002 sessie 56)\n- Routes: GET /find, /inbox, /lade/{lade}, /stats, /homonyms + POST /classify, /edit, /import-text",
+        "laag4": "Laag 4\n\nkb_v2 is de centrale kennismodule van Spark Core voor het opslaan, structureren, beheren en doorzoeken van kenniskaarten. De module organiseert kennis over vier lades — weten, doen, voelen en spreken — en gebruikt daarnaast een inbox voor nieuwe of nog niet ingedeelde kennis. De kaartstructuur combineert vier kennislagen met een 5W-structuur, tags en metadata, waardoor kennis niet alleen opgeslagen maar ook gestructureerd teruggevonden en verder verwerkt kan worden. Dedupe, homoniem-detectie en indexering ondersteunen het voorkomen van dubbele of conflicterende kennis. Daarmee vormt kb_v2 een belangrijk fundament voor hoe Spark kennis opbouwt, beheert en beschikbaar maakt voor andere onderdelen van het systeem."
+      },
+      "ws5": {
+        "wie": "Spark Core en de onderdelen die kenniskaarten opslaan, beheren of opvragen.",
+        "wat": "De centrale module voor gestructureerde opslag, indexering en doorzoeking van kenniskaarten.",
+        "wanneer": "Wanneer kennis wordt toegevoegd, aangepast, ingedeeld, gezocht of gecontroleerd op duplicaten en homoniemen.",
+        "waar": "In /app/backend/modules/kb_v2/ en de bijbehorende kennisdata in /app/backend/data/knowledge/v2/.",
+        "waarom": "Om kennis gestructureerd, doorzoekbaar en beheersbaar binnen Spark Core beschikbaar te maken.",
+        "hoe": "Via JSON-opslag, indexering, routes, 4 lades, 5W-structuur, tags, dedupe en homoniem-detectie."
+      },
+      "tags": [
+        "kb_v2",
+        "spark_core",
+        "module",
+        "kennisbank",
+        "kennisbeheer",
+        "kenniskaarten",
+        "kennisstructuur",
+        "4_lades",
+        "weten",
+        "doen",
+        "voelen",
+        "spreken",
+        "inbox",
+        "5W",
+        "lagen",
+        "tags",
+        "metadata",
+        "JSON",
+        "JSON_store",
+        "indexering",
+        "doorzoeken",
+        "dedupe",
+        "duplicaten",
+        "homoniem",
+        "homoniemdetectie",
+        "routes",
+        "endpoints",
+        "text_importer",
+        "tag_sanitizer",
+        "lite_card_factory",
+        "file_based",
+        "gestructureerde_kennis"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "metadata",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964344be",
+          "begrip": "Informatiebeheer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "kennisbeheer",
+            "metadata"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-20bc8e4a",
+          "begrip": "KB-kaart",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "kennisbeheer",
+            "metadata"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30b11195",
+          "begrip": "Kennisstructuur",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "kennisbeheer",
+            "kennisstructuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-06ecab36",
+          "begrip": "Knowledge card",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "kennisbeheer",
+            "kennisstructuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5798f7ef",
+          "begrip": "Knowledge-base",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "kennisbeheer",
+            "kennisstructuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-361005df",
+          "begrip": "kennisbankkaarten",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "lagen",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6f2081b3",
+          "begrip": "Onderwerpblauwdruk",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisstructuur",
+            "lagen",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dd671454",
+          "begrip": "Tag-curatie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "metadata",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ed2a6d62",
+          "begrip": "Kennisobject",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kennisbank",
+            "kennisbeheer",
+            "kennisstructuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:15:59.456906+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.623329+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:15:56.436718+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:16:00.015522+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:16:00.026277+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "aliassen": [
+        "kb_v2",
+        "kb v2",
+        "knowledge base v2"
+      ],
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ab4274ba",
+      "begrip": "tag_sanitizer",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De tag_sanitizer is de LLM-lek-preventiefilter die tags opschoont voordat ze in de KB terechtkomen: verwijdert leestekens-tags, LLM-instructies-fragmenten, en te lange strings.",
+        "laag2": "Draait op drie haakpunten: (1) bij LLM-tag-generatie in kb_v2 hooks, (2) bij snap-lookup normalisatie, (3) frontend-check bij handmatige tag-invoer. Voorkomt dat prompt-fragmenten of instructie-tekens (uit LLM output) als \"tag\" in de KB belanden. Whitelist-approach: alfanumeriek + Nederlands-diacritics + streepjes; alles anders wordt geweigerd of geschoond.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/tag_sanitizer.py\n- API: sanitize_tag(str), sanitize_tag_list(list)\n- Whitelist: alfanumeriek, NL-diacritics, streep, spatie\n- Max lengte: 40 chars per tag\n- 3 haakpunten: LLM-generate + snap + frontend",
+        "laag4": "tag_sanitizer is een filter binnen kb_v2 dat voorkomt dat ongeldige of ongewenste inhoud als tag in de kennisbank wordt opgeslagen. De module controleert tags op toegestane tekens en lengte en verwijdert of weigert onder andere leestekens-tags en fragmenten uit LLM-instructies. De controle wordt op meerdere momenten toegepast: bij LLM-tag-generatie, bij snap-lookup-normalisatie en bij handmatige invoer vanuit de frontend. Daarmee vormt tag_sanitizer een vaste controlelaag tussen tag-invoer en opslag in de KB."
+      },
+      "ws5": {
+        "wie": "kb_v2 en de onderdelen die tags genereren, normaliseren of invoeren.",
+        "wat": "Een filter die tags controleert, opschoont en ongeldige tags weigert.",
+        "wanneer": "Bij LLM-tag-generatie, snap-lookup-normalisatie en handmatige tag-invoer.",
+        "waar": "In /app/backend/modules/kb_v2/tag_sanitizer.py.",
+        "waarom": "Om te voorkomen dat ongeldige tags of LLM-instructiefragmenten in de kennisbank terechtkomen.",
+        "hoe": "Via sanitize_tag() en sanitize_tag_list() met een whitelist en een maximale lengte van 40 tekens per tag."
+      },
+      "tags": [
+        "tag_sanitizer",
+        "sanitizer",
+        "tag",
+        "tags",
+        "tagfilter",
+        "tagfiltering",
+        "tagvalidatie",
+        "tagopschoning",
+        "kb_v2",
+        "spark_core",
+        "module",
+        "LLM",
+        "LLM-output",
+        "LLM-instructies",
+        "prompt-fragmenten",
+        "prompt-lek",
+        "lekpreventie",
+        "filter",
+        "whitelist",
+        "alfanumeriek",
+        "diacritics",
+        "Nederlands",
+        "streepjes",
+        "spaties",
+        "maximale_lengte",
+        "40_tekens",
+        "sanitize_tag",
+        "sanitize_tag_list",
+        "snap_lookup",
+        "frontend",
+        "handmatige_invoer",
+        "beveiliging"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5eaffe31",
+          "begrip": "kb_v2 (module)",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "kb_v2",
+            "module",
+            "spark_core",
+            "tag_sanitizer",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "llm",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1a272587",
+          "begrip": "Softwarearchitectuur",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "beveiliging",
+            "module"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:17:36.008260+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.569613+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:17:30.890505+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:17:36.555621+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:17:36.567119+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cce162f2",
+      "begrip": "text_importer",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De text_importer parseert lange tekst-blokken (bijv. GPT-antwoorden) en creëert of update KB v2 kaarten met lagen, ws5 en tags op basis van herkende structuur.",
+        "laag2": "Herkent kaart-titel (het begrip vóór \"Laag 1\"), 4 lagen, 5W-blokken en tags. Skipt lade-headers en 5W-VELD-regels (waar:..., wat:...) sinds v13_kbv2_text_import_ws5_fix_57 — losse vraagwoorden als kaart-titel (Waar, Wat, Hoe) komen nu wél door. Grootste bron van KB-content: 3139+ kaarten via deze route.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/text_importer.py (456 rgl)\n- Endpoint: POST /api/kb/v2/admin/import-text\n- Herkenning: lade-header, begrip-titel, \"Laag 1..4\", \"5W\", \"Wie:\", \"Tags\"\n- Skip-lijst: lade-namen + 5W-VELDEN (met dubbele punt)\n- v13_kbv2_text_import_ws5_fix_57: regex ^\\s*(wie|wat|...)\\s*: voor 5W-velden",
+        "laag4": "text_importer is binnen kb_v2 de verwerkingslaag die gestructureerde KB-inhoud uit lange tekstblokken herkent en omzet naar kaarten. De importer herkent onder andere de kaarttitel, de vier kennislagen, het 5W-blok en tags en gebruikt deze structuur om kaarten aan te maken of bij te werken. Daarbij worden lade-headers en 5W-veldregels met een dubbele punt bewust overgeslagen, zodat deze niet onterecht als kaartinhoud of titel worden geïmporteerd. De aanpassing v13_kbv2_text_import_ws5_fix_57 zorgt er specifiek voor dat losse vraagwoorden als kaarttitel wel kunnen worden herkend, terwijl regels zoals Wie: en Wat: als 5W-velden worden behandeld."
+      },
+      "ws5": {
+        "wie": "kb_v2 en onderdelen die gestructureerde tekst naar KB-kaarten verwerken.",
+        "wat": "Een importer die lange tekstblokken parseert en daaruit KB-kaarten met lagen, 5W en tags maakt of bijwerkt.",
+        "wanneer": "Wanneer gestructureerde tekst, zoals een GPT-antwoord, in de KB wordt geïmporteerd.",
+        "waar": "In /app/backend/modules/kb_v2/text_importer.py, bereikbaar via POST /api/kb/v2/admin/import-text.",
+        "waarom": "Om gestructureerde KB-inhoud uit tekst automatisch naar kaarten om te zetten.",
+        "hoe": "Door kaarttitels, Laag 1..4, 5W en Tags te herkennen en specifieke headers en 5W-veldregels uit te sluiten."
+      },
+      "tags": [
+        "text_importer",
+        "text_import",
+        "importer",
+        "import",
+        "kb_v2",
+        "spark_core",
+        "module",
+        "tekstimport",
+        "tekstverwerking",
+        "parsing",
+        "parser",
+        "lange_tekst",
+        "GPT_output",
+        "GPT_antwoord",
+        "kaart",
+        "kenniskaart",
+        "kaarttitel",
+        "lagen",
+        "laag1",
+        "laag2",
+        "laag3",
+        "laag4",
+        "5W",
+        "ws5",
+        "tags",
+        "lade_header",
+        "5W_velden",
+        "regex",
+        "structuurherkenning",
+        "kaartaanmaak",
+        "kaart_update",
+        "import_text",
+        "admin",
+        "endpoint",
+        "v13",
+        "ws5_fix_57"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5eaffe31",
+          "begrip": "kb_v2 (module)",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "5w",
+            "kb_v2",
+            "lagen",
+            "module",
+            "spark_core"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab4274ba",
+          "begrip": "tag_sanitizer",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "kb_v2",
+            "module",
+            "spark_core",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6f2081b3",
+          "begrip": "Onderwerpblauwdruk",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kenniskaart",
+            "lagen",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5b5fc090",
+          "begrip": "Perl",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "parsing",
+            "regex"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kenniskaart",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-85d2b504",
+          "begrip": "kaarten",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kaart",
+            "kenniskaart"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ad558fe",
+          "begrip": "Import",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "import",
+            "module"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-361005df",
+          "begrip": "kennisbankkaarten",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "lagen",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb425b88",
+          "begrip": "Admin-endpoints",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "admin",
+            "endpoint"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:19:01.774219+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.515546+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:18:56.926600+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:19:02.307370+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:19:02.318081+00:00",
+            "result": {
+              "n_found": 9,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1690763a",
+      "begrip": "snap_service",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De snap_service (KB v2) doet user-facing kennis-lookups voor chat: exacte match op begrip + fuzzy fallback op tags.",
+        "laag2": "Wordt aangeroepen vanuit chat/routes.py wanneer een user-bericht een woord bevat dat mogelijk in KB staat. Retourneert de gevonden kaart met lagen 1-4 en 5W. Bij geen match kan de flow doorgaan naar snap_agent om een skeleton te creëren. ROADMAP #6 P1: fuzzy-fallback met rapidfuzz ratio ≥92 nog niet gebouwd.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/snap_service.py (854 rgl)\n- Public API: multi_lookup, single_lookup\n- Return: List[{\"begrip\", \"kaart\", \"lade\", \"match_type\"}]\n- Backlog P1: rapidfuzz fuzzy-fallback (ratio ≥92)\n- Homoniem-handling nog handmatig (zie snap-drank vs snap-kenniskaart fix v13_57)",
+        "laag4": "snap_service is binnen Spark Core de user-facing lookup-laag waarmee vanuit chat kenniskaarten kunnen worden opgezocht. De module probeert eerst een exacte match op het begrip te vinden en gebruikt daarnaast de bestaande tag-gebaseerde lookup; een fuzzy fallback met rapidfuzz ratio ≥92 staat nog als P1 op de roadmap en is dus nog niet gebouwd. Bij een gevonden kaart geeft de service de kaartinformatie terug, inclusief lagen 1 tot en met 4 en de 5W-structuur. Wanneer geen kaart wordt gevonden, kan de chatflow doorgaan naar snap_agent om een skeleton voor nieuwe kennis te creëren. Homoniemen worden momenteel nog handmatig afgehandeld."
+      },
+      "ws5": {
+        "wie": "De chatflow en gebruikers die via chat kennis uit de KB opvragen.",
+        "wat": "Een service voor het opzoeken van kenniskaarten vanuit chat.",
+        "wanneer": "Wanneer een user-bericht een woord bevat dat mogelijk in de KB voorkomt.",
+        "waar": "In /app/backend/modules/chat/snap_service.py, aangeroepen vanuit chat/routes.py.",
+        "waarom": "Om bestaande kenniskaarten vanuit de chat beschikbaar te maken.",
+        "hoe": "Via multi_lookup en single_lookup, met exacte begripsmatching en tag-gebaseerde lookup; de geplande fuzzy fallback is nog niet gebouwd."
+      },
+      "tags": [
+        "snap_service",
+        "snap",
+        "service",
+        "spark_core",
+        "chat",
+        "chatflow",
+        "lookup",
+        "kennislookup",
+        "kenniskaart",
+        "kb_v2",
+        "user_facing",
+        "exact_match",
+        "exacte_match",
+        "begrip",
+        "tag_lookup",
+        "tags",
+        "fuzzy",
+        "fuzzy_fallback",
+        "rapidfuzz",
+        "ratio_92",
+        "backlog",
+        "P1",
+        "snap_agent",
+        "skeleton",
+        "homoniem",
+        "homoniemen",
+        "match_type",
+        "multi_lookup",
+        "single_lookup",
+        "chat_routes",
+        "kennisopvraging"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5eaffe31",
+          "begrip": "kb_v2 (module)",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "homoniem",
+            "kb_v2",
+            "spark_core",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cce162f2",
+          "begrip": "text_importer",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "kb_v2",
+            "kenniskaart",
+            "spark_core",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab4274ba",
+          "begrip": "tag_sanitizer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "kb_v2",
+            "spark_core",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77a3c2bc",
+          "begrip": "snap",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kenniskaart",
+            "snap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kenniskaart",
+            "tags"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b29a7ab5",
+          "begrip": "kb-kaarten",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "begrip",
+            "kenniskaart"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6f2081b3",
+          "begrip": "Onderwerpblauwdruk",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kenniskaart",
+            "tags"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:20:27.510290+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.435445+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:20:23.159362+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:20:28.055256+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:20:28.066086+00:00",
+            "result": {
+              "n_found": 7,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f52b1534",
+      "begrip": "trigger_learner",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De trigger_learner analyseert na elke chat-turn of het gesprek een gedrags-trigger voor Spark oplevert, en delegeert daarna de LLM-output-scan aan de snap_agent.",
+        "laag2": "Roept _llm_analyze(user_text, spark_response) aan om te bepalen of Sparks reactie een leerpatroon moet opleveren (categorie, voorwaarden, gedrag). Voegt geaccepteerde voorstellen toe aan learned_triggers.json. Sinds v13_snap_agent_57 draait de output-scan ONVOORWAARDELIJK — ook als _llm_analyze niks oplevert.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/trigger_learner.py (295 rgl)\n- Entry point: learn_from_interaction(user_text, spark_response, session_id, user_id)\n- Voorstellen: /app/backend/data/chat/learned_triggers.json\n- v13_snap_agent_57: _snap_llm_output wordt nu ALTIJD aangeroepen, niet alleen bij trigger-hit\n- Non-blocking: als scan faalt, gaat trigger-analyse gewoon door",
+        "laag4": "trigger_learner is binnen Spark Core verantwoordelijk voor het analyseren van interacties na een chat-turn om te bepalen of daar een gedrags-trigger uit kan worden geleerd. De module gebruikt daarvoor zowel de tekst van de gebruiker als de reactie van Spark en kan geaccepteerde leer voorstellen opslaan in learned_triggers.json. Sinds v13_snap_agent_57 wordt de LLM-output-scan niet meer afhankelijk gemaakt van het vinden van een trigger: _snap_llm_output wordt na iedere chat-turn aangeroepen. De output-scan is non-blocking, waardoor een fout in de scan de verdere trigger-analyse niet tegenhoudt."
+      },
+      "ws5": {
+        "wie": "Spark Core en de chat-interactie waarin de gebruiker en Spark met elkaar communiceren.",
+        "wat": "Een module die interacties analyseert op mogelijke gedrags-triggers en de LLM-output-scan aanstuurt.",
+        "wanneer": "Na iedere chat-turn.",
+        "waar": "In /app/backend/modules/chat/trigger_learner.py, met geleerde voorstellen in /app/backend/data/chat/learned_triggers.json.",
+        "waarom": "Om uit interacties mogelijke leerpatronen voor Spark te identificeren en geaccepteerde voorstellen vast te leggen.",
+        "hoe": "Via learn_from_interaction() en _llm_analyze(), waarbij _snap_llm_output sinds v13_snap_agent_57 altijd wordt aangeroepen en scanfouten de trigger-analyse niet blokkeren."
+      },
+      "tags": [
+        "trigger_learner",
+        "trigger",
+        "triggers",
+        "spark_core",
+        "module",
+        "chat",
+        "chat_interactie",
+        "chat_turn",
+        "post_turn",
+        "leren",
+        "leerpatroon",
+        "gedrags_trigger",
+        "gedrag",
+        "gedragsleren",
+        "analyse",
+        "trigger_analyse",
+        "llm_analyze",
+        "llm_output",
+        "output_scan",
+        "snap_agent",
+        "snap_llm_output",
+        "learned_triggers",
+        "learned_triggers_json",
+        "voorstel",
+        "voorstellen",
+        "non_blocking",
+        "v13",
+        "v13_snap_agent_57",
+        "interactie",
+        "user_text",
+        "spark_response"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3b2c5463",
+          "begrip": "gedragsanalyse",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "gedrag",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-691230f4",
+          "begrip": "systeemanalyse",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "gedrag",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-506f781f",
+          "begrip": "Patroonvorming",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "gedrag",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cce162f2",
+          "begrip": "text_importer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "module",
+            "spark_core",
+            "v13"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1690763a",
+          "begrip": "snap_service",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "chat",
+            "snap_agent",
+            "spark_core"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c4b094",
+          "begrip": "begeleiden",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "gedrag",
+            "interactie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fa83209e",
+          "begrip": "Situatie",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "gedrag",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gedrag",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10363874",
+          "begrip": "vijandigheid",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gedrag",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d33d9371",
+          "begrip": "onbegrip",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gedrag",
+            "interactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:23:31.042502+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.324944+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:23:28.690999+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:23:31.587003+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:23:31.597975+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-863f25bd",
+      "begrip": "llm_output_scanner",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De llm_output_scanner is een side-effect-vrije scan-utility die Sparks LLM-antwoord ontleedt op woorden die niet in de KB v2 staan en niet in de user-vraag voorkwamen.",
+        "laag2": "Retourneert kandidaten in de vorm {begrip, context_snippet, count_in_spark}. Puur en licht: geen writes, geen calls naar KB. Wordt aangeroepen door snap_agent.scan_llm_output en (legacy) direct door trigger_learner. Filtert stopwoorden, korte tokens (<4 chars), en bekende KB-begrippen zodat alleen echt nieuwe woorden overblijven.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/llm_output_scanner.py (86 rgl)\n- Public API: scan_spark_response(text, user_text, top_n)\n- Return: List[{\"begrip\", \"context_snippet\", \"count_in_spark\"}]\n- Filter: min-length 4, top-N default 8, ignoreert user-vraag-tokens\n- Puur — mag altijd worden aangeroepen zonder side-effects",
+        "laag4": "llm_output_scanner is een lichte, side-effect-vrije scanmodule binnen Spark Core die het antwoord van Spark onderzoekt op woorden die mogelijk nieuwe kennis voor de KB v2 vertegenwoordigen. De scanner vergelijkt de woorden uit het Spark-antwoord met de woorden uit de gebruikersvraag en filtert daarnaast stopwoorden, korte tokens en al bekende KB-begrippen weg. Het resultaat bestaat uit kandidaten met het begrip, een contextsnippet en het aantal keer dat het begrip in het Spark-antwoord voorkomt. De scanner schrijft zelf niets weg en doet geen calls naar de KB, waardoor de scan zonder side-effects kan worden uitgevoerd en de resultaten door een volgende module kunnen worden verwerkt."
+      },
+      "ws5": {
+        "wie": "Spark Core en onderdelen die nieuwe begrippen uit LLM-output willen signaleren.",
+        "wat": "Een scan-utility die mogelijke nieuwe KB-begrippen uit een Spark-antwoord haalt.",
+        "wanneer": "Wanneer een Spark-antwoord wordt gecontroleerd op woorden die nog niet in de KB v2 staan.",
+        "waar": "In /app/backend/modules/chat/llm_output_scanner.py.",
+        "waarom": "Om mogelijke nieuwe begrippen uit LLM-output te vinden zonder zelf wijzigingen in de KB uit te voeren.",
+        "hoe": "Via scan_spark_response() met filters voor onder andere minimale woordlengte, stopwoorden, bekende KB-begrippen en woorden uit de gebruikersvraag."
+      },
+      "tags": [
+        "spark-core",
+        "module",
+        "llm",
+        "scanner",
+        "filter",
+        "onbekend-woord",
+        "side-effect-vrij",
+        "kb-lookup"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ab4274ba",
+          "begrip": "tag_sanitizer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "filter",
+            "llm",
+            "module"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63d9aeba",
+          "begrip": "lite_card_factory",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "module",
+            "spark-core"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:24:40.143947+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.270497+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:24:38.038368+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:24:40.690595+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:24:40.700931+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-48bd1344",
+      "begrip": "snap_agent",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De snap_agent is het centrale ingangspunt binnen Spark Core dat onbekende woorden in chat- en tekst-input detecteert en er automatisch skeleton-kaarten voor aanmaakt in de KB-inbox.",
+        "laag2": "Bundelt drie scan-flows achter één API: scan_user_input, scan_llm_output en scan_text_import. Voegt aan elke aangemaakte kaart footnote-metadata toe (aangemaakt_door, origin, herkomst_turn_id, context_snippet, llm_count). Hanteert een rate-limit van 30 kaarten per user per uur tegen inbox-explosie. Draait onvoorwaardelijk na elke chat-turn sinds v13_snap_agent_57 — voorheen alleen als een trigger-analyse ook succes had.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/snap_agent.py\n- API: scan_user_input, scan_llm_output, seed_self_awareness_cards\n- Delegeert lookup aan llm_output_scanner (bestaande util)\n- Delegeert schrijven aan kb_v2.service.add_to_inbox (met deep-scan dedupe)\n- Rate-limit: 30/hour/user (constante _RATE_LIMIT_PER_HOUR)\n- Idempotent bij bestaande begrippen (dankzij v13_kbv2_inbox_dedupe_002)",
+        "laag4": "snap_agent is het centrale ingangspunt voor het detecteren en verwerken van mogelijke nieuwe kennis uit verschillende soorten input binnen Spark Core. De agent brengt drie scan-flows samen: user-input, LLM-output en tekstimport. Voor gevonden begrippen kan hij skeleton-kaarten laten aanmaken in de KB-inbox en daarbij herkomst- en contextmetadata vastleggen. Het daadwerkelijk scannen van LLM-output en het schrijven naar de KB worden gedelegeerd aan daarvoor bestaande onderdelen, waardoor snap_agent vooral de centrale coördinatie tussen detectie, verwerking en opslag vormt. Sinds v13_snap_agent_57 wordt de agent na iedere chat-turn onvoorwaardelijk uitgevoerd en voorkomt de rate-limit dat één gebruiker de inbox onbeperkt kan vullen."
+      },
+      "ws5": {
+        "wie": "k Core en de onderdelen die nieuwe begrippen uit user-input, LLM-output en tekstimport verwerken.",
+        "wat": "Het centrale ingangspunt voor het detecteren van onbekende woorden en het aanmaken van skeleton-kaarten.",
+        "wanneer": "Na chat-interacties en wanneer user-input, LLM-output of tekstimport wordt gescand.",
+        "waar": "In /app/backend/modules/chat/snap_agent.py.",
+        "waarom": "Om de verschillende scan-flows centraal samen te brengen en nieuwe begrippen gecontroleerd naar de KB-inbox te laten doorstromen.",
+        "hoe": "Via scan_user_input, scan_llm_output en seed_self_awareness_cards, met delegatie aan llm_output_scanner en kb_v2.service.add_to_inbox, plus dedupe en een limiet van 30 kaarten per gebruiker per uur."
+      },
+      "tags": [
+        "spark-core",
+        "module",
+        "onbekend-woord",
+        "kb-inbox",
+        "skeleton",
+        "rate-limit",
+        "footnote",
+        "centraal-punt",
+        "v13",
+        "self-learn"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-63d9aeba",
+          "begrip": "lite_card_factory",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "kb-inbox",
+            "module",
+            "rate-limit",
+            "skeleton",
+            "spark-core"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-863f25bd",
+          "begrip": "llm_output_scanner",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "module",
+            "onbekend-woord",
+            "spark-core"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cce162f2",
+          "begrip": "text_importer",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "module",
+            "v13"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f52b1534",
+          "begrip": "trigger_learner",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "module",
+            "v13"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "spark_self_awareness",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:25:52.937386+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-29T09:46:39.209709+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-08-29T10:25:48.763806+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-08-29T10:25:53.499438+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-08-29T10:25:53.510257+00:00",
+            "result": {
+              "n_found": 4,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ca3f6b44",
+      "begrip": "Agent",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een agent is een onderdeel van een systeem dat zelfstandig een bepaalde taak of opdracht uitvoert.",
+        "laag2": "Een agent ontvangt informatie of een opdracht, verwerkt die en voert vervolgens een passende actie uit. De precieze taak en mate van zelfstandigheid hangen af van het systeem waarin de agent wordt gebruikt.",
+        "laag3": "Een agent kan binnen een software- of AI-systeem een specifieke functie of taak uitvoeren. Een agent kan bijvoorbeeld informatie analyseren, een proces starten, een beslissing voorbereiden of een andere module aansturen. In Spark worden agents gebruikt binnen een modulaire architectuur waarin verschillende onderdelen elk een eigen rol kunnen hebben.",
+        "laag4": "Een agent is een uitvoerend onderdeel binnen een systeem dat een bepaalde taak of verantwoordelijkheid heeft. De agent vormt daarbij een schakel tussen beschikbare informatie, een opdracht en de uitvoering daarvan. Binnen een modulair systeem kunnen meerdere agents naast elkaar bestaan, waarbij iedere agent een eigen functie heeft. De mate waarin een agent zelfstandig werkt wordt bepaald door de architectuur, regels en bevoegdheden van het systeem."
+      },
+      "ws5": {
+        "wie": "Een software- of AI-systeem waarin een agent een specifieke taak uitvoert.",
+        "wat": "Een onderdeel dat informatie verwerkt en een toegewezen taak of opdracht uitvoert.",
+        "wanneer": "Wanneer een specifieke taak, analyse of proces moet worden uitgevoerd.",
+        "waar": "Binnen software-, AI- en modulaire systemen.",
+        "waarom": "Om specifieke taken en verantwoordelijkheden binnen een systeem te verdelen.",
+        "hoe": "Door informatie of opdrachten te ontvangen, deze te verwerken en vervolgens een passende actie of vervolgstap uit te voeren."
+      },
+      "tags": [
+        "aansturing",
+        "actie",
+        "agent",
+        "ai",
+        "ai_agent",
+        "analyse",
+        "autonomie",
+        "modulair",
+        "module",
+        "opdracht",
+        "proces",
+        "software",
+        "spark",
+        "systeem",
+        "taak"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:34:22.789144+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-d100152c",
+      "begrip": "Skeleton",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een skeleton is een minimale basisversie van iets die de belangrijkste structuur al bevat, maar nog niet volledig is uitgewerkt.",
+        "laag2": "Een skeleton bevat de onderdelen die nodig zijn om iets als basis te kunnen gebruiken of verder uit te werken. Binnen Spark kan een skeleton bijvoorbeeld een gedeeltelijk ingevulde kenniskaart zijn die later verder wordt aangevuld.",
+        "laag3": "Een skeleton kan worden gebruikt als tijdelijke of minimale structuur voor verdere uitwerking. Binnen Spark worden skeleton-kaarten gebruikt voor nieuwe kennis die nog niet volledig is ingevuld. Zo kan een kaart met een herkend begrip eerst als skeleton in de KB-inbox worden geplaatst en later verder worden aangevuld met lagen, 5W en tags.",
+        "laag4": "Een skeleton vormt een minimale structuur waarmee iets al als geheel herkenbaar en verwerkbaar is, terwijl verdere inhoud nog ontbreekt. Binnen Spark wordt het begrip onder andere gebruikt voor skeleton-kaarten in de KB-inbox: nieuwe of herkende begrippen kunnen eerst als basiskaart worden vastgelegd voordat de inhoud verder wordt uitgewerkt. Hierdoor hoeft nieuwe kennis niet direct volledig te zijn om toch al opgeslagen en verder verwerkt te kunnen worden. Het skeleton vormt daarmee een tussenstap tussen het herkennen van een begrip en het volledig uitwerken van de bijbehorende kenniskaart."
+      },
+      "ws5": {
+        "wie": "Een systeem of persoon die iets eerst als basisstructuur vastlegt en later verder uitwerkt.",
+        "wat": "Een minimale, nog niet volledig uitgewerkte versie van iets.",
+        "wanneer": "Wanneer iets al moet worden vastgelegd voordat alle inhoud beschikbaar of uitgewerkt is.",
+        "waar": "Bijvoorbeeld in softwareontwikkeling en binnen de Spark KB-inbox.",
+        "waarom": "Om een basisstructuur vast te leggen waarop later kan worden voortgebouwd.",
+        "hoe": "Door alleen de noodzakelijke basisstructuur en beschikbare informatie vast te leggen en ontbrekende onderdelen later aan te vullen."
+      },
+      "tags": [
+        "aanvullen",
+        "basis",
+        "basisversie",
+        "kb_inbox",
+        "kb_v2",
+        "kennisbank",
+        "kenniskaart",
+        "onvolledig",
+        "skelet",
+        "skeleton",
+        "spark",
+        "spark_core",
+        "structuur",
+        "tussenstap",
+        "uitwerken"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-29T10:36:56.358331+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
     }
   ],
   "metadata": {
-    "card_count": 4693,
-    "last_updated": "2026-08-28T12:06:47.952971+00:00"
+    "card_count": 4712,
+    "last_updated": "2026-08-29T10:25:52.937407+00:00"
   }
 }

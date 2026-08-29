@@ -6,13 +6,24 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De snap_agent is het centrale ingangspunt binnen Spark Core dat onbekende woorden in chat- en tekst-input detecteert en er automatisch skeleton-kaarten voor aanmaakt in de KB-inbox.",
+        "laag2": "Bundelt drie scan-flows achter \u00e9\u00e9n API: scan_user_input, scan_llm_output en scan_text_import. Voegt aan elke aangemaakte kaart footnote-metadata toe (aangemaakt_door, origin, herkomst_turn_id, context_snippet, llm_count). Hanteert een rate-limit van 30 kaarten per user per uur tegen inbox-explosie. Draait onvoorwaardelijk na elke chat-turn sinds v13_snap_agent_57 \u2014 voorheen alleen als een trigger-analyse ook succes had.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/snap_agent.py\n- API: scan_user_input, scan_llm_output, seed_self_awareness_cards\n- Delegeert lookup aan llm_output_scanner (bestaande util)\n- Delegeert schrijven aan kb_v2.service.add_to_inbox (met deep-scan dedupe)\n- Rate-limit: 30/hour/user (constante _RATE_LIMIT_PER_HOUR)\n- Idempotent bij bestaande begrippen (dankzij v13_kbv2_inbox_dedupe_002)",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "onbekend-woord",
+        "kb-inbox",
+        "skeleton",
+        "rate-limit",
+        "footnote",
+        "centraal-punt",
+        "v13",
+        "self-learn"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -21,9 +32,13 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.209709+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.209709+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-863f25bd",
@@ -31,13 +46,22 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De llm_output_scanner is een side-effect-vrije scan-utility die Sparks LLM-antwoord ontleedt op woorden die niet in de KB v2 staan en niet in de user-vraag voorkwamen.",
+        "laag2": "Retourneert kandidaten in de vorm {begrip, context_snippet, count_in_spark}. Puur en licht: geen writes, geen calls naar KB. Wordt aangeroepen door snap_agent.scan_llm_output en (legacy) direct door trigger_learner. Filtert stopwoorden, korte tokens (<4 chars), en bekende KB-begrippen zodat alleen echt nieuwe woorden overblijven.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/llm_output_scanner.py (86 rgl)\n- Public API: scan_spark_response(text, user_text, top_n)\n- Return: List[{\"begrip\", \"context_snippet\", \"count_in_spark\"}]\n- Filter: min-length 4, top-N default 8, ignoreert user-vraag-tokens\n- Puur \u2014 mag altijd worden aangeroepen zonder side-effects",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "llm",
+        "scanner",
+        "filter",
+        "onbekend-woord",
+        "side-effect-vrij",
+        "kb-lookup"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -46,9 +70,13 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.270497+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.270497+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-f52b1534",
@@ -56,13 +84,23 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De trigger_learner analyseert na elke chat-turn of het gesprek een gedrags-trigger voor Spark oplevert, en delegeert daarna de LLM-output-scan aan de snap_agent.",
+        "laag2": "Roept _llm_analyze(user_text, spark_response) aan om te bepalen of Sparks reactie een leerpatroon moet opleveren (categorie, voorwaarden, gedrag). Voegt geaccepteerde voorstellen toe aan learned_triggers.json. Sinds v13_snap_agent_57 draait de output-scan ONVOORWAARDELIJK \u2014 ook als _llm_analyze niks oplevert.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/trigger_learner.py (295 rgl)\n- Entry point: learn_from_interaction(user_text, spark_response, session_id, user_id)\n- Voorstellen: /app/backend/data/chat/learned_triggers.json\n- v13_snap_agent_57: _snap_llm_output wordt nu ALTIJD aangeroepen, niet alleen bij trigger-hit\n- Non-blocking: als scan faalt, gaat trigger-analyse gewoon door",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "chat",
+        "leren",
+        "trigger",
+        "gedrag",
+        "post-turn",
+        "non-blocking",
+        "v13"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -71,9 +109,13 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.324944+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.324944+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-63d9aeba",
@@ -81,13 +123,22 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De lite_card_factory bouwt compacte skeleton-kaarten voor de KB-inbox op basis van een lijst scanner-kandidaten, met max N per turn.",
+        "laag2": "Neemt een candidates-list van llm_output_scanner en batcht ze naar add_to_inbox. Bewaakt een max_per_turn parameter (default 3) om te voorkomen dat \u00e9\u00e9n chat-turn de inbox overspoelt. Sinds v13_snap_agent_57 wordt hij niet meer direct aangeroepen door trigger_learner \u2014 snap_agent is de nieuwe voorkant.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/lite_card_factory.py\n- API: batch_create_from_scan(candidates, turn_id, user_id, max_per_turn)\n- Return: {\"created\": [...], \"created_count\": N}\n- Bron-tag in kaart: source=\"llm_auto_extract\"\n- Legacy: rechtstreeks aangeroepen tot sessie 57, nu via snap_agent",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "kb-inbox",
+        "skeleton",
+        "batch",
+        "rate-limit",
+        "factory",
+        "legacy-voorkant"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -96,9 +147,13 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.379366+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.379366+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-1690763a",
@@ -106,13 +161,22 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De snap_service (KB v2) doet user-facing kennis-lookups voor chat: exacte match op begrip + fuzzy fallback op tags.",
+        "laag2": "Wordt aangeroepen vanuit chat/routes.py wanneer een user-bericht een woord bevat dat mogelijk in KB staat. Retourneert de gevonden kaart met lagen 1-4 en 5W. Bij geen match kan de flow doorgaan naar snap_agent om een skeleton te cre\u00ebren. ROADMAP #6 P1: fuzzy-fallback met rapidfuzz ratio \u226592 nog niet gebouwd.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/chat/snap_service.py (854 rgl)\n- Public API: multi_lookup, single_lookup\n- Return: List[{\"begrip\", \"kaart\", \"lade\", \"match_type\"}]\n- Backlog P1: rapidfuzz fuzzy-fallback (ratio \u226592)\n- Homoniem-handling nog handmatig (zie snap-drank vs snap-kenniskaart fix v13_57)",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "chat",
+        "lookup",
+        "kb-v2",
+        "fuzzy-backlog",
+        "homoniem",
+        "v1-1"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -121,9 +185,13 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.435445+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.435445+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-cce162f2",
@@ -131,13 +199,22 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De text_importer parseert lange tekst-blokken (bijv. GPT-antwoorden) en cre\u00ebert of update KB v2 kaarten met lagen, ws5 en tags op basis van herkende structuur.",
+        "laag2": "Herkent kaart-titel (het begrip v\u00f3\u00f3r \"Laag 1\"), 4 lagen, 5W-blokken en tags. Skipt lade-headers en 5W-VELD-regels (waar:..., wat:...) sinds v13_kbv2_text_import_ws5_fix_57 \u2014 losse vraagwoorden als kaart-titel (Waar, Wat, Hoe) komen nu w\u00e9l door. Grootste bron van KB-content: 3139+ kaarten via deze route.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/text_importer.py (456 rgl)\n- Endpoint: POST /api/kb/v2/admin/import-text\n- Herkenning: lade-header, begrip-titel, \"Laag 1..4\", \"5W\", \"Wie:\", \"Tags\"\n- Skip-lijst: lade-namen + 5W-VELDEN (met dubbele punt)\n- v13_kbv2_text_import_ws5_fix_57: regex ^\\s*(wie|wat|...)\\s*: voor 5W-velden",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "import",
+        "text-parsing",
+        "gpt-output",
+        "5w",
+        "lagen",
+        "fix-57"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -146,9 +223,13 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.515546+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.515546+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-ab4274ba",
@@ -156,13 +237,23 @@
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "De tag_sanitizer is de LLM-lek-preventiefilter die tags opschoont voordat ze in de KB terechtkomen: verwijdert leestekens-tags, LLM-instructies-fragmenten, en te lange strings.",
+        "laag2": "Draait op drie haakpunten: (1) bij LLM-tag-generatie in kb_v2 hooks, (2) bij snap-lookup normalisatie, (3) frontend-check bij handmatige tag-invoer. Voorkomt dat prompt-fragmenten of instructie-tekens (uit LLM output) als \"tag\" in de KB belanden. Whitelist-approach: alfanumeriek + Nederlands-diacritics + streepjes; alles anders wordt geweigerd of geschoond.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- File: /app/backend/modules/kb_v2/tag_sanitizer.py\n- API: sanitize_tag(str), sanitize_tag_list(list)\n- Whitelist: alfanumeriek, NL-diacritics, streep, spatie\n- Max lengte: 40 chars per tag\n- 3 haakpunten: LLM-generate + snap + frontend",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "kb-v2",
+        "sanitizer",
+        "llm-lek",
+        "tags",
+        "filter",
+        "whitelist",
+        "beveiliging"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -171,23 +262,38 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.569613+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.569613+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-5eaffe31",
-      "begrip": "kb_v2",
+      "begrip": "kb_v2 (module)",
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "kb_v2 is de kernmodule van Spark Core die alle kennis in de vorm van gestructureerde kaarten opslaat, indexeert en doorzoekbaar maakt via 4 lades: weten, doen, voelen, spreken.",
+        "laag2": "Bestaat uit een file-based JSON store (knowledge_v2_{lade}.json + knowledge_inbox.json + knowledge_index.json), routes.py met 30+ endpoints, en helpers als text_importer, tag_sanitizer, lite_card_factory. Werkt met dedupe (v13_kbv2_inbox_dedupe_002: index-check + deep-scan alle lades), homoniem-detectie en 5W-structuur per kaart.",
+        "laag3": "HARDE FEITEN (voor GPT om te elaboreren):\n- Directory: /app/backend/modules/kb_v2/\n- Data: /app/backend/data/knowledge/v2/ (5 JSON files)\n- Lades: weten (4693), doen (1102), voelen (548), spreken (499)\n- Kaart-structuur: begrip + lagen[laag1..4] + ws5[wie..hoe] + tags + footnote\n- Dedupe: index + deep-scan (v13_kbv2_inbox_dedupe_002 sessie 56)\n- Routes: GET /find, /inbox, /lade/{lade}, /stats, /homonyms + POST /classify, /edit, /import-text",
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "spark-core",
+        "module",
+        "kennisbank",
+        "kb-v2",
+        "4-lades",
+        "5w",
+        "file-store",
+        "dedupe",
+        "homoniem",
+        "kernmodule"
+      ],
       "verbanden": [],
       "footnote": {
         "bron": "spark_self_awareness",
@@ -196,96 +302,18 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-08-29T09:46:39.623329+00:00"
+        "aangemaakt_op": "2026-08-29T09:46:39.623329+00:00",
+        "laatst_aangevuld_op": "2026-08-29T10:10:07.871188+00:00",
+        "laatst_aangevuld_door": "snap_agent (aanzet)",
+        "klaar_voor": "GPT-elaboratie laag4 + ws5"
       },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-cc012bd1",
-      "begrip": "konsept",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-08-29T09:46:58.319392+00:00",
-        "origin": "spark_llm_output",
-        "herkomst_turn_id": "test-turn-001",
-        "context_snippet": "Het konsept van reciprociteit is fundamenteel in ecosemiotiek. Willem,",
-        "llm_count": 1
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-7c7ea4a2",
-      "begrip": "reciprociteit",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-08-29T09:46:58.319392+00:00",
-        "origin": "spark_llm_output",
-        "herkomst_turn_id": "test-turn-001",
-        "context_snippet": "Het konsept van reciprociteit is fundamenteel in ecosemiotiek. Willem, denk aan protagoni",
-        "llm_count": 1
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-a14fcb31",
-      "begrip": "ecosemiotiek",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-08-29T09:46:58.319392+00:00",
-        "origin": "spark_llm_output",
-        "herkomst_turn_id": "test-turn-001",
-        "context_snippet": "pt van reciprociteit is fundamenteel in ecosemiotiek. Willem, denk aan protagonismus binnen zelfregulerende syst",
-        "llm_count": 1
-      },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "aliassen": [
+        "kb_v2",
+        "kb v2",
+        "knowledge base v2"
+      ],
+      "_aanzet_note": "laag1+laag2 door snap_agent geseed; laag3 bevat harde feiten; laag4 + ws5 vragen elaboratie door GPT. Doellade: weten"
     },
     {
       "id": "kbv2-ccc491e0",
@@ -315,64 +343,6 @@
         "llm_count": 1
       },
       "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-6261b27d",
-      "begrip": "nagedacht",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "user_input_snap",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-08-29T09:46:58.767850+00:00",
-        "origin": "user_chat_input",
-        "herkomst_turn_id": "test-turn-002",
-        "context_snippet": "Ik heb over transcedentie nagedacht en de holobiotische balans.",
-        "llm_count": 1
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-add72831",
-      "begrip": "holobiotische",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "user_input_snap",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-08-29T09:46:58.767850+00:00",
-        "origin": "user_chat_input",
-        "herkomst_turn_id": "test-turn-002",
-        "context_snippet": "heb over transcedentie nagedacht en de holobiotische balans.",
-        "llm_count": 1
-      },
-      "_inbox_reason": "missing_laag1"
     }
   ],
   "card_count": 201,
@@ -380,5 +350,6 @@
     "last_updated": "2026-08-27T08:25:12.703781+00:00",
     "last_dedupe_at": "2026-08-27T20:14:21.406843+00:00",
     "last_dedupe_removed": 57
-  }
+  },
+  "_aanzet_seeded_at": "2026-08-29T10:10:07.871188+00:00"
 }

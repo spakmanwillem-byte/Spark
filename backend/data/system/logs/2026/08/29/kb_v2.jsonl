@@ -1,0 +1,2 @@
+{"ts": "2026-08-29T10:05:14.191196+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "pre", "intent": "KB v2 kaart verwijderen", "args": {"body": "DeleteBody(card_id='kbv2-cc012bd1', lade='inbox', user_id='user-001', reason='')"}}
+{"ts": "2026-08-29T10:05:14.263313+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "post", "intent": "KB v2 kaart verwijderen", "result": "dict(success=True, keys=success,message,card_id,begrip,lade,remaining_in_lade)", "duration_ms": 71.85}

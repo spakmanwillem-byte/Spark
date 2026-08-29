@@ -159,10 +159,15 @@ async def learn_from_interaction(
     # Quick dedupe op text_hash voordat we LLM aanroepen (bespaart een call)
     for v in voorstellen[-200:]:
         if v.get("text_hash") == text_hash:
+            _snap_llm_output(user_text, spark_response, user_id, session_id, turn_id=None)
             return
 
     analysis = await _llm_analyze(user_text, spark_response)
     if not analysis:
+        # v13_snap_agent_57 — Ook zonder trigger-analyse door: Spark leert van
+        # zijn eigen output onvoorwaardelijk. Was gekoppeld aan trigger-success
+        # (regel 200-220 onder), waardoor 90% van chat-turns niet gescand werd.
+        _snap_llm_output(user_text, spark_response, user_id, session_id, turn_id=None)
         return
 
     topic = analysis.get("topic", "")
@@ -197,27 +202,35 @@ async def learn_from_interaction(
     _save_learned(data)
     logger.info("[trigger_learner] +1 voorstel: '%s' (categorie=%s)", topic, analysis.get("categorie"))
 
-    # v9_llm_self_learn_001 — Spark leert van eigen output.
-    # Non-blocking: bij fout gaat trigger-learning gewoon door.
+    # v9_llm_self_learn_001 + v13_snap_agent_57 — Spark leert van eigen output
+    # via de centrale snap_agent. Non-blocking: bij fout gaat trigger-learning
+    # gewoon door. Sinds sessie 57 loopt dit óók onvoorwaardelijk (zie eerder
+    # in deze functie), zodat élke chat-turn wordt gescand — niet alleen als de
+    # trigger-analyse iets opleverde.
+    _snap_llm_output(user_text, spark_response, user_id, session_id, turn_id=voorstel["id"])
+
+
+def _snap_llm_output(user_text: str, spark_response: str,
+                     user_id: Optional[str], session_id: Optional[str],
+                     turn_id: Optional[str]) -> None:
+    """Thin wrapper rondom snap_agent voor trigger_learner-flow. Non-blocking."""
     try:
-        from modules.chat.llm_output_scanner import scan_spark_response
-        from modules.kb_v2.lite_card_factory import batch_create_from_scan
-        candidates = scan_spark_response(spark_response, user_text=user_text, top_n=6)
-        if candidates:
-            result = batch_create_from_scan(
-                candidates=candidates,
-                turn_id=voorstel["id"],
-                user_id="user-000",  # Spark leert zichzelf
-                max_per_turn=3,
+        from modules.chat.snap_agent import scan_llm_output
+        result = scan_llm_output(
+            spark_response=spark_response,
+            user_text=user_text,
+            user_id=user_id or "user-000",
+            turn_id=turn_id,
+            max_new=3,
+        )
+        if result.get("created_count", 0) > 0:
+            logger.info(
+                "[llm_self_learn/snap_agent] +%d skeletons uit Spark-output: %s",
+                result["created_count"],
+                [c["begrip"] for c in result["created"]],
             )
-            if result.get("created_count", 0) > 0:
-                logger.info(
-                    "[llm_self_learn] +%d lite-kaarten uit Spark's antwoord: %s",
-                    result["created_count"],
-                    [c["begrip"] for c in result["created"]],
-                )
     except Exception as e:
-        logger.warning("[llm_self_learn] scan/create faalde: %s", e)
+        logger.warning("[llm_self_learn/snap_agent] scan/create faalde: %s", e)
 
 
 def schedule_learn(

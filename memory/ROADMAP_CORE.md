@@ -199,6 +199,69 @@ Spark toonde. Ook: papertrail toonde Spark 8 tokens / 9 potjes na expired-gift G
   `roar/price_snapshots`, `trade/monitor_state`). Spark's pot-006 kreeg 1 extra
   BUY-trade uit prod, capitals van 10.04 → 10.03 door lopende trades.
 
+### ✅ AF (Spoor C — Snap Agent + zelfbewustzijn, sessie 57 vervolg)
+
+**Aanleiding**: Willem — "worden nieuwe woorden niet gelijk herkend door snap en
+KB-kaart van dat woord gemaakt?" Bevestigd via snuffel: 3 losse write-flows
+(trigger_learner, chat/routes, lite_card_factory) + `scan_spark_response` liep
+alleen achter `_llm_analyze`-guard in trigger_learner → 90% van chat-turns geen
+scan.
+
+- **v13_snap_homoniem_fix_57** — `spreken:snap` (schnaps/borrel) had homoniem
+  met `weten:snap` (kenniskaart). Rename `spreken:snap` → **"snap (drank)"**,
+  aliassen `[snap, snaps]`. `weten:schnaps` uitgebreid met aliassen `[snap, snaps]`
+  en tags `[snap, snaps, borrel, sterke drank]`. `knowledge_index.json` — `"snap"`
+  wijst nu uniek naar de kenniskaart. `GET /api/kb/v2/homonyms` → 0 conflicten.
+
+- **v13_snap_agent_57** — Nieuwe module `modules/chat/snap_agent.py`. Centraal
+  ingangspunt voor onbekend-woord-detectie:
+  - `scan_llm_output(spark_response, user_text, user_id, turn_id, max_new=3)`
+  - `scan_user_input(text, user_id, turn_id, max_new=3)`
+  - Rate-limit: 30 kaarten/user/uur (constante `_RATE_LIMIT_PER_HOUR`)
+  - Footnote-verrijking bij elke aangemaakte kaart: `aangemaakt_door=snap_agent`,
+    `origin`, `herkomst_turn_id`, `context_snippet`, `llm_count`
+  - Thin wrapper: delegeert lookup aan `llm_output_scanner`, dedupe+schrijven aan
+    `kb_v2.service.add_to_inbox` (deep-scan alle 4 lades, auto-repair index).
+
+- **v13_trigger_learner_unconditional_57** — `trigger_learner.py:learn_from_interaction`
+  aangepast: `_snap_llm_output()` wordt nu ALTIJD aangeroepen, niet alleen als
+  `_llm_analyze` een trigger-voorstel oplevert. Extra call `_snap_llm_output`
+  ook toegevoegd bij text_hash-dedupe-hit zodat óók herhaalde chat-turns bijdragen.
+  Non-blocking wrapper `_snap_llm_output` isoleert scan-fouten van trigger-flow.
+
+- **v13_self_awareness_seed_57** — `seed_self_awareness_cards()` genereert
+  skeletons in inbox voor 8 core-modules: `snap_agent`, `llm_output_scanner`,
+  `trigger_learner`, `lite_card_factory`, `snap_service`, `text_importer`,
+  `tag_sanitizer`, `kb_v2 (module)`. Elke kaart kreeg **aanzet-inhoud** (laag1
+  + laag2 + laag3 harde feiten + tags) door snap_agent, zodat GPT alleen nog
+  laag4 + ws5 hoeft te polishen.
+
+- **v13_fuzzy_matching_content_57** — 3 gerelateerde kaarten volledig gevuld:
+  `Fuzzy-matching`, `rapidfuzz`, `fuzz`. Alle 3 in lade `weten`, met lagen 1-4
+  + ws5 + tags. Willem's principe geborgd: **kaart bevat geen aannames over
+  ongebouwde Spark-code** — pas na daadwerkelijke integratie mag Spark-specifieke
+  rol worden toegevoegd (audit-log entry `content_neutralisatie` legt dit vast).
+
+**Testresultaten (in-proc):**
+- `scan_llm_output` op fictief antwoord: 3 kandidaten → 3 skeletons met snippet
+  en turn_id in footnote. ✓
+- `scan_user_input`: 3/3 skeletons aangemaakt. ✓
+- Rate-limit: hit exact op 30 pogingen bij spam-test. ✓
+- Dedupe: bestaande begrippen blijven bestaand (deep-scan werkt over 4 lades). ✓
+
+### 📌 OPEN (backlog na sessie 57)
+
+- **ROADMAP #6 P1: Fuzzy-fallback in `snap_service`** — rapidfuzz-integratie
+  daadwerkelijk bouwen (threshold-advies ≥ 92 voor safe-match). Zodra gedaan:
+  de 3 fuzzy-kaarten uitbreiden met Spark-specifieke rol via audit-log-versionering.
+- **Snap-agent hooks voor self-repair** — `on_lookup_conflict` (homoniem-warn),
+  `on_repeated_miss` (kaart-verrijking-suggestie). Willem's oorspronkelijke idee:
+  "als kaart issue heeft en Spark er mee werkt, moet de kaart bijgesteld worden".
+- **KB-lade `spreken:snap (drank)`** — jij vult zelf via GPT-flow aan indien gewenst;
+  huidige data is behouden.
+- **8 module-skeletons afronden** — laag4 + ws5 door GPT afmaken; classify naar `weten`.
+
+
 ### 📌 OPEN (dust + backlog Sessie 57)
 
 - **ETH-dust orphan**: 0.000047 ETH (€0.10) niet aan een pot toegewezen na de

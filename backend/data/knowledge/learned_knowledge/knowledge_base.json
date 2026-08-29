@@ -413119,6 +413119,141 @@
       "metadata": {
         "source": "text_importer"
       }
+    },
+    {
+      "id": "kb-9b32969e",
+      "begrip": "Fuzzy-matching",
+      "status": "active",
+      "lagen": {
+        "laag1": "Fuzzy-matching is een techniek om twee tekstuele waardes te vergelijken op basis van gelijkenis in plaats van exacte overeenkomst, zodat kleine tikfouten, spellingvarianten of verschillen in spaties toch aan elkaar gekoppeld kunnen worden.",
+        "laag2": "Fuzzy-matching berekent een gelijkenisscore tussen twee strings, meestal op een schaal van 0 tot 100. Een ingestelde drempel bepaalt vervolgens wanneer twee strings als voldoende gelijk worden beschouwd. Veelgebruikte technieken zijn onder andere Levenshtein-afstand, Jaro-Winkler en verschillende ratio- en tokenvergelijkingen.",
+        "laag3": "HARDE FEITEN:\n\nToepassing: tekstuele gelijkenis bepalen bij bijvoorbeeld lookup, normalisatie en deduplicatie.\nScore-schaal: 0–100, waarbij 0 staat voor geen gelijkenis en 100 voor identieke strings.\nEen threshold bepaalt wanneer een overeenkomst voldoende sterk is.\nEen te lage threshold kan verkeerde matches opleveren.\nEen te hoge threshold kan correcte matches missen.\nFuzzy-matching is bedoeld om kleine tekstuele verschillen te overbruggen.\nIn Spark Core is rapidfuzz gekozen als library voor fuzzy-matching.\nBinnen Spark is fuzzy-matching bedoeld als tweede lookup-stap wanneer een exacte match geen resultaat geeft.\nFuzzy-matching en homoniem-detectie lossen verschillende problemen op: fuzzy-matching richt zich op tekstuele verschillen, homoniem-detectie op verschillende betekenissen van hetzelfde begrip.",
+        "laag4": "Binnen Spark Core is fuzzy-matching een techniek om tekstuele variaties aan bestaande kennis te kunnen koppelen. Het maakt het mogelijk om kleine verschillen in spelling, schrijfwijze of invoer te herkennen zonder dat iedere variant als een volledig nieuw begrip hoeft te worden behandeld. De techniek levert daarbij alleen een gelijkenisscore; de beslissing of een overeenkomst betrouwbaar genoeg is, ligt bij de Spark-module die de score gebruikt. Daarmee vormt fuzzy-matching een technische bouwsteen die Spark kan inzetten om kennis robuuster terug te vinden."
+      },
+      "ws5": {
+        "wie": "Softwaremodules die tekstuele waarden op gelijkenis moeten vergelijken.",
+        "wat": "Een techniek die de mate van gelijkenis tussen twee strings bepaalt.",
+        "wanneer": "Wanneer een exacte tekstovereenkomst niet noodzakelijk of niet voldoende is.",
+        "waar": "In software die tekst vergelijkt, zoals lookup-, normalisatie- en deduplicatieprocessen.",
+        "waarom": "Om kleine verschillen tussen tekstuele waarden toch met elkaar te kunnen verbinden.",
+        "hoe": "Door twee strings met een vergelijkingsfunctie te beoordelen en de verkregen score eventueel met een threshold te vergelijken."
+      },
+      "tags": [
+        "dedupe",
+        "fuzzy",
+        "gelijkenis",
+        "homoniem",
+        "lookup",
+        "rapidfuzz",
+        "ratio",
+        "score",
+        "spark",
+        "spelling",
+        "string",
+        "tekst",
+        "threshold",
+        "tikfout",
+        "typo"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-29T10:41:52.871815+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-93765882",
+      "begrip": "Strings",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een string is een reeks tekens die in software als tekstwaarde wordt behandeld.",
+        "laag2": "Een string kan letters, cijfers, spaties en andere tekens bevatten. Software kan strings opslaan, vergelijken, bewerken en doorgeven aan andere functies.",
+        "laag3": "HARDE FEITEN:\n\nEen string vertegenwoordigt tekst als een waarde binnen software.\nEen string kan uit één of meerdere tekens bestaan.\nStrings kunnen met elkaar worden vergeleken.\nFuncties zoals rapidfuzz.fuzz.ratio(a, b) ontvangen strings als invoer.\nBij fuzzy-matching worden strings gebruikt als de twee tekstwaarden die op gelijkenis worden beoordeeld.\nEen string kan worden genormaliseerd voordat deze wordt vergeleken, bijvoorbeeld door hoofdletters, spaties of andere variaties te behandelen.",
+        "laag4": "Strings vormen binnen Spark Core de basis waarop tekstuele informatie door verschillende functies kan worden verwerkt. Begrippen uit gebruikersinvoer, Spark-antwoorden en kenniskaarten worden als tekstwaarden verwerkt wanneer ze bijvoorbeeld worden gezocht, genormaliseerd of met elkaar vergeleken. Bij fuzzy-matching zijn strings de invoer waarop een gelijkenisscore wordt berekend. Daarmee is een string een fundamentele technische bouwsteen voor de tekstverwerking binnen Spark."
+      },
+      "ws5": {
+        "wie": "Software en functies die tekstuele waarden verwerken.",
+        "wat": "Een reeks tekens die als tekstwaarde wordt behandeld.",
+        "wanneer": "Wanneer tekst binnen software moet worden opgeslagen, verwerkt of vergeleken.",
+        "waar": "In softwarecode, zoals de Python-modules van Spark Core.",
+        "waarom": "Om tekst als een waarde te kunnen verwerken en doorgeven aan andere functies.",
+        "hoe": "Door tekst als stringwaarde op te slaan en deze vervolgens te bewerken, vergelijken of door te geven."
+      },
+      "tags": [
+        "invoer",
+        "karakter",
+        "kenniskaart",
+        "llm_output",
+        "normalisatie",
+        "output",
+        "python",
+        "rapidfuzz",
+        "software",
+        "spark",
+        "spark_core",
+        "string",
+        "tekst",
+        "tekstwaarde",
+        "waarde"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-29T10:43:06.546155+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
+    },
+    {
+      "id": "kb-975ae06d",
+      "begrip": "Binnenkomende",
+      "status": "active",
+      "lagen": {
+        "laag1": "Binnenkomende betekent dat iets naar een persoon, plaats of systeem toe komt.",
+        "laag2": "Het woord beschrijft iets dat onderweg is naar een bepaalde bestemming of daar wordt ontvangen. Het kan bijvoorbeeld gaan om personen, berichten, goederen, informatie of andere zaken.",
+        "laag3": "Binnenkomende wordt gebruikt om aan te geven dat iets wordt ontvangen of aankomt. Het is het tegenovergestelde van uitgaande wanneer het gaat om een richting van beweging, communicatie of verzending.",
+        "laag4": "Binnenkomende verwijst naar iets dat van buitenaf naar een bepaald punt, persoon of systeem toe komt. De betekenis hangt af van wat er binnenkomt, zoals een bericht, telefoongesprek, betaling, bezoeker of levering. Het woord beschrijft vooral de richting naar de ontvanger toe en zegt op zichzelf niets over de inhoud of eigenschappen van wat binnenkomt."
+      },
+      "ws5": {
+        "wie": "Degene die iets ontvangt of waar iets naartoe komt.",
+        "wat": "Iets dat naar een bepaalde ontvanger of bestemming toe komt.",
+        "wanneer": "Wanneer iets onderweg is naar of wordt ontvangen door een persoon, plaats of systeem.",
+        "waar": "Bij een ontvanger, bestemming of systeem waar iets aankomt.",
+        "waarom": "Om aan te geven dat iets naar de ontvanger toe gericht is.",
+        "hoe": "Door iets van buitenaf naar een persoon, plaats of systeem te sturen of te laten komen."
+      },
+      "tags": [
+        "aankomen",
+        "bericht",
+        "bestemming",
+        "betaling",
+        "bezoeker",
+        "binnenkomen",
+        "goederen",
+        "informatie",
+        "inkomend",
+        "inkomende",
+        "levering",
+        "naar_binnen",
+        "ontvangen",
+        "richting",
+        "telefoon"
+      ],
+      "topic": "",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "detected_by": "user-001",
+      "created_by": "user-001",
+      "created_at": "2026-08-29T10:43:51.002486+00:00",
+      "metadata": {
+        "source": "text_importer"
+      }
     }
   ],
   "last_backfill": "2026-06-07T21:30:59.330073+00:00"

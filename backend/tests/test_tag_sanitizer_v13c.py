@@ -74,3 +74,42 @@ def test_merge_geen_duplicaten():
     new = ["WERK", "werk\n\n🧠"]
     out = merge_tags(existing, new)
     assert out == ["werk"]
+
+
+
+# v13c_tag_sanitizer_apostrof — sessie 58 regressie voor de ghost-scan:
+# unicode-apostrof-varianten mogen niet meer als aparte tag/begrip
+# blijven bestaan (voorheen produceerde "foto’s" een ghost naast "foto's").
+def test_unicode_apostrof_right_single_quote():
+    """U+2019 (’) → rechte apostrof."""
+    assert sanitize_tag("foto\u2019s") == "foto's"
+
+
+def test_unicode_apostrof_left_single_quote():
+    """U+2018 (‘) → rechte apostrof."""
+    assert sanitize_tag("foto\u2018s") == "foto's"
+
+
+def test_unicode_apostrof_modifier_letter():
+    """U+02BC (ʼ) → rechte apostrof."""
+    assert sanitize_tag("foto\u02BCs") == "foto's"
+
+
+def test_unicode_apostrof_acute_accent():
+    """U+00B4 (´) soms als apostrof gebruikt → rechte apostrof."""
+    assert sanitize_tag("foto\u00B4s") == "foto's"
+
+
+def test_apostrof_dedupe_in_lijst():
+    """Beide varianten van foto's in één lijst moeten na sanitize dedupen."""
+    tags = ["foto\u2019s", "foto's", "foto\u2018s"]
+    out = sanitize_tag_list(tags)
+    assert out == ["foto's"]
+
+
+def test_merge_apostrof_variant():
+    """Merge tussen unicode en ASCII apostrof mag geen dubbele opleveren."""
+    existing = ["foto's"]
+    new = ["foto\u2019s", "hobby\u2019s"]
+    out = merge_tags(existing, new)
+    assert out == ["foto's", "hobby's"]

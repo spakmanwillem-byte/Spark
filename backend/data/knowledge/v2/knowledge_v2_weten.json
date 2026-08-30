@@ -505697,7 +505697,7 @@
         "rond",
         "tijd",
         "weten",
-        "zo’n"
+        "zo'n"
       ],
       "topic": "",
       "verbanden": [],
@@ -539854,7 +539854,7 @@
         "omslaan",
         "ordenen",
         "pagina",
-        "pagina’s",
+        "pagina's",
         "schrift",
         "tekst",
         "volgorde"
@@ -540103,7 +540103,7 @@
         "navigatie",
         "overzicht",
         "pagina",
-        "pagina’s",
+        "pagina's",
         "scherm",
         "tekst",
         "webpagina",
@@ -548620,7 +548620,7 @@
         "context",
         "detail",
         "foto",
-        "foto’s",
+        "foto's",
         "geheel",
         "grootte",
         "kern",
@@ -548822,7 +548822,7 @@
         "back-up",
         "backup",
         "bewaren",
-        "foto’s",
+        "foto's",
         "herstel",
         "kopie",
         "nas",
@@ -556832,7 +556832,7 @@
     },
     {
       "id": "kbv2-9d52d5e5",
-      "begrip": "Programma’s",
+      "begrip": "Programma's",
       "lade": "weten",
       "status": "active",
       "lagen": {
@@ -556860,7 +556860,7 @@
         "lesprogramma",
         "planning",
         "programma",
-        "programma’s",
+        "programma's",
         "radioprogramma",
         "software",
         "uitvoering",
@@ -556874,7 +556874,16 @@
         "ingedeeld_op": "2026-08-04T16:02:12.671970+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "history": [
+          {
+            "at": "2026-08-30T16:43:57.321437+00:00",
+            "by": "e1_apostrof_normalize",
+            "action": "begrip_rename",
+            "from": "Programma’s",
+            "to": "Programma's"
+          }
+        ]
       },
       "media": [],
       "needs": [],
@@ -564023,7 +564032,7 @@
         "doen",
         "emotie",
         "foto",
-        "foto’s",
+        "foto's",
         "hdd",
         "kennis",
         "laptop",
@@ -631065,6 +631074,141 @@
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-30T16:41:34.136007+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-bdc5ab82",
+      "begrip": "Gegevenscontrole",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gegevenscontrole is het controleren van gegevens om vast te stellen of ze juist, volledig en bruikbaar zijn.",
+        "laag2": "Bij gegevenscontrole wordt nagegaan of gegevens bijvoorbeeld correct zijn ingevoerd, aan bepaalde voorwaarden voldoen en geen onverwachte fouten bevatten.",
+        "laag3": "Gegevenscontrole kan bijvoorbeeld bestaan uit het controleren van:\n\nontbrekende gegevens;\nonjuiste waarden;\ndubbele gegevens;\ngegevensformaten;\ntegenstrijdige gegevens;\ngegevens die niet aan bepaalde regels voldoen.\n\nDe controle kan handmatig of automatisch worden uitgevoerd.",
+        "laag4": "Gegevenscontrole is het systematisch controleren van gegevens op juistheid, volledigheid, consistentie en geldigheid. Het doel is om fouten of afwijkingen op te sporen voordat de gegevens verder worden verwerkt, opgeslagen of gebruikt. In digitale systemen kunnen hiervoor automatische controles en validatieregels worden toegepast."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties of computersystemen die gegevens verwerken of beheren.",
+        "wat": "Het controleren van gegevens op fouten, volledigheid en geldigheid.",
+        "wanneer": "Voor of tijdens het verwerken, opslaan of gebruiken van gegevens.",
+        "waar": "Bijvoorbeeld in databanken, software, administraties en gegevensverwerkingssystemen.",
+        "waarom": "Om te voorkomen dat onjuiste of onvolledige gegevens verder worden gebruikt.",
+        "hoe": "Door gegevens handmatig of automatisch te controleren aan de hand van vooraf bepaalde regels en voorwaarden."
+      },
+      "tags": [
+        "consistentie",
+        "controle",
+        "databank",
+        "fouten",
+        "gegevens",
+        "gegevenscontrole",
+        "gegevenskwaliteit",
+        "juistheid",
+        "validatie",
+        "volledigheid"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T16:41:57.219217+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-e6092b61",
+      "begrip": "Gegevensopslag",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gegevensopslag is het bewaren van gegevens zodat ze later opnieuw kunnen worden gebruikt.",
+        "laag2": "Gegevens kunnen tijdelijk of langdurig worden opgeslagen. Dit kan bijvoorbeeld op een computer, in een databank, op een harde schijf of in een ander opslagmedium.",
+        "laag3": "Gegevensopslag kan bijvoorbeeld plaatsvinden in:\n\nbestanden;\ndatabanken;\nharde schijven en SSD's;\nUSB-sticks en geheugenkaarten;\nservers;\nandere digitale opslagmedia.\n\nBij gegevensopslag is het belangrijk dat gegevens beschikbaar, betrouwbaar en voldoende beveiligd blijven.",
+        "laag4": "Gegevensopslag is het proces waarbij digitale of andere gegevens worden vastgelegd en bewaard voor later gebruik. Digitale gegevens kunnen bijvoorbeeld worden opgeslagen in bestanden, databanken of op opslagmedia zoals SSD's en harde schijven. De manier waarop gegevens worden opgeslagen hangt af van het doel, de hoeveelheid gegevens, de gewenste beschikbaarheid en de eisen voor beveiliging en betrouwbaarheid."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties en computersystemen die gegevens moeten bewaren.",
+        "wat": "Het vastleggen en bewaren van gegevens voor later gebruik.",
+        "wanneer": "Wanneer gegevens beschikbaar moeten blijven voor toekomstig gebruik, verwerking of raadpleging.",
+        "waar": "Bijvoorbeeld in bestanden, databanken, computers, servers en andere opslagmedia.",
+        "waarom": "Om gegevens te bewaren zodat ze later kunnen worden geraadpleegd, verwerkt of gewijzigd.",
+        "hoe": "Door gegevens op een geschikt opslagmedium of in een digitaal opslagsysteem vast te leggen."
+      },
+      "tags": [
+        "bestand",
+        "data",
+        "databank",
+        "gegevens",
+        "gegevensopslag",
+        "harde schijf",
+        "opslag",
+        "opslagmedium",
+        "server",
+        "ssd"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T16:43:10.821259+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-bad281a7",
+      "begrip": "Geldig",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Geldig betekent dat iets aan de voorwaarden voldoet en daarom als juist, toegestaan of van kracht wordt beschouwd.",
+        "laag2": "",
+        "laag3": "Geldig kan bijvoorbeeld betrekking hebben op:\n\neen geldig identiteitsbewijs;\neen geldig contract;\neen geldige vergunning;\ngeldige gegevens;\neen geldig argument;\neen geldige toegangscode.\n\nHet tegenovergestelde is ongeldig.",
+        "laag4": "Geldig betekent dat iets voldoet aan de voorwaarden of regels die voor een bepaalde situatie gelden. Afhankelijk van de context kan het betekenen dat iets rechtsgeldig, toegestaan, bruikbaar, correct of nog van kracht is. Of iets geldig is, wordt daarom altijd bepaald door de voorwaarden en context waarin het wordt gebruikt."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties of systemen kunnen iets als geldig beoordelen of gebruiken.",
+        "wat": "Iets dat aan de geldende voorwaarden of regels voldoet.",
+        "wanneer": "Wanneer de vereiste voorwaarden zijn vervuld en, indien van toepassing, de geldigheidsduur nog niet is verstreken.",
+        "waar": "Bijvoorbeeld bij documenten, contracten, vergunningen, gegevens, codes en argumenten.",
+        "waarom": "Om vast te stellen of iets kan worden geaccepteerd, gebruikt of toegepast.",
+        "hoe": "Door te controleren of iets voldoet aan de voorwaarden, regels of eisen die ervoor gelden."
+      },
+      "tags": [
+        "bruikbaar",
+        "geldig",
+        "geldigheid",
+        "geldigverklaring",
+        "juist",
+        "ongeldig",
+        "rechtsgeldig",
+        "regels",
+        "toegestaan",
+        "voorwaarden"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T16:43:31.793570+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
         "hooks_fired": []

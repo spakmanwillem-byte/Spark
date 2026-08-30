@@ -36,6 +36,23 @@ _EMOJI_RE = re.compile(
 
 MAX_TAG_LEN = 60
 
+# v13c_tag_sanitizer_apostrof — unicode-apostrofen / smart-quotes normaliseren
+# naar rechte ASCII-apostrof zodat "foto’s" en "foto's" nooit meer als 2 tags
+# door de KB kunnen komen. Zie ROADMAP Principe #8 + ghost-preventie.
+_APO_MAP = str.maketrans({
+    "\u2019": "'",  # ’ RIGHT SINGLE QUOTATION MARK
+    "\u2018": "'",  # ‘ LEFT SINGLE QUOTATION MARK
+    "\u02BC": "'",  # ʼ MODIFIER LETTER APOSTROPHE
+    "\u00B4": "'",  # ´ ACUTE ACCENT (soms gebruikt als apostrof)
+    "\u0060": "'",  # ` GRAVE ACCENT
+    "\u201B": "'",  # ‛ SINGLE HIGH-REVERSED-9 QUOTATION MARK
+})
+
+
+def _normalize_apostrophes(s: str) -> str:
+    """Vervang alle unicode-apostrof-varianten door de rechte ASCII-apostrof."""
+    return s.translate(_APO_MAP) if s else s
+
 
 def sanitize_tag(t) -> str:
     """Return schone tag-string, of leeg als input onbruikbaar was.
@@ -50,6 +67,8 @@ def sanitize_tag(t) -> str:
     stripped = _EMOJI_RE.sub("", first).strip()
     # Dubbele whitespace normaliseren
     stripped = re.sub(r"\s+", " ", stripped)
+    # Unicode-apostrofen → rechte apostrof (voorkomt "foto’s"-ghosts)
+    stripped = _normalize_apostrophes(stripped)
     # Length-cap
     if len(stripped) > MAX_TAG_LEN:
         stripped = stripped[:MAX_TAG_LEN].strip()

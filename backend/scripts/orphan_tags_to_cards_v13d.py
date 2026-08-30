@@ -70,10 +70,23 @@ def _is_noise(tag: str) -> bool:
 
 
 def _canonicalize(word: str) -> str:
-    """Naive plural→singular voor NL/EN om dubbele kaarten te voorkomen."""
+    """Naive plural→singular voor NL/EN om dubbele kaarten te voorkomen.
+
+    v13d_sessie58: unicode-apostrofen (’ ‘ ´ ` ) worden éérst naar rechte
+    apostrof genormaliseerd zodat "foto’s" en "foto's" niet als aparte
+    begrippen worden gezien (ghost-preventie in orphan-scan).
+    """
     w = (word or "").lower().strip()
+    # Unicode-apostrofen normaliseren
+    w = w.translate({
+        0x2019: "'", 0x2018: "'", 0x02BC: "'",
+        0x00B4: "'", 0x0060: "'", 0x201B: "'",
+    })
     # -en (Dutch plural)  bv "gebruikers" → "gebruiker"; skip 3-letter woorden
     if len(w) > 5 and w.endswith('en') and not w.endswith('een'):
+        return w[:-2]
+    # -'s (Dutch bezittelijk-/meervoud met apostrof, bv "foto's" → "foto")
+    if len(w) > 3 and w.endswith("'s"):
         return w[:-2]
     # -s (English + NL)
     if len(w) > 4 and w.endswith('s') and not w.endswith('ss'):

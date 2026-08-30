@@ -1,6 +1,40 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 58 (2026-02-15) — Subject-Agent laag skeletons (Principe #8)
+
+**Melding (Willem)**: "Yes, good idea. Doubt gone. Let's make it." → 4 wrappers als
+skeletons opzetten voor de nieuwe Subject-Agent-laag.
+
+**Wat is gedaan**:
+1. Nieuwe map `/app/backend/modules/agents/` aangemaakt met `__init__.py` docstring
+   die de laag samenvat (dun wrapper-patroon, geen route-registratie).
+2. **`task_agent.py`** — brug tussen chat-intent en `command_registry.json`.
+   Signatures: `resolve(intent_tags)`, `execute(cmd_id, params, user_id)`,
+   `list_commands(gradatie_max)`. `list_commands()` werkt al (leest registry);
+   `resolve` en `execute` retourneren `not_implemented`-marker.
+3. **`admin_command_agent.py`** — wrapper voor admin-only capabilities met
+   whitelist en dubbele check. Skelet-signatures: `is_admin_command`,
+   `execute_as_admin`, `list_admin_commands`.
+4. **`personal_agent.py`** — reader voor persoonlijke context (`snapshot`,
+   `recent_topics`, `get_privacy_flag`) met depth-levels minimal/standard/deep.
+5. **`spark_pulse_agent.py`** — Spark's zelfbewustzijn-heartbeat. Signatures:
+   `pulse`, `narrate`, `should_alert`. Placeholder-narrator geeft NL-zin terug.
+6. **`snap_agent.seed_agent_layer_cards()`** — nieuwe helper die de 4 agent-modules
+   idempotent in de KB-inbox seedt. Uitgevoerd: 4 kaarten aangemaakt
+   (`kbv2-04a9994f`, `kbv2-3e8865f1`, `kbv2-18adeb37`, `kbv2-45d1d661`).
+
+**Testing**: Import-check + smoke-call op elke signatuur = OK. Inbox-listing via
+`/api/kb/v2/inbox` toont alle 4 kaarten aanwezig. Backend gezond, hot-reload actief.
+
+**Wat NIET gedaan** (opzettelijk — user wilde skeletons, geen implementatie):
+- `resolve`-scoring, `execute`-dispatch, gradatie-check.
+- Admin-whitelist invulling.
+- Snapshot depth-lagen data-reads.
+- Pulse-metrics + narrator templates.
+
+
+
 
 ## Sessie 57 (2026-02-24) — Trader Make It Right + Console consolidatie
 

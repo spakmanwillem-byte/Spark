@@ -200,6 +200,36 @@ def _enrich_footnote(kaart_id: Optional[str], snippet: str, turn_id: Optional[st
         logger.warning("[snap_agent] footnote-enrich faalde voor %s: %s", kaart_id, e)
 
 
+def seed_agent_layer_cards() -> Dict:
+    """Éénmalige seed voor de nieuwe Subject-Agent-laag (ROADMAP Principe #8).
+
+    Registreert skeletons in de KB-inbox voor `task_agent`,
+    `admin_command_agent`, `personal_agent`, en `spark_pulse_agent`, zodat
+    Spark deze wrappers kan noemen én er via de KB naar kan verwijzen
+    zodra hij "hoe werk je?" wordt gevraagd. Idempotent via inbox-dedupe.
+    """
+    modules = [
+        "task_agent",
+        "admin_command_agent",
+        "personal_agent",
+        "spark_pulse_agent",
+    ]
+    results = []
+    for name in modules:
+        r = kb_service.add_to_inbox(
+            begrip=name,
+            source="spark_agent_layer_seed",
+            user_id="user-000",
+        )
+        results.append({
+            "module": name,
+            "created": not r.get("existing"),
+            "kaart_id": (r.get("kaart") or {}).get("id"),
+            "existing_lade": r.get("lade") if r.get("existing") else None,
+        })
+    return {"seeded": results, "count": len(results)}
+
+
 def seed_self_awareness_cards() -> Dict:
     """Eénmalige seed: skeletons voor Spark's eigen modules zodat de KB kan
     reflecteren op de eigen infrastructuur. Idempotent — bestaande kaarten

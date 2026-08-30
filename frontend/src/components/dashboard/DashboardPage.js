@@ -92,9 +92,10 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const [priorityNote, setPriorityNote] = useState(null);     // prio-taak of laatste notitie
   const [latestSparkTurn, setLatestSparkTurn] = useState(null);  // laatste Spark antwoord
   const [latestPriveContact, setLatestPriveContact] = useState(null);  // laatste privé-gesprek
-  const [showCommunityInChats, setShowCommunityInChats] = useState(() => {
-    try { return localStorage.getItem('dashboard_show_community') !== '0'; } catch { return true; }
-  });
+  // v13c_dashboard_live_cards_001 — community-zichtbaarheid komt uit
+  // Profiel → Instellingen → Chat zichtbaarheid (community_chat_enabled).
+  // Dashboard is puur overzicht — géén eigen toggle hier.
+  const [communityInDashboard, setCommunityInDashboard] = useState(false);
 
   useEffect(() => {
     if (activePage !== 'dashboard') return;
@@ -145,6 +146,14 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
 
     // v13c_dashboard_live_cards_001 — Agenda + Notities/Tasks parallel maar apart
     if (user?.id) {
+      // Community zichtbaarheid uit profiel-preferences trekken (zelfde bron als GesprekkenPage)
+      fetch(`${API}/api/profile/ui-preferences/${user.id}`)
+        .then(r => r.json()).catch(() => null)
+        .then(d => {
+          if (d?.preferences) {
+            setCommunityInDashboard(d.preferences.community_chat_enabled === true);
+          }
+        });
       // Agenda: pak eerstvolgende event
       fetch(`${API}/api/agenda/events/${user.id}`)
         .then(r => r.json()).catch(() => null)
@@ -163,22 +172,22 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
           }
         });
 
-      // Notities: prio-taak eerst, anders laatste notitie
+      // Notities: HOGE-prio taak eerst, anders LAATSTE notitie (spec Willem)
       Promise.all([
         fetch(`${API}/api/notes/tasks?user_id=${user.id}`).then(r => r.json()).catch(() => null),
         fetch(`${API}/api/notes/all?user_id=${user.id}`).then(r => r.json()).catch(() => null),
       ]).then(([tasksRes, notesRes]) => {
-        const tasks = (tasksRes?.tasks || []).filter(t => t.status !== 'done');
-        const prioTask = tasks.find(t => t.priority === 'hoog' || t.priority === 'high')
-          || tasks[0];
-        if (prioTask) {
-          setPriorityNote({ kind: 'task', text: prioTask.task, priority: prioTask.priority });
+        const openTasks = (tasksRes?.tasks || []).filter(t => t.status !== 'done');
+        const highPrioTask = openTasks.find(t => t.priority === 'hoog' || t.priority === 'high');
+        if (highPrioTask) {
+          setPriorityNote({ kind: 'task', text: highPrioTask.task, priority: highPrioTask.priority });
           return;
         }
+        // Geen hoge-prio taak → laatste notitie (backend insert-op-positie-0, dus notes[0])
         const notes = notesRes?.notes || [];
-        const latestNote = notes[0]; // notes worden vooraan gevoegd bij create
+        const latestNote = notes[0];
         if (latestNote) {
-          setPriorityNote({ kind: 'note', text: latestNote.titel || latestNote.inhoud || '(zonder titel)', priority: null });
+          setPriorityNote({ kind: 'note', text: latestNote.titel || latestNote.inhoud || '(zonder titel)', priority: latestNote.priority || null });
         }
       });
     }
@@ -492,8 +501,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                     </div>
                   </div>
                 )}
-                {/* Community — alleen als toggle aan */}
-                {showCommunityInChats && recentChats.filter(c => (c.from || '').startsWith('Community')).map((c, i) => (
+                {/* Community — alleen als user 'community_chat_enabled' aan heeft in profiel-instellingen */}
+                {communityInDashboard && recentChats.filter(c => (c.from || '').startsWith('Community')).map((c, i) => (
                   <div
                     key={`comm-${i}`}
                     className="flex items-center gap-2.5 cursor-pointer hover:bg-slate-800/40 rounded-md p-1 -m-1 transition-colors"
@@ -534,22 +543,6 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 {!latestSparkTurn && !latestPriveContact && recentChats.length === 0 && (
                   <p className="text-xs text-slate-500 italic">Nog geen recente gesprekken.</p>
                 )}
-              </div>
-              {/* Community-toggle onderaan de kaart */}
-              <div className="pt-2 mt-2 border-t border-slate-800 flex items-center justify-between">
-                <span className="text-[10px] text-slate-500">Community tonen</span>
-                <button
-                  data-testid="dashboard-toggle-community"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const next = !showCommunityInChats;
-                    setShowCommunityInChats(next);
-                    try { localStorage.setItem('dashboard_show_community', next ? '1' : '0'); } catch {}
-                  }}
-                  className={`w-8 h-4 rounded-full transition-colors relative ${showCommunityInChats ? 'bg-cyan-500' : 'bg-slate-700'}`}
-                >
-                  <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-transform ${showCommunityInChats ? 'translate-x-4' : 'translate-x-0.5'}`} />
-                </button>
               </div>
             </Card>
           </div>

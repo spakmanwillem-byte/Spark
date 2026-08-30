@@ -628109,51 +628109,6 @@
       "emotie": "neutraal"
     },
     {
-      "id": "kbv2-e739ced7",
-      "begrip": "Skallet",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Een skallet is een lege kenniskaart die door het Snap-systeem wordt aangemaakt om een nieuw begrip vast te leggen.",
-        "laag2": "Het skallet bevat al de basisstructuur van een kenniskaart, maar de inhoud moet nog worden ingevuld of aangevuld.",
-        "laag3": "Een skallet kan onder andere bevatten:\n\neen begrip;\nlege kennisvelden;\neen lege 5W-structuur;\nbasisgegevens van de kaart;\ninformatie over het aanmaken via Snap.\n\nHet skallet vormt daarmee een startpunt voor verdere verwerking.",
-        "laag4": "Een skallet is een nog niet ingevulde kenniskaart die door het Snap-systeem wordt gegenereerd wanneer een nieuw begrip wordt herkend of vastgelegd. De kaart bevat de benodigde structuur om later kennis aan toe te voegen, maar de inhoudelijke velden kunnen aanvankelijk leeg zijn. Het skallet maakt het mogelijk om een nieuw begrip eerst als kaart vast te leggen en daarna verder te verrijken."
-      },
-      "ws5": {
-        "wie": "Het Snap-systeem maakt het skallet aan en een gebruiker of systeem kan het verder invullen.",
-        "wat": "Een lege of gedeeltelijk lege kenniskaart die als startpunt dient voor een nieuw begrip.",
-        "wanneer": "Wanneer Snap een nieuw begrip herkent en hiervoor een kenniskaart aanmaakt.",
-        "waar": "Binnen de kennisbank van Spark.",
-        "waarom": "Om een nieuw begrip alvast als kenniskaart vast te leggen en later te kunnen aanvullen.",
-        "hoe": "Door automatisch een kaartstructuur aan te maken waarin de inhoud later kan worden ingevuld."
-      },
-      "tags": [
-        "aanvullen",
-        "automatisch",
-        "begrip",
-        "kaartstructuur",
-        "kennisbank",
-        "kenniskaart",
-        "lege kaart",
-        "skallet",
-        "snap",
-        "snap-systeem"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "text_importer",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-08-30T15:33:56.564421+00:00",
-        "vertrouwen": 1.0,
-        "belangrijkheid": 0.5,
-        "hooks_fired": []
-      },
-      "media": [],
-      "needs": [],
-      "emotie": "neutraal"
-    },
-    {
       "id": "kbv2-14eb9c19",
       "begrip": "Skellet",
       "lade": "weten",
@@ -628162,7 +628117,7 @@
         "laag1": "Een skellet is een basisstructuur of geraamte waarop iets verder kan worden opgebouwd.",
         "laag2": "Een skellet bevat de belangrijkste structuur, maar hoeft nog niet volledig uitgewerkt te zijn. Het kan dienen als uitgangspunt voor verdere invulling.",
         "laag3": "Een skellet kan bijvoorbeeld verwijzen naar:\n\neen geraamte van een lichaam;\neen basisstructuur van een bouwwerk;\neen structuur van een document;\neen basisopzet van een systeem;\neen voorbereidende structuur voor verdere uitwerking.",
-        "laag4": "Een skellet is een basisstructuur die de hoofdvorm of indeling van iets vastlegt, terwijl onderdelen nog kunnen ontbreken of verder uitgewerkt moeten worden. Het vormt daarmee een raamwerk waarop aanvullende onderdelen of informatie kunnen worden opgebouwd. Het begrip kan zowel letterlijk, zoals bij een lichamelijk skelet, als figuurlijk worden gebruikt voor de structuur van bijvoorbeeld een document of systeem."
+        "laag4": "Een skellet is een basisstructuur die de hoofdvorm of indeling van iets vastlegt, terwijl onderdelen nog kunnen ontbreken of verder uitgewerkt moeten worden. Het vormt daarmee een raamwerk waarop aanvullende onderdelen of informatie kunnen worden opgebouwd. Het begrip kan zowel letterlijk, zoals bij een lichamelijk skelet, als figuurlijk worden gebruikt voor de structuur van bijvoorbeeld een document of systeem.\n\nBinnen Spark Core wordt de term 'skellet' gebruikt voor een specifiek soort kaart in de kennisbank: een lege of nog-niet-ingevulde kenniskaart die door het snap-systeem wordt aangemaakt zodra Spark een onbekend begrip tegenkomt. Zo'n skellet bevat al de basisstructuur (begrip, lege 4 lagen, lege 5W-velden, footnote met herkomst) maar wacht op inhoudelijke invulling — via handmatige curatie, een text-import of een LLM-aanvulling. Skelletten zijn daarmee een bouwsteen van de KB v2: ze markeren wat Spark nog moet leren zonder dat het gesprek eronder blokkeert."
       },
       "ws5": {
         "wie": "Iemand of iets dat een structuur vormt of gebruikt als basis voor verdere opbouw.",
@@ -628181,7 +628136,15 @@
         "opbouw",
         "raamwerk",
         "skelet",
-        "structuur"
+        "structuur",
+        "snap",
+        "snap-systeem",
+        "kenniskaart",
+        "kb-v2",
+        "lege-kaart",
+        "spark-core",
+        "begrip",
+        "curatie"
       ],
       "topic": "",
       "verbanden": [],
@@ -628191,11 +628154,21 @@
         "ingedeeld_op": "2026-08-30T15:35:25.530836+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [],
+        "laatst_bewerkt_op": "2026-08-30T15:39:27.874507+00:00",
+        "laatst_bewerkt_door": "user-001"
       },
       "media": [],
       "needs": [],
-      "emotie": "neutraal"
+      "emotie": "neutraal",
+      "audit_log": [
+        {
+          "ts": "2026-08-30T15:39:27.874507+00:00",
+          "action": "verrijking_spark_context",
+          "reden": "Willem: skellet is verbonden met iets belangrijks — het snap-systeem in de KB.",
+          "operator": "user-001"
+        }
+      ]
     },
     {
       "id": "kbv2-c8d23266",
@@ -628322,6 +628295,186 @@
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-30T15:37:01.122641+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-05b96aef",
+      "begrip": "Datalek",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een datalek is een situatie waarin gegevens zonder toestemming toegankelijk worden, verloren gaan of openbaar worden gemaakt.",
+        "laag2": "Bij een datalek kunnen bijvoorbeeld persoonsgegevens, wachtwoorden of bedrijfsgegevens terechtkomen bij personen die daar geen toegang toe mogen hebben. Een datalek kan ontstaan door een cyberaanval, maar ook door menselijke fouten of het verlies van een apparaat.",
+        "laag3": "Een datalek kan ontstaan door:\n\nhacking;\nmalware;\neen verkeerd ingestelde databank;\neen fout van een medewerker;\nverlies of diefstal van een apparaat;\nhet versturen van gegevens naar de verkeerde persoon.\n\nBij een datalek kunnen verschillende soorten gegevens betrokken zijn.",
+        "laag4": "Een datalek is een beveiligingsincident waarbij persoonsgegevens of andere vertrouwelijke gegevens worden vernietigd, verloren, gewijzigd, verstrekt of toegankelijk gemaakt zonder dat dit de bedoeling is. Het kan zowel door een digitale aanval als door een menselijke of technische fout ontstaan. De gevolgen hangen onder andere af van welke gegevens zijn gelekt en hoeveel personen of organisaties daardoor worden geraakt."
+      },
+      "ws5": {
+        "wie": "Personen of organisaties van wie gegevens betrokken zijn en de organisatie die de gegevens beheert.",
+        "wat": "Een beveiligingsincident waarbij gegevens onbedoeld of onbevoegd toegankelijk worden, verloren gaan of openbaar worden.",
+        "wanneer": "Wanneer gegevens buiten de bedoelde controle terechtkomen of verloren gaan.",
+        "waar": "Bijvoorbeeld in databanken, computersystemen, e-mail, cloudomgevingen en fysieke documenten.",
+        "waarom": "Bijvoorbeeld door hacking, menselijke fouten, technische problemen, verlies of diefstal.",
+        "hoe": "Door een beveiligingsfout, cyberaanval, verkeerd gebruik of verlies van gegevens."
+      },
+      "tags": [
+        "beveiligingsincident",
+        "cyberveiligheid",
+        "databank",
+        "datalek",
+        "gegevens",
+        "gegevensbeveiliging",
+        "gegevenslek",
+        "persoonsgegevens",
+        "privacy",
+        "vertrouwelijkheid"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T15:38:45.420269+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-776f6071",
+      "begrip": "Datapakket",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een datapakket is een hoeveelheid digitale gegevens die als één geheel wordt verzonden of verwerkt.",
+        "laag2": "Bij computernetwerken wordt informatie vaak opgedeeld in kleinere datapakketten. Elk pakket kan gegevens bevatten die samen met andere pakketten de volledige informatie vormen.",
+        "laag3": "Een datapakket kan bestaan uit:\n\ngegevens;\ninformatie over de bestemming;\ninformatie over de afzender;\nbesturingsinformatie;\ninformatie voor het controleren van de overdracht.\n\nDatapakketten worden gebruikt bij bijvoorbeeld internetverkeer, e-mail en het uitwisselen van bestanden.",
+        "laag4": "Een datapakket is een afzonderlijke eenheid van digitale gegevens die binnen een communicatiesysteem wordt verzonden. Bij netwerkcommunicatie wordt grotere informatie vaak verdeeld over meerdere datapakketten. Elk pakket bevat naast de eigenlijke gegevens ook informatie die nodig is om het pakket te verzenden, te identificeren en op de juiste bestemming te verwerken. De verschillende pakketten kunnen vervolgens weer worden samengevoegd tot de oorspronkelijke informatie."
+      },
+      "ws5": {
+        "wie": "Netwerkapparaten en computers die digitale gegevens met elkaar uitwisselen.",
+        "wat": "Een afzonderlijke eenheid van gegevens die via een netwerk kan worden verzonden.",
+        "wanneer": "Wanneer digitale informatie via een communicatienetwerk wordt uitgewisseld.",
+        "waar": "Bijvoorbeeld op internet en binnen lokale computernetwerken.",
+        "waarom": "Om digitale informatie efficiënt via een netwerk te kunnen verzenden.",
+        "hoe": "Door informatie op te delen in datapakketten die worden verzonden en op de bestemming worden verwerkt of samengevoegd."
+      },
+      "tags": [
+        "communicatie",
+        "data",
+        "datapakket",
+        "gegevens",
+        "gegevensoverdracht",
+        "internet",
+        "netwerk",
+        "ontvangen",
+        "pakket",
+        "verzenden"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T15:39:33.898944+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-69618c3d",
+      "begrip": "Dataverwerking",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Dataverwerking is het verzamelen, verwerken, aanpassen, analyseren of ordenen van gegevens om bruikbare informatie te verkrijgen.",
+        "laag2": "Dataverwerking kan handmatig of automatisch plaatsvinden. Computersystemen kunnen grote hoeveelheden gegevens verwerken en daaruit bijvoorbeeld berekeningen, overzichten of andere informatie maken.",
+        "laag3": "Dataverwerking kan bestaan uit:\n\ngegevens verzamelen;\ngegevens invoeren;\ngegevens opslaan;\ngegevens ordenen;\ngegevens controleren;\ngegevens berekenen;\ngegevens analyseren;\nresultaten weergeven.",
+        "laag4": "Dataverwerking is het geheel van handelingen waarbij gegevens worden verzameld, opgeslagen, bewerkt, geordend, gecontroleerd of geanalyseerd om daar bruikbare informatie of een resultaat uit te verkrijgen. Dataverwerking kan door mensen worden uitgevoerd, maar ook door computersystemen. De verwerking kan eenvoudig zijn, zoals het sorteren van gegevens, of complexer, zoals het analyseren van grote hoeveelheden gegevens."
+      },
+      "ws5": {
+        "wie": "Mensen of computersystemen die gegevens verwerken.",
+        "wat": "Het verwerken van gegevens om daar informatie of een resultaat uit te verkrijgen.",
+        "wanneer": "Wanneer gegevens moeten worden bewerkt, geordend, onderzocht of omgezet in bruikbare informatie.",
+        "waar": "Bijvoorbeeld in computersystemen, databanken, bedrijven, onderzoek en administraties.",
+        "waarom": "Om gegevens bruikbaar, overzichtelijk of betekenisvol te maken.",
+        "hoe": "Door gegevens te verzamelen, opslaan, ordenen, bewerken, controleren en analyseren."
+      },
+      "tags": [
+        "analyseren",
+        "computer",
+        "data",
+        "databank",
+        "dataverwerking",
+        "gegevens",
+        "gegevensverwerking",
+        "informatie",
+        "informatieverwerking",
+        "verwerking"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T15:40:23.448770+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-3e50fd29",
+      "begrip": "Dedupe",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Dedupe betekent het herkennen en verwijderen of voorkomen van dubbele gegevens of dubbele items.",
+        "laag2": "Dedupe is een afkorting van deduplicatie. Het wordt gebruikt om ervoor te zorgen dat dezelfde informatie niet meerdere keren in een systeem voorkomt.",
+        "laag3": "Dedupe kan worden gebruikt voor:\n\ndubbele KB-kaarten;\ndubbele bestanden;\ndubbele gegevens;\ndubbele tags;\ndubbele records;\ndubbele vermeldingen.\n\nBij Spark wordt dedupe bijvoorbeeld gebruikt om dubbele kenniskaarten of dubbele tags te voorkomen en samen te voegen. De roadmap vermeldt zowel duplicate-detectie als tag-dedupe en een dedupe-functie voor Snap.",
+        "laag4": "Dedupe is het proces waarbij dubbele of gelijkwaardige gegevens worden herkend en vervolgens worden verwijderd, samengevoegd of voorkomen. Het doel is om gegevensverzamelingen schoon en consistent te houden. Bij Spark speelt dedupe onder andere een rol bij de Knowledge Base, waar dubbele kaarten en tags kunnen ontstaan en moeten worden herkend en samengevoegd."
+      },
+      "ws5": {
+        "wie": "Een systeem of gebruiker die dubbele gegevens beheert.",
+        "wat": "Het herkennen en verwijderen, samenvoegen of voorkomen van dubbele gegevens.",
+        "wanneer": "Wanneer een gegevensverzameling dubbele of gelijkwaardige items bevat.",
+        "waar": "Bijvoorbeeld in databanken, bestanden, tags en de Spark Knowledge Base.",
+        "waarom": "Om dubbele gegevens te voorkomen en de gegevensverzameling overzichtelijk en consistent te houden.",
+        "hoe": "Door gegevens met elkaar te vergelijken en dubbele of gelijkwaardige items te herkennen en vervolgens te verwijderen of samen te voegen."
+      },
+      "tags": [
+        "databank",
+        "dedupe",
+        "deduplicatie",
+        "dubbele gegevens",
+        "duplicaat",
+        "duplicate",
+        "gegevensbeheer",
+        "opschonen",
+        "samenvoegen",
+        "verwijderen"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-30T15:41:36.035943+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
         "hooks_fired": []

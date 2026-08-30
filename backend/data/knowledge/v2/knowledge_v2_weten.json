@@ -631436,6 +631436,50 @@
         "needs_gpt_review": true
       },
       "topic": "systeem"
+    },
+    {
+      "id": "kbv2-dc6c015e",
+      "begrip": "kb-hit-log",
+      "lade": "weten",
+      "status": "curated",
+      "lagen": {
+        "laag1": "kb-hit-log is een append-only ledger die per chat-turn vastlegt welke KB-kaarten Spark heeft geraakt om zijn antwoord te vormen.",
+        "laag2": "Zonder deze log weten we wel dát Spark antwoordt (chat_log_service), maar niet wélke kaarten hij daarbij gebruikt heeft. De kb-hit-log is die ontbrekende schakel: één regel per gebruikte kaart per turn, met bron, timestamp, snippet en optioneel de lade waaruit de kaart kwam.",
+        "laag3": "Concreet formaat: JSON-Lines in `data/chat_analytics/kb_hits.jsonl`. Elke regel is een dict met velden `ts`, `user_id`, `turn_id`, `kaart_id`, `match_source`, `snippet` (max 180 tekens), `lade`, en optioneel `extra`. Bron-labels zijn gestandaardiseerd (`smart_intents_topic_overview`, `snap_lookup_word`, `snap_sentence_match`, `compose_embed`, `capability_kbv2_search`, `unknown`) zodat je later per bron kan filteren. Schrijven is best-effort — een falende write breekt nooit de chat-flow.",
+        "laag4": "kb-hit-log staat tussen KB-cards en ervaring_agent in de architectuur: KB definieert wat een begrip is, kb-hit-log legt vast wanneer Spark ernaar wees, ervaring_agent (later) destilleert daaruit conclusies. Directe waarde ook zonder ervaring_agent: (1) analytics — welke kaarten zijn dead weight? (2) observability — `spark_pulse_agent` kan zeggen hoe vaak welke kaart geraakt is, (3) traceerbaarheid — 'hoe kwam Spark bij dit antwoord?'. Toekomstige uitbreiding: rotate-strategie bij 100k regels naar gzipped archief, aggregate-cache voor snelle top-10-queries, en integratie met `personal_agent` zodat 'jouw meest-gebruikte kaarten deze week' per user opvraagbaar wordt."
+      },
+      "ws5": {
+        "wie": "response_composer, snap_service, smart_intents_service en capability-handlers als schrijvers; spark_pulse_agent, personal_agent en ervaring_agent als lezers.",
+        "wat": "Append-only JSON-Lines ledger van elke KB-kaart-referentie per chat-turn.",
+        "wanneer": "Elke keer dat Spark een KB-kaart raakt om een antwoord samen te stellen.",
+        "waar": "data/chat_analytics/kb_hits.jsonl — module modules/agents/kb_hit_log_agent.py met API record()/retrieve()/stats_snapshot().",
+        "waarom": "Om dead weight, dominante kaarten en beslis-oorsprong zichtbaar te maken — en om `ervaring_agent` een voedingsbodem te geven.",
+        "hoe": "record(kaart_ids, match_source, ...) schrijft per kaart één JSON-regel; retrieve() leest met filter op user/tijd/bron; stats_snapshot() geeft snel totaalcount voor de pulse."
+      },
+      "tags": [
+        "chat-analytics",
+        "ervaring_agent",
+        "gebruik-ledger",
+        "jsonl",
+        "kb-hit-log",
+        "observability",
+        "principe-8",
+        "spark-architectuur",
+        "spark_pulse_agent",
+        "tracing"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "e1_agent_layer",
+        "ingedeeld_door": "e1_agent_layer",
+        "ingedeeld_op": "2026-08-30T17:19:53.276952+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.85,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-30T17:19:53.213116+00:00",
+        "needs_gpt_review": true
+      },
+      "topic": "systeem"
     }
   ],
   "metadata": {

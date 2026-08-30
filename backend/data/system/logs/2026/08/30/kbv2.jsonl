@@ -33,3 +33,5 @@
 {"ts": "2026-08-30T16:33:37.570349+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 63.71}
 {"ts": "2026-08-30T17:01:21.196519+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"begrip": "orphan-tag scan", "source": "e1_test_card", "user_id": "user-000"}}
 {"ts": "2026-08-30T17:01:21.778530+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 581.85}
+{"ts": "2026-08-30T17:19:52.783002+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"begrip": "kb-hit-log", "source": "e1_agent_layer", "user_id": "user-000"}}
+{"ts": "2026-08-30T17:19:53.276825+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 493.67}

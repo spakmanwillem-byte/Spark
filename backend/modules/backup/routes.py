@@ -43,6 +43,18 @@ MARKER_FILE_PERSISTENT = Path("/app/memory") / ".deploy_marker.json"
 # Folders/files we never want to ship in a backup
 EXCLUDE_NAMES = {".deploy_marker.json", "__pycache__", ".DS_Store"}
 
+# v13c_backup_exclude_prefixes_001 — Backup-in-backup-inception voorkomen.
+# Deze paden (relatief aan APP_ROOT) worden nooit meegenomen in geen enkele
+# backup-slice. Waarom: `_backup_*` en `_backups/` bevatten oude backup-ZIPs
+# en pre-merge-snapshots die anders elke volgende backup ~500-700MB opblazen.
+EXCLUDE_REL_PREFIXES = (
+    "backend/data/_backup_",           # backup_before_prod_merge_YYYYMMDD, backup_pre_prod_merge_*
+    "backend/data/_backups/",          # verzamelmap voor rolling backups
+    "backend/data/_archive/",          # oude archief-map
+    "backend/data/_deleted_containers/",
+    "backend/data/_deleted_users/",
+)
+
 # Roots that are included in backups (relative to APP_ROOT)
 BACKUP_SOURCES = [
     ("backend/data", DATA_ROOT),
@@ -100,7 +112,13 @@ def _iter_files(root: Path):
 
 
 def _collect_files(since_epoch: float = 0.0) -> List[Dict[str, Any]]:
-    """Collect files from all backup sources, optionally filtered by mtime > since_epoch."""
+    """Collect files from all backup sources, optionally filtered by mtime > since_epoch.
+
+    v13c_backup_exclude_prefixes_001 — filtert oude backup-dirs (`_backup_*`,
+    `_backups/`, `_archive/`, `_deleted_*`) uit zodat backup-in-backup-inception
+    stopt. Deze paden groeien elke deploy-cyclus en blazen anders elke volgende
+    'alleen wijzigingen'-download honderden MB's op.
+    """
     items = []
     for prefix, root in BACKUP_SOURCES:
         for fpath in _iter_files(root):
@@ -111,14 +129,57 @@ def _collect_files(since_epoch: float = 0.0) -> List[Dict[str, Any]]:
                 rel = fpath.relative_to(APP_ROOT)
             except ValueError:
                 continue
+            rel_str = str(rel).replace("\\", "/")
+            if any(rel_str.startswith(p) for p in EXCLUDE_REL_PREFIXES):
+                continue
             items.append({
                 "abs": str(fpath),
-                "rel": str(rel),  # bv "backend/data/knowledge/knowledge_base.json"
+                "rel": rel_str,
                 "size": fpath.stat().st_size,
                 "mtime": mtime,
                 "mtime_iso": datetime.fromtimestamp(mtime, tz=timezone.utc).isoformat(),
             })
     return items
+
+
+# v13c_backup_split_001 — Split "alleen wijzigingen" in 3 stukken zodat de
+# zip niet te groot wordt bij intensief chat/trade-gebruik. Elk pad-prefix
+# (relatief aan APP_ROOT) valt in exact één slice.
+CHAT_PREFIXES = (
+    "backend/data/chat/",
+    "backend/data/chat_analytics/",
+    "backend/data/dialogen/",
+    "backend/data/dagboek/",
+)
+CHAT_EXACT_FILES = (
+    "backend/data/chat_sessions.json",
+    "backend/data/conversation_triggers.json",
+)
+TRADER_PREFIXES = (
+    "backend/data/trade/",
+    "backend/data/financial/",
+    "backend/data/bitvavo/",
+)
+
+
+def _slice_of(rel: str) -> str:
+    """Return 'chat', 'trader' of 'rest' voor een backup-relatief pad."""
+    rel_norm = rel.replace("\\", "/")
+    if rel_norm in CHAT_EXACT_FILES:
+        return "chat"
+    for p in CHAT_PREFIXES:
+        if rel_norm.startswith(p):
+            return "chat"
+    for p in TRADER_PREFIXES:
+        if rel_norm.startswith(p):
+            return "trader"
+    return "rest"
+
+
+def _collect_files_sliced(since_epoch: float, slice_name: str) -> List[Dict[str, Any]]:
+    """Zelfde als _collect_files maar filtert op één slice ('chat'/'trader'/'rest')."""
+    files = _collect_files(since_epoch=since_epoch)
+    return [f for f in files if _slice_of(f["rel"]) == slice_name]
 
 
 def _make_zip_file(files: List[Dict[str, Any]], meta: Dict[str, Any]) -> Path:
@@ -388,6 +449,104 @@ async def download_changes(fallback_hours: int = 24):
         },
         background=_cleanup_task(zip_path),
     )
+
+
+# v13c_backup_split_001 — Drie aparte "alleen wijzigingen"-endpoints per slice
+# zodat een intensieve chat- of trade-sessie geen 300MB-ZIP oplevert waar
+# een KB-wijziging in verdrinkt.
+
+def _download_changes_slice(slice_name: str, fallback_hours: int) -> FileResponse:
+    """Gedeelde helper voor de drie slice-endpoints."""
+    if slice_name not in ("chat", "trader", "rest"):
+        raise HTTPException(status_code=400, detail=f"Onbekende slice: {slice_name}")
+    marker = _read_marker()
+    since = float(marker.get("marked_at_epoch") or 0.0)
+    marker_missing = since <= 0.0
+    if marker_missing:
+        since = datetime.now(timezone.utc).timestamp() - (fallback_hours * 3600)
+    files = _collect_files_sliced(since_epoch=since, slice_name=slice_name)
+    meta = {
+        "type": f"changes_since_deploy_{slice_name}",
+        "slice": slice_name,
+        "created_at": _iso_now(),
+        "marker": marker,
+        "marker_missing": marker_missing,
+        "fallback_used_hours": fallback_hours if marker_missing else None,
+        "file_count": len(files),
+        "sources": [str(r) for _, r in BACKUP_SOURCES],
+        "slice_prefixes": {
+            "chat": {"prefixes": list(CHAT_PREFIXES), "exact_files": list(CHAT_EXACT_FILES)},
+            "trader": {"prefixes": list(TRADER_PREFIXES), "exact_files": []},
+            "rest": {"description": "alles wat niet onder chat/trader valt"},
+        }[slice_name],
+        "files": [{"path": f["rel"], "size": f["size"], "mtime": f["mtime_iso"]} for f in files],
+    }
+    zip_path = _make_zip_file(files, meta)
+    size = zip_path.stat().st_size
+    label = f"changes_{slice_name}" if not marker_missing else f"changes_{slice_name}_fallback_{fallback_hours}h"
+    fname = f"spark_backup_{label}_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.zip"
+    return FileResponse(
+        str(zip_path),
+        media_type="application/zip",
+        filename=fname,
+        headers={
+            "Content-Length": str(size),
+            "X-Backup-Bytes": str(size),
+            "X-Backup-Files": str(len(files)),
+            "X-Backup-Slice": slice_name,
+            "X-Marker-Missing": "1" if marker_missing else "0",
+            "X-Fallback-Hours": str(fallback_hours) if marker_missing else "0",
+            "Cache-Control": "no-store",
+        },
+        background=_cleanup_task(zip_path),
+    )
+
+
+@router.get("/download/changes/chat")
+async def download_changes_chat(fallback_hours: int = 24):
+    """Backup met alleen gesprek-log wijzigingen: data/chat, data/chat_analytics,
+    data/dagboek, data/dialogen + chat_sessions.json + conversation_triggers.json."""
+    return _download_changes_slice("chat", fallback_hours)
+
+
+@router.get("/download/changes/trader")
+async def download_changes_trader(fallback_hours: int = 24):
+    """Backup met alleen trader-wijzigingen: data/trade, data/financial, data/bitvavo."""
+    return _download_changes_slice("trader", fallback_hours)
+
+
+@router.get("/download/changes/rest")
+async def download_changes_rest(fallback_hours: int = 24):
+    """Backup met alle overige wijzigingen sinds laatste deploy — dus zonder
+    chat-slice en zonder trader-slice. Voor kleine, snel-mergebare exports
+    van KB / config / notes / persons / achievements / etc."""
+    return _download_changes_slice("rest", fallback_hours)
+
+
+@router.get("/download/changes/sizes")
+async def download_changes_sizes(fallback_hours: int = 24):
+    """Voorbereidings-endpoint: geeft aantal bestanden + totale bytes per slice
+    terug zodat de UI weet hoe groot elke download wordt vóór klikken."""
+    marker = _read_marker()
+    since = float(marker.get("marked_at_epoch") or 0.0)
+    marker_missing = since <= 0.0
+    if marker_missing:
+        since = datetime.now(timezone.utc).timestamp() - (fallback_hours * 3600)
+    all_files = _collect_files(since_epoch=since)
+    summary = {"chat": {"files": 0, "bytes": 0},
+               "trader": {"files": 0, "bytes": 0},
+               "rest": {"files": 0, "bytes": 0},
+               "total": {"files": len(all_files), "bytes": sum(f["size"] for f in all_files)}}
+    for f in all_files:
+        s = _slice_of(f["rel"])
+        summary[s]["files"] += 1
+        summary[s]["bytes"] += f["size"]
+    return {
+        "marker": marker,
+        "marker_missing": marker_missing,
+        "fallback_used_hours": fallback_hours if marker_missing else None,
+        "sizes": summary,
+    }
 
 
 def _analyze_zip(content: bytes) -> Dict[str, Any]:

@@ -460,8 +460,9 @@ export default IntegratiesPage;
 /* ================================================================ */
 function BackupPanel() {
   const [status, setStatus] = useState(null);
+  const [sliceSizes, setSliceSizes] = useState(null); // v13c_backup_split_001
   const [loading, setLoading] = useState(true);
-  const [busy, setBusy] = useState(null); // 'mark' | 'full' | 'changes' | 'preview' | 'restore'
+  const [busy, setBusy] = useState(null); // 'mark' | 'full' | 'changes' | 'changes-chat' | 'changes-trader' | 'changes-rest' | 'preview' | 'restore'
   const [toast, setToast] = useState(null);
   const [restoreFile, setRestoreFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -481,6 +482,14 @@ function BackupPanel() {
     } catch (e) {
       showToast('Status kon niet geladen worden', 'error');
     }
+    // v13c_backup_split_001 — laad ook per-slice groottes voor de 3 changes-cards
+    try {
+      const r2 = await fetch(`${API}/api/backup/download/changes/sizes`);
+      if (r2.ok) {
+        const d2 = await r2.json();
+        setSliceSizes(d2.sizes);
+      }
+    } catch (e) { /* stil */ }
     setLoading(false);
   }, []);
 
@@ -519,9 +528,15 @@ function BackupPanel() {
     setBusy(type);
     setMrSmithOpen(false);
     try {
-      const url = type === 'full'
-        ? `${API}/api/backup/download/full`
-        : `${API}/api/backup/download/changes`;
+      // v13c_backup_split_001 — 3 slices onder 'changes' (chat/trader/rest)
+      const urlMap = {
+        'full': `${API}/api/backup/download/full`,
+        'changes': `${API}/api/backup/download/changes`,
+        'changes-chat': `${API}/api/backup/download/changes/chat`,
+        'changes-trader': `${API}/api/backup/download/changes/trader`,
+        'changes-rest': `${API}/api/backup/download/changes/rest`,
+      };
+      const url = urlMap[type] || urlMap['changes'];
       const a = document.createElement('a');
       a.href = url;
       a.rel = 'noopener';
@@ -609,6 +624,13 @@ function BackupPanel() {
   const marker = status?.marker || {};
   const hasMarker = !!marker.marked_at;
 
+  // v13c_backup_split_001 — MB-formatter voor slice-subtitels
+  const formatMB = (bytes) => {
+    if (!bytes || bytes < 0) return '0 KB';
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+  };
+
   return (
     <div data-testid="backup-panel" className="h-full overflow-y-auto p-6 space-y-6">
       {/* Toast */}
@@ -677,20 +699,43 @@ function BackupPanel() {
         </p>
       </div>
 
-      {/* Download buttons */}
+      {/* Download buttons — v13c_backup_split_001: chat/trader/rest split */}
       <div className="max-w-4xl grid md:grid-cols-3 gap-4">
         <DownloadCard
-          testid="backup-download-changes"
+          testid="backup-download-changes-chat"
           icon={Download}
-          title="Alleen wijzigingen"
-          subtitle={`${status?.changed_files_count ?? 0} bestand(en) sinds laatste deploy`}
-          desc="ZIP met alle gewijzigde bestanden (data + memory). Inclusief grote KB."
+          title="Gesprek-log wijzigingen"
+          subtitle={sliceSizes ? `${sliceSizes.chat.files} bestand(en) · ${formatMB(sliceSizes.chat.bytes)}` : 'laden…'}
+          desc="Alleen chat, dagboek, dialogen en chat-analytics wijzigingen. Klein en snel te mergen."
           color="emerald"
-          loading={busy === 'changes'}
+          loading={busy === 'changes-chat'}
+          onClick={() => triggerDownload('changes-chat')}
+        />
+        <DownloadCard
+          testid="backup-download-changes-trader"
+          icon={Download}
+          title="Trader wijzigingen"
+          subtitle={sliceSizes ? `${sliceSizes.trader.files} bestand(en) · ${formatMB(sliceSizes.trader.bytes)}` : 'laden…'}
+          desc="Alleen trade-, financial- en bitvavo-data. Perfect voor snelle bot-state backups."
+          color="cyan"
+          loading={busy === 'changes-trader'}
+          onClick={() => triggerDownload('changes-trader')}
+        />
+        <DownloadCard
+          testid="backup-download-changes-rest"
+          icon={Download}
+          title="Overige wijzigingen"
+          subtitle={sliceSizes ? `${sliceSizes.rest.files} bestand(en) · ${formatMB(sliceSizes.rest.bytes)}` : 'laden…'}
+          desc="Alle wijzigingen behalve gesprek-log en trader — KB, config, notes, persons, achievements, etc."
+          color="teal"
+          loading={busy === 'changes-rest'}
           disabled={!hasMarker && (status?.changed_files_count ?? 0) > 50}
           warning={!hasMarker ? 'Geen deploy-marker — alles wordt als "gewijzigd" gezien.' : null}
-          onClick={() => triggerDownload('changes')}
+          onClick={() => triggerDownload('changes-rest')}
         />
+      </div>
+
+      <div className="max-w-4xl grid md:grid-cols-2 gap-4">
         <DownloadCard
           testid="backup-download-kb-diff"
           icon={Download}
@@ -911,6 +956,9 @@ function PreviewStat({ label, count, color }) {
 function DownloadCard({ testid, icon: Icon, title, subtitle, desc, color, loading, disabled, warning, onClick }) {
   const colorMap = {
     emerald: 'border-emerald-500/30 hover:border-emerald-500/60 text-emerald-300 bg-emerald-500/5',
+    cyan: 'border-cyan-500/30 hover:border-cyan-500/60 text-cyan-300 bg-cyan-500/5',
+    teal: 'border-teal-500/30 hover:border-teal-500/60 text-teal-300 bg-teal-500/5',
+    amber: 'border-amber-500/30 hover:border-amber-500/60 text-amber-300 bg-amber-500/5',
     blue: 'border-blue-500/30 hover:border-blue-500/60 text-blue-300 bg-blue-500/5',
   };
   return (

@@ -360,12 +360,22 @@ laatst binnengekomen privé als bericht → klik → naar privé."
 - **✅ Gesprekken-kader** verrijkt:
   - Laatste Spark-turn bovenaan met Spark-avatar, klik → sessionStorage
     tab='spark', navigate naar chat.
-  - Community-berichten alleen zichtbaar als toggle aan (persist in
-    `localStorage.dashboard_show_community`). Klik → tab='community'.
+  - Community-berichten alleen zichtbaar als `community_chat_enabled` aan
+    staat in Profiel → Instellingen → Chat zichtbaarheid (zelfde bron als
+    GesprekkenPage, geen aparte dashboard-toggle — dashboard is overzicht).
   - Laatste privé onderaan als notification-badge (cyan dot); klik zet
     `sessionStorage.spark_prive_contact_id` én tab='prive' zodat de
     chat-pagina meteen dat gesprek opent.
-  - Toggle-switch onderaan de kaart voor community-zichtbaarheid.
+- **✅ Notities-kader correctie**: hoge-prio taak (`priority === 'hoog'`)
+  wint; anders **laatste notitie** (bug-fix: eerder werd elke open taak
+  vóór de notitie geplaatst — spec was strikter).
+- **✅ Data-sortering fix**: sparkLog-conversations en notes worden nu
+  expliciet gesorteerd op timestamp/datum descending in de frontend ipv
+  te vertrouwen op backend-array-volgorde (voorkomt out-of-order-drift
+  wanneer entries ooit niet chronologisch geappend werden).
+- **✅ Vast formaat + scroll** — `Card`-component kreeg `fixedHeight` prop
+  (`h-40` body + `overflow-y-auto`). Agenda/Notities/Gesprekken hebben
+  nu identieke hoogte naast elkaar, scrollen intern bij lange inhoud.
 - **Nog te doen** (P2, hierboven): kaart-icoon-accent uit user-kleurschema
   ipv hardcoded oranje/groen/cyaan.
 

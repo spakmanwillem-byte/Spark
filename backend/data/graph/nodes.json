@@ -146266,6 +146266,52 @@
       "vertrouwen": 1.0
     },
     {
+      "id": "kbv2-18829e2b",
+      "label": "orphan-tag scan",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een orphan-tag scan is een onderhoudsactie die tags opspoort die vaak in de KB voorkomen maar zelf geen eigen kaart hebben.",
+      "tags": [
+        "admin-command",
+        "dedupe",
+        "kb",
+        "onderhoud",
+        "opschonen",
+        "orphan-tag-scan",
+        "principe-8",
+        "snap_agent",
+        "spark-architectuur",
+        "tag_sanitizer"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.85
+    },
+    {
+      "id": "kbv2-dc6c015e",
+      "label": "kb-hit-log",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "kb-hit-log is een append-only ledger die per chat-turn vastlegt welke KB-kaarten Spark heeft geraakt om zijn antwoord te vormen.",
+      "tags": [
+        "chat-analytics",
+        "ervaring_agent",
+        "gebruik-ledger",
+        "jsonl",
+        "kb-hit-log",
+        "observability",
+        "principe-8",
+        "spark-architectuur",
+        "spark_pulse_agent",
+        "tracing"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.85
+    },
+    {
       "id": "kbv2-18826611",
       "label": "wandeling",
       "type": "knowledge_v2",

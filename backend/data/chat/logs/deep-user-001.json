@@ -2,126 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "Vrijdag ochtend moet ik mijn belastingaangifte echt doen. ik wil 9 uur beginnen tot 12 uur. onder Spark your live",
-      "ts": "2026-08-26T10:37:36.707931+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Goed, ik zet het in je agenda.\n\n**Datum:** vrijdag 30 augustus 2026 \n**Tijd:** 09:00 – 12:00 \n**Titel:** Belastingaangifte doen \n**Categorie:** Spark Your Life – persoonlijke groei / zelfredzaamheid \n\nDit valt onder de visie van Spark Your Life: ondersteuning bij taken die je zelfredzaamheid en structuur geven. Ik zorg dat de afspraak zichtbaar wordt in je agenda‑tab en je een herinnering krijgt een uur voor de start.\n\nLaat me weten of je nog een extra notitie wilt toevoegen of een andere taak wilt plannen.",
-      "ts": "2026-08-26T10:37:36.707931+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "ook moet ik bij mijn boekhoudprogamma alle uitgaven  bijwerken",
-      "ts": "2026-08-26T10:38:29.943006+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Prima, laten we de uitgaven in je boekhoudprogramma bijwerken. \n\n**1. Overzicht ophalen** \nOpen het **kasboek**‑overzicht (tab Kasboek) om alle huidige uitgaven te zien. Zo weet je precies welke posten nog actueel moeten worden.\n\n**2. Identificeer te wijzigen items** \nZoek de regels die verouderde bedragen, ontbrekende facturen of onjuiste categorieën bevatten. Gebruik de zoekfunctie op “uitgaven” om snel te filteren.\n\n**3. Bijwerken (volgens KB‑kaart “bijwerken”)** \nVoor elke te corrigeren regel: \n- **Bewerk** het bedrag → voeg nieuwe cijfers toe of corrigeer fouten. \n- **Update** de datum → zorg dat de transactie de juiste boekingsdatum heeft. \n- **Pas** de categorie → bijvoorbeeld van “overig” naar “belastingaangifte”. \n- **Voeg** eventueel een toelichting toe (bijv. factuurnummer, leverancier) zodat later duidelijk is waarom de wijziging is gedaan.\n\n**4. Opslaan & bevestigen** \nSla de wijzigingen op en controleer of het kasboek‑saldo nu klopt. Een korte **winst‑/verlies‑overzicht** kan je meteen laten zien of de correcties invloed hebben op je totale resultaat.\n\n**5. Documentatie** \nMaak een notitie (tab Notities) met de datum, welke uitgaven zijn bijgewerkt en waarom. Zo houd je een audit‑trail bij en kun je later gemakkelijk terugvinden wat er is veranderd.\n\nWil je dat ik het kasboek‑overzicht voor je ophaal of een herinnering in je agenda zet om de bijwerking morgen af te ronden? Laat maar weten welke stap je nu wilt uitvoeren.",
-      "ts": "2026-08-26T10:38:29.943006+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "ik gebruik Moneybird",
-      "ts": "2026-08-26T10:39:21.551173+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Goed dat je Moneybird gebruikt, Willem. Hier zijn een paar opties om je uitgaven vanuit Moneybird in Spark te krijgen:\n\n1. **Handmatig exporteren** \n - Open Moneybird → **Financiën** → **Export**. \n - Kies CSV‑formaat, selecteer de periode (bijvoorbeeld 1 aug – 31 aug). \n - Sla het bestand op.\n\n2. **Importeren in Spark’s kasboek** \n - Ga naar tab **Kasboek** → **Import**. \n - Upload de CSV‑file. \n - Spark matcht de kolommen (datum, omschrijving, bedrag, categorie). Controleer het overzicht en bevestig.\n\n3. **Automatische synchronisatie (indien ingesteld)** \n - Als je eerder een API‑sleutel van Moneybird hebt gekoppeld onder **Instellingen → Integraties**, kun je via “Synchroniseer nu” de laatste boekingen ophalen. \n - Spark haalt de nieuwe facturen en uitgaven op en vult ze automatisch in het kasboek in.\n\n4. **Uitgaven bijwerken** \n - Na import zie je een lijst met alle uitgaven. \n - Klik op een regel om de categorie of omschrijving aan te passen, of om een notitie toe te voegen. \n - Zodra je klaar bent, sla je het kasboek op; de wijzigingen worden direct meegenomen in je rapportages.\n\nLaat me weten of je al een API‑koppeling hebt, of dat je de CSV‑export wilt doen. Dan kan ik je stap‑voor‑stap begeleiden.",
-      "ts": "2026-08-26T10:39:21.551173+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "aangschaft 1 whiteboard maker voor 2 euro 99 cent. mag onder Spark your live. inkoop kantoorartikelen. is incl btw contant betaald geen bon. gekocht bij Primera in Bijeum.",
-      "ts": "2026-08-26T11:48:17.301066+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ik noteer de uitgave:\n\n- **Datum:** woensdag 26 augustus 2026 \n- **Bedrag:** € 2,99 (incl. btw) \n- **Categorie:** Spark Your Life – kantoorartikelen \n- **Omschrijving:** Whiteboard‑maker, contant betaald, geen bon, gekocht bij Primera (Bijeum) \n\nWil je dat ik dit direct in het kasboek invoer, of wil je het eerst handmatig bevestigen in de Kasboek‑tab? Laat het me weten, dan zorg ik dat de post correct wordt opgeslagen.",
-      "ts": "2026-08-26T11:48:17.301066+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "voer maar in",
-      "ts": "2026-08-26T11:49:10.364991+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "De uitgave is nu in het kasboek verwerkt:\n\n- **Datum:** woensdag 26 augustus 2026, 13:48 \n- **Bedrag:** € 2,99 (incl. btw) \n- **Categorie:** Spark Your Life → kantoorartikelen \n- **Omschrijving:** whiteboard‑maker, contant betaald, geen bon, gekocht bij Primera (Bijeum) \n\nLaat me weten of je nog een andere post wilt invoeren of een overzicht wilt bekijken.",
-      "ts": "2026-08-26T11:49:10.364991+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "google",
-      "ts": "2026-08-26T11:57:40.246884+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ik kan geen live Google‑zoekopdracht uitvoeren. Wel kan ik in onze kennisbank zoeken of je me vertellen wat je precies wilt vinden, zodat ik je zo goed mogelijk kan helpen. Laat maar weten waar je naar zoekt.",
-      "ts": "2026-08-26T11:57:40.246884+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "wat weet jij over distilleren",
-      "ts": "2026-08-26T11:59:13.880364+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Distilleren is een scheidingsproces waarbij een vloeistof wordt verwarmd zodat de componenten met een lager kookpunt verdampen, waarna de damp wordt afgekoeld en weer vloeibaar wordt. Het wordt vooral gebruikt om alcoholische dranken, zuivere waterstof of andere chemische stoffen te produceren.\n\n**Basisstappen**\n1. **Verwarmen** – de mengvloeistof (bijvoorbeeld een gefermenteerde mash) wordt in een ketel verwarmd.\n2. **Verdampen** – de component met het laagste kookpunt (bij alcohol: ethanol rond 78 °C) stijgt als damp op.\n3. **Condensatie** – de damp stroomt door een koeler (condensor) en wordt weer vloeibaar.\n4. **Afscheiden** – de gecondenseerde vloeistof, nu rijk aan de gewenste component, wordt opgevangen.\n\n**Toepassingen**\n- **Alcoholische dranken**: Schnaps, whisky, gin, vodka en andere sterke dranken ontstaan via één of meerdere distillatiestappen.\n- **Industrieel**: zuivere waterstof, benzine, ether, essentiële oliën.\n- **Laboratorium**: scheiden van mengsels voor analyse of zuivering.\n\n**Kenmerken van Schnaps (voorbeeld)**\n- Wordt gedistilleerd uit gegiste vruchten (appels, peren, pruimen, kersen, abrikozen) of granen.\n- Het distillatie‑proces concentreert de alcohol en de aromatische stoffen.\n- In Duitstalige landen wordt de term “Schnaps” vaak gebruikt voor deze gedistilleerde sterke drank.\n\n**Praktische tips bij thuisdistillatie (waar toegestaan)**\n- Zorg voor een goed afgelijnde ketel en een efficiënte condensor om verlies te beperken.\n- Houd de temperatuur nauwkeurig in de gaten; te hoge temperaturen kunnen ongewenste componenten mee‑dampen.\n- Gebruik een geschikt opvangvat om de distillaat veilig te verzamelen.\n\nKortom, distilleren scheidt stoffen op basis van hun kookpunten, levert geconcentreerde producten op en vormt de kern van de productie van dranken als Schnaps.",
-      "ts": "2026-08-26T11:59:13.880364+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "wat weet jij over verzadigen",
-      "ts": "2026-08-26T12:00:11.010194+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Verzadigen** betekent dat een medium (bijvoorbeeld een oplossing, een bodem of een netwerk) zoveel van een bepaalde stof of energie bevat dat het geen extra meer kan opnemen zonder een verandering in de omstandigheden.\n\n### Chemie & fysica\n- **Oplossing:** Een oplossing is verzadigd wanneer er precies zoveel oplosbaar materiaal in het oplosmiddel is opgelost dat verdere toevoeging leidt tot precipiteren (neerslag) of kristallisatie. \n- **Lucht:** Verzadigde lucht bevat de maximale hoeveelheid waterdamp die bij de huidige temperatuur en druk kan worden vastgehouden; bij hogere luchtvochtigheid ontstaat dauw of mist. \n- **Adsorptie:** Een adsorptiemateriaal is verzadigd wanneer alle beschikbare bindingsplaatsen bezet zijn; extra moleculen blijven in de gas‑ of vloeistoffase.\n\n### Voeding & biologie\n- **Verzadigde vetzuren:** Vetzuren zonder dubbele bindingen (bijv. stearinezuur) worden “verzadigd” genoemd omdat alle koolstofatomen volledig gehydrateerd zijn. \n- **Verzadigd gevoel:** In de psychologie wordt een persoon als verzadigd beschouwd wanneer een behoefte (bijv. honger, dorst) volledig is bevredigd en er geen extra drang meer bestaat.\n\n### Wiskunde & informatica\n- **Verzadigde functies:** Een functie is verzadigd wanneer hij een asymptoot nadert en daarna nauwelijks meer verandert, bijvoorbeeld een logistieke groeifunctie. \n- **Verzadigde datastructuren:** Een buffer of cache is verzadigd wanneer hij vol is en geen nieuwe elementen meer kan opnemen zonder iets te verwijderen.\n\n### Praktische voorbeelden\n- **Koken:** Een zoutoplossing is verzadigd wanneer extra zout niet meer oplost en zich op de bodem legt. \n- **Bouw:** Een grond is verzadigd met water wanneer de waterinhoud de poriën volledig vult; extra regenwater loopt af.\n\nKortom, verzadigen duidt op een toestand waarin een systeem zijn maximale capaciteit voor een bepaalde component heeft bereikt.",
-      "ts": "2026-08-26T12:00:11.010194+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "lintwormen",
-      "ts": "2026-08-26T12:01:16.414631+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Lintwormen (Taenia‑soorten)** \n\n**Wat is het?** \nEen lintworm is een platworm (platyhelminth) die in de dunne darm van zoogdieren leeft. De meest voorkomende soorten voor mensen zijn *Taenia saginata* (rundvlees‑lintworm) en *Taenia solium* (varkens‑lintworm). \n\n**Levenscyclus** \n1. **Eieren** worden via de ontlasting van een geïnfecteerde gastheer uitgescheiden. \n2. **Intermediate gastheer** (rund of varken) eet de eieren; in de spier‑ of weefselcellen ontwikkelen zich cysticerci (bladdervormige cysten). \n3. **Menselijke gastheer** eet rauw of onvoldoende verhit vlees met cysticerci. \n4. In de dunne darm ontwikkelen de cysten zich tot volwassen lintwormen, die meters lang kunnen worden. \n5. De lintwormen produceren duizenden proglottiden (segmenten) die zich loslaten en via de ontlasting het lichaam verlaten, waarmee de cyclus opnieuw start.\n\n**Symptomen** \n- Vaak asymptomatisch. \n- Soms buikpijn, misselijkheid, diarree, gewichtsverlies of een opgeblazen gevoel. \n- Bij *T. solium* kan een cysticercose ontstaan wanneer eieren in het lichaam terechtkomen (hersen‑ of oogcysticercose), wat ernstige neurologische klachten kan geven.\n\n**Diagnose** \n- Analyse van ontlasting op eieren of proglottiden. \n- Serologische tests of beeldvorming (CT/MRI) bij vermoeden van cysticercose.\n\n**Behandeling** \n- **Praziquantel** (5 mg/kg, één enkele dosis) of **Albendazol** (10 mg/kg per dag, 3 dagen) zijn de standaardmedicijnen. \n- Bij neurocysticercose kan aanvullende corticosteroïden en een langere behandelingskuur nodig zijn.\n\n**Preventie** \n- Vlees goed doorbakken of bevroren (min – 10 °C, ≥ 10 dagen) vóór consumptie. \n- Handen wassen na toiletbezoek en voor het bereiden van voedsel. \n- Goede hygiëne in de veehouderij, vooral bij varkens en runderen.\n\n**Praktisch** \n- Als je vermoedt dat je een lintworm hebt, plan een afspraak met je huisarts voor een ontlastingsonderzoek. \n- Na bevestiging kun je de medicatie direct starten; de meeste mensen voelen zich binnen enkele dagen beter. \n\nHeb je specifieke vragen over een bepaalde soort, symptomen of behandelingsopties, laat het me weten!",
-      "ts": "2026-08-26T12:01:16.414631+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "steenpuist",
-      "ts": "2026-08-26T12:02:10.074843+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Steenpuist** is een veelvoorkomende huiduitslag die ontstaat wanneer een haarzakje of talgklier verstopt raakt en zich een harde, steenachtige kern vormt. \n\n**Kenmerken** \n- Ronde, rode bult met een harde, soms witachtige punt. \n- Voelt als een klein steentje onder de huid. \n- Kan pijnlijk zijn, zeker als er druk op wordt uitgeoefend. \n\n**Oorzaken** \n- Overmatige talgproductie en dode huidcellen die de poriën blokkeren. \n- Hormoonschommelingen (bijvoorbeeld tijdens de puberteit, menstruatie of stress). \n- Wrijving van kleding of helm, waardoor de huid geïrriteerd raakt. \n- Bacteriële infectie (meestal *Cutibacterium acnes*). \n\n**Behandeling** \n1. **Warm kompres** – 5‑10 min. 2‑3 × per dag; dit verzacht de huid en helpt de puist openen. \n2. **Reiniging** – milde, niet‑schurende reiniger; vermijd agressieve scrubs die de huid kunnen beschadigen. \n3. **Topische middelen** – producten met benzoylperoxide, salicylzuur of tea‑tree‑olie kunnen de ontsteking verminderen. \n4. **Niet knijpen** – knijpen kan littekens en verdere ontsteking veroorzaken. \n5. **Dermatoloog** – bij hardnekkige of terugkerende puisten kan een arts een steriele incisie, corticoïden of antibiotische crèmes voorschrijven. \n\n**Preventie** \n- Houd de huid schoon en droog, vooral op vettige zones. \n- Gebruik niet‑comedogene (niet‑verstoppende) huidverzorgingsproducten. \n- Vermijd langdurige druk op de huid (bijv. strakke hoeden of helmen). \n- Beperk suiker‑ en zuivelinname als je merkt dat die je huid beïnvloeden. \n\nMocht je een steenpuist hebben die niet binnen een week afneemt of sterk pijnlijk wordt, raad ik aan een afspraak te maken met je huisarts of een dermatoloog voor een gerichte behandeling.",
-      "ts": "2026-08-26T12:02:10.074843+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
       "text": "Talgklier",
       "ts": "2026-08-26T12:03:04.575587+00:00",
       "user_id": "user-001"
@@ -299,9 +179,129 @@
       "text": "**Fuzzy‑matching** is een techniek om twee tekenreeksen (bijvoorbeeld woorden, zinnen of ID’s) met elkaar te vergelijken, ook als ze niet exact gelijk zijn. In plaats van een strikte “gelijk‑of‑niet‑gelijk”‑test kijkt fuzzy‑matching naar *gelijkenis* en geeft een score die aangeeft hoe dicht de strings bij elkaar liggen.\n\n### Hoe werkt het?\n1. **Edit‑distance (Levenshtein‑afstand)** – telt het minimum aantal bewerkingen (invoegen, verwijderen, vervangen) dat nodig is om de ene string in de andere te veranderen. Een kleine afstand = hoge gelijkenis. \n2. **Token‑based scores** – splitst strings in woorden (tokens) en vergelijkt de sets, bijvoorbeeld Jaccard‑ of Sørensen‑Dice‑coëfficiënten. \n3. **Weighted‑algoritmen** – geven bepaalde bewerkingen (bijv. vervanging van een klinker) een lagere kost dan andere. \n4. **RapidFuzz** – de library die Spark’s **snap_agent** intern gebruikt. Het is een snelle, C‑gebaseerde implementatie van fuzzy‑matching, geoptimaliseerd voor grote datasets.\n\n### Waar wordt het gebruikt?\n- **Zoekfuncties**: gebruikers vinden “boek” ook als ze “boeck” typen. \n- **Data‑deduplicatie**: dubbele records met kleine typfouten opsporen. \n- **Intent‑detectie**: herkennen van varianten van een commando of vraag. \n- **Koppelen van externe bronnen**: bijvoorbeeld klantnamen in verschillende systemen matchen.\n\n### Praktisch voorbeeld (RapidFuzz)\n```python\nfrom rapidfuzz import fuzz, process\n\nscore = fuzz.ratio(\"spark\", \"spak\") # → 80 (van 100)\nbeste_match = process.extractOne(\"kattn\", [\"kat\", \"katt\", \"kattens\"], scorer=fuzz.ratio)\n```\nEen score van 80 % betekent dat de strings sterk op elkaar lijken, maar niet identiek.\n\nIn Spark zorgt fuzzy‑matching ervoor dat de **snap_agent** ook begrippen oppikt die net een beetje anders gespeld zijn of een kleine typefout bevatten, waardoor er sneller nieuwe KB‑kaarten ontstaan.",
       "ts": "2026-08-29T10:32:35.262596+00:00",
       "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "dank terug welke onderwerpen benoemde je",
+      "ts": "2026-08-29T10:49:49.966432+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Dank je wel, Willem. Hier zijn de onderwerpen die ik zojuist benoemde:\n\n- **snap agent** – herkenning van onbekende woorden \n- **fuzzy‑matching** – vergelijkende techniek voor tekenreeksen \n- **snap** (als onderwerp) \n- **dacht** \n- **middag** \n- **voorbeeld** \n- **wakker** \n\nTerug. Als je meer details wilt over één van deze onderwerpen, laat het me weten.",
+      "ts": "2026-08-29T10:49:49.966432+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "1. **Quantum‑biologie** – een combinatie van fysica en biologie die nog weinig in onze KB voorkomt. 2. **Retro‑gaming consoles** – namen van oude systemen en hun hardware‑specificaties. 3. **Stadslandbouw** – methoden om in stedelijke omgevingen voedsel te verbouwen. 4. **Neuro‑esthetiek** – hoe ons brein kunst en schoonheid verwerkt.",
+      "ts": "2026-08-29T10:50:43.625225+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "**Quantum‑biologie** \nEen interdisciplinair vakgebied dat kwantummechanische principes (superpositie, verstrengeling, tunneling) toepast op biologische systemen. Belangrijkste onderzoekslijnen: fotosynthese‑efficiëntie, enzymatische reactiemechanismen, magnetisch oriëntatie‑vermogen bij vogels. Omdat de kennisbank nog geen kaart bevat, kun je overwegen een *[weten] Quantum‑biologie*‑kaart aan te maken om de definities, experimentele voorbeelden en relevante literatuur te verzamelen.\n\n**Retro‑gaming consoles** \nOude spelcomputers uit de jaren ‘70‑‘90, vaak gebaseerd op 8‑ of 16‑bit architecturen. Enkele klassiekers: \n- **Atari 2600** (MOS 6507 CPU, 128 KB ROM, 2 KB RAM) \n- **Nintendo Entertainment System (NES)** (Ricoh 2A03, 2 KB RAM) \n- **Sega Mega Drive/Genesis** (Motorola 68000, 64 KB RAM) \n- **Sony PlayStation** (MIPS R3000A, 2 MB VRAM) \nVoor elke console kun je een *[weten] Retro‑gaming*‑kaart toevoegen met hardware‑specificaties, releasedata en iconische games.\n\n**Stadslandbouw** \nProductie van voedsel binnen stedelijke omgevingen. Methoden: verticale farms, daktuinen, hydroponics, aquaponics en community‑tuinen. Belangrijkste voordelen: verkorte supply‑chain, minder transport, lokale biodiversiteit en educatie. Een *[weten] Stadslandbouw*‑kaart kan de verschillende technieken, benodigde infrastructuur en voorbeelden uit Nederlandse steden (bijv. Rotterdamse “Urban Farm”) beschrijven.\n\n**Neuro‑esthetiek** \nOnderzoek naar hoe het brein kunst, schoonheid en esthetische ervaringen verwerkt. Kernpunten: activatie van visuele cortices, beloningssystemen (dopamine), emotionele resonantie en individuele variatie door cultuur en ervaring. Deze discipline verbindt de bestaande *[weten] Esthetiek*‑kaart met neurowetenschappelijke inzichten; een nieuwe kaart *[weten] Neuro‑esthetiek* kan de belangrijkste studies, meetmethoden (fMRI, EEG) en praktische toepassingen (kunst‑therapie, design) samenvatten.\n\nMocht je één of meer van deze onderwerpen willen opnemen in de kennisbank, laat het me weten; ik kan direct een lege kaart voor je aanmaken of een eerste invulling geven.",
+      "ts": "2026-08-29T10:50:43.625225+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "wat weet je over retro gaming",
+      "ts": "2026-08-29T11:01:27.281465+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Retro‑gaming verwijst naar het spelen van videogames en het gebruiken van consoles uit vroegere generaties, meestal de jaren 70 tot begin 2000. Het draait om drie hoofdonderdelen:\n\n**1. Historische consoles** \n- **Atari 2600** (1977) – pionier in thuisgaming, met cartridges en eenvoudige graphics. \n- **Nintendo Entertainment System (NES)** (1983) – bracht platformgames als *Super Mario Bros.* en *The Legend of Zelda* naar een breed publiek. \n- **Sega Master System / Mega Drive (Genesis)** – bood rivaliteit en een eigen catalogus van actie‑ en sportgames. \n- **Super Nintendo (SNES)** (1990) – bekend om 16‑bit graphics, *Donkey Kong Country* en *Chrono Trigger*. \n- **PlayStation 1** (1994) – markeerde de overgang naar 3D‑games, met titels als *Final Fantasy VII* en *Metal Gear Solid*.\n\n**2. Kenmerken van retro‑games** \n- Beperde hardware: lage resolutie, beperkte kleurenpaletten, eenvoudige geluidssynthese. \n- Gameplay‑gericht: vaak hoge moeilijkheidsgraad, korte levels en focus op vaardigheid. \n- Cartridge‑ of disc‑media, later vaak gesimuleerd via emulators op moderne apparaten.\n\n**3. Waarom mensen retro‑gaming omarmen** \n- **Nostalgie**: herbeleven van je jeugd of kennismaken met de roots van gaming. \n- **Culturele waarde**: invloed op design‑principes, verhaalvertelling en genre‑ontwikkeling. \n- **Collectie‑aspect**: fysieke consoles, cartridges en artwork hebben verzamelwaarde. \n- **Toegankelijkheid**: veel retro‑titels zijn nu beschikbaar via digitale platforms (Nintendo Switch Online, PlayStation Now, retro‑bundels).\n\nKortom, retro‑gaming is een brug tussen de vroege experimentele fase van videogames en de hedendaagse high‑definition wereld, en blijft een levendige subcultuur binnen de bredere gaming‑gemeenschap.",
+      "ts": "2026-08-29T11:01:27.281465+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "wat weet jij over Neuro‑esthetiek",
+      "ts": "2026-08-29T11:02:23.733417+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "**Neuro‑esthetiek** is een interdisciplinair onderzoeksveld dat de neurale grondslagen van esthetische beleving onderzoekt. Het combineert inzichten uit de neurowetenschappen, psychologie, kunst‑ en designstudies.\n\n### Kernvragen\n1. **Welke hersengebieden activeren we bij het waarnemen van schoonheid?** \n - *Visuele cortex* (basisverwerking van vormen, kleuren). \n - *Orbitofrontale cortex* (waardering, beloning). \n - *Anterior cingulate cortex* en *insula* (emotionele resonantie). \n - *Dopamine‑systemen* (motivatie en plezier).\n\n2. **Hoe verschilt de hersenactiviteit bij verschillende kunstvormen?** \n - Muziek: sterke betrokkenheid van auditieve gebieden en limbisch systeem. \n - Schilderkunst: hogere activiteit in ruimtelijke verwerkingsnetwerken. \n - Dans/performing arts: integratie van motorische en emotionele circuits.\n\n3. **Wat is de rol van verwachting en kennis?** \n - Top‑down signalen uit prefrontal cortex moduleren perceptie; bekende stijlen of context kunnen de esthetische waardering verhogen of verlagen.\n\n### Methodologie\n- **fMRI / PET‑scans**: meten bloed‑oxygenatie of metabolisme tijdens kunstbeleving. \n- **EEG / MEG**: temporele dynamiek van esthetische reacties (bijv. “aha‑momenten”). \n- **Psychofysiologie**: huidgeleiding, hartslagvariabiliteit als indicatoren van emotionele arousal. \n- **Behavioural studies**: rating‑schalen, keuze‑experimenten.\n\n### Toepassingen\n- **Kunsteducatie**: inzicht in hoe leerprocessen esthetisch oordeel beïnvloeden. \n- **Design & marketing**: ontwerpen die neuro‑esthetisch aantrekkelijk zijn (kleur, symmetrie, complexiteit). \n- **Therapie**: kunst‑ en muziektherapie gebaseerd op bewezen hersenreacties om welzijn te bevorderen.\n\n### Belangrijke bevindingen\n- Symmetrie en proportie activeren beloningscentra sneller dan asymmetrische composities. \n- “Peak‑experience” momenten (intense esthetische climax) gaan gepaard met een piek in dopamine‑release. \n- Individuele verschillen (cultureel, persoonlijk) moduleren de sterkte van neurale respons, maar er zijn universele patronen (bijv. voorkeur voor bepaalde verhoudingen).\n\nKortom: neuro‑esthetiek legt een brug tussen wat we als mooi ervaren en hoe onze hersenen dat verwerken. Het biedt zowel theoretische inzichten als praktische handvatten voor kunst, design en welzijn.",
+      "ts": "2026-08-29T11:02:23.733417+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "Goedemorgen. ben je nieuwe KB aan het leren. maar nu even pauze",
+      "ts": "2026-08-30T11:45:22.094544+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Goedemorgen, Willem. Ja, ik ben bezig met het opnemen van nieuwe kennisbankkaarten. Ik verwerk ze stap voor stap, zodat ik ze later snel kan doorzoeken. \n\nIk neem even een pauze, zodat je kunt bijkomen. Laat maar weten wanneer je wilt dat ik doorga of als je ergens anders over wilt praten.",
+      "ts": "2026-08-30T11:45:22.094544+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "jij hoeft niks te doen. Alleen te wachten.",
+      "ts": "2026-08-30T11:46:06.850018+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Goed, ik wacht. Laat maar weten wanneer je wilt dat ik weer iets doe.",
+      "ts": "2026-08-30T11:46:06.850018+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "Zal ik doen.",
+      "ts": "2026-08-30T11:47:05.253924+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Prima, ik wacht op je. Laat maar weten als je klaar bent of iets nodig hebt.",
+      "ts": "2026-08-30T11:47:05.253924+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "hoeveel skalet kaarten moet ik nog invullen",
+      "ts": "2026-08-30T11:48:02.761779+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik zie geen gegevens over “skalet kaarten” in de huidige sessie. \nOm te weten hoeveel er nog ingevuld moeten worden, moet ik de lijst met die kaarten in de kennisbank kunnen doorzoeken. \n\nOpen de **Knowledge‑v2**‑tab en zoek naar “skalet” (of een specifieke lade waarin die kaarten staan). Als je de resultaten hier deelt, kan ik tellen hoeveel kaarten nog een lege of onvolledige status hebben en je precies vertellen hoeveel er nog ingevuld moeten worden.",
+      "ts": "2026-08-30T11:48:02.761779+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "oke",
+      "ts": "2026-08-30T11:48:56.879975+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Oké, laat maar weten als ik iets voor je kan doen.",
+      "ts": "2026-08-30T11:48:56.879975+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "hoeveel skallet kaarten moet ik nog invullen",
+      "ts": "2026-08-30T11:49:42.310076+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Ik zie de informatie over “skallet‑kaarten” niet in deze sessie. Open de Knowledge‑v2‑tab, zoek naar “skallet” (bijvoorbeeld via de zoekbalk of een filter op de lade) en deel de resultaten. Dan kan ik tellen hoeveel kaarten nog moeten worden ingevuld.",
+      "ts": "2026-08-30T11:49:42.310076+00:00",
+      "model": "primary/openai/gpt-oss-120b"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-08-29T10:32:35.262596+00:00"
+  "updated_at": "2026-08-30T11:49:42.310076+00:00"
 }

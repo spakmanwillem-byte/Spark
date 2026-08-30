@@ -141822,6 +141822,2731 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-ca3f6b44",
+      "label": "Agent",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een agent is een onderdeel van een systeem dat zelfstandig een bepaalde taak of opdracht uitvoert.",
+      "tags": [
+        "aansturing",
+        "actie",
+        "agent",
+        "ai",
+        "ai_agent",
+        "analyse",
+        "autonomie",
+        "modulair",
+        "module",
+        "opdracht",
+        "proces",
+        "software",
+        "spark",
+        "systeem",
+        "taak"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-d100152c",
+      "label": "Skeleton",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een skeleton is een minimale basisversie van iets die de belangrijkste structuur al bevat, maar nog niet volledig is uitgewerkt.",
+      "tags": [
+        "aanvullen",
+        "basis",
+        "basisversie",
+        "kb_inbox",
+        "kb_v2",
+        "kennisbank",
+        "kenniskaart",
+        "onvolledig",
+        "skelet",
+        "skeleton",
+        "spark",
+        "spark_core",
+        "structuur",
+        "tussenstap",
+        "uitwerken"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-5537fbc9",
+      "label": "fuzz",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Fuzz is de submodule binnen rapidfuzz (en fuzzywuzzy) die de eigenlijke score-functies bevat om twee strings te vergelijken op gelijkenis.",
+      "tags": [
+        "fuzz",
+        "rapidfuzz",
+        "submodule",
+        "score",
+        "ratio",
+        "partial-ratio",
+        "token-sort",
+        "token-set",
+        "levenshtein",
+        "stateless",
+        "meet-stap",
+        "fuzzy"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-5f6e3350",
+      "label": "rapidfuzz",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "rapidfuzz is een Python-library voor snelle fuzzy string-matching, met een C-backend die dezelfde API biedt als het oudere fuzzywuzzy maar aanzienlijk sneller is.",
+      "tags": [
+        "rapidfuzz",
+        "python",
+        "library",
+        "fuzzy",
+        "matching",
+        "levenshtein",
+        "c-backend",
+        "fuzzywuzzy-vervanger",
+        "pypi",
+        "mit-license",
+        "spark-core",
+        "snap-service",
+        "v13",
+        "score",
+        "ratio",
+        "process-extract"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-970a9f93",
+      "label": "Fuzzy-matching",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Fuzzy-matching is een techniek om twee tekstuele waardes te vergelijken op basis van gelijkenis in plaats van exacte overeenkomst, zodat kleine tikfouten, spellingvarianten of verschillen in spaties toch aan elkaar gekoppeld kunnen worden.",
+      "tags": [
+        "dedupe",
+        "fuzzy",
+        "gelijkenis",
+        "homoniem",
+        "lookup",
+        "rapidfuzz",
+        "ratio",
+        "score",
+        "spark",
+        "spelling",
+        "string",
+        "tekst",
+        "threshold",
+        "tikfout",
+        "typo"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-1e5f5cbf",
+      "label": "fuzzy‑matching",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Fuzzy-matching is een techniek om twee tekstuele waardes te vergelijken op basis van gelijkenis in plaats van exacte overeenkomst, zodat kleine tikfouten, spellingvarianten of verschillen in spaties toch aan elkaar gekoppeld kunnen worden.",
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill",
+        "fuzzy",
+        "matching",
+        "string-similarity",
+        "rapidfuzz",
+        "levenshtein",
+        "ratio",
+        "threshold",
+        "normalisatie",
+        "kb-lookup",
+        "typo",
+        "dedupe",
+        "snap-service",
+        "p1-backlog",
+        "v13",
+        "roadmap",
+        "fuzzy_matching",
+        "string_similarity",
+        "tekstvergelijking",
+        "gelijkenis",
+        "string",
+        "strings",
+        "tekst",
+        "tikfout",
+        "spellingvariant",
+        "spelling",
+        "tekstvariant",
+        "lookup",
+        "deduplicatie",
+        "score",
+        "Jaro_Winkler",
+        "token_matching",
+        "homoniem",
+        "homoniemdetectie"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-ec106a99",
+      "label": "Strings",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een string is een reeks tekens die in software als tekstwaarde wordt behandeld.",
+      "tags": [
+        "invoer",
+        "karakter",
+        "kenniskaart",
+        "llm_output",
+        "normalisatie",
+        "output",
+        "python",
+        "rapidfuzz",
+        "software",
+        "spark",
+        "spark_core",
+        "string",
+        "tekst",
+        "tekstwaarde",
+        "waarde"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8110e114",
+      "label": "Binnenkomende",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Binnenkomende betekent dat iets naar een persoon, plaats of systeem toe komt.",
+      "tags": [
+        "aankomen",
+        "bericht",
+        "bestemming",
+        "betaling",
+        "bezoeker",
+        "binnenkomen",
+        "goederen",
+        "informatie",
+        "inkomend",
+        "inkomende",
+        "levering",
+        "naar_binnen",
+        "ontvangen",
+        "richting",
+        "telefoon"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b33900ec",
+      "label": "Ingangspunt",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een ingangspunt is een plaats, mogelijkheid of punt waar iemand of iets naar binnen kan gaan of toegang kan krijgen.",
+      "tags": [
+        "beginpunt",
+        "binnengaan",
+        "deur",
+        "doorgang",
+        "entree",
+        "gebouw",
+        "informatie",
+        "ingang",
+        "proces",
+        "route",
+        "ruimte",
+        "startpunt",
+        "systeem",
+        "toegang",
+        "verzoek"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8f3209b3",
+      "label": "Typt",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Typt betekent dat iemand letters, woorden of andere tekens invoert met bijvoorbeeld een toetsenbord.",
+      "tags": [
+        "bericht",
+        "communicatie",
+        "computer",
+        "document",
+        "invoer",
+        "letters",
+        "opdracht",
+        "schrijven",
+        "tekst",
+        "tekstinvoer",
+        "telefoon",
+        "toetsenbord",
+        "type",
+        "woorden",
+        "zoekopdracht"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b0cd1576",
+      "label": "Aansnijden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aansnijden betekent dat je iets begint te bespreken of dat je ergens een eerste snede in maakt.",
+      "tags": [
+        "aansnijden",
+        "beginnen",
+        "bespreken",
+        "brood",
+        "eten",
+        "gesprek",
+        "kwestie",
+        "onderwerp",
+        "probleem",
+        "snede",
+        "snijden",
+        "taart",
+        "thema",
+        "vlees",
+        "voedsel"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-03a795b8",
+      "label": "Bezighouden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bezighouden betekent dat iemand ergens mee bezig is of aandacht aan iets besteedt.",
+      "tags": [
+        "aandacht",
+        "aandacht besteden",
+        "activiteit",
+        "betrokkenheid",
+        "bezig",
+        "bezighouden",
+        "interesse",
+        "onderwerp",
+        "taak",
+        "tijd"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-87d6eb37",
+      "label": "Mentale",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Mentale betekent dat iets te maken heeft met de geest, gedachten of het innerlijke denken van een persoon.",
+      "tags": [
+        "concentratie",
+        "denken",
+        "gedachten",
+        "geest",
+        "geestelijk",
+        "geheugen",
+        "gevoelens",
+        "mentaal",
+        "mentale",
+        "psyche"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8ada449f",
+      "label": "Overwegingen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Overwegingen zijn gedachten of redenen die iemand meeneemt voordat die een keuze of beslissing maakt.",
+      "tags": [
+        "afwegen",
+        "belangen",
+        "beslissing",
+        "besluit",
+        "gevolgen",
+        "keuze",
+        "nadenken",
+        "overweging",
+        "redenen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-afb5d8b7",
+      "label": "Vier",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Vier is het getal dat volgt op drie en voorafgaat aan vijf.",
+      "tags": [
+        "aantal",
+        "cijfer",
+        "even",
+        "getal",
+        "hoeveelheid",
+        "natuurlijk getal",
+        "rekenen",
+        "tellen",
+        "vier"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-d575145a",
+      "label": "Fuzzy",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Fuzzy betekent binnen Spark dat een overeenkomst niet alleen op exacte gelijkheid wordt herkend, maar ook op basis van gelijkenis.",
+      "tags": [
+        "fuzzy",
+        "fuzzy matching",
+        "gelijkenis",
+        "overeenkomst",
+        "rapidfuzz",
+        "ratio",
+        "sentence snap",
+        "snap",
+        "taal",
+        "tekst",
+        "tekstvariatie",
+        "threshold",
+        "vergelijking"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-67228a5d",
+      "label": "Belangrijkste",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Belangrijkste betekent dat iets meer belang heeft dan andere zaken.",
+      "tags": [
+        "afweging",
+        "belang",
+        "belangrijk",
+        "belangrijkheid",
+        "centraal",
+        "hoofdzaak",
+        "prioriteit",
+        "relevantie",
+        "voorrang"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b12f0298",
+      "label": "Interdisciplinair",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Interdisciplinair betekent dat verschillende vakgebieden of disciplines met elkaar worden verbonden om een onderwerp of probleem te onderzoeken of aan te pakken.",
+      "tags": [
+        "combineren",
+        "disciplines",
+        "expertise",
+        "interdisciplinair",
+        "invalshoeken",
+        "kennis",
+        "onderzoek",
+        "samenwerking",
+        "vakgebieden",
+        "verbinden"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8d64365d",
+      "label": "Zojuist",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Zojuist betekent dat iets heel kort geleden is gebeurd.",
+      "tags": [
+        "daarnet",
+        "gebeurtenis",
+        "kort geleden",
+        "moment",
+        "net",
+        "recent",
+        "recentheid",
+        "tijd",
+        "verleden",
+        "zojuist"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-870224e0",
+      "label": "Voorbeelden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Voorbeelden zijn concrete gevallen die laten zien wat met iets wordt bedoeld.",
+      "tags": [
+        "voorbeelden",
+        "voorbeeld",
+        "uitleg",
+        "verduidelijken",
+        "concreet",
+        "situatie",
+        "toepassing",
+        "illustratie",
+        "begrip",
+        "herkenning"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-5f8c2642",
+      "label": "Matching",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Matching betekent dat twee of meer dingen met elkaar worden verbonden omdat ze bij elkaar passen of overeenkomen.",
+      "tags": [
+        "koppelen",
+        "matchen",
+        "overeenkomst",
+        "overeenkomst vinden",
+        "passen",
+        "selectie",
+        "verbinding",
+        "vergelijken",
+        "zoeken"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-abaf888b",
+      "label": "Quantum-biologie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Quantum-biologie is het onderzoeksgebied waarin wordt onderzocht of en hoe quantummechanische verschijnselen een rol spelen in biologische processen.",
+      "tags": [
+        "biochemie",
+        "biologie",
+        "energieoverdracht",
+        "fotosynthese",
+        "magnetoreceptie",
+        "moleculen",
+        "natuurkunde",
+        "quantum-biologie",
+        "quantumcoherentie",
+        "quantummechanica"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-bb049add",
+      "label": "Cortex",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "De cortex is de buitenste laag van een orgaan; bij de hersenen is de hersenschors de buitenste laag van de grote hersenen.",
+      "tags": [
+        "anatomie",
+        "cerebrale cortex",
+        "cortex",
+        "denken",
+        "geheugen",
+        "hersenen",
+        "hersengebied",
+        "hersenschors",
+        "waarneming",
+        "zenuwcellen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c69c9564",
+      "label": "Neurale",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Neurale betekent dat iets te maken heeft met zenuwen, zenuwcellen of het zenuwstelsel.",
+      "tags": [
+        "hersenactiviteit",
+        "hersenen",
+        "informatie",
+        "neuraal",
+        "neurale",
+        "verbindingen",
+        "zenuwcellen",
+        "zenuwen",
+        "zenuwsignalen",
+        "zenuwstelsel"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-576017e8",
+      "label": "Esthetische",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Esthetische betekent dat iets te maken heeft met schoonheid, smaak of de manier waarop iets wordt ervaren als mooi of aantrekkelijk.",
+      "tags": [
+        "aantrekkelijkheid",
+        "esthetisch",
+        "kunst",
+        "lelijk",
+        "mooi",
+        "schoonheid",
+        "smaak",
+        "uiterlijk",
+        "vormgeving"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-89a7a50b",
+      "label": "Neuro-esthetiek",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Neuro-esthetiek onderzoekt hoe de hersenen en het zenuwstelsel reageren op schoonheid, kunst en andere esthetische ervaringen.",
+      "tags": [
+        "emoties",
+        "esthetiek",
+        "hersenen",
+        "kunst",
+        "neuro-esthetiek",
+        "neurowetenschappen",
+        "psychologie",
+        "schoonheid",
+        "waarneming",
+        "zenuwstelsel"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c4d4ef6a",
+      "label": "Consoles",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Consoles zijn apparaten of bedieningsonderdelen waarmee een gebruiker een systeem, apparaat of programma kan bedienen.",
+      "tags": [
+        "bediening",
+        "bedieningspaneel",
+        "computer",
+        "console",
+        "gamen",
+        "interface",
+        "spelcomputer",
+        "terminal",
+        "videogames"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-2487eb29",
+      "label": "Nintendo",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Nintendo is een Japans bedrijf dat videogames, spelcomputers en bijbehorende software ontwikkelt en uitgeeft.",
+      "tags": [
+        "entertainment",
+        "gamebedrijf",
+        "gameontwikkeling",
+        "games",
+        "hardware",
+        "japan",
+        "nintendo",
+        "software",
+        "spelcomputer",
+        "videogames"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-08dbd812",
+      "label": "Videogames",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Videogames zijn digitale spellen die op een computer, spelcomputer, telefoon of ander elektronisch apparaat worden gespeeld.",
+      "tags": [
+        "computer",
+        "digitaal",
+        "games",
+        "interactie",
+        "spel",
+        "spelcomputer",
+        "videogame"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-65830f15",
+      "label": "Retro",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Retro betekent dat iets kenmerken heeft van een vroegere periode of bewust teruggrijpt op het verleden.",
+      "tags": [
+        "cultuur",
+        "games",
+        "nostalgie",
+        "oud",
+        "retro",
+        "stijl",
+        "technologie",
+        "verleden",
+        "vormgeving",
+        "vroeger"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-a465c87c",
+      "label": "Aandeel",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een aandeel is een deel van het eigendom van een bedrijf.",
+      "tags": [
+        "aandeel",
+        "aandeelhouder",
+        "aandelen",
+        "bedrijf",
+        "beleggen",
+        "beurs",
+        "dividend",
+        "eigendom",
+        "investering",
+        "rendement"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-fa36f07e",
+      "label": "Aankomen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aankomen betekent dat iemand of iets een bepaalde plaats bereikt of dat iets bij iemand terechtkomt.",
+      "tags": [
+        "aankomen",
+        "arriveren",
+        "bereiken",
+        "bestemming",
+        "gewicht",
+        "terechtkomen",
+        "toenemen",
+        "zwaarder"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-a984891a",
+      "label": "Aankopen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aankopen betekent dat iemand iets koopt en daarvoor geld of een andere vorm van betaling geeft.",
+      "tags": [
+        "aankoop",
+        "aankopen",
+        "aanschaffen",
+        "betalen",
+        "dienst",
+        "kopen",
+        "product",
+        "verkoop",
+        "verkoper"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-eafaf5e0",
+      "label": "Aanmelden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aanmelden betekent dat iemand zich registreert of kenbaar maakt om ergens gebruik van te kunnen maken of aan deel te nemen.",
+      "tags": [
+        "aanmelden",
+        "deelname",
+        "gegevens",
+        "inschrijven",
+        "kenbaar maken",
+        "registratie",
+        "registreren",
+        "toegang"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c814f59c",
+      "label": "Aanmoedigen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aanmoedigen betekent iemand stimuleren om iets te doen, vol te houden of ergens vertrouwen in te hebben.",
+      "tags": [
+        "aanmoedigen",
+        "compliment",
+        "moed",
+        "motivatie",
+        "motiveren",
+        "steun",
+        "stimuleren",
+        "vertrouwen",
+        "volhouden"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-a25e5e90",
+      "label": "Aannemer",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een aannemer is een persoon of bedrijf dat tegen betaling werkzaamheden uitvoert, vaak voor de bouw, verbouwing of aanleg van iets.",
+      "tags": [
+        "aannemer",
+        "bouw",
+        "bouwbedrijf",
+        "onderaannemer",
+        "opdrachtgever",
+        "project",
+        "vakmensen",
+        "verbouwen",
+        "werkzaamheden"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c7093ae7",
+      "label": "Aantasting",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aantasting betekent dat iets wordt beschadigd, aangetast of in zijn oorspronkelijke toestand wordt veranderd.",
+      "tags": [
+        "aantasten",
+        "achteruitgang",
+        "beschadiging",
+        "kwaliteit",
+        "schade",
+        "schadelijke invloed",
+        "slijtage",
+        "structuur",
+        "verandering"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-5b4e169d",
+      "label": "Aantreffen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aantreffen betekent dat iemand of iets ergens wordt gevonden of aanwezig blijkt te zijn.",
+      "tags": [
+        "aantreffen",
+        "aanwezig",
+        "constateren",
+        "gevonden",
+        "ontdekken",
+        "tegenkomen",
+        "vinden",
+        "waarnemen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-51ed8727",
+      "label": "Aantrekkelijkheid",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aantrekkelijkheid is de mate waarin iemand of iets als aantrekkelijk, aangenaam of interessant wordt ervaren.",
+      "tags": [
+        "aantrekkelijk",
+        "aantrekkelijkheid",
+        "aantrekkend",
+        "aantrekkingskracht",
+        "interesse",
+        "schoonheid",
+        "uiterlijk",
+        "uitstraling",
+        "voorkeur",
+        "waardering"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ff44a8a3",
+      "label": "Aanvragen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Aanvragen betekent dat iemand officieel of bewust om iets verzoekt.",
+      "tags": [
+        "aanvraag",
+        "aanvraagprocedure",
+        "aanvragen",
+        "aanvragen doen",
+        "aanvragen indienen",
+        "indienen",
+        "toestemming",
+        "verkrijgen",
+        "verzoek"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b0d2e6e5",
+      "label": "Achtbaan",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een achtbaan is een attractie waarin mensen met een karretje over een spoor rijden met snelle bochten, hellingen en afdalingen.",
+      "tags": [
+        "achtbaan",
+        "afdaling",
+        "attractie",
+        "attractiepark",
+        "bochten",
+        "karretje",
+        "pretpark",
+        "snelheid",
+        "spoor",
+        "zwaartekracht"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-9b63afb1",
+      "label": "Actualiseren",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Actualiseren betekent dat iets wordt bijgewerkt zodat het weer overeenkomt met de meest recente informatie of situatie.",
+      "tags": [
+        "actualiseren",
+        "actueel",
+        "bijgewerkt",
+        "bijwerken",
+        "gegevens",
+        "informatie",
+        "recente informatie",
+        "updaten",
+        "vernieuwen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-06b1895b",
+      "label": "Afbakenen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afbakenen betekent duidelijk aangeven waar iets begint en eindigt of welke grenzen eraan worden gesteld.",
+      "tags": [
+        "afbakenen",
+        "begrenzen",
+        "beperken",
+        "duidelijkheid",
+        "gebied",
+        "grenzen",
+        "onderwerp",
+        "onderzoek",
+        "taak"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-564c60cc",
+      "label": "Afdrukken",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afdrukken betekent dat tekst, afbeeldingen of andere digitale inhoud op papier of een ander materiaal wordt weergegeven met een printer.",
+      "tags": [
+        "afbeelding",
+        "afdruk",
+        "afdrukken",
+        "document",
+        "foto",
+        "kopie",
+        "papier",
+        "printen",
+        "tekst"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-7465068e",
+      "label": "Afleveren",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afleveren betekent iets of iemand naar een afgesproken plaats of persoon brengen en daar overhandigen.",
+      "tags": [
+        "afleveren",
+        "bestelling",
+        "bestemming",
+        "bezorgen",
+        "brengen",
+        "ontvanger",
+        "overhandigen",
+        "pakket"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-986cd16f",
+      "label": "Afspelen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afspelen betekent dat opgenomen of opgeslagen beeld, geluid of andere media wordt afgespeeld zodat het opnieuw kan worden bekeken of beluisterd.",
+      "tags": [
+        "afspelen",
+        "beluisteren",
+        "geluid",
+        "media",
+        "mediabestand",
+        "muziek",
+        "opname",
+        "video",
+        "weergeven"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-4efc92c4",
+      "label": "Afvalstoffen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afvalstoffen zijn stoffen of materialen die na gebruik worden weggegooid omdat ze niet langer nodig zijn of niet meer bruikbaar zijn.",
+      "tags": [
+        "afval",
+        "afvalmateriaal",
+        "afvalscheiding",
+        "afvalstoffen",
+        "afvalverwerking",
+        "grondstoffen",
+        "hergebruik",
+        "recycling",
+        "restafval",
+        "weggooien"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-92b89a55",
+      "label": "Afweerreactie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een afweerreactie is de reactie van het lichaam op een ziekteverwekker, lichaamsvreemde stof of andere bedreiging.",
+      "tags": [
+        "afweer",
+        "afweercellen",
+        "afweerreactie",
+        "afweersysteem",
+        "antistoffen",
+        "immuniteit",
+        "immuunsysteem",
+        "infectie",
+        "ontsteking",
+        "ziekteverwekker"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-6222da9b",
+      "label": "Afwijken",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afwijken betekent dat iets anders is dan wat gebruikelijk, verwacht of afgesproken is.",
+      "tags": [
+        "afspraak",
+        "afwijken",
+        "anders",
+        "norm",
+        "plan",
+        "regel",
+        "verandering",
+        "verschil",
+        "verwachting"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-a729f575",
+      "label": "Afwijzen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afwijzen betekent dat iemand iets niet accepteert, niet aanneemt of niet toestaat.",
+      "tags": [
+        "afkeuren",
+        "afwijzen",
+        "afwijzend",
+        "goedkeuren",
+        "niet aannemen",
+        "niet accepteren",
+        "niet toestaan",
+        "weigeren"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-1988b4d0",
+      "label": "Afzetten",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afzetten betekent dat iemand of iets van een plaats wordt verwijderd of dat iemand of iets zich van een ondergrond losmaakt.",
+      "tags": [
+        "afduwen",
+        "afsluiten",
+        "afzetten",
+        "beweging",
+        "handel",
+        "uitschakelen",
+        "uitstappen",
+        "verkopen",
+        "vervangen",
+        "verwijderen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-7bbb9779",
+      "label": "Afzondering",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Afzondering betekent dat iemand of iets apart wordt gehouden van anderen of van een bepaalde omgeving.",
+      "tags": [
+        "afzonderen",
+        "alleen",
+        "apart",
+        "groep",
+        "isolatie",
+        "omgeving",
+        "privacy",
+        "scheiding",
+        "terugtrekken"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-d14c7dc0",
+      "label": "Alinea",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een alinea is een gedeelte van een tekst dat uit meerdere zinnen bestaat en samen één onderwerp of gedachte behandelt.",
+      "tags": [
+        "alinea",
+        "deelonderwerp",
+        "hoofdgedachte",
+        "onderwerp",
+        "schrijven",
+        "structuur",
+        "tekst",
+        "tekstblok",
+        "tekstindeling",
+        "zin"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-79c5ddff",
+      "label": "Allergie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een allergie is een overgevoelige reactie van het afweersysteem op een stof die voor de meeste mensen onschadelijk is.",
+      "tags": [
+        "afweer",
+        "afweerreactie",
+        "allergeen",
+        "allergie",
+        "allergisch",
+        "immuunsysteem",
+        "overgevoeligheid",
+        "pollen",
+        "reactie",
+        "voedselallergie"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-99bf14b2",
+      "label": "Lade: 🧠 WetenAllergie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een allergie is een overgevoelige reactie van het afweersysteem op een stof die voor de meeste mensen onschadelijk is.",
+      "tags": [
+        "afweer",
+        "afweerreactie",
+        "allergeen",
+        "allergie",
+        "allergisch",
+        "immuunsysteem",
+        "overgevoeligheid",
+        "pollen",
+        "reactie",
+        "voedselallergie"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-7abf353c",
+      "label": "Amplitude",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Amplitude is de maximale uitwijking van een trilling of golf ten opzichte van de evenwichtsstand.",
+      "tags": [
+        "amplitude",
+        "evenwichtsstand",
+        "geluid",
+        "geluidsgolf",
+        "golf",
+        "golfbeweging",
+        "oscillatie",
+        "signaal",
+        "trilling",
+        "uitwijking"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-0f177585",
+      "label": "Annuleren",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Annuleren betekent dat iets dat gepland, afgesproken of aangevraagd was niet doorgaat.",
+      "tags": [
+        "afspraak",
+        "afzeggen",
+        "annuleren",
+        "bestelling",
+        "beëindigen",
+        "gepland",
+        "reservering",
+        "stoppen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8ac57afc",
+      "label": "Antilichamen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Antilichamen zijn eiwitten van het afweersysteem die zich specifiek binden aan lichaamsvreemde stoffen, zoals onderdelen van ziekteverwekkers.",
+      "tags": [
+        "afweer",
+        "antigenen",
+        "antilichamen",
+        "antistoffen",
+        "b-cellen",
+        "eiwitten",
+        "immuniteit",
+        "immuunsysteem",
+        "plasmacellen",
+        "ziekteverwekkers"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e04f1586",
+      "label": "Antistoffen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Antistoffen zijn eiwitten van het afweersysteem die zich specifiek binden aan lichaamsvreemde stoffen, zoals onderdelen van ziekteverwekkers.",
+      "tags": [
+        "afweer",
+        "antigenen",
+        "antilichamen",
+        "antistoffen",
+        "b-cellen",
+        "eiwitten",
+        "immuniteit",
+        "immuunsysteem",
+        "plasmacellen",
+        "ziekteverwekkers"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-cc3f9266",
+      "label": "Arbeidsmarkt",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "De arbeidsmarkt is het geheel van vraag naar en aanbod van arbeid.",
+      "tags": [
+        "arbeid",
+        "arbeidsaanbod",
+        "arbeidsmarkt",
+        "arbeidsvraag",
+        "loon",
+        "vacature",
+        "werk",
+        "werkgever",
+        "werknemer",
+        "werkzoekende"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-eaacb552",
+      "label": "Arts",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een arts is een medisch professional die mensen onderzoekt, ziekten en aandoeningen beoordeelt en medische zorg verleent.",
+      "tags": [
+        "arts",
+        "behandeling",
+        "diagnose",
+        "dokter",
+        "geneeskunde",
+        "gezondheid",
+        "medische zorg",
+        "onderzoek",
+        "patiënt",
+        "specialist"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-6f8df2be",
+      "label": "Atoomkern",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "De atoomkern is het kleine, massieve centrum van een atoom waarin protonen en neutronen zich bevinden.",
+      "tags": [
+        "atoom",
+        "atoomkern",
+        "atoomnummer",
+        "element",
+        "kern",
+        "kernkracht",
+        "massa",
+        "neutron",
+        "nucleon",
+        "proton"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-aa72569d",
+      "label": "Bebouwing",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bebouwing is het geheel van gebouwen en bouwwerken dat zich in een bepaald gebied bevindt.",
+      "tags": [
+        "bebouwing",
+        "bouw",
+        "bouwwerken",
+        "gebied",
+        "gebouwen",
+        "landelijk",
+        "ruimtelijke inrichting",
+        "stedelijk",
+        "woningbouw",
+        "woningen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-044d606b",
+      "label": "Bedrog",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bedrog betekent dat iemand een ander bewust misleidt om die persoon iets te laten geloven, doen of nalaten.",
+      "tags": [
+        "bedriegen",
+        "bedrog",
+        "leugen",
+        "manipulatie",
+        "misbruik",
+        "misleiden",
+        "negatief",
+        "oneerlijkheid",
+        "vertrouwen",
+        "waarheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8819f327",
+      "label": "Beeldverwerking",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Beeldverwerking is het digitaal bewerken, analyseren of verbeteren van afbeeldingen en andere visuele gegevens.",
+      "tags": [
+        "afbeelding",
+        "beeld",
+        "beeldanalyse",
+        "beeldbewerking",
+        "beeldinformatie",
+        "beeldkwaliteit",
+        "beeldverwerking",
+        "digitaal",
+        "foto",
+        "patroonherkenning"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-7bcf7cc2",
+      "label": "Beginpunt",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een beginpunt is de plaats, situatie of positie waar iets start.",
+      "tags": [
+        "begin",
+        "beginpunt",
+        "ontwikkeling",
+        "proces",
+        "route",
+        "start",
+        "startpositie",
+        "startpunt",
+        "startsituatie",
+        "uitgangspunt"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e8ab3d01",
+      "label": "Begrenzing",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Begrenzing is het aangeven of bepalen van een grens waarbinnen iets geldt, gebeurt of zich bevindt.",
+      "tags": [
+        "afbakenen",
+        "begrenzen",
+        "beperking",
+        "grens",
+        "grensgebied",
+        "kader",
+        "omvang",
+        "reikwijdte"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ced503bc",
+      "label": "Begrijpelijkheid",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Begrijpelijkheid is de mate waarin iets gemakkelijk te begrijpen is.",
+      "tags": [
+        "begrijpelijkheid",
+        "begrijpen",
+        "communicatie",
+        "duidelijkheid",
+        "informatie",
+        "structuur",
+        "taal",
+        "tekst",
+        "uitleg",
+        "woordkeuze"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-3c777875",
+      "label": "Begroting",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een begroting is een overzicht van verwachte inkomsten en uitgaven voor een bepaalde periode.",
+      "tags": [
+        "begroting",
+        "budget",
+        "financieel",
+        "geld",
+        "inkomsten",
+        "kosten",
+        "middelen",
+        "overschot",
+        "planning",
+        "uitgaven"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8e1ccf96",
+      "label": "Beheren",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Beheren betekent dat iemand verantwoordelijk is voor het organiseren, regelen en onderhouden van iets.",
+      "tags": [
+        "administratie",
+        "beheer",
+        "controleren",
+        "onderhouden",
+        "organiseren",
+        "overzicht",
+        "regelen",
+        "toezicht",
+        "verantwoordelijkheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-467326c1",
+      "label": "Belangstelling",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Belangstelling is aandacht of interesse voor iemand, iets of een bepaald onderwerp.",
+      "tags": [
+        "aandacht",
+        "aandacht geven",
+        "belangstelling",
+        "betrokkenheid",
+        "interesse",
+        "interesse tonen",
+        "interessegebied",
+        "motivatie",
+        "nieuwsgierigheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-35ec834c",
+      "label": "Belemmering",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een belemmering is iets dat ervoor zorgt dat iets moeilijker wordt, wordt vertraagd of niet goed kan verlopen.",
+      "tags": [
+        "belemmeren",
+        "beperking",
+        "blokkade",
+        "hindernis",
+        "moeilijkheid",
+        "obstakel",
+        "probleem",
+        "tegenhouden",
+        "vertragen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-47ecf302",
+      "label": "Benadering",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een benadering is een manier waarop iemand iets probeert te bereiken, te begrijpen of te behandelen.",
+      "tags": [
+        "aanpak",
+        "aanpakken",
+        "benadering",
+        "denken",
+        "handelen",
+        "houding",
+        "manier",
+        "methode",
+        "probleemoplossing",
+        "werkwijze"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-bc38c732",
+      "label": "Bepalen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bepalen betekent vaststellen wat iets is, hoe iets moet gebeuren of welke keuze wordt gemaakt.",
+      "tags": [
+        "bepalen",
+        "bepalen wat",
+        "beslissing",
+        "besluiten",
+        "doel",
+        "hoeveelheid",
+        "keuze",
+        "richting",
+        "vaststellen",
+        "waarde"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-3ec15aac",
+      "label": "Beschadigd",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Beschadigd betekent dat iets schade heeft opgelopen en daardoor geheel of gedeeltelijk kapot, aangetast of minder goed bruikbaar is.",
+      "tags": [
+        "aangetast",
+        "beschadigd",
+        "beschadiging",
+        "breuk",
+        "defect",
+        "herstel",
+        "kapot",
+        "schade",
+        "schade hebben",
+        "slijtage"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-58e9886d",
+      "label": "Bestaand",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bestaand betekent dat iets al aanwezig, bekend of in werkelijkheid aanwezig is.",
+      "tags": [
+        "aanwezig",
+        "al aanwezig",
+        "bestaan",
+        "bestaand",
+        "bestaand begrip",
+        "bestaand idee",
+        "bestaand object",
+        "bestaand systeem",
+        "bestaand zijn",
+        "niet nieuw"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-1eb1b7a8",
+      "label": "Besturen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Besturen betekent richting geven aan, controleren of leiding geven over iemand, iets of een proces.",
+      "tags": [
+        "beslissen",
+        "besturen",
+        "bestuur",
+        "bestuurder",
+        "controle",
+        "leiding",
+        "leidinggeven",
+        "richting",
+        "sturen",
+        "toezicht"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-2e869301",
+      "label": "Betaalmiddel",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een betaalmiddel is iets waarmee iemand een betaling kan doen voor een product, dienst of andere verplichting.",
+      "tags": [
+        "bankoverschrijving",
+        "betaalmethode",
+        "betaalmiddel",
+        "betaalpas",
+        "betalen",
+        "contant geld",
+        "elektronische betaling",
+        "geld",
+        "transactie"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-506be6b9",
+      "label": "Bevoegdheden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bevoegdheden zijn de rechten en mogelijkheden die iemand of een organisatie heeft om bepaalde handelingen uit te voeren of beslissingen te nemen.",
+      "tags": [
+        "autoriteit",
+        "beslissingen",
+        "bevoegdheden",
+        "bevoegdheid",
+        "functie",
+        "macht",
+        "rechten",
+        "taken",
+        "toestemming",
+        "verantwoordelijkheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-189f3cda",
+      "label": "Bewoner",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bewoner is iemand die op een bepaalde plaats woont of daar verblijft.",
+      "tags": [
+        "bewoner",
+        "huishouden",
+        "inwoner",
+        "verblijf",
+        "wonen",
+        "woongroep",
+        "woonomgeving",
+        "woonplaats",
+        "woonvoorziening"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-892381d4",
+      "label": "Bezet",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bezet betekent dat iets in gebruik is, dat een plaats door iemand wordt gebruikt of dat iemand ergens mee bezig is.",
+      "tags": [
+        "beschikbaarheid",
+        "bezet",
+        "bezig",
+        "controle",
+        "in gebruik",
+        "ingenomen",
+        "plaats",
+        "ruimte",
+        "telefoonlijn"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-3ee3e56b",
+      "label": "Bezoek",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bezoek is het tijdelijk naar iemand of een bepaalde plaats gaan.",
+      "tags": [
+        "aanwezigheid",
+        "afspraak",
+        "bezoek",
+        "bezoekmoment",
+        "gast",
+        "ontmoeten",
+        "verblijf"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-2acad404",
+      "label": "Bibliotheek",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bibliotheek is een plaats waar boeken, tijdschriften en andere informatiebronnen worden verzameld en beschikbaar worden gesteld aan mensen.",
+      "tags": [
+        "bibliotheek",
+        "boeken",
+        "informatie",
+        "informatiebron",
+        "kennis",
+        "lenen",
+        "lezen",
+        "literatuur",
+        "studie",
+        "tijdschriften"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-4ef8da85",
+      "label": "Bijsturen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bijsturen betekent dat je een richting, aanpak of proces aanpast om weer op de gewenste koers te komen.",
+      "tags": [
+        "aanpak",
+        "aanpassen",
+        "afwijking",
+        "bijsturen",
+        "correctie",
+        "koers",
+        "proces",
+        "richting",
+        "sturen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-9705322a",
+      "label": "Bindweefsel",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bindweefsel is lichaamsweefsel dat verschillende delen van het lichaam ondersteunt, verbindt en bij elkaar houdt.",
+      "tags": [
+        "banden",
+        "bindweefsel",
+        "botweefsel",
+        "cellen",
+        "extracellulaire matrix",
+        "kraakbeen",
+        "pezen",
+        "steunweefsel",
+        "vetweefsel",
+        "vezels",
+        "weefsel"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ed608fda",
+      "label": "Binnenkomen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Binnenkomen betekent dat iemand of iets van buiten naar binnen gaat of aankomt op een bepaalde plaats.",
+      "tags": [
+        "aankomen",
+        "aanvraag",
+        "bericht",
+        "binnen",
+        "binnengaan",
+        "binnenkomen",
+        "ontvangen",
+        "toegang"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-a39e595e",
+      "label": "Blijvend",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Blijvend betekent dat iets blijft bestaan, aanwezig blijft of niet tijdelijk is.",
+      "tags": [
+        "aanhoudend",
+        "bestendig",
+        "blijvend",
+        "duurzaam",
+        "gevolg",
+        "permanent",
+        "tijdelijk",
+        "toestand",
+        "verandering",
+        "voortduren"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-6c4530fe",
+      "label": "Bloedvaten",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bloedvaten zijn buisvormige structuren die bloed door het lichaam vervoeren.",
+      "tags": [
+        "aders",
+        "afvalstoffen",
+        "bloed",
+        "bloedsomloop",
+        "bloedvat",
+        "haarvaten",
+        "hart",
+        "slagaders",
+        "voedingsstoffen",
+        "zuurstof"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-15a0c446",
+      "label": "Blokken",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Blokken zijn afzonderlijke delen die samen een geheel kunnen vormen.",
+      "tags": [
+        "blok",
+        "blokken",
+        "bouwblok",
+        "eenheid",
+        "geheel",
+        "informatie",
+        "onderdeel",
+        "structuur",
+        "tekstblok",
+        "tijdsblok"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-fb18c3bf",
+      "label": "Bol",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bol is een rond, driedimensionaal voorwerp waarbij alle punten van het oppervlak dezelfde afstand tot het middelpunt hebben.",
+      "tags": [
+        "bol",
+        "bolvorm",
+        "diameter",
+        "driedimensionaal",
+        "inhoud",
+        "meetkunde",
+        "middelpunt",
+        "oppervlak",
+        "rond",
+        "straal"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-6fdd31d9",
+      "label": "Bonus",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bonus is een extra voordeel, bedrag of beloning dat bovenop iets gebruikelijks wordt gegeven.",
+      "tags": [
+        "aanbieding",
+        "beloning",
+        "beloningsbedrag",
+        "beloningselement",
+        "bonus",
+        "extra",
+        "extra voordeel",
+        "geld",
+        "prestatie",
+        "voordeel"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-863f57bf",
+      "label": "Bouwwerk",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bouwwerk is een constructie die door mensen is gebouwd of samengesteld.",
+      "tags": [
+        "bouw",
+        "bouwwerk",
+        "bouwwerkzaamheden",
+        "constructie",
+        "constructieonderdeel",
+        "gebouw",
+        "gebouwde omgeving",
+        "materiaal",
+        "structuur"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e2a026b4",
+      "label": "Boven",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Boven betekent dat iets zich op een hogere plaats bevindt dan iets anders.",
+      "tags": [
+        "boven",
+        "bovenop",
+        "hoger",
+        "hogerop",
+        "hoogte",
+        "niveau",
+        "positie",
+        "rang",
+        "referentiepunt",
+        "richting"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c0d58115",
+      "label": "Brief",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een brief is een geschreven boodschap die aan een persoon of organisatie wordt gestuurd.",
+      "tags": [
+        "afzender",
+        "boodschap",
+        "brief",
+        "communicatie",
+        "correspondentie",
+        "ontvanger",
+        "persoonlijke brief",
+        "schriftelijk",
+        "schrijven",
+        "zakelijke brief"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-84962982",
+      "label": "Broche",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een broche is een sierspeld die als sieraad op kleding wordt gedragen.",
+      "tags": [
+        "accessoire",
+        "broche",
+        "draagbaar",
+        "juweel",
+        "kleding",
+        "sieraad",
+        "sierspeld",
+        "sluiting",
+        "speld",
+        "versiering"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-13455bc7",
+      "label": "Broeikasgas",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een broeikasgas is een gas in de atmosfeer dat warmte kan vasthouden.",
+      "tags": [
+        "atmosfeer",
+        "broeikaseffect",
+        "broeikasgas",
+        "klimaat",
+        "klimaatverandering",
+        "koolstofdioxide",
+        "lachgas",
+        "methaan",
+        "warmte",
+        "waterdamp"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-5dc3e27e",
+      "label": "Bronvermelding",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bronvermelding is een verwijzing naar de bron waar informatie, een citaat of een gegeven vandaan komt.",
+      "tags": [
+        "auteur",
+        "bron",
+        "bronvermelding",
+        "citaat",
+        "herkomst",
+        "informatiebron",
+        "onderzoek",
+        "titel",
+        "verwijzing",
+        "vindplaats"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-35bf246d",
+      "label": "Brug",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een brug is een constructie waarmee een obstakel wordt overspannen, zodat mensen, voertuigen of andere zaken eroverheen kunnen gaan.",
+      "tags": [
+        "bouwwerk",
+        "brug",
+        "constructie",
+        "infrastructuur",
+        "overspanning",
+        "rivier",
+        "spoorlijn",
+        "verbinding",
+        "verkeer",
+        "weg"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ca596c08",
+      "label": "Burger",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een burger is een persoon die deel uitmaakt van een land of samenleving en daar bepaalde rechten en plichten heeft.",
+      "tags": [
+        "burger",
+        "burgerplichten",
+        "burgerrechten",
+        "burgerschap",
+        "deelname",
+        "inwoner",
+        "maatschappij",
+        "nationaliteit",
+        "samenleving",
+        "staat"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e8b171ce",
+      "label": "Bus",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een bus is een voertuig waarmee meerdere mensen tegelijk over de weg kunnen worden vervoerd.",
+      "tags": [
+        "bus",
+        "chauffeur",
+        "halte",
+        "openbaar vervoer",
+        "passagiers",
+        "personenvervoer",
+        "route",
+        "vervoer",
+        "voertuig",
+        "weg"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e7529595",
+      "label": "Cake",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Cake is een gebakken zoet baksel dat meestal wordt gemaakt van bloem, boter of margarine, suiker en eieren.",
+      "tags": [
+        "bakken",
+        "baksel",
+        "beslag",
+        "bloem",
+        "boter",
+        "cake",
+        "ei",
+        "gebak",
+        "suiker",
+        "zoet"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ce59322c",
+      "label": "Campagne",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een campagne is een geplande reeks activiteiten die gericht is op een bepaald doel.",
+      "tags": [
+        "bewustwording",
+        "boodschap",
+        "campagne",
+        "campagnevoering",
+        "communicatie",
+        "doel",
+        "doelgroep",
+        "promotie",
+        "reclame",
+        "voorlichting"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-78ca1e94",
+      "label": "Certificaat",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een certificaat is een officieel document dat bevestigt dat iemand aan bepaalde voorwaarden voldoet of iets heeft behaald, afgerond of aangetoond.",
+      "tags": [
+        "bewijs",
+        "certificaat",
+        "cursus",
+        "diploma",
+        "document",
+        "erkenning",
+        "examen",
+        "kwalificatie",
+        "opleiding",
+        "training"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-4c40e54a",
+      "label": "Chemische reactie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een chemische reactie is een proces waarbij stoffen worden omgezet in één of meer nieuwe stoffen met andere eigenschappen.",
+      "tags": [
+        "atomen",
+        "beginstoffen",
+        "chemie",
+        "chemische reactie",
+        "moleculen",
+        "omzetting",
+        "reactie",
+        "reactieproducten",
+        "stoffen",
+        "verbranding"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-5fe22c8d",
+      "label": "Chromosomen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Chromosomen zijn structuren in cellen waarin het DNA is verpakt en waarin erfelijke informatie wordt opgeslagen.",
+      "tags": [
+        "celdeling",
+        "celkern",
+        "chromosomen",
+        "chromosoom",
+        "dna",
+        "eiwitten",
+        "erfelijke informatie",
+        "erfelijkheid",
+        "genen",
+        "genetica"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-4b67bc9e",
+      "label": "Circuit",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een circuit is een gesloten verbinding waarlangs elektrische stroom kan lopen.",
+      "tags": [
+        "circuit",
+        "draad",
+        "elektriciteit",
+        "elektrisch circuit",
+        "schakelaar",
+        "schakeling",
+        "spanning",
+        "spanningsbron",
+        "stroom",
+        "stroomkring"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-dbbacde9",
+      "label": "CO₂",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "CO₂, oftewel koolstofdioxide, is een kleurloos gas dat van nature in de atmosfeer voorkomt.",
+      "tags": [
+        "ademhaling",
+        "atmosfeer",
+        "broeikasgas",
+        "co₂",
+        "fotosynthese",
+        "gas",
+        "koolstof",
+        "koolstofdioxide",
+        "koolstofkringloop",
+        "verbranding",
+        "zuurstof"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-1b018af7",
+      "label": "co2",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "CO₂, oftewel koolstofdioxide, is een kleurloos gas dat van nature in de atmosfeer voorkomt.",
+      "tags": [
+        "ademhaling",
+        "atmosfeer",
+        "broeikasgas",
+        "co2",
+        "co₂",
+        "fotosynthese",
+        "gas",
+        "koolstof",
+        "koolstofdioxide",
+        "koolstofkringloop",
+        "verbranding",
+        "zuurstof"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-fbb134c5",
+      "label": "Commercie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Commercie is het geheel van activiteiten waarbij goederen en diensten worden gekocht, verkocht en verhandeld.",
+      "tags": [
+        "bedrijf",
+        "commercie",
+        "consument",
+        "diensten",
+        "distributie",
+        "goederen",
+        "handel",
+        "kopen",
+        "markt",
+        "verkoop",
+        "verkopen"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-f425135b",
+      "label": "Compositie",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Compositie is de manier waarop verschillende onderdelen samen een geheel vormen.",
+      "tags": [
+        "compositie",
+        "geheel",
+        "indeling",
+        "onderdelen",
+        "opbouw",
+        "ordening",
+        "samenstelling",
+        "structuur",
+        "verhouding",
+        "vormgeving"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b767d2e8",
+      "label": "Computersysteem",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een computersysteem is een geheel van hardware en software dat samen digitale informatie kan verwerken.",
+      "tags": [
+        "besturingssysteem",
+        "computer",
+        "computersysteem",
+        "digitaal",
+        "gegevens",
+        "hardware",
+        "informatie",
+        "opslag",
+        "software",
+        "verwerking"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8cbfe211",
+      "label": "Contact maken",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Contact maken betekent dat iemand verbinding of communicatie met een ander persoon of iets tot stand brengt.",
+      "tags": [
+        "aanspreken",
+        "communicatie",
+        "contact",
+        "contact maken",
+        "gesprek",
+        "interactie",
+        "kennismaken",
+        "luisteren",
+        "relatie",
+        "verbinding"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ac481035",
+      "label": "Contactmoment",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een contactmoment is een moment waarop iemand contact heeft met een andere persoon, groep of organisatie.",
+      "tags": [
+        "afspraak",
+        "begeleiding",
+        "bezoek",
+        "communicatie",
+        "contact",
+        "contact hebben",
+        "contactmoment",
+        "gesprek",
+        "interactie",
+        "overleg"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ba02fe03",
+      "label": "CPU",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een CPU is de centrale processor van een computer die instructies uitvoert en berekeningen verwerkt.",
+      "tags": [
+        "berekeningen",
+        "central processing unit",
+        "centrale verwerkingseenheid",
+        "computer",
+        "cpu",
+        "gegevens",
+        "hardware",
+        "instructies",
+        "processor",
+        "processorkern"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8dbd03e5",
+      "label": "Criteria",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Criteria zijn voorwaarden of kenmerken waarmee iets wordt beoordeeld, vergeleken of geselecteerd.",
+      "tags": [
+        "beoordelen",
+        "criteria",
+        "criterium",
+        "eisen",
+        "kenmerken",
+        "maatstaf",
+        "selecteren",
+        "vergelijken",
+        "voorwaarden"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-09bfe4c0",
+      "label": "Criterium",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een criterium is een voorwaarde of maatstaf waarmee iets wordt beoordeeld, vergeleken of geselecteerd.",
+      "tags": [
+        "beoordelen",
+        "criteria",
+        "criterium",
+        "eis",
+        "kenmerk",
+        "maatstaf",
+        "selecteren",
+        "vergelijken",
+        "voorwaarde"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-4928b796",
+      "label": "Cursus",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een cursus is een georganiseerde reeks lessen of activiteiten waarmee iemand kennis of vaardigheden leert.",
+      "tags": [
+        "cursus",
+        "kennis",
+        "leerdoel",
+        "leren",
+        "lessen",
+        "onderwijs",
+        "opleiding",
+        "studiemateriaal",
+        "training",
+        "vaardigheden"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
       "id": "kbv2-18826611",
       "label": "wandeling",
       "type": "knowledge_v2",
@@ -167117,8 +169842,4614 @@
       "vertrouwen": 1.0
     },
     {
-      "id": "kbv2-3b5783c1",
-      "label": "agent",
+      "id": "kbv2-0cf60abe",
+      "label": "dnd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dnd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-693a8aca",
+      "label": "geldig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geldig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c5d21c75",
+      "label": "geschikt",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geschikt"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-06c869b5",
+      "label": "spark_core",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "spark_core"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a35ca5fd",
+      "label": "wissen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "wissen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0ca775f7",
+      "label": "voorstelling",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voorstelling"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-063f1426",
+      "label": "fietspad",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "fietspad"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b0b829d4",
+      "label": "gelijkenis",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gelijkenis"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-fa3c2daa",
+      "label": "oranje",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "oranje"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c91b45dd",
+      "label": "taalverwerking",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "taalverwerking"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4fc260c1",
+      "label": "ontwikkelaar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ontwikkelaar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b26580a7",
+      "label": "voldoen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voldoen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e505a1df",
+      "label": "markeren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "markeren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c858c62f",
+      "label": "terugzetten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "terugzetten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5d886679",
+      "label": "dalen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dalen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-88516a20",
+      "label": "werkproces",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "werkproces"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7eb7b942",
+      "label": "passen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "passen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f2c76372",
+      "label": "deelnemen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "deelnemen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-515997a0",
+      "label": "devops",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "devops"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b0c6a8a3",
+      "label": "selecteren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "selecteren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b7740da7",
+      "label": "instantie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "instantie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3b12da9a",
+      "label": "waardevol",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "waardevol"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e8f806d7",
+      "label": "kennismaken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kennismaken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1945a677",
+      "label": "gebaren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gebaren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-23813fba",
+      "label": "spark-core",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "spark-core"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a35e89be",
+      "label": "hotel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hotel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e4066a89",
+      "label": "eiwitten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "eiwitten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4b6bbcc3",
+      "label": "samenleven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "samenleven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ec0c6848",
+      "label": "tabel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tabel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-93a00314",
+      "label": "raam",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "raam"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-77ec9cfd",
+      "label": "golven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "golven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-18d7b410",
+      "label": "voorschrift",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voorschrift"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b0081a7b",
+      "label": "smartphone",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "smartphone"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7b13e6db",
+      "label": "krijgsmacht",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "krijgsmacht"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-94fc80eb",
+      "label": "immuuncellen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "immuuncellen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4f2fd274",
+      "label": "wifi",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "wifi"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b422f2ac",
+      "label": "homoniem",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "homoniem"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c99f75ff",
+      "label": "doorsturen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "doorsturen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1ff1e316",
+      "label": "toneel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toneel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e84b25e4",
+      "label": "treffen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "treffen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1b6c300b",
+      "label": "verzekerde",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verzekerde"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3cb453c9",
+      "label": "foutmelding",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "foutmelding"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d1822685",
+      "label": "kb_v2",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kb_v2"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7266abef",
+      "label": "ratio",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ratio"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-cca43fdd",
+      "label": "hek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1b9ef412",
+      "label": "patiënt",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "patiënt"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-48fcc870",
+      "label": "winnen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "winnen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-af9f0ae5",
+      "label": "examen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "examen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d3af616a",
+      "label": "schepper",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "schepper"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-167b0fc5",
+      "label": "onderbouwen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "onderbouwen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-39331e3c",
+      "label": "meedoen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "meedoen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-dbd2e34a",
+      "label": "typografie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "typografie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-00052d16",
+      "label": "dupliceren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dupliceren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-776295f6",
+      "label": "uitwisselen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "uitwisselen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-2413d56a",
+      "label": "professioneel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "professioneel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ded26bc6",
+      "label": "variabele",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "variabele"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-033ff481",
+      "label": "response",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "response"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1f2df2e8",
+      "label": "inademen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "inademen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6002034c",
+      "label": "nicotine",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "nicotine"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-71a76a8b",
+      "label": "tegenstand",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tegenstand"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-371b90ad",
+      "label": "non-verbaal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "non-verbaal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4d6c57f1",
+      "label": "sluiten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "sluiten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-45d622d1",
+      "label": "stemmen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "stemmen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-78ead679",
+      "label": "tastzin",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tastzin"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-2c277cd7",
+      "label": "vóór",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vóór"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3e97f032",
+      "label": "frisdrank",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "frisdrank"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ecddbcb2",
+      "label": "tegenovergestelde",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tegenovergestelde"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-70f6d680",
+      "label": "factoren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "factoren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-60718183",
+      "label": "poot",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "poot"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f3bbe91a",
+      "label": "vakman",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vakman"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d3a099ce",
+      "label": "verbaasd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verbaasd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7a526e9d",
+      "label": "vlak",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vlak"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7930a72f",
+      "label": "houvast",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "houvast"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f832689f",
+      "label": "diameter",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "diameter"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6147b3d4",
+      "label": "omtrek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "omtrek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ba37b6f8",
+      "label": "smaragd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "smaragd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ed7063e8",
+      "label": "verrast",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verrast"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-38a881fd",
+      "label": "onbedoeld",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "onbedoeld"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-007a985c",
+      "label": "gebrek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gebrek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-cb6f955c",
+      "label": "landmacht",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "landmacht"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3f7ec16b",
+      "label": "dieet",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dieet"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b089899c",
+      "label": "knooppunt",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "knooppunt"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c474c373",
+      "label": "historisch",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "historisch"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-32237eb0",
+      "label": "huisarts",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "huisarts"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c0104e94",
+      "label": "stage",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "stage"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-82986e64",
+      "label": "geschil",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geschil"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-bd10ae19",
+      "label": "syntaxis",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "syntaxis"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-155d517f",
+      "label": "grenswaarde",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "grenswaarde"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a3393546",
+      "label": "onderhandelen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "onderhandelen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e3defedd",
+      "label": "transistor",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "transistor"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a538d569",
+      "label": "waterschap",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "waterschap"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6d3352a6",
+      "label": "stijging",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "stijging"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-fcc7f9fd",
+      "label": "deskundigheid",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "deskundigheid"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6e3f69cc",
+      "label": "publiceren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "publiceren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-43e1feaf",
+      "label": "riolering",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "riolering"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b3dc4c63",
+      "label": "lager",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lager"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-fc52165a",
+      "label": "shell",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "shell"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7f85720a",
+      "label": "zwaar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "zwaar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b8928f75",
+      "label": "herkenbaar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "herkenbaar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-748b85b0",
+      "label": "voortbestaan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voortbestaan"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-2eb9ef9f",
+      "label": "link",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "link"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-48a54c79",
+      "label": "sticker",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "sticker"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ec85fb7d",
+      "label": "exemplaar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "exemplaar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c220c36a",
+      "label": "digitale gegevens",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "digitale gegevens"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c8b715db",
+      "label": "hechten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hechten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e0cb74fc",
+      "label": "terugnemen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "terugnemen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1dc360cd",
+      "label": "remmen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "remmen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b2fdebe5",
+      "label": "rijbaan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "rijbaan"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a59e995c",
+      "label": "doorrijden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "doorrijden"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-57e34a5c",
+      "label": "meetwaarde",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "meetwaarde"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e85d9c4f",
+      "label": "threshold",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "threshold"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-58e1dcc8",
+      "label": "nederlandse taal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "nederlandse taal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-51ce25fd",
+      "label": "verkregen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verkregen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-66f39149",
+      "label": "waterstand",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "waterstand"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-90928615",
+      "label": "richten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "richten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f2b364a9",
+      "label": "pantser",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "pantser"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c7040697",
+      "label": "mededeling",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "mededeling"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c819b48d",
+      "label": "vormgeven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vormgeven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-55d39a88",
+      "label": "verliezen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verliezen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-bb795fc9",
+      "label": "hervatten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hervatten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5c4d606b",
+      "label": "eetmoment",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "eetmoment"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-bf74359b",
+      "label": "vaststellen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vaststellen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3313ef28",
+      "label": "overnemen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "overnemen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b1e2c875",
+      "label": "tegenwerken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tegenwerken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5a3760c0",
+      "label": "verleend",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verleend"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b2d580a0",
+      "label": "gedragspatroon",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gedragspatroon"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6007e8ca",
+      "label": "inductie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "inductie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-73d27369",
+      "label": "overlap",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "overlap"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a7563e7a",
+      "label": "terugvinden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "terugvinden"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e8c4d975",
+      "label": "feitelijk",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "feitelijk"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0a5183b3",
+      "label": "meemaken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "meemaken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b1485f94",
+      "label": "toestaan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toestaan"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9c5eb369",
+      "label": "omgekeerd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "omgekeerd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0b635f5b",
+      "label": "prikken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "prikken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-307d4b8f",
+      "label": "verdiepen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verdiepen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6689b716",
+      "label": "java",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "java"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c441eba0",
+      "label": "databank",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "databank"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-93d2960e",
+      "label": "doel bereiken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "doel bereiken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-410d393d",
+      "label": "vakantie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vakantie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-041fb906",
+      "label": "lanceren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lanceren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5c801023",
+      "label": "monteur",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "monteur"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b517dcc6",
+      "label": "sigaar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "sigaar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c4fbdbe7",
+      "label": "uitademen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "uitademen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c3f74e3e",
+      "label": "hulp bieden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hulp bieden"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a67e781b",
+      "label": "hanteren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hanteren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4d1d290f",
+      "label": "werktijd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "werktijd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3c42f918",
+      "label": "jongeren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "jongeren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b716d84d",
+      "label": "herdenken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "herdenken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-cf2fdd71",
+      "label": "jubileum",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "jubileum"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d531a7df",
+      "label": "voetpad",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voetpad"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e6e0f71b",
+      "label": "toelaten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toelaten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-55ce3b12",
+      "label": "gesprekspartner",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gesprekspartner"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8b814f7e",
+      "label": "mondeling",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "mondeling"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1c749b11",
+      "label": "onduidelijk",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "onduidelijk"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c04954fe",
+      "label": "samenvatten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "samenvatten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-535fa5ff",
+      "label": "interview",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "interview"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-bbe15848",
+      "label": "toelichten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toelichten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-af581670",
+      "label": "even",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "even"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ef2b3302",
+      "label": "gast",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gast"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-feb330af",
+      "label": "e-mailadres",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "e-mailadres"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9f518b27",
+      "label": "poëzie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "poëzie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-15f90c73",
+      "label": "omschrijven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "omschrijven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e0a29ce0",
+      "label": "maar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "maar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e6e167d0",
+      "label": "omgang",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "omgang"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f16c02e4",
+      "label": "sociale omgeving",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "sociale omgeving"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d34da6a3",
+      "label": "kalm",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kalm"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1e7323eb",
+      "label": "voldoening",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voldoening"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5513eb2f",
+      "label": "onaangenaam",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "onaangenaam"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b808066d",
+      "label": "gemakkelijk",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gemakkelijk"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-db858944",
+      "label": "genegenheid",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "genegenheid"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c496bd4e",
+      "label": "geschiktheid",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geschiktheid"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-145cfbce",
+      "label": "zorgvuldig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "zorgvuldig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-981e18c3",
+      "label": "tast",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tast"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b440f647",
+      "label": "ongewenst",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ongewenst"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-050a1048",
+      "label": "eetgedrag",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "eetgedrag"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5bf1b742",
+      "label": "ongunstig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ongunstig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1d25837c",
+      "label": "neus",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "neus"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b82d19f5",
+      "label": "misdrijf",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "misdrijf"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e64c6b40",
+      "label": "schriftelijk",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "schriftelijk"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-93f7e3cc",
+      "label": "levensbeschouwing",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "levensbeschouwing"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5c130b0a",
+      "label": "hoopvol",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hoopvol"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-828fd5bb",
+      "label": "vertrouwd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vertrouwd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-53d1815b",
+      "label": "oren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "oren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-54525d19",
+      "label": "snuit",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "snuit"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1edca208",
+      "label": "strafzaak",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "strafzaak"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d44250cf",
+      "label": "historie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "historie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-908e0488",
+      "label": "echo",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "echo"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ed841d14",
+      "label": "entree",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "entree"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ded211d6",
+      "label": "toegangspunt",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toegangspunt"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6fbe4d1e",
+      "label": "klauwen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "klauwen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c6e3866d",
+      "label": "ribben",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ribben"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-25db4974",
+      "label": "woongebied",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "woongebied"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-dc532055",
+      "label": "kwalificatie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kwalificatie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-2f8e4dab",
+      "label": "diner",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "diner"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ef6746b6",
+      "label": "links",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "links"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-25242bd4",
+      "label": "snavel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "snavel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-36c7410e",
+      "label": "fries",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "fries"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-49f81235",
+      "label": "meren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "meren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9b2741e6",
+      "label": "duinen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "duinen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ce8314de",
+      "label": "zaak",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "zaak"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1ac68ed5",
+      "label": "gebogen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gebogen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-649f8a3c",
+      "label": "geslaagd",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geslaagd"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6849a8ca",
+      "label": "merknaam",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "merknaam"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c0e781de",
+      "label": "opvolgend",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "opvolgend"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b4d3c6f9",
+      "label": "geleider",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geleider"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-efee666a",
+      "label": "lesgeven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lesgeven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c7a84f06",
+      "label": "zienswijze",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "zienswijze"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-fa11ec26",
+      "label": "slijpen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "slijpen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ade159d2",
+      "label": "kostbaar",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kostbaar"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-dcb7cddd",
+      "label": "verbranden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verbranden"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5f5f6f59",
+      "label": "datalek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "datalek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-cb612776",
+      "label": "programmacode",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "programmacode"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d961ecb9",
+      "label": "horizontaal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "horizontaal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-877e531d",
+      "label": "plas",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "plas"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ed524fa0",
+      "label": "pluimvee",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "pluimvee"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f48063d0",
+      "label": "indirect",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "indirect"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-db765916",
+      "label": "programmeur",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "programmeur"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-34615f40",
+      "label": "sector",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "sector"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f54c4a86",
+      "label": "lancering",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lancering"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-96f1b9c9",
+      "label": "kalf",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kalf"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-842c13f1",
+      "label": "reikwijdte",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "reikwijdte"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-51ffc305",
+      "label": "procescontrole",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "procescontrole"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4d325333",
+      "label": "technisch",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "technisch"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-84e7a038",
+      "label": "macos",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "macos"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-819cd96b",
+      "label": "motiveren",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "motiveren"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-48e1a3a9",
+      "label": "dhcp",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dhcp"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-aa6f59a3",
+      "label": "lan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lan"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-044658e5",
+      "label": "nakomen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "nakomen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1be7bbd8",
+      "label": "kwekerij",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kwekerij"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8b0b349c",
+      "label": "export",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "export"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-daf2af7c",
+      "label": "welvaart",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "welvaart"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-21b69f5e",
+      "label": "dynamisch",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dynamisch"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0e173d70",
+      "label": "rpg",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "rpg"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9f09dda6",
+      "label": "webbrowser",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "webbrowser"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-977940f0",
+      "label": "rna",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "rna"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1e27d72f",
+      "label": "umami",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "umami"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6d88b03a",
+      "label": "datapakket",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "datapakket"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5141802a",
+      "label": "systeemontwerp",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "systeemontwerp"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b352747d",
+      "label": "lokaal netwerk",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lokaal netwerk"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-672ea04e",
+      "label": "dataverwerking",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dataverwerking"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-12c79120",
+      "label": "gegevensopslag",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gegevensopslag"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4f335416",
+      "label": "harde schijf",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "harde schijf"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-88fa3f5e",
+      "label": "vaccinatie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vaccinatie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-56e5c812",
+      "label": "licentie",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "licentie"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-db199812",
+      "label": "opstelling",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "opstelling"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-49c953fd",
+      "label": "fotograaf",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "fotograaf"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4688ee30",
+      "label": "cyberveiligheid",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "cyberveiligheid"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f3ecaf6a",
+      "label": "opsporing",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "opsporing"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b0ef255a",
+      "label": "gegevenscontrole",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gegevenscontrole"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0b9ae245",
+      "label": "parallel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "parallel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ecf24f67",
+      "label": "oorlogvoering",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "oorlogvoering"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d5dcffd0",
+      "label": "kustgebied",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kustgebied"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-ee8c219d",
+      "label": "graaf",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "graaf"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-59bcef38",
+      "label": "digitale media",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "digitale media"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-727dd620",
+      "label": "ethisch hacken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ethisch hacken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-700ffe07",
+      "label": "hindernis",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hindernis"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-24ba983f",
+      "label": "keramiek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "keramiek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f4f380a5",
+      "label": "meertalig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "meertalig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5db92744",
+      "label": "speelveld",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "speelveld"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f84fe4bf",
+      "label": "voorbij",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voorbij"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-32cb4f28",
+      "label": "gastheer",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gastheer"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-34b667ea",
+      "label": "proeven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "proeven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-2cc33a74",
+      "label": "loonstrook",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "loonstrook"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f5800239",
+      "label": "zool",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "zool"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8e035f7f",
+      "label": "zang",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "zang"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a5ca7de9",
+      "label": "vijver",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vijver"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-3b34a40d",
+      "label": "regenwater",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "regenwater"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f7c21a04",
+      "label": "specialisme",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "specialisme"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-eb46e512",
+      "label": "voelenbegrip",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voelenbegrip"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e4480c7c",
+      "label": "lidwoord",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lidwoord"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8dfac10a",
+      "label": "natuurlijk getal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "natuurlijk getal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9bb5d714",
+      "label": "hulpwerkwoord",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "hulpwerkwoord"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-4b7ccf79",
+      "label": "drinkwater",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "drinkwater"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5f3ad278",
+      "label": "kweken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kweken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-1e4158bf",
+      "label": "kennisgebied",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "kennisgebied"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f54c021b",
+      "label": "ingewikkeld",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ingewikkeld"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-dcc4e84a",
+      "label": "rij",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "rij"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-01296427",
+      "label": "voordelen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voordelen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8235e880",
+      "label": "namaak",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "namaak"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-043937d3",
+      "label": "drukpers",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "drukpers"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0d6e4334",
+      "label": "voorbereid",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "voorbereid"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-badeebc9",
+      "label": "geplaatst",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "geplaatst"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f5382ae6",
+      "label": "duplicaat",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "duplicaat"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d86277b9",
+      "label": "tweemaal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tweemaal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-63c3d542",
+      "label": "foto’s",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "foto’s"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-555d3a69",
+      "label": "programmeercode",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "programmeercode"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8839328a",
+      "label": "streek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "streek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-5f3dbc74",
+      "label": "omhoog",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "omhoog"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-421c4b52",
+      "label": "nakomelingen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "nakomelingen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-da931b0e",
+      "label": "een",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "een"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0611ac55",
+      "label": "ontwikkelaars",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "ontwikkelaars"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d539a557",
+      "label": "gescheiden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gescheiden"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-09a7e573",
+      "label": "endpoint",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "endpoint"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-04db35aa",
+      "label": "retina",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "retina"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6dbff847",
+      "label": "tentakels",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tentakels"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-663976d7",
+      "label": "odonata",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "odonata"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a0787ebb",
+      "label": "stengels",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "stengels"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-97c99874",
+      "label": "tape",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "tape"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-43bd1fd0",
+      "label": "vaststaan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vaststaan"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-496d40a2",
+      "label": "minderwaardig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "minderwaardig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-26bf99e7",
+      "label": "diplomatiek",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "diplomatiek"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-75dc86ca",
+      "label": "vrijwillig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vrijwillig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-50056e51",
+      "label": "telgetal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "telgetal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-0ddc353f",
+      "label": "sociaal gedrag",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "sociaal gedrag"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9c5d810e",
+      "label": "verwerven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verwerven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-82b44ca2",
+      "label": "polisvoorwaarden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "polisvoorwaarden"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-21013689",
+      "label": "rijrichting",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "rijrichting"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-2fef7b59",
+      "label": "risico's",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "risico's"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-02de1df3",
+      "label": "oorzaken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "oorzaken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d1a64859",
+      "label": "fysiek dragen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "fysiek dragen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-fd8fb3ca",
+      "label": "keuze maken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "keuze maken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-064c64cd",
+      "label": "oogcontact",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "oogcontact"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7d6f1261",
+      "label": "wetten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "wetten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-9041bdfc",
+      "label": "gasvormig",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gasvormig"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-dfe8c088",
+      "label": "scripttaal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "scripttaal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-244bd03d",
+      "label": "lichtsignaal",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lichtsignaal"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-7a2b891d",
+      "label": "gebreken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "gebreken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-03b7522a",
+      "label": "groot taalmodel",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "groot taalmodel"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d13b3a76",
+      "label": "verdampen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verdampen"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d5e69bc0",
+      "label": "naleven",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "naleven"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-c65397ff",
+      "label": "toegestaan",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toegestaan"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-06a58054",
+      "label": "toerist",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "toerist"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-6306b895",
+      "label": "video's",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "video's"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-58d60cff",
+      "label": "verdenken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "verdenken"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e7f37481",
+      "label": "vetten",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "vetten"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-d3597985",
+      "label": "dedupe",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "dedupe"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-51387f45",
+      "label": "lookup",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "lookup"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-413d8de8",
+      "label": "levenshtein",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "levenshtein"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-cd72c32d",
+      "label": "spelcomputer",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [
+        "spelcomputer"
+      ],
+      "topic": null,
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-bd0cc29c",
+      "label": "skalet",
       "type": "knowledge",
       "description": "",
       "tags": [
@@ -167131,8 +174462,8 @@
       "belangrijkheid": 2
     },
     {
-      "id": "kbv2-1e5f5cbf",
-      "label": "fuzzy‑matching",
+      "id": "kbv2-11fbabac",
+      "label": "skallet",
       "type": "knowledge",
       "description": "",
       "tags": [

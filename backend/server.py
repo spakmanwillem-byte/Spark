@@ -150,6 +150,10 @@ app.include_router(notes_router, prefix="/api")
 from modules.triggers import triggers_router
 app.include_router(triggers_router, prefix="/api")
 
+# v13c_commands_list_001 — Spark's introspectieve command-lijst (Principe #8)
+from modules.system.commands_list_routes import router as commands_list_router
+app.include_router(commands_list_router, prefix="/api")
+
 # Module 9: Persons (persoonskaarten)
 from modules.persons import persons_router
 app.include_router(persons_router, prefix="/api")

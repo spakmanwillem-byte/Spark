@@ -28,10 +28,27 @@ logger = logging.getLogger(__name__)
 
 # TODO: uitbreiden zodra elke admin-cmd geregistreerd is in de registry.
 _ADMIN_CMD_WHITELIST: List[str] = [
-    "cap_kb_normalize_apostrophes",  # v13c_apostrophe_normalizer_001 — eerste live admin-cmd
-    # "cap_reconcile_potjes",
-    # "cap_seed_self_awareness_cards",
-    # "cap_toggle_admin_capable",
+    "cap_kb_normalize_apostrophes",  # v13c_apostrophe_normalizer_001
+    # KB-onderhoud (bestaande admin-routes, geregistreerd in batch-1)
+    "cap_kb_dedupe_inbox",
+    "cap_kb_rebuild_index",
+    "cap_kb_verbanden_rebuild",
+    "cap_kb_sync_v1_drift",
+    "cap_kb_orphan_tag_scan",
+    # Agenda-onderhoud
+    "cap_agenda_archive_now_all",
+    # Bug-moderation (admin-only)
+    "cap_bug_list_all",
+    "cap_bug_status_update",
+    "cap_bug_delete",
+    # Triggers (dieper systeem-onderhoud)
+    "cap_triggers_all",
+    "cap_triggers_intent_patterns",
+    "cap_triggers_intent_add",
+    "cap_triggers_intent_remove",
+    "cap_triggers_by_type",
+    "cap_triggers_edit_add",
+    "cap_triggers_edit_remove",
 ]
 
 

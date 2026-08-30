@@ -144,7 +144,87 @@ deze vier kan Spark z'n eigen geheugen niet betrouwbaar én privacy-veilig doorz
 
 ---
 
-## 🧹 CLUSTER — Sessie 57 (28 feb 2026) — Trader Make It Right + Console consolidatie + BTC-ijkpunt
+## 🧹 CLUSTER — Sessie 58 (15 feb 2026) — Subject-Agent-laag + Registry-fundering (Principe #8)
+
+**Kern**: Principe #8 (Subject-Agent Pattern) wordt geïmplementeerd. Elke losse
+string / capability krijgt een agent-wrapper en een KB-kaart zodat Spark
+introspectief kan uitleggen wat hij kan.
+
+### ✅ AF (Sessie 58 — dag 1)
+
+- **`/app/backend/modules/agents/`** aangemaakt met 4 dun-wrapper skeletons:
+  `task_agent`, `admin_command_agent`, `personal_agent`, `spark_pulse_agent`.
+  Signatures + docstrings + TODO's; geen volledige logica.
+- **12 draft KB-kaarten** ingevuld en gecureerd naar juiste lade (Weten/Doen):
+  4 agents + 8 architectuur-begrippen (`principe-8`, `spark-architectuur`,
+  `command_registry`, `intent-uitvoering`, `compose`, `privacy_matrix`,
+  `self_awareness`, `observability`). Elk met laag1-4, ws5, tags, topic.
+- **Apostrof-ghost-preventie** — `tag_sanitizer.sanitize_tag` normaliseert nu
+  unicode-apostrofen (’‘´`‛ʼ → '). `orphan-tag-scanner._canonicalize` idem.
+  Data-fix uitgevoerd (8 tags + 1 begrip `Programma's`). 6 regressietests
+  toegevoegd, 18/18 pass.
+- **Apostrof-normalize als admin-command**: `POST /api/kb/v2/admin/normalize-apostrophes`
+  + registry-entry `cap_kb_normalize_apostrophes` + toegevoegd aan
+  `admin_command_agent._ADMIN_CMD_WHITELIST` — eerste échte lid van de agent.
+- **Registry-batch-1**: 38 nieuwe entries toegevoegd voor agenda (9), notes (7),
+  bugs (5), help (3), triggers (8), KB v2 admin (5), commands-list (1).
+  Registry: **14 → 76 entries**.
+- **`GET /api/commands/list`** nieuwe route (module `system/commands_list_routes.py`)
+  met filters `module`, `admin_only`, `gradatie_max`, `q`. Dit is Spark's
+  "welke commando's ken je?"-endpoint via `task_agent.list_commands()`.
+- **Auto-scanner** — `scripts/scan_routes_for_registry.py` scant alle 669
+  `@router`-decorators in `/app/backend/modules/` en genereert concept-entries
+  voor missende routes. Output: `/tmp/registry_scan_YYYYMMDD_HHMMSS.json`
+  met 617 concept-entries klaar voor review.
+
+### 🎯 OPEN (Sessie 58 vervolg — registry-uitbreiding)
+
+**Doel**: 617 → 0 missende entries via module-per-module aanvulling.
+
+- **P1 — Registry batch-2 (KB v2)** — 54 kb_v2-routes met echte intent_tags.
+  Dit is de grootste single-module wisser. Zonder deze kan Spark's KB-chat
+  niet volledig introspectief zijn (bijv. "hoe zoek jij kaarten?" → moet
+  naar `kbv2_search` kunnen wijzen).
+- **P1 — Registry batch-3 (chat)** — 30 chat-routes. Cruciaal voor Sparks
+  zelfuitleg over eigen chat-flow (intent-matching, compose, snap).
+- **P1 — Registry batch-4 (spark + spark_planner + spark_kasboek)** — 32 routes
+  over Sparks eigen leven (identity, planner, saldo).
+- **P2 — Registry batch-5 (auth + wallet + profile)** — 79 routes. Belangrijk
+  maar minder Spark-introspectief.
+- **P2 — Registry batch-6 (trade)** — 95 routes. Grootste module; kan gefaseerd
+  per bot/reconcile/monitor.
+- **P2 — Registry batch-7 (boekhouder)** — 47 routes. Multi-book.
+- **P3 — Restant** — accounting, achievements, admin, backup, files, graph,
+  shop, settings, winkelstraat, etc. — nog ~180 routes.
+
+### 🧠 Agent-skelet fill-in (Principe #8 vervolgstappen)
+
+- **P1 — `task_agent.resolve()`** — tag-overlap-score + tie-break op laagste
+  gradatie_min. Return `{cmd, score, matched_tags}`. Test: geef `["tellen","gebruikers"]`
+  → moet `cap_tellen_gebruikers` (score 2) terugvinden.
+- **P1 — `task_agent.execute()`** — gradatie-check + params-validatie + dispatch
+  via `entry.source` + audit-log-entry naar `data/system/audit_log.json`.
+- **P1 — `admin_command_agent.execute_as_admin()`** — whitelist-check +
+  auth-guard hergebruiken van `modules.auth.deps.require_admin_capable` +
+  gestructureerde audit `event_type=admin_action`.
+- **P2 — `personal_agent.snapshot()`** — depth minimal/standard/deep uitwerken
+  met 30s TTL-cache; consumer wordt `compose_routes`.
+- **P2 — `spark_pulse_agent.pulse()`** — KB + trade + LLM-router + chat
+  metrics-blokken, health_score berekening, narrator-templates.
+
+### 📌 Uitgebreide stats (kleine wins, hoge waarde)
+
+- **P1 — `GET /api/kb/v2/stats/extended`** — huidige `/stats` uitbreiden met
+  `topics_count`, `topics_top20`, `avg_verbanden_per_kaart`, `median_verbanden`,
+  `cards_zonder_verbanden`. Directe waarde: Spark kan "hoeveel onderwerpen
+  ken je?" en "gemiddeld verbanden per woord?" beantwoorden.
+- **P2 — `POST /api/kb/v2/admin/topics/recompute`** — per kaart of bulk
+  het `topic`-veld herberekenen op basis van tags. Nuttig bij drift na
+  bulk-import of merges.
+
+---
+
+
 
 **Trigger**: Willem: "iedere user met potje moet trader werken. en hij is stuk."
 Bitvavo had €69.79 aan BTC (7 potjes waardig) terwijl registratie maar 1 open pot bij

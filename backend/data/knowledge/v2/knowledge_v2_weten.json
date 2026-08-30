@@ -631392,6 +631392,50 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-18829e2b",
+      "begrip": "orphan-tag scan",
+      "lade": "weten",
+      "status": "curated",
+      "lagen": {
+        "laag1": "Een orphan-tag scan is een onderhoudsactie die tags opspoort die vaak in de KB voorkomen maar zelf geen eigen kaart hebben.",
+        "laag2": "Iedere KB-kaart heeft tags. Sommige tags verwijzen naar begrippen die zelf óók een kaart verdienen (bijv. 'fotografie', 'privacy'). Als zo'n tag drie keer of vaker terugkomt zonder eigen kaart, noemen we hem een orphan. De scan maakt daar automatisch een lege skeleton-kaart van in de inbox.",
+        "laag3": "Concreet: het script `orphan_tags_to_cards_v13d.py` telt alle tags in alle lades, filtert ruis (meta-woorden, cijfers, prefixes zoals kbv2-, sessie-), en vergelijkt de rest met de bestaande begrippen-set. Wat overblijft is met MIN_COUNT ≥ 3 een 'orphan'. Voor elke orphan wordt een minimale kaart (`begrip`, `_inbox_reason: orphan_tag_v13d_sessie55`, `_orphan_frequency`, verwijzing naar één representatieve source-kaart) in `knowledge_inbox.json` gezet — klaar voor menselijke curatie.",
+        "laag4": "De orphan-tag scan is de tegenhanger van `snap_agent`. Waar snap_agent onbekende woorden vangt uit lopende LLM-output, kijkt de orphan-tag scan retrospectief naar wat al in de KB staat: welke begrippen worden impliciet gebruikt (als tag) maar nooit expliciet uitgewerkt (als kaart)? Vanaf sessie 58 normaliseert de scan óók unicode-apostrofen (’ → '), zodat 'foto’s' en 'foto\\'s' niet als twee aparte orphans opduiken. Vanaf dezelfde sessie zit de scan als admin-command in de registry (`cap_kb_orphan_tag_scan`) zodat Spark er via `task_agent` naar kan wijzen. Toekomstige uitbreiding: hook op `snap_agent.on_deprecated_hit` zodat gedeprecieerde spellingen niet meer als orphan terugkomen."
+      },
+      "ws5": {
+        "wie": "Willem als beslisser; het script `orphan_tags_to_cards_v13d.py` als uitvoerder; het toekomstige `task_agent`/`admin_command_agent`-koppel als route.",
+        "wat": "Een periodieke check die veel-gebruikte-maar-niet-gedefinieerde tags detecteert en er skeletons van maakt in de KB-inbox.",
+        "wanneer": "On-demand via admin-actie, of periodiek als scheduled task; direct nuttig na bulk-import of KB-migratie.",
+        "waar": "/app/backend/scripts/orphan_tags_to_cards_v13d.py + route POST /api/kb/v2/inbox/orphan-tag-scan.",
+        "waarom": "Om drift tussen 'wat we noemen' en 'wat we definiëren' te elimineren; Principe #8 zegt: elke betekenis-dragende tag krijgt een kaart.",
+        "hoe": "Tellen → ruis filteren → vergelijken met bestaande begrippen (canonicaliseren op enkelvoud + unicode-apostrof) → skeletons in inbox schrijven met _orphan_frequency-metadata."
+      },
+      "tags": [
+        "admin-command",
+        "dedupe",
+        "kb",
+        "onderhoud",
+        "opschonen",
+        "orphan-tag-scan",
+        "principe-8",
+        "snap_agent",
+        "spark-architectuur",
+        "tag_sanitizer"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "e1_test_card",
+        "ingedeeld_door": "e1_test_card",
+        "ingedeeld_op": "2026-08-30T17:01:21.778671+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.85,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-30T17:01:21.715257+00:00",
+        "needs_gpt_review": true
+      },
+      "topic": "systeem"
     }
   ],
   "metadata": {

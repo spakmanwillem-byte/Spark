@@ -13383,6 +13383,29 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-798bfce3",
+      "label": "Genegenheid",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Genegenheid is een warm en positief gevoel van verbondenheid, liefde of waardering voor iemand.",
+      "tags": [
+        "aandacht",
+        "affectie",
+        "betrokkenheid",
+        "genegenheid",
+        "liefde",
+        "nabijheid",
+        "verbondenheid",
+        "waardering",
+        "warmte",
+        "zorg"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
       "id": "kbv2-70b6d717",
       "label": "klank",
       "type": "knowledge_v2",
@@ -24060,7 +24083,7 @@
       "tags": [
         "babbelen",
         "gesprek",
-        "hobby’s",
+        "hobby's",
         "kletsen",
         "luchtig",
         "pauze",
@@ -88744,7 +88767,7 @@
         "rond",
         "tijd",
         "weten",
-        "zo’n"
+        "zo'n"
       ],
       "topic": "",
       "belangrijkheid": 0.5,
@@ -103532,7 +103555,7 @@
         "omslaan",
         "ordenen",
         "pagina",
-        "pagina’s",
+        "pagina's",
         "schrift",
         "tekst",
         "volgorde"
@@ -103671,7 +103694,7 @@
         "navigatie",
         "overzicht",
         "pagina",
-        "pagina’s",
+        "pagina's",
         "scherm",
         "tekst",
         "webpagina",
@@ -106073,7 +106096,7 @@
         "context",
         "detail",
         "foto",
-        "foto’s",
+        "foto's",
         "geheel",
         "grootte",
         "kern",
@@ -106185,7 +106208,7 @@
         "back-up",
         "backup",
         "bewaren",
-        "foto’s",
+        "foto's",
         "herstel",
         "kopie",
         "nas",
@@ -107557,7 +107580,7 @@
     },
     {
       "id": "kbv2-9d52d5e5",
-      "label": "Programma’s",
+      "label": "Programma's",
       "type": "knowledge_v2",
       "lade": "weten",
       "lade_color": "#f59e0b",
@@ -107573,7 +107596,7 @@
         "lesprogramma",
         "planning",
         "programma",
-        "programma’s",
+        "programma's",
         "radioprogramma",
         "software",
         "uitvoering",
@@ -110469,7 +110492,7 @@
         "doen",
         "emotie",
         "foto",
-        "foto’s",
+        "foto's",
         "hdd",
         "kennis",
         "laptop",
@@ -127145,13 +127168,15 @@
       "type": "knowledge_v2",
       "lade": "weten",
       "lade_color": "#f59e0b",
-      "description": "Foto's zijn afbeeldingen die met een camera of ander beeldvormend apparaat zijn gemaakt.",
+      "description": "Foto's zijn afbeeldingen die een moment, persoon, voorwerp, dier of omgeving visueel vastleggen.",
       "tags": [
         "afbeelding",
+        "afdruk",
         "afdrukken",
         "beeld",
         "camera",
         "digitaal",
+        "documentatie",
         "foto",
         "foto's",
         "fotoalbum",
@@ -127163,7 +127188,7 @@
         "print",
         "smartphone"
       ],
-      "topic": "",
+      "topic": "media",
       "belangrijkheid": 0.5,
       "vertrouwen": 1.0
     },
@@ -145574,6 +145599,667 @@
         "mening",
         "objectief",
         "waarneming"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-74d1c7a9",
+      "label": "Fietspad",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een fietspad is een gedeelte van de weg dat speciaal bedoeld is voor fietsers.",
+      "tags": [
+        "fiets",
+        "fietspad",
+        "fietsroute",
+        "infrastructuur",
+        "rijbaan",
+        "verkeer",
+        "verkeersveiligheid",
+        "weg",
+        "wegmarkering"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-917a463c",
+      "label": "Fotograaf",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een fotograaf is iemand die foto's maakt met een camera.",
+      "tags": [
+        "beeld",
+        "camera",
+        "evenementfotografie",
+        "foto",
+        "fotograaf",
+        "fotografie",
+        "journalistiek",
+        "landschapsfotografie",
+        "natuurfotografie",
+        "portretfotografie"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-11dcce72",
+      "label": "Foutmelding",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een foutmelding is een melding die aangeeft dat er iets fout is gegaan in een systeem, programma of proces.",
+      "tags": [
+        "debugging",
+        "error",
+        "fout",
+        "foutcode",
+        "foutmelding",
+        "probleem",
+        "programma",
+        "software",
+        "storing",
+        "systeem"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-2da222e0",
+      "label": "Fries",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Fries is een taal die vooral in de Nederlandse provincie Fryslân en delen van Noord-Duitsland wordt gesproken.",
+      "tags": [
+        "fries",
+        "friese cultuur",
+        "friese taal",
+        "fryslân",
+        "nederland",
+        "noord-fries",
+        "saterfries",
+        "taal",
+        "west-germaanse talen",
+        "westerlauwers fries"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-110841c8",
+      "label": "Frisdrank",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Frisdrank is een alcoholvrije drank die meestal water, zoetstoffen en smaakstoffen bevat.",
+      "tags": [
+        "alcoholvrij",
+        "cola",
+        "drank",
+        "drinken",
+        "frisdrank",
+        "koolzuur",
+        "limonade",
+        "smaakstof",
+        "suiker",
+        "zoetstof"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8927407d",
+      "label": "Fysiek dragen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Fysiek dragen betekent dat iemand een voorwerp met het lichaam optilt en vasthoudt terwijl het wordt verplaatst.",
+      "tags": [
+        "dragen",
+        "fysiek dragen",
+        "gewicht",
+        "kracht",
+        "lichaam",
+        "lichamelijke belasting",
+        "tillen",
+        "transport",
+        "verplaatsen",
+        "voorwerp"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-bcb16b33",
+      "label": "Gast",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een gast is iemand die ergens aanwezig is omdat die persoon is uitgenodigd of welkom is.",
+      "tags": [
+        "bezoek",
+        "evenement",
+        "gast",
+        "gastvrijheid",
+        "genodigde",
+        "hotel",
+        "restaurant",
+        "uitnodiging"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-3749dda6",
+      "label": "Gastheer",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een gastheer is iemand die gasten ontvangt en ervoor zorgt dat zij zich welkom voelen.",
+      "tags": [
+        "bezoeker",
+        "biologie",
+        "evenement",
+        "gast",
+        "gastheer",
+        "gastvrijheid",
+        "gastvrouw",
+        "horeca",
+        "ontvangen",
+        "organisme",
+        "parasiet"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-04a9994f",
+      "label": "task_agent",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "task_agent is de dunne brug tussen een herkende chat-intent en het bijbehorende endpoint in command_registry.json.",
+      "tags": [
+        "intent-uitvoering",
+        "agent",
+        "command_registry",
+        "task_agent",
+        "spark-architectuur",
+        "principe-8"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-3e8865f1",
+      "label": "admin_command_agent",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "admin_command_agent is de wrapper die admin-only capability-commando's centraal gate-keeps en uitvoert.",
+      "tags": [
+        "principe-8",
+        "admin_command_agent",
+        "agent",
+        "audit",
+        "capability",
+        "spark-architectuur",
+        "admin"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-18adeb37",
+      "label": "personal_agent",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "personal_agent is de reader-agent die persoonlijke context (naam, gradatie, recente tags, actieve potjes) op één plek bundelt voor Spark's compose-laag.",
+      "tags": [
+        "privacy_matrix",
+        "context",
+        "agent",
+        "personal_agent",
+        "compose",
+        "spark-architectuur",
+        "principe-8"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-45d1d661",
+      "label": "spark_pulse_agent",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "spark_pulse_agent is Spark's zelfbewustzijn-agent: hij verzamelt periodiek een health-snapshot van de eigen infrastructuur en vertelt daarover in Sparks eigen stem.",
+      "tags": [
+        "spark_pulse_agent",
+        "self_awareness",
+        "agent",
+        "observability",
+        "heartbeat",
+        "spark-architectuur",
+        "principe-8"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-406b1e7c",
+      "label": "principe-8",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Principe #8 (Subject-Agent Pattern) stelt: elke losse string, commando of module in Spark's codebase krijgt uiteindelijk een Agent-wrapper én een corresponderende KB-kaart.",
+      "tags": [
+        "spark-architectuur",
+        "architectuur-principe",
+        "meta",
+        "subject-agent",
+        "roadmap",
+        "principe-8"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-f4f17100",
+      "label": "spark-architectuur",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Spark-architectuur is de verzameling ontwerpkeuzes die Spark Core 2.0 tot een privacy-first, JSON-only, eco-container-gebaseerd systeem maken.",
+      "tags": [
+        "spark-architectuur",
+        "meta",
+        "roadmap",
+        "principe-8"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-b698777f",
+      "label": "command_registry",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "command_registry.json is de master-lijst die intent-tags koppelt aan API-endpoints in Spark Core.",
+      "tags": [
+        "spark-architectuur",
+        "capability",
+        "data-artefact",
+        "registry",
+        "command_registry"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-f4cea9f3",
+      "label": "privacy_matrix",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "privacy_matrix is een geplande JSON-config die per gebruikersveld (financiën, gezondheid, dagboek) een privacy-niveau vastlegt.",
+      "tags": [
+        "spark-architectuur",
+        "data-artefact",
+        "privacy_matrix",
+        "privacy",
+        "attente_spark"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-d2474649",
+      "label": "self_awareness",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Self-awareness in Spark betekent: het systeem kan feitelijk over de eigen infrastructuur praten (modules, KB-cards, health, drift) in plaats van alleen over de user.",
+      "tags": [
+        "spark-architectuur",
+        "self_awareness",
+        "meta",
+        "introspectie",
+        "principe-8"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-2d9e7946",
+      "label": "observability",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Observability in Spark is het vermogen om achteraf te reconstrueren wat er gebeurde: welke intent, welke uitvoering, welke compose-templates, welke LLM-call.",
+      "tags": [
+        "spark-architectuur",
+        "observability",
+        "traced",
+        "monitoring",
+        "roadmap"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-547ead90",
+      "label": "Gasvormig",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gasvormig betekent dat een stof zich in de gasvormige toestand bevindt.",
+      "tags": [
+        "aggregatietoestand",
+        "deeltjes",
+        "druk",
+        "gas",
+        "gasvormig",
+        "gasvormige toestand",
+        "stof",
+        "temperatuur",
+        "verdampen",
+        "vloeibaar"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-a0e45320",
+      "label": "Gebaren",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gebaren zijn bewegingen van het lichaam waarmee iemand iets kan uitdrukken, duidelijk maken of ondersteunen.",
+      "tags": [
+        "beweging",
+        "communicatie",
+        "expressie",
+        "gebaar",
+        "gebaren",
+        "handgebaar",
+        "lichaamstaal",
+        "non-verbale communicatie",
+        "taal"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8b99d790",
+      "label": "Gebogen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gebogen betekent dat iets niet recht is, maar een kromming heeft.",
+      "tags": [
+        "beweging",
+        "bocht",
+        "gebogen",
+        "houding",
+        "krom",
+        "lijn",
+        "oppervlak",
+        "recht",
+        "vorm"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b83a4dbc",
+      "label": "Gebrek",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een gebrek is iets dat ontbreekt of een tekortkoming vormt.",
+      "tags": [
+        "fout",
+        "gebrek",
+        "gebrek aan",
+        "mankement",
+        "ontbreken",
+        "ontbrekend",
+        "onvoldoende",
+        "probleem",
+        "tekort",
+        "tekortkoming"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-cc90d138",
+      "label": "Gebreken",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gebreken zijn tekortkomingen, fouten of dingen die ontbreken en ervoor zorgen dat iets niet volledig of niet goed functioneert.",
+      "tags": [
+        "beschadiging",
+        "defect",
+        "fout",
+        "gebrek",
+        "mankement",
+        "ontbrekend",
+        "probleem",
+        "tekort",
+        "tekortkoming"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-ee1d3939",
+      "label": "Gedragspatroon",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een gedragspatroon is een manier van doen of reageren die regelmatig terugkomt.",
+      "tags": [
+        "communicatie",
+        "gedrag",
+        "gedrag herkennen",
+        "gedrag veranderen",
+        "gedragspatroon",
+        "gewoonte",
+        "handelen",
+        "herhaling",
+        "patroon",
+        "reactie"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-bdc5ab82",
+      "label": "Gegevenscontrole",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gegevenscontrole is het controleren van gegevens om vast te stellen of ze juist, volledig en bruikbaar zijn.",
+      "tags": [
+        "consistentie",
+        "controle",
+        "databank",
+        "fouten",
+        "gegevens",
+        "gegevenscontrole",
+        "gegevenskwaliteit",
+        "juistheid",
+        "validatie",
+        "volledigheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e6092b61",
+      "label": "Gegevensopslag",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gegevensopslag is het bewaren van gegevens zodat ze later opnieuw kunnen worden gebruikt.",
+      "tags": [
+        "bestand",
+        "data",
+        "databank",
+        "gegevens",
+        "gegevensopslag",
+        "harde schijf",
+        "opslag",
+        "opslagmedium",
+        "server",
+        "ssd"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-bad281a7",
+      "label": "Geldig",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Geldig betekent dat iets aan de voorwaarden voldoet en daarom als juist, toegestaan of van kracht wordt beschouwd.",
+      "tags": [
+        "bruikbaar",
+        "geldig",
+        "geldigheid",
+        "geldigverklaring",
+        "juist",
+        "ongeldig",
+        "rechtsgeldig",
+        "regels",
+        "toegestaan",
+        "voorwaarden"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-cef26fde",
+      "label": "Geleider",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een geleider is een materiaal of voorwerp dat iets, zoals elektriciteit of warmte, goed kan doorgeven.",
+      "tags": [
+        "aluminium",
+        "elektriciteit",
+        "elektrisch circuit",
+        "elektrische stroom",
+        "geleider",
+        "koper",
+        "metaal",
+        "stroom",
+        "warmte"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-59a5498f",
+      "label": "Gelijkenis",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een gelijkenis is een overeenkomst tussen twee of meer dingen, personen of situaties.",
+      "tags": [
+        "eigenschappen",
+        "gelijk",
+        "gelijkenis",
+        "herkenning",
+        "kenmerken",
+        "overeenkomen",
+        "overeenkomstigheid",
+        "vergelijken"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-984105de",
+      "label": "Gemakkelijk",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Gemakkelijk betekent dat iets weinig moeite, inspanning of moeilijkheid vraagt.",
+      "tags": [
+        "eenvoud",
+        "eenvoudig",
+        "gemakkelijk",
+        "inspanning",
+        "lastig",
+        "makkelijk",
+        "moeilijk",
+        "moeilijkheid",
+        "moeite",
+        "vaardigheid"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c826096c",
+      "label": "Geplaatst",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Geplaatst betekent dat iets op een bepaalde plek is neergezet, gezet of aangebracht.",
+      "tags": [
+        "aangebracht",
+        "bestemming",
+        "geplaatst",
+        "gepubliceerd",
+        "locatie",
+        "neergezet",
+        "plaats",
+        "positie",
+        "toegewezen"
       ],
       "topic": "",
       "belangrijkheid": 0.5,
@@ -170875,6 +171561,41 @@
       "vertrouwen": 1.0
     },
     {
+      "id": "kbv2-f960c2ed",
+      "label": "intent-uitvoering",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Intent-uitvoering is de stap waarin een herkende gebruikers-intent daadwerkelijk een actie triggert (endpoint-call, data-mutatie, respons).",
+      "tags": [
+        "spark-architectuur",
+        "chat",
+        "capability",
+        "workflow",
+        "intent-uitvoering"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-6a12e1ca",
+      "label": "compose",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Compose is de fase waarin Spark uit ruwe data (uitvoerresultaat, persoonlijke context, KB-kaarten) een Nederlands antwoord vormt.",
+      "tags": [
+        "spark-architectuur",
+        "chat",
+        "antwoord-formulering",
+        "compose"
+      ],
+      "topic": "systeem",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.5
+    },
+    {
       "id": "kbv2-0cf60abe",
       "label": "dnd",
       "type": "knowledge_v2",
@@ -170883,20 +171604,6 @@
       "description": "",
       "tags": [
         "dnd"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-693a8aca",
-      "label": "geldig",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "geldig"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -170953,34 +171660,6 @@
       "description": "",
       "tags": [
         "voorstelling"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-063f1426",
-      "label": "fietspad",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "fietspad"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-b0b829d4",
-      "label": "gelijkenis",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gelijkenis"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -171149,20 +171828,6 @@
       "description": "",
       "tags": [
         "kennismaken"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-1945a677",
-      "label": "gebaren",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gebaren"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -171373,20 +172038,6 @@
       "description": "",
       "tags": [
         "verzekerde"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-3cb453c9",
-      "label": "foutmelding",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "foutmelding"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -171687,20 +172338,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-3e97f032",
-      "label": "frisdrank",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "frisdrank"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-ecddbcb2",
       "label": "tegenovergestelde",
       "type": "knowledge_v2",
@@ -171835,20 +172472,6 @@
       "description": "",
       "tags": [
         "onbedoeld"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-007a985c",
-      "label": "gebrek",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gebrek"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -172415,20 +173038,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-b2d580a0",
-      "label": "gedragspatroon",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gedragspatroon"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-6007e8ca",
       "label": "inductie",
       "type": "knowledge_v2",
@@ -172821,20 +173430,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-ef2b3302",
-      "label": "gast",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gast"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-9f518b27",
       "label": "poëzie",
       "type": "knowledge_v2",
@@ -172941,34 +173536,6 @@
       "description": "",
       "tags": [
         "onaangenaam"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-b808066d",
-      "label": "gemakkelijk",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gemakkelijk"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-db858944",
-      "label": "genegenheid",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "genegenheid"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -173283,20 +173850,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-36c7410e",
-      "label": "fries",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "fries"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-49f81235",
       "label": "meren",
       "type": "knowledge_v2",
@@ -173319,20 +173872,6 @@
       "description": "",
       "tags": [
         "zaak"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-1ac68ed5",
-      "label": "gebogen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gebogen"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -173375,20 +173914,6 @@
       "description": "",
       "tags": [
         "opvolgend"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-b4d3c6f9",
-      "label": "geleider",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "geleider"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -173801,20 +174326,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-12c79120",
-      "label": "gegevensopslag",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gegevensopslag"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-4f335416",
       "label": "harde schijf",
       "type": "knowledge_v2",
@@ -173871,20 +174382,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-49c953fd",
-      "label": "fotograaf",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "fotograaf"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-f3ecaf6a",
       "label": "opsporing",
       "type": "knowledge_v2",
@@ -173893,20 +174390,6 @@
       "description": "",
       "tags": [
         "opsporing"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-b0ef255a",
-      "label": "gegevenscontrole",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gegevenscontrole"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -174033,20 +174516,6 @@
       "description": "",
       "tags": [
         "voorbij"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-32cb4f28",
-      "label": "gastheer",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gastheer"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -174305,20 +174774,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-badeebc9",
-      "label": "geplaatst",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "geplaatst"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-d86277b9",
       "label": "tweemaal",
       "type": "knowledge_v2",
@@ -174327,20 +174782,6 @@
       "description": "",
       "tags": [
         "tweemaal"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-63c3d542",
-      "label": "foto’s",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "foto’s"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -174641,20 +175082,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-d1a64859",
-      "label": "fysiek dragen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "fysiek dragen"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-fd8fb3ca",
       "label": "keuze maken",
       "type": "knowledge_v2",
@@ -174697,20 +175124,6 @@
       "vertrouwen": 0.3
     },
     {
-      "id": "kbv2-9041bdfc",
-      "label": "gasvormig",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gasvormig"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
       "id": "kbv2-dfe8c088",
       "label": "scripttaal",
       "type": "knowledge_v2",
@@ -174733,20 +175146,6 @@
       "description": "",
       "tags": [
         "lichtsignaal"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-7a2b891d",
-      "label": "gebreken",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "gebreken"
       ],
       "topic": null,
       "belangrijkheid": 5,
@@ -174903,54 +175302,6 @@
         "spelcomputer"
       ],
       "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-04a9994f",
-      "label": "task_agent",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-3e8865f1",
-      "label": "admin_command_agent",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-18adeb37",
-      "label": "personal_agent",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-45d1d661",
-      "label": "spark_pulse_agent",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [],
-      "topic": "",
       "belangrijkheid": 5,
       "vertrouwen": 0.3
     }

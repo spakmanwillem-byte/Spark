@@ -76804,11 +76804,35 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3034
       }
+    },
+    {
+      "id": "conv-e2591bd8",
+      "timestamp": "2026-08-30T18:09:21.984461+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo Willem, goed om je weer te horen. Waar kan ik je nu mee helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hoeveel",
+        "used_cards": [
+          "kbv2-f1d5db2f",
+          "kbv2-aaf81efb",
+          "kbv2-2ad0e675",
+          "kbv2-336bd0a9",
+          "kbv2-f6f6530b"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3035
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3034,
-    "last_updated": "2026-08-30T11:49:42.314102+00:00"
+    "total_conversations": 3035,
+    "last_updated": "2026-08-30T18:09:21.984461+00:00"
   }
 }

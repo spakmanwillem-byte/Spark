@@ -122,8 +122,16 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       setRecentChats(buildRecentChats(sparkLog, community, contacts));
       setKbv2Stats(kbv2);
       setFinStats(fin);
-      // v13c_dashboard_live_cards_001 — Spark laatste output uit sparkLog
-      const sc = sparkLog?.conversations?.[0];
+      // v13c_dashboard_live_cards_002 — expliciet sorteren op timestamp,
+      // niet vertrouwen op array-volgorde. Backend reversed() faalt als
+      // log-entries ooit niet chronologisch zijn geappend.
+      const convs = Array.isArray(sparkLog?.conversations) ? [...sparkLog.conversations] : [];
+      convs.sort((a, b) => {
+        const ta = a?.timestamp || '';
+        const tb = b?.timestamp || '';
+        return tb.localeCompare(ta);  // descending → nieuwste eerst
+      });
+      const sc = convs[0];
       if (sc && (sc.spark_response || sc.user_message)) {
         setLatestSparkTurn({
           text: sc.spark_response || sc.user_message,
@@ -445,7 +453,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             <StorageCard storageStats={storageStats} onNavigate={onNavigate} />
 
             {/* Agenda Quick — v13c_dashboard_live_cards_001 */}
-            <Card title="Agenda" icon={Calendar} accent="#f97316" onClick={() => onNavigate('calendar', '/calendar')}>
+            <Card title="Agenda" icon={Calendar} accent="#f97316" onClick={() => onNavigate('calendar', '/calendar')} fixedHeight>
               {nextEvent ? (
                 <div className="flex items-center gap-2.5">
                   <div className="w-1 h-10 rounded-full" style={{ background: nextEvent.color || '#f97316' }} />
@@ -467,7 +475,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             </Card>
 
             {/* Notities — v13c_dashboard_live_cards_001 */}
-            <Card title="Notities" icon={BookOpen} accent="#22c55e" onClick={() => onNavigate('notes', '/notes')}>
+            <Card title="Notities" icon={BookOpen} accent="#22c55e" onClick={() => onNavigate('notes', '/notes')} fixedHeight>
               {priorityNote ? (
                 <div className="flex items-start gap-2.5">
                   <div className={`w-1 h-10 rounded-full flex-shrink-0 ${priorityNote.priority === 'hoog' || priorityNote.priority === 'high' ? 'bg-red-500' : 'bg-emerald-500'}`} />
@@ -484,7 +492,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             </Card>
 
             {/* Gesprekken — v13c_dashboard_live_cards_001 */}
-            <Card title="Gesprekken" icon={MessageSquare} accent="#06b6d4" onClick={() => onNavigate('chat', '/chat')}>
+            <Card title="Gesprekken" icon={MessageSquare} accent="#06b6d4" onClick={() => onNavigate('chat', '/chat')} fixedHeight>
               <div className="space-y-2">
                 {/* Laatste Spark-output */}
                 {latestSparkTurn && (
@@ -661,14 +669,14 @@ function StorageCard({ storageStats, onNavigate }) {
 }
 
 /* === Reusable Card === */
-function Card({ title, icon: Icon, accent, badge, badgeColor, children, onClick }) {
+function Card({ title, icon: Icon, accent, badge, badgeColor, children, onClick, fixedHeight = false }) {
   return (
     <div
       data-testid={`card-${title.toLowerCase().replace(/\s/g, '-')}`}
-      className={`bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden ${onClick ? 'cursor-pointer hover:border-slate-600 transition-colors' : ''}`}
+      className={`bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col ${onClick ? 'cursor-pointer hover:border-slate-600 transition-colors' : ''}`}
       onClick={onClick}
     >
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800/50">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800/50 flex-shrink-0">
         <div className="flex items-center gap-2">
           <Icon className="w-4 h-4" style={{ color: accent }} />
           <h3 className="text-sm font-semibold text-white">{title}</h3>
@@ -679,7 +687,8 @@ function Card({ title, icon: Icon, accent, badge, badgeColor, children, onClick 
           </span>
         )}
       </div>
-      <div className="p-4">{children}</div>
+      {/* v13c_dashboard_live_cards_003 — fixedHeight geeft vast formaat + scroll */}
+      <div className={`p-4 ${fixedHeight ? 'h-40 overflow-y-auto' : ''}`}>{children}</div>
     </div>
   );
 }

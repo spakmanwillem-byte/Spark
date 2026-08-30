@@ -200179,6 +200179,87 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-f960c2ed",
+      "begrip": "intent-uitvoering",
+      "lade": "doen",
+      "status": "curated",
+      "lagen": {
+        "laag1": "Intent-uitvoering is de stap waarin een herkende gebruikers-intent daadwerkelijk een actie triggert (endpoint-call, data-mutatie, respons).",
+        "laag2": "Onderscheiden van intent-matching (welke intent zit in dit bericht?) en compose (hoe formuleer ik het antwoord?). Uitvoering staat er tussenin en heeft haar eigen validatie, gradatie-check en audit.",
+        "laag3": "In Spark Core wordt intent-uitvoering geleidelijk verhuisd van capability_handler_service naar task_agent, zodat matching en uitvoering ontkoppeld worden. Elke uitvoering doorloopt: (1) resolve → cmd_id, (2) gradatie-check, (3) params-validatie, (4) dispatch naar source-functie, (5) audit-log.",
+        "laag4": "Intent-uitvoering is één van de drie chat-fasen (match → uitvoer → compose). Door dit als aparte laag te benoemen kan Spark straks per fase logs en metrics leveren, en kan het pulse-agent detecteren waar in de pipeline vertraging of fouten ontstaan."
+      },
+      "ws5": {
+        "wie": "task_agent (nieuwe route) en capability_handler_service (bestaande route) voeren intents uit.",
+        "wat": "De middelste fase van chat-flow: van herkende intent naar concreet resultaat.",
+        "wanneer": "Direct na intent-matching, vóór compose.",
+        "waar": "/app/backend/modules/agents/task_agent.py en /app/backend/modules/chat/capability_handler_service.py.",
+        "waarom": "Om matching, uitvoering en formulering apart testbaar en observeerbaar te maken.",
+        "hoe": "Via resolve() → execute() met gradatie- en params-check en audit-log-entry."
+      },
+      "tags": [
+        "spark-architectuur",
+        "chat",
+        "capability",
+        "workflow",
+        "intent-uitvoering"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "spark_agent_layer_tag_seed",
+        "ingedeeld_door": "e1_agent_layer_move",
+        "ingedeeld_op": "2026-08-30T16:37:12.394098+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.5,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-30T16:33:37.254697+00:00",
+        "draft_filled_by": "e1_agent_layer_tag_fill",
+        "draft_filled_at": "2026-08-30T16:33:36.568061+00:00",
+        "needs_gpt_review": true
+      },
+      "topic": "systeem"
+    },
+    {
+      "id": "kbv2-6a12e1ca",
+      "begrip": "compose",
+      "lade": "doen",
+      "status": "curated",
+      "lagen": {
+        "laag1": "Compose is de fase waarin Spark uit ruwe data (uitvoerresultaat, persoonlijke context, KB-kaarten) een Nederlands antwoord vormt.",
+        "laag2": "Compose gebruikt personal_agent voor context, LLM-router voor generatie en fallback-service voor deterministische zinnen wanneer geen LLM nodig of beschikbaar is.",
+        "laag3": "In /app/backend/modules/chat/compose_routes.py + composer_helpers.py leeft de logica. Compose weet niets van intent-matching of uitvoering — hij krijgt een 'answer_intent' + payload en produceert de tekst. Zo blijft de laag agnostisch voor bron (chat, morning-brief, recap).",
+        "laag4": "Compose is de laatste stap in de drie-fasen-pipeline (match → uitvoer → compose). Door persoonlijke context centraal via personal_agent te trekken, blijven antwoorden consistent qua toon en aanspreek-vorm. Toekomstige uitbreiding: compose-templates die de KB-cards zelf leesbaar reflecteren ('ik weet dat je gisteren met potje X bezig was')."
+      },
+      "ws5": {
+        "wie": "compose_routes en composer_helpers als producers; personal_agent en LLM-router als toeleveranciers.",
+        "wat": "De antwoord-formuleringsfase van elke chat-turn.",
+        "wanneer": "Na uitvoering, vlak vóór het antwoord de user bereikt.",
+        "waar": "/app/backend/modules/chat/compose_routes.py en composer_helpers.py.",
+        "waarom": "Om antwoord-formulering ontkoppeld te houden van datalogica en per bron herbruikbaar te maken.",
+        "hoe": "Door een 'answer_intent' + payload in te nemen en via templates + optionele LLM-call tekst te produceren."
+      },
+      "tags": [
+        "spark-architectuur",
+        "chat",
+        "antwoord-formulering",
+        "compose"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "spark_agent_layer_tag_seed",
+        "ingedeeld_door": "e1_agent_layer_move",
+        "ingedeeld_op": "2026-08-30T16:37:12.394098+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.5,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-08-30T16:33:37.319192+00:00",
+        "draft_filled_by": "e1_agent_layer_tag_fill",
+        "draft_filled_at": "2026-08-30T16:33:36.568061+00:00",
+        "needs_gpt_review": true
+      },
+      "topic": "systeem"
     }
   ]
 }

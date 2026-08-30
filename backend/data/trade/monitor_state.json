@@ -1,5 +1,5 @@
 {
-  "running": true,
+  "running": false,
   "interval": 900,
   "market": "BCH-EUR",
   "markets": [
@@ -17,5 +17,7 @@
   "use_mock": false,
   "use_potjes": true,
   "last_buy_per_market": {},
-  "last_persisted": "2026-08-30T17:34:09.935413+00:00"
+  "last_persisted": "2026-08-30T17:34:09.935413+00:00",
+  "_auto_stopped_at": "2026-08-30T17:50:05.295596+00:00",
+  "_auto_stop_reason": "v7_no_auto_resume \u2014 safety after (re)deploy"
 }

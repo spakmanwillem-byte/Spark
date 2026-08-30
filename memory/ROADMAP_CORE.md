@@ -269,6 +269,50 @@ introspectief kan uitleggen wat hij kan.
 - **`Programma's`-kaart** heeft nu rechte apostrof; index-alias unicode-versie
   verwijderd. Backups: `*.bak_apostrof_normalize_*` + `*.bak_orphan_scan_test_*`.
 
+### 🎨 Backup-splitsing + Response-tijd + Thinking-indicator (dag 2)
+
+**Melding (Willem)**: "alleen wijzigingen wordt te groot" + "wacht-icoon tijdens
+input" + "response-tijd loggen leuk voor later onderzoek".
+
+- **✅ Backup-splitsing 3 slices** (`modules/backup/routes.py` + UI):
+  - `/api/backup/download/changes/chat` — chat, dagboek, dialogen, chat_analytics
+  - `/api/backup/download/changes/trader` — trade, financial, bitvavo
+  - `/api/backup/download/changes/rest` — al het overige
+  - `/api/backup/download/changes/sizes` — preview per slice
+  - **Bonus fix**: `EXCLUDE_REL_PREFIXES` sluit oude `_backup_*`/`_backups/`/`_archive/`
+    /`_deleted_*` dirs uit → **1185 MB → 528 MB** (-657 MB backup-in-backup).
+  - Frontend `IntegratiesPage.js`: 3 nieuwe DownloadCards (emerald/cyan/teal)
+    met live size-preview per slice; KB-diff + Volledig in aparte rij.
+- **✅ Response-tijd logging**:
+  - `POST /api/chat/log-response-time` — schrijft naar
+    `data/chat_analytics/response_times.jsonl` per turn (duration_ms, endpoint,
+    user_id, ok, used_model, message_length).
+  - Frontend meet met `performance.now()` rond beide fetch-paden
+    (`/api/chat/message` én `/api/spark/compose`).
+  - Verwacht consumer: latere analytics + `spark_pulse_agent.pulse()`.
+- **✅ Thinking-indicator** in `ChatInput`:
+  - Nieuwe `thinking`-prop; toont `Loader2` + "denkt…" label links + spinner
+    in send-knop; input disabled; placeholder wisselt naar "Spark denkt na…";
+    border wisselt naar amber-glow tijdens wachten.
+  - `sparkThinking`-state in `GesprekkenPage` toggles rond fetch-calls,
+    ook bij compose-deep-mode.
+
+### 📌 OPEN (voor volgende sessie — image-upload-naming)
+
+- **P2 — Image-upload → begrip mapping**:
+  - Bij upload van een afbeelding op een KB-kaart wordt de bestandsnaam
+    (bijv. `appel.png`) automatisch het begrip. Zo krijgt elke afbeelding
+    meteen een correct onderwerp en kan Spark later zeggen "wil je een appel
+    zien?".
+  - Bij een 2e afbeelding op hetzelfde begrip → automatisch nummeren
+    (`appel-2.png` etc.).
+  - Nieuw KB-kaart-concept: "**wacht-icoon**" (Willem maakt zelf met
+    512x512 afbeelding) → deze wordt de eerste test-case voor het
+    image-upload-naming-patroon.
+  - Nadenken: welke module handelt image-uploads af (`kb_v2/media_routes.py`?),
+    hoe passen we filename → begrip toe zonder bestaande kaarten om te gooien,
+    en waar valt de "wacht-icoon" onder (weten? doen?).
+
 ---
 
 

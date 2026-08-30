@@ -10,7 +10,7 @@ import { RpsBark } from '../games/RpsBark';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
   Sparkles, Phone, Video, Bot, Circle, BookOpen, Zap,
-  Shield, Timer, Mic, MicOff, Volume2, VolumeX
+  Shield, Timer, Mic, MicOff, Volume2, VolumeX, Loader2
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -214,6 +214,8 @@ export function GesprekkenPage({ onNavigate }) {
   const [activeTab, setActiveTab] = useState('spark');
   // Lazy init: bij eerste render check sessionStorage. Behoud chat tussen page-switches.
   const [sparkMessages, setSparkMessages] = useState(() => loadStoredMessages(userId) || initialSparkMessages);
+  // v13c_thinking_indicator_001 — toon activiteit + meet response-tijd voor logging
+  const [sparkThinking, setSparkThinking] = useState(false);
   const [newMessage, setNewMessage] = useState('');
   const [selectedContact, setSelectedContact] = useState(null);
 
@@ -761,6 +763,23 @@ export function GesprekkenPage({ onNavigate }) {
     const text = raw;
     setNewMessage('');
 
+    // v13c_thinking_indicator_001 — helper: log-and-clear thinking na round-trip
+    const logResponseTime = (durationMs, endpoint, extra = {}) => {
+      try {
+        fetch(`${API}/api/chat/log-response-time`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            duration_ms: durationMs,
+            endpoint,
+            user_id: userId,
+            message_length: text.length,
+            ...extra,
+          }),
+        }).catch(() => {});
+      } catch {}
+    };
+
     // v6_rps_001b — Client-side RPS-trigger in community tab (Spark tab gaat via backend)
     if (activeTab === 'community') {
       const txt = text.toLowerCase().trim();
@@ -784,6 +803,8 @@ export function GesprekkenPage({ onNavigate }) {
       setSparkMessages(prev => [...prev, userMsg]);
       // v6_response_composer_001 — Diep-gesprek modus: directe LLM-bridge via /api/spark/compose
       if (deepMode && activeTab === 'spark') {
+        const t0 = performance.now();
+        setSparkThinking(true);
         try {
           // v6_tab_context_001 — stuur laatst-bekeken tab mee zodat Spark context heeft
           let lastTab = null;
@@ -803,6 +824,7 @@ export function GesprekkenPage({ onNavigate }) {
             throw new Error(`${statusHint} — probeer over een moment opnieuw`);
           }
           const d = await r.json();
+          logResponseTime(performance.now() - t0, 'spark_compose', { ok: !!d.success, used_model: d.used_model });
 
           // v6_deep_side_effects_001 — Diep gebruikt nu DEZELFDE audio-pipeline als normale chat
           // (TTS-toggle / STT-toggle / ambient / KB-card geluid)
@@ -892,16 +914,22 @@ export function GesprekkenPage({ onNavigate }) {
             time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
             deep: true,
           }]);
+          logResponseTime(performance.now() - t0, 'spark_compose', { ok: false });
+        } finally {
+          setSparkThinking(false);
         }
         return;
       }
       try {
+        const t1 = performance.now();
+        setSparkThinking(true);
         const res = await fetch(`${API}/api/chat/message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text, user_naam: userName, user_id: userId, channel: 'spark', admin_mode: !!adminModeActive }),
         });
         const data = await res.json();
+        logResponseTime(performance.now() - t1, 'chat_message', { ok: !!data.success, used_model: data.used_model });
 
         // v4_actions_001 — Frontend voert action uit op basis van backend response
         if (data.action === 'enable_stt') {
@@ -1008,6 +1036,9 @@ export function GesprekkenPage({ onNavigate }) {
           message: 'Er ging iets mis met de verbinding. Probeer het opnieuw.',
           time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
         }]);
+        logResponseTime(performance.now() - t1, 'chat_message', { ok: false });
+      } finally {
+        setSparkThinking(false);
       }
     } else if (activeTab === 'community') {
       if (sendingCommunity) return;
@@ -1176,6 +1207,7 @@ export function GesprekkenPage({ onNavigate }) {
                 onSend={handleSend}
                 placeholder="Vraag Spark iets..."
                 accent="#f59e0b"
+                thinking={sparkThinking}
                 sttEnabled={sttEnabled}
                 sttListening={sttListening}
                 onSttToggle={toggleSttRecord}
@@ -1463,16 +1495,30 @@ export function GesprekkenPage({ onNavigate }) {
 }
 
 /* === Chat input in framed container === */
-function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, sttEnabled = false, sttListening = false, onSttToggle = null, deepMode = false, onDeepToggle = null, showDeepToggle = true }) {
+function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, thinking = false, sttEnabled = false, sttListening = false, onSttToggle = null, deepMode = false, onDeepToggle = null, showDeepToggle = true }) {
+  const inputDisabled = disabled || thinking;
   return (
     <div className="p-4 bg-slate-900/20 border-t border-slate-800 flex-shrink-0">
       <div
-        className="flex items-center gap-2 max-w-4xl mx-auto bg-slate-800/60 border border-slate-700/60 rounded-2xl px-2 py-1.5 shadow-lg focus-within:border-slate-600 transition-colors"
+        className={`flex items-center gap-2 max-w-4xl mx-auto bg-slate-800/60 border rounded-2xl px-2 py-1.5 shadow-lg focus-within:border-slate-600 transition-colors ${thinking ? 'border-amber-500/60 shadow-amber-500/10' : 'border-slate-700/60'}`}
         style={{ '--accent': accent }}
       >
-        <button data-testid="attach-btn" className="p-2 hover:bg-slate-700/50 rounded-xl transition-colors flex-shrink-0">
-          <Plus className="w-4 h-4 text-slate-400" />
-        </button>
+        {/* v13c_thinking_indicator_001 — activiteits-icoon links tijdens wachten op Spark */}
+        {thinking && (
+          <div
+            data-testid="chat-thinking-indicator"
+            className="flex items-center gap-1 pl-2 pr-1 flex-shrink-0"
+            title="Spark denkt na…"
+          >
+            <Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
+            <span className="text-[11px] text-amber-300 font-medium hidden sm:inline">denkt…</span>
+          </div>
+        )}
+        {!thinking && (
+          <button data-testid="attach-btn" className="p-2 hover:bg-slate-700/50 rounded-xl transition-colors flex-shrink-0">
+            <Plus className="w-4 h-4 text-slate-400" />
+          </button>
+        )}
         {sttEnabled && onSttToggle && (
           <button
             data-testid="stt-mic-btn"
@@ -1500,19 +1546,19 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
           data-testid="chat-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && !disabled && onSend()}
-          placeholder={sttListening ? 'Luistert... druk mic om te stoppen' : (placeholder || 'Praat met Spark — vraag of vertel iets...')}
-          disabled={disabled}
+          onKeyDown={(e) => e.key === 'Enter' && !inputDisabled && onSend()}
+          placeholder={thinking ? 'Spark denkt na…' : (sttListening ? 'Luistert... druk mic om te stoppen' : (placeholder || 'Praat met Spark — vraag of vertel iets...'))}
+          disabled={inputDisabled}
           className="flex-1 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none px-2 py-2 disabled:opacity-50"
         />
         <button
           data-testid="send-btn"
           onClick={onSend}
-          disabled={disabled || !value.trim()}
+          disabled={inputDisabled || !value.trim()}
           className="p-2.5 rounded-xl transition-all flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ background: accent }}
         >
-          <Send className="w-4 h-4 text-white" />
+          {thinking ? <Loader2 className="w-4 h-4 text-white animate-spin" /> : <Send className="w-4 h-4 text-white" />}
         </button>
       </div>
     </div>

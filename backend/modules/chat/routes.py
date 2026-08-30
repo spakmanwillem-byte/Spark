@@ -38,6 +38,45 @@ HOMONYM_XP_BONUS = 15
 class ChatMessage(BaseModel):
     message: str
     user_naam: Optional[str] = "Gebruiker"
+
+
+# v13c_response_time_log_001 — log Spark response-tijd per turn.
+# Best-effort append-only ledger; faalt stil zodat chat nooit stukgaat.
+class ResponseTimeLog(BaseModel):
+    duration_ms: float
+    endpoint: str  # "chat_message" | "spark_compose"
+    user_id: Optional[str] = "user-000"
+    turn_id: Optional[str] = None
+    ok: Optional[bool] = True
+    used_model: Optional[str] = None
+    message_length: Optional[int] = None
+
+
+@router.post("/log-response-time")
+async def log_response_time(body: ResponseTimeLog):
+    """Log frontend-gemeten response-tijd naar
+    data/chat_analytics/response_times.jsonl."""
+    try:
+        import json as _json
+        from pathlib import Path as _Path
+        p = _Path(__file__).parent.parent.parent / "data" / "chat_analytics" / "response_times.jsonl"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        row = {
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "duration_ms": round(float(body.duration_ms), 1),
+            "endpoint": body.endpoint,
+            "user_id": body.user_id,
+            "turn_id": body.turn_id,
+            "ok": body.ok if body.ok is not None else True,
+            "used_model": body.used_model,
+            "message_length": body.message_length,
+        }
+        with p.open("a", encoding="utf-8") as fh:
+            fh.write(_json.dumps(row, ensure_ascii=False) + "\n")
+        return {"ok": True}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
     user_id: Optional[str] = None
     channel: Optional[str] = "spark"
     session_id: Optional[str] = None

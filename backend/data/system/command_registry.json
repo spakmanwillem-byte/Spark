@@ -1,7 +1,7 @@
 {
-  "_arch_ref": "v6_command_registry_001 \u2014 master mapping van app-endpoints naar intent_tags (donderdag-fundering)",
+  "_arch_ref": "v6_command_registry_001 — master mapping van app-endpoints naar intent_tags (donderdag-fundering)",
   "version": "v1",
-  "last_updated": "2026-05-25T22:00:00Z",
+  "last_updated": "2026-08-30T16:46:18.321083+00:00",
   "commands": [
     {
       "id": "cap_tellen_gebruikers",
@@ -636,6 +636,28 @@
       "gradatie_min": 1,
       "behavior_class_hint": "diagnostisch",
       "source": "capability_handler_service._handle_audit_health"
+    },
+    {
+      "id": "cap_kb_normalize_apostrophes",
+      "path": "/api/kb/v2/admin/normalize-apostrophes",
+      "method": "POST",
+      "intent_tags": [
+        "normaliseren",
+        "apostrofen",
+        "kb",
+        "onderhoud",
+        "ghost-preventie",
+        "opschonen"
+      ],
+      "required_params": [],
+      "optional_params": [
+        "dry_run"
+      ],
+      "gradatie_min": 5,
+      "admin_only": true,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "kb_v2.routes.admin_normalize_apostrophes",
+      "description": "Vervang unicode-apostrofen (’‘´`‛ʼ) door rechte ASCII in alle KB-tags, begrippen en index-keys. Voorkomt ghost-kaarten (foto’s vs foto's)."
     }
   ],
   "stats": {

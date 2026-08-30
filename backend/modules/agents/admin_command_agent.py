@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: uitbreiden zodra elke admin-cmd geregistreerd is in de registry.
 _ADMIN_CMD_WHITELIST: List[str] = [
+    "cap_kb_normalize_apostrophes",  # v13c_apostrophe_normalizer_001 — eerste live admin-cmd
     # "cap_reconcile_potjes",
     # "cap_seed_self_awareness_cards",
     # "cap_toggle_admin_capable",

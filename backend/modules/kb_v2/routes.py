@@ -102,6 +102,17 @@ async def admin_dedupe_inbox(dry_run: bool = False):
     return service.dedupe_inbox(dry_run=dry_run)
 
 
+# v13c_apostrophe_normalizer_001 — Unicode-apostrof normalisatie in KB (admin)
+@router.post("/admin/normalize-apostrophes")
+async def admin_normalize_apostrophes(dry_run: bool = False):
+    """Vervang unicode-apostrofen (’ ‘ ´ ` ‛ ʼ) door rechte ASCII-apostrof (')
+    in alle tags, begrippen en index-keys. Voorkomt ghost-kaarten zoals
+    'foto’s' naast 'foto's'. Idempotent + backups. Zet dry_run=true om te
+    zien wat er zou veranderen zonder writes."""
+    from .apostrophe_normalizer import normalize_apostrophes_in_kb
+    return normalize_apostrophes_in_kb(dry_run=dry_run)
+
+
 # v6_kbv2_text_importer_001 — Bulk import van rijke txt-kaarten
 class TextImportBody(BaseModel):
     text: str

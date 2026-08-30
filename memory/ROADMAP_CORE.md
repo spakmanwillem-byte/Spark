@@ -176,6 +176,24 @@ introspectief kan uitleggen wat hij kan.
   `@router`-decorators in `/app/backend/modules/` en genereert concept-entries
   voor missende routes. Output: `/tmp/registry_scan_YYYYMMDD_HHMMSS.json`
   met 617 concept-entries klaar voor review.
+- **Admin-whitelist uitbreiding**: 17 cmd_id's in `_ADMIN_CMD_WHITELIST`
+  (KB-onderhoud, agenda-archive-all, bug-moderation, triggers-editing).
+- **Foto's-kaart upgrade** (`kbv2-c0421b96`) — Willem's uitgebreide versie
+  overschreven op de bestaande kaart (7 use-cases, betere ws5). Lege
+  ghost-duplicaat `kbv2-63c3d542` (unicode-apostrof) opgeruimd.
+- **Ervaring-uit-brainstorm — `kb_hit_log_agent` skelet + KB-kaart**:
+  `modules/agents/kb_hit_log_agent.py` met `record()`/`retrieve()`/`stats_snapshot()`,
+  datafile-formaat vastgelegd (`data/chat_analytics/kb_hits.jsonl`, JSON-Lines,
+  gestandaardiseerde `match_source`-labels). KB-kaart `kbv2-dc6c015e`
+  volledig gevuld in Weten. Smoke-test: 2 rijen geschreven + teruggelezen.
+  Hooks in `response_composer` / `snap_service` bewust NIET geplaatst
+  (skelet-fase — format vaststellen eerst).
+- **KB-test-kaart `orphan-tag scan`** (`kbv2-18829e2b`) volledig gevuld in
+  Weten met 10 tags — bewijs dat Principe #8 werkt: cmd_id in registry
+  + concept-naam in KB, twee kanalen, één begrip.
+- **Small tweak**: topic-overview sample-limiet van 5 → 10 begrippen
+  (`smart_intents_service.py:683`). KB is gegroeid naar 7000+ kaarten;
+  5 sample-hits was te karig geworden.
 
 ### 🎯 OPEN (Sessie 58 vervolg — registry-uitbreiding)
 
@@ -189,6 +207,11 @@ introspectief kan uitleggen wat hij kan.
   zelfuitleg over eigen chat-flow (intent-matching, compose, snap).
 - **P1 — Registry batch-4 (spark + spark_planner + spark_kasboek)** — 32 routes
   over Sparks eigen leven (identity, planner, saldo).
+- **P1 — Trader-intents-registratie** — `modules/trade/trader_intents.py`
+  bevat al 8+ chat-intents (`trader_start`, `trader_stop`, `trader_status`,
+  `trader_explain`, `trader_recent_trades`, etc.) die vóór de LLM-router
+  worden gematcht. Werkt, maar niet in registry — Spark kan er niet naar
+  wijzen op "wat kan je met de trader?". Aparte batch (~8 entries).
 - **P2 — Registry batch-5 (auth + wallet + profile)** — 79 routes. Belangrijk
   maar minder Spark-introspectief.
 - **P2 — Registry batch-6 (trade)** — 95 routes. Grootste module; kan gefaseerd
@@ -207,10 +230,24 @@ introspectief kan uitleggen wat hij kan.
 - **P1 — `admin_command_agent.execute_as_admin()`** — whitelist-check +
   auth-guard hergebruiken van `modules.auth.deps.require_admin_capable` +
   gestructureerde audit `event_type=admin_action`.
+- **P1 — `kb_hit_log`-hooks plaatsen** in `chat/response_composer.py`,
+  `chat/snap_service.py` en `chat/smart_intents_service.py` op de plekken
+  waar KB-kaarten worden gebruikt (topic-overview, snap-lookup,
+  sentence-match, compose-embed). Één regel per hook — best-effort.
+  Zodra ledger vult: dead-weight-analyse mogelijk.
 - **P2 — `personal_agent.snapshot()`** — depth minimal/standard/deep uitwerken
   met 30s TTL-cache; consumer wordt `compose_routes`.
 - **P2 — `spark_pulse_agent.pulse()`** — KB + trade + LLM-router + chat
-  metrics-blokken, health_score berekening, narrator-templates.
+  metrics-blokken, health_score berekening, narrator-templates. Leest ook
+  `kb_hit_log.stats_snapshot()` zodra hooks live zijn.
+- **P2 — `ervaring_agent` skelet** — nieuwe agent boven `kb_hit_log`.
+  Distilleert conclusies uit reeksen van gesprekken; LLM-onafhankelijk zodat
+  Spark bij LLM-uitval nog steeds "geleerde ervaring" heeft. Structuur:
+  `modules/agents/ervaring_agent.py` + datafiles
+  `data/ervaringen/ledger.json` / `disputed.json` / `verified.json`.
+  Bronnen: `chat_conclusion` (pattern-match afsluiters), `interaction_log`
+  (bijv. openingszin-tracking), `external_check` (Wikipedia/Google, P3).
+  Nog niet bouwen — pas als `kb_hit_log` een paar honderd rijen heeft.
 
 ### 📌 Uitgebreide stats (kleine wins, hoge waarde)
 
@@ -221,6 +258,16 @@ introspectief kan uitleggen wat hij kan.
 - **P2 — `POST /api/kb/v2/admin/topics/recompute`** — per kaart of bulk
   het `topic`-veld herberekenen op basis van tags. Nuttig bij drift na
   bulk-import of merges.
+
+### 🧹 Kleine opruim-items (opgetekend maar niet gedaan)
+
+- **`kb-hit-log` seed-script niet uitgevoerd** — `scripts/seed_registry_concepts_to_inbox.py`
+  bestaat maar niet gedraaid. Zou 617 skeletons in KB-inbox zetten met
+  cmd_id als begrip. Beter: script aanpassen zodat het lees­bare begrip
+  genereert (bv `cap_agenda_events_list` → "agenda-events tonen") vóór
+  massa-seed.
+- **`Programma's`-kaart** heeft nu rechte apostrof; index-alias unicode-versie
+  verwijderd. Backups: `*.bak_apostrof_normalize_*` + `*.bak_orphan_scan_test_*`.
 
 ---
 

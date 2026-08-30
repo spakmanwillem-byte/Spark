@@ -1,37 +1,69 @@
 # Spark Core 2.0 — PRD
 
 
-## Sessie 58 (2026-02-15) — Subject-Agent laag skeletons (Principe #8)
+## Sessie 58 vervolg (2026-02-15) — Registry-fundering + Ghost-preventie + kb-hit-log
 
-**Melding (Willem)**: "Yes, good idea. Doubt gone. Let's make it." → 4 wrappers als
-skeletons opzetten voor de nieuwe Subject-Agent-laag.
+**Melding (Willem)**: "kaart foto's kwam als 'bestaat al' — waarom werd er een snap
+van gemaakt bij de orphan-tag scan?" + "die tag schoonmaker is gelijk een functie
+die je kan inbouwen. en koppelen aan een admin command." + "de trader aan uit is
+ook al verbonden door middel gesprek?" + "als idee goed is ook gelijk format
+kunnen we later op verder" + brainfart over fact/ervaring-agent.
 
 **Wat is gedaan**:
-1. Nieuwe map `/app/backend/modules/agents/` aangemaakt met `__init__.py` docstring
-   die de laag samenvat (dun wrapper-patroon, geen route-registratie).
-2. **`task_agent.py`** — brug tussen chat-intent en `command_registry.json`.
-   Signatures: `resolve(intent_tags)`, `execute(cmd_id, params, user_id)`,
-   `list_commands(gradatie_max)`. `list_commands()` werkt al (leest registry);
-   `resolve` en `execute` retourneren `not_implemented`-marker.
-3. **`admin_command_agent.py`** — wrapper voor admin-only capabilities met
-   whitelist en dubbele check. Skelet-signatures: `is_admin_command`,
-   `execute_as_admin`, `list_admin_commands`.
-4. **`personal_agent.py`** — reader voor persoonlijke context (`snapshot`,
-   `recent_topics`, `get_privacy_flag`) met depth-levels minimal/standard/deep.
-5. **`spark_pulse_agent.py`** — Spark's zelfbewustzijn-heartbeat. Signatures:
-   `pulse`, `narrate`, `should_alert`. Placeholder-narrator geeft NL-zin terug.
-6. **`snap_agent.seed_agent_layer_cards()`** — nieuwe helper die de 4 agent-modules
-   idempotent in de KB-inbox seedt. Uitgevoerd: 4 kaarten aangemaakt
-   (`kbv2-04a9994f`, `kbv2-3e8865f1`, `kbv2-18adeb37`, `kbv2-45d1d661`).
+1. **Foto's-kaart** (`kbv2-c0421b96`) upgraded met Willem's uitgebreide versie
+   (7 use-cases, betere ws5). Ghost-duplicaat `kbv2-63c3d542` (unicode-apostrof
+   in begrip) verwijderd uit inbox.
+2. **Root-cause apostrof-ghost gefixt**:
+   - `modules/kb_v2/tag_sanitizer.py` — `_APO_MAP` toegevoegd, `sanitize_tag`
+     normaliseert nu unicode-apostrofen (’‘´`‛ʼ → ').
+   - `scripts/orphan_tags_to_cards_v13d.py` — `_canonicalize` doet apostrof-normalisatie
+     vóór alle andere checks; nieuwe `-'s`-plural-strip-regel.
+   - Data-fix: 8 tags + 1 begrip (`Programma's`) + 1 index-key genormaliseerd.
+   - 6 regressietests toegevoegd, 18/18 pass.
+3. **Apostrof-normalize als admin-command**:
+   - `modules/kb_v2/apostrophe_normalizer.py` — herbruikbare
+     `normalize_apostrophes_in_kb(dry_run)`-functie.
+   - `POST /api/kb/v2/admin/normalize-apostrophes?dry_run=bool` route.
+   - Registry-entry `cap_kb_normalize_apostrophes` (admin_only=True, gradatie=5).
+   - `admin_command_agent._ADMIN_CMD_WHITELIST` — eerste écht lid.
+   - CLI-wrapper `scripts/normalize_apostrophes_in_kb.py` gebruikt zelfde functie.
+4. **Registry-batch-1** — 38 nieuwe entries: agenda (9), notes (7), bugs (5),
+   help (3), triggers (8), KB v2 admin (5), commands-list (1). Registry
+   totaal: **14 → 76 entries**.
+5. **`GET /api/commands/list`** nieuwe route (`modules/system/commands_list_routes.py`)
+   met filters module/admin_only/gradatie_max/q. Spark's "welke commando's ken
+   je?"-endpoint via `task_agent.list_commands()`.
+6. **Admin-whitelist naar 18 leden**: KB-onderhoud (5), agenda-archive-all,
+   bug-moderation (3), triggers-editing (7), apostrof-normalize.
+7. **Auto-scanner** — `scripts/scan_routes_for_registry.py` scant 669 router-
+   decorators; 617 concept-entries geschreven naar `/tmp/registry_scan_*.json`
+   voor module-per-module review + aanvulling.
+8. **KB-kaarten**:
+   - `orphan-tag scan` (`kbv2-18829e2b`) in Weten, volledig ingevuld.
+   - `kb-hit-log` (`kbv2-dc6c015e`) in Weten, volledig ingevuld.
+9. **kb_hit_log_agent skelet** (`modules/agents/kb_hit_log_agent.py`) met
+   `record()`/`retrieve()`/`stats_snapshot()`. Datafile-formaat vastgelegd:
+   `data/chat_analytics/kb_hits.jsonl` JSON-Lines met gestandaardiseerde
+   `match_source`-labels. Smoke-test 2 rijen OK. Hooks in response_composer
+   bewust NIET geplaatst (skelet-fase).
+10. **Kleine tweak**: topic-overview sample 5 → 10 begrippen
+    (`chat/smart_intents_service.py:683`) — KB is naar 7000+ kaarten gegroeid.
 
-**Testing**: Import-check + smoke-call op elke signatuur = OK. Inbox-listing via
-`/api/kb/v2/inbox` toont alle 4 kaarten aanwezig. Backend gezond, hot-reload actief.
+**Testing**: 18/18 tag_sanitizer pytest-regressie pass. End-to-end via externe
+API-URL: `POST /admin/normalize-apostrophes?dry_run=true` → 200 OK, correct
+resultaat. `GET /commands/list` met filters agenda/admin_only/gradatie_max
+allemaal correct. `kb_hit_log_agent.record()` + `retrieve()` roundtrip OK.
 
-**Wat NIET gedaan** (opzettelijk — user wilde skeletons, geen implementatie):
-- `resolve`-scoring, `execute`-dispatch, gradatie-check.
-- Admin-whitelist invulling.
-- Snapshot depth-lagen data-reads.
-- Pulse-metrics + narrator templates.
+**Ontdekt maar niet uitgevoerd**:
+- **Trader chat-intents** (`modules/trade/trader_intents.py`) — 8+ NL-regex
+  patronen (`trader_start`, `trader_stop`, `trader_status`, `trader_explain`,
+  etc.) draaien al vóór LLM-router. Ontbreken alleen in registry — aparte
+  batch nodig zodat Spark er via `commands/list` naar kan wijzen.
+- **`seed_registry_concepts_to_inbox.py`** — script bestaat maar niet gedraaid.
+  Zou 617 skeletons met cmd_id als begrip seeden. Beter eerst readable-name-
+  generator maken (cmd_id → menselijk begrip) om massa-seed nuttig te maken.
+
+**Vervolg**: zie ROADMAP_CORE.md sectie "Sessie 58 — OPEN" voor P1/P2/P3.
 
 
 

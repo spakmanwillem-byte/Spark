@@ -297,7 +297,7 @@ input" + "response-tijd loggen leuk voor later onderzoek".
   - `sparkThinking`-state in `GesprekkenPage` toggles rond fetch-calls,
     ook bij compose-deep-mode.
 
-### 📌 OPEN (voor volgende sessie — image-upload-naming)
+### 📌 OPEN (voor volgende sessie — image-upload-naming + dashboard-kleurschema + chat-persistence)
 
 - **P2 — Image-upload → begrip mapping**:
   - Bij upload van een afbeelding op een KB-kaart wordt de bestandsnaam
@@ -312,6 +312,62 @@ input" + "response-tijd loggen leuk voor later onderzoek".
   - Nadenken: welke module handelt image-uploads af (`kb_v2/media_routes.py`?),
     hoe passen we filename → begrip toe zonder bestaande kaarten om te gooien,
     en waar valt de "wacht-icoon" onder (weten? doen?).
+
+- **P2 — Dashboard-kaders kleurschema**:
+  - Icoon-accent van Agenda/Notities/Gesprekken-cards uit
+    profiel → instellingen → kleurbeheer trekken ipv hardcoded
+    (`#f97316` / `#22c55e` / `#06b6d4`). Waarschijnlijk via de bestaande
+    CSS-variabelen `--glow-base` / `--glow-accent` (die de chat-bubbles
+    ook gebruiken sinds v13_bubble_glow_persoonlijk_001).
+  - Nette fallback: als user geen kleuren gekozen heeft → huidige defaults.
+
+- **P1 — Bug: Spark stopt bij tab-wissel**:
+  - Symptoom (Willem): wisselen van Gesprekken naar andere pagina tijdens
+    het wachten → Spark's antwoord komt niet meer aan.
+  - Vermoedelijke oorzaak: `GesprekkenPage` unmount, `setSparkMessages`
+    krijgt geen effect meer (React silent no-op op unmounted component).
+    Fetch loopt in JS door maar het resultaat verdwijnt in het luchtruim.
+  - Voorgestelde fix: sla per pending-fetch een record op in
+    `sessionStorage` (turn_id + text), en in de `.then()` óók het resultaat
+    naar `sessionStorage`. Bij `GesprekkenPage` mount → lees unread-results
+    + herstel `sparkThinking`-state. Bonus: response-tijd-logging blijft
+    werken want die is in de fetch-thread, niet in de component.
+  - Alternatief: lift `sparkMessages` naar een globale context/provider
+    zodat unmounten niet meer uitmaakt. Groter refactor.
+
+### 🎨 Dashboard-kaders live (dag 2 vervolg)
+
+**Melding (Willem)**: "in dat kader zou ik graag de eerst volgende komende
+afspraak willen zien uit de agenda. en als ik er op klik na agenda ga.
+kader als nodig aan kleur schema in beheer mijn profiel instellingen
+kleurbeheer daar. zo zou je ook een notitie kader moeten hebben. met de
+prio taak als eerst, en als die er niet is de laatst ingevoerde notitie.
+gesprekken net zo: laatst gegeven output van spark, community aan/uit,
+laatst binnengekomen privé als bericht → klik → naar privé."
+
+- **✅ Agenda-kader** (`DashboardPage.js`): 
+  - Fetcht `/api/agenda/events/{user_id}`, filter op `datum >= nu`, sorteert,
+    toont eerste komende afspraak (titel + geformatteerd tijdstip).
+  - Fallback-tekst "Geen aankomende afspraken" indien leeg.
+  - Klik → `onNavigate('calendar', '/calendar')`.
+- **✅ Notities-kader** (nieuw):
+  - Fetcht `/api/notes/tasks?user_id=...` + `/api/notes/all?user_id=...`
+    parallel. Prio-taak (`hoog`/`high`) wint; anders eerste taak; anders
+    laatste notitie.
+  - Rode streep bij hoge prio, groen anders. Kind-label ("taak · hoog"
+    of "laatste notitie") onder de content.
+  - Klik → `onNavigate('notes', '/notes')`.
+- **✅ Gesprekken-kader** verrijkt:
+  - Laatste Spark-turn bovenaan met Spark-avatar, klik → sessionStorage
+    tab='spark', navigate naar chat.
+  - Community-berichten alleen zichtbaar als toggle aan (persist in
+    `localStorage.dashboard_show_community`). Klik → tab='community'.
+  - Laatste privé onderaan als notification-badge (cyan dot); klik zet
+    `sessionStorage.spark_prive_contact_id` én tab='prive' zodat de
+    chat-pagina meteen dat gesprek opent.
+  - Toggle-switch onderaan de kaart voor community-zichtbaarheid.
+- **Nog te doen** (P2, hierboven): kaart-icoon-accent uit user-kleurschema
+  ipv hardcoded oranje/groen/cyaan.
 
 ---
 

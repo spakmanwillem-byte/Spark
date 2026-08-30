@@ -87,6 +87,14 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const [kbv2Stats, setKbv2Stats] = useState(null);
   // v6_dashboard_fin_001 (28 mei) — saldo + vermogen widget
   const [finStats, setFinStats] = useState(null);
+  // v13c_dashboard_live_cards_001 — Agenda/Notities/Gesprekken kaders live
+  const [nextEvent, setNextEvent] = useState(null);           // eerstvolgende agenda-afspraak
+  const [priorityNote, setPriorityNote] = useState(null);     // prio-taak of laatste notitie
+  const [latestSparkTurn, setLatestSparkTurn] = useState(null);  // laatste Spark antwoord
+  const [latestPriveContact, setLatestPriveContact] = useState(null);  // laatste privé-gesprek
+  const [showCommunityInChats, setShowCommunityInChats] = useState(() => {
+    try { return localStorage.getItem('dashboard_show_community') !== '0'; } catch { return true; }
+  });
 
   useEffect(() => {
     if (activePage !== 'dashboard') return;
@@ -113,7 +121,67 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       setRecentChats(buildRecentChats(sparkLog, community, contacts));
       setKbv2Stats(kbv2);
       setFinStats(fin);
+      // v13c_dashboard_live_cards_001 — Spark laatste output uit sparkLog
+      const sc = sparkLog?.conversations?.[0];
+      if (sc && (sc.spark_response || sc.user_message)) {
+        setLatestSparkTurn({
+          text: sc.spark_response || sc.user_message,
+          ts: sc.timestamp,
+        });
+      }
+      // Laatste privé-contact
+      const contactList = contacts?.contacts || [];
+      const lastPrive = contactList.find(c => c.last_message);
+      if (lastPrive) {
+        setLatestPriveContact({
+          id: lastPrive.id,
+          naam: lastPrive.naam || 'Contact',
+          msg: lastPrive.last_message,
+          time: lastPrive.last_time || '',
+          color: lastPrive.color || '#3b82f6',
+        });
+      }
     });
+
+    // v13c_dashboard_live_cards_001 — Agenda + Notities/Tasks parallel maar apart
+    if (user?.id) {
+      // Agenda: pak eerstvolgende event
+      fetch(`${API}/api/agenda/events/${user.id}`)
+        .then(r => r.json()).catch(() => null)
+        .then(data => {
+          if (!data) return;
+          const events = Array.isArray(data) ? data : (data.events || []);
+          const now = new Date();
+          const upcoming = events
+            .filter(e => {
+              const d = new Date(e.datum || e.date || e.timestamp || e.starts_at || 0);
+              return !isNaN(d) && d >= now;
+            })
+            .sort((a, b) => new Date(a.datum || a.date || a.starts_at) - new Date(b.datum || b.date || b.starts_at));
+          if (upcoming.length > 0) {
+            setNextEvent(upcoming[0]);
+          }
+        });
+
+      // Notities: prio-taak eerst, anders laatste notitie
+      Promise.all([
+        fetch(`${API}/api/notes/tasks?user_id=${user.id}`).then(r => r.json()).catch(() => null),
+        fetch(`${API}/api/notes/all?user_id=${user.id}`).then(r => r.json()).catch(() => null),
+      ]).then(([tasksRes, notesRes]) => {
+        const tasks = (tasksRes?.tasks || []).filter(t => t.status !== 'done');
+        const prioTask = tasks.find(t => t.priority === 'hoog' || t.priority === 'high')
+          || tasks[0];
+        if (prioTask) {
+          setPriorityNote({ kind: 'task', text: prioTask.task, priority: prioTask.priority });
+          return;
+        }
+        const notes = notesRes?.notes || [];
+        const latestNote = notes[0]; // notes worden vooraan gevoegd bij create
+        if (latestNote) {
+          setPriorityNote({ kind: 'note', text: latestNote.titel || latestNote.inhoud || '(zonder titel)', priority: null });
+        }
+      });
+    }
   }, [activePage, user?.id]);
 
   const pageInfo = getPageInfo(activePage);
@@ -367,44 +435,121 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             {/* Mijn Opslag */}
             <StorageCard storageStats={storageStats} onNavigate={onNavigate} />
 
-            {/* Agenda Quick */}
+            {/* Agenda Quick — v13c_dashboard_live_cards_001 */}
             <Card title="Agenda" icon={Calendar} accent="#f97316" onClick={() => onNavigate('calendar', '/calendar')}>
-              <div className="space-y-2">
-                {[
-                  { time: '09:00', title: 'Daily standup', color: '#3b82f6' },
-                  { time: '11:30', title: 'Knowledge review', color: '#f59e0b' },
-                  { time: '14:00', title: 'Module testing', color: '#22c55e' },
-                ].map((ev, i) => (
-                  <div key={i} className="flex items-center gap-2.5">
-                    <div className="w-1 h-8 rounded-full" style={{ background: ev.color }} />
-                    <div>
-                      <p className="text-xs text-white">{ev.title}</p>
-                      <p className="text-[10px] text-slate-500">{ev.time}</p>
-                    </div>
+              {nextEvent ? (
+                <div className="flex items-center gap-2.5">
+                  <div className="w-1 h-10 rounded-full" style={{ background: nextEvent.color || '#f97316' }} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-white truncate">{nextEvent.title || nextEvent.titel || 'Afspraak'}</p>
+                    <p className="text-[10px] text-slate-500">
+                      {(() => {
+                        try {
+                          const d = new Date(nextEvent.datum || nextEvent.date || nextEvent.starts_at);
+                          return d.toLocaleString('nl-NL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+                        } catch { return ''; }
+                      })()}
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ) : (
+                <p className="text-xs text-slate-500 italic">Geen aankomende afspraken.</p>
+              )}
             </Card>
 
-            {/* Gesprekken */}
+            {/* Notities — v13c_dashboard_live_cards_001 */}
+            <Card title="Notities" icon={BookOpen} accent="#22c55e" onClick={() => onNavigate('notes', '/notes')}>
+              {priorityNote ? (
+                <div className="flex items-start gap-2.5">
+                  <div className={`w-1 h-10 rounded-full flex-shrink-0 ${priorityNote.priority === 'hoog' || priorityNote.priority === 'high' ? 'bg-red-500' : 'bg-emerald-500'}`} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-white line-clamp-2">{priorityNote.text}</p>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      {priorityNote.kind === 'task' ? `taak · ${priorityNote.priority || 'normaal'}` : 'laatste notitie'}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-xs text-slate-500 italic">Nog geen taken of notities.</p>
+              )}
+            </Card>
+
+            {/* Gesprekken — v13c_dashboard_live_cards_001 */}
             <Card title="Gesprekken" icon={MessageSquare} accent="#06b6d4" onClick={() => onNavigate('chat', '/chat')}>
               <div className="space-y-2">
-                {recentChats.length === 0 ? (
-                  <p className="text-xs text-slate-500 italic">Nog geen recente gesprekken.</p>
-                ) : recentChats.map((c, i) => (
-                  <div key={i} className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" style={{ background: c.color }}>
-                      {c.from[0]}
+                {/* Laatste Spark-output */}
+                {latestSparkTurn && (
+                  <div
+                    className="flex items-center gap-2.5 cursor-pointer hover:bg-slate-800/40 rounded-md p-1 -m-1 transition-colors"
+                    onClick={(e) => { e.stopPropagation(); try { sessionStorage.setItem('spark_active_tab', 'spark'); } catch {} onNavigate('chat', '/chat'); }}
+                  >
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: '#f59e0b' }}>
+                      <Sparkles className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <p className="text-xs text-white truncate">{c.from}</p>
-                        <span className="text-[10px] text-slate-500 ml-2 flex-shrink-0">{c.time}</span>
-                      </div>
-                      <p className="text-[10px] text-slate-400 truncate">{c.msg}</p>
+                      <p className="text-[10px] text-slate-400">Spark AI</p>
+                      <p className="text-xs text-white truncate">{latestSparkTurn.text}</p>
+                    </div>
+                  </div>
+                )}
+                {/* Community — alleen als toggle aan */}
+                {showCommunityInChats && recentChats.filter(c => (c.from || '').startsWith('Community')).map((c, i) => (
+                  <div
+                    key={`comm-${i}`}
+                    className="flex items-center gap-2.5 cursor-pointer hover:bg-slate-800/40 rounded-md p-1 -m-1 transition-colors"
+                    onClick={(e) => { e.stopPropagation(); try { sessionStorage.setItem('spark_active_tab', 'community'); } catch {} onNavigate('chat', '/chat'); }}
+                  >
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" style={{ background: c.color }}>
+                      {(c.from || '?')[0]}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] text-slate-400 truncate">{c.from}</p>
+                      <p className="text-xs text-white truncate">{c.msg}</p>
                     </div>
                   </div>
                 ))}
+                {/* Laatste privé — als badge/melding */}
+                {latestPriveContact && (
+                  <div
+                    className="flex items-center gap-2.5 cursor-pointer hover:bg-slate-800/40 rounded-md p-1 -m-1 transition-colors border-t border-slate-800 pt-2 mt-1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      try {
+                        sessionStorage.setItem('spark_active_tab', 'prive');
+                        sessionStorage.setItem('spark_prive_contact_id', latestPriveContact.id || '');
+                      } catch {}
+                      onNavigate('chat', '/chat');
+                    }}
+                  >
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0 relative" style={{ background: latestPriveContact.color }}>
+                      {(latestPriveContact.naam || '?')[0]}
+                      <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-cyan-400 rounded-full border border-slate-900" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] text-cyan-400">Privé · {latestPriveContact.naam}</p>
+                      <p className="text-xs text-white truncate">{latestPriveContact.msg}</p>
+                    </div>
+                  </div>
+                )}
+                {!latestSparkTurn && !latestPriveContact && recentChats.length === 0 && (
+                  <p className="text-xs text-slate-500 italic">Nog geen recente gesprekken.</p>
+                )}
+              </div>
+              {/* Community-toggle onderaan de kaart */}
+              <div className="pt-2 mt-2 border-t border-slate-800 flex items-center justify-between">
+                <span className="text-[10px] text-slate-500">Community tonen</span>
+                <button
+                  data-testid="dashboard-toggle-community"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const next = !showCommunityInChats;
+                    setShowCommunityInChats(next);
+                    try { localStorage.setItem('dashboard_show_community', next ? '1' : '0'); } catch {}
+                  }}
+                  className={`w-8 h-4 rounded-full transition-colors relative ${showCommunityInChats ? 'bg-cyan-500' : 'bg-slate-700'}`}
+                >
+                  <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-transform ${showCommunityInChats ? 'translate-x-4' : 'translate-x-0.5'}`} />
+                </button>
               </div>
             </Card>
           </div>

@@ -679,8 +679,8 @@ def handle_topic_overview(topic_query: str) -> Dict:
         return -score
     hits.sort(key=_score)
 
-    # Geef top 5 begrippen
-    sample = hits[:5]
+    # Geef top 10 begrippen (v13c_sessie58 — was 5, KB is gegroeid naar 7000+ kaarten)
+    sample = hits[:10]
     begrippen = [e.get("begrip") for e in sample if e.get("begrip")]
     begrip_str = ", ".join(f"**{b}**" for b in begrippen)
 

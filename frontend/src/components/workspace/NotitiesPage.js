@@ -38,6 +38,39 @@ export function NotitiesPage({ onNavigate }) {
   const [showBugForm, setShowBugForm] = useState(false);
   const [newBug, setNewBug] = useState({ description: '', when: '', page: '' });
   const [bugSubmitMsg, setBugSubmitMsg] = useState(null);
+  // v13c_dashboard_live_cards_002 — focus-id vanuit dashboard-klik
+  const [focusId, setFocusId] = useState(null);
+
+  // Bij mount: check of dashboard een focus-item heeft doorgegeven via sessionStorage
+  useEffect(() => {
+    try {
+      const fid = sessionStorage.getItem('notes_focus_id');
+      const kind = sessionStorage.getItem('notes_focus_kind');
+      if (fid) {
+        setFocusId(fid);
+        if (kind === 'task') setViewMode('tasks');
+        else if (kind === 'note') setViewMode('notes');
+        sessionStorage.removeItem('notes_focus_id');
+        sessionStorage.removeItem('notes_focus_kind');
+      }
+    } catch {}
+  }, []);
+
+  // Scroll naar en highlight het focus-item zodra items geladen zijn
+  useEffect(() => {
+    if (!focusId || loading) return;
+    // Wacht 1 render-tick zodat DOM up-to-date is
+    const t = setTimeout(() => {
+      const el = document.querySelector(`[data-note-item-id="${focusId}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('ring-2', 'ring-amber-400', 'ring-offset-2', 'ring-offset-slate-900');
+        setTimeout(() => el.classList.remove('ring-2', 'ring-amber-400', 'ring-offset-2', 'ring-offset-slate-900'), 3000);
+      }
+      setFocusId(null); // niet meer nodig
+    }, 250);
+    return () => clearTimeout(t);
+  }, [focusId, loading, notes, tasks]);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -493,7 +526,7 @@ export function NotitiesPage({ onNavigate }) {
             {filtered.length === 0 ? (
               <div className="py-16 text-center"><StickyNote className="w-10 h-10 text-slate-700 mx-auto mb-3" /><p className="text-slate-400 text-sm">Geen items gevonden</p></div>
             ) : (
-              <NotitiesTreeView items={filtered} toggleDone={toggleDone} deleteItem={deleteItem} updateItem={updateItem} />
+              <NotitiesTreeView items={filtered} toggleDone={toggleDone} deleteItem={deleteItem} updateItem={updateItem} focusId={focusId} />
             )}
           </div>
           )}
@@ -511,7 +544,7 @@ export default NotitiesPage;
 /* ================================================================ */
 const MONTHS_NL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
 
-function NotitiesTreeView({ items, toggleDone, deleteItem, updateItem }) {
+function NotitiesTreeView({ items, toggleDone, deleteItem, updateItem, focusId }) {
   const tree = React.useMemo(() => {
     const t = {};
     for (const e of items) {
@@ -556,6 +589,23 @@ function NotitiesTreeView({ items, toggleDone, deleteItem, updateItem }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // v13c_dashboard_live_cards_002 — als er een focusId is (vanuit dashboard-klik),
+  // vind het item in de tree en open het juiste jaar/maand/dag zodat het item
+  // gerendered wordt. De scroll+highlight zit in NotitiesPage.
+  React.useEffect(() => {
+    if (!focusId) return;
+    const target = items.find(it => it.id === focusId);
+    if (!target) return;
+    const d = new Date(target.datum || target.created_at || Date.now());
+    const y = d.getFullYear();
+    const m = d.getMonth();
+    const dd = d.getDate();
+    if (availableYears.includes(y)) setActiveYear(y);
+    setOpenMonths(s => ({ ...s, [`${y}-${m}`]: true }));
+    setOpenDays(s => ({ ...s, [`${y}-${m}-${dd}`]: true }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focusId, items]);
 
   const toggleMonth = (y, m) => setOpenMonths(s => ({ ...s, [`${y}-${m}`]: !s[`${y}-${m}`] }));
   const toggleDay = (y, m, d) => setOpenDays(s => ({ ...s, [`${y}-${m}-${d}`]: !s[`${y}-${m}-${d}`] }));
@@ -713,7 +763,7 @@ function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
   }
 
   return (
-    <div data-testid={`item-${item.id}`} className={`p-3 bg-slate-900/50 border rounded-xl transition-all ${item.done ? 'border-slate-800/50 opacity-60' : 'border-slate-800 hover:border-slate-600'}`}>
+    <div data-testid={`item-${item.id}`} data-note-item-id={item.id} className={`p-3 bg-slate-900/50 border rounded-xl transition-all ${item.done ? 'border-slate-800/50 opacity-60' : 'border-slate-800 hover:border-slate-600'}`}>
       <div className="flex items-start gap-3">
         {item.type === 'task' ? (
           <button onClick={() => toggleDone(item)} className="mt-0.5 flex-shrink-0">

@@ -7,7 +7,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.05,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -106,24 +106,20 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.02,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68527.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.02,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "market": "BTC-EUR",
           "stats": {
-            "trades": 2,
+            "trades": 3,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -160,9 +156,15 @@
               "old_exit_price": 65943.0,
               "new_exit_price": 66035.0,
               "capital_after_repair": 10.15
+            },
+            {
+              "ts": "2026-08-31T07:30:51.271790+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000147 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
             }
           ],
-          "last_action": "CLEAN SLATE reset @ 2026-08-27T19:37",
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -196,7 +198,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.05,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -264,7 +266,7 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.05,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -332,7 +334,7 @@
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 10.05,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -401,25 +403,21 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 10.1,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BTC-EUR",
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68527.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.1,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "stats": {
-            "trades": 2,
+            "trades": 3,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -448,9 +446,15 @@
               "action": "restwaarde_close",
               "reason": "Pot claimt 7.502402 ATOM maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
               "entry_price": 1.3529
+            },
+            {
+              "ts": "2026-08-31T07:30:51.271790+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000148 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
             }
           ],
-          "last_action": "BUY cluster ee6559 @ EUR69057.7424",
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -496,31 +500,34 @@
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 10.02,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BTC-EUR",
           "minted_at": "2026-07-23T09:16:23.939810+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68527.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.02,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "reconcile_audit": [],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-31T07:30:51.271790+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000147 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
+            }
+          ],
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -550,7 +557,7 @@
               "operator": "user-001"
             }
           ],
-          "last_action": "AUTO-FIX ghost reset @ 2026-08-27T19:27"
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0"
         }
       ],
       "last_buy_cycle": null,
@@ -582,24 +589,27 @@
           "minted_at": "2026-07-20T16:52:48.805064+00:00",
           "minted_from": "test_reserve_log",
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68225.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.02,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "trade_log": [],
-          "reconcile_audit": [],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-31T07:31:24.049046+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000147 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
+            }
+          ],
           "original_max_size": 50.0,
           "assigned_market": "BTC-EUR",
           "assigned_at": "2026-08-23T14:04:43.334619+00:00",
@@ -617,7 +627,8 @@
               "reason": "v13_btc_redistribute_57 — Willem 28-aug: Bitvavo heeft 0.00102325 BTC = 7 potjes @ €68.2k. Verdeel over 7 potjes (Willem 2/Spark 3/Geiser 1/Gerben 1) i.p.v. alles in Spark pot-006.",
               "operator": "user-001"
             }
-          ]
+          ],
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0"
         },
         {
           "id": "pot-002",
@@ -630,25 +641,28 @@
           "minted_at": "2026-07-31T10:20:50.733070+00:00",
           "minted_from": "v11_potjes_reconcile",
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68225.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.02,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "trade_log": [],
           "note": "v11_potjes_reconcile — auto-added to match token balance",
-          "reconcile_audit": [],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-31T07:31:24.049046+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000147 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
+            }
+          ],
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -664,7 +678,8 @@
               "reason": "v13_btc_redistribute_57 — Willem 28-aug: Bitvavo heeft 0.00102325 BTC = 7 potjes @ €68.2k. Verdeel over 7 potjes (Willem 2/Spark 3/Geiser 1/Gerben 1) i.p.v. alles in Spark pot-006.",
               "operator": "user-001"
             }
-          ]
+          ],
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0"
         },
         {
           "id": "pot-003",
@@ -701,24 +716,20 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.02,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68527.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.02,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "market": "BTC-EUR",
           "stats": {
-            "trades": 2,
+            "trades": 3,
             "wins": 1,
             "losses": 0,
             "total_pnl": 0.0765
@@ -777,9 +788,15 @@
               "old_exit_price": 241.66,
               "new_exit_price": 253.39003248911803,
               "capital_after_repair": 10.13
+            },
+            {
+              "ts": "2026-08-31T07:31:04.606875+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000147 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
             }
           ],
-          "last_action": "AUTO-FIX ghost reset @ 2026-08-28T12:44",
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -815,7 +832,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.05,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -900,24 +917,20 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.02,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "market": "BTC-EUR",
           "position": {
-            "is_open": true,
-            "entry_price": 68202.0,
-            "highest_price": 68433.0,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-08-28T13:09:08.298546+00:00",
-            "amount_eur": 10.02,
-            "filled_coin": 0.00014617857142857143,
-            "cluster_id": "btc_redistribute_57",
-            "cluster_size": 7
+            "entry_time": null
           },
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -935,10 +948,17 @@
               "amount_eur": 10.1
             }
           ],
-          "reconcile_audit": [],
+          "reconcile_audit": [
+            {
+              "ts": "2026-08-31T07:31:14.151788+00:00",
+              "action": "restwaarde_close",
+              "reason": "Pot claimt 0.000147 BTC maar Bitvavo heeft 0.000000. Coin al verkocht buiten pot-state om.",
+              "entry_price": 68202.0
+            }
+          ],
           "original_max_size": 50.0,
           "note": "Aangemaakt door retro-accept van Sparks gift (2026-02-24) — dekking is de van Spark afgeboekte token.",
-          "last_action": "AUTO-FIX ghost reset @ 2026-08-28T12:44",
+          "last_action": "ADMIN CLOSE (restwaarde — coin al weg) @ €68202.0",
           "audit_log": [
             {
               "ts": "2026-08-28T12:44:54.829571+00:00",

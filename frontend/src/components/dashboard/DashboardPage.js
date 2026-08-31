@@ -188,14 +188,14 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
         const openTasks = (tasksRes?.tasks || []).filter(t => t.status !== 'done');
         const highPrioTask = openTasks.find(t => t.priority === 'hoog' || t.priority === 'high');
         if (highPrioTask) {
-          setPriorityNote({ kind: 'task', text: highPrioTask.task, priority: highPrioTask.priority });
+          setPriorityNote({ kind: 'task', id: highPrioTask.id, text: highPrioTask.task, priority: highPrioTask.priority });
           return;
         }
-        // Geen hoge-prio taak → laatste notitie (backend insert-op-positie-0, dus notes[0])
-        const notes = notesRes?.notes || [];
+        // Geen hoge-prio taak → laatste notitie (frontend sort op datum desc voor zekerheid)
+        const notes = [...(notesRes?.notes || [])].sort((a, b) => (b.datum || '').localeCompare(a.datum || ''));
         const latestNote = notes[0];
         if (latestNote) {
-          setPriorityNote({ kind: 'note', text: latestNote.titel || latestNote.inhoud || '(zonder titel)', priority: latestNote.priority || null });
+          setPriorityNote({ kind: 'note', id: latestNote.id, text: latestNote.titel || latestNote.inhoud || '(zonder titel)', priority: latestNote.priority || null });
         }
       });
     }
@@ -475,7 +475,21 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             </Card>
 
             {/* Notities — v13c_dashboard_live_cards_001 */}
-            <Card title="Notities" icon={BookOpen} accent="#22c55e" onClick={() => onNavigate('notes', '/notes')} fixedHeight>
+            <Card
+              title="Notities"
+              icon={BookOpen}
+              accent="#22c55e"
+              onClick={() => {
+                if (priorityNote?.id) {
+                  try {
+                    sessionStorage.setItem('notes_focus_id', priorityNote.id);
+                    sessionStorage.setItem('notes_focus_kind', priorityNote.kind);
+                  } catch {}
+                }
+                onNavigate('notes', '/notes');
+              }}
+              fixedHeight
+            >
               {priorityNote ? (
                 <div className="flex items-start gap-2.5">
                   <div className={`w-1 h-10 rounded-full flex-shrink-0 ${priorityNote.priority === 'hoog' || priorityNote.priority === 'high' ? 'bg-red-500' : 'bg-emerald-500'}`} />

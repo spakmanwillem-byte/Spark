@@ -45,6 +45,12 @@ Postgres, SQLite of andere databases voorstellen — óók niet voor "even snel 
 Geen mock users, geen "placeholder" antwoorden, geen "dit werkt over enkele minuten".
 Als iets niet werkt: eerlijk zeggen + concreet vervolg.
 
+### RULE_agent_test_account_001 — Testen als "Emergent" (Willem, 17-09-2026)
+De agent test ALTIJD met zijn eigen account **Emergent** (`user-4453ade3`, gradatie 4,
+admin_capable). Zie `test_credentials.md`. Nooit nieuwe testusers aanmaken (vervuilt
+`users.json` + eco-containers), nooit ongevraagd als Willem/echte users chatten.
+Willem-account alleen als hij dat expliciet vraagt (repro in zijn eigen data).
+
 ### RULE_footnote_metadata_001 — Kaart-aanmaak flow
 Iedere nieuwe KB v2 inbox-kaart moet minstens deze metadata dragen:
 - `footnote.bron` (waar komt de kaart vandaan?)

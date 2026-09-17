@@ -98,6 +98,26 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 
 ---
 
+## 🧩 PLAN — Fact-kaarten + "LLM-modus aan/uit" (uit Willem's admin-notitie "Facts", 07-09-2026, met Emmy)
+
+Gevonden 17-09 bij het doorlezen van chatlog + notities; stond nog nérgens op de roadmap.
+Bron: `data/notes/notes.json` titel "Facts" (scope admin). Sluit aan op fictie-gate + Odroid-offline.
+
+1. **Fact-kaart klasse** — afgeleide conclusie uit bestaande KB-kaarten, traceerbaar: `bronkaarten[]`,
+   `relaties[]`, `redeneerpad` (stappen). Fundament aanwezig: `lite_card_factory` (skeletons met footnote),
+   `footnote`-metadata, `ervaring_agent`-skelet (roadmap). Voorstel: `kind: "fact"` op KB v2-kaart + lade-onafhankelijk.
+2. **Auto lege fact-kaart bij "weet ik niet"** — als snap + semantic_lookup niets geven → fact-kaart draft in inbox
+   met de vraag als `_inbox_reason: "onbeantwoord"`; Willem ziet in Inbox waar Spark's gaten zitten.
+3. **Admin-toggle "LLM-modus"** (settings `llm_mode_enabled`, system-scope) — AAN: LLM-fallback + snap leert woorden
+   uit respons (`llm_output_scanner`). UIT: **eerlijke leegte** ("dat weet ik nog niet") — geen LLM-call.
+   Klein te bouwen; essentieel voor Odroid zonder internet en voor kosten.
+4. **5W+H als zoek-matching (onderzoek)** — zin → woord-tags → match op W/H-veld → onderwerp als antwoord.
+   `semantic_lookup` scoort al op ws5; onderzoeken of een W/H-gerichte scoring (vraagwoord → veld) de LLM
+   vaker overbodig maakt. Meetbaar via `kb_hits.jsonl`.
+Ook open (notitie 05-09 "Is deze KB goed"): inhoud kaart `kb_v2` vergelijken met andere KB-v2-kaarten.
+
+---
+
 ## 🎯 P0 VOLGENDE SESSIE — Zelfscan-fundering (metadata-integriteit)
 
 Willem's inzicht sessie 55: "kan Spark z'n eigen data zien" = zelfscan. Zonder

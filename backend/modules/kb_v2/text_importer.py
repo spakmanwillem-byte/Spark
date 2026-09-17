@@ -45,6 +45,7 @@ from datetime import datetime, timezone
 
 LADE_EMOJI_MAP = {
     "🎭": "doen", "doen": "doen", "🎭 doen": "doen",
+    "🎮": "games", "games": "games", "🎮 games": "games", "spark games": "games",
     "🧠": "weten", "weten": "weten", "🧠 weten": "weten",
     "🌸": "voelen", "voelen": "voelen", "🌸 voelen": "voelen",
     "💬": "spreken", "spreken": "spreken", "💬 spreken": "spreken",
@@ -313,7 +314,7 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
 
     # Load V2 per lade
     v2_data = {}
-    for lade in ("voelen", "spreken", "weten", "doen"):
+    for lade in ("voelen", "spreken", "weten", "doen", "games"):
         f = KB_V2 / f"knowledge_v2_{lade}.json"
         v2_data[lade] = load_json(f, default={"kaarten": []})
 

@@ -464,7 +464,7 @@ def _load_ops_context(user_text: str, user_id: Optional[str]) -> Optional[str]:
         try:
             v2_dir = Path(bp["paths"]["kbv2_dir"])
             totals = {}
-            for lade in ["doen", "weten", "voelen", "spreken"]:
+            for lade in ["doen", "weten", "voelen", "spreken", "games"]:
                 d = load_json(v2_dir / f"knowledge_v2_{lade}.json", default={"kaarten": []})
                 totals[lade] = len(d.get("kaarten") or [])
             inbox = load_json(v2_dir / "knowledge_inbox.json", default={"kaarten": []})

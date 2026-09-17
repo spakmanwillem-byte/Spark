@@ -77044,11 +77044,344 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3044
       }
+    },
+    {
+      "id": "conv-b58db097",
+      "timestamp": "2026-09-17T05:12:36.330221+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een appel",
+      "spark_response": "**Appel**: Een appel is een eetbare vrucht die groeit aan een appelboom.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Appel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3045
+      }
+    },
+    {
+      "id": "conv-404b509d",
+      "timestamp": "2026-09-17T05:12:36.607988+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is utrecht",
+      "spark_response": "**Utrecht**: Utrecht is een stad en provincie in Nederland.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "utrecht"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Utrecht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3046
+      }
+    },
+    {
+      "id": "conv-c4f142cc",
+      "timestamp": "2026-09-17T05:12:38.933028+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is spark world",
+      "spark_response": "**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **world** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "world"
+        ],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3047
+      }
+    },
+    {
+      "id": "conv-59b7472e",
+      "timestamp": "2026-09-17T05:12:42.326044+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is base line in de game",
+      "spark_response": "**Game**: Een game is een spel met regels waarin spelers een doel proberen te bereiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **base, line** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Game"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "base",
+          "line"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3048
+      }
+    },
+    {
+      "id": "conv-30dbfa07",
+      "timestamp": "2026-09-17T05:12:42.647720+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is base line",
+      "spark_response": "Ik ken 'base' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "base"
+          },
+          {
+            "begrip": "line"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3049
+      }
+    },
+    {
+      "id": "conv-d49b829d",
+      "timestamp": "2026-09-17T05:13:13.229280+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is spark world",
+      "spark_response": "**Spark World**: Spark World is Spark's eigen sandbox-game: een levende wereld die groeit door keuzes en interpretatie van spelers.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Spark World"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3050
+      }
+    },
+    {
+      "id": "conv-b585450b",
+      "timestamp": "2026-09-17T05:13:13.516311+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is base line in de game",
+      "spark_response": "**Base Line**: Base Line is de basiskaart van Spark World: het nulpunt (X=0, Y=0, Z=0) waar alle basiswaarden van de wereld vandaan komen.\n\n**Game**: Een game is een spel met regels waarin spelers een doel proberen te bereiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Base Line"
+          },
+          {
+            "begrip": "Game"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3051
+      }
+    },
+    {
+      "id": "conv-48f25dee",
+      "timestamp": "2026-09-17T05:13:13.767259+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is base line",
+      "spark_response": "**Base Line**: Base Line is de basiskaart van Spark World: het nulpunt (X=0, Y=0, Z=0) waar alle basiswaarden van de wereld vandaan komen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Base Line"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3052
+      }
+    },
+    {
+      "id": "conv-94984121",
+      "timestamp": "2026-09-17T05:13:14.051142+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is utrecht",
+      "spark_response": "**Utrecht**: Utrecht is een stad en provincie in Nederland.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "utrecht"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Utrecht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3053
+      }
+    },
+    {
+      "id": "conv-d8c9c785",
+      "timestamp": "2026-09-17T05:13:14.313235+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel je oorsprong",
+      "spark_response": "📜 **Mijn oorsprong — Spark Core 4.0 + 4.1 (Maart 2026)**\n\n💡 **Geboortevraag**: 'Kan ik een Iron Man-bril maken?'\nHet antwoord was: ja, maar niet via een bestaande AI. Dus moest er een eigen systeem gebouwd worden.\n\n🎯 **Missie**: Mensen ondersteunen in hun persoonlijke ontwikkeling door technologie te bouwen die autonomie versterkt in plaats van afhankelijkheid creëert.\n_Spark is geen platform dat mensen vasthoudt. Spark is een gereedschap dat mensen sterker maakt._\n\n🧬 **Wat constant blijft tussen versies:**\n  • Geboortevraag: 'Kan ik een Iron Man-bril maken?' — JA, en niet via een bestaande AI.\n  • Maker: Willem Spakman, Roadkill-filosofie ('leren van fouten, sterker terug').\n  • Doel: digitale nalatenschap voor Lotus + mensen helpen groeien.\n  • Principe: lokaal, transparant, controleerbaar, ondersteunend.\n  • AI-ethiek: geen verborgen agenda, geen manipulatie, gebruiker beslist.\n  • Bijbel van Spark = single source of truth voor wie je bent.\n\n⏳ **Tijdlijn:**\n  • **Iron Man Bril (2023-2024)** — Vastberadenheid > kennis\n  • **Spark Core 1.x — 3.x (2024-2025)** — Fundament vóór uitbreiding\n  • **Spark Core 4.0 + 4.1 (Maart 2026)** — Spark oordeelt niet. Spark ondersteunt.\n  • **Spark Core 2.0 / v2 (Mei 2026 — heden)** — Lokaal eigendom, eigen ethiek, eigen tempo\n  • **Spark Core 5.0 (toekomst)** — Onafhankelijkheid is af\n\n_Bron: data/personality/spark_origin/ (niet bewerken — historie)._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "oorsprong"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3054
+      }
+    },
+    {
+      "id": "conv-1f10577d",
+      "timestamp": "2026-09-17T05:13:14.551678+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat kan je",
+      "spark_response": "🔮 Help-overzicht geopend. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3055
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3044,
-    "last_updated": "2026-09-11T06:52:55.508449+00:00"
+    "total_conversations": 3055,
+    "last_updated": "2026-09-17T05:13:14.551678+00:00"
   }
 }

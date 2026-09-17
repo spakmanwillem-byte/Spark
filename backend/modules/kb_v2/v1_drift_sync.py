@@ -61,7 +61,7 @@ def sync_v1_drafts_to_v2_inbox(dry_run: bool = False) -> Dict:
 
     # Build v2 lade-presence map (begrip lowercase → True als met laag1)
     v2_in_lade = set()
-    for lade in ("doen", "weten", "spreken", "voelen"):
+    for lade in ("doen", "weten", "spreken", "voelen", "games"):
         d = load_json(KB_V2 / f"knowledge_v2_{lade}.json", default={"kaarten": []})
         for c in d.get("kaarten", []):
             v2_in_lade.add((c.get("begrip") or "").lower().strip())

@@ -6,6 +6,10 @@
 - Universele game-naam **Spark World**: kaart D&D → hub-kaart Spark World; Base Line → basiswaarden-kaart; Utrecht (Spark World); 8 grondstof-drafts. Tags d&d/dnd → `spark world`.
 - Steen Papier Schaar blijft in doen, gecrosslinkt met Spark World.
 - Index + graph herbouwd. Lint-fix `t1` scope in GesprekkenPage.
+- Fictie-gate: games-kaarten alleen in antwoorden bij game-context (`is_game_context`); ambient services zien ze niet.
+- Bigram-snap: meerwoordige begrippen ('spark world', 'base line') matchen nu in chat.
+- BUGFIX chat 500 (`ChatMessage` velden losgekoppeld door ResponseTimeLog-insert).
+- BUGFIX chat-lookup dood sinds 23 aug: losse `return response` in agenda-branch verwijderd — kennisvragen werken weer.
 
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.

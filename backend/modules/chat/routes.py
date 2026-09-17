@@ -38,6 +38,13 @@ HOMONYM_XP_BONUS = 15
 class ChatMessage(BaseModel):
     message: str
     user_naam: Optional[str] = "Gebruiker"
+    user_id: Optional[str] = None
+    channel: Optional[str] = "spark"
+    session_id: Optional[str] = None
+    # v12_admin_gated_triggers_001 — Wanneer False (default) triggeren admin-taken
+    # zoals trader-commando's niet meer op random woorden tijdens bv. verhaal-paste
+    # voor snap-input. Frontend stuurt True mee zodra 'Admin aan' toggle actief is.
+    admin_mode: Optional[bool] = False
 
 
 # v13c_response_time_log_001 — log Spark response-tijd per turn.
@@ -76,14 +83,6 @@ async def log_response_time(body: ResponseTimeLog):
         return {"ok": True}
     except Exception as e:
         return {"ok": False, "error": str(e)}
-
-    user_id: Optional[str] = None
-    channel: Optional[str] = "spark"
-    session_id: Optional[str] = None
-    # v12_admin_gated_triggers_001 — Wanneer False (default) triggeren admin-taken
-    # zoals trader-commando's niet meer op random woorden tijdens bv. verhaal-paste
-    # voor snap-input. Frontend stuurt True mee zodra 'Admin aan' toggle actief is.
-    admin_mode: Optional[bool] = False
 
 
 class SnapRequest(BaseModel):
@@ -1297,7 +1296,6 @@ async def process_message(req: ChatMessage):
                 response["agenda_intent"] = pending
                 _save_log(req, response, "agenda_proposal")
                 return response
-            return response
 
         # v4_community_recap_001 — "wat is gisteren besproken?"
         recap_offset = si.detect_community_recap_intent(text)

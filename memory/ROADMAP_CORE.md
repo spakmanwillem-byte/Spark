@@ -375,7 +375,25 @@ universeel Spark World".
   `data/dnd/_kb_cards_moved_to_games_lade_*.json.bak`, `data/dnd/_legacy_kb_inbox_moved.json.bak`.
 - **Getest**: curl stats/lade/find/orphan-dry-run + screenshot Spark Games-tab. Geen testing-agent.
 
+- **✅ Fictie-gate (`v14_fictie_gate_001`)** — Willem: "spark moet geen fantoom krijgen met
+  realiteit". `kb_v2/service.py`: `FICTIE_LADES={"games"}`, `is_game_context(text)`,
+  `filter_fictie()`. `semantic_lookup` filtert games-kaarten weg zonder game-context;
+  `snap_service._get_index(query)` heeft nu een 'real'- en 'all'-index. Ambient
+  services (spontaneous_w, wedervraag, scan, card_session) zien games NIET.
+  Test: "wat is utrecht" → echte kaart; "wat is spark world" → hub-kaart.
+- **✅ Bigram-snap (`v14_snap_bigram_001`)** — `multi_lookup` probeert eerst 2-woord-begrippen
+  ('spark world', 'base line') vóór losse woorden. Was een gap voor álle meerwoordige kaarten.
+- **🐛 ✅ Chat 500 gefixt** — `ResponseTimeLog`-blok (sessie 58) zat midden in `ChatMessage`,
+  waardoor `user_id/channel/session_id/admin_mode` van de class los waren → `/api/chat/message` 500.
+- **🐛 ✅ Chat-lookup dood sinds sessie 54 (23 aug)** — losse `return response` onder
+  `if req.user_id:` in de agenda-CREATE-branch (commit 62a87352) liet élke gewone
+  kennisvraag leeg terugkomen ("Hmm, daar moet ik even over nadenken") vóór snap bereikt werd.
+  Learning: na een branch-herordening altijd een `trace` op `return`-regel draaien
+  (`sys.settrace` op `process_message`) — 98 `return response` in één functie is te veel om op het oog te zien.
+
 **📌 OPEN — Spark World (pas oppakken als Core klaar is, Willem)**
+- P2 — Utrecht (Spark World) hernoemen naar een zelfbedachte stadsnaam (Willem: layout was NL-kaart,
+  geen admin-front voor de game nog) + `steden.json` id `utrecht` mee.
 - P2 — Spark Games-tab: filter per `game`-veld (Spark World / Steen Papier Schaar / …).
 - P2 — Restore-/eco-container per game zodat game-data en KB-kaarten samen verhuizen.
 - P2 — SPS-scorelijst koppelen als gevechtsmechaniek in Spark World.

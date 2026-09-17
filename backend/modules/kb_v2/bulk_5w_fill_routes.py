@@ -62,7 +62,7 @@ from modules.core.storage import load_json, save_json
 router = APIRouter(prefix="/kb/v2/curation", tags=["kb-v2-curation-5w-bulk"])
 
 V2 = Path("/app/backend/data/knowledge/v2")
-LADES = ["voelen", "spreken", "weten", "doen"]
+LADES = ["voelen", "spreken", "weten", "doen", "games"]
 REQUIRED_5W = ["wie", "wat", "wanneer", "waar", "waarom", "hoe"]
 PLACEHOLDER = {"", "?", "nog te vullen", "onbekend", "n.v.t.", "n/a"}
 HISTORY_FILE = V2 / "curation_history.json"
@@ -179,7 +179,7 @@ class BulkFillResult(BaseModel):
 @router.post("/5w-fill-bulk")
 async def bulk_5w_fill(limit: int = Query(20, ge=1, le=100),
                        dry_run: bool = False,
-                       lade: str = Query("all", regex="^(all|voelen|spreken|weten|doen)$")):
+                       lade: str = Query("all", regex="^(all|voelen|spreken|weten|doen|games)$")):
     """v12_5w_bulk_fill_001 — Vul lege 5W/lagen op bestaande lade-kaarten via LLM.
 
     Params:

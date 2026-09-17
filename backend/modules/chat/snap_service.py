@@ -198,12 +198,19 @@ class SnapNLPService:
                     index.setdefault(k, []).append(e)
         return index
 
-    def _get_index(self):
+    def _get_index(self, query_text=None):
+        """v14_fictie_gate_001 — zonder game-context krijgt de lookup een index
+        zónder fictie-kaarten (Spark World), zodat 'Utrecht' nooit de game-stad wordt."""
         global _GLOBAL_KNOWLEDGE_INDEX
         if _GLOBAL_KNOWLEDGE_INDEX is None:
             entries = self._load_knowledge()
-            _GLOBAL_KNOWLEDGE_INDEX = self._build_index(entries)
-        return _GLOBAL_KNOWLEDGE_INDEX
+            from modules.kb_v2.service import FICTIE_LADES
+            _GLOBAL_KNOWLEDGE_INDEX = {
+                "all": self._build_index(entries),
+                "real": self._build_index([e for e in entries if e.get("lade") not in FICTIE_LADES]),
+            }
+        from modules.kb_v2.service import is_game_context
+        return _GLOBAL_KNOWLEDGE_INDEX["all" if is_game_context(query_text) else "real"]
 
     def invalidate_cache(self):
         """Call na save/delete operaties (gedeeld over alle instances)."""
@@ -243,8 +250,8 @@ class SnapNLPService:
         return de eerste maar voeg `homonym_candidates` toe zodat de chat
         kan vragen welke betekenis user bedoelt.
         """
-        index = self._get_index()
         q = query.lower().strip()
+        index = self._get_index(f"{q} {context_text or ''}")
         ctx_words = set()
         if context_text:
             ctx_words = set(self._extract_meaningful_words(context_text))
@@ -341,7 +348,7 @@ class SnapNLPService:
         de hele user-zin. Bij gelijkspel → markeer match met
         `homonym_ambiguous=True` + `homonym_candidates`.
         """
-        index = self._get_index()
+        index = self._get_index(text)
         words = self._extract_meaningful_words(text.lower())
         ctx_words = set(words)
         results = []
@@ -372,6 +379,13 @@ class SnapNLPService:
             else:
                 res["homonym_matched_tags"] = best_tags
             return res
+
+        # v14_snap_bigram_001 — meerwoordige begrippen ('spark world', 'base line') eerst
+        for i in range(len(words) - 1):
+            bg = f"{words[i]} {words[i + 1]}"
+            if bg in index and bg not in seen:
+                seen.update({bg, words[i], words[i + 1]})
+                results.append(_disambig(index[bg], "exact", bg))
 
         for w in words:
             if w in index and w not in seen:

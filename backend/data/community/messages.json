@@ -6129,6 +6129,29 @@
       "ts": "2026-08-30T19:00:15.418359+00:00",
       "kind": "boekhouder_roundup",
       "source": "scheduler_v6"
+    },
+    {
+      "id": "bark-err-20260917T050657",
+      "user_id": "bot-boekhouder",
+      "user_name": "De Boekhouder",
+      "message": "🐛 **Madelief heeft iets opgevangen**\n\n• `chat` — Spark chat-bericht verwerken: AttributeError: 'ChatMessage' object has no attribute 'admin_mode'\n• `chat` — Spark chat-bericht verwerken: AttributeError: 'ChatMessage' object has no attribute 'admin_mode'\n\n_Spark gaat er mee aan de slag._",
+      "ts": "2026-09-17T05:06:57.266281+00:00",
+      "kind": "self_error_bark",
+      "source": "scheduler_v6",
+      "errors": [
+        {
+          "module": "chat",
+          "intent": "Spark chat-bericht verwerken",
+          "err": "AttributeError: 'ChatMessage' object has no attribute 'admin_mode'",
+          "ts": "2026-09-17T05:06:00.112791+00:00"
+        },
+        {
+          "module": "chat",
+          "intent": "Spark chat-bericht verwerken",
+          "err": "AttributeError: 'ChatMessage' object has no attribute 'admin_mode'",
+          "ts": "2026-09-17T05:06:07.631847+00:00"
+        }
+      ]
     }
   ],
   "active_users": [

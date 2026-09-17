@@ -32,8 +32,29 @@ LADE_META = {
     "spreken": {"icon": "💬", "naam": "Spreken", "stroom": "Communicatie & Taal"},
     "weten": {"icon": "🧠", "naam": "Weten", "stroom": "Systeem & Kennis"},
     "doen": {"icon": "🎭", "naam": "Doen", "stroom": "Gedrag & Actie"},
-    "games": {"icon": "🎮", "naam": "Spark Games", "stroom": "Spel & Wereld"},
+    "games": {"icon": "🎮", "naam": "Spark Games", "stroom": "Spel & Wereld", "realiteit": "fictie"},
 }
+
+# v14_fictie_gate_001 (Willem 17-09-2026): "spark moet geen fantoom krijgen met realiteit".
+# Kaarten in fictie-lades (Spark World) zijn kennis vóór Spark, maar mogen alleen
+# meedoen in een antwoord als de user het over de game heeft.
+FICTIE_LADES = {"games"}
+_GAME_CONTEXT_WORDS = (
+    "spark world", "spark games", "game", "spel", "spelen", "speler", "fractie", "fracties",
+    "base line", "persoonskaart", "rugzak", "inventory", "grondstof", "lore", "sandbox",
+)
+
+
+def is_game_context(text: str) -> bool:
+    t = (text or "").lower()
+    return any(w in t for w in _GAME_CONTEXT_WORDS)
+
+
+def filter_fictie(cards: List[Dict], query: str, lade_key: str = "_lade") -> List[Dict]:
+    """Verwijder fictie-kaarten uit een resultaat tenzij de vraag over de game gaat."""
+    if is_game_context(query):
+        return cards
+    return [c for c in cards if (c.get(lade_key) or c.get("lade")) not in FICTIE_LADES]
 
 _lock = threading.RLock()
 
@@ -304,6 +325,7 @@ def semantic_lookup(query: str, top_n: int = 5, min_score: int = 5) -> Dict:
         return {"query": query, "query_tokens": [], "n_scanned": 0, "n_matched": 0, "results": []}
 
     all_cards = _all_cards_with_lade()
+    all_cards = filter_fictie(all_cards, query)
     scored: List[Dict] = []
     for c in all_cards:
         s = _score_card(c, query_tokens)

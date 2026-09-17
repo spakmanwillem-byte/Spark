@@ -29,7 +29,7 @@ from modules.kb_v2.service import V2_DIR as _V2_DIR_PATH
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/kb/v2/curation", tags=["kb-curation"])
 
-LADES = ["voelen", "spreken", "weten", "doen"]
+LADES = ["voelen", "spreken", "weten", "doen", "games"]
 REQUIRED_5W = {"wie", "wat", "wanneer", "waar", "waarom", "hoe"}
 
 # Regel 1 detectie: infinitief NL werkwoord (min 4 chars, eindigt op -en).

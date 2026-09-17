@@ -84,6 +84,10 @@ Nieuwe module met externe API → entry toevoegen aan `CONNECTION_DEFS`, verschi
 waarden, admin) · `POST /api/connections/import` {content} → KEY=WAARDE regels naar connections.json (onbekende
 keys gemeld, lege overgeslagen). Panel bovenin de widget. Willem: download → veilig bewaren → upload op Odroid.
 Bitvavo blijft per user (niet in sleutelbestand) — bewust één ingang.
+**Waarom (Willem)**: "ik was bang voor allemaal foutmeldingen in cmd". Leidend principe voor fase 1:
+`spark.sh` spreekt mensentaal, geen stacktraces ("Python ontbreekt → installeer met …", "poort 8001 bezet",
+"sleutelbestand nog niet geüpload → open Kladblok → Verbindingen"). Ontbrekende sleutel = rood bolletje in het
+kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 **Fase 1 (op Emergent, voorbereiding, geen risico)**: `SPARK_ROOT` i.p.v. `/app` · `backend/.env.example`
 + `frontend/.env.example` · `spark.sh` (start backend 8001 + frontend 3000) · `ODROID.md` · oude
 `_backup_*`-mappen uit Git (staan al in Backup-download).

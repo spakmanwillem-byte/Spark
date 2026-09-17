@@ -63,6 +63,25 @@ Voor auto-extract-kaarten extra: `extract_source`, `extract_turn_id`, `extract_a
 
 ---
 
+## 🖥️ PLAN — Spark op eigen hardware (Odroid/Ubuntu) — Willem 17-09-2026, nog niet gestart
+
+**Doel**: Spark als "body": Odroid met scherm/toetsenbord, later mic/cam, later lokaal LLM (Ollama).
+**Feiten gecheckt**: geen database nodig (JSON) · `backend/data` zit in Git (1.6 GB, ~700 MB oude
+`_backup_*`) · `.env` wordt NOOIT gepusht (`.gitignore` 284-286) · geen torch/tensorflow → ARM ok ·
+LLM-router is al env-gestuurd (`LLM_PRIMARY_BASE_URL` → Ollama `http://localhost:11434/v1` werkt zonder code).
+**Blocker in code**: 72 hardcoded `/app/backend/...`-paden in 25 modules (container, synapse, backup,
+agenda, files, kb_v2, …). Workaround: symlink `/app` → clone-map. Netjes: `SPARK_ROOT` env-var.
+
+**Fase 1 (op Emergent, voorbereiding, geen risico)**: `SPARK_ROOT` i.p.v. `/app` · `backend/.env.example`
++ `frontend/.env.example` · `spark.sh` (start backend 8001 + frontend 3000) · `ODROID.md` · oude
+`_backup_*`-mappen uit Git (staan al in Backup-download).
+**Fase 2 (Odroid basis)**: Ubuntu + Python 3.11 + Node 20 + yarn · Save to GitHub → clone · `.env` invullen
+(Republish → Secrets) · `REACT_APP_BACKEND_URL=http://localhost:8001` · Chromium kiosk op :3000.
+**Fase 3 (offline)**: Ollama + klein model (3B-8B) als primary of fallback · mic/cam via browser.
+**Fase 4 (body)**: systemd autostart · TTS/STT hardware-check.
+
+---
+
 ## 🎯 P0 VOLGENDE SESSIE — Zelfscan-fundering (metadata-integriteit)
 
 Willem's inzicht sessie 55: "kan Spark z'n eigen data zien" = zelfscan. Zonder

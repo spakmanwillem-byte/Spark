@@ -441,6 +441,12 @@ universeel Spark World".
   later toepasbaar in de wereld) maar doet in antwoorden alleen mee bij game-context.
   Nieuwe game-kaarten altijd in lade Spark Games, nooit in Weten. Nieuwe fictie-lade →
   toevoegen aan `FICTIE_LADES`, verder niets.
+- **✅ Text-importer tags (`v14_text_importer_tags_001`)** — Willem zag kaarten zonder tags na "Importeer txt".
+  Root cause: `_TAGS_HDR_RX` eiste exact `Tags` alleen op een regel; `Tags:`, `**Tags**`, `Tags: a, b` (inline),
+  `- lijstjes`, `#hashtags`, `·`-scheiding gaven stil 0 tags of één rommel-tag. Parser nu tolerant (10 varianten
+  getest). Learning: een stil-lege parser-uitkomst moet een waarschuwing in de import-response geven (TODO).
+- **✅ 44 tagloze kaarten getagd** via `scripts/fill_missing_tags_v14.py` (LLM 5-8 tags + sanitize; herbruikbaar:
+  pakt alle kaarten met ≤1 tag). Graph herbouwd.
 - **✅ Fictie-gate (`v14_fictie_gate_001`)** — Willem: "spark moet geen fantoom krijgen met
   realiteit". `kb_v2/service.py`: `FICTIE_LADES={"games"}`, `is_game_context(text)`,
   `filter_fictie()`. `semantic_lookup` filtert games-kaarten weg zonder game-context;

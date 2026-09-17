@@ -15088,10 +15088,87 @@
         "hoe": "Door schepping en initiatie"
       },
       "tags": [
-        "mythologie"
+        "brahma",
+        "god",
+        "schepping",
+        "hindoeïsme",
+        "begin",
+        "creatie",
+        "mythe"
       ],
       "topic": "mythologie",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-637e116f",
+          "begrip": "Mythologie",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "god",
+            "mythe"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05d2e50a",
+          "begrip": "Vishnu",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "god",
+            "hindoeïsme"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63fbb78d",
+          "begrip": "Schepping",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "begin",
+            "schepping"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c487718a",
+          "begrip": "aanmaken",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "begin",
+            "creatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-223c88a1",
+          "begrip": "creatie",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "begin",
+            "creatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3df2c212",
+          "begrip": "creatief",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "begin",
+            "creatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-993bd9d8",
+          "begrip": "geboren",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "begin",
+            "creatie"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "Willem Spakman",
         "ingedeeld_door": "kbv2_migratie",
@@ -15107,8 +15184,26 @@
               "active": true,
               "is_new": true
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:27:47.201959+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:27:47.212498+00:00",
+            "result": {
+              "n_found": 7,
+              "top_overlap": 2
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:27:46.990286+00:00"
       },
       "media": {
         "voice_url": null,
@@ -56859,9 +56954,133 @@
         "waarom": "Om identiteit, herkenning en aanspreking mogelijk te maken",
         "hoe": "Door namen te gebruiken binnen taal, communicatie en sociale verbinding"
       },
-      "tags": [],
+      "tags": [
+        "peter",
+        "naam",
+        "identiteit",
+        "herkenning",
+        "communicatie",
+        "sociale_relatie",
+        "persoonlijkheid",
+        "aanspreking"
+      ],
       "topic": "identiteit",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreking",
+            "communicatie",
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c9e2f6c",
+          "begrip": "Jongensnaam",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-936cd9ae",
+          "begrip": "Roepnaam",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-465561f8",
+          "begrip": "klaas",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d8beecf5",
+          "begrip": "Riet",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-018e3d9a",
+          "begrip": "joël",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-70b9561c",
+          "begrip": "authenticiteit",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "identiteit",
+            "persoonlijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-80e2d698",
+          "begrip": "Karaktereigenschap",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "identiteit",
+            "persoonlijkheid"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "T",
         "ingedeeld_door": "user-001",
@@ -56885,8 +57104,26 @@
               "active": true,
               "is_new": false
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:25:25.474440+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:25:25.485168+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:25:25.253467+00:00"
       },
       "media": {
         "voice_url": null,

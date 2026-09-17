@@ -75,7 +75,9 @@ def _norm_emotion(s: str) -> str:
 # (lowercase → Capitalized) óf direct "Laag 1".
 _LAAG_RX = re.compile(r"^\s*Laag\s*([1-4])\b\s*(?:[—:-].*)?$", re.IGNORECASE | re.MULTILINE)
 _LADE_HDR_RX = re.compile(r"^\s*Lade\s*$", re.IGNORECASE | re.MULTILINE)
-_TAGS_HDR_RX = re.compile(r"^\s*Tags\s*$", re.IGNORECASE | re.MULTILINE)
+# v14_text_importer_tags_001 (Willem 17-09-2026): "Tags:", "**Tags**", "Tags: a, b" op één regel
+# gaven stil 0 tags. Header mag nu markdown-vet, dubbele punt en inline-inhoud hebben.
+_TAGS_HDR_RX = re.compile(r"^\s*(?:\*\*|__|#+\s*)?Tags(?:\*\*|__)?\s*:?\s*", re.IGNORECASE | re.MULTILINE)
 _5W_HDR_RX = re.compile(r"^\s*5W(?:\s*\(.*?\))?\s*$", re.IGNORECASE | re.MULTILINE)
 _EMOTIE_HDR_RX = re.compile(r"^\s*Emotie\s*$", re.IGNORECASE | re.MULTILINE)
 _KERNZIN_HDR_RX = re.compile(r"^\s*Kernzin\s*$", re.IGNORECASE | re.MULTILINE)
@@ -178,7 +180,7 @@ def _extract_field(block: str, header_rx: re.Pattern, multi: bool = True) -> Opt
     # Stop bij volgende header (Laag X / 5W / Tags / Lade / Emotie / Wie / Wat etc.)
     # v6_text_importer_003 — voeg 'Praktijkvoorbeelden' en 'Voorbeeld N' toe zodat laag 4 daar stopt
     next_header = re.search(
-        r"^\s*(Laag\s*[1-4]|5W|Tags|Lade|Emotie|Kernzin|Wie|Wat|Wanneer|Waar|Waarom|Hoe|Praktijkvoorbeelden|Voorbeeld\s*\d+)\b",
+        r"^\s*(?:\*\*|__|#+\s*)?(Laag\s*[1-4]|5W|Tags|Lade|Emotie|Kernzin|Wie|Wat|Wanneer|Waar|Waarom|Hoe|Praktijkvoorbeelden|Voorbeeld\s*\d+)\b",
         rest, re.IGNORECASE | re.MULTILINE
     )
     if next_header:
@@ -209,8 +211,15 @@ def _extract_tags(block: str) -> List[str]:
     content = _extract_field(block, _TAGS_HDR_RX)
     if not content:
         return []
-    # Splits op komma, strip, filter lege
-    return [t.strip().lower() for t in content.split(",") if t.strip()]
+    # Scheidingstekens: komma, puntkomma, middenpunt, pipe, regeleinde, lijst-bullets, hashtags
+    parts = re.split(r"[,;·•|\n]+", content)
+    out: List[str] = []
+    for part in parts:
+        for t in re.split(r"\s+#", " " + part):  # "#a #b" → ["a", "b"]
+            t = t.strip().lstrip("-*•#").strip().strip("`*_").lower()
+            if t and t not in out and len(t) <= 40:
+                out.append(t)
+    return out
 
 
 def parse_text_to_cards(text: str) -> List[Dict]:

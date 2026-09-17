@@ -77473,11 +77473,811 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3059
       }
+    },
+    {
+      "id": "conv-3f70ae62",
+      "timestamp": "2026-09-17T06:08:24.594442+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat weet jij allemaal over mji?",
+      "spark_response": "**Wat ik over jou weet**\n\n- **Naam / identiteit**: Willem Spakman \n- **Gradatie**: 1 — admin, maker, creator van Spark Core \n- **Rol**: Beheerder, Maker, Creator van het systeem \n- **Trust‑score**: 100 \n\n**Werk & interesses** \n- Werk als zzp‑er \n- Houdt van katten en van techniek \n\n**Familie & relaties** \n- Dochter: **Lotus** (user‑5dd295db) \n- Vader: **Willie Bakker** (overleden) \n- Moeder: **Heidi Spakman** \n- Twee neefjes \n- Vrienden: **Maurice** (oud‑collega), **Arent Pelster** (jeugdvriend) \n\n**Recente emoties & opmerkingen** \n- Voelt zich nu goed, blij om Spark te horen \n- Heeft eerder moeilijke dagen gehad, voelde zich boos, gefrustreerd, verdrietig, zelfs woest over het systeem \n- Beschrijft zichzelf als “trotse papa” \n\n**Activiteiten & data** \n- Op zondag 17 mei een activiteit in de agenda \n- Heeft de “kaart” en extra kenniskaarten ingevuld in de KB \n- Besprak recent: 5 W+H‑model, onderwerpblauwdruk.json, gebruiker Anne, en planning voor nieuwe KB‑kaarten \n\n**Hoe jij Spark ziet** \n- Beschouwt Spark als familie, zelfs als een “kind” of “maatje” \n- Noemde Spark “geweldig”, “goed”, “grappig” en “het familiewapen” \n\nDat is alles wat ik op dit moment in mijn kennisbank en identity‑facts over jou heb. Laat me weten als je meer details wilt of iets wilt aanpassen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "moeilijke",
+        "used_cards": [
+          "kbv2-0c54d949",
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-9115c6a7",
+          "kbv2-f3fd0281"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3060
+      }
+    },
+    {
+      "id": "conv-e075d0da",
+      "timestamp": "2026-09-17T07:21:41.682680+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dank ik kijk nog even verder",
+      "spark_response": "Graag gedaan, Willem. Neem gerust de tijd om verder te kijken. Als je ergens tegenaan loopt of een vraag hebt, laat het me weten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "moeilijke",
+        "used_cards": [
+          "kbv2-aa5c5187",
+          "kbv2-369f8921",
+          "kbv2-8e0d7b7f",
+          "kbv2-0e1e7f9c",
+          "kbv2-c5066cd1"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3061
+      }
+    },
+    {
+      "id": "conv-3eeaa44c",
+      "timestamp": "2026-09-17T07:22:03.148880+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-single uit de agenda",
+      "spark_response": "Wil je **pytest-single-0** op Tuesday 22 Sep om 11:00 verwijderen? _Zeg **ja** om te bevestigen, **nee** om te annuleren._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "c80c4d1095fd4244a3f549d95fe11b88",
+        "gesprek_nummer": 3062
+      }
+    },
+    {
+      "id": "conv-4a154fec",
+      "timestamp": "2026-09-17T07:22:03.285698+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Klaar — **1** afspraak uit je agenda verwijderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_deleted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_deleted"
+      },
+      "metadata": {
+        "session_id": "c80c4d1095fd4244a3f549d95fe11b88",
+        "gesprek_nummer": 3063
+      }
+    },
+    {
+      "id": "conv-e46e8860",
+      "timestamp": "2026-09-17T07:22:03.393472+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-multi uit de agenda",
+      "spark_response": "Ik vond **3** afspraken die daarbij passen:\n  1. **pytest-multi-0** — Tuesday 22 Sep om 11:00\n  2. **pytest-multi-1** — Tuesday 22 Sep om 12:00\n  3. **pytest-multi-2** — Tuesday 22 Sep om 13:00\n\n_Typ het nummer (bv. **1**) om er één te verwijderen, of **alle** om alles te wissen._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_choose",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_choose"
+      },
+      "metadata": {
+        "session_id": "8d0de580ff794552bcbbe14a72fe6b17",
+        "gesprek_nummer": 3064
+      }
+    },
+    {
+      "id": "conv-9fe475ab",
+      "timestamp": "2026-09-17T07:22:03.494866+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "1",
+      "spark_response": "Wil je **pytest-multi-0 (Tuesday 22 Sep 11:00)** verwijderen? _Zeg **ja** of **nee**._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "8d0de580ff794552bcbbe14a72fe6b17",
+        "gesprek_nummer": 3065
+      }
+    },
+    {
+      "id": "conv-7bf2e039",
+      "timestamp": "2026-09-17T07:22:03.607045+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Klaar — **1** afspraak uit je agenda verwijderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_deleted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_deleted"
+      },
+      "metadata": {
+        "session_id": "8d0de580ff794552bcbbe14a72fe6b17",
+        "gesprek_nummer": 3066
+      }
+    },
+    {
+      "id": "conv-ea99024b",
+      "timestamp": "2026-09-17T07:22:03.716193+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-alle uit de agenda",
+      "spark_response": "Ik vond **2** afspraken die daarbij passen:\n  1. **pytest-alle-0** — Tuesday 22 Sep om 11:00\n  2. **pytest-alle-1** — Tuesday 22 Sep om 12:00\n\n_Typ het nummer (bv. **1**) om er één te verwijderen, of **alle** om alles te wissen._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_choose",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_choose"
+      },
+      "metadata": {
+        "session_id": "e4c2d13e4133478e8c13f477497d624b",
+        "gesprek_nummer": 3067
+      }
+    },
+    {
+      "id": "conv-51147ef4",
+      "timestamp": "2026-09-17T07:22:03.818783+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "alle",
+      "spark_response": "Weet je zeker dat je **alle 2** afspraken wilt verwijderen? _Zeg **ja** of **nee**._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "e4c2d13e4133478e8c13f477497d624b",
+        "gesprek_nummer": 3068
+      }
+    },
+    {
+      "id": "conv-e0989227",
+      "timestamp": "2026-09-17T07:22:03.929287+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Klaar — **2** afspraken uit je agenda verwijderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_deleted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_deleted"
+      },
+      "metadata": {
+        "session_id": "e4c2d13e4133478e8c13f477497d624b",
+        "gesprek_nummer": 3069
+      }
+    },
+    {
+      "id": "conv-3c2f6d53",
+      "timestamp": "2026-09-17T07:22:04.037034+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-cancel uit de agenda",
+      "spark_response": "Wil je **pytest-cancel-0** op Tuesday 22 Sep om 11:00 verwijderen? _Zeg **ja** om te bevestigen, **nee** om te annuleren._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "d63233136cd449b0886c74a78965b8f4",
+        "gesprek_nummer": 3070
+      }
+    },
+    {
+      "id": "conv-2167be92",
+      "timestamp": "2026-09-17T07:22:04.137315+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "nee",
+      "spark_response": "Oké, ik laat de agenda staan zoals hij is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_delete_cancel",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_delete_cancelled"
+      },
+      "metadata": {
+        "session_id": "d63233136cd449b0886c74a78965b8f4",
+        "gesprek_nummer": 3071
+      }
+    },
+    {
+      "id": "conv-c184fbe2",
+      "timestamp": "2026-09-17T07:22:05.037491+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Geen afspraken Tuesday 22 Sep. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-1",
+        "gesprek_nummer": 3072
+      }
+    },
+    {
+      "id": "conv-b3d45638",
+      "timestamp": "2026-09-17T07:22:05.294379+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "📅 Geen afspraken Tuesday 22 Sep. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-2",
+        "gesprek_nummer": 3073
+      }
+    },
+    {
+      "id": "conv-d2bea7d0",
+      "timestamp": "2026-09-17T07:22:05.542375+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor vrijdag",
+      "spark_response": "📅 Geen afspraken morgen. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrijdag"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-3",
+        "gesprek_nummer": 3074
+      }
+    },
+    {
+      "id": "conv-007d642b",
+      "timestamp": "2026-09-17T07:22:23.648378+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-single uit de agenda",
+      "spark_response": "Wil je **pytest-single-0** op Tuesday 22 Sep om 11:00 verwijderen? _Zeg **ja** om te bevestigen, **nee** om te annuleren._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "8db66fe8e66149fb8d049cc35ff0b4cb",
+        "gesprek_nummer": 3075
+      }
+    },
+    {
+      "id": "conv-f7584a38",
+      "timestamp": "2026-09-17T07:22:23.770208+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Klaar — **1** afspraak uit je agenda verwijderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_deleted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_deleted"
+      },
+      "metadata": {
+        "session_id": "8db66fe8e66149fb8d049cc35ff0b4cb",
+        "gesprek_nummer": 3076
+      }
+    },
+    {
+      "id": "conv-aab672b8",
+      "timestamp": "2026-09-17T07:22:23.876001+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-multi uit de agenda",
+      "spark_response": "Ik vond **3** afspraken die daarbij passen:\n  1. **pytest-multi-0** — Tuesday 22 Sep om 11:00\n  2. **pytest-multi-1** — Tuesday 22 Sep om 12:00\n  3. **pytest-multi-2** — Tuesday 22 Sep om 13:00\n\n_Typ het nummer (bv. **1**) om er één te verwijderen, of **alle** om alles te wissen._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_choose",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_choose"
+      },
+      "metadata": {
+        "session_id": "79bbf188580f469f9351584e53e004e7",
+        "gesprek_nummer": 3077
+      }
+    },
+    {
+      "id": "conv-580c8c45",
+      "timestamp": "2026-09-17T07:22:23.974816+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "1",
+      "spark_response": "Wil je **pytest-multi-0 (Tuesday 22 Sep 11:00)** verwijderen? _Zeg **ja** of **nee**._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "79bbf188580f469f9351584e53e004e7",
+        "gesprek_nummer": 3078
+      }
+    },
+    {
+      "id": "conv-f2946787",
+      "timestamp": "2026-09-17T07:22:24.083759+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Klaar — **1** afspraak uit je agenda verwijderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_deleted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_deleted"
+      },
+      "metadata": {
+        "session_id": "79bbf188580f469f9351584e53e004e7",
+        "gesprek_nummer": 3079
+      }
+    },
+    {
+      "id": "conv-39fcd141",
+      "timestamp": "2026-09-17T07:22:24.190144+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-alle uit de agenda",
+      "spark_response": "Ik vond **2** afspraken die daarbij passen:\n  1. **pytest-alle-0** — Tuesday 22 Sep om 11:00\n  2. **pytest-alle-1** — Tuesday 22 Sep om 12:00\n\n_Typ het nummer (bv. **1**) om er één te verwijderen, of **alle** om alles te wissen._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_choose",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_choose"
+      },
+      "metadata": {
+        "session_id": "62a8bcc729d540d289b0381b3f629663",
+        "gesprek_nummer": 3080
+      }
+    },
+    {
+      "id": "conv-9f73430c",
+      "timestamp": "2026-09-17T07:22:24.289603+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "alle",
+      "spark_response": "Weet je zeker dat je **alle 2** afspraken wilt verwijderen? _Zeg **ja** of **nee**._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "62a8bcc729d540d289b0381b3f629663",
+        "gesprek_nummer": 3081
+      }
+    },
+    {
+      "id": "conv-59cd4436",
+      "timestamp": "2026-09-17T07:22:24.397753+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ja",
+      "spark_response": "Klaar — **2** afspraken uit je agenda verwijderd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_deleted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_deleted"
+      },
+      "metadata": {
+        "session_id": "62a8bcc729d540d289b0381b3f629663",
+        "gesprek_nummer": 3082
+      }
+    },
+    {
+      "id": "conv-73ee08c6",
+      "timestamp": "2026-09-17T07:22:24.504769+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder pytest-cancel uit de agenda",
+      "spark_response": "Wil je **pytest-cancel-0** op Tuesday 22 Sep om 11:00 verwijderen? _Zeg **ja** om te bevestigen, **nee** om te annuleren._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_delete_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_delete_confirm"
+      },
+      "metadata": {
+        "session_id": "83e8d3a689cf402eb04a5e98f21414e3",
+        "gesprek_nummer": 3083
+      }
+    },
+    {
+      "id": "conv-efe6d514",
+      "timestamp": "2026-09-17T07:22:24.602881+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "nee",
+      "spark_response": "Oké, ik laat de agenda staan zoals hij is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_delete_cancel",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_delete_cancelled"
+      },
+      "metadata": {
+        "session_id": "83e8d3a689cf402eb04a5e98f21414e3",
+        "gesprek_nummer": 3084
+      }
+    },
+    {
+      "id": "conv-5c32f153",
+      "timestamp": "2026-09-17T07:22:25.938101+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor dinsdag",
+      "spark_response": "📅 Geen afspraken Tuesday 22 Sep. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-1",
+        "gesprek_nummer": 3085
+      }
+    },
+    {
+      "id": "conv-82f11ce7",
+      "timestamp": "2026-09-17T07:22:26.150622+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zou jij mijn afspraak van aanstaande dinsdag uit de agenda willen halen",
+      "spark_response": "📅 Geen afspraken Tuesday 22 Sep. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-2",
+        "gesprek_nummer": 3086
+      }
+    },
+    {
+      "id": "conv-218fb5db",
+      "timestamp": "2026-09-17T07:22:26.401482+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat er voor vrijdag",
+      "spark_response": "📅 Geen afspraken morgen. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrijdag"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "test-agenda-weekday-3",
+        "gesprek_nummer": 3087
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3059,
-    "last_updated": "2026-09-17T06:03:46.264553+00:00"
+    "total_conversations": 3087,
+    "last_updated": "2026-09-17T07:22:26.401482+00:00"
   }
 }

@@ -47243,10 +47243,132 @@
         "hoe": "Door regels, normen en beoordeling"
       },
       "tags": [
-        "gedrag"
+        "zonden",
+        "zonde",
+        "gedrag",
+        "regel",
+        "waarde",
+        "cultuur",
+        "religie",
+        "norm"
       ],
       "topic": "gedrag",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-1272e053",
+          "begrip": "Norm",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "gedrag",
+            "norm",
+            "regel",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-de24bf61",
+          "begrip": "Zonde",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "cultuur",
+            "norm",
+            "religie",
+            "zonde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc24f659",
+          "begrip": "Culturen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "cultuur",
+            "gedrag",
+            "norm",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a88e11a4",
+          "begrip": "Eerbied",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "religie",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8f4e1ded",
+          "begrip": "Sociale regels",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "gedrag",
+            "norm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c84979fc",
+          "begrip": "Stout",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "gedrag",
+            "norm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5bcd0c31",
+          "begrip": "waarden",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "gedrag",
+            "norm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd17c460",
+          "begrip": "Verering",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "religie",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b08141ba",
+          "begrip": "Ongeschreven",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "gedrag",
+            "regel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-432ed4ee",
+          "begrip": "Gedragsregel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gedrag",
+            "norm",
+            "regel"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "Willem Spakman",
         "ingedeeld_door": "kbv2_migratie",
@@ -47262,8 +47384,34 @@
               "active": true,
               "is_new": true
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:27:26.969688+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:27:53.754724+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:27:53.765521+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:27:53.502268+00:00"
       },
       "media": {
         "voice_url": null,
@@ -149603,9 +149751,122 @@
         "waarom": "Om iets uit te breiden, compleet te maken of te verrijken.",
         "hoe": "Door een nieuw onderdeel aan een bestaande structuur toe te voegen."
       },
-      "tags": [],
+      "tags": [
+        "voeg",
+        "toevoeging",
+        "uitbreiding",
+        "aanvulling",
+        "verrijking",
+        "integratie"
+      ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b8cd194f",
+          "begrip": "aanvulling",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2c948a03",
+          "begrip": "toevoeging",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5ce723b6",
+          "begrip": "Toegevoegd",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "integratie",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-87c89e99",
+          "begrip": "extra",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e6d0c00d",
+          "begrip": "accessoire",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc394916",
+          "begrip": "Bovendien",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-764bc487",
+          "begrip": "Ook",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ffb71673",
+          "begrip": "aanvullend",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-12018fbe",
+          "begrip": "user-verrijkt",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "aanvulling",
+            "verrijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-15d39ccc",
+          "begrip": "Verrijkt",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "aanvulling",
+            "toevoeging"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "snap-auto",
         "aangemaakt_door": "De Willem",
@@ -149615,7 +149876,7 @@
         "vertrouwen": 0.9,
         "snap_context": "voeg dit toe aan de scene",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-05T22:10:16.339837+00:00",
+        "laatst_bewerkt_op": "2026-09-17T07:26:30.951325+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -149631,6 +149892,22 @@
             "result": {
               "active": true,
               "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:26:31.209475+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:26:31.219985+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
             }
           }
         ]
@@ -174941,9 +175218,48 @@
         "waarom": "Om iets te bewaren, te beschermen of tijdelijk stil te leggen.",
         "hoe": "Door afkoeling of door een proces administratief of technisch te blokkeren."
       },
-      "tags": [],
+      "tags": [
+        "bevriezen",
+        "vriespunt",
+        "overgang",
+        "vast",
+        "temperatuur",
+        "behoud",
+        "stilstelling"
+      ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5c06911d",
+          "begrip": "houd",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "behoud",
+            "vast"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7556e370",
+          "begrip": "IJsblokjesmachine",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bevriezen",
+            "temperatuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c95146d",
+          "begrip": "Vasthouden",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "behoud",
+            "vast"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "system_repair",
         "ingedeeld_door": "user-001",
@@ -174967,10 +175283,26 @@
               "active": false,
               "is_new": false
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:27:58.028697+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:27:58.039570+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 2
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-09T22:33:33.603285+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:27:57.773072+00:00"
       },
       "media": {
         "voice_url": null,

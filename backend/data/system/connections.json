@@ -1,0 +1,35 @@
+{
+  "connections": {
+    "llm_primary": {
+      "_last_test": {
+        "ok": true,
+        "at": "2026-09-17T05:51:10.621003+00:00",
+        "detail": "13 modellen bereikbaar"
+      }
+    },
+    "emergent_key": {
+      "_last_test": {
+        "ok": true,
+        "at": "2026-09-17T05:44:21.517401+00:00",
+        "detail": "Key aanwezig"
+      }
+    },
+    "bitvavo": {
+      "_last_test": {
+        "ok": true,
+        "at": "2026-09-17T05:44:21.923078+00:00",
+        "detail": "11 assets op balans"
+      }
+    },
+    "llm_fallback": {
+      "_updated_at": "2026-09-17T05:51:10.314165+00:00",
+      "_updated_by": "user-001",
+      "_last_test": {
+        "ok": false,
+        "at": "2026-09-17T05:44:39.025775+00:00",
+        "detail": "ConnectError: [Errno 99] Cannot assign requested address"
+      }
+    }
+  },
+  "updated_at": "2026-09-17T05:51:10.314173+00:00"
+}

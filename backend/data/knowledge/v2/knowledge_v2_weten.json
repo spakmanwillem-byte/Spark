@@ -639683,10 +639683,133 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-e8b05146",
+      "begrip": "Verbindingen (beheer)",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verbindingen (beheer) is Spark's kader met alle koppelingen naar buiten: LLM's, sleutels, exchange en poorten — op één plek, lokaal opgeslagen.",
+        "laag2": "Elke verbinding heeft velden (URL, sleutel, model) die de admin kan invullen, opslaan en testen. Waarden staan in data/system/connections.json; een ingevulde waarde wint van het .env-bestand, een leeg veld valt terug op .env. Bitvavo-sleutels blijven per gebruiker in het eigen profiel.",
+        "laag3": "Verbindingen nu: primaire LLM (Groq), reserve-LLM (bv. Ollama lokaal), Emergent Universal Key (TTS/STT/foto/noodrem), Bitvavo (per user, alleen test) en poorten (8001 backend, 3000 frontend, CORS). Bij opstart zet Spark de opgeslagen waarden in de omgeving zodat bestaande modules niets hoeven te weten van dit bestand. Endpoints: GET /api/connections, PUT /api/connections/{id}, POST /api/connections/{id}/test (admin).",
+        "laag4": "Bedoeld voor Spark op eigen hardware (Odroid): na een download hoeft niemand meer een tekstbestand te bewerken — alles staat in het kader. Nieuwe modules met een externe API registreren zich in CONNECTION_DEFS en verschijnen automatisch. Geen cloud: alle verbindingen zijn zichtbaar en lokaal. Kader staat tijdelijk in Widget Kladblok."
+      },
+      "ws5": {
+        "wie": "Admin (gradatie ≤ 2 of admin_capable).",
+        "wat": "Overzicht + beheer van alle externe koppelingen.",
+        "waar": "Widget Kladblok → Verbindingen; data/system/connections.json.",
+        "wanneer": "Bij installatie op nieuwe hardware, bij een nieuwe sleutel of als iets niet bereikbaar is.",
+        "waarom": "Eén doos, geen losse cloud-configuratie; Spark weet zelf wat er aan hem vastzit.",
+        "hoe": "Invullen → Opslaan (JSON wint van .env) → Test (ping)."
+      },
+      "tags": [
+        "verbindingen",
+        "connecties",
+        "api",
+        "sleutels",
+        "poorten",
+        "llm",
+        "groq",
+        "ollama",
+        "bitvavo",
+        "emergent key",
+        "connections.json",
+        "beheer",
+        "principe-8"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "api",
+            "bitvavo"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-67ed1384",
+          "begrip": "unitykey",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "api",
+            "llm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-74a405d4",
+          "begrip": "conciërge",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "beheer",
+            "sleutels"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb425b88",
+          "begrip": "Admin-endpoints",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "api",
+            "beheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d8892021",
+          "begrip": "Admin-interface",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "api",
+            "beheer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "e1-sessie-59",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-09-17T05:46:40.832999+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-09-17T05:46:40.593396+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T05:46:41.474978+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T05:46:41.486205+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
   "metadata": {
-    "card_count": 5014,
-    "last_updated": "2026-09-10T08:39:25.466319+00:00"
+    "card_count": 5097,
+    "last_updated": "2026-09-17T05:46:40.833021+00:00"
   }
 }

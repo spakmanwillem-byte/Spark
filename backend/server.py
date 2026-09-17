@@ -411,6 +411,11 @@ app.include_router(rps_router, prefix="/api")
 from modules.admin.pre_deploy_routes import router as pre_deploy_router
 app.include_router(pre_deploy_router, prefix="/api")
 
+# Module 31: Verbindingen (v14_connections_001) — alle externe koppelingen op één plek, JSON wint van .env
+from modules.connections import connections_router, apply_to_env as _apply_connections_env
+_apply_connections_env()
+app.include_router(connections_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

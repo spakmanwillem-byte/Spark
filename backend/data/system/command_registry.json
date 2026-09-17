@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_command_registry_001 — master mapping van app-endpoints naar intent_tags (donderdag-fundering)",
   "version": "v1",
-  "last_updated": "2026-08-30T16:56:18.419926+00:00",
+  "last_updated": "2026-09-17T05:44:00.451063+00:00",
   "commands": [
     {
       "id": "cap_tellen_gebruikers",
@@ -1348,6 +1348,76 @@
       "gradatie_min": 1,
       "behavior_class_hint": "informatief-functioneel",
       "source": "system.commands_list_routes.list_commands"
+    },
+    {
+      "id": "cap_connections_list",
+      "path": "/api/connections",
+      "method": "GET",
+      "intent_tags": [
+        "verbindingen",
+        "connecties",
+        "koppelingen",
+        "api",
+        "sleutels",
+        "poorten",
+        "llm",
+        "bitvavo",
+        "welke verbindingen"
+      ],
+      "required_params": [
+        "viewer_id"
+      ],
+      "optional_params": [],
+      "gradatie_min": 2,
+      "admin_only": true,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "connections.routes.list_connections"
+    },
+    {
+      "id": "cap_connections_save",
+      "path": "/api/connections/{conn_id}",
+      "method": "PUT",
+      "intent_tags": [
+        "verbinding",
+        "instellen",
+        "api key",
+        "opslaan",
+        "wijzigen",
+        "llm",
+        "groq",
+        "ollama"
+      ],
+      "required_params": [
+        "conn_id",
+        "viewer_id",
+        "values"
+      ],
+      "optional_params": [],
+      "gradatie_min": 2,
+      "admin_only": true,
+      "behavior_class_hint": "actie-beheer",
+      "source": "connections.routes.save_connection"
+    },
+    {
+      "id": "cap_connections_test",
+      "path": "/api/connections/{conn_id}/test",
+      "method": "POST",
+      "intent_tags": [
+        "test verbinding",
+        "ping",
+        "bereikbaar",
+        "werkt de api",
+        "check verbinding"
+      ],
+      "required_params": [
+        "conn_id",
+        "viewer_id"
+      ],
+      "optional_params": [],
+      "gradatie_min": 2,
+      "admin_only": true,
+      "behavior_class_hint": "actie-beheer",
+      "source": "connections.routes.test_connection"
     }
   ],
   "stats": {
@@ -1362,6 +1432,7 @@
       "informatief-functioneel": 22,
       "exploreren-uitbreiden": 8,
       "vertragen-ondersteunen": 2
-    }
+    },
+    "total": 79
   }
 }

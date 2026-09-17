@@ -46,8 +46,8 @@ Geen mock users, geen "placeholder" antwoorden, geen "dit werkt over enkele minu
 Als iets niet werkt: eerlijk zeggen + concreet vervolg.
 
 ### RULE_agent_test_account_001 — Testen als "Emergent" (Willem, 17-09-2026)
-De agent test ALTIJD met zijn eigen account **Emergent** (`user-4453ade3`, gradatie 4,
-admin_capable). Zie `test_credentials.md`. Nooit nieuwe testusers aanmaken (vervuilt
+De agent test ALTIJD met zijn eigen account **Emergent** (`user-4453ade3`, gradatie 2 sinds 17-09 —
+gradatie 4 verborg admin-pagina's ondanks admin-mode; admin_capable, key `admin`). Zie `test_credentials.md`. Nooit nieuwe testusers aanmaken (vervuilt
 `users.json` + eco-containers), nooit ongevraagd als Willem/echte users chatten.
 Willem-account alleen als hij dat expliciet vraagt (repro in zijn eigen data).
 
@@ -72,6 +72,14 @@ LLM-router is al env-gestuurd (`LLM_PRIMARY_BASE_URL` → Ollama `http://localho
 **Blocker in code**: 72 hardcoded `/app/backend/...`-paden in 25 modules (container, synapse, backup,
 agenda, files, kb_v2, …). Workaround: symlink `/app` → clone-map. Netjes: `SPARK_ROOT` env-var.
 
+**✅ Fase 0 — Verbindingen-kader (`v14_connections_001`, 17-09)**: module `modules/connections/`
+(`data/system/connections.json`, JSON wint van .env, leeg → .env-baseline; `apply_to_env()` bij startup +
+na save zodat llm_router/voice/media niets hoeven te weten). Endpoints `GET /api/connections?viewer_id`,
+`PUT /api/connections/{id}`, `POST /api/connections/{id}/test` (admin: gradatie ≤2 of admin_capable).
+Verbindingen: llm_primary (Groq), llm_fallback (Ollama-klaar), emergent_key, bitvavo (per user, test only),
+ports (info). Widget `ConnectionsWidget` in Kladblok (tijdelijk; eindplek Beheer → "Verbindingen").
+Registry +3 (`cap_connections_*`), KB-kaart `Verbindingen (beheer)` kbv2-e8b05146 (weten).
+Nieuwe module met externe API → entry toevoegen aan `CONNECTION_DEFS`, verschijnt automatisch.
 **Fase 1 (op Emergent, voorbereiding, geen risico)**: `SPARK_ROOT` i.p.v. `/app` · `backend/.env.example`
 + `frontend/.env.example` · `spark.sh` (start backend 8001 + frontend 3000) · `ODROID.md` · oude
 `_backup_*`-mappen uit Git (staan al in Backup-download).

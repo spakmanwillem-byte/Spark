@@ -30,6 +30,7 @@ import { PerformanceWidget } from './widgets/PerformanceWidget';
 import { BugsListWidget } from './widgets/BugsListWidget';
 import { DeployWidget } from './widgets/DeployWidget';
 import { AdminNotesWidget } from './widgets/AdminNotesWidget';
+import { ConnectionsWidget } from './widgets/ConnectionsWidget';
 
 export const SANDBOX_WIDGETS = [
   {
@@ -131,6 +132,16 @@ export const SANDBOX_WIDGETS = [
     aangemaakt_door: 'e1 sessie 56b',
     reden: "Willem: 'admin notities maar even een kader voor in Widget Kladblok om zo te splitten'.",
     Component: AdminNotesWidget,
+  },
+  {
+    id: 'connections',
+    naam: 'Verbindingen',
+    doel: 'Alle externe koppelingen op één plek: LLM (Groq/Ollama), Emergent-key, Bitvavo, poorten. Invullen, opslaan (JSON wint van .env), testen.',
+    waar_hoort_het: 'Beheer → eigen tab "Verbindingen" (of Instellingen → Systeem)',
+    aangemaakt_op: '2026-09-17',
+    aangemaakt_door: 'e1 sessie 59',
+    reden: "Willem: 'ik wil geen cloud maar alle connecties, verbindingen, poorten, api's op één plek' — voorbereiding Spark op eigen hardware (Odroid). Sleutels in data/system/connections.json i.p.v. alleen .env.",
+    Component: ConnectionsWidget,
   },
   // Volgende sandbox-widgets komen hier:
   // { id: 'xxx', naam: '...', ..., Component: XxxWidget }

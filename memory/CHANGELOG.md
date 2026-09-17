@@ -9,6 +9,7 @@
 - Fictie-gate: games-kaarten alleen in antwoorden bij game-context (`is_game_context`); ambient services zien ze niet.
 - Bigram-snap: meerwoordige begrippen ('spark world', 'base line') matchen nu in chat.
 - BUGFIX chat 500 (`ChatMessage` velden losgekoppeld door ResponseTimeLog-insert).
+- **Verbindingen-kader** (`modules/connections`, Kladblok-widget): alle externe koppelingen op één plek, `connections.json` wint van `.env`, test-knop per verbinding. Voorbereiding Spark op Odroid.
 - BUGFIX chat-lookup dood sinds 23 aug: losse `return response` in agenda-branch verwijderd — kennisvragen werken weer.
 
 

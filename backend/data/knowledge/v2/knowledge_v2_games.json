@@ -401,7 +401,13 @@
         "spark world",
         "grondstof",
         "anders",
-        "grondstoffen"
+        "grondstoffen",
+        "rover kamp",
+        "rover",
+        "kamp",
+        "sparkkaart",
+        "spel",
+        "wereld"
       ],
       "media": {
         "voice_url": null,
@@ -411,20 +417,151 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:39:38.452393+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:39:38.452398+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:06.435830+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:06.552368+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:06.563377+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-f65d4f57"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-738cda3b",
+          "begrip": "Zee Haven",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73ebc070",
+          "begrip": "Wild",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d249de5",
+          "begrip": "Grondstoffen",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4f65ba9",
+          "begrip": "Bos",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ae622c4",
+          "begrip": "Akkers",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0d1fc7d5",
+          "begrip": "Vis resource",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-83bc8035",
+          "begrip": "minecraft",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "spel",
+            "wereld"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2351592c",
+          "begrip": "endlantis",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "spel",
+            "wereld"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5ae16b66",
+          "begrip": "Spark World",
+          "lade": "games",
+          "overlap": 2,
+          "shared_tags": [
+            "spark world",
+            "spel"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-e3f53257",
@@ -447,7 +584,13 @@
         "spark world",
         "grondstof",
         "bos",
-        "grondstoffen"
+        "grondstoffen",
+        "land trade post",
+        "landhandelspost",
+        "hout",
+        "wild",
+        "duurzaamheid",
+        "sparkkaart"
       ],
       "media": {
         "voice_url": null,
@@ -457,20 +600,151 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:38:57.324340+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:38:57.324346+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:10.237252+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:10.356245+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:10.367715+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-d565acbd"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-94ad9dfe",
+          "begrip": "Rover Kamp",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world",
+            "sparkkaart"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4f65ba9",
+          "begrip": "Bos",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "bos",
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-738cda3b",
+          "begrip": "Zee Haven",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d249de5",
+          "begrip": "Grondstoffen",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73ebc070",
+          "begrip": "Wild",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ae622c4",
+          "begrip": "Akkers",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0d1fc7d5",
+          "begrip": "Vis resource",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4a818a0e",
+          "begrip": "Beren",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bos",
+            "wild"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9198ff3d",
+          "begrip": "Houthakker",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bos",
+            "hout"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6ef62262",
+          "begrip": "verspilling",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "duurzaamheid",
+            "grondstof"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-738cda3b",
@@ -493,7 +767,14 @@
         "spark world",
         "grondstof",
         "anders",
-        "grondstoffen"
+        "grondstoffen",
+        "zee haven",
+        "haven",
+        "zee",
+        "kaart",
+        "spellen",
+        "resource",
+        "wereld"
       ],
       "media": {
         "voice_url": null,
@@ -503,20 +784,152 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:38:26.961159+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:38:26.961163+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:11.065161+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:11.187312+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:11.199060+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-4cf530a7"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-94ad9dfe",
+          "begrip": "Rover Kamp",
+          "lade": "games",
+          "overlap": 5,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "spark world",
+            "wereld"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73ebc070",
+          "begrip": "Wild",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d249de5",
+          "begrip": "Grondstoffen",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4f65ba9",
+          "begrip": "Bos",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ae622c4",
+          "begrip": "Akkers",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0d1fc7d5",
+          "begrip": "Vis resource",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-551af4f5",
+          "begrip": "evenaar",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kaart",
+            "wereld"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-09d3af0f",
+          "begrip": "schip",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "haven",
+            "zee"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0ced653b",
+          "begrip": "wereldkaart",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kaart",
+            "wereld"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-3d249de5",
@@ -539,7 +952,12 @@
         "spark world",
         "grondstof",
         "mijn",
-        "grondstoffen"
+        "grondstoffen",
+        "erts",
+        "edelsteen",
+        "ondergrond",
+        "kaart",
+        "bron"
       ],
       "media": {
         "voice_url": null,
@@ -549,20 +967,140 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:37:51.411676+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:37:51.411685+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:12.976160+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:13.098550+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:13.109788+00:00",
+            "result": {
+              "n_found": 9,
+              "top_overlap": 4
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-a01fbcfb"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-738cda3b",
+          "begrip": "Zee Haven",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-94ad9dfe",
+          "begrip": "Rover Kamp",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4f65ba9",
+          "begrip": "Bos",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73ebc070",
+          "begrip": "Wild",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ae622c4",
+          "begrip": "Akkers",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0d1fc7d5",
+          "begrip": "Vis resource",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1b0675a7",
+          "begrip": "Grondstof",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bron",
+            "grondstof"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efed022a",
+          "begrip": "koper",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "erts",
+            "grondstof"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-a4f65ba9",
@@ -585,7 +1123,12 @@
         "spark world",
         "grondstof",
         "bos",
-        "grondstoffen"
+        "grondstoffen",
+        "hout",
+        "wild",
+        "duurzaamheid",
+        "ecosysteem",
+        "natuur"
       ],
       "media": {
         "voice_url": null,
@@ -595,20 +1138,155 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:37:18.959849+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:37:18.959854+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:15.793154+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:15.911272+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:15.923094+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-631f5a91"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
+          "lade": "games",
+          "overlap": 7,
+          "shared_tags": [
+            "bos",
+            "duurzaamheid",
+            "grondstof",
+            "grondstoffen",
+            "hout"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3690f56e",
+          "begrip": "wild",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bos",
+            "ecosysteem",
+            "natuur",
+            "wild"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f0b1da5",
+          "begrip": "Boom",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bos",
+            "ecosysteem",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ffa9ce61",
+          "begrip": "Bos",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bos",
+            "ecosysteem",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4a818a0e",
+          "begrip": "Beren",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bos",
+            "natuur",
+            "wild"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9198ff3d",
+          "begrip": "Houthakker",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bos",
+            "hout",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d68fd1a",
+          "begrip": "Ecologie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "duurzaamheid",
+            "ecosysteem",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3808eae0",
+          "begrip": "Katoen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "duurzaamheid",
+            "grondstof",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b63dadf3",
+          "begrip": "Natuurproduct",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "duurzaamheid",
+            "grondstof",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e089e53c",
+          "begrip": "Zoetwater",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "duurzaamheid",
+            "ecosysteem",
+            "natuur"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-73ebc070",
@@ -631,7 +1309,13 @@
         "spark world",
         "grondstof",
         "anders",
-        "grondstoffen"
+        "grondstoffen",
+        "wild",
+        "spel",
+        "kaart",
+        "spark",
+        "onbekend",
+        "wereld"
       ],
       "media": {
         "voice_url": null,
@@ -641,20 +1325,156 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:36:52.439710+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:36:52.439719+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:18.935149+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:19.058831+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:19.070705+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-1e2a0469"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-94ad9dfe",
+          "begrip": "Rover Kamp",
+          "lade": "games",
+          "overlap": 6,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "spark world",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-738cda3b",
+          "begrip": "Zee Haven",
+          "lade": "games",
+          "overlap": 6,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world",
+            "wild"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d249de5",
+          "begrip": "Grondstoffen",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4f65ba9",
+          "begrip": "Bos",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world",
+            "wild"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ae622c4",
+          "begrip": "Akkers",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0d1fc7d5",
+          "begrip": "Vis resource",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fb93202a",
+          "begrip": "Vreemd",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "anders",
+            "onbekend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f9efce92",
+          "begrip": "anders",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "anders",
+            "onbekend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-551af4f5",
+          "begrip": "evenaar",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kaart",
+            "wereld"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-1ae622c4",
@@ -677,7 +1497,12 @@
         "spark world",
         "grondstof",
         "akker",
-        "grondstoffen"
+        "grondstoffen",
+        "akkers",
+        "grond",
+        "gewas",
+        "voedsel",
+        "landbouw"
       ],
       "media": {
         "voice_url": null,
@@ -687,20 +1512,154 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:36:23.669412+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:36:23.669417+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:23.905015+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:24.023577+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:24.035279+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-6581410f"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c051d551",
+          "begrip": "oogst",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "akker",
+            "gewas",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-818d1d64",
+          "begrip": "Gewas",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "akker",
+            "gewas",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-64244d0f",
+          "begrip": "Suikerbiet",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77778b0d",
+          "begrip": "Tarwe",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e3ce6ea",
+          "begrip": "Maïs",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-11576212",
+          "begrip": "Soja",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73998e4a",
+          "begrip": "Koffiebonen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-89cec8c5",
+          "begrip": "Theebladeren",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f99e2e00",
+          "begrip": "Vlees",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d6213090",
+          "begrip": "Groenten",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "landbouw",
+            "voedsel"
+          ]
+        }
+      ]
     },
     {
       "id": "kbv2-0d1fc7d5",
@@ -723,7 +1682,12 @@
         "spark world",
         "grondstof",
         "vis",
-        "grondstoffen"
+        "grondstoffen",
+        "vis resource",
+        "resource",
+        "water",
+        "kaart",
+        "kust"
       ],
       "media": {
         "voice_url": null,
@@ -733,20 +1697,154 @@
         ]
       },
       "status": "draft",
-      "needs": [],
+      "needs": [
+        "voice"
+      ],
       "footnote": {
         "bron": "dnd_resource_upload",
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:35:51.667406+00:00",
-        "laatst_bewerkt_op": "2026-06-06T23:35:51.667410+00:00"
+        "laatst_bewerkt_op": "2026-09-17T07:47:24.658232+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:47:24.775193+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:47:24.786749+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ]
       },
       "_meta": {
         "legacy_id": "kb-f3fcca99"
       },
       "lade": "games",
       "game": "spark world",
-      "verbanden": []
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-738cda3b",
+          "begrip": "Zee Haven",
+          "lade": "games",
+          "overlap": 5,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "resource",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d249de5",
+          "begrip": "Grondstoffen",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73ebc070",
+          "begrip": "Wild",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6a5bac94",
+          "begrip": "visserij",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "resource",
+            "vis",
+            "water"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-94ad9dfe",
+          "begrip": "Rover Kamp",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4f65ba9",
+          "begrip": "Bos",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ae622c4",
+          "begrip": "Akkers",
+          "lade": "games",
+          "overlap": 3,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2aace17d",
+          "begrip": "Vis",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "vis",
+            "water"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4af2a7e3",
+          "begrip": "erosie",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kust",
+            "water"
+          ]
+        }
+      ]
     }
   ],
   "card_count": 12,

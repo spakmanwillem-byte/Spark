@@ -19,6 +19,10 @@
   "children_max": 4,
   "endpoints": [
     "GET /backup/download/changes",
+    "GET /backup/download/changes/chat",
+    "GET /backup/download/changes/rest",
+    "GET /backup/download/changes/sizes",
+    "GET /backup/download/changes/trader",
     "GET /backup/download/full",
     "GET /backup/kb-changed-since-deploy",
     "GET /backup/status",

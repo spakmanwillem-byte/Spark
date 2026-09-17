@@ -5626,10 +5626,23 @@
         "gevoel",
         "ontspanning",
         "stress",
-        "emotie"
+        "emotie",
+        "opluchting"
       ],
       "topic": "emotie",
       "verbanden": [
+        {
+          "kaart_id": "kbv2-9f03a88a",
+          "begrip": "Verlichting",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "gevoel",
+            "ontspanning",
+            "opluchting"
+          ]
+        },
         {
           "kaart_id": "kbv2-b8766f90",
           "begrip": "Frustratie",
@@ -5664,14 +5677,14 @@
           ]
         },
         {
-          "kaart_id": "kbv2-9f03a88a",
-          "begrip": "Verlichting",
+          "kaart_id": "kbv2-d3390d0b",
+          "begrip": "Bevrijdend",
           "lade": "voelen",
           "overlap": 3,
           "shared_tags": [
             "emotie",
             "gevoel",
-            "ontspanning"
+            "opluchting"
           ]
         },
         {
@@ -5728,16 +5741,6 @@
             "gevoel",
             "stress"
           ]
-        },
-        {
-          "kaart_id": "kbv2-33ec6d42",
-          "begrip": "Blij",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "emotie",
-            "gevoel"
-          ]
         }
       ],
       "footnote": {
@@ -5771,8 +5774,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:38:49.012265+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:38:49.022802+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:38:48.802725+00:00"
       },
       "media": {
         "voice_url": null,
@@ -8776,27 +8797,35 @@
         "opgewonden",
         "emotie",
         "enthousiasme",
-        "spanning"
+        "spanning",
+        "verwachting",
+        "energie",
+        "prikkel",
+        "reactie"
       ],
       "topic": "emotie",
       "verbanden": [
         {
-          "kaart_id": "kbv2-b8766f90",
-          "begrip": "Frustratie",
+          "kaart_id": "kbv2-8c30e2ec",
+          "begrip": "irritatie",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 4,
           "shared_tags": [
             "emotie",
+            "prikkel",
+            "reactie",
             "spanning"
           ]
         },
         {
-          "kaart_id": "kbv2-b37d2c36",
-          "begrip": "Onheilspellend",
+          "kaart_id": "kbv2-f86e417b",
+          "begrip": "ergernis",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 4,
           "shared_tags": [
             "emotie",
+            "prikkel",
+            "reactie",
             "spanning"
           ]
         },
@@ -8804,80 +8833,88 @@
           "kaart_id": "kbv2-6fd187de",
           "begrip": "Spannend",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 3,
           "shared_tags": [
             "emotie",
-            "spanning"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-1fa7032e",
-          "begrip": "Onrustig",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "emotie",
-            "spanning"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-6c6e11c4",
-          "begrip": "Oude koeien uit de sloot halen",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "emotie",
-            "spanning"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9f03a88a",
-          "begrip": "Verlichting",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "emotie",
-            "spanning"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-94efcc1e",
-          "begrip": "druk",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "emotie",
-            "spanning"
+            "spanning",
+            "verwachting"
           ]
         },
         {
           "kaart_id": "kbv2-58356e7a",
           "begrip": "spanning",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 3,
           "shared_tags": [
             "emotie",
+            "energie",
             "spanning"
           ]
         },
         {
-          "kaart_id": "kbv2-4585c1be",
-          "begrip": "yhee",
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 3,
           "shared_tags": [
             "emotie",
-            "enthousiasme"
+            "reactie",
+            "verwachting"
           ]
         },
         {
-          "kaart_id": "kbv2-f82e642e",
-          "begrip": "geweldig is dit",
+          "kaart_id": "kbv2-aae48394",
+          "begrip": "gefrustreerd",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 3,
           "shared_tags": [
             "emotie",
-            "enthousiasme"
+            "spanning",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7e2610bd",
+          "begrip": "frustrerend",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "spanning",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "reactie",
+            "spanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-eb31fb44",
+          "begrip": "onzeker",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "spanning",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-73d1d0f0",
+          "begrip": "weerstand",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "reactie",
+            "spanning"
           ]
         }
       ],
@@ -8912,8 +8949,26 @@
               "n_found": 10,
               "top_overlap": 2
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:38:50.199127+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:38:50.210391+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:38:50.016422+00:00"
       },
       "media": {
         "voice_url": null,
@@ -9307,10 +9362,40 @@
         "superheld",
         "strip",
         "fictie",
-        "kracht"
+        "kracht",
+        "doctor manhattan",
+        "kwantum",
+        "tijd",
+        "materie",
+        "watchmen",
+        "onsterfelijkheid",
+        "energie"
       ],
       "topic": "fictie",
       "verbanden": [
+        {
+          "kaart_id": "kbv2-a189ae6c",
+          "begrip": "Natuurkunde",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "kracht",
+            "materie",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-116c9385",
+          "begrip": "universum",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "energie",
+            "materie",
+            "tijd"
+          ]
+        },
         {
           "kaart_id": "kbv2-skel-3a95278d",
           "begrip": "superheld",
@@ -9323,13 +9408,75 @@
           ]
         },
         {
-          "kaart_id": "kbv2-ee0f6de8",
-          "begrip": "Doctor Strange",
+          "kaart_id": "kbv2-23d569ed",
+          "begrip": "Fysica",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "energie",
+            "kracht",
+            "materie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c2cbc9fd",
+          "begrip": "Physics",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "energie",
+            "kracht",
+            "materie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19b876f3",
+          "begrip": "Wapen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58356e7a",
+          "begrip": "spanning",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d7bc1088",
+          "begrip": "Energie",
           "lade": "weten",
           "overlap": 2,
           "shared_tags": [
-            "fictie",
-            "superheld"
+            "energie",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a55dea5",
+          "begrip": "Gas",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "materie"
           ]
         }
       ],
@@ -9356,8 +9503,26 @@
               "n_found": 2,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:38:51.462474+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:38:51.473469+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:38:51.277654+00:00"
       },
       "media": {
         "voice_url": null,
@@ -10464,71 +10629,24 @@
         "temperatuur",
         "warmte",
         "natuurkunde",
-        "dagelijks-taalgebruik"
+        "dagelijks-taalgebruik",
+        "heet",
+        "brandgevaar",
+        "koken",
+        "zon",
+        "energie",
+        "voelen"
       ],
       "topic": "algemeen",
       "verbanden": [
         {
-          "kaart_id": "kbv2-313f0c98",
-          "begrip": "Temperatuur",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "natuurkunde",
-            "temperatuur",
-            "warmte"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-c2591846",
-          "begrip": "Warmtebron",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "natuurkunde",
-            "temperatuur",
-            "warmte"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-c515185a",
-          "begrip": "kookt",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "natuurkunde",
-            "temperatuur",
-            "warmte"
-          ]
-        },
-        {
           "kaart_id": "kbv2-0aceeab5",
           "begrip": "koken van voedsel",
           "lade": "weten",
-          "overlap": 3,
+          "overlap": 5,
           "shared_tags": [
-            "natuurkunde",
-            "temperatuur",
-            "warmte"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-a2d695f8",
-          "begrip": "Hete lucht",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "natuurkunde",
-            "temperatuur",
-            "warmte"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-6094dfa9",
-          "begrip": "Koelen",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
+            "energie",
+            "koken",
             "natuurkunde",
             "temperatuur",
             "warmte"
@@ -10538,8 +10656,10 @@
           "kaart_id": "kbv2-e07b2fdc",
           "begrip": "Kookpunt",
           "lade": "doen",
-          "overlap": 3,
+          "overlap": 5,
           "shared_tags": [
+            "energie",
+            "koken",
             "natuurkunde",
             "temperatuur",
             "warmte"
@@ -10549,9 +10669,71 @@
           "kaart_id": "kbv2-skel-30167a7f",
           "begrip": "verhitten",
           "lade": "doen",
-          "overlap": 3,
+          "overlap": 5,
           "shared_tags": [
+            "energie",
+            "koken",
             "natuurkunde",
+            "temperatuur",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-313f0c98",
+          "begrip": "Temperatuur",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "natuurkunde",
+            "temperatuur",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c2591846",
+          "begrip": "Warmtebron",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "natuurkunde",
+            "temperatuur",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c515185a",
+          "begrip": "kookt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "koken",
+            "natuurkunde",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6094dfa9",
+          "begrip": "Koelen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "natuurkunde",
+            "temperatuur",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b97f9b4",
+          "begrip": "Elektrische kookplaat",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "koken",
             "temperatuur",
             "warmte"
           ]
@@ -10560,19 +10742,21 @@
           "kaart_id": "kbv2-skel-9c445ea1",
           "begrip": "verwarmen",
           "lade": "doen",
-          "overlap": 3,
+          "overlap": 4,
           "shared_tags": [
+            "energie",
             "natuurkunde",
             "temperatuur",
             "warmte"
           ]
         },
         {
-          "kaart_id": "kbv2-skel-028cb626",
-          "begrip": "warm",
-          "lade": "voelen",
-          "overlap": 2,
+          "kaart_id": "kbv2-8f297419",
+          "begrip": "Hitte",
+          "lade": "weten",
+          "overlap": 3,
           "shared_tags": [
+            "energie",
             "temperatuur",
             "warmte"
           ]
@@ -10609,8 +10793,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:38:52.544803+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:38:52.555865+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:38:52.358780+00:00"
       },
       "media": {
         "voice_url": null,
@@ -12437,18 +12639,116 @@
         "turnen",
         "gymnastiek",
         "balans",
-        "sporttoestel"
+        "sporttoestel",
+        "balk",
+        "acrobatiek",
+        "sport",
+        "wedstrijd"
       ],
       "topic": "sport",
       "verbanden": [
         {
+          "kaart_id": "kbv2-31573443",
+          "begrip": "Turnen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "gymnastiek",
+            "sport",
+            "turnen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6d049a8f",
+          "begrip": "Trampoline",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gymnastiek",
+            "sport",
+            "sporttoestel"
+          ]
+        },
+        {
           "kaart_id": "kbv2-a102d1e2",
           "begrip": "Gymnastiek",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "gymnastiek",
+            "sport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-338c9fe8",
+          "begrip": "Vrije tijd",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "balans",
+            "sport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-654326f4",
+          "begrip": "rennen",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "sport",
+            "wedstrijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81c5c302",
+          "begrip": "rende",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "sport",
+            "wedstrijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3c7f6801",
+          "begrip": "Volleybalnet",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "sport",
+            "wedstrijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e3f08dee",
+          "begrip": "teamsport",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "sport",
+            "wedstrijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-62755bd1",
+          "begrip": "tegenstander",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "sport",
+            "wedstrijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-175e2625",
+          "begrip": "Planken",
           "lade": "doen",
           "overlap": 2,
           "shared_tags": [
             "balans",
-            "gymnastiek"
+            "sport"
           ]
         }
       ],
@@ -12475,8 +12775,26 @@
               "n_found": 1,
               "top_overlap": 2
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-09-17T07:38:53.421422+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-09-17T07:38:53.432082+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-09-17T07:38:53.237425+00:00"
       },
       "media": {
         "voice_url": null,

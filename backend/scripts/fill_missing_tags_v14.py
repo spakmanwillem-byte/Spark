@@ -25,8 +25,8 @@ def _prompt(c):
 
 
 async def main():
-    todo = [c for c in kb._all_cards_with_lade() if len(c.get("tags") or []) <= 1 and not str(c.get("begrip", "")).lower().startswith("test-")]
-    print(f"{len(todo)} kaarten zonder tags")
+    todo = [c for c in kb._all_cards_with_lade() if len(c.get("tags") or []) < kb.MIN_TAGS_FOR_LADE and c["_lade"] != "inbox" and not str(c.get("begrip", "")).lower().startswith("test-")]
+    print(f"{len(todo)} kaarten met <{kb.MIN_TAGS_FOR_LADE} tags")
     done = 0
     for c in todo:
         resp = await llm_router.chat_complete(_prompt(c), temperature=0.3, max_tokens=700, timeout=30.0, use_cache=False)
@@ -38,9 +38,9 @@ async def main():
             raw = [t.strip() for t in re.split(r"[,\n]", text) if t.strip()]
         if len(raw) < 3:
             print(f"    RAW({c['begrip']}): {text[:160]!r}")
-        tags = sanitize_tag_list([str(t).lower() for t in [c["begrip"]] + list(raw)])
-        print(f"  {c['id']} {c['begrip']:<22} → {tags}")
-        if tags and not DRY:
+        tags = sanitize_tag_list([str(t).lower() for t in list(c.get("tags") or []) + [c["begrip"]] + list(raw)])
+        print(f"  {c['_lade']:<7} {c['begrip']:<22} {len(c.get('tags') or [])}→{len(tags)}")
+        if len(tags) >= kb.MIN_TAGS_FOR_LADE and not DRY:
             kb.edit_card(c["id"], c["_lade"], {"tags": tags}, user_id="user-001")
             done += 1
     print(f"klaar: {done} kaarten bijgewerkt" + (" (DRY)" if DRY else ""))

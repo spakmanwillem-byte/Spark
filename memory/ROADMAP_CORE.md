@@ -445,6 +445,11 @@ universeel Spark World".
   Root cause: `_TAGS_HDR_RX` eiste exact `Tags` alleen op een regel; `Tags:`, `**Tags**`, `Tags: a, b` (inline),
   `- lijstjes`, `#hashtags`, `·`-scheiding gaven stil 0 tags of één rommel-tag. Parser nu tolerant (10 varianten
   getest). Learning: een stil-lege parser-uitkomst moet een waarschuwing in de import-response geven (TODO).
+- **✅ REGEL `MIN_TAGS_FOR_LADE = 5` (`v14_min_tags_001`, Willem)** — "zonder tags kan hij niet naar een lade en
+  blijft in algemene inbox; minimaal 5 tags voor goedkeuring." Twee poorten: (1) `text_importer` zet nieuwe kaart
+  met <5 tags in inbox (`_inbox_reason`, `_suggested_lade`, `needs:["tags"]`) + `warnings[]`/`to_inbox` in
+  response, UI toont amber waarschuwingsblok + tag-aantal in dry-run; (2) `service.classify_card` weigert met
+  `reason:"min_tags"` (toast in UI). `tags_gate()` is de ene bron. Bewerken van bestaande lade-kaarten blijft vrij.
 - **✅ 44 tagloze kaarten getagd** via `scripts/fill_missing_tags_v14.py` (LLM 5-8 tags + sanitize; herbruikbaar:
   pakt alle kaarten met ≤1 tag). Graph herbouwd.
 - **✅ Fictie-gate (`v14_fictie_gate_001`)** — Willem: "spark moet geen fantoom krijgen met

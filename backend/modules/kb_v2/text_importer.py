@@ -314,7 +314,8 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
     from modules.core.storage import load_json, save_json
 
     summary = {"parsed": len(cards), "added_v2": 0, "added_v1": 0,
-               "updated_v1": 0, "skipped": 0, "errors": [], "details": []}
+               "updated_v1": 0, "skipped": 0, "errors": [], "details": [],
+               "to_inbox": 0, "warnings": []}
 
     # Load V1
     kb1 = load_json(KB_V1, default={"knowledge_entries": []})
@@ -326,6 +327,8 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
     for lade in ("voelen", "spreken", "weten", "doen", "games"):
         f = KB_V2 / f"knowledge_v2_{lade}.json"
         v2_data[lade] = load_json(f, default={"kaarten": []})
+    inbox_f = KB_V2 / "knowledge_inbox.json"
+    inbox_data = load_json(inbox_f, default={"kaarten": []})
 
     for c in cards:
         b = c.get("begrip", "").strip()
@@ -437,6 +440,25 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
             else:
                 summary["details"].append({"begrip": b, "v2_action": "already filled"})
         else:
+            # v14_min_tags_001 — nieuwe kaart met <5 tags gaat naar inbox, niet naar de lade
+            from modules.kb_v2.service import tags_gate, MIN_TAGS_FOR_LADE
+            _gate = tags_gate(c.get("tags"))
+            if _gate:
+                _inbox_card = {
+                    "id": f"kbv2-{uuid.uuid4().hex[:8]}", "begrip": b, "lade": None, "status": "draft",
+                    "lagen": c["lagen"], "ws5": c["ws5"], "tags": c["tags"], "topic": "", "verbanden": [],
+                    "_inbox_reason": f"text_importer: {len(c['tags'])}/{MIN_TAGS_FOR_LADE} tags", "_suggested_lade": lade,
+                    "footnote": {"bron": "text_importer", "aangemaakt_door": user_id, "aangemaakt_op": _now(),
+                                 "vertrouwen": 1.0, "belangrijkheid": 0.5, "hooks_fired": []},
+                    "media": [], "needs": ["tags"],
+                }
+                if c.get("emotie"):
+                    _inbox_card["emotie"] = c["emotie"]
+                inbox_data["kaarten"].append(_inbox_card)
+                summary["to_inbox"] += 1
+                summary["warnings"].append(f"⚠ {b}: {len(c['tags'])}/{MIN_TAGS_FOR_LADE} tags → inbox (niet naar {lade})")
+                summary["details"].append({"begrip": b, "v2_action": f"inbox ({len(c['tags'])}/{MIN_TAGS_FOR_LADE} tags)"})
+                continue
             new_card = {
                 "id": f"kbv2-{uuid.uuid4().hex[:8]}",
                 "begrip": b,
@@ -462,6 +484,9 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
     save_json(KB_V1, kb1)
     for lade_key, lade_data in v2_data.items():
         save_json(KB_V2 / f"knowledge_v2_{lade_key}.json", lade_data)
+    if summary["to_inbox"]:
+        inbox_data["card_count"] = len(inbox_data["kaarten"])
+        save_json(inbox_f, inbox_data)
 
     # Update index
     idx_f = KB_V2 / "knowledge_index.json"

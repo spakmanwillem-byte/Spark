@@ -39,6 +39,18 @@ LADE_META = {
 # Kaarten in fictie-lades (Spark World) zijn kennis vóór Spark, maar mogen alleen
 # meedoen in een antwoord als de user het over de game heeft.
 FICTIE_LADES = {"games"}
+
+# v14_min_tags_001 (Willem 17-09-2026): "zonder tags kan hij niet naar een lade en blijft in
+# algemene inbox; alles moet minimaal 5 tags hebben voor goedkeuring."
+MIN_TAGS_FOR_LADE = 5
+
+
+def tags_gate(tags) -> Optional[str]:
+    """None als OK, anders de weigerreden."""
+    n = len([t for t in (tags or []) if str(t).strip()])
+    if n < MIN_TAGS_FOR_LADE:
+        return f"Te weinig tags ({n}/{MIN_TAGS_FOR_LADE}) — kaart blijft in inbox tot er minimaal {MIN_TAGS_FOR_LADE} tags zijn"
+    return None
 _GAME_CONTEXT_WORDS = (
     "spark world", "spark games", "game", "spel", "spelen", "speler", "fractie", "fracties",
     "base line", "persoonskaart", "rugzak", "inventory", "grondstof", "lore", "sandbox",
@@ -774,6 +786,12 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
                     if k.get("id") == card_id:
                         return {"success": False, "message": f"Kaart staat al in lade '{L}'"}
             return {"success": False, "message": f"Kaart '{card_id}' niet gevonden"}
+
+        # v14_min_tags_001 — geen lade zonder ≥5 tags
+        _gate_tags = (updates.get("tags") if updates and updates.get("tags") is not None else inbox["kaarten"][target_idx].get("tags"))
+        _gate_msg = tags_gate(_gate_tags)
+        if _gate_msg:
+            return {"success": False, "message": _gate_msg, "reason": "min_tags", "tags_count": len(_gate_tags or []), "min_tags": MIN_TAGS_FOR_LADE}
 
         card = inbox["kaarten"].pop(target_idx)
         card["lade"] = lade

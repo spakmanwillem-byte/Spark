@@ -959,7 +959,14 @@ function TextImporterModal({ onClose, onSuccess }) {
                 {!result.dry_run && (
                   <p className="mb-2 text-emerald-300">
                     ✓ v2 toegevoegd: {result.added_v2} · v1 toegevoegd: {result.added_v1} · v1 bijgewerkt: {result.updated_v1} · overgeslagen: {result.skipped}
+                    {result.to_inbox > 0 && <span className="text-amber-300"> · naar inbox: {result.to_inbox}</span>}
                   </p>
+                )}
+                {(result.warnings || []).length > 0 && (
+                  <ul data-testid="kbv2-import-warnings" className="mb-2 space-y-0.5 rounded-lg border border-amber-500/30 bg-amber-500/10 p-2">
+                    {result.warnings.map((w, i) => <li key={i} className="text-[11px] text-amber-200">{w}</li>)}
+                    <li className="text-[10px] text-amber-400/70">Minimaal 5 tags nodig voor een lade. Vul tags aan in de Inbox en keur daarna goed.</li>
+                  </ul>
                 )}
                 <ul className="space-y-0.5">
                   {(result.preview || result.details || []).slice(0, 50).map((p, i) => (
@@ -968,6 +975,7 @@ function TextImporterModal({ onClose, onSuccess }) {
                       {p.lade && <span className="text-sky-400"> → {p.lade}</span>}
                       {p.emotie && <span className="text-purple-400"> ({p.emotie})</span>}
                       {p.v2_action && <span className="text-amber-400"> [{p.v2_action}]</span>}
+                      {typeof p.tag_count === 'number' && <span className={p.tag_count < 5 ? 'text-amber-400' : 'text-slate-600'}> · {p.tag_count} tags{p.tag_count < 5 ? ' ⚠ → inbox' : ''}</span>}
                       {p.reason && <span className="text-rose-400"> ⓘ {p.reason}</span>}
                     </li>
                   ))}

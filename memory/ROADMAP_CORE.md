@@ -1457,3 +1457,9 @@ Voordelen:
 - **Gradatie 1** (super-admin): alle widgets incl. Triggers, KB Lades, Shadow Learning, Storage Cache
 - **Gradatie 2** (admin): KB Lades + Triggers + Users + Health
 - **Gradatie 3-7**: Kennisbank-overzicht + persoonlijke widgets (Mijn Opslag, Agenda, Spark-status)
+
+## Sessie 2026-09-17 — KB opschoning orphan-skeletons
+- `voelenbegrip` (foute tag op Vervanging/Wedergeboorte/Zoetwater) verwijderd + skelet kbv2-eb46e512 weg.
+- `rna` skelet kbv2-977940f0 blijft: Willem vult hem in (echte biologie-term, 3 kaarten verwijzen).
+- **Game-container** `data/dnd/kb_cards.json` aangemaakt (status parked): Persoonskaart Rugzak, Base Line, Utrecht-gamekopie (kbv2-592d038c, fractie neutraal) + 10 legacy grondstof-drafts uit verweesd `v2/inbox.json`. Canonical game-tag = `d&d`. Hoofd-KB houdt echte Utrecht kbv2-6507fdfc en algemene kaart D&D kbv2-5ae16b66.
+- TODO bij heropstart game: eigen KB-lade/eco-container voor Spark World + restore-script vanuit kb_cards.json.

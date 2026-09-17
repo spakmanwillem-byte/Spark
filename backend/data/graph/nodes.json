@@ -61555,34 +61555,6 @@
       "vertrouwen": 0.9
     },
     {
-      "id": "kbv2-592d038c",
-      "label": "Utrecht",
-      "type": "knowledge_v2",
-      "lade": "weten",
-      "lade_color": "#f59e0b",
-      "description": "Utrecht is een stad en provincie in Nederland.",
-      "tags": [
-        "centraal",
-        "cultuur",
-        "dnd",
-        "domtoren",
-        "fractie",
-        "gemeente",
-        "geschiedenis",
-        "grachten",
-        "nederland",
-        "neutraal",
-        "onderwijs",
-        "provincie",
-        "stad",
-        "utrecht",
-        "weten"
-      ],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.85
-    },
-    {
       "id": "kbv2-bbae5798",
       "label": "Waterkoker",
       "type": "knowledge_v2",
@@ -63615,54 +63587,6 @@
         "burgermeester"
       ],
       "topic": "bestuur",
-      "belangrijkheid": 3,
-      "vertrouwen": 0.9
-    },
-    {
-      "id": "kbv2-5cd66b24",
-      "label": "Persoonskaart Rugzak",
-      "type": "knowledge_v2",
-      "lade": "weten",
-      "lade_color": "#f59e0b",
-      "description": "Persoonskaart-rugzak = inventory-slot dat bonus draagkracht geeft (D&D-laag van Spark).",
-      "tags": [
-        "rugzak",
-        "persoonskaart",
-        "inventory",
-        "carry",
-        "d&d",
-        "stat",
-        "slots",
-        "gewicht",
-        "body-slot",
-        "spark world"
-      ],
-      "topic": "",
-      "belangrijkheid": 5,
-      "vertrouwen": 0.9
-    },
-    {
-      "id": "kbv2-c5847d4a",
-      "label": "Base Line",
-      "type": "knowledge_v2",
-      "lade": "weten",
-      "lade_color": "#f59e0b",
-      "description": "Base Line is het oorsprongspunt van Spark World — Spark's eigen 3D universum (X=0, Y=0, Z=0).",
-      "tags": [
-        "base line",
-        "spark world",
-        "lore",
-        "d&d",
-        "oorsprong",
-        "ad",
-        "puls",
-        "licht",
-        "schaduw",
-        "fracties",
-        "elementen",
-        "fantasie"
-      ],
-      "topic": "",
       "belangrijkheid": 3,
       "vertrouwen": 0.9
     },
@@ -150874,6 +150798,261 @@
       "vertrouwen": 1.0
     },
     {
+      "id": "kbv2-7334d5d4",
+      "label": "Werkproces",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een werkproces is een gestructureerde en logische opeenvolging van opeenvolgende handelingen of stappen die door een persoon of systeem worden uitgevoerd om een specifiek, vooraf gedefinieerd resultaat of product te leveren.",
+      "tags": [
+        "efficiëntie",
+        "handeling",
+        "input",
+        "keten",
+        "logica",
+        "operationalisering",
+        "optimalisatie",
+        "organisatie",
+        "output",
+        "procedure",
+        "proces",
+        "standerdisatie",
+        "structuur",
+        "werkproces"
+      ],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b73782c7",
+      "label": "Waardevol",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Waardevol betekent dat iets veel waarde, betekenis of belang heeft.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-bfb12251",
+      "label": "Webbrowser",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een webbrowser is een programma waarmee je websites en webpagina’s op internet kunt bekijken en gebruiken.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-981e133b",
+      "label": "Welvaart",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Welvaart is de mate waarin mensen in hun behoeften kunnen voorzien met de beschikbare goederen, diensten en middelen.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-426989c1",
+      "label": "Werktijd",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Werktijd is de tijd waarin iemand werkzaamheden uitvoert in het kader van een beroep, baan of andere vorm van werk.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-eecddd34",
+      "label": "Wetten",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Wetten zijn officieel vastgestelde regels waaraan mensen en organisaties zich binnen een bepaald land of rechtsgebied moeten houden.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-f9062625",
+      "label": "Wifi",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Wifi is een draadloze netwerktechnologie waarmee apparaten gegevens kunnen uitwisselen via radiosignalen.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-47ba6fc0",
+      "label": "Winnen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Winnen betekent een wedstrijd, spel, strijd of andere situatie als winnaar afsluiten.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-f027203d",
+      "label": "Zaak",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een zaak is iets waarover wordt gesproken, gedacht, gehandeld of beslist.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-e418d3ef",
+      "label": "Wissen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Wissen betekent iets verwijderen, zodat het niet langer aanwezig, opgeslagen of zichtbaar is.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-b65ccf65",
+      "label": "Woongebied",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een woongebied is een gebied waar mensen wonen en waar woningen en voorzieningen aanwezig zijn.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-042bf1a6",
+      "label": "Zang",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Zang is het maken van muzikale klanken met de menselijke stem.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-61cc8814",
+      "label": "Zwaar",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Zwaar betekent dat iets veel gewicht heeft of veel kracht kost om te dragen of te verplaatsen.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-0f59b40e",
+      "label": "Zorgvuldig",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Zorgvuldig betekent dat iemand iets met aandacht, nauwkeurigheid en voldoende voorzichtigheid doet.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-7003017c",
+      "label": "Zool",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een zool is het onderste deel van een schoen of voet dat de voet ondersteunt en contact maakt met de ondergrond.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-3943af61",
+      "label": "Zienswijze",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een zienswijze is de manier waarop iemand een onderwerp, situatie of gebeurtenis bekijkt en beoordeelt.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-9233b585",
+      "label": "Vóór",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Vóór betekent dat iets eerder is dan iets anders in tijd, plaats of volgorde.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-9e0e24b9",
+      "label": "Spark-Core",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Spark Core is de centrale kern van Spark waarin identiteit, geheugen, kennis en besluitvorming samenkomen.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-0886ba18",
+      "label": "Spark_Core",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Spark Core is de centrale kern van Spark waarin identiteit, geheugen, kennis en besluitvorming samenkomen.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-8e8235df",
+      "label": "RNA",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "RNA is een molecuul dat in cellen een belangrijke rol speelt bij het opslaan, doorgeven en gebruiken van genetische informatie.",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
       "id": "kbv2-18826611",
       "label": "wandeling",
       "type": "knowledge_v2",
@@ -177293,300 +177472,6 @@
       "topic": "",
       "belangrijkheid": 0.5,
       "vertrouwen": 1.0
-    },
-    {
-      "id": "kbv2-0cf60abe",
-      "label": "dnd",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "dnd"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-06c869b5",
-      "label": "spark_core",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "spark_core"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-a35ca5fd",
-      "label": "wissen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "wissen"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-88516a20",
-      "label": "werkproces",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "werkproces"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-3b12da9a",
-      "label": "waardevol",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "waardevol"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-23813fba",
-      "label": "spark-core",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "spark-core"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-4f2fd274",
-      "label": "wifi",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "wifi"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-48fcc870",
-      "label": "winnen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "winnen"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-2c277cd7",
-      "label": "vóór",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "vóór"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-7f85720a",
-      "label": "zwaar",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "zwaar"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-4d1d290f",
-      "label": "werktijd",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "werktijd"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-145cfbce",
-      "label": "zorgvuldig",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "zorgvuldig"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-25db4974",
-      "label": "woongebied",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "woongebied"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-ce8314de",
-      "label": "zaak",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "zaak"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-c7a84f06",
-      "label": "zienswijze",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "zienswijze"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-daf2af7c",
-      "label": "welvaart",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "welvaart"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-9f09dda6",
-      "label": "webbrowser",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "webbrowser"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-977940f0",
-      "label": "rna",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "rna"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-f5800239",
-      "label": "zool",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "zool"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-8e035f7f",
-      "label": "zang",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "zang"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
-    },
-    {
-      "id": "kbv2-7d6f1261",
-      "label": "wetten",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "wetten"
-      ],
-      "topic": null,
-      "belangrijkheid": 5,
-      "vertrouwen": 0.3
     }
   ]
 }

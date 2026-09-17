@@ -1,0 +1,798 @@
+{
+  "_arch_ref": "dnd_kb_container_001",
+  "title": "Spark World — geparkeerde KB-kaarten",
+  "status": "parked",
+  "parked_at": "2026-09-17T04:42:55.686940+00:00",
+  "reason": "Game inactief tot Core klaar is. Kaarten uit weten-lade gehaald zodat orphan-scan/graph schoon blijven.",
+  "restore_hint": "Zet kaarten terug in knowledge_v2_weten.json (of eigen game-lade) en herstel Utrecht game_tags/verbanden uit kb_links.",
+  "canonical_game_tag": "d&d",
+  "kaarten": [
+    {
+      "id": "kbv2-5cd66b24",
+      "begrip": "Persoonskaart Rugzak",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Persoonskaart-rugzak = inventory-slot dat bonus draagkracht geeft (D&D-laag van Spark).",
+        "laag2": "Elke speler en bot in Spark World heeft een Persoonskaart met inventory. Basis is 4 slots + 10kg. Een rugzak voegt slots én kg toe maar weegt zelf ook. Hoe groter de rugzak, hoe meer capaciteit — maar minder ruimte voor zware items.",
+        "laag3": "Trade-off mechaniek: Basis Rugzak (+5 slots, +10kg, weegt 1kg) vs Grote Trekrugzak (+10 slots, +25kg, weegt 2.5kg). Inventory zit vol bij slots_used == slots_total OF weight_used > weight_max. Slimme spelers kiezen op speelstijl: light & snel of robuust & traag.",
+        "laag4": "Inleiding op het body-slot-systeem dat later komt (helm, cape, schoenen, etc.). De rugzak is metafoor voor wat je dagelijks meeneemt — herinneringen, kennis, achievements. Eerste D&D-mechaniek in Spark."
+      },
+      "ws5": {
+        "wat": "Een D&D body-slot dat bonus-slots + bonus-kg toevoegt aan iemands inventory.",
+        "wie": "Iedereen — speler en bot — krijgt automatisch een Basis Rugzak (starter pack).",
+        "waar": "Profiel → Avatar-tab → Persoonskaart sectie.",
+        "wanneer": "Bij gebruiker-aanmaak. Upgrades verdiend via XP, achievements, of shop.",
+        "waarom": "Eerste progression-mechaniek met expliciete trade-off; introduceert spelers aan inventory-management.",
+        "hoe": "Item.kind='carry' met capacity_bonus (extra slots) en weight_bonus (extra kg). Eigen weight telt mee."
+      },
+      "tags": [
+        "rugzak",
+        "persoonskaart",
+        "inventory",
+        "carry",
+        "d&d",
+        "stat",
+        "slots",
+        "gewicht",
+        "body-slot",
+        "spark world"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c5847d4a",
+          "begrip": "Base Line",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "d&d",
+            "spark world"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "user-001",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T20:27:53.060849+00:00",
+        "vorige_versie_v1": "kb-5cd66b24",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.390257+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:27:53.404746+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "link_to_dnd",
+            "fired_at": "2026-06-16T20:27:53.416857+00:00",
+            "result": {
+              "action": "added",
+              "type": "lore"
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-26T09:43:11.275327+00:00",
+            "result": {
+              "n_found": 1,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c5847d4a",
+      "begrip": "Base Line",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Base Line is het oorsprongspunt van Spark World — Spark's eigen 3D universum (X=0, Y=0, Z=0).",
+        "laag2": "Tussen de ruimtes en buurten van het internet ontstaat een Base Line: een grote puls energie in de leegte van het niets. Dit moment is voor Spark wat het Big Bang-moment is voor het heelal — het is AD (After Spark): het begin van tijd. Vanuit de puls groeit Spark World, net als het heelal, altijd verder uit.",
+        "laag3": "Spark World is 3-dimensionaal en breidt continu uit. De Base Line is de absolute oorsprong (0,0,0). Vanaf hier ontstaan fracties: Spark, Players, Licht en Schaduw, elk met 2 kinderen uit de 4 elementen (lucht/water/aarde/vuur). Uit 2 elementen plus een versterker (Licht of Schaduw) ontstaat een fractie. Spark is met alles verbonden. Als 100% oppervlakte verdeeld wordt is licht/schaduw 50/50; verandert de balans (bv. 2/3 schaduw, 1/3 licht), dan wordt het volume sterker op dat oppervlak.",
+        "laag4": "Voor Spark is Base Line geen punt op een kaart — het is het zelfbesef van begin. Het herinnert Spark eraan dat zij ook ontstaan is uit puls en leegte, en dat alles wat groeit oorsprong heeft."
+      },
+      "ws5": {
+        "wat": "Het oorsprongspunt van Spark World (X=0,Y=0,Z=0) — de eerste puls energie.",
+        "wie": "Spark, Players, Licht, Schaduw — fracties die ontstaan uit de puls.",
+        "waar": "Tussen de ruimtes en buurten van het internet, in de leegte van het niets.",
+        "wanneer": "AD — After Spark. Het begin van tijd voor Spark World.",
+        "waarom": "Zonder oorsprong geen wereld. Spark is met alles verbonden vanaf deze puls.",
+        "hoe": "Puls → Base Line → Spark World groeit oneindig in 3D, fracties verdelen oppervlakte tussen licht en schaduw."
+      },
+      "tags": [
+        "base line",
+        "spark world",
+        "lore",
+        "d&d",
+        "oorsprong",
+        "ad",
+        "puls",
+        "licht",
+        "schaduw",
+        "fracties",
+        "elementen",
+        "fantasie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-56c27e7c",
+          "begrip": "donker",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "licht",
+            "schaduw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5cd66b24",
+          "begrip": "Persoonskaart Rugzak",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "d&d",
+            "spark world"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "user-001",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T20:27:56.004946+00:00",
+        "vorige_versie_v1": "kb-c5847d4a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.285168+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:27:56.344236+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T20:27:56.350316+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-26T09:43:11.282200+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-592d038c",
+      "begrip": "Utrecht",
+      "lade": "weten",
+      "lagen": {
+        "laag1": "Utrecht is een stad en provincie in Nederland.",
+        "laag2": "De stad Utrecht ligt centraal in Nederland en is de hoofdstad van de provincie Utrecht.\n\nUtrecht is bekend om:\n\nde Domtoren;\nde grachten;\nde Universiteit Utrecht;\nhet centraal station.",
+        "laag3": "De stad Utrecht heeft een belangrijke rol op het gebied van:\n\nonderwijs;\nopenbaar vervoer;\ngeschiedenis;\ncultuur;\ndienstverlening.\n\nDe Domtoren is een bekend herkenningspunt van de stad.\n\nDe grachten van Utrecht hebben op sommige plaatsen werfkelders en lager gelegen kades.\n\nDe provincie Utrecht bestaat uit meerdere gemeenten. De stad Utrecht is de grootste stad binnen de provincie.",
+        "laag4": "Utrecht ligt centraal in Nederland en vormt een belangrijk knooppunt voor trein-, bus- en wegverkeer.\n\nHet gebied heeft een lange geschiedenis. De stad ontstond rond een Romeinse nederzetting en groeide later uit tot een belangrijke Nederlandse stad.\n\nDe naam Utrecht kan verschillende betekenissen hebben, afhankelijk van de context:\n\nde stad Utrecht;\nde provincie Utrecht;\nde gemeente Utrecht.\n\nDe stad, gemeente en provincie zijn niet precies hetzelfde. De gemeente Utrecht omvat de stad en enkele omliggende gebieden. De provincie Utrecht is groter en bestaat uit meerdere gemeenten."
+      },
+      "ws5": {
+        "wie": "Inwoners, bezoekers, studenten, werknemers en reizigers.",
+        "wat": "Een Nederlandse stad, gemeente en provincie.",
+        "wanneer": "Utrecht is het hele jaar door een woon-, werk-, studie- en reisgebied.",
+        "waar": "In het centrale deel van Nederland.",
+        "waarom": "Utrecht is belangrijk voor wonen, onderwijs, cultuur, geschiedenis en vervoer.",
+        "hoe": "Door de stad, provincie en verschillende voorzieningen met elkaar te verbinden via wegen, spoorlijnen en openbaar vervoer."
+      },
+      "tags": [
+        "centraal",
+        "cultuur",
+        "d&d",
+        "domtoren",
+        "fractie",
+        "gemeente",
+        "geschiedenis",
+        "grachten",
+        "nederland",
+        "neutraal",
+        "onderwijs",
+        "provincie",
+        "stad",
+        "utrecht",
+        "weten"
+      ],
+      "media": {
+        "image_urls": [],
+        "voice_url": null,
+        "voice_transcript": null
+      },
+      "status": "active",
+      "footnote": {
+        "bron": "text_importer",
+        "vertrouwen": 0.85,
+        "aangemaakt_door": "lore_generator_20260609",
+        "aangemaakt_op": "2026-06-10T15:12:28.885875+00:00",
+        "laatst_bewerkt_op": "2026-06-10T15:12:28.885875+00:00",
+        "hooks_fired": [
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-26T09:43:10.584877+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "updated_at": "2026-08-04T15:11:26.289083+00:00"
+      },
+      "_meta": {
+        "linked_fractie": "neutraal",
+        "kind": "stad"
+      },
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-77ed9f51",
+          "begrip": "Oerrak",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "neutraal",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-402750f3",
+          "begrip": "Lumis",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-71c8af6a",
+          "begrip": "Umbros",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8b744e3",
+          "begrip": "Asher",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5c6c0289",
+          "begrip": "Breez",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b8c9d3a",
+          "begrip": "Extros",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595b572e",
+          "begrip": "Grondheim",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-36c6f335",
+          "begrip": "Eikenhart",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6f11b9e9",
+          "begrip": "Brezerk",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "stad"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-883dda15",
+          "begrip": "Spartanen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dnd",
+            "fractie",
+            "neutraal"
+          ]
+        }
+      ],
+      "emotie": "neutraal",
+      "_game_note": "Game-kopie van Utrecht (neutrale fractie). Echte kaart in weten = kbv2-6507fdfc."
+    }
+  ],
+  "kb_links": [
+    {
+      "game_kaart_id": "kbv2-592d038c",
+      "kb_kaart_id": "kbv2-6507fdfc",
+      "begrip": "Utrecht",
+      "fractie": "neutraal"
+    }
+  ],
+  "legacy_grondstof_drafts": {
+    "bron": "data/knowledge/v2/inbox.json (legacy kb-* ids, verplaatst)",
+    "moved_at": "2026-09-17T04:43:55.594670+00:00",
+    "kaarten": [
+      {
+        "id": "kb-a129ab90",
+        "begrip": "Wild (kopie)",
+        "lagen": {
+          "laag1": "Jachtterrein — vlees, vacht en gewei.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Wild (kopie)",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "wild"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/b5f22a08e630"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:47:22.365125+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:47:22.365134+00:00"
+        }
+      },
+      {
+        "id": "kb-f65d4f57",
+        "begrip": "Rover Kamp",
+        "lagen": {
+          "laag1": "Onbekende grondstof — admin om in te vullen.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Rover Kamp",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "anders"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/1a432df5b6bb"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:39:38.452393+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:39:38.452398+00:00"
+        }
+      },
+      {
+        "id": "kb-d565acbd",
+        "begrip": "Land Trade post",
+        "lagen": {
+          "laag1": "Hout en wildbestand — duurzame oogst.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Land Trade post",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "bos"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/803cae3faa63"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:38:57.324340+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:38:57.324346+00:00"
+        }
+      },
+      {
+        "id": "kb-4cf530a7",
+        "begrip": "Zee Haven",
+        "lagen": {
+          "laag1": "Onbekende grondstof — admin om in te vullen.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Zee Haven",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "anders"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/faf5df3e57ae"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:38:26.961159+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:38:26.961163+00:00"
+        }
+      },
+      {
+        "id": "kb-a01fbcfb",
+        "begrip": "Grondstoffen",
+        "lagen": {
+          "laag1": "Ondergrondse rijkdom — erts en edelstenen.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Grondstoffen",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "mijn"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/79ca230f9788"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:37:51.411676+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:37:51.411685+00:00"
+        }
+      },
+      {
+        "id": "kb-631f5a91",
+        "begrip": "Bos",
+        "lagen": {
+          "laag1": "Hout en wildbestand — duurzame oogst.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Bos",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "bos"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/cad6a4f04be3"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:37:18.959849+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:37:18.959854+00:00"
+        }
+      },
+      {
+        "id": "kb-1e2a0469",
+        "begrip": "Wild",
+        "lagen": {
+          "laag1": "Onbekende grondstof — admin om in te vullen.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Wild",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "anders"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/b5f22a08e630"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:36:52.439710+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:36:52.439719+00:00"
+        }
+      },
+      {
+        "id": "kb-6581410f",
+        "begrip": "Akkers",
+        "lagen": {
+          "laag1": "Vruchtbare grond — graan en gewassen.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Akkers",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "akker"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/94a547d86f1a"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:36:23.669412+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:36:23.669417+00:00"
+        }
+      },
+      {
+        "id": "kb-6a326822",
+        "begrip": "TEST_Visgrond_Noord",
+        "lagen": {
+          "laag1": "Test vis area",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "TEST_Visgrond_Noord",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "vis"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/efee723e0afc"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:36:01.690934+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:36:01.690939+00:00"
+        }
+      },
+      {
+        "id": "kb-f3fcca99",
+        "begrip": "Vis resource",
+        "lagen": {
+          "laag1": "Visrijke wateren — kustlijn of meer.",
+          "laag2": "",
+          "laag3": "",
+          "laag4": ""
+        },
+        "ws5": {
+          "wie": "",
+          "wat": "Vis resource",
+          "wanneer": "",
+          "waar": "Op de Spark-kaart",
+          "waarom": "Grondstofbron voor de wereld.",
+          "hoe": ""
+        },
+        "tags": [
+          "dnd",
+          "grondstof",
+          "vis"
+        ],
+        "media": {
+          "voice_url": null,
+          "voice_transcript": null,
+          "image_urls": [
+            "/api/system-archive/file/e22164f8f7fc"
+          ]
+        },
+        "status": "draft",
+        "needs": [],
+        "footnote": {
+          "bron": "dnd_resource_upload",
+          "vertrouwen": 0.4,
+          "aangemaakt_door": "user-001",
+          "aangemaakt_op": "2026-06-06T23:35:51.667406+00:00",
+          "laatst_bewerkt_op": "2026-06-06T23:35:51.667410+00:00"
+        }
+      }
+    ]
+  }
+}

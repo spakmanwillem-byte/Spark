@@ -106,6 +106,7 @@ def _search_kb_v2(query: str, viewer_id: Optional[str], max_results: int = 5) ->
         ("weten",   "knowledge_v2_weten.json"),
         ("voelen",  "knowledge_v2_voelen.json"),
         ("spreken", "knowledge_v2_spreken.json"),
+        ("games",   "knowledge_v2_games.json"),
         ("inbox",   "knowledge_inbox.json"),
     ]
     for lade_label, fname in files:

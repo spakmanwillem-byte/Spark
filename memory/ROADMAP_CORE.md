@@ -335,6 +335,55 @@ input" + "response-tijd loggen leuk voor later onderzoek".
   - Alternatief: lift `sparkMessages` naar een globale context/provider
     zodat unmounten niet meer uitmaakt. Groter refactor.
 
+### 🧹 KB-opschoning + Spark Games lade (17 sep 2026)
+
+**Trigger (Willem)**: orphan-tag scan maakte skelet-kaarten `voelenbegrip`, `rna`, `dnd`.
+"dit is een fout woord … dit moet goed gezet worden" + "de game is inactief tot core
+klaar … zonde om weg te doen … game zou eigen container moeten zitten" + "de naam wordt
+universeel Spark World".
+
+- **✅ `voelenbegrip`** — foute tag op 3 weten-kaarten (Vervanging, Wedergeboorte,
+  Zoetwater) verwijderd; skelet `kbv2-eb46e512` weg. Oorsprong onvindbaar (zat al in
+  oudste backup 23-08).
+- **✅ `rna`** — géén fout: echte biologie-tag op Celkern/Genen/Virussen. Skelet
+  `kbv2-977940f0` blijft in inbox; **Willem vult hem zelf in**.
+- **✅ `dnd` root cause** — verweesd legacy-bestand `v2/inbox.json` (oude `kb-*` ids,
+  door geen enkele module gelezen) met 10 grondstof-drafts. Verplaatst; leeg-gezet.
+  Learning: de orphan-scan globt `V2/*.json` — élk los json-bestand in die map telt mee.
+- **✅ Dubbele Utrecht** — kbv2-592d038c was een game-kopie van kbv2-6507fdfc (identieke
+  lagen). Kopie is nu `Utrecht (Spark World)` in de games-lade met de fractie-link.
+- **✅ 5e lade `games` ("Spark Games", 🎮, `#22c55e`)** — geregistreerd in:
+  `kb_v2/service.py` (LADES + LADE_META), `kb_v2/routes.py` (alle lade-lijsten, move
+  valid-set, dupes-files), `graph/sync_service.LADE_COLORS`, `chat/snap_service.V2_LADES`,
+  `chat/spark_snuffel`, `kb_v2/llm_generate_routes`, `kb_v2/apostrophe_normalizer`,
+  frontend `KennisbankV2Page.LADES` + count-fetch. Orphan-scan **slaat
+  `knowledge_v2_games.json` over** (game-tags als `grondstof`/`fractie` zijn intern).
+  Nog NIET in: `bulk_5w_fill_routes`, `curation_routes`, `text_importer`,
+  `card_session_service`, `scan_service`, `spontaneous_w_service`, `wedervraag_service`
+  (bewust: die werken op de 4 kennis-lades; games volgt als de game weer actief wordt).
+- **✅ Spark World hub-kaart** — oude kaart "D&D" (kbv2-5ae16b66, generieke Dungeons &
+  Dragons-uitleg) hernoemd + herschreven: sandbox-game, fictieve steden, fracties,
+  bouwstenen, status geparkeerd. Verbanden → Base Line, Rugzak, Utrecht (SW), SPS.
+- **✅ Base Line = basiswaarden-kaart** — oorsprong (0,0,0), AD-tijdrekening, licht/schaduw
+  50/50, 4 elementen, fracties, startinventory 4 slots + 10 kg. Oude verhaal-lore weg
+  (gearchiveerd in `data/dnd/lore_index.json`).
+- **✅ Tags** — `d&d`/`dnd` → `spark world` overal. SPS-kaart kreeg tag `spark games`
+  + verband naar Spark World.
+- **✅ Index + graph herbouwd** (`POST /api/kb/v2/admin/rebuild-index`, `POST /api/graph/rebuild`):
+  7280 index-entries (155 stale alias-keys van oude homoniem-namen weg), 7343 nodes.
+- **Backups**: `*.bak_voelenbegrip_fix_*`, `*.bak_dnd_container_*`, `*.bak_spark_games_*`,
+  `data/dnd/_kb_cards_moved_to_games_lade_*.json.bak`, `data/dnd/_legacy_kb_inbox_moved.json.bak`.
+- **Getest**: curl stats/lade/find/orphan-dry-run + screenshot Spark Games-tab. Geen testing-agent.
+
+**📌 OPEN — Spark World (pas oppakken als Core klaar is, Willem)**
+- P2 — Spark Games-tab: filter per `game`-veld (Spark World / Steen Papier Schaar / …).
+- P2 — Restore-/eco-container per game zodat game-data en KB-kaarten samen verhuizen.
+- P2 — SPS-scorelijst koppelen als gevechtsmechaniek in Spark World.
+- P2 — 8 grondstof-drafts in games-lade invullen (laag1 ontbreekt).
+- P2 — `rna`-kaart invullen (Willem).
+- P3 — 17 begrippen met leading/trailing spatie (`'ADA '`, `'Schors '`, …) strippen;
+  index-keys zijn al gestript dus lookups werken, maar het is rommel.
+
 ### 🎨 Dashboard-kaders live (dag 2 vervolg)
 
 **Melding (Willem)**: "in dat kader zou ik graag de eerst volgende komende
@@ -1344,13 +1393,18 @@ Backup gemaakt: `/app/_backup_before_prod_merge_20260803_071830/`
 - **`intent_matcher_service.py`** — capability-matcher die Spark's *handen* moet gaan koppelen aan acties (P0 backlog: live-routering nog te maken).
 
 ### 🗂️ Kennis-architectuur (4 lagen)
-- **v1 Knowledge Base** (`/data/knowledge/learned_knowledge/knowledge_base.json`) — 5288 entries, full graph-coverage.
-- **KB v2 — 4 lades** (`/data/knowledge/v2/`) — 🌸 Voelen 250 · 💬 Spreken 329 · 🧠 Weten 1071 · 🎭 Doen 632 + 📥 Inbox 3007 (te classificeren).
+- **v1 Knowledge Base** (`/data/knowledge/learned_knowledge/knowledge_base.json`) — legacy, alleen-lezen fallback.
+- **KB v2 — 5 lades** (`/data/knowledge/v2/`, stand 17-09-2026) — 🌸 Voelen 566 · 💬 Spreken 516 · 🧠 Weten 5096 · 🎭 Doen 1153 · 🎮 Spark Games 12 + 📥 Inbox 1 (`rna`, Willem vult in).
+  Lade-lijst is de bron `service.LADES` + `LADE_META`; frontend `KennisbankV2Page.LADES` moet gelijk lopen.
 - **Knowledge graph** (`modules/graph/sync_service.py`) — 10577 nodes + 65981 edges (v1+v2 gemengd, lade-kleuren).
 - **Voice/Image media** — centraal in `system_archive` met `linked_card_id` backreference.
 
-### 🎭 D&D / Levende Wereld laag
-- **Lore index** (7 avatars-as-functions, 6 behavior-categorieën).
+### 🎮 Spark World (sandbox-game) — universele naam sinds 17-09-2026
+- **Eén game, één naam**: D&D / dnd / d&d / "Levende Wereld" = **Spark World**. Gebruik nooit meer "D&D" als naam voor de game (alleen als tag-historie in `footnote.hernoemd_van`).
+- **KB**: hub-kaart `Spark World` (kbv2-5ae16b66) in lade `games`, Base Line = basiswaarden-kaart, Rugzak, Utrecht (Spark World), grondstof-drafts. Veld `game: "spark world"` per kaart voor onderverdeling per game.
+- **Data**: `data/dnd/` container (steden, fracties, characters, blueprints, world_state, lore_index). Status: **geparkeerd tot Core klaar is**.
+- **Steen Papier Schaar** = onafhankelijke module-game (kaart in doen), cross-linkbaar als gevechtsmechaniek in Spark World.
+- **Lore index** (7 avatars-as-functions, 6 behavior-categorieën) — gearchiveerd, oude oorsprongs-lore van Base Line staat hier.
 - **Aura-engine** (`/api/dnd/aura/{user_id}`) — live top-3 gedragingen → kleur-gradient op Persoonskaart.
 - **Card Factory** (`modules/cards/`) — DnD/Event/Bark kaarten met hook-chain bij draft→active.
 - **Base Line intro** (community chat `[start verhaal]`) — keuze-driven story-flow.
@@ -1457,9 +1511,3 @@ Voordelen:
 - **Gradatie 1** (super-admin): alle widgets incl. Triggers, KB Lades, Shadow Learning, Storage Cache
 - **Gradatie 2** (admin): KB Lades + Triggers + Users + Health
 - **Gradatie 3-7**: Kennisbank-overzicht + persoonlijke widgets (Mijn Opslag, Agenda, Spark-status)
-
-## Sessie 2026-09-17 — KB opschoning orphan-skeletons
-- `voelenbegrip` (foute tag op Vervanging/Wedergeboorte/Zoetwater) verwijderd + skelet kbv2-eb46e512 weg.
-- `rna` skelet kbv2-977940f0 blijft: Willem vult hem in (echte biologie-term, 3 kaarten verwijzen).
-- **Game-container** `data/dnd/kb_cards.json` aangemaakt (status parked): Persoonskaart Rugzak, Base Line, Utrecht-gamekopie (kbv2-592d038c, fractie neutraal) + 10 legacy grondstof-drafts uit verweesd `v2/inbox.json`. Canonical game-tag = `d&d`. Hoofd-KB houdt echte Utrecht kbv2-6507fdfc en algemene kaart D&D kbv2-5ae16b66.
-- TODO bij heropstart game: eigen KB-lade/eco-container voor Spark World + restore-script vanuit kb_cards.json.

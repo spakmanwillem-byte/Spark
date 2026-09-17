@@ -33,7 +33,7 @@ def _ascii_fold(s: str) -> str:
 
 # v6_kbv2_unify_snap_001 — KB v2 paden (nieuwe primaire bron)
 V2_DIR = DATA_DIR / "knowledge" / "v2"
-V2_LADES = ("voelen", "spreken", "weten", "doen")
+V2_LADES = ("voelen", "spreken", "weten", "doen", "games")
 V2_INBOX_FILE = V2_DIR / "knowledge_inbox.json"
 
 # Legacy V1-bestand (alleen-lezen, alleen voor fallback)

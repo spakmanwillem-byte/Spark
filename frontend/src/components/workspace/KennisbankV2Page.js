@@ -18,6 +18,7 @@ const LADES = [
   { id: 'spreken',  icon: '💬', naam: 'Spreken',     stroom: 'Communicatie & Taal', color: '#06b6d4' },
   { id: 'weten',    icon: '🧠', naam: 'Weten',       stroom: 'Systeem & Kennis',    color: '#f59e0b' },
   { id: 'doen',     icon: '🎭', naam: 'Doen',        stroom: 'Gedrag & Actie',      color: '#a855f7' },
+  { id: 'games',    icon: '🎮', naam: 'Spark Games', stroom: 'Spel & Wereld',       color: '#22c55e' },
 ];
 
 const REASON_LABEL = {
@@ -156,6 +157,7 @@ export function KennisbankV2Page({ onNavigate }) {
           { tab: 'spreken', url: `${API}/api/kb/v2/lade/spreken?limit=10000` },
           { tab: 'weten', url: `${API}/api/kb/v2/lade/weten?limit=10000` },
           { tab: 'doen', url: `${API}/api/kb/v2/lade/doen?limit=10000` },
+          { tab: 'games', url: `${API}/api/kb/v2/lade/games?limit=10000` },
         ];
         for (const b of buckets) {
           try {
@@ -621,7 +623,7 @@ export function KennisbankV2Page({ onNavigate }) {
             <h1 className="text-xl font-bold text-white flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-amber-400" /> Kennisbank
             </h1>
-            <p className="text-xs text-slate-400 mt-0.5">4 Lades + Inbox · Piramide-laag 3 (Geheugen) · v2 schema</p>
+            <p className="text-xs text-slate-400 mt-0.5">5 Lades + Inbox · Piramide-laag 3 (Geheugen) · v2 schema</p>
           </div>
           <div className="flex items-center gap-2">
             <button data-testid="kbv2-new-card-btn" onClick={() => {

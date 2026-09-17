@@ -67,6 +67,7 @@ LADE_COLORS = {
     "spreken": "#06b6d4",
     "weten":   "#f59e0b",
     "doen":    "#a855f7",
+    "games":   "#22c55e",
 }
 
 

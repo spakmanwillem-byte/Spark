@@ -920,8 +920,8 @@ export function GesprekkenPage({ onNavigate }) {
         }
         return;
       }
+      const t1 = performance.now();
       try {
-        const t1 = performance.now();
         setSparkThinking(true);
         const res = await fetch(`${API}/api/chat/message`, {
           method: 'POST',

@@ -126696,34 +126696,6 @@
       "vertrouwen": 1.0
     },
     {
-      "id": "kbv2-5ae16b66",
-      "label": "D&D",
-      "type": "knowledge_v2",
-      "lade": "weten",
-      "lade_color": "#f59e0b",
-      "description": "D&D staat voor Dungeons & Dragons en is een tabletop-rollenspel waarin spelers samen een verhaal en avonturen beleven.",
-      "tags": [
-        "avontuur",
-        "campagne",
-        "d&d",
-        "dm",
-        "fantasie",
-        "fantasy",
-        "karakter",
-        "personage",
-        "rollenspel",
-        "rpg",
-        "sessie",
-        "speler",
-        "spelregels",
-        "tabletop",
-        "verhaal"
-      ],
-      "topic": "",
-      "belangrijkheid": 0.5,
-      "vertrouwen": 1.0
-    },
-    {
       "id": "kbv2-2feca2aa",
       "label": "Doelgericht",
       "type": "knowledge_v2",
@@ -155964,7 +155936,8 @@
         "balans",
         "mechanic",
         "interactie",
-        "strategie"
+        "strategie",
+        "spark games"
       ],
       "topic": "spel",
       "belangrijkheid": 5,
@@ -177472,6 +177445,238 @@
       "topic": "",
       "belangrijkheid": 0.5,
       "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-5ae16b66",
+      "label": "Spark World",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Spark World is Spark's eigen sandbox-game: een levende wereld die groeit door keuzes en interpretatie van spelers.",
+      "tags": [
+        "spark world",
+        "sandbox",
+        "game",
+        "levende wereld",
+        "fracties",
+        "steden",
+        "base line",
+        "spark games",
+        "spel",
+        "simulatie"
+      ],
+      "topic": "spark world",
+      "belangrijkheid": 0.5,
+      "vertrouwen": 1.0
+    },
+    {
+      "id": "kbv2-c5847d4a",
+      "label": "Base Line",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Base Line is de basiskaart van Spark World: het nulpunt (X=0, Y=0, Z=0) waar alle basiswaarden van de wereld vandaan komen.",
+      "tags": [
+        "base line",
+        "spark world",
+        "basiswaarden",
+        "oorsprong",
+        "ad",
+        "licht",
+        "schaduw",
+        "fracties",
+        "elementen",
+        "nulpunt"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-5cd66b24",
+      "label": "Persoonskaart Rugzak",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Persoonskaart-rugzak = inventory-slot dat bonus draagkracht geeft (D&D-laag van Spark).",
+      "tags": [
+        "rugzak",
+        "persoonskaart",
+        "inventory",
+        "carry",
+        "spark world",
+        "stat",
+        "slots",
+        "gewicht",
+        "body-slot"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-592d038c",
+      "label": "Utrecht (Spark World)",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Utrecht is in Spark World de neutrale stad: het startpunt van spelers, gekoppeld aan de echte stad Utrecht.",
+      "tags": [
+        "centraal",
+        "cultuur",
+        "spark world",
+        "domtoren",
+        "fractie",
+        "gemeente",
+        "geschiedenis",
+        "grachten",
+        "nederland",
+        "neutraal",
+        "onderwijs",
+        "provincie",
+        "stad",
+        "utrecht",
+        "weten"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.85
+    },
+    {
+      "id": "kbv2-94ad9dfe",
+      "label": "Rover Kamp",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Onbekende grondstof — admin om in te vullen.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "anders",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-e3f53257",
+      "label": "Land Trade post",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Hout en wildbestand — duurzame oogst.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "bos",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-738cda3b",
+      "label": "Zee Haven",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Onbekende grondstof — admin om in te vullen.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "anders",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-3d249de5",
+      "label": "Grondstoffen",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Ondergrondse rijkdom — erts en edelstenen.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "mijn",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-a4f65ba9",
+      "label": "Bos",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Hout en wildbestand — duurzame oogst.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "bos",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-73ebc070",
+      "label": "Wild",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Onbekende grondstof — admin om in te vullen.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "anders",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-1ae622c4",
+      "label": "Akkers",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Vruchtbare grond — graan en gewassen.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "akker",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
+    },
+    {
+      "id": "kbv2-0d1fc7d5",
+      "label": "Vis resource",
+      "type": "knowledge_v2",
+      "lade": "games",
+      "lade_color": "#22c55e",
+      "description": "Visrijke wateren — kustlijn of meer.",
+      "tags": [
+        "spark world",
+        "grondstof",
+        "vis",
+        "grondstoffen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.4
     }
   ]
 }

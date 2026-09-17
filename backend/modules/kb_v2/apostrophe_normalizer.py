@@ -25,6 +25,7 @@ KB_FILES = [
     BASE / "knowledge_v2_doen.json",
     BASE / "knowledge_v2_spreken.json",
     BASE / "knowledge_v2_voelen.json",
+    BASE / "knowledge_v2_games.json",
 ]
 INDEX = BASE / "knowledge_index.json"
 

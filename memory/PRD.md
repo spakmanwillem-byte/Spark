@@ -4398,3 +4398,9 @@ Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" —
 - Resize endpoint blokkeert bij open posities: bevestigd
 - Chat "hoe werkt de bot?" → `type=trader_help`: bevestigd
 - Wallet UI screenshot: knop-volgorde Storten→Opnemen→Gift correct (rechts)
+
+
+## 2026-09-17 — Spark Games lade + KB opschoning
+- 5e KB-lade `games` ("Spark Games") live; hub-kaart Spark World, Base Line (basiswaarden), Rugzak, Utrecht (Spark World), 8 grondstof-drafts.
+- Orphan-skeletons `voelenbegrip`/`dnd` opgeruimd (foute tag verwijderd resp. game-kaarten verhuisd); `rna` skelet blijft voor Willem om in te vullen.
+- Universele naam voor de sandbox-game: **Spark World** (D&D/dnd = hetzelfde). Zie ROADMAP_CORE.md.

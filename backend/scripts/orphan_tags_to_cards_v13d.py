@@ -101,6 +101,8 @@ def collect_all() -> tuple[dict, set, dict]:
     known_begrippen: set[str] = set()
 
     for p in sorted(V2.glob('*.json')):
+        if p.name == 'knowledge_v2_games.json':
+            continue
         try:
             d = json.loads(p.read_text())
         except Exception:

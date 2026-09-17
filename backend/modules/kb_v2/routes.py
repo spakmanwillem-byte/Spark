@@ -200,7 +200,7 @@ async def get_inbox_incomplete(limit: int = Query(50, ge=1, le=500),
     """
     from modules.core.storage import load_json as _lj
     REQUIRED_5W = {"wie", "wat", "wanneer", "waar", "waarom", "hoe"}
-    LADES = ["voelen", "spreken", "weten", "doen"]
+    LADES = ["voelen", "spreken", "weten", "doen", "games"]
     PLACEHOLDER = {"", "?", "nog te vullen", "onbekend", "n.v.t.", "n/a"}
     out = []
 
@@ -350,6 +350,7 @@ async def list_homonyms(min_count: int = Query(2, ge=2, le=10),
         ("spreken", V2 / "knowledge_v2_spreken.json"),
         ("weten", V2 / "knowledge_v2_weten.json"),
         ("doen", V2 / "knowledge_v2_doen.json"),
+        ("games", V2 / "knowledge_v2_games.json"),
     ]
 
     # Groepeer per begrip.lower()
@@ -473,7 +474,7 @@ async def move(body: MoveCardBody):
     wanneer hij per ongeluk in de verkeerde lade beland is. Behoudt id + alle velden,
     wijzigt alleen `lade` en verplaatst tussen de bron-JSON-bestanden.
     """
-    valid = {"weten", "doen", "voelen", "spreken", "inbox"}
+    valid = {"weten", "doen", "voelen", "spreken", "games", "inbox"}
     if body.from_lade not in valid or body.to_lade not in valid:
         raise HTTPException(400, f"lade moet één van {sorted(valid)} zijn")
     if body.from_lade == body.to_lade:
@@ -514,7 +515,7 @@ async def rebuild_knowledge_index(body: DedupeInboxBody):
 
     # v7_ghost_cleanup_001 — verzamel eerst alle begrippen die gevuld zijn in de lades
     filled_begrippen = set()
-    for cat in ("weten", "doen", "voelen", "spreken"):
+    for cat in ("weten", "doen", "voelen", "spreken", "games"):
         fp = DATA / f"knowledge_v2_{cat}.json"
         if not fp.exists():
             continue
@@ -526,7 +527,7 @@ async def rebuild_knowledge_index(body: DedupeInboxBody):
                 filled_begrippen.add(begrip)
 
     new_entries = {}
-    for cat in ("weten", "doen", "voelen", "spreken"):
+    for cat in ("weten", "doen", "voelen", "spreken", "games"):
         fp = DATA / f"knowledge_v2_{cat}.json"
         if not fp.exists():
             continue
@@ -622,7 +623,7 @@ async def dedupe_inbox_vs_lade(body: DedupeInboxBody):
 
     # Verzamel alle lade-IDs
     lade_ids = set()
-    for cat in ("weten", "doen", "voelen", "spreken"):
+    for cat in ("weten", "doen", "voelen", "spreken", "games"):
         fp = DATA / f"knowledge_v2_{cat}.json"
         if not fp.exists():
             continue
@@ -684,7 +685,7 @@ async def backfill_v1_migration(body: BackfillMigrationBody):
 
     # Build v2-index (begrip lower → {card_id, lade, has_laag1})
     v2_idx = {}
-    for cat in ("weten", "doen", "voelen", "spreken"):
+    for cat in ("weten", "doen", "voelen", "spreken", "games"):
         fp = DATA / "knowledge" / "v2" / f"knowledge_v2_{cat}.json"
         if not fp.exists():
             continue
@@ -935,7 +936,7 @@ async def sync_vocab(body: VocabSyncBody):
     missing = []
     stale = []
     all_lade_cards = []
-    for lade in ["voelen", "spreken", "weten", "doen"]:
+    for lade in ["voelen", "spreken", "weten", "doen", "games"]:
         ldata = load_json(_lade_path(lade), default={"kaarten": []})
         for k in ldata.get("kaarten", []):
             begrip = (k.get("begrip") or "").strip()
@@ -1336,7 +1337,7 @@ async def herzien_promote(body: HerzienPromoteBody):
         service.edit_card(card_id, "inbox", updates=updates, user_id=body.user_id)
     # 3. Classify naar lade
     target = body.target_lade or _auto_lade(body.topic, body.tags)
-    if target not in ("voelen", "spreken", "weten", "doen"):
+    if target not in ("voelen", "spreken", "weten", "doen", "games"):
         target = "weten"
     cl = service.classify_card(card_id, target, updates=None, user_id=body.user_id)
     # 4. Mark v1 als gemigreerd
@@ -1402,7 +1403,7 @@ async def tag_scan(limit: int = 50):
     from collections import defaultdict
     from modules.core.storage import load_json
     from .tag_normalizer import is_risky_merge, risk_reason
-    lades = ["voelen", "spreken", "weten", "doen"]
+    lades = ["voelen", "spreken", "weten", "doen", "games"]
     stem_to_variants: dict = defaultdict(set)
     stem_to_count: dict = defaultdict(int)
     total_tags = 0
@@ -1496,7 +1497,7 @@ async def tag_merge(body: TagMergeBody):
     if not target_stem or not keep:
         return {"success": False, "error": "stem en keep_variant mogen niet leeg zijn"}
 
-    lades = ["voelen", "spreken", "weten", "doen"]
+    lades = ["voelen", "spreken", "weten", "doen", "games"]
     stats = {lade: {"cards_touched": 0, "tags_replaced": 0} for lade in lades}
 
     for lade in lades:
@@ -1562,7 +1563,7 @@ async def tags_cleanup(dry_run: bool = True, min_tags_threshold: int = 0,
     from pathlib import Path as _P
 
     KB_V2 = _P("/app/backend/data/knowledge/v2")
-    lades = ["voelen", "spreken", "weten", "doen"]
+    lades = ["voelen", "spreken", "weten", "doen", "games"]
 
     global_report = {
         "dry_run": dry_run,

@@ -25,13 +25,14 @@ from modules.core.spark_logger import traced, log_event
 
 V2_DIR = Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
 
-LADES = ["voelen", "spreken", "weten", "doen"]
+LADES = ["voelen", "spreken", "weten", "doen", "games"]
 
 LADE_META = {
     "voelen": {"icon": "🌸", "naam": "Voelen", "stroom": "Emotie & Verbinding"},
     "spreken": {"icon": "💬", "naam": "Spreken", "stroom": "Communicatie & Taal"},
     "weten": {"icon": "🧠", "naam": "Weten", "stroom": "Systeem & Kennis"},
     "doen": {"icon": "🎭", "naam": "Doen", "stroom": "Gedrag & Actie"},
+    "games": {"icon": "🎮", "naam": "Spark Games", "stroom": "Spel & Wereld"},
 }
 
 _lock = threading.RLock()

@@ -1,0 +1,762 @@
+{
+  "kaarten": [
+    {
+      "id": "kbv2-5ae16b66",
+      "begrip": "Spark World",
+      "lade": "games",
+      "status": "active",
+      "lagen": {
+        "laag1": "Spark World is Spark's eigen sandbox-game: een levende wereld die groeit door keuzes en interpretatie van spelers.",
+        "laag2": "Geen klassiek RPG met vaste regels. Stats ontstaan uit gedrag, lore ontstaat uit ervaring. De wereld is gebouwd op de kaart van Nederland met fictieve steden (Oerrak, Lumis, Umbros, Asher, Breez, Extros, Grondheim, Eikenhart) en één neutrale stad: Utrecht. Fracties: Spark, Players, Licht en Schaduw.",
+        "laag3": "Bouwstenen: Base Line (basiswaarden), Persoonskaart met inventory (Rugzak), grondstoffen en gebieden (bos, akkers, vis, mijn, haven), fracties en steden. Losse module-games zoals Steen Papier Schaar kunnen gekoppeld worden, bv. als gevechtsmechaniek met een eigen scorelijst.",
+        "laag4": "Status: geparkeerd tot Spark Core klaar is. Data leeft in de dnd-container (data/dnd/: steden, fracties, characters, blueprints, world_state). Eerder liepen de namen D&D, dnd en d&d door elkaar; de universele naam is nu Spark World."
+      },
+      "ws5": {
+        "wie": "Spelers, bots en Spark zelf.",
+        "wat": "Spark's sandbox-game: een levende wereld.",
+        "wanneer": "Geparkeerd; oppakken na Spark Core.",
+        "waar": "Kennisbank → Spark Games + data/dnd container.",
+        "waarom": "Spelen, groeien en betekenis maken uit ervaring.",
+        "hoe": "Base Line-waarden + modules (steden, fracties, inventory, gekoppelde mini-games)."
+      },
+      "tags": [
+        "spark world",
+        "sandbox",
+        "game",
+        "levende wereld",
+        "fracties",
+        "steden",
+        "base line",
+        "spark games",
+        "spel",
+        "simulatie"
+      ],
+      "topic": "spark world",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c5847d4a",
+          "begrip": "Base Line",
+          "lade": "games",
+          "overlap": 1,
+          "shared_tags": [
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5cd66b24",
+          "begrip": "Persoonskaart Rugzak",
+          "lade": "games",
+          "overlap": 1,
+          "shared_tags": [
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-592d038c",
+          "begrip": "Utrecht (Spark World)",
+          "lade": "games",
+          "overlap": 1,
+          "shared_tags": [
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-812be9a3",
+          "begrip": "Steen Papier Schaar",
+          "lade": "doen",
+          "overlap": 1,
+          "shared_tags": [
+            "spel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "text_importer",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-08-25T20:01:04.008350+00:00",
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": [],
+        "hernoemd_van": "D&D",
+        "hernoemd_op": "2026-09-17T04:55:59.687188+00:00"
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal",
+      "game": "spark world"
+    },
+    {
+      "id": "kbv2-c5847d4a",
+      "begrip": "Base Line",
+      "lade": "games",
+      "status": "active",
+      "lagen": {
+        "laag1": "Base Line is de basiskaart van Spark World: het nulpunt (X=0, Y=0, Z=0) waar alle basiswaarden van de wereld vandaan komen.",
+        "laag2": "Basiswaarden:\n\n- Oorsprong: (0, 0, 0), wereld is 3D en groeit onbegrensd\n- Tijdrekening: AD (After Spark), jaar 0 = Base Line\n- Balans licht/schaduw: standaard 50/50 van het oppervlak\n- Elementen: lucht, water, aarde, vuur\n- Fracties: Spark, Players, Licht, Schaduw (2 elementen + versterker licht of schaduw = fractie)\n- Startinventory: 4 slots + 10 kg (zie Persoonskaart Rugzak)",
+        "laag3": "Elke waarde in Spark World wordt relatief aan Base Line gemeten: afstand vanaf (0,0,0), tijd sinds AD 0 en de licht/schaduw-verhouding per gebied. Verschuift de balans (bv. 2/3 schaduw), dan weegt dat oppervlak zwaarder in het volume.",
+        "laag4": "Base Line is de plek om nieuwe basiswaarden toe te voegen (economie, XP-curves, grondstofprijzen) zodat alle game-modules één bron van waarheid delen. De oude oorsprongs-lore staat gearchiveerd in data/dnd/lore_index.json."
+      },
+      "ws5": {
+        "wat": "De basiswaarden-kaart van Spark World.",
+        "wie": "Alle game-modules en spelers gebruiken deze waarden.",
+        "waar": "Nulpunt (0,0,0) van de Spark World-kaart.",
+        "wanneer": "AD 0 — en bij elke nieuwe basiswaarde.",
+        "waarom": "Eén bron van waarheid voor coördinaten, tijd, balans, fracties en startwaarden.",
+        "hoe": "Waarden hier vastleggen; modules (steden, fracties, inventory) verwijzen ernaar."
+      },
+      "tags": [
+        "base line",
+        "spark world",
+        "basiswaarden",
+        "oorsprong",
+        "ad",
+        "licht",
+        "schaduw",
+        "fracties",
+        "elementen",
+        "nulpunt"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5ae16b66",
+          "begrip": "Spark World",
+          "lade": "games",
+          "overlap": 1,
+          "shared_tags": [
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5cd66b24",
+          "begrip": "Persoonskaart Rugzak",
+          "lade": "games",
+          "overlap": 2,
+          "shared_tags": [
+            "spark world"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "user-001",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T20:27:56.004946+00:00",
+        "vorige_versie_v1": "kb-c5847d4a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.285168+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:27:56.344236+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T20:27:56.350316+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-26T09:43:11.282200+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "game": "spark world"
+    },
+    {
+      "id": "kbv2-5cd66b24",
+      "begrip": "Persoonskaart Rugzak",
+      "lade": "games",
+      "status": "active",
+      "lagen": {
+        "laag1": "Persoonskaart-rugzak = inventory-slot dat bonus draagkracht geeft (D&D-laag van Spark).",
+        "laag2": "Elke speler en bot in Spark World heeft een Persoonskaart met inventory. Basis is 4 slots + 10kg. Een rugzak voegt slots én kg toe maar weegt zelf ook. Hoe groter de rugzak, hoe meer capaciteit — maar minder ruimte voor zware items.",
+        "laag3": "Trade-off mechaniek: Basis Rugzak (+5 slots, +10kg, weegt 1kg) vs Grote Trekrugzak (+10 slots, +25kg, weegt 2.5kg). Inventory zit vol bij slots_used == slots_total OF weight_used > weight_max. Slimme spelers kiezen op speelstijl: light & snel of robuust & traag.",
+        "laag4": "Inleiding op het body-slot-systeem dat later komt (helm, cape, schoenen, etc.). De rugzak is metafoor voor wat je dagelijks meeneemt — herinneringen, kennis, achievements. Eerste D&D-mechaniek in Spark."
+      },
+      "ws5": {
+        "wat": "Een D&D body-slot dat bonus-slots + bonus-kg toevoegt aan iemands inventory.",
+        "wie": "Iedereen — speler en bot — krijgt automatisch een Basis Rugzak (starter pack).",
+        "waar": "Profiel → Avatar-tab → Persoonskaart sectie.",
+        "wanneer": "Bij gebruiker-aanmaak. Upgrades verdiend via XP, achievements, of shop.",
+        "waarom": "Eerste progression-mechaniek met expliciete trade-off; introduceert spelers aan inventory-management.",
+        "hoe": "Item.kind='carry' met capacity_bonus (extra slots) en weight_bonus (extra kg). Eigen weight telt mee."
+      },
+      "tags": [
+        "rugzak",
+        "persoonskaart",
+        "inventory",
+        "carry",
+        "spark world",
+        "stat",
+        "slots",
+        "gewicht",
+        "body-slot"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5ae16b66",
+          "begrip": "Spark World",
+          "lade": "games",
+          "overlap": 1,
+          "shared_tags": [
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5847d4a",
+          "begrip": "Base Line",
+          "lade": "games",
+          "overlap": 2,
+          "shared_tags": [
+            "spark world"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "user-001",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T20:27:53.060849+00:00",
+        "vorige_versie_v1": "kb-5cd66b24",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.390257+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:27:53.404746+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "link_to_dnd",
+            "fired_at": "2026-06-16T20:27:53.416857+00:00",
+            "result": {
+              "action": "added",
+              "type": "lore"
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-26T09:43:11.275327+00:00",
+            "result": {
+              "n_found": 1,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "game": "spark world"
+    },
+    {
+      "id": "kbv2-592d038c",
+      "begrip": "Utrecht (Spark World)",
+      "lade": "games",
+      "lagen": {
+        "laag1": "Utrecht is in Spark World de neutrale stad: het startpunt van spelers, gekoppeld aan de echte stad Utrecht.",
+        "laag2": "In Spark World zijn Nederlandse steden hernoemd tot fictieve steden (Oerrak, Lumis, Umbros, Asher, Breez, Extros, Grondheim, Eikenhart). Utrecht houdt zijn eigen naam en fractie \"neutraal\": hier kiest niemand partij.",
+        "laag3": "Kaartdata staat in data/dnd/steden.json (id \"utrecht\"). De echte kennis over de stad staat op de weten-kaart Utrecht.",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "Spelers die starten of neutraal willen blijven.",
+        "wat": "De neutrale stad van Spark World.",
+        "wanneer": "Bij start van het spel en bij fractiewissel.",
+        "waar": "Centraal op de Spark World-kaart (echte locatie Utrecht).",
+        "waarom": "Een neutrale plek waar fracties elkaar kunnen ontmoeten zonder strijd.",
+        "hoe": "Via steden.json + fracties.json in de dnd-container."
+      },
+      "tags": [
+        "centraal",
+        "cultuur",
+        "spark world",
+        "domtoren",
+        "fractie",
+        "gemeente",
+        "geschiedenis",
+        "grachten",
+        "nederland",
+        "neutraal",
+        "onderwijs",
+        "provincie",
+        "stad",
+        "utrecht",
+        "weten"
+      ],
+      "media": {
+        "image_urls": [],
+        "voice_url": null,
+        "voice_transcript": null
+      },
+      "status": "active",
+      "footnote": {
+        "bron": "text_importer",
+        "vertrouwen": 0.85,
+        "aangemaakt_door": "lore_generator_20260609",
+        "aangemaakt_op": "2026-06-10T15:12:28.885875+00:00",
+        "laatst_bewerkt_op": "2026-06-10T15:12:28.885875+00:00",
+        "hooks_fired": [
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-26T09:43:10.584877+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "updated_at": "2026-08-04T15:11:26.289083+00:00"
+      },
+      "_meta": {
+        "linked_fractie": "neutraal",
+        "kind": "stad"
+      },
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5ae16b66",
+          "begrip": "Spark World",
+          "lade": "games",
+          "overlap": 1,
+          "shared_tags": [
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6507fdfc",
+          "begrip": "Utrecht",
+          "lade": "weten",
+          "overlap": 1,
+          "shared_tags": [
+            "utrecht"
+          ]
+        }
+      ],
+      "emotie": "neutraal",
+      "game": "spark world"
+    },
+    {
+      "id": "kbv2-94ad9dfe",
+      "begrip": "Rover Kamp",
+      "lagen": {
+        "laag1": "Onbekende grondstof — admin om in te vullen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Rover Kamp",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "anders",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/1a432df5b6bb"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:39:38.452393+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:39:38.452398+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-f65d4f57"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-e3f53257",
+      "begrip": "Land Trade post",
+      "lagen": {
+        "laag1": "Hout en wildbestand — duurzame oogst.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Land Trade post",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "bos",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/803cae3faa63"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:38:57.324340+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:38:57.324346+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-d565acbd"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-738cda3b",
+      "begrip": "Zee Haven",
+      "lagen": {
+        "laag1": "Onbekende grondstof — admin om in te vullen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Zee Haven",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "anders",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/faf5df3e57ae"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:38:26.961159+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:38:26.961163+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-4cf530a7"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-3d249de5",
+      "begrip": "Grondstoffen",
+      "lagen": {
+        "laag1": "Ondergrondse rijkdom — erts en edelstenen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Grondstoffen",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "mijn",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/79ca230f9788"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:37:51.411676+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:37:51.411685+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-a01fbcfb"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-a4f65ba9",
+      "begrip": "Bos",
+      "lagen": {
+        "laag1": "Hout en wildbestand — duurzame oogst.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Bos",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "bos",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/cad6a4f04be3"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:37:18.959849+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:37:18.959854+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-631f5a91"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-73ebc070",
+      "begrip": "Wild",
+      "lagen": {
+        "laag1": "Onbekende grondstof — admin om in te vullen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Wild",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "anders",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/b5f22a08e630"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:36:52.439710+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:36:52.439719+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-1e2a0469"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-1ae622c4",
+      "begrip": "Akkers",
+      "lagen": {
+        "laag1": "Vruchtbare grond — graan en gewassen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Akkers",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "akker",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/94a547d86f1a"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:36:23.669412+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:36:23.669417+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-6581410f"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    },
+    {
+      "id": "kbv2-0d1fc7d5",
+      "begrip": "Vis resource",
+      "lagen": {
+        "laag1": "Visrijke wateren — kustlijn of meer.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "Vis resource",
+        "wanneer": "",
+        "waar": "Op de Spark-kaart",
+        "waarom": "Grondstofbron voor de wereld.",
+        "hoe": ""
+      },
+      "tags": [
+        "spark world",
+        "grondstof",
+        "vis",
+        "grondstoffen"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/e22164f8f7fc"
+        ]
+      },
+      "status": "draft",
+      "needs": [],
+      "footnote": {
+        "bron": "dnd_resource_upload",
+        "vertrouwen": 0.4,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-06T23:35:51.667406+00:00",
+        "laatst_bewerkt_op": "2026-06-06T23:35:51.667410+00:00"
+      },
+      "_meta": {
+        "legacy_id": "kb-f3fcca99"
+      },
+      "lade": "games",
+      "game": "spark world",
+      "verbanden": []
+    }
+  ],
+  "card_count": 12,
+  "metadata": {
+    "lade": "games",
+    "naam": "Spark Games",
+    "games": [
+      "spark world"
+    ],
+    "created_at": "2026-09-17T04:55:59.687188+00:00",
+    "note": "Onderverdeling per game via veld `game`. Steen Papier Schaar blijft in doen (klassiek spel) en is gecrosslinkt vanuit Spark World."
+  }
+}

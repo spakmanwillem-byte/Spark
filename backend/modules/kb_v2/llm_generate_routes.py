@@ -133,8 +133,8 @@ async def llm_generate_card(card_id: str, req: GenerateRequest):
 @router.post("/{card_id}/llm-approve")
 async def llm_approve_card(card_id: str, req: ApproveRequest):
     """Pas LLM-voorstel toe en verplaats kaart naar target_lade."""
-    if req.target_lade not in ("doen", "weten", "voelen", "spreken"):
-        raise HTTPException(400, "target_lade moet zijn: doen/weten/voelen/spreken")
+    if req.target_lade not in ("doen", "weten", "voelen", "spreken", "games"):
+        raise HTTPException(400, "target_lade moet zijn: doen/weten/voelen/spreken/games")
 
     v2_dir = _v2_dir()
     inbox_fp = v2_dir / "knowledge_inbox.json"

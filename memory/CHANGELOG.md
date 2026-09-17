@@ -1,5 +1,13 @@
 # Spark Core 2.0 — CHANGELOG
 
+## 2026-09-17 — KB-opschoning + 5e lade "Spark Games"
+- Orphan-skeletons opgeruimd: `voelenbegrip` (foute tag op 3 kaarten), `dnd` (legacy `v2/inbox.json` verplaatst). `rna` blijft (Willem vult in).
+- Nieuwe KB-lade `games` = 🎮 Spark Games (backend + UI-tab + graph-kleur). Orphan-scan slaat de lade over.
+- Universele game-naam **Spark World**: kaart D&D → hub-kaart Spark World; Base Line → basiswaarden-kaart; Utrecht (Spark World); 8 grondstof-drafts. Tags d&d/dnd → `spark world`.
+- Steen Papier Schaar blijft in doen, gecrosslinkt met Spark World.
+- Index + graph herbouwd. Lint-fix `t1` scope in GesprekkenPage.
+
+
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
 ## 2026-02-26 (sessie 56b, deel 3) — Multi-book Uren + Clienten per kasboek

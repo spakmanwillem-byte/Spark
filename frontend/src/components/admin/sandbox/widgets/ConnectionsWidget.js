@@ -5,7 +5,7 @@
  * Zelfstandig: eigen fetch op /api/connections. JSON-waarde wint van .env; leeg veld = terug naar .env.
  */
 import React, { useState, useEffect, useCallback } from 'react';
-import { Plug, Eye, EyeOff, Save, Wifi, Loader2 } from 'lucide-react';
+import { Plug, Eye, EyeOff, Save, Wifi, Loader2, Download, Upload, KeyRound } from 'lucide-react';
 import { useAuth } from '../../../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -114,6 +114,62 @@ function ConnectionRow({ conn, viewerId, onSaved }) {
   );
 }
 
+function KeyFilePanel({ viewerId, onImported }) {
+  const [result, setResult] = useState(null);
+  const [busy, setBusy] = useState(false);
+
+  const download = async () => {
+    const r = await fetch(`${API}/api/connections/export?viewer_id=${viewerId}`);
+    const blob = await r.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'spark.env'; a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  const upload = async (file) => {
+    if (!file) return;
+    setBusy(true); setResult(null);
+    try {
+      const content = await file.text();
+      const r = await fetch(`${API}/api/connections/import`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: viewerId, content }),
+      }).then(x => x.json());
+      setResult(r); if (r.success) onImported();
+    } catch (e) { setResult({ success: false, detail: String(e) }); }
+    finally { setBusy(false); }
+  };
+
+  return (
+    <div data-testid="keyfile-panel" className="rounded-xl border border-amber-500/20 bg-amber-950/10 p-3 space-y-2">
+      <div className="flex items-center gap-2">
+        <KeyRound className="w-3.5 h-3.5 text-amber-300" />
+        <span className="text-sm font-medium text-white">Sleutelbestand (.env)</span>
+      </div>
+      <p className="text-[11px] text-slate-500">Download alle sleutels als één bestand en bewaar het veilig. Op een nieuwe Spark (bv. Odroid) upload je het hier: de verbindingen worden dan ingevuld.</p>
+      <div className="flex items-center gap-2 flex-wrap">
+        <button onClick={download} data-testid="keyfile-download-btn"
+          className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-lg border border-amber-500/40 text-amber-200 hover:bg-amber-500/10 transition-colors">
+          <Download className="w-3 h-3" /> Download sleutelbestand
+        </button>
+        <label data-testid="keyfile-upload-label"
+          className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-lg border border-slate-700 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-colors cursor-pointer">
+          {busy ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />} Upload sleutelbestand
+          <input type="file" accept=".env,text/plain,*/*" className="hidden" data-testid="keyfile-upload-input"
+            onChange={e => { upload(e.target.files?.[0]); e.target.value = ''; }} />
+        </label>
+      </div>
+      {result && (
+        <p data-testid="keyfile-result" className={`text-[11px] ${result.success ? 'text-emerald-300' : 'text-rose-300'}`}>
+          {result.success
+            ? `${result.filled} waarden ingevuld (${(result.connections || []).join(', ') || 'geen'})${result.unknown_keys?.length ? ` · overgeslagen: ${result.unknown_keys.join(', ')}` : ''}`
+            : (result.detail || 'Upload mislukt')}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function ConnectionsWidget() {
   const { user } = useAuth();
   const viewerId = user?.id || 'user-001';
@@ -141,6 +197,7 @@ export function ConnectionsWidget() {
       {!conns && !error && <p className="text-xs text-slate-500">Verbindingen laden...</p>}
       {conns && (
         <div className="space-y-3">
+          <KeyFilePanel viewerId={viewerId} onImported={load} />
           {conns.map(c => <ConnectionRow key={c.id} conn={c} viewerId={viewerId} onSaved={load} />)}
         </div>
       )}

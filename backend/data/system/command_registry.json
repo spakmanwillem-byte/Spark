@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_command_registry_001 — master mapping van app-endpoints naar intent_tags (donderdag-fundering)",
   "version": "v1",
-  "last_updated": "2026-09-17T05:44:00.451063+00:00",
+  "last_updated": "2026-09-17T05:54:10.952174+00:00",
   "commands": [
     {
       "id": "cap_tellen_gebruikers",
@@ -1418,6 +1418,44 @@
       "admin_only": true,
       "behavior_class_hint": "actie-beheer",
       "source": "connections.routes.test_connection"
+    },
+    {
+      "id": "cap_connections_export",
+      "path": "/api/connections/export",
+      "method": "GET",
+      "intent_tags": [
+        "sleutelbestand",
+        "download env",
+        "exporteer sleutels",
+        "backup sleutels"
+      ],
+      "required_params": [
+        "viewer_id"
+      ],
+      "optional_params": [],
+      "gradatie_min": 2,
+      "admin_only": true,
+      "behavior_class_hint": "actie-beheer",
+      "source": "connections.routes.export_keyfile"
+    },
+    {
+      "id": "cap_connections_import",
+      "path": "/api/connections/import",
+      "method": "POST",
+      "intent_tags": [
+        "sleutelbestand uploaden",
+        "env importeren",
+        "sleutels inlezen"
+      ],
+      "required_params": [
+        "viewer_id",
+        "content"
+      ],
+      "optional_params": [],
+      "gradatie_min": 2,
+      "admin_only": true,
+      "behavior_class_hint": "actie-beheer",
+      "source": "connections.routes.import_keyfile"
     }
   ],
   "stats": {
@@ -1433,6 +1471,6 @@
       "exploreren-uitbreiden": 8,
       "vertragen-ondersteunen": 2
     },
-    "total": 79
+    "total": 81
   }
 }

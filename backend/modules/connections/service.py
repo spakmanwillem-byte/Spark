@@ -196,3 +196,44 @@ def test_connection(conn_id: str, user_id: str = "user-001") -> Dict:
         res = {"ok": False, "detail": f"{type(ex).__name__}: {str(ex)[:140]}"}
     _record_test(conn_id, res)
     return res
+
+
+# ---------- v14_connections_keyfile_001 — sleutelbestand (.env) export/import ----------
+_ENV_TO_FIELD = {f["env"]: (d["id"], f["key"]) for d in CONNECTION_DEFS for f in d["velden"]}
+
+
+def export_env_text() -> str:
+    """Alle verbindingen als .env-tekst (huidige effectieve waarden). Bewaar veilig."""
+    lines = ["# Spark sleutelbestand — gegenereerd " + _now(), "# Upload dit in Widget Kladblok → Verbindingen op een nieuwe Spark-installatie.", ""]
+    for d in CONNECTION_DEFS:
+        if not d["velden"]:
+            continue
+        lines.append(f"# {d['naam']}")
+        for f in d["velden"]:
+            lines.append(f"{f['env']}={effective_value(d['id'], f['key'])}")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def import_env_text(content: str, user_id: str) -> Dict:
+    """Parse KEY=WAARDE regels; bekende keys → connections.json. Onbekende keys worden genoemd, niet opgeslagen."""
+    per_conn: Dict[str, Dict[str, str]] = {}
+    unknown, skipped = [], 0
+    for raw in (content or "").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        key = key.strip().removeprefix("export ").strip()
+        val = val.strip().strip('"').strip("'")
+        if key not in _ENV_TO_FIELD:
+            unknown.append(key)
+            continue
+        if not val:
+            skipped += 1
+            continue
+        conn_id, fkey = _ENV_TO_FIELD[key]
+        per_conn.setdefault(conn_id, {})[fkey] = val
+    for conn_id, vals in per_conn.items():
+        save_values(conn_id, vals, user_id)
+    return {"filled": sum(len(v) for v in per_conn.values()), "connections": sorted(per_conn), "unknown_keys": unknown, "empty_skipped": skipped}

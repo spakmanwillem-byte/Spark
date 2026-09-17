@@ -1,6 +1,7 @@
 from typing import Dict
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 
 from modules.auth.service import AuthService
@@ -14,6 +15,11 @@ ADMIN_MAX_GRAD = 2
 class SaveBody(BaseModel):
     viewer_id: str
     values: Dict[str, str]
+
+
+class ImportBody(BaseModel):
+    viewer_id: str
+    content: str
 
 
 def _require_admin(viewer_id: str) -> None:
@@ -45,3 +51,15 @@ async def test_connection(conn_id: str, viewer_id: str):
         return {"success": True, "conn_id": conn_id, **service.test_connection(conn_id, user_id=viewer_id)}
     except KeyError:
         raise HTTPException(404, f"Onbekende verbinding '{conn_id}'")
+
+
+@router.get("/export", response_class=PlainTextResponse)
+async def export_keyfile(viewer_id: str):
+    _require_admin(viewer_id)
+    return PlainTextResponse(service.export_env_text(), headers={"Content-Disposition": 'attachment; filename="spark.env"'})
+
+
+@router.post("/import")
+async def import_keyfile(body: ImportBody):
+    _require_admin(body.viewer_id)
+    return {"success": True, **service.import_env_text(body.content, body.viewer_id)}

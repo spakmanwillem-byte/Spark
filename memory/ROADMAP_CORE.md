@@ -80,6 +80,10 @@ Verbindingen: llm_primary (Groq), llm_fallback (Ollama-klaar), emergent_key, bit
 ports (info). Widget `ConnectionsWidget` in Kladblok (tijdelijk; eindplek Beheer → "Verbindingen").
 Registry +3 (`cap_connections_*`), KB-kaart `Verbindingen (beheer)` kbv2-e8b05146 (weten).
 Nieuwe module met externe API → entry toevoegen aan `CONNECTION_DEFS`, verschijnt automatisch.
+**Sleutelbestand** (`v14_connections_keyfile_001`): `GET /api/connections/export` → `spark.env` (alle effectieve
+waarden, admin) · `POST /api/connections/import` {content} → KEY=WAARDE regels naar connections.json (onbekende
+keys gemeld, lege overgeslagen). Panel bovenin de widget. Willem: download → veilig bewaren → upload op Odroid.
+Bitvavo blijft per user (niet in sleutelbestand) — bewust één ingang.
 **Fase 1 (op Emergent, voorbereiding, geen risico)**: `SPARK_ROOT` i.p.v. `/app` · `backend/.env.example`
 + `frontend/.env.example` · `spark.sh` (start backend 8001 + frontend 3000) · `ODROID.md` · oude
 `_backup_*`-mappen uit Git (staan al in Backup-download).

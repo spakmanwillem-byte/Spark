@@ -375,6 +375,11 @@ universeel Spark World".
   `data/dnd/_kb_cards_moved_to_games_lade_*.json.bak`, `data/dnd/_legacy_kb_inbox_moved.json.bak`.
 - **Getest**: curl stats/lade/find/orphan-dry-run + screenshot Spark Games-tab. Geen testing-agent.
 
+- **📌 BESLUIT (Willem, 17-09-2026)** — de fictie-gate is de **standaard** voor alle huidige en
+  toekomstige game-/fictie-lades: game-kennis staat gewoon in de KB (vindbaar, verbindbaar,
+  later toepasbaar in de wereld) maar doet in antwoorden alleen mee bij game-context.
+  Nieuwe game-kaarten altijd in lade Spark Games, nooit in Weten. Nieuwe fictie-lade →
+  toevoegen aan `FICTIE_LADES`, verder niets.
 - **✅ Fictie-gate (`v14_fictie_gate_001`)** — Willem: "spark moet geen fantoom krijgen met
   realiteit". `kb_v2/service.py`: `FICTIE_LADES={"games"}`, `is_game_context(text)`,
   `filter_fictie()`. `semantic_lookup` filtert games-kaarten weg zonder game-context;

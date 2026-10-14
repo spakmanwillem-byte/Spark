@@ -155,6 +155,12 @@ Berichtenbeheer wordt een **module naast `contacts`**, niet erin: contacten = Sp
 3. Tab Berichten (read-only) + glow + settings + "alles wissen".
 4. Eigen Android-app `SparkBridge` (QR-koppeling, filter per contact, buffer).
 5. Pas daarna fase 2 (zoeken, samenvatten met Ollama, antwoord-voorstel met bevestiging).
+6. **Antwoordapparaat (idee Willem + Spark, vóór dit GPT-plan)** — Spark antwoordt WhatsApp-contacten namens de user
+   als die volgens agenda bezet is: "Willem zit tot 15:00 in een afspraak — ik ben Spark, zijn assistent, ik geef het
+   door." Hergebruikt `v6_voicemail_agenda_001` (`relay_service._agenda_busy_now` + inbox-notitie) één-op-één.
+   Verzenden via Direct Reply (`RemoteInput`) uit de melding → adapter-capability `send: True`. Voorwaarden:
+   per contact aanzetten, alleen vaste voorstel-tekst (geen vrije LLM naar derden), log van elk verzonden antwoord.
+   Nevendoel: Spark voorstellen aan Willems contacten + testen in het echt.
 
 ## 6. Open vragen voor Willem
 

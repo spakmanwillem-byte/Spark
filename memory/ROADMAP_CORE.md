@@ -106,7 +106,8 @@ noodzakelijk (prototype kan eerst met MacroDroid/Tasker). Nieuwe module `modules
 adapter-registry; kern raakt alleen server.py/sidebar/settings/CONNECTION_DEFS. Hergebruik: contacts-opslagpatroon,
 bel_contacts (telefoonnummers), glow, privacy-guard, settings-SCHEMA, Verbindingen-kader, cryptography (Fernet).
 Harde eisen: berichten NOOIT in KB/chat-logs, AI opt-in default uit, versleutelde opslag, device-token per telefoon.
-Wacht op Willem's antwoord op de 4 open vragen in §6 van het rapport.
+**Antwoordapparaat-adapter** (idee Willem+Spark): agenda-bezet → Spark antwoordt via Direct Reply, hergebruik
+`v6_voicemail_agenda_001`; per contact opt-in, vaste tekst. Wacht op Willem's antwoord op de 4 open vragen in §6 van het rapport.
 
 ---
 

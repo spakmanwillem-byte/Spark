@@ -98,6 +98,18 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 
 ---
 
+## 📨 ONDERZOEK — Berichtenbeheer & WhatsApp (17-09-2026, geen code)
+Volledig rapport: `memory/ONDERZOEK_BERICHTENBEHEER.md`. Kern: **Fase 1 = Android Notification Listener**
+(legaal, LAN, geen cloud); **whatsapp-web.js/Baileys afgeraden** (permanente bans 2026); **Business API alleen
+bij zakelijke noodzaak** (per-bericht betaald, publieke webhook nodig). Aparte Android-app `SparkBridge` is
+noodzakelijk (prototype kan eerst met MacroDroid/Tasker). Nieuwe module `modules/berichten/` met één schema +
+adapter-registry; kern raakt alleen server.py/sidebar/settings/CONNECTION_DEFS. Hergebruik: contacts-opslagpatroon,
+bel_contacts (telefoonnummers), glow, privacy-guard, settings-SCHEMA, Verbindingen-kader, cryptography (Fernet).
+Harde eisen: berichten NOOIT in KB/chat-logs, AI opt-in default uit, versleutelde opslag, device-token per telefoon.
+Wacht op Willem's antwoord op de 4 open vragen in §6 van het rapport.
+
+---
+
 ## 🧩 PLAN — Fact-kaarten + "LLM-modus aan/uit" (uit Willem's admin-notitie "Facts", 07-09-2026, met Emmy)
 
 Gevonden 17-09 bij het doorlezen van chatlog + notities; stond nog nérgens op de roadmap.

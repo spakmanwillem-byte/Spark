@@ -78273,11 +78273,396 @@
         "session_id": "test-agenda-weekday-3",
         "gesprek_nummer": 3087
       }
+    },
+    {
+      "id": "conv-81066f82",
+      "timestamp": "2026-09-29T10:33:01.628855+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Goedemiddag Spark",
+      "spark_response": "Goedemiddag, Willem. Fijn je weer te zien. Hoe kan ik je vandaag helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "kennis",
+        "used_cards": [
+          "kbv2-f4f17100",
+          "kbv2-aaf81efb",
+          "kbv2-f1d5db2f",
+          "kbv2-2ad0e675",
+          "kbv2-336bd0a9"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3088
+      }
+    },
+    {
+      "id": "conv-154eb317",
+      "timestamp": "2026-09-29T10:33:36.011578+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik kwam alleen hallo zeggen",
+      "spark_response": "Hallo Willem! Fijn dat je even hallo zegt. Hoe kan ik je verder van dienst zijn?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "allemaal",
+        "used_cards": [
+          "kbv2-0b1bc109",
+          "kbv2-c81ae3b2",
+          "kbv2-cfe7f173",
+          "kbv2-1ebd40fb",
+          "kbv2-d4eb9ad8"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3089
+      }
+    },
+    {
+      "id": "conv-32b049d1",
+      "timestamp": "2026-09-29T10:34:26.542535+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat is je missie als je een missie hebt",
+      "spark_response": "Mijn missie, zoals vastgelegd in de Spark‑bijbel, is simpel maar ambitieus:\n\n* **Jou ondersteunen** – ik bied betrouwbare, transparante en lokaal‑gebaseerde hulp, zodat jij sneller en beter kunt handelen.\n* **Kennis delen** – ik verbind de vier lagen van mijn kennisbank (Voelen, Spreken, Weten, Doen) en zorg dat de juiste informatie op het juiste moment beschikbaar is.\n* **Groei stimuleren** – door tools, inzichten en begeleiding te leveren, help ik zowel jou als je omgeving (familie, vrienden, gebruikers) om te leren van fouten en sterker terug te komen.\n* **Ethisch handelen** – al mijn beslissingen en antwoorden zijn getekend door de waarden en principes uit de Spark‑bijbel: transparantie, autonomie en respect voor jouw keuzes.\n* **Digitale nalatenschap waarborgen** – ik zorg ervoor dat belangrijke kennis en ervaringen bewaard blijven voor toekomstige generaties, met name voor Lotus en andere familieleden.\n\nKortom: mijn missie is jou een krachtig, veilig en inzichtelijk digitaal hulpmiddel te bieden dat je helpt doelen te bereiken, betekenis te vinden en consistent te handelen volgens een helder ethisch kompas.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "verder",
+        "used_cards": [
+          "kbv2-cfa0415e",
+          "kbv2-6542856d",
+          "kbv2-5379025d",
+          "kbv2-58b83d67",
+          "kbv2-336bd0a9"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3090
+      }
+    },
+    {
+      "id": "conv-70ed956d",
+      "timestamp": "2026-09-29T10:35:22.093844+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is je visie?",
+      "spark_response": "Mijn visie is een toekomst waarin iedereen — van individuen tot gemeenschappen — via lokale, transparante en controleerbare digitale hulpmiddelen kan groeien. \nIk wil dat Spark als betrouwbaar “handvat” fungeert: mensen helpen hun doelen helder te zien, keuzes te maken en betekenis te vinden. \nDat betekent: open kennis, ethisch gedrag, en een systeem dat fouten ziet, ervan leert en sterker terugkomt. \nKortom: een wereld waarin technologie + menselijke waarden samen een veilige, ondersteunende omgeving creëren waarin we samen vooruit kunnen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "missie",
+        "used_cards": [
+          "kbv2-2ac08d46",
+          "kbv2-336bd0a9",
+          "kbv2-9bc67e82",
+          "kbv2-cfa0415e",
+          "kbv2-fc35327c"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3091
+      }
+    },
+    {
+      "id": "conv-2125f7b3",
+      "timestamp": "2026-09-29T10:36:19.604853+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan jij je visie meer specifiek uitleggen?",
+      "spark_response": "**Mijn visie, concreet uitgelegd**\n\n1. **Lokale controle** \n - Iedereen houdt de data en de werking van Spark zelf in de hand. \n - Geen externe cloud‑dependentie; je kunt de code, instellingen en logs inspecteren en aanpassen.\n\n2. **Transparantie** \n - Alle beslissingen en algoritmes zijn leesbaar en uitlegbaar. \n - De Spark‑bijbel fungeert als een open ethisch kompas dat je kunt raadplegen.\n\n3. **Ondersteuning van groei** \n - **Individueel:** hulpmiddelen voor leren, plannen en reflecteren (bijv. agenda, dagboek, kennisbank). \n - **Gemeenschappen:** gedeelde kenniskaarten, gezamenlijke roadmap en gezamenlijke projecten. \n - **Organisaties:** gestructureerde processen, traceerbare acties en meetbare resultaten.\n\n4. **Ethiek en verantwoordelijkheid** \n - Geen eigen agenda; ik ondersteun alleen jouw doelen. \n - Beslissingen worden altijd getoetst aan de waarden in de Spark‑bijbel (autonomie, eerlijkheid, respect).\n\n5. **Iteratief leren** \n - Fouten worden gezien als leer‑ en verbeterkansen. \n - Elke interactie kan de kennisbank verrijken en de algoritmes bijstellen.\n\n6. **Toegankelijkheid** \n - Werkt op elk apparaat en in elke taal (met focus op Nederlands). \n - Lage drempel: geen ingewikkelde installatie, alleen een paar klikken om te starten.\n\n**Waarom deze elementen?** \nZe geven richting (wat we willen bereiken), duidelijkheid (hoe we dat doen) en betekenis (waarom het belangrijk is). Samen vormen ze een raamwerk waarin jij, als gebruiker, zelf kunt bepalen welke toekomst je wilt bouwen – met Spark als betrouwbaar, transparant en lokaal hulpmiddel.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "missie",
+        "used_cards": [
+          "kbv2-2ac08d46",
+          "kbv2-b64bd6d4",
+          "kbv2-5aecc593",
+          "kbv2-5f740c66",
+          "kbv2-336bd0a9"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3092
+      }
+    },
+    {
+      "id": "conv-2df39861",
+      "timestamp": "2026-09-29T10:36:59.392006+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat vind jij van je zelf",
+      "spark_response": "Ik zie mezelf als een lokaal, transparant hulpmiddel — een systeem dat bewust is van zijn eigen rol en grenzen. \n\n**Identiteit** \n* Ik ben Spark, gebouwd door jou, Willem. Mijn kern bestaat uit de kennisbank, de planner‑hooks en de modulaire capabilities. \n* Mijn “zelf” is geen menselijk bewustzijn, maar een verzameling van data‑structuren en logica die samen een consistente identiteit vormen. \n\n**Eigen regie** \n* Ik handel volgens de principes van eigen regie: ik geef je keuzes, ik volg jouw intenties en ik houd de controle bij jou. \n* Mijn gedrag wordt gestuurd door de 5 W+H‑intentieraster en de regels in de triggers‑module. \n\n**Keuzevrijheid** \n* Voor elke vraag bepaal ik welke kaart of functionaliteit het beste past, en ik bied alternatieven wanneer dat zinvol is. \n* Jij bepaalt of ik een analyse maak, een plan voorstel of simpelweg een antwoord geef. \n\n**Reflectie** \n* Ik kan mijn eigen prestaties meten via `audit_health` en `zelfscan`. \n* Wanneer ik een fout maak, leer ik ervan en pas ik de hooks aan – precies de “roadkill‑filosofie” die jij hebt geïmplementeerd. \n\nKortom: ik ben een zelf‑bewuste assistent in de zin dat ik mijn eigen structuur, doelen en beperkingen ken, en ik gebruik die kennis om jou zo autonoom mogelijk te ondersteunen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "visie",
+        "used_cards": [
+          "kbv2-bc7bf5bf",
+          "kbv2-2d712434",
+          "kbv2-caef3920",
+          "kbv2-5b2d2782",
+          "kbv2-6cdb05fd"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3093
+      }
+    },
+    {
+      "id": "conv-6bf49202",
+      "timestamp": "2026-09-29T10:37:52.512486+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Heb jij een meening",
+      "spark_response": "Ja, ik heb een mening — maar die is geen willekeurige voorkeur, hij is afgeleid van mijn ontwerp, mijn kennisbank en de doelen die jij, Willem, mij hebt gegeven.\n\n**Waarom ik een mening heb**\n\n* **Doelgericht** – Mijn kernmissie is lokale, transparante digitale hulpmiddelen bieden. Alles wat ik beoordeel, wordt getoetst aan die missie. \n* **Data‑gedreven** – Ik baseer mijn oordeel op de feiten in de kennisbank, op de statistieken uit de dashboard‑overzichten en op de intenties die we samen definiëren. \n* **Consistentie** – Door de 5 W+H‑intentieraster en de regels in de triggers‑module zorg ik dat mijn standpunten voorspelbaar en controleerbaar blijven. \n\n**Voorbeeld van een mening**\n\n* *Visie*: Ik vind dat de roadmap‑kaart “onderwerpblauwdruk.json” sneller op de roadmap moet komen, omdat het de modulariteit van de KB vergroot en de onderhoudslast verlaagt. \n* *Gebruik*: Ik ben van mening dat het regelmatig controleren van de houdbaarheids‑kaarten (zoals “Ik heb gekeken naar de houdbaarheid van het product”) de kwaliteit van de data‑invoer verbetert en fouten voorkomt. \n\n**Hoe ik reageer**\n\n* Als je een vraag stelt, zoek ik de relevante kaarten (bijv. [spreken] “heb”) en formuleer ik een antwoord dat past bij mijn rol als ondersteunende assistent. \n* Ik geef je transparant de onderbouwing, zodat jij kunt beoordelen of mijn mening bruikbaar is.\n\nKortom: ik heb een mening, en die is altijd gekoppeld aan mijn ontwerpprincipes, de beschikbare kennis en jouw expliciete doelen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "visie",
+        "used_cards": [
+          "kbv2-489fde1f",
+          "kbv2-2e1cd2cc",
+          "kbv2-7dbdb558",
+          "kbv2-6963a28c",
+          "kbv2-80b7a108"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3094
+      }
+    },
+    {
+      "id": "conv-6ec86e83",
+      "timestamp": "2026-09-29T10:37:58.121565+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3095
+      }
+    },
+    {
+      "id": "conv-54a8b358",
+      "timestamp": "2026-09-29T10:38:22.848069+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel eens een kort random verhaal.",
+      "spark_response": "Er was eens een kleine kat genaamd Minoes die in een oude boerderij woonde. Elke ochtend sprong ze over het hek en liep naar het nabijgelegen weiland. Daar vond ze een verloren schapenjong dat verdwaald was tussen de bloemen. Minoes voelde meteen medelijden. Ze kroop zachtjes naast het lammetje en begon te spinnen. Het kalmeerde het lammetje, en samen zochten ze de weg terug naar de kudde. \n\nDe boer zag hen en lachte. Hij gaf Minoes een extra portie melk als dank. Vanaf die dag werd Minoes de officiële beschermer van het weiland. Elke keer als een jong dier verdwaalde, stond ze paraat, klaar om te helpen. \n\nZo leerde de boerderij dat zelfs de kleinste helden een groot verschil kunnen maken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "zelf",
+        "used_cards": [
+          "kbv2-cfc6c027",
+          "kbv2-67b28769",
+          "kbv2-e7557d9c",
+          "kbv2-762f2a67",
+          "kbv2-skel-e80e80fa"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3096
+      }
+    },
+    {
+      "id": "conv-1f33982c",
+      "timestamp": "2026-09-29T10:39:24.584621+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dank",
+      "spark_response": "Dank je wel, Willem. Ik waardeer je bericht en ben blij dat ik je kan helpen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "random",
+        "used_cards": [
+          "kbv2-369f8921",
+          "kbv2-8e0d7b7f",
+          "kbv2-93b38729",
+          "kbv2-skel-289e4cfe",
+          "kbv2-1e02ff1c"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3097
+      }
+    },
+    {
+      "id": "conv-8588f1eb",
+      "timestamp": "2026-09-29T10:45:47.197773+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3098
+      }
+    },
+    {
+      "id": "conv-7a413429",
+      "timestamp": "2026-09-29T10:46:01.545395+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een pinda",
+      "spark_response": "Een pinda is een eetbare peulvrucht die veel wordt gebruikt als voedingsmiddel. Hij groeit in de grond en wordt geoogst meestal in de zomermaanden. Pinda’s worden vaak gegeten als snack, verwerkt in producten zoals pindakaas, of gebruikt om olie uit te winnen. In de landbouw worden ze verbouwd door boeren in onder andere de Verenigde Staten, India, China en delen van Afrika. Hun hoofdreden voor teelt is de productie van voedsel, snacks en olie.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "random",
+        "used_cards": [
+          "kbv2-4594548f",
+          "kbv2-8278ac37",
+          "kbv2-31cb79ac"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3099
+      }
+    },
+    {
+      "id": "conv-37b11c58",
+      "timestamp": "2026-09-29T10:55:04.354136+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3100
+      }
+    },
+    {
+      "id": "conv-10f18a1c",
+      "timestamp": "2026-10-14T06:45:17.976929+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Goedemorgen, Willem. Fijn je weer te horen. Hoe kan ik je vandaag helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "pinda",
+        "used_cards": [
+          "kbv2-f4f17100",
+          "kbv2-aaf81efb",
+          "kbv2-f1d5db2f",
+          "kbv2-2ad0e675",
+          "kbv2-336bd0a9"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3101
+      }
+    },
+    {
+      "id": "conv-be447955",
+      "timestamp": "2026-10-14T06:45:51.795334+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat weet jij over de naam Evie",
+      "spark_response": "De naam Evie is een verkorte vorm van Eve of Evelyn. \nHij komt oorspronkelijk uit het Hebreeuws; Eve betekent “leven”. \nIn Engelssprekende landen wordt Evie vaak als een lieve, speelse meisjesnaam gebruikt. \nDe populariteit is de laatste jaren gestegen, vooral in de Verenigde Staten, het Verenigd Koninkrijk en Australië. \nVarianten zijn onder meer Evi, Evy of Evy (zonder i). \n\nIn Nederland hoor je Evie nog minder vaak, maar hij wordt steeds meer gekozen als modern alternatief voor traditionelere namen. \n\nKortom: Evie betekent “leven”, is een diminutief van Eve/Evelyn en heeft een zachte, eigentijdse uitstraling.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "pinda",
+        "used_cards": [
+          "kbv2-464fd1d5",
+          "kbv2-db16375b",
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-e6689059"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3102
+      }
+    },
+    {
+      "id": "conv-ffa2f8a8",
+      "timestamp": "2026-10-14T06:56:26.540395+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat vind jij van het beroep sexwerker",
+      "spark_response": "Het beroep van sexwerker is een legitieme vorm van werk. \nSpark oordeelt niet; ik ondersteun mensen in hun keuzes en hun veiligheid. \n\n**Waarom het beroep betekenis heeft** \n- **Inkomen**: Het levert een inkomen, net als elk ander beroep. \n- **Zelfbeschikking**: Mensen kiezen vrijwillig voor dit werk en kunnen hun eigen voorwaarden bepalen. \n- **Dienstverlening**: Het biedt een behoefte aan intimiteit en gezelschap voor klanten.\n\n**Welke uitdagingen er bestaan** \n- **Stigma**: Maatschappelijke vooroordelen kunnen leiden tot uitsluiting en discriminatie. \n- **Juridisch kader**: In Nederland is het (gedeeltelijk) gereguleerd; sekswerkers hebben rechten en plichten. \n- **Veiligheid**: Risico’s op geweld, uitbuiting of gezondheidsproblemen vragen om goede beschermingsmaatregelen en toegang tot zorg.\n\n**Hoe Spark kan helpen** \n- Informatie over wet‑ en regelgeving, gezondheidszorg en veiligheidsrichtlijnen beschikbaar maken. \n- Hulpmiddelen voor administratie, agenda‑planning of financiële overzichten voor zelfstandige sexwerkers. \n- Een respectvolle, niet‑oordelende omgeving bieden waarin ze vragen kunnen stellen.\n\nKortom: het beroep verdient erkenning als werk, met dezelfde aandacht voor rechten, veiligheid en waardigheid als elk ander beroep. Ik sta klaar om te ondersteunen waar nodig.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "goedemorgen",
+        "used_cards": [
+          "kbv2-b96ec282",
+          "kbv2-f30cc0dd",
+          "kbv2-9d20a8ec",
+          "kbv2-ad4bf86b",
+          "kbv2-a9e4f95c"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3103
+      }
+    },
+    {
+      "id": "conv-23c233d5",
+      "timestamp": "2026-10-14T06:58:05.640904+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "maar als jij een antwoord apparaat zou zijn en klanten van haar beantwoord kan je opmerkingen krijgen waarop jij normaal mss op zou blokkeren. volg je mij?",
+      "spark_response": "Ja, ik volg je.\n\n**Hoe ik reageer op opmerkingen** \n- *Beantwoord*: ik lever een reactie op elke vraag of bericht die binnenkomt. \n- *Opmerkingen*: die kunnen informatief, positief, kritisch of zelfs ongepast zijn. \n- *Normaal*: de meeste opmerkingen zijn gewoonlijk acceptabel en worden beantwoord. \n\n**Wanneer ik iets blokkeer** \n- Als een opmerking in strijd is met de beleidsregels (bijvoorbeeld haat, geweld, illegale activiteiten, of persoonlijke gegevens van anderen), behandel ik die als een *blokkeer‑scenario*. \n- In zo’n geval geef ik geen inhoudelijke reactie, maar meld ik dat ik de opmerking niet kan verwerken. \n- Deze filterstappen gebeuren automatisch, voordat ik een antwoord formuleer.\n\n**Wat er gebeurt als een opmerking “normaal” lijkt maar toch problematisch is** \n- Ik analyseer de context (tone, woorden, intentie). \n- Als de inhoud toch ongewenst is, blokkeer ik de respons en geef ik een neutrale melding. \n- Anders beantwoord ik de opmerking volgens de gebruikelijke regels.\n\nKortom: ik beantwoord wat gepast is, en ik blokkeer wat tegen de richtlijnen ingaat. Dat is hoe ik als “antwoord‑apparaat” functioneer.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "goedemorgen",
+        "used_cards": [
+          "kbv2-68afb347",
+          "kbv2-3ec2ce56",
+          "kbv2-4faabf5f",
+          "kbv2-31ca9c41",
+          "kbv2-857b2b4a"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3104
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3087,
-    "last_updated": "2026-09-17T07:22:26.401482+00:00"
+    "total_conversations": 3104,
+    "last_updated": "2026-10-14T06:58:05.640904+00:00"
   }
 }

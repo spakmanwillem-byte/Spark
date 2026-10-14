@@ -162,6 +162,15 @@ Berichtenbeheer wordt een **module naast `contacts`**, niet erin: contacten = Sp
    per contact aanzetten, alleen vaste voorstel-tekst (geen vrije LLM naar derden), log van elk verzonden antwoord.
    Nevendoel: Spark voorstellen aan Willems contacten + testen in het echt.
 
+## 5b. Drie standen per adapter (Willem, 17-09 — leidend voor de bouw)
+1. **Ontvangen** — alleen inlezen en tonen. Niets terug.
+2. **Reageren zonder zenden (concept-modus)** — Spark maakt zijn antwoord (agenda-check, voorsteltekst) en zet het
+   als *concept* in de Berichten-tab. Willem ziet wat Spark zou zeggen; er gaat niets naar buiten. Dit is de
+   testmodus voor het antwoordapparaat.
+3. **Zenden** — per contact aan te zetten; concept wordt echt verstuurd (Direct Reply, later Business API).
+Capability `send` wordt dus een stand `{"uit", "concept", "aan"}` i.p.v. true/false. Business API = tweede adapter
+met dezelfde drie standen; alleen het transport (en de kosten) verschillen.
+
 ## 6. Open vragen voor Willem
 
 - Welke telefoon/Android-versie? (bepaalt Notification-bundling gedrag en werkprofiel-beperkingen)

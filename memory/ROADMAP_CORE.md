@@ -51,6 +51,11 @@ gradatie 4 verborg admin-pagina's ondanks admin-mode; admin_capable, key `admin`
 `users.json` + eco-containers), nooit ongevraagd als Willem/echte users chatten.
 Willem-account alleen als hij dat expliciet vraagt (repro in zijn eigen data).
 
+### RULE_toets_voor_bouw_001 — Eerst toetsen, dan pas bouwen (Willem, 19-10-2026)
+Bij elk nieuw idee van Willem: (1) kijk wat er al is (dubbel werk voorkomen), (2) zeg eerlijk of het een goed idee
+is en wat de haken zijn, (3) **wacht op akkoord**, (4) pas dan bouwen. "Zeg eerst wat je doet" betekent STOPPEN
+na het zeggen — niet aankondigen en in dezelfde beurt bouwen. Nooit iets stukmaken om iets te testen.
+
 ### RULE_footnote_metadata_001 — Kaart-aanmaak flow
 Iedere nieuwe KB v2 inbox-kaart moet minstens deze metadata dragen:
 - `footnote.bron` (waar komt de kaart vandaan?)

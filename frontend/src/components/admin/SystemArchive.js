@@ -320,17 +320,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
             <Code2 className="w-3.5 h-3.5" />
             D&amp;D Galerij
           </button>
-          {/* v6_roadkill_merch_archive_001 — Roadkill Merch galerij */}
-          <button
-            data-testid="foto-subtab-merch"
-            onClick={() => setFotoSubTab('merch')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              fotoSubTab === 'merch' ? 'bg-red-500/20 text-red-300' : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Tag className="w-3.5 h-3.5" />
-            Roadkill Merch
-          </button>
+          {/* v14: Roadkill Merch-tab verwijderd uit Beheer (Willem 19-10) — hoort in Workspace → Archief → Foto → Winkel */}
         </div>
       )}
 

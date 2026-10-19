@@ -28,6 +28,9 @@ AMBIENT_REGISTRY = AMBIENT_DIR / "registry.json"
 # /api/triggers/edit/intent/{stt_on|stt_off|tts_on|tts_off|ambient_off}/add.
 
 
+_RX_TTSS = re.compile(r"^\s*\(?\s*(ttss|gtss)\s*(aan|uit|on|off)\s*\)?\s*$", re.IGNORECASE)
+
+
 def _match_any(text: str, intent_key: str) -> bool:
     return _patterns.match_any(intent_key, text or "")
 
@@ -72,6 +75,19 @@ def try_detect(text: str) -> Optional[Dict]:
     """Detecteer een action-intent. Returnt None als geen match."""
     if not text:
         return None
+
+    # 0. v14_ttss_001 — ttss (Willems eigen stem) / gtss (kaart-geluiden) aan/uit
+    m = _RX_TTSS.match(text or "")
+    if m:
+        kind, state = m.group(1).lower(), m.group(2).lower()
+        on = state in ("aan", "on")
+        if kind == "ttss":
+            return {"action": "enable_ttss" if on else "disable_ttss", "type": f"action_ttss_{'on' if on else 'off'}",
+                    "message": ("TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt."
+                                if on else "TTSS uit — terug naar de gewone stem (als TTS aan staat).")}
+        return {"action": "enable_gtss" if on else "disable_gtss", "type": f"action_gtss_{'on' if on else 'off'}",
+                "message": ("GTSS aan — bij woorden met een kaart-geluid speel ik dat geluid af. (Placeholder: nog weinig geluiden.)"
+                            if on else "GTSS uit.")}
 
     # 1. STT off (eerst, want "stt uit" mag niet als "stt aan" matchen)
     if _match_any(text, "stt_off"):

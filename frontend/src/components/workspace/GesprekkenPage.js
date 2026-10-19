@@ -226,6 +226,10 @@ export function GesprekkenPage({ onNavigate }) {
   const [ambientLabel, setAmbientLabel] = useState(null);
   const [ambientPendingResume, setAmbientPendingResume] = useState(false);
   const [ttsEnabled, setTtsEnabled] = useState(false);
+  // v14_ttss_001 — Spark spreekt met Willems eigen ingesproken kaarten (ttss) / kaart-geluiden (gtss)
+  const [ttssEnabled, setTtssEnabled] = useState(false);
+  const [gtssEnabled, setGtssEnabled] = useState(false);
+  const voiceMapRef = useRef({ woorden: {}, geluiden: {}, loaded_at: 0 });
   const [ttsSpeaking, setTtsSpeaking] = useState(false); // v4_voice_002 — TTS-glow
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -678,6 +682,46 @@ export function GesprekkenPage({ onNavigate }) {
   };
 
   // v4_tts_001 — speak Spark response via /api/voice/tts + duck ambient + TTS-glow state
+  // v14_ttss_001 — eigen-stem speler: zoekt per woord (en 2-woord-begrip) een inspraak; zonder opname = skip.
+  const loadVoiceMap = async () => {
+    if (Date.now() - voiceMapRef.current.loaded_at < 60000) return voiceMapRef.current;
+    try {
+      const d = await fetch(`${API}/api/kb/v2/voice/map`).then(r => r.json());
+      voiceMapRef.current = { woorden: d.woorden || {}, geluiden: d.geluiden || {}, loaded_at: Date.now() };
+    } catch {}
+    return voiceMapRef.current;
+  };
+  const playUrl = (url) => new Promise((resolve) => {
+    const a = new Audio(url.startsWith('http') ? url : `${API}${url}`);
+    sparkAudioRef.current = a;
+    a.onended = resolve; a.onerror = resolve;
+    a.play().catch(resolve);
+  });
+  const speakOwnVoice = async (text) => {
+    if (!text) return;
+    const map = await loadVoiceMap();
+    const woorden = ttssEnabled ? map.woorden : {};
+    const geluiden = gtssEnabled ? map.geluiden : {};
+    const tokens = text.toLowerCase().replace(/[*_`#>]/g, ' ').replace(/[^a-z0-9àâäéèêëïîôöùûüçñ'\- ]/gi, ' ').split(/\s+/).filter(Boolean);
+    const queue = [];
+    for (let i = 0; i < tokens.length; i++) {
+      const bi = tokens[i + 1] ? `${tokens[i]} ${tokens[i + 1]}` : null;
+      if (bi && (woorden[bi] || geluiden[bi])) { queue.push(woorden[bi] || geluiden[bi]); i++; continue; }
+      if (woorden[tokens[i]]) queue.push(woorden[tokens[i]]);
+      else if (geluiden[tokens[i]]) queue.push(geluiden[tokens[i]]);
+    }
+    if (!queue.length) return;
+    if (sparkAudioRef.current) { try { sparkAudioRef.current.pause(); } catch {} }
+    setTtsSpeaking(true);
+    for (const url of queue) { await playUrl(url); }
+    setTtsSpeaking(false);
+    rearmMicIfVoiceLoop();
+  };
+  const speakAny = async (text) => {
+    if (ttssEnabled || gtssEnabled) return speakOwnVoice(text);
+    if (ttsEnabled) return speakSparkResponse(text);
+  };
+
   const speakSparkResponse = async (text) => {
     if (!text) return;
     // Strip markdown for cleaner TTS
@@ -828,7 +872,11 @@ export function GesprekkenPage({ onNavigate }) {
 
           // v6_deep_side_effects_001 — Diep gebruikt nu DEZELFDE audio-pipeline als normale chat
           // (TTS-toggle / STT-toggle / ambient / KB-card geluid)
-          if (d.action === 'enable_tts') {
+          if (d.action === 'enable_ttss') { setTtssEnabled(true); loadVoiceMap(); }
+          else if (d.action === 'disable_ttss') setTtssEnabled(false);
+          else if (d.action === 'enable_gtss') { setGtssEnabled(true); loadVoiceMap(); }
+          else if (d.action === 'disable_gtss') setGtssEnabled(false);
+          else if (d.action === 'enable_tts') {
             setTtsEnabled(true);
           } else if (d.action === 'disable_tts') {
             setTtsEnabled(false);
@@ -875,8 +923,8 @@ export function GesprekkenPage({ onNavigate }) {
           }
 
           // TTS van Diep-response (was missing — dat is bug 1)
-          if (ttsEnabled && d.success && d.message && d.action !== 'enable_tts') {
-            await speakSparkResponse(d.message);
+          if ((ttsEnabled || ttssEnabled || gtssEnabled) && d.success && d.message && !String(d.action || '').match(/^(enable|disable)_/)) {
+            await speakAny(d.message);
           } else {
             rearmMicIfVoiceLoop();
           }
@@ -942,6 +990,10 @@ export function GesprekkenPage({ onNavigate }) {
           setSttEnabled(false);
           voiceLoopRef.current = false;
           if (sttListening) await stopSttRecording();
+        } else if (data.action === 'enable_ttss') { setTtssEnabled(true); loadVoiceMap();
+        } else if (data.action === 'disable_ttss') { setTtssEnabled(false);
+        } else if (data.action === 'enable_gtss') { setGtssEnabled(true); loadVoiceMap();
+        } else if (data.action === 'disable_gtss') { setGtssEnabled(false);
         } else if (data.action === 'enable_tts') {
           setTtsEnabled(true);
         } else if (data.action === 'disable_tts') {
@@ -997,8 +1049,8 @@ export function GesprekkenPage({ onNavigate }) {
         await playKbSound();
 
         // TTS speak Spark's response — strip markdown for cleaner audio
-        if (ttsEnabled && data.message && data.action !== 'enable_tts') {
-          await speakSparkResponse(data.message);
+        if ((ttsEnabled || ttssEnabled || gtssEnabled) && data.message && !String(data.action || '').match(/^(enable|disable)_/)) {
+          await speakAny(data.message);
         } else {
           // Geen TTS → meteen re-arm mic indien voice-loop
           rearmMicIfVoiceLoop();
@@ -1142,6 +1194,11 @@ export function GesprekkenPage({ onNavigate }) {
           {activeTab === 'spark' && (
             <div className="flex-1 flex flex-col">
               {/* v4_voice_002 — TTS-glow indicator (Spark spreekt) */}
+              {(ttssEnabled || gtssEnabled) && (
+                <div data-testid="ttss-mode-bar" className="flex items-center gap-2 px-4 py-1 bg-cyan-500/10 border-b border-cyan-500/20 text-[11px] text-cyan-200">
+                  🎙️ {ttssEnabled && 'TTSS: Spark spreekt met jouw ingesproken kaarten'}{ttssEnabled && gtssEnabled && ' · '}{gtssEnabled && 'GTSS: kaart-geluiden'} <span className="text-cyan-400/60">— woorden zonder opname worden overgeslagen</span>
+                </div>
+              )}
               {ttsSpeaking && (
                 <div data-testid="tts-glow-bar" className="flex items-center gap-2 px-4 py-2 bg-amber-500/10 border-b border-amber-500/30">
                   <div className="relative flex items-center justify-center">

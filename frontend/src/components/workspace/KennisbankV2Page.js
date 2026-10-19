@@ -47,6 +47,8 @@ export function KennisbankV2Page({ onNavigate }) {
   const [reasons, setReasons] = useState({});
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [voiceFilter, setVoiceFilter] = useState(false); // v14_ttss_001 — alleen niet-ingesproken kaarten
+  const [voiceStats, setVoiceStats] = useState(null);
   const [reasonFilter, setReasonFilter] = useState('');
   // v6_kbv2_priority_001 — Top 50 prio modus (blijft bestaan, maar niet meer als button;
   // wordt gedreven door sortMode==='hits_desc' via de dropdown hieronder)
@@ -109,11 +111,15 @@ export function KennisbankV2Page({ onNavigate }) {
         if (reasonFilter) qs.append('reason', reasonFilter);
         if (sortMode && sortMode !== 'recent') qs.append('sort', sortMode);
         url = `${API}/api/kb/v2/inbox?${qs}`;
+      } else if (voiceFilter) {
+        qs.append('lade', activeTab);
+        url = `${API}/api/kb/v2/voice/missing?${qs}`;
       } else {
         url = `${API}/api/kb/v2/lade/${activeTab}?${qs}`;
       }
       const r = await fetch(url).then(x => x.json());
       setItems(r.kaarten || []);
+      if (r.per_lade) setVoiceStats(r.per_lade);
       if (sortMode === 'hits_desc' || sortMode === 'hits_asc') {
         setTotal(r.total_missing_laag1 || r.total || 0);
         setPriorityMeta({ total: r.total_missing_laag1, shown: r.kaarten?.length || 0 });
@@ -126,7 +132,7 @@ export function KennisbankV2Page({ onNavigate }) {
       setItems([]); setTotal(0);
     }
     setLoading(false);
-  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode]);
+  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode, voiceFilter]);
 
   useEffect(() => { loadStats(); }, [loadStats]);
   useEffect(() => { loadItems(); }, [loadItems]);
@@ -712,6 +718,13 @@ export function KennisbankV2Page({ onNavigate }) {
               placeholder="Zoek op begrip..."
               className="w-full pl-8 pr-3 py-1.5 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-amber-500/50" />
           </div>
+          {activeTab !== 'inbox' && (
+            <button data-testid="kbv2-voice-filter" onClick={() => { setVoiceFilter(v => !v); setPage(0); }}
+              title="Alleen kaarten zonder ingesproken woord (voor TTSS)"
+              className={`flex items-center gap-1 text-[11px] px-2.5 py-1.5 rounded-lg border transition-colors ${voiceFilter ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 text-slate-400 hover:text-slate-200'}`}>
+              🎙️ niet ingesproken{voiceStats?.[activeTab] ? ` (${voiceStats[activeTab].niet}/${voiceStats[activeTab].totaal})` : ''}
+            </button>
+          )}
           {activeTab === 'inbox' && (
             <div className="flex items-center gap-1.5 flex-wrap">
               {/* Alle onbeantwoord (default) */}

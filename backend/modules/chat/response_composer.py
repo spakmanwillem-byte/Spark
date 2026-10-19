@@ -181,6 +181,23 @@ async def compose_response(
     except Exception:
         pass  # bij fout: ga gewoon door naar LLM-pad
 
+    # v14_compose_extraction_001 (Willem 19-10, Maaike-bug) — diep-modus sloeg relaties/personalia
+    # NIET op ("Willem Spakman is mijn broer" → "ik noteer…" maar niets vastgelegd). Zelfde passieve
+    # observers als /api/chat/message. Resultaat gaat als `new_relations`/`personalia_saved` mee
+    # zodat de LLM alleen "ik noteer" zegt als er écht iets is opgeslagen.
+    _new_relations, _personalia_saved = [], []
+    if user_id and not user_text.startswith("[system:"):
+        try:
+            from modules.chat import relation_extraction_service as _rel
+            _new_relations = _rel.detect_and_save(user_id, user_text) or []
+        except Exception as ex:
+            print(f"[compose relation-extract] failed: {ex}")
+        try:
+            from modules.chat import personalia_extraction_service as _pe
+            _personalia_saved = _pe.detect_and_save(user_id, user_text) or []
+        except Exception as ex:
+            print(f"[compose personalia-extract] failed: {ex}")
+
     # v6_snuffel_bestand_001 — Spark doorzoekt eigen JSON-data op verzoek
     try:
         from modules.chat.spark_snuffel import detect_snuffel_intent, execute_snuffel, format_snuffel_result_for_chat
@@ -608,6 +625,15 @@ async def compose_response(
         f"## Huidige vraag van {_current_user_naam}:",
         user_text,
         "",
+    ]
+    if _new_relations or _personalia_saved:
+        _saved_bits = [f"{r.get('relation_type', '')}: {r.get('person_name', '')}" for r in _new_relations]
+        _saved_bits += [str(p.get("summary") or p.get("field") or p) for p in _personalia_saved]
+        user_prompt_parts += [f"## Zojuist écht opgeslagen in het profiel van {_current_user_naam}: " + "; ".join(_saved_bits),
+                              "Bevestig kort dat dit is vastgelegd. Zeg nooit 'ik noteer' over iets dat hier niet staat.", ""]
+    else:
+        user_prompt_parts += ["(Er is niets automatisch opgeslagen uit deze zin. Zeg dus NIET 'ik noteer' of 'ik sla op'; stel hooguit voor het in Mijn Profiel te zetten.)", ""]
+    user_prompt_parts += [
         "Reageer in Spark's stem, in het Nederlands.",
     ]
     user_prompt = "\n".join(user_prompt_parts)
@@ -851,6 +877,8 @@ async def compose_response(
         return {
             "success": True,
             "message": text,
+            "new_relations": _new_relations or None,
+            "personalia_saved": _personalia_saved or None,
             "used_cards": [c.get("id") for c in cards],
             "used_model": f"{model_provider}/{model_name}",
             "blueprint_version": bp.get("_schema_version", "?"),

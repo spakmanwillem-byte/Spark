@@ -7,3 +7,5 @@ from .bulk_5w_fill_routes import router as kbv2_bulk_5w_router
 
 __all__ = ["kbv2_router", "kbv2_media_router", "kbv2_llm_router",
            "kbv2_curation_router", "kbv2_bulk_5w_router"]
+
+from .voice_routes import router as kbv2_voice_router

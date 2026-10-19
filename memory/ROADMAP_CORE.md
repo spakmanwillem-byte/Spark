@@ -135,6 +135,10 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 - **ttss-output als sample opslaan (onderzoek)**: zinloos voor eigen opnames (zelfde audio). Wél mogelijk: per kaart
   één keer OpenAI-TTS genereren in apart veld `media.tts_url` (nooit `voice_url`) als bootstrap-stem. Risico: ~7353
   calls, ~200 MB, twee stemmen door elkaar. Niet gebouwd; wacht op akkoord.
+- **Onderzoek 19-10 (geen bouw)**: emotie-graph + hybride command-systeem → `/app/memory/ONDERZOEK_EMOTIE_GRAPH_COMMANDS.md`
+  en `/app/memory/COMMANDS_OVERZICHT_19-10.md`. Kern: `emotie`-tag = ~25 % ruis in kennis-graph; emotie-veld bestaat al
+  (3631 kaarten) maar wordt niet gelezen; registry 81 = 58 live / 23 placeholder; task_agent.resolve/execute zijn leeg.
+  Punt 3 (tab "Nog geen emotie", 120 %) wacht op akkoord punt 1.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

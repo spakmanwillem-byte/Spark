@@ -1,0 +1,12 @@
+{"ts": "2026-10-19T06:12:54.475155+00:00", "module": "auth", "fn": "logout", "phase": "pre", "intent": "user uitloggen + sessie eindigen", "args": {"user_id": "user-001"}}
+{"ts": "2026-10-19T06:12:54.483937+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 3.87}
+{"ts": "2026-10-19T06:13:01.159093+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-10-19T06:13:01.159294+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=False, message='Ongeldige inloggegevens', user=None, is_masterkey=False)", "duration_ms": 0.06}
+{"ts": "2026-10-19T06:13:05.987327+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-10-19T06:13:06.026925+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'naam': 'Maaike', 'volledige_naam': 'Maaike Spakman', 'sleut…", "duration_ms": 39.56}
+{"ts": "2026-10-19T06:17:59.387955+00:00", "module": "auth", "fn": "logout", "phase": "pre", "intent": "user uitloggen + sessie eindigen", "args": {"user_id": "user-fc2f683b"}}
+{"ts": "2026-10-19T06:17:59.389831+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 0.16}
+{"ts": "2026-10-19T06:18:14.493989+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-10-19T06:18:14.534315+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'Willem', 'volledige_naam': 'Wille…", "duration_ms": 40.53}
+{"ts": "2026-10-19T08:20:14.074117+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-10-19T08:20:14.114452+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'Willem', 'volledige_naam': 'Wille…", "duration_ms": 38.87}

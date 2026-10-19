@@ -95,11 +95,155 @@
         "session_id": "deep-user-fc2f683b",
         "gesprek_nummer": 4
       }
+    },
+    {
+      "id": "conv-78a03122",
+      "timestamp": "2026-10-19T06:13:22.024305+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Goedemorgen, Maaike! Hoe kan ik je vandaag helpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "winkel",
+        "used_cards": [
+          "kbv2-f4f17100",
+          "kbv2-aaf81efb",
+          "kbv2-f1d5db2f",
+          "kbv2-2ad0e675",
+          "kbv2-336bd0a9"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-65568836",
+      "timestamp": "2026-10-19T06:13:50.719628+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Weet jij wie mijn broer is?",
+      "spark_response": "Maaike, ik weet niet precies wie jouw broer is. Kun je me een beetje meer vertellen — bijvoorbeeld zijn naam of een herkenningspunt—zodat ik kan bevestigen dat we het over dezelfde persoon hebben? Dan kan ik je beter helpen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "winkel",
+        "used_cards": [
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-69341428",
+          "kbv2-8e9b2726",
+          "kbv2-8197c815"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-78f74597",
+      "timestamp": "2026-10-19T06:14:38.818042+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Willem Spakman is mijn broer",
+      "spark_response": "Dank je, Maaike. Het klinkt mooi dat Willem Spakman jouw broer is. Om er zeker van te zijn dat we het over dezelfde Willem hebben, kun je me nog een klein detail geven? Bijvoorbeeld een herinnering die jullie delen, of een kenmerkende gebeurtenis. Dan kan ik bevestigen dat we het over dezelfde persoon spreken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "goedemorgen",
+        "used_cards": [
+          "kbv2-skel-2af74cfb",
+          "kbv2-89dd4fa3",
+          "kbv2-69341428",
+          "kbv2-8e9b2726",
+          "kbv2-b4f1ef99"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-b3b94a5e",
+      "timestamp": "2026-10-19T06:15:27.917875+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Ik weet dat mijn broer 22 april 1977 is geboren.",
+      "spark_response": "Dank je, Maaike. Ik noteer dat jouw broer Willem Spakman op 22 april 1977 is geboren. \n\nWil je dat ik deze datum als een notitie opsla, of misschien een herinnering maak voor een verjaardag in de agenda? Laat maar weten wat je wilt doen met deze informatie.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "broer",
+        "used_cards": [
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-2a740566",
+          "kbv2-993bd9d8",
+          "kbv2-69341428"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-2a013b9f",
+      "timestamp": "2026-10-19T06:16:18.239857+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Heidi Spakman is mijn moeder",
+      "spark_response": "Dank je, Maaike. Ik noteer dat jouw moeder Heidi Spakman heet. Heidi is een voornaam van Duitse oorsprong en Spakman is de achternaam die jullie familie verbindt. Een moeder speelt een belangrijke rol in de geboorte, verzorging en opvoeding – ik hoor dat jullie een hechte band hebben.\n\nWil je dat ik deze informatie opsla als een notitie, of misschien een verjaardagsherinnering toevoegen als je de geboortedatum van Heidi weet? Laat maar weten wat je wilt doen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "broer",
+        "used_cards": [
+          "kbv2-207b265d",
+          "kbv2-skel-2af74cfb",
+          "kbv2-964bb409",
+          "kbv2-660e8fcf",
+          "kbv2-8197c815"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 9
+      }
+    },
+    {
+      "id": "conv-6840784b",
+      "timestamp": "2026-10-19T06:17:56.058164+00:00",
+      "user_id": "user-fc2f683b",
+      "user_naam": "Maaike",
+      "user_message": "Dank ik ga weer",
+      "spark_response": "Dank je wel, Maaike. Fijn dat we even hebben kunnen bijpraten. Als je later nog iets wilt weten — over het weer, een herinnering, of iets anders — laat het me gerust weten. Ik ben er voor je. Tot de volgende keer!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "spakman",
+        "used_cards": [
+          "kbv2-c2b5cf3b",
+          "kbv2-369f8921",
+          "kbv2-d65e84a9",
+          "kbv2-8e0d7b7f",
+          "kbv2-91a72265"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-fc2f683b",
+        "gesprek_nummer": 10
+      }
     }
   ],
   "metadata": {
     "user_id": "user-fc2f683b",
-    "total_conversations": 4,
-    "last_updated": "2026-08-01T06:46:38.359309+00:00"
+    "total_conversations": 10,
+    "last_updated": "2026-10-19T06:17:56.058164+00:00"
   }
 }

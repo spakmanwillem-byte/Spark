@@ -98,6 +98,16 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 
 ---
 
+## 🎙️ Stem-dataset uit KB-inspraak (19-10-2026)
+- **Bug gefixt**: `EMERGENT_LLM_KEY` in `.env` was ongeldig → alle 47 kaart-inspraken (sinds maanden) stonden zonder
+  transcript ("Transcriptie mislukt"). Nieuwe sleutel; alle 47 alsnog getranscribeerd (36 goed, 11 missers zoals
+  Heet→HATE, Balk→Boog, Verrast→Furast). Audio: `data/system_archive/geluiden/*.webm`, link op kaart `media.voice_url`
+  + `media.voice_transcript`.
+- **Willem's doel**: eigen TTS/STT op basis van zijn stem per begrip. De KB is daarmee al een gelabelde dataset.
+- **TODO P2**: "klopt dit?"-knop naast transcript (ja / corrigeer → begrip) → `data/voice_dataset/labels.jsonl`
+  `(archive_id, begrip, whisper_heard, correct)`; export-knop; later Whisper-fine-tune of eigen model op Odroid.
+- **TODO P2**: Verbindingen-test voor `emergent_key` echt een mini-aanroep laten doen (nu alleen "key aanwezig").
+
 ## 📨 ONDERZOEK — Berichtenbeheer & WhatsApp (17-09-2026, geen code)
 Volledig rapport: `memory/ONDERZOEK_BERICHTENBEHEER.md`. Kern: **Fase 1 = Android Notification Listener**
 (legaal, LAN, geen cloud); **whatsapp-web.js/Baileys afgeraden** (permanente bans 2026); **Business API alleen

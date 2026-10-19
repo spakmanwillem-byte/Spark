@@ -748,11 +748,11 @@
     },
     {
       "id": "kbv2-738cda3b",
-      "begrip": "Zee Haven",
+      "begrip": "Zeehaven",
       "lagen": {
-        "laag1": "Onbekende grondstof — admin om in te vullen.",
-        "laag2": "",
-        "laag3": "",
+        "laag1": "Zeehaven, Hier komen exotische producten en goederen binnen vanuit andere gebieden.",
+        "laag2": "Zeehaven, Hier komen exotische producten en goederen binnen vanuit andere gebieden. dit gebeurt elke in-game 24 uur. Dan wordt de zeehaven aangevuld. ",
+        "laag3": "Om te zien wat er te Handelen is kan de speler op de haven klikken om deze info te zien. Echter zal de speler naar de zeehaven moeten gaan om te kunnen handelen. ",
         "laag4": ""
       },
       "ws5": {
@@ -792,7 +792,7 @@
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:38:26.961159+00:00",
-        "laatst_bewerkt_op": "2026-09-17T07:47:11.065161+00:00",
+        "laatst_bewerkt_op": "2026-10-19T06:31:39.407529+00:00",
         "laatst_bewerkt_door": "user-001",
         "hooks_fired": [
           {
@@ -810,6 +810,22 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T06:31:39.537333+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T06:31:39.548232+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
           }
         ]
       },
@@ -819,6 +835,19 @@
       "lade": "games",
       "game": "spark world",
       "verbanden": [
+        {
+          "kaart_id": "kbv2-73ebc070",
+          "begrip": "Wild",
+          "lade": "games",
+          "overlap": 6,
+          "shared_tags": [
+            "anders",
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
         {
           "kaart_id": "kbv2-94ad9dfe",
           "begrip": "Rover Kamp",
@@ -833,31 +862,33 @@
           ]
         },
         {
-          "kaart_id": "kbv2-73ebc070",
-          "begrip": "Wild",
+          "kaart_id": "kbv2-0d1fc7d5",
+          "begrip": "Vis resource",
           "lade": "games",
-          "overlap": 4,
-          "shared_tags": [
-            "anders",
-            "grondstof",
-            "grondstoffen",
-            "spark world"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-e3f53257",
-          "begrip": "Land Trade post",
-          "lade": "games",
-          "overlap": 3,
+          "overlap": 5,
           "shared_tags": [
             "grondstof",
             "grondstoffen",
+            "kaart",
+            "resource",
             "spark world"
           ]
         },
         {
           "kaart_id": "kbv2-3d249de5",
           "begrip": "Grondstoffen",
+          "lade": "games",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstof",
+            "grondstoffen",
+            "kaart",
+            "spark world"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3f53257",
+          "begrip": "Land Trade post",
           "lade": "games",
           "overlap": 3,
           "shared_tags": [
@@ -880,17 +911,6 @@
         {
           "kaart_id": "kbv2-1ae622c4",
           "begrip": "Akkers",
-          "lade": "games",
-          "overlap": 3,
-          "shared_tags": [
-            "grondstof",
-            "grondstoffen",
-            "spark world"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0d1fc7d5",
-          "begrip": "Vis resource",
           "lade": "games",
           "overlap": 3,
           "shared_tags": [

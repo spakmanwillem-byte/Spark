@@ -42,7 +42,8 @@
         "lieverd": 1,
         "leiverd": 1,
         "schat": 1,
-        "gelukt": 3
+        "gelukt": 3,
+        "nice": 3
       }
     },
     "boos": {
@@ -165,7 +166,10 @@
       }
     },
     "neutraal": {
-      "triggers": {},
+      "triggers": {
+        "oke": 3,
+        "doe ik": 3
+      },
       "emoji": "😐",
       "color": "#94a3b8",
       "beschrijving": "Neutrale toon - geen sterke emotie"
@@ -173,16 +177,25 @@
   },
   "empathic_responses": {
     "blij": [
-      "Wat fijn om te horen! 😊",
-      "Dat klinkt geweldig!",
-      "Leuk! Vertel me meer",
-      "Wat mooi om te horen"
+      "Wat mooi om te horen",
+      "Dat klinkt goed",
+      "Dat klinkt geweldig",
+      "Dat klinkt super",
+      "Wat fijn om te horen",
+      "Wat leuk om te horen",
+      "Blij om dat te horen",
+      "Dat is mooi om te horen",
+      "Dat is fijn om te horen",
+      "Dat maakt mij blij"
     ],
     "boos": [
       "Ik begrijp dat je boos bent",
       "Dat klinkt frustrerend",
       "Dat zou mij ook irriteren",
-      "Vervelend om te horen"
+      "Vervelend om te horen",
+      "Dat zou mij ook boos maken",
+      "Dat zou mij ook woedend maken",
+      "Daar zou ik ook boos van worden"
     ],
     "bang": [
       "Dat klinkt spannend voor je",
@@ -191,12 +204,19 @@
       "Wil je erover praten?"
     ],
     "bedroefd": [
-      "Dat spijt me om te horen 💙",
       "Wat verdrietig voor je",
       "Dat moet moeilijk zijn",
-      "Wil je erover praten?"
+      "Wil je erover praten?",
+      "Wat vervelend voor je",
+      "Dat zou bij ook verdrietig maken",
+      "Dat vind in vervelend om te horen",
+      "Ik ben er als je mij nodig bent"
     ],
-    "neutraal": []
+    "neutraal": [
+      "fijn",
+      "graag",
+      "oke"
+    ]
   },
   "meta": {
     "max_word_count": 3,
@@ -233,6 +253,6 @@
       "type": "intensity_with_context",
       "description": "Basis intensiteit scores (1-10) × context versterkers"
     },
-    "last_updated": "2026-08-22T21:00:01.615825"
+    "last_updated": "2026-10-18T16:08:59.990074"
   }
 }

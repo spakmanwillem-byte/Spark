@@ -9,3 +9,4 @@ __all__ = ["kbv2_router", "kbv2_media_router", "kbv2_llm_router",
            "kbv2_curation_router", "kbv2_bulk_5w_router"]
 
 from .voice_routes import router as kbv2_voice_router
+from .emotion_routes import router as kbv2_emotie_router

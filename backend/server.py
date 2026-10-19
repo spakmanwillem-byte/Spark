@@ -352,6 +352,8 @@ app.include_router(kbv2_curation_router, prefix="/api")
 app.include_router(kbv2_bulk_5w_router, prefix="/api")
 from modules.kb_v2 import kbv2_voice_router
 app.include_router(kbv2_voice_router, prefix="/api")  # v14_ttss_001
+from modules.kb_v2 import kbv2_emotie_router
+app.include_router(kbv2_emotie_router, prefix="/api")  # v14_emotie_veld_001
 
 # v6_emotion_pipeline_001 — 7-laags emotie-pipeline (dry-run)
 from modules.emotion_pipeline.routes import router as emotion_pipeline_router

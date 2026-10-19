@@ -921,6 +921,19 @@ def _fire_post_classify_hooks(card: Dict, lade: str) -> None:
         log_event("kbv2_hooks", "link_to_dnd_error", intent="hook-fail", detail={"err": str(e)[:120]})
 
 
+EMOTIES = ("blij", "boos", "bang", "bedroefd", "neutraal")
+
+
+def _apply_emotie(k: Dict, updates: Dict, user_id: str) -> None:
+    """v14_emotie_veld_001 — bevestigde emotie zetten (neutraal is een echte keuze, geen default)."""
+    e = updates.get("emotie")
+    if isinstance(e, str) and e.lower().strip() in EMOTIES:
+        k["emotie"] = e.lower().strip()
+        k["emotie_bevestigd"] = True
+        k["emotie_bron"] = user_id
+        k["emotie_bevestigd_op"] = _now()
+
+
 @traced(intent="bestaande kaart in lade bewerken", module="kbv2")
 def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000") -> Dict:
     """Update lagen / ws5 / tags / begrip van een kaart die al in een lade staat OF in inbox."""
@@ -942,6 +955,7 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
                         k["begrip"] = updates["begrip"]
                     if "media" in updates and isinstance(updates["media"], dict):
                         k["media"] = {**(k.get("media") or {}), **updates["media"]}
+                    _apply_emotie(k, updates, user_id)
                     fn = k.get("footnote") or {}
                     fn["laatst_bewerkt_door"] = user_id
                     fn["laatst_bewerkt_op"] = _now()
@@ -974,6 +988,7 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
                 # v5_kbv2_media_001 — media-updates (voice + images)
                 if "media" in updates and isinstance(updates["media"], dict):
                     k["media"] = {**(k.get("media") or {}), **updates["media"]}
+                _apply_emotie(k, updates, user_id)
                 fn = k.get("footnote") or {}
                 fn["laatst_bewerkt_door"] = user_id
                 fn["laatst_bewerkt_op"] = _now()

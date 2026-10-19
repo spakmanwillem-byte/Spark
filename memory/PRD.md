@@ -8,6 +8,7 @@
 - Diep-modus (`/api/spark/compose`) slaat nu relaties/personalia op (Maaike-bug). Roadkill Merch-tab uit Beheer.
 - Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen met Willem, dan pas bouwen.
 - Kennisbank-tab "In te spreken" (alle lades, kaart verdwijnt na inspreken, auto-volgende). Merch-code weg.
+- Emotie-veld (`emotie`/`emotie_bevestigd`) + tab "Nog geen emotie" + detector schone reset (alleen bevestigd veld) + badge 120 %.
 - Command-registry opgeschoond (58 live / 23 placeholders) + `task_agent.resolve/resolve_text/execute` basis (werkwoord-concepten, gradatie, ASGI-dispatch, audit). Nog niet in chat-flow. Onderzoek emotie-graph: `/app/memory/ONDERZOEK_EMOTIE_GRAPH_COMMANDS.md`.
 - Open/backlog: zie ROADMAP_CORE.md (Odroid fase 1, Berichtenbeheer-prototype, Onvolledige Kaarten (120, lagen/WS5), dashboard click-to-focus Agenda/Gesprekken, stts, zelfkennis-kaarten).
 

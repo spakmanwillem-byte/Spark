@@ -24,7 +24,7 @@ def _load_all_kb_entries() -> list:
     entries = []
     for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
                   "knowledge_v2_voelen", "knowledge_v2_spreken",
-                  "knowledge_inbox"]:
+                  "knowledge_v2_games", "knowledge_inbox"]:
         data = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
         entries.extend(data.get("kaarten", []) or [])
     return entries
@@ -43,13 +43,12 @@ class EmotionDetectionService:
 
     @staticmethod
     def _load_learned_triggers():
-        """Laad geleerde emotie triggers uit knowledge cards met emotie-tags.
+        """Laad geleerde emotie-triggers uit KB v2 kaarten.
 
-        Ondersteunt drie tag-patronen:
-        1. Single tag: 'emotie-blij' / '#emotie-blij' (oude stijl)
-        2. Combo tag : 'emotie blij' (één tag met spatie)
-        3. Twee losse tags: 'emotie' + 'blij' op dezelfde kaart (user-stijl v4_011)
-        Geldige emoties: blij, boos, bang, bedroefd, neutraal.
+        v14_emotie_veld_001 (Willem 19-10-2026, schone reset): bron is het kaartveld `emotie`,
+        en alléén als `emotie_bevestigd` true is (door Willem gekozen). Tags (`emotie-blij` etc.)
+        tellen niet meer; 'neutraal' is een echte keuze maar levert geen trigger-woord op.
+        Statische triggers (emotion_triggers.json) blijven het anker.
         """
         import time
         now = time.time()
@@ -57,44 +56,14 @@ class EmotionDetectionService:
                 now - EmotionDetectionService._learned_cache_time < 60):
             return EmotionDetectionService._learned_cache
 
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        entries = data.get("knowledge_entries", [])
-        # v6_v2_first_001 — voeg V2 kaarten toe (bron-van-waarheid)
-        entries = entries + _load_all_kb_entries()
-
         learned = {"blij": {}, "boos": {}, "bang": {}, "bedroefd": {}, "neutraal": {}}
-        valid_emotions = set(learned.keys())
-        emotie_map = {
-            "emotie-blij": "blij", "#emotie-blij": "blij",
-            "emotie-boos": "boos", "#emotie-boos": "boos",
-            "emotie-bang": "bang", "#emotie-bang": "bang",
-            "emotie-bedroefd": "bedroefd", "#emotie-bedroefd": "bedroefd",
-            "emotie-neutraal": "neutraal", "#emotie-neutraal": "neutraal",
-            "emotie blij": "blij", "emotie boos": "boos", "emotie bang": "bang",
-            "emotie bedroefd": "bedroefd", "emotie neutraal": "neutraal",
-        }
-
-        for entry in entries:
-            # Geen status-filter meer — draft kaarten tellen ook mee voor leren
-            begrip = (entry.get("begrip") or "").lower().strip()
-            if not begrip:
+        for entry in _load_all_kb_entries():
+            if not entry.get("emotie_bevestigd"):
                 continue
-            tag_set = set()
-            for tag in entry.get("tags", []) or []:
-                tag_set.add(tag.lower().strip().lstrip("#").strip())
-            matched_emotion = None
-            for tag in tag_set:
-                if tag in emotie_map:
-                    matched_emotion = emotie_map[tag]
-                    break
-            # Patroon 3: losse 'emotie' + één van de 5 emotie-namen
-            if not matched_emotion and "emotie" in tag_set:
-                for em in valid_emotions:
-                    if em in tag_set:
-                        matched_emotion = em
-                        break
-            if matched_emotion:
-                learned[matched_emotion][begrip] = 3
+            begrip = (entry.get("begrip") or "").lower().strip()
+            emo = (entry.get("emotie") or "").lower().strip()
+            if begrip and emo in learned and emo != "neutraal":
+                learned[emo][begrip] = 3
 
         EmotionDetectionService._learned_cache = learned
         EmotionDetectionService._learned_cache_time = now

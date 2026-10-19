@@ -122,18 +122,31 @@
           "kaart_id": "kbv2-5ae16b66",
           "begrip": "Spark World",
           "lade": "games",
-          "overlap": 1,
+          "overlap": 3,
           "shared_tags": [
+            "base line",
+            "fracties",
             "spark world"
           ]
         },
         {
-          "kaart_id": "kbv2-5cd66b24",
-          "begrip": "Persoonskaart Rugzak",
-          "lade": "games",
+          "kaart_id": "kbv2-skel-56c27e7c",
+          "begrip": "donker",
+          "lade": "weten",
           "overlap": 2,
           "shared_tags": [
-            "spark world"
+            "licht",
+            "schaduw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7a4039e9",
+          "begrip": "schaduw",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "licht",
+            "schaduw"
           ]
         }
       ],
@@ -176,8 +189,26 @@
               "n_found": 2,
               "top_overlap": 2
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:52:56.024207+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:52:56.036547+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T09:52:55.881002+00:00"
       },
       "media": {
         "voice_url": null,
@@ -188,7 +219,8 @@
         "voice",
         "image"
       ],
-      "game": "spark world"
+      "game": "spark world",
+      "emotie": "neutraal"
     },
     {
       "id": "kbv2-5cd66b24",
@@ -1540,7 +1572,7 @@
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:36:23.669412+00:00",
-        "laatst_bewerkt_op": "2026-10-19T09:09:17.958821+00:00",
+        "laatst_bewerkt_op": "2026-10-19T09:52:18.344763+00:00",
         "laatst_bewerkt_door": "user-4453ade3",
         "hooks_fired": [
           {
@@ -1621,6 +1653,54 @@
             "result": {
               "n_found": 10,
               "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:52:09.678385+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:52:09.689334+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "link_to_dnd",
+            "fired_at": "2026-10-19T09:52:09.713453+00:00",
+            "result": {
+              "action": "updated",
+              "type": "lore"
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:52:18.467103+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:52:18.477850+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "link_to_dnd",
+            "fired_at": "2026-10-19T09:52:18.503545+00:00",
+            "result": {
+              "action": "updated",
+              "type": "lore"
             }
           }
         ]
@@ -1743,7 +1823,8 @@
             "voedsel"
           ]
         }
-      ]
+      ],
+      "emotie": "neutraal"
     },
     {
       "id": "kbv2-0d1fc7d5",

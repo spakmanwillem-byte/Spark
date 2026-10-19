@@ -6,7 +6,7 @@ import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
   Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus, Merge,
-  Volume2, Sparkles, Zap
+  Volume2, Sparkles, Zap, Heart
 } from 'lucide-react';
 import { KbV2TagCuration } from './KbV2TagCuration';
 import { robustFetch, getQueueSize, replayQueue } from '../../utils/robustFetch';
@@ -52,6 +52,9 @@ export function KennisbankV2Page({ onNavigate }) {
   // v14_inspreek_tab_001 — eigen tab "In te spreken": alle lades, kaart verdwijnt na inspreken
   const [inspreekLade, setInspreekLade] = useState('');
   const inspreekIdxRef = useRef(0);
+  // v14_emotie_veld_001 — tab "Nog geen emotie": kaart verdwijnt na bevestigen
+  const [emotieStats, setEmotieStats] = useState(null);
+  const [emotieLade, setEmotieLade] = useState('');
   const [reasonFilter, setReasonFilter] = useState('');
   // v6_kbv2_priority_001 — Top 50 prio modus (blijft bestaan, maar niet meer als button;
   // wordt gedreven door sortMode==='hits_desc' via de dropdown hieronder)
@@ -92,6 +95,8 @@ export function KennisbankV2Page({ onNavigate }) {
       setStats(r);
       const v = await fetch(`${API}/api/kb/v2/voice/missing?limit=1`).then(x => x.json());
       if (v.per_lade) setVoiceStats(v.per_lade);
+      const e = await fetch(`${API}/api/kb/v2/emotie/stats`).then(x => x.json());
+      if (e.per_lade) setEmotieStats(e.per_lade);
     } catch {}
   }, []);
 
@@ -119,6 +124,9 @@ export function KennisbankV2Page({ onNavigate }) {
       } else if (activeTab === 'inspreken') {
         if (inspreekLade) qs.append('lade', inspreekLade);
         url = `${API}/api/kb/v2/voice/missing?${qs}`;
+      } else if (activeTab === 'emotie') {
+        if (emotieLade) qs.append('lade', emotieLade);
+        url = `${API}/api/kb/v2/emotie/missing?${qs}`;
       } else if (voiceFilter) {
         qs.append('lade', activeTab);
         url = `${API}/api/kb/v2/voice/missing?${qs}`;
@@ -127,7 +135,8 @@ export function KennisbankV2Page({ onNavigate }) {
       }
       const r = await fetch(url).then(x => x.json());
       setItems(r.kaarten || []);
-      if (r.per_lade) setVoiceStats(r.per_lade);
+      if (r.per_lade && activeTab === 'emotie') setEmotieStats(r.per_lade);
+      else if (r.per_lade) setVoiceStats(r.per_lade);
       if (sortMode === 'hits_desc' || sortMode === 'hits_asc') {
         setTotal(r.total_missing_laag1 || r.total || 0);
         setPriorityMeta({ total: r.total_missing_laag1, shown: r.kaarten?.length || 0 });
@@ -140,7 +149,7 @@ export function KennisbankV2Page({ onNavigate }) {
       setItems([]); setTotal(0);
     }
     setLoading(false);
-  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode, voiceFilter, inspreekLade]);
+  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode, voiceFilter, inspreekLade, emotieLade]);
 
   useEffect(() => { loadStats(); }, [loadStats]);
   useEffect(() => { loadItems(); }, [loadItems]);
@@ -155,10 +164,10 @@ export function KennisbankV2Page({ onNavigate }) {
     if (loading || !selectedCard || creatingNew) return;
     const fresh = items.find(c => c.id === selectedCard.id);
     if (fresh) {
-      if (fresh !== selectedCard && JSON.stringify(fresh.media || {}) !== JSON.stringify(selectedCard.media || {})) setSelectedCard(fresh);
+      if (fresh !== selectedCard && JSON.stringify([fresh.media, fresh.emotie, fresh.emotie_bevestigd]) !== JSON.stringify([selectedCard.media, selectedCard.emotie, selectedCard.emotie_bevestigd])) setSelectedCard(fresh);
       return;
     }
-    if (activeTab !== 'inspreken') return;
+    if (activeTab !== 'inspreken' && activeTab !== 'emotie') return;
     const next = items[Math.min(inspreekIdxRef.current, items.length - 1)] || null;
     setSelectedCard(next); setEditMode(false); setEditForm(null);
   }, [items, loading]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -726,6 +735,10 @@ export function KennisbankV2Page({ onNavigate }) {
             count={voiceStats ? Object.values(voiceStats).reduce((a, s) => a + (s.niet || 0), 0) : 0}
             icon={<Mic className="w-3.5 h-3.5" />}
             label="In te spreken" color="#22d3ee" />
+          <TabButton id="emotie" active={activeTab === 'emotie'} onClick={setActiveTab}
+            count={emotieStats ? Object.values(emotieStats).reduce((a, s) => a + (s.niet || 0), 0) : 0}
+            icon={<Heart className="w-3.5 h-3.5" />}
+            label="Nog geen emotie" color="#f472b6" />
           <TabButton id="curatie" active={activeTab === 'curatie'} onClick={setActiveTab}
             icon={<Merge className="w-3.5 h-3.5" />}
             label="Tag-curatie" color="#f59e0b" />
@@ -746,30 +759,37 @@ export function KennisbankV2Page({ onNavigate }) {
               placeholder="Zoek op begrip..."
               className="w-full pl-8 pr-3 py-1.5 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-amber-500/50" />
           </div>
-          {activeTab !== 'inbox' && activeTab !== 'inspreken' && (
+          {activeTab !== 'inbox' && activeTab !== 'inspreken' && activeTab !== 'emotie' && (
             <button data-testid="kbv2-voice-filter" onClick={() => { setVoiceFilter(v => !v); setPage(0); }}
               title="Alleen kaarten zonder ingesproken woord (voor TTSS)"
               className={`flex items-center gap-1 text-[11px] px-2.5 py-1.5 rounded-lg border transition-colors ${voiceFilter ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 text-slate-400 hover:text-slate-200'}`}>
               🎙️ niet ingesproken{voiceStats?.[activeTab] ? ` (${voiceStats[activeTab].niet}/${voiceStats[activeTab].totaal})` : ''}
             </button>
           )}
-          {activeTab === 'inspreken' && (
+          {(activeTab === 'inspreken' || activeTab === 'emotie') && (() => {
+            const isEmo = activeTab === 'emotie';
+            const cur = isEmo ? emotieLade : inspreekLade;
+            const setCur = isEmo ? setEmotieLade : setInspreekLade;
+            const st = isEmo ? emotieStats : voiceStats;
+            const accent = isEmo ? 'bg-pink-500/20 border-pink-500/40 text-pink-200' : 'bg-cyan-500/20 border-cyan-500/40 text-cyan-200';
+            return (
             <div className="flex items-center gap-1.5 flex-wrap">
-              <button data-testid="kbv2-inspreek-lade-alle"
-                onClick={() => { setInspreekLade(''); setPage(0); }}
-                className={`px-2 py-1 rounded text-[10px] font-medium border ${inspreekLade === '' ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-200' : 'border-slate-700 text-slate-400'}`}>
+              <button data-testid={`kbv2-${activeTab}-lade-alle`}
+                onClick={() => { setCur(''); setPage(0); }}
+                className={`px-2 py-1 rounded text-[10px] font-medium border ${cur === '' ? accent : 'border-slate-700 text-slate-400'}`}>
                 alle lades
               </button>
               {LADES.map(l => (
-                <button key={l.id} data-testid={`kbv2-inspreek-lade-${l.id}`}
-                  onClick={() => { setInspreekLade(l.id); setPage(0); }}
-                  className={`px-2 py-1 rounded text-[10px] font-medium border ${inspreekLade === l.id ? 'border-current' : 'border-slate-700 text-slate-400'}`}
-                  style={inspreekLade === l.id ? { color: l.color, borderColor: l.color, backgroundColor: l.color + '15' } : {}}>
-                  {l.icon} {l.naam}{voiceStats?.[l.id] ? ` ${voiceStats[l.id].niet}/${voiceStats[l.id].totaal}` : ''}
+                <button key={l.id} data-testid={`kbv2-${activeTab}-lade-${l.id}`}
+                  onClick={() => { setCur(l.id); setPage(0); }}
+                  className={`px-2 py-1 rounded text-[10px] font-medium border ${cur === l.id ? 'border-current' : 'border-slate-700 text-slate-400'}`}
+                  style={cur === l.id ? { color: l.color, borderColor: l.color, backgroundColor: l.color + '15' } : {}}>
+                  {l.icon} {l.naam}{st?.[l.id] ? ` ${st[l.id].niet}/${st[l.id].totaal}` : ''}
                 </button>
               ))}
             </div>
-          )}
+            );
+          })()}
           {activeTab === 'inbox' && (
             <div className="flex items-center gap-1.5 flex-wrap">
               {/* Alle onbeantwoord (default) */}
@@ -822,7 +842,7 @@ export function KennisbankV2Page({ onNavigate }) {
           <div className="bg-slate-900/40 border border-slate-800 rounded-xl min-w-0 h-[75vh] flex flex-col overflow-hidden">
             <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between bg-slate-900/90 z-10 shrink-0">
               <p className="text-[11px] text-slate-400 font-medium">
-                {activeTab === 'inbox' ? 'Onbeantwoord' : activeTab === 'inspreken' ? '🎙️ Nog in te spreken' : LADES.find(l => l.id === activeTab)?.naam}
+                {activeTab === 'inbox' ? 'Onbeantwoord' : activeTab === 'inspreken' ? '🎙️ Nog in te spreken' : activeTab === 'emotie' ? '💗 Nog geen emotie' : LADES.find(l => l.id === activeTab)?.naam}
                 <span className="text-slate-500"> · {total} kaarten</span>
               </p>
               {totalPages > 1 && (
@@ -876,7 +896,7 @@ export function KennisbankV2Page({ onNavigate }) {
                 onCancelEdit={() => { setEditMode(false); setEditForm(null); }}
                 onClassify={classifyTo} onSaveEdit={saveEdit}
                 saving={savingClassify} inInbox={activeTab === 'inbox'}
-                currentLade={activeTab === 'inspreken' ? (selectedCard.lade || null) : activeTab}
+                currentLade={(activeTab === 'inspreken' || activeTab === 'emotie') ? (selectedCard.lade || null) : activeTab}
                 onMediaUpdated={() => { loadItems(); loadStats(); }}
                 onGenerateLLM={adminModeActive ? generateWithLLM : null} llmGenerating={llmGenerating}
                 onDeleteCard={() => setConfirmDelete(selectedCard)} />
@@ -1107,19 +1127,22 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
     setEditForm(f => ({ ...f, [path]: val }));
   };
 
-  // v6_kbv2_unify_001 — bereken 100%-status (laag1 + 5W + tags + media voice/image)
+  // v6_kbv2_unify_001 — 100%-status (laag1-4 + 5W + tags + foto)
+  // v14_emotie_veld_001 (Willem) — 100% = kaart klaar · +10% ingesproken · +10% emotie bevestigd = 120%
   const hasL1 = !!(card.lagen?.laag1 || '').trim();
   const hasL2 = !!(card.lagen?.laag2 || '').trim();
   const hasL3 = !!(card.lagen?.laag3 || '').trim();
   const hasL4 = !!(card.lagen?.laag4 || '').trim();
   const has5w = Object.values(card.ws5 || {}).some(v => (v || '').trim());
   const hasTags = (card.tags || []).length > 0;
-  const hasVoice = !!(card.media?.voice_url);
+  const hasVoice = !!(card.media?.voice_url) && (card.media?.voice_kind || 'spraak') === 'spraak';
+  const hasEmotie = !!card.emotie_bevestigd;
   const hasImage = (card.media?.image_urls || []).filter(Boolean).length > 0;
-  const filledCount = [hasL1, hasL2, hasL3, hasL4, has5w, hasTags, hasVoice, hasImage].filter(Boolean).length;
-  const totalFields = 8;
-  const pct = Math.round((filledCount / totalFields) * 100);
-  const isComplete = pct === 100;
+  const filledCount = [hasL1, hasL2, hasL3, hasL4, has5w, hasTags, hasImage].filter(Boolean).length;
+  const totalFields = 7;
+  const basePct = Math.round((filledCount / totalFields) * 100);
+  const isComplete = basePct === 100;
+  const pct = isComplete ? 100 + (hasVoice ? 10 : 0) + (hasEmotie ? 10 : 0) : basePct;
 
   return (
     <div className="space-y-3">
@@ -1143,8 +1166,8 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
             : pct >= 50
               ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
               : 'bg-slate-800/60 border-slate-700 text-slate-400'
-        }`}>
-          {isComplete ? '✓ 100% gekuurd' : `${pct}% (${filledCount}/${totalFields})`}
+        }`} title={isComplete ? `100% kaart${hasVoice ? ' · +10% ingesproken' : ''}${hasEmotie ? ' · +10% emotie' : ''}` : undefined}>
+          {isComplete ? (pct > 100 ? `✓ ${pct}%${hasVoice ? ' 🎙️' : ''}${hasEmotie ? ' 💗' : ''}` : '✓ 100% gekuurd') : `${pct}% (${filledCount}/${totalFields})`}
         </div>
         {!editMode ? (
           <div className="flex items-center gap-1.5 shrink-0 flex-wrap">
@@ -1192,6 +1215,7 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
       )}
 
       {/* v5_kbv2_media_001 — Voice & Image upload */}
+      <EmotieSection card={card} currentLade={inInbox ? 'inbox' : currentLade} onUpdated={onMediaUpdated} />
       <MediaSection card={card} currentLade={inInbox ? null : currentLade} onUpdated={onMediaUpdated} />
 
       {/* Needs checklist */}
@@ -1501,6 +1525,66 @@ function Stat({ label, value, color }) {
     <div className="bg-slate-800/40 rounded-lg p-2 border border-slate-800">
       <p className="text-[10px] text-slate-500 uppercase tracking-wide">{label}</p>
       <p className="text-xl font-bold mt-0.5" style={{ color }}>{value || 0}</p>
+    </div>
+  );
+}
+
+/**
+ * EmotieSection — v14_emotie_veld_001: 5 basis-emoties, bevestigen met één klik.
+ * 'neutraal' is een echte keuze. Suggestie (uit tag/importer) licht op maar telt niet.
+ */
+const EMOTIES = [
+  { id: 'blij', label: 'Blij', color: '#facc15' },
+  { id: 'boos', label: 'Boos', color: '#f87171' },
+  { id: 'bang', label: 'Bang', color: '#a78bfa' },
+  { id: 'bedroefd', label: 'Bedroefd', color: '#60a5fa' },
+  { id: 'neutraal', label: 'Neutraal', color: '#94a3b8' },
+];
+
+function EmotieSection({ card, currentLade, onUpdated }) {
+  const [saving, setSaving] = useState(false);
+  const confirmed = !!card.emotie_bevestigd;
+  const current = confirmed ? card.emotie : null;
+  const suggestie = !confirmed ? (card.emotie_suggestie || card.emotie || null) : null;
+
+  const kies = async (emotie) => {
+    if (saving || !currentLade) return;
+    setSaving(true);
+    try {
+      const r = await fetch(`${API}/api/kb/v2/edit`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ card_id: card.id, lade: currentLade, updates: { emotie }, user_id: 'user-001' }),
+      }).then(x => x.json());
+      if (!r.success) toast.error(r.message || 'Emotie opslaan mislukt');
+      else onUpdated && onUpdated();
+    } catch (e) { toast.error('Emotie fout: ' + e.message); }
+    setSaving(false);
+  };
+
+  return (
+    <div data-testid="kbv2-emotie-section" className="bg-slate-800/30 rounded-lg p-2 space-y-1.5">
+      <div className="flex items-center justify-between">
+        <p className="text-[10px] text-slate-500 uppercase tracking-wide">Emotie</p>
+        <span className="text-[10px] text-slate-500">
+          {confirmed ? <span className="text-pink-300">💗 bevestigd</span>
+            : suggestie ? <>suggestie: <span className="text-slate-300">{suggestie}</span> (nog niet bevestigd)</>
+            : 'nog niet gekozen'}
+        </span>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {EMOTIES.map(e => {
+          const active = current === e.id;
+          const hint = !confirmed && suggestie === e.id;
+          return (
+            <button key={e.id} data-testid={`kbv2-emotie-${e.id}`} onClick={() => kies(e.id)} disabled={saving}
+              className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors disabled:opacity-50 ${
+                active ? 'border-current' : hint ? 'border-dashed border-current opacity-80' : 'border-slate-700 text-slate-400 hover:text-slate-200'}`}
+              style={(active || hint) ? { color: e.color, borderColor: e.color, backgroundColor: active ? e.color + '22' : 'transparent' } : {}}>
+              {e.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

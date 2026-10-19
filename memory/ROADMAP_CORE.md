@@ -151,6 +151,20 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   user-schaal (1=beheerder); omrekening `user_gradatie <= 6 - gradatie_min`, `admin_only` eist gradatie 1.
   **Nog niet**: task_agent hangt nog NIET in de chat-flow (hybride stap 3 na action_intents + capabilities) en de
   concept-JSON is nog hard-coded (`_VERB_CONCEPTS`) — volgende sessie live-editable maken zoals intent_patterns.
+- **✅ 19-10 — Emotie-veld + tab "Nog geen emotie"** (`v14_emotie_veld_001`, Willems keuzes: 5 basis-emoties,
+  sub-emoties later leerbaar; `neutraal` is een echte keuze, geen default; schone reset van de detector):
+  kaartvelden `emotie` (blij/boos/bang/bedroefd/neutraal) + `emotie_bevestigd` + `emotie_bron` + `emotie_bevestigd_op`,
+  gezet via `/api/kb/v2/edit` updates `{emotie}` (`service._apply_emotie`). Routes `GET /api/kb/v2/emotie/missing|stats`
+  (`emotion_routes.py`). Tab in de Kennisbank met lade-chips/tellers; kaart verdwijnt na bevestigen, volgende opent.
+  EmotieSection op elke kaart; niet-bevestigde suggestie (uit emotie-tag of importer-veld) licht gestippeld op.
+  **Detector**: `emotion_service._load_learned_triggers` leest alleen nog bevestigde velden (neutraal = geen trigger);
+  tags en v1 `knowledge_base.json` tellen niet meer → geleerde woorden 1336 → 0 tot Willem bevestigt (statische
+  triggers blijven anker). Getest: bevestig `akkers`=blij → "ik ben zo blij met de akkers" bron `both`.
+  **Badge**: 100 % = laag1-4 + 5W + tags + foto (7 velden); +10 % ingesproken (alleen voice_kind spraak) · +10 % emotie
+  bevestigd → max **120 %**. (Stem telt niet meer mee in de 100 %-basis.)
+  **Open**: emotie-tags (`emotie-blij`, losse `emotie`+`blij`, 1529× `emotie`) staan nog op kaarten — doen niets meer
+  voor de detector; opruimen/hervalideren kan later (kern-kaarten sparen). Kennis-graph-ontruising (`emotie` uit tag-
+  overlap) + emotie-edges (escaleert_naar/verwant/tegenpool) = volgende stap "emotie-graph".
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

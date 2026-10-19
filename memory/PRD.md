@@ -1,5 +1,14 @@
 # Spark Core 2.0 — PRD
 
+> Actuele status, open punten en regels: zie `/app/memory/ROADMAP_CORE.md` en `/app/memory/CHANGELOG.md` (nieuwste bovenaan).
+
+## 2026-10-19 — TTSS/GTSS + inspraak-filter + diep-modus relaties (afgerond, getest als Emergent-account)
+- `ttss aan/uit` / `gtss aan/uit` chatcommando's; Spark spreekt met Willems eigen ingesproken kaarten, ontbrekende woorden stil overgeslagen. GTSS = placeholder voor kaart-geluiden.
+- `GET /api/kb/v2/voice/map`, `GET /api/kb/v2/voice/missing` (`modules/kb_v2/voice_routes.py`); KB-filter 🎙️ "niet ingesproken" per lade.
+- Diep-modus (`/api/spark/compose`) slaat nu relaties/personalia op (Maaike-bug). Roadkill Merch-tab uit Beheer.
+- Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen met Willem, dan pas bouwen.
+- Open/backlog: zie ROADMAP_CORE.md (Odroid fase 1, Berichtenbeheer-prototype, Onvolledige Kaarten (120, lagen/WS5), dashboard click-to-focus Agenda/Gesprekken, stts, zelfkennis-kaarten).
+
 
 ## Sessie 58 vervolg (2026-02-15) — Registry-fundering + Ghost-preventie + kb-hit-log
 

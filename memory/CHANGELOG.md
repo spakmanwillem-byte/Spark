@@ -1,5 +1,14 @@
 # Spark Core 2.0 — CHANGELOG
 
+## 2026-10-19 — TTSS/GTSS, inspraak-filter, diep-modus relaties, Merch-tab weg
+- `ttss aan/uit`: Spark spreekt met Willems eigen ingesproken KB-kaarten (`media.voice_url`), ontbrekende woorden worden stil overgeslagen (geen OpenAI-terugval). `gtss aan/uit` = placeholder voor kaart-geluiden (`media.extra_audio`).
+- Nieuwe routes `GET /api/kb/v2/voice/map` en `/voice/missing` (`modules/kb_v2/voice_routes.py`).
+- Kennisbank: 🎙️ "niet ingesproken"-filter per lade met teller (niet in Inbox).
+- BUGFIX diep-modus (`/api/spark/compose`) sloeg relaties/personalia niet op — nu wel (Maaike-bug). Oude uitspraken van Maaike zijn niet met terugwerkende kracht opgeslagen.
+- Roadkill Merch-tab verwijderd uit Beheer → Archief → Foto (blijft in Workspace → Winkel).
+- Testartefacten opgeruimd; alle 7353 lade-kaarten ≥5 tags.
+- Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen, dan pas bouwen.
+
 ## 2026-09-17 — KB-opschoning + 5e lade "Spark Games"
 - Orphan-skeletons opgeruimd: `voelenbegrip` (foute tag op 3 kaarten), `dnd` (legacy `v2/inbox.json` verplaatst). `rna` blijft (Willem vult in).
 - Nieuwe KB-lade `games` = 🎮 Spark Games (backend + UI-tab + graph-kleur). Orphan-scan slaat de lade over.

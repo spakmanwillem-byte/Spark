@@ -97,11 +97,51 @@
         "session_id": "default",
         "gesprek_nummer": 3
       }
+    },
+    {
+      "id": "conv-763e2a20",
+      "timestamp": "2026-10-19T08:43:03.794194+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Gebruiker",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ttss_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-a13bb377",
+      "timestamp": "2026-10-19T08:43:25.910595+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "user-4453ade3",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-4453ade3",
+        "gesprek_nummer": 5
+      }
     }
   ],
   "metadata": {
     "user_id": "user-4453ade3",
-    "total_conversations": 3,
-    "last_updated": "2026-10-19T08:38:53.732113+00:00"
+    "total_conversations": 5,
+    "last_updated": "2026-10-19T08:43:25.910595+00:00"
   }
 }

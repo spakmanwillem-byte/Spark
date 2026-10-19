@@ -69,7 +69,8 @@ async def voice_missing(lade: str = Query("", description="leeg = alle lades"),
         if q and q not in (c.get("begrip") or "").lower():
             continue
         missing.append({"id": c["id"], "begrip": c.get("begrip"), "lade": ld,
-                        "tags": (c.get("tags") or [])[:4], "laag1": ((c.get("lagen") or {}).get("laag1") or "")[:90]})
+                        "tags": (c.get("tags") or [])[:4],
+                        "lagen": {"laag1": ((c.get("lagen") or {}).get("laag1") or "")[:90]}})
     missing.sort(key=lambda x: (x["begrip"] or "").lower())
     return {"success": True, "total": len(missing), "offset": offset, "limit": limit,
             "kaarten": missing[offset:offset + limit], "per_lade": per_lade}

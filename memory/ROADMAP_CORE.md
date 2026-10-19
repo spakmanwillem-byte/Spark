@@ -103,19 +103,31 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 
 ---
 
-## 🐛 OPEN (Willem 19-10-2026) — gevonden bij inloggen als Maaike
-- **P1 Relatie-/personalia-extractie ontbreekt in diep-modus** — `/api/spark/compose` doet capability-checks maar
-  roept `relation_extraction_service.detect_and_save` en `personalia_extraction_service.detect_and_save` NIET aan
-  (alleen `/api/chat/message` doet dat). Maaike: "Willem Spakman is mijn broer", "Heidi Spakman is mijn moeder",
-  "mijn broer is 22 april 1977 geboren" → Spark zei "ik noteer…" maar sloeg niets op. Fix: beide extracties ook in
-  `compose_routes.compose()` vóór de LLM-call; `new_relations` in response. Verder: Spark mag "ik noteer" alleen
-  zeggen als er écht iets is opgeslagen (zelfde klasse als "is dat zo?"-fantoom van 18-10).
-- **P2 Roadkill Merch-tab dubbel** in Beheer → Instellingen → Archief → Foto; hoort alleen in Workspace → Archief →
-  Foto → Winkel (user-gebonden). Uit Beheer verwijderen.
-- **P2 `ttss` / `stts` (idee Willem)** — naast `tts aan/uit` een stand **ttss**: Spark spreekt met Willems eigen
-  opnames (kaart-audio) waar beschikbaar, rest via gewone TTS. Omgekeerd **stts**: eerst matchen tegen eigen
-  opnames, dan pas Whisper. Bouwt op `media.voice_url` + `data/system_archive/geluiden`. Start klein: ttss alleen
-  voor begrippen met audio.
+## ✅ AFGEROND 19-10-2026 (100-credit-batch, getest als Emergent-account)
+- **Relatie-/personalia-extractie in diep-modus** (`v14_compose_extraction_001`, `response_composer.py` r.184) —
+  `compose()` roept nu dezelfde `relation_extraction_service` + `personalia_extraction_service` aan als
+  `/api/chat/message`; `new_relations`/`personalia_saved` gaan mee in de response zodat "ik noteer" alleen klinkt
+  als er echt iets staat. Getest: "X is mijn broer" → `persons/<user>.json` + `_relationships.json` gevuld.
+  Testrelaties daarna verwijderd. **Maaike moet haar zinnen één keer opnieuw zeggen** — de oude zijn nooit opgeslagen.
+- **Roadkill Merch-tab uit Beheer** (`SystemArchive.js` r.323) — bestaat alleen nog in Workspace → Archief → Foto → Winkel.
+- **TTSS / GTSS** (`v14_ttss_001`) — zie blok hieronder.
+- **KB-filter 🎙️ niet ingesproken** (`kbv2-voice-filter`, per lade met teller bv. Voelen 554/566). Niet in Inbox-tab.
+- Testartefacten opgeruimd: `test-dupe-guard-15599c75` (weten), inbox-gapfills `testman/testbroer/emergentsen`.
+  → **alle 7353 lade-kaarten hebben ≥5 tags.**
+
+### 🎙️ TTSS / GTSS — hoe het werkt en wat de grenzen zijn
+- Chat-commando's: `ttss aan|uit`, `gtss aan|uit` (`action_intents_service._RX_TTSS`, acties `enable_ttss` enz.).
+  Cyaan modusbalk `ttss-mode-bar` boven de chat. Gewone `tts aan` blijft OpenAI-stem.
+- Backend `GET /api/kb/v2/voice/map` → `{woorden: begrip→voice_url, geluiden: begrip→extra_audio-url}`;
+  `GET /api/kb/v2/voice/missing?lade=&search=` → kaarten zonder inspraak + `per_lade`-tellers.
+  **Alleen `media.voice_url` telt als inspraak**; `media.extra_audio` (geüploade geluiden) is het GTSS-kanaal.
+- Frontend `speakOwnVoice()` (GesprekkenPage r.685): loopt per woord (+ 2-woord-begrippen) door het antwoord,
+  speelt de opname af als die er is, **skipt stil** als die ontbreekt. Geen terugval op OpenAI-TTS in ttss-stand.
+- **Grens**: nu 50 ingesproken woorden + 9 geluiden op 7353 kaarten → antwoorden klinken hakkelig/leeg. Dat is
+  by design: de filter laat zien wat nog ontbreekt. GTSS is een **placeholder**: speelt kaart-geluid als het
+  begrip in het antwoord staat; er is nog geen bewuste "bloeper → bloepergeluid"-koppeling.
+- Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
+  eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 
 ## 🎙️ Stem-dataset uit KB-inspraak (19-10-2026)
 - **Bug gefixt**: `EMERGENT_LLM_KEY` in `.env` was ongeldig → alle 47 kaart-inspraken (sinds maanden) stonden zonder

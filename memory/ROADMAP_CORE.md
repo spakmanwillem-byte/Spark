@@ -98,6 +98,20 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 
 ---
 
+## 🐛 OPEN (Willem 19-10-2026) — gevonden bij inloggen als Maaike
+- **P1 Relatie-/personalia-extractie ontbreekt in diep-modus** — `/api/spark/compose` doet capability-checks maar
+  roept `relation_extraction_service.detect_and_save` en `personalia_extraction_service.detect_and_save` NIET aan
+  (alleen `/api/chat/message` doet dat). Maaike: "Willem Spakman is mijn broer", "Heidi Spakman is mijn moeder",
+  "mijn broer is 22 april 1977 geboren" → Spark zei "ik noteer…" maar sloeg niets op. Fix: beide extracties ook in
+  `compose_routes.compose()` vóór de LLM-call; `new_relations` in response. Verder: Spark mag "ik noteer" alleen
+  zeggen als er écht iets is opgeslagen (zelfde klasse als "is dat zo?"-fantoom van 18-10).
+- **P2 Roadkill Merch-tab dubbel** in Beheer → Instellingen → Archief → Foto; hoort alleen in Workspace → Archief →
+  Foto → Winkel (user-gebonden). Uit Beheer verwijderen.
+- **P2 `ttss` / `stts` (idee Willem)** — naast `tts aan/uit` een stand **ttss**: Spark spreekt met Willems eigen
+  opnames (kaart-audio) waar beschikbaar, rest via gewone TTS. Omgekeerd **stts**: eerst matchen tegen eigen
+  opnames, dan pas Whisper. Bouwt op `media.voice_url` + `data/system_archive/geluiden`. Start klein: ttss alleen
+  voor begrippen met audio.
+
 ## 🎙️ Stem-dataset uit KB-inspraak (19-10-2026)
 - **Bug gefixt**: `EMERGENT_LLM_KEY` in `.env` was ongeldig → alle 47 kaart-inspraken (sinds maanden) stonden zonder
   transcript ("Transcriptie mislukt"). Nieuwe sleutel; alle 47 alsnog getranscribeerd (36 goed, 11 missers zoals

@@ -71,8 +71,6 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
     if (tagFilter) params.append('tag', tagFilter);
     // v5_kbv2_media_002 — bron-filter via tag-query
     if (sourceFilter === 'kbv2') params.append('tag', 'kbv2');
-    // v6_roadkill_merch_archive_001 — merch sub-tab filter
-    if (activeTab === 'foto' && fotoSubTab === 'merch') params.append('tag', 'roadkill_merch');
     try {
       const res = await fetch(`${API}/api/system-archive?${params}`).then(r => r.json());
       let arr = res.files || [];
@@ -100,8 +98,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       fd.append('category', activeTab); // forceer huidige tab
       // v6_subtab_upload_tag_001 — sub-tab → automatische tag
       if (activeTab === 'foto') {
-        if (fotoSubTab === 'merch') fd.append('tags', 'roadkill_merch');
-        else if (fotoSubTab === 'avatars') fd.append('tags', 'avatar');
+        if (fotoSubTab === 'avatars') fd.append('tags', 'avatar');
         else if (fotoSubTab === 'dnd') fd.append('tags', 'dnd');
         else fd.append('tags', 'algemeen');
       }
@@ -191,7 +188,6 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
             {uploading ? 'Bezig...' : (
               activeTab === 'foto'
                 ? `Upload ${
-                    fotoSubTab === 'merch' ? 'Roadkill Merch foto' :
                     fotoSubTab === 'avatars' ? 'Avatar foto' :
                     fotoSubTab === 'dnd' ? 'D&D foto' : 'Algemene foto'
                   }`
@@ -338,7 +334,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       {/* v13c_dnd_sloop_001 (sessie 54) — DnD Galerij verwijderd. */}
 
       {/* v5_kbv2_media_002 — bron sub-tabs binnen media-categorieën */}
-      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'merch')) && (
+      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
         <div className="flex items-center gap-1.5">
           {[
             { id: 'alle',  label: 'Alles' },

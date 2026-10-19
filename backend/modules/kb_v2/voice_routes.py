@@ -14,14 +14,20 @@ router = APIRouter(prefix="/kb/v2/voice", tags=["kb-v2-voice"])
 
 
 def _voice(c: Dict) -> Optional[str]:
+    """Alleen echte inspraak: voice_url met voice_kind 'spraak' (een als GELUID gemarkeerde opname telt niet)."""
     m = c.get("media")
-    return (m or {}).get("voice_url") if isinstance(m, dict) else None
+    if not isinstance(m, dict) or not m.get("voice_url"):
+        return None
+    return m["voice_url"] if (m.get("voice_kind") or "spraak") == "spraak" else None
 
 
 def _sound(c: Dict) -> Optional[str]:
     m = c.get("media")
-    extras = (m or {}).get("extra_audio") if isinstance(m, dict) else None
-    for e in extras or []:
+    if not isinstance(m, dict):
+        return None
+    if m.get("voice_url") and (m.get("voice_kind") or "spraak") == "geluid":
+        return m["voice_url"]
+    for e in m.get("extra_audio") or []:
         if e.get("url"):
             return e["url"]
     return None
@@ -68,9 +74,9 @@ async def voice_missing(lade: str = Query("", description="leeg = alle lades"),
             continue
         if q and q not in (c.get("begrip") or "").lower():
             continue
-        missing.append({"id": c["id"], "begrip": c.get("begrip"), "lade": ld,
-                        "tags": (c.get("tags") or [])[:4],
-                        "lagen": {"laag1": ((c.get("lagen") or {}).get("laag1") or "")[:90]}})
-    missing.sort(key=lambda x: (x["begrip"] or "").lower())
+        full = {k: v for k, v in c.items() if k != "_lade"}
+        full["lade"] = ld
+        missing.append(full)
+    missing.sort(key=lambda x: (x.get("begrip") or "").lower())
     return {"success": True, "total": len(missing), "offset": offset, "limit": limit,
             "kaarten": missing[offset:offset + limit], "per_lade": per_lade}

@@ -7,6 +7,7 @@
 - BUGFIX diep-modus (`/api/spark/compose`) sloeg relaties/personalia niet op — nu wel (Maaike-bug). Oude uitspraken van Maaike zijn niet met terugwerkende kracht opgeslagen.
 - Roadkill Merch-tab verwijderd uit Beheer → Archief → Foto (blijft in Workspace → Winkel).
 - Testartefacten opgeruimd; alle 7353 lade-kaarten ≥5 tags.
+- Kennisbank-tab **In te spreken**: alle lades, lade-chips met tellers, kaart verdwijnt na inspreken + auto-volgende. GELUID-opnames tellen niet als inspraak. Merch: resterende dode code uit `SystemArchive.js`.
 - Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen, dan pas bouwen.
 
 ## 2026-09-17 — KB-opschoning + 5e lade "Spark Games"

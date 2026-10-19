@@ -1540,8 +1540,8 @@
         "vertrouwen": 0.4,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-06T23:36:23.669412+00:00",
-        "laatst_bewerkt_op": "2026-09-17T07:47:23.905015+00:00",
-        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T09:09:17.958821+00:00",
+        "laatst_bewerkt_door": "user-4453ade3",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -1554,6 +1554,70 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-09-17T07:47:24.035279+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:08:08.821133+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:08:08.832593+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:08:12.177068+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:08:12.188626+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:08:22.219030+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:08:22.230702+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T09:09:18.088344+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T09:09:18.100179+00:00",
             "result": {
               "n_found": 10,
               "top_overlap": 4

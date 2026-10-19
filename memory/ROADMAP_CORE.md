@@ -126,6 +126,15 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
 - **Grens**: nu 50 ingesproken woorden + 9 geluiden op 7353 kaarten → antwoorden klinken hakkelig/leeg. Dat is
   by design: de filter laat zien wat nog ontbreekt. GTSS is een **placeholder**: speelt kaart-geluid als het
   begrip in het antwoord staat; er is nog geen bewuste "bloeper → bloepergeluid"-koppeling.
+- **Tab "In te spreken"** (`v14_inspreek_tab_001`, 19-10): eigen tab in de lade-rij, alle lades + lade-chips met tellers,
+  kaart verdwijnt na inspreken en de volgende kaart wordt automatisch geopend. Alleen `voice_kind='spraak'` telt;
+  een als GELUID gemarkeerde opname telt niet als inspraak (gaat naar het gtss-kanaal). Merch: ook dode code weg.
+- **Emotie-veld (onderzoek, niet bouwen; Willem: "goed als is")**: top-level `emotie` bestaat al op 3631 kaarten
+  (3553 neutraal) via txt-importer, maar `emotion_service` leest alleen tags (1336 geleerd, 1147 neutraal). Dode data.
+  Willems gedachte: emotie als eigen graph-laag naast de verbanden-graph, los van de kaart → minder ruis. Parkeren.
+- **ttss-output als sample opslaan (onderzoek)**: zinloos voor eigen opnames (zelfde audio). Wél mogelijk: per kaart
+  één keer OpenAI-TTS genereren in apart veld `media.tts_url` (nooit `voice_url`) als bootstrap-stem. Risico: ~7353
+  calls, ~200 MB, twee stemmen door elkaar. Niet gebouwd; wacht op akkoord.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

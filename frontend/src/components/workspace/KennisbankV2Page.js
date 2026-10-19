@@ -49,6 +49,9 @@ export function KennisbankV2Page({ onNavigate }) {
   const [search, setSearch] = useState('');
   const [voiceFilter, setVoiceFilter] = useState(false); // v14_ttss_001 — alleen niet-ingesproken kaarten
   const [voiceStats, setVoiceStats] = useState(null);
+  // v14_inspreek_tab_001 — eigen tab "In te spreken": alle lades, kaart verdwijnt na inspreken
+  const [inspreekLade, setInspreekLade] = useState('');
+  const inspreekIdxRef = useRef(0);
   const [reasonFilter, setReasonFilter] = useState('');
   // v6_kbv2_priority_001 — Top 50 prio modus (blijft bestaan, maar niet meer als button;
   // wordt gedreven door sortMode==='hits_desc' via de dropdown hieronder)
@@ -87,6 +90,8 @@ export function KennisbankV2Page({ onNavigate }) {
     try {
       const r = await fetch(`${API}/api/kb/v2/stats`).then(x => x.json());
       setStats(r);
+      const v = await fetch(`${API}/api/kb/v2/voice/missing?limit=1`).then(x => x.json());
+      if (v.per_lade) setVoiceStats(v.per_lade);
     } catch {}
   }, []);
 
@@ -111,6 +116,9 @@ export function KennisbankV2Page({ onNavigate }) {
         if (reasonFilter) qs.append('reason', reasonFilter);
         if (sortMode && sortMode !== 'recent') qs.append('sort', sortMode);
         url = `${API}/api/kb/v2/inbox?${qs}`;
+      } else if (activeTab === 'inspreken') {
+        if (inspreekLade) qs.append('lade', inspreekLade);
+        url = `${API}/api/kb/v2/voice/missing?${qs}`;
       } else if (voiceFilter) {
         qs.append('lade', activeTab);
         url = `${API}/api/kb/v2/voice/missing?${qs}`;
@@ -132,7 +140,7 @@ export function KennisbankV2Page({ onNavigate }) {
       setItems([]); setTotal(0);
     }
     setLoading(false);
-  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode, voiceFilter]);
+  }, [activeTab, page, search, reasonFilter, incompleteMode, sortMode, voiceFilter, inspreekLade]);
 
   useEffect(() => { loadStats(); }, [loadStats]);
   useEffect(() => { loadItems(); }, [loadItems]);
@@ -140,7 +148,23 @@ export function KennisbankV2Page({ onNavigate }) {
   // Reset page on tab change
   useEffect(() => { setPage(0); setReasonFilter(''); setPriorityMode(false); setIncompleteMode(false); }, [activeTab]);
 
+  // v14_inspreek_tab_001 — houd de geopende kaart in sync met de lijst: na een media-update
+  // de verse versie tonen; in de inspreek-tab springt hij door naar de volgende als de kaart
+  // uit de lijst verdwenen is (= ingesproken).
+  useEffect(() => {
+    if (loading || !selectedCard || creatingNew) return;
+    const fresh = items.find(c => c.id === selectedCard.id);
+    if (fresh) {
+      if (fresh !== selectedCard && JSON.stringify(fresh.media || {}) !== JSON.stringify(selectedCard.media || {})) setSelectedCard(fresh);
+      return;
+    }
+    if (activeTab !== 'inspreken') return;
+    const next = items[Math.min(inspreekIdxRef.current, items.length - 1)] || null;
+    setSelectedCard(next); setEditMode(false); setEditForm(null);
+  }, [items, loading]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const openCard = (card) => {
+    inspreekIdxRef.current = Math.max(0, items.findIndex(c => c.id === card.id));
     setSelectedCard(card);
     setEditMode(false);
     setEditForm(null);
@@ -698,6 +722,10 @@ export function KennisbankV2Page({ onNavigate }) {
               count={stats?.lades?.[l.id]?.count || 0} iconEmoji={l.icon}
               label={l.naam} color={l.color} />
           ))}
+          <TabButton id="inspreken" active={activeTab === 'inspreken'} onClick={setActiveTab}
+            count={voiceStats ? Object.values(voiceStats).reduce((a, s) => a + (s.niet || 0), 0) : 0}
+            icon={<Mic className="w-3.5 h-3.5" />}
+            label="In te spreken" color="#22d3ee" />
           <TabButton id="curatie" active={activeTab === 'curatie'} onClick={setActiveTab}
             icon={<Merge className="w-3.5 h-3.5" />}
             label="Tag-curatie" color="#f59e0b" />
@@ -718,12 +746,29 @@ export function KennisbankV2Page({ onNavigate }) {
               placeholder="Zoek op begrip..."
               className="w-full pl-8 pr-3 py-1.5 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-amber-500/50" />
           </div>
-          {activeTab !== 'inbox' && (
+          {activeTab !== 'inbox' && activeTab !== 'inspreken' && (
             <button data-testid="kbv2-voice-filter" onClick={() => { setVoiceFilter(v => !v); setPage(0); }}
               title="Alleen kaarten zonder ingesproken woord (voor TTSS)"
               className={`flex items-center gap-1 text-[11px] px-2.5 py-1.5 rounded-lg border transition-colors ${voiceFilter ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 text-slate-400 hover:text-slate-200'}`}>
               🎙️ niet ingesproken{voiceStats?.[activeTab] ? ` (${voiceStats[activeTab].niet}/${voiceStats[activeTab].totaal})` : ''}
             </button>
+          )}
+          {activeTab === 'inspreken' && (
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <button data-testid="kbv2-inspreek-lade-alle"
+                onClick={() => { setInspreekLade(''); setPage(0); }}
+                className={`px-2 py-1 rounded text-[10px] font-medium border ${inspreekLade === '' ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-200' : 'border-slate-700 text-slate-400'}`}>
+                alle lades
+              </button>
+              {LADES.map(l => (
+                <button key={l.id} data-testid={`kbv2-inspreek-lade-${l.id}`}
+                  onClick={() => { setInspreekLade(l.id); setPage(0); }}
+                  className={`px-2 py-1 rounded text-[10px] font-medium border ${inspreekLade === l.id ? 'border-current' : 'border-slate-700 text-slate-400'}`}
+                  style={inspreekLade === l.id ? { color: l.color, borderColor: l.color, backgroundColor: l.color + '15' } : {}}>
+                  {l.icon} {l.naam}{voiceStats?.[l.id] ? ` ${voiceStats[l.id].niet}/${voiceStats[l.id].totaal}` : ''}
+                </button>
+              ))}
+            </div>
           )}
           {activeTab === 'inbox' && (
             <div className="flex items-center gap-1.5 flex-wrap">
@@ -777,7 +822,7 @@ export function KennisbankV2Page({ onNavigate }) {
           <div className="bg-slate-900/40 border border-slate-800 rounded-xl min-w-0 h-[75vh] flex flex-col overflow-hidden">
             <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between bg-slate-900/90 z-10 shrink-0">
               <p className="text-[11px] text-slate-400 font-medium">
-                {activeTab === 'inbox' ? 'Onbeantwoord' : LADES.find(l => l.id === activeTab)?.naam}
+                {activeTab === 'inbox' ? 'Onbeantwoord' : activeTab === 'inspreken' ? '🎙️ Nog in te spreken' : LADES.find(l => l.id === activeTab)?.naam}
                 <span className="text-slate-500"> · {total} kaarten</span>
               </p>
               {totalPages > 1 && (
@@ -830,8 +875,9 @@ export function KennisbankV2Page({ onNavigate }) {
                 setEditForm={setEditForm} onStartEdit={startEdit}
                 onCancelEdit={() => { setEditMode(false); setEditForm(null); }}
                 onClassify={classifyTo} onSaveEdit={saveEdit}
-                saving={savingClassify} inInbox={activeTab === 'inbox'} currentLade={activeTab}
-                onMediaUpdated={loadItems}
+                saving={savingClassify} inInbox={activeTab === 'inbox'}
+                currentLade={activeTab === 'inspreken' ? (selectedCard.lade || null) : activeTab}
+                onMediaUpdated={() => { loadItems(); loadStats(); }}
                 onGenerateLLM={adminModeActive ? generateWithLLM : null} llmGenerating={llmGenerating}
                 onDeleteCard={() => setConfirmDelete(selectedCard)} />
             )}

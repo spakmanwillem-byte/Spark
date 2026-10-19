@@ -8,6 +8,8 @@
 - Roadkill Merch-tab verwijderd uit Beheer → Archief → Foto (blijft in Workspace → Winkel).
 - Testartefacten opgeruimd; alle 7353 lade-kaarten ≥5 tags.
 - Kennisbank-tab **In te spreken**: alle lades, lade-chips met tellers, kaart verdwijnt na inspreken + auto-volgende. GELUID-opnames tellen niet als inspraak. Merch: resterende dode code uit `SystemArchive.js`.
+- Command-registry: 23 dode entries → `placeholders` (geen 404's meer), 58 live met `status`. `task_agent.resolve/resolve_text/execute` gevuld (werkwoord-concepten, gradatie-check, interne dispatch, audit-log). Nog niet in de chat-flow.
+- Onderzoek emotie-graph + commands → `ONDERZOEK_EMOTIE_GRAPH_COMMANDS.md`.
 - Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen, dan pas bouwen.
 
 ## 2026-09-17 — KB-opschoning + 5e lade "Spark Games"

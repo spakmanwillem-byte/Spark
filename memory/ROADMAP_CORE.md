@@ -139,6 +139,18 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   en `/app/memory/COMMANDS_OVERZICHT_19-10.md`. Kern: `emotie`-tag = ~25 % ruis in kennis-graph; emotie-veld bestaat al
   (3631 kaarten) maar wordt niet gelezen; registry 81 = 58 live / 23 placeholder; task_agent.resolve/execute zijn leeg.
   Punt 3 (tab "Nog geen emotie", 120 %) wacht op akkoord punt 1.
+- **✅ 19-10 — Registry opgeruimd + task_agent-basis** (`v14_task_agent_basis_001`):
+  `command_registry.json`: 58 live (`status: live`) · 23 verplaatst naar `placeholders` (route bestaat niet; wens
+  bewaard, 8 ervan werken via spark_capabilities laag B). Backup `.bak_placeholders_*`. Stats hersteld.
+  `task_agent.resolve(tags, methods)` → beste live command via matcher; `resolve_text(zin)` voegt losse woorden,
+  stam (-s/-en) en **werkwoord-concepten** toe: verwijderen = verwijder/delete/wis/ruim op/gooi weg → alleen DELETE-
+  commands; aanmaken → POST; zonder actie-werkwoord → alleen GET. Getest: "verwijder die bug" / "ruim die notitie op"
+  / "delete die taak" → juiste delete-command. `execute(cmd_id, params, user_id)` → gradatie-check, required-params,
+  `{user_id}` auto in pad, interne ASGI-dispatch (geen netwerk), audit-log `task_agent.jsonl`; placeholders → geweigerd.
+  **AANNAME te bevestigen door Willem**: registry-schaal `gradatie_min` 1=iedereen…5=beheer is omgekeerd aan de
+  user-schaal (1=beheerder); omrekening `user_gradatie <= 6 - gradatie_min`, `admin_only` eist gradatie 1.
+  **Nog niet**: task_agent hangt nog NIET in de chat-flow (hybride stap 3 na action_intents + capabilities) en de
+  concept-JSON is nog hard-coded (`_VERB_CONCEPTS`) — volgende sessie live-editable maken zoals intent_patterns.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

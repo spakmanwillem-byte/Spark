@@ -1,40 +1,8 @@
 {
   "_arch_ref": "v6_command_registry_001 — master mapping van app-endpoints naar intent_tags (donderdag-fundering)",
   "version": "v1",
-  "last_updated": "2026-09-17T05:54:10.952174+00:00",
+  "last_updated": "2026-10-19T09:36:34.806894+00:00",
   "commands": [
-    {
-      "id": "cap_tellen_gebruikers",
-      "path": "/api/users/count",
-      "method": "GET",
-      "intent_tags": [
-        "tellen",
-        "gebruikers",
-        "leden",
-        "aantal",
-        "overzicht"
-      ],
-      "required_params": [],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_tellen_gebruikers"
-    },
-    {
-      "id": "cap_tellen_bestanden",
-      "path": "/api/system-archive/count",
-      "method": "GET",
-      "intent_tags": [
-        "tellen",
-        "bestanden",
-        "archief",
-        "media",
-        "aantal"
-      ],
-      "required_params": [],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_tellen_bestanden"
-    },
     {
       "id": "cap_taken_lijst",
       "path": "/api/notes/tasks",
@@ -51,241 +19,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_taken_lijst"
-    },
-    {
-      "id": "cap_winst_verlies",
-      "path": "/api/trade/stats",
-      "method": "GET",
-      "intent_tags": [
-        "winst",
-        "verlies",
-        "pnl",
-        "trade",
-        "resultaat",
-        "overzicht"
-      ],
-      "required_params": [],
-      "gradatie_min": 2,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_winst_verlies"
-    },
-    {
-      "id": "cap_spark_saldo",
-      "path": "/api/wallet/spark/balance",
-      "method": "GET",
-      "intent_tags": [
-        "saldo",
-        "spark",
-        "geld",
-        "balance",
-        "kasboek"
-      ],
-      "required_params": [],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_spark_saldo"
-    },
-    {
-      "id": "cap_gesprek_lezen",
-      "path": "/api/chat/recap",
-      "method": "GET",
-      "intent_tags": [
-        "gesprek",
-        "lezen",
-        "terugkijken",
-        "log",
-        "geschiedenis",
-        "wat besproken"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 3,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_gesprek_lezen"
-    },
-    {
-      "id": "cap_toon_afbeelding",
-      "path": "/api/system-archive/list?type=image",
-      "method": "GET",
-      "intent_tags": [
-        "afbeelding",
-        "foto",
-        "plaatje",
-        "tonen",
-        "archief"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_toon_afbeelding"
-    },
-    {
-      "id": "cap_speel_geluid",
-      "path": "/api/system-archive/list?type=audio",
-      "method": "GET",
-      "intent_tags": [
-        "geluid",
-        "audio",
-        "afspelen",
-        "muziek",
-        "stem"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_speel_geluid"
-    },
-    {
-      "id": "agenda_list",
-      "path": "/api/agenda/items",
-      "method": "GET",
-      "intent_tags": [
-        "agenda",
-        "afspraak",
-        "planning",
-        "tijd",
-        "bekijken",
-        "vandaag",
-        "morgen"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "agenda_create",
-      "path": "/api/agenda/items",
-      "method": "POST",
-      "intent_tags": [
-        "agenda",
-        "afspraak",
-        "toevoegen",
-        "plannen",
-        "nieuw"
-      ],
-      "required_params": [
-        "user_id",
-        "titel",
-        "datum"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "exploreren-uitbreiden"
-    },
-    {
-      "id": "notes_create",
-      "path": "/api/notes",
-      "method": "POST",
-      "intent_tags": [
-        "notitie",
-        "noteren",
-        "schrijven",
-        "opslaan",
-        "memo",
-        "onthouden"
-      ],
-      "required_params": [
-        "user_id",
-        "title",
-        "content"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "wallet_topup",
-      "path": "/api/wallet/tikkie",
-      "method": "POST",
-      "intent_tags": [
-        "geld",
-        "toevoegen",
-        "tikkie",
-        "opwaarderen",
-        "topup",
-        "wallet"
-      ],
-      "required_params": [
-        "user_id",
-        "amount_eur"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "wallet_transactions",
-      "path": "/api/wallet/transactions",
-      "method": "GET",
-      "intent_tags": [
-        "transacties",
-        "wallet",
-        "geschiedenis",
-        "uitgaven",
-        "bekijken"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "trade_watchlist",
-      "path": "/api/trade/watchlist",
-      "method": "GET",
-      "intent_tags": [
-        "trade",
-        "watchlist",
-        "coins",
-        "prijs",
-        "monitor",
-        "crypto"
-      ],
-      "required_params": [],
-      "gradatie_min": 2,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "trade_buy",
-      "path": "/api/trade/buy",
-      "method": "POST",
-      "intent_tags": [
-        "kopen",
-        "buy",
-        "trade",
-        "order",
-        "crypto"
-      ],
-      "required_params": [
-        "market",
-        "amount_eur"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "exploreren-uitbreiden"
-    },
-    {
-      "id": "trade_sell",
-      "path": "/api/trade/sell",
-      "method": "POST",
-      "intent_tags": [
-        "verkopen",
-        "sell",
-        "trade",
-        "order",
-        "crypto"
-      ],
-      "required_params": [
-        "market",
-        "amount_coin"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "exploreren-uitbreiden"
+      "source": "capability_handler_service._handle_taken_lijst",
+      "status": "live"
     },
     {
       "id": "kbv2_search",
@@ -303,7 +38,8 @@
         "begrip"
       ],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "kbv2_audit",
@@ -318,7 +54,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "bijbel_lookup",
@@ -334,7 +71,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "vertragen-ondersteunen"
+      "behavior_class_hint": "vertragen-ondersteunen",
+      "status": "live"
     },
     {
       "id": "spark_disclaimer",
@@ -349,7 +87,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "spark_identity",
@@ -364,7 +103,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "emotion_pipeline_run",
@@ -381,90 +121,8 @@
         "text"
       ],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "achievements_list",
-      "path": "/api/achievements/{user_id}",
-      "method": "GET",
-      "intent_tags": [
-        "achievement",
-        "milestone",
-        "xp",
-        "behaald",
-        "voortgang"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "exploreren-uitbreiden"
-    },
-    {
-      "id": "leaderboard",
-      "path": "/api/leaderboard",
-      "method": "GET",
-      "intent_tags": [
-        "leaderboard",
-        "ranglijst",
-        "podium",
-        "top",
-        "score"
-      ],
-      "required_params": [],
-      "gradatie_min": 1,
-      "behavior_class_hint": "exploreren-uitbreiden"
-    },
-    {
-      "id": "community_chat_send",
-      "path": "/api/community/messages",
-      "method": "POST",
-      "intent_tags": [
-        "community",
-        "chat",
-        "bericht",
-        "groep",
-        "post"
-      ],
-      "required_params": [
-        "user_id",
-        "text"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "exploreren-uitbreiden"
-    },
-    {
-      "id": "diary_entry_create",
-      "path": "/api/dagboek/entries",
-      "method": "POST",
-      "intent_tags": [
-        "dagboek",
-        "entry",
-        "schrijven",
-        "reflectie",
-        "mood"
-      ],
-      "required_params": [
-        "user_id",
-        "content"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "vertragen-ondersteunen"
-    },
-    {
-      "id": "boekhouder_overview",
-      "path": "/api/boekhouder/transactions",
-      "method": "GET",
-      "intent_tags": [
-        "kasboek",
-        "boekhouding",
-        "transacties",
-        "overzicht",
-        "financien"
-      ],
-      "required_params": [],
-      "gradatie_min": 2,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "winkelstraat_list",
@@ -479,7 +137,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "winkelstraat_create",
@@ -498,7 +157,8 @@
         "voorwaarden_geaccepteerd"
       ],
       "gradatie_min": 4,
-      "behavior_class_hint": "exploreren-uitbreiden"
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "live"
     },
     {
       "id": "help_per_gradatie",
@@ -512,25 +172,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
-    },
-    {
-      "id": "navigate_to_tab",
-      "path": "/api/intent-registry/navigate",
-      "method": "POST",
-      "intent_tags": [
-        "navigate",
-        "navigate_open",
-        "tab",
-        "pagina",
-        "winkel",
-        "winkelstraat"
-      ],
-      "required_params": [
-        "target"
-      ],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "shop_voorwaarden",
@@ -545,7 +188,8 @@
       ],
       "required_params": [],
       "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel"
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "live"
     },
     {
       "id": "cap_kasboek_overzicht",
@@ -563,42 +207,8 @@
       "required_params": [],
       "gradatie_min": 2,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_kasboek_overzicht"
-    },
-    {
-      "id": "cap_agenda_vandaag",
-      "naam": "Agenda van vandaag",
-      "path": "/api/agenda/today",
-      "method": "GET",
-      "intent_tags": [
-        "agenda",
-        "vandaag",
-        "afspraken",
-        "planning"
-      ],
-      "required_params": [
-        "user_id"
-      ],
-      "gradatie_min": 5,
-      "behavior_class_hint": "informatief-persoonlijk",
-      "source": "capability_handler_service._handle_agenda_vandaag"
-    },
-    {
-      "id": "cap_kennis_inbox_status",
-      "naam": "Kennis-inbox status",
-      "path": "/api/kb/v2/inbox/stats",
-      "method": "GET",
-      "intent_tags": [
-        "inbox",
-        "kennis",
-        "wachten",
-        "classificeer",
-        "kaarten"
-      ],
-      "required_params": [],
-      "gradatie_min": 1,
-      "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_kennis_inbox_status"
+      "source": "capability_handler_service._handle_kasboek_overzicht",
+      "status": "live"
     },
     {
       "id": "cap_bots_status",
@@ -617,7 +227,8 @@
       "required_params": [],
       "gradatie_min": 1,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "capability_handler_service._handle_bots_status"
+      "source": "capability_handler_service._handle_bots_status",
+      "status": "live"
     },
     {
       "id": "cap_audit_health",
@@ -635,7 +246,8 @@
       "required_params": [],
       "gradatie_min": 1,
       "behavior_class_hint": "diagnostisch",
-      "source": "capability_handler_service._handle_audit_health"
+      "source": "capability_handler_service._handle_audit_health",
+      "status": "live"
     },
     {
       "id": "cap_kb_normalize_apostrophes",
@@ -657,7 +269,8 @@
       "admin_only": true,
       "behavior_class_hint": "informatief-functioneel",
       "source": "kb_v2.routes.admin_normalize_apostrophes",
-      "description": "Vervang unicode-apostrofen (’‘´`‛ʼ) door rechte ASCII in alle KB-tags, begrippen en index-keys. Voorkomt ghost-kaarten (foto’s vs foto's)."
+      "description": "Vervang unicode-apostrofen (’‘´`‛ʼ) door rechte ASCII in alle KB-tags, begrippen en index-keys. Voorkomt ghost-kaarten (foto’s vs foto's).",
+      "status": "live"
     },
     {
       "id": "cap_agenda_events_list",
@@ -676,7 +289,8 @@
       ],
       "gradatie_min": 2,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "agenda.routes.get_events"
+      "source": "agenda.routes.get_events",
+      "status": "live"
     },
     {
       "id": "cap_agenda_event_create",
@@ -695,7 +309,8 @@
       ],
       "gradatie_min": 2,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "agenda.routes.create_event"
+      "source": "agenda.routes.create_event",
+      "status": "live"
     },
     {
       "id": "cap_agenda_event_update",
@@ -714,7 +329,8 @@
       ],
       "gradatie_min": 2,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "agenda.routes.update_event"
+      "source": "agenda.routes.update_event",
+      "status": "live"
     },
     {
       "id": "cap_agenda_event_delete",
@@ -733,7 +349,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "agenda.routes.delete_event"
+      "source": "agenda.routes.delete_event",
+      "status": "live"
     },
     {
       "id": "cap_agenda_archive_list",
@@ -751,7 +368,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "agenda.routes.get_archive"
+      "source": "agenda.routes.get_archive",
+      "status": "live"
     },
     {
       "id": "cap_agenda_archive_month",
@@ -770,7 +388,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "agenda.routes.get_archive_month"
+      "source": "agenda.routes.get_archive_month",
+      "status": "live"
     },
     {
       "id": "cap_agenda_archive_now_all",
@@ -787,7 +406,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "agenda.routes.archive_now_all"
+      "source": "agenda.routes.archive_now_all",
+      "status": "live"
     },
     {
       "id": "cap_agenda_archive_now_user",
@@ -804,7 +424,8 @@
       ],
       "gradatie_min": 4,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "agenda.routes.archive_now_user"
+      "source": "agenda.routes.archive_now_user",
+      "status": "live"
     },
     {
       "id": "cap_agenda_uren_rapport",
@@ -823,7 +444,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "agenda.routes.uren_rapport"
+      "source": "agenda.routes.uren_rapport",
+      "status": "live"
     },
     {
       "id": "cap_notes_list_all",
@@ -835,12 +457,14 @@
         "notes",
         "lijst",
         "bekijken",
-        "overzicht"
+        "overzicht",
+        "notitie"
       ],
       "required_params": [],
       "gradatie_min": 2,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "notes.routes.list_all"
+      "source": "notes.routes.list_all",
+      "status": "live"
     },
     {
       "id": "cap_notes_create",
@@ -857,7 +481,8 @@
       "required_params": [],
       "gradatie_min": 2,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "notes.routes.create_note"
+      "source": "notes.routes.create_note",
+      "status": "live"
     },
     {
       "id": "cap_notes_update",
@@ -874,7 +499,8 @@
       ],
       "gradatie_min": 2,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "notes.routes.update_note"
+      "source": "notes.routes.update_note",
+      "status": "live"
     },
     {
       "id": "cap_notes_delete",
@@ -890,7 +516,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "notes.routes.delete_note"
+      "source": "notes.routes.delete_note",
+      "status": "live"
     },
     {
       "id": "cap_notes_task_create",
@@ -907,7 +534,8 @@
       "required_params": [],
       "gradatie_min": 2,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "notes.routes.create_task"
+      "source": "notes.routes.create_task",
+      "status": "live"
     },
     {
       "id": "cap_notes_task_update",
@@ -925,7 +553,8 @@
       ],
       "gradatie_min": 2,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "notes.routes.update_task"
+      "source": "notes.routes.update_task",
+      "status": "live"
     },
     {
       "id": "cap_notes_task_delete",
@@ -942,7 +571,8 @@
       ],
       "gradatie_min": 3,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "notes.routes.delete_task"
+      "source": "notes.routes.delete_task",
+      "status": "live"
     },
     {
       "id": "cap_bug_report",
@@ -959,7 +589,8 @@
       "required_params": [],
       "gradatie_min": 1,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "bugs.routes.create_bug"
+      "source": "bugs.routes.create_bug",
+      "status": "live"
     },
     {
       "id": "cap_bug_list_all",
@@ -976,7 +607,8 @@
       "gradatie_min": 4,
       "admin_only": true,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "bugs.routes.list_all"
+      "source": "bugs.routes.list_all",
+      "status": "live"
     },
     {
       "id": "cap_bug_mine",
@@ -992,7 +624,8 @@
       "required_params": [],
       "gradatie_min": 2,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "bugs.routes.mine"
+      "source": "bugs.routes.mine",
+      "status": "live"
     },
     {
       "id": "cap_bug_status_update",
@@ -1010,7 +643,8 @@
       "gradatie_min": 4,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "bugs.routes.update_status"
+      "source": "bugs.routes.update_status",
+      "status": "live"
     },
     {
       "id": "cap_bug_delete",
@@ -1027,7 +661,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "bugs.routes.delete_bug"
+      "source": "bugs.routes.delete_bug",
+      "status": "live"
     },
     {
       "id": "cap_help_for_viewer",
@@ -1043,7 +678,8 @@
       "required_params": [],
       "gradatie_min": 1,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "help.routes.for_viewer"
+      "source": "help.routes.for_viewer",
+      "status": "live"
     },
     {
       "id": "cap_help_find",
@@ -1059,7 +695,8 @@
       "required_params": [],
       "gradatie_min": 1,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "help.routes.find_topic"
+      "source": "help.routes.find_topic",
+      "status": "live"
     },
     {
       "id": "cap_help_topic",
@@ -1077,7 +714,8 @@
       ],
       "gradatie_min": 1,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "help.routes.get_topic"
+      "source": "help.routes.get_topic",
+      "status": "live"
     },
     {
       "id": "cap_triggers_all",
@@ -1094,7 +732,8 @@
       "gradatie_min": 4,
       "admin_only": true,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "triggers.routes.all_triggers"
+      "source": "triggers.routes.all_triggers",
+      "status": "live"
     },
     {
       "id": "cap_triggers_intent_patterns",
@@ -1110,7 +749,8 @@
       "gradatie_min": 4,
       "admin_only": true,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "triggers.routes.intent_patterns"
+      "source": "triggers.routes.intent_patterns",
+      "status": "live"
     },
     {
       "id": "cap_triggers_intent_add",
@@ -1129,7 +769,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "triggers.routes.intent_pattern_add"
+      "source": "triggers.routes.intent_pattern_add",
+      "status": "live"
     },
     {
       "id": "cap_triggers_intent_remove",
@@ -1147,7 +788,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "triggers.routes.intent_pattern_remove"
+      "source": "triggers.routes.intent_pattern_remove",
+      "status": "live"
     },
     {
       "id": "cap_triggers_intent_test",
@@ -1163,7 +805,8 @@
       "required_params": [],
       "gradatie_min": 4,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "triggers.routes.intent_test"
+      "source": "triggers.routes.intent_test",
+      "status": "live"
     },
     {
       "id": "cap_triggers_by_type",
@@ -1181,7 +824,8 @@
       "gradatie_min": 4,
       "admin_only": true,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "triggers.routes.by_type"
+      "source": "triggers.routes.by_type",
+      "status": "live"
     },
     {
       "id": "cap_triggers_edit_add",
@@ -1201,7 +845,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "exploreren-uitbreiden",
-      "source": "triggers.routes.edit_add_word"
+      "source": "triggers.routes.edit_add_word",
+      "status": "live"
     },
     {
       "id": "cap_triggers_edit_remove",
@@ -1221,7 +866,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "triggers.routes.edit_remove_word"
+      "source": "triggers.routes.edit_remove_word",
+      "status": "live"
     },
     {
       "id": "cap_kb_dedupe_inbox",
@@ -1242,7 +888,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "kb_v2.routes.admin_dedupe_inbox"
+      "source": "kb_v2.routes.admin_dedupe_inbox",
+      "status": "live"
     },
     {
       "id": "cap_kb_rebuild_index",
@@ -1260,7 +907,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "kb_v2.routes.admin_rebuild_index"
+      "source": "kb_v2.routes.admin_rebuild_index",
+      "status": "live"
     },
     {
       "id": "cap_kb_verbanden_rebuild",
@@ -1278,7 +926,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "kb_v2.routes.admin_verbanden_rebuild_all"
+      "source": "kb_v2.routes.admin_verbanden_rebuild_all",
+      "status": "live"
     },
     {
       "id": "cap_kb_sync_v1_drift",
@@ -1299,7 +948,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "kb_v2.routes.admin_sync_v1_drift"
+      "source": "kb_v2.routes.admin_sync_v1_drift",
+      "status": "live"
     },
     {
       "id": "cap_kb_orphan_tag_scan",
@@ -1320,7 +970,8 @@
       "gradatie_min": 5,
       "admin_only": true,
       "behavior_class_hint": "vertragen-ondersteunen",
-      "source": "kb_v2.routes.orphan_tag_scan"
+      "source": "kb_v2.routes.orphan_tag_scan",
+      "status": "live"
     },
     {
       "id": "cap_commands_list",
@@ -1347,7 +998,8 @@
       ],
       "gradatie_min": 1,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "system.commands_list_routes.list_commands"
+      "source": "system.commands_list_routes.list_commands",
+      "status": "live"
     },
     {
       "id": "cap_connections_list",
@@ -1371,7 +1023,8 @@
       "gradatie_min": 2,
       "admin_only": true,
       "behavior_class_hint": "informatief-functioneel",
-      "source": "connections.routes.list_connections"
+      "source": "connections.routes.list_connections",
+      "status": "live"
     },
     {
       "id": "cap_connections_save",
@@ -1396,7 +1049,8 @@
       "gradatie_min": 2,
       "admin_only": true,
       "behavior_class_hint": "actie-beheer",
-      "source": "connections.routes.save_connection"
+      "source": "connections.routes.save_connection",
+      "status": "live"
     },
     {
       "id": "cap_connections_test",
@@ -1417,7 +1071,8 @@
       "gradatie_min": 2,
       "admin_only": true,
       "behavior_class_hint": "actie-beheer",
-      "source": "connections.routes.test_connection"
+      "source": "connections.routes.test_connection",
+      "status": "live"
     },
     {
       "id": "cap_connections_export",
@@ -1436,7 +1091,8 @@
       "gradatie_min": 2,
       "admin_only": true,
       "behavior_class_hint": "actie-beheer",
-      "source": "connections.routes.export_keyfile"
+      "source": "connections.routes.export_keyfile",
+      "status": "live"
     },
     {
       "id": "cap_connections_import",
@@ -1455,22 +1111,477 @@
       "gradatie_min": 2,
       "admin_only": true,
       "behavior_class_hint": "actie-beheer",
-      "source": "connections.routes.import_keyfile"
+      "source": "connections.routes.import_keyfile",
+      "status": "live"
     }
   ],
   "stats": {
-    "total_commands": 33,
+    "total_commands": 58,
+    "total_placeholders": 23,
     "by_gradatie_min": {
-      "1": 27,
-      "2": 4,
-      "3": 2,
-      "4": 1
+      "3": 7,
+      "1": 16,
+      "4": 8,
+      "2": 15,
+      "5": 12
     },
     "by_behavior_class": {
-      "informatief-functioneel": 22,
-      "exploreren-uitbreiden": 8,
-      "vertragen-ondersteunen": 2
+      "informatief-functioneel": 27,
+      "vertragen-ondersteunen": 15,
+      "exploreren-uitbreiden": 11,
+      "diagnostisch": 1,
+      "actie-beheer": 4
+    }
+  },
+  "placeholders": [
+    {
+      "id": "cap_tellen_gebruikers",
+      "path": "/api/users/count",
+      "method": "GET",
+      "intent_tags": [
+        "tellen",
+        "gebruikers",
+        "leden",
+        "aantal",
+        "overzicht"
+      ],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_tellen_gebruikers",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
     },
-    "total": 81
-  }
+    {
+      "id": "cap_tellen_bestanden",
+      "path": "/api/system-archive/count",
+      "method": "GET",
+      "intent_tags": [
+        "tellen",
+        "bestanden",
+        "archief",
+        "media",
+        "aantal"
+      ],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_tellen_bestanden",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "cap_winst_verlies",
+      "path": "/api/trade/stats",
+      "method": "GET",
+      "intent_tags": [
+        "winst",
+        "verlies",
+        "pnl",
+        "trade",
+        "resultaat",
+        "overzicht"
+      ],
+      "required_params": [],
+      "gradatie_min": 2,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_winst_verlies",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "cap_spark_saldo",
+      "path": "/api/wallet/spark/balance",
+      "method": "GET",
+      "intent_tags": [
+        "saldo",
+        "spark",
+        "geld",
+        "balance",
+        "kasboek"
+      ],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_spark_saldo",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "cap_gesprek_lezen",
+      "path": "/api/chat/recap",
+      "method": "GET",
+      "intent_tags": [
+        "gesprek",
+        "lezen",
+        "terugkijken",
+        "log",
+        "geschiedenis",
+        "wat besproken"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 3,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_gesprek_lezen",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "cap_toon_afbeelding",
+      "path": "/api/system-archive/list?type=image",
+      "method": "GET",
+      "intent_tags": [
+        "afbeelding",
+        "foto",
+        "plaatje",
+        "tonen",
+        "archief"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_toon_afbeelding",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "cap_speel_geluid",
+      "path": "/api/system-archive/list?type=audio",
+      "method": "GET",
+      "intent_tags": [
+        "geluid",
+        "audio",
+        "afspelen",
+        "muziek",
+        "stem"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_speel_geluid",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "agenda_list",
+      "path": "/api/agenda/items",
+      "method": "GET",
+      "intent_tags": [
+        "agenda",
+        "afspraak",
+        "planning",
+        "tijd",
+        "bekijken",
+        "vandaag",
+        "morgen"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "agenda_create",
+      "path": "/api/agenda/items",
+      "method": "POST",
+      "intent_tags": [
+        "agenda",
+        "afspraak",
+        "toevoegen",
+        "plannen",
+        "nieuw"
+      ],
+      "required_params": [
+        "user_id",
+        "titel",
+        "datum"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "notes_create",
+      "path": "/api/notes",
+      "method": "POST",
+      "intent_tags": [
+        "notitie",
+        "noteren",
+        "schrijven",
+        "opslaan",
+        "memo",
+        "onthouden"
+      ],
+      "required_params": [
+        "user_id",
+        "title",
+        "content"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "wallet_topup",
+      "path": "/api/wallet/tikkie",
+      "method": "POST",
+      "intent_tags": [
+        "geld",
+        "toevoegen",
+        "tikkie",
+        "opwaarderen",
+        "topup",
+        "wallet"
+      ],
+      "required_params": [
+        "user_id",
+        "amount_eur"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "wallet_transactions",
+      "path": "/api/wallet/transactions",
+      "method": "GET",
+      "intent_tags": [
+        "transacties",
+        "wallet",
+        "geschiedenis",
+        "uitgaven",
+        "bekijken"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "trade_watchlist",
+      "path": "/api/trade/watchlist",
+      "method": "GET",
+      "intent_tags": [
+        "trade",
+        "watchlist",
+        "coins",
+        "prijs",
+        "monitor",
+        "crypto"
+      ],
+      "required_params": [],
+      "gradatie_min": 2,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "trade_buy",
+      "path": "/api/trade/buy",
+      "method": "POST",
+      "intent_tags": [
+        "kopen",
+        "buy",
+        "trade",
+        "order",
+        "crypto"
+      ],
+      "required_params": [
+        "market",
+        "amount_eur"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "trade_sell",
+      "path": "/api/trade/sell",
+      "method": "POST",
+      "intent_tags": [
+        "verkopen",
+        "sell",
+        "trade",
+        "order",
+        "crypto"
+      ],
+      "required_params": [
+        "market",
+        "amount_coin"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "achievements_list",
+      "path": "/api/achievements/{user_id}",
+      "method": "GET",
+      "intent_tags": [
+        "achievement",
+        "milestone",
+        "xp",
+        "behaald",
+        "voortgang"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "leaderboard",
+      "path": "/api/leaderboard",
+      "method": "GET",
+      "intent_tags": [
+        "leaderboard",
+        "ranglijst",
+        "podium",
+        "top",
+        "score"
+      ],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "community_chat_send",
+      "path": "/api/community/messages",
+      "method": "POST",
+      "intent_tags": [
+        "community",
+        "chat",
+        "bericht",
+        "groep",
+        "post"
+      ],
+      "required_params": [
+        "user_id",
+        "text"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "diary_entry_create",
+      "path": "/api/dagboek/entries",
+      "method": "POST",
+      "intent_tags": [
+        "dagboek",
+        "entry",
+        "schrijven",
+        "reflectie",
+        "mood"
+      ],
+      "required_params": [
+        "user_id",
+        "content"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "vertragen-ondersteunen",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "boekhouder_overview",
+      "path": "/api/boekhouder/transactions",
+      "method": "GET",
+      "intent_tags": [
+        "kasboek",
+        "boekhouding",
+        "transacties",
+        "overzicht",
+        "financien"
+      ],
+      "required_params": [],
+      "gradatie_min": 2,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "navigate_to_tab",
+      "path": "/api/intent-registry/navigate",
+      "method": "POST",
+      "intent_tags": [
+        "navigate",
+        "navigate_open",
+        "tab",
+        "pagina",
+        "winkel",
+        "winkelstraat"
+      ],
+      "required_params": [
+        "target"
+      ],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "status": "placeholder",
+      "placeholder_reason": "route bestaat niet (v1-wens) — verplaatst 19-10-2026"
+    },
+    {
+      "id": "cap_agenda_vandaag",
+      "naam": "Agenda van vandaag",
+      "path": "/api/agenda/today",
+      "method": "GET",
+      "intent_tags": [
+        "agenda",
+        "vandaag",
+        "afspraken",
+        "planning"
+      ],
+      "required_params": [
+        "user_id"
+      ],
+      "gradatie_min": 5,
+      "behavior_class_hint": "informatief-persoonlijk",
+      "source": "capability_handler_service._handle_agenda_vandaag",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    },
+    {
+      "id": "cap_kennis_inbox_status",
+      "naam": "Kennis-inbox status",
+      "path": "/api/kb/v2/inbox/stats",
+      "method": "GET",
+      "intent_tags": [
+        "inbox",
+        "kennis",
+        "wachten",
+        "classificeer",
+        "kaarten"
+      ],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_kennis_inbox_status",
+      "status": "placeholder",
+      "placeholder_reason": "werkt via chat-capability (spark_capabilities.json, laag B); dit pad bestaat niet — 19-10-2026"
+    }
+  ],
+  "_note": "commands = live routes; placeholders = wensen zonder route (task_agent/matcher negeren ze)"
 }

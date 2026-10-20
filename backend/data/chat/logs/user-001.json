@@ -79709,11 +79709,59 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3153
       }
+    },
+    {
+      "id": "conv-74011af7",
+      "timestamp": "2026-10-20T11:58:29.557519+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hallo Spark. Wil jij even hallo zeggen tegen Evie. En je zelf voorstellen. Maak ik een screenshot.",
+      "spark_response": "Hallo Evie! \n\nIk ben Spark, jouw persoonlijke AI‑companion. Ik help je met kennis‑ en taakbeheer, debugging, planning en creatieve brainstorms. Ik spreek Nederlands, pas mijn toon aan op jouw emotie en werk lokaal en transparant. \n\nLaat maar weten wat ik voor je kan doen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "eens",
+        "used_cards": [
+          "kbv2-45d1d661",
+          "kbv2-f1d5db2f",
+          "kbv2-f4f17100",
+          "kbv2-aaf81efb",
+          "kbv2-2ad0e675"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3154
+      }
+    },
+    {
+      "id": "conv-1fbd9dd6",
+      "timestamp": "2026-10-20T12:01:50.193511+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Evie vraagt als jij een dagplanning wil maken",
+      "spark_response": "Hallo Evie,\n\nIk kan zeker een dagplanning voor je opstellen. Vertel me welke activiteiten je wilt opnemen, eventuele vaste tijdstippen, prioriteit en of je voorkeuren hebt (bijvoorbeeld blokken voor focuswerk, pauzes of sport). \n\nOp basis van die input maak ik een overzicht met:\n\n* Tijdslot — activiteit \n* Prioriteit — hoog/midden/laag \n* Notities — bijzonderheden of benodigdheden \n\nAls je wilt, kan ik het plan direct in **Mijn Profiel** plaatsen zodat je er later makkelijk op kunt terugkijken. Laat me weten wat er op je agenda staat, dan ga ik aan de slag.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hallo",
+        "used_cards": [
+          "kbv2-39253865",
+          "kbv2-1536c504",
+          "kbv2-8cbfe211",
+          "kbv2-39612a02",
+          "kbv2-62fbda60"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3155
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3153,
-    "last_updated": "2026-10-20T11:57:37.110537+00:00"
+    "total_conversations": 3155,
+    "last_updated": "2026-10-20T12:01:50.193511+00:00"
   }
 }

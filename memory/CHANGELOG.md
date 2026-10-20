@@ -1852,3 +1852,8 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 - **Capability `kies_persoonlijkheid`**: laat Spark per gesprek wisselen tussen `traits` uit zijn identity (nieuwsgierig / streng / speels). Modes regelen lengte, traits zouden toon-kleur kunnen regelen.
 - **Self-awareness diagnostics-endpoint**: `GET /api/spark/awareness` dat een JSON-dump van Spark's volledige zelfbeeld retourneert (modules, modes, origin, gradatie, current_emotion, current_mode). Handig voor debug-UI.
 - **Capability `wat_observeer_je_aan_mij`**: leest shadow-profile + behavior-tracker → "ik zie dat je 3 keer per week over X praat, vooral 's avonds laat" — transparant.
+
+## 2026-10-20 — v14_shop_eigen_code_001 + fix 422-crash inkoop
+- **Bug**: inkoop-artikel zonder productcode opslaan gaf 422 (`code: str` verplicht) en de 422-lijst werd rauw in een toast gerenderd → React-crash "Objects are not valid as a React child". Fix: `code` optioneel; `apiError()` in `frontend/src/lib/utils.js` maakt van FastAPI-`detail` altijd een string (ShopTabView, ContactenTab, ProductEditModal).
+- **Eigen productcodes**: leeg laten → Spark genereert `PREFIX-0001` (verkoop) / `PREFIX-I-0001` (inkoop), ook bij bewerken van een artikel zonder code. Prefix per winkel in Inkoop → Instellingen (`code_prefix`, Roadkill = RK), anders eerste 2 letters winkelnaam.
+- Profiel → Algemeen → Contact (E-mail/Telefoon) opslaan: nagespeeld als Emergent, werkt (backend 200 + waarde blijft na herladen). Melding van Willem kwam waarschijnlijk door de crash hierboven.

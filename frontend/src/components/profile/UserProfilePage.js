@@ -509,7 +509,7 @@ function PersoonskaartCard({ userId, isAdmin }) {
       });
       const d = await r.json();
       if (r.ok) { setInv(d); setShowShop(false); }
-      else setErr(d.detail || 'Toevoegen mislukt');
+      else setErr(typeof d.detail === 'string' ? d.detail : 'Toevoegen mislukt');
     } finally { setBusy(false); }
   };
 

@@ -6,6 +6,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
 import { Package, Plus, Edit3, Trash2, Image as ImageIcon, ShoppingBag, Camera, ClipboardList, Store } from 'lucide-react';
 import { ProductEditModal } from '../modules/ProductEditModal';
+import { apiError } from '../../lib/utils';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -58,7 +59,7 @@ export function ShopTabView({ shop, userId }) {
         // Cache-buster zodat browser nieuwe logo direct laadt
         setLogoUrl(`${r.logo_url}?t=${Date.now()}`);
       } else {
-        setLogoErr(r.detail || 'Upload mislukt');
+        setLogoErr(apiError(r, 'Upload mislukt'));
       }
     } catch (ex) { setLogoErr(ex.message); }
     setUploadingLogo(false);
@@ -420,12 +421,13 @@ function InkoopBeheer({ shop, userId, inkoop, settings, color, onChanged }) {
   const [verzend, setVerzend] = useState('');
   const [verpakking, setVerpakking] = useState('');
   const [afhalen, setAfhalen] = useState(true);
+  const [codePrefix, setCodePrefix] = useState('');
   useEffect(() => {
     fetch(`${API}/api/contacten/${userId}?laag=zakelijk`).then(r => r.json()).then(d => setLeveranciers((d.contacten || []).filter(c => c.rol === 'leverancier' || c.rol === 'partner' || !c.rol))).catch(() => {});
   }, [userId]);
   useEffect(() => {
     if (!settings) return;
-    setVerzend(settings.verzendkosten ?? ''); setVerpakking(settings.verpakking_inkoop_id || ''); setAfhalen(settings.afhalen_mogelijk !== false);
+    setVerzend(settings.verzendkosten ?? ''); setVerpakking(settings.verpakking_inkoop_id || ''); setAfhalen(settings.afhalen_mogelijk !== false); setCodePrefix(settings.code_prefix || '');
   }, [settings]);
 
   const save = async () => {
@@ -440,16 +442,16 @@ function InkoopBeheer({ shop, userId, inkoop, settings, color, onChanged }) {
     const r = await fetch(url, { method: form.id ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.json()).catch(() => ({}));
     setSaving(false);
     if (r.success) { toast.success(form.id ? 'Artikel bijgewerkt' : 'Artikel toegevoegd'); setForm(null); onChanged(); }
-    else toast.error(r.detail || 'Opslaan mislukt');
+    else toast.error(apiError(r, 'Opslaan mislukt'));
   };
   const remove = async (a) => {
     if (!window.confirm(`"${a.naam}" verwijderen?`)) return;
     const r = await fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/inkoop/${a.id}?viewer_id=${userId}`, { method: 'DELETE' }).then(x => x.json()).catch(() => ({}));
-    if (r.success) { toast.success('Verwijderd'); onChanged(); } else toast.error(r.detail || 'Verwijderen mislukt');
+    if (r.success) { toast.success('Verwijderd'); onChanged(); } else toast.error(apiError(r, 'Verwijderen mislukt'));
   };
   const saveSettings = async () => {
     const r = await fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/settings`, { method: 'PUT', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ viewer_id: userId, verzendkosten: verzend === '' ? null : Number(verzend), verpakking_inkoop_id: verpakking || null, afhalen_mogelijk: afhalen }) }).then(x => x.json()).catch(() => ({}));
+      body: JSON.stringify({ viewer_id: userId, verzendkosten: verzend === '' ? null : Number(verzend), verpakking_inkoop_id: verpakking || null, afhalen_mogelijk: afhalen, code_prefix: codePrefix.trim().toUpperCase() || null }) }).then(x => x.json()).catch(() => ({}));
     if (r.success) { toast.success('Instellingen opgeslagen'); onChanged(); } else toast.error('Opslaan mislukt');
   };
   const inp = 'px-2 py-1.5 bg-slate-800 border border-slate-700 rounded text-xs text-white w-full';
@@ -472,6 +474,10 @@ function InkoopBeheer({ shop, userId, inkoop, settings, color, onChanged }) {
         <label className="flex items-center gap-1.5 text-xs text-slate-300 pb-1.5">
           <input data-testid="shop-afhalen" type="checkbox" checked={afhalen} onChange={e => setAfhalen(e.target.checked)} /> afhalen mogelijk
         </label>
+        <div className="w-28">
+          <label className="text-[10px] text-slate-500 uppercase">Code-prefix</label>
+          <input data-testid="shop-code-prefix" value={codePrefix} onChange={e => setCodePrefix(e.target.value)} placeholder="RK" maxLength={6} className={inp + ' font-mono uppercase'} />
+        </div>
         <button data-testid="shop-settings-save" onClick={saveSettings} className="ml-auto px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-950" style={{ background: color }}>Instellingen opslaan</button>
       </div>
 
@@ -484,7 +490,7 @@ function InkoopBeheer({ shop, userId, inkoop, settings, color, onChanged }) {
 
       {form && (
         <div data-testid="inkoop-form" className="bg-slate-900 border border-slate-700 rounded-xl p-3 grid grid-cols-2 md:grid-cols-4 gap-2">
-          <div><label className="text-[10px] text-slate-500 uppercase">Productcode</label><input data-testid="inkoop-code" value={form.code} onChange={e => setForm(f => ({ ...f, code: e.target.value }))} placeholder="ST-STSU822-C-22" className={inp + ' font-mono'} /></div>
+          <div><label className="text-[10px] text-slate-500 uppercase">Productcode</label><input data-testid="inkoop-code" value={form.code} onChange={e => setForm(f => ({ ...f, code: e.target.value }))} placeholder="leverancierscode, leeg = Spark maakt er een" className={inp + ' font-mono'} /></div>
           <div><label className="text-[10px] text-slate-500 uppercase">Naam</label><input data-testid="inkoop-naam" value={form.naam} onChange={e => setForm(f => ({ ...f, naam: e.target.value }))} className={inp} /></div>
           <div><label className="text-[10px] text-slate-500 uppercase">Inkoopprijs excl.</label><input data-testid="inkoop-prijs" type="number" step="0.01" min="0" value={form.inkoopprijs_excl} onChange={e => setForm(f => ({ ...f, inkoopprijs_excl: e.target.value }))} className={inp} /></div>
           <div><label className="text-[10px] text-slate-500 uppercase">Voorraad</label><input data-testid="inkoop-voorraad" type="number" min="0" value={form.voorraad} onChange={e => setForm(f => ({ ...f, voorraad: e.target.value }))} placeholder="leeg = onbekend" className={inp} /></div>

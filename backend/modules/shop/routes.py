@@ -760,6 +760,28 @@ class ProductUpsert(BaseModel):
     kleuren: Optional[List[str]] = None
 
 
+# v14_shop_eigen_code_001 — Willem 20-10: "voor eigen productcodes mag Spark die genereren bij aanmaken".
+# Prefix = hoofdletters van de winkelnaam (shop-roadkill → RK), volgnummer per winkel, inkoop krijgt -I-.
+def _shop_prefix(shop_id: str, data: Dict) -> str:
+    """Prefix uit winkel-instellingen (code_prefix), anders eerste 2 letters van de winkelnaam."""
+    pref = (data.get("settings") or {}).get("code_prefix")
+    if pref:
+        return str(pref).upper()
+    shops = load_json(SHOPS_FILE, default={"shops": []}).get("shops", [])
+    shop = next((s for s in shops if s.get("id") == shop_id), {})
+    naam = "".join(c for c in str(shop.get("naam") or shop_id.replace("shop-", "")).upper() if c.isalpha()) or "SP"
+    return naam[:2]
+
+
+def _genereer_code(shop_id: str, data: Dict, inkoop: bool = False) -> str:
+    prefix = f"{_shop_prefix(shop_id, data)}-I-" if inkoop else f"{_shop_prefix(shop_id, data)}-"
+    bestaand = {(p.get("product_code") or "") for p in data.get("products", [])} | {(a.get("code") or "") for a in data.get("inkoop", [])}
+    n = 1
+    while f"{prefix}{n:04d}" in bestaand:
+        n += 1
+    return f"{prefix}{n:04d}"
+
+
 def _require_admin(viewer_id: str) -> None:
     """v11_shop_delete_admin_only_001 — Strict admin check (drop legacy grad-2 fallback).
     Reden: Familie op grad-2 zoals Heidi/Lotus/Maaike had toegang tot shop-delete
@@ -831,7 +853,8 @@ async def admin_create_product(req: ProductUpsert):
         "shop_id": req.shop_id or "shop-roadkill",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "btw_percentage": 0,  # Verkoopprijs is incl. BTW (per user: zonder BTW = wat ze betalen)
-        "product_code": req.product_code, "leverancier_contact_id": req.leverancier_contact_id,
+        "product_code": req.product_code or _genereer_code(req.shop_id or "shop-roadkill", data),
+        "leverancier_contact_id": req.leverancier_contact_id,
         "leverancier_naam": req.leverancier_naam, "voorraad": req.voorraad,
         "stuklijst": req.stuklijst or [],
         "maten": req.maten or [], "kleuren": req.kleuren or [],
@@ -855,7 +878,7 @@ async def admin_update_product(product_id: str, req: ProductUpsert):
             p["category"] = req.category
             p["entity_id"] = req.entity_id
             p["in_stock"] = req.in_stock
-            p["product_code"] = req.product_code
+            p["product_code"] = req.product_code or _genereer_code(req.shop_id or "shop-roadkill", data)
             p["leverancier_contact_id"] = req.leverancier_contact_id
             p["leverancier_naam"] = req.leverancier_naam
             p["voorraad"] = req.voorraad
@@ -968,7 +991,7 @@ async def mark_order_shipped(order_id: str, req: ShipOrderRequest):
 
 class InkoopArtikel(BaseModel):
     viewer_id: str
-    code: str
+    code: Optional[str] = None
     naam: str
     inkoopprijs_excl: Optional[float] = None
     leverancier_contact_id: Optional[str] = None
@@ -980,6 +1003,7 @@ class InkoopArtikel(BaseModel):
 
 class ShopSettings(BaseModel):
     viewer_id: str
+    code_prefix: Optional[str] = None           # v14_shop_eigen_code_001 — prefix voor gegenereerde productcodes (RK)
     verzendkosten: Optional[float] = None       # vast bedrag per bestelling, geen BTW erover
     verpakking_inkoop_id: Optional[str] = None  # inkoop-artikel dat per bestelling verbruikt wordt
     afhalen_mogelijk: Optional[bool] = True
@@ -1019,6 +1043,7 @@ async def create_inkoop(shop_id: str, req: InkoopArtikel):
     d = _shop_data(shop_id)
     a = {"id": f"ink-{uuid.uuid4().hex[:6]}", **req.model_dump(exclude={"viewer_id"}),
          "created_at": datetime.now(timezone.utc).isoformat()}
+    a["code"] = a.get("code") or _genereer_code(shop_id, d, inkoop=True)
     d["inkoop"].append(a)
     save_json(_shop_products_path(shop_id), d)
     return {"success": True, "artikel": a}
@@ -1031,6 +1056,7 @@ async def update_inkoop(shop_id: str, inkoop_id: str, req: InkoopArtikel):
     for a in d["inkoop"]:
         if a["id"] == inkoop_id:
             a.update(req.model_dump(exclude={"viewer_id"}))
+            a["code"] = a.get("code") or _genereer_code(shop_id, d, inkoop=True)
             a["updated_at"] = datetime.now(timezone.utc).isoformat()
             save_json(_shop_products_path(shop_id), d)
             return {"success": True, "artikel": a}

@@ -1,6 +1,7 @@
 // v6_shop_admin_product_crud_001 — Admin: nieuw / bewerk product met meerdere afbeeldingen
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Upload, Trash2, Loader2, Plus } from 'lucide-react';
+import { apiError } from '../../lib/utils';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 const MATEN_STD = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
@@ -109,7 +110,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, shop_id: shopId, ...extraFields() }),
       }).then(r => r.json());
-      if (!created.success) { setError(created.detail || 'Aanmaken mislukt'); return; }
+      if (!created.success) { setError(apiError(created, 'Aanmaken mislukt')); return; }
       pid = created.product.id;
     }
     const newImgs = [...images];
@@ -152,7 +153,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
       const url = isNew ? `${API}/api/shop/admin/products` : `${API}/api/shop/admin/products/${product.id}`;
       const method = isNew ? 'POST' : 'PUT';
       const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.json());
-      if (!r.success) { setError(r.detail || 'Opslaan mislukt'); return; }
+      if (!r.success) { setError(apiError(r, 'Opslaan mislukt')); return; }
       onSaved && onSaved(r.product);
       onClose && onClose();
     } finally { setSaving(false); }
@@ -286,7 +287,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
           <div className="grid grid-cols-3 gap-3">
             <div>
               <label className="text-[10px] text-slate-400 uppercase tracking-wider">Eigen code (optioneel)</label>
-              <input data-testid="product-code" value={productCode} onChange={e => setProductCode(e.target.value)} placeholder="bijv. RK-CAP"
+              <input data-testid="product-code" value={productCode} onChange={e => setProductCode(e.target.value)} placeholder="leeg = Spark maakt er een (RK-0001)"
                 className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
             </div>
             <div>

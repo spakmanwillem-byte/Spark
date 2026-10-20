@@ -2,18 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "Weet jij welke lades en momenteel gebruikt worden?",
-      "ts": "2026-10-19T10:14:02.725256+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ja, Willem. In de huidige kennisbank v2 worden vier hoofd‑lades gebruikt:\n\n1. **Voelen** – kaarten met emotionele of sensorische informatie. \n2. **Spreken** – kaarten die gericht zijn op communicatie, vragen en antwoorden. \n3. **Weten** – feitelijke, conceptuele en definities‑kaarten. \n4. **Doen** – instructies, procedures en actie‑gerelateerde content.\n\nDeze indeling staat bevestigd in de KB‑kaart **[weten] Lades** (vertrouwen = 1.0). Als je een nieuw onderwerp hebt, kun je aangeven in welke van deze lades het moet, dan maak ik de kaart meteen aan.",
-      "ts": "2026-10-19T10:14:02.725256+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
       "text": "Wat weet jij over je emotie-pipeline?",
       "ts": "2026-10-19T10:14:58.387389+00:00",
       "user_id": "user-001"
@@ -299,9 +287,21 @@
       "text": "**Water** \n- **Betekenis**: een vloeistof (H₂O) die essentieel is voor al het leven. \n- **Verdieping**: nodig voor drinken, koken, schoonmaken en alle biologische processen. \n- **Wie**: mensen, dieren, planten – iedereen heeft water nodig. \n- **Waar**: oceanen, rivieren, meren, regen, grondwater; overal op aarde. \n- **Waarom**: zorgt voor hydratatie, transport van voedingsstoffen en regulatie van temperatuur. \n\n**Aannemen** \n- **Betekenis**: iets accepteren, ontvangen of ervan uitgaan dat het waar is; iemand in dienst nemen. \n- **Verdieping**: kan gaan over het accepteren van een aanbod, het in dienst nemen van een medewerker, of het aannemen van een veronderstelling. \n- **Wie**: personen, organisaties, werkgevers, systemen – iedereen kan iets aannemen. \n- **Waar**: in gesprekken, werksettings, thuis, bij ontvangst of binnen een denkproces. \n- **Wanneer**: zodra een aanbod, voorstel, pakket of gedachte beschikbaar is. \n- **Waarom**: om een aanbod te accepteren, werk te geven, iets te ontvangen of een uitgangspunt te bepalen.",
       "ts": "2026-10-20T05:06:11.578169+00:00",
       "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "wat kan je",
+      "ts": "2026-10-20T11:39:16.869991+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "🔮 Help-overzicht geopend.",
+      "ts": "2026-10-20T11:39:16.869991+00:00",
+      "model": "smart_intents_service"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-10-20T05:06:11.578169+00:00"
+  "updated_at": "2026-10-20T11:39:16.869991+00:00"
 }

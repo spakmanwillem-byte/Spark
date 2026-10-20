@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Users, Briefcase, Plus, Pencil, Trash2, Phone, Mail, MapPin, X, Save, Printer, Globe } from 'lucide-react';
 import { toast } from 'sonner';
+import { apiError } from '../../lib/utils';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -40,7 +41,7 @@ export function ContactenTab({ userId }) {
     try {
       const r = await fetch(url, { method: isNew ? 'POST' : 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.json());
       if (r.success) { toast.success(isNew ? 'Contact toegevoegd' : 'Contact bijgewerkt'); setForm(null); load(); }
-      else toast.error(r.detail || r.message || 'Opslaan mislukt');
+      else toast.error(apiError(r, 'Opslaan mislukt'));
     } catch (e) { toast.error(e.message); }
     setSaving(false);
   };

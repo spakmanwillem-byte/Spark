@@ -149,7 +149,11 @@ Puur bash, werkt ook als install.sh half mislukt is.
 ./doctor.sh --fix    # installeert wat ontbreekt (apt, node, yarn, venv+pip, yarn install), vraagt sudo
 ./doctor.sh --net    # extra: publiek IP / CG-NAT-check, caddy, poort 80/443, DuckDNS
 ```
-Loopt iets vast → plak de rode regels in de chat.
+Loopt iets vast → plak de rode regels in de chat, of de staart van de log:
+```bash
+tail -40 logs/laatste_doctor.log      # idem: laatste_install.log, laatste_run.log
+```
+Elke run van install.sh / run.sh / doctor.sh schrijft automatisch een log in `logs/` (zonder kleurcodes, met regelnummer + commando bij een fout).
 
 ---
 

@@ -7,11 +7,16 @@
 #   ./doctor.sh --fix    # zelfde scan, maar installeert/repareert wat ontbreekt (vraagt sudo)
 #   ./doctor.sh --net    # extra: netwerk/poort/HTTPS-check voor toegang van buiten
 #
+# Alles komt ook in logs/laatste_doctor.log (install.sh → laatste_install.log, run.sh → laatste_run.log).
+#
 # Werkt zonder venv/node — puur bash, dus ook als install.sh half mislukt is.
 # ============================================================
 set -uo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/deploy/logging.sh" doctor "$@"
+trap - ERR
 
 FIX=false; NET=false
 for a in "$@"; do case $a in --fix) FIX=true ;; --net) NET=true ;; *) echo "Onbekend arg: $a"; exit 1 ;; esac; done

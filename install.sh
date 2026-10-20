@@ -16,6 +16,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/deploy/logging.sh" install "$@"
 
 # ---------- Config ----------
 # Python: neem wat er is (3.10+); Ubuntu 22.04 = 3.10, 24.04 = 3.12. Override met PYTHON_BIN=python3.11

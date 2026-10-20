@@ -17,8 +17,12 @@
 set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
-
 TARGET="${1:-all}"
+if [ "$TARGET" != "stop" ] && [ "$TARGET" != "check" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/deploy/logging.sh" run "$@"
+fi
+
 BACKEND_PORT="${BACKEND_PORT:-8001}"
 FRONTEND_PORT="${FRONTEND_PORT:-3000}"
 PID_DIR="${SCRIPT_DIR}/.run"

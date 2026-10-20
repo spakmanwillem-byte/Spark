@@ -108,6 +108,38 @@ Wanneer iemand een woord typt dat Spark niet kent (= niet in `spark_vocab.json::
 
 ---
 
+## 🧹 Open punten uit sessies 52–58 (verzameld 20-10-2026 bij opschoning ROADMAP_CORE; detail in ROADMAP_HISTORY)
+
+**P1 — bugs & kleine blockers (elk < 30 min)**
+- [ ] Bug: Spark's antwoord verdwijnt als je van tab wisselt tijdens het wachten (sessie 58)
+- [ ] `admin-capable`-schakelaar in Beheer → Gebruikers (nu alleen via curl) (sessie 57)
+- [ ] "klopt dit?"-knop naast stem-transcript (11 van 47 missers) (19-10)
+- [ ] Wallet `spend_tokens` voor Spark-fee inlossen: module bestaat niet onder die naam (boeking gaat door, inhouding niet) (sessie 53)
+- [ ] 12 test-users ruis in `/data/users` opschonen (sessie 54)
+- [ ] Twee inkoop-artikelen zonder code (envelop, cap basis) RK-I-code geven (20-10)
+
+**P1 — Spark's zelfkennis & gastheer (missie-kern)**
+- [ ] Registry: ~617 ontbrekende endpoint-entries in batches (sessie 58) — basis voor commands zonder slash
+- [ ] Subject-agent-laag: agent-skelet per onderwerp (sessie 58)
+- [ ] Fact-kaarten + **LLM-modus aan/uit** ("eerlijke leegte") — plan staat in CORE; feiten-archief (20-10) is de eerste helft
+- [ ] Gastheer-laag: onzekerheids-triggers ("ik snap het niet", "doe ik dit goed"), first-run handreikingen (§ hierboven)
+- [ ] KB-vulling uit vakboeken: STARR, Methodiekengids (28 methoden), Begeleid Leren — Willem: "bruikbaar, oppakken" (sessie 55)
+- [ ] Zelfscan-rest: trace-capability "waar heb ik dit gezegd", write-guard/validate_footnote, fuzzy-snap (sessie 55; scan + backfill ✅ 20-10)
+- [ ] Emmy's launch-lijst (3 aug): Weeskaarten uit `111.txt`, Bijbel-kaart "De Basis van Rust", disclaimer, KB-viewer-intent in chat, refactor bestanden >1000 regels (routes.py 3000+, AnalyticsPage 2781)
+- [ ] 141 blauwdruk-stubs "Wat werkt al / Relaties" invullen (Willem twijfelt; mogelijk door Spark uit code laten voorstellen)
+
+**P2 — boekhouding & trader**
+- [ ] Bank → Wallet brug; BTW per productcategorie (9 % / 0 %); Klanten-tab moderniseren (leest oude bonnetjes; shop-orders boeken nu in boekhouder); Vermogens-tab; grace-period (sessie 52/53)
+- [ ] Trader winst-hook → boekhouder; chain-integrity endpoint (sessie 53)
+- [ ] `book_id` op agenda/notities/taken; urenstaat → factuur-PDF (fpdf2-infra is er nu); Archief split privé/zakelijk (sessie 56b)
+
+**P2 — UI & diversen**
+- [ ] XP-motor: rang-mapping, text_importer XP, XP in edit-modal (sessie 57)
+- [ ] Dashboard: click-to-focus rest, kleurschema; image-upload → begrip (sessie 58)
+- [ ] Login/Fronts/Fase A-B-C admin-look (cosmetisch, sessie 52s)
+- [ ] Chat/LLM: Cerebras-watchdog, alternatieve fallback, Ollama lokaal (Odroid) (sessie 52r-t)
+- [ ] Privacy-matrix fase 2 (koelkast); collectieve intelligentie (research); Spark World (geparkeerd tot Core af is — Willems regel)
+
 ## 🗺️ Backlog (prioriteit hoog → laag)
 
 ### P0 — In Progress

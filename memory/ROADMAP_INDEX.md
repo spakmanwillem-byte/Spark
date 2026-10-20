@@ -38,3 +38,5 @@
 Spark's `spark_index` module scant `/app/memory/*.md` automatisch bij backend startup en aggregeert de footnotes. Alle bestanden hierboven worden dus mee-geïndexeerd — Spark kan ze via chat-intent `"wat hebben we?"` / `"wat is X?"` opzoeken (v6_synapse_002 chat_handler).
 
 Als je een nieuw memory-bestand toevoegt: geen registratie nodig, alleen backend herstarten of `POST /api/spark-index/rebuild` triggeren.
+
+> 20-10-2026: ROADMAP_CORE opgeschoond 1888 → 401 regels. Sessies 52-58 + AFGEROND-detail 19/20-10 → ROADMAP_HISTORY § "Verplaatst 20-10-2026"; open punten → ROADMAP_BACKLOG § "Open punten uit sessies 52–58". Backup: `_backup_ROADMAP_CORE_20261020.md`.

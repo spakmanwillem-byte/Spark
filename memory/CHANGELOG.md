@@ -1881,3 +1881,4 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 ## 2026-10-20 (laatste) — v14_contacten_relatie_sync_001 · v14_task_agent_bridge_004
 - Contacten tonen relatie uit de graaf; familie uit graaf → contact (3 nieuw). Agenda-afspraak via chat met ja/nee ("zet morgen 10 uur tandarts in de agenda"). Wijsheid-kaarten in antwoorden. Laatste 2 feiten afgehandeld (mening / verworpen identiteitsclaim).
 - Feiten-tab: bewerk nu begrip/soort/wat/waarom/context; Willems katten-correctie doorgevoerd (feiten + identity_facts).
+- ROADMAP_CORE opgeschoond: 1888 → 401 regels (sessies 52-58 → HISTORY, open punten → BACKLOG, backup bewaard).

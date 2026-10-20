@@ -755,6 +755,9 @@ class ProductUpsert(BaseModel):
     # v14_shop_inkoop_stuklijst_001 — verkoopprijs = excl. BTW (BTW-% per winkel, zie boekhouder.shop_hooks);
     # stuklijst = inkoop-artikelen × aantal
     stuklijst: Optional[List[Dict]] = None  # [{"inkoop_id": "...", "aantal": 1}]
+    # v14_shop_varianten_001 — koper kiest maat/kleur bij bestellen (leeg = n.v.t.)
+    maten: Optional[List[str]] = None
+    kleuren: Optional[List[str]] = None
 
 
 def _require_admin(viewer_id: str) -> None:
@@ -831,6 +834,7 @@ async def admin_create_product(req: ProductUpsert):
         "product_code": req.product_code, "leverancier_contact_id": req.leverancier_contact_id,
         "leverancier_naam": req.leverancier_naam, "voorraad": req.voorraad,
         "stuklijst": req.stuklijst or [],
+        "maten": req.maten or [], "kleuren": req.kleuren or [],
     }
     data.setdefault("products", []).append(new_prod)
     save_json(pfile, data)
@@ -857,6 +861,10 @@ async def admin_update_product(product_id: str, req: ProductUpsert):
             p["voorraad"] = req.voorraad
             if req.stuklijst is not None:
                 p["stuklijst"] = req.stuklijst
+            if req.maten is not None:
+                p["maten"] = req.maten
+            if req.kleuren is not None:
+                p["kleuren"] = req.kleuren
             if req.image_icon:
                 p["image_icon"] = req.image_icon
             if req.images is not None:
@@ -1069,6 +1077,8 @@ async def shop_kostprijzen(shop_id: str):
 class OrderItem(BaseModel):
     product_id: str
     quantity: int = 1
+    maat: Optional[str] = None   # v14_shop_varianten_001
+    kleur: Optional[str] = None
 
 
 class CreateOrderRequest(BaseModel):
@@ -1102,6 +1112,10 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             return {"success": False, "error": f"{prod['name']} is niet op voorraad"}
         if prod.get("category") == "token":
             return {"success": False, "error": "ROAR tokens koop je via de Token sectie"}
+        if prod.get("maten") and item.maat not in prod["maten"]:
+            return {"success": False, "error": f"Kies een maat voor {prod['name']}"}
+        if prod.get("kleuren") and item.kleur not in prod["kleuren"]:
+            return {"success": False, "error": f"Kies een kleur voor {prod['name']}"}
 
         price = prod["price"]  # v14: excl. BTW
         line_total = round(price * item.quantity, 2)
@@ -1111,6 +1125,8 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             "product_id": item.product_id,
             "name": prod["name"],
             "product_code": prod.get("product_code"),
+            "maat": item.maat,
+            "kleur": item.kleur,
             "price": price,
             "quantity": item.quantity,
             "line_total": line_total,

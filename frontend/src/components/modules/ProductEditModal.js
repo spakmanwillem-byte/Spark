@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, Upload, Trash2, Loader2, Plus } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+const MATEN_STD = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+const KLEUREN_STD = ['Navy blauw', 'Khaki groen', 'Zwart', 'Marble grijs'];
 
 export function ProductEditModal({ open, onClose, product, userId, shopId = 'shop-roadkill', shopName = 'Roadkill Shop', onSaved, defaultCategory = 'merch' }) {
   const isNew = !product;
@@ -23,6 +25,9 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
   // v14_shop_inkoop_stuklijst_001 — stuklijst: inkoop-artikelen × aantal
   const [inkoop, setInkoop] = useState([]);
   const [stuklijst, setStuklijst] = useState([]);
+  // v14_shop_varianten_001 — maten/kleuren die de koper kiest
+  const [maten, setMaten] = useState([]);
+  const [kleuren, setKleuren] = useState([]);
   const [uploadingIdx, setUploadingIdx] = useState(-1);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -50,11 +55,12 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
       setProductCode(product.product_code || ''); setVoorraad(product.voorraad ?? '');
       setLeverancierId(product.leverancier_contact_id || ''); setLeverancierNaam(product.leverancier_naam || '');
       setStuklijst(product.stuklijst || []);
+      setMaten(product.maten || []); setKleuren(product.kleuren || []);
     } else {
       setName(''); setDescription(''); setPrice(''); setCategory(defaultCategory);
       setEntityId(derivedEntityId);
       setInStock(true); setImageIcon('package'); setImages([]);
-      setProductCode(''); setVoorraad(''); setLeverancierId(''); setLeverancierNaam(''); setStuklijst([]);
+      setProductCode(''); setVoorraad(''); setLeverancierId(''); setLeverancierNaam(''); setStuklijst([]); setMaten([]); setKleuren([]);
     }
   }, [open, product, defaultCategory, derivedEntityId]);
 
@@ -78,6 +84,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
   }, [open, userId]);
 
   const extraFields = () => ({
+    maten, kleuren,
     stuklijst: stuklijst.filter(r => r.inkoop_id).map(r => ({ inkoop_id: r.inkoop_id, aantal: Number(r.aantal) || 1 })),
     product_code: productCode || null,
     voorraad: voorraad === '' ? null : parseInt(voorraad, 10),
@@ -253,6 +260,26 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
                 </div>
               );
             })}
+          </div>
+
+          {/* v14_shop_varianten_001 — maten/kleuren */}
+          <div data-testid="product-varianten" className="grid grid-cols-2 gap-3">
+            {[['Maten', maten, setMaten, MATEN_STD, 'maat'], ['Kleuren', kleuren, setKleuren, KLEUREN_STD, 'kleur']].map(([label, list, setList, std, tid]) => (
+              <div key={label} className="bg-slate-800/40 border border-slate-700 rounded-lg p-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-[10px] text-slate-400 uppercase tracking-wider">{label} (koper kiest)</label>
+                  <button type="button" onClick={() => setList(list.length ? [] : [...std])} className="text-[10px] text-amber-300">{list.length ? 'wis' : 'standaard'}</button>
+                </div>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {[...new Set([...std, ...list])].map(v => (
+                    <button type="button" key={v} data-testid={`product-${tid}-${v}`} onClick={() => setList(list.includes(v) ? list.filter(x => x !== v) : [...list, v])}
+                      className={`px-2 py-0.5 rounded text-[10px] border ${list.includes(v) ? 'border-amber-500/60 text-amber-200 bg-amber-500/10' : 'border-slate-700 text-slate-500'}`}>{v}</button>
+                  ))}
+                  <input placeholder="+ eigen" onKeyDown={e => { if (e.key === 'Enter' && e.target.value.trim()) { setList([...list, e.target.value.trim()]); e.target.value = ''; e.preventDefault(); } }}
+                    className="w-16 px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-white" />
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* v14_shop_producten_tab_001 — eigen code, voorraad, leverancier (alleen zonder stuklijst) */}

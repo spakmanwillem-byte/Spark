@@ -358,7 +358,7 @@ function BestellingenLijst({ orders, loading, color }) {
           <ul className="mt-2 space-y-0.5">
             {o.items.map((i, idx) => (
               <li key={idx} className="text-[11px] text-slate-300 flex justify-between">
-                <span>{i.quantity}× {i.name}{i.product_code ? <span className="font-mono text-slate-500"> · {i.product_code}</span> : ''}</span>
+                <span>{i.quantity}× {i.name}{(i.kleur || i.maat) ? <span className="text-slate-400"> · {[i.kleur, i.maat].filter(Boolean).join(' · ')}</span> : ''}{i.product_code ? <span className="font-mono text-slate-500"> · {i.product_code}</span> : ''}</span>
                 <span className="text-slate-400">€{Number(i.line_total || 0).toFixed(2)}</span>
               </li>
             ))}

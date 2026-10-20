@@ -116,21 +116,30 @@ export function WinkelPage({ onNavigate }) {
   const cartTotal = Math.round((cartSubtotal + cartBtw + verzendkosten) * 100) / 100;
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
+  // v14_shop_varianten_001 — keuze maat/kleur per product; cart-regel = product + maat + kleur
+  const [keuze, setKeuze] = useState({});
+  const lineKey = (id, maat, kleur) => `${id}|${maat || ''}|${kleur || ''}`;
   const addToCart = (product) => {
+    const k = keuze[product.id] || {};
+    const maat = product.maten?.length ? k.maat : null;
+    const kleur = product.kleuren?.length ? k.kleur : null;
+    if (product.maten?.length && !maat) { toast.error(`Kies eerst een maat voor ${product.name}`); return; }
+    if (product.kleuren?.length && !kleur) { toast.error(`Kies eerst een kleur voor ${product.name}`); return; }
+    const key = lineKey(product.id, maat, kleur);
     setCart(prev => {
-      const existing = prev.find(i => i.id === product.id);
-      if (existing) return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i);
-      return [...prev, { id: product.id, name: product.name, price: product.price, qty: 1 }];
+      const existing = prev.find(i => i.key === key);
+      if (existing) return prev.map(i => i.key === key ? { ...i, qty: i.qty + 1 } : i);
+      return [...prev, { key, id: product.id, name: product.name, price: product.price, qty: 1, maat, kleur }];
     });
   };
 
-  const removeFromCart = (productId) => {
-    setCart(prev => prev.filter(i => i.id !== productId));
+  const removeFromCart = (key) => {
+    setCart(prev => prev.filter(i => i.key !== key));
   };
 
-  const updateCartQty = (productId, delta) => {
+  const updateCartQty = (key, delta) => {
     setCart(prev => prev.map(i => {
-      if (i.id !== productId) return i;
+      if (i.key !== key) return i;
       const newQty = i.qty + delta;
       return newQty > 0 ? { ...i, qty: newQty } : i;
     }).filter(i => i.qty > 0));
@@ -143,7 +152,7 @@ export function WinkelPage({ onNavigate }) {
     const res = await fetch(`${API}/api/shop/orders/${userId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: cart.map(i => ({ product_id: i.id, quantity: i.qty })), bezorging }),
+      body: JSON.stringify({ items: cart.map(i => ({ product_id: i.id, quantity: i.qty, maat: i.maat, kleur: i.kleur })), bezorging }),
     }).then(r => r.json()).catch(() => ({ success: false, error: 'Verbinding mislukt' }));
     setOrderResult(res);
     setOrdering(false);
@@ -328,12 +337,30 @@ export function WinkelPage({ onNavigate }) {
                           : <p className="text-[10px] text-red-400">Uitverkocht</p>
                         }
                       </div>
+                      <div className="flex flex-col items-end gap-1">
+                        {(product.maten?.length > 0 || product.kleuren?.length > 0) && (
+                          <div className="flex gap-1">
+                            {product.kleuren?.length > 0 && (
+                              <select data-testid={`kleur-${product.id}`} value={keuze[product.id]?.kleur || ''} onChange={e => setKeuze(k => ({ ...k, [product.id]: { ...(k[product.id] || {}), kleur: e.target.value } }))}
+                                className="px-1.5 py-1 bg-slate-800 border border-slate-700 rounded text-[10px] text-white max-w-[110px]">
+                                <option value="">kleur</option>{product.kleuren.map(c => <option key={c} value={c}>{c}</option>)}
+                              </select>
+                            )}
+                            {product.maten?.length > 0 && (
+                              <select data-testid={`maat-${product.id}`} value={keuze[product.id]?.maat || ''} onChange={e => setKeuze(k => ({ ...k, [product.id]: { ...(k[product.id] || {}), maat: e.target.value } }))}
+                                className="px-1.5 py-1 bg-slate-800 border border-slate-700 rounded text-[10px] text-white">
+                                <option value="">maat</option>{product.maten.map(m => <option key={m} value={m}>{m}</option>)}
+                              </select>
+                            )}
+                          </div>
+                        )}
                       <button data-testid={`add-${product.id}`}
                         onClick={() => addToCart(product)}
                         disabled={!product.in_stock}
                         className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-white transition-all disabled:opacity-40 bg-red-600 hover:bg-red-700">
                         <Plus className="w-3.5 h-3.5" /> In wagen
                       </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -510,19 +537,19 @@ export function WinkelPage({ onNavigate }) {
               ) : (
                 <div className="p-4 space-y-3">
                   {cart.map(item => (
-                    <div key={item.id} data-testid={`cart-item-${item.id}`}
+                    <div key={item.key || item.id} data-testid={`cart-item-${item.id}`}
                       className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-800">
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-white font-medium truncate">{item.name}</p>
-                        <p className="text-xs text-slate-400">&euro;{item.price.toFixed(2)} per stuk</p>
+                        <p className="text-xs text-slate-400">{(item.maat || item.kleur) && <span className="text-slate-300">{[item.kleur, item.maat].filter(Boolean).join(' · ')} · </span>}&euro;{item.price.toFixed(2)} per stuk</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button onClick={() => updateCartQty(item.id, -1)}
+                        <button onClick={() => updateCartQty(item.key, -1)}
                           className="w-7 h-7 flex items-center justify-center rounded-lg bg-slate-700 text-slate-300 hover:bg-slate-600">
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="text-sm font-bold text-white w-6 text-center">{item.qty}</span>
-                        <button onClick={() => updateCartQty(item.id, 1)}
+                        <button onClick={() => updateCartQty(item.key, 1)}
                           className="w-7 h-7 flex items-center justify-center rounded-lg bg-slate-700 text-slate-300 hover:bg-slate-600">
                           <Plus className="w-3 h-3" />
                         </button>
@@ -530,7 +557,7 @@ export function WinkelPage({ onNavigate }) {
                       <div className="text-right flex-shrink-0 w-16">
                         <p className="text-sm font-bold text-white">&euro;{(item.price * item.qty).toFixed(2)}</p>
                       </div>
-                      <button onClick={() => removeFromCart(item.id)}
+                      <button onClick={() => removeFromCart(item.key)}
                         className="p-1 text-slate-600 hover:text-red-400">
                         <X className="w-4 h-4" />
                       </button>

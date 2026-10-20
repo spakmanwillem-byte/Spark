@@ -202,6 +202,10 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     Mover jogger 30,95 · Trainer shorts 22,35 · Creator t-shirt 7,50 · DTF groot 6,95 · DTF klein 3,95. Rugtas = 1 klein
     logo (basis-code/prijs onbekend). **Marges nu zichtbaar: jogger lang −6,85 en kort −3,25 (verkoop onder kostprijs!),
     set +5,05.** Later: varianten (kleur/maat) per inkoop-artikel — de Promotex-orders zijn per kleur/maat.
+    **✅ 20-10 Varianten** (`v14_shop_varianten_001`): product heeft `maten[]`/`kleuren[]` (standaard S–XXXL · Navy blauw,
+    Khaki groen, Zwart, Marble grijs; eigen waarden toevoegbaar; leeg = n.v.t.). Koper kiest kleur+maat bij "In wagen"
+    (verplicht als ingesteld, backend valideert), cart-regel per product+kleur+maat, `maat`/`kleur` op order-items en in
+    Bestellingen-tab. Kleding-producten Roadkill hebben de standaardset; cap/rugtas niet.
     **Nog**: `create_order` boekt in oud accounting-bestand i.p.v. `record_shop_sale` (boekhouder) → koppelen bij
     "Bestellingen ↔ boekhouder"; inkoop bij leverancier → `record_shop_purchase`.
   **Fase 3 — nog te bouwen (roadmap)**: bij bestelling zonder voorraad → leveranciersmail (aantal + productcode,

@@ -1,4 +1,0 @@
-{"ts": "2026-07-27T05:02:10.284116+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-0090af05', lade='inbox', updates={'lagen': {'laag1': 'Ee…"}}
-{"ts": "2026-07-27T05:02:10.340084+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 55.71}
-{"ts": "2026-07-27T05:02:12.336302+00:00", "module": "kb_v2", "fn": "classify", "phase": "pre", "intent": "KB v2 kaart classificeren (inbox → lade)", "args": {"body": "ClassifyBody(card_id='kbv2-0090af05', lade='weten', updates=None, user_id='user…"}}
-{"ts": "2026-07-27T05:02:13.241194+00:00", "module": "kb_v2", "fn": "classify", "phase": "post", "intent": "KB v2 kaart classificeren (inbox → lade)", "result": "dict(success=True, keys=success,kaart,lade)", "duration_ms": 904.69}

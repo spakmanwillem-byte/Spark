@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Users, Briefcase, Plus, Pencil, Trash2, Phone, Mail, MapPin, X, Save } from 'lucide-react';
+import { Users, Briefcase, Plus, Pencil, Trash2, Phone, Mail, MapPin, X, Save, Printer, Globe } from 'lucide-react';
 import { toast } from 'sonner';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -10,7 +10,7 @@ const ROLLEN = {
   zakelijk: ['leverancier', 'klant', 'partner', 'overig'],
 };
 const BRON_LABEL = { klapper: null, bel: 'bel-contact', clienten: 'cliënt' }; // bewerken/verwijderen schrijft terug naar die module
-const LEEG = { laag: 'prive', naam: '', rol: '', bedrijf: '', contactpersoon: '', email: '', telefoon: '', adres: '', postcode: '', plaats: '', notities: '' };
+const LEEG = { laag: 'prive', naam: '', rol: '', bedrijf: '', contactpersoon: '', email: '', email2: '', telefoon: '', telefoon2: '', fax: '', website: '', adres: '', postcode: '', plaats: '', notities: '' };
 
 export function ContactenTab({ userId }) {
   const [laag, setLaag] = useState('prive');
@@ -94,7 +94,11 @@ export function ContactenTab({ userId }) {
                   {c.contactpersoon && <p className="text-[11px] text-slate-400 truncate">t.a.v. {c.contactpersoon}</p>}
                   <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1 text-[11px] text-slate-400">
                     {c.telefoon && <span className="flex items-center gap-1"><Phone className="w-3 h-3" />{c.telefoon}</span>}
+                    {c.telefoon2 && <span className="flex items-center gap-1"><Phone className="w-3 h-3" />{c.telefoon2}</span>}
+                    {c.fax && <span className="flex items-center gap-1"><Printer className="w-3 h-3" />fax {c.fax}</span>}
                     {c.email && <span className="flex items-center gap-1"><Mail className="w-3 h-3" />{c.email}</span>}
+                    {c.email2 && <span className="flex items-center gap-1"><Mail className="w-3 h-3" />{c.email2}</span>}
+                    {c.website && <a href={c.website.startsWith('http') ? c.website : `https://${c.website}`} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-white"><Globe className="w-3 h-3" />{c.website}</a>}
                     {(c.plaats || c.adres) && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{[c.adres, c.postcode, c.plaats].filter(Boolean).join(', ')}</span>}
                   </div>
                   {c.notities && <p className="text-[11px] text-slate-500 mt-1 italic truncate">{c.notities}</p>}
@@ -142,8 +146,12 @@ function ContactForm({ form, setForm, onSave, saving, onCancel }) {
           </select>
         </label>
         {zak && <F label="Contactpersoon" k="contactpersoon" form={form} setForm={setForm} placeholder="Naam contactpersoon" />}
-        <F label="E-mail" k="email" form={form} setForm={setForm} placeholder="naam@voorbeeld.nl" type="email" />
         <F label="Telefoon" k="telefoon" form={form} setForm={setForm} placeholder="+31 6 …" />
+        <F label="Telefoon 2 (optioneel)" k="telefoon2" form={form} setForm={setForm} placeholder="vast / mobiel" />
+        {zak && <F label="Fax (optioneel)" k="fax" form={form} setForm={setForm} placeholder="050 …" />}
+        <F label="E-mail" k="email" form={form} setForm={setForm} placeholder="naam@voorbeeld.nl" type="email" />
+        <F label="E-mail 2 (optioneel)" k="email2" form={form} setForm={setForm} placeholder="info@…" type="email" />
+        {zak && <F label="Website" k="website" form={form} setForm={setForm} placeholder="www.voorbeeld.nl" />}
         <F label="Adres" k="adres" form={form} setForm={setForm} placeholder="Straat 1" />
         <F label="Postcode" k="postcode" form={form} setForm={setForm} placeholder="1234 AB" />
         <F label="Plaats" k="plaats" form={form} setForm={setForm} placeholder="Plaats" />

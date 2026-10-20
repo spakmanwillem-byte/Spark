@@ -45,7 +45,11 @@ class ContactIn(BaseModel):
     bedrijf: Optional[str] = None
     contactpersoon: Optional[str] = None
     email: Optional[str] = None
+    email2: Optional[str] = None
     telefoon: Optional[str] = None
+    telefoon2: Optional[str] = None
+    fax: Optional[str] = None
+    website: Optional[str] = None
     adres: Optional[str] = None
     postcode: Optional[str] = None
     plaats: Optional[str] = None
@@ -61,13 +65,14 @@ def _from_bel(c: Dict) -> Dict:
 def _from_client(c: Dict) -> Dict:
     return {"id": f"client:{c.get('id')}", "bron": "clienten", "laag": "zakelijk", "naam": c.get("naam"),
             "rol": "klant", "bedrijf": c.get("naam"), "contactpersoon": c.get("contactpersoon"),
-            "email": c.get("email"), "telefoon": c.get("telefoon"), "adres": c.get("adres"),
+            "email": c.get("email"), "email2": c.get("email2"), "telefoon": c.get("telefoon"),
+            "telefoon2": c.get("telefoon2"), "fax": c.get("fax"), "website": c.get("website"), "adres": c.get("adres"),
             "postcode": c.get("postcode"), "plaats": c.get("plaats"), "notities": c.get("notities"),
             "readonly": False}
 
 
 _BEL_MAP = {"naam": "name", "rol": "relation", "telefoon": "phone", "notities": "notes"}
-_CLIENT_KEYS = ("naam", "contactpersoon", "email", "telefoon", "adres", "postcode", "plaats", "notities")
+_CLIENT_KEYS = ("naam", "contactpersoon", "email", "email2", "telefoon", "telefoon2", "fax", "website", "adres", "postcode", "plaats", "notities")
 
 
 def _bel_file(user_id: str) -> Path:
@@ -90,7 +95,7 @@ def _update_extern(user_id: str, contact_id: str, body: ContactIn) -> Optional[D
                         continue
                     c[_BEL_MAP.get(k, k)] = v
                 save_json(f, d)
-                return {**_from_bel(c), **{k: v for k, v in c.items() if k in ("email", "bedrijf", "contactpersoon", "adres", "postcode", "plaats")}}
+                return {**_from_bel(c), **{k: v for k, v in c.items() if k in ("email", "email2", "telefoon2", "fax", "website", "bedrijf", "contactpersoon", "adres", "postcode", "plaats")}}
     if contact_id.startswith("client:"):
         f = _client_file(user_id); d = load_json(f, default={"clienten": []})
         for c in d.get("clienten", []):
@@ -122,7 +127,7 @@ def _delete_extern(user_id: str, contact_id: str) -> bool:
 def alle_contacten(user_id: str, laag: str = "") -> List[Dict]:
     items = [{**c, "bron": "klapper", "readonly": False} for c in _load(user_id)]
     bel = load_json(_bel_file(user_id), default={"contacts": []}).get("contacts", [])
-    items += [{**_from_bel(c), **{k: c.get(k) for k in ("email", "bedrijf", "contactpersoon", "adres", "postcode", "plaats") if c.get(k)}} for c in bel]
+    items += [{**_from_bel(c), **{k: c.get(k) for k in ("email", "email2", "telefoon2", "fax", "website", "bedrijf", "contactpersoon", "adres", "postcode", "plaats") if c.get(k)}} for c in bel]
     cl = load_json(_client_file(user_id), default={"clienten": []}).get("clienten", [])
     items += [_from_client(c) for c in cl if (c.get("scope") or "zakelijk") == "zakelijk"]
     if laag in LAGEN:

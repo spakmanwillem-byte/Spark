@@ -690,11 +690,159 @@
         "session_id": "default",
         "gesprek_nummer": 30
       }
+    },
+    {
+      "id": "conv-7faa3192",
+      "timestamp": "2026-10-20T12:57:16.853583+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ik vind het belangrijk dat je eerlijk bent",
+      "spark_response": "**Belangrijk**: Belangrijk betekent dat iets waarde heeft of aandacht verdient.\n\n**Eerlijk**: Eerlijk betekent dat iemand de waarheid zegt en oprecht handelt.\n\n**bent**: “Bent” is een vorm van het werkwoord “zijn” en wordt gebruikt om identiteit, toestand of aanwezigheid aan te geven.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Belangrijk"
+          },
+          {
+            "begrip": "Eerlijk"
+          },
+          {
+            "begrip": "bent"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 31
+      }
+    },
+    {
+      "id": "conv-0e146d3b",
+      "timestamp": "2026-10-20T12:57:17.056826+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "wat weet je van mij",
+      "spark_response": "Ik ken geen 'van mij' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 32
+      }
+    },
+    {
+      "id": "conv-0e17e15d",
+      "timestamp": "2026-10-20T12:57:17.261081+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "verwijder die notitie",
+      "spark_response": "Ik lees: tags [notitie, verwijderen] → verwijderen → `cap_notes_delete` (DELETE /api/notes/delete/{note_id}, zekerheid 40%). Zal ik het doen? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm_free",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 33
+      }
+    },
+    {
+      "id": "conv-d60db3a1",
+      "timestamp": "2026-10-20T12:57:17.463041+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "nee",
+      "spark_response": "Oké, niet uitgevoerd. Dat onthoud ik: die zin hoort niet bij dat commando.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_cancelled",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_cancelled"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 34
+      }
+    },
+    {
+      "id": "conv-e00b66ee",
+      "timestamp": "2026-10-20T12:57:52.909672+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "wat weet je van mij",
+      "spark_response": "Dit heb ik van je onthouden:\nWat jij belangrijk vindt:\n• belangrijk: je eerlijk bent\n(1 kaarten in totaal — uit onze gesprekken, geen LLM-gok)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "feiten_antwoord",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "feiten_antwoord"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 35
+      }
+    },
+    {
+      "id": "conv-646f0151",
+      "timestamp": "2026-10-20T12:57:53.134309+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "wat vind ik belangrijk",
+      "spark_response": "Uit wat je me eerder vertelde:\n• belangrijk: je eerlijk bent",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "feiten_antwoord",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "feiten_antwoord"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 36
+      }
     }
   ],
   "metadata": {
     "user_id": "user-4453ade3",
-    "total_conversations": 30,
-    "last_updated": "2026-10-20T12:29:39.173651+00:00"
+    "total_conversations": 36,
+    "last_updated": "2026-10-20T12:57:53.134309+00:00"
   }
 }

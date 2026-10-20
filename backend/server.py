@@ -390,6 +390,10 @@ app.include_router(deposit_watcher_router, prefix="/api")
 from modules.synapse.routes import router as synapse_router
 app.include_router(synapse_router, prefix="/api")
 
+# v14_feiten_archief_001 — Feiten-archief (meningen + toetsbare feiten, KB-kaart-formaat)
+from modules.feiten import router as feiten_router
+app.include_router(feiten_router, prefix="/api")
+
 # v6_container_001 — Universeel container-patroon (user/shop/asset/...)
 from modules.container.routes import router as container_router
 app.include_router(container_router, prefix="/api")

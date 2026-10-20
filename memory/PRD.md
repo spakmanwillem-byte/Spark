@@ -4429,3 +4429,4 @@ Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" —
 - **Mijn Profiel → Algemeen**: 3 kaders (Wie ben jij? / Privé / Zakelijk incl. website + social); 11 ontbrekende velden toegevoegd aan `ProfileExtended`.
 - **Open/wacht op Willem**: joggers onder kostprijs · mailverbinding voor echte verzending · voorraad per variant · task_agent in chat · Zelfscan P0 · ROADMAP_CORE opschonen (1814 regels).
 - **20-10 avond**: relaties voor elke user (kleine letters + naamloos), `/tree` en `/cmd` in chat via task_agent (ja/nee bij schrijven), Zelfscan-tab (rapport + backfill, 55 % compleet). Open: feiten-archief, blauwdruk-stubs invullen, laag 2 commands zonder slash.
+- **20-10 nacht**: feiten-archief (mening · waarde · overtuiging · feit; admin-only; feit wint van LLM), commands zonder slash met redenering + altijd ja/nee + leer-log.

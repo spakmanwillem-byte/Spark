@@ -91,7 +91,8 @@ Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leve
 | Relaties onthouden voor élke user (kleine letters, naamloos → placeholder) | ✅ 20-10 | Zusje/anderen zeggen hun zinnen één keer opnieuw |
 | `/tree` + `/cmd <zin>` in chat via task_agent (lezen direct, schrijven ja/nee) | ✅ 20-10 | Laag 2: zonder slash + concept-JSON live-editbaar; params vragen (bv. note_id) |
 | Zelfscan-tab (Beheer → Integraties): rapport + "Vul aan" | ✅ 20-10 | 245 containers: footnote 100 %, compleet 55 %. 141 code-blauwdrukken zijn nog stub ("Wat werkt al" invullen) |
-| Feiten-archief (`kind: feit`, feit wint van LLM) | ⏸ voorstel | Eigen sessie ~80-100 credits, grijpt in antwoord-volgorde chat |
+| Feiten-archief: mening · waarde · overtuiging · feit, Beheer → Instellingen → Feiten, feit wint van LLM | ✅ 20-10 | Admin toetst feiten (45 ongetoetst); Spark-scope (algemene wijsheid) nog leeg — handmatig of later uit gesprekken |
+| Commands zónder slash (laag 2): zin → tags → concept → command, altijd ja/nee, leert in `command_learning.jsonl` | ✅ 20-10 | Params vragen (note_id); leer-log gebruiken om scores bij te stellen |
 | Dit bestand: >1800 regels (regel: <500) | 🧹 onderhoud | Sessies 52-58 naar HISTORY, open items naar BACKLOG — aparte opruimsessie, na akkoord |
 
 **Bugs 20-10 gefixt**: inkoop-artikel zonder code → 422 + React-crash (code optioneel, `apiError()` overal) ·
@@ -300,6 +301,25 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     Resultaat: 1 % → 55 % compleet, footnote 0 ontbrekend. `_backup*/_preview*` mappen worden overgeslagen.
   **Bevestigd gat**: 59 → 90 blauwdruk-stubs, 3 echt ingevuld; `spark_groeien_public.json` / `spark_tag_curatie_public.json`
   staan nog los van `blueprint_ref`. Feiten-archief: `identity_facts` (cap 15/type) + scratch bestaan; fact-kaart = volgende.
+- **✅ 20-10 (nacht, 130-credit-batch) — Feiten-archief + commands zonder slash** (`v14_feiten_archief_001`,
+  `v14_task_agent_bridge_002`):
+  • `modules/feiten/__init__.py` (router `/api/feiten`, admin-only): kaart-formaat {begrip, lagen{wat, waarom, context},
+    tags, kind, status, vertrouwen, bron, keer_gehoord}. **Vier soorten** (Willem): `mening` (persoonlijk, status bevestigd),
+    `waarde` (normen & waarden), `overtuiging` (geloof/levensbeschouwing — "hun bijbel", apart van waarden; "ik geloof in X"
+    is overtuiging als X levensbeschouwelijk is, anders waarde; "spark bijbel" uitgesloten), `feit` (toetsbaar: ongetoetst →
+    getoetst/verworpen door admin). Per user `users/{uid}/feiten.json`, algemeen `data/feiten/spark.json`.
+  • Extractie passief in chat (naast relaties) en in compose; `identity_facts` blijft bestaan (LLM-context) maar wordt via
+    `feiten.extract_and_save` aangeroepen → één archief. Migratie-knop: 69 kaarten uit 4 users ingelezen (idempotent).
+  • **Feit wint van LLM** (0b3d, vroeg in de flow, vóór profile_lookup): "wat weet je van mij", "wat vind ik van X",
+    "waar hou ik van", "wat vind ik belangrijk", "wat geloof ik", "wat is mijn X" → antwoord uit kaarten met
+    "(nog niet getoetst)" waar van toepassing; "geen LLM-gok". Geen W-vervolgvraag (Willem: niet natuurlijk genoeg).
+  • Alleen admin ziet het (Beheer → Instellingen → **Feiten**: tellers, filters scope/user/soort/status/zoek, kaarten met
+    getoetst/verwerp/herstel/bewerk/verwijder, handmatig aanmaken, migratie). Gebruikers zelf niet ("soms willen mensen
+    dingen niet weten over zichzelf").
+  • **Laag 2 commands** (`task_agent_bridge.try_resolve_free`, 0b3e ná capability-router, dus alleen zinnen die nergens
+    landden): actie-werkwoord vereist, geen vraagteken, score ≥ 0.25 → "Ik lees: tags [notitie, verwijderen] → verwijderen
+    → `cap_notes_delete` (zekerheid 40%). Zal ik het doen? (ja/nee)". Altijd bevestigen, ook lezen (we testen nog).
+    Ja/nee → regel in `data/system/command_learning.jsonl` (zin, cmd, tags, besluit) als leerdata.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

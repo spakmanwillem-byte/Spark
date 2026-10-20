@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-10-20T12:30:46.001857",
+      "last_active": "2026-10-20T13:02:22.055005+00:00",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1398,11 +1398,22 @@
             "rarity": "legendary",
             "type": "words",
             "unlocked_at": "2026-08-25T22:04:58.197820+00:00"
+          },
+          {
+            "id": "words_3000",
+            "name": "Architect van Begrip",
+            "description": "Je helpt Spark steeds complexere ideeën te begrijpen.",
+            "milestone": 3000,
+            "xp_reward": 20000,
+            "icon": "🧠",
+            "rarity": "legendary",
+            "type": "words",
+            "unlocked_at": "2026-10-20T12:59:30.919292+00:00"
           }
         ],
-        "total_xp_from_achievements": 46435
+        "total_xp_from_achievements": 66435
       },
-      "xp": 56958,
+      "xp": 76958,
       "credits": 0,
       "contact": {
         "telefoon": ""
@@ -1428,12 +1439,6 @@
         "Willem Spakman"
       ],
       "xp_events": [
-        {
-          "amount": 25,
-          "reason": "Bijdrage goedgekeurd (100% gevuld)",
-          "granted_at": "2026-05-12T09:55:36.013454+00:00",
-          "total_after": 26375
-        },
         {
           "amount": 50,
           "reason": "Achievement: Ik koos een Avatar",
@@ -2027,6 +2032,12 @@
           "reason": "Achievement: This is a Milestone",
           "granted_at": "2026-08-25T22:04:58.213775+00:00",
           "total_after": 56958
+        },
+        {
+          "amount": 20000,
+          "reason": "Achievement: Architect van Begrip",
+          "granted_at": "2026-10-20T12:59:30.938413+00:00",
+          "total_after": 76958
         }
       ],
       "gradatie_titel": "Beheerder",
@@ -7757,12 +7768,127 @@
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 0,
+      "xp": 1350,
       "welcome_version_seen": "v1",
       "welcome_sent_at": "2026-09-17T05:21:20.143892+00:00",
       "gradatie_titel": "Familie",
       "admin_capable": true,
-      "admin_key": "admin"
+      "admin_key": "admin",
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "letter_j",
+            "name": "De Letter J",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter J leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓙ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-10-20T12:59:31.073836+00:00",
+            "letter": "J"
+          },
+          {
+            "id": "letter_n",
+            "name": "De Letter N",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter N leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓝ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-10-20T12:59:31.073856+00:00",
+            "letter": "N"
+          },
+          {
+            "id": "letter_q",
+            "name": "De Letter Q",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter Q leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓠ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-10-20T12:59:31.073863+00:00",
+            "letter": "Q"
+          },
+          {
+            "id": "letter_x",
+            "name": "De Letter X",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter X leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓧ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-10-20T12:59:31.073873+00:00",
+            "letter": "X"
+          },
+          {
+            "id": "letter_y",
+            "name": "De Letter Y",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter Y leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓨ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-10-20T12:59:31.073876+00:00",
+            "letter": "Y"
+          },
+          {
+            "id": "letter_z",
+            "name": "De Letter Z",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter Z leerde.",
+            "milestone": null,
+            "xp_reward": 250,
+            "icon": "Ⓩ",
+            "rarity": "rare",
+            "type": "letter_completion",
+            "unlocked_at": "2026-10-20T12:59:31.073880+00:00",
+            "letter": "Z"
+          }
+        ],
+        "total_xp_from_achievements": 1350
+      },
+      "xp_events": [
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter J",
+          "granted_at": "2026-10-20T12:59:31.093833+00:00",
+          "total_after": 250
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter N",
+          "granted_at": "2026-10-20T12:59:31.113356+00:00",
+          "total_after": 350
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter Q",
+          "granted_at": "2026-10-20T12:59:31.132043+00:00",
+          "total_after": 600
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter X",
+          "granted_at": "2026-10-20T12:59:31.150137+00:00",
+          "total_after": 850
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter Y",
+          "granted_at": "2026-10-20T12:59:31.170459+00:00",
+          "total_after": 1100
+        },
+        {
+          "amount": 250,
+          "reason": "Achievement: De Letter Z",
+          "granted_at": "2026-10-20T12:59:31.190012+00:00",
+          "total_after": 1350
+        }
+      ]
     }
   ],
   "metadata": {

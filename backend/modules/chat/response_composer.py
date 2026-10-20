@@ -251,6 +251,15 @@ async def compose_response(
     except Exception as _cex:
         print(f"[compose task-agent-bridge] failed: {_cex}")
     try:
+        from modules import feiten as _feiten
+        _f_out = _feiten.vind_antwoord(user_id, user_text)
+        if _f_out:
+            if session_id:
+                _save_turn_pair(session_id, user_id, user_text, _f_out.get("message", ""), "feiten")
+            return {"success": True, **_f_out, "used_cards": [], "used_model": "feiten", "blueprint_version": "1.0", "fast_path": True}
+    except Exception as _fex:
+        print(f"[compose feiten] failed: {_fex}")
+    try:
         from modules.chat.smart_intents_service import route_help
         _help_out = route_help(user_text, user_id, is_admin=admin_mode)
         if _help_out:
@@ -864,10 +873,10 @@ async def compose_response(
         except Exception:
             pass
 
-        # v6_identity_facts_001 — extract identity-claims uit user-text (sync, snel, regex-only)
+        # v6_identity_facts_001 → v14_feiten_archief_001: feiten.extract_and_save roept identity_facts zelf aan
         try:
-            from modules.chat import identity_facts
-            identity_facts.extract_and_save(user_id, user_text, session_id=session_id)
+            from modules import feiten as _feiten_x
+            _feiten_x.extract_and_save(user_id, user_text, session_id=session_id)
         except Exception:
             pass
 

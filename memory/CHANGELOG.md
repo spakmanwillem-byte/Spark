@@ -1868,3 +1868,7 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 - Chat slash-commands: `/tree` (mappenboom, admin-mode), `/cmd <zin>` → task_agent; schrijven/verwijderen vraagt ja/nee. Registry +`cap_files_tree` (59 live). KB-kaart "Command-blauwdruk" in Weten.
 - Zelfscan-tab in Beheer → Integraties: rapport + backfill (footnote/doel/blauwdruk). 245 containers → footnote 100 %, compleet 55 %. Backups `.bak_zelfscan`.
 - Chat-samenvatting en /tree zonder markdown-sterretjes (bubble rendert geen markdown).
+
+## 2026-10-20 (nacht) — v14_feiten_archief_001 · v14_task_agent_bridge_002
+- Feiten-archief (admin): vier soorten mening/waarde/overtuiging/feit als kaart per user + Spark-scope; passieve extractie in chat; "wat weet je van mij / wat vind ik van X / wat geloof ik" → antwoord uit kaarten i.p.v. LLM. Tab Beheer → Instellingen → Feiten. 69 oude identity-facts gemigreerd.
+- Commands zonder slash: zin met actie-werkwoord → Spark toont redenering (tags → concept → command → zekerheid) en vraagt altijd ja/nee; besluit gelogd in command_learning.jsonl.

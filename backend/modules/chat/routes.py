@@ -401,6 +401,17 @@ async def process_message(req: ChatMessage):
     except Exception as _hex:
         print(f"[help-priority-pre] failed: {_hex}")
 
+    # 0b3d. FEIT WINT VAN LLM (v14_feiten_archief_001) — "wat weet je van mij / wat vind ik van X"
+    try:
+        from modules import feiten as _feiten
+        _f_out = _feiten.vind_antwoord(req.user_id, text)
+        if _f_out:
+            response.update(_f_out)
+            _save_log(req, response, "feiten_antwoord")
+            return response
+    except Exception as _fex:
+        print(f"[feiten-antwoord] failed: {_fex}")
+
     # 0b1. IDENTITY-INTENT (v4_identity_001) — vragen over Spark zelf ("wie ben je", "wat kan je",
     # "jouw missie/visie/core/doel/waarden") krijgen voorrang vóór alle pending flows.
     # Dit voorkomt ook dat een stale pending_wedervraag een identity-vraag opvreet.
@@ -902,6 +913,18 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[capability-router] failed: {ex}")
 
+    # 0b3e. COMMANDS ZONDER SLASH — laag 2 (v14_task_agent_bridge_002): alleen zinnen die nergens anders landden,
+    # met een actie-werkwoord; Spark toont zijn redenering en doet pas na ja (ook bij lezen, we testen nog).
+    try:
+        from . import task_agent_bridge as _tab2
+        _cmd2 = _tab2.try_resolve_free(text, req.user_id, admin_mode=bool(req.admin_mode))
+        if _cmd2:
+            response.update(_cmd2)
+            _save_log(req, response, "cmd_confirm_free")
+            return response
+    except Exception as _cex2:
+        print(f"[task-agent-bridge laag2] failed: {_cex2}")
+
     # 0b4. RELATION EXTRACTION (v4_rel_001) — passieve observer, slaat relaties op
     # uit zinnen als "mijn moeder Anneke", "Ron is mijn vriend". Loopt parallel,
     # blokkeert geen andere intents. Returnt lijst van nieuw toegevoegde relaties.
@@ -911,6 +934,13 @@ async def process_message(req: ChatMessage):
             new_relations = relation_extraction_service.detect_and_save(req.user_id, text)
         except Exception as ex:
             print(f"[relation-extract] failed: {ex}")
+        try:  # v14_feiten_archief_001 — meningen/feiten passief vastleggen (kaart per user)
+            from modules import feiten as _feiten_x
+            _nf = _feiten_x.extract_and_save(req.user_id, text, session_id=getattr(req, "session_id", None))
+            if _nf:
+                response["new_feiten"] = [{"id": f["id"], "kind": f["kind"], "begrip": f["begrip"]} for f in _nf]
+        except Exception as ex:
+            print(f"[feiten-extract] failed: {ex}")
     # Inject nieuwe relaties in response (zichtbaar voor frontend, klein notitie-blokje)
     if new_relations:
         response["new_relations"] = new_relations

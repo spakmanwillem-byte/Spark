@@ -8,14 +8,32 @@ gewone gesprekken nooit per ongeluk een command raken. Laag 2 (later): zonder sl
 """
 from __future__ import annotations
 
+import json
 import re
 from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Dict, Optional
 
 from modules.agents import task_agent
 from modules.chat import session_state
 
 _SLASH = re.compile(r"^\s*/(\w+)\s*(.*)$", re.S)
+_LEARN_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "command_learning.jsonl"
+# laag 2: alleen zinnen met een actie-werkwoord komen in aanmerking (geen gewone gesprekszinnen)
+_ACTIE = re.compile(r"\b(verwijder|wis|gooi\s+weg|delete|maak|cre[eë]er|voeg\s+toe|toon|laat\s+(?:me\s+)?zien|open|zet|geef|start|stop|archiveer|exporteer|download|herstel|ruim\s+op|plan|noteer)\b", re.I)
+_MIN_SCORE_FREE = 0.25
+
+
+def _leer(user_id: str, zin: str, cmd_id: str, tags, besluit: str):
+    """Elke ja/nee op een vrije zin → regel in command_learning.jsonl (zin → command → besluit)."""
+    try:
+        _LEARN_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with _LEARN_FILE.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps({"ts": datetime.now(timezone.utc).isoformat(), "user_id": user_id, "zin": zin,
+                                 "cmd_id": cmd_id, "tags": list(tags or []), "besluit": besluit}, ensure_ascii=False) + "\n")
+    except Exception as e:
+        print(f"[task-agent-bridge] leren mislukt: {e}")
 _ALIASES = {"tree": "cap_files_tree", "boom": "cap_files_tree", "mappen": "cap_files_tree"}
 
 
@@ -74,10 +92,14 @@ async def try_execute(text: str, user_id: Optional[str], admin_mode: bool = Fals
         from modules.chat.smart_intents_service import is_yes, is_no
         if is_yes(t):
             _clear(user_id)
+            if pending.get("zin"):
+                _leer(user_id, pending["zin"], pending["cmd_id"], pending.get("tags"), "ja")
             return _antwoord(await task_agent.execute(pending["cmd_id"], pending.get("params"), user_id=user_id, admin_mode=admin_mode))
         if is_no(t):
             _clear(user_id)
-            return {"type": "cmd_cancelled", "message": "Oké, niet uitgevoerd."}
+            if pending.get("zin"):
+                _leer(user_id, pending["zin"], pending["cmd_id"], pending.get("tags"), "nee")
+            return {"type": "cmd_cancelled", "message": "Oké, niet uitgevoerd. Dat onthoud ik: die zin hoort niet bij dat commando."}
         _clear(user_id)
 
     m = _SLASH.match(t)
@@ -106,3 +128,28 @@ async def try_execute(text: str, user_id: Optional[str], admin_mode: bool = Fals
         return {"type": "cmd_confirm", "cmd_id": cmd["id"],
                 "message": f"Dit is {actie} via `{cmd['id']}` ({method} {cmd.get('path')}). Zal ik het doen? (ja/nee)"}
     return None
+
+
+def try_resolve_free(text: str, user_id: Optional[str], admin_mode: bool = False) -> Optional[Dict]:
+    """Laag 2 (v14_task_agent_bridge_002): zin zonder slash → tags → concept → command, altijd eerst ja/nee.
+    Wordt pas aangeroepen als geen andere intent de zin oppakte."""
+    if not user_id:
+        return None
+    t = (text or "").strip()
+    if len(t) < 6 or t.startswith("/") or "?" in t or not _ACTIE.search(t):
+        return None
+    hit = task_agent.resolve_text(t)
+    if not hit or not hit.get("cmd") or hit.get("score", 0) < _MIN_SCORE_FREE:
+        return None
+    cmd = hit["cmd"]
+    method = (cmd.get("method") or "GET").upper()
+    concept = {"DELETE": "verwijderen", "POST": "aanmaken/uitvoeren", "PUT": "wijzigen", "PATCH": "wijzigen"}.get(method, "lezen")
+    tags = hit.get("matched_tags") or []
+    session_state.set_state(user_id, pending_cmd={"cmd_id": cmd["id"], "params": {}, "zin": t, "tags": tags})
+    session_state.set_last_question(user_id, f"cmd_confirm:{cmd['id']}", intent="cmd_confirm")
+    alt = ""
+    if hit.get("needs_disambiguation") and len(hit.get("candidates") or []) > 1:
+        alt = f" (twijfel met `{hit['candidates'][1]['id']}`)"
+    return {"type": "cmd_confirm", "cmd_id": cmd["id"], "score": hit.get("score"),
+            "message": (f"Ik lees: tags [{', '.join(tags) or '—'}] → {concept} → `{cmd['id']}` "
+                        f"({method} {cmd.get('path')}, zekerheid {round(hit.get('score', 0) * 100)}%){alt}. Zal ik het doen? (ja/nee)")}

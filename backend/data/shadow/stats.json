@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 1842,
+    "events": 1848,
     "corrections": 2,
     "confirmations": 5,
     "fallbacks": 0,
-    "knowledge_matches": 733
+    "knowledge_matches": 736
   },
   "triggers_used": {
     "wedervraag_done": 29,
@@ -88,7 +88,7 @@
     "synapse_list": 1,
     "capability_error": 1,
     "trader_help": 2,
-    "profile_lookup": 44,
+    "profile_lookup": 45,
     "profile_lookup_denied": 3,
     "relay_sent": 5,
     "deposit_ask": 5,
@@ -131,11 +131,13 @@
     "help_summary_declined": 1,
     "cmd_failed": 3,
     "cmd_confirm": 2,
-    "cmd_cancelled": 1,
-    "cmd_executed": 2
+    "cmd_cancelled": 2,
+    "cmd_executed": 2,
+    "cmd_confirm_free": 1,
+    "feiten_antwoord": 2
   },
   "response_types": {
-    "knowledge": 362,
+    "knowledge": 363,
     "unknown": 36,
     "wedervraag_done": 29,
     "wedervraag": 44,
@@ -223,7 +225,7 @@
     "kbv2_cmd_empty": 5,
     "capability_error": 1,
     "trader_help": 2,
-    "profile_lookup": 44,
+    "profile_lookup": 45,
     "profile_lookup_denied": 3,
     "relay_sent": 5,
     "deposit_ask": 5,
@@ -262,9 +264,10 @@
     "help_summary": 2,
     "help_summary_declined": 1,
     "cmd_failed": 3,
-    "cmd_confirm": 2,
-    "cmd_cancelled": 1,
-    "cmd_executed": 2
+    "cmd_confirm": 3,
+    "cmd_cancelled": 2,
+    "cmd_executed": 2,
+    "feiten_antwoord": 2
   },
   "begrip_used": {
     "vroeg": 2,
@@ -374,7 +377,7 @@
     "Winst": 2,
     "Gemaakt": 1,
     "stop": 1,
-    "bent": 5,
+    "bent": 6,
     "geweldig": 1,
     "gisteren": 1,
     "community": 1,
@@ -646,12 +649,14 @@
     "Beheer": 1,
     "Broer": 2,
     "Willem": 2,
-    "Spakman": 1
+    "Spakman": 1,
+    "Belangrijk": 1,
+    "Eerlijk": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-10-20T12:29:39.183722+00:00",
+  "last_event_at": "2026-10-20T12:57:53.144827+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

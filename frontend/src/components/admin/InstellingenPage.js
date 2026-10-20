@@ -3,14 +3,14 @@ import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { SystemArchive } from './SystemArchive';
 import { SynapseTab } from './SynapseTab';
+import { FeitenTab } from './FeitenTab';
 import {
   Settings, Monitor, Volume2, Link2, Sparkles, HelpCircle,
   Save, Shield, ShieldCheck, Clock, Bug, RefreshCw, Palette, Sun, Moon,
   Mic, Speech, Music, Upload, Play, Trash2, Edit3, Plus,
   Keyboard, MessageSquare, Brain, Trophy, ChevronDown, ChevronRight,
   Zap, Globe, Wifi, Database, Server, Bell, Eye, EyeOff,
-  ToggleLeft, ToggleRight, Archive, X, Wallet, Pencil, Lock
-} from 'lucide-react';
+  ToggleLeft, ToggleRight, Archive, X, Wallet, Pencil, Lock, BookOpen } from 'lucide-react';
 import { BarkModal } from '../shared/BarkModal';
 import { InputBark } from '../shared/InputBark';
 
@@ -114,6 +114,7 @@ export function InstellingenPage({ onNavigate }) {
     { id: 'integraties', label: 'Integraties', icon: Link2, accent: '#06b6d4' },
     { id: 'features', label: 'Features', icon: Sparkles, accent: '#22c55e' },
     { id: 'admin', label: 'Admin', icon: ShieldCheck, accent: '#a855f7' },
+    { id: 'feiten', label: 'Feiten', icon: BookOpen, accent: '#f59e0b' }, // v14_feiten_archief_001
     { id: 'tips', label: 'Tips & Hulp', icon: HelpCircle, accent: '#f97316' },
   ];
 
@@ -278,6 +279,11 @@ export function InstellingenPage({ onNavigate }) {
             {/* ====== SYNAPSLAAG (v6_synapse_001 F6) ====== */}
             {activeTab === 'synapse' && (
               <SynapseTab />
+            )}
+
+            {/* ====== FEITEN-ARCHIEF (v14_feiten_archief_001) ====== */}
+            {activeTab === 'feiten' && (
+              <FeitenTab />
             )}
 
             {/* ====== INTEGRATIES ====== */}

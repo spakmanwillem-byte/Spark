@@ -1872,3 +1872,8 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 ## 2026-10-20 (nacht) — v14_feiten_archief_001 · v14_task_agent_bridge_002
 - Feiten-archief (admin): vier soorten mening/waarde/overtuiging/feit als kaart per user + Spark-scope; passieve extractie in chat; "wat weet je van mij / wat vind ik van X / wat geloof ik" → antwoord uit kaarten i.p.v. LLM. Tab Beheer → Instellingen → Feiten. 69 oude identity-facts gemigreerd.
 - Commands zonder slash: zin met actie-werkwoord → Spark toont redenering (tags → concept → command → zekerheid) en vraagt altijd ja/nee; besluit gelogd in command_learning.jsonl.
+
+## 2026-10-20 (laat) — v14_task_agent_bridge_003 · v14_rel_dedupe_001 · feiten getoetst
+- Commands leren van ja/nee (zekerheid stijgt/daalt, "2× eerder ja"), ontbrekende note_id/task_id/event_id → genummerd lijstje → kiezen → bevestigen → uitvoeren.
+- Feiten: 45 ongetoetst → 3 getoetst / 7 mening / 33 momentopname (verworpen); momentopname-filter in extractie. Spark Wijsheid-voorstellen (≥2 users) + keur-goed → Spark-kaart.
+- Relaties: dubbele personen samengevoegd, "Jarig" weg, toestandwoorden geen namen meer, "wie is joy" → één antwoord, "wie is mijn moeder" weer via relaties.

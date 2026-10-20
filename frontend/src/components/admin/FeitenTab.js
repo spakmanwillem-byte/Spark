@@ -70,18 +70,21 @@ export function FeitenTab() {
   const [q, setQ] = useState('');
   const [busy, setBusy] = useState(false);
   const [nieuw, setNieuw] = useState(null);
+  const [voorstellen, setVoorstellen] = useState([]);
 
   const load = useCallback(async () => {
     setBusy(true);
     const p = new URLSearchParams({ viewer_id: user?.id, scope });
     if (userId) p.set('user_id', userId); if (kind) p.set('kind', kind); if (status) p.set('status', status); if (q) p.set('q', q);
     try {
-      const [r, s] = await Promise.all([
+      const [r, s, v] = await Promise.all([
         fetch(`${API}/api/feiten?${p}`).then(x => x.json()),
         fetch(`${API}/api/feiten/stats?viewer_id=${user?.id}`).then(x => x.json()),
+        fetch(`${API}/api/feiten/voorstellen?viewer_id=${user?.id}`).then(x => x.json()),
       ]);
       if (r.success) setData(r); else toast.error(apiError(r));
       if (s.success) setStats(s);
+      if (v.success) setVoorstellen(v.voorstellen || []);
     } catch { toast.error('Laden mislukt'); }
     setBusy(false);
   }, [user?.id, scope, userId, kind, status, q]);
@@ -105,6 +108,10 @@ export function FeitenTab() {
   const migreer = async () => {
     const r = await fetch(`${API}/api/feiten/migreer`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ viewer_id: user?.id }) }).then(x => x.json());
     if (r.success) { toast.success(`Migratie: ${r.stats.nieuw} nieuwe kaarten uit ${r.stats.users} users`); load(); } else toast.error(apiError(r));
+  };
+  const keurGoed = async (v) => {
+    const r = await fetch(`${API}/api/feiten/voorstellen/keur-goed`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ viewer_id: user?.id, kind: v.kind, begrip: v.begrip, wat: v.wat, users: v.users, bron_ids: v.bron_ids }) }).then(x => x.json());
+    if (r.success) { toast.success('Spark-kaart aangemaakt'); load(); } else toast.error(apiError(r));
   };
   const maak = async () => {
     const r = await fetch(`${API}/api/feiten`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ viewer_id: user?.id, ...nieuw, user_id: nieuw.scope === 'user' ? nieuw.user_id : null }) }).then(x => x.json());
@@ -138,6 +145,21 @@ export function FeitenTab() {
           <input data-testid="feiten-nieuw-begrip" value={nieuw.begrip} onChange={e => setNieuw({ ...nieuw, begrip: e.target.value })} className={inp} placeholder="Begrip" />
           <input data-testid="feiten-nieuw-wat" value={nieuw.wat} onChange={e => setNieuw({ ...nieuw, wat: e.target.value })} className={inp + ' md:col-span-2'} placeholder="Wat" />
           <div className="md:col-span-6 flex gap-2"><button data-testid="feiten-nieuw-save" onClick={maak} disabled={!nieuw.begrip || !nieuw.wat} className="text-xs px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-semibold disabled:opacity-40">Aanmaken</button><button onClick={() => setNieuw(null)} className="text-xs px-3 py-1.5 rounded bg-slate-800 text-slate-300">Annuleer</button></div>
+        </div>
+      )}
+
+      {voorstellen.length > 0 && (
+        <div data-testid="feiten-voorstellen" className="bg-slate-900 border border-violet-500/30 rounded-xl p-4 space-y-2">
+          <h4 className="text-sm font-semibold text-violet-300">Spark Wijsheid — {voorstellen.length} voorstel{voorstellen.length > 1 ? 'len' : ''}</h4>
+          <p className="text-[11px] text-slate-500">Kaarten die meerdere gebruikers onafhankelijk delen. Jij keurt goed → algemene Spark-kaart.</p>
+          {voorstellen.map((v, i) => (
+            <div key={i} data-testid={`feiten-voorstel-${i}`} className="flex flex-wrap items-center gap-2 border-t border-slate-800/60 pt-2">
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: (KIND[v.kind]?.kleur || '#fff') + '22', color: KIND[v.kind]?.kleur }}>{KIND[v.kind]?.label}</span>
+              <span className="text-xs text-white">{v.begrip}: {v.wat}</span>
+              <span className="text-[10px] text-slate-500">{v.users.length} users · {v.aantal}×</span>
+              <button data-testid={`feiten-voorstel-ok-${i}`} onClick={() => keurGoed(v)} className="ml-auto text-[11px] px-2 py-1 rounded bg-violet-500/20 text-violet-200 flex items-center gap-1"><Check className="w-3 h-3" /> keur goed</button>
+            </div>
+          ))}
         </div>
       )}
 

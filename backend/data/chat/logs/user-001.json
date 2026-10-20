@@ -79757,11 +79757,222 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3155
       }
+    },
+    {
+      "id": "conv-5c627cb9",
+      "timestamp": "2026-10-20T13:06:47.814219+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is joy",
+      "spark_response": "Welke 'joy' bedoel je? Ik vind: Joy, Joy, Joy Spakman.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup_ambiguous",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup_ambiguous"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3156
+      }
+    },
+    {
+      "id": "conv-4ec8fc10",
+      "timestamp": "2026-10-20T13:06:48.072935+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is Joy",
+      "spark_response": "Welke 'Joy' bedoel je? Ik vind: Joy, Joy, Joy Spakman.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup_ambiguous",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup_ambiguous"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3157
+      }
+    },
+    {
+      "id": "conv-17999d78",
+      "timestamp": "2026-10-20T13:06:48.357454+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is heidi",
+      "spark_response": "**Heidi Spakman** is jouw **moeder** — ~69 jaar · interesses: katten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3158
+      }
+    },
+    {
+      "id": "conv-b9da0bf9",
+      "timestamp": "2026-10-20T13:06:48.623759+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is mijn moeder",
+      "spark_response": "Uit wat je me eerder vertelde:\n• ik heb: achternaam wijziging gehad door invloed van mijn opa oma moederskant (nog niet getoetst)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "feiten_antwoord",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "feiten_antwoord"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3159
+      }
+    },
+    {
+      "id": "conv-b94d7ace",
+      "timestamp": "2026-10-20T13:06:49.164816+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie zijn mijn familie",
+      "spark_response": "**Familie**: Familie is een groep mensen die met elkaar verbonden zijn door geboorte, relatie of samenleven.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Familie"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3160
+      }
+    },
+    {
+      "id": "conv-718de70d",
+      "timestamp": "2026-10-20T13:09:24.676987+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is joy",
+      "spark_response": "**Joy Spakman** is jouw **nicht**.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3161
+      }
+    },
+    {
+      "id": "conv-27157b6c",
+      "timestamp": "2026-10-20T13:09:24.921408+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is mijn moeder",
+      "spark_response": "Jouw **moeder** is **Heidi Spakman**.\n\n_Moeder_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "my_relation_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "my_relation_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3162
+      }
+    },
+    {
+      "id": "conv-1524959f",
+      "timestamp": "2026-10-20T13:09:25.178406+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie is lotus",
+      "spark_response": "**Lotus Martens** is jouw **dochter** — 17 jaar · heeft: scooter, fiets.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3163
+      }
+    },
+    {
+      "id": "conv-2d6103fe",
+      "timestamp": "2026-10-20T13:09:25.419863+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat weet je van mij",
+      "spark_response": "Dit heb ik van je onthouden:\nFeiten:\n• werk: zzp-er\n• ik heb: eigenlijk 2 neefjes\n• ik heb: achternaam wijziging gehad door invloed van mijn opa oma moederskant (nog niet getoetst)\n• ik heb: bitvavo account\nJouw meningen:\n• houdt van: katten en techniek\n• ik ben: zo blij met je\n• ik ben: zo blij om je stem te horen\n• ik heb: geel veel brainfarts\n• ik ben: je bewust aan het maken\n• ik ben: niet zo van een land kiezen\n• ik heb: vertrouwen in jou\n• houdt van: eerlijkheid\n(35 kaarten in totaal — uit onze gesprekken, geen LLM-gok)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "feiten_antwoord",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "feiten_antwoord"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3164
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3155,
-    "last_updated": "2026-10-20T12:01:50.193511+00:00"
+    "total_conversations": 3164,
+    "last_updated": "2026-10-20T13:09:25.419863+00:00"
   }
 }

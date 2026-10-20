@@ -147,7 +147,10 @@ TRANSITIVE_REL = {
 }
 
 # Negatieve woorden die we niet als naam willen
-NAME_BLACKLIST = {"De", "Het", "Een", "Wat", "Hoe", "Hij", "Zij", "Mijn", "Jouw"}
+NAME_BLACKLIST = {"De", "Het", "Een", "Wat", "Hoe", "Hij", "Zij", "Mijn", "Jouw",
+                  # v14_rel_dedupe_001 — toestanden zijn geen namen ("mijn moeder is Jarig")
+                  "Jarig", "Ziek", "Thuis", "Weg", "Blij", "Moe", "Boos", "Druk", "Dood", "Overleden", "Oud", "Klaar",
+                  "Weer", "Ook", "Nog", "Vandaag", "Morgen", "Gisteren", "Lief", "Aardig", "Er", "Hier", "Daar"}
 
 
 def _rel_file(user_id: str) -> Path:

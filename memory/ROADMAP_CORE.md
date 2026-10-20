@@ -92,7 +92,10 @@ Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leve
 | `/tree` + `/cmd <zin>` in chat via task_agent (lezen direct, schrijven ja/nee) | ✅ 20-10 | Laag 2: zonder slash + concept-JSON live-editbaar; params vragen (bv. note_id) |
 | Zelfscan-tab (Beheer → Integraties): rapport + "Vul aan" | ✅ 20-10 | 245 containers: footnote 100 %, compleet 55 %. 141 code-blauwdrukken zijn nog stub ("Wat werkt al" invullen) |
 | Feiten-archief: mening · waarde · overtuiging · feit, Beheer → Instellingen → Feiten, feit wint van LLM | ✅ 20-10 | Admin toetst feiten (45 ongetoetst); Spark-scope (algemene wijsheid) nog leeg — handmatig of later uit gesprekken |
-| Commands zónder slash (laag 2): zin → tags → concept → command, altijd ja/nee, leert in `command_learning.jsonl` | ✅ 20-10 | Params vragen (note_id); leer-log gebruiken om scores bij te stellen |
+| Commands zónder slash (laag 2): zin → tags → concept → command, altijd ja/nee, leert in `command_learning.jsonl` | ✅ 20-10 | ✅ leer-bias (vaak-ja → hogere zekerheid, 2× nee → ander command) · ✅ "welke notitie?" genummerd lijstje (note_id/task_id/event_id) |
+| Feiten getoetst door Spark: 3 getoetst, 7 → mening, 33 → verworpen als momentopname; extractie filtert momentopnames nu | ✅ 20-10 | 2 open (achternaam-historie, "ik ben willem" van user-672f0e5c) — Willem |
+| Spark Wijsheid: `GET /api/feiten/voorstellen` (≥2 users delen een kaart) → admin keurt goed → Spark-kaart | ✅ 20-10 | Nog 0 voorstellen (1 actieve user); groeit vanzelf |
+| Relaties opgeschoond: dubbelen samengevoegd (Joy/Lotus/Maurice), "Jarig" weg, toestand-woorden geblokkeerd, profile-lookup dedupet | ✅ 20-10 | Contacten tonen bij familie geen moeder/zus-detail — sync met relatie-graaf = later |
 | Dit bestand: >1800 regels (regel: <500) | 🧹 onderhoud | Sessies 52-58 naar HISTORY, open items naar BACKLOG — aparte opruimsessie, na akkoord |
 
 **Bugs 20-10 gefixt**: inkoop-artikel zonder code → 422 + React-crash (code optioneel, `apiError()` overal) ·
@@ -320,6 +323,22 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     landden): actie-werkwoord vereist, geen vraagteken, score ≥ 0.25 → "Ik lees: tags [notitie, verwijderen] → verwijderen
     → `cap_notes_delete` (zekerheid 40%). Zal ik het doen? (ja/nee)". Altijd bevestigen, ook lezen (we testen nog).
     Ja/nee → regel in `data/system/command_learning.jsonl` (zin, cmd, tags, besluit) als leerdata.
+- **✅ 20-10 (laat) — leren van ja/nee · ontbrekende gegevens · feiten getoetst · wijsheid · Joy-fix**
+  (`v14_task_agent_bridge_003`, `v14_rel_dedupe_001`):
+  • `task_agent_bridge._leer_bias`: per cmd ja/nee-tellingen op exacte zin of gelijke tag-set → score +0,15/ja −0,10/nee,
+    drempel 0,25 vervalt bij ≥1 ja ("zekerheid 60%, 2× eerder ja"); ≥2 nee en meer nee dan ja → volgende kandidaat of niets.
+  • `_PARAM_SPEC` note_id/task_id/event_id → lijst ophalen (intern via ASGI), genummerd kiezen (nummer of tekst, "laat maar"
+    annuleert), daarna opnieuw ja/nee met de gekozen titel → uitvoeren. Getest: 2 notities → "2" → "ja" → verwijderd.
+  • Feiten getoetst (Willem: "feiten zijn feiten, die kan je wel"): 45 ongetoetst → 3 getoetst (zzp-er, 2 neefjes, Bitvavo),
+    7 omgezet naar mening, 33 verworpen met tag `momentopname` (gevoel/bezigheid/tijd), 2 open. `_MOMENT`-filter in
+    `feiten.extract_and_save` voor triggers i_am/i_have → zulke zinnen komen niet meer als feit binnen.
+  • Spark Wijsheid: kern-woorden van `wat` (Jaccard ≥ 0,5), zelfde soort, ≥2 users, nog geen Spark-kaart → voorstel;
+    `POST /voorstellen/keur-goed` maakt Spark-kaart (bron wijsheid, users + bron_ids). UI-blok in Feiten-tab.
+  • Joy/Heidi (Willem): oorzaken = dubbele personen (Joy + Joy Spakman…) → "Welke Joy?", rommel-relatie "Jarig" (uit "mijn
+    moeder is jarig"), en feiten-antwoord kaapte "wie is mijn moeder". Fix: `_resolve_person` dedupet voornaam ⊂ volledige
+    naam met gelijke relatie; relaties/persons van user-001 samengevoegd; `NAME_BLACKLIST` + toestandwoorden;
+    `vind_antwoord` slaat relatiewoorden over en matcht alleen op wat/begrip. Heidi staat correct als moeder in de
+    relatie-graaf; ze staat niet in Contacten (daar alleen Maaike/Lotus/Joy als "familie" zonder detail).
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

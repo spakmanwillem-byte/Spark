@@ -838,11 +838,301 @@
         "session_id": "default",
         "gesprek_nummer": 36
       }
+    },
+    {
+      "id": "conv-6773c56d",
+      "timestamp": "2026-10-20T13:09:48.326268+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "verwijder die notitie",
+      "spark_response": "**Verwijderd**: Verwijderd betekent dat iets is weggehaald of niet meer aanwezig is.\n\n**Notitie**: Een notitie is een korte vastlegging van informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Verwijderd"
+          },
+          {
+            "begrip": "Notitie"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 37
+      }
+    },
+    {
+      "id": "conv-f04bfa39",
+      "timestamp": "2026-10-20T13:09:48.497363+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ja",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 38
+      }
+    },
+    {
+      "id": "conv-fe318a69",
+      "timestamp": "2026-10-20T13:09:48.660222+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "2",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 39
+      }
+    },
+    {
+      "id": "conv-6e75b0cc",
+      "timestamp": "2026-10-20T13:09:48.845575+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ja",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 40
+      }
+    },
+    {
+      "id": "conv-70988b42",
+      "timestamp": "2026-10-20T13:09:49.101785+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "verwijder die notitie",
+      "spark_response": "**Verwijderd**: Verwijderd betekent dat iets is weggehaald of niet meer aanwezig is.\n\n**Notitie**: Een notitie is een korte vastlegging van informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Verwijderd"
+          },
+          {
+            "begrip": "Notitie"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 41
+      }
+    },
+    {
+      "id": "conv-997d8f05",
+      "timestamp": "2026-10-20T13:09:49.305772+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "laat maar",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 42
+      }
+    },
+    {
+      "id": "conv-eefc5c07",
+      "timestamp": "2026-10-20T13:10:07.149882+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "verwijder die notitie",
+      "spark_response": "Ik lees: tags [notitie, verwijderen] → verwijderen → `cap_notes_delete` (DELETE /api/notes/delete/{note_id}, zekerheid 30%). Zal ik het doen? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm_free",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 43
+      }
+    },
+    {
+      "id": "conv-ef20e788",
+      "timestamp": "2026-10-20T13:10:07.398745+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ja",
+      "spark_response": "Welke notitie bedoel je?\n1. Testnotitie B\n2. Testnotitie A\n(zeg het nummer, of 'laat maar')",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_param",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_param"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 44
+      }
+    },
+    {
+      "id": "conv-337c475c",
+      "timestamp": "2026-10-20T13:10:07.629759+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "2",
+      "spark_response": "'Testnotitie A' verwijderen via `cap_notes_delete`. Zeker weten? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 45
+      }
+    },
+    {
+      "id": "conv-061fcb8b",
+      "timestamp": "2026-10-20T13:10:07.814495+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ja",
+      "spark_response": "✅ 'Testnotitie A' — gedaan via `cap_notes_delete`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_executed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_executed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 46
+      }
+    },
+    {
+      "id": "conv-48629032",
+      "timestamp": "2026-10-20T13:10:08.039094+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "verwijder die notitie",
+      "spark_response": "Ik lees: tags [notitie, verwijderen] → verwijderen → `cap_notes_delete` (DELETE /api/notes/delete/{note_id}, zekerheid 60%, 2× eerder ja). Zal ik het doen? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm_free",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 47
+      }
+    },
+    {
+      "id": "conv-806aee53",
+      "timestamp": "2026-10-20T13:10:08.221831+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "laat maar",
+      "spark_response": "Oké, niet uitgevoerd. Dat onthoud ik: die zin hoort niet bij dat commando.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_cancelled",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "cmd_cancelled"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 48
+      }
     }
   ],
   "metadata": {
     "user_id": "user-4453ade3",
-    "total_conversations": 36,
-    "last_updated": "2026-10-20T12:57:53.134309+00:00"
+    "total_conversations": 48,
+    "last_updated": "2026-10-20T13:10:08.221831+00:00"
   }
 }

@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 1848,
+    "events": 1869,
     "corrections": 2,
     "confirmations": 5,
     "fallbacks": 0,
-    "knowledge_matches": 736
+    "knowledge_matches": 741
   },
   "triggers_used": {
     "wedervraag_done": 29,
@@ -88,7 +88,7 @@
     "synapse_list": 1,
     "capability_error": 1,
     "trader_help": 2,
-    "profile_lookup": 45,
+    "profile_lookup": 48,
     "profile_lookup_denied": 3,
     "relay_sent": 5,
     "deposit_ask": 5,
@@ -98,9 +98,9 @@
     "rps_stats": 3,
     "rps_reset": 3,
     "kb_sound_toggle": 7,
-    "my_relation_lookup": 11,
+    "my_relation_lookup": 12,
     "age_lookup": 15,
-    "profile_lookup_ambiguous": 2,
+    "profile_lookup_ambiguous": 4,
     "personalia_save": 7,
     "personalia_intrek": 2,
     "homonym_disambig": 3,
@@ -130,14 +130,15 @@
     "open_help_bark": 4,
     "help_summary_declined": 1,
     "cmd_failed": 3,
-    "cmd_confirm": 2,
-    "cmd_cancelled": 2,
-    "cmd_executed": 2,
-    "cmd_confirm_free": 1,
-    "feiten_antwoord": 2
+    "cmd_confirm": 3,
+    "cmd_cancelled": 3,
+    "cmd_executed": 3,
+    "cmd_confirm_free": 3,
+    "feiten_antwoord": 4,
+    "cmd_param": 1
   },
   "response_types": {
-    "knowledge": 363,
+    "knowledge": 366,
     "unknown": 36,
     "wedervraag_done": 29,
     "wedervraag": 44,
@@ -151,7 +152,7 @@
     "welcome": 328,
     "recap": 1,
     "greeting": 40,
-    "general": 43,
+    "general": 47,
     "prive_message": 12,
     "goodbye": 8,
     "knowledge_deeper": 3,
@@ -225,7 +226,7 @@
     "kbv2_cmd_empty": 5,
     "capability_error": 1,
     "trader_help": 2,
-    "profile_lookup": 45,
+    "profile_lookup": 48,
     "profile_lookup_denied": 3,
     "relay_sent": 5,
     "deposit_ask": 5,
@@ -236,9 +237,9 @@
     "rps_reset": 3,
     "kb_sound_toggle": 7,
     "open_help_bark": 57,
-    "my_relation_lookup": 11,
+    "my_relation_lookup": 12,
     "age_lookup": 15,
-    "profile_lookup_ambiguous": 2,
+    "profile_lookup_ambiguous": 4,
     "personalia_save": 7,
     "personalia_intrek": 2,
     "homonym_disambig": 3,
@@ -264,10 +265,11 @@
     "help_summary": 2,
     "help_summary_declined": 1,
     "cmd_failed": 3,
-    "cmd_confirm": 3,
-    "cmd_cancelled": 2,
-    "cmd_executed": 2,
-    "feiten_antwoord": 2
+    "cmd_confirm": 6,
+    "cmd_cancelled": 3,
+    "cmd_executed": 3,
+    "feiten_antwoord": 4,
+    "cmd_param": 1
   },
   "begrip_used": {
     "vroeg": 2,
@@ -651,12 +653,15 @@
     "Willem": 2,
     "Spakman": 1,
     "Belangrijk": 1,
-    "Eerlijk": 1
+    "Eerlijk": 1,
+    "Familie": 1,
+    "Verwijderd": 2,
+    "Notitie": 2
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-10-20T12:57:53.144827+00:00",
+  "last_event_at": "2026-10-20T13:10:08.232201+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

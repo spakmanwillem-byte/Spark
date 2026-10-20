@@ -298,6 +298,18 @@ def _resolve_person(name_query: str, viewer_id: str):
         # uniek matcht binnen viewer's eigen graaf, want viewer kent zijn eigen persoon-kaart.
         # Selecteer de meest-complete persons_card (met meeste velden ingevuld).
         own_cards = [m for m in matches if m.get("_source") == "persons_card"]
+        # v14_rel_dedupe_001 (Willem 20-10: "Joy, Joy, Joy Spakman") — "Joy" en "Joy Spakman" met dezelfde relatie
+        # zijn één persoon: houd de volledigste naam.
+        def _nm(m): return ((m.get("volledige_naam") or m.get("naam") or "")).strip().lower()
+        def _rel(m): return ((m.get("_persons_card") or {}).get("relatie") or "").lower()
+        samengevoegd = []
+        for m in sorted(own_cards, key=lambda x: -len(_nm(x))):
+            if any(_nm(m) and _nm(m) != _nm(o) and _nm(o).startswith(_nm(m).split()[0]) and _rel(m) == _rel(o) for o in samengevoegd):
+                continue
+            if any(_nm(m) == _nm(o) for o in samengevoegd):
+                continue
+            samengevoegd.append(m)
+        own_cards = samengevoegd
         if own_cards:
             # Score op aantal info-velden
             def _score(m):

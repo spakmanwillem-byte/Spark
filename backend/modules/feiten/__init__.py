@@ -69,6 +69,13 @@ _FEIT = [
     (r"\bik\s+heb\s+(\d+|een|twee|drie|vier)\s+(kinderen|kind|zoons?|dochters?|honden?|katten?|broers?|zussen?)\b", "gezin"),
 ]
 _NEG = re.compile(r"\b(niet|nooit|geen)\b")
+# Momentopnames zijn geen feiten: gevoel/toestand van nu, bezigheid (voltooid deelwoord), tijdsaanduiding.
+_MOMENT = re.compile(r"\b(blij|boos|woest|moe|verdrietig|gefrustreerd|bang|wakker|terug|er weer|klaar|kwijt|verdwaald|ziek|druk|"
+                     r"onderweg|thuis|bezig|benieuwd|trots|zenuwachtig|gespannen|net|straks|vandaag|morgen|gisteren|deze week|"
+                     r"om \d{1,2}(:\d{2})?\s*uur|\d{1,2}:\d{2}|zondag|maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|"
+                     r"ge\w+d|ge\w+t|ingevuld|gezet|gestuurd|geleerd|uitgelegd|gewerkt|gesleuteld|gedaan|afspraak|test\w*|vragen|"
+                     r"kaart\w*|kennisbank|agenda|strategie|brainstorm\w*)\b", re.I)
+_STATE_TRIGGERS = {"i_am", "i_have"}
 
 
 def _file(scope: str, user_id: Optional[str]) -> Path:
@@ -150,6 +157,8 @@ def extract_and_save(user_id: str, text: str, session_id: Optional[str] = None) 
             kind = "mening" if trig in MENING_TRIGGERS else "feit"
             if any(n["kind"] == "feit" and n["lagen"]["wat"].lower() in (f.get("value") or "").lower() for n in nieuw):
                 continue  # specifieker patroon (leeftijd/woonplaats) heeft dit al
+            if trig in _STATE_TRIGGERS and _MOMENT.search(f.get("value") or ""):
+                continue  # "ik ben boos" / "ik heb de kaart ingevuld" = momentopname, geen feit
             k = _kaart(kind, "user", user_id, TRIGGER_BEGRIP.get(trig, trig.replace("_", " ")), f.get("value", ""), t, "chat",
                        session_id, trigger=trig)
             if _dedupe_add(d, k):
@@ -195,8 +204,11 @@ def vind_antwoord(user_id: str, text: str) -> Optional[Dict]:
     if not m:
         return None
     onderwerp = next((g for g in m.groups() if g), "").strip().lower()
+    # "wie is mijn moeder" hoort bij relaties, niet bij het feiten-archief
+    if re.search(r"\b(moeder|vader|zus|zusje|broer|broertje|dochter|zoon|oma|opa|neef|nicht|tante|oom|vriend|vriendin|partner|vrouw|man|kind|kinderen|familie|ouders)\b", onderwerp):
+        return None
     woorden = {w for w in re.findall(r"[a-zà-ÿ]{3,}", onderwerp)} - {"van", "over", "mijn", "het", "een", "dat", "die"}
-    hits = [f for f in feiten if woorden and (any(w in (f["lagen"]["wat"] + " " + f["begrip"] + " " + f["lagen"]["context"]).lower() for w in woorden))]
+    hits = [f for f in feiten if woorden and (any(w in (f["lagen"]["wat"] + " " + f["begrip"]).lower() for w in woorden))]
     if not hits and re.search(r"\bhou(?:d)?\s+ik\s+van", t, re.I):
         hits = [f for f in feiten if f["begrip"] in ("houdt van", "gek op", "favoriet", "hobby")]
     if not hits and re.search(r"belangrijk|normen|waarden", t, re.I):
@@ -353,3 +365,71 @@ async def migreer(body: MigreerBody):
                     stats["nieuw"] += 1
         _save("user", uid, d)
     return {"success": True, "stats": stats}
+
+
+# ---- Spark Wijsheid: feiten die meerdere users delen → voorstel voor Spark-kaart (admin keurt goed) ----------------
+_STOP = {"de", "het", "een", "en", "of", "in", "op", "van", "voor", "met", "dat", "die", "is", "zijn", "ik", "je", "mijn", "niet",
+         "ook", "nog", "wel", "heel", "erg", "als", "aan", "bij", "om", "te", "er", "zo", "dan", "maar", "dus"}
+
+
+def _kern(f: Dict) -> frozenset:
+    return frozenset(w for w in re.findall(r"[a-zà-ÿ]{3,}", f["lagen"]["wat"].lower()) if w not in _STOP)
+
+
+def _lijkt(a: frozenset, b: frozenset) -> bool:
+    if not a or not b:
+        return False
+    return len(a & b) / len(a | b) >= 0.5
+
+
+@router.get("/voorstellen")
+async def voorstellen(viewer_id: str):
+    """Kaarten (feit/waarde/overtuiging, niet verworpen) die ≥2 verschillende users delen."""
+    _require_admin(viewer_id)
+    alle = [f for u in _alle_users() for f in _load("user", u)["feiten"] if f["kind"] != "mening" and f["status"] != "verworpen"]
+    spark = _load("spark", None)["feiten"]
+    groepen: List[Dict] = []
+    for f in alle:
+        k = _kern(f)
+        g = next((g for g in groepen if g["kind"] == f["kind"] and _lijkt(g["kern"], k)), None)
+        if g:
+            g["leden"].append(f); g["users"].add(f["user_id"])
+        else:
+            groepen.append({"kind": f["kind"], "kern": k, "leden": [f], "users": {f["user_id"]}})
+    out = []
+    for g in groepen:
+        if len(g["users"]) < 2:
+            continue
+        if any(_lijkt(_kern(sf), g["kern"]) for sf in spark):
+            continue  # al een Spark-kaart
+        lid = max(g["leden"], key=lambda x: x.get("keer_gehoord", 1))
+        out.append({"kind": g["kind"], "begrip": lid["begrip"], "wat": lid["lagen"]["wat"], "users": sorted(g["users"]),
+                    "aantal": len(g["leden"]), "voorbeelden": [x["lagen"]["context"][:120] for x in g["leden"][:3]],
+                    "bron_ids": [x["id"] for x in g["leden"]]})
+    out.sort(key=lambda x: (-len(x["users"]), -x["aantal"]))
+    return {"success": True, "voorstellen": out}
+
+
+class KeurGoedBody(BaseModel):
+    viewer_id: str
+    kind: str
+    begrip: str
+    wat: str
+    users: List[str]
+    bron_ids: List[str] = []
+
+
+@router.post("/voorstellen/keur-goed")
+async def keur_goed(body: KeurGoedBody):
+    _require_admin(body.viewer_id)
+    d = _load("spark", None)
+    k = _kaart(body.kind, "spark", None, body.begrip, body.wat, "", "wijsheid", tags=["wijsheid", "gedeeld"])
+    k["lagen"]["waarom"] = f"Gedeeld door {len(body.users)} gebruikers; goedgekeurd door {body.viewer_id}"
+    k["status"] = "getoetst" if body.kind == "feit" else "bevestigd"
+    k["getoetst_door"] = body.viewer_id
+    k["bron"]["users"] = body.users
+    k["bron"]["bron_ids"] = body.bron_ids
+    k["vertrouwen"] = 0.9
+    d["feiten"].append(k)
+    _save("spark", None, d)
+    return {"success": True, "feit": k}

@@ -1,38 +1,6 @@
 {
   "persons": [
     {
-      "id": "person-6c47506a",
-      "naam": "Lotus",
-      "volledige_naam": "Lotus Spakman",
-      "relatie": "dochter",
-      "gradatie": 2,
-      "is_user": true,
-      "linked_user_id": "user-lotus",
-      "tags": [
-        "familie",
-        "dochter"
-      ],
-      "notes": "",
-      "created_by": "user-001",
-      "conversation_refs": [],
-      "knowledge_refs": [],
-      "created_at": "2026-03-15T17:03:38.247993",
-      "updated_at": "2026-06-03T17:21:54.734972+00:00",
-      "body_slots": {
-        "chest": {
-          "label": "Houten ketting",
-          "color": null,
-          "icon": "📿",
-          "note": null,
-          "ts": "2026-05-29T10:23:53.916657+00:00"
-        }
-      },
-      "bezittingen": [
-        "scooter",
-        "fiets"
-      ]
-    },
-    {
       "id": "person-e92653b6",
       "naam": "Maurice Maas",
       "volledige_naam": "Maurice Maas",
@@ -50,7 +18,8 @@
       "conversation_refs": [],
       "knowledge_refs": [],
       "created_at": "2026-03-15T17:03:38.248244",
-      "updated_at": "2026-05-19T12:06:48.982489+00:00"
+      "updated_at": "2026-05-19T12:06:48.982489+00:00",
+      "auto_detected": true
     },
     {
       "id": "person-fac9edb5",
@@ -185,8 +154,8 @@
       "volledige_naam": "Lotus Martens",
       "relatie": "dochter",
       "gradatie": 2,
-      "is_user": false,
-      "linked_user_id": null,
+      "is_user": true,
+      "linked_user_id": "user-lotus",
       "tags": [
         "dochter",
         "familie"
@@ -202,7 +171,16 @@
       "bezittingen": [
         "scooter",
         "fiets"
-      ]
+      ],
+      "body_slots": {
+        "chest": {
+          "label": "Houten ketting",
+          "color": null,
+          "icon": "📿",
+          "note": null,
+          "ts": "2026-05-29T10:23:53.916657+00:00"
+        }
+      }
     },
     {
       "id": "person-9cf5657e",
@@ -232,26 +210,6 @@
       ]
     },
     {
-      "id": "person-5c7efbbe",
-      "naam": "Joy",
-      "volledige_naam": "Joy",
-      "relatie": "nicht",
-      "gradatie": 5,
-      "is_user": false,
-      "linked_user_id": null,
-      "tags": [
-        "familie",
-        "nicht"
-      ],
-      "notes": "Auto-detected uit chat (2026-06-03)",
-      "created_by": "user-001",
-      "conversation_refs": [],
-      "knowledge_refs": [],
-      "auto_detected": true,
-      "created_at": "2026-06-03T16:46:14.031639+00:00",
-      "updated_at": "2026-06-03T16:46:14.031639+00:00"
-    },
-    {
       "id": "person-b1424098",
       "naam": "Joy Spakman",
       "volledige_naam": "Joy Spakman",
@@ -272,26 +230,6 @@
       "updated_at": "2026-06-03T16:46:14.031639+00:00"
     },
     {
-      "id": "person-d3d1b8ac",
-      "naam": "Jarig",
-      "volledige_naam": "Jarig",
-      "relatie": "moeder",
-      "gradatie": 2,
-      "is_user": false,
-      "linked_user_id": null,
-      "tags": [
-        "familie",
-        "moeder"
-      ],
-      "notes": "Auto-detected uit chat (2026-06-03)",
-      "created_by": "user-001",
-      "conversation_refs": [],
-      "knowledge_refs": [],
-      "auto_detected": true,
-      "created_at": "2026-06-03T17:00:14.362757+00:00",
-      "updated_at": "2026-06-03T17:00:14.362757+00:00"
-    },
-    {
       "id": "person-f316cc69",
       "naam": "Wouter",
       "volledige_naam": "Wouter",
@@ -310,26 +248,6 @@
       "auto_detected": true,
       "created_at": "2026-06-03T17:30:52.573494+00:00",
       "updated_at": "2026-06-03T17:30:52.573494+00:00"
-    },
-    {
-      "id": "person-38ac5660",
-      "naam": "Maurice",
-      "volledige_naam": "Maurice",
-      "relatie": "vriend",
-      "gradatie": 5,
-      "is_user": false,
-      "linked_user_id": null,
-      "tags": [
-        "kennis",
-        "vriend"
-      ],
-      "notes": "Auto-detected uit chat (2026-06-05)",
-      "created_by": "user-001",
-      "conversation_refs": [],
-      "knowledge_refs": [],
-      "auto_detected": true,
-      "created_at": "2026-06-05T13:18:47.207097+00:00",
-      "updated_at": "2026-06-05T13:18:47.207097+00:00"
     },
     {
       "id": "person-4b41c64e",
@@ -354,7 +272,7 @@
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_persons": 16,
+    "total_persons": 12,
     "last_updated": "2026-08-22T12:14:59.237080+00:00"
   }
 }

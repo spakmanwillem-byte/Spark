@@ -2,28 +2,6 @@
   "user_id": "user-001",
   "relationships": [
     {
-      "person_name": "Lotus",
-      "user_id": "user-lotus",
-      "relation_type": "familie/dochter",
-      "knows_about_me": true,
-      "i_know_about": true,
-      "notes": "Dochter",
-      "roles": [
-        "familie/dochter"
-      ]
-    },
-    {
-      "person_name": "Maurice",
-      "user_id": "user-maurice",
-      "relation_type": "vriend/oud-collega",
-      "knows_about_me": true,
-      "i_know_about": true,
-      "notes": "Goede vriend",
-      "roles": [
-        "vriend/oud-collega"
-      ]
-    },
-    {
       "person_name": "Arent Pelster",
       "relation_type": "vriend/jeugdvriend",
       "knows_about_me": true,
@@ -104,18 +82,6 @@
       ]
     },
     {
-      "person_name": "Joy",
-      "relation_type": "familie/nicht",
-      "knows_about_me": true,
-      "i_know_about": true,
-      "notes": "Auto-detected uit chat (2026-06-03)",
-      "auto_detected": true,
-      "detected_at": "2026-06-03T16:46:14.023818+00:00",
-      "roles": [
-        "familie/nicht"
-      ]
-    },
-    {
       "person_name": "Joy Spakman",
       "relation_type": "familie/nicht",
       "knows_about_me": true,
@@ -125,18 +91,6 @@
       "detected_at": "2026-06-03T16:46:14.023829+00:00",
       "roles": [
         "familie/nicht"
-      ]
-    },
-    {
-      "person_name": "Jarig",
-      "relation_type": "familie/moeder",
-      "knows_about_me": true,
-      "i_know_about": true,
-      "notes": "Auto-detected uit chat (2026-06-03)",
-      "auto_detected": true,
-      "detected_at": "2026-06-03T17:00:14.358640+00:00",
-      "roles": [
-        "familie/moeder"
       ]
     },
     {
@@ -153,14 +107,14 @@
     },
     {
       "person_name": "Maurice",
-      "relation_type": "vriend",
+      "user_id": "user-maurice",
+      "relation_type": "vriend/oud-collega",
       "knows_about_me": true,
       "i_know_about": true,
-      "notes": "Auto-detected uit chat (2026-06-05)",
-      "auto_detected": true,
-      "detected_at": "2026-06-05T13:18:47.199392+00:00",
+      "notes": "Goede vriend",
       "roles": [
-        "vriend"
+        "vriend",
+        "vriend/oud-collega"
       ]
     }
   ],

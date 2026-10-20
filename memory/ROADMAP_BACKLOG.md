@@ -54,6 +54,9 @@
 > Geen "audit", geen tracking-bril. Spark voelt de sfeer en biedt zachtjes aan.
 
 ### 1. Help-functie als gesprek, niet als FAQ
+> ✅ Eerste stap 20-10-2026 (`v14_help_summary_001`): "wat kan je" geeft nu een korte opsomming + vraag of het help-kader
+> open moet (ja/nee), i.p.v. direct de popup. Onzekerheids-triggers hieronder zijn nog **niet** gedaan.
+
 Triggers die nu nog geen match krijgen maar voor onzekerheid wijzen:
 - "wat moet ik doen", "ik snap het niet", "waar begin ik", "is dit goed zo", "klopt dit?", "doe ik dit goed"
 - → Spark reageert **niet** met een opgeleide FAQ-lijst, maar met een uitnodigende toon: *"Geen zorgen, je doet het prima. Wil je dat ik je een paar handige stappen wijs of liever rondkijken?"*

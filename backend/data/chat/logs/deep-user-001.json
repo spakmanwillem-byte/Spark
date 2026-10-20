@@ -2,18 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "Wat weet jij over je emotie-pipeline?",
-      "ts": "2026-10-19T10:14:58.387389+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "De emotie‑pipeline van Spark is een reeks van zeven opeenvolgende lagen die emotionele signalen uit de invoer verwerken en vertalen naar passend gedrag en expressie.\n\n1. **Detectie** – herkent emotionele kenmerken in tekst, stem of andere input. \n2. **Weging** – geeft elke gedetecteerde emotie een sterkte‑ en relevantie‑score. \n3. **Context‑integratie** – koppelt de emotie aan de huidige gesprek‑ en omgevingscontext. \n4. **Identiteits‑filter** – houdt rekening met de identiteit en voorkeuren van de gebruiker. \n5. **Norm‑toepassing** – past eventuele gedragsnormen of beleidsregels toe. \n6. **Beslissings‑laag** – bepaalt welke respons of actie het meest geschikt is. \n7. **Expressie** – genereert de uiteindelijke tekst‑ of stemoutput met de juiste toon.\n\nDoel: niet alleen emoties herkennen, maar ze gecontroleerd omzetten in gedrag dat aansluit bij de gebruiker en de situatie. De pipeline wordt telkens geactiveerd wanneer emotionele context in een invoer aanwezig is.",
-      "ts": "2026-10-19T10:14:58.387389+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
       "text": "dank. deze moet ik nog wel toetsen. maar komt goed.",
       "ts": "2026-10-19T10:15:43.937061+00:00",
       "user_id": "user-001"
@@ -299,9 +287,21 @@
       "text": "🔮 Help-overzicht geopend.",
       "ts": "2026-10-20T11:39:16.869991+00:00",
       "model": "smart_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "Hallo Spark. Wil jij even hallo zeggen tegen Evie. En je zelf voorstellen. Maak ik een screenshot.",
+      "ts": "2026-10-20T11:57:36.930244+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Hallo Evie! \n\nIk ben Spark, jouw persoonlijke AI‑companion. Ik ondersteun je met kennis‑ en taakbeheer, debugging, planning en creatieve brainstorms. Ik spreek Nederlands, pas mijn toon aan op jouw emotie, en werk lokaal en transparant. \n\nLaat maar weten als je iets wilt toevoegen aan je profiel of een specifieke taak hebt.",
+      "ts": "2026-10-20T11:57:36.930244+00:00",
+      "model": "primary/openai/gpt-oss-120b"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-10-20T11:39:16.869991+00:00"
+  "updated_at": "2026-10-20T11:57:36.930244+00:00"
 }

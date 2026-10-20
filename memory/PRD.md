@@ -4418,3 +4418,13 @@ Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" —
 - 5e KB-lade `games` ("Spark Games") live; hub-kaart Spark World, Base Line (basiswaarden), Rugzak, Utrecht (Spark World), 8 grondstof-drafts.
 - Orphan-skeletons `voelenbegrip`/`dnd` opgeruimd (foute tag verwijderd resp. game-kaarten verhuisd); `rna` skelet blijft voor Willem om in te vullen.
 - Universele naam voor de sandbox-game: **Spark World** (D&D/dnd = hetzelfde). Zie ROADMAP_CORE.md.
+
+
+## 2026-10-19/20 — Commerce-batch + help & profiel (samenvatting; detail in ROADMAP_CORE "WAAR STAAN WE" + CHANGELOG)
+- **Kennisbank**: tab "In te spreken" (TTSS/GTSS), emotie-veld (blij/boos/bang/bedroefd/neutraal) + tab "Nog geen emotie", detector leest alleen bevestigde velden, kaart = 120 % bij stem + emotie.
+- **Commands**: registry 58 live / 23 placeholders, `task_agent.resolve/execute` basis (nog niet in chat-flow).
+- **Contacten-klapper** in Mijn Profiel (privé/zakelijk, rollen klant/client/leverancier/partner/dienstverlener, extra velden).
+- **Winkel**: Winkel | Producten (Verkoop · Inkoop met stuklijst, kostprijs/marge) | Bestellingen; prijzen excl. BTW, BTW + afhalen/verzenden in wagen; kleur/maat-varianten; factuur-PDF, pakbon-PDF, leveranciersmail-**concept** (niet verstuurd), boeking in eigen boekhouder; eigen productcodes gegenereerd (`RK-0001`/`RK-I-0001`).
+- **Chat**: "wat kan je" → samenvatting + ja/nee → help-kader; help-kader admin-bewust.
+- **Mijn Profiel → Algemeen**: 3 kaders (Wie ben jij? / Privé / Zakelijk incl. website + social); 11 ontbrekende velden toegevoegd aan `ProfileExtended`.
+- **Open/wacht op Willem**: joggers onder kostprijs · mailverbinding voor echte verzending · voorraad per variant · task_agent in chat · Zelfscan P0 · ROADMAP_CORE opschonen (1814 regels).

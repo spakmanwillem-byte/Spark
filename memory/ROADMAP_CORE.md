@@ -68,6 +68,37 @@ Voor auto-extract-kaarten extra: `extract_source`, `extract_turn_id`, `extract_a
 
 ---
 
+## 📍 WAAR STAAN WE — stand 20-10-2026 (na commerce-batch)
+
+**Rode draad van de week**: Kennisbank 120 % (stem + emotie) → hybride commands-fundering → Contacten-klapper →
+Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leveranciersmail en eigen boekhouder.
+
+| Blok | Status | Wat nog / wacht op |
+|---|---|---|
+| KB stem (TTSS/GTSS) + tab "In te spreken" | ✅ live | Willem spreekt in (50/7353). `stts` en stam-matching later |
+| KB emotie-veld + tab "Nog geen emotie" + detector-reset | ✅ live | Willem bevestigt kaart voor kaart; emotie-graph = onderzoek, wacht op akkoord |
+| Commands: registry 58 live / 23 placeholder, task_agent resolve/execute | ✅ basis | task_agent nog **niet** in chat-flow (stap 3 na action_intents + capabilities); concept-JSON hard-coded; gradatie-schaal-aanname bevestigen |
+| Contacten-klapper (privé/zakelijk, rollen, extra velden) | ✅ live | Contacten matchen aan users (later) |
+| Winkel: Winkel / Producten (Verkoop · Inkoop) / Bestellingen | ✅ live | Voorraad per kleur/maat; bestellen bij niet-Roadkill-shops |
+| Stuklijst, kostprijs/marge, BTW in wagen, afhalen/verzenden, varianten | ✅ live | **Willem: joggers staan onder kostprijs** (lang −6,85 · kort −3,25) |
+| Factuur-PDF · pakbon-PDF · leveranciersmail-concept · boekhouder-boeking | ✅ live | **Mail versturen** = mailverbinding in Connections (Outlook app-wachtwoord) — niet gebouwd, wacht op akkoord |
+| Eigen productcodes (leeg → `RK-0001` / `RK-I-0001`, prefix per winkel) | ✅ 20-10 | 2 bestaande inkoop-artikelen zonder code (envelop, cap basis) nog aanvullen |
+| Chat "wat kan je" → samenvatting + ja/nee → help-kader | ✅ 20-10 | Eerste stap van backlog "Help als gesprek" (BACKLOG § Gastheer 1 + 4) |
+| Help-kader admin-bewust (toggle alleen bij admin-mode aan) | ✅ 20-10 | — |
+| Mijn Profiel → Algemeen in 3 kaders (Wie ben jij / Privé / Zakelijk) | ✅ 20-10 | — |
+| Odroid-portabiliteit (`SPARK_ROOT`, `spark.sh`, `.env.example`) | ⏸ gepland | Fase 1 kan op Emergent zonder risico |
+| Zelfscan-fundering (privacy-bypass compose, metadata-backfill, write-guard) | 🔴 P0 open sinds sessie 55 | Nog niet aangeraakt — eerstvolgende grote blok na commerce |
+| Dit bestand: 1770 regels (regel: <500) | 🧹 onderhoud | Sessies 52-58 naar HISTORY, open items naar BACKLOG — aparte opruimsessie, na akkoord |
+
+**Bugs 20-10 gefixt**: inkoop-artikel zonder code → 422 + React-crash (code optioneel, `apiError()` overal) ·
+profiel Beroep/Opleiding/social werden stil weggegooid (ontbraken in `ProfileExtended`) · help-popup bij "wat kan je".
+
+**Voorgestelde volgorde hierna** (Willem kiest): (1) inkoop-codes aanvullen + prijscheck joggers · (2) mailverbinding →
+echte verzending leveranciersmail/factuur · (3) voorraad per variant · (4) task_agent in chat-flow (met bevestiging bij
+verwijderen) · (5) Zelfscan P0 · (6) ROADMAP_CORE opschonen.
+
+---
+
 ## 🖥️ PLAN — Spark op eigen hardware (Odroid/Ubuntu) — Willem 17-09-2026, nog niet gestart
 
 **Doel**: Spark als "body": Odroid met scherm/toetsenbord, later mic/cam, later lokaal LLM (Ollama).
@@ -233,6 +264,20 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   aan users → bekende users zichtbaar in privé-gesprekken (Willem 20-10).
   Bekende beperking (bestaand): `create_order` leest producten alleen uit Roadkill's products.json → bestellen bij
   andere shops werkt nog niet; hoort bij fase 3.
+- **✅ 20-10 (middag) — Eigen codes, help-samenvatting, profiel-kaders** (`v14_shop_eigen_code_001`, `v14_help_summary_001`,
+  `v14_help_admin_mode_001`, `v14_profiel_kaders_001`):
+  • Productcode leeg laten → Spark genereert `PREFIX-0001` (verkoop) / `PREFIX-I-0001` (inkoop), ook bij bewerken zonder code;
+    prefix per winkel in Inkoop → Instellingen (`settings.code_prefix`, Roadkill = RK; anders eerste 2 letters winkelnaam).
+  • Bugfix: `InkoopArtikel.code` was verplicht → 422 bij artikel zonder code; 422-lijst werd rauw in toast gerenderd → crash.
+    `apiError()` in `frontend/src/lib/utils.js` nu overal in winkel/contacten/producten.
+  • Chat: `route_help()` (smart_intents_service) is de ene plek: `help_open` (expliciet) → popup · `help_overview` ("wat kan
+    je") → 7-regel samenvatting + "Zal ik het help-overzicht openen? (ja/nee)" via `session_state.last_question`
+    (intent `help_open`, 5 min). Admin-regel alleen bij `admin_mode` (nu ook in compose-request). Semantic-matcher
+    canonicals versmald tot expliciet openen.
+  • HelpBark leest `useAuth().isAdmin`: admin-mode uit → gewone help zonder toggle; aan → admin-help + toggle.
+  • Profiel Algemeen: 3 kaders (Wie ben jij? / Privé / Zakelijk, elk met secties; zakelijk ook website + social).
+    `ProfileExtended` +11 velden (beroep, opleiding, social_*, zakelijk_website, zakelijk_social_*) — ontbraken, dus
+    "kon niet opslaan". E-mail/Telefoon-opslag zelf werkte al (gecheckt als Emergent).
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

@@ -4,7 +4,7 @@ Eén plek, niets dubbel:
   • eigen contacten  → data/users/<user_id>/contacten.json  (bron 'klapper', bewerkbaar)
   • privé-laag toont ook bel_contacts.json  (bron 'bel', alleen lezen hier)
   • zakelijke laag toont ook clienten        (bron 'clienten', alleen lezen hier)
-Rollen zakelijk: leverancier | klant | partner | overig. Privé: familie | vriend | overig.
+Rollen zakelijk: leverancier | klant (koopt merch) | client (vraagt zorg/handelingen) | partner | overig. Privé: familie | vriend | overig.
 Later (roadmap): Spark matcht contacten op e-mail/tel/naam aan users → zichtbaar in privé-gesprekken.
 """
 from __future__ import annotations
@@ -64,7 +64,7 @@ def _from_bel(c: Dict) -> Dict:
 
 def _from_client(c: Dict) -> Dict:
     return {"id": f"client:{c.get('id')}", "bron": "clienten", "laag": "zakelijk", "naam": c.get("naam"),
-            "rol": "klant", "bedrijf": c.get("naam"), "contactpersoon": c.get("contactpersoon"),
+            "rol": "client", "bedrijf": c.get("naam"), "contactpersoon": c.get("contactpersoon"),
             "email": c.get("email"), "email2": c.get("email2"), "telefoon": c.get("telefoon"),
             "telefoon2": c.get("telefoon2"), "fax": c.get("fax"), "website": c.get("website"), "adres": c.get("adres"),
             "postcode": c.get("postcode"), "plaats": c.get("plaats"), "notities": c.get("notities"),

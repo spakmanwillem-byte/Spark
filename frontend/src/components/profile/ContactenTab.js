@@ -7,9 +7,9 @@ const API = process.env.REACT_APP_BACKEND_URL;
 // v14_contacten_klapper_001 — telefoonklapper met twee lagen (privé / zakelijk)
 const ROLLEN = {
   prive: ['familie', 'vriend', 'overig'],
-  zakelijk: ['leverancier', 'klant', 'partner', 'overig'],
+  zakelijk: ['leverancier', 'klant', 'client', 'partner', 'overig'], // klant = koopt merch · client = vraagt zorg/handelingen
 };
-const BRON_LABEL = { klapper: null, bel: 'bel-contact', clienten: 'cliënt' }; // bewerken/verwijderen schrijft terug naar die module
+const BRON_LABEL = { klapper: null, bel: 'bel-contact', clienten: 'cliëntdossier' }; // bewerken/verwijderen schrijft terug naar die module
 const LEEG = { laag: 'prive', naam: '', rol: '', bedrijf: '', contactpersoon: '', email: '', email2: '', telefoon: '', telefoon2: '', fax: '', website: '', adres: '', postcode: '', plaats: '', notities: '' };
 
 export function ContactenTab({ userId }) {

@@ -175,6 +175,8 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     CRUD. Eén klapper, niets dubbel: bel_contacts (bron `bel`) en clienten (bron `clienten`) worden erin getoond én
     zijn er bewerk-/verwijderbaar — schrijft terug naar hun eigen bestand (Willem 20-10: "kon mijn contacten niet
     aanpassen"). Eigen entries: `data/users/<id>/contacten.json`. Routes `/api/contacten/{user_id}` GET/POST/PUT/DELETE.
+  • Rollen zakelijk (Willem 20-10): **klant** = koopt merch · **client** = vraagt zorg/handelingen (cliëntdossiers
+    uit `clienten` krijgen rol client) · leverancier · partner · overig.
   • Velden (Willem 20-10 n.a.v. Promotex): telefoon + telefoon2, fax (zakelijk), e-mail + e-mail2, website (zakelijk).
   • Profiel-kaart **Zakelijk**: `zakelijke_email`, `bedrijfsnaam`, `kvk`, `btw_nummer` (ProfileExtended).
     Regel Willem: e-mail pas gebruiken als ingevuld. Spark's eigen afzender later: spark-your-life@hotmail.com.

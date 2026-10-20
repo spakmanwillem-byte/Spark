@@ -76,8 +76,12 @@ check_cmd gcc build-essential
 
 if command -v python3 >/dev/null; then
   PYV=$(python3 -c 'import sys;print(f"{sys.version_info[0]}.{sys.version_info[1]}")')
-  if python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3,10) else 1)'; then ok "Python $PYV (≥3.10)"; else fail "Python $PYV is te oud, 3.10+ nodig"; fi
-  if python3 -c 'import venv, ensurepip' 2>/dev/null; then ok "python3-venv aanwezig"; else fail "python3-venv ontbreekt"; APT_MISSING+=("python${PYV}-venv" "python3-venv"); fi
+  case "$PYV" in
+    3.1[0-2]) ok "Python $PYV (systeem)" ;;
+    3.[0-9]|3.[0-9].*) fail "Python $PYV is te oud — --fix haalt via uv Python 3.12 op" ;;
+    *) warn "Python $PYV (systeem) is nieuwer dan de pins (3.10-3.12) — --fix maakt de venv met Python 3.12 via uv" ;;
+  esac
+  if python3 -c 'import venv, ensurepip' 2>/dev/null; then ok "python3-venv aanwezig"; else warn "python3-venv ontbreekt (niet nodig met uv)"; APT_MISSING+=("python3-venv"); fi
   if dpkg -s "python3-dev" >/dev/null 2>&1 || dpkg -s "python${PYV}-dev" >/dev/null 2>&1; then ok "python3-dev aanwezig"; else warn "python3-dev ontbreekt (nodig als een wheel gecompileerd moet worden)"; APT_MISSING+=("python3-dev"); fi
 fi
 
@@ -93,9 +97,11 @@ head_ "Spark-installatie ($SCRIPT_DIR)"
 [ -x install.sh ] && ok "install.sh uitvoerbaar" || { warn "install.sh niet uitvoerbaar"; $FIX && { fixing "chmod +x *.sh"; chmod +x install.sh run.sh doctor.sh; }; }
 
 if [ -x backend/.venv/bin/python ]; then
-  if backend/.venv/bin/python -c 'import fastapi, uvicorn' 2>/dev/null; then ok "backend/.venv met fastapi+uvicorn"
-  else fail "backend/.venv bestaat maar pip-packages ontbreken/incompleet"; VENV_BROKEN=true; fi
-  for m in numpy pandas; do backend/.venv/bin/python -c "import $m" 2>/dev/null && ok "python: $m importeert" || warn "python: $m importeert niet (ARM-wheel?) — check 'pip install $m' in de venv"; done
+  VPY=$(backend/.venv/bin/python -c 'import sys;print(f"{sys.version_info[0]}.{sys.version_info[1]}")' 2>/dev/null)
+  if backend/.venv/bin/python -c 'import fastapi, uvicorn' 2>/dev/null; then ok "backend/.venv (Python $VPY) met fastapi+uvicorn"
+  else fail "backend/.venv (Python $VPY) bestaat maar pip-packages ontbreken/incompleet"; VENV_BROKEN=true; fi
+  for m in numpy pandas; do backend/.venv/bin/python -c "import $m" 2>/dev/null && ok "python: $m importeert" || { warn "python: $m importeert niet → venv opnieuw met --fix"; VENV_BROKEN=true; }; done
+  backend/.venv/bin/python -c "import emergentintegrations" 2>/dev/null && ok "emergentintegrations aanwezig (Universal Key bruikbaar)" || warn "emergentintegrations niet geïnstalleerd → basis-modus: geen cloud-LLM/TTS/STT via Universal Key. Alles lokaals werkt."
 else fail "backend/.venv ontbreekt → ./install.sh (of --fix)"; VENV_MISSING=true; fi
 
 [ -d frontend/node_modules ] && ok "frontend/node_modules aanwezig" || { fail "frontend/node_modules ontbreekt → yarn install"; NM_MISSING=true; }
@@ -175,16 +181,13 @@ if $FIX; then
   fi
   command -v yarn >/dev/null || { fixing "yarn"; sudo npm install -g yarn || fail "yarn install mislukt"; }
   if [ "${VENV_MISSING:-false}" = true ] || [ "${VENV_BROKEN:-false}" = true ]; then
-    fixing "backend venv + pip install -r requirements.txt (kan 10+ min duren op ARM)"
-    EXTRA_IDX="https://d33sy5i8bnduwe.cloudfront.net/simple/"
-    ( cd backend && python3 -m venv .venv && . .venv/bin/activate && pip install --upgrade pip -q \
-      && { pip install -r requirements.txt --extra-index-url "$EXTRA_IDX" \
-           || { warn "emergentintegrations niet beschikbaar → zonder (alleen nodig met EMERGENT_LLM_KEY)"; grep -v '^emergentintegrations' requirements.txt > /tmp/spark_req.txt && pip install -r /tmp/spark_req.txt; }; } ) \
-      || fail "pip install mislukt — plak de laatste regels van de fout in de chat"
+    fixing "backend venv (Python 3.12 via uv) + requirements — zie deploy/setup_venv.sh"
+    bash "$SCRIPT_DIR/deploy/setup_venv.sh" "$SCRIPT_DIR" || fail "venv/pip mislukt — plak de laatste 20 regels van logs/laatste_doctor.log in de chat"
   fi
   if [ "${NM_MISSING:-false}" = true ]; then
     fixing "yarn install (frontend)"
-    ( cd frontend && yarn install --frozen-lockfile ) || fail "yarn install mislukt"
+    if [ -f frontend/yarn.lock ]; then ( cd frontend && yarn install --frozen-lockfile ) || fail "yarn install mislukt"
+    else ( cd frontend && yarn install ) || fail "yarn install mislukt"; fi
   fi
   echo; echo "Fix klaar — draai ./doctor.sh nog eens om te controleren."
 fi

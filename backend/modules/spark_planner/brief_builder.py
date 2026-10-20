@@ -14,7 +14,10 @@ from pathlib import Path
 from datetime import datetime, timezone, date as date_cls, timedelta
 from typing import Dict, List, Optional, Any
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+try:
+    from emergentintegrations.llm.chat import LlmChat, UserMessage
+except ImportError:  # lokaal zonder Universal Key (Odroid/pc)
+    LlmChat = UserMessage = None
 
 from modules.core.storage import load_json, save_json
 from modules.core.blueprint import load_blueprint_cached
@@ -152,7 +155,7 @@ async def build_daily_brief(user_id: str, target_date: Optional[str] = None) -> 
         }
 
     api_key = os.environ.get("EMERGENT_LLM_KEY")
-    if not api_key:
+    if not api_key or LlmChat is None:
         return {"success": False, "error": "EMERGENT_LLM_KEY ontbreekt"}
 
     max_turns = brief_cfg.get("max_turns_in_prompt", 40)

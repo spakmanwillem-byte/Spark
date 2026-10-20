@@ -22,8 +22,6 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage
-
 from modules.core.storage import load_json
 from modules.core.blueprint import load_blueprint_cached
 

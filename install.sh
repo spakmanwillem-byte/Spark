@@ -74,22 +74,13 @@ else
 fi
 
 # ---------- Backend ----------
-log "Backend Python-venv opzetten..."
-cd backend
-$PYTHON_BIN -m venv .venv
-# shellcheck disable=SC1091
-source .venv/bin/activate
-pip install --upgrade pip
-# emergentintegrations staat op een eigen index; zonder internet daarheen → zonder (alleen nodig met EMERGENT_LLM_KEY)
-pip install -r requirements.txt --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ \
-  || { warn "emergentintegrations niet beschikbaar — installeer de rest"; grep -v '^emergentintegrations' requirements.txt > /tmp/spark_req.txt && pip install -r /tmp/spark_req.txt; }
-deactivate
-cd ..
+log "Backend Python-venv opzetten (Python 3.12 via uv, zonder Emergent-only pakket)..."
+bash "$SCRIPT_DIR/deploy/setup_venv.sh" "$SCRIPT_DIR" || { err "venv mislukt — zie logs/laatste_install.log"; exit 1; }
 
 # ---------- Frontend ----------
 log "Frontend dependencies installeren..."
 cd frontend
-yarn install --frozen-lockfile
+if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else yarn install; fi
 cd ..
 
 # ---------- Data-mappen ----------

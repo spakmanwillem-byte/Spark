@@ -52,6 +52,9 @@ fi
 
 DISK_FREE=$(df -Pm "$SCRIPT_DIR" | awk 'NR==2 {print $4}')
 if [ "${DISK_FREE:-0}" -ge 3000 ]; then ok "Schijf vrij: ${DISK_FREE} MB"; else fail "Schijf vrij: ${DISK_FREE} MB — minimaal ~3 GB nodig (node_modules + venv)"; fi
+for bk in "$SCRIPT_DIR"/_backup_*; do
+  [ -d "$bk" ] && warn "Oude backup-map $(basename "$bk") ($(du -sm "$bk" | cut -f1) MB) — niet nodig op de Odroid: rm -rf $bk"
+done
 
 # ---------- 2. Systeemtools ----------
 head_ "Systeemtools"
@@ -168,8 +171,11 @@ if $FIX; then
   command -v yarn >/dev/null || { fixing "yarn"; sudo npm install -g yarn || fail "yarn install mislukt"; }
   if [ "${VENV_MISSING:-false}" = true ] || [ "${VENV_BROKEN:-false}" = true ]; then
     fixing "backend venv + pip install -r requirements.txt (kan 10+ min duren op ARM)"
-    ( cd backend && python3 -m venv .venv && . .venv/bin/activate && pip install --upgrade pip -q && pip install -r requirements.txt ) || fail "pip install mislukt — plak de laatste regels van de fout in de chat"
-    ( cd backend && . .venv/bin/activate && pip install emergentintegrations --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ -q ) || warn "emergentintegrations niet geïnstalleerd (alleen nodig met EMERGENT_LLM_KEY)"
+    EXTRA_IDX="https://d33sy5i8bnduwe.cloudfront.net/simple/"
+    ( cd backend && python3 -m venv .venv && . .venv/bin/activate && pip install --upgrade pip -q \
+      && { pip install -r requirements.txt --extra-index-url "$EXTRA_IDX" \
+           || { warn "emergentintegrations niet beschikbaar → zonder (alleen nodig met EMERGENT_LLM_KEY)"; grep -v '^emergentintegrations' requirements.txt > /tmp/spark_req.txt && pip install -r /tmp/spark_req.txt; }; } ) \
+      || fail "pip install mislukt — plak de laatste regels van de fout in de chat"
   fi
   if [ "${NM_MISSING:-false}" = true ]; then
     fixing "yarn install (frontend)"

@@ -78,9 +78,9 @@ $PYTHON_BIN -m venv .venv
 # shellcheck disable=SC1091
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
-# Emergent integrations (optioneel — key nodig)
-pip install emergentintegrations --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ || warn "emergentintegrations install faalde — Emergent LLM key features werken niet."
+# emergentintegrations staat op een eigen index; zonder internet daarheen → zonder (alleen nodig met EMERGENT_LLM_KEY)
+pip install -r requirements.txt --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ \
+  || { warn "emergentintegrations niet beschikbaar — installeer de rest"; grep -v '^emergentintegrations' requirements.txt > /tmp/spark_req.txt && pip install -r /tmp/spark_req.txt; }
 deactivate
 cd ..
 

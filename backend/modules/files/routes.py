@@ -2,11 +2,13 @@
 Files & Module Sandbox Routes
 Intern zoeksysteem voor bestanden + sandbox voor nieuwe modules
 """
+from fastapi.responses import FileResponse
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 from typing import Optional
 from pathlib import Path
 import os
+from urllib.parse import quote
 import json
 import subprocess
 import shutil
@@ -15,7 +17,14 @@ from datetime import datetime, timezone
 router = APIRouter(tags=["files"])
 
 ALLOWED_DIRS = ["/app/backend", "/app/frontend/src", "/app/memory"]
-SUPPORTED_EXT = ['.py', '.js', '.jsx', '.json', '.css', '.html', '.md', '.txt', '.yaml', '.yml']
+# v14_files_alle_types_001 (Willem 20-10: "alle bestandstypen die ik gebruik in Spark moet ik kunnen kiezen")
+TEXT_EXT = ['.py', '.js', '.jsx', '.json', '.jsonl', '.css', '.html', '.md', '.txt', '.yaml', '.yml', '.csv', '.log', '.sh', '.toml', '.ini', '.xml', '.svg']
+BINARY_EXT = ['.pdf', '.docx', '.xlsx', '.jpg', '.jpeg', '.png', '.webp', '.gif', '.webm', '.wav', '.mp3', '.ogg', '.mp4', '.zip']
+SUPPORTED_EXT = TEXT_EXT + BINARY_EXT
+MIME = {'.pdf': 'application/pdf', '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+        '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.webm': 'video/webm',
+        '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.ogg': 'audio/ogg', '.mp4': 'video/mp4', '.zip': 'application/zip'}
 PROTECTED_FILES = [
     '/app/backend/.env',
     '/app/backend/server.py',
@@ -28,11 +37,17 @@ def _is_allowed(path: str) -> bool:
     return any(os.path.abspath(path).startswith(d) for d in ALLOWED_DIRS)
 
 def _is_supported(path: str) -> bool:
-    return any(path.endswith(e) for e in SUPPORTED_EXT)
+    return any(path.lower().endswith(e) for e in SUPPORTED_EXT)
+
+
+def _is_binary(path: str) -> bool:
+    return any(path.lower().endswith(e) for e in BINARY_EXT)
 
 def _file_type(path: str) -> str:
-    m = {'.py':'python','.js':'javascript','.jsx':'javascript','.json':'json','.css':'css','.html':'html','.md':'markdown','.txt':'text','.yaml':'yaml','.yml':'yaml'}
-    return m.get(Path(path).suffix, 'text')
+    m = {'.py':'python','.js':'javascript','.jsx':'javascript','.json':'json','.jsonl':'jsonl','.css':'css','.html':'html','.md':'markdown','.txt':'text','.yaml':'yaml','.yml':'yaml',
+         '.csv':'csv','.log':'log','.pdf':'pdf','.docx':'word','.xlsx':'excel','.jpg':'image','.jpeg':'image','.png':'image','.webp':'image','.gif':'image','.svg':'svg',
+         '.webm':'video','.mp4':'video','.wav':'audio','.mp3':'audio','.ogg':'audio','.zip':'zip'}
+    return m.get(Path(path).suffix.lower(), 'text')
 
 
 # ============ FILE BROWSER ============
@@ -71,8 +86,11 @@ async def get_file_content(file_path: str = Query(...)):
         raise HTTPException(status_code=403, detail="Pad niet toegestaan")
     if not os.path.isfile(file_path):
         raise HTTPException(status_code=404, detail="Bestand niet gevonden")
+    if _is_binary(file_path):
+        return {"success": True, "path": file_path, "content": "", "binary": True, "file_type": _file_type(file_path),
+                "size": os.path.getsize(file_path), "raw_url": f"/api/files/raw?file_path={quote(file_path)}", "protected": True}
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
         return {
             "success": True, "path": file_path, "content": content,
@@ -81,6 +99,16 @@ async def get_file_content(file_path: str = Query(...)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/files/raw")
+async def get_file_raw(file_path: str = Query(...)):
+    """Binaire bestanden (pdf, afbeelding, audio, video) inline tonen/downloaden — alleen binnen ALLOWED_DIRS."""
+    if not _is_allowed(file_path) or not _is_supported(file_path):
+        raise HTTPException(status_code=403, detail="Pad niet toegestaan")
+    if not os.path.isfile(file_path):
+        raise HTTPException(status_code=404, detail="Bestand niet gevonden")
+    return FileResponse(file_path, media_type=MIME.get(Path(file_path).suffix.lower(), "application/octet-stream"), filename=os.path.basename(file_path))
 
 
 class SaveRequest(BaseModel):

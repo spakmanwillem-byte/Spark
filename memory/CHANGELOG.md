@@ -1882,3 +1882,4 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 - Contacten tonen relatie uit de graaf; familie uit graaf → contact (3 nieuw). Agenda-afspraak via chat met ja/nee ("zet morgen 10 uur tandarts in de agenda"). Wijsheid-kaarten in antwoorden. Laatste 2 feiten afgehandeld (mening / verworpen identiteitsclaim).
 - Feiten-tab: bewerk nu begrip/soort/wat/waarom/context; Willems katten-correctie doorgevoerd (feiten + identity_facts).
 - ROADMAP_CORE opgeschoond: 1888 → 401 regels (sessies 52-58 → HISTORY, open punten → BACKLOG, backup bewaard).
+- Integraties → Bestanden: alle Spark-bestandstypen zichtbaar (jsonl/csv/log/pdf/docx/afbeeldingen/audio/video/zip); binaire bestanden met voorvertoning + 'open in nieuw tabblad' via `/api/files/raw` (alleen binnen toegestane mappen, niet bewerkbaar). v14_files_alle_types_001

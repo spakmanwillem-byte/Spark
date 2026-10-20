@@ -109,7 +109,7 @@ function FileBrowser() {
     try {
       const res = await fetch(`${API}/api/files/content?file_path=${encodeURIComponent(file.path)}`);
       const data = await res.json();
-      if (data.success) { setContent(data.content); setEditedContent(data.content); }
+      if (data.success) { setContent(data.content); setEditedContent(data.content); setSelectedFile(prev => ({ ...prev, ...data, name: prev?.name || data.path.split('/').pop() })); }
     } catch (e) { console.error(e); }
   };
 
@@ -158,6 +158,13 @@ function FileBrowser() {
             <option value="json">JSON</option>
             <option value="markdown">Markdown</option>
             <option value="css">CSS</option>
+            <option value="jsonl">JSONL (logs)</option>
+            <option value="text">Tekst</option>
+            <option value="pdf">PDF</option>
+            <option value="word">Word</option>
+            <option value="image">Afbeeldingen</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
             <option value="html">HTML</option>
             <option value="text">Tekst</option>
             <option value="yaml">YAML</option>
@@ -196,7 +203,9 @@ function FileBrowser() {
               <div className="flex items-center gap-2">
                 <FileCode className="w-4 h-4 text-blue-400" />
                 <span className="text-sm text-white font-medium">{selectedFile.name}</span>
-                {selectedFile.protected && <span className="text-[9px] px-1.5 py-0.5 bg-red-500/15 text-red-400 rounded">Beschermd</span>}
+                {selectedFile.binary ? <span className="text-[9px] px-1.5 py-0.5 bg-slate-700/60 text-slate-300 rounded">Alleen bekijken · {Math.round((selectedFile.size || 0) / 1024)} kB</span>
+                  : selectedFile.protected && <span className="text-[9px] px-1.5 py-0.5 bg-red-500/15 text-red-400 rounded">Beschermd</span>}
+                {selectedFile.binary && <a data-testid="file-open-raw" href={`${API}${selectedFile.raw_url}`} target="_blank" rel="noreferrer" className="text-[10px] text-cyan-300 underline ml-1">open in nieuw tabblad</a>}
                 {editedContent !== content && <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />}
               </div>
               <div className="flex items-center gap-2">
@@ -219,6 +228,17 @@ function FileBrowser() {
               </div>
             </div>
             <div className="flex-1 overflow-hidden relative">
+              {selectedFile.binary ? (
+                <div data-testid="file-binary-preview" className="h-full w-full flex items-center justify-center bg-slate-950 p-3">
+                  {selectedFile.file_type === 'image' && <img src={`${API}${selectedFile.raw_url}`} alt={selectedFile.name} className="max-h-full max-w-full object-contain rounded" />}
+                  {selectedFile.file_type === 'pdf' && <iframe title={selectedFile.name} src={`${API}${selectedFile.raw_url}`} className="w-full h-full rounded border border-slate-800" />}
+                  {selectedFile.file_type === 'audio' && <audio controls src={`${API}${selectedFile.raw_url}`} className="w-full" />}
+                  {selectedFile.file_type === 'video' && <video controls src={`${API}${selectedFile.raw_url}`} className="max-h-full max-w-full rounded" />}
+                  {!['image', 'pdf', 'audio', 'video'].includes(selectedFile.file_type) && (
+                    <a data-testid="file-download-link" href={`${API}${selectedFile.raw_url}`} target="_blank" rel="noreferrer" className="text-sm text-cyan-300 underline">Download {selectedFile.name} ({Math.round((selectedFile.size || 0) / 1024)} kB)</a>
+                  )}
+                </div>
+              ) : (
               <textarea
                 data-testid="code-editor"
                 value={editedContent}
@@ -228,6 +248,7 @@ function FileBrowser() {
                 className="w-full h-full p-4 bg-transparent text-slate-200 text-xs font-mono leading-relaxed resize-none focus:outline-none"
                 style={{ tabSize: 2 }}
               />
+              )}
             </div>
             {validation && !validation.valid && (
               <div className="p-3 border-t border-red-500/30 bg-red-500/5 max-h-32 overflow-y-auto">

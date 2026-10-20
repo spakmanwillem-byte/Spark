@@ -18,6 +18,7 @@ Endpoints:
   GET  /api/perks/check/{perk_id}       → ja/nee + reden
   GET  /api/perks/user/{user_id}        → unlocked perks lijst
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Any
@@ -26,7 +27,7 @@ from modules.core.storage import load_json
 
 router = APIRouter(prefix="/perks", tags=["perks"])
 
-DATA = Path("/app/backend/data")
+DATA = Path(f"{SPARK_ROOT}/backend/data")
 USERS_FILE = DATA / "system" / "users.json"
 ACHIEVEMENTS_FILE = DATA / "achievements.json"
 

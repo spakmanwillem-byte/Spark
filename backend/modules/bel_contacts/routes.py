@@ -9,6 +9,7 @@ die al bestaat voor online-users / admin-collectief).
 """
 from __future__ import annotations
 
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import re
 import uuid
 from pathlib import Path
@@ -22,7 +23,7 @@ from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/bel-contacts", tags=["bel-contacts"])
 
-USERS_DIR = Path("/app/backend/data/users")
+USERS_DIR = Path(f"{SPARK_ROOT}/backend/data/users")
 
 
 def _contacts_path(user_id: str) -> Path:

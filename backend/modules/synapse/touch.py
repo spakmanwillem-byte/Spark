@@ -6,8 +6,9 @@ Update `_meta.json::last_touched` + `activity_count`.
 
 Gebruik:
   from modules.synapse.touch import touch_path
-  touch_path("/app/backend/data/notes/notes.json")  # vindt parent-meta en bumpt
+  touch_path(f"{SPARK_ROOT}/backend/data/notes/notes.json")  # vindt parent-meta en bumpt
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -16,7 +17,7 @@ from modules.core.storage import load_json, save_json
 from .schema import now_iso
 
 META_FILENAME = "_meta.json"
-APP_ROOT = Path("/app")
+from modules.core.paths import SPARK_ROOT as APP_ROOT  # v14_spark_root_001
 
 
 def find_container_for(file_path: Path) -> Optional[Path]:

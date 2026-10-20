@@ -8,6 +8,7 @@ Endpoints:
   POST /api/synapse/tag           : tag een container (status update)
   POST /api/synapse/touch         : handmatig touch
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 
@@ -125,7 +126,7 @@ async def search(q: str, group: Optional[str] = None):
 # TAG (status update)
 # ============================================================
 class TagBody(BaseModel):
-    container_path: str  # bv. "/app/backend/modules/winkelstraat" of relative
+    container_path: str  # bv. f"{SPARK_ROOT}/backend/modules/winkelstraat" of relative
     status: Optional[str] = None
     footnote: Optional[str] = None
     blueprint_ref: Optional[str] = None
@@ -139,7 +140,7 @@ async def tag_container(body: TagBody):
     """Update status/footnote/blueprint/tags/doel van een container's _meta.json."""
     # Resolve path
     raw = body.container_path
-    p = Path(raw) if raw.startswith("/") else Path("/app") / raw
+    p = Path(raw) if raw.startswith("/") else SPARK_ROOT / raw
     if not p.exists() or not p.is_dir():
         raise HTTPException(404, f"Map niet gevonden: {raw}")
     meta_path = p / "_meta.json"

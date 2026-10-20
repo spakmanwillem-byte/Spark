@@ -10,6 +10,7 @@ Generieke container CRUD + user-specifieke acties.
   POST   /api/container/{type}/{id}/tag-for-deletion  : tag-for-deletion
   DELETE /api/container/{type}/{id}                   : finalize delete (archive + cross-ref clean)
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 
@@ -31,7 +32,7 @@ def _check_admin(viewer_id: Optional[str]) -> bool:
         return False
     try:
         from modules.core.storage import load_json
-        users = load_json(Path("/app/backend/data/system/users.json"), default={"users": []}).get("users", [])
+        users = load_json(Path(f"{SPARK_ROOT}/backend/data/system/users.json"), default={"users": []}).get("users", [])
         for u in users:
             if u.get("id") == viewer_id:
                 return (u.get("gradatie") or 7) <= 2

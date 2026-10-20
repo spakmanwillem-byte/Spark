@@ -28,7 +28,7 @@ from .schema import (
 
 
 # Project roots
-APP_ROOT = Path("/app")
+from modules.core.paths import SPARK_ROOT as APP_ROOT  # v14_spark_root_001
 BACKEND_MODULES = APP_ROOT / "backend" / "modules"
 FRONTEND_COMPONENTS = APP_ROOT / "frontend" / "src" / "components"
 BACKEND_DATA = APP_ROOT / "backend" / "data"

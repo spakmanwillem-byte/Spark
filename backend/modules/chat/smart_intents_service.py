@@ -12,6 +12,7 @@ Een handvol high-value chat intents die Spark slimmer maken:
 Elke detector retourneert (matched: bool, response_dict | None).
 Hooked vanuit chat/routes.py voordat de fallback-flow start.
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import re
 import json
 import uuid
@@ -1137,7 +1138,7 @@ def handle_agenda_delete_cancel() -> Dict:
 
 SHOPS_FILE = DATA_ROOT.parent / "backend" / "data" / "shop" / "shops.json"
 # Fallback: DATA_ROOT / "shop" / "shops.json"
-_SHOPS_FP = Path("/app/backend/data/shop/shops.json")
+_SHOPS_FP = Path(f"{SPARK_ROOT}/backend/data/shop/shops.json")
 
 
 def detect_shop_delete_intent(text: str) -> bool:

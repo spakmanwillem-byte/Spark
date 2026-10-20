@@ -11,31 +11,33 @@ Deze doc + `install.sh` + `run.sh` maakt dat mogelijk.
 
 ---
 
-## Snelstart Odroid
+## Snelstart Odroid (bijgewerkt 20-10-2026, v14_spark_root_001)
 
 ```bash
-# 1. Clone repo
-git clone <jouw-repo> spark-core
-cd spark-core
+# 1. Repo ophalen (GitHub "Save to GitHub" → clone of zip uitpakken)
+git clone <jouw-repo> spark-core && cd spark-core
 
-# 2. Vul .env in
-cp backend/.env.example backend/.env   # zie config-sectie
-cp frontend/.env.example frontend/.env
+# 2. Installeren (Ubuntu 22.04 of 24.04, arm64/x86_64). Maakt venv, yarn install en kopieert .env.example → .env
+./install.sh --dev
 
-# 3. Install (Ubuntu 22.04, arm64 of x86_64)
-./install.sh          # met systemd
-./install.sh --dev    # zonder systemd, foreground
+# 3. Sleutels invullen (minimaal ADMIN_PASSWORD en SPARK_MASTERKEY)
+nano backend/.env
 
-# 4. Start (dev-modus)
-./run.sh              # backend :8001 + frontend :3000
-./run.sh stop         # netjes stoppen
+# 4. Starten — aanrader op Odroid: één poort, backend serveert de gebouwde frontend
+./run.sh prod            # bouwt frontend (duurt een paar minuten op ARM) en start backend op :8001
+# → open http://<odroid-ip>:8001 op je laptop/telefoon in hetzelfde netwerk
 
-# 5. Prod-modus (na install.sh zonder --dev)
-sudo systemctl start spark-backend spark-frontend
-sudo journalctl -u spark-backend -f
+# Alternatief (dev): twee processen, hot-reload
+./run.sh                 # backend :8001 + frontend dev-server :3000 (zet dan REACT_APP_BACKEND_URL in frontend/.env)
+./run.sh stop
 ```
 
----
+**Wat er vóór 20-10 misging op een verse machine**: `.env`-bestanden zitten niet in de GitHub-export (gitignored) en er was
+geen `.env.example`; `install.sh` eiste `python3.11` (bestaat niet op Ubuntu 24.04); ~60 paden stonden hard op `/app/...`;
+de dev-server opent geen browser op een headless Odroid. Nu: `.env.example` voor beide, python-autodetect, alle paden via
+`modules/core/paths.py` (`SPARK_ROOT`, override met env), en `./run.sh prod` voor één poort.
+
+**Logs bij problemen**: `./run.sh backend` in de voorgrond laat de Python-fout direct zien; stuur die regel(s) naar Spark.
 
 ## Portable paden (v8_odroid_portability_001)
 

@@ -86,7 +86,7 @@ Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leve
 | Chat "wat kan je" → samenvatting + ja/nee → help-kader | ✅ 20-10 | Eerste stap van backlog "Help als gesprek" (BACKLOG § Gastheer 1 + 4) |
 | Help-kader admin-bewust (toggle alleen bij admin-mode aan) | ✅ 20-10 | — |
 | Mijn Profiel → Algemeen in 3 kaders (Wie ben jij / Privé / Zakelijk) | ✅ 20-10 | — |
-| Odroid-portabiliteit (`SPARK_ROOT`, `spark.sh`, `.env.example`) | ⏸ gepland | Fase 1 kan op Emergent zonder risico |
+| Odroid-portabiliteit fase 1: `SPARK_ROOT` (paths.py, 60 paden), `.env.example`, install.sh autodetect, `./run.sh prod` één poort | ✅ 20-10 | Willem test op Odroid; frontend-build op ARM duurt; Ollama/hardware-validatie later |
 | Zelfscan-fundering (privacy-bypass compose, metadata-backfill, write-guard) | 🔴 P0 open sinds sessie 55 | Nog niet aangeraakt — eerstvolgende grote blok na commerce |
 | Relaties onthouden voor élke user (kleine letters, naamloos → placeholder) | ✅ 20-10 | Zusje/anderen zeggen hun zinnen één keer opnieuw |
 | `/tree` + `/cmd <zin>` in chat via task_agent (lezen direct, schrijven ja/nee) | ✅ 20-10 | Laag 2: zonder slash + concept-JSON live-editbaar; params vragen (bv. note_id) |

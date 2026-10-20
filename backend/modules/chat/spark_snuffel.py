@@ -20,6 +20,7 @@ van bron_user_id == viewer_id.
 """
 from __future__ import annotations
 
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import json
 import re
 from pathlib import Path
@@ -32,11 +33,11 @@ DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 
 # v6_snuffel_code_001 — sandboxed roots voor source-file search
 CODE_ROOTS = [
-    Path("/app/backend/modules"),
-    Path("/app/backend/config"),
-    Path("/app/backend/data/blueprints"),
-    Path("/app/backend/data/personality"),
-    Path("/app/memory"),
+    Path(f"{SPARK_ROOT}/backend/modules"),
+    Path(f"{SPARK_ROOT}/backend/config"),
+    Path(f"{SPARK_ROOT}/backend/data/blueprints"),
+    Path(f"{SPARK_ROOT}/backend/data/personality"),
+    Path(f"{SPARK_ROOT}/memory"),
 ]
 CODE_EXTENSIONS = {".py", ".md", ".json", ".txt", ".yaml", ".yml"}
 CODE_SKIP_DIRS = {"__pycache__", "node_modules", ".git", "build", "dist", "sandbox"}
@@ -316,7 +317,7 @@ def _search_code_files(query: str, max_results: int = 5) -> List[Dict]:
             snippet = text[line_start:line_end if line_end != -1 else idx + 120].strip()
             hits.append((score, {
                 "path": str(path),
-                "rel_path": str(path.relative_to(Path("/app"))),
+                "rel_path": str(path.relative_to(SPARK_ROOT)),
                 "occurrences": occur,
                 "snippet": snippet[:200],
             }))

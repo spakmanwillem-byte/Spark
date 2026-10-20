@@ -12,12 +12,13 @@ Voegt natuurlijke chat-intenties toe waarmee Spark zichzelf kan lezen:
 
 Hookt vóór capability-router in chat/routes.py.
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import re
 from typing import Optional, Dict, List
 from pathlib import Path
 from modules.core.storage import load_json
 
-SYNAPSE_FILE = Path("/app/memory/SYNAPSE.json")
+SYNAPSE_FILE = Path(f"{SPARK_ROOT}/memory/SYNAPSE.json")
 
 
 # ============================================================

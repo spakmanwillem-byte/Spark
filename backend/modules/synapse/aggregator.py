@@ -7,6 +7,7 @@ zodat:
   - Jij hem kan openen voor één-blik-overzicht
   - UI Synapse-tab (F6) een snelle datasource heeft
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any
@@ -14,7 +15,7 @@ from typing import Dict, Any
 from modules.core.storage import save_json
 from .scanner import scan_all
 
-SYNAPSE_FILE = Path("/app/memory/SYNAPSE.json")
+SYNAPSE_FILE = Path(f"{SPARK_ROOT}/memory/SYNAPSE.json")
 
 
 def _summary(grouped: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:

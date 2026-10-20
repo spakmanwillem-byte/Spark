@@ -10,6 +10,7 @@ Universeel patroon. Vandaag voor users; morgen ook shop/asset/card/thread.
   delete_container(type, id, ...)  : status=deleting → archive → status=deleted
   list_containers(type)            : alle ids
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,7 +23,7 @@ from modules.synapse.schema import (
     STATUS_ACTIVE, STATUS_DELETED, STATUS_TAGGED_FOR_DELETION,
 )
 
-DATA_ROOT = Path("/app/backend/data")
+DATA_ROOT = Path(f"{SPARK_ROOT}/backend/data")
 DELETED_ROOT = DATA_ROOT / "_deleted_containers"
 
 

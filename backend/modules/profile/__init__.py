@@ -1,6 +1,7 @@
 """
 Spark Profile, Willem Personality, Roadmap, Notifications, Extended Profile
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
@@ -429,7 +430,7 @@ async def credits_bonus_status():
     from modules.chat.dank_service import sync_credits_bonus
     from modules.core.storage import load_json as _lj
     from pathlib import Path as _P
-    users = _lj(_P("/app/backend/data/system/users.json"), default={"users": []}).get("users", [])
+    users = _lj(_P(f"{SPARK_ROOT}/backend/data/system/users.json"), default={"users": []}).get("users", [])
     bonused = [
         {
             "id": u.get("id"), "naam": u.get("naam"),
@@ -459,7 +460,7 @@ async def roadmap_archeology():
     import re as _re, subprocess as _sp
     from pathlib import Path as _P
     result = _sp.run(
-        ["grep", "-rho", "-E", "v[0-9]+_[a-z_0-9]{3,40}", "/app/backend/modules"],
+        ["grep", "-rho", "-E", "v[0-9]+_[a-z_0-9]{3,40}", f"{SPARK_ROOT}/backend/modules"],
         capture_output=True, text=True, timeout=30,
     )
     code_refs = set()
@@ -467,7 +468,7 @@ async def roadmap_archeology():
         m = _re.match(r"v\d+_[a-z_0-9]+", line.strip())
         if m and 4 < len(m.group(0)) < 35:
             code_refs.add(m.group(0))
-    roadmap = load_json(_P("/app/backend/data/system/roadmap.json"), default={})
+    roadmap = load_json(_P(f"{SPARK_ROOT}/backend/data/system/roadmap.json"), default={})
     rm_ids = set()
     for v_data in roadmap.values():
         if isinstance(v_data, dict):
@@ -488,7 +489,7 @@ async def roadmap_archeology():
 async def admin_architecture():
     """Scan /app/backend/modules en geef live overzicht van lagen + modules terug."""
     from pathlib import Path as _P
-    modules_dir = _P("/app/backend/modules")
+    modules_dir = _P(f"{SPARK_ROOT}/backend/modules")
     modules = []
     for d in sorted(modules_dir.iterdir()):
         if not d.is_dir() or d.name.startswith("_"):
@@ -513,7 +514,7 @@ async def admin_architecture():
         })
 
     # Tel frontend componenten als snelle inventaris
-    fe_dir = _P("/app/frontend/src/components")
+    fe_dir = _P(f"{SPARK_ROOT}/frontend/src/components")
     fe_groups = []
     if fe_dir.exists():
         for d in sorted(fe_dir.iterdir()):

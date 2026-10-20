@@ -11,6 +11,7 @@ POST /api/kb/v2/classify                  inbox → lade (met optionele edits)
 POST /api/kb/v2/edit                      bewerk kaart in een lade
 POST /api/kb/v2/inbox/add                 nieuwe kaart in inbox
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from typing import Optional, Dict, List
 from datetime import datetime as _dt, timezone as _tz
 from pathlib import Path as _Path  # noqa: F401
@@ -1089,7 +1090,7 @@ async def orphan_tag_scan(
     - Filters: skip meta-tags (uitleg/patroon/concept…), min length 3, geen cijfer-only.
     """
     import sys as _sys
-    _sys.path.insert(0, '/app/backend')
+    _sys.path.insert(0, f'{SPARK_ROOT}/backend')
     try:
         from scripts.orphan_tags_to_cards_v13d import (
             collect_all, find_orphans, make_skeleton, INBOX_REASON,
@@ -1562,7 +1563,7 @@ async def tags_cleanup(dry_run: bool = True, min_tags_threshold: int = 0,
     from .tag_cleaner import clean_tags
     from pathlib import Path as _P
 
-    KB_V2 = _P("/app/backend/data/knowledge/v2")
+    KB_V2 = _P(f"{SPARK_ROOT}/backend/data/knowledge/v2")
     lades = ["voelen", "spreken", "weten", "doen", "games"]
 
     global_report = {

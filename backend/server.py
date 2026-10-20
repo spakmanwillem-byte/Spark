@@ -8,6 +8,7 @@ Modulaire architectuur:
 
 Elke module is zelfstandig en heeft eigen routes.
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
@@ -336,7 +337,7 @@ app.include_router(help_router, prefix="/api")
 # Bootstrap-load admin password uit JSON-bestand (overrules env-default voor live wijzigingen)
 try:
     from modules.admin import admin_service as _admin_svc
-    _pw_file = Path("/app/backend/data/system/admin_password.json")
+    _pw_file = Path(f"{SPARK_ROOT}/backend/data/system/admin_password.json")
     if _pw_file.exists():
         import json as _json
         _pw_data = _json.loads(_pw_file.read_text())
@@ -735,11 +736,11 @@ async def startup():
         from pathlib import Path as _P
         from modules.core.storage import load_json
         warmup_files = [
-            _P("/app/backend/data/knowledge/learned_knowledge/knowledge_base.json"),
-            _P("/app/backend/data/graph/nodes.json"),
-            _P("/app/backend/data/graph/edges.json"),
-            _P("/app/backend/data/personality/spark_vocab.json"),
-            _P("/app/backend/data/system/users.json"),
+            _P(f"{SPARK_ROOT}/backend/data/knowledge/learned_knowledge/knowledge_base.json"),
+            _P(f"{SPARK_ROOT}/backend/data/graph/nodes.json"),
+            _P(f"{SPARK_ROOT}/backend/data/graph/edges.json"),
+            _P(f"{SPARK_ROOT}/backend/data/personality/spark_vocab.json"),
+            _P(f"{SPARK_ROOT}/backend/data/system/users.json"),
         ]
         t0 = _t.perf_counter()
         loaded = 0
@@ -757,6 +758,28 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     print("⚡ Spark Core shutting down")
+
+
+# v14_spark_root_001 — Odroid/één-poort-modus: als frontend/build bestaat (./run.sh prod), serveert de backend de
+# frontend. /api/* blijft voorgaan; alle andere paden → index.html (React Router).
+try:
+    from fastapi import HTTPException
+    from fastapi.responses import FileResponse as _FR
+    from fastapi.staticfiles import StaticFiles as _SF
+    from modules.core.paths import SPARK_ROOT as _SR
+    _BUILD = _SR / "frontend" / "build"
+    if (_BUILD / "index.html").exists():
+        app.mount("/static", _SF(directory=str(_BUILD / "static")), name="fe-static")
+
+        @app.get("/{full_path:path}", include_in_schema=False)
+        async def _spa(full_path: str):
+            if full_path.startswith("api/"):
+                raise HTTPException(404, "Not Found")
+            f = _BUILD / full_path
+            return _FR(str(f)) if full_path and f.is_file() else _FR(str(_BUILD / "index.html"))
+        print(f"[spark] frontend/build gevonden → geserveerd op / ({_BUILD})")
+except Exception as _e:
+    print(f"[spark] frontend/build niet geserveerd: {_e}")
 
 
 if __name__ == "__main__":

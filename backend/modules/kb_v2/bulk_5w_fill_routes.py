@@ -48,6 +48,7 @@ dezelfde motor (Willem sessie 53).
 """
 from __future__ import annotations
 
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import json
 import re
 from datetime import datetime, timezone
@@ -61,7 +62,7 @@ from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/kb/v2/curation", tags=["kb-v2-curation-5w-bulk"])
 
-V2 = Path("/app/backend/data/knowledge/v2")
+V2 = Path(f"{SPARK_ROOT}/backend/data/knowledge/v2")
 LADES = ["voelen", "spreken", "weten", "doen", "games"]
 REQUIRED_5W = ["wie", "wat", "wanneer", "waar", "waarom", "hoe"]
 PLACEHOLDER = {"", "?", "nog te vullen", "onbekend", "n.v.t.", "n/a"}

@@ -17,7 +17,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
 # ---------- Config ----------
-PYTHON_VERSION="${PYTHON_VERSION:-3.11}"
+# Python: neem wat er is (3.10+); Ubuntu 22.04 = 3.10, 24.04 = 3.12. Override met PYTHON_BIN=python3.11
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+PYTHON_VERSION="$($PYTHON_BIN -c 'import sys;print(f"{sys.version_info[0]}.{sys.version_info[1]}")' 2>/dev/null || echo 3)"
 NODE_VERSION="${NODE_VERSION:-20}"
 SPARK_USER="${SPARK_USER:-$USER}"
 INSTALL_DEPS=true
@@ -47,7 +49,7 @@ if [ "$INSTALL_DEPS" = true ]; then
   log "APT dependencies installeren..."
   sudo apt-get update -qq
   sudo apt-get install -y \
-    python${PYTHON_VERSION} python${PYTHON_VERSION}-venv python3-pip \
+    python3 python3-venv python3-pip python3-dev \
     curl git build-essential ca-certificates \
     ffmpeg libsndfile1 \
     || { err "APT install mislukt"; exit 1; }
@@ -71,7 +73,7 @@ fi
 # ---------- Backend ----------
 log "Backend Python-venv opzetten..."
 cd backend
-python${PYTHON_VERSION} -m venv .venv
+$PYTHON_BIN -m venv .venv
 # shellcheck disable=SC1091
 source .venv/bin/activate
 pip install --upgrade pip
@@ -95,6 +97,14 @@ mkdir -p backend/data/_backups
 
 # ---------- .env checks ----------
 log ".env bestanden checken..."
+if [ ! -f backend/.env ] && [ -f backend/.env.example ]; then
+  cp backend/.env.example backend/.env
+  warn "backend/.env aangemaakt uit .env.example — vul ADMIN_PASSWORD en SPARK_MASTERKEY in (nano backend/.env)"
+fi
+if [ ! -f frontend/.env ] && [ -f frontend/.env.example ]; then
+  cp frontend/.env.example frontend/.env
+  warn "frontend/.env aangemaakt — zet REACT_APP_BACKEND_URL op http://<odroid-ip>:8001 als je vanaf een ander apparaat kijkt"
+fi
 if [ ! -f backend/.env ]; then
   warn "backend/.env ontbreekt! Kopieer .env.example → .env en vul in:"
   echo "  MONGO_URL=  (leeg mag, JSON-only)"
@@ -128,7 +138,8 @@ log "✓ Install compleet!"
 log ""
 log "Volgende stap:"
 if [ "$DEV_MODE" = true ]; then
-  log "  ./run.sh    # start backend + frontend in foreground"
+  log "  ./run.sh         # dev: backend :8001 + frontend dev-server :3000"
+  log "  ./run.sh prod    # één poort: frontend bouwen, backend serveert alles op :8001"
 else
   log "  sudo systemctl start spark-backend spark-frontend"
   log "  sudo journalctl -u spark-backend -f    # logs volgen"

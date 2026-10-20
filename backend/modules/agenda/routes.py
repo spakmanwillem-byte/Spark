@@ -6,6 +6,7 @@ v13d_multi_module_privacy_001 (sessie 55) — Willem: "iedere user in eco-contai
 GET/PATCH/DELETE endpoints eisen nu een `viewer_id` query-param die mag toegang
 tot target user_id in de path. Owner en admin mogen; anders 403.
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
 from typing import Optional
@@ -148,7 +149,7 @@ async def list_archive(user_id: str):
     """Lijst alle gearchiveerde maand-bestanden voor deze user. Elk bestand
     bevat de events van één afgelopen maand."""
     from pathlib import Path
-    d = Path("/app/backend/data/users") / user_id / "archive" / "agenda_archief"
+    d = Path(f"{SPARK_ROOT}/backend/data/users") / user_id / "archive" / "agenda_archief"
     if not d.exists():
         return {"user_id": user_id, "months": [], "total_events": 0}
     months = []
@@ -170,7 +171,7 @@ async def list_archive(user_id: str):
 async def get_archived_month(user_id: str, month: str):
     """Alle events van een specifieke maand. `month` = YYYY-MM."""
     from pathlib import Path
-    f = Path("/app/backend/data/users") / user_id / "archive" / "agenda_archief" / f"agenda-{month}.json"
+    f = Path(f"{SPARK_ROOT}/backend/data/users") / user_id / "archive" / "agenda_archief" / f"agenda-{month}.json"
     if not f.exists():
         return {"user_id": user_id, "month": month, "events": []}
     return load_json(f, default={"events": []})

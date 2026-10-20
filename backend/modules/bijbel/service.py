@@ -5,6 +5,7 @@ Many-to-many gekoppeld aan KB-begrippen.
 """
 from __future__ import annotations
 
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import threading
 import uuid
 from datetime import datetime, timezone
@@ -13,7 +14,7 @@ from typing import Dict, List, Optional
 
 from modules.core.storage import load_json, save_json
 
-DATA_PATH = Path("/app/backend/data/knowledge/learned_knowledge/unified_bijbel_entries.json")
+DATA_PATH = Path(f"{SPARK_ROOT}/backend/data/knowledge/learned_knowledge/unified_bijbel_entries.json")
 
 VALID_TYPES = {"wijsheid", "patroon", "mentaal_model", "anker"}
 _lock = threading.RLock()

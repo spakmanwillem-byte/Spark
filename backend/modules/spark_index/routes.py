@@ -10,6 +10,7 @@ Endpoints:
   GET  /api/spark-index         — read-only index (fast)
   GET  /api/spark-index/module/{name} — details per module (footnote + counts)
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from fastapi import APIRouter
 from pathlib import Path
 from datetime import datetime, timezone
@@ -24,7 +25,7 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 INDEX_FILE = DATA_DIR / "index.json"
 LOG_FILE = DATA_DIR / "rebuild_log.json"
 
-SCAN_ROOTS = ["/app/backend", "/app/frontend/src", "/app/memory"]
+SCAN_ROOTS = [f"{SPARK_ROOT}/backend", f"{SPARK_ROOT}/frontend/src", f"{SPARK_ROOT}/memory"]
 SKIP_DIRS = {"__pycache__", "node_modules", ".git", "build", "dist", "sandbox", ".pytest_cache"}
 CODE_EXTS = {".py", ".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".html", ".md", ".txt", ".yaml", ".yml"}
 
@@ -55,7 +56,7 @@ def _scan_root(root: str) -> Dict:
 
 def _scan_modules() -> Dict[str, Dict]:
     """Scan /app/backend/modules/*/  — per module: bestand-count + footnote uit _meta.json."""
-    mods_dir = Path("/app/backend/modules")
+    mods_dir = Path(f"{SPARK_ROOT}/backend/modules")
     result: Dict[str, Dict] = {}
     if not mods_dir.exists():
         return result

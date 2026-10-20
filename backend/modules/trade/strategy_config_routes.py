@@ -7,6 +7,7 @@ Willem kan tunen via PATCH zonder code-deploy. Elke wijziging wordt gelogd.
 """
 from __future__ import annotations
 
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -19,8 +20,8 @@ from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/trader", tags=["trader-strategy-config"])
 
-CONFIG_FILE = Path("/app/backend/data/trade/strategy_config.json")
-HISTORY_FILE = Path("/app/backend/data/trade/strategy_config_history.json")
+CONFIG_FILE = Path(f"{SPARK_ROOT}/backend/data/trade/strategy_config.json")
+HISTORY_FILE = Path(f"{SPARK_ROOT}/backend/data/trade/strategy_config_history.json")
 
 _DEFAULTS = {
     "buy": {

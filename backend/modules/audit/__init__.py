@@ -13,6 +13,7 @@ Endpoints:
 Resultaten worden ook gepersisteerd in:
   /data/system/audit_reports/{type}_{timestamp}.json
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Any
@@ -23,7 +24,7 @@ from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/audit", tags=["audit"])
 
-DATA = Path("/app/backend/data")
+DATA = Path(f"{SPARK_ROOT}/backend/data")
 KNOWLEDGE_FILE = DATA / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
 KBV2_DIR = DATA / "knowledge" / "v2"
 SHADOW_OBSERVATIONS = DATA / "system" / "shadow_observations.jsonl"

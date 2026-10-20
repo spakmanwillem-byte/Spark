@@ -9,6 +9,7 @@ Geen LLM nodig — directe data-lookups via bestaande services.
 
 Hook punt: chat/routes.py vóór smart_intents (na safe-word + identity).
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from pathlib import Path
 from typing import Optional, Dict
 from modules.core.storage import load_json
@@ -128,7 +129,7 @@ def _handle_taken_lijst(user_id: Optional[str]) -> Optional[Dict]:
     CORE bevat de actieve items met [x]/[~]/[ ] checkboxes."""
     from pathlib import Path as _P
     # Zoek volgorde: CORE eerst (heeft de actieve items), dan legacy ROADMAP.md
-    candidates = [_P("/app/memory/ROADMAP_CORE.md"), _P("/app/memory/ROADMAP.md")]
+    candidates = [_P(f"{SPARK_ROOT}/memory/ROADMAP_CORE.md"), _P(f"{SPARK_ROOT}/memory/ROADMAP.md")]
     for md_fp in candidates:
         if not md_fp.exists():
             continue
@@ -351,10 +352,10 @@ def _handle_kasboek_overzicht(user_id):
         from pathlib import Path
         from modules.core.storage import load_json
         # Probeer eerst centrale ledger.json
-        led_fp = Path("/app/backend/data/accounting/ledger.json")
+        led_fp = Path(f"{SPARK_ROOT}/backend/data/accounting/ledger.json")
         if not led_fp.exists():
             # Fallback: aggregeer over alle accounting JSONs
-            acct_dir = Path("/app/backend/data/accounting")
+            acct_dir = Path(f"{SPARK_ROOT}/backend/data/accounting")
             in_total = 0.0
             out_total = 0.0
             entries = 0
@@ -409,7 +410,7 @@ def _handle_agenda_vandaag(user_id, user_text: str = ""):
         from . import smart_intents_service as si
         from modules.core.storage import load_json
         from pathlib import Path
-        USERS_FILE = Path("/app/backend/data/system/users.json")
+        USERS_FILE = Path(f"{SPARK_ROOT}/backend/data/system/users.json")
         users = load_json(USERS_FILE, default={"users": []})
         users_list = users.get("users", []) if isinstance(users, dict) else users
         user = next((u for u in users_list if u.get("id") == user_id), None)
@@ -437,7 +438,7 @@ def _handle_agenda_terugblik(user_id, user_text: str = ""):
         from datetime import datetime as _dt, timedelta as _td, timezone as _tz
         from modules.core.storage import load_json
         from pathlib import Path
-        fpath = Path("/app/backend/data/agenda") / f"{user_id}.json"
+        fpath = Path(f"{SPARK_ROOT}/backend/data/agenda") / f"{user_id}.json"
         data = load_json(fpath, default={"events": []})
         events = data.get("events", []) or []
 
@@ -551,7 +552,7 @@ def _handle_bots_status(user_id):
     try:
         from pathlib import Path
         from modules.core.storage import load_json
-        bots_fp = Path("/app/backend/data/bots/bots.json")
+        bots_fp = Path(f"{SPARK_ROOT}/backend/data/bots/bots.json")
         bots = load_json(bots_fp, default={"bots": []}).get("bots", [])
         if not bots:
             return {"type": "capability_response", "capability_id": "bots_status",
@@ -901,7 +902,7 @@ def _handle_notities_terugblik(user_id, user_text: str = ""):
         from datetime import datetime as _dt, timedelta as _td, timezone as _tz
         from modules.core.storage import load_json
         from pathlib import Path
-        fpath = Path("/app/backend/data/notes/notes.json")
+        fpath = Path(f"{SPARK_ROOT}/backend/data/notes/notes.json")
         data = load_json(fpath, default={"notes": []})
         # Filter op user + scope != admin (admin lives in kladblok)
         mine = [n for n in data.get("notes", []) if (n.get("user_id") or "user-001") == user_id and n.get("scope") != "admin"]
@@ -1002,7 +1003,7 @@ def _handle_dagboek_terugblik(user_id, user_text: str = ""):
         from datetime import datetime as _dt, timedelta as _td, timezone as _tz
         from modules.core.storage import load_json
         from pathlib import Path
-        fpath = Path("/app/backend/data/dagboek") / f"{user_id}.json"
+        fpath = Path(f"{SPARK_ROOT}/backend/data/dagboek") / f"{user_id}.json"
         data = load_json(fpath, default={"entries": []})
         entries = data.get("entries", []) or []
 

@@ -15,6 +15,7 @@ Scope:
   /app/backend/data/   (knowledge, personality, triggers, etc.)
   /app/memory/         (PRD, roadmap, notes)
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import io
 import json
 import zipfile
@@ -30,7 +31,7 @@ from fastapi.responses import StreamingResponse, FileResponse
 router = APIRouter(prefix="/backup", tags=["backup"])
 
 # ============== PATHS ==============
-APP_ROOT = Path("/app")
+from modules.core.paths import SPARK_ROOT as APP_ROOT  # v14_spark_root_001
 DATA_ROOT = APP_ROOT / "backend" / "data"
 MEMORY_ROOT = APP_ROOT / "memory"
 MARKER_FILE = DATA_ROOT / "system" / ".deploy_marker.json"
@@ -38,7 +39,7 @@ MARKER_FILE = DATA_ROOT / "system" / ".deploy_marker.json"
 # waardoor de marker verdwijnt en "alleen gewijzigd" backup het HELE systeem inpakt.
 # /app/memory/ overleeft resets (bevat PRD/CHANGELOG). Marker eerst daar lezen/schrijven,
 # fallback naar oude locatie voor backwards-compat.
-MARKER_FILE_PERSISTENT = Path("/app/memory") / ".deploy_marker.json"
+MARKER_FILE_PERSISTENT = Path(f"{SPARK_ROOT}/memory") / ".deploy_marker.json"
 
 # Folders/files we never want to ship in a backup
 EXCLUDE_NAMES = {".deploy_marker.json", "__pycache__", ".DS_Store"}

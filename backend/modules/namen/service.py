@@ -9,6 +9,7 @@ Categorieen:
 """
 from __future__ import annotations
 
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import threading
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,7 +17,7 @@ from typing import Dict, List, Optional
 
 from modules.core.storage import load_json, save_json
 
-BLUEPRINT_PATH = Path("/app/backend/data/blueprints/namen.json")
+BLUEPRINT_PATH = Path(f"{SPARK_ROOT}/backend/data/blueprints/namen.json")
 VALID_CATEGORIES = {
     "voornaam_man", "voornaam_vrouw", "voornaam_unisex",
     "achternaam", "koosnaam", "gamertag", "onbekend",

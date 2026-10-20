@@ -1,6 +1,7 @@
 """
 Bot & Community Routes - Bots met persoonlijkheden + community chat
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
@@ -282,7 +283,7 @@ async def send_community_message(msg: ChatMessage):
     try:
         from modules.core.storage import load_json as _lj
         from pathlib import Path as _P
-        kb_path = _P("/app/backend/data/knowledge/learned_knowledge/knowledge_base.json")
+        kb_path = _P(f"{SPARK_ROOT}/backend/data/knowledge/learned_knowledge/knowledge_base.json")
         kb = _lj(kb_path, default={})
         known_concepts = {k.lower() for k in kb.keys()} if isinstance(kb, dict) else set()
         import re as _re

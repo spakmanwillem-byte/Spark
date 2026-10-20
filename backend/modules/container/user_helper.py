@@ -20,6 +20,7 @@ Cross-ref bronnen die we anonimiseren bij user-delete:
   - data/wallet/*.json                     (entries voor user)
   - data/chat/prive/*__{user_id}*.json     (verwijderen)
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 import re
 from pathlib import Path
 from typing import Dict, Any
@@ -29,7 +30,7 @@ from .service import (
 )
 from modules.synapse.schema import CONTAINER_USER
 
-DATA = Path("/app/backend/data")
+DATA = Path(f"{SPARK_ROOT}/backend/data")
 ANON_PLACEHOLDER = "[verwijderde gebruiker]"
 
 

@@ -18,7 +18,7 @@ from typing import Optional, Tuple, Dict, Any
 from modules.core.storage import load_json, save_json
 from .schema import now_iso
 
-APP_ROOT = Path("/app")
+from modules.core.paths import SPARK_ROOT as APP_ROOT  # v14_spark_root_001
 MEMORY_BLUEPRINTS = APP_ROOT / "memory" / "blueprints"
 META_FILENAME = "_meta.json"
 

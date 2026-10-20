@@ -2,6 +2,7 @@
 Files & Module Sandbox Routes
 Intern zoeksysteem voor bestanden + sandbox voor nieuwe modules
 """
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from fastapi.responses import FileResponse
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
@@ -16,7 +17,7 @@ from datetime import datetime, timezone
 
 router = APIRouter(tags=["files"])
 
-ALLOWED_DIRS = ["/app/backend", "/app/frontend/src", "/app/memory"]
+ALLOWED_DIRS = [f"{SPARK_ROOT}/backend", f"{SPARK_ROOT}/frontend/src", f"{SPARK_ROOT}/memory"]
 # v14_files_alle_types_001 (Willem 20-10: "alle bestandstypen die ik gebruik in Spark moet ik kunnen kiezen")
 TEXT_EXT = ['.py', '.js', '.jsx', '.json', '.jsonl', '.css', '.html', '.md', '.txt', '.yaml', '.yml', '.csv', '.log', '.sh', '.toml', '.ini', '.xml', '.svg']
 BINARY_EXT = ['.pdf', '.docx', '.xlsx', '.jpg', '.jpeg', '.png', '.webp', '.gif', '.webm', '.wav', '.mp3', '.ogg', '.mp4', '.zip']
@@ -26,11 +27,11 @@ MIME = {'.pdf': 'application/pdf', '.docx': 'application/vnd.openxmlformats-offi
         '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.webm': 'video/webm',
         '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.ogg': 'audio/ogg', '.mp4': 'video/mp4', '.zip': 'application/zip'}
 PROTECTED_FILES = [
-    '/app/backend/.env',
-    '/app/backend/server.py',
-    '/app/memory/test_credentials.md',  # bevat admin sleutelwoord — niet via UI bewerken
+    f'{SPARK_ROOT}/backend/.env',
+    f'{SPARK_ROOT}/backend/server.py',
+    f'{SPARK_ROOT}/memory/test_credentials.md',  # bevat admin sleutelwoord — niet via UI bewerken
 ]
-SANDBOX_DIR = "/app/backend/sandbox/modules"
+SANDBOX_DIR = f"{SPARK_ROOT}/backend/sandbox/modules"
 
 
 def _is_allowed(path: str) -> bool:
@@ -280,11 +281,11 @@ async def integrate_module(req: ModuleName):
     integrated = []
     for fn in os.listdir(path):
         if fn.endswith('_service.py'):
-            dst = os.path.join("/app/backend/modules", fn)
+            dst = os.path.join(f"{SPARK_ROOT}/backend/modules", fn)
             shutil.copy2(os.path.join(path, fn), dst)
             integrated.append(fn)
         elif fn.endswith('.js') or fn.endswith('.jsx'):
-            dst = os.path.join("/app/frontend/src/components/modules", fn)
+            dst = os.path.join(f"{SPARK_ROOT}/frontend/src/components/modules", fn)
             os.makedirs(os.path.dirname(dst), exist_ok=True)
             shutil.copy2(os.path.join(path, fn), dst)
             integrated.append(fn)

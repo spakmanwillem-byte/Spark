@@ -8,6 +8,7 @@
 #   ./run.sh             # Start beide, log naar stdout
 #   ./run.sh backend     # Alleen backend
 #   ./run.sh frontend    # Alleen frontend
+#   ./run.sh prod        # Frontend bouwen (yarn build) + backend serveert alles op :8001 (aanrader op Odroid)
 #   ./run.sh stop        # Stop alle Spark-processen
 #
 # Voor productie (Odroid): gebruik systemd via install.sh (spark-backend.service)
@@ -44,12 +45,23 @@ fi
 start_backend() {
   cd "$SCRIPT_DIR/backend"
   # Portable data-pad via env-var
+  export SPARK_ROOT="${SPARK_ROOT:-$SCRIPT_DIR}"
   export SPARK_DATA_DIR="${SPARK_DATA_DIR:-$SCRIPT_DIR/backend/data}"
   # shellcheck disable=SC1091
   source .venv/bin/activate 2>/dev/null || { warn "venv niet gevonden — draai eerst ./install.sh"; exit 1; }
   log "Backend start op :$BACKEND_PORT (SPARK_DATA_DIR=$SPARK_DATA_DIR)"
   uvicorn server:app --host 0.0.0.0 --port "$BACKEND_PORT" --reload &
   echo $! > "$PID_DIR/backend.pid"
+}
+
+# ---------- Prod: build + één poort ----------
+build_frontend() {
+  cd "$SCRIPT_DIR/frontend"
+  [ -f .env ] || cp .env.example .env
+  # Zelfde host als de backend → relatieve API-calls, werkt vanaf elk apparaat in je netwerk
+  log "Frontend bouwen (REACT_APP_BACKEND_URL leeg = zelfde host)…"
+  REACT_APP_BACKEND_URL="" yarn build
+  cd "$SCRIPT_DIR"
 }
 
 # ---------- Frontend ----------
@@ -69,7 +81,12 @@ case "$TARGET" in
     sleep 3
     start_frontend
     ;;
-  *) echo "Onbekende target: $TARGET (all|backend|frontend|stop)"; exit 1 ;;
+  prod)
+    build_frontend
+    start_backend
+    log "Open http://<dit-ip>:$BACKEND_PORT in je browser (frontend wordt door de backend geserveerd)"
+    ;;
+  *) echo "Onbekende target: $TARGET (all|backend|frontend|prod|stop)"; exit 1 ;;
 esac
 
 # ---------- Wacht ----------

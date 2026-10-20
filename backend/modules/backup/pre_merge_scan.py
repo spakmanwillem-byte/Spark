@@ -21,6 +21,7 @@ from __future__ import annotations
 import json
 import zipfile
 from pathlib import Path
+from modules.core.paths import SPARK_ROOT  # v14_spark_root_001
 from typing import Any, Dict, List, Tuple
 
 DATA_ROOT = Path(__file__).resolve().parent.parent.parent / "data"
@@ -113,7 +114,7 @@ def scan_zip_vs_current(zip_path: str | Path) -> Dict[str, Any]:
                 rel = name[len("data/"):]
                 local_path = DATA_ROOT / rel
             elif name.startswith("memory/"):
-                local_path = Path("/app") / name
+                local_path = SPARK_ROOT / name
             else:
                 continue
             zip_size = info.file_size

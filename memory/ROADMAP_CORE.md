@@ -198,6 +198,10 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     -1 ná saldocheck, afhalen mogelijk) in Producten → Inkoop. Order bevat subtotaal_excl/btw_pct/btw/bezorging/
     verzendkosten/verpakking + productcodes. Routes: `/api/shop/shops/{id}/inkoop` CRUD, `/settings`, `/kostprijzen`.
     Getest: hoodie 60 → 72,60 afhalen / 79,55 verzenden; 2 petten 49,30.
+    20-10: inkoopprijzen/codes uit Promotex-orders (4-08-2023, 12-05-2023) ingevuld: Cruiser hoodie 32,20 ·
+    Mover jogger 30,95 · Trainer shorts 22,35 · Creator t-shirt 7,50 · DTF groot 6,95 · DTF klein 3,95. Rugtas = 1 klein
+    logo (basis-code/prijs onbekend). **Marges nu zichtbaar: jogger lang −6,85 en kort −3,25 (verkoop onder kostprijs!),
+    set +5,05.** Later: varianten (kleur/maat) per inkoop-artikel — de Promotex-orders zijn per kleur/maat.
     **Nog**: `create_order` boekt in oud accounting-bestand i.p.v. `record_shop_sale` (boekhouder) → koppelen bij
     "Bestellingen ↔ boekhouder"; inkoop bij leverancier → `record_shop_purchase`.
   **Fase 3 — nog te bouwen (roadmap)**: bij bestelling zonder voorraad → leveranciersmail (aantal + productcode,

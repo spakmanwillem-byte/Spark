@@ -11,6 +11,7 @@
 - Command-registry: 23 dode entries → `placeholders` (geen 404's meer), 58 live met `status`. `task_agent.resolve/resolve_text/execute` gevuld (werkwoord-concepten, gradatie-check, interne dispatch, audit-log). Nog niet in de chat-flow.
 - Onderzoek emotie-graph + commands → `ONDERZOEK_EMOTIE_GRAPH_COMMANDS.md`.
 - Emotie-veld op KB-kaart (5 basis, bevestigd door Willem) + Kennisbank-tab **Nog geen emotie** (kaart verdwijnt na bevestigen). Detector leest alleen nog bevestigde velden (schone reset; tags tellen niet meer). Badge tot 120 % (stem + emotie).
+- Bij emotie bevestigen gaan tegensprekende emotie-tags automatisch weg (nooit < 5 tags); `emotie` en gelijke tag blijven.
 - Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen, dan pas bouwen.
 
 ## 2026-09-17 — KB-opschoning + 5e lade "Spark Games"

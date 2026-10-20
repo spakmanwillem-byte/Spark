@@ -18515,16 +18515,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-d6c51a59",
-          "begrip": "verwijzing",
-          "lade": "spreken",
-          "overlap": 2,
-          "shared_tags": [
-            "richting",
-            "verwijzing"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-770a03a1",
           "begrip": "instructie",
           "lade": "spreken",
@@ -18575,13 +18565,23 @@
           ]
         },
         {
-          "kaart_id": "kbv2-04b0d8bf",
-          "begrip": "namen",
+          "kaart_id": "kbv2-skel-deedc7b2",
+          "begrip": "label",
           "lade": "weten",
           "overlap": 2,
           "shared_tags": [
             "identificatie",
             "label"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d56d9db",
+          "begrip": "Handvatten",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "aanwijzing",
+            "richting"
           ]
         }
       ],
@@ -18616,8 +18616,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T10:49:32.828611+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T10:49:32.839195+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T10:49:32.648902+00:00"
       },
       "media": {
         "voice_url": null,
@@ -18627,7 +18645,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-19T10:49:32.648898+00:00"
     },
     {
       "id": "kbv2-8a961a1b",
@@ -23170,19 +23192,6 @@
       "topic": "bewustzijn",
       "verbanden": [
         {
-          "kaart_id": "kbv2-e15b7d94",
-          "begrip": "kijken",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "aandacht",
-            "bewustzijn",
-            "communicatie",
-            "focus",
-            "informatie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-16d46c73",
           "begrip": "gemerkt",
           "lade": "spreken",
@@ -23209,15 +23218,28 @@
           ]
         },
         {
-          "kaart_id": "kbv2-b1ae70e0",
-          "begrip": "landen",
-          "lade": "voelen",
+          "kaart_id": "kbv2-6b703153",
+          "begrip": "Opletten",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "communicatie",
+            "focus",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
           "overlap": 4,
           "shared_tags": [
             "aandacht",
             "bewustzijn",
-            "concentratie",
-            "focus"
+            "focus",
+            "observatie"
           ]
         },
         {
@@ -23257,6 +23279,18 @@
           ]
         },
         {
+          "kaart_id": "kbv2-7badb7d5",
+          "begrip": "kijkt",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "informatie",
+            "observatie"
+          ]
+        },
+        {
           "kaart_id": "kbv2-skel-d0e02013",
           "begrip": "luisteren",
           "lade": "doen",
@@ -23278,18 +23312,6 @@
             "bewustzijn",
             "concentratie",
             "focus"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-7badb7d5",
-          "begrip": "kijkt",
-          "lade": "doen",
-          "overlap": 4,
-          "shared_tags": [
-            "aandacht",
-            "communicatie",
-            "informatie",
-            "observatie"
           ]
         }
       ],
@@ -23324,18 +23346,55 @@
               "n_found": 10,
               "top_overlap": 6
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T10:02:50.362273+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T10:02:50.375353+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T12:59:08.536166+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T12:59:08.547555+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T12:59:08.355524+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/7493fadd4c96",
+        "voice_transcript": "Aandacht",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-19T12:59:08.355520+00:00"
     },
     {
       "id": "kbv2-361c0e49",
@@ -84365,18 +84424,164 @@
         "context"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2f51c377",
+          "begrip": "Gegeven",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "beschikbaar",
+            "context",
+            "geven",
+            "hulp",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea7ce894",
+          "begrip": "Geef",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aanbieden",
+            "geven",
+            "hulp",
+            "informatie",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d00a690b",
+          "begrip": "geeft",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aanbieden",
+            "geven",
+            "hulp",
+            "informatie",
+            "ontvangen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f740c66",
+          "begrip": "Uitleggen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "hulp",
+            "informatie",
+            "ondersteuning",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0eb305c",
+          "begrip": "Verlenen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aanbieden",
+            "geven",
+            "hulp",
+            "ondersteuning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d91948df",
+          "begrip": "Reciprociteit",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "geven",
+            "hulp",
+            "informatie",
+            "ontvangen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a8e0a2b4",
+          "begrip": "krijgen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "geven",
+            "informatie",
+            "ontvangen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "hulp",
+            "suggestie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56f183f0",
+          "begrip": "ken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "informatie",
+            "kennis"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-07-31T08:00:54.066030+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T10:51:45.197679+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T10:51:45.210026+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T10:51:45.017230+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-19T10:51:45.017226+00:00"
     },
     {
       "id": "kbv2-4b9379e3",
@@ -85524,20 +85729,162 @@
         "verbonden"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-83fa163c",
+          "begrip": "gekoppeld",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "netwerk",
+            "systeem",
+            "verband",
+            "verbinden",
+            "verbonden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e1fef534",
+          "begrip": "Kabel",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "kabel",
+            "netwerk",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1983825",
+          "begrip": "Aansluiten",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "groep",
+            "systeem",
+            "toevoegen",
+            "verbinden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d5f1d83",
+          "begrip": "Gegevensoverdracht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "kabel",
+            "netwerk",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9a89e376",
+          "begrip": "toevoegen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "netwerk",
+            "systeem",
+            "toevoegen",
+            "verbinden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f4d18917",
+          "begrip": "verbonden",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "netwerk",
+            "systeem",
+            "verbonden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d0ca25db",
+          "begrip": "wijziging",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "systeem",
+            "toevoegen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-691230f4",
+          "begrip": "systeemanalyse",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "netwerk",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab5ea394",
+          "begrip": "ordening",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "netwerk",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77a3c2bc",
+          "begrip": "snap",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "netwerk",
+            "systeem"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-02T13:15:28.841570+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": [],
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T13:14:49.312949+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T13:14:49.325136+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ],
         "llm_5w_filled_at": "2026-08-21T17:20:12.343592+00:00",
-        "llm_5w_provider": "primary"
+        "llm_5w_provider": "primary",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T13:14:49.128036+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-19T13:14:49.128032+00:00"
     },
     {
       "id": "kbv2-210e9fdd",

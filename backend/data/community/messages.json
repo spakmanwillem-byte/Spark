@@ -6152,6 +6152,29 @@
           "ts": "2026-09-17T05:06:07.631847+00:00"
         }
       ]
+    },
+    {
+      "id": "bark-err-20261019T104204",
+      "user_id": "bot-boekhouder",
+      "user_name": "De Boekhouder",
+      "message": "🐛 **Madelief heeft iets opgevangen**\n\n• `kb_v2` — KB v2 kaart verplaatsen tussen lades: HTTPException: 400: lade moet één van ['doen', 'games', 'inbox', 'spreken', 'voelen', 'weten'] zijn\n• `kb_v2` — KB v2 kaart verplaatsen tussen lades: HTTPException: 400: lade moet één van ['doen', 'games', 'inbox', 'spreken', 'voelen', 'weten'] zijn\n\n_Spark gaat er mee aan de slag._",
+      "ts": "2026-10-19T10:42:04.435990+00:00",
+      "kind": "self_error_bark",
+      "source": "scheduler_v6",
+      "errors": [
+        {
+          "module": "kb_v2",
+          "intent": "KB v2 kaart verplaatsen tussen lades",
+          "err": "HTTPException: 400: lade moet één van ['doen', 'games', 'inbox', 'spreken', 'voelen', 'weten'] zijn",
+          "ts": "2026-10-19T10:41:21.908965+00:00"
+        },
+        {
+          "module": "kb_v2",
+          "intent": "KB v2 kaart verplaatsen tussen lades",
+          "err": "HTTPException: 400: lade moet één van ['doen', 'games', 'inbox', 'spreken', 'voelen', 'weten'] zijn",
+          "ts": "2026-10-19T10:41:23.707464+00:00"
+        }
+      ]
     }
   ],
   "active_users": [

@@ -1556,7 +1556,12 @@ function EmotieSection({ card, currentLade, onUpdated }) {
         body: JSON.stringify({ card_id: card.id, lade: currentLade, updates: { emotie }, user_id: 'user-001' }),
       }).then(x => x.json());
       if (!r.success) toast.error(r.message || 'Emotie opslaan mislukt');
-      else onUpdated && onUpdated();
+      else {
+        const weg = r.kaart?.emotie_tags_verwijderd;
+        if (weg?.length && !(card.emotie_tags_verwijderd?.length)) toast.success(`Emotie ${emotie} · tegensprekende tags weg: ${weg.join(', ')}`);
+        if (r.kaart?.emotie_tags_conflict?.length) toast.warning(`Tags ${r.kaart.emotie_tags_conflict.join(', ')} blijven staan (anders < 5 tags)`);
+        onUpdated && onUpdated();
+      }
     } catch (e) { toast.error('Emotie fout: ' + e.message); }
     setSaving(false);
   };

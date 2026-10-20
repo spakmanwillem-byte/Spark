@@ -284,51 +284,12 @@
           "kaart_id": "kbv2-2b71033a",
           "begrip": "gele",
           "lade": "weten",
-          "overlap": 7,
+          "overlap": 5,
           "shared_tags": [
-            "blij",
             "emotie",
             "energie",
             "licht",
-            "natuur"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-028cb626",
-          "begrip": "warm",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "blij",
-            "emotie",
-            "energie",
-            "sfeer",
-            "warmte"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b1ae70e0",
-          "begrip": "landen",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "aanwezigheid",
-            "blij",
-            "emotie",
-            "energie",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-c9e1eb3a",
-          "begrip": "gezellig",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "blij",
-            "emotie",
-            "neutraal",
-            "sfeer",
+            "natuur",
             "warmte"
           ]
         },
@@ -336,11 +297,10 @@
           "kaart_id": "kbv2-c515185a",
           "begrip": "kookt",
           "lade": "weten",
-          "overlap": 5,
+          "overlap": 4,
           "shared_tags": [
             "emotie",
             "energie",
-            "neutraal",
             "semantiek",
             "warmte"
           ]
@@ -349,12 +309,11 @@
           "kaart_id": "kbv2-b13f8290",
           "begrip": "Kaars",
           "lade": "weten",
-          "overlap": 5,
+          "overlap": 4,
           "shared_tags": [
             "energie",
             "licht",
             "sfeer",
-            "symboliek",
             "warmte"
           ]
         },
@@ -362,12 +321,11 @@
           "kaart_id": "kbv2-skel-d929a652",
           "begrip": "straling",
           "lade": "weten",
-          "overlap": 5,
+          "overlap": 4,
           "shared_tags": [
             "emotie",
             "energie",
             "licht",
-            "neutraal",
             "warmte"
           ]
         },
@@ -375,38 +333,68 @@
           "kaart_id": "kbv2-skel-ecf36734",
           "begrip": "kleur",
           "lade": "weten",
-          "overlap": 5,
+          "overlap": 4,
           "shared_tags": [
             "emotie",
             "licht",
             "natuur",
-            "neutraal",
             "visueel"
           ]
         },
         {
-          "kaart_id": "kbv2-skel-5a2ab536",
-          "begrip": "groente",
-          "lade": "doen",
-          "overlap": 5,
+          "kaart_id": "kbv2-90171519",
+          "begrip": "Zonlicht",
+          "lade": "weten",
+          "overlap": 4,
           "shared_tags": [
-            "blij",
-            "emotie",
             "energie",
+            "licht",
             "natuur",
-            "neutraal"
+            "warmte"
           ]
         },
         {
-          "kaart_id": "kbv2-fefe6525",
-          "begrip": "Even een pauze nemen.",
+          "kaart_id": "kbv2-skel-028cb626",
+          "begrip": "warm",
           "lade": "voelen",
-          "overlap": 4,
+          "overlap": 3,
           "shared_tags": [
-            "blij",
             "emotie",
             "energie",
-            "neutraal"
+            "sfeer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-59a23b76",
+          "begrip": "luchtig",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "licht",
+            "sfeer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c9e1eb3a",
+          "begrip": "gezellig",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "sfeer",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-dd161113",
+          "begrip": "gezelligheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "sfeer",
+            "warmte"
           ]
         }
       ],
@@ -457,8 +445,42 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T02:13:11.511135+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T02:13:12.024128+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T02:13:12.471306+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T02:13:12.483826+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-4453ade3",
+        "laatst_bewerkt_op": "2026-10-20T02:13:12.312403+00:00"
       },
       "media": {
         "voice_url": null,
@@ -468,7 +490,8 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal"
     },
     {
       "id": "kbv2-287e34ef",
@@ -39267,6 +39290,30 @@
           ]
         },
         {
+          "kaart_id": "kbv2-4dfd1600",
+          "begrip": "Goden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "geloof",
+            "religie",
+            "ritueel",
+            "verering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-044cef22",
+          "begrip": "Godheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "geloof",
+            "religie",
+            "ritueel",
+            "verering"
+          ]
+        },
+        {
           "kaart_id": "kbv2-882404f7",
           "begrip": "Heilig",
           "lade": "weten",
@@ -39282,18 +39329,6 @@
           "kaart_id": "kbv2-11dc8526",
           "begrip": "Religie",
           "lade": "weten",
-          "overlap": 4,
-          "shared_tags": [
-            "geloof",
-            "religie",
-            "ritueel",
-            "spiritualiteit"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-c49473c6",
-          "begrip": "handoplegging",
-          "lade": "doen",
           "overlap": 4,
           "shared_tags": [
             "geloof",
@@ -39325,17 +39360,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-5ed1360f",
-          "begrip": "Mensen geloven in goden",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "geloof",
-            "religie",
-            "spiritualiteit"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-32121c93",
           "begrip": "hiernamaals",
           "lade": "weten",
@@ -39358,13 +39382,14 @@
           ]
         },
         {
-          "kaart_id": "kbv2-52616c1d",
-          "begrip": "Bovennatuurlijk",
-          "lade": "voelen",
-          "overlap": 2,
+          "kaart_id": "kbv2-cd17c460",
+          "begrip": "Verering",
+          "lade": "weten",
+          "overlap": 3,
           "shared_tags": [
+            "geloof",
             "religie",
-            "spiritualiteit"
+            "respect"
           ]
         }
       ],
@@ -39399,18 +39424,55 @@
               "n_found": 10,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T10:02:30.893580+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T10:02:30.904802+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T10:35:51.374363+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T10:35:51.385280+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-19T10:35:51.182186+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/c02efd793e2f",
+        "voice_transcript": "Aanbeten",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-19T10:35:51.182183+00:00"
     },
     {
       "id": "kbv2-2b80d498",
@@ -40792,28 +40854,14 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-skel-83fa163c",
-          "begrip": "gekoppeld",
-          "lade": "doen",
-          "overlap": 5,
-          "shared_tags": [
-            "aansluiting",
-            "integratie",
-            "koppeling",
-            "samenhang",
-            "verbinding"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-444c9aa9",
           "begrip": "eenheid",
           "lade": "voelen",
-          "overlap": 4,
+          "overlap": 3,
           "shared_tags": [
             "afstemming",
             "integratie",
-            "samenhang",
-            "verbinding"
+            "samenhang"
           ]
         },
         {
@@ -40839,17 +40887,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-2a7689ee",
-          "begrip": "Bindmiddel",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "koppeling",
-            "samenhang",
-            "verbinding"
-          ]
-        },
-        {
           "kaart_id": "kbv2-7a03ed83",
           "begrip": "Koppeling",
           "lade": "weten",
@@ -40861,12 +40898,12 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-8598ee1f",
-          "begrip": "afstemmen",
-          "lade": "doen",
+          "kaart_id": "kbv2-3ec044c5",
+          "begrip": "Verweven",
+          "lade": "weten",
           "overlap": 3,
           "shared_tags": [
-            "afstemming",
+            "integratie",
             "samenhang",
             "verbinding"
           ]
@@ -40880,6 +40917,17 @@
             "afstemming",
             "integratie",
             "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-83fa163c",
+          "begrip": "gekoppeld",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "integratie",
+            "koppeling",
+            "samenhang"
           ]
         },
         {
@@ -40899,6 +40947,16 @@
           "overlap": 2,
           "shared_tags": [
             "afstemming",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8d9261ff",
+          "begrip": "verbondenheid",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "samenhang",
             "verbinding"
           ]
         }
@@ -40958,10 +41016,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-19T13:14:55.182327+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-19T13:14:55.192951+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-05-28T21:37:00.732052+00:00"
+        "laatst_bewerkt_op": "2026-10-19T13:14:54.991759+00:00"
       },
       "media": {
         "voice_url": null,
@@ -40971,7 +41045,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-19T13:14:54.991754+00:00"
     },
     {
       "id": "kbv2-skel-bc1649ca",

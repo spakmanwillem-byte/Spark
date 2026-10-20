@@ -78790,11 +78790,463 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3110
       }
+    },
+    {
+      "id": "conv-0548d9cc",
+      "timestamp": "2026-10-19T09:58:19.024484+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo Willem! Fijn je weer te horen. \n\nWaarmee kan ik je vandaag helpen? \n\n* Wil je doorgaan met je seksuele woordenschat? \n* Heb je een vraag over de Spark‑architectuur of een ander onderwerp? \n* Of wil je iets anders bespreken of plannen? \n\nLaat maar weten wat je nodig hebt.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "uitbreiden",
+        "used_cards": [
+          "kbv2-f1d5db2f",
+          "kbv2-f4f17100",
+          "kbv2-aaf81efb",
+          "kbv2-2ad0e675",
+          "kbv2-336bd0a9"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3111
+      }
+    },
+    {
+      "id": "conv-7a40d2ca",
+      "timestamp": "2026-10-19T09:58:53.251874+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil werken aan je ttss",
+      "spark_response": "Dat klinkt als een goed plan, Willem. Hieronder een kort stappenplan om aan de TTS‑functionaliteit te werken:\n\n**1. Doel bepalen** \n- Wil je een nieuwe stem toevoegen, de huidige stem aanpassen (toon, snelheid, intonatie) of een geheel andere TTS‑engine integreren? \n- Welke talen of dialecten wil je ondersteunen?\n\n**2. Voice‑instellingen bekijken** \n- Open de **Voice‑tab** in de app. \n- Daar vind je de huidige configuratie: gekozen engine, stem‑ID, snelheid, pitch en volume. \n- Klik op *Bewerken* om de parameters te wijzigen. De wijzigingen worden direct in de lokale configuratie opgeslagen.\n\n**3. Nieuwe stem toevoegen (indien nodig)** \n- In de **Voice‑tab** kun je onder *Stemmen beheren* een nieuw stem‑pakket uploaden (bijvoorbeeld een .wav‑ of .json‑definitie). \n- Zorg dat het pakket voldoet aan het formaat dat Spark ondersteunt (sample‑rate 16 kHz, mono). \n- Na upload verschijnt de stem in de lijst; selecteer hem als standaard of koppel hem aan een specifieke context (bijv. “Spreken → Medische uitleg”).\n\n**4. Testen** \n- Gebruik de *Voorbeeld‑afspelen* knop om een korte tekst te laten voorlezen. \n- Pas eventueel snelheid en pitch aan totdat het resultaat naar wens klinkt. \n\n**5. Integratie in workflows** \n- Als je TTS wilt inzetten bij bepaalde KB‑kaarten (bijv. “Ziekenhuizen werken samen…”), voeg dan een **trigger** toe in de *Triggers‑tab*: bij het ophalen van die kaart wordt automatisch de TTS‑actie gestart. \n- Definieer de trigger met een sleutelwoord (bijv. `tts_zorg`) en koppel de gewenste stem.\n\n**6. Documentatie & versiebeheer** \n- Noteer de gemaakte wijzigingen in een notitie (tab *Notities*) zodat je later kunt terugkijken of delen met collega‑ontwikkelaars. \n- Commit de aangepaste `voice_config.json` naar je lokale repository als je versiebeheer gebruikt.\n\nLaat me weten welke van deze stappen je wilt starten, of als je specifieke vragen hebt over een van de onderdelen. Ik sta klaar om je door elk onderdeel heen te leiden.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "uitbreiden",
+        "used_cards": [
+          "kbv2-14a6fef4",
+          "kbv2-40357d7f",
+          "kbv2-1eb3cc8d",
+          "kbv2-436d7636",
+          "kbv2-bdfa0deb"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3112
+      }
+    },
+    {
+      "id": "conv-a49dcd05",
+      "timestamp": "2026-10-19T09:59:45.919146+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "niet tts maar ttss. text to speech spark. grijns",
+      "spark_response": "Voor zover ik me herinner wil je de **ttss**‑functionaliteit (Text‑to‑Speech) van Spark verder uitbouwen. Hieronder een beknopt stappenplan.\n\n**1. Doel helder formuleren** \n- Nieuwe stem toevoegen of bestaande stem aanpassen? \n- Doelgroep: interne tests, externe gebruikers, toegankelijkheids‑feature? \n\n**2. Huidige TTS‑stack bekijken** \n- Spark maakt gebruik van de [spreken] ‑ Text‑to‑Speech‑kaart (vertrouwen 0.9). \n- Controleer welke TTS‑engine (bijv. Google Cloud, eSpeak, open‑source) momenteel is gekoppeld in `settings/tts_config.json`. \n\n**3. Stem‑ en taal‑parameters definiëren** \n- Kies een stem‑ID, toonhoogte, snelheid en volume. \n- Voeg eventueel emotie‑modulaties toe via de `emotion_pipeline`. \n\n**4. Integratie in Spark‑core** \n- In de module `spark/voice` voeg een functie `tts_generate(text, voice_id)` toe die de gekozen engine aanroept. \n- Zorg voor een fallback‑mechanisme als de engine niet beschikbaar is. \n\n**5. Test‑scenario’s opzetten** \n- Maak een reeks test‑zinnen (korte, lange, met speciale tekens). \n- Gebruik de **Speech‑to‑Text**‑kaart om de output te transcriberen en controleer nauwkeurigheid. \n\n**6. UI‑knop in Dashboard** \n- Voeg een “Play‑TTS”‑knop toe onder **Voice**‑tab. \n- Koppel de knop aan `tts_generate` zodat gebruikers direct tekst kunnen laten voorlezen. \n\n**7. Documentatie & KB‑update** \n- Schrijf een korte KB‑kaart met de nieuwe stem‑details en voorbeeldcode. \n- Tag `text-to-speech`, `ttss`, `voice_customization`. \n\n**8. Release & monitoring** \n- Deploy via de **Deploy**‑tab (admin‑only). \n- Houd logs in `audit_health` om eventuele fouten vroegtijdig te detecteren. \n\nAls je wilt, kan ik meteen de huidige TTS‑configuratie voor je ophalen of een voorbeeld‑tekst laten voorlezen. Laat maar weten welke stap je nu wilt oppakken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hallo",
+        "used_cards": [
+          "kbv2-92430248",
+          "kbv2-33419345",
+          "kbv2-cce162f2",
+          "kbv2-934b26c3",
+          "kbv2-f4f17100"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3113
+      }
+    },
+    {
+      "id": "conv-a033daec",
+      "timestamp": "2026-10-19T10:00:02.171797+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3114
+      }
+    },
+    {
+      "id": "conv-d1ba5e12",
+      "timestamp": "2026-10-19T10:00:40.341058+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "fijn",
+      "spark_response": "Fijn, Willem. Het is prettig om te horen dat je je goed voelt.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "werken",
+        "used_cards": [
+          "kbv2-skel-a07a1351",
+          "kbv2-c760a1f1",
+          "kbv2-b545a71a",
+          "kbv2-66f8a6f7",
+          "kbv2-b8d1c9a4"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3115
+      }
+    },
+    {
+      "id": "conv-7942c530",
+      "timestamp": "2026-10-19T10:03:22.249277+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3116
+      }
+    },
+    {
+      "id": "conv-b4a35d7e",
+      "timestamp": "2026-10-19T10:04:11.123039+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "zeg eens aanduiden",
+      "spark_response": "Aanduiden betekent dat je iets duidelijk aangeeft, aanwijst of herkenbaar maakt. \n\n**Wie:** een persoon of systeem dat iets wil verduidelijken. \n**Wat:** het aangeven, aanwijzen of herkenbaar maken van een object, begrip, plaats of situatie. \n**Waar:** in gesprekken, teksten, kaarten, signalen, verkeersborden — overal waar informatie moet worden gemarkeerd. \n**Wanneer:** wanneer het nodig is om duidelijk te maken wat of waar iets is. \n**Waarom:** om gerichte, eenduidige informatie over te brengen. \n\n**Tags:** aanduiden, aangeven, aanwijzen, begrip, benoemen, gebaar, informatie, markeren.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "fijn",
+        "used_cards": [
+          "kbv2-9f310b89",
+          "kbv2-37b2a93f",
+          "kbv2-ce19e818",
+          "kbv2-653b359c",
+          "kbv2-11459c2d"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3117
+      }
+    },
+    {
+      "id": "conv-12fd283c",
+      "timestamp": "2026-10-19T10:04:24.797254+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3118
+      }
+    },
+    {
+      "id": "conv-f03a96be",
+      "timestamp": "2026-10-19T10:04:52.648643+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "aanduiden",
+      "spark_response": "**Aanduiden** \n\n- **Wie:** een persoon of systeem dat iets wil verduidelijken. \n- **Wat:** het duidelijk aangeven, aanwijzen of herkenbaar maken van een object, begrip, plaats of situatie. \n- **Waar:** in gesprekken, teksten, kaarten, systemen, verkeersborden, afbeeldingen… overal waar informatie gemarkeerd moet worden. \n- **Wanneer:** zodra duidelijk moet zijn wat of waar iets bedoeld wordt. \n- **Waarom:** om gerichte, eenduidige informatie over te brengen; om misverstanden te voorkomen. \n\n**Hoe kun je aanduiden?** \n- Met een woord of naam (bijv. “dit bestand”). \n- Met een teken of symbool (✔, →, *). \n- Met een gebaar of aanwijzing (wijzen). \n- Met een visueel element (kleur, markering, label). \n\n**Voorbeelden** \n1. “Markeer het juiste antwoord.” – je wijst het antwoord aan. \n2. “Het verkeersbord wijst de richting aan.” – het bord duidt de weg aan. \n3. “De kaart labelt de locatie als ‘thuis’.” – de kaart maakt de plek herkenbaar. \n\n**Gerelateerde termen** \n- **Markeren:** een specifieke vorm van aanduiden, vaak visueel. \n- **Benoemen:** iets bij naam noemen, een vorm van aanduiden via taal. \n- **Noemde:** het verleden van benoemen; iets eerder aangeduid. \n\nKort: aanduiden = iets duidelijk maken zodat iedereen weet wat of waar het is.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "aanduiden",
+        "used_cards": [
+          "kbv2-37b2a93f",
+          "kbv2-ce19e818",
+          "kbv2-653b359c",
+          "kbv2-11459c2d",
+          "kbv2-752c8987"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3119
+      }
+    },
+    {
+      "id": "conv-778ccba8",
+      "timestamp": "2026-10-19T10:05:44.276346+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel eens meer",
+      "spark_response": "**Vertel** \n- **Betekenis**: een opdracht of verzoek om informatie, een verhaal of uitleg te geven. \n- **Gebruik**: wordt ingezet wanneer iemand iets wil laten beschrijven, uitleggen of delen. \n- **Context**: gesprekken, onderwijs, digitale systemen. \n- **Waarom**: om kennis, ervaringen of details uit te wisselen. \n\n**Meer** \n- **Betekenis**: een groot watergebied dat volledig door land wordt omringd (een meer). \n- **Ecologie**: biedt habitat voor planten, dieren en mensen; fungeert als wateropslag. \n- **Waar**: in valleien, laagtes of door geologische processen gevormde depressies. \n\n**Extra** \n- **Betekenis**: iets dat boven op het bestaande wordt toegevoegd. \n- **Toepassing**: extra tijd, geld, informatie, hulp of functionaliteit. \n- **Wanneer**: wanneer de huidige hoeveelheid niet voldoende is of een aanvulling gewenst is. \n\n**Overvloed** \n- **Betekenis**: een hoeveelheid die groter is dan nodig of gebruikelijk. \n- **Voorbeelden**: overvloed aan voedsel, bloemen, informatie. \n- **Reden**: vaak door hoge productie, groei of verzameling. \n\n**Uitgebreider** \n- **Betekenis**: met meer details, informatie of uitleg. \n- **Doel**: een onderwerp vollediger maken, zodat de lezer of luisteraar een dieper inzicht krijgt. \n\nWil je dieper ingaan op een van deze begrippen, of een ander onderwerp uit de kennisbank verkennen? Laat het me weten, dan geef ik een gerichte uitbreiding.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "aanduiden",
+        "used_cards": [
+          "kbv2-cfc6c027",
+          "kbv2-b64bd6d4",
+          "kbv2-87c89e99",
+          "kbv2-73fc90b6",
+          "kbv2-99535199"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3120
+      }
+    },
+    {
+      "id": "conv-3cc24a87",
+      "timestamp": "2026-10-19T10:06:07.063057+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss uit",
+      "spark_response": "TTSS uit — terug naar de gewone stem (als TTS aan staat).",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "disable_ttss",
+        "type": "action_ttss_off"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3121
+      }
+    },
+    {
+      "id": "conv-1ed82de4",
+      "timestamp": "2026-10-19T10:06:36.878000+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "fijn",
+      "spark_response": "**Fijn** betekent dat iets prettig, aangenaam of positief wordt ervaren. Het duidt op een goede, comfortabele beleving, bijvoorbeeld een fijn weer, een fijn gesprek of een fijne sfeer. \n\n- **Wie:** Mensen, gebruikers, groepen. \n- **Wat:** Een positieve ervaring of gevoel. \n- **Waar:** In relaties, activiteiten, omgevingen, gebeurtenissen. \n- **Wanneer:** Bij prettige situaties of momenten. \n- **Waarom:** Omdat iets als prettig, comfortabel of waardevol wordt ervaren. \n\n**Voorbeelden** \n- “Het is fijn om weer buiten te zitten.” \n- “Dat was een fijne samenwerking.” \n- “Ik vind het fijn hoe je dit hebt uitgelegd.” \n\nWil je meer weten over gerelateerde kaarten, zoals *leuke* of *prettig*? Laat het me weten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "aanduiden",
+        "used_cards": [
+          "kbv2-skel-a07a1351",
+          "kbv2-c760a1f1",
+          "kbv2-b545a71a",
+          "kbv2-66f8a6f7",
+          "kbv2-b8d1c9a4"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3122
+      }
+    },
+    {
+      "id": "conv-50b29e90",
+      "timestamp": "2026-10-19T10:07:21.449363+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "admin uit",
+      "spark_response": "Wil je de admin‑functionaliteit uitschakelen of de admin‑tabbladen verbergen? \nJe kunt dat op twee manieren doen:\n\n1. **Admin‑modus verlaten** \n - Open de **Instellingen**‑tab. \n - Zoek de optie **“Admin‑modus”** of **“Beheerder‑weergave”**. \n - Schakel de schakelaar uit. De admin‑tabbladen verdwijnen dan uit de interface.\n\n2. **Specifieke admin‑tabbladen verbergen** \n - Ga naar **Admin‑tabs** in het beheer‑dashboard. \n - Klik op het tabblad dat je niet meer wilt zien. \n - Druk op **“Verbergen”** of **“Uitschakelen”**. \n\nNa deze stappen zie je alleen de normale gebruikers‑tabbladen. Laat me weten of je hulp nodig hebt bij een van de stappen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "vertel",
+        "used_cards": [
+          "kbv2-2ecb20e3",
+          "kbv2-3e8865f1",
+          "kbv2-65f07fef",
+          "kbv2-skel-2c3d5910",
+          "kbv2-eb425b88"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3123
+      }
+    },
+    {
+      "id": "conv-cd3b2c59",
+      "timestamp": "2026-10-19T10:08:15.351008+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil dat jij mijn admin functie uit ze",
+      "spark_response": "Natuurlijk, Willem. Om de admin‑functie uit te schakelen kun je één van de volgende routes nemen:\n\n**1. Via de Instellingen‑tab** \n1. Open **Instellingen**. \n2. Scroll naar **Beheer & Toegang**. \n3. Schakel de schakelaar **“Admin‑modus actief”** uit. \n4. Bevestig met *OK*; de admin‑tabbladen verdwijnen en admin‑commando’s worden geblokkeerd.\n\n**2. Via Mijn Profiel** \n1. Ga naar **Mijn Profiel**. \n2. Klik op **Rol & rechten**. \n3. Zet **Admin‑status** op *Uit* (of vink **Verberg admin‑tabbladen** aan). \n4. Sla de wijziging op.\n\nNa deze stappen zie je geen admin‑tabbladen meer en kun je geen admin‑only commando’s meer uitvoeren totdat je de functie weer inschakelt. \n\nLaat me weten of je hulp nodig hebt bij een van de stappen of als je de wijziging direct wilt laten uitvoeren; ik kan de instelling voor je aanpassen zodra je bevestigt.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "admin",
+        "used_cards": [
+          "kbv2-2ecb20e3",
+          "kbv2-3e8865f1",
+          "kbv2-skel-2c3d5910",
+          "kbv2-65f07fef",
+          "kbv2-5c0cf7ff"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3124
+      }
+    },
+    {
+      "id": "conv-9a6342be",
+      "timestamp": "2026-10-19T10:11:43.557460+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik heb een idee",
+      "spark_response": "Leuk dat je een idee hebt, Willem. \n\nEen **idee** is een gedachte of plan dat in je hoofd ontstaat. Het kan voortkomen uit inspiratie, ervaring of het combineren van bestaande kennis. Ideeën helpen ons nieuwe oplossingen, plannen of creaties te bedenken.\n\nWil je het idee verder uitwerken? Ik kan:\n\n* vragen stellen om het te verduidelijken, \n* een **voorstel** formuleren voor mogelijke vervolgstappen, of \n* je helpen het idee in een **notitie** op te slaan zodat je er later op kunt terugkomen.\n\nLaat me weten hoe ik je het beste kan ondersteunen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "admin",
+        "used_cards": [
+          "kbv2-489fde1f",
+          "kbv2-5a991a03",
+          "kbv2-f9ab26d4",
+          "kbv2-f34b9311",
+          "kbv2-2e1cd2cc"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3125
+      }
+    },
+    {
+      "id": "conv-6f5be723",
+      "timestamp": "2026-10-19T10:13:10.944032+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "als ik tegen je een onderwerp benoem en vervolgens de correcte lade benoem, zou jij dit onderwerp eigenlijk in die lade van je kennisbank moeten kunnen plaatsen.",
+      "spark_response": "Dat klopt, Willem. Als je een onderwerp noemt en aangeeft in welke lade het moet, kan ik een KB‑kaart aanmaken en die direct in de juiste lade plaatsen. \n\nWil je dat ik nu een kaart voor je maak? Geef dan het **onderwerp** en de **lade** (bijvoorbeeld “Wissen → Lade ‘Doen’”). \n\nIk kan het ook als een notitie in **Mijn Profiel** bewaren, zodat je later zelf kunt bevestigen of de indeling klopt. Laat maar weten wat je wilt.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "admin",
+        "used_cards": [
+          "kbv2-361005df",
+          "kbv2-b29a7ab5",
+          "kbv2-3699c6a2",
+          "kbv2-0090af05",
+          "kbv2-dd10662f"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3126
+      }
+    },
+    {
+      "id": "conv-4e44dd2d",
+      "timestamp": "2026-10-19T10:14:02.736605+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Weet jij welke lades en momenteel gebruikt worden?",
+      "spark_response": "Ja, Willem. In de huidige kennisbank v2 worden vier hoofd‑lades gebruikt:\n\n1. **Voelen** – kaarten met emotionele of sensorische informatie. \n2. **Spreken** – kaarten die gericht zijn op communicatie, vragen en antwoorden. \n3. **Weten** – feitelijke, conceptuele en definities‑kaarten. \n4. **Doen** – instructies, procedures en actie‑gerelateerde content.\n\nDeze indeling staat bevestigd in de KB‑kaart **[weten] Lades** (vertrouwen = 1.0). Als je een nieuw onderwerp hebt, kun je aangeven in welke van deze lades het moet, dan maak ik de kaart meteen aan.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "onderwerp",
+        "used_cards": [
+          "kbv2-922cf802",
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-a5d3933d",
+          "kbv2-e1c2eb3d"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3127
+      }
+    },
+    {
+      "id": "conv-10d427b0",
+      "timestamp": "2026-10-19T10:14:58.398714+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat weet jij over je emotie-pipeline?",
+      "spark_response": "De emotie‑pipeline van Spark is een reeks van zeven opeenvolgende lagen die emotionele signalen uit de invoer verwerken en vertalen naar passend gedrag en expressie.\n\n1. **Detectie** – herkent emotionele kenmerken in tekst, stem of andere input. \n2. **Weging** – geeft elke gedetecteerde emotie een sterkte‑ en relevantie‑score. \n3. **Context‑integratie** – koppelt de emotie aan de huidige gesprek‑ en omgevingscontext. \n4. **Identiteits‑filter** – houdt rekening met de identiteit en voorkeuren van de gebruiker. \n5. **Norm‑toepassing** – past eventuele gedragsnormen of beleidsregels toe. \n6. **Beslissings‑laag** – bepaalt welke respons of actie het meest geschikt is. \n7. **Expressie** – genereert de uiteindelijke tekst‑ of stemoutput met de juiste toon.\n\nDoel: niet alleen emoties herkennen, maar ze gecontroleerd omzetten in gedrag dat aansluit bij de gebruiker en de situatie. De pipeline wordt telkens geactiveerd wanneer emotionele context in een invoer aanwezig is.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "lade",
+        "used_cards": [
+          "kbv2-bae03cd8",
+          "kbv2-skel-6c1cd198",
+          "kbv2-82ebfcac",
+          "kbv2-0f509036",
+          "kbv2-9115c6a7"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3128
+      }
+    },
+    {
+      "id": "conv-4c824d22",
+      "timestamp": "2026-10-19T10:15:43.947980+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dank. deze moet ik nog wel toetsen. maar komt goed.",
+      "spark_response": "Dank je, Willem. Als je wilt, kan ik deze opmerking in je profiel zetten — laat maar weten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "lade",
+        "used_cards": [
+          "kbv2-369f8921",
+          "kbv2-8e0d7b7f",
+          "kbv2-ff9241cb",
+          "kbv2-0d8458e6",
+          "kbv2-cbb06fad"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3129
+      }
+    },
+    {
+      "id": "conv-4d2b318a",
+      "timestamp": "2026-10-19T10:16:15.832916+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "je hoeft niks alles is goed. dank voor het vragen.",
+      "spark_response": "Graag gedaan, Willem. Laat maar weten als er later nog iets is waar ik mee kan helpen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "weet",
+        "used_cards": [
+          "kbv2-ff9241cb",
+          "kbv2-369f8921",
+          "kbv2-8e0d7b7f",
+          "kbv2-28feae55",
+          "kbv2-9be16a2a"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3130
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3110,
-    "last_updated": "2026-10-18T16:23:15.862353+00:00"
+    "total_conversations": 3130,
+    "last_updated": "2026-10-19T10:16:15.832916+00:00"
   }
 }

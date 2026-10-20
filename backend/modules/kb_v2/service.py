@@ -14,6 +14,7 @@ Architectuur (zie ARCHITECTURE.md → Laag 3: Geheugen):
 """
 from __future__ import annotations
 
+import re
 import threading
 import uuid
 from datetime import datetime, timezone
@@ -925,13 +926,36 @@ EMOTIES = ("blij", "boos", "bang", "bedroefd", "neutraal")
 
 
 def _apply_emotie(k: Dict, updates: Dict, user_id: str) -> None:
-    """v14_emotie_veld_001 — bevestigde emotie zetten (neutraal is een echte keuze, geen default)."""
+    """v14_emotie_veld_001 — bevestigde emotie zetten (neutraal is een echte keuze, geen default).
+    v14_emotie_tags_001 (Willem): tegensprekende emotie-tags gaan weg; 'emotie' en een tag gelijk aan
+    de keuze blijven; nooit onder MIN_TAGS_FOR_LADE."""
     e = updates.get("emotie")
-    if isinstance(e, str) and e.lower().strip() in EMOTIES:
-        k["emotie"] = e.lower().strip()
-        k["emotie_bevestigd"] = True
-        k["emotie_bron"] = user_id
-        k["emotie_bevestigd_op"] = _now()
+    if not (isinstance(e, str) and e.lower().strip() in EMOTIES):
+        return
+    e = e.lower().strip()
+    k["emotie"] = e
+    k["emotie_bevestigd"] = True
+    k["emotie_bron"] = user_id
+    k["emotie_bevestigd_op"] = _now()
+    tags = list(k.get("tags") or [])
+    low = {str(t).lower().strip().lstrip("#") for t in tags}
+    is_emotie_kaart = "emotie" in low or any(re.match(r"^emotie[- ]", t) for t in low)
+    removed: List[str] = []
+    for t in tags:
+        tl = str(t).lower().strip().lstrip("#")
+        m = re.match(r"^emotie[- ](blij|boos|bang|bedroefd|neutraal)$", tl)
+        if m:
+            if m.group(1) != e:
+                removed.append(t)
+            continue
+        if tl in EMOTIES and tl != e and is_emotie_kaart:
+            removed.append(t)
+    keep = [t for t in tags if t not in removed]
+    if removed and len(keep) >= MIN_TAGS_FOR_LADE:
+        k["tags"] = keep
+        k["emotie_tags_verwijderd"] = removed
+    elif removed:
+        k["emotie_tags_conflict"] = removed
 
 
 @traced(intent="bestaande kaart in lade bewerken", module="kbv2")

@@ -162,8 +162,12 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   triggers blijven anker). Getest: bevestig `akkers`=blij → "ik ben zo blij met de akkers" bron `both`.
   **Badge**: 100 % = laag1-4 + 5W + tags + foto (7 velden); +10 % ingesproken (alleen voice_kind spraak) · +10 % emotie
   bevestigd → max **120 %**. (Stem telt niet meer mee in de 100 %-basis.)
-  **Open**: emotie-tags (`emotie-blij`, losse `emotie`+`blij`, 1529× `emotie`) staan nog op kaarten — doen niets meer
-  voor de detector; opruimen/hervalideren kan later (kern-kaarten sparen). Kennis-graph-ontruising (`emotie` uit tag-
+  **✅ Tags-opruimen bij bevestigen** (`v14_emotie_tags_001`, Willems keuze "alleen tegensprekende weg"): in
+  `_apply_emotie` gaan `emotie-X`-tags met X ≠ keuze weg, en op emotie-kaarten (tag `emotie`) ook losse basis-emotie-
+  tags ≠ keuze; `emotie` zelf en een tag gelijk aan de keuze blijven; nooit onder MIN_TAGS_FOR_LADE (dan
+  `emotie_tags_conflict` + waarschuwing). Verwijderde tags staan in `emotie_tags_verwijderd` (toast in UI).
+  Getest: gloed (emotie, blij, neutraal, …) bevestigd als boos → blij + neutraal weg, 13 tags over; teruggedraaid.
+  Stand: 5 kaarten met expliciete pipeline-tags, 1330 met losse emotie+basis; worden pas geraakt als Willem bevestigt. Kennis-graph-ontruising (`emotie` uit tag-
   overlap) + emotie-edges (escaleert_naar/verwant/tegenpool) = volgende stap "emotie-graph".
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).

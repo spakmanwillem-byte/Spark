@@ -400,11 +400,301 @@
         "session_id": "test-help-sess",
         "gesprek_nummer": 18
       }
+    },
+    {
+      "id": "conv-c28a688e",
+      "timestamp": "2026-10-20T12:22:52.655633+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/tree",
+      "spark_response": "⚠️ `cap_files_tree` niet uitgevoerd — daar heb je geen rechten voor.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_failed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_failed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 19
+      }
+    },
+    {
+      "id": "conv-33622035",
+      "timestamp": "2026-10-20T12:22:52.881059+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/cmd toon mijn taken",
+      "spark_response": "🤖 Ik kan **Notities & dagboek** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 20
+      }
+    },
+    {
+      "id": "conv-8cce3469",
+      "timestamp": "2026-10-20T12:22:53.111662+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/cmd verwijder die notitie",
+      "spark_response": "Dit is **verwijderen** via `cap_notes_delete` (DELETE /api/notes/delete/{note_id}). Zal ik het doen? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 21
+      }
+    },
+    {
+      "id": "conv-194c387b",
+      "timestamp": "2026-10-20T12:22:53.320712+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "nee",
+      "spark_response": "Oké, niet uitgevoerd. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_cancelled",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_cancelled"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 22
+      }
+    },
+    {
+      "id": "conv-5a7117cf",
+      "timestamp": "2026-10-20T12:23:19.824928+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/tree",
+      "spark_response": "🗂️ Mappenboom (alleen lezen):\n📁 **backend** — 2888 bestanden\n   └ data/ (2403)\n   └ modules/ (383)\n   └ tests/ (68)\n   └ scripts/ (29)\n   └ ./ (2)\n   └ config/ (2)\n   └ memory/ (1)\n📁 **src** — 139 bestanden\n   └ components/ (130)\n   └ ./ (4)\n   └ context/ (1)\n   └ lib/ (1)\n   └ utils/ (1)\n   └ hooks/ (1)\n   └ api/ (1)\n📁 **memory** — 85 bestanden\n   └ blueprints/ (59)\n   └ ./ (26)\nTotaal 3112 bestanden. Zeg `/cmd <wat je wilt>` voor andere commando's.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_executed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_executed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 23
+      }
+    },
+    {
+      "id": "conv-b259bfc0",
+      "timestamp": "2026-10-20T12:23:20.031903+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/cmd toon mijn taken",
+      "spark_response": "✅ `cap_taken_lijst` uitgevoerd — 0 items.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_executed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "cmd_executed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 24
+      }
+    },
+    {
+      "id": "conv-88553589",
+      "timestamp": "2026-10-20T12:23:20.227381+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/cmd hoeveel gebruikers",
+      "spark_response": "Er zijn **12 users** in het systeem:\n- **Willem** (1) (admin) — `user-001`\n- **Spark** (1) (admin) — `user-000`\n- **Heidi** (2) — `user-64bf063d`\n- **Ron** (3) — `user-ceeba762`\n- **De Boekhouder** (4) — `bot-boekhouder`\n- **de Geiser** (3) — `user-a0ee2d7e`\n- **Lotus** (2) — `user-5dd295db`\n- **Maaike** (2) — `user-fc2f683b`\n- **Joy** (2) — `user-c4507f59`\n- **Gerben** (2) — `user-4d9b59aa`\n- **GPT** (5) — `user-7b75ad55`\n- **Emergent** (2) (admin) — `user-4453ade3`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "user_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "user_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 25
+      }
+    },
+    {
+      "id": "conv-054cac80",
+      "timestamp": "2026-10-20T12:23:20.395817+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/tree",
+      "spark_response": "⚠️ `cap_files_tree` niet uitgevoerd — daar heb je geen rechten voor.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_failed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_failed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 26
+      }
+    },
+    {
+      "id": "conv-dec792bc",
+      "timestamp": "2026-10-20T12:29:38.559350+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "wat is water",
+      "spark_response": "**Water**: Water is een vloeistof die essentieel is voor al het leven op aarde.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Water"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 27
+      }
+    },
+    {
+      "id": "conv-513bd611",
+      "timestamp": "2026-10-20T12:29:38.818198+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "mijn broertje willem is jarig",
+      "spark_response": "**Broer**: Een broer is een mannelijk kind van dezelfde ouders of van één van dezelfde ouders.\n\n**Willem**: Willem is een mannelijke voornaam van Germaanse oorsprong.\n\n**jarig**: Jarig betekent dat iemand de geboortedag viert waarop die persoon geboren is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Broer"
+          },
+          {
+            "begrip": "Willem"
+          },
+          {
+            "begrip": "jarig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 28
+      }
+    },
+    {
+      "id": "conv-1362599d",
+      "timestamp": "2026-10-20T12:29:39.003580+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "/cmd verwijder die notitie",
+      "spark_response": "Dit is verwijderen via `cap_notes_delete` (DELETE /api/notes/delete/{note_id}). Zal ik het doen? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 29
+      }
+    },
+    {
+      "id": "conv-fb86d442",
+      "timestamp": "2026-10-20T12:29:39.173651+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ja",
+      "spark_response": "⚠️ `cap_notes_delete` niet uitgevoerd — er ontbreekt iets: note_id.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_failed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_failed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 30
+      }
     }
   ],
   "metadata": {
     "user_id": "user-4453ade3",
-    "total_conversations": 18,
-    "last_updated": "2026-10-20T11:52:08.810417+00:00"
+    "total_conversations": 30,
+    "last_updated": "2026-10-20T12:29:39.173651+00:00"
   }
 }

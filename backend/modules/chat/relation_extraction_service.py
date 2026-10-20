@@ -158,6 +158,48 @@ def _normalize(name: str) -> str:
     return name.strip()
 
 
+# v14_rel_alle_users_001 (Willem 20-10: "als ik inlog als mijn zusje worden relaties niet onthouden").
+# Oorzaak: naam moest met hoofdletter én er moest een naam zijn. Nu: (a) kleine letter mag als het
+# een bekende naam is (users, contacten, bel-contacten, eigen relaties), (b) relatie zonder naam
+# wordt onthouden als "(naam onbekend)" en krijgt later de naam via "mijn broer heet Willem".
+NAAM_ONBEKEND = "(naam onbekend)"
+_LC_WOORD = r"([a-zà-ÿ][a-zà-ÿ\-]{1,})"
+PATTERN_MIJN_REL_LC = re.compile(rf"\b[Mm]ijn\s+({REL_REGEX})\s+{_LC_WOORD}\b")
+PATTERN_MIJN_REL_NAAMLOOS = re.compile(rf"\b[Mm]ijn\s+({REL_REGEX})\b(?!\s+(?:heet|is\s+[A-Z]|[A-Z]))")
+_STOP_NA_REL = {"heeft", "is", "was", "wordt", "komt", "gaat", "zei", "heet", "en", "of", "die", "dat", "ook", "nog",
+                "hier", "daar", "al", "niet", "wel", "van", "met", "bij", "in", "op", "aan", "voor", "naar", "toe"}
+
+
+def _bekende_namen(user_id: Optional[str]) -> Dict[str, str]:
+    """lowercase → nette schrijfwijze, uit users.json, contacten, bel-contacten en eigen relaties."""
+    namen: Dict[str, str] = {}
+    def put(n):
+        n = (n or "").strip()
+        if len(n) >= 2:
+            for deel in [n] + n.split():
+                namen.setdefault(deel.lower(), deel[0].upper() + deel[1:])
+    try:
+        for u in load_json(DATA_DIR / "system" / "users.json", default={"users": []}).get("users", []):
+            put(u.get("naam"))
+    except Exception:
+        pass
+    if user_id:
+        for rel, key in ((f"users/{user_id}/contacten.json", "contacten"), (f"users/{user_id}/bel_contacts.json", "contacts")):
+            try:
+                d = load_json(DATA_DIR / rel, default={})
+                items = d.get(key) if isinstance(d, dict) else d
+                for c in items or []:
+                    put(c.get("naam") or c.get("name"))
+            except Exception:
+                pass
+        try:
+            for r in load_json(_rel_file(user_id), default={"relationships": []}).get("relationships", []):
+                put(r.get("person_name"))
+        except Exception:
+            pass
+    return namen
+
+
 def extract(text: str, user_id: Optional[str] = None) -> List[Dict]:
     """Vind relatie-mentions in tekst.
 
@@ -213,6 +255,25 @@ def extract(text: str, user_id: Optional[str] = None) -> List[Dict]:
         for m in pat.finditer(text):
             rel_word, naam = m.group(1), m.group(2)
             add(naam, rel_word)
+
+    # v14_rel_alle_users_001 — kleine-letter-naam alleen als bekende naam ("mijn broertje willem")
+    bekend = _bekende_namen(user_id)
+    for m in PATTERN_MIJN_REL_LC.finditer(text):
+        rel_word, woord = m.group(1), m.group(2)
+        if woord.lower() in bekend and woord.lower() not in _STOP_NA_REL:
+            add(bekend[woord.lower()], rel_word)
+    # relatie zonder naam ("mijn broer heeft een winkel") → placeholder, alleen als die relatie nog geen naam heeft
+    gevonden_rels = {f["relation_type"] for f in findings}
+    for m in PATTERN_MIJN_REL_NAAMLOOS.finditer(text):
+        rel_word = m.group(1)
+        rel_type = REL_TYPES.get(rel_word.lower(), rel_word.lower())
+        if rel_type in gevonden_rels or rel_word.lower() in ("vriend", "vriendin", "bekende", "collega", "buurman", "buurvrouw"):
+            continue
+        key = (NAAM_ONBEKEND.lower(), rel_type)
+        if key not in seen:
+            seen.add(key)
+            findings.append({"person_name": NAAM_ONBEKEND, "relation_type": rel_type,
+                             "raw_relation_word": rel_word.lower(), "naam_onbekend": True})
 
     # v6_rel_004 — Transitieve relatie via bestaande relatie van user
     if user_id:
@@ -281,6 +342,19 @@ def add_relations(user_id: str, findings: List[Dict]) -> List[Dict]:
         rtype = f["relation_type"]
         nm_lc = naam.strip().lower()
 
+        # v14_rel_alle_users_001 — placeholder-logica
+        placeholder = next((r for r in existing if r.get("naam_onbekend") and rtype in (r.get("roles") or [r.get("relation_type")])), None)
+        if f.get("naam_onbekend"):
+            if placeholder or any(rtype in (r.get("roles") or [r.get("relation_type")]) for r in existing):
+                continue  # al een (naamloze of echte) relatie van dit type
+        elif placeholder:
+            # echte naam voor een eerder naamloze relatie → placeholder invullen
+            placeholder.update({"person_name": naam, "naam_onbekend": False,
+                                "updated_at": datetime.now(timezone.utc).isoformat()})
+            by_name[nm_lc] = placeholder
+            new_entries.append(placeholder)
+            continue
+
         # Persoon bestaat al → check of role nieuw is
         if nm_lc in by_name:
             entry = by_name[nm_lc]
@@ -307,6 +381,9 @@ def add_relations(user_id: str, findings: List[Dict]) -> List[Dict]:
             "auto_detected": True,
             "detected_at": datetime.now(timezone.utc).isoformat(),
         }
+        if f.get("naam_onbekend"):
+            entry["naam_onbekend"] = True
+            entry["notes"] = "Relatie genoemd zonder naam — zeg bv. 'mijn broer heet …' om de naam aan te vullen"
         existing.append(entry)
         by_name[nm_lc] = entry
         new_entries.append(entry)
@@ -411,6 +488,9 @@ def migrate_all_to_roles_array() -> Dict[str, int]:
 def _sync_persons_cards(user_id: str, new_relations: List[Dict]):
     """Maak/update person-cards in /data/persons/{user_id}.json voor elke nieuwe relatie."""
     import uuid
+    new_relations = [r for r in new_relations if not r.get("naam_onbekend")]  # geen persoonskaart zonder naam
+    if not new_relations:
+        return
     pf = PERSONS_DIR / f"{user_id}.json"
     pd = load_json(pf, default={"persons": [], "metadata": {"user_id": user_id, "total_persons": 0}})
     persons = pd.get("persons", [])

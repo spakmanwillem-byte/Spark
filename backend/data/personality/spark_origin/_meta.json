@@ -3,9 +3,27 @@
   "rule": "Deze documenten zijn HISTORIE — niet bewerken. Voor evolutie: maak een nieuwe versie als spark_core_5_0.json. Originele teksten blijven verbatim bewaard.",
   "spark_should_remember": "Ja — geïnjecteerd in Diep-systeemprompt via response_composer._load_origin() en gefaciliteerd door capability vertel_oorsprong.",
   "files": [
-    {"id": "spark_core_4_0", "label": "Spark Core 4.0 — Definitieve Kernstructuur", "from": "2026-03-03", "source": "spark-v1-source/backend/data/personality/spark_core_4_0.txt"},
-    {"id": "spark_core_4_1", "label": "Spark Core 4.1 — Aanvullende Kernlagen", "from": "2026-03-03", "source": "spark-v1-source/backend/data/personality/spark_core_4_1.txt"}
+    {
+      "id": "spark_core_4_0",
+      "label": "Spark Core 4.0 — Definitieve Kernstructuur",
+      "from": "2026-03-03",
+      "source": "spark-v1-source/backend/data/personality/spark_core_4_0.txt"
+    },
+    {
+      "id": "spark_core_4_1",
+      "label": "Spark Core 4.1 — Aanvullende Kernlagen",
+      "from": "2026-03-03",
+      "source": "spark-v1-source/backend/data/personality/spark_core_4_1.txt"
+    }
   ],
   "_arch_ref": "v6_spark_origin_001 — origin-preservation",
-  "last_imported": "2026-06-27"
+  "last_imported": "2026-06-27",
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-06-27T22:51:42.492810+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.090945+00:00"
+  },
+  "footnote": "legacy_backfill · map bestond al op 2026-06-27 · vertrouwen 0.5"
 }

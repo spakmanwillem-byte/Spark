@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(winkelstraat — geen doel-omschrijving)
+Winkelstraat — multi-tenant shop architecture (v6_winkelstraat_001)
 
 ## ✅ Wat werkt al
 - _(vul aan)_

@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(agenda — geen doel-omschrijving)
+Agenda-events per user + maand-archivering (v13_agenda_monthly_archive_001).
 
 ## ✅ Wat werkt al
 - _(vul aan)_

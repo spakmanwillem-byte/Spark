@@ -679068,10 +679068,202 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-395f1632",
+      "begrip": "Command-blauwdruk",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een command is één ding dat Spark kan doen: een registry-regel met id, pad, methode (lezen of schrijven), tags en gradatie. Zinnen in de chat worden teruggebracht tot zo'n command.",
+        "laag2": "Bron: data/system/command_registry.json (59 live, 23 placeholders). task_agent.resolve_text zet een zin om in tags + werkwoord-concept (verwijderen → DELETE, aanmaken → POST, anders GET) en kiest het best passende live command. task_agent.execute controleert gradatie, vult {user_id} in het pad en voert het intern uit met audit-log (task_agent.jsonl).",
+        "laag3": "In de chat (v14_task_agent_bridge_001): /tree toont de mappenboom (alleen lezen, admin-mode). /cmd <zin> zoekt een command: lezen wordt direct uitgevoerd, schrijven of verwijderen vraagt eerst ja/nee. Placeholders worden geweigerd met uitleg. Gewone zinnen zonder slash raken nooit een command — dat is laag 2, later, met een live-editbare concept-JSON.",
+        "laag4": "Waarom in lagen: eerst veilig lezen (/tree), dan schrijven met bevestiging (/cmd maak map X), dan pas zonder slash. Zo leert Spark commands uitvoeren zonder iets stuk te maken. Elke nieuwe route hoort als registry-regel én als KB-kaart te bestaan (Principe #8: twee kanalen, één begrip)."
+      },
+      "ws5": {
+        "wie": "Spark (task_agent) voor de gebruiker; admin-mode voor beheer-commands",
+        "wat": "zin → registry-command → uitvoeren",
+        "waar": "modules/agents/task_agent.py, modules/chat/task_agent_bridge.py, data/system/command_registry.json",
+        "wanneer": "bij een bericht dat met / begint, of na een ja op een bevestigingsvraag",
+        "waarom": "Spark's handen: gesprekken terugbrengen tot uitvoerbare stappen, met bevestiging bij alles wat schrijft",
+        "hoe": "/tree · /cmd toon mijn taken · /cmd verwijder die notitie → ja/nee"
+      },
+      "tags": [
+        "command",
+        "registry",
+        "task_agent",
+        "blauwdruk",
+        "chat",
+        "uitvoeren",
+        "bevestiging",
+        "spark-architectuur",
+        "principe-8"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-04a9994f",
+          "begrip": "task_agent",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur",
+            "task_agent"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b73833e",
+          "begrip": "Daadwerkelijk",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bevestiging",
+            "uitvoeren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3e8865f1",
+          "begrip": "admin_command_agent",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-18adeb37",
+          "begrip": "personal_agent",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45d1d661",
+          "begrip": "spark_pulse_agent",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-406b1e7c",
+          "begrip": "principe-8",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f4f17100",
+          "begrip": "spark-architectuur",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b698777f",
+          "begrip": "command_registry",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "registry",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d2474649",
+          "begrip": "self_awareness",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-18829e2b",
+          "begrip": "orphan-tag scan",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "principe-8",
+            "spark-architectuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "task_agent_bridge",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-10-20T12:24:53.018904+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-10-20T12:23:52.645672+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T12:24:52.530262+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T12:24:52.641937+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T12:24:53.005452+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T12:24:53.642350+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T12:24:53.653108+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T12:24:52.530138+00:00"
     }
   ],
   "metadata": {
-    "card_count": 5108,
-    "last_updated": "2026-09-17T07:36:11.593975+00:00"
+    "card_count": 5157,
+    "last_updated": "2026-10-20T12:24:53.018928+00:00"
   }
 }

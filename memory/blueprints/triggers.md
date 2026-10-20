@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(triggers — geen doel-omschrijving)
+Triggers Routes - Read all trigger files from /data/triggers/ and /data/emotions/
 
 ## ✅ Wat werkt al
 - _(vul aan)_

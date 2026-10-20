@@ -2,12 +2,12 @@
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
   "naam": "system",
-  "doel": "Data-store voor system: bevat 20 JSON-bestanden (achievements, spark_kasboek, ijkpunt_v5_1…).",
+  "doel": "Data-store voor system: bevat 28 JSON-bestanden (users, boekhouder_closings, achievements…).",
   "container_type": "data",
   "status": "active",
   "owner": "spark-system",
   "blueprint_ref": "/memory/blueprints/system.md",
-  "footnote": "",
+  "footnote": "legacy_backfill · map bestond al op 2026-10-20 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [],
@@ -19,9 +19,16 @@
     "key_holder": null
   },
   "created_at": "2026-05-26T15:54:32.337103+00:00",
-  "last_touched": "2026-10-20T12:16:44.688409+00:00",
-  "activity_count": 79423,
-  "file_count": 146,
+  "last_touched": "2026-10-20T12:30:46.016924+00:00",
+  "activity_count": 79511,
+  "file_count": 166,
   "subdir_count": 6,
-  "extra": {}
+  "extra": {},
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-10-20T12:26:45.413572+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.144491+00:00"
+  }
 }

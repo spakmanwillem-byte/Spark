@@ -7,7 +7,7 @@
   "status": "active",
   "owner": "spark-system",
   "blueprint_ref": "/memory/blueprints/agenda.md",
-  "footnote": "",
+  "footnote": "legacy_backfill · map bestond al op 2026-09-17 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [],
@@ -30,5 +30,12 @@
     "Spark leest ook uit archief voor historie-vragen (\"wat deed ik in juli?\")",
     "Handmatig: POST /api/agenda/archive-now (alle users) of /api/agenda/archive-now/{user_id}",
     "Overzicht: GET /api/agenda/archive/{user_id} (lijst maanden) + /{user_id}/{YYYY-MM} (events)"
-  ]
+  ],
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-09-17T07:41:43.946310+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:45.930468+00:00"
+  }
 }

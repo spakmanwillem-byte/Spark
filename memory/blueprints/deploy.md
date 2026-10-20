@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(deploy — geen doel-omschrijving)
+Update Bark + Anker Systeem (v4_update_bark_001)
 
 ## ✅ Wat werkt al
 - _(vul aan)_

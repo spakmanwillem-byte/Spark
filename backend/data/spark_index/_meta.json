@@ -2,12 +2,12 @@
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
   "naam": "spark_index",
-  "doel": "(spark_index — geen doel-omschrijving)",
+  "doel": "Data-store voor spark_index: bevat 2 JSON-bestanden (index, rebuild_log).",
   "container_type": "data",
   "status": "active",
   "owner": "spark-system",
-  "blueprint_ref": null,
-  "footnote": "",
+  "blueprint_ref": "/memory/blueprints/spark_index.md",
+  "footnote": "legacy_backfill · map bestond al op 2026-10-20 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [],
@@ -19,9 +19,16 @@
     "key_holder": null
   },
   "created_at": "2026-08-02T04:48:44.383351+00:00",
-  "last_touched": "2026-08-02T04:48:44.383351+00:00",
+  "last_touched": "2026-10-20T12:26:44.903916+00:00",
   "activity_count": 0,
   "file_count": 2,
   "subdir_count": 0,
-  "extra": {}
+  "extra": {},
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-10-20T12:26:44.913572+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.134849+00:00"
+  }
 }

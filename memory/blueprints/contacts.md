@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(contacts — geen doel-omschrijving)
+Contacts Module (v4_contacts_001) — Privé-gesprekken tussen users en bots.
 
 ## ✅ Wat werkt al
 - _(vul aan)_

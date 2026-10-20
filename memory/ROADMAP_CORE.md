@@ -88,7 +88,11 @@ Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leve
 | Mijn Profiel → Algemeen in 3 kaders (Wie ben jij / Privé / Zakelijk) | ✅ 20-10 | — |
 | Odroid-portabiliteit (`SPARK_ROOT`, `spark.sh`, `.env.example`) | ⏸ gepland | Fase 1 kan op Emergent zonder risico |
 | Zelfscan-fundering (privacy-bypass compose, metadata-backfill, write-guard) | 🔴 P0 open sinds sessie 55 | Nog niet aangeraakt — eerstvolgende grote blok na commerce |
-| Dit bestand: 1770 regels (regel: <500) | 🧹 onderhoud | Sessies 52-58 naar HISTORY, open items naar BACKLOG — aparte opruimsessie, na akkoord |
+| Relaties onthouden voor élke user (kleine letters, naamloos → placeholder) | ✅ 20-10 | Zusje/anderen zeggen hun zinnen één keer opnieuw |
+| `/tree` + `/cmd <zin>` in chat via task_agent (lezen direct, schrijven ja/nee) | ✅ 20-10 | Laag 2: zonder slash + concept-JSON live-editbaar; params vragen (bv. note_id) |
+| Zelfscan-tab (Beheer → Integraties): rapport + "Vul aan" | ✅ 20-10 | 245 containers: footnote 100 %, compleet 55 %. 141 code-blauwdrukken zijn nog stub ("Wat werkt al" invullen) |
+| Feiten-archief (`kind: feit`, feit wint van LLM) | ⏸ voorstel | Eigen sessie ~80-100 credits, grijpt in antwoord-volgorde chat |
+| Dit bestand: >1800 regels (regel: <500) | 🧹 onderhoud | Sessies 52-58 naar HISTORY, open items naar BACKLOG — aparte opruimsessie, na akkoord |
 
 **Bugs 20-10 gefixt**: inkoop-artikel zonder code → 422 + React-crash (code optioneel, `apiError()` overal) ·
 profiel Beroep/Opleiding/social werden stil weggegooid (ontbraken in `ProfileExtended`) · help-popup bij "wat kan je".
@@ -278,6 +282,24 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   • Profiel Algemeen: 3 kaders (Wie ben jij? / Privé / Zakelijk, elk met secties; zakelijk ook website + social).
     `ProfileExtended` +11 velden (beroep, opleiding, social_*, zakelijk_website, zakelijk_social_*) — ontbraken, dus
     "kon niet opslaan". E-mail/Telefoon-opslag zelf werkte al (gecheckt als Emergent).
+- **✅ 20-10 (avond, 150-credit-batch) — Relaties · /tree · Zelfscan** (Willems brainfarts: blauwdrukken niet gekoppeld,
+  metadata voor zelfscan, zusje's relaties niet onthouden, command-blauwdruk, "bouwen in lagen"):
+  • **Relaties voor elke user** (`v14_rel_alle_users_001`, `relation_extraction_service`): oorzaak was hoofdletter-eis + naam
+    verplicht → slechts 2/22 users hadden een relatiebestand. Nu: kleine-letter-naam telt als die bekend is (users.json,
+    contacten, bel-contacten, eigen relaties); relatie zonder naam → entry `(naam onbekend)` (`naam_onbekend: true`, geen
+    persoonskaart) die later gevuld wordt door "mijn zus heet Lotus". Getest: 'mijn broertje willem' → Willem/broer.
+  • **Task-agent-brug** (`v14_task_agent_bridge_001`, `chat/task_agent_bridge.py`, in `/api/chat/message` vóór de
+    capability-router én in compose): `/tree` → `cap_files_tree` (nieuw in registry, admin_only; admin-mode = beheer-
+    rechten in `task_agent.execute(admin_mode=)`), `/cmd <zin>` → `resolve_text` → GET direct, POST/PUT/DELETE eerst
+    ja/nee (`session_state.pending_cmd` + `last_question` intent `cmd_confirm`, 5 min). Placeholders/ontbrekende params
+    → nette melding. Bewust alleen achter een slash. KB-kaart **Command-blauwdruk** (`kbv2-395f1632`, Weten, 9 tags).
+  • **Zelfscan** (`v14_zelfscan_001`, `synapse/zelfscan.py`, `GET /api/synapse/zelfscan`, `POST …/backfill` admin;
+    UI `ZelfscanPanel` als 4e tab in Beheer → Integraties): per `_meta.json` footnote/doel/blauwdruk; compleet = footnote +
+    doel + (code-modules) ingevulde blauwdruk. Backfill: footnote `legacy_backfill` met mapdatum + vertrouwen 0.5
+    (`footnote_meta`), enricher voor doel + blueprint_ref, stubs krijgen echt doel. Backup `_meta.json.bak_zelfscan`.
+    Resultaat: 1 % → 55 % compleet, footnote 0 ontbrekend. `_backup*/_preview*` mappen worden overgeslagen.
+  **Bevestigd gat**: 59 → 90 blauwdruk-stubs, 3 echt ingevuld; `spark_groeien_public.json` / `spark_tag_curatie_public.json`
+  staan nog los van `blueprint_ref`. Feiten-archief: `identity_facts` (cap 15/type) + scratch bestaan; fact-kaart = volgende.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

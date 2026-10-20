@@ -241,6 +241,16 @@ async def compose_response(
     # via een UI-event. Diep heeft deze short-circuit nodig anders blijft de LLM lekker
     # filosofisch antwoorden i.p.v. de popup te openen.
     try:
+        from modules.chat import task_agent_bridge as _tab
+        _cmd_out = await _tab.try_execute(user_text, user_id, admin_mode=admin_mode)
+        if _cmd_out:
+            if session_id:
+                _save_turn_pair(session_id, user_id, user_text, _cmd_out.get("message", ""), "task_agent_bridge")
+            return {"success": True, **_cmd_out, "used_cards": [], "used_model": "task_agent_bridge",
+                    "blueprint_version": "1.0", "fast_path": True}
+    except Exception as _cex:
+        print(f"[compose task-agent-bridge] failed: {_cex}")
+    try:
         from modules.chat.smart_intents_service import route_help
         _help_out = route_help(user_text, user_id, is_admin=admin_mode)
         if _help_out:

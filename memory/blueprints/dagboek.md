@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(dagboek — geen doel-omschrijving)
+Dagboek Routes - Diary entries CRUD per user
 
 ## ✅ Wat werkt al
 - _(vul aan)_

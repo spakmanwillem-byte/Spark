@@ -6,8 +6,8 @@
   "container_type": "data",
   "status": "active",
   "owner": "spark-system",
-  "blueprint_ref": null,
-  "footnote": "",
+  "blueprint_ref": "/memory/blueprints/shops.md",
+  "footnote": "legacy_backfill · map bestond al op 2026-10-20 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [],
@@ -22,7 +22,7 @@
   "last_touched": "2026-05-28T19:25:09.566277+00:00",
   "activity_count": 0,
   "file_count": 0,
-  "subdir_count": 14,
+  "subdir_count": 16,
   "extra": {},
   "shops": [
     {
@@ -41,5 +41,12 @@
     "btw_default_pct": 21.0,
     "btw_kor_default": false,
     "spark_fee_pct": 1.0
+  },
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-10-20T12:26:45.398572+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.129907+00:00"
   }
 }

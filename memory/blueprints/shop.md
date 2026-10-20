@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(shop — geen doel-omschrijving)
+Shop Routes - Roadkill Winkel + ROAR Token
 
 ## ✅ Wat werkt al
 - _(vul aan)_

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { ZelfscanPanel } from './ZelfscanPanel';
 import {
   Search, FolderOpen, FileCode, FilePlus, Package, Play, Link2, Trash2,
   Save, X, ChevronRight, Code, AlertTriangle, CheckCircle, Lock,
   Plus, TestTube, Puzzle, Eye, FileText, Loader2,
-  Archive, Download, Upload, Clock, RotateCcw
-} from 'lucide-react';
+  Archive, Download, Upload, Clock, RotateCcw, ScanSearch } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -16,6 +16,7 @@ export function IntegratiesPage({ onNavigate }) {
     { id: 'files', label: 'Bestanden', icon: FolderOpen, accent: '#3b82f6' },
     { id: 'sandbox', label: 'Module Sandbox', icon: Package, accent: '#a855f7' },
     { id: 'backup', label: 'Backup Systeem', icon: Archive, accent: '#10b981' },
+    { id: 'zelfscan', label: 'Zelfscan', icon: ScanSearch, accent: '#f59e0b' }, // v14_zelfscan_001
   ];
 
   return (
@@ -57,6 +58,7 @@ export function IntegratiesPage({ onNavigate }) {
           {activeTab === 'files' && <FileBrowser />}
           {activeTab === 'sandbox' && <ModuleSandbox />}
           {activeTab === 'backup' && <BackupPanel />}
+          {activeTab === 'zelfscan' && <ZelfscanPanel />}
         </div>
       </div>
     </MainLayout>

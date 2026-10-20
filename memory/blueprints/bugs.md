@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(bugs — geen doel-omschrijving)
+Bugs Module (v4_bugs_001) — Bug-meldingen door iedereen, beheerd door admins (gradatie ≤ 2).
 
 ## ✅ Wat werkt al
 - _(vul aan)_

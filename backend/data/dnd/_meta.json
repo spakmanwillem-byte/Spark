@@ -2,12 +2,12 @@
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
   "naam": "dnd",
-  "doel": "Data-store voor dnd: bevat 3 JSON-bestanden (observations, lore_index, world_state).",
+  "doel": "Data-store voor dnd: bevat 11 JSON-bestanden (provincies, lore_index, spark_world_map…).",
   "container_type": "data",
   "status": "active",
   "owner": "spark-system",
   "blueprint_ref": "/memory/blueprints/dnd.md",
-  "footnote": "",
+  "footnote": "legacy_backfill · map bestond al op 2026-10-20 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [],
@@ -19,11 +19,18 @@
     "key_holder": null
   },
   "created_at": "2026-05-26T15:54:32.317714+00:00",
-  "last_touched": "2026-10-20T09:34:15.322554+00:00",
+  "last_touched": "2026-10-20T12:26:44.790766+00:00",
   "activity_count": 353,
   "file_count": 32,
   "subdir_count": 4,
   "extra": {},
   "kb_lade": "games",
-  "universele_naam": "Spark World"
+  "universele_naam": "Spark World",
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-10-20T12:26:44.794572+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.043724+00:00"
+  }
 }

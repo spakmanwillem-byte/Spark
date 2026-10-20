@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(accounting — geen doel-omschrijving)
+Accounting Routes - Kasboeken (4 entities) + transacties
 
 ## ✅ Wat werkt al
 - _(vul aan)_

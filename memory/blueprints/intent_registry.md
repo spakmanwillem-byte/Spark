@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(intent_registry — geen doel-omschrijving)
+Intent Registry routes (v6_command_registry_001)
 
 ## ✅ Wat werkt al
 - _(vul aan)_

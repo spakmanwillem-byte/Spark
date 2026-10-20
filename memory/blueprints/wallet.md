@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(wallet — geen doel-omschrijving)
+Wallet Routes - User wallets, entities, transactions
 
 ## ✅ Wat werkt al
 - _(vul aan)_

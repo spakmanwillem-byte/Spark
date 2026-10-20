@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(emotion_pipeline — geen doel-omschrijving)
+v6_emotion_pipeline_001 — endpoints voor 7-laags emotie-pipeline (dry-run modus).
 
 ## ✅ Wat werkt al
 - _(vul aan)_

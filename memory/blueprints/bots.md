@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:26
 
 ## 🎯 Doel
-(bots — geen doel-omschrijving)
+Bot & Community Routes - Bots met persoonlijkheden + community chat
 
 ## ✅ Wat werkt al
 - _(vul aan)_

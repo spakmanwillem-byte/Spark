@@ -1113,20 +1113,42 @@
       "behavior_class_hint": "actie-beheer",
       "source": "connections.routes.import_keyfile",
       "status": "live"
+    },
+    {
+      "id": "cap_files_tree",
+      "path": "/api/files/tree",
+      "method": "GET",
+      "intent_tags": [
+        "tree",
+        "mappen",
+        "map",
+        "bestandsboom",
+        "bestanden",
+        "structuur",
+        "boom",
+        "overzicht"
+      ],
+      "required_params": [],
+      "gradatie_min": 5,
+      "admin_only": true,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "files.routes.get_file_tree",
+      "status": "live",
+      "note": "v14_task_agent_bridge_001 — eerste chat-command via /tree (alleen lezen)"
     }
   ],
   "stats": {
-    "total_commands": 58,
+    "total_commands": 59,
     "total_placeholders": 23,
     "by_gradatie_min": {
       "3": 7,
       "1": 16,
       "4": 8,
       "2": 15,
-      "5": 12
+      "5": 13
     },
     "by_behavior_class": {
-      "informatief-functioneel": 27,
+      "informatief-functioneel": 28,
       "vertragen-ondersteunen": 15,
       "exploreren-uitbreiden": 11,
       "diagnostisch": 1,

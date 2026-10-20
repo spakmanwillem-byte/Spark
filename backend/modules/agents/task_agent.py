@@ -112,7 +112,7 @@ def _fill_path(path: str, params: Dict) -> (str, Dict, List[str]):
     return re.sub(r"\{([^}]+)\}", sub, path), rest, missing
 
 
-async def execute(cmd_id: str, params: Optional[Dict] = None, user_id: str = "user-000") -> Dict:
+async def execute(cmd_id: str, params: Optional[Dict] = None, user_id: str = "user-000", admin_mode: bool = False) -> Dict:
     """Voer een live registry-commando intern uit. Returns {ok, status, data|reason, cmd_id}."""
     from modules.core.spark_logger import log_event
     params = dict(params or {})
@@ -126,6 +126,8 @@ async def execute(cmd_id: str, params: Optional[Dict] = None, user_id: str = "us
     # Registry-schaal: 1 = iedereen … 5 = beheer. User-schaal: 1 = beheerder … 5 = gast.
     # Omrekening: user mag als user_gradatie <= 6 - gradatie_min; admin_only eist gradatie 1.
     allowed = grad is not None and grad <= (6 - need) and not (cmd.get("admin_only") and grad != 1)
+    if admin_mode and grad is not None and grad <= 2:
+        allowed = True  # v14_task_agent_bridge_001 — admin-mode aan (admin_capable, frontend-toggle) = beheer-rechten
     if not allowed:
         log_event("task_agent", "execute_denied", intent=cmd_id, detail={"user_id": user_id, "gradatie": grad, "gradatie_min": need})
         return {"ok": False, "reason": "gradatie", "cmd_id": cmd_id, "gradatie": grad, "gradatie_min": need}

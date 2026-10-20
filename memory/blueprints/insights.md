@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(insights — geen doel-omschrijving)
+Insights Module (v4_016) — Analyser voor Shadow Observer data.
 
 ## ✅ Wat werkt al
 - _(vul aan)_

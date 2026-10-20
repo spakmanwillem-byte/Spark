@@ -2,12 +2,12 @@
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
   "naam": "local_storage",
-  "doel": "Skelet — local_storage module nog leeg of placeholder",
+  "doel": "local_storage — Strikte lokale JSON/binary opslag.",
   "container_type": "dir",
   "status": "skeleton",
   "owner": "spark-system",
-  "blueprint_ref": null,
-  "footnote": "",
+  "blueprint_ref": "/memory/blueprints/local_storage.md",
+  "footnote": "legacy_backfill · map bestond al op 2026-10-20 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [],
@@ -19,9 +19,16 @@
     "key_holder": null
   },
   "created_at": "2026-09-17T07:41:43.461463+00:00",
-  "last_touched": "2026-09-17T07:41:43.461463+00:00",
+  "last_touched": "2026-10-20T12:26:44.618338+00:00",
   "activity_count": 0,
   "file_count": 1,
   "subdir_count": 0,
-  "extra": {}
+  "extra": {},
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-10-20T12:26:44.625572+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.229260+00:00"
+  }
 }

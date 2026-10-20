@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 1830,
+    "events": 1842,
     "corrections": 2,
     "confirmations": 5,
     "fallbacks": 0,
-    "knowledge_matches": 729
+    "knowledge_matches": 733
   },
   "triggers_used": {
     "wedervraag_done": 29,
@@ -75,7 +75,7 @@
     "kbv2_learn_word": 1,
     "kbv2_make_dnd": 1,
     "capability_response": 160,
-    "capability_placeholder": 25,
+    "capability_placeholder": 26,
     "kbv2_tell_short": 5,
     "kbv2_tell_deep": 4,
     "kbv2_tell_more": 6,
@@ -119,7 +119,7 @@
     "contact_call": 9,
     "make_bug": 1,
     "note_early": 1,
-    "user_lookup": 9,
+    "user_lookup": 10,
     "bug_early": 2,
     "agenda_delete_confirm": 22,
     "agenda_deleted": 15,
@@ -128,10 +128,14 @@
     "action_ttss_on": 2,
     "help_summary": 2,
     "open_help_bark": 4,
-    "help_summary_declined": 1
+    "help_summary_declined": 1,
+    "cmd_failed": 3,
+    "cmd_confirm": 2,
+    "cmd_cancelled": 1,
+    "cmd_executed": 2
   },
   "response_types": {
-    "knowledge": 360,
+    "knowledge": 362,
     "unknown": 36,
     "wedervraag_done": 29,
     "wedervraag": 44,
@@ -205,7 +209,7 @@
     "kbv2_cmd_learned": 1,
     "card_made_dnd": 1,
     "capability_response": 160,
-    "capability_placeholder": 25,
+    "capability_placeholder": 26,
     "kbv2_tell_kort": 5,
     "kbv2_tell_diep": 3,
     "kbv2_tell_meer": 2,
@@ -249,14 +253,18 @@
     "agenda_declined": 1,
     "contact_call": 9,
     "bug_created": 3,
-    "user_lookup": 9,
+    "user_lookup": 10,
     "agenda_delete_confirm": 22,
     "agenda_deleted": 15,
     "agenda_delete_choose": 10,
     "agenda_delete_cancelled": 5,
     "action_ttss_on": 2,
     "help_summary": 2,
-    "help_summary_declined": 1
+    "help_summary_declined": 1,
+    "cmd_failed": 3,
+    "cmd_confirm": 2,
+    "cmd_cancelled": 1,
+    "cmd_executed": 2
   },
   "begrip_used": {
     "vroeg": 2,
@@ -343,7 +351,7 @@
     "invullen": 1,
     "Appel": 2,
     "anneke": 4,
-    "jarig": 4,
+    "jarig": 5,
     "Oma": 2,
     "peter": 1,
     "werkt": 3,
@@ -627,7 +635,7 @@
     "jeroen": 1,
     "schrijf": 1,
     "zin": 1,
-    "Water": 1,
+    "Water": 2,
     "Woorden": 1,
     "Utrecht": 2,
     "base": 1,
@@ -636,14 +644,14 @@
     "Base Line": 2,
     "Verbindingen": 1,
     "Beheer": 1,
-    "Broer": 1,
-    "Willem": 1,
+    "Broer": 2,
+    "Willem": 2,
     "Spakman": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-10-20T11:49:35.131159+00:00",
+  "last_event_at": "2026-10-20T12:29:39.183722+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

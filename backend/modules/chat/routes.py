@@ -831,6 +831,17 @@ async def process_message(req: ChatMessage):
     except Exception as _hex:
         print(f"[help-priority] failed: {_hex}")
 
+    # 0b3c. TASK-AGENT BRIDGE (v14_task_agent_bridge_001) — slash-commands: /tree, /cmd <zin>, ja/nee op bevestiging.
+    try:
+        from . import task_agent_bridge
+        _cmd_out = await task_agent_bridge.try_execute(text, req.user_id, admin_mode=bool(req.admin_mode))
+        if _cmd_out:
+            response.update(_cmd_out)
+            _save_log(req, response, _cmd_out.get("type", "cmd"))
+            return response
+    except Exception as _cex:
+        print(f"[task-agent-bridge] failed: {_cex}")
+
     # 0b3b. CAPABILITY ROUTER (v6_intent_router_001) — Spark's handen: match→execute
     # Pakt "hoeveel users", "weet jij X", "log van trade", "winst", "taken" etc.
     # v13d_agenda_delete_001 — Vóór capability-router agenda_delete + agenda_read

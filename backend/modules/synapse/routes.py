@@ -198,3 +198,23 @@ async def get_summary():
         "generated_at": doc.get("generated_at"),
         **summary,
     }
+
+
+# v14_zelfscan_001 — Zelfscan: rapport + backfill (admin)
+@router.get("/zelfscan")
+async def zelfscan_rapport():
+    from .zelfscan import rapport
+    return rapport()
+
+
+class ZelfscanBody(BaseModel):
+    viewer_id: str
+
+
+@router.post("/zelfscan/backfill")
+async def zelfscan_backfill(body: ZelfscanBody):
+    from modules.core.privacy import is_admin
+    if not is_admin(body.viewer_id):
+        raise HTTPException(403, "Alleen admins")
+    from .zelfscan import backfill
+    return backfill(door=body.viewer_id)

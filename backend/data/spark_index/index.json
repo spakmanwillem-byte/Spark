@@ -1,17 +1,17 @@
 {
   "version": "v11_spark_index_001",
-  "rebuilt_at": "2026-10-20T11:51:58.945422+00:00",
+  "rebuilt_at": "2026-10-20T12:29:21.752359+00:00",
   "totals": {
     "dirs": 736,
-    "files": 3112,
+    "files": 3146,
     "backend_modules": 69,
-    "modules_with_meta": 68
+    "modules_with_meta": 69
   },
   "per_extension": {
     ".json": 2380,
-    ".py": 398,
-    ".md": 185,
-    ".js": 77,
+    ".py": 400,
+    ".md": 216,
+    ".js": 78,
     ".jsx": 46,
     ".txt": 24,
     ".css": 2
@@ -21,10 +21,10 @@
       "exists": true,
       "root": "/app/backend",
       "total_dirs": 713,
-      "total_files": 2888,
+      "total_files": 2890,
       "per_extension": {
         ".txt": 24,
-        ".py": 398,
+        ".py": 400,
         ".json": 2365,
         ".md": 101
       }
@@ -33,9 +33,9 @@
       "exists": true,
       "root": "/app/frontend/src",
       "total_dirs": 21,
-      "total_files": 139,
+      "total_files": 140,
       "per_extension": {
-        ".js": 77,
+        ".js": 78,
         ".css": 2,
         ".json": 14,
         ".jsx": 46
@@ -45,9 +45,9 @@
       "exists": true,
       "root": "/app/memory",
       "total_dirs": 2,
-      "total_files": 85,
+      "total_files": 116,
       "per_extension": {
-        ".md": 84,
+        ".md": 115,
         ".json": 1
       }
     }
@@ -116,7 +116,7 @@
     "bijbel": {
       "py_files": 3,
       "footnote": null,
-      "purpose": "Wijsheden, patronen, mentale modellen en ankers. NIET een tweede kennisbank, maar de semantische laag DIE de kennisbank ordent. Entries linken many-to-many naar KB-begrippen.",
+      "purpose": null,
       "has_meta": true
     },
     "boekhouder": {
@@ -150,7 +150,7 @@
       "has_meta": true
     },
     "chat": {
-      "py_files": 58,
+      "py_files": 59,
       "footnote": null,
       "purpose": null,
       "has_meta": true
@@ -177,7 +177,7 @@
       "py_files": 2,
       "footnote": null,
       "purpose": null,
-      "has_meta": false
+      "has_meta": true
     },
     "contacts": {
       "py_files": 2,
@@ -308,7 +308,7 @@
     "namen": {
       "py_files": 3,
       "footnote": null,
-      "purpose": "Spark's naam-classificatie systeem. Slaat voornamen (m/v/unisex), achternamen, koosnamen en gamertags op. Auto-learn kan nieuwe namen classificeren via LLM.",
+      "purpose": null,
       "has_meta": true
     },
     "notes": {
@@ -402,7 +402,7 @@
       "has_meta": true
     },
     "synapse": {
-      "py_files": 8,
+      "py_files": 9,
       "footnote": null,
       "purpose": null,
       "has_meta": true

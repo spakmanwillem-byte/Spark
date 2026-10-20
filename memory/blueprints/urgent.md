@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(urgent — geen doel-omschrijving)
+Urgent Notifications (v4_glow_001) — Welke sidebar-tabs moeten "glowen"?
 
 ## ✅ Wat werkt al
 - _(vul aan)_

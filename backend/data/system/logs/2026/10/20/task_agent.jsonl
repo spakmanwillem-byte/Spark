@@ -1,0 +1,5 @@
+{"ts": "2026-10-20T12:22:52.650205+00:00", "module": "task_agent", "fn": "execute_denied", "phase": "event", "intent": "cap_files_tree", "detail": {"user_id": "user-4453ade3", "gradatie": "2", "gradatie_min": "5"}}
+{"ts": "2026-10-20T12:23:19.822929+00:00", "module": "task_agent", "fn": "execute", "phase": "event", "intent": "cap_files_tree", "detail": {"user_id": "user-4453ade3", "method": "GET", "path": "/api/files/tree", "status": "200", "ok": "True"}}
+{"ts": "2026-10-20T12:23:20.031585+00:00", "module": "task_agent", "fn": "execute", "phase": "event", "intent": "cap_taken_lijst", "detail": {"user_id": "user-4453ade3", "method": "GET", "path": "/api/notes/tasks", "status": "200", "ok": "True"}}
+{"ts": "2026-10-20T12:23:20.395551+00:00", "module": "task_agent", "fn": "execute_denied", "phase": "event", "intent": "cap_files_tree", "detail": {"user_id": "user-4453ade3", "gradatie": "2", "gradatie_min": "5"}}
+{"ts": "2026-10-20T12:29:03.625157+00:00", "module": "task_agent", "fn": "execute", "phase": "event", "intent": "cap_files_tree", "detail": {"user_id": "user-4453ade3", "method": "GET", "path": "/api/files/tree", "status": "200", "ok": "True"}}

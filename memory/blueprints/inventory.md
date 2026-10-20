@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(inventory — geen doel-omschrijving)
+Inventory Module (v4_inventory_001)
 
 ## ✅ Wat werkt al
 - _(vul aan)_

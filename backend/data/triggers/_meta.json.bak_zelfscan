@@ -1,0 +1,27 @@
+{
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
+  "naam": "triggers",
+  "doel": "Data-store voor triggers: bevat 7 JSON-bestanden (intent_patterns, calendar_triggers, conversation_triggers…).",
+  "container_type": "data",
+  "status": "active",
+  "owner": "spark-system",
+  "blueprint_ref": "/memory/blueprints/triggers.md",
+  "footnote": "",
+  "split_from": null,
+  "children_max": 4,
+  "endpoints": [],
+  "tags": [],
+  "encryption": {
+    "enabled": false,
+    "algorithm": null,
+    "key_id": null,
+    "key_holder": null
+  },
+  "created_at": "2026-05-26T15:54:32.341521+00:00",
+  "last_touched": "2026-10-20T12:26:44.937019+00:00",
+  "activity_count": 47,
+  "file_count": 7,
+  "subdir_count": 0,
+  "extra": {}
+}

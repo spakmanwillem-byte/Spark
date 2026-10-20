@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(persons — geen doel-omschrijving)
+Persons Routes - Persoonskaarten (relatiebeheer)
 
 ## ✅ Wat werkt al
 - _(vul aan)_

@@ -5,7 +5,7 @@
 > Gegenereerd op: 2026-05-26T16:13:27
 
 ## 🎯 Doel
-(settings — geen doel-omschrijving)
+Settings Module (v4_settings_001) — System + User instellingen met gradatie-gating.
 
 ## ✅ Wat werkt al
 - _(vul aan)_

@@ -2,12 +2,12 @@
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
   "naam": "prive_call",
-  "doel": "(prive_call — geen doel-omschrijving)",
+  "doel": "v13_prive_incoming_call_001 — Lokale inkomende oproep signaal.",
   "container_type": "dir",
   "status": "active",
   "owner": "spark-system",
-  "blueprint_ref": null,
-  "footnote": "",
+  "blueprint_ref": "/memory/blueprints/prive_call.md",
+  "footnote": "legacy_backfill · map bestond al op 2026-10-20 · vertrouwen 0.5",
   "split_from": null,
   "children_max": 4,
   "endpoints": [
@@ -23,9 +23,16 @@
     "key_holder": null
   },
   "created_at": "2026-08-23T10:31:09.184730+00:00",
-  "last_touched": "2026-08-23T10:31:09.184730+00:00",
+  "last_touched": "2026-10-20T12:26:44.645889+00:00",
   "activity_count": 0,
   "file_count": 1,
   "subdir_count": 0,
-  "extra": {}
+  "extra": {},
+  "footnote_meta": {
+    "bron": "legacy_backfill",
+    "aangemaakt_door": "user-001",
+    "aangemaakt_op": "2026-10-20T12:26:44.654572+00:00",
+    "vertrouwen": 0.5,
+    "backfill_op": "2026-10-20T12:26:46.238602+00:00"
+  }
 }

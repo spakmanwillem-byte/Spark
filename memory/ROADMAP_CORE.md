@@ -100,6 +100,7 @@ Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leve
 | "zet morgen 10 uur tandarts in de agenda" → voorstel → ja → afspraak staat | ✅ 20-10 | Zonder "agenda/afspraak" in de zin pakt de oude agenda_proposal-flow het |
 | Wijsheid in antwoorden: goedgekeurde Spark-kaarten bij vragen → "dit delen meerdere mensen met mij" | ✅ 20-10 | Nog geen Spark-kaarten; groeit via voorstellen |
 | Integraties → Bestanden toont alle bestandstypen (pdf, afbeeldingen, audio, video, jsonl…) met voorvertoning | ✅ 20-10 | Bewerken alleen voor tekstbestanden |
+| Marge-kader in product-bewerken: marge % intypen → verkoopprijs volgt, prijs intypen → marge % volgt (over kostprijs stuklijst) | ✅ 20-10 | Joggers kun je nu op bv. 25 % zetten |
 | Dit bestand opgeschoond: 1888 → <500 regels; sessies 52-58 in HISTORY, open punten in BACKLOG | ✅ 20-10 | Regel blijft: afgerond → CHANGELOG/HISTORY, hier alleen stand + plannen |
 
 **Bugs 20-10 gefixt**: inkoop-artikel zonder code → 422 + React-crash (code optioneel, `apiError()` overal) ·

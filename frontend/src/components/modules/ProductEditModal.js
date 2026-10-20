@@ -76,6 +76,14 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
     if (!a || a.inkoopprijs_excl == null) return NaN;
     return sum + Number(a.inkoopprijs_excl) * Number(r.aantal || 1);
   }, 0) : null;
+  const kostprijsOk = kostprijs != null && !Number.isNaN(kostprijs) && kostprijs > 0;
+  const [margePct, setMargePct] = useState('');
+  useEffect(() => {
+    if (!kostprijsOk) return;
+    const p = parseFloat(price);
+    const m = Number.isNaN(p) ? '' : String(Math.round(((p - kostprijs) / kostprijs) * 100));
+    setMargePct(prev => (prev !== '' && !Number.isNaN(parseFloat(prev)) && Math.abs((kostprijs * (1 + parseFloat(prev) / 100)) - p) < 0.011 ? prev : m));
+  }, [price, kostprijs, kostprijsOk]);
 
   useEffect(() => {
     if (!open) return;
@@ -221,10 +229,27 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
               <input data-testid="product-price" type="number" step="0.01" min="0" value={price} onChange={e => setPrice(e.target.value)}
                 placeholder="0.00"
                 className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500" />
-              <p className="text-[9px] text-slate-500 mt-1">Excl. BTW — de winkelwagen rekent de BTW van de winkel erbij.{kostprijs != null && (
-                <span className={Number.isNaN(kostprijs) ? 'text-slate-500' : (Number(price) - kostprijs) >= 0 ? ' text-emerald-400' : ' text-red-400'}>
-                  {Number.isNaN(kostprijs) ? ' Kostprijs onbekend (inkoopprijs ontbreekt).' : ` Kostprijs €${kostprijs.toFixed(2)} → marge €${(Number(price || 0) - kostprijs).toFixed(2)}`}
-                </span>
+              {/* v14_shop_marge_hybride_001 — Willem 20-10: marge % intypen → verkoopprijs volgt (en andersom) */}
+              {kostprijsOk && (
+                <div data-testid="product-marge-kader" className="mt-2 grid grid-cols-3 gap-2 items-end">
+                  <div>
+                    <label className="text-[9px] text-slate-500 uppercase">Marge %</label>
+                    <input data-testid="product-marge-pct" type="number" step="1" value={margePct}
+                      onChange={e => { setMargePct(e.target.value); const m = parseFloat(e.target.value); if (!Number.isNaN(m)) setPrice((kostprijs * (1 + m / 100)).toFixed(2)); }}
+                      className="mt-0.5 w-full px-2 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:border-amber-500" />
+                  </div>
+                  <div>
+                    <label className="text-[9px] text-slate-500 uppercase">Kostprijs</label>
+                    <p className="text-xs text-slate-300 py-1.5">€{kostprijs.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <label className="text-[9px] text-slate-500 uppercase">Marge €</label>
+                    <p data-testid="product-marge-eur" className={`text-xs py-1.5 font-semibold ${Number(price || 0) - kostprijs >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>€{(Number(price || 0) - kostprijs).toFixed(2)}</p>
+                  </div>
+                </div>
+              )}
+              <p className="text-[9px] text-slate-500 mt-1">Excl. BTW — de winkelwagen rekent de BTW van de winkel erbij.{kostprijs != null && Number.isNaN(kostprijs) && (
+                <span className="text-slate-500"> Kostprijs onbekend (inkoopprijs ontbreekt) — vul de stuklijst aan voor marge-berekening.</span>
               )}</p>
             </div>
           </div>

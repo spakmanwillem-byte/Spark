@@ -1883,3 +1883,4 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 - Feiten-tab: bewerk nu begrip/soort/wat/waarom/context; Willems katten-correctie doorgevoerd (feiten + identity_facts).
 - ROADMAP_CORE opgeschoond: 1888 → 401 regels (sessies 52-58 → HISTORY, open punten → BACKLOG, backup bewaard).
 - Integraties → Bestanden: alle Spark-bestandstypen zichtbaar (jsonl/csv/log/pdf/docx/afbeeldingen/audio/video/zip); binaire bestanden met voorvertoning + 'open in nieuw tabblad' via `/api/files/raw` (alleen binnen toegestane mappen, niet bewerkbaar). v14_files_alle_types_001
+- Verkoopproduct bewerken: hybride marge-kader (marge % ↔ verkoopprijs, op totale kostprijs van de stuklijst), v14_shop_marge_hybride_001.

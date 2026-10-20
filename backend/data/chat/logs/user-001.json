@@ -80329,11 +80329,59 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 3182
       }
+    },
+    {
+      "id": "conv-08b6d7b0",
+      "timestamp": "2026-10-20T15:14:34.384221+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "mag ik je tree zien",
+      "spark_response": "Natuurlijk, Willem. Ik kan je een overzicht van de boomstructuur laten zien. Welke boom wil je precies bekijken?\n\n- **Kennisboom** – de hiërarchie van kaarten in de vier lades (Voelen, Spreken, Weten, Doen). \n- **Emotiepijplijn‑boom** – hoe de verschillende emotiedetectie‑stappen met elkaar verbonden zijn. \n- **Trigger‑boom** – welke woord‑/zin‑triggers leiden tot welke acties.\n\nGeef even aan welke van deze (of een andere) boom je wilt zien, dan toon ik het meteen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "vertellen",
+        "used_cards": [
+          "kbv2-56b3003d",
+          "kbv2-3f69e8d4",
+          "kbv2-ca4d3707",
+          "kbv2-26fc3dc5",
+          "kbv2-fae7e6da"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3183
+      }
+    },
+    {
+      "id": "conv-16d9e021",
+      "timestamp": "2026-10-20T15:15:12.503253+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja map structuur",
+      "spark_response": "Zeker, Willem. Een **map** is in de kern een **structuur** — een georganiseerde opzet om informatie overzichtelijk te bewaren en terug te vinden.\n\n**Hoe een map is opgebouwd**\n\n| Niveau | Beschrijving |\n|--------|--------------|\n| **1. Hoofdniveau** | De map zelf, vaak een fysieke map, een digitale folder of een database‑tabel. |\n| **2. Sub‑maps / secties** | Binnen de hoofdmappen kun je sub‑maps maken (bijv. “Project A”, “Facturen 2026”). Ze vormen de takken van de structuur. |\n| **3. Items / bestanden** | In elke (sub‑)map staan de eigenlijke gegevens: documenten, afbeeldingen, code‑snippets, etc. |\n| **4. Metagegevens** | Tags, datum‑stempels, auteur‑info en andere attributen die zoeken en sorteren makkelijker maken. |\n\n**Waarom deze opzet werkt**\n\n- **Orde**: Alles heeft een vaste plek, waardoor je sneller vindt wat je zoekt. \n- **Navigatie**: De hiërarchie (hoofdmappen → sub‑maps → items) geeft een duidelijk pad, net als een kaart. \n- **Schaalbaarheid**: Nieuwe sub‑maps kunnen zonder conflicten worden toegevoegd. \n- **Herbruikbaarheid**: Eenzelfde structuur kan in verschillende contexten (projecten, klanten, kennisbank) worden hergebruikt.\n\n**Relatie met de kaart‑metafoor**\n\n- Een **kaart** visualiseert een map‑structuur: de kaart toont de “locaties” (mappen) en de “verbindingen” (sub‑maps) zodat je een globaal overzicht krijgt. \n- Net als bij een geografische kaart helpt een goed ontworpen map‑structuur je om snel van punt A naar punt B te navigeren binnen je informatie‑landschap.\n\nKortom: een map is een concrete toepassing van een algemene **structuur**, en beide dienen hetzelfde doel — ordelijkheid, overzicht en efficiënte toegang. Laat me weten of je een voorbeeld wilt zien of een specifieke map wilt laten ontwerpen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "vertellen",
+        "used_cards": [
+          "kbv2-127cfc7c",
+          "kbv2-e6d0212d",
+          "kbv2-570706e9",
+          "kbv2-f525bd56",
+          "kbv2-8d16eb91"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3184
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3182,
-    "last_updated": "2026-10-20T14:51:01.159289+00:00"
+    "total_conversations": 3184,
+    "last_updated": "2026-10-20T15:15:12.503253+00:00"
   }
 }

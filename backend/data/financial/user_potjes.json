@@ -7,20 +7,18 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ADA-EUR",
           "stats": {
@@ -95,7 +93,7 @@
               "capital_after_repair": 10.0238
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970",
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02",
           "original_max_size": 0.0,
           "audit_log": [
             {
@@ -110,26 +108,40 @@
                 "entry_time": "2026-08-23T13:28:57.557582+00:00"
               },
               "reason": "Willem clean-slate na trader incident"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ]
         },
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ADA-EUR",
           "stats": {
@@ -186,7 +198,7 @@
               "entry_price": 68202.0
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970",
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -214,26 +226,40 @@
               "new_filled_coin": 0.00014617857142857143,
               "reason": "v13_btc_redistribute_57 — Willem 28-aug: Bitvavo heeft 0.00102325 BTC = 7 potjes @ €68.2k. Verdeel over 7 potjes (Willem 2/Spark 3/Geiser 1/Gerben 1) i.p.v. alles in Spark pot-006.",
               "operator": "user-001"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ]
         },
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ADA-EUR",
           "stats": {
@@ -277,7 +303,7 @@
               "actual_coin": 4.671e-05
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970",
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -292,26 +318,40 @@
                 "entry_time": "2026-08-23T13:29:01.179555+00:00"
               },
               "reason": "Willem clean-slate na trader incident"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ]
         },
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ADA-EUR",
           "stats": {
@@ -355,7 +395,7 @@
               "actual_coin": 0.00138955
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970",
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -370,26 +410,40 @@
                 "entry_time": "2026-08-23T13:28:59.425169+00:00"
               },
               "reason": "Willem clean-slate na trader incident"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ]
         },
         {
           "id": "pot-005",
           "index": 4,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "market": "ADA-EUR",
           "stats": {
@@ -433,7 +487,7 @@
               "actual_coin": 1.90146
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970",
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -448,6 +502,22 @@
                 "entry_time": "2026-08-23T13:28:56.784912+00:00"
               },
               "reason": "Willem clean-slate na trader incident"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ]
         },
@@ -455,22 +525,20 @@
           "id": "pot-006",
           "index": 5,
           "nummer": 6,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "ADA-EUR",
           "minted_at": "2026-07-20T17:20:05.442195+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "stats": {
             "trades": 3,
@@ -518,7 +586,7 @@
               "entry_price": 68202.0
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970",
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02",
           "original_max_size": 50.0,
           "audit_log": [
             {
@@ -555,6 +623,22 @@
               "new_filled_coin": 0.00014617857142857143,
               "reason": "v13_btc_redistribute_57 — Willem 28-aug: Bitvavo heeft 0.00102325 BTC = 7 potjes @ €68.2k. Verdeel over 7 potjes (Willem 2/Spark 3/Geiser 1/Gerben 1) i.p.v. alles in Spark pot-006.",
               "operator": "user-001"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ],
           "hollow_flagged_at": "2026-08-28T12:44:54.817132+00:00",
@@ -564,22 +648,20 @@
           "id": "pot-007",
           "index": 6,
           "nummer": 7,
-          "capital": 0.8,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "ADA-EUR",
           "minted_at": "2026-07-23T09:16:23.939810+00:00",
           "minted_from": "auto_mint_24h_ruis",
           "position": {
-            "is_open": true,
-            "entry_price": 0.19695000678206878,
-            "highest_price": 0.2005,
-            "trailing_active": true,
-            "entry_time": "2026-10-19T09:19:40.540375+00:00",
-            "amount_eur": 0.8,
-            "cluster_id": "899cefcccb1e",
-            "cluster_size": 7,
-            "filled_coin": 4.047437571428572
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null,
+            "amount_eur": null,
+            "filled_coin": 0
           },
           "stats": {
             "trades": 1,
@@ -632,9 +714,25 @@
               "new_filled_coin": 0.00014617857142857143,
               "reason": "v13_btc_redistribute_57 — Willem 28-aug: Bitvavo heeft 0.00102325 BTC = 7 potjes @ €68.2k. Verdeel over 7 potjes (Willem 2/Spark 3/Geiser 1/Gerben 1) i.p.v. alles in Spark pot-006.",
               "operator": "user-001"
+            },
+            {
+              "ts": "2026-10-20T15:02:06.759856+00:00",
+              "action": "clean_slate_reset",
+              "before": {
+                "is_open": true,
+                "entry_price": 0.19695000678206878,
+                "highest_price": 0.2005,
+                "trailing_active": true,
+                "entry_time": "2026-10-19T09:19:40.540375+00:00",
+                "amount_eur": 0.8,
+                "cluster_id": "899cefcccb1e",
+                "cluster_size": 7,
+                "filled_coin": 4.047437571428572
+              },
+              "reason": "Willem clean-slate na trader incident"
             }
           ],
-          "last_action": "BUY cluster 899cef @ EUR0.1970"
+          "last_action": "CLEAN SLATE reset @ 2026-10-20T15:02"
         }
       ],
       "last_buy_cycle": null,
@@ -659,7 +757,7 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.02,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BTC-EUR",
@@ -711,7 +809,7 @@
           "id": "pot-002",
           "index": 1,
           "nummer": 2,
-          "capital": 10.02,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "BTC-EUR",
@@ -762,7 +860,7 @@
           "id": "pot-003",
           "index": 2,
           "nummer": 3,
-          "capital": 10.06,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "market": "ATOM-EUR",
@@ -793,7 +891,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.19,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -909,7 +1007,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.19,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -994,7 +1092,7 @@
           "id": "pot-001",
           "index": 0,
           "nummer": 1,
-          "capital": 10.19,
+          "capital": 15.47,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,

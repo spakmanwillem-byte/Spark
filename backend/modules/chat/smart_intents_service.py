@@ -388,7 +388,59 @@ def handle_bug(user: Optional[dict], user_id: Optional[str], content: str) -> Di
 
 
 def detect_help_intent(text: str) -> bool:
+    """Expliciet om het help-kader vragen ('open help', '/help') → popup."""
+    return _patterns.match_any("help_open", (text or "").strip())
+
+
+def detect_help_summary_intent(text: str) -> bool:
+    """v14_help_summary_001 — 'wat kan je?' → korte opsomming in tekst, geen popup."""
     return _patterns.match_any("help_overview", (text or "").strip())
+
+
+_HELP_OPEN_RESPONSE = {"type": "open_help_bark", "action": "open_help_bark", "message": "🔮 Help-overzicht geopend."}
+
+
+def handle_help_summary(user_id: Optional[str], is_admin: bool = False) -> Dict:
+    """Korte samenvatting van wat Spark kan + vraag of het help-kader open moet."""
+    from modules.chat import session_state
+    regels = [
+        "Kort samengevat kan ik dit voor je doen:",
+        "  • Praten & leren — vragen beantwoorden uit mijn kennisbank, nieuwe woorden leren, relaties onthouden",
+        "  • Plannen — afspraken maken en je agenda voorlezen, notities en taken vastleggen",
+        "  • Terugkijken — recap van eerdere gesprekken of de community",
+        "  • Stem & geluid — spraak naar tekst, tekst naar spraak, achtergrondgeluid",
+        "  • Winkel & wallet — bestellen, ROAR-tokens, trader",
+        "  • Documenten — testament, survivalgids, archief, privacy/voorwaarden",
+    ]
+    if is_admin:
+        regels.append("  • Beheer (admin) — credits, triggers, bugs, back-ups, boekhouding, logs")
+    regels += ["", "Zal ik het volledige help-overzicht voor je openen? (ja/nee)"]
+    if user_id:
+        session_state.set_last_question(user_id, "help_openen", intent="help_open")
+    return {"type": "help_summary", "message": "\n".join(regels)}
+
+
+def route_help(text: str, user_id: Optional[str], is_admin: bool = False) -> Optional[Dict]:
+    """Eén plek voor alle help-afhandeling: expliciet openen, samenvatting, of ja/nee op de vervolgvraag."""
+    from modules.chat import session_state
+    t = (text or "").strip()
+    if detect_help_intent(t):
+        if user_id:
+            session_state.set_state(user_id, last_question=None, last_question_intent=None)
+        return dict(_HELP_OPEN_RESPONSE)
+    if detect_help_summary_intent(t):
+        return handle_help_summary(user_id, is_admin)
+    if user_id:
+        lq = session_state.get_last_question(user_id)
+        if lq.get("intent") == "help_open" and (lq.get("age_sec") is None or lq["age_sec"] < 300):
+            if is_yes(t):
+                session_state.set_state(user_id, last_question=None, last_question_intent=None)
+                return dict(_HELP_OPEN_RESPONSE)
+            if is_no(t):
+                session_state.set_state(user_id, last_question=None, last_question_intent=None)
+                return {"type": "help_summary_declined", "message": "Oké, dan niet. Vraag gerust als je iets specifieks zoekt."}
+            session_state.set_state(user_id, last_question=None, last_question_intent=None)
+    return None
 
 
 def handle_help(is_admin: bool = False) -> Dict:

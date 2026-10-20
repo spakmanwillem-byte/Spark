@@ -856,7 +856,7 @@ export function GesprekkenPage({ onNavigate }) {
           const r = await fetch(`${API}/api/spark/compose`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}`, active_tab: lastTab || undefined }),
+            body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}`, active_tab: lastTab || undefined, admin_mode: !!adminModeActive }),
           });
           // v13_deep_response_guard_001 (sessie 53): backend kan HTML terugsturen bij
           // gateway-timeout (502/504) of proxy-fout. Vroeger deed `r.json()` een harde

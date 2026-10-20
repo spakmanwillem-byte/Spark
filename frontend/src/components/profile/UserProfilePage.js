@@ -3,8 +3,8 @@ import { ContactenTab } from './ContactenTab';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import {
-  User, Save, X, AlertTriangle, Globe,
-  Camera, MapPin, Upload, Check, MessageSquare,
+  User, Save, X,
+  Camera, Upload, Check, MessageSquare,
   Image as ImageIcon, Sparkles, ChevronDown, Trash2,
   Backpack, Award, Plus, Settings, Palette, Volume2, Link2, KeyRound, RotateCcw, ShieldCheck,
 } from 'lucide-react';
@@ -243,92 +243,96 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
         </div>
       </Card>
 
-      <Card title="Werk & Opleiding" accent="#10b981" icon={User}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="Beroep" value={profile.beroep || ''}
-            placeholder="Bijv. Ondernemer" onChange={v => updateField('beroep', v)} />
-          <InputField label="Opleiding" value={profile.opleiding || ''}
-            placeholder="Bijv. MBO Techniek" onChange={v => updateField('opleiding', v)} />
+      {/* v14_profiel_kaders_001 — Willem 20-10: kader 1 "Wie ben jij?", kader 2 Privé, kader 3 Zakelijk.
+          Privé-items (werk, contact, adres, noodcontact, bank, social) in één kader i.p.v. zes losse. */}
+      <Card title="Privé" accent="#06b6d4" icon={User} subtitle="Jouw persoonlijke gegevens — alleen voor jou en Spark">
+        <div className="space-y-5">
+          <Sectie label="Werk & opleiding">
+            <InputField label="Beroep" value={profile.beroep || ''}
+              placeholder="Bijv. Ondernemer" onChange={v => updateField('beroep', v)} />
+            <InputField label="Opleiding" value={profile.opleiding || ''}
+              placeholder="Bijv. MBO Techniek" onChange={v => updateField('opleiding', v)} />
+          </Sectie>
+          <Sectie label="Contact">
+            <InputField label="E-mail" value={profile.email || ''}
+              placeholder="email@voorbeeld.nl" onChange={v => updateField('email', v)} />
+            <InputField label="Telefoon" value={profile.telefoon || ''}
+              placeholder="+31 6 ..." onChange={v => updateField('telefoon', v)} />
+          </Sectie>
+          <Sectie label="Adres">
+            <InputField label="Straat + Nr" value={profile.straat || ''}
+              placeholder="Straatnaam 1" onChange={v => updateField('straat', v)} />
+            <InputField label="Postcode" value={profile.postcode || ''}
+              placeholder="1234 AB" onChange={v => updateField('postcode', v)} />
+            <InputField label="Plaats" value={profile.plaats || ''}
+              placeholder="Amsterdam" onChange={v => updateField('plaats', v)} />
+            <InputField label="Land" value={profile.land || ''}
+              placeholder="Nederland" onChange={v => updateField('land', v)} />
+          </Sectie>
+          <Sectie label="Noodcontact">
+            <InputField label="Naam" value={profile.noodcontact_naam || ''}
+              placeholder="Contactpersoon" onChange={v => updateField('noodcontact_naam', v)} />
+            <InputField label="Telefoon" value={profile.noodcontact_telefoon || ''}
+              placeholder="+31 6 ..." onChange={v => updateField('noodcontact_telefoon', v)} />
+          </Sectie>
+          <Sectie label="Bank">
+            <InputField label="IBAN" value={profile.iban || ''}
+              placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('iban', v)} />
+            <InputField label="Bank" value={profile.bank_provider || ''}
+              placeholder="ING, Rabobank, ABN..." onChange={v => updateField('bank_provider', v)} />
+          </Sectie>
+          <Sectie label="Sociale media" hint="Wat je deelt, mag Spark gebruiken">
+            <InputField label="Instagram" value={profile.social_instagram || ''}
+              placeholder="@gebruikersnaam" onChange={v => updateField('social_instagram', v)} />
+            <InputField label="Facebook" value={profile.social_facebook || ''}
+              placeholder="naam of url" onChange={v => updateField('social_facebook', v)} />
+            <InputField label="LinkedIn" value={profile.social_linkedin || ''}
+              placeholder="profiel url" onChange={v => updateField('social_linkedin', v)} />
+            <InputField label="YouTube / TikTok" value={profile.social_youtube || ''}
+              placeholder="kanaal/handle" onChange={v => updateField('social_youtube', v)} />
+          </Sectie>
         </div>
       </Card>
 
-      <Card title="Contact" accent="#06b6d4" icon={MessageSquare}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="E-mail" value={profile.email || ''}
-            placeholder="email@voorbeeld.nl" onChange={v => updateField('email', v)} />
-          <InputField label="Telefoon" value={profile.telefoon || ''}
-            placeholder="+31 6 ..." onChange={v => updateField('telefoon', v)} />
-        </div>
-      </Card>
-
-      {/* v14_contacten_klapper_001 — zakelijk: voor leveranciersmail / factuur. E-mail wordt pas gebruikt als ingevuld. */}
-      <Card title="Zakelijk" accent="#f59e0b" icon={MessageSquare}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="Zakelijke e-mail" value={profile.zakelijke_email || ''}
-            placeholder="bedrijf@voorbeeld.nl" onChange={v => updateField('zakelijke_email', v)} />
-          <InputField label="Bedrijfsnaam" value={profile.bedrijfsnaam || ''}
-            placeholder="Bedrijf" onChange={v => updateField('bedrijfsnaam', v)} />
-          <InputField label="KvK" value={profile.kvk || ''}
-            placeholder="12345678" onChange={v => updateField('kvk', v)} />
-          <InputField label="BTW-nummer" value={profile.btw_nummer || ''}
-            placeholder="NL000000000B01" onChange={v => updateField('btw_nummer', v)} />
-          <InputField label="Zakelijk adres" value={profile.zakelijk_adres || ''}
-            placeholder="Straat 1" onChange={v => updateField('zakelijk_adres', v)} />
-          <div className="grid grid-cols-2 gap-3">
+      {/* v14_contacten_klapper_001 — zakelijk: afzender op facturen/pakbonnen. E-mail wordt pas gebruikt als ingevuld. */}
+      <Card title="Zakelijk" accent="#f59e0b" icon={MessageSquare} subtitle="Deze gegevens komen als afzender op facturen en pakbonnen van je winkel">
+        <div className="space-y-5">
+          <Sectie label="Bedrijf">
+            <InputField label="Bedrijfsnaam" value={profile.bedrijfsnaam || ''}
+              placeholder="Bedrijf" onChange={v => updateField('bedrijfsnaam', v)} />
+            <InputField label="KvK" value={profile.kvk || ''}
+              placeholder="12345678" onChange={v => updateField('kvk', v)} />
+            <InputField label="BTW-nummer" value={profile.btw_nummer || ''}
+              placeholder="NL000000000B01" onChange={v => updateField('btw_nummer', v)} />
+            <InputField label="Zakelijke IBAN" value={profile.zakelijk_iban || ''}
+              placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('zakelijk_iban', v)} />
+          </Sectie>
+          <Sectie label="Contact">
+            <InputField label="Zakelijke e-mail" value={profile.zakelijke_email || ''}
+              placeholder="bedrijf@voorbeeld.nl" onChange={v => updateField('zakelijke_email', v)} />
+            <InputField label="Zakelijk telefoon" value={profile.zakelijk_telefoon || ''}
+              placeholder="06 …" onChange={v => updateField('zakelijk_telefoon', v)} />
+            <InputField label="Website" value={profile.zakelijk_website || ''}
+              placeholder="www.voorbeeld.nl" onChange={v => updateField('zakelijk_website', v)} />
+          </Sectie>
+          <Sectie label="Adres">
+            <InputField label="Zakelijk adres" value={profile.zakelijk_adres || ''}
+              placeholder="Straat 1" onChange={v => updateField('zakelijk_adres', v)} />
             <InputField label="Postcode" value={profile.zakelijk_postcode || ''}
               placeholder="1234 AB" onChange={v => updateField('zakelijk_postcode', v)} />
             <InputField label="Plaats" value={profile.zakelijk_plaats || ''}
               placeholder="Plaats" onChange={v => updateField('zakelijk_plaats', v)} />
-          </div>
-          <InputField label="Zakelijke IBAN" value={profile.zakelijk_iban || ''}
-            placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('zakelijk_iban', v)} />
-          <InputField label="Zakelijk telefoon" value={profile.zakelijk_telefoon || ''}
-            placeholder="06 …" onChange={v => updateField('zakelijk_telefoon', v)} />
-        </div>
-        <p className="text-[10px] text-slate-500 mt-2">Deze gegevens komen als afzender op facturen en pakbonnen van je winkel.</p>
-      </Card>
-
-      <Card title="Adres" accent="#f59e0b" icon={MapPin}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="Straat + Nr" value={profile.straat || ''}
-            placeholder="Straatnaam 1" onChange={v => updateField('straat', v)} />
-          <InputField label="Postcode" value={profile.postcode || ''}
-            placeholder="1234 AB" onChange={v => updateField('postcode', v)} />
-          <InputField label="Plaats" value={profile.plaats || ''}
-            placeholder="Amsterdam" onChange={v => updateField('plaats', v)} />
-          <InputField label="Land" value={profile.land || ''}
-            placeholder="Nederland" onChange={v => updateField('land', v)} />
-        </div>
-      </Card>
-
-      <Card title="Noodcontact" accent="#ef4444" icon={AlertTriangle}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="Naam" value={profile.noodcontact_naam || ''}
-            placeholder="Contactpersoon" onChange={v => updateField('noodcontact_naam', v)} />
-          <InputField label="Telefoon" value={profile.noodcontact_telefoon || ''}
-            placeholder="+31 6 ..." onChange={v => updateField('noodcontact_telefoon', v)} />
-        </div>
-      </Card>
-
-      <Card title="Bankgegevens" accent="#22c55e" icon={Globe}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InputField label="IBAN" value={profile.iban || ''}
-            placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('iban', v)} />
-          <InputField label="Bank" value={profile.bank_provider || ''}
-            placeholder="ING, Rabobank, ABN..." onChange={v => updateField('bank_provider', v)} />
-        </div>
-      </Card>
-
-      <Card title="Sociale Media" accent="#3b82f6" subtitle="Wat je deelt, mag Spark gebruiken">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <InputField label="Instagram" value={profile.social_instagram || ''}
-            placeholder="@gebruikersnaam" onChange={v => updateField('social_instagram', v)} />
-          <InputField label="Facebook" value={profile.social_facebook || ''}
-            placeholder="naam of url" onChange={v => updateField('social_facebook', v)} />
-          <InputField label="LinkedIn" value={profile.social_linkedin || ''}
-            placeholder="profiel url" onChange={v => updateField('social_linkedin', v)} />
-          <InputField label="YouTube / TikTok" value={profile.social_youtube || ''}
-            placeholder="kanaal/handle" onChange={v => updateField('social_youtube', v)} />
+          </Sectie>
+          <Sectie label="Sociale media (zakelijk)">
+            <InputField label="Instagram" value={profile.zakelijk_social_instagram || ''}
+              placeholder="@bedrijf" onChange={v => updateField('zakelijk_social_instagram', v)} />
+            <InputField label="Facebook" value={profile.zakelijk_social_facebook || ''}
+              placeholder="pagina of url" onChange={v => updateField('zakelijk_social_facebook', v)} />
+            <InputField label="LinkedIn" value={profile.zakelijk_social_linkedin || ''}
+              placeholder="bedrijfspagina url" onChange={v => updateField('zakelijk_social_linkedin', v)} />
+            <InputField label="YouTube / TikTok" value={profile.zakelijk_social_youtube || ''}
+              placeholder="kanaal/handle" onChange={v => updateField('zakelijk_social_youtube', v)} />
+          </Sectie>
         </div>
       </Card>
 
@@ -413,6 +417,18 @@ function GalleryTabs({ gallery, current, onSelect, apiUrl }) {
 // ============================================================
 // HERBRUIKBARE BOUWSTENEN
 // ============================================================
+function Sectie({ label, hint, children }) {
+  return (
+    <div data-testid={`profiel-sectie-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}>
+      <div className="flex items-baseline gap-2 mb-2">
+        <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">{label}</p>
+        {hint && <p className="text-[10px] text-slate-600">{hint}</p>}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">{children}</div>
+    </div>
+  );
+}
+
 function Card({ title, subtitle, accent = '#f59e0b', icon: Icon, children }) {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">

@@ -70887,7 +70887,6 @@
         "bescheidenheid",
         "nederigheid",
         "emotie",
-        "bang",
         "boos"
       ],
       "topic": "",
@@ -70896,9 +70895,8 @@
           "kaart_id": "kbv2-c82f3134",
           "begrip": "beledigd",
           "lade": "voelen",
-          "overlap": 5,
+          "overlap": 4,
           "shared_tags": [
-            "bang",
             "boos",
             "emotie",
             "gedrag",
@@ -70906,12 +70904,59 @@
           ]
         },
         {
-          "kaart_id": "kbv2-3772ab5a",
-          "begrip": "IJdelheid",
+          "kaart_id": "kbv2-skel-3b090f8b",
+          "begrip": "houding",
           "lade": "voelen",
           "overlap": 4,
           "shared_tags": [
-            "bang",
+            "emotie",
+            "gedrag",
+            "houding",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6eac9d9d",
+          "begrip": "vriendelijkheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "houding",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45e30fa2",
+          "begrip": "Ego",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bescheidenheid",
+            "ego",
+            "emotie",
+            "trots"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0000b059",
+          "begrip": "Neerbuigend",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "arrogantie",
+            "gedrag",
+            "houding",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3772ab5a",
+          "begrip": "IJdelheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
             "ego",
             "emotie",
             "trots"
@@ -70921,9 +70966,8 @@
           "kaart_id": "kbv2-009fbf90",
           "begrip": "menselijk",
           "lade": "voelen",
-          "overlap": 4,
+          "overlap": 3,
           "shared_tags": [
-            "bang",
             "boos",
             "emotie",
             "gedrag"
@@ -70933,9 +70977,8 @@
           "kaart_id": "kbv2-1bd85df1",
           "begrip": "personen",
           "lade": "voelen",
-          "overlap": 4,
+          "overlap": 3,
           "shared_tags": [
-            "bang",
             "boos",
             "emotie",
             "gedrag"
@@ -70945,9 +70988,8 @@
           "kaart_id": "kbv2-91e7fb2c",
           "begrip": "gevoel",
           "lade": "voelen",
-          "overlap": 4,
+          "overlap": 3,
           "shared_tags": [
-            "bang",
             "boos",
             "emotie",
             "gedrag"
@@ -70957,57 +70999,8 @@
           "kaart_id": "kbv2-96055b6a",
           "begrip": "Gevoelens",
           "lade": "voelen",
-          "overlap": 4,
+          "overlap": 3,
           "shared_tags": [
-            "bang",
-            "boos",
-            "emotie",
-            "gedrag"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-251af4c5",
-          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
-          "lade": "voelen",
-          "overlap": 4,
-          "shared_tags": [
-            "bang",
-            "boos",
-            "emotie",
-            "gedrag"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-f86e417b",
-          "begrip": "ergernis",
-          "lade": "voelen",
-          "overlap": 4,
-          "shared_tags": [
-            "bang",
-            "boos",
-            "emotie",
-            "gedrag"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-10363874",
-          "begrip": "vijandigheid",
-          "lade": "voelen",
-          "overlap": 4,
-          "shared_tags": [
-            "bang",
-            "boos",
-            "emotie",
-            "gedrag"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-d33d9371",
-          "begrip": "onbegrip",
-          "lade": "voelen",
-          "overlap": 4,
-          "shared_tags": [
-            "bang",
             "boos",
             "emotie",
             "gedrag"
@@ -71069,10 +71062,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T11:46:06.416754+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T11:46:06.428333+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-06T19:42:39.272405+00:00"
+        "laatst_bewerkt_op": "2026-10-20T11:46:06.202357+00:00"
       },
       "media": {
         "voice_url": null,
@@ -71082,6 +71091,13 @@
       "needs": [
         "voice",
         "image"
+      ],
+      "emotie": "boos",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T11:46:06.202223+00:00",
+      "emotie_tags_verwijderd": [
+        "bang"
       ]
     },
     {
@@ -76779,32 +76795,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-fc35327c",
-          "begrip": "bedoeling",
-          "lade": "spreken",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "gedrag",
-            "identiteit",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b7582786",
-          "begrip": "Wat maakt jou anders dan andere AI?",
-          "lade": "spreken",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "gedrag",
-            "identiteit",
-            "neutraal"
-          ]
-        },
-        {
           "kaart_id": "kbv2-a32662cc",
           "begrip": "Openhartig",
           "lade": "spreken",
@@ -76818,28 +76808,28 @@
           ]
         },
         {
-          "kaart_id": "kbv2-0f8a996a",
-          "begrip": "user",
+          "kaart_id": "kbv2-fdad36fd",
+          "begrip": "Oprechtheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "authenticiteit",
+            "communicatie",
+            "eerlijkheid",
+            "oprechtheid",
+            "vertrouwen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-af6e4a94",
+          "begrip": "Eerlijke",
           "lade": "weten",
           "overlap": 5,
           "shared_tags": [
             "communicatie",
-            "emotie",
+            "eerlijkheid",
             "gedrag",
-            "identiteit",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-1631a07c",
-          "begrip": "privacy",
-          "lade": "doen",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "identiteit",
-            "neutraal",
+            "oprechtheid",
             "vertrouwen"
           ]
         },
@@ -76880,15 +76870,39 @@
           ]
         },
         {
-          "kaart_id": "kbv2-0e95d34a",
-          "begrip": "zusje",
+          "kaart_id": "kbv2-skel-3b090f8b",
+          "begrip": "houding",
           "lade": "voelen",
           "overlap": 4,
           "shared_tags": [
             "communicatie",
             "emotie",
-            "identiteit",
+            "gedrag",
             "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "eerlijkheid",
+            "emotie",
+            "vertrouwen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-870f6b5d",
+          "begrip": "moed",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "neutraal",
+            "vertrouwen"
           ]
         }
       ],
@@ -76915,8 +76929,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T11:48:09.284457+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T11:48:09.297562+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T11:48:09.089041+00:00"
       },
       "_inbox_reason": "missing_laag1",
       "media": {
@@ -76925,8 +76957,6 @@
         "image_urls": []
       },
       "needs": [
-        "laag1",
-        "ws5",
         "voice",
         "image"
       ],
@@ -76939,7 +76969,11 @@
           "bron": "verlorenkennis.txt (batch 7)",
           "lade": "voelen"
         }
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T11:48:09.088912+00:00"
     },
     {
       "id": "kbv2-skel-f4fcf5a5",
@@ -98128,18 +98162,156 @@
         "waarden"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-935b1270",
+          "begrip": "Oprecht",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "authentiek",
+            "echt",
+            "eerlijkheid",
+            "jezelf zijn",
+            "oprecht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-70b9561c",
+          "begrip": "authenticiteit",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "authenticiteit",
+            "eerlijkheid",
+            "identiteit",
+            "oprechtheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fdad36fd",
+          "begrip": "Oprechtheid",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "authenticiteit",
+            "eerlijkheid",
+            "oprechtheid",
+            "waarden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-42b1b397",
+          "begrip": "Écht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "authentiek",
+            "echt",
+            "oprecht",
+            "origineel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-678a95ec",
+          "begrip": "Echte",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "authentiek",
+            "echt",
+            "oprecht",
+            "origineel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30db20cc",
+          "begrip": "Origineel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "authentiek",
+            "echt",
+            "origineel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-55375854",
+          "begrip": "zingeving",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "identiteit",
+            "waarden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a5f1bf2",
+          "begrip": "Innerlijk",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "identiteit",
+            "waarden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-80e2d698",
+          "begrip": "Karaktereigenschap",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "identiteit",
+            "waarden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "identiteit",
+            "waarden"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T06:22:51.175294+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T11:48:20.656493+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T11:48:20.668222+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T11:48:20.470357+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "blij",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T11:48:20.470268+00:00"
     },
     {
       "id": "kbv2-0ce9beae",

@@ -40839,32 +40839,6 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-d0b3fd0f",
-          "begrip": "horen",
-          "lade": "doen",
-          "overlap": 8,
-          "shared_tags": [
-            "audio",
-            "communicatie",
-            "emotie",
-            "frequentie",
-            "geluid"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-370dddfb",
-          "begrip": "Nou, zo als jij dieper zegt klinkt dat wel fijn. Grijns",
-          "lade": "voelen",
-          "overlap": 7,
-          "shared_tags": [
-            "beleving",
-            "communicatie",
-            "emotie",
-            "geluid",
-            "luisteren"
-          ]
-        },
-        {
           "kaart_id": "kbv2-70b6d717",
           "begrip": "klank",
           "lade": "spreken",
@@ -40881,50 +40855,24 @@
           "kaart_id": "kbv2-25667e42",
           "begrip": "stem",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
-            "communicatie",
             "emotie",
             "geluid",
             "luisteren",
-            "neutraal"
+            "neutraal",
+            "signaal"
           ]
         },
         {
           "kaart_id": "kbv2-f10ef3f5",
           "begrip": "klinkt",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "beleving",
-            "communicatie",
             "emotie",
             "geluid",
-            "luisteren"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-7d6abafd",
-          "begrip": "spraak",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "geluid",
-            "luisteren",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-72778c24",
-          "begrip": "belt",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "informatie",
             "luisteren",
             "neutraal"
           ]
@@ -40943,6 +40891,19 @@
           ]
         },
         {
+          "kaart_id": "kbv2-d0b3fd0f",
+          "begrip": "horen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "audio",
+            "emotie",
+            "geluid",
+            "luisteren",
+            "neutraal"
+          ]
+        },
+        {
           "kaart_id": "kbv2-934b26c3",
           "begrip": "speech",
           "lade": "spreken",
@@ -40956,8 +40917,34 @@
           ]
         },
         {
-          "kaart_id": "kbv2-9f310b89",
-          "begrip": "zeg",
+          "kaart_id": "kbv2-7d6abafd",
+          "begrip": "spraak",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "geluid",
+            "luisteren",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72778c24",
+          "begrip": "belt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "luisteren",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8e190be7",
+          "begrip": "bericht",
           "lade": "spreken",
           "overlap": 5,
           "shared_tags": [
@@ -40965,7 +40952,20 @@
             "emotie",
             "informatie",
             "neutraal",
-            "spraak"
+            "signaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4fe0ed50",
+          "begrip": "boodschap",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "signaal"
           ]
         }
       ],
@@ -41024,10 +41024,26 @@
               "n_found": 10,
               "top_overlap": 8
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T11:47:34.737768+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T11:47:35.191301+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-05-31T19:14:43.244698+00:00"
+        "laatst_bewerkt_op": "2026-10-20T11:47:34.550234+00:00"
       },
       "media": {
         "voice_url": null,
@@ -41037,7 +41053,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T11:47:34.550084+00:00"
     },
     {
       "id": "kbv2-skel-b231303c",
@@ -46859,6 +46879,18 @@
           ]
         },
         {
+          "kaart_id": "kbv2-4b7c0e93",
+          "begrip": "Hyperlink",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bestand",
+            "document",
+            "e-mail",
+            "internet"
+          ]
+        },
+        {
           "kaart_id": "kbv2-b3c78d32",
           "begrip": "Word",
           "lade": "spreken",
@@ -46912,17 +46944,6 @@
             "internet",
             "technologie"
           ]
-        },
-        {
-          "kaart_id": "kbv2-ebf0a8db",
-          "begrip": "internet",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "internet",
-            "technologie"
-          ]
         }
       ],
       "footnote": {
@@ -46964,8 +46985,26 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T11:47:04.931085+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T11:47:04.942019+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T11:47:04.748673+00:00"
       },
       "media": {
         "voice_url": null,
@@ -46975,7 +47014,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T11:47:04.748652+00:00"
     },
     {
       "id": "kbv2-ec201ab8",

@@ -58,6 +58,7 @@ async def compose_response(
     session_id: Optional[str] = None,
     emotion: Optional[str] = None,
     active_tab: Optional[str] = None,
+    admin_mode: bool = False,
 ) -> Dict[str, Any]:
     """Hoofdfunctie. Return {success, message, used_cards, used_model}."""
     # v8_trader_intents_001 — Trader-commando's ('start bot', 'wat verdiend', etc.)
@@ -240,8 +241,10 @@ async def compose_response(
     # via een UI-event. Diep heeft deze short-circuit nodig anders blijft de LLM lekker
     # filosofisch antwoorden i.p.v. de popup te openen.
     try:
-        from modules.chat.smart_intents_service import detect_help_intent
-        if detect_help_intent(user_text):
+        from modules.chat.smart_intents_service import route_help
+        _help_out = route_help(user_text, user_id, is_admin=admin_mode)
+        if _help_out:
+            _help_msg = _help_out.get("message", "")
             if session_id:
                 try:
                     from modules.chat import chat_log_service
@@ -249,19 +252,17 @@ async def compose_response(
                         user_id=user_id,
                         user_naam=user_id,
                         user_message=user_text,
-                        spark_response="🔮 Help-overzicht geopend.",
+                        spark_response=_help_msg,
                         channel="spark-deep-help",
                         session_id=session_id,
-                        analysis={"action": "open_help_bark"},
+                        analysis={"action": _help_out.get("action"), "type": _help_out.get("type")},
                     )
                 except Exception:
                     pass
-                _save_turn_pair(session_id, user_id, user_text, "🔮 Help-overzicht geopend.", "smart_intents_service")
+                _save_turn_pair(session_id, user_id, user_text, _help_msg, "smart_intents_service")
             return {
                 "success": True,
-                "message": "🔮 Help-overzicht geopend.",
-                "action": "open_help_bark",
-                "type": "open_help_bark",
+                **_help_out,
                 "used_cards": [],
                 "used_model": "smart_intents_service",
                 "blueprint_version": "1.0",

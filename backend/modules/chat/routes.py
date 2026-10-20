@@ -393,13 +393,10 @@ async def process_message(req: ChatMessage):
     # en krijgt user 'identity_what_can' i.p.v. de Help-Bark popup.
     try:
         from . import smart_intents_service as _si_help_pre
-        if _si_help_pre.detect_help_intent(text):
-            response.update({
-                "type": "open_help_bark",
-                "action": "open_help_bark",
-                "message": "🔮 Help-overzicht geopend.",
-            })
-            _save_log(req, response, "help_overview")
+        _help_out = _si_help_pre.route_help(text, req.user_id, is_admin=bool(req.admin_mode))
+        if _help_out:
+            response.update(_help_out)
+            _save_log(req, response, _help_out.get("type", "help_overview"))
             return response
     except Exception as _hex:
         print(f"[help-priority-pre] failed: {_hex}")
@@ -826,13 +823,10 @@ async def process_message(req: ChatMessage):
     # capability-router worden onderschept als 'toon_afbeelding'. Help wint altijd.
     try:
         from . import smart_intents_service as _si_help
-        if _si_help.detect_help_intent(text):
-            response.update({
-                "type": "open_help_bark",
-                "action": "open_help_bark",
-                "message": "🔮 Help-overzicht geopend.",
-            })
-            _save_log(req, response, "help_overview")
+        _help_out = _si_help.route_help(text, req.user_id, is_admin=bool(req.admin_mode))
+        if _help_out:
+            response.update(_help_out)
+            _save_log(req, response, _help_out.get("type", "help_overview"))
             return response
     except Exception as _hex:
         print(f"[help-priority] failed: {_hex}")
@@ -1313,13 +1307,10 @@ async def process_message(req: ChatMessage):
             return response
 
         # Help (v6_help_001b — open de Help-Bark popup i.p.v. tekst-opsomming)
-        if si.detect_help_intent(text):
-            response.update({
-                "type": "open_help_bark",
-                "action": "open_help_bark",
-                "message": "🔮 Help-overzicht geopend.",
-            })
-            _save_log(req, response, "help_overview")
+        _help_out = si.route_help(text, req.user_id, is_admin=bool(req.admin_mode))
+        if _help_out:
+            response.update(_help_out)
+            _save_log(req, response, _help_out.get("type", "help_overview"))
             return response
 
         # Legal: privacy / cookies / voorwaarden

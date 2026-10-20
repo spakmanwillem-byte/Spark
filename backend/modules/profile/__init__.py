@@ -222,6 +222,19 @@ class ProfileExtended(BaseModel):
     zakelijk_plaats: Optional[str] = None
     zakelijk_iban: Optional[str] = None
     zakelijk_telefoon: Optional[str] = None
+    # v14_profiel_kaders_001 — werk/opleiding + sociale media (privé én zakelijk) werden
+    # door Pydantic weggegooid omdat ze niet in het model stonden → "kon niet opslaan".
+    beroep: Optional[str] = None
+    opleiding: Optional[str] = None
+    social_instagram: Optional[str] = None
+    social_facebook: Optional[str] = None
+    social_linkedin: Optional[str] = None
+    social_youtube: Optional[str] = None
+    zakelijk_website: Optional[str] = None
+    zakelijk_social_instagram: Optional[str] = None
+    zakelijk_social_facebook: Optional[str] = None
+    zakelijk_social_linkedin: Optional[str] = None
+    zakelijk_social_youtube: Optional[str] = None
 
 
 @router.get("/profile/extended/{user_id}")

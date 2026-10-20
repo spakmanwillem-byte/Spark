@@ -98,13 +98,18 @@ BASELINE: Dict[str, List[str]] = {
     ],
 
     # HELP / SUGGEST / TOPIC
+    # v14_help_summary_001 — Willem 20-10: "wat kan je" opent NIET meer de help-popup
+    # maar geeft een korte opsomming + vraag of hij de help moet openen (ja/nee).
     "help_overview": [
         r"\bwat kan je\b",
         r"\bwat kun je\b",
         r"\bhoe werk je\b",
-        r"^\s*/?help[\s.!?]*$",
         r"\bwelke (commands|opdrachten|functies)\b",
         r"\bwat zijn je (mogelijkheden|capaciteiten)\b",
+    ],
+    # help_open = expliciet om het help-kader vragen → popup direct
+    "help_open": [
+        r"^\s*/?help[\s.!?]*$",
         r"\b(open|toon|laat zien|geef|opent?)\s+(de\s+|het\s+)?help(\s+(kader|overzicht|menu|popup|venster|paneel))?\b",
         r"\bhelp(\s+(kader|overzicht|menu|popup|venster|paneel))\b",
         r"\bik wil de? help\b",

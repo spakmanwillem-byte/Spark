@@ -6,10 +6,14 @@
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import { HelpCircle, Search, ShieldCheck, ChevronRight, X, ArrowLeft } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
 export function HelpBark({ open, onClose, userId }) {
+  // v14_help_admin_mode_001 — Willem 20-10: admin-mode uit → gewone help zonder wisselknop;
+  // admin-mode aan → admin-help als start, wisselknop blijft (heen en weer is handig).
+  const { isAdmin: adminModeActive } = useAuth();
   const [helpData, setHelpData] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResult, setSearchResult] = useState(null);
@@ -40,9 +44,9 @@ export function HelpBark({ open, onClose, userId }) {
       setSearchQuery('');
       setSearchResult(null);
       setActiveTopic(null);
-      setShowAdmin(false);
     }
-  }, [open]);
+    setShowAdmin(!!adminModeActive);
+  }, [open, adminModeActive]);
 
   const doSearch = useCallback(async () => {
     if (!searchQuery.trim()) {
@@ -108,7 +112,7 @@ export function HelpBark({ open, onClose, userId }) {
 
   const topics = showAdmin ? (helpData?.admin_topics || []) : (helpData?.topics || []);
   const intro = showAdmin ? helpData?.admin_intro : helpData?.intro;
-  const canShowAdmin = helpData?.is_admin && (helpData?.admin_topics || []).length > 0;
+  const canShowAdmin = adminModeActive && helpData?.is_admin && (helpData?.admin_topics || []).length > 0;
 
   return (
     <div data-testid="help-bark-modal" className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={onClose}>
@@ -132,7 +136,7 @@ export function HelpBark({ open, onClose, userId }) {
                 {showAdmin ? 'Help (Admin)' : 'Help'}
               </h2>
               <p className="text-[11px] text-slate-400">
-                {helpData ? `Gradatie ${helpData.gradatie}` : 'Laden...'} {helpData?.is_admin && !showAdmin ? '• admin' : ''}
+                {helpData ? `Gradatie ${helpData.gradatie}` : 'Laden...'} {adminModeActive && !showAdmin ? '• admin' : ''}
               </p>
             </div>
             {canShowAdmin && (

@@ -86,12 +86,11 @@ _CATALOG: List[Dict[str, Any]] = [
     },
     {
         "action": "open_help_bark",
+        # v14_help_summary_001 — alleen expliciet "open het kader"; "welke mogelijkheden" → tekst-samenvatting (route_help)
         "canonical": [
-            "geef me een overzicht van commando's",
-            "ik wil een commando-lijst",
-            "welke mogelijkheden zijn er",
             "toon help kader",
             "open help paneel",
+            "open het help overzicht",
         ],
         "min_score": 85,
         "response": {

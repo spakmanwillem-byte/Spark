@@ -1205,42 +1205,7 @@ async def create_order(user_id: str, req: CreateOrderRequest):
     wallets["transactions"].append(wallet_tx)
     save_json(WALLET_FILE, wallets)
 
-    # Boek in kasboek per entity
-    accounting = load_json(ACCOUNTING_FILE, default={"transactions": []})
-    for item in order_items:
-        acc_tx = {
-            "id": str(uuid.uuid4()),
-            "type": "income",
-            "category": "Sales",
-            "amount": item["line_total"],
-            "description": f"Verkoop: {item['quantity']}x {item['name']} (order #{order_id})",
-            "entity_id": item["entity_id"],
-            "date": now,
-            "btw_percentage": item.get("btw_pct", 21),
-            "btw_amount": item.get("line_btw", round(item["line_total"] * 0.21, 2)),
-            "created_at": now,
-            "tx_ref": f"shop_sale_{order_id}_{item['id']}",
-        }
-        accounting["transactions"].append(acc_tx)
-        # v6_accounting_hooks_001 — 2% shop-commissie naar spark_core
-        if item["entity_id"] != "spark_core":
-            commissie = round(item["line_total"] * 0.02, 2)
-            if commissie > 0:
-                accounting["transactions"].append({
-                    "id": str(uuid.uuid4()),
-                    "type": "income",
-                    "category": "Sales",
-                    "amount": commissie,
-                    "description": f"Shop-commissie 2% van {item['entity_id']} (order #{order_id})",
-                    "entity_id": "spark_core",
-                    "date": now,
-                    "btw_percentage": 0,
-                    "btw_amount": 0,
-                    "created_at": now,
-                    "tx_ref": f"shop_commissie_{order_id}_{item['id']}",
-                    "source": "auto_hook",
-                })
-    save_json(ACCOUNTING_FILE, accounting)
+    # v14_shop_documenten_001 — boeking loopt via boekhouder.record_shop_sale (zie hieronder); oud accounting-bestand niet meer gevuld
 
     # Sla order op
     if "orders" not in data:
@@ -1270,11 +1235,40 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             except Exception as e:
                 print(f"[SHOP] Storage activeren mislukt: {e}")
 
-    # v6_order_followup_001 — Bonnetje + admin-taak + bark naar user
-    _create_order_bonnetje(user_id, order)
-    if any(it.get("category") == "merch" for it in order_items):
-        # Fysiek product: admin moet verzenden → bonnetje voor admin + taak + bark
-        _create_order_bonnetje(user_id, order, viewer_target="user-001")
+    # v14_shop_documenten_001 — boekhouder-boeking + factuur/pakbon (PDF) + leveranciersmail (concept)
+    merch_items = [it for it in order_items if it.get("category") == "merch"]
+    if merch_items:
+        try:
+            from modules.shop import documents as docs
+            from modules.boekhouder import shop_hooks as _sh
+            shop_rec = _sh._get_shop("shop-roadkill") or {}
+            owner_id = shop_rec.get("owner_user_id") or "user-001"
+            koper_prof = docs._profile(user_id)
+            koper = {"naam": req.shipping_name or koper_prof.get("display_name") or koper_prof.get("naam") or user_id}
+            afz = docs.afzender(owner_id, shop_rec)
+            boeking = _sh.record_shop_sale("shop-roadkill", netto_eur=subtotaal_excl, koper_naam=koper["naam"], source_id=order_id)
+            nummer = docs.volgend_factuurnummer(_shop_products_path("shop-roadkill"), "RK")
+            f_pdf = docs.factuur_pdf(order, nummer, afz, koper)
+            p_pdf = docs.pakbon_pdf(order, afz, koper, verpakking)
+            # products is hier een dict {id: product}
+            prod_list = list(products.values()) if isinstance(products, dict) else products
+            order["documenten"] = {
+                "factuurnummer": nummer,
+                "factuur_koper": docs.archiveer(user_id, f"Factuur {nummer}.pdf", f_pdf, f"Factuur {nummer} — bestelling {order_id}", ["factuur", "winkel", f"order_{order_id}"]),
+                "factuur_eigenaar": docs.archiveer(owner_id, f"Factuur {nummer} (kopie).pdf", f_pdf, f"Verkoopfactuur {nummer} — {koper['naam']}", ["factuur", "verkoop", f"order_{order_id}"]),
+                "pakbon": docs.archiveer(owner_id, f"Pakbon {order_id}.pdf", p_pdf, f"Pakbon bestelling {order_id} — {koper['naam']}", ["pakbon", "verkoop", f"order_{order_id}"]),
+                "leveranciersmails": docs.leveranciersmail(order, prod_list, shop_d["inkoop"], afz),
+                "boekhouder": {"ok": boeking.get("success"), "bruto_eur": boeking.get("bruto_eur"), "spark_fee_eur": boeking.get("spark_fee_eur"),
+                               "bon_ids": [b.get("bon_id") for b in (boeking.get("bonnen") or {}).values()]},
+            }
+            data["orders"] = [order if o["id"] == order_id else o for o in data["orders"]]
+            save_json(PRODUCTS_FILE, data)
+        except Exception as e:
+            print(f"[SHOP] documenten/boekhouder mislukt: {e}")
+            order["documenten"] = {"fout": str(e)}
+    else:
+        _create_order_bonnetje(user_id, order)
+    if merch_items:
         _create_order_admin_task(order)
         _bark_to_user(
             user_id,
@@ -1411,6 +1405,16 @@ async def get_shop_orders(shop_id: str):
             orders.append({**o, "items": items, "shop_total": round(sum(i.get("line_total", 0) for i in items), 2)})
     orders.sort(key=lambda o: o.get("created_at", ""), reverse=True)
     return {"success": True, "orders": orders, "count": len(orders)}
+
+
+@router.get("/orders/{order_id}/documenten")
+async def order_documenten(order_id: str):
+    """v14_shop_documenten_001 — factuur/pakbon-links + leveranciersmail-concepten van een bestelling."""
+    data = load_json(PRODUCTS_FILE, default={"orders": []})
+    o = next((x for x in data.get("orders", []) if x["id"] == order_id), None)
+    if not o:
+        raise HTTPException(404, "Bestelling niet gevonden")
+    return {"success": True, "order_id": order_id, "documenten": o.get("documenten") or {}}
 
 
 @router.get("/orders/{user_id}")

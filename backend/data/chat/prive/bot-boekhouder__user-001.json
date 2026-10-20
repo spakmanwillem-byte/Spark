@@ -6671,6 +6671,22 @@
       "pot_id": "pot-007",
       "price": 0.19695000678206878,
       "user_id": "user-000"
+    },
+    {
+      "id": "bh-2a95caf6",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📈 **Auto-boeking in Roadkillshop**\nType: verkoop\nBedrag: €+60.00\nOmschrijving: Verkoop aan Heidi Spakman\nHash: `e00cc3aa6e3b`",
+      "ts": "2026-10-20T11:27:30.040698+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_auto_entry",
+      "book_id": "book-roadkillshop",
+      "entry_id": "entry-f8aee440",
+      "source": "shop_hook"
     }
   ]
 }

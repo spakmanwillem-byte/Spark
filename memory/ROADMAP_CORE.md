@@ -208,7 +208,23 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     Bestellingen-tab. Kleding-producten Roadkill hebben de standaardset; cap/rugtas niet.
     **Nog**: `create_order` boekt in oud accounting-bestand i.p.v. `record_shop_sale` (boekhouder) → koppelen bij
     "Bestellingen ↔ boekhouder"; inkoop bij leverancier → `record_shop_purchase`.
-  **Fase 3 — nog te bouwen (roadmap)**: bij bestelling zonder voorraad → leveranciersmail (aantal + productcode,
+  • **✅ 20-10 — Fase 3: factuur, pakbon, leveranciersmail, boekhouder** (`v14_shop_documenten_001`, `modules/shop/documents.py`):
+    bij een merch-bestelling → `boekhouder.record_shop_sale` (netto/BTW/bruto, bonnen-JSON, Spark-fee; **oud accounting-
+    bestand wordt niet meer gevuld** — Willem: eigen boekhoudsysteem, later Moneybird) → factuurnummer `RK-<jaar>-0001`
+    (teller in shop-settings) → **Factuur-PDF** in Archief koper + kopie bij eigenaar → **Pakbon-PDF** (= bestelbon, geen
+    prijzen, afvinkvakjes, verpakking) bij eigenaar → **leveranciersmail-concept** per leverancier uit de stuklijsten
+    (code · naam · kleur/maat · aantal, "ik haal zelf af, factuur per mail naar <zakelijke e-mail>", groet Willem,
+    "Spark AI"). PDF lokaal (fpdf2, geen dienst). Afzender = Mijn Profiel → Zakelijk (bedrijfsnaam, zakelijk adres/
+    postcode/plaats/IBAN/telefoon, KvK, BTW, zakelijke e-mail — ingevuld: Spark / Roadkill, Bentismaheerd 180 …).
+    Bestellingen-tab: knoppen 📄 Factuur · 📦 Pakbon · ✉ <leverancier> concept (uitklappen + Kopieer) · "geboekt".
+    `GET /api/shop/orders/{order_id}/documenten`. Archief-URL's zijn `/api/archive/{user}/file/{id}`.
+    **Mail wordt niet verstuurd** (concept-modus) tot er een mailverbinding (Outlook-SMTP app-wachtwoord voor
+    spark-your-life@hotmail.com / Willems hotmail) in Connections staat. Oud markdown-bonnetje alleen nog voor niet-merch.
+    Getest met echte testbestelling (hoodie Navy L, verzenden → RK-2026-0001, 79,55, Promotex-mail 1× hoodie + 1× groot
+    + 1× klein); alle testdata (wallet, orders, archief, kasboek, openstaand, logs, taak, bark) daarna verwijderd.
+    **Niet gebouwd**: voorraad per kleur/maat; Bestellingen-tab UI alleen via code/API gecontroleerd (Willem heeft de
+    enige winkel met orders) — Willem kijkt zelf.
+  **Fase 3 — later**: bij bestelling zonder voorraad → leveranciersmail (aantal + productcode,
   standaardtekst) + kopie naar zakelijke e-mail · factuur (PDF, lokaal gemaakt — geen externe dienst) naar koper-mail
   als ingevuld + Workspace-Archief · pakbon naar winkeleigenaar-archief · bestelbon bij bestanden.
   Mail-verzending vereist een provider/SMTP (hotmail-afzender = Outlook SMTP met app-wachtwoord, via Connections);

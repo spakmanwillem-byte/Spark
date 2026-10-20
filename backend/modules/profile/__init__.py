@@ -217,6 +217,11 @@ class ProfileExtended(BaseModel):
     bedrijfsnaam: Optional[str] = None
     kvk: Optional[str] = None
     btw_nummer: Optional[str] = None
+    zakelijk_adres: Optional[str] = None
+    zakelijk_postcode: Optional[str] = None
+    zakelijk_plaats: Optional[str] = None
+    zakelijk_iban: Optional[str] = None
+    zakelijk_telefoon: Optional[str] = None
 
 
 @router.get("/profile/extended/{user_id}")

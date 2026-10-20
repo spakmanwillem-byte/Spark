@@ -272,7 +272,20 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
             placeholder="12345678" onChange={v => updateField('kvk', v)} />
           <InputField label="BTW-nummer" value={profile.btw_nummer || ''}
             placeholder="NL000000000B01" onChange={v => updateField('btw_nummer', v)} />
+          <InputField label="Zakelijk adres" value={profile.zakelijk_adres || ''}
+            placeholder="Straat 1" onChange={v => updateField('zakelijk_adres', v)} />
+          <div className="grid grid-cols-2 gap-3">
+            <InputField label="Postcode" value={profile.zakelijk_postcode || ''}
+              placeholder="1234 AB" onChange={v => updateField('zakelijk_postcode', v)} />
+            <InputField label="Plaats" value={profile.zakelijk_plaats || ''}
+              placeholder="Plaats" onChange={v => updateField('zakelijk_plaats', v)} />
+          </div>
+          <InputField label="Zakelijke IBAN" value={profile.zakelijk_iban || ''}
+            placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('zakelijk_iban', v)} />
+          <InputField label="Zakelijk telefoon" value={profile.zakelijk_telefoon || ''}
+            placeholder="06 …" onChange={v => updateField('zakelijk_telefoon', v)} />
         </div>
+        <p className="text-[10px] text-slate-500 mt-2">Deze gegevens komen als afzender op facturen en pakbonnen van je winkel.</p>
       </Card>
 
       <Card title="Adres" accent="#f59e0b" icon={MapPin}>

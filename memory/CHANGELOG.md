@@ -16,6 +16,7 @@
 - Winkel-tab: subtabs Winkel | Producten | Bestellingen; product met productcode, voorraad, leverancier (uit zakelijke contacten). Fase 3 (mail/PDF-bonnen) op roadmap.
 - Winkel: Producten → **Verkoop | Inkoop** (productcodes, inkoopprijs excl., leverancier), **stuklijst** per verkoopproduct met kostprijs/marge, prijzen excl. BTW, winkelwagen met BTW-% van de winkel + **Afhalen/Verzenden**, verpakking per bestelling. Opdruk/envelop uit de etalage gehaald (stonden als GB-opslag).
 - Winkel: maat/kleur per product (standaard S–XXXL, Navy blauw/Khaki groen/Zwart/Marble grijs), koper kiest bij bestellen, staat op de bestelling. Inkoopprijzen/codes uit Promotex-orders ingevuld; marges zichtbaar (joggers negatief).
+- Winkel fase 3: bestelling → boekhouder-boeking, factuur-PDF (koper + eigenaar), pakbon-PDF, leveranciersmail-concept per leverancier (kopieerbaar, niet verstuurd), factuurnummering RK-jaar-0001, afzender uit profiel Zakelijk. Oud accounting-bestand niet meer gevuld.
 - Procesregel `RULE_toets_voor_bouw_001`: eerst bestaand onderzoeken + afstemmen, dan pas bouwen.
 
 ## 2026-09-17 — KB-opschoning + 5e lade "Spark Games"

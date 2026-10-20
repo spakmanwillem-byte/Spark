@@ -364,8 +364,48 @@ function BestellingenLijst({ orders, loading, color }) {
             ))}
           </ul>
           {o.notes && <p className="text-[11px] text-slate-500 italic mt-1">{o.notes}</p>}
+          <OrderDocumenten order={o} color={color} />
         </div>
       ))}
+    </div>
+  );
+}
+
+// v14_shop_documenten_001 — factuur / pakbon (PDF in Archief) + leveranciersmail-concept
+function OrderDocumenten({ order, color }) {
+  const [openMail, setOpenMail] = useState(null);
+  const d = order.documenten;
+  if (!d) return <p className="text-[10px] text-slate-600 mt-2">Geen documenten (bestelling van vóór de factuur-flow).</p>;
+  if (d.fout) return <p className="text-[10px] text-red-400 mt-2">Documenten mislukt: {d.fout}</p>;
+  const link = (doc, label, tid) => doc?.url ? (
+    <a key={tid} data-testid={`${tid}-${order.id}`} href={`${API}${doc.url}`} target="_blank" rel="noreferrer"
+      className="px-2 py-1 rounded border border-slate-700 text-[10px] text-slate-200 hover:border-slate-500">{label}</a>
+  ) : null;
+  const kopieer = (m) => { navigator.clipboard?.writeText(`${m.onderwerp}\n\n${m.tekst}`); toast.success('Mail gekopieerd — plak hem in je mailprogramma'); };
+  return (
+    <div className="mt-2 pt-2 border-t border-slate-800 space-y-1.5">
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="text-[10px] text-slate-500 font-mono">{d.factuurnummer}</span>
+        {link(d.factuur_eigenaar, '📄 Factuur', 'order-factuur')}
+        {link(d.pakbon, '📦 Pakbon', 'order-pakbon')}
+        {(d.leveranciersmails || []).map((m, i) => (
+          <button key={i} data-testid={`order-levmail-${order.id}-${i}`} onClick={() => setOpenMail(openMail === i ? null : i)}
+            className="px-2 py-1 rounded border text-[10px]" style={{ borderColor: color + '80', color }}>
+            ✉ {m.leverancier} <span className="opacity-60">· concept</span>
+          </button>
+        ))}
+        {d.boekhouder?.ok && <span className="text-[10px] text-emerald-400/80 ml-auto">geboekt · Spark-fee €{Number(d.boekhouder.spark_fee_eur || 0).toFixed(2)}</span>}
+      </div>
+      {openMail != null && d.leveranciersmails?.[openMail] && (
+        <div data-testid={`order-levmail-body-${order.id}`} className="bg-slate-950 border border-slate-800 rounded-lg p-3">
+          <div className="flex items-center justify-between mb-1">
+            <p className="text-[11px] text-slate-300 font-medium">{d.leveranciersmails[openMail].onderwerp}</p>
+            <button onClick={() => kopieer(d.leveranciersmails[openMail])} className="text-[10px] px-2 py-0.5 rounded font-semibold text-slate-950" style={{ background: color }}>Kopieer</button>
+          </div>
+          <pre className="text-[11px] text-slate-300 whitespace-pre-wrap font-sans">{d.leveranciersmails[openMail].tekst}</pre>
+          <p className="text-[10px] text-slate-500 mt-1">Wordt nog niet automatisch verstuurd — daarvoor is een mailverbinding in Connections nodig.</p>
+        </div>
+      )}
     </div>
   );
 }

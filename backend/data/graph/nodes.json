@@ -151,8 +151,7 @@
         "waarnemen",
         "mens",
         "kennis",
-        "emotie",
-        "blij"
+        "emotie"
       ],
       "topic": "bewustzijn",
       "belangrijkheid": 5,
@@ -335,11 +334,7 @@
         "verdediging",
         "conflict",
         "voorbereiding",
-        "emotie",
-        "bang",
-        "boos",
-        "bedroefd",
-        "blij"
+        "emotie"
       ],
       "topic": "maatschappij",
       "belangrijkheid": 4,
@@ -3328,8 +3323,6 @@
       "description": "Beledigd betekent dat iemand zich aangevallen, vernederd of gekwetst voelt door woorden of gedrag.",
       "tags": [
         "afwijzing",
-        "bang",
-        "bedroefd",
         "beledigd",
         "boos",
         "boosheid",
@@ -5127,7 +5120,6 @@
         "grens",
         "sociaal",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "",
@@ -5175,8 +5167,7 @@
         "afstemming",
         "verantwoordelijkheid",
         "relatie",
-        "groei",
-        "neutraal"
+        "groei"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -6942,7 +6933,6 @@
         "aandacht",
         "betrokken",
         "betrokkenheid",
-        "blij",
         "deelname",
         "emotie",
         "gemeenschap",
@@ -8514,7 +8504,6 @@
         "respect",
         "ontzag",
         "emotie",
-        "blij",
         "gevoel",
         "inspiratie",
         "motivatie",
@@ -9463,7 +9452,6 @@
       "tags": [
         "activiteit",
         "bezigheid",
-        "blij",
         "context",
         "dagbesteding",
         "emotie",
@@ -18315,7 +18303,6 @@
         "documentatie",
         "emotie",
         "informatie",
-        "neutraal",
         "observatie",
         "semantiek",
         "systeem",
@@ -22188,8 +22175,7 @@
         "taal",
         "emotie",
         "blij",
-        "positief",
-        "neutraal"
+        "positief"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -42384,7 +42370,6 @@
         "analyse",
         "leren",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "inzicht",
@@ -42915,7 +42900,6 @@
         "behoud",
         "archivering",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "opslag",
@@ -45866,7 +45850,6 @@
         "zekerheid",
         "gebruik",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "",
@@ -48448,7 +48431,6 @@
         "concept",
         "emergentie",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "realiteit",
@@ -48766,7 +48748,6 @@
         "opslag",
         "communicatie",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "toegang",
@@ -51391,7 +51372,6 @@
       "description": "Een bank is een meubel waarop mensen kunnen zitten of liggen.",
       "tags": [
         "bank",
-        "blij",
         "comfort",
         "emotie",
         "huis",
@@ -52876,7 +52856,6 @@
       "tags": [
         "bakken",
         "beslag",
-        "blij",
         "cake",
         "ei",
         "emotie",
@@ -55944,7 +55923,6 @@
       "tags": [
         "akker",
         "biet",
-        "blij",
         "bodem",
         "boer",
         "emotie",
@@ -71205,7 +71183,6 @@
         "emotie",
         "gevangenschap",
         "herstel",
-        "neutraal",
         "onafhankelijkheid",
         "onderdrukking",
         "ontwikkeling",
@@ -153323,6 +153300,28 @@
       "vertrouwen": 1.0
     },
     {
+      "id": "kbv2-395f1632",
+      "label": "Command-blauwdruk",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een command is één ding dat Spark kan doen: een registry-regel met id, pad, methode (lezen of schrijven), tags en gradatie. Zinnen in de chat worden teruggebracht tot zo'n command.",
+      "tags": [
+        "command",
+        "registry",
+        "task_agent",
+        "blauwdruk",
+        "chat",
+        "uitvoeren",
+        "bevestiging",
+        "spark-architectuur",
+        "principe-8"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-18826611",
       "label": "wandeling",
       "type": "knowledge_v2",
@@ -161644,7 +161643,6 @@
         "ontwikkeling",
         "interactie",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "start",
@@ -165193,7 +165191,6 @@
         "aanpak",
         "begeleiding",
         "behandeling",
-        "blij",
         "emotie",
         "gezondheid",
         "herstel",
@@ -166462,7 +166459,6 @@
         "informatie",
         "afweging",
         "emotie",
-        "blij",
         "neutraal"
       ],
       "topic": "keuze",
@@ -181080,6 +181076,78 @@
     {
       "id": "kbv2-a96efb04",
       "label": "pipeline",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-14dc7c1b",
+      "label": "opstellen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-e47ce033",
+      "label": "tijdstippen",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-14840b98",
+      "label": "focuswerk",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-a1a17089",
+      "label": "oppakken",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-579063a4",
+      "label": "laden",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-dbdcb691",
+      "label": "kaartje",
       "type": "knowledge_v2",
       "lade": null,
       "lade_color": "#94a3b8",

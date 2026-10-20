@@ -5712,13 +5712,26 @@
       "topic": "taal",
       "verbanden": [
         {
-          "kaart_id": "kbv2-skel-123be636",
-          "begrip": "uitspreken",
-          "lade": "spreken",
-          "overlap": 3,
+          "kaart_id": "kbv2-cfe04bee",
+          "begrip": "Stelling",
+          "lade": "weten",
+          "overlap": 4,
           "shared_tags": [
             "communicatie",
             "mening",
+            "stelling",
+            "uitspraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45ca533c",
+          "begrip": "Bewering",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "claim",
+            "mening",
+            "stelling",
             "uitspraak"
           ]
         },
@@ -5734,6 +5747,17 @@
           ]
         },
         {
+          "kaart_id": "kbv2-1a95feda",
+          "begrip": "Uitspraak",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "mening",
+            "uitspraak"
+          ]
+        },
+        {
           "kaart_id": "kbv2-fdad6bce",
           "begrip": "domme",
           "lade": "voelen",
@@ -5741,26 +5765,6 @@
           "shared_tags": [
             "communicatie",
             "mening"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0c25c50b",
-          "begrip": "Persoonlijk",
-          "lade": "spreken",
-          "overlap": 2,
-          "shared_tags": [
-            "communicatie",
-            "mening"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-3f817740",
-          "begrip": "Daar vind ik wat van",
-          "lade": "spreken",
-          "overlap": 2,
-          "shared_tags": [
-            "mening",
-            "uitspraak"
           ]
         },
         {
@@ -5804,13 +5808,13 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-e2c7d584",
-          "begrip": "overdreven",
+          "kaart_id": "kbv2-c86d482d",
+          "begrip": "Ik moet niks",
           "lade": "spreken",
           "overlap": 2,
           "shared_tags": [
             "communicatie",
-            "mening"
+            "uitspraak"
           ]
         }
       ],
@@ -5845,8 +5849,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:19:58.679014+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:19:58.690647+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:19:58.487043+00:00"
       },
       "media": {
         "voice_url": null,
@@ -5856,7 +5878,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:19:58.487025+00:00"
     },
     {
       "id": "kbv2-aa22aa7c",
@@ -8172,10 +8198,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:15:47.998943+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:15:48.011953+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-09-17T07:39:00.125456+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:15:47.816174+00:00"
       },
       "media": {
         "voice_url": null,
@@ -8185,7 +8227,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:15:47.816151+00:00"
     },
     {
       "id": "kbv2-7b1dcf77",
@@ -8227,6 +8273,18 @@
             "begrip",
             "communicatie",
             "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f451543",
+          "begrip": "Duidelijk",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "duidelijkheid",
             "uitleg"
           ]
         },
@@ -8324,17 +8382,6 @@
             "taal",
             "uitleg"
           ]
-        },
-        {
-          "kaart_id": "kbv2-bc672f4f",
-          "begrip": "Vraagwoord",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "taal",
-            "uitleg"
-          ]
         }
       ],
       "footnote": {
@@ -8384,10 +8431,26 @@
               "n_found": 10,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:03:39.563899+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:03:39.575435+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-09-17T07:39:01.103883+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:03:39.378852+00:00"
       },
       "media": {
         "voice_url": null,
@@ -8397,7 +8460,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:03:39.378830+00:00"
     },
     {
       "id": "kbv2-72eb8ec5",
@@ -8778,18 +8845,33 @@
               "n_found": 10,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:36:08.405272+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:36:08.416601+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-10-20T09:38:04.798890+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:36:08.214436+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/f7f2219f11a4",
+        "voice_transcript": "Ander",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
       ],
       "emotie": "neutraal",
@@ -12298,19 +12380,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-e101cc8b",
-          "begrip": "betekenen",
-          "lade": "spreken",
-          "overlap": 5,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "context",
-            "interpretatie",
-            "waarde"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-e1df63b6",
           "begrip": "perspectief",
           "lade": "weten",
@@ -12360,48 +12429,59 @@
           ]
         },
         {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
-          "lade": "spreken",
-          "overlap": 4,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "context",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-e6db9df8",
-          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
-          "lade": "spreken",
-          "overlap": 4,
-          "shared_tags": [
-            "begrip",
-            "context",
-            "ervaring",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
-          "lade": "spreken",
-          "overlap": 4,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "context",
-            "interpretatie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-662e8bca",
           "begrip": "misverstand",
           "lade": "spreken",
           "overlap": 4,
           "shared_tags": [
             "begrip",
+            "betekenis",
+            "context",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e101cc8b",
+          "begrip": "betekenen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "context",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-57702291",
+          "begrip": "associatie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "ervaring",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4fa7bc63",
+          "begrip": "Contextzin",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "context",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-46805938",
+          "begrip": "twist",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
             "betekenis",
             "context",
             "interpretatie"
@@ -12439,8 +12519,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:17:39.385491+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:17:39.396735+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:17:39.195400+00:00"
       },
       "media": {
         "voice_url": null,
@@ -12450,7 +12548,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:17:39.195380+00:00"
     },
     {
       "id": "kbv2-3902081b",
@@ -15925,6 +16027,28 @@
           ]
         },
         {
+          "kaart_id": "kbv2-6652a70b",
+          "begrip": "Informatieverwerking",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "context",
+            "selectie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193a1ab4",
+          "begrip": "Relevante",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "relevantie",
+            "selectie"
+          ]
+        },
+        {
           "kaart_id": "kbv2-skel-3951c2f0",
           "begrip": "selectie",
           "lade": "doen",
@@ -15933,26 +16057,6 @@
             "prioriteit",
             "relevantie",
             "selectie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-f6d601a6",
-          "begrip": "Daar geef ik veel om",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "context",
-            "waarde"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-fefe6525",
-          "begrip": "Even een pauze nemen.",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "context",
-            "focus"
           ]
         },
         {
@@ -16017,8 +16121,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:06:15.367692+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:06:15.378607+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:06:15.182019+00:00"
       },
       "media": {
         "voice_url": null,
@@ -16028,7 +16150,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:06:15.182001+00:00"
     },
     {
       "id": "kbv2-4bb2a255",
@@ -16072,17 +16198,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-640ab01f",
-          "begrip": "vorm",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "betekenis",
-            "interpretatie",
-            "patroon"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-662e8bca",
           "begrip": "misverstand",
           "lade": "spreken",
@@ -16094,14 +16209,14 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-d06bd250",
-          "begrip": "concept",
-          "lade": "weten",
+          "kaart_id": "kbv2-4b718590",
+          "begrip": "Suggereert",
+          "lade": "spreken",
           "overlap": 3,
           "shared_tags": [
-            "betekenis",
+            "aanname",
             "interpretatie",
-            "patroon"
+            "onzekerheid"
           ]
         },
         {
@@ -16127,28 +16242,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-d549fc6f",
-          "begrip": "hetzelfde",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "betekenis",
-            "interpretatie",
-            "patroon"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-5ed1360f",
-          "begrip": "Mensen geloven in goden",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "betekenis",
-            "geloof",
-            "overtuiging"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-38a03404",
           "begrip": "aanname",
           "lade": "doen",
@@ -16160,8 +16253,38 @@
           ]
         },
         {
-          "kaart_id": "kbv2-d33d9371",
-          "begrip": "onbegrip",
+          "kaart_id": "kbv2-46805938",
+          "begrip": "twist",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "betekenis",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2183102a",
+          "begrip": "pessimistisch",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "interpretatie",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-974f5a10",
+          "begrip": "spiritualiteit",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "betekenis",
+            "geloof"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6e6e8d7e",
+          "begrip": "angst",
           "lade": "voelen",
           "overlap": 2,
           "shared_tags": [
@@ -16201,8 +16324,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:23:31.941808+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:23:31.952559+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:23:31.757532+00:00"
       },
       "media": {
         "voice_url": null,
@@ -16212,7 +16353,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:23:31.757512+00:00"
     },
     {
       "id": "kbv2-65324360",
@@ -17762,8 +17907,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:10:45.641273+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:10:45.652230+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:10:45.451734+00:00"
       },
       "media": {
         "voice_url": null,
@@ -17773,7 +17936,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:10:45.451715+00:00"
     },
     {
       "id": "kbv2-778ce7f4",
@@ -21429,22 +21596,22 @@
       "topic": "communicatie",
       "verbanden": [
         {
-          "kaart_id": "kbv2-68afb347",
-          "begrip": "Beantwoord",
-          "lade": "weten",
-          "overlap": 6,
-          "shared_tags": [
-            "antwoord",
-            "beantwoorden",
-            "communicatie",
-            "reactie",
-            "taal"
-          ]
-        },
-        {
           "kaart_id": "kbv2-8d809154",
           "begrip": "Dat vroeg ik niet",
           "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "reactie",
+            "taal",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68afb347",
+          "begrip": "Beantwoord",
+          "lade": "weten",
           "overlap": 5,
           "shared_tags": [
             "antwoord",
@@ -21467,9 +21634,9 @@
           ]
         },
         {
-          "kaart_id": "kbv2-6c804020",
-          "begrip": "antwoorden",
-          "lade": "doen",
+          "kaart_id": "kbv2-3524be62",
+          "begrip": "Vraagt",
+          "lade": "spreken",
           "overlap": 4,
           "shared_tags": [
             "antwoord",
@@ -21479,14 +21646,27 @@
           ]
         },
         {
-          "kaart_id": "kbv2-251af4c5",
-          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
-          "lade": "voelen",
-          "overlap": 3,
+          "kaart_id": "kbv2-71ac86a4",
+          "begrip": "Vraagstructuur",
+          "lade": "weten",
+          "overlap": 4,
           "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "taal",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6c804020",
+          "begrip": "antwoorden",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "antwoord",
             "communicatie",
             "reactie",
-            "taal"
+            "vraag"
           ]
         },
         {
@@ -21512,28 +21692,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-3cee5024",
-          "begrip": "Is het al middag",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "reactie",
-            "vraag"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b6a8928e",
-          "begrip": "Wat weet jij",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "taal",
-            "vraag"
-          ]
-        },
-        {
           "kaart_id": "kbv2-0648b550",
           "begrip": "ik blijf hoor, je begreep het verkeerd.",
           "lade": "spreken",
@@ -21542,6 +21700,17 @@
             "communicatie",
             "reactie",
             "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "taal",
+            "vraag"
           ]
         }
       ],
@@ -21576,8 +21745,26 @@
               "n_found": 10,
               "top_overlap": 6
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T13:59:56.764151+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T13:59:56.775396+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T13:59:56.580758+00:00"
       },
       "media": {
         "voice_url": null,
@@ -21587,7 +21774,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T13:59:56.580740+00:00"
     },
     {
       "id": "kbv2-7d181b6e",
@@ -26167,19 +26358,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-595cef85",
-          "begrip": "woord",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "communicatie",
-            "context",
-            "informatie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-51a8a639",
           "begrip": "Ken je het woord meteorologisch?",
           "lade": "spreken",
@@ -26206,29 +26384,16 @@
           ]
         },
         {
-          "kaart_id": "kbv2-99597d34",
-          "begrip": "Maak van de woorden die je niet kent een snap",
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
             "begrip",
             "betekenis",
-            "communicatie",
             "context",
-            "informatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "communicatie",
-            "context",
-            "informatie"
+            "informatie",
+            "kennis"
           ]
         },
         {
@@ -26245,19 +26410,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-3db2c213",
-          "begrip": "bewustwording",
-          "lade": "weten",
-          "overlap": 7,
-          "shared_tags": [
-            "betekenis",
-            "ervaring",
-            "interpretatie",
-            "inzicht",
-            "kennis"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-1364c6a2",
           "begrip": "voorbeeld",
           "lade": "weten",
@@ -26268,6 +26420,45 @@
             "context",
             "informatie",
             "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e1df63b6",
+          "begrip": "perspectief",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "context",
+            "ervaring",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1c211cf2",
+          "begrip": "Taalbegrip",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "begrijpen",
+            "begrip",
+            "betekenis",
+            "context",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-abdf4d2d",
+          "begrip": "Context",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "interpretatie",
+            "kennis"
           ]
         }
       ],
@@ -26302,8 +26493,26 @@
               "n_found": 10,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:03:30.925050+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:03:30.938019+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 9
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:03:30.741000+00:00"
       },
       "media": {
         "voice_url": null,
@@ -26313,7 +26522,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:03:30.740972+00:00"
     },
     {
       "id": "kbv2-0648b550",
@@ -26793,19 +27006,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-032ee3ec",
-          "begrip": "je geeft 2 verschillende antwoorden op de zelfde vraag",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "antwoord",
-            "betekenis",
-            "communicatie",
-            "context",
-            "gesprek"
-          ]
-        },
-        {
           "kaart_id": "kbv2-68afb347",
           "begrip": "Beantwoord",
           "lade": "weten",
@@ -26815,32 +27015,6 @@
             "communicatie",
             "context",
             "gesprek",
-            "interactie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-251af4c5",
-          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
-          "lade": "voelen",
-          "overlap": 7,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "gesprek",
-            "interactie",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-d33d9371",
-          "begrip": "onbegrip",
-          "lade": "voelen",
-          "overlap": 7,
-          "shared_tags": [
-            "afstemming",
-            "communicatie",
-            "context",
-            "frustratie",
             "interactie"
           ]
         },
@@ -26871,23 +27045,10 @@
           ]
         },
         {
-          "kaart_id": "kbv2-63b1e5c8",
-          "begrip": "Ik ga niet weg :P",
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
           "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "correctie",
-            "gesprek",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9f310b89",
-          "begrip": "zeg",
-          "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "betekenis",
             "communicatie",
@@ -26897,15 +27058,67 @@
           ]
         },
         {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "gesprek",
+            "interactie",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-662e8bca",
+          "begrip": "misverstand",
+          "lade": "spreken",
+          "overlap": 6,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "context",
             "correctie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e628516e",
+          "begrip": "antwoord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "antwoord",
+            "betekenis",
+            "communicatie",
+            "interactie",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ad1f60c0",
+          "begrip": "Bedoelt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "interpretatie",
+            "misverstand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-336cfdae",
+          "begrip": "Woordgebruik",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "duidelijkheid",
             "interpretatie"
           ]
         }
@@ -26941,16 +27154,33 @@
               "n_found": 10,
               "top_overlap": 10
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:48:14.468026+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:48:14.480869+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 10
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:48:14.255216+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/a9798744ec5e",
+        "voice_transcript": "Dat vroeg ik niet.",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
       ]
     },
@@ -32246,16 +32476,16 @@
           ]
         },
         {
-          "kaart_id": "kbv2-2acb2921",
-          "begrip": "houdt",
-          "lade": "spreken",
+          "kaart_id": "kbv2-27e164e4",
+          "begrip": "Zijn",
+          "lade": "weten",
           "overlap": 6,
           "shared_tags": [
             "betekenis",
-            "communicatie",
-            "context",
-            "relatie",
-            "taal"
+            "identiteit",
+            "taal",
+            "toestand",
+            "werkwoord"
           ]
         },
         {
@@ -32324,42 +32554,42 @@
           ]
         },
         {
-          "kaart_id": "kbv2-b7582786",
-          "begrip": "Wat maakt jou anders dan andere AI?",
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beschrijving",
+            "betekenis",
+            "communicatie",
+            "context",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4afdfab2",
+          "begrip": "was",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beschrijving",
+            "taal",
+            "toestand",
+            "werkwoord",
+            "zijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f53a6962",
+          "begrip": "voorstelt",
           "lade": "spreken",
           "overlap": 5,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "context",
-            "identiteit",
-            "relatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9ba3a044",
-          "begrip": "hield",
-          "lade": "spreken",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "relatie",
             "taal",
             "werkwoord"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-654d8676",
-          "begrip": "inzake",
-          "lade": "spreken",
-          "overlap": 5,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "context",
-            "relatie",
-            "taal"
           ]
         }
       ],
@@ -32394,8 +32624,26 @@
               "n_found": 10,
               "top_overlap": 8
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:11:13.891079+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:11:13.903280+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 8
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:11:13.703777+00:00"
       },
       "media": {
         "voice_url": null,
@@ -32405,7 +32653,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:11:13.703751+00:00"
     },
     {
       "id": "kbv2-964a6e1a",
@@ -32442,19 +32694,6 @@
       ],
       "topic": "taal",
       "verbanden": [
-        {
-          "kaart_id": "kbv2-da45f230",
-          "begrip": "inmiddels",
-          "lade": "spreken",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "overgang",
-            "taal",
-            "voortgang"
-          ]
-        },
         {
           "kaart_id": "kbv2-87cff1ba",
           "begrip": "zover",
@@ -32493,18 +32732,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-6b7cb703",
-          "begrip": "zo dat waren weer paar kenniskaarten",
-          "lade": "spreken",
-          "overlap": 4,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "taal",
-            "voortgang"
-          ]
-        },
-        {
           "kaart_id": "kbv2-3a29cf22",
           "begrip": "waren",
           "lade": "spreken",
@@ -32529,15 +32756,15 @@
           ]
         },
         {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "kaart_id": "kbv2-7136a54a",
+          "begrip": "Zelfs",
           "lade": "spreken",
           "overlap": 4,
           "shared_tags": [
             "communicatie",
             "context",
-            "nuance",
-            "taal"
+            "taal",
+            "verwachting"
           ]
         },
         {
@@ -32562,6 +32789,28 @@
             "context",
             "taal",
             "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b71890dd",
+          "begrip": "zit",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "taal",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-04c5a529",
+          "begrip": "los",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "taal",
+            "toestand"
           ]
         }
       ],
@@ -32596,8 +32845,26 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:23:54.895914+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:23:54.907961+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:23:54.709085+00:00"
       },
       "media": {
         "voice_url": null,
@@ -32607,7 +32874,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:23:54.709062+00:00"
     },
     {
       "id": "kbv2-b8cd194f",
@@ -32823,18 +33094,33 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:26:41.390292+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:26:41.402652+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-10-20T03:48:29.295543+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:26:41.191897+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/5c8c25d1efb2",
+        "voice_transcript": "aanvulling.",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
       ],
       "emotie": "neutraal",
@@ -34163,132 +34449,132 @@
       "verbanden": [
         {
           "kaart_id": "kbv2-cfa0415e",
-          "begrip": "Missie (visie)",
+          "begrip": "Missie",
           "lade": "spreken",
-          "overlap": 10,
+          "overlap": 8,
           "shared_tags": [
             "betekenis",
-            "communicatie",
             "doel",
             "emotie",
-            "identiteit"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b7582786",
-          "begrip": "Wat maakt jou anders dan andere AI?",
-          "lade": "spreken",
-          "overlap": 10,
-          "shared_tags": [
-            "ai",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emergentie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9b00ff83",
-          "begrip": "onderliggende",
-          "lade": "weten",
-          "overlap": 10,
-          "shared_tags": [
-            "ai",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emergentie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-2ac08d46",
-          "begrip": "visie",
-          "lade": "spreken",
-          "overlap": 9,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "doel",
-            "emotie",
-            "identiteit"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
-          "lade": "spreken",
-          "overlap": 9,
-          "shared_tags": [
-            "ai",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-dc815f75",
-          "begrip": "Wat is de bedoeling van Spark?",
-          "lade": "weten",
-          "overlap": 9,
-          "shared_tags": [
-            "ai",
-            "autonomie",
-            "bedoeling",
-            "betekenis",
-            "emergentie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0f8a996a",
-          "begrip": "user",
-          "lade": "weten",
-          "overlap": 9,
-          "shared_tags": [
-            "ai",
-            "communicatie",
-            "context",
-            "emergentie",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-25b237ba",
-          "begrip": "Ik dacht dat jij binnen de gesprekken van de user jij de onderliggende relaties van de user bij hield.",
-          "lade": "weten",
-          "overlap": 9,
-          "shared_tags": [
-            "ai",
-            "communicatie",
-            "context",
-            "emergentie",
-            "emotie"
+            "intentie",
+            "motivatie"
           ]
         },
         {
           "kaart_id": "kbv2-aaf81efb",
           "begrip": "Spark",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
             "ai",
             "betekenis",
-            "communicatie",
             "context",
-            "emotie"
+            "emotie",
+            "gedrag"
           ]
         },
         {
-          "kaart_id": "kbv2-35bf6a72",
-          "begrip": "Hoe laat is het?",
+          "kaart_id": "kbv2-2ac08d46",
+          "begrip": "visie",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
-            "ai",
-            "communicatie",
+            "betekenis",
+            "doel",
+            "emotie",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
             "context",
             "emotie",
-            "intentie"
+            "gedrag",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37bffc41",
+          "begrip": "wilde",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "gedrag",
+            "intentie",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "intentie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-74c6dbff",
+          "begrip": "behoefte",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "gedrag",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-55375854",
+          "begrip": "zingeving",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "doel",
+            "emotie",
+            "motivatie",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f39d2548",
+          "begrip": "streven",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "intentie",
+            "motivatie",
+            "richting"
           ]
         }
       ],
@@ -34323,8 +34609,26 @@
               "n_found": 10,
               "top_overlap": 10
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:01:04.894974+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:01:04.908424+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 8
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:01:04.710408+00:00"
       },
       "media": {
         "voice_url": null,
@@ -34334,7 +34638,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:01:04.710388+00:00"
     },
     {
       "id": "kbv2-96d9c6f8",
@@ -35014,133 +35322,114 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-d316c9a7",
-          "begrip": "Ik wilde je alleen begroeten.",
+          "kaart_id": "kbv2-skel-430ebae6",
+          "begrip": "toon",
           "lade": "spreken",
-          "overlap": 10,
+          "overlap": 4,
           "shared_tags": [
-            "begroeten",
-            "begroeting",
-            "communicatie",
-            "contact",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-792abcf8",
-          "begrip": "erbij",
-          "lade": "voelen",
-          "overlap": 8,
-          "shared_tags": [
-            "communicatie",
-            "contact",
             "emotie",
-            "herkenning",
-            "interactie"
+            "stem",
+            "taal",
+            "toon"
           ]
         },
         {
-          "kaart_id": "kbv2-be4ef430",
-          "begrip": "Hallo Spark",
+          "kaart_id": "kbv2-70b6d717",
+          "begrip": "klank",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "begroeting",
-            "communicatie",
-            "contact",
-            "gesprek",
-            "hallo"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-e315ddd0",
-          "begrip": "zegt",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "communicatie",
             "emotie",
-            "gesprek",
-            "interactie",
-            "neutraal"
+            "stem",
+            "toon"
           ]
         },
         {
-          "kaart_id": "kbv2-05777c12",
-          "begrip": "spraken",
+          "kaart_id": "kbv2-934b26c3",
+          "begrip": "speech",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "communicatie",
             "emotie",
-            "gesprek",
-            "interactie",
-            "neutraal"
+            "stem",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7d6abafd",
+          "begrip": "spraak",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "stem",
+            "taal"
           ]
         },
         {
           "kaart_id": "kbv2-9f310b89",
           "begrip": "zeg",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "communicatie",
             "emotie",
-            "gesprek",
-            "interactie",
-            "neutraal"
+            "stem",
+            "taal"
           ]
         },
         {
-          "kaart_id": "kbv2-72778c24",
-          "begrip": "belt",
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "communicatie",
-            "contact",
             "emotie",
-            "gesprek",
-            "interactie"
+            "stem",
+            "taal"
           ]
         },
         {
-          "kaart_id": "kbv2-skel-f55b8561",
-          "begrip": "sociale interactie",
+          "kaart_id": "kbv2-f10ef3f5",
+          "begrip": "klinkt",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "communicatie",
-            "contact",
             "emotie",
-            "gesprek",
-            "neutraal"
+            "stem",
+            "toon"
           ]
         },
         {
-          "kaart_id": "kbv2-9eb7705b",
-          "begrip": "Tot ziens",
+          "kaart_id": "kbv2-e0eb254a",
+          "begrip": "hoor",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "communicatie",
-            "contact",
             "emotie",
-            "interactie",
-            "neutraal"
+            "taal",
+            "toon"
           ]
         },
         {
-          "kaart_id": "kbv2-skel-cca12a6b",
-          "begrip": "welkom",
+          "kaart_id": "kbv2-0b1bc109",
+          "begrip": "zeggen",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 3,
           "shared_tags": [
-            "begroeting",
-            "communicatie",
             "emotie",
-            "interactie",
-            "relatie"
+            "stem",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "stem",
+            "taal"
           ]
         }
       ],
@@ -35175,9 +35464,27 @@
               "n_found": 10,
               "top_overlap": 10
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:04:03.362522+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:04:03.374864+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
         ],
-        "updated_at": "2026-08-03T15:48:54.227965+00:00"
+        "updated_at": "2026-08-03T15:48:54.227965+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:04:03.177397+00:00"
       },
       "media": {
         "voice_url": null,
@@ -35185,11 +35492,13 @@
         "image_urls": []
       },
       "needs": [
-        "ws5",
         "voice",
         "image"
       ],
-      "emotie": "neutraal"
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:04:03.177375+00:00"
     },
     {
       "id": "kbv2-6db88117",
@@ -36514,133 +36823,133 @@
       "topic": "communicatie",
       "verbanden": [
         {
-          "kaart_id": "kbv2-63c2beae",
-          "begrip": "oke, zeg eens wat",
-          "lade": "spreken",
-          "overlap": 11,
-          "shared_tags": [
-            "aanwezigheid",
-            "communicatie",
-            "emotie",
-            "gesprek",
-            "interactie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-9f310b89",
           "begrip": "zeg",
           "lade": "spreken",
-          "overlap": 10,
+          "overlap": 9,
           "shared_tags": [
-            "communicatie",
             "emotie",
             "gesprek",
             "informatie",
-            "interactie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-4619694d",
-          "begrip": "bellen",
-          "lade": "weten",
-          "overlap": 9,
-          "shared_tags": [
-            "bellen",
-            "communicatie",
-            "contact",
-            "emotie",
-            "gesprek"
+            "interactie",
+            "neutraal"
           ]
         },
         {
           "kaart_id": "kbv2-skel-a10a7334",
           "begrip": "spreken",
           "lade": "doen",
-          "overlap": 9,
+          "overlap": 8,
           "shared_tags": [
-            "communicatie",
             "emotie",
             "gesprek",
             "informatie",
-            "interactie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-370dddfb",
-          "begrip": "Nou, zo als jij dieper zegt klinkt dat wel fijn. Grijns",
-          "lade": "voelen",
-          "overlap": 8,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
             "interactie",
-            "luisteren",
-            "neutraal"
+            "luisteren"
           ]
         },
         {
           "kaart_id": "kbv2-05777c12",
           "begrip": "spraken",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
-            "communicatie",
             "emotie",
             "gesprek",
             "informatie",
-            "interactie"
+            "interactie",
+            "neutraal"
           ]
         },
         {
           "kaart_id": "kbv2-7d6abafd",
           "begrip": "spraak",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
-            "communicatie",
             "emotie",
             "gesprek",
-            "interactie",
-            "luisteren"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-25667e42",
-          "begrip": "stem",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
             "interactie",
             "luisteren",
             "neutraal"
           ]
         },
         {
-          "kaart_id": "kbv2-0b1bc109",
-          "begrip": "zeggen",
-          "lade": "spreken",
-          "overlap": 8,
+          "kaart_id": "kbv2-skel-4619694d",
+          "begrip": "bellen",
+          "lade": "weten",
+          "overlap": 7,
           "shared_tags": [
-            "communicatie",
+            "contact",
             "emotie",
             "gesprek",
-            "informatie",
-            "interactie"
+            "neutraal",
+            "spraak"
           ]
         },
         {
-          "kaart_id": "kbv2-792abcf8",
-          "begrip": "erbij",
+          "kaart_id": "kbv2-ddba79d3",
+          "begrip": "contact",
           "lade": "voelen",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
-            "communicatie",
             "contact",
             "emotie",
+            "informatie",
             "interactie",
             "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e315ddd0",
+          "begrip": "zegt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "luisteren",
+            "neutraal",
+            "sociaal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f10ef3f5",
+          "begrip": "klinkt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "interactie",
+            "luisteren",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f55b8561",
+          "begrip": "sociale interactie",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "contact",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "sociaal"
           ]
         }
       ],
@@ -36675,8 +36984,26 @@
               "n_found": 10,
               "top_overlap": 11
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:10:35.266195+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:10:35.279847+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 9
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:10:35.075650+00:00"
       },
       "media": {
         "voice_url": null,
@@ -36686,7 +37013,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:10:35.075628+00:00"
     },
     {
       "id": "kbv2-654d8676",
@@ -39378,7 +39709,6 @@
         "documentatie",
         "emotie",
         "informatie",
-        "neutraal",
         "observatie",
         "semantiek",
         "systeem",
@@ -39388,36 +39718,23 @@
       "topic": "communicatie",
       "verbanden": [
         {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
           "lade": "spreken",
-          "overlap": 10,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie",
-            "informatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-35bf6a72",
-          "begrip": "Hoe laat is het?",
-          "lade": "spreken",
-          "overlap": 9,
+          "overlap": 7,
           "shared_tags": [
             "ai",
             "communicatie",
             "context",
             "emotie",
-            "informatie"
+            "semantiek"
           ]
         },
         {
           "kaart_id": "kbv2-520cbff2",
           "begrip": "zin",
           "lade": "spreken",
-          "overlap": 9,
+          "overlap": 7,
           "shared_tags": [
             "betekenis",
             "communicatie",
@@ -39427,94 +39744,107 @@
           ]
         },
         {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "kaart_id": "kbv2-beddcba2",
+          "begrip": "Beschrijft",
           "lade": "spreken",
-          "overlap": 9,
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c1ee5231",
+          "begrip": "kenniskaart",
+          "lade": "weten",
+          "overlap": 7,
           "shared_tags": [
             "ai",
             "betekenis",
-            "communicatie",
+            "blij",
             "context",
             "emotie"
           ]
         },
         {
-          "kaart_id": "kbv2-e101cc8b",
-          "begrip": "betekenen",
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bc672f4f",
+          "begrip": "Vraagwoord",
           "lade": "spreken",
-          "overlap": 9,
+          "overlap": 6,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "context",
-            "emotie",
-            "interpretatie"
+            "informatie",
+            "taal"
           ]
         },
         {
-          "kaart_id": "kbv2-3208c15b",
-          "begrip": "verwerkt",
-          "lade": "weten",
-          "overlap": 9,
+          "kaart_id": "kbv2-63373119",
+          "begrip": "Dit",
+          "lade": "spreken",
+          "overlap": 6,
           "shared_tags": [
-            "ai",
+            "betekenis",
             "communicatie",
             "context",
+            "informatie",
+            "semantiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
             "emotie",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea357020",
+          "begrip": "nergens",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "beschrijving",
+            "betekenis",
+            "communicatie",
+            "context",
             "informatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9b00ff83",
-          "begrip": "onderliggende",
-          "lade": "weten",
-          "overlap": 9,
-          "shared_tags": [
-            "ai",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-e0aed0e1",
-          "begrip": "Wat voor taal spreek je?",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "ai",
-            "communicatie",
-            "context",
-            "emotie",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-fc35327c",
-          "begrip": "bedoeling",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "ai",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b7582786",
-          "begrip": "Wat maakt jou anders dan andere AI?",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "ai",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
           ]
         }
       ],
@@ -39549,8 +39879,26 @@
               "n_found": 10,
               "top_overlap": 10
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:14:34.851305+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:14:34.865065+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:14:34.667130+00:00"
       },
       "media": {
         "voice_url": null,
@@ -39560,6 +39908,13 @@
       "needs": [
         "voice",
         "image"
+      ],
+      "emotie": "blij",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:14:34.667094+00:00",
+      "emotie_tags_verwijderd": [
+        "neutraal"
       ]
     },
     {
@@ -40128,19 +40483,6 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-2c3d72bb",
-          "begrip": "Wat is gisteren in de community besproken?",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "afstemming",
-            "besproken",
-            "communicatie",
-            "emotie",
-            "gesprek"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-f55b8561",
           "begrip": "sociale interactie",
           "lade": "spreken",
@@ -40167,32 +40509,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-e628516e",
-          "begrip": "antwoord",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "begrip",
-            "communicatie",
-            "duidelijkheid",
-            "emotie",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-3e763012",
-          "begrip": "Ik deelde het alleen",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "delen",
-            "emotie",
-            "gesprek",
-            "neutraal"
-          ]
-        },
-        {
           "kaart_id": "kbv2-f4d18917",
           "begrip": "verbonden",
           "lade": "voelen",
@@ -40202,32 +40518,6 @@
             "emotie",
             "neutraal",
             "uitwisseling",
-            "verbinding"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0cfd731e",
-          "begrip": "excuus ik was even weg",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "gesprek",
-            "neutraal",
-            "verbinding"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9fb4bf15",
-          "begrip": "dieper",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "begrip",
-            "communicatie",
-            "emotie",
-            "neutraal",
             "verbinding"
           ]
         },
@@ -40253,6 +40543,71 @@
             "communicatie",
             "delen",
             "emotie",
+            "neutraal",
+            "uitwisseling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0648b550",
+          "begrip": "ik blijf hoor, je begreep het verkeerd.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "afstemming",
+            "begrip",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-770a03a1",
+          "begrip": "instructie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "afstemming",
+            "communicatie",
+            "duidelijkheid",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f02f431e",
+          "begrip": "spreektaal",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
             "neutraal",
             "uitwisseling"
           ]
@@ -40313,10 +40668,26 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:15:50.411828+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:15:50.424614+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-05-31T11:52:19.637984+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:15:50.222992+00:00"
       },
       "media": {
         "voice_url": null,
@@ -40326,7 +40697,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:15:50.222972+00:00"
     },
     {
       "id": "kbv2-skel-d6c51a59",
@@ -41040,18 +41415,33 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:38:52.734729+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:38:52.747827+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-10-20T11:47:34.550234+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:38:52.533652+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/57e6d67d3348",
+        "voice_transcript": "Audio",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
       ],
       "emotie": "neutraal",
@@ -41348,7 +41738,7 @@
           "kaart_id": "kbv2-skel-c3f1997f",
           "begrip": "ontvangen",
           "lade": "doen",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
             "bericht",
             "communicatie",
@@ -41361,7 +41751,7 @@
           "kaart_id": "kbv2-skel-61872f1f",
           "begrip": "ontvanger",
           "lade": "doen",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
             "bericht",
             "communicatie",
@@ -41384,19 +41774,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-3e763012",
-          "begrip": "Ik deelde het alleen",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "bericht",
-            "communicatie",
-            "emotie",
-            "informatie",
-            "neutraal"
-          ]
-        },
-        {
           "kaart_id": "kbv2-ddd33f25",
           "begrip": "boekdelen",
           "lade": "spreken",
@@ -41410,16 +41787,16 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-417279b4",
-          "begrip": "verspreiden",
-          "lade": "doen",
+          "kaart_id": "kbv2-155e84ea",
+          "begrip": "Zender",
+          "lade": "weten",
           "overlap": 6,
           "shared_tags": [
             "communicatie",
-            "emotie",
             "informatie",
+            "media",
             "neutraal",
-            "ontvanger"
+            "signaal"
           ]
         },
         {
@@ -41451,6 +41828,19 @@
         {
           "kaart_id": "kbv2-96868b29",
           "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-31c6d4d6",
+          "begrip": "schrijf",
           "lade": "spreken",
           "overlap": 5,
           "shared_tags": [
@@ -41517,10 +41907,26 @@
               "n_found": 10,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:12:45.786552+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:12:45.799699+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 9
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-05-31T19:25:17.601156+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:12:45.605198+00:00"
       },
       "media": {
         "voice_url": null,
@@ -41530,7 +41936,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:12:45.605179+00:00"
     },
     {
       "id": "kbv2-skel-ce1a8553",
@@ -44401,11 +44811,36 @@
           "kaart_id": "kbv2-8e0d7b7f",
           "begrip": "Dank je wel",
           "lade": "spreken",
-          "overlap": 4,
+          "overlap": 5,
           "shared_tags": [
             "beleefdheid",
             "communicatie",
             "dankbaarheid",
+            "respect",
+            "sociale interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8f4e1ded",
+          "begrip": "Sociale regels",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beleefdheid",
+            "communicatie",
+            "gedrag",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9a978e3f",
+          "begrip": "Etiquette",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beleefdheid",
+            "communicatie",
+            "gedrag",
             "respect"
           ]
         },
@@ -44419,28 +44854,6 @@
             "communicatie",
             "dankbaarheid",
             "gedrag"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-990fe083",
-          "begrip": "fijn, dank je wel",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "beleefdheid",
-            "communicatie",
-            "dankbaarheid"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-c82f3134",
-          "begrip": "beledigd",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "gedrag",
-            "respect"
           ]
         },
         {
@@ -44499,14 +44912,14 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-2b90d9cd",
-          "begrip": "compliment",
-          "lade": "spreken",
+          "kaart_id": "kbv2-e411e044",
+          "begrip": "Groet",
+          "lade": "voelen",
           "overlap": 3,
           "shared_tags": [
+            "beleefdheid",
             "communicatie",
-            "dankbaarheid",
-            "respect"
+            "sociale interactie"
           ]
         }
       ],
@@ -44549,8 +44962,42 @@
               "n_found": 10,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:00:13.825674+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:00:13.836640+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:00:39.204372+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:00:39.215223+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:00:39.014147+00:00"
       },
       "media": {
         "voice_url": null,
@@ -44560,7 +45007,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "blij",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:00:39.014127+00:00"
     },
     {
       "id": "kbv2-91e28d41",
@@ -45440,30 +45891,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-99597d34",
-          "begrip": "Maak van de woorden die je niet kent een snap",
-          "lade": "spreken",
-          "overlap": 4,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "kennis",
-            "taal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
-          "lade": "spreken",
-          "overlap": 4,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "kennis",
-            "taal"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-e64c654b",
           "begrip": "benoemen",
           "lade": "spreken",
@@ -45484,6 +45911,30 @@
             "begrip",
             "betekenis",
             "kennis",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4d476e0d",
+          "begrip": "Termen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "kennis",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86613fbc",
+          "begrip": "Definieert",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "concept",
             "taal"
           ]
         }
@@ -45527,8 +45978,26 @@
               "n_found": 10,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:04:00.828218+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:04:00.839180+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:04:00.639492+00:00"
       },
       "media": {
         "voice_url": null,
@@ -45538,7 +46007,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:04:00.639474+00:00"
     },
     {
       "id": "kbv2-06b167ab",
@@ -47304,6 +47777,18 @@
           ]
         },
         {
+          "kaart_id": "kbv2-4b7c0e93",
+          "begrip": "Hyperlink",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bestand",
+            "document",
+            "e-mail",
+            "internet"
+          ]
+        },
+        {
           "kaart_id": "kbv2-b3c78d32",
           "begrip": "Word",
           "lade": "spreken",
@@ -47357,17 +47842,6 @@
             "internet",
             "technologie"
           ]
-        },
-        {
-          "kaart_id": "kbv2-ebf0a8db",
-          "begrip": "internet",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "internet",
-            "technologie"
-          ]
         }
       ],
       "footnote": {
@@ -47409,8 +47883,26 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:23:52.523851+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:23:52.534843+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:23:52.337852+00:00"
       },
       "media": {
         "voice_url": null,
@@ -47420,7 +47912,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:23:52.337833+00:00"
     },
     {
       "id": "kbv2-536d5e7e",
@@ -52875,10 +53371,26 @@
               "n_found": 10,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:23:01.055999+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:23:01.067659+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 3
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-09-17T07:39:48.221169+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:23:00.866755+00:00"
       },
       "media": {
         "voice_url": null,
@@ -52888,7 +53400,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:23:00.866732+00:00"
     },
     {
       "id": "kbv2-14a6fef4",
@@ -58516,19 +59032,6 @@
       "topic": "methodisch begeleiden",
       "verbanden": [
         {
-          "kaart_id": "kbv2-skel-136baae3",
-          "begrip": "beelddenken",
-          "lade": "weten",
-          "overlap": 8,
-          "shared_tags": [
-            "associatie",
-            "beelddenken",
-            "cognitie",
-            "communicatie",
-            "creativiteit"
-          ]
-        },
-        {
           "kaart_id": "kbv2-1841db75",
           "begrip": "aanschouwelijkheid",
           "lade": "doen",
@@ -58555,29 +59058,29 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-68fb65a6",
-          "begrip": "leraar",
-          "lade": "spreken",
-          "overlap": 5,
+          "kaart_id": "kbv2-67fff139",
+          "begrip": "Leerproblemen",
+          "lade": "voelen",
+          "overlap": 6,
           "shared_tags": [
             "begeleiding",
-            "communicatie",
+            "dyslexie",
+            "informatieverwerking",
             "leren",
-            "onderwijs",
-            "ontwikkeling"
+            "onderwijs"
           ]
         },
         {
-          "kaart_id": "kbv2-skel-84f2ceda",
-          "begrip": "docent",
-          "lade": "spreken",
-          "overlap": 5,
+          "kaart_id": "kbv2-3f85d532",
+          "begrip": "Leerstoornissen",
+          "lade": "voelen",
+          "overlap": 6,
           "shared_tags": [
             "begeleiding",
-            "communicatie",
+            "dyslexie",
+            "informatieverwerking",
             "leren",
-            "onderwijs",
-            "ontwikkeling"
+            "onderwijs"
           ]
         },
         {
@@ -58594,16 +59097,16 @@
           ]
         },
         {
-          "kaart_id": "kbv2-d6030958",
-          "begrip": "wat heb jij geleerd vandaag?",
-          "lade": "spreken",
+          "kaart_id": "kbv2-skel-136baae3",
+          "begrip": "beelddenken",
+          "lade": "weten",
           "overlap": 5,
           "shared_tags": [
-            "begeleiding",
-            "communicatie",
-            "leren",
-            "onderwijs",
-            "ontwikkeling"
+            "associatie",
+            "beelddenken",
+            "cognitie",
+            "dyslexie",
+            "leren"
           ]
         },
         {
@@ -58620,18 +59123,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-86777294",
-          "begrip": "inspiratie",
-          "lade": "voelen",
-          "overlap": 4,
-          "shared_tags": [
-            "communicatie",
-            "creativiteit",
-            "leren",
-            "ontwikkeling"
-          ]
-        },
-        {
           "kaart_id": "kbv2-3b59156c",
           "begrip": "begreep",
           "lade": "spreken",
@@ -58641,6 +59132,30 @@
             "communicatie",
             "leren",
             "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5191be8",
+          "begrip": "Cognitie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "cognitie",
+            "informatieverwerking",
+            "leren",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-344ae9c2",
+          "begrip": "Instapniveau",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "begeleiding",
+            "leren",
+            "onderwijs",
+            "ontwikkeling"
           ]
         }
       ],
@@ -58683,8 +59198,26 @@
               "n_found": 10,
               "top_overlap": 8
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:02:13.569886+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:02:13.581796+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:02:13.384021+00:00"
       },
       "media": {
         "voice_url": null,
@@ -58694,7 +59227,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:02:13.383994+00:00"
     },
     {
       "id": "kbv2-475c7ca7",
@@ -61347,120 +61884,120 @@
           ]
         },
         {
-          "kaart_id": "kbv2-04b0d8bf",
-          "begrip": "namen",
-          "lade": "weten",
-          "overlap": 10,
-          "shared_tags": [
-            "benoemen",
-            "classificatie",
-            "communicatie",
-            "emotie",
-            "herkenning"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "communicatie",
-            "emotie",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ecd1bb38",
-          "begrip": "noemen",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "benoemen",
-            "classificatie",
-            "communicatie",
-            "emotie",
-            "identificatie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-b1197711",
           "begrip": "symbool",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 7,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "emotie",
             "herkenning",
-            "interpretatie"
+            "neutraal"
           ]
         },
         {
-          "kaart_id": "kbv2-e101cc8b",
-          "begrip": "betekenen",
+          "kaart_id": "kbv2-skel-f5e6af9a",
+          "begrip": "symbolen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "herkenning",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-deedc7b2",
+          "begrip": "label",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "herkenning",
+            "identificatie",
+            "label"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56f183f0",
+          "begrip": "ken",
           "lade": "spreken",
-          "overlap": 8,
+          "overlap": 6,
           "shared_tags": [
             "begrip",
             "betekenis",
             "communicatie",
-            "emotie",
-            "interpretatie"
+            "herkenning",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "communicatie",
+            "herkenning",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6714443e",
+          "begrip": "kent",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "communicatie",
+            "herkenning",
+            "kennis"
           ]
         },
         {
           "kaart_id": "kbv2-96868b29",
           "begrip": "tekst",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "emotie",
-            "interpretatie",
-            "kennis"
+            "kennis",
+            "neutraal"
           ]
         },
         {
-          "kaart_id": "kbv2-6db88117",
-          "begrip": "noem",
+          "kaart_id": "kbv2-e101cc8b",
+          "begrip": "betekenen",
           "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "benoemen",
-            "classificatie",
-            "communicatie",
-            "emotie",
-            "kennis"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
-          "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "begrip",
             "betekenis",
-            "communicatie",
             "emotie",
-            "interpretatie"
+            "neutraal",
+            "symbool"
           ]
         },
         {
-          "kaart_id": "kbv2-0a6aaa40",
-          "begrip": "Welke dieren kan jij op noemen",
+          "kaart_id": "kbv2-9115c6a7",
+          "begrip": "weet",
           "lade": "weten",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
-            "benoemen",
-            "classificatie",
+            "begrip",
             "communicatie",
             "emotie",
-            "kennis"
+            "kennis",
+            "neutraal"
           ]
         }
       ],
@@ -61519,10 +62056,26 @@
               "n_found": 10,
               "top_overlap": 11
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:11:05.404539+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:11:05.417998+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 11
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T13:53:08.685725+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:11:05.222788+00:00"
       },
       "media": {
         "voice_url": null,
@@ -61532,7 +62085,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:11:05.222767+00:00"
     },
     {
       "id": "kbv2-skel-e628516e",
@@ -67186,6 +67743,19 @@
           ]
         },
         {
+          "kaart_id": "kbv2-bbf2e566",
+          "begrip": "Grappig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "grap",
+            "humor",
+            "komedie",
+            "lachen",
+            "woordspeling"
+          ]
+        },
+        {
           "kaart_id": "kbv2-21f69dbd",
           "begrip": "Grapje",
           "lade": "voelen",
@@ -67221,25 +67791,47 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-614a038b",
-          "begrip": "lachen",
+          "kaart_id": "kbv2-8025c97c",
+          "begrip": "Sarcasme",
           "lade": "voelen",
           "overlap": 3,
           "shared_tags": [
             "communicatie",
+            "grap",
+            "humor"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4a3108f",
+          "begrip": "Zelfspot",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grap",
             "humor",
             "lachen"
           ]
         },
         {
-          "kaart_id": "kbv2-5e9681a6",
-          "begrip": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
-          "lade": "spreken",
+          "kaart_id": "kbv2-59f5f94e",
+          "begrip": "Woordspeling",
+          "lade": "weten",
           "overlap": 3,
           "shared_tags": [
             "communicatie",
             "humor",
             "woordspeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a03c1d29",
+          "begrip": "Komedie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "humor",
+            "komedie",
+            "lachen"
           ]
         },
         {
@@ -67250,36 +67842,6 @@
           "shared_tags": [
             "humor",
             "lachen"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-c760a1f1",
-          "begrip": "leuke",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "communicatie",
-            "humor"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-5414e132",
-          "begrip": "grijns",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "communicatie",
-            "humor"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-3cee5024",
-          "begrip": "Is het al middag",
-          "lade": "spreken",
-          "overlap": 2,
-          "shared_tags": [
-            "communicatie",
-            "humor"
           ]
         }
       ],
@@ -67338,20 +67900,55 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T13:55:57.170693+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T13:55:57.181858+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:41:31.143138+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:41:31.154715+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-05T22:39:07.448348+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:41:30.940197+00:00"
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/faa20152c6f2",
+        "voice_transcript": "Bad joke",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T13:55:56.987484+00:00"
     },
     {
       "id": "kbv2-4afdfab2",
@@ -71012,19 +71609,6 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-990fe083",
-          "begrip": "fijn, dank je wel",
-          "lade": "voelen",
-          "overlap": 9,
-          "shared_tags": [
-            "beleefdheid",
-            "blij",
-            "communicatie",
-            "dankbaarheid",
-            "emotie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-skel-289e4cfe",
           "begrip": "bedankt",
           "lade": "spreken",
@@ -71064,23 +71648,62 @@
           ]
         },
         {
-          "kaart_id": "kbv2-skel-2b90d9cd",
-          "begrip": "compliment",
-          "lade": "spreken",
-          "overlap": 8,
+          "kaart_id": "kbv2-f82e642e",
+          "begrip": "geweldig is dit",
+          "lade": "voelen",
+          "overlap": 6,
           "shared_tags": [
             "blij",
             "communicatie",
+            "emotie",
+            "positief",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e7bd2cf1",
+          "begrip": "dankbaarheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
             "dankbaarheid",
             "emotie",
-            "erkenning"
+            "erkenning",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff5f4984",
+          "begrip": "geweldig",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1ef01b9b",
+          "begrip": "vriendelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief"
           ]
         },
         {
           "kaart_id": "kbv2-359f7662",
           "begrip": "waardeer",
           "lade": "voelen",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "blij",
             "communicatie",
@@ -71093,7 +71716,7 @@
           "kaart_id": "kbv2-87de16d8",
           "begrip": "waardeert",
           "lade": "voelen",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "blij",
             "dankbaarheid",
@@ -71103,22 +71726,9 @@
           ]
         },
         {
-          "kaart_id": "kbv2-d316c9a7",
-          "begrip": "Ik wilde je alleen begroeten.",
+          "kaart_id": "kbv2-355d3b15",
+          "begrip": "goedemorgen",
           "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "blij",
-            "communicatie",
-            "emotie",
-            "gesprek",
-            "positief"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0cfd731e",
-          "begrip": "excuus ik was even weg",
-          "lade": "voelen",
           "overlap": 6,
           "shared_tags": [
             "beleefdheid",
@@ -71126,19 +71736,6 @@
             "communicatie",
             "emotie",
             "gesprek"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-f82e642e",
-          "begrip": "geweldig is dit",
-          "lade": "voelen",
-          "overlap": 6,
-          "shared_tags": [
-            "blij",
-            "communicatie",
-            "emotie",
-            "positief",
-            "sociaal"
           ]
         }
       ],
@@ -71151,7 +71748,7 @@
         "vertrouwen": 0.9,
         "snap_context": "ik zei dank omdat ik je bedankte voor je reactie",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-29T19:56:22.304331+00:00",
+        "laatst_bewerkt_op": "2026-10-20T14:00:48.217077+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -71192,6 +71789,22 @@
               "n_found": 10,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:00:48.406661+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:00:48.419482+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 9
+            }
           }
         ]
       },
@@ -71203,7 +71816,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "blij",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:00:48.217055+00:00"
     },
     {
       "id": "kbv2-969ab090",
@@ -71478,32 +72095,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-35bf6a72",
-          "begrip": "Hoe laat is het?",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "emotie",
-            "gesprek",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9f310b89",
-          "begrip": "zeg",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "emotie",
-            "gesprek",
-            "neutraal"
-          ]
-        },
-        {
           "kaart_id": "kbv2-520cbff2",
           "begrip": "zin",
           "lade": "spreken",
@@ -71580,6 +72171,32 @@
             "gesprek",
             "neutraal"
           ]
+        },
+        {
+          "kaart_id": "kbv2-33902a4a",
+          "begrip": "goedeavond",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e315ddd0",
+          "begrip": "zegt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "taal"
+          ]
         }
       ],
       "footnote": {
@@ -71600,7 +72217,7 @@
         "extract_note": "Spark noemde 'graag' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
         "needs_review": true,
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-20T13:00:24.148456+00:00",
+        "laatst_bewerkt_op": "2026-10-20T14:45:14.300737+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -71641,16 +72258,31 @@
               "n_found": 10,
               "top_overlap": 6
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:45:14.493051+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:45:14.506211+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
           }
         ]
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/6d4b4dc9c028",
+        "voice_transcript": "graag",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
       ]
     },
@@ -74811,8 +75443,7 @@
         "taal",
         "emotie",
         "blij",
-        "positief",
-        "neutraal"
+        "positief"
       ],
       "topic": "",
       "verbanden": [
@@ -74843,19 +75474,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-990fe083",
-          "begrip": "fijn, dank je wel",
-          "lade": "voelen",
-          "overlap": 8,
-          "shared_tags": [
-            "beleefdheid",
-            "blij",
-            "communicatie",
-            "dankbaarheid",
-            "emotie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-1e02ff1c",
           "begrip": "dankje",
           "lade": "voelen",
@@ -74866,19 +75484,6 @@
             "communicatie",
             "dank",
             "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0cfd731e",
-          "begrip": "excuus ik was even weg",
-          "lade": "voelen",
-          "overlap": 6,
-          "shared_tags": [
-            "beleefdheid",
-            "blij",
-            "communicatie",
-            "emotie",
-            "gesprek"
           ]
         },
         {
@@ -74895,49 +75500,75 @@
           ]
         },
         {
-          "kaart_id": "kbv2-359f7662",
-          "begrip": "waardeer",
-          "lade": "voelen",
+          "kaart_id": "kbv2-355d3b15",
+          "begrip": "goedemorgen",
+          "lade": "spreken",
           "overlap": 6,
           "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69daa7b6",
+          "begrip": "Graag gedaan",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beleefdheid",
             "blij",
             "communicatie",
             "dankbaarheid",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f82e642e",
+          "begrip": "geweldig is dit",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1ef01b9b",
+          "begrip": "vriendelijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
             "emotie",
             "positief"
           ]
         },
         {
-          "kaart_id": "kbv2-33902a4a",
-          "begrip": "goedeavond",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "blij",
-            "communicatie",
-            "emotie",
-            "gesprek",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-9f310b89",
-          "begrip": "zeg",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "gesprek",
-            "neutraal",
-            "reactie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-2b90d9cd",
-          "begrip": "compliment",
-          "lade": "spreken",
-          "overlap": 6,
+          "kaart_id": "kbv2-359f7662",
+          "begrip": "waardeer",
+          "lade": "voelen",
+          "overlap": 5,
           "shared_tags": [
             "blij",
             "communicatie",
@@ -75002,10 +75633,26 @@
               "n_found": 10,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:00:20.014162+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:00:20.026606+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 9
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-22T11:43:05.071152+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:00:19.825445+00:00"
       },
       "media": {
         "voice_url": null,
@@ -75015,6 +75662,13 @@
       "needs": [
         "voice",
         "image"
+      ],
+      "emotie": "blij",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:00:19.825423+00:00",
+      "emotie_tags_verwijderd": [
+        "neutraal"
       ]
     },
     {
@@ -76470,133 +77124,133 @@
       ],
       "verbanden": [
         {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
-          "lade": "spreken",
-          "overlap": 10,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
-          "lade": "spreken",
-          "overlap": 9,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-be9fa48b",
-          "begrip": "beschrijving",
-          "lade": "spreken",
-          "overlap": 9,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-2acb2921",
-          "begrip": "houdt",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-520cbff2",
-          "begrip": "zin",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "context",
-            "emotie",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-e64c654b",
-          "begrip": "benoemen",
-          "lade": "spreken",
-          "overlap": 8,
-          "shared_tags": [
-            "begrip",
-            "betekenis",
-            "communicatie",
-            "emotie",
-            "interpretatie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-595cef85",
           "begrip": "woord",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "begrip",
             "betekenis",
-            "communicatie",
-            "context",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-165ff5e9",
-          "begrip": "nuance",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
             "context",
             "emotie",
-            "interpretatie"
+            "taal"
           ]
         },
         {
           "kaart_id": "kbv2-e0aed0e1",
           "begrip": "Wat voor taal spreek je?",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "begrip",
-            "communicatie",
             "context",
             "emotie",
-            "neutraal"
+            "neutraal",
+            "semantiek"
           ]
         },
         {
-          "kaart_id": "kbv2-fc35327c",
-          "begrip": "bedoeling",
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "betekenis",
-            "communicatie",
             "context",
             "emotie",
-            "interpretatie"
+            "neutraal",
+            "semantiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "semantiek",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e64c654b",
+          "begrip": "benoemen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "emotie",
+            "neutraal",
+            "symbool"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f53a6962",
+          "begrip": "voorstelt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-66b5cc1b",
+          "begrip": "Definities",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "context",
+            "definitie",
+            "semantiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "semantiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-112cdde2",
+          "begrip": "Definitie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "definitie",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "context",
+            "taal",
+            "uitleg"
           ]
         }
       ],
@@ -76618,7 +77272,7 @@
         "extract_note": "Spark noemde 'betekenen' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
         "needs_review": true,
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-22T15:51:45.424770+00:00",
+        "laatst_bewerkt_op": "2026-10-20T14:17:36.892954+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -76659,6 +77313,22 @@
               "n_found": 10,
               "top_overlap": 10
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:17:37.086842+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:17:37.100832+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
           }
         ]
       },
@@ -76670,7 +77340,11 @@
       "needs": [
         "voice",
         "image"
-      ]
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:17:36.892933+00:00"
     },
     {
       "id": "kbv2-39c0803f",
@@ -77096,7 +77770,7 @@
         "extract_note": "Spark noemde 'alsof' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
         "needs_review": true,
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-10-20T09:36:03.542135+00:00",
+        "laatst_bewerkt_op": "2026-10-20T14:35:28.104187+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -77153,16 +77827,31 @@
               "n_found": 10,
               "top_overlap": 6
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:35:28.291991+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:35:28.306159+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
           }
         ]
       },
       "media": {
-        "voice_url": null,
-        "voice_transcript": null,
+        "voice_url": "/api/system-archive/file/abcfe107cf53",
+        "voice_transcript": "alsof",
         "image_urls": []
       },
       "needs": [
-        "voice",
         "image"
       ],
       "emotie": "neutraal",
@@ -77243,17 +77932,6 @@
           ]
         },
         {
-          "kaart_id": "kbv2-d33d9371",
-          "begrip": "onbegrip",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "context",
-            "uitleg"
-          ]
-        },
-        {
           "kaart_id": "kbv2-a02d2848",
           "begrip": "Gemak",
           "lade": "voelen",
@@ -77276,24 +77954,13 @@
           ]
         },
         {
-          "kaart_id": "kbv2-0211e5df",
-          "begrip": "wat heb jij te bieden spark?",
+          "kaart_id": "kbv2-5f451543",
+          "begrip": "Duidelijk",
           "lade": "spreken",
           "overlap": 3,
           "shared_tags": [
             "communicatie",
-            "context",
-            "uitleg"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-4aaf862c",
-          "begrip": "Wat is de Bijbel van Spark",
-          "lade": "spreken",
-          "overlap": 3,
-          "shared_tags": [
-            "communicatie",
-            "context",
+            "helderheid",
             "uitleg"
           ]
         },
@@ -77318,6 +77985,28 @@
             "context",
             "spreektaal"
           ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "uitleg"
+          ]
         }
       ],
       "footnote": {
@@ -77334,11 +78023,34 @@
               "n_found": 10,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:48:09.827562+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:48:09.839606+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:48:09.635717+00:00"
       },
-      "media": [],
-      "needs": [],
+      "media": {
+        "voice_url": "/api/system-archive/file/042f531e65b9",
+        "voice_transcript": "dagelijks taalgebruik"
+      },
+      "needs": [
+        "image"
+      ],
       "emotie": "neutraal"
     },
     {
@@ -82504,42 +83216,29 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-fc35327c",
-          "begrip": "bedoeling",
-          "lade": "spreken",
+          "kaart_id": "kbv2-fc2b16d4",
+          "begrip": "Intentieherkenning",
+          "lade": "weten",
           "overlap": 7,
           "shared_tags": [
             "bedoeling",
-            "betekenis",
             "communicatie",
             "context",
-            "doel"
+            "doel",
+            "intentie"
           ]
         },
         {
-          "kaart_id": "kbv2-520cbff2",
-          "begrip": "zin",
+          "kaart_id": "kbv2-ad1f60c0",
+          "begrip": "Bedoelt",
           "lade": "spreken",
           "overlap": 6,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "context",
-            "intentie",
-            "interpretatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ea50eab8",
-          "begrip": "De betekenis van vraag is onjuist in deze zin",
-          "lade": "spreken",
-          "overlap": 6,
-          "shared_tags": [
-            "betekenis",
-            "communicatie",
-            "context",
-            "intentie",
-            "interpretatie"
+            "doel",
+            "intentie"
           ]
         },
         {
@@ -82582,6 +83281,19 @@
           ]
         },
         {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bedoeling",
+            "betekenis",
+            "context",
+            "doel",
+            "intentie"
+          ]
+        },
+        {
           "kaart_id": "kbv2-96868b29",
           "begrip": "tekst",
           "lade": "spreken",
@@ -82595,35 +83307,35 @@
           ]
         },
         {
-          "kaart_id": "kbv2-99a85340",
-          "begrip": "betekend",
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
           "lade": "spreken",
           "overlap": 5,
           "shared_tags": [
             "betekenis",
             "communicatie",
             "context",
-            "interpretatie",
+            "intentie",
             "taal"
           ]
         },
         {
-          "kaart_id": "kbv2-35bf6a72",
-          "begrip": "Hoe laat is het?",
+          "kaart_id": "kbv2-82d96204",
+          "begrip": "Ironie",
           "lade": "spreken",
           "overlap": 5,
           "shared_tags": [
+            "betekenis",
             "communicatie",
             "context",
             "intentie",
-            "interpretatie",
             "taal"
           ]
         },
         {
-          "kaart_id": "kbv2-skel-be9fa48b",
-          "begrip": "beschrijving",
-          "lade": "spreken",
+          "kaart_id": "kbv2-0d0af0f5",
+          "begrip": "Niet letterlijk",
+          "lade": "weten",
           "overlap": 5,
           "shared_tags": [
             "betekenis",
@@ -82648,12 +83360,36 @@
               "n_found": 10,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:00:59.760453+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:00:59.772379+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:00:59.573381+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:00:59.573358+00:00"
     },
     {
       "id": "kbv2-9f3abb38",
@@ -84604,18 +85340,174 @@
         "spreken"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bc672f4f",
+          "begrip": "Vraagwoord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86613fbc",
+          "begrip": "Definieert",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beschrijven",
+            "betekenis",
+            "communicatie",
+            "definitie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8e9a514c",
+          "begrip": "Verbale",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "spreken",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63373119",
+          "begrip": "Dit",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-112cdde2",
+          "begrip": "Definitie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "definitie",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56f183f0",
+          "begrip": "ken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "informatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "informatie",
+            "taal",
+            "uitleg"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-07-31T07:47:34.355015+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:14:10.949482+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:14:10.962116+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:14:10.763505+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:14:10.763478+00:00"
     },
     {
       "id": "kbv2-d57d67f8",
@@ -85268,20 +86160,176 @@
         "vraag"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d809154",
+          "begrip": "Dat vroeg ik niet",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "interpretatie",
+            "misverstand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c4424f65",
+          "begrip": "Bedoeld",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "doel",
+            "intentie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05d3d1d9",
+          "begrip": "Praat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "boodschap",
+            "context",
+            "spreken",
+            "toon",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4fa7bc63",
+          "begrip": "Contextzin",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "interpretatie",
+            "situatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc2b16d4",
+          "begrip": "Intentieherkenning",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "doel",
+            "intentie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bc672f4f",
+          "begrip": "Vraagwoord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "uitleg",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "uitleg",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-662e8bca",
+          "begrip": "misverstand",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "interpretatie",
+            "misverstand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37feae50",
+          "begrip": "formuleren",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "boodschap",
+            "communicatie",
+            "context",
+            "spreken",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-beddcba2",
+          "begrip": "Beschrijft",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "spreken",
+            "uitleg"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-07-31T08:45:09.051638+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": [],
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:01:07.429787+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:01:07.442321+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ],
         "llm_5w_filled_at": "2026-08-21T17:18:26.789812+00:00",
-        "llm_5w_provider": "primary"
+        "llm_5w_provider": "primary",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:01:07.241033+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:01:07.241006+00:00"
     },
     {
       "id": "kbv2-05d3d1d9",
@@ -85973,16 +87021,34 @@
               "n_found": 10,
               "top_overlap": 6
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:34:15.459355+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:34:15.472667+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
           }
         ],
         "llm_5w_filled_at": "2026-08-21T17:19:33.730969+00:00",
         "llm_5w_provider": "primary",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-10-20T09:26:49.341068+00:00"
+        "laatst_bewerkt_op": "2026-10-20T14:34:15.249953+00:00"
       },
-      "media": [],
+      "media": {
+        "voice_url": "/api/system-archive/file/f6dcc5c942fa",
+        "voice_transcript": "afgesloten"
+      },
       "needs": [
-        "voice",
         "image"
       ],
       "emotie": "neutraal",
@@ -88134,133 +89200,120 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-d3904470",
-          "begrip": "bevestigen",
-          "lade": "doen",
-          "overlap": 16,
-          "shared_tags": [
-            "ai",
-            "akkoord",
-            "bevestigen",
-            "bevestiging",
-            "communicatie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-f89b2dab",
-          "begrip": "ik denk wel dat jij eerst toestemming moet vragen om wat in te vullen. En dan vervolgens bevestig voor het opslaan. Anders wordt de vervolg reactie verkeerd verwerkt.",
+          "kaart_id": "kbv2-f1d5db2f",
+          "begrip": "Hé Spark, stel je eens voor?",
           "lade": "spreken",
-          "overlap": 13,
+          "overlap": 4,
           "shared_tags": [
             "ai",
-            "bevestiging",
-            "communicatie",
-            "controle",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-39918bb0",
-          "begrip": "toestemming",
-          "lade": "doen",
-          "overlap": 12,
-          "shared_tags": [
-            "ai",
-            "akkoord",
-            "communicatie",
-            "controle",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-ac760346",
-          "begrip": "Als het goed is ben jij Spark",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "ai",
-            "bevestiging",
-            "communicatie",
-            "controle",
-            "interactie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-4f1b2721",
-          "begrip": "Klopt en jij bent Spark",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "ai",
-            "bevestiging",
-            "communicatie",
-            "controle",
-            "interactie"
+            "context",
+            "emotie",
+            "gesprek"
           ]
         },
         {
           "kaart_id": "kbv2-e0aed0e1",
           "begrip": "Wat voor taal spreek je?",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 4,
           "shared_tags": [
             "ai",
-            "communicatie",
+            "context",
             "emotie",
-            "interactie",
-            "neutraal"
+            "gesprek"
           ]
         },
         {
-          "kaart_id": "kbv2-b7582786",
-          "begrip": "Wat maakt jou anders dan andere AI?",
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 4,
           "shared_tags": [
-            "ai",
-            "communicatie",
+            "context",
             "emotie",
-            "interactie",
-            "neutraal"
+            "gesprek",
+            "spreken"
           ]
         },
         {
-          "kaart_id": "kbv2-3369d24f",
-          "begrip": "vullen",
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
           "lade": "spreken",
-          "overlap": 7,
+          "overlap": 4,
           "shared_tags": [
-            "ai",
-            "communicatie",
+            "context",
             "emotie",
-            "neutraal",
-            "semantiek"
+            "gesprek",
+            "spreken"
           ]
         },
         {
-          "kaart_id": "kbv2-3208c15b",
-          "begrip": "verwerkt",
-          "lade": "weten",
-          "overlap": 7,
+          "kaart_id": "kbv2-skel-f02f431e",
+          "begrip": "spreektaal",
+          "lade": "spreken",
+          "overlap": 4,
           "shared_tags": [
-            "ai",
-            "communicatie",
+            "context",
             "emotie",
-            "neutraal",
-            "semantiek"
+            "gesprek",
+            "spreken"
           ]
         },
         {
-          "kaart_id": "kbv2-0f8a996a",
-          "begrip": "user",
-          "lade": "weten",
-          "overlap": 7,
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 4,
           "shared_tags": [
-            "ai",
-            "communicatie",
+            "bericht",
+            "context",
             "emotie",
-            "interactie",
-            "neutraal"
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-355d3b15",
+          "begrip": "goedemorgen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gesprek",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "akkoord",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-462f3439",
+          "begrip": "bewust",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "keuze"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7863c5af",
+          "begrip": "best",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "keuze"
           ]
         }
       ],
@@ -88295,11 +89348,29 @@
               "n_found": 10,
               "top_overlap": 16
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:18:55.578487+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:18:55.591141+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
           }
         ],
         "updated_at": "2026-08-03T15:52:25.492046+00:00",
         "llm_5w_filled_at": "2026-08-21T17:21:11.346928+00:00",
-        "llm_5w_provider": "primary"
+        "llm_5w_provider": "primary",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:18:55.390517+00:00"
       },
       "media": {
         "voice_url": null,
@@ -88307,11 +89378,13 @@
         "image_urls": []
       },
       "needs": [
-        "ws5",
         "voice",
         "image"
       ],
-      "emotie": "neutraal"
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:18:55.390497+00:00"
     },
     {
       "id": "kbv2-0f8a996a",
@@ -88834,19 +89907,175 @@
         "voorbeeld"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1364c6a2",
+          "begrip": "voorbeeld",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "illustratie",
+            "kennis",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "kennis",
+            "leren",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "kennis",
+            "leren",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "kennis",
+            "leren",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f25aada8",
+          "begrip": "vroeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "kennis",
+            "leren",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5113a6b4",
+          "begrip": "vertelde",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "kennis",
+            "spreken",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2497f12f",
+          "begrip": "analogie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "kennis",
+            "leren",
+            "uitleg",
+            "voorbeeld"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37feae50",
+          "begrip": "formuleren",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "spreken",
+            "taal",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d8aa835",
+          "begrip": "Introductie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "leren",
+            "spreken",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fae7e6da",
+          "begrip": "Presenteren",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "kennis",
+            "spreken",
+            "toelichten",
+            "uitleg"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-07-26T11:08:37.397013+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": [],
-        "updated_at": "2026-08-04T14:13:27.744985+00:00"
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:24:08.081614+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:24:08.094598+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "updated_at": "2026-08-04T14:13:27.744985+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:24:07.891001+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:24:07.890975+00:00"
     },
     {
       "id": "kbv2-ce19e818",
@@ -90428,18 +91657,173 @@
         "verhaal"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-083901bb",
+          "begrip": "Figuurlijk",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "beeldspraak",
+            "betekenis",
+            "communicatie",
+            "figuurlijk",
+            "metafoor"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d6d792a1",
+          "begrip": "Spreekwoordelijke",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beeldspraak",
+            "betekenis",
+            "communicatie",
+            "figuurlijk",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2b81f1ff",
+          "begrip": "Woordje",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "spreken",
+            "taal",
+            "uitdrukking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ddd33f25",
+          "begrip": "boekdelen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "spreken",
+            "taal",
+            "uitdrukking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e191dbfe",
+          "begrip": "Overdrijven",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beeldspraak",
+            "communicatie",
+            "figuurlijk",
+            "spreken",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cb1d01fe",
+          "begrip": "Overdrijving",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beeldspraak",
+            "communicatie",
+            "spreken",
+            "taal",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-febea466",
+          "begrip": "Poëzie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beeldspraak",
+            "literatuur",
+            "metafoor",
+            "poëzie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b59f4bb",
+          "begrip": "grammatica",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8e9a514c",
+          "begrip": "Verbale",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T06:28:44.793527+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:02:22.746965+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:02:22.759110+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:02:22.563252+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:02:22.563223+00:00"
     },
     {
       "id": "kbv2-2094a26d",
@@ -90478,18 +91862,156 @@
         "zwaaien"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9a978e3f",
+          "begrip": "Etiquette",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "begroeten",
+            "communicatie",
+            "formeel",
+            "informeel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9eb7705b",
+          "begrip": "Tot ziens",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "groet",
+            "ontmoeting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e7d5301",
+          "begrip": "begroeten",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "groet",
+            "hallo",
+            "knikje"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-355d3b15",
+          "begrip": "goedemorgen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "goedemorgen",
+            "groet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-62c0a347",
+          "begrip": "Kennismaken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "begroeten",
+            "communicatie",
+            "contact"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-edb3137e",
+          "begrip": "Casual",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "formeel",
+            "informeel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cf1eb629",
+          "begrip": "Aanraking",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "handdruk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fce281f1",
+          "begrip": "Aanspreken",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aanspreken",
+            "communicatie",
+            "contact"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8cbfe211",
+          "begrip": "Contact maken",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aanspreken",
+            "communicatie",
+            "contact"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bbc0054",
+          "begrip": "Verbinding",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "communicatie",
+            "contact"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T06:29:23.618402+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:04:05.124299+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:04:05.135960+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:04:04.940573+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:04:04.940545+00:00"
     },
     {
       "id": "kbv2-09c32507",
@@ -90528,18 +92050,167 @@
         "uitleg"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7fa83436",
+          "begrip": "samengevat",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "kern",
+            "samenvatten",
+            "tekst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39c0803f",
+          "begrip": "korte",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beknopt",
+            "bondig",
+            "kort",
+            "tekst",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f4628b9d",
+          "begrip": "Samenvatting",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "kern",
+            "samenvatten",
+            "tekst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c45dbace",
+          "begrip": "duidelijker",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "duidelijk",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-87e009d4",
+          "begrip": "Helder",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "duidelijk",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e80e80fa",
+          "begrip": "kort",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beknopt",
+            "compact",
+            "informatie",
+            "kort"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9fa42aa9",
+          "begrip": "concreet",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "duidelijk",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-690dec11",
+          "begrip": "Essentie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "hoofdzaak",
+            "informatie",
+            "kern"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ced503bc",
+          "begrip": "Begrijpelijkheid",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "tekst",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-630aee2f",
+          "begrip": "Samenvatten",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "informatie",
+            "kern",
+            "samenvatten",
+            "tekst"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T06:31:49.569093+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:06:01.558382+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:06:01.570668+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:06:01.375659+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:06:01.375631+00:00"
     },
     {
       "id": "kbv2-bfeab2b7",
@@ -90578,18 +92249,162 @@
         "weergeven"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4a459e10",
+          "begrip": "beschreven",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beschrijven",
+            "gebeurtenis",
+            "informatie",
+            "kenmerken",
+            "situatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "informatie",
+            "observatie",
+            "taal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-beddcba2",
+          "begrip": "Beschrijft",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijven",
+            "informatie",
+            "observatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fd4aa44b",
+          "begrip": "Rapportage",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "informatie",
+            "observatie",
+            "verslag",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7696bb74",
+          "begrip": "Verklaren",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijven",
+            "gebeurtenis",
+            "gedrag",
+            "situatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86613fbc",
+          "begrip": "Definieert",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beschrijven",
+            "kenmerken",
+            "omschrijven",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10a73247",
+          "begrip": "staat",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "gedrag",
+            "informatie",
+            "situatie",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "observatie",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-12809d56",
+          "begrip": "waarneming",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "observatie",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-462c5ccc",
+          "begrip": "meemaakt",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "gebeurtenis",
+            "situatie",
+            "waarneming"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T06:34:49.698662+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:14:12.744634+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:14:12.756854+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:14:12.561616+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:14:12.561589+00:00"
     },
     {
       "id": "kbv2-cdf1d77e",
@@ -90628,18 +92443,163 @@
         "zinsdeel"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8fd4b8b7",
+          "begrip": "Zinsbouw",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "grammatica",
+            "schrijven",
+            "spreken",
+            "taal",
+            "zinsbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-760883ab",
+          "begrip": "Leesteken",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "grammatica",
+            "schrijven",
+            "taal",
+            "zinsbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b59f4bb",
+          "begrip": "grammatica",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "grammatica",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4c1bbaa2",
+          "begrip": "vervoeging",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "grammatica",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-afbbb094",
+          "begrip": "talen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "grammatica",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30cb2e5f",
+          "begrip": "Zodat",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bijzin",
+            "grammatica",
+            "taal",
+            "zinsbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a9018b72",
+          "begrip": "Waarbij",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bijzin",
+            "grammatica",
+            "taal",
+            "zinsbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cce956d0",
+          "begrip": "Engels",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "grammatica",
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8e9a514c",
+          "begrip": "Verbale",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37feae50",
+          "begrip": "formuleren",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "schrijven",
+            "spreken",
+            "taal"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T07:35:54.321016+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:17:53.685146+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:17:53.697044+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:17:53.501684+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:17:53.501657+00:00"
     },
     {
       "id": "kbv2-37a7b5ff",
@@ -90678,18 +92638,157 @@
         "voorstel"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c1c9564c",
+          "begrip": "Onderbouwing",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "argument",
+            "beslissing",
+            "reden",
+            "standpunt"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3236e535",
+          "begrip": "Overtuigen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "argument",
+            "beslissing",
+            "standpunt",
+            "voorstel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-df10060f",
+          "begrip": "Verzet",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bezwaar",
+            "situatie",
+            "tegenstand",
+            "verzet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b1bac4d5",
+          "begrip": "Argumentatie",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "argument",
+            "reden",
+            "standpunt"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-44798605",
+          "begrip": "Aangezien",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "argument",
+            "handeling",
+            "reden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-486dce3c",
+          "begrip": "Onhoudbaar",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "argument",
+            "situatie",
+            "standpunt"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ffa586ae",
+          "begrip": "Tegenin",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beslissing",
+            "bezwaar",
+            "verzet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6d4ef7df",
+          "begrip": "Oneens",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bezwaar",
+            "oneens",
+            "standpunt"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-959341b6",
+          "begrip": "Onherroepelijk",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beslissing",
+            "bezwaar",
+            "juridisch"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34ecf5dd",
+          "begrip": "Herroepen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beslissing",
+            "bestuurlijk",
+            "juridisch"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T16:55:06.536820+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:22:12.635554+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:22:12.647505+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:22:12.448584+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:22:12.448557+00:00"
     },
     {
       "id": "kbv2-0612ae2c",
@@ -90728,18 +92827,172 @@
         "uiterlijk"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-936cd9ae",
+          "begrip": "Roepnaam",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "aanspreeknaam",
+            "aanspreken",
+            "bijnaam",
+            "herkenning",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-47da5ba3",
+          "begrip": "Wouter",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "herkenning",
+            "identiteit",
+            "naam",
+            "naamgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25b5908d",
+          "begrip": "Jan",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "herkenning",
+            "identiteit",
+            "naam",
+            "naamgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7ecdfe44",
+          "begrip": "Persoonsnaam",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "identiteit",
+            "naam",
+            "naamgeving",
+            "persoonsnaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8282f248",
+          "begrip": "augustes",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "herkenning",
+            "identiteit",
+            "naam",
+            "persoonsnaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4604f503",
+          "begrip": "David",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "herkenning",
+            "identiteit",
+            "naam",
+            "naamgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c419de44",
+          "begrip": "Mila",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "herkenning",
+            "identiteit",
+            "naam",
+            "naamgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-580ffa9c",
+          "begrip": "Gert",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanspreken",
+            "identiteit",
+            "naam",
+            "naamgeving",
+            "persoonsnaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8f42d42f",
+          "begrip": "Persoonlijkheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "eigenschap",
+            "gedrag",
+            "identiteit",
+            "karakter"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f346d824",
+          "begrip": "Persoonlijke eigenschap",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "eigenschap",
+            "gedrag",
+            "identiteit",
+            "karakter"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "text_importer",
         "ingedeeld_door": "user-001",
         "ingedeeld_op": "2026-08-25T16:57:31.316544+00:00",
         "vertrouwen": 1.0,
         "belangrijkheid": 0.5,
-        "hooks_fired": []
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T14:23:56.597911+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T14:23:56.609947+00:00",
+            "result": {
+              "n_found": 10,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T14:23:56.410405+00:00"
       },
       "media": [],
-      "needs": [],
-      "emotie": "neutraal"
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T14:23:56.410377+00:00"
     },
     {
       "id": "kbv2-107001a2",

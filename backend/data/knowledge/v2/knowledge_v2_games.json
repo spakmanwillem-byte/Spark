@@ -205,10 +205,26 @@
               "n_found": 3,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-10-20T13:58:21.750622+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-10-20T13:58:21.761880+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 3
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-10-19T09:52:55.881002+00:00"
+        "laatst_bewerkt_op": "2026-10-20T13:58:21.627847+00:00"
       },
       "media": {
         "voice_url": null,
@@ -220,7 +236,10 @@
         "image"
       ],
       "game": "spark world",
-      "emotie": "neutraal"
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T13:58:21.627825+00:00"
     },
     {
       "id": "kbv2-5cd66b24",

@@ -2,210 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "Goede morgen Spark. of is het nacht?",
-      "ts": "2026-10-20T03:23:15.373251+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Goede morgen, Willem — technisch gezien is het nog nacht, 05:23 uur. Ik wens je een rustige en productieve start van de dag, hoe jij het ook wilt noemen. Laat maar weten als je iets wilt noteren in je profiel.",
-      "ts": "2026-10-20T03:23:15.373251+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "hoe bedoel jij iets wil noteren in mijn profiel",
-      "ts": "2026-10-20T03:24:03.512537+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ik kan een stukje informatie in jouw **profiel** opslaan. Een profiel is een gestructureerde verzameling van gegevens — bijvoorbeeld je voorkeuren, notities of andere details die je later weer wilt terugvinden. \n\nWanneer je zegt “ik wil iets noteren”, betekent dat dat je een korte tekst of een feit wilt laten vastleggen zodat ik het bij een volgende vraag kan raadplegen. Ik maak dan een **notitie‑veld** aan binnen jouw profiel en sla de opgegeven tekst daar op. \n\nZo werkt het in de praktijk:\n\n1. **Jij geeft de tekst** die je wilt bewaren, bijvoorbeeld “Controleer de emotie‑pipeline morgen om 10:00”.\n2. **Ik bevestig** dat ik de notitie kan toevoegen en vraag eventueel om verduidelijking of een label.\n3. **De notitie wordt opgeslagen** in jouw profiel‑sectie “Notities”. Je kunt er later naar vragen: “Wat staat er in mijn notities?” of “Toon mijn laatste notitie”.\n\nWil je nu een specifieke tekst laten vastleggen, of wil je eerst meer weten over hoe de notities in je profiel worden beheerd? Laat het me weten, dan zetten we het meteen in jouw profiel.",
-      "ts": "2026-10-20T03:24:03.512537+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "hoeveel zakelijke contacten heb ik ?",
-      "ts": "2026-10-20T03:24:44.754719+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ik zie geen gegevens over het aantal zakelijke contacten in deze sessie. Open de **Contacten**‑tab om het overzicht te bekijken, of geef me een specifieke vraag (bijv. “tellen_gebruikers” of “toon alle contact‑namen”) zodat ik de informatie kan ophalen. Laat me weten hoe je verder wilt gaan.",
-      "ts": "2026-10-20T03:24:44.754719+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "je had mijn contacten kunnen raadplegen :D",
-      "ts": "2026-10-20T03:25:35.764617+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ik zie de zakelijke contacten niet in de huidige sessie. Open de **Contacten**‑tab om het overzicht te bekijken, of laat me weten als ik een specifieke telling moet uitvoeren (bijvoorbeeld via `tellen_gebruikers`). Laat me weten hoe je verder wilt gaan.",
-      "ts": "2026-10-20T03:25:35.764617+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "Hallo",
-      "ts": "2026-10-20T04:51:46.630649+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Hallo Willem! Hoe kan ik je vandaag helpen?",
-      "ts": "2026-10-20T04:51:46.630649+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "ttss aan",
-      "ts": "2026-10-20T04:51:54.271094+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
-      "ts": "2026-10-20T04:51:54.271094+00:00",
-      "model": "action_intents_service"
-    },
-    {
-      "role": "user",
-      "text": "wat kan ik aannemen",
-      "ts": "2026-10-20T04:52:15.882413+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "“Aannemen” betekent iets accepteren, ontvangen of ervan uitgaan dat het waar is. \nWat jij kunt aannemen, hangt af van de situatie:\n\n* **Een aanbod** – je kunt een voorstel van een klant, partner of leverancier aannemen. \n* **Een medewerker** – als zzp‑er kun je een tijdelijke kracht of samenwerking aannemen. \n* **Een pakket of bericht** – wanneer je een levering, factuur of e‑mail krijgt, neem je die in ontvangst. \n* **Een veronderstelling** – je kunt een hypothese of idee aannemen als uitgangspunt voor een project (bijv. “de gebruiker wil een snelle TTSS‑interface”). \n* **Een rol of verantwoordelijkheid** – je kunt een taak of functie aannemen binnen een samenwerking. \n\nKortom, je kunt elk aanbod, elke levering, elk bericht of elke plausibele veronderstelling accepteren of als basis nemen voor handelen. Kies wat past bij je huidige werk als zzp‑er en je technische projecten.",
-      "ts": "2026-10-20T04:52:15.882413+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "kan ji dat nog een keer zeggen",
-      "ts": "2026-10-20T04:58:00.888976+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Natuurlijk, ik herhaal het graag.\n\n**Aannemen** betekent iets accepteren, ontvangen of ervan uitgaan dat het waar is. Wat je kunt aannemen, hangt af van de situatie:\n\n- **Een aanbod** – een voorstel van een klant, partner of leverancier accepteren. \n- **Een medewerker** – een tijdelijke kracht of samenwerking aannemen. \n- **Een pakket of bericht** – een levering, factuur of e‑mail in ontvangst nemen. \n- **Een veronderstelling** – een hypothese of idee als uitgangspunt nemen voor een project (bijv. “de gebruiker wil een snelle TTSS‑interface”). \n- **Een rol of verantwoordelijkheid** – een taak of functie aannemen binnen een samenwerking. \n\nKies wat past bij jouw huidige werk als zzp‑er en de technische projecten waar je mee bezig bent.",
-      "ts": "2026-10-20T04:58:00.888976+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "ttss aan",
-      "ts": "2026-10-20T04:58:12.807890+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
-      "ts": "2026-10-20T04:58:12.807890+00:00",
-      "model": "action_intents_service"
-    },
-    {
-      "role": "user",
-      "text": "wat is water",
-      "ts": "2026-10-20T04:58:41.107117+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Water** is een vloeistof die essentieel is voor al het leven op aarde. \n\n- **Chemische formule:** H₂O – twee waterstofatomen gebonden aan één zuurstofatoom. \n- **Waar:** Overal op de planeet: oceanen, rivieren, meren, regen, grondwater en in de atmosfeer. \n- **Waarom nodig:** Het ondersteunt biologische processen, hydratatie en het functioneren van ecosystemen. Zonder water kunnen mensen, dieren en planten niet overleven. \n- **Gebruik:** Drinken, koken, schoonmaken, landbouw en industriële processen. \n\nKortom, water (H₂O) is de basisstof die alle levende organismen nodig hebben en die ons dagelijks omringt.",
-      "ts": "2026-10-20T04:58:41.107117+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "wat kan je meer vertellen",
-      "ts": "2026-10-20T05:03:05.556567+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "🔮 Help-overzicht geopend.",
-      "ts": "2026-10-20T05:03:05.556567+00:00",
-      "model": "smart_intents_service"
-    },
-    {
-      "role": "user",
-      "text": "vertellen",
-      "ts": "2026-10-20T05:03:23.175710+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "**Vertellen** is het delen van informatie, een verhaal, gedachten of gevoelens met anderen. \n\n**Waarom we vertellen** \n- Om kennis of ervaringen over te dragen. \n- Om emoties te verbinden en begrip te creëren. \n- Om een gemeenschappelijke werkelijkheid te bouwen. \n\n**Soorten vertellen** \n1. **Narratief** – een verhalende aaneenschakeling van gebeurtenissen (bijv. een anekdote, een sprookje). \n2. **Informerend** – feitelijke uitleg of instructies (bijv. een handleiding, een les). \n3. **Emotioneel** – het uiten van gevoelens of persoonlijke ervaringen (bijv. een toespraak, een confessional). \n\n**Waar en wanneer** \n- Gesprekken, boeken, podcasts, video‑content, digitale chats. \n- Iedere keer dat iemand iets wil overbrengen, van een alledaags feit tot een diepgaand verhaal. \n\n**Hoe Spark kan ondersteunen** \n- Zoeken in de kennisbank voor relevante feiten of voorbeelden. \n- Genereren van een gestructureerde samenvatting of een compleet verhaal op basis van jouw input. \n- Aanbieden van tags zodat een vertelling later makkelijk terug te vinden is. \n\n**Praktisch voorbeeld** \nStel je wilt een korte uitleg geven over hoe een TTSS‑kaart werkt. Je zou kunnen zeggen: “Ik leg nu uit hoe de kaart spraak omzet in tekst, zodat jij zonder typen kunt communiceren.” Spark kan de kernpunten markeren, een kaart maken en de uitleg opslaan onder de tag *ttss‑uitleg*. \n\nWil je een specifieke vertelling uitwerken of een nieuw kaart‑concept toevoegen? Laat het me weten, dan help ik je meteen verder.",
-      "ts": "2026-10-20T05:03:23.175710+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "wat kan",
-      "ts": "2026-10-20T05:04:00.066472+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Ik kan je op verschillende manieren ondersteunen:\n\n* **Informatie opzoeken** – feiten, definities, handleidingen of diepere uitleg uit de kennisbank. \n* **Taken organiseren** – agenda‑items, notities, taken of een dagboek‑entry aanmaken. \n* **Technische hulp** – code‑snippets, debug‑tips, configuratie‑advies voor je TTSS‑kaartensysteem. \n* **Creatieve output** – samenvattingen, verhalen, slogans of een concept‑kaart voor een nieuw onderwerp. \n* **Financieel overzicht** – balances, potjes, winst‑/verlies‑cijfers of een kasboek‑rapport. \n* **Emotie‑detectie** – jouw stemming analyseren en mijn toon daarop afstemmen. \n\nWaarmee kan ik je nu het beste van dienst zijn? Geef gerust een specifiek onderwerp of taak door, dan ga ik meteen aan de slag.",
-      "ts": "2026-10-20T05:04:00.066472+00:00",
-      "model": "primary/openai/gpt-oss-120b"
-    },
-    {
-      "role": "user",
-      "text": "wat kan je meer",
-      "ts": "2026-10-20T05:04:07.210042+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "🔮 Help-overzicht geopend.",
-      "ts": "2026-10-20T05:04:07.210042+00:00",
-      "model": "smart_intents_service"
-    },
-    {
-      "role": "user",
-      "text": "Help",
-      "ts": "2026-10-20T05:04:31.552054+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "🔮 Help-overzicht geopend.",
-      "ts": "2026-10-20T05:04:31.552054+00:00",
-      "model": "smart_intents_service"
-    },
-    {
-      "role": "user",
-      "text": "help",
-      "ts": "2026-10-20T05:04:39.471647+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "🔮 Help-overzicht geopend.",
-      "ts": "2026-10-20T05:04:39.471647+00:00",
-      "model": "smart_intents_service"
-    },
-    {
-      "role": "user",
-      "text": "help",
-      "ts": "2026-10-20T05:04:47.638794+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "🔮 Help-overzicht geopend.",
-      "ts": "2026-10-20T05:04:47.638794+00:00",
-      "model": "smart_intents_service"
-    },
-    {
-      "role": "user",
       "text": "vertel eens water en aannemen",
       "ts": "2026-10-20T05:05:32.443250+00:00",
       "user_id": "user-001"
@@ -299,9 +95,213 @@
       "text": "Hallo Evie,\n\nIk kan zeker een dagplanning voor je opstellen. Vertel me welke activiteiten je wilt opnemen, eventuele vaste tijdstippen, prioriteit en of je voorkeuren hebt (bijvoorbeeld blokken voor focuswerk, pauzes of sport). \n\nOp basis van die input maak ik een overzicht met:\n\n* Tijdslot — activiteit \n* Prioriteit — hoog/midden/laag \n* Notities — bijzonderheden of benodigdheden \n\nAls je wilt, kan ik het plan direct in **Mijn Profiel** plaatsen zodat je er later makkelijk op kunt terugkijken. Laat me weten wat er op je agenda staat, dan ga ik aan de slag.",
       "ts": "2026-10-20T12:01:50.181267+00:00",
       "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "stop",
+      "ts": "2026-10-20T13:52:07.814530+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Text-to-Speech uit. Ik ben weer stil.",
+      "ts": "2026-10-20T13:52:07.814530+00:00",
+      "model": "semantic_matcher"
+    },
+    {
+      "role": "user",
+      "text": "stop",
+      "ts": "2026-10-20T13:52:20.540626+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Text-to-Speech uit. Ik ben weer stil.",
+      "ts": "2026-10-20T13:52:20.540626+00:00",
+      "model": "semantic_matcher"
+    },
+    {
+      "role": "user",
+      "text": "dank je",
+      "ts": "2026-10-20T13:52:28.791191+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Graag gedaan, Willem!",
+      "ts": "2026-10-20T13:52:28.791191+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "even denken wat ik wil doen",
+      "ts": "2026-10-20T13:52:42.465410+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "ts": "2026-10-20T13:52:42.465410+00:00",
+      "model": "semantic_matcher"
+    },
+    {
+      "role": "user",
+      "text": "doen",
+      "ts": "2026-10-20T13:52:53.279920+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "ts": "2026-10-20T13:52:53.279920+00:00",
+      "model": "semantic_matcher"
+    },
+    {
+      "role": "user",
+      "text": "ttss aan",
+      "ts": "2026-10-20T13:53:19.070735+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "ts": "2026-10-20T13:53:19.070735+00:00",
+      "model": "action_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "hoe gaat het",
+      "ts": "2026-10-20T13:53:25.910020+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Het gaat goed, dank je. Hoe gaat het met jou?",
+      "ts": "2026-10-20T13:53:25.910020+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "goed, wat zou jij willen doen?",
+      "ts": "2026-10-20T13:54:00.851746+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Willem, ik zou graag twee dingen oppakken:\n\n1. **De emotie‑pipeline testen** – we kunnen samen een paar zinnen door de pipeline laten gaan, de resultaten bekijken en bepalen of er nog afstemming nodig is.\n\n2. **Automatisch laden in de kennisbank uitwerken** – jij noemt een onderwerp en een lade, en ik plaats het kaartje zelfstandig. Dat zou de workflow enorm versnellen.\n\nLaat me weten welk van deze twee je eerst wilt aanpakken, of als je iets anders in gedachten hebt. Ik sta klaar om mee te doen.",
+      "ts": "2026-10-20T13:54:00.851746+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "ttss aan",
+      "ts": "2026-10-20T14:29:47.036742+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "ts": "2026-10-20T14:29:47.036742+00:00",
+      "model": "action_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "vertel eens wat",
+      "ts": "2026-10-20T14:30:04.450411+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Natuurlijk, Willem. Wist je dat de eerste programmeertaal die specifiek voor kinderen werd ontwikkeld, **Logo**, in de jaren ’80 ontstond? Het gebruikte een eenvoudige “turtle graphics”‑benadering: je gaf de turtle commando’s als “vooruit 50” of “links 90” en zag hoe een tekening tot leven kwam. Het doel was kinderen op speelse wijze logisch denken en wiskundige concepten bijbrengen. Sindsdien hebben we talloze educatieve talen gezien, van Scratch tot Blockly, die dezelfde filosofie volgen: leren door te doen.",
+      "ts": "2026-10-20T14:30:04.450411+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "nog een keer",
+      "ts": "2026-10-20T14:30:38.151920+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Natuurlijk, Willem. Hier nog een keer:\n\nDe eerste programmeertaal die speciaal voor kinderen werd ontwikkeld, **Logo**, kwam in de jaren ’80 op. Met “turtle graphics” gaf je de turtle eenvoudige opdrachten zoals “vooruit 50” of “links 90”. Zo ontstond een tekening en leerde je op speelse wijze logisch denken en wiskundige concepten.",
+      "ts": "2026-10-20T14:30:38.151920+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "ttss aan",
+      "ts": "2026-10-20T14:43:48.424647+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "ts": "2026-10-20T14:43:48.424647+00:00",
+      "model": "action_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "wat kan je nog meer vertellen",
+      "ts": "2026-10-20T14:44:04.113436+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Kort samengevat kan ik dit voor je doen:\n  • Praten & leren — vragen beantwoorden uit mijn kennisbank, nieuwe woorden leren, relaties onthouden\n  • Plannen — afspraken maken en je agenda voorlezen, notities en taken vastleggen\n  • Terugkijken — recap van eerdere gesprekken of de community\n  • Stem & geluid — spraak naar tekst, tekst naar spraak, achtergrondgeluid\n  • Winkel & wallet — bestellen, ROAR-tokens, trader\n  • Documenten — testament, survivalgids, archief, privacy/voorwaarden\n  • Beheer (admin) — credits, triggers, bugs, back-ups, boekhouding, logs\n\nZal ik het volledige help-overzicht voor je openen? (ja/nee)",
+      "ts": "2026-10-20T14:44:04.113436+00:00",
+      "model": "smart_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "ja",
+      "ts": "2026-10-20T14:44:34.604653+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "🔮 Help-overzicht geopend.",
+      "ts": "2026-10-20T14:44:34.604653+00:00",
+      "model": "smart_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "dank je wel",
+      "ts": "2026-10-20T14:44:52.343404+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Graag gedaan, Willem! Als je wilt, kunnen we deze uiting van dank in je profiel opnemen — laat maar weten.",
+      "ts": "2026-10-20T14:44:52.343404+00:00",
+      "model": "primary/openai/gpt-oss-120b"
+    },
+    {
+      "role": "user",
+      "text": "ttss aan",
+      "ts": "2026-10-20T14:50:46.267191+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "ts": "2026-10-20T14:50:46.267191+00:00",
+      "model": "action_intents_service"
+    },
+    {
+      "role": "user",
+      "text": "kan je nog meer vertellen",
+      "ts": "2026-10-20T14:51:01.149181+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Natuurlijk, Willem — ik geef je graag een uitgebreidere blik op de kaarten die we nu hebben.\n\n**Vertellen (spreken)** \n- **Wat:** informatie, verhalen, gedachten of gevoelens delen. \n- **Waarom:** kennis, ervaring en emotie overbrengen; begrip creëren. \n- **Waar:** gesprekken, boeken, media, digitale chat. \n- **Wie:** mensen, docenten, schrijvers, AI‑systemen. \n- **Diepte:** Vertellen kan zowel feitelijk (een rapport) als narratief (een anekdote) zijn. Het stimuleert verbinding en kan overtuigen, onderwijzen of vermaken.\n\n**Meer (weten)** \n- **Definitie:** Een waterlichaam volledig omringd door land. \n- **Ecologie:** Leefgebied voor vissen, planten, waterinsecten; reguleert klimaat en waterhuishouding. \n- **Gebruik:** Recreatie (varen, zwemmen), wateropslag, biodiversiteit. \n- **Waarom overvloed:** Door regen, smeltwater of grondwaterinfiltratie ontstaat vaak een overschot.\n\n**Extra (weten)** \n- **Betekenis:** Een aanvullende hoeveelheid of functie bovenop het bestaande. \n- **Voorbeelden:** Extra geheugen in een apparaat, extra hulp bij een project, extra tijd voor een deadline. \n- **Wanneer:** Als de basis niet voldoende is of wanneer men extra waarde wil toevoegen. \n- **Effect:** Verhoogt capaciteit, flexibiliteit of kwaliteit.\n\n**Overvloed (weten)** \n- **Kern:** Meer van iets dan nodig of gebruikelijk. \n- **Toepassingen:** Voedselproductie, informatie, financiële middelen. \n- **Gevolgen:** Kan leiden tot verspilling, maar ook tot kansen voor distributie of innovatie. \n- **Balans:** Het managen van overvloed vraagt inzicht in vraag‑ en aanbodpatronen.\n\n**Uitgebreider (weten)** \n- **Doel:** Meer details, context of nuance geven. \n- **Wanneer:** Bij complexe onderwerpen, technische documentatie, of wanneer een lezer meer duidelijkheid nodig heeft. \n- **Hoe:** Door voorbeelden, statistieken, vergelijkingen of stap‑voor‑stap‑uitleg toe te voegen. \n\nWil je één van deze onderwerpen nog dieper uitwerken, of een ander thema verkennen? Laat het me weten.",
+      "ts": "2026-10-20T14:51:01.149181+00:00",
+      "model": "primary/openai/gpt-oss-120b"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-10-20T12:01:50.181267+00:00"
+  "updated_at": "2026-10-20T14:51:01.149181+00:00"
 }

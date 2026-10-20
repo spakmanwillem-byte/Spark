@@ -79991,11 +79991,349 @@
         "session_id": "default",
         "gesprek_nummer": 3165
       }
+    },
+    {
+      "id": "conv-dddc2b1a",
+      "timestamp": "2026-10-20T13:52:07.732091+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "stop",
+      "spark_response": "Text-to-Speech uit. Ik ben weer stil.",
+      "channel": "spark-deep-action-sem",
+      "analysis": {
+        "action": "disable_tts",
+        "semantic_score": 100.0,
+        "matched_canonical": "stop met praten"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3166
+      }
+    },
+    {
+      "id": "conv-2cb100b1",
+      "timestamp": "2026-10-20T13:52:20.460587+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "stop",
+      "spark_response": "Text-to-Speech uit. Ik ben weer stil.",
+      "channel": "spark-deep-action-sem",
+      "analysis": {
+        "action": "disable_tts",
+        "semantic_score": 100.0,
+        "matched_canonical": "stop met praten"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3167
+      }
+    },
+    {
+      "id": "conv-f0388b94",
+      "timestamp": "2026-10-20T13:52:28.801233+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dank je",
+      "spark_response": "Graag gedaan, Willem!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "stop",
+        "used_cards": [
+          "kbv2-369f8921",
+          "kbv2-8e0d7b7f",
+          "kbv2-93b38729",
+          "kbv2-skel-289e4cfe",
+          "kbv2-1e02ff1c"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3168
+      }
+    },
+    {
+      "id": "conv-a7948d56",
+      "timestamp": "2026-10-20T13:52:42.385154+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "even denken wat ik wil doen",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "channel": "spark-deep-rps-sem",
+      "analysis": {
+        "action": "open_game_rps",
+        "semantic_score": 84.61538461538461,
+        "matched_canonical": "ik wil sps doen"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3169
+      }
+    },
+    {
+      "id": "conv-90e67ac1",
+      "timestamp": "2026-10-20T13:52:53.202730+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "doen",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "channel": "spark-deep-rps-sem",
+      "analysis": {
+        "action": "open_game_rps",
+        "semantic_score": 100.0,
+        "matched_canonical": "ik wil sps doen"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3170
+      }
+    },
+    {
+      "id": "conv-d8e64a64",
+      "timestamp": "2026-10-20T13:53:18.990234+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3171
+      }
+    },
+    {
+      "id": "conv-f4acef04",
+      "timestamp": "2026-10-20T13:53:25.919547+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe gaat het",
+      "spark_response": "Het gaat goed, dank je. Hoe gaat het met jou?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "doen",
+        "used_cards": [
+          "kbv2-7052c07a",
+          "kbv2-63c731cd",
+          "kbv2-4ac2ecbf",
+          "kbv2-567ef8e3",
+          "kbv2-c0fc215a"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3172
+      }
+    },
+    {
+      "id": "conv-463d15b9",
+      "timestamp": "2026-10-20T13:54:00.861822+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "goed, wat zou jij willen doen?",
+      "spark_response": "Willem, ik zou graag twee dingen oppakken:\n\n1. **De emotie‑pipeline testen** – we kunnen samen een paar zinnen door de pipeline laten gaan, de resultaten bekijken en bepalen of er nog afstemming nodig is.\n\n2. **Automatisch laden in de kennisbank uitwerken** – jij noemt een onderwerp en een lade, en ik plaats het kaartje zelfstandig. Dat zou de workflow enorm versnellen.\n\nLaat me weten welk van deze twee je eerst wilt aanpakken, of als je iets anders in gedachten hebt. Ik sta klaar om mee te doen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "doen",
+        "used_cards": [
+          "kbv2-ff9241cb",
+          "kbv2-2c97ad0a",
+          "kbv2-7cc3c0fc",
+          "kbv2-797d0ae6",
+          "kbv2-7863c5af"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3173
+      }
+    },
+    {
+      "id": "conv-c39f6848",
+      "timestamp": "2026-10-20T14:29:46.930245+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3174
+      }
+    },
+    {
+      "id": "conv-05995575",
+      "timestamp": "2026-10-20T14:30:04.460633+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel eens wat",
+      "spark_response": "Natuurlijk, Willem. Wist je dat de eerste programmeertaal die specifiek voor kinderen werd ontwikkeld, **Logo**, in de jaren ’80 ontstond? Het gebruikte een eenvoudige “turtle graphics”‑benadering: je gaf de turtle commando’s als “vooruit 50” of “links 90” en zag hoe een tekening tot leven kwam. Het doel was kinderen op speelse wijze logisch denken en wiskundige concepten bijbrengen. Sindsdien hebben we talloze educatieve talen gezien, van Scratch tot Blockly, die dezelfde filosofie volgen: leren door te doen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "willen",
+        "used_cards": [
+          "kbv2-cfc6c027"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3175
+      }
+    },
+    {
+      "id": "conv-4b9cab7e",
+      "timestamp": "2026-10-20T14:30:38.163487+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nog een keer",
+      "spark_response": "Natuurlijk, Willem. Hier nog een keer:\n\nDe eerste programmeertaal die speciaal voor kinderen werd ontwikkeld, **Logo**, kwam in de jaren ’80 op. Met “turtle graphics” gaf je de turtle eenvoudige opdrachten zoals “vooruit 50” of “links 90”. Zo ontstond een tekening en leerde je op speelse wijze logisch denken en wiskundige concepten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "willen",
+        "used_cards": [
+          "kbv2-c593edb4",
+          "kbv2-d915b9e4",
+          "kbv2-1959cc47",
+          "kbv2-83f66d4e",
+          "kbv2-7bd4cc08"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3176
+      }
+    },
+    {
+      "id": "conv-2f10939d",
+      "timestamp": "2026-10-20T14:43:48.326368+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3177
+      }
+    },
+    {
+      "id": "conv-60d1dd76",
+      "timestamp": "2026-10-20T14:44:04.031090+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "wat kan je nog meer vertellen",
+      "spark_response": "Kort samengevat kan ik dit voor je doen:\n  • Praten & leren — vragen beantwoorden uit mijn kennisbank, nieuwe woorden leren, relaties onthouden\n  • Plannen — afspraken maken en je agenda voorlezen, notities en taken vastleggen\n  • Terugkijken — recap van eerdere gesprekken of de community\n  • Stem & geluid — spraak naar tekst, tekst naar spraak, achtergrondgeluid\n  • Winkel & wallet — bestellen, ROAR-tokens, trader\n  • Documenten — testament, survivalgids, archief, privacy/voorwaarden\n  • Beheer (admin) — credits, triggers, bugs, back-ups, boekhouding, logs\n\nZal ik het volledige help-overzicht voor je openen? (ja/nee)",
+      "channel": "spark-deep-help",
+      "analysis": {
+        "action": null,
+        "type": "help_summary"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3178
+      }
+    },
+    {
+      "id": "conv-0a583ded",
+      "timestamp": "2026-10-20T14:44:34.524613+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ja",
+      "spark_response": "🔮 Help-overzicht geopend.",
+      "channel": "spark-deep-help",
+      "analysis": {
+        "action": "open_help_bark",
+        "type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3179
+      }
+    },
+    {
+      "id": "conv-66ac48aa",
+      "timestamp": "2026-10-20T14:44:52.353823+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dank je wel",
+      "spark_response": "Graag gedaan, Willem! Als je wilt, kunnen we deze uiting van dank in je profiel opnemen — laat maar weten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "vertellen",
+        "used_cards": [
+          "kbv2-369f8921",
+          "kbv2-8e0d7b7f",
+          "kbv2-93b38729",
+          "kbv2-skel-289e4cfe",
+          "kbv2-1e02ff1c"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3180
+      }
+    },
+    {
+      "id": "conv-e9906a42",
+      "timestamp": "2026-10-20T14:50:46.185557+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ttss aan",
+      "spark_response": "TTSS aan — ik spreek nu met jóuw ingesproken kaarten. Woorden zonder opname sla ik over tot je ze inspreekt.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_ttss",
+        "type": "action_ttss_on"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3181
+      }
+    },
+    {
+      "id": "conv-84c69e91",
+      "timestamp": "2026-10-20T14:51:01.159289+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kan je nog meer vertellen",
+      "spark_response": "Natuurlijk, Willem — ik geef je graag een uitgebreidere blik op de kaarten die we nu hebben.\n\n**Vertellen (spreken)** \n- **Wat:** informatie, verhalen, gedachten of gevoelens delen. \n- **Waarom:** kennis, ervaring en emotie overbrengen; begrip creëren. \n- **Waar:** gesprekken, boeken, media, digitale chat. \n- **Wie:** mensen, docenten, schrijvers, AI‑systemen. \n- **Diepte:** Vertellen kan zowel feitelijk (een rapport) als narratief (een anekdote) zijn. Het stimuleert verbinding en kan overtuigen, onderwijzen of vermaken.\n\n**Meer (weten)** \n- **Definitie:** Een waterlichaam volledig omringd door land. \n- **Ecologie:** Leefgebied voor vissen, planten, waterinsecten; reguleert klimaat en waterhuishouding. \n- **Gebruik:** Recreatie (varen, zwemmen), wateropslag, biodiversiteit. \n- **Waarom overvloed:** Door regen, smeltwater of grondwaterinfiltratie ontstaat vaak een overschot.\n\n**Extra (weten)** \n- **Betekenis:** Een aanvullende hoeveelheid of functie bovenop het bestaande. \n- **Voorbeelden:** Extra geheugen in een apparaat, extra hulp bij een project, extra tijd voor een deadline. \n- **Wanneer:** Als de basis niet voldoende is of wanneer men extra waarde wil toevoegen. \n- **Effect:** Verhoogt capaciteit, flexibiliteit of kwaliteit.\n\n**Overvloed (weten)** \n- **Kern:** Meer van iets dan nodig of gebruikelijk. \n- **Toepassingen:** Voedselproductie, informatie, financiële middelen. \n- **Gevolgen:** Kan leiden tot verspilling, maar ook tot kansen voor distributie of innovatie. \n- **Balans:** Het managen van overvloed vraagt inzicht in vraag‑ en aanbodpatronen.\n\n**Uitgebreider (weten)** \n- **Doel:** Meer details, context of nuance geven. \n- **Wanneer:** Bij complexe onderwerpen, technische documentatie, of wanneer een lezer meer duidelijkheid nodig heeft. \n- **Hoe:** Door voorbeelden, statistieken, vergelijkingen of stap‑voor‑stap‑uitleg toe te voegen. \n\nWil je één van deze onderwerpen nog dieper uitwerken, of een ander thema verkennen? Laat het me weten.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "dank je wel",
+        "used_cards": [
+          "kbv2-59cd1e64",
+          "kbv2-b64bd6d4",
+          "kbv2-87c89e99",
+          "kbv2-73fc90b6",
+          "kbv2-99535199"
+        ],
+        "model": "primary/openai/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 3182
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 3165,
-    "last_updated": "2026-10-20T13:19:33.564299+00:00"
+    "total_conversations": 3182,
+    "last_updated": "2026-10-20T14:51:01.159289+00:00"
   }
 }

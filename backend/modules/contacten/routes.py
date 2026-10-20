@@ -20,7 +20,8 @@ from pydantic import BaseModel
 from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/contacten", tags=["contacten"])
-USERS_DIR = Path(__file__).parent.parent.parent / "data" / "users"
+DATA_DIR = Path(__file__).parent.parent.parent / "data"
+USERS_DIR = DATA_DIR / "users"
 LAGEN = ("prive", "zakelijk")
 
 
@@ -134,16 +135,72 @@ def _delete_extern(user_id: str, contact_id: str) -> bool:
     return False
 
 
+# v14_contacten_relatie_sync_001 (Willem 20-10) — familie-contacten tonen de relatie (moeder, zus, nicht) uit de
+# relatie-graaf (persons/{uid}_relationships.json); familie uit de graaf die nog geen contact is, komt erbij.
+def _relaties(user_id: str) -> Dict[str, str]:
+    rel = load_json(DATA_DIR / "persons" / f"{user_id}_relationships.json", default={"relationships": []})
+    out: Dict[str, str] = {}
+    for r in rel.get("relationships", []):
+        if r.get("naam_onbekend"):
+            continue
+        rollen = r.get("roles") or [r.get("relation_type", "")]
+        kort = ", ".join(sorted({x.split("/")[-1] for x in rollen if x}))
+        out[(r.get("person_name") or "").strip().lower()] = kort
+    return out
+
+
+def _relatie_voor(naam: str, rels: Dict[str, str]) -> Optional[str]:
+    n = (naam or "").strip().lower()
+    if not n:
+        return None
+    if n in rels:
+        return rels[n]
+    return next((v for k, v in rels.items() if k and (n.startswith(k + " ") or k.startswith(n + " ") or k.split()[0] == n.split()[0] and len(k.split()) > 1)), None)
+
+
+def sync_relaties(user_id: str) -> Dict[str, int]:
+    """Familie uit de relatie-graaf → privé-contact met rol 'familie' (idempotent)."""
+    items = _load(user_id)
+    rel = load_json(DATA_DIR / "persons" / f"{user_id}_relationships.json", default={"relationships": []})
+    extern = [c.get("naam", "").lower() for c in alle_contacten(user_id)]
+    nieuw = 0
+    for r in rel.get("relationships", []):
+        rollen = r.get("roles") or [r.get("relation_type", "")]
+        if r.get("naam_onbekend") or not any(x.startswith("familie/") for x in rollen):
+            continue
+        naam = (r.get("person_name") or "").strip()
+        if not naam or any(_relatie_voor(naam, {c: "x"}) for c in extern) or naam.lower() in extern:
+            continue
+        items.append({"id": f"ct-{uuid.uuid4().hex[:8]}", "laag": "prive", "naam": naam, "rol": "familie",
+                      "notities": "uit relatie-graaf", "created_at": datetime.now(timezone.utc).isoformat(),
+                      "updated_at": datetime.now(timezone.utc).isoformat()})
+        extern.append(naam.lower()); nieuw += 1
+    if nieuw:
+        _save(user_id, items)
+    return {"nieuw": nieuw}
+
+
 def alle_contacten(user_id: str, laag: str = "") -> List[Dict]:
     items = [{**c, "bron": "klapper", "readonly": False} for c in _load(user_id)]
     bel = load_json(_bel_file(user_id), default={"contacts": []}).get("contacts", [])
     items += [{**_from_bel(c), **{k: c.get(k) for k in ("email", "email2", "telefoon2", "fax", "website", "bedrijf", "contactpersoon", "adres", "postcode", "plaats") if c.get(k)}} for c in bel]
     cl = load_json(_client_file(user_id), default={"clienten": []}).get("clienten", [])
     items += [_from_client(c) for c in cl if (c.get("scope") or "zakelijk") == "zakelijk"]
+    rels = _relaties(user_id)
+    for c in items:
+        if c.get("laag") == "prive":
+            r = _relatie_voor(c.get("naam"), rels)
+            if r:
+                c["relatie"] = r
     if laag in LAGEN:
         items = [c for c in items if c.get("laag") == laag]
     items.sort(key=lambda c: (c.get("naam") or "").lower())
     return items
+
+
+@router.post("/{user_id}/sync-relaties")
+async def sync_relaties_route(user_id: str):
+    return {"success": True, **sync_relaties(user_id)}
 
 
 @router.get("/{user_id}")

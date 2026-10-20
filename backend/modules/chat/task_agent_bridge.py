@@ -73,6 +73,64 @@ async def _vraag_param(user_id: str, cmd: Dict, params: Dict, zin: str, tags, pa
     return {"type": "cmd_param", "cmd_id": cmd["id"], "message": "\n".join(regels), "keuzes": keuzes}
 
 
+# v14_task_agent_bridge_004 — "zet morgen 10 uur tandarts in de agenda" → afspraak-voorstel → ja/nee → POST agenda
+_AGENDA_CREATE = re.compile(r"\b(zet|plan|maak|noteer|voeg)\b.*\b(agenda|afspraak)\b|\b(agenda|afspraak)\b.*\b(zetten|plannen|maken|noteren|toevoegen)\b", re.I)
+_DAGEN = {"maandag": 0, "dinsdag": 1, "woensdag": 2, "donderdag": 3, "vrijdag": 4, "zaterdag": 5, "zondag": 6}
+_TIJD = re.compile(r"\b(?:om\s+)?(\d{1,2})(?:[:.u](\d{2}))?\s*(?:uur)?\b(?!\s*(?:mei|jan|feb|mrt|apr|jun|jul|aug|sep|okt|nov|dec|januari|februari|maart|april|juni|juli|augustus|september|oktober|november|december))", re.I)
+_RUIS = re.compile(r"\b(zet|plan|maak|noteer|voeg|toe|in|de|mijn|agenda|afspraak|een|om|uur|morgen|overmorgen|vandaag|op|voor|aan|erin|erbij|graag|even|aub|alsjeblieft|maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|volgende|week|s|ochtends|middags|avonds)\b", re.I)
+
+
+def _parse_afspraak(t: str):
+    from datetime import date, timedelta
+    import re as _re
+    tl = t.lower()
+    vandaag = date.today()
+    dag = None
+    if "overmorgen" in tl: dag = vandaag + timedelta(days=2)
+    elif "morgen" in tl: dag = vandaag + timedelta(days=1)
+    elif "vandaag" in tl: dag = vandaag
+    else:
+        for naam, idx in _DAGEN.items():
+            if naam in tl:
+                delta = (idx - vandaag.weekday()) % 7 or 7
+                if "volgende week" in tl: delta += 7
+                dag = vandaag + timedelta(days=delta); break
+    m_dat = _re.search(r"\b(\d{1,2})[-/](\d{1,2})(?:[-/](\d{2,4}))?\b", tl)
+    if not dag and m_dat:
+        jr = int(m_dat.group(3)) if m_dat.group(3) else vandaag.year
+        if jr < 100: jr += 2000
+        try: dag = date(jr, int(m_dat.group(2)), int(m_dat.group(1)))
+        except ValueError: dag = None
+    if not dag:
+        return None
+    uur, minuut = 9, 0
+    rest = tl if not m_dat else tl.replace(m_dat.group(0), " ")
+    m_t = _TIJD.search(rest)
+    if m_t and 0 <= int(m_t.group(1)) <= 23:
+        uur = int(m_t.group(1)); minuut = int(m_t.group(2) or 0)
+        if uur < 7 and ("middag" in tl or "avond" in tl): uur += 12
+        rest = rest.replace(m_t.group(0), " ")
+    titel = _RUIS.sub(" ", rest)
+    titel = _re.sub(r"[^\wà-ÿ\s-]", " ", titel)
+    titel = " ".join(titel.split()).strip() or "Afspraak"
+    return {"titel": titel[:1].upper() + titel[1:], "date": f"{dag.isoformat()}T{uur:02d}:{minuut:02d}:00", "dag": dag, "uur": uur, "minuut": minuut}
+
+
+def try_agenda_create(text: str, user_id: Optional[str]) -> Optional[Dict]:
+    t = (text or "").strip()
+    if not user_id or "?" in t or not _AGENDA_CREATE.search(t):
+        return None
+    p = _parse_afspraak(t)
+    if not p:
+        return {"type": "cmd_need_date", "message": "Wanneer moet dat zijn? Zeg bv. 'morgen 10 uur' of 'vrijdag 14:30'."}
+    dagnaam = ["ma", "di", "wo", "do", "vr", "za", "zo"][p["dag"].weekday()]
+    session_state.set_state(user_id, pending_cmd={"cmd_id": "cap_agenda_event_create", "params": {"titel": p["titel"], "date": p["date"], "scope": "prive"},
+                                                   "zin": t, "tags": ["agenda", "aanmaken"], "label": f"{p['titel']} {dagnaam} {p['dag'].strftime('%d-%m')} {p['uur']:02d}:{p['minuut']:02d}"})
+    session_state.set_last_question(user_id, "cmd_confirm:cap_agenda_event_create", intent="cmd_confirm")
+    return {"type": "cmd_confirm", "cmd_id": "cap_agenda_event_create",
+            "message": f"📅 Afspraak '{p['titel']}' op {dagnaam} {p['dag'].strftime('%d-%m-%Y')} om {p['uur']:02d}:{p['minuut']:02d} in je agenda zetten? (ja/nee)"}
+
+
 def _leer_bias(zin: str, tags) -> Dict[str, Dict[str, int]]:
     """Per cmd_id: hoe vaak ja/nee op precies deze zin of dezelfde tag-set."""
     out: Dict[str, Dict[str, int]] = {}
@@ -207,7 +265,7 @@ async def try_execute(text: str, user_id: Optional[str], admin_mode: bool = Fals
 
     m = _SLASH.match(t)
     if not m:
-        return None
+        return try_agenda_create(t, user_id)
     naam, rest = m.group(1).lower(), m.group(2).strip()
     if naam in ("help",):
         return None  # help heeft z'n eigen route

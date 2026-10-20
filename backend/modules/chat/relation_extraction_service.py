@@ -399,6 +399,11 @@ def add_relations(user_id: str, findings: List[Dict]) -> List[Dict]:
             _sync_persons_cards(user_id, new_entries)
         except Exception as e:
             print(f"[rel-extract] persons-card sync failed: {e}")
+        try:  # v14_contacten_relatie_sync_001 — familie ook in de Contacten-klapper
+            from modules.contacten.routes import sync_relaties
+            sync_relaties(user_id)
+        except Exception as e:
+            print(f"[rel-extract] contacten-sync faalde: {e}")
     return new_entries + role_added_entries
 
 

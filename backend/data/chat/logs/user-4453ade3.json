@@ -1128,11 +1128,149 @@
         "session_id": "default",
         "gesprek_nummer": 48
       }
+    },
+    {
+      "id": "conv-432ba5c8",
+      "timestamp": "2026-10-20T13:15:12.179213+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "zet morgen 10 uur tandarts in de agenda",
+      "spark_response": "📅 Geen afspraken morgen. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 49
+      }
+    },
+    {
+      "id": "conv-338adabb",
+      "timestamp": "2026-10-20T13:15:12.565213+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "nee",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 50
+      }
+    },
+    {
+      "id": "conv-2e1cd5ab",
+      "timestamp": "2026-10-20T13:17:01.645763+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "zet morgen 10 uur tandarts in de agenda",
+      "spark_response": "📅 Afspraak 'Tandarts' op wo 21-10-2026 om 10:00 in je agenda zetten? (ja/nee)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "cmd_confirm"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 51
+      }
+    },
+    {
+      "id": "conv-d8268382",
+      "timestamp": "2026-10-20T13:17:01.959900+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "ja",
+      "spark_response": "✅ 'Tandarts wo 21-10 10:00' — gedaan via `cap_agenda_event_create`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "cmd_executed",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "cmd_executed"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 52
+      }
+    },
+    {
+      "id": "conv-f5f1daa6",
+      "timestamp": "2026-10-20T13:17:02.183696+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "plan vrijdag 14:30 kapper",
+      "spark_response": "Ik hoorde dat je vrijdag om 14:30 kapper hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 53
+      }
+    },
+    {
+      "id": "conv-a9b6db3c",
+      "timestamp": "2026-10-20T13:17:02.434354+00:00",
+      "user_id": "user-4453ade3",
+      "user_naam": "Emergent",
+      "user_message": "nee",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 54
+      }
     }
   ],
   "metadata": {
     "user_id": "user-4453ade3",
-    "total_conversations": 48,
-    "last_updated": "2026-10-20T13:10:08.221831+00:00"
+    "total_conversations": 54,
+    "last_updated": "2026-10-20T13:17:02.434354+00:00"
   }
 }

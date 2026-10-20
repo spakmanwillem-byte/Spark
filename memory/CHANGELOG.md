@@ -1877,3 +1877,6 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 - Commands leren van ja/nee (zekerheid stijgt/daalt, "2× eerder ja"), ontbrekende note_id/task_id/event_id → genummerd lijstje → kiezen → bevestigen → uitvoeren.
 - Feiten: 45 ongetoetst → 3 getoetst / 7 mening / 33 momentopname (verworpen); momentopname-filter in extractie. Spark Wijsheid-voorstellen (≥2 users) + keur-goed → Spark-kaart.
 - Relaties: dubbele personen samengevoegd, "Jarig" weg, toestandwoorden geen namen meer, "wie is joy" → één antwoord, "wie is mijn moeder" weer via relaties.
+
+## 2026-10-20 (laatste) — v14_contacten_relatie_sync_001 · v14_task_agent_bridge_004
+- Contacten tonen relatie uit de graaf; familie uit graaf → contact (3 nieuw). Agenda-afspraak via chat met ja/nee ("zet morgen 10 uur tandarts in de agenda"). Wijsheid-kaarten in antwoorden. Laatste 2 feiten afgehandeld (mening / verworpen identiteitsclaim).

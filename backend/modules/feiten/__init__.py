@@ -202,7 +202,7 @@ def vind_antwoord(user_id: str, text: str) -> Optional[Dict]:
         return {"type": "feiten_antwoord", "message": "\n".join(regels), "feiten_ids": [f["id"] for f in fei + ove + waa + men]}
     m = _VRAAG_MENING.search(t) or _VRAAG_FEIT.search(t)
     if not m:
-        return None
+        return _wijsheid_antwoord(t)
     onderwerp = next((g for g in m.groups() if g), "").strip().lower()
     # "wie is mijn moeder" hoort bij relaties, niet bij het feiten-archief
     if re.search(r"\b(moeder|vader|zus|zusje|broer|broertje|dochter|zoon|oma|opa|neef|nicht|tante|oom|vriend|vriendin|partner|vrouw|man|kind|kinderen|familie|ouders)\b", onderwerp):
@@ -219,6 +219,23 @@ def vind_antwoord(user_id: str, text: str) -> Optional[Dict]:
         return None
     return {"type": "feiten_antwoord", "message": "Uit wat je me eerder vertelde:\n" + "\n".join(_fmt(f) for f in hits[:5]),
             "feiten_ids": [f["id"] for f in hits[:5]]}
+
+
+def _wijsheid_antwoord(t: str) -> Optional[Dict]:
+    """Goedgekeurde Spark-kaarten (scope spark) als iemand ernaar vraagt: alleen bij een vraag, kernwoord moet matchen."""
+    if "?" not in t and not re.match(r"^(wat|hoe|waarom|wanneer|welke|is|zijn|vind|vinden)\b", t.strip(), re.I):
+        return None
+    spark = [f for f in _load("spark", None)["feiten"] if f["status"] in ("getoetst", "bevestigd")]
+    if not spark:
+        return None
+    woorden = {w for w in re.findall(r"[a-zà-ÿ]{4,}", t.lower())} - {"spark", "jouw", "mijn", "over", "wat", "hoe", "waarom", "welke", "vind", "vinden", "mensen", "weet", "denk", "denkt"}
+    hits = [f for f in spark if any(w in (f["lagen"]["wat"] + " " + f["begrip"] + " " + " ".join(f["tags"])).lower() for w in woorden)]
+    if not hits:
+        return None
+    regels = ["Dit delen meerdere mensen met mij:"] + [f"• {f['begrip']}: {f['lagen']['wat']}" for f in hits[:4]]
+    n = max(len((f.get("bron") or {}).get("users") or []) for f in hits)
+    regels.append(f"(gedeeld door {n} gebruikers en goedgekeurd door beheer — geen LLM-gok)")
+    return {"type": "wijsheid_antwoord", "message": "\n".join(regels), "feiten_ids": [f["id"] for f in hits[:4]]}
 
 
 # ---- Admin API ----------------------------------------------------------------------------------

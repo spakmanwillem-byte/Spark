@@ -95,7 +95,10 @@ Winkel als echte webshop met inkoop/verkoop, BTW, varianten, factuur/pakbon/leve
 | Commands zónder slash (laag 2): zin → tags → concept → command, altijd ja/nee, leert in `command_learning.jsonl` | ✅ 20-10 | ✅ leer-bias (vaak-ja → hogere zekerheid, 2× nee → ander command) · ✅ "welke notitie?" genummerd lijstje (note_id/task_id/event_id) |
 | Feiten getoetst door Spark: 3 getoetst, 7 → mening, 33 → verworpen als momentopname; extractie filtert momentopnames nu | ✅ 20-10 | 2 open (achternaam-historie, "ik ben willem" van user-672f0e5c) — Willem |
 | Spark Wijsheid: `GET /api/feiten/voorstellen` (≥2 users delen een kaart) → admin keurt goed → Spark-kaart | ✅ 20-10 | Nog 0 voorstellen (1 actieve user); groeit vanzelf |
-| Relaties opgeschoond: dubbelen samengevoegd (Joy/Lotus/Maurice), "Jarig" weg, toestand-woorden geblokkeerd, profile-lookup dedupet | ✅ 20-10 | Contacten tonen bij familie geen moeder/zus-detail — sync met relatie-graaf = later |
+| Relaties opgeschoond: dubbelen samengevoegd (Joy/Lotus/Maurice), "Jarig" weg, toestand-woorden geblokkeerd, profile-lookup dedupet | ✅ 20-10 | — |
+| Contacten ↔ relatie-graaf: familie-contacten tonen relatie (moeder/zus/nicht), familie uit graaf komt erbij (Willie, Gerben, Wouter) | ✅ 20-10 | Sync loopt automatisch mee bij nieuwe relaties |
+| "zet morgen 10 uur tandarts in de agenda" → voorstel → ja → afspraak staat | ✅ 20-10 | Zonder "agenda/afspraak" in de zin pakt de oude agenda_proposal-flow het |
+| Wijsheid in antwoorden: goedgekeurde Spark-kaarten bij vragen → "dit delen meerdere mensen met mij" | ✅ 20-10 | Nog geen Spark-kaarten; groeit via voorstellen |
 | Dit bestand: >1800 regels (regel: <500) | 🧹 onderhoud | Sessies 52-58 naar HISTORY, open items naar BACKLOG — aparte opruimsessie, na akkoord |
 
 **Bugs 20-10 gefixt**: inkoop-artikel zonder code → 422 + React-crash (code optioneel, `apiError()` overal) ·
@@ -339,6 +342,14 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     naam met gelijke relatie; relaties/persons van user-001 samengevoegd; `NAME_BLACKLIST` + toestandwoorden;
     `vind_antwoord` slaat relatiewoorden over en matcht alleen op wat/begrip. Heidi staat correct als moeder in de
     relatie-graaf; ze staat niet in Contacten (daar alleen Maaike/Lotus/Joy als "familie" zonder detail).
+- **✅ 20-10 (laatste) — contacten-sync · agenda via ja/nee · wijsheid in antwoorden · 2 feiten** (`v14_contacten_relatie_sync_001`,
+  `v14_task_agent_bridge_004`): `contacten.routes._relaties/_relatie_voor/sync_relaties` (+ `POST /api/contacten/{uid}/sync-relaties`,
+  automatisch na `add_relations`); `alle_contacten` zet `relatie` op privé-contacten (roze badge in ContactenTab).
+  `task_agent_bridge.try_agenda_create`: werkwoord + "agenda/afspraak" → `_parse_afspraak` (morgen/overmorgen/weekdag/dd-mm,
+  "10 uur"/"14:30", titel = rest zonder ruis) → pending `cap_agenda_event_create` {titel, date ISO, scope prive} → ja → POST.
+  `feiten._wijsheid_antwoord`: alleen bij vraagzin, kernwoord ≥4 letters in wat/begrip/tags van Spark-kaarten (getoetst/bevestigd).
+  Feiten: achternaam-historie → mening (`persoonlijke-historie`, niet toetsbaar); "ik ben willem" van user-672f0e5c → verworpen
+  (`identiteitsclaim`, Willem: "iemand kan ook liegen"). Momenteel 0 ongetoetst.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

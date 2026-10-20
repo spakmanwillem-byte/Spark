@@ -89,6 +89,7 @@ export function ContactenTab({ userId }) {
                   <div className="flex items-center gap-2">
                     <p className="text-sm text-white font-medium truncate">{c.naam}</p>
                     {c.rol && <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{c.rol}</span>}
+                    {c.relatie && c.relatie !== c.rol && <span data-testid={`contact-relatie-${c.id}`} className="text-[10px] px-1.5 py-0.5 rounded bg-pink-500/15 text-pink-300" title="uit relatie-graaf">{c.relatie}</span>}
                     {BRON_LABEL[c.bron] && <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800/60 text-slate-500" title="Komt uit een andere module; bewerken hier werkt door in die module">{BRON_LABEL[c.bron]}</span>}
                   </div>
                   {(c.bedrijf && c.bedrijf !== c.naam) && <p className="text-[11px] text-slate-400 truncate">{c.bedrijf}</p>}

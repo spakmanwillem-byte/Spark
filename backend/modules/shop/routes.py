@@ -5,7 +5,7 @@ Winkelwagen + bestellingen. Kasboek koppeling per entity.
 """
 from fastapi import APIRouter, Query, UploadFile, File, Form, HTTPException
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Dict, Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 import time
@@ -634,7 +634,14 @@ async def get_products(shop_id: str = "shop-roadkill"):
     for p in products:
         if p.get("dynamic_price"):
             p["price"] = price
-    return {"success": True, "products": products, "shop_id": shop_id, "source": str(pfile)}
+    # v14_shop_inkoop_stuklijst_001 — winkel-instellingen + BTW-% (bron: boekhouder.shop_hooks) voor de winkelwagen
+    from modules.boekhouder import shop_hooks as _sh
+    _shop = _sh._get_shop(shop_id) or {}
+    _cfg = _sh._shop_config()
+    btw_pct = 0.0 if bool(_shop.get("btw_kor_actief", _cfg.get("btw_kor_default", False))) else float(_shop.get("btw_pct", _cfg.get("btw_default_pct", 21.0)))
+    settings = data.get("settings") or {"verzendkosten": 6.95, "verpakking_inkoop_id": None, "afhalen_mogelijk": True}
+    return {"success": True, "products": products, "shop_id": shop_id, "source": str(pfile),
+            "settings": settings, "btw_pct": btw_pct, "prijzen_excl_btw": True}
 
 
 @router.get("/products/{product_id}")
@@ -745,6 +752,9 @@ class ProductUpsert(BaseModel):
     leverancier_contact_id: Optional[str] = None
     leverancier_naam: Optional[str] = None
     voorraad: Optional[int] = None
+    # v14_shop_inkoop_stuklijst_001 — verkoopprijs = excl. BTW (BTW-% per winkel, zie boekhouder.shop_hooks);
+    # stuklijst = inkoop-artikelen × aantal
+    stuklijst: Optional[List[Dict]] = None  # [{"inkoop_id": "...", "aantal": 1}]
 
 
 def _require_admin(viewer_id: str) -> None:
@@ -820,6 +830,7 @@ async def admin_create_product(req: ProductUpsert):
         "btw_percentage": 0,  # Verkoopprijs is incl. BTW (per user: zonder BTW = wat ze betalen)
         "product_code": req.product_code, "leverancier_contact_id": req.leverancier_contact_id,
         "leverancier_naam": req.leverancier_naam, "voorraad": req.voorraad,
+        "stuklijst": req.stuklijst or [],
     }
     data.setdefault("products", []).append(new_prod)
     save_json(pfile, data)
@@ -844,6 +855,8 @@ async def admin_update_product(product_id: str, req: ProductUpsert):
             p["leverancier_contact_id"] = req.leverancier_contact_id
             p["leverancier_naam"] = req.leverancier_naam
             p["voorraad"] = req.voorraad
+            if req.stuklijst is not None:
+                p["stuklijst"] = req.stuklijst
             if req.image_icon:
                 p["image_icon"] = req.image_icon
             if req.images is not None:
@@ -939,6 +952,117 @@ async def mark_order_shipped(order_id: str, req: ShipOrderRequest):
 
 
 # ============================================================
+# v14_shop_inkoop_stuklijst_001 — INKOOP-ARTIKELEN (productcodes) + SHOP-INSTELLINGEN
+# Willem 20-10: "Producten → Verkoop | Inkoop". Inkoop = artikel met productcode, leverancier,
+# inkoopprijs excl. Een verkoopproduct heeft een stuklijst van inkoop-artikelen (hoodie-code +
+# opdruk klein + opdruk groot; set = hoodie-code + jogger-code + ...). Verpakking = per bestelling.
+# ============================================================
+
+class InkoopArtikel(BaseModel):
+    viewer_id: str
+    code: str
+    naam: str
+    inkoopprijs_excl: Optional[float] = None
+    leverancier_contact_id: Optional[str] = None
+    leverancier_naam: Optional[str] = None
+    voorraad: Optional[int] = None
+    eenheid: Optional[str] = "stuk"
+    notities: Optional[str] = None
+
+
+class ShopSettings(BaseModel):
+    viewer_id: str
+    verzendkosten: Optional[float] = None       # vast bedrag per bestelling, geen BTW erover
+    verpakking_inkoop_id: Optional[str] = None  # inkoop-artikel dat per bestelling verbruikt wordt
+    afhalen_mogelijk: Optional[bool] = True
+
+
+def _shop_data(shop_id: str) -> Dict:
+    d = load_json(_shop_products_path(shop_id), default={"products": [], "orders": []})
+    d.setdefault("inkoop", [])
+    d.setdefault("settings", {"verzendkosten": 6.95, "verpakking_inkoop_id": None, "afhalen_mogelijk": True})
+    return d
+
+
+def kostprijs_excl(product: Dict, inkoop: List[Dict]) -> Optional[float]:
+    """Som van stuklijst (inkoopprijs × aantal). None als een regel geen prijs heeft."""
+    idx = {a["id"]: a for a in inkoop}
+    total = 0.0
+    regels = product.get("stuklijst") or []
+    if not regels:
+        return None
+    for r in regels:
+        a = idx.get(r.get("inkoop_id"))
+        if not a or a.get("inkoopprijs_excl") is None:
+            return None
+        total += float(a["inkoopprijs_excl"]) * float(r.get("aantal") or 1)
+    return round(total, 2)
+
+
+@router.get("/shops/{shop_id}/inkoop")
+async def list_inkoop(shop_id: str):
+    d = _shop_data(shop_id)
+    return {"success": True, "inkoop": d["inkoop"], "settings": d["settings"]}
+
+
+@router.post("/shops/{shop_id}/inkoop")
+async def create_inkoop(shop_id: str, req: InkoopArtikel):
+    _require_admin_or_shop_owner(req.viewer_id, shop_id)
+    d = _shop_data(shop_id)
+    a = {"id": f"ink-{uuid.uuid4().hex[:6]}", **req.model_dump(exclude={"viewer_id"}),
+         "created_at": datetime.now(timezone.utc).isoformat()}
+    d["inkoop"].append(a)
+    save_json(_shop_products_path(shop_id), d)
+    return {"success": True, "artikel": a}
+
+
+@router.put("/shops/{shop_id}/inkoop/{inkoop_id}")
+async def update_inkoop(shop_id: str, inkoop_id: str, req: InkoopArtikel):
+    _require_admin_or_shop_owner(req.viewer_id, shop_id)
+    d = _shop_data(shop_id)
+    for a in d["inkoop"]:
+        if a["id"] == inkoop_id:
+            a.update(req.model_dump(exclude={"viewer_id"}))
+            a["updated_at"] = datetime.now(timezone.utc).isoformat()
+            save_json(_shop_products_path(shop_id), d)
+            return {"success": True, "artikel": a}
+    raise HTTPException(404, "Inkoop-artikel niet gevonden")
+
+
+@router.delete("/shops/{shop_id}/inkoop/{inkoop_id}")
+async def delete_inkoop(shop_id: str, inkoop_id: str, viewer_id: str):
+    _require_admin_or_shop_owner(viewer_id, shop_id)
+    d = _shop_data(shop_id)
+    gebruikt = [p["name"] for p in d["products"] if any(r.get("inkoop_id") == inkoop_id for r in (p.get("stuklijst") or []))]
+    if gebruikt:
+        raise HTTPException(400, f"Zit nog in stuklijst van: {', '.join(gebruikt)}")
+    d["inkoop"] = [a for a in d["inkoop"] if a["id"] != inkoop_id]
+    save_json(_shop_products_path(shop_id), d)
+    return {"success": True}
+
+
+@router.put("/shops/{shop_id}/settings")
+async def update_shop_settings(shop_id: str, req: ShopSettings):
+    _require_admin_or_shop_owner(req.viewer_id, shop_id)
+    d = _shop_data(shop_id)
+    for k, v in req.model_dump(exclude={"viewer_id"}).items():
+        if v is not None:
+            d["settings"][k] = v
+    save_json(_shop_products_path(shop_id), d)
+    return {"success": True, "settings": d["settings"]}
+
+
+@router.get("/shops/{shop_id}/kostprijzen")
+async def shop_kostprijzen(shop_id: str):
+    d = _shop_data(shop_id)
+    out = {}
+    for p in d["products"]:
+        k = kostprijs_excl(p, d["inkoop"])
+        out[p["id"]] = {"kostprijs_excl": k, "marge_excl": round(float(p.get("price") or 0) - k, 2) if k is not None else None}
+    return {"success": True, "kostprijzen": out}
+
+
+# ============================================================
 # BESTELLINGEN (Merch)
 # ============================================================
 
@@ -952,6 +1076,7 @@ class CreateOrderRequest(BaseModel):
     shipping_name: Optional[str] = None
     shipping_address: Optional[str] = None
     notes: Optional[str] = None
+    bezorging: Optional[str] = "verzenden"  # v14: afhalen | verzenden
 
 
 @router.post("/orders/{user_id}")
@@ -959,6 +1084,12 @@ async def create_order(user_id: str, req: CreateOrderRequest):
     """Bestelling plaatsen - trekt af van wallet, boekt in kasboek"""
     data = load_json(PRODUCTS_FILE, default={"products": [], "orders": []})
     products = {p["id"]: p for p in data.get("products", [])}
+
+    # v14 — BTW-% en KOR per winkel, zelfde bron als boekhouder.shop_hooks (geen tweede waarheid)
+    from modules.boekhouder import shop_hooks as _sh
+    _shop = _sh._get_shop("shop-roadkill") or {}
+    _cfg = _sh._shop_config()
+    btw_pct = 0.0 if bool(_shop.get("btw_kor_actief", _cfg.get("btw_kor_default", False))) else float(_shop.get("btw_pct", _cfg.get("btw_default_pct", 21.0)))
 
     # Bouw order items
     order_items = []
@@ -972,21 +1103,42 @@ async def create_order(user_id: str, req: CreateOrderRequest):
         if prod.get("category") == "token":
             return {"success": False, "error": "ROAR tokens koop je via de Token sectie"}
 
-        price = prod["price"]
+        price = prod["price"]  # v14: excl. BTW
         line_total = round(price * item.quantity, 2)
+        line_btw = round(line_total * btw_pct / 100, 2)
         total += line_total
         order_items.append({
             "product_id": item.product_id,
             "name": prod["name"],
+            "product_code": prod.get("product_code"),
             "price": price,
             "quantity": item.quantity,
             "line_total": line_total,
+            "btw_pct": btw_pct,
+            "line_btw": line_btw,
             "entity_id": prod.get("entity_id", "roadkill_merch"),
             "category": prod.get("category", "merch"),
             "metadata": prod.get("metadata", {}),
         })
 
-    total = round(total, 2)
+    # v14_shop_inkoop_stuklijst_001 — BTW over producten; verzendkosten vast (geen BTW); verpakking per bestelling
+    shop_d = _shop_data("shop-roadkill")
+    settings = shop_d["settings"]
+    subtotaal_excl = round(total, 2)
+    btw_totaal = round(sum(i["line_btw"] for i in order_items), 2)
+    order_btw_pct = btw_pct
+    bezorging = req.bezorging if req.bezorging in ("afhalen", "verzenden") else "verzenden"
+    if bezorging == "afhalen" and not settings.get("afhalen_mogelijk", True):
+        bezorging = "verzenden"
+    verzendkosten = round(float(settings.get("verzendkosten") or 0), 2) if bezorging == "verzenden" else 0.0
+    verpakking = None
+    vid = settings.get("verpakking_inkoop_id")
+    if vid:
+        for a in shop_d["inkoop"]:
+            if a["id"] == vid:
+                verpakking = {"inkoop_id": vid, "code": a.get("code"), "naam": a.get("naam"), "kosten_excl": a.get("inkoopprijs_excl")}
+                break
+    total = round(subtotaal_excl + btw_totaal + verzendkosten, 2)
 
     # Check wallet saldo
     wallets = load_json(WALLET_FILE, default={"wallets": {}, "transactions": []})
@@ -997,13 +1149,24 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             "error": f"Onvoldoende saldo. Heb {user_wallet.get('balance', 0):.2f}, nodig {total:.2f}",
         }
 
-    # Maak order aan
+    # Maak order aan (saldo is gecheckt) — verpakking nu pas van voorraad af
+    if verpakking:
+        for a in shop_d["inkoop"]:
+            if a["id"] == verpakking["inkoop_id"] and isinstance(a.get("voorraad"), int):
+                a["voorraad"] = max(0, a["voorraad"] - 1)
+        save_json(_shop_products_path("shop-roadkill"), shop_d)
     order_id = str(uuid.uuid4())[:8]
     now = datetime.now(timezone.utc).isoformat()
     order = {
         "id": order_id,
         "user_id": user_id,
         "items": order_items,
+        "subtotaal_excl": subtotaal_excl,
+        "btw_pct": order_btw_pct,
+        "btw": btw_totaal,
+        "bezorging": bezorging,
+        "verzendkosten": verzendkosten,
+        "verpakking": verpakking,
         "total": total,
         "status": "besteld",
         "shipping_name": req.shipping_name,
@@ -1037,8 +1200,8 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             "description": f"Verkoop: {item['quantity']}x {item['name']} (order #{order_id})",
             "entity_id": item["entity_id"],
             "date": now,
-            "btw_percentage": 21,
-            "btw_amount": round(item["line_total"] * 0.21, 2),
+            "btw_percentage": item.get("btw_pct", 21),
+            "btw_amount": item.get("line_btw", round(item["line_total"] * 0.21, 2)),
             "created_at": now,
             "tx_ref": f"shop_sale_{order_id}_{item['id']}",
         }

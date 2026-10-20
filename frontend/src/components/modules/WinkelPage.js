@@ -94,6 +94,7 @@ export function WinkelPage({ onNavigate }) {
       fetch(`${API}/api/archive/${userId}/stats`).then(r => r.json()).catch(() => null),
     ]).then(([prods, price, bal, wallet, storage]) => {
       setProducts(prods.products || []);
+      if (prods.settings) setShopMeta({ btw_pct: prods.btw_pct ?? 21, settings: prods.settings });
       setTokenInfo(price);
       setUserBalance({ ...bal, wallet_eur: wallet?.balance_eur || 0 });
       setStorageStats(storage);
@@ -106,7 +107,13 @@ export function WinkelPage({ onNavigate }) {
   const merchProducts = products.filter(p => p.category === 'merch');
   const storageProducts = products.filter(p => p.category === 'storage');
   const tokenProduct = products.find(p => p.category === 'token');
-  const cartTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  // v14_shop_inkoop_stuklijst_001 — prijzen excl. BTW; BTW-% + verzendkosten komen van de winkel
+  const [bezorging, setBezorging] = useState('verzenden');
+  const [shopMeta, setShopMeta] = useState({ btw_pct: 21, settings: { verzendkosten: 6.95, afhalen_mogelijk: true } });
+  const cartSubtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const cartBtw = Math.round(cartSubtotal * (shopMeta.btw_pct || 0)) / 100;
+  const verzendkosten = bezorging === 'verzenden' ? Number(shopMeta.settings?.verzendkosten || 0) : 0;
+  const cartTotal = Math.round((cartSubtotal + cartBtw + verzendkosten) * 100) / 100;
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
   const addToCart = (product) => {
@@ -136,7 +143,7 @@ export function WinkelPage({ onNavigate }) {
     const res = await fetch(`${API}/api/shop/orders/${userId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: cart.map(i => ({ product_id: i.id, quantity: i.qty })) }),
+      body: JSON.stringify({ items: cart.map(i => ({ product_id: i.id, quantity: i.qty })), bezorging }),
     }).then(r => r.json()).catch(() => ({ success: false, error: 'Verbinding mislukt' }));
     setOrderResult(res);
     setOrdering(false);
@@ -532,9 +539,28 @@ export function WinkelPage({ onNavigate }) {
 
                   {/* Totaal */}
                   <div className="border-t border-slate-800 pt-3 space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-slate-400">Subtotaal</span>
-                      <span className="text-white font-bold">&euro;{cartTotal.toFixed(2)}</span>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-400">Subtotaal (excl. BTW)</span>
+                      <span className="text-slate-200" data-testid="cart-subtotal">&euro;{cartSubtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-400">BTW {shopMeta.btw_pct}%</span>
+                      <span className="text-slate-200" data-testid="cart-btw">&euro;{cartBtw.toFixed(2)}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs gap-2">
+                      <div className="flex gap-1">
+                        {shopMeta.settings?.afhalen_mogelijk !== false && (
+                          <button data-testid="cart-afhalen" onClick={() => setBezorging('afhalen')}
+                            className={`px-2 py-0.5 rounded border text-[10px] ${bezorging === 'afhalen' ? 'border-red-500/60 text-red-300 bg-red-500/10' : 'border-slate-700 text-slate-400'}`}>Afhalen</button>
+                        )}
+                        <button data-testid="cart-verzenden" onClick={() => setBezorging('verzenden')}
+                          className={`px-2 py-0.5 rounded border text-[10px] ${bezorging === 'verzenden' ? 'border-red-500/60 text-red-300 bg-red-500/10' : 'border-slate-700 text-slate-400'}`}>Verzenden</button>
+                      </div>
+                      <span className="text-slate-200" data-testid="cart-verzendkosten">{bezorging === 'verzenden' ? `€${verzendkosten.toFixed(2)}` : 'gratis'}</span>
+                    </div>
+                    <div className="flex justify-between text-sm border-t border-slate-800 pt-2">
+                      <span className="text-slate-300">Totaal</span>
+                      <span className="text-white font-bold" data-testid="cart-total">&euro;{cartTotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-xs">
                       <span className="text-slate-500">Wallet saldo</span>

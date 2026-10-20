@@ -654,3 +654,7 @@
 {"ts": "2026-10-20T09:42:40.687316+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 1113.63}
 {"ts": "2026-10-20T09:42:54.695382+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-12e0779a', lade='weten', updates={'emotie': 'neutraal'},…"}}
 {"ts": "2026-10-20T09:42:55.841356+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 1145.77}
+{"ts": "2026-10-20T11:02:51.702337+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-b76bb379', lade='inbox', updates={'emotie': 'neutraal'},…"}}
+{"ts": "2026-10-20T11:02:51.770856+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 66.7}
+{"ts": "2026-10-20T11:02:56.315165+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-b76bb379', lade='inbox', updates={'emotie': 'neutraal'},…"}}
+{"ts": "2026-10-20T11:02:56.377587+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 62.25}

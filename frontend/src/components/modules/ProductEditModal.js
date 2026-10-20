@@ -20,6 +20,9 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
   const [leverancierId, setLeverancierId] = useState('');
   const [leverancierNaam, setLeverancierNaam] = useState('');
   const [leveranciers, setLeveranciers] = useState([]);
+  // v14_shop_inkoop_stuklijst_001 — stuklijst: inkoop-artikelen × aantal
+  const [inkoop, setInkoop] = useState([]);
+  const [stuklijst, setStuklijst] = useState([]);
   const [uploadingIdx, setUploadingIdx] = useState(-1);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -46,13 +49,26 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
       setImages(product.images || (product.image_url ? [product.image_url] : []));
       setProductCode(product.product_code || ''); setVoorraad(product.voorraad ?? '');
       setLeverancierId(product.leverancier_contact_id || ''); setLeverancierNaam(product.leverancier_naam || '');
+      setStuklijst(product.stuklijst || []);
     } else {
       setName(''); setDescription(''); setPrice(''); setCategory(defaultCategory);
       setEntityId(derivedEntityId);
       setInStock(true); setImageIcon('package'); setImages([]);
-      setProductCode(''); setVoorraad(''); setLeverancierId(''); setLeverancierNaam('');
+      setProductCode(''); setVoorraad(''); setLeverancierId(''); setLeverancierNaam(''); setStuklijst([]);
     }
   }, [open, product, defaultCategory, derivedEntityId]);
+
+  useEffect(() => {
+    if (!open || !shopId) return;
+    fetch(`${API}/api/shop/shops/${encodeURIComponent(shopId)}/inkoop`).then(r => r.json())
+      .then(d => setInkoop(d.inkoop || [])).catch(() => setInkoop([]));
+  }, [open, shopId]);
+
+  const kostprijs = stuklijst.length ? stuklijst.reduce((sum, r) => {
+    const a = inkoop.find(x => x.id === r.inkoop_id);
+    if (!a || a.inkoopprijs_excl == null) return NaN;
+    return sum + Number(a.inkoopprijs_excl) * Number(r.aantal || 1);
+  }, 0) : null;
 
   useEffect(() => {
     if (!open) return;
@@ -62,6 +78,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
   }, [open, userId]);
 
   const extraFields = () => ({
+    stuklijst: stuklijst.filter(r => r.inkoop_id).map(r => ({ inkoop_id: r.inkoop_id, aantal: Number(r.aantal) || 1 })),
     product_code: productCode || null,
     voorraad: voorraad === '' ? null : parseInt(voorraad, 10),
     leverancier_contact_id: leverancierId || null,
@@ -196,7 +213,11 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
               <input data-testid="product-price" type="number" step="0.01" min="0" value={price} onChange={e => setPrice(e.target.value)}
                 placeholder="0.00"
                 className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500" />
-              <p className="text-[9px] text-slate-500 mt-1">Excl. BTW (intern wordt 0% gerekend)</p>
+              <p className="text-[9px] text-slate-500 mt-1">Excl. BTW — de winkelwagen rekent de BTW van de winkel erbij.{kostprijs != null && (
+                <span className={Number.isNaN(kostprijs) ? 'text-slate-500' : (Number(price) - kostprijs) >= 0 ? ' text-emerald-400' : ' text-red-400'}>
+                  {Number.isNaN(kostprijs) ? ' Kostprijs onbekend (inkoopprijs ontbreekt).' : ` Kostprijs €${kostprijs.toFixed(2)} → marge €${(Number(price || 0) - kostprijs).toFixed(2)}`}
+                </span>
+              )}</p>
             </div>
           </div>
 
@@ -208,11 +229,37 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
               className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 resize-none" />
           </div>
 
-          {/* v14_shop_producten_tab_001 — productcode, voorraad, leverancier */}
+          {/* v14_shop_inkoop_stuklijst_001 — stuklijst: welke inkoop-artikelen (productcodes) maken dit product */}
+          <div data-testid="product-stuklijst" className="bg-slate-800/40 border border-slate-700 rounded-lg p-3 space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Stuklijst (inkoop-artikelen)</label>
+              <button type="button" data-testid="stuklijst-add" onClick={() => setStuklijst(l => [...l, { inkoop_id: '', aantal: 1 }])}
+                className="text-[10px] text-amber-300 hover:text-amber-200">+ regel</button>
+            </div>
+            {stuklijst.length === 0 && <p className="text-[10px] text-slate-500">Leeg = jij levert dit zelf, zonder onderdelen. Inkoop-artikelen beheer je in Producten → Inkoop.</p>}
+            {stuklijst.map((r, i) => {
+              const a = inkoop.find(x => x.id === r.inkoop_id);
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <select data-testid={`stuklijst-item-${i}`} value={r.inkoop_id} onChange={e => setStuklijst(l => l.map((x, j) => j === i ? { ...x, inkoop_id: e.target.value } : x))}
+                    className="flex-1 px-2 py-1.5 bg-slate-800 border border-slate-700 rounded text-xs text-white">
+                    <option value="">— kies artikel —</option>
+                    {inkoop.map(x => <option key={x.id} value={x.id}>{x.code ? `${x.code} · ` : ''}{x.naam}{x.inkoopprijs_excl != null ? ` (€${Number(x.inkoopprijs_excl).toFixed(2)})` : ''}</option>)}
+                  </select>
+                  <input data-testid={`stuklijst-aantal-${i}`} type="number" min="1" value={r.aantal} onChange={e => setStuklijst(l => l.map((x, j) => j === i ? { ...x, aantal: e.target.value } : x))}
+                    className="w-16 px-2 py-1.5 bg-slate-800 border border-slate-700 rounded text-xs text-white text-right" />
+                  <span className="w-16 text-right text-[11px] text-slate-400">{a && a.inkoopprijs_excl != null ? `€${(Number(a.inkoopprijs_excl) * Number(r.aantal || 1)).toFixed(2)}` : '—'}</span>
+                  <button type="button" onClick={() => setStuklijst(l => l.filter((_, j) => j !== i))} className="text-slate-500 hover:text-red-400 text-xs">✕</button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* v14_shop_producten_tab_001 — eigen code, voorraad, leverancier (alleen zonder stuklijst) */}
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Productcode</label>
-              <input data-testid="product-code" value={productCode} onChange={e => setProductCode(e.target.value)} placeholder="bijv. RK-CAP-001"
+              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Eigen code (optioneel)</label>
+              <input data-testid="product-code" value={productCode} onChange={e => setProductCode(e.target.value)} placeholder="bijv. RK-CAP"
                 className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
             </div>
             <div>
@@ -233,7 +280,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
               )}
             </div>
           </div>
-          <p className="text-[9px] text-slate-500 -mt-2">Leveranciers komen uit Mijn Profiel → Contacten (zakelijk). Leeg = jij levert zelf.</p>
+          <p className="text-[9px] text-slate-500 -mt-2">Leverancier hier alleen als er géén stuklijst is; met stuklijst komt de leverancier van de inkoop-artikelen.</p>
 
           {/* Categorie + kasboek (read-only, gekoppeld aan shop) */}
           <div className="grid grid-cols-2 gap-3">

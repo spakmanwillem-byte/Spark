@@ -186,6 +186,20 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     `leverancier_contact_id` (keuze uit zakelijke contacten) of `leverancier_naam` (vrij). Leeg = eigenaar levert zelf.
     Nieuw product in Producten-tab verschijnt ook in Winkel (zelfde bron). `GET /api/shop/shops/{shop_id}/orders`.
   • Betaling blijft zoals het was: koper betaalt uit Spark-wallet (Willem: "daar heb ik al wat voor").
+  • **✅ 20-10 — Producten → Verkoop | Inkoop + stuklijst + BTW in winkelwagen** (`v14_shop_inkoop_stuklijst_001`):
+    Inkoop-artikelen per shop (`products.json → inkoop[]`: code, naam, inkoopprijs excl., leverancier uit zakelijke
+    contacten, voorraad). Verkoopproduct heeft `stuklijst[]` = inkoop-artikelen × aantal (hoodie-code + opdruk klein +
+    opdruk groot; set = hoodie + jogger + 2× opdrukken) → kostprijs/marge berekend (`/kostprijzen`). Willems drie
+    "storage"-items (opdruk klein/groot, envelop — stonden als digitale GB-opslag in de etalage!) zijn omgezet naar
+    inkoop-artikelen; stuklijsten voor alle 7 Roadkill-producten ingevuld; inkoopprijzen basis-artikelen nog leeg (?).
+    **Prijzen = excl. BTW** (bestaand v13b-model in `boekhouder/shop_hooks`); BTW-% en KOR komen **per winkel** uit
+    shops.json (geen tweede waarheid). Winkelwagen: subtotaal excl. → BTW → **Afhalen/Verzenden** (vast bedrag, geen
+    BTW) → totaal. Shop-instellingen (`settings`: verzendkosten 6,95, verpakking per bestelling = envelop → voorraad
+    -1 ná saldocheck, afhalen mogelijk) in Producten → Inkoop. Order bevat subtotaal_excl/btw_pct/btw/bezorging/
+    verzendkosten/verpakking + productcodes. Routes: `/api/shop/shops/{id}/inkoop` CRUD, `/settings`, `/kostprijzen`.
+    Getest: hoodie 60 → 72,60 afhalen / 79,55 verzenden; 2 petten 49,30.
+    **Nog**: `create_order` boekt in oud accounting-bestand i.p.v. `record_shop_sale` (boekhouder) → koppelen bij
+    "Bestellingen ↔ boekhouder"; inkoop bij leverancier → `record_shop_purchase`.
   **Fase 3 — nog te bouwen (roadmap)**: bij bestelling zonder voorraad → leveranciersmail (aantal + productcode,
   standaardtekst) + kopie naar zakelijke e-mail · factuur (PDF, lokaal gemaakt — geen externe dienst) naar koper-mail
   als ingevuld + Workspace-Archief · pakbon naar winkeleigenaar-archief · bestelbon bij bestanden.

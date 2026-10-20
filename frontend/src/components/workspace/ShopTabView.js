@@ -3,6 +3,7 @@
 // v12_shop_owner_perms_001 — Header met kleur-picker: shop-owner beheert hier zijn winkel
 // (naam + accent-kleur). Winkelstraat (front) blijft admin-only voor CRUD.
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { toast } from 'sonner';
 import { Package, Plus, Edit3, Trash2, Image as ImageIcon, ShoppingBag, Camera, ClipboardList, Store } from 'lucide-react';
 import { ProductEditModal } from '../modules/ProductEditModal';
 
@@ -169,7 +170,8 @@ export function ShopTabView({ shop, userId }) {
       </div>
 
       {subTab === 'producten' && (
-        <ProductenTabel products={products} loading={loading} color={color} onEdit={setEditing} onDelete={doDelete} onNew={() => setCreating(true)} />
+        <ProductenBeheer shop={shop} userId={userId} products={products} loading={loading} color={color}
+          onEdit={setEditing} onDelete={doDelete} onNew={() => setCreating(true)} />
       )}
       {subTab === 'bestellingen' && (
         <BestellingenLijst orders={orders} loading={ordersLoading} color={color} />
@@ -236,17 +238,58 @@ export function ShopTabView({ shop, userId }) {
 }
 
 
-// v14_shop_producten_tab_001 — productoverzicht met code / voorraad / leverancier
-function ProductenTabel({ products, loading, color, onEdit, onDelete, onNew }) {
+// v14_shop_inkoop_stuklijst_001 — Producten → Verkoop | Inkoop (+ winkel-instellingen)
+function ProductenBeheer({ shop, userId, products, loading, color, onEdit, onDelete, onNew }) {
+  const [mode, setMode] = useState('verkoop');
+  const [inkoop, setInkoop] = useState([]);
+  const [settings, setSettings] = useState(null);
+  const [kost, setKost] = useState({});
+  const loadInkoop = useCallback(() => {
+    fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/inkoop`).then(r => r.json())
+      .then(d => { setInkoop(d.inkoop || []); setSettings(d.settings || null); }).catch(() => {});
+    fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/kostprijzen`).then(r => r.json())
+      .then(d => setKost(d.kostprijzen || {})).catch(() => {});
+  }, [shop.id]);
+  useEffect(() => { loadInkoop(); }, [loadInkoop, products]);
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-1">
+        {[['verkoop', 'Verkoop'], ['inkoop', 'Inkoop']].map(([id, label]) => (
+          <button key={id} data-testid={`shop-producten-${id}`} onClick={() => setMode(id)}
+            className={`px-3 py-1 rounded-lg text-[11px] font-medium border ${mode === id ? 'border-current' : 'border-slate-700 text-slate-400'}`}
+            style={mode === id ? { color, borderColor: color, backgroundColor: color + '18' } : {}}>
+            {label} {id === 'inkoop' && inkoop.length > 0 && <span className="opacity-60">({inkoop.length})</span>}
+          </button>
+        ))}
+        <span className="ml-auto text-[10px] text-slate-500">Prijzen excl. BTW · BTW-% en KOR staan bij de winkel (boekhouder)</span>
+      </div>
+      {mode === 'verkoop'
+        ? <ProductenTabel products={products} loading={loading} color={color} kost={kost} inkoop={inkoop} onEdit={onEdit} onDelete={onDelete} onNew={onNew} />
+        : <InkoopBeheer shop={shop} userId={userId} inkoop={inkoop} settings={settings} color={color} onChanged={loadInkoop} />}
+    </div>
+  );
+}
+
+// v14_shop_producten_tab_001 — verkoopproducten met kostprijs / marge / voorraad
+function ProductenTabel({ products, loading, color, kost = {}, inkoop = [], onEdit, onDelete, onNew }) {
   if (loading) return <div className="text-center py-8 text-xs text-slate-500">Producten laden...</div>;
+  const levNaam = (p) => {
+    const regels = p.stuklijst || [];
+    if (regels.length) {
+      const namen = [...new Set(regels.map(r => inkoop.find(a => a.id === r.inkoop_id)?.leverancier_naam).filter(Boolean))];
+      return namen.length ? namen.join(', ') : <span className="text-slate-600">zelf</span>;
+    }
+    return p.leverancier_naam || <span className="text-slate-600">zelf</span>;
+  };
   return (
     <div data-testid="shop-producten-tabel" className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
       <table className="w-full text-xs">
         <thead>
           <tr className="text-[10px] uppercase tracking-wider text-slate-500 border-b border-slate-800">
             <th className="text-left px-3 py-2">Product</th>
-            <th className="text-left px-3 py-2">Code</th>
-            <th className="text-right px-3 py-2">Prijs</th>
+            <th className="text-left px-3 py-2">Stuklijst</th>
+            <th className="text-right px-3 py-2">Verkoop excl.</th>
+            <th className="text-right px-3 py-2">Kostprijs / marge</th>
             <th className="text-right px-3 py-2">Voorraad</th>
             <th className="text-left px-3 py-2">Leverancier</th>
             <th className="px-3 py-2" />
@@ -256,14 +299,21 @@ function ProductenTabel({ products, loading, color, onEdit, onDelete, onNew }) {
           {products.map(p => (
             <tr key={p.id} data-testid={`shop-prodrow-${p.id}`} className="border-b border-slate-800/60 hover:bg-slate-800/40">
               <td className="px-3 py-2 text-white font-medium">{p.name}</td>
-              <td className="px-3 py-2 font-mono text-slate-300">{p.product_code || <span className="text-slate-600">—</span>}</td>
+              <td className="px-3 py-2 text-slate-300 text-[11px]">
+                {(p.stuklijst || []).length
+                  ? (p.stuklijst || []).map((r, i) => { const a = inkoop.find(x => x.id === r.inkoop_id); return <div key={i} className="font-mono text-[10px]">{r.aantal}× {a?.code || ''} <span className="text-slate-500">{a?.naam || r.inkoop_id}</span></div>; })
+                  : <span className="text-slate-600">{p.product_code || '—'}</span>}
+              </td>
               <td className="px-3 py-2 text-right" style={{ color }}>€{Number(p.price || 0).toFixed(2)}</td>
+              <td className="px-3 py-2 text-right text-[11px]">
+                {kost[p.id]?.kostprijs_excl != null
+                  ? <><span className="text-slate-300">€{kost[p.id].kostprijs_excl.toFixed(2)}</span> <span className={kost[p.id].marge_excl >= 0 ? 'text-emerald-400' : 'text-red-400'}>→ €{kost[p.id].marge_excl.toFixed(2)}</span></>
+                  : <span className="text-slate-600" title="Inkoopprijs ontbreekt op een artikel">—</span>}
+              </td>
               <td className="px-3 py-2 text-right text-slate-300">
                 {p.voorraad ?? (p.in_stock === false ? <span className="text-red-400">uitverkocht</span> : <span className="text-slate-500">onbekend</span>)}
               </td>
-              <td className="px-3 py-2 text-slate-300">
-                {p.leverancier_naam || (p.leverancier_contact_id ? p.leverancier_contact_id : <span className="text-slate-600">zelf</span>)}
-              </td>
+              <td className="px-3 py-2 text-slate-300 text-[11px]">{levNaam(p)}</td>
               <td className="px-3 py-2 text-right whitespace-nowrap">
                 <button data-testid={`shop-prodrow-edit-${p.id}`} onClick={() => onEdit(p)} className="p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-white" title="Bewerken"><Edit3 className="w-3.5 h-3.5" /></button>
                 <button data-testid={`shop-prodrow-delete-${p.id}`} onClick={() => onDelete(p)} className="p-1.5 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-300" title="Verwijderen"><Trash2 className="w-3.5 h-3.5" /></button>
@@ -271,7 +321,7 @@ function ProductenTabel({ products, loading, color, onEdit, onDelete, onNew }) {
             </tr>
           ))}
           {products.length === 0 && (
-            <tr><td colSpan={6} className="px-3 py-8 text-center text-slate-500">
+            <tr><td colSpan={7} className="px-3 py-8 text-center text-slate-500">
               Nog geen producten. <button onClick={onNew} className="underline" style={{ color }}>Nieuw product</button> — hij verschijnt dan ook in de Winkel.
             </td></tr>
           )}
@@ -297,7 +347,8 @@ function BestellingenLijst({ orders, loading, color }) {
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
               <p className="text-xs text-white font-medium">Order <span className="font-mono">{o.id}</span> · {o.shipping_name || o.user_id}</p>
-              <p className="text-[10px] text-slate-500">{new Date(o.created_at).toLocaleString('nl-NL')}{o.shipping_address ? ` · ${o.shipping_address}` : ''}</p>
+              <p className="text-[10px] text-slate-500">{new Date(o.created_at).toLocaleString('nl-NL')}{o.bezorging ? ` · ${o.bezorging}` : ''}{o.shipping_address ? ` · ${o.shipping_address}` : ''}</p>
+              {o.subtotaal_excl != null && <p className="text-[10px] text-slate-500">excl. €{Number(o.subtotaal_excl).toFixed(2)} · BTW {o.btw_pct ?? 21}% €{Number(o.btw || 0).toFixed(2)} · verzend €{Number(o.verzendkosten || 0).toFixed(2)}{o.verpakking ? ` · ${o.verpakking.naam}` : ''}</p>}
             </div>
             <div className="text-right shrink-0">
               <p className="text-sm font-bold" style={{ color }}>€{Number(o.shop_total ?? o.total ?? 0).toFixed(2)}</p>
@@ -315,6 +366,127 @@ function BestellingenLijst({ orders, loading, color }) {
           {o.notes && <p className="text-[11px] text-slate-500 italic mt-1">{o.notes}</p>}
         </div>
       ))}
+    </div>
+  );
+}
+
+
+// v14_shop_inkoop_stuklijst_001 — inkoop-artikelen (productcodes) + instellingen (verzendkosten, verpakking)
+const LEEG_INK = { code: '', naam: '', inkoopprijs_excl: '', leverancier_contact_id: '', leverancier_naam: '', voorraad: '', eenheid: 'stuk', notities: '' };
+function InkoopBeheer({ shop, userId, inkoop, settings, color, onChanged }) {
+  const [form, setForm] = useState(null);
+  const [leveranciers, setLeveranciers] = useState([]);
+  const [saving, setSaving] = useState(false);
+  const [verzend, setVerzend] = useState('');
+  const [verpakking, setVerpakking] = useState('');
+  const [afhalen, setAfhalen] = useState(true);
+  useEffect(() => {
+    fetch(`${API}/api/contacten/${userId}?laag=zakelijk`).then(r => r.json()).then(d => setLeveranciers((d.contacten || []).filter(c => c.rol === 'leverancier' || c.rol === 'partner' || !c.rol))).catch(() => {});
+  }, [userId]);
+  useEffect(() => {
+    if (!settings) return;
+    setVerzend(settings.verzendkosten ?? ''); setVerpakking(settings.verpakking_inkoop_id || ''); setAfhalen(settings.afhalen_mogelijk !== false);
+  }, [settings]);
+
+  const save = async () => {
+    if (!form.naam.trim()) { toast.error('Naam is verplicht'); return; }
+    setSaving(true);
+    const body = { viewer_id: userId, ...form, code: form.code || null,
+      inkoopprijs_excl: form.inkoopprijs_excl === '' ? null : Number(form.inkoopprijs_excl),
+      voorraad: form.voorraad === '' ? null : parseInt(form.voorraad, 10),
+      leverancier_contact_id: form.leverancier_contact_id || null,
+      leverancier_naam: form.leverancier_naam || leveranciers.find(c => c.id === form.leverancier_contact_id)?.naam || null };
+    const url = form.id ? `${API}/api/shop/shops/${encodeURIComponent(shop.id)}/inkoop/${form.id}` : `${API}/api/shop/shops/${encodeURIComponent(shop.id)}/inkoop`;
+    const r = await fetch(url, { method: form.id ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.json()).catch(() => ({}));
+    setSaving(false);
+    if (r.success) { toast.success(form.id ? 'Artikel bijgewerkt' : 'Artikel toegevoegd'); setForm(null); onChanged(); }
+    else toast.error(r.detail || 'Opslaan mislukt');
+  };
+  const remove = async (a) => {
+    if (!window.confirm(`"${a.naam}" verwijderen?`)) return;
+    const r = await fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/inkoop/${a.id}?viewer_id=${userId}`, { method: 'DELETE' }).then(x => x.json()).catch(() => ({}));
+    if (r.success) { toast.success('Verwijderd'); onChanged(); } else toast.error(r.detail || 'Verwijderen mislukt');
+  };
+  const saveSettings = async () => {
+    const r = await fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/settings`, { method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ viewer_id: userId, verzendkosten: verzend === '' ? null : Number(verzend), verpakking_inkoop_id: verpakking || null, afhalen_mogelijk: afhalen }) }).then(x => x.json()).catch(() => ({}));
+    if (r.success) { toast.success('Instellingen opgeslagen'); onChanged(); } else toast.error('Opslaan mislukt');
+  };
+  const inp = 'px-2 py-1.5 bg-slate-800 border border-slate-700 rounded text-xs text-white w-full';
+
+  return (
+    <div className="space-y-3">
+      {/* Instellingen per bestelling */}
+      <div data-testid="shop-settings" className="bg-slate-900 border border-slate-800 rounded-xl p-3 flex flex-wrap items-end gap-3">
+        <div className="w-32">
+          <label className="text-[10px] text-slate-500 uppercase">Verzendkosten (vast, incl.)</label>
+          <input data-testid="shop-verzendkosten" type="number" step="0.01" min="0" value={verzend} onChange={e => setVerzend(e.target.value)} className={inp} />
+        </div>
+        <div className="w-56">
+          <label className="text-[10px] text-slate-500 uppercase">Verpakking per bestelling</label>
+          <select data-testid="shop-verpakking" value={verpakking} onChange={e => setVerpakking(e.target.value)} className={inp}>
+            <option value="">— geen —</option>
+            {inkoop.map(a => <option key={a.id} value={a.id}>{a.naam}{a.inkoopprijs_excl != null ? ` (€${Number(a.inkoopprijs_excl).toFixed(2)})` : ''}</option>)}
+          </select>
+        </div>
+        <label className="flex items-center gap-1.5 text-xs text-slate-300 pb-1.5">
+          <input data-testid="shop-afhalen" type="checkbox" checked={afhalen} onChange={e => setAfhalen(e.target.checked)} /> afhalen mogelijk
+        </label>
+        <button data-testid="shop-settings-save" onClick={saveSettings} className="ml-auto px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-950" style={{ background: color }}>Instellingen opslaan</button>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <p className="text-[11px] text-slate-400">Inkoop-artikelen: productcode + leverancier + inkoopprijs excl. Een verkoopproduct kiest hieruit zijn stuklijst.</p>
+        <button data-testid="inkoop-nieuw" onClick={() => setForm({ ...LEEG_INK })} className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-950" style={{ background: color }}>
+          <Plus className="w-3.5 h-3.5" /> Nieuw artikel
+        </button>
+      </div>
+
+      {form && (
+        <div data-testid="inkoop-form" className="bg-slate-900 border border-slate-700 rounded-xl p-3 grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div><label className="text-[10px] text-slate-500 uppercase">Productcode</label><input data-testid="inkoop-code" value={form.code} onChange={e => setForm(f => ({ ...f, code: e.target.value }))} placeholder="ST-STSU822-C-22" className={inp + ' font-mono'} /></div>
+          <div><label className="text-[10px] text-slate-500 uppercase">Naam</label><input data-testid="inkoop-naam" value={form.naam} onChange={e => setForm(f => ({ ...f, naam: e.target.value }))} className={inp} /></div>
+          <div><label className="text-[10px] text-slate-500 uppercase">Inkoopprijs excl.</label><input data-testid="inkoop-prijs" type="number" step="0.01" min="0" value={form.inkoopprijs_excl} onChange={e => setForm(f => ({ ...f, inkoopprijs_excl: e.target.value }))} className={inp} /></div>
+          <div><label className="text-[10px] text-slate-500 uppercase">Voorraad</label><input data-testid="inkoop-voorraad" type="number" min="0" value={form.voorraad} onChange={e => setForm(f => ({ ...f, voorraad: e.target.value }))} placeholder="leeg = onbekend" className={inp} /></div>
+          <div className="col-span-2">
+            <label className="text-[10px] text-slate-500 uppercase">Leverancier (zakelijk contact)</label>
+            <select data-testid="inkoop-leverancier" value={form.leverancier_contact_id} onChange={e => setForm(f => ({ ...f, leverancier_contact_id: e.target.value, leverancier_naam: '' }))} className={inp}>
+              <option value="">— zelf / anders —</option>
+              {leveranciers.map(c => <option key={c.id} value={c.id}>{c.naam}</option>)}
+            </select>
+          </div>
+          {!form.leverancier_contact_id && <div><label className="text-[10px] text-slate-500 uppercase">of naam</label><input value={form.leverancier_naam} onChange={e => setForm(f => ({ ...f, leverancier_naam: e.target.value }))} className={inp} /></div>}
+          <div><label className="text-[10px] text-slate-500 uppercase">Notities</label><input value={form.notities || ''} onChange={e => setForm(f => ({ ...f, notities: e.target.value }))} className={inp} /></div>
+          <div className="col-span-2 md:col-span-4 flex justify-end gap-2">
+            <button onClick={() => setForm(null)} className="px-3 py-1.5 text-xs text-slate-400 hover:text-white">Annuleren</button>
+            <button data-testid="inkoop-save" onClick={save} disabled={saving} className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-950 disabled:opacity-50" style={{ background: color }}>{saving ? 'Opslaan…' : 'Opslaan'}</button>
+          </div>
+        </div>
+      )}
+
+      <div data-testid="shop-inkoop-tabel" className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <table className="w-full text-xs">
+          <thead><tr className="text-[10px] uppercase tracking-wider text-slate-500 border-b border-slate-800">
+            <th className="text-left px-3 py-2">Code</th><th className="text-left px-3 py-2">Artikel</th><th className="text-right px-3 py-2">Inkoop excl.</th><th className="text-right px-3 py-2">Voorraad</th><th className="text-left px-3 py-2">Leverancier</th><th className="px-3 py-2" />
+          </tr></thead>
+          <tbody>
+            {inkoop.map(a => (
+              <tr key={a.id} data-testid={`inkoop-row-${a.id}`} className="border-b border-slate-800/60 hover:bg-slate-800/40">
+                <td className="px-3 py-2 font-mono text-slate-300">{a.code || <span className="text-slate-600">—</span>}</td>
+                <td className="px-3 py-2 text-white">{a.naam}</td>
+                <td className="px-3 py-2 text-right" style={{ color }}>{a.inkoopprijs_excl != null ? `€${Number(a.inkoopprijs_excl).toFixed(2)}` : <span className="text-amber-400/80" title="Nog invullen">?</span>}</td>
+                <td className="px-3 py-2 text-right text-slate-300">{a.voorraad ?? <span className="text-slate-500">onbekend</span>}</td>
+                <td className="px-3 py-2 text-slate-300">{a.leverancier_naam || <span className="text-slate-600">zelf</span>}</td>
+                <td className="px-3 py-2 text-right whitespace-nowrap">
+                  <button data-testid={`inkoop-edit-${a.id}`} onClick={() => setForm({ ...LEEG_INK, ...a, inkoopprijs_excl: a.inkoopprijs_excl ?? '', voorraad: a.voorraad ?? '', code: a.code || '', leverancier_contact_id: a.leverancier_contact_id || '', leverancier_naam: a.leverancier_naam || '' })} className="p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-white"><Edit3 className="w-3.5 h-3.5" /></button>
+                  <button data-testid={`inkoop-delete-${a.id}`} onClick={() => remove(a)} className="p-1.5 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-300"><Trash2 className="w-3.5 h-3.5" /></button>
+                </td>
+              </tr>
+            ))}
+            {inkoop.length === 0 && <tr><td colSpan={6} className="px-3 py-8 text-center text-slate-500">Nog geen inkoop-artikelen.</td></tr>}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

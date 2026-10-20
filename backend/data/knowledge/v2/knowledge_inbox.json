@@ -1463,34 +1463,6 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-3cd154f0",
-      "begrip": "ervaringen",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [],
-      "verbanden": [],
-      "footnote": {
-        "bron": "llm_auto_extract",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "snap_agent",
-        "aangemaakt_op": "2026-10-19T10:05:47.409657+00:00",
-        "origin": "spark_llm_output",
-        "context_snippet": "ale systemen.  - **Waarom**: om kennis, ervaringen of details uit te wisselen.   **Meer**  - **Betekenis**: ee",
-        "llm_count": 1
-      },
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-b4993220",
       "begrip": "watergebied",
       "lade": null,
@@ -1738,9 +1710,26 @@
         "aangemaakt_op": "2026-10-19T10:11:44.810106+00:00",
         "origin": "spark_llm_output",
         "context_snippet": "plan dat in je hoofd ontstaat. Het kan voortkomen uit inspiratie, ervaring of het combineren van bestaande ke",
-        "llm_count": 1
+        "llm_count": 1,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-10-20T11:02:56.315782+00:00"
       },
-      "_inbox_reason": "missing_laag1"
+      "_inbox_reason": "missing_laag1",
+      "emotie": "neutraal",
+      "emotie_bevestigd": true,
+      "emotie_bron": "user-001",
+      "emotie_bevestigd_op": "2026-10-20T11:02:56.315774+00:00",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ]
     },
     {
       "id": "kbv2-a96efb04",

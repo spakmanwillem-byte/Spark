@@ -740,6 +740,11 @@ class ProductUpsert(BaseModel):
     images: Optional[List[str]] = []  # full URLs (sa /api/system-archive/file/...)
     # v11_shop_scope_001 — Product-CRUD moet per shop schrijven, niet in de global PRODUCTS_FILE.
     shop_id: Optional[str] = "shop-roadkill"
+    # v14_shop_producten_tab_001 — productcode + leverancier (hybride link naar zakelijke contacten)
+    product_code: Optional[str] = None
+    leverancier_contact_id: Optional[str] = None
+    leverancier_naam: Optional[str] = None
+    voorraad: Optional[int] = None
 
 
 def _require_admin(viewer_id: str) -> None:
@@ -813,6 +818,8 @@ async def admin_create_product(req: ProductUpsert):
         "shop_id": req.shop_id or "shop-roadkill",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "btw_percentage": 0,  # Verkoopprijs is incl. BTW (per user: zonder BTW = wat ze betalen)
+        "product_code": req.product_code, "leverancier_contact_id": req.leverancier_contact_id,
+        "leverancier_naam": req.leverancier_naam, "voorraad": req.voorraad,
     }
     data.setdefault("products", []).append(new_prod)
     save_json(pfile, data)
@@ -833,6 +840,10 @@ async def admin_update_product(product_id: str, req: ProductUpsert):
             p["category"] = req.category
             p["entity_id"] = req.entity_id
             p["in_stock"] = req.in_stock
+            p["product_code"] = req.product_code
+            p["leverancier_contact_id"] = req.leverancier_contact_id
+            p["leverancier_naam"] = req.leverancier_naam
+            p["voorraad"] = req.voorraad
             if req.image_icon:
                 p["image_icon"] = req.image_icon
             if req.images is not None:
@@ -1207,6 +1218,20 @@ def _bark_to_user(user_id: str, text: str, kind: str = "order_update", meta: dic
         save_json(fp, data)
     except Exception as e:
         print(f"[shop] bark naar user mislukt: {e}")
+
+
+@router.get("/shops/{shop_id}/orders")
+async def get_shop_orders(shop_id: str):
+    """v14_shop_producten_tab_001 — bestellingen voor een winkel (orders met producten uit deze shop)."""
+    prods = {p["id"] for p in load_json(_shop_products_path(shop_id), default={"products": []}).get("products", [])}
+    data = load_json(PRODUCTS_FILE, default={"orders": []})
+    orders = []
+    for o in data.get("orders", []):
+        items = [i for i in o.get("items", []) if i.get("product_id") in prods]
+        if items:
+            orders.append({**o, "items": items, "shop_total": round(sum(i.get("line_total", 0) for i in items), 2)})
+    orders.sort(key=lambda o: o.get("created_at", ""), reverse=True)
+    return {"success": True, "orders": orders, "count": len(orders)}
 
 
 @router.get("/orders/{user_id}")

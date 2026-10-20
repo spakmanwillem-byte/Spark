@@ -3,7 +3,7 @@
 // v12_shop_owner_perms_001 — Header met kleur-picker: shop-owner beheert hier zijn winkel
 // (naam + accent-kleur). Winkelstraat (front) blijft admin-only voor CRUD.
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Package, Plus, Edit3, Trash2, Image as ImageIcon, ShoppingBag, Camera } from 'lucide-react';
+import { Package, Plus, Edit3, Trash2, Image as ImageIcon, ShoppingBag, Camera, ClipboardList, Store } from 'lucide-react';
 import { ProductEditModal } from '../modules/ProductEditModal';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -18,6 +18,16 @@ export function ShopTabView({ shop, userId }) {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null);
   const [creating, setCreating] = useState(false);
+  // v14_shop_producten_tab_001 — subtabs: winkel (etalage) | producten (beheer) | bestellingen
+  const [subTab, setSubTab] = useState('winkel');
+  const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
+  useEffect(() => {
+    if (subTab !== 'bestellingen') return;
+    setOrdersLoading(true);
+    fetch(`${API}/api/shop/shops/${encodeURIComponent(shop.id)}/orders`).then(r => r.json())
+      .then(d => setOrders(d.orders || [])).catch(() => setOrders([])).finally(() => setOrdersLoading(false));
+  }, [subTab, shop.id]);
   // v12_shop_owner_perms_001 — lokale kleur-state (blijft in sync met shop prop maar
   // laat direct visuele feedback zien terwijl PATCH loopt).
   const [color, setColor] = useState(shop.color_accent || '#f59e0b');
@@ -146,8 +156,27 @@ export function ShopTabView({ shop, userId }) {
         </div>
       </div>
 
-      {/* Producten grid */}
-      {loading ? (
+      {/* v14_shop_producten_tab_001 — subtabs */}
+      <div className="flex gap-1 border-b border-slate-800">
+        {[['winkel', 'Winkel', Store], ['producten', 'Producten', Package], ['bestellingen', 'Bestellingen', ClipboardList]].map(([id, label, Icon]) => (
+          <button key={id} data-testid={`shop-subtab-${id}`} onClick={() => setSubTab(id)}
+            className={`relative flex items-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors ${subTab === id ? 'text-white' : 'text-slate-400 hover:text-slate-200'}`}>
+            <Icon className="w-3.5 h-3.5" /> {label}
+            {id === 'producten' && products.length > 0 && <span className="text-[10px] text-slate-500">({products.length})</span>}
+            {subTab === id && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: color }} />}
+          </button>
+        ))}
+      </div>
+
+      {subTab === 'producten' && (
+        <ProductenTabel products={products} loading={loading} color={color} onEdit={setEditing} onDelete={doDelete} onNew={() => setCreating(true)} />
+      )}
+      {subTab === 'bestellingen' && (
+        <BestellingenLijst orders={orders} loading={ordersLoading} color={color} />
+      )}
+
+      {/* Producten grid (etalage) */}
+      {subTab === 'winkel' && (loading ? (
         <div className="text-center py-8 text-xs text-slate-500">Producten laden...</div>
       ) : products.length === 0 ? (
         <div className="text-center py-16 border border-dashed border-slate-700 rounded-xl">
@@ -189,7 +218,7 @@ export function ShopTabView({ shop, userId }) {
             </div>
           ))}
         </div>
-      )}
+      ))}
 
       {/* Edit/create modal */}
       <ProductEditModal
@@ -202,6 +231,90 @@ export function ShopTabView({ shop, userId }) {
         defaultCategory={editing?.category || 'merch'}
         onSaved={() => load()}
       />
+    </div>
+  );
+}
+
+
+// v14_shop_producten_tab_001 — productoverzicht met code / voorraad / leverancier
+function ProductenTabel({ products, loading, color, onEdit, onDelete, onNew }) {
+  if (loading) return <div className="text-center py-8 text-xs text-slate-500">Producten laden...</div>;
+  return (
+    <div data-testid="shop-producten-tabel" className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <table className="w-full text-xs">
+        <thead>
+          <tr className="text-[10px] uppercase tracking-wider text-slate-500 border-b border-slate-800">
+            <th className="text-left px-3 py-2">Product</th>
+            <th className="text-left px-3 py-2">Code</th>
+            <th className="text-right px-3 py-2">Prijs</th>
+            <th className="text-right px-3 py-2">Voorraad</th>
+            <th className="text-left px-3 py-2">Leverancier</th>
+            <th className="px-3 py-2" />
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(p => (
+            <tr key={p.id} data-testid={`shop-prodrow-${p.id}`} className="border-b border-slate-800/60 hover:bg-slate-800/40">
+              <td className="px-3 py-2 text-white font-medium">{p.name}</td>
+              <td className="px-3 py-2 font-mono text-slate-300">{p.product_code || <span className="text-slate-600">—</span>}</td>
+              <td className="px-3 py-2 text-right" style={{ color }}>€{Number(p.price || 0).toFixed(2)}</td>
+              <td className="px-3 py-2 text-right text-slate-300">
+                {p.voorraad ?? (p.in_stock === false ? <span className="text-red-400">uitverkocht</span> : <span className="text-slate-500">onbekend</span>)}
+              </td>
+              <td className="px-3 py-2 text-slate-300">
+                {p.leverancier_naam || (p.leverancier_contact_id ? p.leverancier_contact_id : <span className="text-slate-600">zelf</span>)}
+              </td>
+              <td className="px-3 py-2 text-right whitespace-nowrap">
+                <button data-testid={`shop-prodrow-edit-${p.id}`} onClick={() => onEdit(p)} className="p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-white" title="Bewerken"><Edit3 className="w-3.5 h-3.5" /></button>
+                <button data-testid={`shop-prodrow-delete-${p.id}`} onClick={() => onDelete(p)} className="p-1.5 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-300" title="Verwijderen"><Trash2 className="w-3.5 h-3.5" /></button>
+              </td>
+            </tr>
+          ))}
+          {products.length === 0 && (
+            <tr><td colSpan={6} className="px-3 py-8 text-center text-slate-500">
+              Nog geen producten. <button onClick={onNew} className="underline" style={{ color }}>Nieuw product</button> — hij verschijnt dan ook in de Winkel.
+            </td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// v14_shop_producten_tab_001 — bestellingen van deze winkel (later: hybride link naar boekhouder/voorraad)
+const STATUS_KLEUR = { besteld: '#f59e0b', verzonden: '#10b981', geannuleerd: '#ef4444' };
+function BestellingenLijst({ orders, loading, color }) {
+  if (loading) return <div className="text-center py-8 text-xs text-slate-500">Bestellingen laden...</div>;
+  if (!orders.length) return (
+    <div data-testid="shop-bestellingen-leeg" className="text-center py-12 border border-dashed border-slate-700 rounded-xl text-xs text-slate-500">
+      Nog geen bestellingen voor deze winkel.
+    </div>
+  );
+  return (
+    <div data-testid="shop-bestellingen" className="space-y-2">
+      {orders.map(o => (
+        <div key={o.id} data-testid={`shop-order-${o.id}`} className="bg-slate-900 border border-slate-800 rounded-xl p-3">
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0">
+              <p className="text-xs text-white font-medium">Order <span className="font-mono">{o.id}</span> · {o.shipping_name || o.user_id}</p>
+              <p className="text-[10px] text-slate-500">{new Date(o.created_at).toLocaleString('nl-NL')}{o.shipping_address ? ` · ${o.shipping_address}` : ''}</p>
+            </div>
+            <div className="text-right shrink-0">
+              <p className="text-sm font-bold" style={{ color }}>€{Number(o.shop_total ?? o.total ?? 0).toFixed(2)}</p>
+              <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ color: STATUS_KLEUR[o.status] || '#94a3b8', background: (STATUS_KLEUR[o.status] || '#94a3b8') + '22' }}>{o.status}</span>
+            </div>
+          </div>
+          <ul className="mt-2 space-y-0.5">
+            {o.items.map((i, idx) => (
+              <li key={idx} className="text-[11px] text-slate-300 flex justify-between">
+                <span>{i.quantity}× {i.name}{i.product_code ? <span className="font-mono text-slate-500"> · {i.product_code}</span> : ''}</span>
+                <span className="text-slate-400">€{Number(i.line_total || 0).toFixed(2)}</span>
+              </li>
+            ))}
+          </ul>
+          {o.notes && <p className="text-[11px] text-slate-500 italic mt-1">{o.notes}</p>}
+        </div>
+      ))}
     </div>
   );
 }

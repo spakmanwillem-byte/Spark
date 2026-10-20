@@ -14,6 +14,12 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
   const [inStock, setInStock] = useState(true);
   const [imageIcon, setImageIcon] = useState('package');
   const [images, setImages] = useState([]);
+  // v14_shop_producten_tab_001 — productcode, voorraad, leverancier (hybride link naar zakelijke contacten)
+  const [productCode, setProductCode] = useState('');
+  const [voorraad, setVoorraad] = useState('');
+  const [leverancierId, setLeverancierId] = useState('');
+  const [leverancierNaam, setLeverancierNaam] = useState('');
+  const [leveranciers, setLeveranciers] = useState([]);
   const [uploadingIdx, setUploadingIdx] = useState(-1);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -38,12 +44,29 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
       setInStock(product.in_stock !== false);
       setImageIcon(product.image_icon || 'package');
       setImages(product.images || (product.image_url ? [product.image_url] : []));
+      setProductCode(product.product_code || ''); setVoorraad(product.voorraad ?? '');
+      setLeverancierId(product.leverancier_contact_id || ''); setLeverancierNaam(product.leverancier_naam || '');
     } else {
       setName(''); setDescription(''); setPrice(''); setCategory(defaultCategory);
       setEntityId(derivedEntityId);
       setInStock(true); setImageIcon('package'); setImages([]);
+      setProductCode(''); setVoorraad(''); setLeverancierId(''); setLeverancierNaam('');
     }
   }, [open, product, defaultCategory, derivedEntityId]);
+
+  useEffect(() => {
+    if (!open) return;
+    fetch(`${API}/api/contacten/${userId}?laag=zakelijk`).then(r => r.json())
+      .then(d => setLeveranciers((d.contacten || []).filter(c => !c.rol || c.rol === 'leverancier' || c.rol === 'partner' || c.rol === 'overig')))
+      .catch(() => setLeveranciers([]));
+  }, [open, userId]);
+
+  const extraFields = () => ({
+    product_code: productCode || null,
+    voorraad: voorraad === '' ? null : parseInt(voorraad, 10),
+    leverancier_contact_id: leverancierId || null,
+    leverancier_naam: leverancierNaam || (leveranciers.find(c => c.id === leverancierId)?.naam ?? null),
+  });
 
   if (!open) return null;
 
@@ -60,7 +83,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
       }
       const created = await fetch(`${API}/api/shop/admin/products`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, shop_id: shopId }),
+        body: JSON.stringify({ viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, shop_id: shopId, ...extraFields() }),
       }).then(r => r.json());
       if (!created.success) { setError(created.detail || 'Aanmaken mislukt'); return; }
       pid = created.product.id;
@@ -101,7 +124,7 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
     if (!Number.isFinite(pr) || pr < 0) { setError('Prijs ongeldig'); return; }
     setSaving(true);
     try {
-      const body = { viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, images, shop_id: shopId };
+      const body = { viewer_id: userId, name, description, price: pr, category, entity_id: entityId, in_stock: inStock, image_icon: imageIcon, images, shop_id: shopId, ...extraFields() };
       const url = isNew ? `${API}/api/shop/admin/products` : `${API}/api/shop/admin/products/${product.id}`;
       const method = isNew ? 'POST' : 'PUT';
       const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.json());
@@ -184,6 +207,33 @@ export function ProductEditModal({ open, onClose, product, userId, shopId = 'sho
               placeholder="Materiaal, maten, levertijd…"
               className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 resize-none" />
           </div>
+
+          {/* v14_shop_producten_tab_001 — productcode, voorraad, leverancier */}
+          <div className="grid grid-cols-3 gap-3">
+            <div>
+              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Productcode</label>
+              <input data-testid="product-code" value={productCode} onChange={e => setProductCode(e.target.value)} placeholder="bijv. RK-CAP-001"
+                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+            </div>
+            <div>
+              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Voorraad</label>
+              <input data-testid="product-voorraad" type="number" min="0" value={voorraad} onChange={e => setVoorraad(e.target.value)} placeholder="leeg = onbekend"
+                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+            </div>
+            <div>
+              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Leverancier</label>
+              <select data-testid="product-leverancier" value={leverancierId} onChange={e => { setLeverancierId(e.target.value); setLeverancierNaam(''); }}
+                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white">
+                <option value="">— geen / zelf —</option>
+                {leveranciers.map(c => <option key={c.id} value={c.id}>{c.naam}{c.rol ? ` (${c.rol})` : ''}</option>)}
+              </select>
+              {!leverancierId && (
+                <input data-testid="product-leverancier-naam" value={leverancierNaam} onChange={e => setLeverancierNaam(e.target.value)} placeholder="of typ een naam"
+                  className="mt-1 w-full px-2 py-1 bg-slate-800/60 border border-slate-700 rounded text-[11px] text-white placeholder-slate-500" />
+              )}
+            </div>
+          </div>
+          <p className="text-[9px] text-slate-500 -mt-2">Leveranciers komen uit Mijn Profiel → Contacten (zakelijk). Leeg = jij levert zelf.</p>
 
           {/* Categorie + kasboek (read-only, gekoppeld aan shop) */}
           <div className="grid grid-cols-2 gap-3">

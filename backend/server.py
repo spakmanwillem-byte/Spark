@@ -281,6 +281,9 @@ app.include_router(trade_strategy_cfg_router, prefix="/api")
 # v12_contact_call_001 — Bel-contacten + WhatsApp deep-link
 from modules.bel_contacts import bel_contacts_router
 app.include_router(bel_contacts_router, prefix="/api")
+# v14_contacten_klapper_001 — telefoonklapper privé/zakelijk (Mijn Profiel → Contacten)
+from modules.contacten import contacten_router
+app.include_router(contacten_router, prefix="/api")
 
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router

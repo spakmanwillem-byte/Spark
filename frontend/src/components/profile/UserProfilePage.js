@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { ContactenTab } from './ContactenTab';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -17,6 +18,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const TABS = [
   { id: 'algemeen', label: 'Algemeen' },
+  { id: 'contacten', label: 'Contacten' }, // v14_contacten_klapper_001
   { id: 'instellingen', label: 'Instellingen' },
 ];
 
@@ -138,6 +140,7 @@ export function UserProfilePage({ onNavigate }) {
               />
             )}
             {/* v13c_dnd_sloop_001 — Avatar-tab verwijderd (was 100% DnD-character-sheet) */}
+            {activeTab === 'contacten' && <ContactenTab userId={userId} />}
             {activeTab === 'instellingen' && (
               <InstellingenTab userId={userId} user={user} />
             )}
@@ -255,6 +258,20 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
             placeholder="email@voorbeeld.nl" onChange={v => updateField('email', v)} />
           <InputField label="Telefoon" value={profile.telefoon || ''}
             placeholder="+31 6 ..." onChange={v => updateField('telefoon', v)} />
+        </div>
+      </Card>
+
+      {/* v14_contacten_klapper_001 — zakelijk: voor leveranciersmail / factuur. E-mail wordt pas gebruikt als ingevuld. */}
+      <Card title="Zakelijk" accent="#f59e0b" icon={MessageSquare}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <InputField label="Zakelijke e-mail" value={profile.zakelijke_email || ''}
+            placeholder="bedrijf@voorbeeld.nl" onChange={v => updateField('zakelijke_email', v)} />
+          <InputField label="Bedrijfsnaam" value={profile.bedrijfsnaam || ''}
+            placeholder="Bedrijf" onChange={v => updateField('bedrijfsnaam', v)} />
+          <InputField label="KvK" value={profile.kvk || ''}
+            placeholder="12345678" onChange={v => updateField('kvk', v)} />
+          <InputField label="BTW-nummer" value={profile.btw_nummer || ''}
+            placeholder="NL000000000B01" onChange={v => updateField('btw_nummer', v)} />
         </div>
       </Card>
 

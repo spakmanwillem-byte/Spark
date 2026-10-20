@@ -169,6 +169,27 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   Getest: gloed (emotie, blij, neutraal, …) bevestigd als boos → blij + neutraal weg, 13 tags over; teruggedraaid.
   Stand: 5 kaarten met expliciete pipeline-tags, 1330 met losse emotie+basis; worden pas geraakt als Willem bevestigt. Kennis-graph-ontruising (`emotie` uit tag-
   overlap) + emotie-edges (escaleert_naar/verwant/tegenpool) = volgende stap "emotie-graph".
+- **✅ 19/20-10 — Contacten-klapper + Winkel: Producten/Bestellingen (fase 1+2)** (`v14_contacten_klapper_001`,
+  `v14_shop_producten_tab_001`; getest als Emergent met tijdelijke testwinkel, daarna opgeruimd):
+  • Mijn Profiel → **Contacten**: twee lagen privé/zakelijk, rollen (familie/vriend · leverancier/klant/partner), zoek,
+    CRUD. Eén klapper, niets dubbel: bel_contacts (bron `bel`) en clienten (bron `clienten`) worden erin getoond én
+    zijn er bewerk-/verwijderbaar — schrijft terug naar hun eigen bestand (Willem 20-10: "kon mijn contacten niet
+    aanpassen"). Eigen entries: `data/users/<id>/contacten.json`. Routes `/api/contacten/{user_id}` GET/POST/PUT/DELETE.
+  • Profiel-kaart **Zakelijk**: `zakelijke_email`, `bedrijfsnaam`, `kvk`, `btw_nummer` (ProfileExtended).
+    Regel Willem: e-mail pas gebruiken als ingevuld. Spark's eigen afzender later: spark-your-life@hotmail.com.
+  • Winkel-tab → subtabs **Winkel | Producten | Bestellingen**. Product heeft nu `product_code`, `voorraad`,
+    `leverancier_contact_id` (keuze uit zakelijke contacten) of `leverancier_naam` (vrij). Leeg = eigenaar levert zelf.
+    Nieuw product in Producten-tab verschijnt ook in Winkel (zelfde bron). `GET /api/shop/shops/{shop_id}/orders`.
+  • Betaling blijft zoals het was: koper betaalt uit Spark-wallet (Willem: "daar heb ik al wat voor").
+  **Fase 3 — nog te bouwen (roadmap)**: bij bestelling zonder voorraad → leveranciersmail (aantal + productcode,
+  standaardtekst) + kopie naar zakelijke e-mail · factuur (PDF, lokaal gemaakt — geen externe dienst) naar koper-mail
+  als ingevuld + Workspace-Archief · pakbon naar winkeleigenaar-archief · bestelbon bij bestanden.
+  Mail-verzending vereist een provider/SMTP (hotmail-afzender = Outlook SMTP met app-wachtwoord, via Connections);
+  tot die tijd **concept-modus**: mail + bon als bestand in Archief, niets verstuurd.
+  **Later**: Bestellingen-tab hybride link naar boekhouder + voorraad bijhouden · contacten matchen op e-mail/tel/naam
+  aan users → bekende users zichtbaar in privé-gesprekken (Willem 20-10).
+  Bekende beperking (bestaand): `create_order` leest producten alleen uit Roadkill's products.json → bestellen bij
+  andere shops werkt nog niet; hoort bij fase 3.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

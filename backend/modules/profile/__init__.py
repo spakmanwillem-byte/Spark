@@ -212,6 +212,11 @@ class ProfileExtended(BaseModel):
     bio: Optional[str] = None
     iban: Optional[str] = None
     bank_provider: Optional[str] = None
+    # v14_contacten_klapper_001 — zakelijk (voor leveranciersmail/factuur; e-mail pas gebruiken als ingevuld)
+    zakelijke_email: Optional[str] = None
+    bedrijfsnaam: Optional[str] = None
+    kvk: Optional[str] = None
+    btw_nummer: Optional[str] = None
 
 
 @router.get("/profile/extended/{user_id}")

@@ -20,6 +20,9 @@ function FeitKaart({ f, onStatus, onDelete, onEdit }) {
   const [edit, setEdit] = useState(false);
   const [wat, setWat] = useState(f.lagen.wat);
   const [waarom, setWaarom] = useState(f.lagen.waarom || '');
+  const [begrip, setBegrip] = useState(f.begrip);
+  const [context, setContext] = useState(f.lagen.context || '');
+  const [kind, setKind] = useState(f.kind);
   const k = KIND[f.kind] || KIND.feit;
   return (
     <div data-testid={`feit-kaart-${f.id}`} className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2" style={{ borderLeft: `3px solid ${k.kleur}` }}>
@@ -32,10 +35,15 @@ function FeitKaart({ f, onStatus, onDelete, onEdit }) {
       <h4 className="text-sm font-semibold text-white">{f.begrip}</h4>
       {edit ? (
         <div className="space-y-1.5">
+          <div className="grid grid-cols-2 gap-1.5">
+            <input data-testid={`feit-edit-begrip-${f.id}`} value={begrip} onChange={e => setBegrip(e.target.value)} className={inp} placeholder="Begrip" />
+            <select data-testid={`feit-edit-kind-${f.id}`} value={kind} onChange={e => setKind(e.target.value)} className={inp}>{Object.entries(KIND).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select>
+          </div>
           <input data-testid={`feit-edit-wat-${f.id}`} value={wat} onChange={e => setWat(e.target.value)} className={inp} placeholder="Wat" />
           <input data-testid={`feit-edit-waarom-${f.id}`} value={waarom} onChange={e => setWaarom(e.target.value)} className={inp} placeholder="Waarom (optioneel)" />
+          <textarea data-testid={`feit-edit-context-${f.id}`} value={context} onChange={e => setContext(e.target.value)} rows={2} className={inp} placeholder="Context (de zin waaruit het komt — mag je aanpassen)" />
           <div className="flex gap-2">
-            <button data-testid={`feit-edit-save-${f.id}`} onClick={() => { onEdit(f, { wat, waarom }); setEdit(false); }} className="text-[11px] px-2 py-1 rounded bg-amber-500 text-slate-950 font-semibold">Opslaan</button>
+            <button data-testid={`feit-edit-save-${f.id}`} onClick={() => { onEdit(f, { wat, waarom, begrip, kind, context }); setEdit(false); }} className="text-[11px] px-2 py-1 rounded bg-amber-500 text-slate-950 font-semibold">Opslaan</button>
             <button onClick={() => setEdit(false)} className="text-[11px] px-2 py-1 rounded bg-slate-800 text-slate-300">Annuleer</button>
           </div>
         </div>

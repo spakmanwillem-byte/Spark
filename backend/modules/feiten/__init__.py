@@ -292,6 +292,7 @@ class FeitUpdate(BaseModel):
     begrip: Optional[str] = None
     kind: Optional[str] = None
     tags: Optional[List[str]] = None
+    context: Optional[str] = None
 
 
 @router.put("/{feit_id}")
@@ -307,11 +308,14 @@ async def update(feit_id: str, body: FeitUpdate):
         f["status"] = body.status
         f["getoetst_door"] = body.viewer_id
         f["vertrouwen"] = {"getoetst": 0.9, "bevestigd": 0.8, "verworpen": 0.0}.get(body.status, 0.5)
-    for k in ("wat", "waarom"):
+    for k in ("wat", "waarom", "context"):
         v = getattr(body, k)
         if v is not None: f["lagen"][k] = v.strip()[:300]
     if body.begrip is not None: f["begrip"] = body.begrip.strip()[:60]
-    if body.kind in ("mening", "feit", "waarde", "overtuiging"): f["kind"] = body.kind
+    if body.kind in ("mening", "feit", "waarde", "overtuiging") and body.kind != f["kind"]:
+        f["kind"] = body.kind
+        f["status"] = "ongetoetst" if body.kind == "feit" else "bevestigd"
+        f["tags"] = sorted((set(f["tags"]) - {"mening", "feit", "waarde", "overtuiging"}) | {body.kind})
     if body.tags is not None: f["tags"] = sorted(set(t.strip().lower() for t in body.tags if t.strip()))
     f["updated_at"] = _now()
     _save(body.scope, body.user_id, d)

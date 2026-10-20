@@ -350,6 +350,8 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
   `feiten._wijsheid_antwoord`: alleen bij vraagzin, kernwoord ≥4 letters in wat/begrip/tags van Spark-kaarten (getoetst/bevestigd).
   Feiten: achternaam-historie → mening (`persoonlijke-historie`, niet toetsbaar); "ik ben willem" van user-672f0e5c → verworpen
   (`identiteitsclaim`, Willem: "iemand kan ook liegen"). Momenteel 0 ongetoetst.
+  Correctie Willem: "katten en techniek" → mening *techniek* (wel een kat gehad, geen "houden van"), ook in `identity_facts`
+  (LLM-context). Bewerk-formulier in Feiten-tab nu volledig: begrip, soort, wat, waarom, context; soort-wissel zet status mee.
 - Later: `stts` (eerst eigen opnames matchen, dan Whisper) · vervoegingen/stam-matching (nu exacte begrip-match) ·
   eigen stemmodel uit de dataset (`voice_transcript` is al het label).
 

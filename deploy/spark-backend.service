@@ -1,0 +1,18 @@
+[Unit]
+Description=Spark Core 2.0 (backend + geserveerde frontend op :8001)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__SPARK_USER__
+WorkingDirectory=__SPARK_ROOT__/backend
+Environment=SPARK_ROOT=__SPARK_ROOT__
+Environment=SPARK_DATA_DIR=__SPARK_ROOT__/backend/data
+Environment=PYTHONUNBUFFERED=1
+ExecStart=__SPARK_ROOT__/backend/.venv/bin/uvicorn server:app --host 0.0.0.0 --port 8001
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

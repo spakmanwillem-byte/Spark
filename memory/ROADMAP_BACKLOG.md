@@ -138,6 +138,7 @@ Wanneer iemand een woord typt dat Spark niet kent (= niet in `spark_vocab.json::
 - [ ] Dashboard: click-to-focus rest, kleurschema; image-upload → begrip (sessie 58)
 - [ ] Login/Fronts/Fase A-B-C admin-look (cosmetisch, sessie 52s)
 - [ ] Chat/LLM: Cerebras-watchdog, alternatieve fallback, Ollama lokaal (Odroid) (sessie 52r-t)
+- [ ] Odroid: Willem draait `./doctor.sh` → `./install.sh` → `./run.sh prod` op ARM; fouten terugkoppelen. Daarna poort 80/443 + DuckDNS + Caddy (PORTABILITY.md). Optie: doctor-rapport ook in Beheer → Integraties → Zelfscan tonen (v14_odroid_doctor_001)
 - [ ] Privacy-matrix fase 2 (koelkast); collectieve intelligentie (research); Spark World (geparkeerd tot Core af is — Willems regel)
 
 ## 🗺️ Backlog (prioriteit hoog → laag)

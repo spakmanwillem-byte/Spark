@@ -1885,3 +1885,10 @@ User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modu
 - Integraties → Bestanden: alle Spark-bestandstypen zichtbaar (jsonl/csv/log/pdf/docx/afbeeldingen/audio/video/zip); binaire bestanden met voorvertoning + 'open in nieuw tabblad' via `/api/files/raw` (alleen binnen toegestane mappen, niet bewerkbaar). v14_files_alle_types_001
 - Verkoopproduct bewerken: hybride marge-kader (marge % ↔ verkoopprijs, op totale kostprijs van de stuklijst), v14_shop_marge_hybride_001.
 - Odroid-portabiliteit (v14_spark_root_001): `modules/core/paths.py` (SPARK_ROOT/DATA_DIR/MEMORY_DIR), 60 hardcoded `/app/`-paden vervangen, `.env.example` backend+frontend (gitignore-uitzondering), install.sh python-autodetect + .env kopiëren, `./run.sh prod` (yarn build + backend serveert frontend op :8001, SPA-fallback in server.py), PORTABILITY.md snelstart bijgewerkt.
+
+## 2026-10-21 — v14_odroid_doctor_001 · Odroid zelfscan + toegang van buiten
+- `./doctor.sh` (ook `./run.sh check`): puur-bash zelfscan van de Odroid — platform/RAM/swap/schijf, python/venv/node/yarn/ffmpeg, venv+node_modules+frontend/build, .env-sleutels (ADMIN_PASSWORD/SPARK_MASTERKEY verplicht, EMERGENT_LLM_KEY optioneel = basis-modus), poort 8001/LAN-IP, systemd. `--fix` installeert wat ontbreekt (apt/node/yarn/venv/pip/yarn install). `--net`: publiek IP + CG-NAT-uitleg, caddy, poort 80/443, DuckDNS.
+- `deploy/spark-backend.service` (template, install.sh vult SPARK_ROOT/USER in; één service, frontend-service vervallen), `deploy/Caddyfile.example` (HTTPS reverse-proxy → :8001, nodig voor microfoon in browser), `deploy/duckdns-update.sh` (cron, volgt Ziggo-IP).
+- run.sh prod: NODE_OPTIONS max-old-space 1536 + geen sourcemaps (OOM-bescherming 2-4 GB Odroid). install.sh: stale BITVAVO/GROQ-hints weg, verwijst naar doctor.sh.
+- PORTABILITY.md: hoofdstukken "Zelfscan", "Systemd", "Van buiten bereikbaar (Ziggo poort 80/443 open + DuckDNS + Caddy)", CG-NAT-check, beveiligingstips.
+- Geverifieerd in preview: SPA-fallback (`/`, `/beheer/...` → index.html, `/api/*` blijft werken) met stub-build; doctor.sh draait zonder venv. Niet getest: echte ARM/Odroid-run (Willem).

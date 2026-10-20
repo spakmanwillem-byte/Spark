@@ -10,8 +10,9 @@
 #   ./run.sh frontend    # Alleen frontend
 #   ./run.sh prod        # Frontend bouwen (yarn build) + backend serveert alles op :8001 (aanrader op Odroid)
 #   ./run.sh stop        # Stop alle Spark-processen
+#   ./run.sh check       # Zelfscan: wat is er, wat ontbreekt (= ./doctor.sh)
 #
-# Voor productie (Odroid): gebruik systemd via install.sh (spark-backend.service)
+# Voor autostart na reboot (Odroid): systemd via install.sh (deploy/spark-backend.service)
 # ============================================================
 set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,6 +27,9 @@ mkdir -p "$PID_DIR"
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 log() { echo -e "${GREEN}[RUN]${NC} $*"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
+
+# ---------- Check ----------
+if [ "$TARGET" = "check" ]; then exec "$SCRIPT_DIR/doctor.sh"; fi
 
 # ---------- Stop ----------
 if [ "$TARGET" = "stop" ]; then
@@ -59,8 +63,9 @@ build_frontend() {
   cd "$SCRIPT_DIR/frontend"
   [ -f .env ] || cp .env.example .env
   # Zelfde host als de backend → relatieve API-calls, werkt vanaf elk apparaat in je netwerk
-  log "Frontend bouwen (REACT_APP_BACKEND_URL leeg = zelfde host)…"
-  REACT_APP_BACKEND_URL="" yarn build
+  log "Frontend bouwen (REACT_APP_BACKEND_URL leeg = zelfde host)… op een Odroid duurt dit 5-15 min"
+  # Odroid: beperk node-geheugen zodat de build niet OOM'd op 2-4 GB
+  REACT_APP_BACKEND_URL="" GENERATE_SOURCEMAP=false NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1536}" yarn build
   cd "$SCRIPT_DIR"
 }
 
@@ -86,7 +91,7 @@ case "$TARGET" in
     start_backend
     log "Open http://<dit-ip>:$BACKEND_PORT in je browser (frontend wordt door de backend geserveerd)"
     ;;
-  *) echo "Onbekende target: $TARGET (all|backend|frontend|prod|stop)"; exit 1 ;;
+  *) echo "Onbekende target: $TARGET (all|backend|frontend|prod|stop|check)"; exit 1 ;;
 esac
 
 # ---------- Wacht ----------

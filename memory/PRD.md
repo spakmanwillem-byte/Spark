@@ -12,7 +12,7 @@
 - Contacten-klapper (privé/zakelijk) in Mijn Profiel + Winkel-subtabs Producten/Bestellingen (productcode, voorraad, leverancier). Fase 3 mail/PDF op roadmap.
 - Winkel: Verkoop|Inkoop + stuklijst, BTW/afhalen-verzenden, maat/kleur, factuur+pakbon PDF, leveranciersmail-concept, boekhouder-boeking (fase 3 klaar; mail versturen wacht op Connections-mail).
 - Command-registry opgeschoond (58 live / 23 placeholders) + `task_agent.resolve/resolve_text/execute` basis (werkwoord-concepten, gradatie, ASGI-dispatch, audit). Nog niet in chat-flow. Onderzoek emotie-graph: `/app/memory/ONDERZOEK_EMOTIE_GRAPH_COMMANDS.md`.
-- Open/backlog: zie ROADMAP_CORE.md (Odroid fase 1, Berichtenbeheer-prototype, Onvolledige Kaarten (120, lagen/WS5), dashboard click-to-focus Agenda/Gesprekken, stts, zelfkennis-kaarten).
+- Open/backlog: zie ROADMAP_CORE.md (Odroid fase 1 — scripts klaar (install/run prod/doctor/deploy), ARM-run door Willem nog te doen; Berichtenbeheer-prototype, Onvolledige Kaarten (120, lagen/WS5), dashboard click-to-focus Agenda/Gesprekken, stts, zelfkennis-kaarten).
 
 
 ## Sessie 58 vervolg (2026-02-15) — Registry-fundering + Ghost-preventie + kb-hit-log

@@ -1,0 +1,20 @@
+# /etc/caddy/Caddyfile — Spark Core via HTTPS (automatisch Let's Encrypt-certificaat)
+#
+# 1. Vervang JOUWNAAM.duckdns.org door je eigen DuckDNS-domein (gratis op https://www.duckdns.org)
+# 2. sudo cp deploy/Caddyfile.example /etc/caddy/Caddyfile && sudo systemctl reload caddy
+# 3. Zet op de Ziggo-router poort 80 én 443 (TCP) door naar het LAN-IP van de Odroid
+#    (poort 80 is nodig voor het ophalen/vernieuwen van het certificaat)
+#
+# Microfoon/STT werkt in de browser alléén via https — daarom deze stap.
+
+JOUWNAAM.duckdns.org {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8001
+
+    header {
+        Strict-Transport-Security "max-age=31536000"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+}

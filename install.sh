@@ -9,7 +9,8 @@
 #   ./install.sh --skip-deps    # Skip apt/system-level deps
 #   ./install.sh --dev          # Dev-modus (geen systemd, alleen dependencies)
 #
-# Testet op: Ubuntu 22.04 (x86_64 + arm64 = Odroid N2+/M1)
+# Doel: Ubuntu 22.04 / 24.04 (x86_64 + arm64 = Odroid N2+/M1/H-serie)
+# Eerst kijken wat er al is / ontbreekt?  ./doctor.sh   (of ./doctor.sh --fix)
 # ============================================================
 set -euo pipefail
 
@@ -105,31 +106,18 @@ if [ ! -f frontend/.env ] && [ -f frontend/.env.example ]; then
   cp frontend/.env.example frontend/.env
   warn "frontend/.env aangemaakt — zet REACT_APP_BACKEND_URL op http://<odroid-ip>:8001 als je vanaf een ander apparaat kijkt"
 fi
-if [ ! -f backend/.env ]; then
-  warn "backend/.env ontbreekt! Kopieer .env.example → .env en vul in:"
-  echo "  MONGO_URL=  (leeg mag, JSON-only)"
-  echo "  DB_NAME=spark_core"
-  echo "  BITVAVO_KEY=..."
-  echo "  BITVAVO_SECRET=..."
-  echo "  GROQ_API_KEY=..."
-  echo "  CEREBRAS_API_KEY=..."
-  echo "  EMERGENT_LLM_KEY=... (voor TTS/STT + optionele LLM)"
-  echo "  SPARK_DATA_DIR=$(pwd)/backend/data  # portable path override"
-fi
-if [ ! -f frontend/.env ]; then
-  warn "frontend/.env ontbreekt! Vereist:"
-  echo "  REACT_APP_BACKEND_URL=http://<odroid-ip>:8001  (of localhost:8001)"
-fi
 
 # ---------- Systemd (optioneel, alleen bij prod-install) ----------
+# Eén service: backend serveert ook de gebouwde frontend (./run.sh prod) op :8001
 if [ "$DEV_MODE" = false ] && [ "$INSTALL_DEPS" = true ]; then
-  log "Systemd services aanmaken..."
-  sudo cp deploy/spark-backend.service /etc/systemd/system/ 2>/dev/null || warn "deploy/spark-backend.service niet gevonden — sla over"
-  sudo cp deploy/spark-frontend.service /etc/systemd/system/ 2>/dev/null || warn "deploy/spark-frontend.service niet gevonden — sla over"
-  if [ -f /etc/systemd/system/spark-backend.service ]; then
+  log "Systemd service aanmaken (spark-backend, autostart na reboot)..."
+  if [ -f deploy/spark-backend.service ]; then
+    sed -e "s#__SPARK_ROOT__#${SCRIPT_DIR}#g" -e "s#__SPARK_USER__#${SPARK_USER}#g" deploy/spark-backend.service | sudo tee /etc/systemd/system/spark-backend.service >/dev/null
     sudo systemctl daemon-reload
-    sudo systemctl enable spark-backend spark-frontend
-    log "Systemd services enabled. Start met: sudo systemctl start spark-backend spark-frontend"
+    sudo systemctl enable spark-backend
+    log "spark-backend enabled. Eerst frontend bouwen: ./run.sh prod (eenmalig), daarna: sudo systemctl start spark-backend"
+  else
+    warn "deploy/spark-backend.service niet gevonden — sla systemd over"
   fi
 fi
 
@@ -137,10 +125,11 @@ fi
 log "✓ Install compleet!"
 log ""
 log "Volgende stap:"
-if [ "$DEV_MODE" = true ]; then
-  log "  ./run.sh         # dev: backend :8001 + frontend dev-server :3000"
-  log "  ./run.sh prod    # één poort: frontend bouwen, backend serveert alles op :8001"
-else
-  log "  sudo systemctl start spark-backend spark-frontend"
+log "  nano backend/.env     # ADMIN_PASSWORD + SPARK_MASTERKEY invullen"
+log "  ./doctor.sh           # controleer of alles klopt"
+log "  ./run.sh prod         # frontend bouwen + alles op http://<odroid-ip>:8001"
+if [ "$DEV_MODE" = false ]; then
+  log "  sudo systemctl start spark-backend     # daarna: start vanzelf na reboot"
   log "  sudo journalctl -u spark-backend -f    # logs volgen"
 fi
+log "  ./doctor.sh --net     # als je Spark ook van buiten wilt bereiken (Ziggo poort open + HTTPS)"

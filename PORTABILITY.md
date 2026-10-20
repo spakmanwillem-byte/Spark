@@ -141,45 +141,52 @@ for i in issues[:20]: print(f'  {i}')
 
 ---
 
-## Systemd Templates
+## Zelfscan op de Odroid: `./doctor.sh`
 
-Maak in `deploy/spark-backend.service`:
-```ini
-[Unit]
-Description=Spark Core Backend
-After=network.target
+Puur bash, werkt ook als install.sh half mislukt is.
+```bash
+./doctor.sh          # wat is er, wat ontbreekt, wat staat verkeerd (RAM, python, node, venv, .env, poort 8001)
+./doctor.sh --fix    # installeert wat ontbreekt (apt, node, yarn, venv+pip, yarn install), vraagt sudo
+./doctor.sh --net    # extra: publiek IP / CG-NAT-check, caddy, poort 80/443, DuckDNS
+```
+Loopt iets vast → plak de rode regels in de chat.
 
-[Service]
-Type=simple
-User=spark
-WorkingDirectory=/opt/spark/backend
-Environment=SPARK_DATA_DIR=/opt/spark/backend/data
-ExecStart=/opt/spark/backend/.venv/bin/uvicorn server:app --host 0.0.0.0 --port 8001
-Restart=on-failure
-RestartSec=5
+---
 
-[Install]
-WantedBy=multi-user.target
+## Systemd (autostart na reboot)
+
+`deploy/spark-backend.service` is een template; `install.sh` vult `__SPARK_ROOT__`/`__SPARK_USER__` in en zet 'm in `/etc/systemd/system/`.
+Eén service volstaat: de backend serveert de gebouwde frontend (`./run.sh prod` eenmalig draaien zodat `frontend/build/` bestaat).
+```bash
+sudo systemctl start spark-backend
+sudo journalctl -u spark-backend -f
 ```
 
-En `deploy/spark-frontend.service`:
-```ini
-[Unit]
-Description=Spark Core Frontend
-After=network.target
+---
 
-[Service]
-Type=simple
-User=spark
-WorkingDirectory=/opt/spark/frontend
-Environment=PORT=3000
-ExecStart=/usr/bin/yarn start
-Restart=on-failure
-RestartSec=5
+## Van buiten bereikbaar (Ziggo poort open + HTTPS)
 
-[Install]
-WantedBy=multi-user.target
-```
+**Waarom HTTPS:** de browser laat de microfoon (STT/opnemen) alleen toe via `https://` of `localhost`. Via `http://<odroid-ip>:8001` werkt alles behalve de mic.
+
+1. **Gratis domein**: maak op https://www.duckdns.org een subdomein (bv. `sparkwillem.duckdns.org`) en noteer je token.
+2. **DuckDNS-updater** (Ziggo wisselt je IP af en toe):
+   ```bash
+   sudo cp deploy/duckdns-update.sh /usr/local/bin/ && sudo chmod +x /usr/local/bin/duckdns-update.sh
+   printf 'DOMAIN=sparkwillem\nTOKEN=jouw-token\n' | sudo tee /etc/duckdns.conf
+   echo '*/5 * * * * root /usr/local/bin/duckdns-update.sh' | sudo tee /etc/cron.d/duckdns
+   ```
+3. **Caddy** (HTTPS reverse-proxy, haalt zelf een certificaat): `./doctor.sh --net --fix` installeert 'm, daarna:
+   ```bash
+   sudo cp deploy/Caddyfile.example /etc/caddy/Caddyfile
+   sudo nano /etc/caddy/Caddyfile      # JOUWNAAM.duckdns.org vervangen
+   sudo systemctl reload caddy
+   ```
+4. **Ziggo-modem** (192.168.178.1 → Geavanceerd → Port forwarding): TCP **80** en **443** → LAN-IP van de Odroid (zie `./doctor.sh`). Geef de Odroid daar ook een vast IP (DHCP-reservering).
+5. Open `https://sparkwillem.duckdns.org` — login met je Spark-account; poort 8001 zelf hoeft **niet** open.
+
+**CG-NAT-check:** `./doctor.sh --net` toont je publieke IP. Als het WAN-IP in je modem daar niet mee overeenkomt (of met 100.64–100.127 begint) zit je achter CG-NAT en werkt port-forwarding niet → bel Ziggo voor een publiek IPv4-adres, of gebruik Tailscale/Cloudflare Tunnel.
+
+**Beveiliging:** wat publiek staat, wordt gescand. Sterk `ADMIN_PASSWORD`/`SPARK_MASTERKEY`, `sudo apt install unattended-upgrades`, en overweeg `ufw allow 80,443/tcp && ufw enable` (ssh eerst toestaan!).
 
 ---
 
@@ -231,5 +238,5 @@ rm -rf backend/data && mkdir backend/data
 
 ## Support & vragen
 
-Bij problemen: check `journalctl -u spark-backend -n 100` op de Odroid,
+Bij problemen: eerst `./doctor.sh`, dan `journalctl -u spark-backend -n 100` op de Odroid,
 of run `./run.sh backend` in foreground om real-time logs te zien.

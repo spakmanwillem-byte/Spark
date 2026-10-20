@@ -7,10 +7,10 @@ const API = process.env.REACT_APP_BACKEND_URL;
 // v14_contacten_klapper_001 — telefoonklapper met twee lagen (privé / zakelijk)
 const ROLLEN = {
   prive: ['familie', 'vriend', 'overig'],
-  zakelijk: ['leverancier', 'klant', 'client', 'partner', 'overig'], // klant = koopt merch · client = vraagt zorg/handelingen
+  zakelijk: ['leverancier', 'dienstverlener', 'klant', 'client', 'partner', 'overig'], // klant = koopt merch · client = vraagt zorg/handelingen · dienstverlener = advocaat/accountant
 };
 const BRON_LABEL = { klapper: null, bel: 'bel-contact', clienten: 'cliëntdossier' }; // bewerken/verwijderen schrijft terug naar die module
-const LEEG = { laag: 'prive', naam: '', rol: '', bedrijf: '', contactpersoon: '', email: '', email2: '', telefoon: '', telefoon2: '', fax: '', website: '', adres: '', postcode: '', plaats: '', notities: '' };
+const LEEG = { laag: 'prive', naam: '', rol: '', bedrijf: '', contactpersoon: '', email: '', email2: '', telefoon: '', telefoon2: '', fax: '', website: '', adres: '', postcode: '', plaats: '', notities: '', kvk: '', btw_nummer: '', iban: '', bic: '', klantnummer: '' };
 
 export function ContactenTab({ userId }) {
   const [laag, setLaag] = useState('prive');
@@ -101,6 +101,14 @@ export function ContactenTab({ userId }) {
                     {c.website && <a href={c.website.startsWith('http') ? c.website : `https://${c.website}`} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-white"><Globe className="w-3 h-3" />{c.website}</a>}
                     {(c.plaats || c.adres) && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{[c.adres, c.postcode, c.plaats].filter(Boolean).join(', ')}</span>}
                   </div>
+                  {(c.kvk || c.btw_nummer || c.iban || c.klantnummer) && (
+                    <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1 text-[10px] text-slate-500 font-mono">
+                      {c.kvk && <span>KvK {c.kvk}</span>}
+                      {c.btw_nummer && <span>BTW {c.btw_nummer}</span>}
+                      {c.iban && <span>IBAN {c.iban}{c.bic ? ` · ${c.bic}` : ''}</span>}
+                      {c.klantnummer && <span>klantnr {c.klantnummer}</span>}
+                    </div>
+                  )}
                   {c.notities && <p className="text-[11px] text-slate-500 mt-1 italic truncate">{c.notities}</p>}
                 </div>
                 {!c.readonly && (
@@ -157,6 +165,15 @@ function ContactForm({ form, setForm, onSave, saving, onCancel }) {
         <F label="Plaats" k="plaats" form={form} setForm={setForm} placeholder="Plaats" />
         <F label="Notities" k="notities" form={form} setForm={setForm} placeholder="…" />
       </div>
+      {zak && (
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 pt-2 border-t border-slate-800">
+          <F label="KvK" k="kvk" form={form} setForm={setForm} placeholder="12345678" />
+          <F label="BTW-nummer" k="btw_nummer" form={form} setForm={setForm} placeholder="NL000000000B01" />
+          <F label="IBAN" k="iban" form={form} setForm={setForm} placeholder="NL00 BANK 0000 0000 00" />
+          <F label="BIC" k="bic" form={form} setForm={setForm} placeholder="ABNANL2A" />
+          <F label="Jouw klantnr bij hen" k="klantnummer" form={form} setForm={setForm} placeholder="debiteurnummer" />
+        </div>
+      )}
       <div className="flex justify-end gap-2">
         <button onClick={onCancel} className="px-3 py-1.5 rounded-lg text-xs text-slate-400 hover:text-white">Annuleren</button>
         <button data-testid="contact-form-save" onClick={onSave} disabled={saving}

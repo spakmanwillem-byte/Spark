@@ -4,7 +4,7 @@ Eén plek, niets dubbel:
   • eigen contacten  → data/users/<user_id>/contacten.json  (bron 'klapper', bewerkbaar)
   • privé-laag toont ook bel_contacts.json  (bron 'bel', alleen lezen hier)
   • zakelijke laag toont ook clienten        (bron 'clienten', alleen lezen hier)
-Rollen zakelijk: leverancier | klant (koopt merch) | client (vraagt zorg/handelingen) | partner | overig. Privé: familie | vriend | overig.
+Rollen zakelijk: leverancier | dienstverlener (advocaat, accountant…) | klant (koopt merch) | client (vraagt zorg/handelingen) | partner | overig. Privé: familie | vriend | overig.
 Later (roadmap): Spark matcht contacten op e-mail/tel/naam aan users → zichtbaar in privé-gesprekken.
 """
 from __future__ import annotations
@@ -54,6 +54,16 @@ class ContactIn(BaseModel):
     postcode: Optional[str] = None
     plaats: Optional[str] = None
     notities: Optional[str] = None
+    # zakelijk (Willem 20-10: stonden in notities)
+    kvk: Optional[str] = None
+    btw_nummer: Optional[str] = None
+    iban: Optional[str] = None
+    bic: Optional[str] = None
+    klantnummer: Optional[str] = None  # jouw debiteur-/klantnummer bij hen
+
+
+def _clean(body: ContactIn) -> Dict:
+    return {k: (v.strip() if isinstance(v, str) else v) for k, v in body.model_dump().items()}
 
 
 def _from_bel(c: Dict) -> Dict:
@@ -72,7 +82,7 @@ def _from_client(c: Dict) -> Dict:
 
 
 _BEL_MAP = {"naam": "name", "rol": "relation", "telefoon": "phone", "notities": "notes"}
-_CLIENT_KEYS = ("naam", "contactpersoon", "email", "email2", "telefoon", "telefoon2", "fax", "website", "adres", "postcode", "plaats", "notities")
+_CLIENT_KEYS = ("naam", "contactpersoon", "email", "email2", "telefoon", "telefoon2", "fax", "website", "adres", "postcode", "plaats", "notities", "kvk", "btw_nummer", "iban", "bic", "klantnummer")
 
 
 def _bel_file(user_id: str) -> Path:
@@ -150,7 +160,7 @@ async def create_contact(user_id: str, body: ContactIn):
     if not body.naam.strip():
         raise HTTPException(400, "naam is verplicht")
     items = _load(user_id)
-    c = {"id": f"ct-{uuid.uuid4().hex[:8]}", **body.model_dump(),
+    c = {"id": f"ct-{uuid.uuid4().hex[:8]}", **_clean(body),
          "created_at": datetime.now(timezone.utc).isoformat()}
     items.append(c)
     _save(user_id, items)
@@ -167,7 +177,7 @@ async def update_contact(user_id: str, contact_id: str, body: ContactIn):
     items = _load(user_id)
     for c in items:
         if c["id"] == contact_id:
-            c.update(body.model_dump())
+            c.update(_clean(body))
             c["updated_at"] = datetime.now(timezone.utc).isoformat()
             _save(user_id, items)
             return {"success": True, "contact": c}

@@ -1,5 +1,5 @@
 {
-  "last_known_eur": 130.0,
+  "last_known_eur": 0.0,
   "history": [
     {
       "ts": "2026-08-22T15:02:25.559582+00:00",
@@ -22,9 +22,16 @@
       "previous_eur": 0.0,
       "current_eur": 130.0,
       "user_id": "user-001"
+    },
+    {
+      "ts": "2026-10-20T04:46:09.067561+00:00",
+      "type": "decrease_detected",
+      "delta_eur": -130.0,
+      "previous_eur": 130.0,
+      "current_eur": 0.0
     }
   ],
-  "last_check_at": "2026-08-27T20:04:11.410844+00:00",
+  "last_check_at": "2026-10-20T04:46:09.067561+00:00",
   "last_check_ts": null,
   "last_balance_eur": 0.0
 }

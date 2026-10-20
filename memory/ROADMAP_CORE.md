@@ -177,6 +177,8 @@ kader, nooit een crash. Enige terminalregel voor Willem: `./spark.sh start`.
     aanpassen"). Eigen entries: `data/users/<id>/contacten.json`. Routes `/api/contacten/{user_id}` GET/POST/PUT/DELETE.
   • Rollen zakelijk (Willem 20-10): **klant** = koopt merch · **client** = vraagt zorg/handelingen (cliëntdossiers
     uit `clienten` krijgen rol client) · leverancier · partner · overig.
+  • Zakelijke kaders (Willem 20-10, stonden in notities): KvK, BTW-nummer, IBAN, BIC, jouw klant-/debiteurnummer bij hen.
+    Rol **dienstverlener** erbij (advocaat/accountant). Promotex/Full of Joy/Boutadvocaten gemigreerd; spaties getrimd.
   • Velden (Willem 20-10 n.a.v. Promotex): telefoon + telefoon2, fax (zakelijk), e-mail + e-mail2, website (zakelijk).
   • Profiel-kaart **Zakelijk**: `zakelijke_email`, `bedrijfsnaam`, `kvk`, `btw_nummer` (ProfileExtended).
     Regel Willem: e-mail pas gebruiken als ingevuld. Spark's eigen afzender later: spark-your-life@hotmail.com.
